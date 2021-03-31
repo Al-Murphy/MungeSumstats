@@ -1,16 +1,34 @@
 Package: hssGWAS
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
-Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
-Encoding: UTF-8
-LazyData: true
-Roxygen: list(markdown = TRUE)
+Type: Package
+Title: Homogenise summary statistics from GWAS
+Version: 0.99.1
+Authors@R:
+    c(person(given = "Alan",
+           family = "Murphy",
+           role = c("cre"),
+           email = "alanmurph94@hotmail.com",
+           comment = c(ORCID = "0000-0002-2487-8753")),
+    person(given = "Nathan",
+           family = "Skene",
+           role = c("aut"),
+           email = "nathan.skene@gmail.com",
+           comment = c(ORCID = "0000-0002-6807-3180"))) 
+Description: 
+  The *hssGWAS* package is designed to facilitate the standardisation of GWAS 
+  summary statistics. It reformats inputted summary statisitics to include 
+  SNP, CHR, BP and can look up these values if any are missing. It also removes 
+  duplicates across SNPs.
+URL: https://github.com/neurogenomics/hssGWAS
+License: Artistic-2.0
+Depends: R(>= 3.6)
+Imports: 
+    data.table,
+    stringr,
+    utils
+biocViews: 
+    SNP, WholeGenome, Genetics, ComparativeGenomics, 
+    GenomeWideAssociation, GenomicVariation, Preprocessing
+LazyData: TRUE
 RoxygenNote: 7.1.1
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)

@@ -18,3 +18,4 @@ inst/.DS_Store
 vignettes/.DS_Store
 docs
 docs/
+data/SNP_LOC_DATA.rda
