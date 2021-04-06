@@ -1,6 +1,6 @@
-Package: hssGWAS
+Package: MungeSumstats
 Type: Package
-Title: Homogenise summary statistics from GWAS
+Title: Standardise summary statistics from GWAS
 Version: 0.99.1
 Authors@R:
     c(person(given = "Alan",
@@ -14,11 +14,11 @@ Authors@R:
            email = "nathan.skene@gmail.com",
            comment = c(ORCID = "0000-0002-6807-3180"))) 
 Description: 
-  The *hssGWAS* package is designed to facilitate the standardisation of GWAS 
-  summary statistics. It reformats inputted summary statisitics to include 
+  The *MungeSumstats* package is designed to facilitate the standardisation of 
+  GWAS summary statistics. It reformats inputted summary statisitics to include 
   SNP, CHR, BP and can look up these values if any are missing. It also removes 
   duplicates across SNPs.
-URL: https://github.com/neurogenomics/hssGWAS
+URL: https://github.com/neurogenomics/MungeSumstats
 License: Artistic-2.0
 Depends: R(>= 3.6)
 Imports: 

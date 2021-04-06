@@ -1,15 +1,16 @@
-Homogenise the format of summary statistics from GWAS with *hssGWAS*
+Standardise the format of summary statistics from GWAS with
+*MungeSumstats*
 ================
 Alan Murphy and Nathan Skene
-2021-03-30
+2021-04-06
 
 <!-- Readme.md is generated from Readme.Rmd. Please edit that file -->
 
 # Introduction
 
-The *hssGWAS* package is designed to facilitate the standardisation of
-GWAS summary statistics as utilised in our Nature Genetics
-paper.<sup>1</sup>
+The *MungeSumstats* package is designed to facilitate the
+standardisation of GWAS summary statistics as utilised in our Nature
+Genetics paper.<sup>1</sup>
 
 # Overview
 
@@ -20,36 +21,36 @@ ieugwasr](https://mrcieu.github.io/ieugwasr/) and
 [gwasvcf](https://github.com/MRCIEU/gwasvcf) but because a lot of GWAS
 remain closed access, these repositories are not all encompassing.
 
-*hssGWAS* provides a framework standardise the format fo any GWAS
-summary statistics enabling downstream integration and analysis. The
-package works by addressing the most common discrepancies across summary
-statistics.
+*MungeSumstats* provides a framework to standardise the format fo any
+GWAS summary statistics enabling downstream integration and analysis.
+The package works by addressing the most common discrepancies across
+summary statistics.
 
-# Installing hssGWAS
+# Installing MungeSumstats
 
-The *hssGWAS* package is available from github. To be able to install
-the package one needs to run the following lines of code:
+The *MungeSumstats* package is available from github. To be able to
+install the package one needs to run the following lines of code:
 
     if (!require("devtools")) {
       install.packages("devtools")
     }
-    devtools::install_github("neurogenomics/hssGWAS")
+    devtools::install_github("neurogenomics/MungeSumstats")
 
 You can then load the package and data package:
 
 ``` r
-library(hssGWAS)
+library(MungeSumstats)
 ```
 
 # Getting started
 
-See the vignette for use cases of *hssGWAS*.
+See the vignette for use cases of *MungeSumstats*.
 
 If you have any problems please do file an issue here on github.
 
 # Citation
 
-If you use the hssGWAS package as well then please cite
+If you use the MungeSumstats package as well then please cite
 
 [Skene, et al. Genetic identification of brain cell types underlying
 schizophrenia. Nature Genetics,
