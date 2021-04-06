@@ -9,6 +9,9 @@ check_vital_col(sumstats_file)
 \arguments{
 \item{sumstats_file}{The summary statistics file for the GWAS}
 }
+\value{
+null
+}
 \description{
 Ensure that all necessary columns are in the summary statistics file
 }

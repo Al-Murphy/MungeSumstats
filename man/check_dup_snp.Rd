@@ -11,6 +11,9 @@ check_dup_snp(sumstats_file, path)
 
 \item{path}{Filepath for the summary statistics file to be formatted}
 }
+\value{
+null
+}
 \description{
 Ensure all rows have SNPs beginning with rs or SNP, drop those that don't
 }

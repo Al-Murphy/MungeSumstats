@@ -13,7 +13,7 @@ load_snp_loc_data <- function(){
   #print("Note: this requires downloading a 300mb file from figshare into a temporary directory")
   #print("the file which is downloaded is created by the build_snp_location_tables function included with this package")
   SNP_LOC_DATA=NA # Because SNP_LOC_DATA is loaded from a file, we need to trick devtools::check() into passing with this
-  filePath = sprintf("%s/hssGWAS/data/SNP_LOC_DATA.rda",.libPaths()[1])
+  filePath = sprintf("%s/MungeSumstats/data/SNP_LOC_DATA.rda",.libPaths()[1])
   if(!file.exists(filePath)){
     default <- getOption('timeout')
     options(timeout=200)

@@ -2,6 +2,7 @@
 #'
 #' @param sumstats_file The summary statistics file for the GWAS
 #' @param path Filepath for the summary statistics file to be formatted
+#' @return null
 #' @importFrom data.table fread
 #' @importFrom data.table fwrite
 check_dup_snp <- function(sumstats_file, path){
@@ -12,7 +13,7 @@ check_dup_snp <- function(sumstats_file, path){
   if(sum(duplicated(sumstats[,1]))>0){
     notDup <- which(!duplicated(sumstats[,1]))
     notDupLines <- sumstats[notDup,]
-    fwrite(notDupLines, file=path, sep="\t") 
+    fwrite(notDupLines, file=path, sep="\t")
     rm(notDupLines)
     gc()
   }

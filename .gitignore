@@ -1,8 +1,8 @@
 .Rproj.user
 .Rhistory
+MungeSumstats.Rproj
 .RData
 .Ruserdata
-*.rda
 BootstrapPlots
 *.csv
 *.txt

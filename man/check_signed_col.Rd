@@ -9,6 +9,9 @@ check_signed_col(sumstats_file)
 \arguments{
 \item{sumstats_file}{The summary statistics file for the GWAS}
 }
+\value{
+null
+}
 \description{
 Ensure that there is at least one signed column in summary statistics file
 }
