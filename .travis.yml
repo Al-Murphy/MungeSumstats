@@ -8,8 +8,8 @@ r:
 - release
 - oldrel
 
-services:
-- docker
+#services:
+#- docker
 
 #before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
 
@@ -41,8 +41,8 @@ notifications:
       - alanmurph94@hotmail.com
     on_success: never # default: change
     on_failure: always # default: always
-    
-    
+
+
 # for codecov
 r_packages:
   - covr
