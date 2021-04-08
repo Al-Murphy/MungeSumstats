@@ -2,8 +2,8 @@
 title: "Standardise the format of summary statistics from GWAS with *MungeSumstats*"
 author: "Alan Murphy and Nathan Skene"
 date: "`r Sys.Date()`"
-bibliography: inst/extdata/MungeSumstats.bib
-csl: inst/extdata/nature.csl
+bibliography: inst/cit/MungeSumstats.bib
+csl: inst/cit/nature.csl
 output: rmarkdown::github_document
 vignette: >
   %\VignetteIndexEntry{MungeSumstats}
@@ -18,6 +18,10 @@ knitr::opts_chunk$set(tidy         = FALSE,
                       warning      = FALSE,
                       message      = FALSE)
 ```
+
+<!-- badges: start -->
+[![Build Status](https://travis-ci.org/neurogenomics/MungeSumstats.svg?branch=master)](https://travis-ci.org/neurogenomics/MungeSumstats)
+<!-- badges: end -->
 
 # Introduction
 

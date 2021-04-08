@@ -2,9 +2,14 @@ Standardise the format of summary statistics from GWAS with
 *MungeSumstats*
 ================
 Alan Murphy and Nathan Skene
-2021-04-06
+2021-04-08
 
 <!-- Readme.md is generated from Readme.Rmd. Please edit that file -->
+<!-- badges: start -->
+
+[![Build
+Status](https://travis-ci.org/neurogenomics/MungeSumstats.svg?branch=master)](https://travis-ci.org/neurogenomics/MungeSumstats)
+<!-- badges: end -->
 
 # Introduction
 

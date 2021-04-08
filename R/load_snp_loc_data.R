@@ -3,7 +3,7 @@
 #' @return SNP_LOC_DATA Has four columns with SNP CHR BP and Build
 #'
 #' @examples
-#' SNP_LOC_DATA <- load_snp_loc_data()
+#' #SNP_LOC_DATA <- load_snp_loc_data()
 #'
 #' @export
 #' @importFrom utils download.file

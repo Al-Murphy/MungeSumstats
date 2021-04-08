@@ -13,6 +13,6 @@ SNP_LOC_DATA Has four columns with SNP CHR BP and Build
 Downloads and loads the SNP_LOC_DATA file that I stashed at figshare
 }
 \examples{
-SNP_LOC_DATA <- load_snp_loc_data()
+#SNP_LOC_DATA <- load_snp_loc_data()
 
 }

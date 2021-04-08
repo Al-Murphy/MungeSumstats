@@ -10,8 +10,6 @@ check_vital_col <- function(sumstats_file){
   for(key_column in c("SNP","CHR","BP","P","A1","A2")){
     code_example <- "sed -i '' '1s/p_value/P/' IQ.Sniekers.2017.txt"
     if(!key_column %in% col_headers){
-      print("Header of file:")
-      print(rows_of_data)
       stop(sprintf(err_msg,key_column,code_example))
     }
   }

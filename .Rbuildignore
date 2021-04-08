@@ -1,3 +1,4 @@
 ^MungeSumstats\.Rproj$
 ^\.Rproj\.user$
 ^README.Rmd
+.travis.yml

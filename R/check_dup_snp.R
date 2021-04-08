@@ -8,13 +8,18 @@
 check_dup_snp <- function(sumstats_file, path){
   #TODO improve this
   # Try to remove duplicated RSIDs
-  print("Removing duplicated RSIDs.")
   sumstats <- fread(path)
   if(sum(duplicated(sumstats[,1]))>0){
+    message(paste0(sum(duplicated(sumstats[,1]))," RS IDs are duplicated ",
+                    "in the sumstats file. These duplicates will be removed"))
     notDup <- which(!duplicated(sumstats[,1]))
     notDupLines <- sumstats[notDup,]
     fwrite(notDupLines, file=path, sep="\t")
     rm(notDupLines)
     gc()
+    return(sumstats_file)
+  }
+  else{
+    return(sumstats_file)
   }
 }

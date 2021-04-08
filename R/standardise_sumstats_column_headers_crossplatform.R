@@ -15,12 +15,9 @@
 #' #col_headers = standardise.sumstats.column.headers.crossplatform("~/Downloads/202040.assoc.tsv")
 standardise_sumstats_column_headers_crossplatform <- function(first_line) {
   column_headers <- strsplit(first_line, "\t")[[1]]
-  print("First line of summary statistics file: ")
-  print(first_line)
-  print(column_headers)
-
+  message("First line of summary statistics file: ")
+  message(paste(first_line,collapse = "\t"))
   column_headers <- toupper(column_headers)
-  print(column_headers)
 
   for (headerI in seq_len(nrow(MungeSumstats::sumstatsColHeaders))) {
     un <- MungeSumstats::sumstatsColHeaders[headerI, 1]
