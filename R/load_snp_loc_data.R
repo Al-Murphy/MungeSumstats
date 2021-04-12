@@ -1,29 +1,37 @@
-#' Downloads and loads the SNP_LOC_DATA file that I stashed at figshare
+#' Loads the SNP locations and alleles for Homo sapiens extracted from
+#' NCBI dbSNP Build 144. Reference genome version is dependent on user input.
 #'
-#' @return SNP_LOC_DATA Has four columns with SNP CHR BP and Build
+#' @param msg Optional name of the column missing from the dataset in question
+#' @return SNP_LOC_DATA SNP positions and alleles for Homo sapiens extracted
+#' from NCBI dbSNP Build 144
 #'
 #' @examples
 #' #SNP_LOC_DATA <- load_snp_loc_data()
 #'
 #' @export
-#' @importFrom utils download.file
-load_snp_loc_data <- function(){
-  #TODO IF SUBMITTING TO BIOCONDUCTOR, NEED TO ADD THIS TO EXPERIMENT HUB
-  #print("There is no SNP column found within the data. It must be inferred from CHR and BP information.")
-  #print("Note: this requires downloading a 300mb file from figshare into a temporary directory")
-  #print("the file which is downloaded is created by the build_snp_location_tables function included with this package")
-  SNP_LOC_DATA=NA # Because SNP_LOC_DATA is loaded from a file, we need to trick devtools::check() into passing with this
-  filePath = sprintf("%s/MungeSumstats/data/SNP_LOC_DATA.rda",.libPaths()[1])
-  if(!file.exists(filePath)){
-    default <- getOption('timeout')
-    options(timeout=200)
-    start.time <- Sys.time()
-    utils::download.file("https://ndownloader.figshare.com/files/21768105",destfile=filePath)
-    end.time <- Sys.time()
-    time.taken <- end.time - start.time
-    print(sprintf("File downloaded in %.0f seconds",time.taken))
-    options(timeout=default)
+#' @importFrom SNPlocs.Hsapiens.dbSNP144.GRCh37 SNPlocs.Hsapiens.dbSNP144.GRCh37
+#' @importFrom SNPlocs.Hsapiens.dbSNP144.GRCh38 SNPlocs.Hsapiens.dbSNP144.GRCh38
+load_snp_loc_data <- function(msg=NULL){
+  if(!is.null(msg)){
+    message(paste0("There is no ",msg," column found within the data. ",
+                    "It must be inferred from other column information."))
   }
-  load(filePath)
-  return(SNP_LOC_DATA)
+  genomebuild <- 0
+  while((!genomebuild %in% c(1,2))){
+    msg<-paste0("Which genome build is the data from? ",
+                "1 for GRCh37, 2 for GRCh38: ")
+    genomebuild <- as.numeric(readline(msg))
+    if(!genomebuild %in% c(1,2))
+      message(paste0("Genome build must be entered as either ",
+                      "1 (for GRCh37) or 2 (for GRCh38)"))
+  }
+  if(genomebuild==1){
+    snp_loc_data <-
+      SNPlocs.Hsapiens.dbSNP144.GRCh37::SNPlocs.Hsapiens.dbSNP144.GRCh37
+  }
+  else{
+    snp_loc_data <-
+      SNPlocs.Hsapiens.dbSNP144.GRCh38::SNPlocs.Hsapiens.dbSNP144.GRCh38
+  }
+  return(snp_loc_data)
 }

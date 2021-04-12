@@ -2,15 +2,21 @@
 % Please edit documentation in R/load_snp_loc_data.R
 \name{load_snp_loc_data}
 \alias{load_snp_loc_data}
-\title{Downloads and loads the SNP_LOC_DATA file that I stashed at figshare}
+\title{Loads the SNP locations and alleles for Homo sapiens extracted from
+NCBI dbSNP Build 144. Reference genome version is dependent on user input.}
 \usage{
-load_snp_loc_data()
+load_snp_loc_data(msg = NULL)
+}
+\arguments{
+\item{msg}{Optional name of the column missing from the dataset in question}
 }
 \value{
-SNP_LOC_DATA Has four columns with SNP CHR BP and Build
+SNP_LOC_DATA SNP positions and alleles for Homo sapiens extracted
+from NCBI dbSNP Build 144
 }
 \description{
-Downloads and loads the SNP_LOC_DATA file that I stashed at figshare
+Loads the SNP locations and alleles for Homo sapiens extracted from
+NCBI dbSNP Build 144. Reference genome version is dependent on user input.
 }
 \examples{
 #SNP_LOC_DATA <- load_snp_loc_data()

@@ -2,13 +2,12 @@ Standardise the format of summary statistics from GWAS with
 *MungeSumstats*
 ================
 Alan Murphy and Nathan Skene
-2021-04-08
+2021-04-12
 
 <!-- Readme.md is generated from Readme.Rmd. Please edit that file -->
 <!-- badges: start -->
 
-[![Build
-Status](https://travis-ci.org/neurogenomics/MungeSumstats.svg?branch=master)](https://travis-ci.org/neurogenomics/MungeSumstats)
+[![R-CMD-check](https://github.com/neurogenomics/MungeSumstats/workflows/R-CMD-check/badge.svg)](https://github.com/neurogenomics/MungeSumstats/actions)
 <!-- badges: end -->
 
 # Introduction
@@ -26,10 +25,10 @@ ieugwasr](https://mrcieu.github.io/ieugwasr/) and
 [gwasvcf](https://github.com/MRCIEU/gwasvcf) but because a lot of GWAS
 remain closed access, these repositories are not all encompassing.
 
-*MungeSumstats* provides a framework to standardise the format fo any
-GWAS summary statistics enabling downstream integration and analysis.
-The package works by addressing the most common discrepancies across
-summary statistics.
+*MungeSumstats* provides a framework to standardise the format for any
+GWAS summary statistics, including those in VCF format, enabling
+downstream integration and analysis. The package works by addressing the
+most common discrepancies across summary statistics.
 
 # Installing MungeSumstats
 

@@ -5,18 +5,21 @@
 #' @return null
 #' @importFrom data.table fread
 #' @importFrom data.table fwrite
+#' @importFrom data.table key
+#' @importFrom data.table setkey
 check_dup_snp <- function(sumstats_file, path){
-  #TODO improve this
+  SNP = NULL
   # Try to remove duplicated RSIDs
-  sumstats <- fread(path)
-  if(sum(duplicated(sumstats[,1]))>0){
-    message(paste0(sum(duplicated(sumstats[,1]))," RS IDs are duplicated ",
+  sumstats_dt <- data.table::fread(path)
+  data.table::setkey(sumstats_dt,SNP)
+  dups <- duplicated(sumstats_dt, by = data.table::key(sumstats_dt))
+  if(sum(dups)>0){
+    message(paste0(dups," RS IDs are duplicated ",
                     "in the sumstats file. These duplicates will be removed"))
-    notDup <- which(!duplicated(sumstats[,1]))
-    notDupLines <- sumstats[notDup,]
-    fwrite(notDupLines, file=path, sep="\t")
-    rm(notDupLines)
-    gc()
+    sumstats_dt <- unique(sumstats_dt, by = data.table::key(sumstats_dt))
+    data.table::fwrite(sumstats_dt, file=path, sep="\t")
+    sumstats_file <- readLines(path)
+
     return(sumstats_file)
   }
   else{

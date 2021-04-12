@@ -1,0 +1,139 @@
+---
+title: "Standardise the format of summary statistics from GWAS with *MungeSumstats*"
+author: "Alan Murphy and Nathan Skene"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    df_print: paged
+csl: inst/cit/nature.csl
+vignette: >
+    %\VignetteIndexEntry{Standardise the format of summary statistics from GWAS with MungeSumstats} 
+    %\usepackage[utf8]{inputenc}
+    %\VignetteEngine{knitr::knitr} 
+bibliography: inst/cit/MungeSumstats.bib
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r style, echo=FALSE, results='asis', message=FALSE}
+BiocStyle::markdown()
+knitr::opts_chunk$set(tidy         = FALSE,
+                      warning      = FALSE,
+                      message      = FALSE)
+
+```
+
+# Citation
+
+If you use the MungeSumstats package, please cite
+
+[Skene, et al. Genetic identification of brain cell types underlying
+schizophrenia, 2016.](https://www.nature.com/articles/s41588-018-0129-5)
+
+# Overview
+
+The *MungeSumstats* package is designed to facilitate the
+standardisation of GWAS summary statistics as utilised in our Nature
+Genetics paper [@Skene2018].
+
+The package is designed to handle the lack of standardisation of output
+files by the GWAS community. There is a group who have now manually
+standardised many GWAS: [R interface to the IEU GWAS database API •
+ieugwasr](https://mrcieu.github.io/ieugwasr/) and
+[gwasvcf](https://github.com/MRCIEU/gwasvcf) but because a lot of GWAS
+remain closed access, these repositories are not all encompassing.
+
+The [GWAS-Download
+project](https://github.com/mikegloudemans/gwas-download) has collated
+summary statistics from 200+ GWAS. This repository has been utilsed to
+identify the most common formats, all of which can be standardised with
+*MungeSumstats*.
+
+Moreover, there is an emerging standard of VCF format for summary
+statistics files with multiple, useful, associated R packages such as
+*vcfR*. However, there is currently no method to convert VCF formats to
+a standardised format that matches older approaches.
+
+The *MungeSumstats* package standardises both VCF and the most common
+summary statistic file formats to enable downstream integration and
+analysis.
+
+# Aim
+
+*MungeSumstats* will ensure that the necessary columns are present,
+syntactically correct. The output columns will depend on your input but can 
+include: 
+  * SNP : SNP ID (rs IDs) 
+  * CHR : Chromosome number 
+  * BP : Base pair positions
+  * A1 : Effect allele 
+  * A2 : Non-effect allele
+  * Z : Z-score
+  * N : Sample size
+  * P : Unadjusted p-value for SNP
+  * BETA : Effect size estimate relative to the alternative allele 
+
+Tests run by *MungeSumstats* include:
+  * Check VCF format
+  * Check tab delimited
+  * Check header names
+  * Check for multiple models or traits in GWAS
+  * Check for CHR:BP:A2:A1 all in one column
+  * Check for CHR:BP in one column
+  * Check if CHR and/or BP is missing (infer from SNP ID)
+  * Check if SNP ID is missing (infer from CHR and BP)
+  * Check that vital columns are present (SNP,CHR,BP,P,A1,A2)
+  * Check for one signed column (Z,OR,BETA,LOG_ODDS,SIGNED_SUMSTAT)
+  * Check column ordering
+  * Check for missing data
+  * Check for duplicated columns
+  * Check for small p-values (lower than  5e-324)
+  * Check N column is an integer
+  * Check SNPs are RS ID's
+  * Check for duplicated rows, based on SNP ID
+
+If a test is failed, the user will be notified and if possible, the input will 
+be corrected.
+
+# Data
+
+The *MungeSumstats* package contains a small subset of the GWAS summary
+statistics file on Educational Attainment by Okbay et al 2016: PMID:
+27898078 PMCID: PMC5509058 DOI: 10.1038/ng1216-1587b.
+
+This data will be used to showcase MungeSumstats functionality.
+
+# Running MungeSumstats
+
+The R package can be installed from github as follows:
+
+    if (!require("devtools")) {
+      install.packages("devtools")
+    }
+    devtools::install_github("neurogenomics/MungeSumstats")
+
+```{r setup}
+library(MungeSumstats)
+#save the Educational Attainment Okbay sumstat file to a temp directory
+tmp <- tempfile()
+writeLines(MungeSumstats::eduAttainOkbay,con = tmp)
+```
+
+To standardise the summary statistics' file format, simply call
+`format_sumstats()` passing in the path to your summary statistics file.
+The path to the reformatted summary statistics file will be returned
+
+```{r, message=TRUE}
+reformatted <- MungeSumstats::format_sumstats(tmp)
+```
+
+# Future Enhancements
+
+The *MungeSumstats* package aims to be able to handle the most common
+summary statistic file formats including VCF. If your file can not be
+formatted by *MungeSumstats* feel free to report the bug on github:
+<https://github.com/neurogenomics/MungeSumstats>
+
+# References

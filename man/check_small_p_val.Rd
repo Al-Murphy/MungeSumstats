@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_small_p_val.R
 \name{check_small_p_val}
 \alias{check_small_p_val}
-\title{Ensure that the p values are not 3e-400 or lower, if so set to 0}
+\title{Ensure that the p values are not 5e-324 or lower, if so set to 0}
 \usage{
 check_small_p_val(sumstats_file, path)
 }
@@ -15,5 +15,5 @@ check_small_p_val(sumstats_file, path)
 The modified sumstats_file
 }
 \description{
-Ensure that the p values are not 3e-400 or lower, if so set to 0
+Ensure that the p values are not 5e-324 or lower, if so set to 0
 }

@@ -5,40 +5,43 @@
 #' @return The modified sumstats_file
 #' @importFrom data.table fread
 #' @importFrom data.table fwrite
+#' @importFrom data.table setDT
+#' @importFrom data.table setkeyv
+#' @importFrom data.table :=
+#' @importFrom data.table setcolorder
+#' @importFrom BSgenome snpsByOverlaps
+#' @importFrom GenomicRanges makeGRangesFromDataFrame
 check_no_snp <- function(sumstats_file, path){
+  SNP = CHR = i.RefSNP_id = NULL
   # If CHR and BP are present BUT not SNP then need to find the relevant SNP ids
-  rows_of_data <- c(sumstats_file[1], sumstats_file[2]) 
-  col_headers = strsplit(rows_of_data[1], "\t")[[1]]
-  
+  col_headers <- strsplit(sumstats_file[1], "\t")[[1]]
   if(sum(c("CHR","BP") %in% col_headers)==2 & sum("SNP" %in% col_headers)==0){
-    print(paste0("There is no SNP column found within the data. ",
-                  "It must be inferred from CHR and BP information."))
-    msg<-paste0("Which genome build is the data from? ",
-                  "1 for GRCh37, 2 for GRCh38: ")
-    genomebuild <- as.numeric(readline(msg))
-    if(!genomebuild %in% c(1,2))
-      stop(paste0("Genome build must be entered as either ",
-                    "1 (for GRCh37) or 2 (for GRCh38)"))
-    
-    SNP_LOC_DATA = load_snp_loc_data()
-    if(genomebuild==1){
-      genomebuild="GRCh37"
-    }
-    else{
-      genomebuild="GRCh38"
-    }
-    snpLocDat = SNP_LOC_DATA[SNP_LOC_DATA$Build==genomebuild,][,-4]
-    #Use data table for speed
-    sumstats = fread(path)
-    sumstats$CHR = as.factor(sumstats$CHR)
-    if(length(grep("chr",sumstats$CHR[1]))!=0)
-      sumstats$CHR = gsub("chr","",sumstats$CHR)
-    sumstats2 <- merge(sumstats,snpLocDat,by=c("CHR","BP"))
-    # Remove any rows where P is NaN
-    sumstats2 <- sumstats2[!is.nan(sumstats2$P),]
-    fwrite(sumstats2,file=path,sep="\t")
+    SNP_LOC_DATA <- load_snp_loc_data("SNP")
+    sumstats_file <- data.table::fread(path)
+    gr_snp <- GenomicRanges::makeGRangesFromDataFrame(sumstats_file,
+                                                      keep.extra.columns = TRUE,
+                                                      seqnames.field = "CHR",
+                                                      start.field = "BP",
+                                                      end.field = "BP")
+    gr_rsids <-
+      BSgenome::snpsByOverlaps(SNP_LOC_DATA, ranges = gr_snp)
+    rsids <- data.table::setDT(data.frame(gr_rsids))
+    data.table::setnames(rsids,"seqnames","CHR")
+    data.table::setnames(rsids,"pos","BP")
+    #in case there is CHR8 and chr8
+    rsids[,CHR:=tolower(as.character(CHR))]
+    sumstats_file[,CHR:=tolower(as.character(CHR))]
+    # join on SNP ID to sumstats
+    data.table::setkeyv(sumstats_file,c("CHR","BP"))
+    data.table::setkeyv(rsids,c("CHR","BP"))
+    sumstats_file[rsids,SNP:=i.RefSNP_id]
+    #move SNP to start
+    other_cols <- names(sumstats_file)[names(sumstats_file)!="SNP"]
+    data.table::setcolorder(sumstats_file, c("SNP", other_cols))
+    #write new data
+    data.table::fwrite(sumstats_file,file=path,sep="\t")
     sumstats_file <- readLines(path)
-    
+
     return(sumstats_file)
   }
   else{

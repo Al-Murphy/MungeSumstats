@@ -6,14 +6,22 @@
 #' @importFrom data.table fread
 #' @importFrom data.table fwrite
 check_row_snp <- function(sumstats_file, path){
-  #TODO use data table instead
+  SNP = NULL
   # All rows should start with either SNP or rs... if they don't drop them
-  if(length(sumstats_file[!grepl("^rs",sumstats_file)])>0){
-    message(paste0(length(sumstats_file[!grepl("^rs",sumstats_file)])," SNPs",
+  #use data table for speed
+  sumstats_dt <- data.table::fread(path)
+  num_bad_ids <- nrow(sumstats_dt[!grep("^rs",SNP),])
+  if(num_bad_ids>0){
+    message(paste0(num_bad_ids, " SNPs",
                     " don't start with 'rs' and will be removed"))
-  }
-  sumstats_file <- c(sumstats_file[1],sumstats_file[grepl("^rs",sumstats_file)])
-  writeLines(text=sumstats_file, con = path)
+    sumstats_dt <- sumstats_dt[grep("^rs",SNP),]
+    #write new data
+    data.table::fwrite(sumstats_dt,file=path,sep="\t")
+    sumstats_file <- readLines(path)
 
-  return(sumstats_file)
+    return(sumstats_file)
+  }
+  else{
+    return(sumstats_file)
+  }
 }

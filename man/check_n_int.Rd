@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_n_int.R
 \name{check_n_int}
 \alias{check_n_int}
-\title{Ensure that the p values are not 3e-400 or lower, if so set to 0}
+\title{Ensure that the N column are all integers}
 \usage{
 check_n_int(sumstats_file, path)
 }
@@ -15,5 +15,5 @@ check_n_int(sumstats_file, path)
 The modified sumstats_file
 }
 \description{
-Ensure that the p values are not 3e-400 or lower, if so set to 0
+Ensure that the N column are all integers
 }

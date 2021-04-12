@@ -12,50 +12,6 @@
 #' @import stringr
 #' @export
 format_sumstats <- function(path){
-  #Standardise the format of summary statistics from GWAS
-  #SNP : SNP ID (it’s recommended to only include SNPs with rs IDs in the data,
-  #      as these SNPs are often more well-characterized) (Aka RS ID)
-  #CHR : Chromosome number (some GWAS summary data contain SNPs on chromosome
-  #      X, Y, and MT, but usually these SNPs are filtered out during QC)
-  #BP : Base pair positions (make sure all formatted summary stats use the same
-  #     genome build)
-  #A1 : Effect allele (also sometimes called risk allele, reference allele,
-  #     effect allele, coded allele, etc.)
-  #A2 : Non-effect allele (also some times called alternate allele, the other
-  #     allele etc.)
-  #Z : Z-score with respect to the effect allele, i.e. if Z-score is positive
-  #    then the effect allele increases the phenotype
-  #N – Sample size (this is often the discovery stage sample size, not maximum
-  #    sample size)
-  #P - P-value for SNP
-
-  #MungedSumstats tries to get SNP CHR BP A1 A2 at the start of the
-  #reformatted sumstats file
-  #Must also have P and
-  #signed sumstats column (e.g. Z, OR, BETA, LOG_ODDS, SIGNED_SUMSTAT)
-
-  #All issues with format_sumstats_for_magma here
-
-
-  #use A1/A2 to confirm that it's the same SNP being discussed....
-  #e.g. if it's CHR 2 bp 234234.... the SNP can be a->c or a->g....
-  #at the moment I'm not checking that, I just find any SNP at that location
-
-  #drop the SNP column from the one in the vignette though to check it works as expected
-
-  #also this part of the function.... currently it's commented out... would be great if
-  #you could implement it properly and check it works
-
-  #summary statistics from vignette, just remove SNP column so it has to be inferred
-
-
-  #test cases:
-  #1. column of data with CHR:BP:A2:A1 format - fourStepCol
-  #20016_irnt.gwas.imputed_v3.both_sexes.tsv
-
-  #Needed test cases:
-  # Ensure that tabs separate rows
-
   # Checking if the file exists should happen first
   if (!file.exists(path))
     stop("Path to GWAS sumstats is not valid")
@@ -68,81 +24,72 @@ format_sumstats <- function(path){
   writeLines(sumstats_file, con=tmp)
   path <- tmp
 
-  # Check 1: Ensure that tabs separate rows
+  # Check 1: Check if the file is in VCF format
   sumstats_file <- check_tab_delimited(sumstats_file)
 
-  #Standardise headers for all OS
-  sumstats_file[1] <-
-    standardise_sumstats_column_headers_crossplatform(sumstats_file[1])
+  # Check 2: Ensure that tabs separate rows
+  sumstats_file <- check_tab_delimited(sumstats_file)
 
-  # Check 2: Check if multiple models used or multiple traits tested in GWAS
-  sumstats_file <-  check_multi_gwas(sumstats_file, file)
+  # Check 3:Standardise headers for all OS
+  sumstats_file <-
+    standardise_sumstats_column_headers_crossplatform(sumstats_file, path)
+
+  # Check 4: Check if multiple models used or multiple traits tested in GWAS
+  sumstats_file <-  check_multi_gwas(sumstats_file, path)
 
   col_headers <- sumstats_file[1]
   col_headers <- strsplit(col_headers, "\t")[[1]]
 
   # Series of checks if CHR or BP columns aren't present
   if(!sum(c("SNP","BP") %in% col_headers)==2){
-    # - UKBB data from Ben Neale has a Variant column with CHR:POS:REF:ALT where
-    # ALT allele is the effect allele in the model [NB: the ALT allele is NOT always the minor allele]
-    # -- For input to LDSC, A1 is effect allele, A2 is non-effect allele
-    # - DIAGRAM diabetes data has a Chr:Position column with CHR:BP
-    # - BMI adjusted for smoking has markername with CHR:BP (with the chromosome name having 'chr' preceeding)
-    # - Agression [EAGLE] just doesn't have any CHR or BP data
     message(paste0("Summary statistics file does not have obvious CHR/BP colum",
                   "ns. Checking to see if they are joined in another column"))
 
-    #Check 3: check if CHR:BP:A2:A1 merged to 1 column
+    #Check 5: check if CHR:BP:A2:A1 merged to 1 column
     sumstats_file <- check_four_step_col(sumstats_file, path)
 
-    # Check 4: check if there is a column of data with CHR:BP format
+    # Check 6: check if there is a column of data with CHR:BP format
     sumstats_file <- check_two_step_col(sumstats_file, path)
 
     # Re-standardise in case the joined column headers were unusual
-    sumstats_file[1] <-
-      standardise_sumstats_column_headers_crossplatform(sumstats_file[1])
+    sumstats_file <-
+      standardise_sumstats_column_headers_crossplatform(sumstats_file, path)
   }
 
-  #TODO DON"T KNOW IF THESE LINES ARE NECESSARY??---------
-  # If SNP is present... BUT not CHR or BP then need to find the relevant locations
-  rows_of_data <- c(sumstats_file[1], sumstats_file[2])
-  col_headers = strsplit(rows_of_data[1], "\t")[[1]]
-  writeLines(sumstats_file, con = path)
+  # Check 7: check if CHR and BP are missing but SNP is present
+  sumstats_file <- check_no_chr_bp(sumstats_file, path)
 
-  # Check 5: check if CHR and BP are missing but SNP is present
-  sumstats_file <- check_no_chr_bp(sumstats_file)
+  # Check 8: check if CHR and BP are present but SNP is missing
+  sumstats_file <- check_no_snp(sumstats_file, path)
 
-  # Check 6: check if CHR and BP are present but SNP is missing
-  sumstats_file <- check_no_snp(sumstats_file)
-
-  # Check 7: check that all the vital columns are present
+  # Check 9: check that all the vital columns are present
   check_vital_col(sumstats_file)
 
-  # Check 8: check there is at least one signed sumstats column
+  # Check 10: check there is at least one signed sumstats column
   check_signed_col(sumstats_file)
 
-  # Check 9: check first three column headers are SNP, CHR, BP (in that order)
+  # Check 11: check first three column headers are SNP, CHR, BP (in that order)
   sumstats_file <- check_col_order(sumstats_file, path)
 
-  #Check 10: Keep only rows which have the number of columns expected
+  #Check 12: Keep only rows which have the number of columns expected
   # This check is necessary see top15_sumstats_example_data[[2]]
   sumstats_file <- check_miss_data(sumstats_file, path)
 
   # The formatting process can (rarely) result in duplicated columns,
   # i.e. CHR, if CHR:BP is expanded and one already exists... delete duplicates
-  # Check 11: check for duplicated columns
+  # Check 13: check for duplicated columns
   sumstats_file <- check_dup_col(sumstats_file, path)
 
-  #Check 12: check for small P-values (3e-400 or lower)
+  #Check 14: check for small P-values (3e-400 or lower)
   sumstats_file <- check_small_p_val(sumstats_file, path)
 
-  #Check 13: check is N column not all integers, if so round it up
+  #Check 15: check is N column not all integers, if so round it up
   sumstats_file <- check_n_int(sumstats_file, path)
 
-  #Check 14: check all rows have SNPs starting with SNP or rs, drop those don't
+  #Check 16: check all rows have SNPs starting with SNP or rs, drop those don't
   sumstats_file <- check_row_snp(sumstats_file, path)
 
-  #Check 15: check all rows for duplicated SNPs, remove any that are
+  #Check 17: check all rows for duplicated SNPs, remove any that are
   sumstats_file <- check_dup_snp(sumstats_file, path)
 
   # Show how the data now looks
@@ -155,16 +102,6 @@ format_sumstats <- function(path){
 
   return(tmp) # Returns address of modified file
 }
-
-
-
-#TODO
-#check.small.p.val
-#check.no.chr.bp
-#check.no.snp
-#check.n.int
-#check.row.snp
-#check.dup.snp
 
 
 

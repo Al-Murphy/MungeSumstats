@@ -11,13 +11,14 @@ check_multi_gwas <- function(sumstats_file, path){
     MungeSumstats::sumstatsColHeaders$Corrected=="P", 1]
   # So P_value columns found have already been corrected to "P" so if you find
   # any in p_syn in colheaders then we found multiple
-  # NOTE THIS ASSUMES AN '_' SEPARATES P VALUE SYN FROM TRAIT/MODEL NAME AND
-  # COLUMN NAME STARTS WITH P VAULE SYM
+  # NOTE THIS ASSUMES AN '_' or '.' SEPARATES P VALUE SYN FROM TRAIT/MODEL NAME
+  # AND COLUMN NAME STARTS WITH P VAULE SYM
   # Sort p_syn so longest ones checked first, once 1 found stop
   # so don't get wrong subset with shorter ones
   p_syn <- p_syn[order(nchar(p_syn), p_syn, decreasing = TRUE)]
   for(pattern_i in p_syn){
-    p_val_multi <- grepl(paste0("^",pattern_i,"_"),col_headers)
+    p_val_multi <- grepl(paste0("^",pattern_i,"_","|",
+                                  "^",pattern_i,"[.]"),col_headers)
     if(any(p_val_multi))
       break
   }
@@ -25,7 +26,8 @@ check_multi_gwas <- function(sumstats_file, path){
   # 2+ (remove all but one) traits
   if (any(p_val_multi)) {#multiple traits
     #first get trait name by removing specific p_syn
-    traits <- gsub(paste0(pattern_i,"_"),"",col_headers[p_val_multi])
+    traits <- gsub(paste0("^",pattern_i,"_","|",
+                            "^",pattern_i,"[.]"),"",col_headers[p_val_multi])
     if(length(traits)>1){
       msg <- paste0("WARNING: Multiple traits found in sumstats file only one ",
                       "of which can be analysed: \n",
@@ -48,12 +50,15 @@ check_multi_gwas <- function(sumstats_file, path){
     }
     #just 1 trait from start or 1 chosen by user, remove the trait from col name
     #then get the correct synonyms
-    #NOTE ASSUMES TRAIT NAME STARTS WITH '_' AND IS AT THE END OF THE COLUMN
-    col_headers <- gsub(paste0("_",chosen_trait,"$"),"",col_headers)
+    #NOTE ASSUMES TRAIT NAME STARTS WITH '_' or '.' & IS AT THE END OF COLUMN
+    col_headers <- gsub(paste0("_",chosen_trait,"$","|",
+                                ".",chosen_trait,"$"),"",col_headers)
+    new_first_line <- paste(col_headers, collapse = "\t")
+    sumstats_file[1] <- new_first_line
     #RE-standardise headers for all OS
-    sumstats_file[1] <-
-      standardise_sumstats_column_headers_crossplatform(paste(col_headers,
-                                                                collapse="\t"))
+    sumstats_file <-
+      standardise_sumstats_column_headers_crossplatform(sumstats_file, path)
+
     return(sumstats_file)
   }
   else{

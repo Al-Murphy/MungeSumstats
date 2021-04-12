@@ -5,20 +5,20 @@
 \alias{standardise_sumstats_column_headers_crossplatform}
 \title{Standardise the column headers in the Summary Statistics files (CROSSPLATFORM)}
 \usage{
-standardise_sumstats_column_headers_crossplatform(first_line)
+standardise_sumstats_column_headers_crossplatform(sumstats_file, path)
 }
 \arguments{
-\item{first_line}{String containing the first line of the sumstats file}
+\item{sumstats_file}{The summary statistics file for the GWAS}
+
+\item{path}{Filepath for the summary statistics file to be formatted}
 }
 \value{
-The amended column headers (also the column headers will be written directly into the summary statistics file)
+The modified sumstats_file
 }
 \description{
-Use a reference data table of common column header names (stored in sumstatsColHeaders.rda) convert them to a standard set, i.e. chromosome --> CHR
-}
-\details{
+Use a reference data table of common column header names (stored in
+sumstatsColHeaders) convert them to a standard set, i.e. chromosome -> CHR
 This function does not check that all the required column headers are present
-
 The amended header is written directly back into the file
 }
 \examples{
