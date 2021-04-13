@@ -3,7 +3,7 @@ test_that("Input has correct format", {
   #write the Educational Attainment GWAS to a temp file for testing
   writeLines(MungeSumstats::eduAttainOkbay,con = file)
   #Run MungeSumstats code
-  reformatted <- MungeSumstats::format_sumstats(file)
+  reformatted <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37")
   reformatted_lines <- readLines(reformatted)
   #Only issue with eduAttainOkbay is the SNP ID name so update before check
   len_eduAttainOkbay <- length(MungeSumstats::eduAttainOkbay)

@@ -3,19 +3,28 @@
 #' @return The address for the modified sumstats file
 #'
 #' @examples
-#' #format_sumstats(path)
+#' #save the Educational Attainment Okbay sumstat file to a temp directory
+#' tmp <- tempfile()
+#' writeLines(MungeSumstats::eduAttainOkbay,con = tmp)
+#' #pass path to format_sumstats
+#' reformatted <- MungeSumstats::format_sumstats(tmp,ref_genome="GRCh37")
+#' #returned location has the updated summary statistics file
 #' @param path Filepath for the summary statistics file to be formatted
+#' @param ref_genome name of the reference genome used for the GWAS (GRCh37 or GRCh38)
+#' @param convert_small_p Binary, should p-values < 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.
+#' @param convert_n_int Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE.
+#' @param analysis_trait If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL
 #' @importFrom data.table fread
 #' @importFrom data.table fwrite
 #' @importFrom data.table setcolorder
 #' @importFrom utils read.table
 #' @import stringr
 #' @export
-format_sumstats <- function(path){
-  # Checking if the file exists should happen first
-  if (!file.exists(path))
-    stop("Path to GWAS sumstats is not valid")
-
+format_sumstats <- function(path,ref_genome, convert_small_p=TRUE,
+                              convert_n_int=TRUE, analysis_trait=NULL){
+  #Check input parameters
+  validate_parameters(path,ref_genome, convert_small_p,
+                        convert_n_int, analysis_trait)
   # This almost surely modifies the file (since most sumstats from different
   # studies are differently formatted), so it makes more sense to just make a
   # temporary file <tmp>, and return the address of the temp
@@ -25,7 +34,7 @@ format_sumstats <- function(path){
   path <- tmp
 
   # Check 1: Check if the file is in VCF format
-  sumstats_file <- check_tab_delimited(sumstats_file)
+  sumstats_file <- check_vcf(sumstats_file, path)
 
   # Check 2: Ensure that tabs separate rows
   sumstats_file <- check_tab_delimited(sumstats_file)
@@ -35,13 +44,13 @@ format_sumstats <- function(path){
     standardise_sumstats_column_headers_crossplatform(sumstats_file, path)
 
   # Check 4: Check if multiple models used or multiple traits tested in GWAS
-  sumstats_file <-  check_multi_gwas(sumstats_file, path)
+  sumstats_file <-  check_multi_gwas(sumstats_file, path, analysis_trait)
 
   col_headers <- sumstats_file[1]
   col_headers <- strsplit(col_headers, "\t")[[1]]
 
   # Series of checks if CHR or BP columns aren't present
-  if(!sum(c("SNP","BP") %in% col_headers)==2){
+  if(!sum(c("CHR","BP") %in% col_headers)==2){
     message(paste0("Summary statistics file does not have obvious CHR/BP colum",
                   "ns. Checking to see if they are joined in another column"))
 
@@ -57,10 +66,10 @@ format_sumstats <- function(path){
   }
 
   # Check 7: check if CHR and BP are missing but SNP is present
-  sumstats_file <- check_no_chr_bp(sumstats_file, path)
+  sumstats_file <- check_no_chr_bp(sumstats_file, path, ref_genome)
 
   # Check 8: check if CHR and BP are present but SNP is missing
-  sumstats_file <- check_no_snp(sumstats_file, path)
+  sumstats_file <- check_no_snp(sumstats_file, path, ref_genome)
 
   # Check 9: check that all the vital columns are present
   check_vital_col(sumstats_file)
@@ -72,7 +81,6 @@ format_sumstats <- function(path){
   sumstats_file <- check_col_order(sumstats_file, path)
 
   #Check 12: Keep only rows which have the number of columns expected
-  # This check is necessary see top15_sumstats_example_data[[2]]
   sumstats_file <- check_miss_data(sumstats_file, path)
 
   # The formatting process can (rarely) result in duplicated columns,
@@ -81,10 +89,10 @@ format_sumstats <- function(path){
   sumstats_file <- check_dup_col(sumstats_file, path)
 
   #Check 14: check for small P-values (3e-400 or lower)
-  sumstats_file <- check_small_p_val(sumstats_file, path)
+  sumstats_file <- check_small_p_val(sumstats_file, path, convert_small_p)
 
   #Check 15: check is N column not all integers, if so round it up
-  sumstats_file <- check_n_int(sumstats_file, path)
+  sumstats_file <- check_n_int(sumstats_file, path, convert_n_int)
 
   #Check 16: check all rows have SNPs starting with SNP or rs, drop those don't
   sumstats_file <- check_row_snp(sumstats_file, path)

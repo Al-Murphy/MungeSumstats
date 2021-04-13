@@ -2,6 +2,7 @@
 #'
 #' @param sumstats_file The summary statistics file for the GWAS
 #' @param path Filepath for the summary statistics file to be formatted
+#' @param ref_genome name of the reference genome used for the GWAS (GRCh37 or GRCh38)
 #' @return The modified sumstats_file
 #' @importFrom data.table fread
 #' @importFrom data.table fwrite
@@ -12,19 +13,21 @@
 #' @importFrom data.table setcolorder
 #' @importFrom BSgenome snpsById
 #' @importFrom data.table setorder
-check_no_chr_bp <- function(sumstats_file, path){
+check_no_chr_bp <- function(sumstats_file, path, ref_genome){
   SNP = i.seqnames = CHR = BP = i.pos = LP = P = NULL
   # If SNP present but no CHR/BP then need to find them
   col_headers <- strsplit(sumstats_file[1], "\t")[[1]]
   if(sum(c("CHR","BP") %in% col_headers)<=1 & sum("SNP" %in% col_headers)==1){
-    SNP_LOC_DATA <- load_snp_loc_data("Chromosome or Base Pair Position")
+    SNP_LOC_DATA <- load_snp_loc_data(ref_genome,
+                                        "Chromosome or Base Pair Position")
     sumstats_file <- data.table::fread(path)
     #if dataset has one of CHR or BP remove it and take from re dataset
     if(sum(c("CHR","BP") %in% col_headers)==1){
       colsToDelete <- c("CHR","BP")[c("CHR","BP") %in% col_headers]
       sumstats_file[,(colsToDelete):=NULL]
     }
-    gr_rsids <- BSgenome::snpsById(SNP_LOC_DATA, ids = sumstats_file$SNP)
+    gr_rsids <- BSgenome::snpsById(SNP_LOC_DATA, ids = sumstats_file$SNP,
+                                   ifnotfound="drop")#remove SNPs not found
     rsids <- data.table::setDT(data.frame(gr_rsids))
     data.table::setnames(rsids,"RefSNP_id","SNP")
     colsToDelete <- c("strand", "alleles_as_ambig")

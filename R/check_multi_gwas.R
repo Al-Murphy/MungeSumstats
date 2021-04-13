@@ -2,8 +2,9 @@
 #'
 #' @param sumstats_file The summary statistics file for the GWAS
 #' @param path Filepath for the summary statistics file to be formatted
+#' @param analysis_trait If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL
 #' @return The modified sumstats_file
-check_multi_gwas <- function(sumstats_file, path){
+check_multi_gwas <- function(sumstats_file, path, analysis_trait){
   col_headers <- strsplit(sumstats_file[1], "\t")[[1]]
   #Check for multiple p values and other columns, if found choose 1 to continue
   #Use P value to find - first load all p-value synonyms
@@ -29,21 +30,17 @@ check_multi_gwas <- function(sumstats_file, path){
     traits <- gsub(paste0("^",pattern_i,"_","|",
                             "^",pattern_i,"[.]"),"",col_headers[p_val_multi])
     if(length(traits)>1){
-      msg <- paste0("WARNING: Multiple traits found in sumstats file only one ",
-                      "of which can be analysed: \n",
-                      paste(traits, collapse=', ' ),"\n",
-                      "Please indicate which you want to be analysed by ",
-                      "typing its name: ")
-      chosen_trait <- ""
-      while(!toupper(chosen_trait) %in% toupper(traits)){
-        chosen_trait <- readline(msg)
-        if(!toupper(chosen_trait) %in% toupper(traits)){
-          message(paste0(chosen_trait,
-                          " is not a valid trait name. Please try again"))
-        }
-      }
+      if(!is.null(analysis_trait))
+        analysis_trait <- as.character(analysis_trait)#ensure character
+      message(paste0("WARNING: Multiple traits found in sumstats file only one",
+                      " of which can be analysed: \n",
+                      paste(traits, collapse=', ' )))
+      if(is.null(analysis_trait) ||
+         !toupper(analysis_trait) %in% toupper(traits))
+        stop(paste0("Inputted analysis_trait not one of these trait. Please ",
+                    "input one of the traits above."))
       #get right case for choice
-      chosen_trait <- traits[toupper(traits) %in% toupper(chosen_trait)]
+      chosen_trait <- traits[toupper(traits) %in% toupper(analysis_trait)]
     }
     else{#just one trait
       chosen_trait <- traits

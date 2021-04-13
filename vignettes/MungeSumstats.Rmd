@@ -108,12 +108,13 @@ This data will be used to showcase MungeSumstats functionality.
 # Running MungeSumstats
 
 The R package can be installed from github as follows:
-
+```
     if (!require("devtools")) {
       install.packages("devtools")
     }
     devtools::install_github("neurogenomics/MungeSumstats")
-
+    
+```
 ```{r setup}
 library(MungeSumstats)
 #save the Educational Attainment Okbay sumstat file to a temp directory
@@ -123,10 +124,24 @@ writeLines(MungeSumstats::eduAttainOkbay,con = tmp)
 
 To standardise the summary statistics' file format, simply call
 `format_sumstats()` passing in the path to your summary statistics file.
-The path to the reformatted summary statistics file will be returned
+You must also specify which genome build was used in the GWAS(GRCh37 or GRCh38).
+The path to the reformatted summary statistics file will be returned.
 
 ```{r, message=TRUE}
-reformatted <- MungeSumstats::format_sumstats(tmp)
+reformatted <- MungeSumstats::format_sumstats(path=tmp,ref_genome="GRCh37")
+```
+
+VCF files can also be standardised to the same format as other summary statistic
+files. A subset of the Amyotrophic lateral sclerosis GWAS from the ieu open GWAS
+project has been added to *MungeSumstats* to demonstrate this functionality.
+Simply pass the path to the file in the same manner you would for other summary
+statistic files:
+
+```{r, message=TRUE}
+#save ALS GWAS from the ieu open GWAS project to a temp directory
+tmp2 <- tempfile()
+writeLines(MungeSumstats::ieuAmlVcf,con = tmp2)
+reformatted_vcf <- MungeSumstats::format_sumstats(path=tmp2,ref_genome="GRCh37")
 ```
 
 # Future Enhancements

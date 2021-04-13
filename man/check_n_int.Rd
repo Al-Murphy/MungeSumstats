@@ -4,12 +4,14 @@
 \alias{check_n_int}
 \title{Ensure that the N column are all integers}
 \usage{
-check_n_int(sumstats_file, path)
+check_n_int(sumstats_file, path, convert_n_int)
 }
 \arguments{
 \item{sumstats_file}{The summary statistics file for the GWAS}
 
 \item{path}{Filepath for the summary statistics file to be formatted}
+
+\item{convert_n_int}{Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE.}
 }
 \value{
 The modified sumstats_file

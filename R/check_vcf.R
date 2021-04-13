@@ -7,14 +7,14 @@
 #' @importFrom data.table fwrite
 #' @importFrom data.table tstrsplit
 #' @importFrom data.table :=
-check_no_chr_bp <- function(sumstats_file, path){
+check_vcf <- function(sumstats_file, path){
   P = LP = NULL
   #if the file is a VCF, first line will look like: ##fileformat=VCFv4.2
   first_line <- sumstats_file[[1]]
   file_type <- gsub("^##fileformat=","",first_line)
   if(length(grep("^vcf",tolower(file_type)))==1){
     message(paste0("VCF format detected, this will be converted to a standard",
-                    "summary statistics file format."))
+                    " summary statistics file format."))
     #First get the name of data column, held in the ##SAMPLE row
     sample_id <- sumstats_file[grepl("^##SAMPLE",sumstats_file)]#gets ##SAMPLE
     sample_id <- gsub(",.*$", "", sample_id)#get rid of everything after ID
@@ -68,12 +68,19 @@ check_no_chr_bp <- function(sumstats_file, path){
     #ES ro BETA* -need confirmation
 
     #Need to convert P-value, currently -log10
-    if("LP" %in% names(sumstats_file))
-      sumstats_file[,P:=10^(log(-1*LP,base=10))]
+    if("LP" %in% names(sumstats_file)){
+      message(paste0("Inputted VCF format has -log10 P-values, these will be ",
+                      "converted to unadjusted p-values in the 'P' column."))
+      sumstats_file[,P:=10^(-1*as.numeric(LP))]
+    }
+
+    #VCF format has dups of each row, get unique
+    sumstats_file <- unique(sumstats_file)
 
     #write new data
     data.table::fwrite(sumstats_file,file=path,sep="\t")
     sumstats_file <- readLines(path)
+
     return(sumstats_file)
   }
   else{

@@ -42,7 +42,7 @@ check_four_step_col <- function(sumstats_file, path){
     first_line <- paste(col_headers, collapse = "\t")
     new_first_line <-
       gsub(sprintf("^%s\\t|\\t%s\\t|\\t%s$",curColName,curColName,curColName),
-           "CHR\tBP\tA2\tA1\t", paste(col_headers, collapse = "\t"))
+           "\tCHR\tBP\tA2\tA1\t", paste(col_headers, collapse = "\t"))
     sumstats_file[1] <- new_first_line
     col_headers <- strsplit(new_first_line, "\t")[[1]]
     message(sprintf("Column %s has been replaced with CHR BP A2 A1",

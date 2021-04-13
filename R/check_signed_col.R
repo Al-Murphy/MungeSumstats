@@ -6,7 +6,7 @@ check_signed_col <- function(sumstats_file){
   rows_of_data <- c(sumstats_file[1], sumstats_file[2])
   col_headers <- strsplit(rows_of_data[1], "\t")[[1]]
   signed_stat_column_names <- c("Z","OR","BETA","LOG_ODDS","SIGNED_SUMSTAT")
-  if(sum(signed_stat_column_names %in% col_headers)<1 %in% col_headers){
+  if(sum(signed_stat_column_names %in% col_headers)<1){
     stop(paste0("ERROR: cannot find a column name representing signed ",
                   "statistic in GWAS sumstats file:\n",
                   "'Z','OR','BETA','LOG_ODDS','SIGNED_SUMSTAT'"))

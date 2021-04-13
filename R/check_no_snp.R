@@ -2,6 +2,7 @@
 #'
 #' @param sumstats_file The summary statistics file for the GWAS
 #' @param path Filepath for the summary statistics file to be formatted
+#' @param ref_genome name of the reference genome used for the GWAS (GRCh37 or GRCh38)
 #' @return The modified sumstats_file
 #' @importFrom data.table fread
 #' @importFrom data.table fwrite
@@ -11,12 +12,12 @@
 #' @importFrom data.table setcolorder
 #' @importFrom BSgenome snpsByOverlaps
 #' @importFrom GenomicRanges makeGRangesFromDataFrame
-check_no_snp <- function(sumstats_file, path){
+check_no_snp <- function(sumstats_file, path, ref_genome){
   SNP = CHR = i.RefSNP_id = NULL
   # If CHR and BP are present BUT not SNP then need to find the relevant SNP ids
   col_headers <- strsplit(sumstats_file[1], "\t")[[1]]
   if(sum(c("CHR","BP") %in% col_headers)==2 & sum("SNP" %in% col_headers)==0){
-    SNP_LOC_DATA <- load_snp_loc_data("SNP")
+    SNP_LOC_DATA <- load_snp_loc_data(ref_genome,"SNP")
     sumstats_file <- data.table::fread(path)
     gr_snp <- GenomicRanges::makeGRangesFromDataFrame(sumstats_file,
                                                       keep.extra.columns = TRUE,

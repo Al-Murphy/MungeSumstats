@@ -2,7 +2,7 @@ Standardise the format of summary statistics from GWAS with
 *MungeSumstats*
 ================
 Alan Murphy and Nathan Skene
-2021-04-12
+2021-04-13
 
 <!-- Readme.md is generated from Readme.Rmd. Please edit that file -->
 <!-- badges: start -->
@@ -48,7 +48,9 @@ library(MungeSumstats)
 
 # Getting started
 
-See the vignette for use cases of *MungeSumstats*.
+See the vignette for use cases of *MungeSumstats*:
+
+    browseVignettes("MungeSumstats")
 
 If you have any problems please do file an issue here on github.
 
