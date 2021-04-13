@@ -41,8 +41,9 @@ Suggests:
     rmarkdown,
     knitr,
     testthat (>= 3.0.0),
-    summarytools, 
+    summarytools,
     UpSetR,
-    BiocStyle
+    BiocStyle,
+    covr
 Config/testthat/edition: 3
 VignetteBuilder: knitr

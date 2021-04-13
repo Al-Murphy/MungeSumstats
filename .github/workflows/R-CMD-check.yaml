@@ -17,8 +17,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
         matrix:
-            os: [ubuntu-latest, windows-latest, macOS-latest]
-            node-version: [12.x]  
+            os: [ubuntu-latest, windows-latest, macOS-latest]  
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:

@@ -8,6 +8,8 @@ Alan Murphy and Nathan Skene
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/neurogenomics/MungeSumstats/workflows/R-CMD-check/badge.svg)](https://github.com/neurogenomics/MungeSumstats/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/neurogenomics/MungeSumstats/branch/master/graph/badge.svg)](https://codecov.io/gh/neurogenomics/MungeSumstats?branch=master)
 <!-- badges: end -->
 
 # Introduction
