@@ -10,11 +10,7 @@ on:
       - main
       - master
 
-name: R-CMD-check
-
-jobs:
-  R-CMD-check:
-
+name: R-full
 
 jobs:
   macOS:
