@@ -17,8 +17,8 @@ jobs:
     runs-on: macOS-latest
     strategy:
       matrix:
-      #  r: ['4.0', 'devel']
-        r:['devel']
+        r: ['devel']
+        #r:['4.0', 'devel']
     steps:
       - uses: actions/checkout@v1
       - uses: r-lib/actions/setup-r@master
