@@ -17,7 +17,8 @@ jobs:
     runs-on: macOS-latest
     strategy:
       matrix:
-        r: ['4.0', 'devel']
+      #  r: ['4.0', 'devel']
+        r:['devel']
     steps:
       - uses: actions/checkout@v1
       - uses: r-lib/actions/setup-r@master
@@ -32,7 +33,7 @@ jobs:
       - name: Check
         run: Rscript -e "rcmdcheck::rcmdcheck(error_on = 'error')"
       - name: Test coverage
-        if: matrix.r == '4.0'
+        if: matrix.r == 'devel'
         run: |
           Rscript -e 'remotes::install_github("r-lib/covr@gh-actions")'
           Rscript -e 'covr::codecov(token = "${{secrets.CODECOV_TOKEN}}")'

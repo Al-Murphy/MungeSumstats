@@ -149,6 +149,9 @@ reformatted_vcf <- MungeSumstats::format_sumstats(path=tmp2,ref_genome="GRCh37")
 The *MungeSumstats* package aims to be able to handle the most common
 summary statistic file formats including VCF. If your file can not be
 formatted by *MungeSumstats* feel free to report the bug on github:
-<https://github.com/neurogenomics/MungeSumstats>
+<https://github.com/neurogenomics/MungeSumstats> along with your summary
+statistic file header. We also encourage people to edit the code to
+resolve their particular issues too and are happy to incorporate these
+through pull requests on github.
 
 # References

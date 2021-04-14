@@ -2,12 +2,12 @@ Standardise the format of summary statistics from GWAS with
 *MungeSumstats*
 ================
 Alan Murphy and Nathan Skene
-2021-04-13
+2021-04-14
 
 <!-- Readme.md is generated from Readme.Rmd. Please edit that file -->
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/neurogenomics/MungeSumstats/workflows/R-CMD-check/badge.svg)](https://github.com/neurogenomics/MungeSumstats/actions)
+[![R-CMD-check](https://github.com/neurogenomics/MungeSumstats/workflows/R-full/badge.svg)](https://github.com/neurogenomics/MungeSumstats/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/neurogenomics/MungeSumstats/branch/master/graph/badge.svg)](https://codecov.io/gh/neurogenomics/MungeSumstats?branch=master)
 <!-- badges: end -->
@@ -63,6 +63,16 @@ If you use the MungeSumstats package as well then please cite
 [Skene, et al. Genetic identification of brain cell types underlying
 schizophrenia. Nature Genetics,
 2018.](https://www.nature.com/articles/s41588-018-0129-5)
+
+# Future Enhancements
+
+The *MungeSumstats* package aims to be able to handle the most common
+summary statistic file formats including VCF. If your file can not be
+formatted by *MungeSumstats* feel free to report the bug on github:
+<https://github.com/neurogenomics/MungeSumstats> along with your summary
+statistic file header. We also encourage people to edit the code to
+resolve their particular issues too and are happy to incorporate these
+through pull requests on github.
 
 # References
 
