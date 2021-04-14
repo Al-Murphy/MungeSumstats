@@ -104,9 +104,12 @@ format_sumstats <- function(path,ref_genome, convert_small_p=TRUE,
   message("Succesfully finished preparing sumstats file, preview:")
   rows_of_data <- c(sumstats_file[1], sumstats_file[2], sumstats_file[2])
   col_headers <- strsplit(sumstats_file[1], "\t")[[1]]
-  message(paste(col_headers,collapse = "\t"))
-  message(paste(strsplit(sumstats_file[2], "\t")[[1]],collapse = "\t"))
-  message(paste(strsplit(sumstats_file[3], "\t")[[1]],collapse = "\t"))
+  headers <- paste(col_headers,collapse = "\t")
+  message(headers)
+  line1_data <- paste(strsplit(sumstats_file[2], "\t")[[1]],collapse = "\t")
+  line2_data <- paste(strsplit(sumstats_file[3], "\t")[[1]],collapse = "\t")
+  message(line1_data)
+  message(line2_data)
 
   return(tmp) # Returns address of modified file
 }

@@ -13,8 +13,9 @@
 standardise_sumstats_column_headers_crossplatform <-
   function(sumstats_file, path) {
   column_headers <- strsplit(sumstats_file[1], "\t")[[1]]
+  pretty_col_headers <- paste(sumstats_file[1],collapse = "\t")
   message("First line of summary statistics file: ")
-  message(paste(sumstats_file[1],collapse = "\t"))
+  message(pretty_col_headers)
   column_headers <- toupper(column_headers)
   #Go through each and get correct spelling
   for (headerI in seq_len(nrow(MungeSumstats::sumstatsColHeaders))) {

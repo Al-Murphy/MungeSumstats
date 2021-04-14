@@ -107,14 +107,27 @@ This data will be used to showcase MungeSumstats functionality.
 
 # Running MungeSumstats
 
-The R package can be installed from github as follows:
+The *MungeSumstats* is in the process of being added to Bioconductor but, in the meantime, is available from github. 
+To be able to install the package one needs to install the devel version of R (version 4.1) which can be found at https://cran.r-project.org/ and then run the following lines of code:
+
 ```
-    if (!require("devtools")) {
-      install.packages("devtools")
-    }
-    devtools::install_github("neurogenomics/MungeSumstats")
-    
+if (!require("devtools")) {
+  install.packages("devtools")
+}
+devtools::install_github("neurogenomics/MungeSumstats")
 ```
+
+To install *MungeSumstats* on Bioconductor run:
+
+```
+if (!require("BiocManager"))
+    install.packages("BiocManager")
+
+BiocManager::install(version = "devel")
+BiocManager::install("MungeSumstats")
+```
+Once installed, load the package and the sample dataset, writing to a temporary directory:
+
 ```{r setup}
 library(MungeSumstats)
 #save the Educational Attainment Okbay sumstat file to a temp directory
