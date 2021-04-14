@@ -6,7 +6,7 @@ test_that("Can correctly separate CHR:BP:A2:A1", {
   sumstats_dt <- data.table::fread(file)
   #Keep Org to validate values
   sumstats_dt_missing <- data.table::copy(sumstats_dt)
-  sumstats_dt_missing[,CHR_BP_A1_A2:=paste0(CHR,":",POS,":",A2,":",A1)]
+  sumstats_dt_missing[,CHR_BP_A2_A1:=paste0(CHR,":",POS,":",A2,":",A1)]
   sumstats_dt_missing[,CHR:=NULL]
   sumstats_dt_missing[,POS:=NULL]
   sumstats_dt_missing[,A1:=NULL]
