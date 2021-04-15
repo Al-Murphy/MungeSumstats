@@ -20,7 +20,7 @@ Description:
   duplicates across SNPs.
 URL: https://github.com/neurogenomics/MungeSumstats
 License: Artistic-2.0
-Depends: R(>= 4.1)
+Depends: R(>= 4.0)
 Imports: 
     data.table,
     stringr,
