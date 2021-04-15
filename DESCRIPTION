@@ -39,6 +39,7 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Suggests: 
     rmarkdown,
+    markdown,
     knitr,
     testthat (>= 3.0.0),
     summarytools,
