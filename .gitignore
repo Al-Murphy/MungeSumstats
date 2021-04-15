@@ -3,6 +3,7 @@
 MungeSumstats.Rproj
 .RData
 .Ruserdata
+.Rhistory
 BootstrapPlots
 *.csv
 *.txt
