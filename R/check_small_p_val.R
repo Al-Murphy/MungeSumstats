@@ -29,7 +29,8 @@ check_small_p_val <- function(sumstats_file, path, convert_small_p){
       msg <- paste0("There are existing p-values as low as 5e-324 which ",
                     "LDSC/MAGMA may not be able to handle. ")
       if (convert_small_p) { #if user wants to correct
-        message(paste0(msg,"These will be converted to 0."))
+        msg2 <- paste0(msg,"These will be converted to 0.")
+        message(msg2)
         sumstats_dt[,P:=as.numeric(as.character(P))]
         data.table::fwrite(x=sumstats_dt, file=path, sep="\t")
         sumstats_file <- readLines(path)
@@ -37,7 +38,8 @@ check_small_p_val <- function(sumstats_file, path, convert_small_p){
         return(sumstats_file)
       }
       else{
-        message(paste0(msg,"These will NOT be converted."))
+        msg2 <-paste0(msg,"These will NOT be converted.")
+        message(msg2)
       }
     }
   }

@@ -17,7 +17,8 @@ check_n_int <- function(sumstats_file, path, convert_n_int){
       msg <- paste0("The sumstats N column is not all integers, this could ",
                       "effect downstream analysis.")
       if (convert_n_int) { #if user wants to correct
-        message(paste0(msg,"These will be converted to integers."))
+        msg2 <- paste0(msg,"These will be converted to integers.")
+        message(msg2)
         sumstats_dt[,N:=round(N,0)]
         data.table::fwrite(x=sumstats_dt, file=path, sep="\t")
         sumstats_file <- readLines(path)
@@ -25,7 +26,8 @@ check_n_int <- function(sumstats_file, path, convert_n_int){
         return(sumstats_file)
       }
       else{
-        message(paste0(msg,"These will NOT be converted to integers."))
+        msg2 <- paste0(msg,"These will NOT be converted to integers.")
+        message(msg2)
       }
     }
   }

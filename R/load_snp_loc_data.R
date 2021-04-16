@@ -15,8 +15,9 @@
 load_snp_loc_data <- function(ref_genome, msg=NULL){
   ref_genome <- toupper(ref_genome)
   if(!is.null(msg)){
-    message(paste0("There is no ",msg," column found within the data. ",
-                    "It must be inferred from other column information."))
+    print_msg <- paste0("There is no ",msg," column found within the data. ",
+                        "It must be inferred from other column information.")
+    message(print_msg)
   }
   if(ref_genome=="GRCH37"){
     snp_loc_data <-

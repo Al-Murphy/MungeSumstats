@@ -15,8 +15,9 @@ check_dup_snp <- function(sumstats_file, path){
   dups <- duplicated(sumstats_dt, by = data.table::key(sumstats_dt))
   if(sum(dups)>0){
     dup_snps <- sumstats_dt$SNP[dups]
-    message(paste0(paste(dup_snps, collapse = ", ")," RS IDs are duplicated ",
-                    "in the sumstats file. These duplicates will be removed"))
+    msg <- paste0(paste(dup_snps, collapse = ", ")," RS IDs are duplicated ",
+                  "in the sumstats file. These duplicates will be removed")
+    message(msg)
     sumstats_dt <- unique(sumstats_dt, by = data.table::key(sumstats_dt))
     data.table::fwrite(sumstats_dt, file=path, sep="\t")
     sumstats_file <- readLines(path)

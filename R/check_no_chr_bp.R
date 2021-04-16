@@ -30,13 +30,14 @@ check_no_chr_bp <- function(sumstats_file, path, ref_genome){
                                    ifnotfound="drop")#remove SNPs not found
     rsids <- data.table::setDT(data.frame(gr_rsids))
     data.table::setnames(rsids,"RefSNP_id","SNP")
-    colsToDelete <- c("strand", "alleles_as_ambig")
     data.table::setorder(rsids,SNP)
     # join on CHR BP to sumstats
     data.table::setkey(sumstats_file,SNP)
     data.table::setkey(rsids,SNP)
     sumstats_file[rsids,CHR:=i.seqnames]
     sumstats_file[rsids,BP:=i.pos]
+    #remove rows where CHR/BP couldn't be found
+    sumstats_file <- sumstats_file[complete.cases(sumstats_file),]
     #move SNP, CHR, BP to start
     other_cols <-
       names(sumstats_file)[!names(sumstats_file) %in% c("SNP","CHR","BP")]

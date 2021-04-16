@@ -84,6 +84,7 @@ Tests run by *MungeSumstats* include:
   * Check for CHR:BP in one column
   * Check if CHR and/or BP is missing (infer from SNP ID)
   * Check if SNP ID is missing (infer from CHR and BP)
+  * Check if A1 and/or A2 are missing (infer from SNP ID)
   * Check that vital columns are present (SNP,CHR,BP,P,A1,A2)
   * Check for one signed column (Z,OR,BETA,LOG_ODDS,SIGNED_SUMSTAT)
   * Check column ordering

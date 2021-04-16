@@ -32,13 +32,15 @@ check_multi_gwas <- function(sumstats_file, path, analysis_trait){
     if(length(traits)>1){
       if(!is.null(analysis_trait))
         analysis_trait <- as.character(analysis_trait)#ensure character
-      message(paste0("WARNING: Multiple traits found in sumstats file only one",
-                      " of which can be analysed: \n",
-                      paste(traits, collapse=', ' )))
+      msg <- paste0("WARNING: Multiple traits found in sumstats file only one",
+                    " of which can be analysed: \n",
+                    paste(traits, collapse=', ' ))
+      message(msg)
+      stp_msg <- paste0("Inputted analysis_trait not one of these trait. Pleas",
+                        "e input one of the traits above.")
       if(is.null(analysis_trait) ||
          !toupper(analysis_trait) %in% toupper(traits))
-        stop(paste0("Inputted analysis_trait not one of these trait. Please ",
-                    "input one of the traits above."))
+        stop(stp_msg)
       #get right case for choice
       chosen_trait <- traits[toupper(traits) %in% toupper(analysis_trait)]
     }

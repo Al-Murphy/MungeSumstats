@@ -12,8 +12,9 @@ check_row_snp <- function(sumstats_file, path){
   sumstats_dt <- data.table::fread(path)
   num_bad_ids <- nrow(sumstats_dt[!grep("^rs",SNP),])
   if(num_bad_ids>0){
-    message(paste0(num_bad_ids, " SNPs",
-                    " don't start with 'rs' and will be removed"))
+    msg <- paste0(num_bad_ids, " SNPs",
+                  " don't start with 'rs' and will be removed")
+    message(msg)
     sumstats_dt <- sumstats_dt[grep("^rs",SNP),]
     #write new data
     data.table::fwrite(sumstats_dt,file=path,sep="\t")

@@ -11,10 +11,11 @@ check_miss_data <- function(sumstats_file, path){
   dt_sumstats <- data.table::fread(path)
   #check for rows missing data to be excluded
   if(nrow(dt_sumstats[!complete.cases(dt_sumstats),])>0){
-    message(paste0("WARNING: ",
-                    nrow(dt_sumstats[!complete.cases(dt_sumstats),]),
-                    " rows in sumstats file are missing data and will ",
-                    "be removed."))
+    msg <- paste0("WARNING: ",
+                  nrow(dt_sumstats[!complete.cases(dt_sumstats),]),
+                  " rows in sumstats file are missing data and will ",
+                  "be removed.")
+    message(msg)
     dt_sumstats <- dt_sumstats[complete.cases(dt_sumstats)]
     data.table::fwrite(x=dt_sumstats, file=path, sep="\t")
     sumstats_file <- readLines(path)

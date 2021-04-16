@@ -10,7 +10,7 @@
 #' reformatted <- MungeSumstats::format_sumstats(tmp,ref_genome="GRCh37")
 #' #returned location has the updated summary statistics file
 #' @param path Filepath for the summary statistics file to be formatted
-#' @param ref_genome name of the reference genome used for the GWAS (GRCh37 or GRCh38)
+#' @param ref_genome name of the reference genome used for the GWAS (GRCh37 or GRCh38). Default is GRCh37.
 #' @param convert_small_p Binary, should p-values < 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.
 #' @param convert_n_int Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE.
 #' @param analysis_trait If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL
@@ -20,7 +20,7 @@
 #' @importFrom utils read.table
 #' @import stringr
 #' @export
-format_sumstats <- function(path,ref_genome, convert_small_p=TRUE,
+format_sumstats <- function(path,ref_genome="GRCh37", convert_small_p=TRUE,
                               convert_n_int=TRUE, analysis_trait=NULL){
   #Check input parameters
   validate_parameters(path,ref_genome, convert_small_p,
@@ -29,9 +29,12 @@ format_sumstats <- function(path,ref_genome, convert_small_p=TRUE,
   # studies are differently formatted), so it makes more sense to just make a
   # temporary file <tmp>, and return the address of the temp
   sumstats_file <- readLines(path)
+  #Deal with strange, not recognised characters in header like '\' e.g 'xa6\xc2'
+  sumstats_file[[1]] <- iconv(enc2utf8(sumstats_file[[1]]),sub="byte") 
   tmp <- tempfile()
   writeLines(sumstats_file, con=tmp)
   path <- tmp
+  
 
   # Check 1: Check if the file is in VCF format
   sumstats_file <- check_vcf(sumstats_file, path)
@@ -51,8 +54,9 @@ format_sumstats <- function(path,ref_genome, convert_small_p=TRUE,
 
   # Series of checks if CHR or BP columns aren't present
   if(!sum(c("CHR","BP") %in% col_headers)==2){
-    message(paste0("Summary statistics file does not have obvious CHR/BP colum",
-                  "ns. Checking to see if they are joined in another column"))
+    msg <- paste0("Summary statistics file does not have obvious CHR/BP colum",
+                  "ns. Checking to see if they are joined in another column")
+    message(msg)
 
     #Check 5: check if CHR:BP:A2:A1 merged to 1 column
     sumstats_file <- check_four_step_col(sumstats_file, path)
@@ -70,34 +74,37 @@ format_sumstats <- function(path,ref_genome, convert_small_p=TRUE,
 
   # Check 8: check if CHR and BP are present but SNP is missing
   sumstats_file <- check_no_snp(sumstats_file, path, ref_genome)
+  
+  # Check 9: check if SNP is present but A1 and/or A2 is missing
+  sumstats_file <- check_no_allele(sumstats_file, path, ref_genome)
 
-  # Check 9: check that all the vital columns are present
+  # Check 10: check that all the vital columns are present
   check_vital_col(sumstats_file)
 
-  # Check 10: check there is at least one signed sumstats column
+  # Check 11: check there is at least one signed sumstats column
   check_signed_col(sumstats_file)
 
-  # Check 11: check first three column headers are SNP, CHR, BP (in that order)
+  # Check 12: check first three column headers are SNP, CHR, BP (in that order)
   sumstats_file <- check_col_order(sumstats_file, path)
 
-  #Check 12: Keep only rows which have the number of columns expected
+  #Check 13: Keep only rows which have the number of columns expected
   sumstats_file <- check_miss_data(sumstats_file, path)
 
   # The formatting process can (rarely) result in duplicated columns,
   # i.e. CHR, if CHR:BP is expanded and one already exists... delete duplicates
-  # Check 13: check for duplicated columns
+  # Check 14: check for duplicated columns
   sumstats_file <- check_dup_col(sumstats_file, path)
 
-  #Check 14: check for small P-values (3e-400 or lower)
+  #Check 15: check for small P-values (3e-400 or lower)
   sumstats_file <- check_small_p_val(sumstats_file, path, convert_small_p)
 
-  #Check 15: check is N column not all integers, if so round it up
+  #Check 16: check is N column not all integers, if so round it up
   sumstats_file <- check_n_int(sumstats_file, path, convert_n_int)
 
-  #Check 16: check all rows have SNPs starting with SNP or rs, drop those don't
+  #Check 17: check all rows have SNPs starting with SNP or rs, drop those don't
   sumstats_file <- check_row_snp(sumstats_file, path)
 
-  #Check 17: check all rows for duplicated SNPs, remove any that are
+  #Check 18: check all rows for duplicated SNPs, remove any that are
   sumstats_file <- check_dup_snp(sumstats_file, path)
 
   # Show how the data now looks

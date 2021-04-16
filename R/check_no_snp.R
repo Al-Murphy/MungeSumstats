@@ -36,6 +36,8 @@ check_no_snp <- function(sumstats_file, path, ref_genome){
     data.table::setkeyv(sumstats_file,c("CHR","BP"))
     data.table::setkeyv(rsids,c("CHR","BP"))
     sumstats_file[rsids,SNP:=i.RefSNP_id]
+    #remove rows where SNP couldn't be found
+    sumstats_file <- sumstats_file[complete.cases(sumstats_file),]
     #move SNP to start
     other_cols <- names(sumstats_file)[names(sumstats_file)!="SNP"]
     data.table::setcolorder(sumstats_file, c("SNP", other_cols))

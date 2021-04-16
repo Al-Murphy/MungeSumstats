@@ -12,12 +12,13 @@ check_two_step_col <- function(sumstats_file, path){
     #sort to get most recent genome build by default (cols: SNP_hg19, SNP_hg18)
     keep_col <- sort(col_headers[twoStepCol],decreasing = TRUE)[1]
     drop_cols <- sort(col_headers[twoStepCol],decreasing = TRUE)[-1]
-    message(paste0("Warning: Multiple columns in the sumstats file seem to ",
-                 "relate to Chromosome:Base Pair position.\nThe column ",
-                 keep_col," will be kept whereas the column(s) ",
-                 drop_cols, " will be removed.\nIf this is not the correct ",
-                 "column to keep, please remove all incorrect columns from ",
-                 "those listed here before \nrunning `format_sumstats()`."))
+    msg <- paste0("Warning: Multiple columns in the sumstats file seem to ",
+                  "relate to Chromosome:Base Pair position.\nThe column ",
+                  keep_col," will be kept whereas the column(s) ",
+                  drop_cols, " will be removed.\nIf this is not the correct ",
+                  "column to keep, please remove all incorrect columns from ",
+                  "those listed here before \nrunning `format_sumstats()`.")
+    message(msg)
     #Get data without dropped
     write.table(x=utils::read.table(path)[-which(col_headers %in% drop_cols)],
                   file=path, sep="\t", quote=FALSE, row.names = FALSE,

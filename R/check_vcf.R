@@ -13,8 +13,9 @@ check_vcf <- function(sumstats_file, path){
   first_line <- sumstats_file[[1]]
   file_type <- gsub("^##fileformat=","",first_line)
   if(length(grep("^vcf",tolower(file_type)))==1){
-    message(paste0("VCF format detected, this will be converted to a standard",
-                    " summary statistics file format."))
+    msg <- paste0("VCF format detected, this will be converted to a standard",
+                  " summary statistics file format.")
+    message(msg)
     #First get the name of data column, held in the ##SAMPLE row
     sample_id <- sumstats_file[grepl("^##SAMPLE",sumstats_file)]#gets ##SAMPLE
     sample_id <- gsub(",.*$", "", sample_id)#get rid of everything after ID
@@ -69,8 +70,9 @@ check_vcf <- function(sumstats_file, path){
 
     #Need to convert P-value, currently -log10
     if("LP" %in% names(sumstats_file)){
-      message(paste0("Inputted VCF format has -log10 P-values, these will be ",
-                      "converted to unadjusted p-values in the 'P' column."))
+      msg <- paste0("Inputted VCF format has -log10 P-values, these will be ",
+                    "converted to unadjusted p-values in the 'P' column.")
+      message(msg)
       sumstats_file[,P:=10^(-1*as.numeric(LP))]
     }
 
