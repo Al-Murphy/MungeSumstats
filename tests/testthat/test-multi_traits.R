@@ -11,7 +11,11 @@ test_that("Multi-trait GWAS handled correctly", {
   writeLines(multi_trait,con = file)
   #Run MungeSumstats code
   reformatted <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37",
-                                                  analysis_trait="smk")
+                                                  analysis_trait="smk",
+                                                  on_ref_genome = FALSE,
+                                                  strand_ambig_filter=FALSE,
+                                                  bi_allelic_filter=FALSE,
+                                                  allele_flip_check=FALSE)
   reformatted_res <- readLines(reformatted)
   #check manually
   multi_trait_res_smk <- c(
@@ -21,5 +25,5 @@ test_that("Multi-trait GWAS handled correctly", {
     "rs1000075\t1\t94939420\t94939420\tT\tC\t0.3583\t38959\t-0.0013\t0.0082\t0.8687\t147567\t-0.0043\t0.0044\t0.3259",
     "rs1000085\t1\t66630503\t66630503\tC\tG\t0.1667\t38761\t0.0053\t0.0095\t0.5746\t147259\t-0.0034\t0.0052\t0.5157"
   )
-  expect_equal(multi_trait_res_smk,reformatted_res)
+  expect_equal(setequal(multi_trait_res_smk,reformatted_res),TRUE)
 })

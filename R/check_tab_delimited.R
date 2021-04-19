@@ -9,7 +9,7 @@ check_tab_delimited <-function(sumstats_file){
     #check presence of space - space delimited
     if (length(grep(" ", row_of_data))!=0){
       msg <- paste0("WARNING: GWAS sumstat file has space field separators",
-                    " instead of tabs (unusual, not proper input for MAGMA). ",
+                    " instead of tabs (unusual, not proper input for MAGMA).\n",
                     "Temp file with corrected FS created and used instead.")
       message(msg)
       sumstats_file <-
@@ -19,7 +19,7 @@ check_tab_delimited <-function(sumstats_file){
     #check presence of comma - comma delimited
     if (length(grep(",", row_of_data))!=0){
       msg <- paste0("WARNING: GWAS sumstat file has comma field separators",
-                    " instead of tabs (unusual, not proper input for MAGMA). ",
+                    " instead of tabs (unusual, not proper input for MAGMA).\n",
                       "Temp file with corrected FS created and used instead.")
       message(msg)
       sumstats_file <-

@@ -3,8 +3,7 @@
 #' @param sumstats_file The summary statistics file for the GWAS
 #' @return null
 check_vital_col <- function(sumstats_file){
-  rows_of_data <- c(sumstats_file[1], sumstats_file[2])
-  col_headers <- strsplit(rows_of_data[1], "\t")[[1]]
+  col_headers <- names(sumstats_file)
   err_msg <-
     "Cannot find a %s column in GWAS sumstats. \nUse code such as '%s' to fix"
   for(key_column in c("SNP","CHR","BP","P","A1","A2")){

@@ -14,7 +14,11 @@ test_that("Imputation of SNP correctly", {
     .Platform$r_arch == "i386"
   if (!is_32bit_windows) {
     #Run MungeSumstats code
-    reformatted <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37")
+    reformatted <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37",
+                                                  on_ref_genome = FALSE,
+                                                  strand_ambig_filter=FALSE,
+                                                  bi_allelic_filter=FALSE,
+                                                  allele_flip_check=FALSE)
     res_dt <- data.table::fread(reformatted)
     #correct names of MungeSumstats::eduAttainOkbay
     names(sumstats_dt) <- c("SNP","CHR","BP","A1","A2","FRQ","Beta","SE","P")

@@ -17,7 +17,7 @@
 #'
 #' GWAS Summary Statistics on Educational Attainment by Okbay et al 2016:
 #' PMID: 27898078 PMCID: PMC5509058 DOI: 10.1038/ng1216-1587b.
-#' A subset of 99 SNPs
+#' A subset of 93 SNPs
 #'
 #' @source The summary statistics file was downloaded from
 #' https://www.nature.com/articles/ng.3552
@@ -27,15 +27,20 @@
 #' link<-"Educational-Attainment_Okbay_2016/EduYears_Discovery_5000.txt"
 #' eduAttainOkbay<-readLines(link,n=100)
 #' #There is an issue where values end with .0, this 0 is removed in func
-#' #So need to remove it in this dataset as its used for testing
+#' #There are also SNPs not on ref genome or arebi/tri allelic
+#' #So need to remove these in this dataset as its used for testing
 #' tmp <- tempfile()
 #' writeLines(eduAttainOkbay,con=tmp)
 #' eduAttainOkbay <- data.table::fread(tmp) #DT read removes the .0's
+#' #remove those not on ref genome and withbi/tri allelic
+#' rmv <- c("rs192818565","rs79925071","rs1606974","rs1871109",
+#'          "rs73074378","rs7955289")
+#' eduAttainOkbay <- eduAttainOkbay[!MarkerName %in% rmv,]
 #' data.table::fwrite(eduAttainOkbay,file=tmp,sep="\t")
 #' eduAttainOkbay <- readLines(tmp)
 #' usethis::use_data(eduAttainOkbay,overwrite = TRUE)
 #' }
-#' @format character vector with 100 items
+#' @format character vector with 94 items
 "eduAttainOkbay"
 
 #' GWAS Amyotrophic lateral sclerosis ieu open GWAS project - Subset

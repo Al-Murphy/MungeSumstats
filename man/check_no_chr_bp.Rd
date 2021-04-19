@@ -4,7 +4,7 @@
 \alias{check_no_chr_bp}
 \title{Ensure that CHR and BP are missing if SNP is present, can find them}
 \usage{
-check_no_chr_bp(sumstats_file, path, ref_genome)
+check_no_chr_bp(sumstats_file, path, ref_genome, rsids)
 }
 \arguments{
 \item{sumstats_file}{The summary statistics file for the GWAS}
@@ -12,6 +12,8 @@ check_no_chr_bp(sumstats_file, path, ref_genome)
 \item{path}{Filepath for the summary statistics file to be formatted}
 
 \item{ref_genome}{name of the reference genome used for the GWAS (GRCh37 or GRCh38)}
+
+\item{rsids}{datatable of snpsById, filtered to SNPs of interest if loaded already. Or else NULL}
 }
 \value{
 The modified sumstats_file

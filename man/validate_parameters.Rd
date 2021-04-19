@@ -9,7 +9,14 @@ validate_parameters(
   ref_genome,
   convert_small_p,
   convert_n_int,
-  analysis_trait
+  analysis_trait,
+  INFO_filter,
+  N_std,
+  rmv_chr,
+  on_ref_genome,
+  strand_ambig_filter,
+  allele_flip_check,
+  bi_allelic_filter
 )
 }
 \arguments{
@@ -22,6 +29,20 @@ validate_parameters(
 \item{convert_n_int}{Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE.}
 
 \item{analysis_trait}{If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL}
+
+\item{INFO_filter}{numeric The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9}
+
+\item{N_std}{numeric The number of standard deviations above the mean a SNP's N is needed to be removed. Default is 5.}
+
+\item{rmv_chr}{vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary. Default is X, Y and mitochondrial.}
+
+\item{on_ref_genome}{Binary Should a check take place that all SNPs are on the reference genome by SNP ID. Default is TRUE}
+
+\item{strand_ambig_filter}{Binary Should SNPs with strand-ambiguous alleles be removed. Default is FALSE}
+
+\item{allele_flip_check}{Binary Should the allele columns be chacked against reference genome to infer if flipping is necessary. Default is TRUE}
+
+\item{bi_allelic_filter}{Binary Should non-biallelic SNPs be removed. Default is TRUE}
 }
 \value{
 No return

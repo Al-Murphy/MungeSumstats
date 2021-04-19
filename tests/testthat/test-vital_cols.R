@@ -9,7 +9,11 @@ test_that("will fail without a vital column", {
   data.table::fwrite(x=sumstats_dt, file=file, sep="\t")
   #Run MungeSumstats code
   error_return <-
-    tryCatch( MungeSumstats::format_sumstats(file,ref_genome="GRCh37"),
+    tryCatch( MungeSumstats::format_sumstats(file,ref_genome="GRCh37",
+                                             on_ref_genome = FALSE,
+                                             strand_ambig_filter=FALSE,
+                                             bi_allelic_filter=FALSE,
+                                             allele_flip_check=FALSE),
     error = function(e) e,
     warning = function(w) w
     )

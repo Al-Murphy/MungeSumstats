@@ -12,11 +12,19 @@ test_that("Can correctly separate two CHR:BP columns", {
   sumstats_dt_missing[,POS:=NULL]
   data.table::fwrite(x=sumstats_dt_missing, file=file, sep="\t")
   #Run MungeSumstats code
-  reformatted <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37")
+  reformatted <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37",
+                                                on_ref_genome = FALSE,
+                                                strand_ambig_filter=FALSE,
+                                                bi_allelic_filter=FALSE,
+                                                allele_flip_check=FALSE)
   res_dt <- data.table::fread(reformatted)
   #Should give same result as separated
   data.table::fwrite(x=sumstats_dt, file=file, sep="\t")
-  org <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37")
+  org <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37",
+                                        on_ref_genome = FALSE,
+                                        strand_ambig_filter=FALSE,
+                                        bi_allelic_filter=FALSE,
+                                        allele_flip_check=FALSE)
   org_dt <- data.table::fread(org)
   expect_equal(org_dt,res_dt)
 })

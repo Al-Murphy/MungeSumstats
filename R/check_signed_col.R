@@ -3,8 +3,7 @@
 #' @param sumstats_file The summary statistics file for the GWAS
 #' @return null
 check_signed_col <- function(sumstats_file){
-  rows_of_data <- c(sumstats_file[1], sumstats_file[2])
-  col_headers <- strsplit(rows_of_data[1], "\t")[[1]]
+  col_headers <- names(sumstats_file)
   signed_stat_column_names <- c("Z","OR","BETA","LOG_ODDS","SIGNED_SUMSTAT")
   stp_msg <- paste0("ERROR: cannot find a column name representing signed ",
                     "statistic in GWAS sumstats file:\n",

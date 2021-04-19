@@ -7,11 +7,20 @@ test_that("Handle small p-values", {
   #write the Educational Attainment GWAS to a temp file for testing
   writeLines(eduAttainOkbay_missing,con = file)
   #Run MungeSumstats code
-  reformatted <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37")
+  reformatted <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37",
+                                                on_ref_genome = FALSE,
+                                                strand_ambig_filter=FALSE,
+                                                bi_allelic_filter=FALSE,
+                                                allele_flip_check=FALSE)
   reformatted_lines <- readLines(reformatted)
   #Should equal org apart from this one line
   writeLines(MungeSumstats::eduAttainOkbay,con = file)
-  org <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37")
+  org <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37",
+                                        on_ref_genome = FALSE,
+                                        strand_ambig_filter=FALSE,
+                                        bi_allelic_filter=FALSE,
+                                        allele_flip_check=FALSE)
   org_lines <- readLines(org)
-  expect_equal(reformatted_lines[-3],org_lines[-3])
+  #rows get reordered in function so 3 -> 58
+  expect_equal(reformatted_lines[-58],org_lines[-58])
 })

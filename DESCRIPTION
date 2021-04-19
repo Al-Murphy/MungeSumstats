@@ -23,7 +23,6 @@ License: Artistic-2.0
 Depends: R(>= 4.0)
 Imports: 
     data.table,
-    stringr,
     utils,
     stats,
     SNPlocs.Hsapiens.dbSNP144.GRCh37,
@@ -31,7 +30,8 @@ Imports:
     BSgenome.Hsapiens.1000genomes.hs37d5,
     BSgenome.Hsapiens.NCBI.GRCh38,
     GenomicRanges,
-    BSgenome
+    BSgenome,
+    Biostrings
 biocViews: 
     SNP, WholeGenome, Genetics, ComparativeGenomics, 
     GenomeWideAssociation, GenomicVariation, Preprocessing

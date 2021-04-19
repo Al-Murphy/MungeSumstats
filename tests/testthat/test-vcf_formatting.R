@@ -3,7 +3,11 @@ test_that("VCF is correctly formatted", {
   #write the Educational Attainment GWAS to a temp file for testing
   writeLines(MungeSumstats::ieuAmlVcf,con = file)
   #Run MungeSumstats code
-  reformatted <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37")
+  reformatted <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37",
+                                                on_ref_genome = FALSE,
+                                                strand_ambig_filter=FALSE,
+                                                bi_allelic_filter=FALSE,
+                                                allele_flip_check=FALSE)
   reformatted_lines <- readLines(reformatted)
   #check manually against first five SNPs
   corr_res <- c(

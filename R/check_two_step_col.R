@@ -3,6 +3,7 @@
 #' @param sumstats_file The summary statistics file for the GWAS
 #' @param path Filepath for the summary statistics file to be formatted
 #' @return The modified sumstats_file
+#' @importFrom utils write.table
 check_two_step_col <- function(sumstats_file, path){
   col_headers <- strsplit(sumstats_file[1], "\t")[[1]]
   row_of_data <- strsplit(sumstats_file[2], "\t")[[1]]

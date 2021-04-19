@@ -60,56 +60,76 @@ The *MungeSumstats* package standardises both VCF and the most common
 summary statistic file formats to enable downstream integration and
 analysis.
 
+*MungeSumstats* also offers a number of Quality Control (QC) steps 
+which are important prerequisites for downstream analysis like Linkage 
+disequilibrium score regression (LDSC) and MAGMA.
+
 # Aim
 
-*MungeSumstats* will ensure that the necessary columns are present,
-syntactically correct. The output columns will depend on your input but can 
-include: 
+*MungeSumstats* will ensure that the all essential columns for analysis are 
+present and syntactically correct. Generally, summary statistic files include 
+(but are not limited to) the columns: 
   * SNP : SNP ID (rs IDs) 
   * CHR : Chromosome number 
   * BP : Base pair positions
   * A1 : Effect allele 
   * A2 : Non-effect allele
   * Z : Z-score
-  * N : Sample size
-  * P : Unadjusted p-value for SNP
   * BETA : Effect size estimate relative to the alternative allele 
+  * P : Unadjusted p-value for SNP
+  * N : Sample size
+  * INFO: The imputation information score
+  * FRQ: The minor allele frequency (MAF) of the SNP
 
 Tests run by *MungeSumstats* include:
   * Check VCF format
-  * Check tab delimited
+  * Check tab or space delimited
   * Check header names
   * Check for multiple models or traits in GWAS
   * Check for CHR:BP:A2:A1 all in one column
   * Check for CHR:BP in one column
-  * Check if CHR and/or BP is missing (infer from SNP ID)
-  * Check if SNP ID is missing (infer from CHR and BP)
-  * Check if A1 and/or A2 are missing (infer from SNP ID)
+  * Check if CHR and/or BP is missing (infer from reference genome)
+  * Check if SNP ID is missing (infer from reference genome)
+  * Check if A1 and/or A2 are missing (infer from reference genome)
   * Check that vital columns are present (SNP,CHR,BP,P,A1,A2)
-  * Check for one signed column (Z,OR,BETA,LOG_ODDS,SIGNED_SUMSTAT)
-  * Check column ordering
+  * Check for one signed/effect column (Z,OR,BETA,LOG_ODDS,SIGNED_SUMSTAT)
   * Check for missing data
   * Check for duplicated columns
   * Check for small p-values (lower than  5e-324)
   * Check N column is an integer
   * Check SNPs are RS ID's
   * Check for duplicated rows, based on SNP ID
-
+  * Check for duplicated rows, based on base-pair position
+  * Check for SNPs on reference genome
+  * Check INFO score
+  * Check for strand-ambiguous SNPs
+  * Check for non-biallelic SNPs (infer from reference genome)
+  * Check for allele flipping
+  * Check for SNPs on chromosome X, Y, and mitichondrial SNPs (MT)
+  * Check for SNPs with  
+  
 If a test is failed, the user will be notified and if possible, the input will 
-be corrected.
+be corrected. The QC steps from the checks above can also be adjusted to suit 
+the user's analysis, see `MungeSumstats::format_sumstats`.
 
 # Data
 
-The *MungeSumstats* package contains a small subset of the GWAS summary
-statistics file on Educational Attainment by Okbay et al 2016: PMID:
+The *MungeSumstats* package contains small subsets of GWAS summary
+statistics files. Firstly, on Educational Attainment by Okbay et al 2016: PMID:
 27898078 PMCID: PMC5509058 DOI: 10.1038/ng1216-1587b.
 
-This data will be used to showcase MungeSumstats functionality.
+Secondly, a VCF file (VCFv4.2)relating to the GWAS Amyotrophic lateral 
+sclerosis from ieu open GWAS project. Dataset: ebi-a-GCST005647:
+https://gwas.mrcieu.ac.uk/datasets/ebi-a-GCST005647/
+
+These datasets will be used to showcase MungeSumstats functionality.
 
 # Running MungeSumstats
 
-The *MungeSumstats* is in the process of being added to Bioconductor but, in the meantime, is available from github. 
-To be able to install the package one needs to install the devel version of R (version 4.1) which can be found at https://cran.r-project.org/ and then run the following lines of code:
+The *MungeSumstats* is in the process of being added to Bioconductor but, in the 
+meantime, is available from github. To be able to install the package one needs 
+to install the devel version of R (version 4.1) which can be found at 
+https://cran.r-project.org/ and then run the following lines of code:
 
 ```
 if (!require("devtools")) {
@@ -139,11 +159,27 @@ writeLines(MungeSumstats::eduAttainOkbay,con = tmp)
 To standardise the summary statistics' file format, simply call
 `format_sumstats()` passing in the path to your summary statistics file.
 You must also specify which genome build was used in the GWAS(GRCh37 or GRCh38).
-The path to the reformatted summary statistics file will be returned.
+The reference genome is used for multiple checks like deriving missing 
+data such SNP/BP/CHR/A1/A2 and for QC steps like removing non-biallelic
+SNPs or strand-ambiguous SNPs. The path to the reformatted summary statistics 
+file is returned by the function call.
 
 ```{r, message=TRUE}
 reformatted <- MungeSumstats::format_sumstats(path=tmp,ref_genome="GRCh37")
 ```
+
+The hyperparameters `format_sumstats` in that control the level of QC conducted 
+by *MungeSumstats* are:
+  * *convert_small_p* Binary, should p-values < 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.
+  * *convert_n_int* Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE.
+analysis_trait If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL
+INFO_filter numeric The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9
+  * *N_std* Numeric, the number of standard deviations above the mean a SNP's N is needed to be removed. Default is 5.
+rmv_chr vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary. Default is X, Y and mitochondrial. 
+  * *on_ref_genome* Binary, should a check take place that all SNPs are on the reference genome by SNP ID. Default is TRUE
+  * *strand_ambig_filter* Binary, should SNPs with strand-ambiguous alleles be removed. Default is FALSE
+  * *allele_flip_check* Binary, should the allele columns be chacked against reference genome to infer if flipping is necessary. Default is TRUE
+  * *bi_allelic_filter* Binary, should non-biallelic SNPs be removed. Default is TRUE
 
 VCF files can also be standardised to the same format as other summary statistic
 files. A subset of the Amyotrophic lateral sclerosis GWAS from the ieu open GWAS
@@ -164,8 +200,17 @@ The *MungeSumstats* package aims to be able to handle the most common
 summary statistic file formats including VCF. If your file can not be
 formatted by *MungeSumstats* feel free to report the bug on github:
 <https://github.com/neurogenomics/MungeSumstats> along with your summary
-statistic file header. We also encourage people to edit the code to
-resolve their particular issues too and are happy to incorporate these
-through pull requests on github.
+statistic file header. 
+
+We also encourage people to edit the code to resolve their particular issues 
+too and are happy to incorporate these through pull requests on github. If your
+summary statistic file headers are not recognised by *MungeSumstats* but 
+correspond to one of SNP, BP, CHR, A1, A2, P, Z, OR, BETA, LOG_ODDS,
+SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ, feel free to update the 
+`MungeSumstats::sumstatsColHeaders` following the approach in the data.R file
+and add your mapping. Then use a pull request on github and we will incorporate 
+this change into the package.
+
+
 
 # References

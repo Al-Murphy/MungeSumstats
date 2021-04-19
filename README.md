@@ -2,7 +2,7 @@ Standardise the format of summary statistics from GWAS with
 *MungeSumstats*
 ================
 Alan Murphy and Nathan Skene
-2021-04-14
+2021-04-19
 
 <!-- Readme.md is generated from Readme.Rmd. Please edit that file -->
 <!-- badges: start -->
@@ -30,7 +30,9 @@ remain closed access, these repositories are not all encompassing.
 *MungeSumstats* provides a framework to standardise the format for any
 GWAS summary statistics, including those in VCF format, enabling
 downstream integration and analysis. The package works by addressing the
-most common discrepancies across summary statistics.
+most common discrepancies across summary statistic files.
+*MungeSumstats* also offers a range of adjustable, Quality Control (QC)
+steps.
 
 # Installing MungeSumstats
 
@@ -81,9 +83,17 @@ The *MungeSumstats* package aims to be able to handle the most common
 summary statistic file formats including VCF. If your file can not be
 formatted by *MungeSumstats* feel free to report the bug on github:
 <https://github.com/neurogenomics/MungeSumstats> along with your summary
-statistic file header. We also encourage people to edit the code to
-resolve their particular issues too and are happy to incorporate these
-through pull requests on github.
+statistic file header.
+
+We also encourage people to edit the code to resolve their particular
+issues too and are happy to incorporate these through pull requests on
+github. If your summary statistic file headers are not recognised by
+*MungeSumstats* but correspond to one of SNP, BP, CHR, A1, A2, P, Z, OR,
+BETA, LOG\_ODDS, SIGNED\_SUMSTAT, N, N\_CAS, N\_CON, NSTUDY, INFO or
+FRQ, feel free to update the `MungeSumstats::sumstatsColHeaders`
+following the approach in the data.R file and add your mapping. Then use
+a pull request on github and we will incorporate this change into the
+package.
 
 # References
 

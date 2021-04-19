@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_dup_snp.R
 \name{check_dup_snp}
 \alias{check_dup_snp}
-\title{Ensure all rows have SNPs beginning with rs or SNP, drop those that don't}
+\title{Ensure all rows have unique SNP IDs, drop those that don't}
 \usage{
 check_dup_snp(sumstats_file, path)
 }
@@ -15,5 +15,5 @@ check_dup_snp(sumstats_file, path)
 null
 }
 \description{
-Ensure all rows have SNPs beginning with rs or SNP, drop those that don't
+Ensure all rows have unique SNP IDs, drop those that don't
 }

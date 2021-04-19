@@ -4,7 +4,7 @@
 \alias{check_no_allele}
 \title{Ensure that A1 & A2 are present, if not can find it with SNP and other allele}
 \usage{
-check_no_allele(sumstats_file, path, ref_genome)
+check_no_allele(sumstats_file, path, ref_genome, rsids)
 }
 \arguments{
 \item{sumstats_file}{The summary statistics file for the GWAS}
@@ -12,10 +12,13 @@ check_no_allele(sumstats_file, path, ref_genome)
 \item{path}{Filepath for the summary statistics file to be formatted}
 
 \item{ref_genome}{name of the reference genome used for the GWAS (GRCh37 or GRCh38)}
+
+\item{rsids}{datatable of snpsById, filtered to SNPs of interest if loaded already. Or else NULL}
 }
 \value{
 The modified sumstats_file
 }
 \description{
-Ensure that A1 & A2 are present, if not can find it with SNP and other allele
+More care needs to be taken if one of A1/A2 is present, before imputing the
+other allele flipping needs to be checked
 }
