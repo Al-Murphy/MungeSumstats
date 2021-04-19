@@ -7,7 +7,16 @@
 #' tmp <- tempfile()
 #' writeLines(MungeSumstats::eduAttainOkbay,con = tmp)
 #' #pass path to format_sumstats
+#' ## Call uses reference genome as default with more than 2GB of memory,
+#' ## which is more than what 32-bit Windows can handle so remove certain checks
+#' is_32bit_windows <- .Platform$OS.type == "windows" && .Platform$r_arch == "i386"
+#' if (!is_32bit_windows) {
 #' reformatted <- MungeSumstats::format_sumstats(tmp,ref_genome="GRCh37")
+#' } else{
+#' reformatted <- MungeSumstats::format_sumstats(tmp,ref_genome="GRCh37",
+#' on_ref_genome = FALSE,strand_ambig_filter=FALSE,bi_allelic_filter=FALSE,
+#' allele_flip_check=FALSE)
+#' }
 #' #returned location has the updated summary statistics file
 #' @param path Filepath for the summary statistics file to be formatted
 #' @param ref_genome name of the reference genome used for the GWAS (GRCh37 or GRCh38). Default is GRCh37.
