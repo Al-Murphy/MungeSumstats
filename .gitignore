@@ -6,7 +6,6 @@ MungeSumstats.Rproj
 .Rhistory
 BootstrapPlots
 *.csv
-*.txt
 *.log
 doc
 Meta
