@@ -4,18 +4,19 @@
 \alias{check_info_score}
 \title{Ensure all SNPs have info score above threshold}
 \usage{
-check_info_score(sumstats_file, path, INFO_filter)
+check_info_score(sumstats_dt, path, INFO_filter)
 }
 \arguments{
-\item{sumstats_file}{The summary statistics file for the GWAS}
+\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
 
 \item{path}{Filepath for the summary statistics file to be formatted}
 
 \item{INFO_filter}{integer The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9}
 }
 \value{
-The modified sumstats_file
+list containing sumstats_dt, the modified summary statistics data table object
 }
 \description{
 Ensure all SNPs have info score above threshold
 }
+\keyword{internal}

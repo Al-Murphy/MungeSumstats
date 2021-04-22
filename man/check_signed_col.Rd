@@ -4,10 +4,10 @@
 \alias{check_signed_col}
 \title{Ensure that there is at least one signed column in summary statistics file}
 \usage{
-check_signed_col(sumstats_file)
+check_signed_col(sumstats_dt)
 }
 \arguments{
-\item{sumstats_file}{The summary statistics file for the GWAS}
+\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
 }
 \value{
 null
@@ -15,3 +15,4 @@ null
 \description{
 Ensure that there is at least one signed column in summary statistics file
 }
+\keyword{internal}

@@ -1,7 +1,9 @@
 test_that("Handle n when its 5 std dev > mean", {
   file <- tempfile()
   #write the Educational Attainment GWAS to a temp file for testing
-  writeLines(MungeSumstats::eduAttainOkbay,con = file)
+  eduAttainOkbay <- readLines(system.file("extdata","eduAttainOkbay.txt",
+                                          package="MungeSumstats"))
+  writeLines(eduAttainOkbay,con = file)
   #read it in and make N
   sumstats_dt <- data.table::fread(file)
   #Add N column and make it not an integer

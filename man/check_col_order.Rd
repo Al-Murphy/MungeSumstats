@@ -4,16 +4,17 @@
 \alias{check_col_order}
 \title{Ensure that the first three columns are SNP, CHR, BP in that order}
 \usage{
-check_col_order(sumstats_file, path)
+check_col_order(sumstats_dt, path)
 }
 \arguments{
-\item{sumstats_file}{The summary statistics file for the GWAS}
+\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
 
 \item{path}{Filepath for the summary statistics file to be formatted}
 }
 \value{
-The modified sumstats_file
+list containing sumstats_dt, the modified summary statistics data table object
 }
 \description{
 Ensure that the first three columns are SNP, CHR, BP in that order
 }
+\keyword{internal}

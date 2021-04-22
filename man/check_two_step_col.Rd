@@ -4,16 +4,17 @@
 \alias{check_two_step_col}
 \title{Ensure that CHR:BP aren't merged into 1 column}
 \usage{
-check_two_step_col(sumstats_file, path)
+check_two_step_col(sumstats_dt, path)
 }
 \arguments{
-\item{sumstats_file}{The summary statistics file for the GWAS}
+\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
 
 \item{path}{Filepath for the summary statistics file to be formatted}
 }
 \value{
-The modified sumstats_file
+list containing sumstats_dt, the modified summary statistics data table object
 }
 \description{
 Ensure that CHR:BP aren't merged into 1 column
 }
+\keyword{internal}

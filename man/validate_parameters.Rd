@@ -50,3 +50,4 @@ No return
 \description{
 Ensure that the input parameters are logical
 }
+\keyword{internal}

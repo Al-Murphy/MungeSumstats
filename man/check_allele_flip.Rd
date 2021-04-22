@@ -4,10 +4,10 @@
 \alias{check_allele_flip}
 \title{Ensure A1 & A2 are correctly named, if GWAS constructed as Risk/nonrisk alleles this will need to be converted}
 \usage{
-check_allele_flip(sumstats_file, path, ref_genome, rsids, allele_flip_check)
+check_allele_flip(sumstats_dt, path, ref_genome, rsids, allele_flip_check)
 }
 \arguments{
-\item{sumstats_file}{The summary statistics file for the GWAS}
+\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
 
 \item{path}{Filepath for the summary statistics file to be formatted}
 
@@ -18,8 +18,13 @@ check_allele_flip(sumstats_file, path, ref_genome, rsids, allele_flip_check)
 \item{allele_flip_check}{Binary Should the allele columns be chacked against reference genome to infer if flipping is necessary. Default is TRUE}
 }
 \value{
-The modified sumstats_file
+A list containing two data tables:
+\itemize{
+\item \code{sumstats_dt}: the modified summary statistics data table object
+\item \code{rsids}: snpsById, filtered to SNPs of interest if loaded already. Or else NULL
+}
 }
 \description{
 Ensure A1 & A2 are correctly named, if GWAS constructed as Risk/nonrisk alleles this will need to be converted
 }
+\keyword{internal}

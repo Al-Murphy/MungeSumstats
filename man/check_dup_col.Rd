@@ -4,16 +4,17 @@
 \alias{check_dup_col}
 \title{Ensure that no columns are duplicated}
 \usage{
-check_dup_col(sumstats_file, path)
+check_dup_col(sumstats_dt, path)
 }
 \arguments{
-\item{sumstats_file}{The summary statistics file for the GWAS}
+\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
 
 \item{path}{Filepath for the summary statistics file to be formatted}
 }
 \value{
-The modified sumstats_file
+list containing sumstats_dt, the modified summary statistics data table object
 }
 \description{
 Ensure that no columns are duplicated
 }
+\keyword{internal}

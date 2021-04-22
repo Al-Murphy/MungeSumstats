@@ -13,8 +13,7 @@
 #' @param allele_flip_check Binary Should the allele columns be chacked against reference genome to infer if flipping is necessary. Default is TRUE
 #' @param bi_allelic_filter Binary Should non-biallelic SNPs be removed. Default is TRUE
 #' @return No return
-#'
-
+#' @keywords internal
 validate_parameters <- function(path,ref_genome, convert_small_p,
                             convert_n_int, analysis_trait, INFO_filter,
                             N_std, rmv_chr, on_ref_genome, strand_ambig_filter,

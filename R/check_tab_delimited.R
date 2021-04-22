@@ -2,6 +2,7 @@
 #'
 #' @param sumstats_file The summary statistics file for the GWAS
 #' @return The modified sumstats_file
+#' @keywords internal
 check_tab_delimited <-function(sumstats_file){
   row_of_data <- strsplit(sumstats_file[2], "\t")[[1]]
   #check if readLines picked up headers as single char

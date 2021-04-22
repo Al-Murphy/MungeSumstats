@@ -4,16 +4,17 @@
 \alias{check_miss_data}
 \title{Ensure that only one model in GWAS sumstats or only one trait tested}
 \usage{
-check_miss_data(sumstats_file, path)
+check_miss_data(sumstats_dt, path)
 }
 \arguments{
-\item{sumstats_file}{The summary statistics file for the GWAS}
+\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
 
 \item{path}{Filepath for the summary statistics file to be formatted}
 }
 \value{
-The modified sumstats_file
+list containing sumstats_dt, the modified summary statistics data table object
 }
 \description{
 Ensure that only one model in GWAS sumstats or only one trait tested
 }
+\keyword{internal}

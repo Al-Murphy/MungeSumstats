@@ -4,10 +4,10 @@
 \alias{check_strand_ambiguous}
 \title{Remove SNPs with strand-ambiguous alleles}
 \usage{
-check_strand_ambiguous(sumstats_file, path, ref_genome, strand_ambig_filter)
+check_strand_ambiguous(sumstats_dt, path, ref_genome, strand_ambig_filter)
 }
 \arguments{
-\item{sumstats_file}{The summary statistics file for the GWAS}
+\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
 
 \item{path}{Filepath for the summary statistics file to be formatted}
 
@@ -16,8 +16,9 @@ check_strand_ambiguous(sumstats_file, path, ref_genome, strand_ambig_filter)
 \item{strand_ambig_filter}{Binary Should SNPs with strand-ambiguous alleles be removed. Default is FALSE}
 }
 \value{
-The modified sumstats_file
+list containing sumstats_dt, the modified summary statistics data table object
 }
 \description{
 Remove SNPs with strand-ambiguous alleles
 }
+\keyword{internal}

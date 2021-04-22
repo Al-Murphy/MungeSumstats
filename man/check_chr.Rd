@@ -4,18 +4,19 @@
 \alias{check_chr}
 \title{Ensure all SNPs on specified chromosomes are removed}
 \usage{
-check_chr(sumstats_file, path, rmv_chr)
+check_chr(sumstats_dt, path, rmv_chr)
 }
 \arguments{
-\item{sumstats_file}{The summary statistics file for the GWAS}
+\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
 
 \item{path}{Filepath for the summary statistics file to be formatted}
 
 \item{rmv_chr}{vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary. Default is X, Y and mitochondrial.}
 }
 \value{
-The modified sumstats_file
+list containing sumstats_dt, the modified summary statistics data table object
 }
 \description{
 Ensure all SNPs on specified chromosomes are removed
 }
+\keyword{internal}

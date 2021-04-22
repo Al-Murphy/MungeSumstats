@@ -3,12 +3,13 @@
 #' @param sumstats_file The summary statistics file for the GWAS
 #' @param path Filepath for the summary statistics file to be formatted
 #' @return The modified sumstats_file
+#' @keywords internal
 #' @importFrom data.table fread
 #' @importFrom data.table fwrite
 #' @importFrom data.table tstrsplit
 #' @importFrom data.table :=
 check_vcf <- function(sumstats_file, path){
-  P = LP = NULL
+  P = LP = INFO = NULL
   #if the file is a VCF, first line will look like: ##fileformat=VCFv4.2
   first_line <- sumstats_file[[1]]
   file_type <- gsub("^##fileformat=","",first_line)
@@ -29,11 +30,12 @@ check_vcf <- function(sumstats_file, path){
     writeLines(sumstats_file, con=path)
     sumstats_file <- data.table::fread(path)
     #Get format column values too
-    format <- sumstats_file$FORMAT[1]#assume format same for all rows**
+    format <- sumstats_file$FORMAT[1]#assume format same for all rows except 
+    #where INFO="." then can be missing AF**
     #Remove unnecessary cols - need sample_id and FORMAT column
     colsToRemove <-
       names(sumstats_file)[!names(sumstats_file) %in% c("CHROM","POS","ID",
-                                                          "REF","ALT",
+                                                          "REF","ALT","INFO",
                                                           sample_id)]
     sumstats_file[,(colsToRemove):=NULL]
     #sample_id and FORMAT col will look like:
@@ -55,6 +57,48 @@ check_vcf <- function(sumstats_file, path){
     if(length(sample_id)!=0){
       #split out format into separate values
       format <- strsplit(format,":")[[1]]
+      #First, there is an issue where INFO=".", AF from FORMAT is missing
+      #Need to impute 0 for these values
+      #See dataset for example of this: 
+      #http://fileserve.mrcieu.ac.uk/vcf/IEU-a-2.vcf.gz
+      if("AF" %in% format && "INFO" %in% names(sumstats_file) && 
+          nrow(sumstats_file[INFO=="."])>0){
+        #get positions of ":" separators for each SNP
+        find_splits <- gregexpr(":", sumstats_file[,get(sample_id)])
+        #get position of AF to be imputed
+        AF_pos <- which("AF" == format)
+        #Update sumstats_file where number of splits isn't correct
+        #get row identifiers
+        update_rows<-
+          (lengths(regmatches(sumstats_file[,get(sample_id)],find_splits))!=
+             length(format)-1)
+        #get char pos for imputation
+        find_splits <- unlist(lapply(find_splits,function(x) x[AF_pos-1]))
+        #add to dt
+        sumstats_file[,find_splits:=find_splits]
+        #Now update these by imputing 0 for AF
+        sumstats_file[update_rows,(sample_id):=
+                        paste0(substr(get(sample_id),0,find_splits),
+                                "0:",#AF impute
+                                substr(get(sample_id),find_splits+1,
+                                        nchar(get(sample_id))))]
+        sumstats_file[,find_splits:=NULL]
+        #Then replace INFO="." with 0 at later stage
+      }
+      
+      #check if any cols already present - ID likely will be, rename if so
+      if(any(format %in% names(sumstats_file))){
+        format_copy <- format[format %in% names(sumstats_file)]
+        for(format_i in format_copy){
+          #If it is ID just remove other ID column
+          if(format_i=="ID"){
+            sumstats_file[,(format_i):=NULL]
+          }
+          else{#otherwise keep both columns just rename one
+            data.table::setnames(sumstats_file,format_i,paste0(format_i,"2"))
+          }
+        }  
+      }  
       sumstats_file[, (format) :=
                       data.table::tstrsplit(get(sample_id),
                                             split=":", fixed=TRUE)]
@@ -74,6 +118,14 @@ check_vcf <- function(sumstats_file, path){
                     "converted to unadjusted p-values in the 'P' column.")
       message(msg)
       sumstats_file[,P:=10^(-1*as.numeric(LP))]
+    }
+    
+    #Need to remove "AF=" at start of INFO column and replace any "." with 0
+    if("INFO" %in% names(sumstats_file)){
+      sumstats_file[,INFO:=gsub("^AF=","",INFO)]
+      sumstats_file[INFO==".",INFO:=0]
+      #update to numeric
+      sumstats_file[,INFO:=as.numeric(INFO)]
     }
 
     #VCF format has dups of each row, get unique

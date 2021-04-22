@@ -1,7 +1,9 @@
 test_that("Input has correct headers", {
   file <- tempfile()
   #write the Educational Attainment GWAS to a temp file for testing
-  writeLines(MungeSumstats::eduAttainOkbay,con = file)
+  eduAttainOkbay <- readLines(system.file("extdata","eduAttainOkbay.txt",
+                                          package="MungeSumstats"))
+  writeLines(eduAttainOkbay,con = file)
   #read it in and correct column headers
   sumstats_dt <- data.table::fread(file)
   names(sumstats_dt) <- c("SNP","CHR","BP","A1","A2","FRQ","BETA","SE","P")

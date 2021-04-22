@@ -1,15 +1,16 @@
 #' Ensure that CHR:BP:A2:A1 aren't merged into 1 column
 #'
-#' @param sumstats_file The summary statistics file for the GWAS
+#' @param sumstats_dt data table obj of the summary statistics file for the GWAS
 #' @param path Filepath for the summary statistics file to be formatted
-#' @return The modified sumstats_file
-#' @importFrom utils write.table
-check_four_step_col <- function(sumstats_file, path){
+#' @return list containing sumstats_dt, the modified summary statistics data table object
+#' @keywords internal
+#' @importFrom data.table tstrsplit
+#' @importFrom data.table :=
+check_four_step_col <- function(sumstats_dt, path){
   #get col headers
-  col_headers <- sumstats_file[1]
-  col_headers <- strsplit(col_headers, "\t")[[1]]
+  col_headers <- names(sumstats_dt)
   # Obtain a row of the actual data
-  row_of_data <- strsplit(sumstats_file[2], "\t")[[1]]
+  row_of_data <- as.character(sumstats_dt[1,])
   # Check if there is a column of data with CHR:BP:A2:A1 format
   fourStepCol <- grep(".*:.*:\\w:\\w",row_of_data)
   #in case there are more than one column with ":", just take first one
@@ -25,34 +26,28 @@ check_four_step_col <- function(sumstats_file, path){
                   "those listed here before \nrunning `format_sumstats()`.")
     message(msg)
     #Get data without dropped
-    write.table(x=utils::read.table(path)[-which(col_headers %in% drop_cols)],
-                file=path, sep="\t", quote=FALSE, row.names = FALSE,
-                col.names = FALSE)
-    sumstats_file <- readLines(path)
-    col_headers <- strsplit(sumstats_file[1], "\t")[[1]]
-    row_of_data <- strsplit(sumstats_file[2], "\t")[[1]]
-    fourStepCol <- grep(".*:.*:\\w:\\w",row_of_data)# should only have 1 col now
+    sumstats_dt[, (drop_cols) := NULL]
+    fourStepCol <- which(col_headers==keep_col)
   }
-
   if(length(fourStepCol)){
-    # Convert the ':' into '\t'
-    sumstats_file <-
-      gsub(pattern = ":", replacement = "\t", x = sumstats_file)
-    # Replace the column name with four names
-    curColName <- col_headers[fourStepCol]
-    # Write the new column headers to file
-    first_line <- paste(col_headers, collapse = "\t")
-    new_first_line <-
-      gsub(sprintf("^%s\\t|\\t%s\\t|\\t%s$",curColName,curColName,curColName),
-           "\tCHR\tBP\tA2\tA1\t", paste(col_headers, collapse = "\t"))
-    sumstats_file[1] <- new_first_line
-    col_headers <- strsplit(new_first_line, "\t")[[1]]
-    message(sprintf("Column %s has been replaced with CHR BP A2 A1",
-                  curColName))
-
-    return(sumstats_file)
+    keep_col <- col_headers[fourStepCol]
+    #split out col into separate values, keep names
+    format <- strsplit(keep_col,":")[[1]]
+    if(length(format)!=4)#check : and underscore in name
+      format <- strsplit(keep_col,"_")[[1]]
+    if(length(format)!=4)#If neither found assign name
+      format <- c("CHR","BP","A2","A1")
+    sumstats_dt[, (format) := data.table::tstrsplit(get(keep_col),
+                                                      split=":", fixed=TRUE)]
+    #remove combined column
+    sumstats_dt[, (keep_col) := NULL]
+    msg <- paste0("Column",keep_col," has been separated into the columns ",
+                  paste(format,collapse=", "))
+    message(msg)
+    
+    return(list("sumstats_dt"=sumstats_dt))
   }
   else{
-    return(sumstats_file)
+    return(list("sumstats_dt"=sumstats_dt))
   }
 }

@@ -4,19 +4,20 @@
 \alias{check_n_num}
 \title{Ensure all SNPs have N less than X std dev below mean}
 \usage{
-check_n_num(sumstats_file, path, N_std)
+check_n_num(sumstats_dt, path, N_std)
 }
 \arguments{
-\item{sumstats_file}{The summary statistics file for the GWAS}
+\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
 
 \item{path}{Filepath for the summary statistics file to be formatted}
 
 \item{N_std}{numeric The number of standard deviations above the mean a SNP's N is needed to be removed. Default is 5.}
 }
 \value{
-The modified sumstats_file
+list containing sumstats_dt, the modified summary statistics data table object
 }
 \description{
 Incase some SNPs were genotyped by a specialized genotyping array and
 have substantially more samples than others. These will be removed.
 }
+\keyword{internal}

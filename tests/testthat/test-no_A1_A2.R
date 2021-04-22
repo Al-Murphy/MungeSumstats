@@ -1,7 +1,9 @@
 test_that("Imputation of A1/A2 correctly", {
   file <- tempfile()
   #write the Educational Attainment GWAS to a temp file for testing
-  writeLines(MungeSumstats::eduAttainOkbay,con = file)
+  eduAttainOkbay <- readLines(system.file("extdata","eduAttainOkbay.txt",
+                                          package="MungeSumstats"))
+  writeLines(eduAttainOkbay,con = file)
   #read it in and drop CHR BP columns
   sumstats_dt <- data.table::fread(file)
   #Keep Org to validate values
@@ -24,8 +26,8 @@ test_that("Imputation of A1/A2 correctly", {
     
     #Check with just one of A1 A2
     #write the Educational Attainment GWAS to a temp file for testing
-    writeLines(MungeSumstats::eduAttainOkbay,con = file)
-    #read it in and drop CHR BP columns
+    writeLines(eduAttainOkbay,con = file)
+    #read it in and drop A1 columns
     sumstats_dt <- data.table::fread(file)
     #Keep Org to validate values
     sumstats_dt_missing <- data.table::copy(sumstats_dt)
@@ -39,6 +41,23 @@ test_that("Imputation of A1/A2 correctly", {
                                                   allele_flip_check=FALSE)
     res_dt2 <- data.table::fread(reformatted2)
     
+    #Check with just one of A1 A2
+    #write the Educational Attainment GWAS to a temp file for testing
+    writeLines(eduAttainOkbay,con = file)
+    #read it in and drop A2 columns
+    sumstats_dt <- data.table::fread(file)
+    #Keep Org to validate values
+    sumstats_dt_missing <- data.table::copy(sumstats_dt)
+    sumstats_dt_missing[,A2:=NULL]
+    data.table::fwrite(x=sumstats_dt_missing, file=file, sep="\t")
+    #Run MungeSumstats code
+    reformatted3 <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37",
+                                                   on_ref_genome = FALSE,
+                                                   strand_ambig_filter=FALSE,
+                                                   bi_allelic_filter=FALSE,
+                                                   allele_flip_check=FALSE)
+    res_dt3 <- data.table::fread(reformatted3)
+    
     #correct names of MungeSumstats::eduAttainOkbay
     names(sumstats_dt) <- c("SNP","CHR","BP","A1","A2","FRQ","Beta","SE","P")
     #get order same
@@ -50,8 +69,10 @@ test_that("Imputation of A1/A2 correctly", {
     #add A2 to org
     sumstats_dt[res_dt,A2_der:=i.A2]
     
+    #add second A1 to org
+    sumstats_dt[res_dt2,A1_der2:=i.A1]
     #add second A2 to org
-    sumstats_dt[res_dt2,A2_der2:=i.A2]
+    sumstats_dt[res_dt3,A2_der2:=i.A2]
     
     #remove any that weren't found in reference
     sumstats_dt <- sumstats_dt[complete.cases(sumstats_dt),]
@@ -63,11 +84,16 @@ test_that("Imputation of A1/A2 correctly", {
     #expect A2s to be equal, all won't be since can be multiple A2s
     expect_equal(A2_valid,TRUE)
     
+    A1_valid2 <- mean(sumstats_dt$A1==sumstats_dt$A1_der2)>0.5 #50% threshold
+    #expect A1s to be equal, all won't be since can be multiple A1s
+    expect_equal(A1_valid2,TRUE)
+    
     A2_valid2 <- mean(sumstats_dt$A2==sumstats_dt$A2_der2)>0.45 #45% threshold
     #expect A2s to be equal, all won't be since can be multiple A2s
     expect_equal(A2_valid2,TRUE)
   }
   else{
+    expect_equal(is_32bit_windows,TRUE)
     expect_equal(is_32bit_windows,TRUE)
     expect_equal(is_32bit_windows,TRUE)
     expect_equal(is_32bit_windows,TRUE)

@@ -4,10 +4,10 @@
 \alias{check_no_chr_bp}
 \title{Ensure that CHR and BP are missing if SNP is present, can find them}
 \usage{
-check_no_chr_bp(sumstats_file, path, ref_genome, rsids)
+check_no_chr_bp(sumstats_dt, path, ref_genome, rsids)
 }
 \arguments{
-\item{sumstats_file}{The summary statistics file for the GWAS}
+\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
 
 \item{path}{Filepath for the summary statistics file to be formatted}
 
@@ -16,8 +16,13 @@ check_no_chr_bp(sumstats_file, path, ref_genome, rsids)
 \item{rsids}{datatable of snpsById, filtered to SNPs of interest if loaded already. Or else NULL}
 }
 \value{
-The modified sumstats_file
+A list containing two data tables:
+\itemize{
+\item \code{sumstats_dt}: the modified summary statistics data table object
+\item \code{rsids}: snpsById, filtered to SNPs of interest if loaded already. Or else NULL
+}
 }
 \description{
 Ensure that CHR and BP are missing if SNP is present, can find them
 }
+\keyword{internal}

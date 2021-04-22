@@ -1,7 +1,9 @@
 test_that("Imputation of SNP correctly", {
   file <- tempfile()
   #write the Educational Attainment GWAS to a temp file for testing
-  writeLines(MungeSumstats::eduAttainOkbay,con = file)
+  eduAttainOkbay <- readLines(system.file("extdata","eduAttainOkbay.txt",
+                                          package="MungeSumstats"))
+  writeLines(eduAttainOkbay,con = file)
   #read it in and drop CHR BP columns
   sumstats_dt <- data.table::fread(file)
   #Keep Org to validate values

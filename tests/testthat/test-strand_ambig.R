@@ -5,7 +5,9 @@ test_that("strand-ambiguous SNPs are removed", {
   #"rs4493682"  "rs34106693" "rs6799130"  are strand-ambiguous
   SA_snps <- c("rs7131944","rs12682297","rs55830725","rs2992632","rs11689269",
                 "rs4493682","rs34106693","rs6799130" )
-  eduAttainOkbay_missing <- MungeSumstats::eduAttainOkbay
+  eduAttainOkbay <- readLines(system.file("extdata","eduAttainOkbay.txt",
+                                          package="MungeSumstats"))
+  eduAttainOkbay_missing <- eduAttainOkbay
   for(SA_snp in SA_snps){
     eduAttainOkbay_missing <- 
       eduAttainOkbay_missing[!grepl(SA_snp,eduAttainOkbay_missing)]
@@ -25,7 +27,7 @@ test_that("strand-ambiguous SNPs are removed", {
                                                   allele_flip_check=FALSE)
     reformatted_lines <- readLines(reformatted)
     #Should equal org as strand ambig can be removed
-    writeLines(MungeSumstats::eduAttainOkbay,con = file)
+    writeLines(eduAttainOkbay,con = file)
     org <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37",
                                           on_ref_genome = FALSE,
                                           strand_ambig_filter=TRUE,

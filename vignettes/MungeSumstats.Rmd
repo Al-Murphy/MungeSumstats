@@ -6,12 +6,12 @@ output:
   html_document:
     toc: true
     df_print: paged
-csl: inst/cit/nature.csl
+csl: vignettes/nature.csl
 vignette: >
     %\VignetteIndexEntry{Standardise the format of summary statistics from GWAS with MungeSumstats} 
     %\usepackage[utf8]{inputenc}
     %\VignetteEngine{knitr::knitr} 
-bibliography: inst/cit/MungeSumstats.bib
+bibliography: vignettes/MungeSumstats.bib
 editor_options: 
   markdown: 
     wrap: 72
@@ -20,7 +20,6 @@ editor_options:
 ```{r style, echo=FALSE, results='asis', message=FALSE}
 BiocStyle::markdown()
 knitr::opts_chunk$set(tidy         = FALSE,
-                      warning      = FALSE,
                       message      = FALSE)
 
 ```
@@ -83,8 +82,8 @@ present and syntactically correct. Generally, summary statistic files include
 
 Tests run by *MungeSumstats* include:
   * Check VCF format
-  * Check tab or space delimited
-  * Check header names
+  * Check tab, space or comma delimited
+  * Check for header name synonyms
   * Check for multiple models or traits in GWAS
   * Check for CHR:BP:A2:A1 all in one column
   * Check for CHR:BP in one column
@@ -97,6 +96,7 @@ Tests run by *MungeSumstats* include:
   * Check for duplicated columns
   * Check for small p-values (lower than  5e-324)
   * Check N column is an integer
+  * Check for SNPs with N greater than 5 times standard dev. plus the mean  
   * Check SNPs are RS ID's
   * Check for duplicated rows, based on SNP ID
   * Check for duplicated rows, based on base-pair position
@@ -105,8 +105,7 @@ Tests run by *MungeSumstats* include:
   * Check for strand-ambiguous SNPs
   * Check for non-biallelic SNPs (infer from reference genome)
   * Check for allele flipping
-  * Check for SNPs on chromosome X, Y, and mitichondrial SNPs (MT)
-  * Check for SNPs with  
+  * Check for SNPs on chromosome X, Y, and mitochondrial SNPs (MT)
   
 If a test is failed, the user will be notified and if possible, the input will 
 be corrected. The QC steps from the checks above can also be adjusted to suit 
@@ -126,34 +125,19 @@ These datasets will be used to showcase MungeSumstats functionality.
 
 # Running MungeSumstats
 
-The *MungeSumstats* is in the process of being added to Bioconductor but, in the 
-meantime, is available from github. To be able to install the package one needs 
-to install the devel version of R (version 4.1) which can be found at 
-https://cran.r-project.org/ and then run the following lines of code:
-
-```
-if (!require("devtools")) {
-  install.packages("devtools")
-}
-devtools::install_github("neurogenomics/MungeSumstats")
-```
-
-To install *MungeSumstats* on Bioconductor run:
+*MungeSumstats* is available on Bioconductor. To install the package on 
+Bioconductor run the following lines of code:
 
 ```
 if (!require("BiocManager"))
     install.packages("BiocManager")
 
-BiocManager::install(version = "devel")
 BiocManager::install("MungeSumstats")
 ```
-Once installed, load the package and the sample dataset, writing to a temporary directory:
+Once installed, load the package:
 
 ```{r setup}
 library(MungeSumstats)
-#save the Educational Attainment Okbay sumstat file to a temp directory
-tmp <- tempfile()
-writeLines(MungeSumstats::eduAttainOkbay,con = tmp)
 ```
 
 To standardise the summary statistics' file format, simply call
@@ -164,8 +148,15 @@ data such SNP/BP/CHR/A1/A2 and for QC steps like removing non-biallelic
 SNPs or strand-ambiguous SNPs. The path to the reformatted summary statistics 
 file is returned by the function call.
 
+The Educational Attainment by Okbay GWAS summary statistics file is saved as a 
+text document in the package's external data folder so we can just pass the file
+path to it straight to *MungeSumstats*.
+
 ```{r, message=TRUE}
-reformatted <- MungeSumstats::format_sumstats(path=tmp,ref_genome="GRCh37")
+eduAttainOkbayPth <- system.file("extdata","eduAttainOkbay.txt",
+                                  package="MungeSumstats")
+reformatted <- 
+  MungeSumstats::format_sumstats(path=eduAttainOkbayPth,ref_genome="GRCh37")
 ```
 
 The hyperparameters `format_sumstats` in that control the level of QC conducted 
@@ -183,15 +174,15 @@ rmv_chr vector or character The chromosomes on which the SNPs should be removed.
 
 VCF files can also be standardised to the same format as other summary statistic
 files. A subset of the Amyotrophic lateral sclerosis GWAS from the ieu open GWAS
-project has been added to *MungeSumstats* to demonstrate this functionality.
-Simply pass the path to the file in the same manner you would for other summary
-statistic files:
+project (a .vcf file) has been added to *MungeSumstats* to demonstrate this 
+functionality.Simply pass the path to the file in the same manner you would for 
+other summary statistic files:
 
 ```{r, message=TRUE}
 #save ALS GWAS from the ieu open GWAS project to a temp directory
-tmp2 <- tempfile()
-writeLines(MungeSumstats::ieuAmlVcf,con = tmp2)
-reformatted_vcf <- MungeSumstats::format_sumstats(path=tmp2,ref_genome="GRCh37")
+ALSvcfPth <- system.file("extdata","ALSvcf.vcf",package="MungeSumstats")
+reformatted_vcf <- 
+  MungeSumstats::format_sumstats(path=ALSvcfPth, ref_genome="GRCh37")
 ```
 
 # Future Enhancements
@@ -211,6 +202,9 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ, feel free to update the
 and add your mapping. Then use a pull request on github and we will incorporate 
 this change into the package.
 
-
+# Session Information
+```{r, message=TRUE, echo=FALSE}
+sessionInfo()
+```
 
 # References

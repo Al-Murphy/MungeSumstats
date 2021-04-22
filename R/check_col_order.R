@@ -1,11 +1,12 @@
 #' Ensure that the first three columns are SNP, CHR, BP in that order
 #'
-#' @param sumstats_file The summary statistics file for the GWAS
+#' @param sumstats_dt data table obj of the summary statistics file for the GWAS
 #' @param path Filepath for the summary statistics file to be formatted
-#' @return The modified sumstats_file
+#' @return list containing sumstats_dt, the modified summary statistics data table object
+#' @keywords internal
 #' @importFrom data.table setcolorder
-check_col_order <- function(sumstats_file, path){
-  col_headers <- names(sumstats_file)
+check_col_order <- function(sumstats_dt, path){
+  col_headers <- names(sumstats_dt)
   #Use data tables for speed
   if(!sum(col_headers[seq_len(3)]==c("SNP","CHR","BP"))==3){
     msg <- paste0("Reordering so first three column headers are SNP, CHR and",
@@ -16,11 +17,11 @@ check_col_order <- function(sumstats_file, path){
     whichBP <- which(col_headers=="BP")[1]
     otherCols <-
       setdiff(seq_len(length(col_headers)),c(whichSNP,whichCHR,whichBP))
-    data.table::setcolorder(sumstats_file, c(whichSNP,whichCHR,whichBP,otherCols))
+    data.table::setcolorder(sumstats_dt, c(whichSNP,whichCHR,whichBP,otherCols))
     
-    return(sumstats_file)
+    return(list("sumstats_dt"=sumstats_dt))
   }
   else{
-    return(sumstats_file)
+    return(list("sumstats_dt"=sumstats_dt))
   }
 }

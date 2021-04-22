@@ -1,7 +1,9 @@
 test_that("Can correctly separate CHR:BP", {
   file <- tempfile()
   #write the Educational Attainment GWAS to a temp file for testing
-  writeLines(MungeSumstats::eduAttainOkbay,con = file)
+  eduAttainOkbay <- readLines(system.file("extdata","eduAttainOkbay.txt",
+                                          package="MungeSumstats"))
+  writeLines(eduAttainOkbay,con = file)
   #read it in and combine CHR BP columns
   sumstats_dt <- data.table::fread(file)
   #Keep Org to validate values
@@ -25,5 +27,5 @@ test_that("Can correctly separate CHR:BP", {
                                         bi_allelic_filter=FALSE,
                                         allele_flip_check=FALSE)
   org_dt <- data.table::fread(org)
-  expect_equal(org_dt,res_dt)
+  expect_equal(all.equal(org_dt,res_dt,ignore.row.order=TRUE),TRUE)
 })

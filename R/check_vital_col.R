@@ -1,9 +1,10 @@
 #' Ensure that all necessary columns are in the summary statistics file
 #'
-#' @param sumstats_file The summary statistics file for the GWAS
+#' @param sumstats_dt data table obj of the summary statistics file for the GWAS
 #' @return null
-check_vital_col <- function(sumstats_file){
-  col_headers <- names(sumstats_file)
+#' @keywords internal
+check_vital_col <- function(sumstats_dt){
+  col_headers <- names(sumstats_dt)
   err_msg <-
     "Cannot find a %s column in GWAS sumstats. \nUse code such as '%s' to fix"
   for(key_column in c("SNP","CHR","BP","P","A1","A2")){

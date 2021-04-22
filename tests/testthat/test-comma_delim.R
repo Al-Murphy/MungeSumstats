@@ -1,7 +1,9 @@
 test_that("Can handle comma delimited files", {
   file <- tempfile()
   #write the Educational Attainment GWAS to a temp file for testing
-  writeLines(MungeSumstats::eduAttainOkbay,con = file)
+  eduAttainOkbay <- readLines(system.file("extdata","eduAttainOkbay.txt",
+                                          package="MungeSumstats"))
+  writeLines(eduAttainOkbay,con = file)
   #read it in and write as space delimited
   sumstats_dt <- data.table::fread(file)
   data.table::fwrite(x=sumstats_dt, file=file, sep=",")
@@ -15,7 +17,7 @@ test_that("Can handle comma delimited files", {
   #check against results of normal run should be the exact same
   file2 <- tempfile()
   #write the Educational Attainment GWAS to a temp file for testing
-  writeLines(MungeSumstats::eduAttainOkbay,con = file2)
+  writeLines(eduAttainOkbay,con = file2)
   org <- MungeSumstats::format_sumstats(file2,ref_genome="GRCh37",
                                         on_ref_genome = FALSE,
                                         strand_ambig_filter=FALSE,

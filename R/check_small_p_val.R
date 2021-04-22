@@ -1,24 +1,25 @@
 #' Ensure that the p values are not 5e-324 or lower, if so set to 0
 #'
-#' @param sumstats_file The summary statistics file for the GWAS
+#' @param sumstats_dt data table obj of the summary statistics file for the GWAS
 #' @param path Filepath for the summary statistics file to be formatted
 #' @param convert_small_p Binary, should p-values < 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.
-#' @return The modified sumstats_file
+#' @return list containing sumstats_dt, the modified summary statistics data table object
+#' @keywords internal
 #' @importFrom data.table :=
-check_small_p_val <- function(sumstats_file, path, convert_small_p){
+check_small_p_val <- function(sumstats_dt, path, convert_small_p){
   P = NULL
   # Sometimes the N column is not all integers... so round it up
-  col_headers <- names(sumstats_file)
+  col_headers <- names(sumstats_dt)
   if("P" %in% col_headers) {
     #get smallest p-val - seems to change to character if < xe-300
     char_check <- FALSE
     num_check <- FALSE
-    if(is.numeric(sumstats_file$P)){
-      if(min(sumstats_file$P)<=5e-324)
+    if(is.numeric(sumstats_dt$P)){
+      if(min(sumstats_dt$P)<=5e-324)
         num_check <- TRUE
     }
     else{#char check
-      max_minus_power <- max(as.numeric(gsub(".*-","",sumstats_file$P)))
+      max_minus_power <- max(as.numeric(gsub(".*-","",sumstats_dt$P)))
       if(max_minus_power >= 324)
         char_check <- TRUE
     }
@@ -28,9 +29,9 @@ check_small_p_val <- function(sumstats_file, path, convert_small_p){
       if (convert_small_p) { #if user wants to correct
         msg2 <- paste0(msg,"These will be converted to 0.")
         message(msg2)
-        sumstats_file[,P:=as.numeric(as.character(P))]
+        sumstats_dt[,P:=as.numeric(as.character(P))]
 
-        return(sumstats_file)
+        return(list("sumstats_dt"=sumstats_dt))
       }
       else{
         msg2 <-paste0(msg,"These will NOT be converted.")
@@ -38,5 +39,5 @@ check_small_p_val <- function(sumstats_file, path, convert_small_p){
       }
     }
   }
-  return(sumstats_file)
+  return(list("sumstats_dt"=sumstats_dt))
 }

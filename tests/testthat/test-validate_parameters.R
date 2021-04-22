@@ -2,7 +2,9 @@ test_that("validate parameters", {
   
   file <- tempfile()
   #write the Educational Attainment GWAS to a temp file for testing
-  writeLines(MungeSumstats::eduAttainOkbay,con = file)
+  eduAttainOkbay <- readLines(system.file("extdata","eduAttainOkbay.txt",
+                                          package="MungeSumstats"))
+  writeLines(eduAttainOkbay,con = file)
   
   #Check that submitting incorrect parameters gives errors
   #Run MungeSumstats code

@@ -1,7 +1,9 @@
 test_that("Can correctly separate CHR:BP:A2:A1, two columns", {
   file <- tempfile()
   #write the Educational Attainment GWAS to a temp file for testing
-  writeLines(MungeSumstats::eduAttainOkbay,con = file)
+  eduAttainOkbay <- readLines(system.file("extdata","eduAttainOkbay.txt",
+                                          package="MungeSumstats"))
+  writeLines(eduAttainOkbay,con = file)
   #read it in and combine CHR BP columns
   sumstats_dt <- data.table::fread(file)
   #Keep Org to validate values
@@ -31,5 +33,5 @@ test_that("Can correctly separate CHR:BP:A2:A1, two columns", {
   org_dt <- data.table::fread(org)
   #Need to move A1 and A2 to end
   setcolorder(org_dt, c("SNP","CHR","BP","FRQ","BETA","SE","P","A2","A1"))
-  expect_equal(org_dt,res_dt)
+  expect_equal(all.equal(org_dt,res_dt,ignore.row.order=TRUE),TRUE)
 })

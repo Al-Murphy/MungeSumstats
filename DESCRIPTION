@@ -1,7 +1,7 @@
 Package: MungeSumstats
 Type: Package
 Title: Standardise summary statistics from GWAS
-Version: 0.99.9
+Version: 0.99.10
 Authors@R:
     c(person(given = "Alan",
            family = "Murphy",
@@ -19,23 +19,23 @@ Description:
   SNP, CHR, BP and can look up these values if any are missing. It also removes 
   duplicates across SNPs.
 URL: https://github.com/neurogenomics/MungeSumstats
+BugReports: https://github.com/neurogenomics/MungeSumstats/issues
 License: Artistic-2.0
 Depends: R(>= 4.0)
 Imports: 
     data.table,
     utils,
     stats,
+    GenomicRanges,
+    BSgenome,
+    Biostrings,
     SNPlocs.Hsapiens.dbSNP144.GRCh37,
     SNPlocs.Hsapiens.dbSNP144.GRCh38,
     BSgenome.Hsapiens.1000genomes.hs37d5,
-    BSgenome.Hsapiens.NCBI.GRCh38,
-    GenomicRanges,
-    BSgenome,
-    Biostrings
+    BSgenome.Hsapiens.NCBI.GRCh38
 biocViews: 
     SNP, WholeGenome, Genetics, ComparativeGenomics, 
     GenomeWideAssociation, GenomicVariation, Preprocessing
-LazyData: TRUE
 RoxygenNote: 7.1.1
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

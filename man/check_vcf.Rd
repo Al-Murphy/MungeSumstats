@@ -17,3 +17,4 @@ The modified sumstats_file
 \description{
 Check if the inputted file is in VCF format, if so reformat as standard
 }
+\keyword{internal}

@@ -2,8 +2,8 @@
 title: "Standardise the format of summary statistics from GWAS with *MungeSumstats*"
 author: "Alan Murphy and Nathan Skene"
 date: "`r Sys.Date()`"
-bibliography: inst/cit/MungeSumstats.bib
-csl: inst/cit/nature.csl
+bibliography: vignettes/MungeSumstats.bib
+csl: vignettes/nature.csl
 output: rmarkdown::github_document
 vignette: >
   %\VignetteIndexEntry{MungeSumstats}

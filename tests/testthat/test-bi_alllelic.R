@@ -2,7 +2,9 @@ test_that("non-biallelic SNPs are removed", {
   file <- tempfile()
   #Update ID from line 3 to check it is deleted -
   # rs1871109 is non-biallelic
-  eduAttainOkbay_missing <- MungeSumstats::eduAttainOkbay
+  eduAttainOkbay <- readLines(system.file("extdata","eduAttainOkbay.txt",
+                                          package="MungeSumstats"))
+  eduAttainOkbay_missing <- eduAttainOkbay
   eduAttainOkbay_missing[3] <-
     "rs1871109\t6\t98584733\tA\tC\t0.5019\t0.024\t0.003\t2.457e-19"
   #write the Educational Attainment GWAS to a temp file for testing
@@ -20,7 +22,7 @@ test_that("non-biallelic SNPs are removed", {
                                                   allele_flip_check=FALSE)
     reformatted_lines <- readLines(reformatted)
     #Should equal org apart from this one line
-    writeLines(MungeSumstats::eduAttainOkbay,con = file)
+    writeLines(eduAttainOkbay,con = file)
     org <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37",
                                           on_ref_genome = FALSE,
                                           strand_ambig_filter=FALSE,

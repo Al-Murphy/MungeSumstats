@@ -4,16 +4,17 @@
 \alias{check_row_snp}
 \title{Ensure all rows have SNPs beginning with rs or SNP, drop those that don't}
 \usage{
-check_row_snp(sumstats_file, path)
+check_row_snp(sumstats_dt, path)
 }
 \arguments{
-\item{sumstats_file}{The summary statistics file for the GWAS}
+\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
 
 \item{path}{Filepath for the summary statistics file to be formatted}
 }
 \value{
-The modified sumstats_file
+list containing sumstats_dt, the modified summary statistics data table object
 }
 \description{
 Ensure all rows have SNPs beginning with rs or SNP, drop those that don't
 }
+\keyword{internal}

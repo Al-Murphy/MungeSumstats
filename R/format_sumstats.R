@@ -3,18 +3,20 @@
 #' @return The address for the modified sumstats file
 #'
 #' @examples
-#' #save the Educational Attainment Okbay sumstat file to a temp directory
-#' tmp <- tempfile()
-#' writeLines(MungeSumstats::eduAttainOkbay,con = tmp)
+#' #Pass path to Educational Attainment Okbay sumstat file to a temp directory
+#' eduAttainOkbayPth <- system.file("extdata","eduAttainOkbay.txt",
+#' package="MungeSumstats")
 #' #pass path to format_sumstats
 #' ## Call uses reference genome as default with more than 2GB of memory,
 #' ## which is more than what 32-bit Windows can handle so remove certain checks
 #' is_32bit_windows <- .Platform$OS.type == "windows" && .Platform$r_arch == "i386"
 #' if (!is_32bit_windows) {
-#' reformatted <- MungeSumstats::format_sumstats(tmp,ref_genome="GRCh37")
+#' reformatted <- MungeSumstats::format_sumstats(eduAttainOkbayPth,
+#' ref_genome="GRCh37")
 #' } else{
-#' reformatted <- MungeSumstats::format_sumstats(tmp,ref_genome="GRCh37",
-#' on_ref_genome = FALSE,strand_ambig_filter=FALSE,bi_allelic_filter=FALSE,
+#' reformatted <- MungeSumstats::format_sumstats(eduAttainOkbayPth,
+#' ref_genome="GRCh37",on_ref_genome = FALSE,strand_ambig_filter=FALSE,
+#' bi_allelic_filter=FALSE,
 #' allele_flip_check=FALSE)
 #' }
 #' #returned location has the updated summary statistics file
@@ -28,12 +30,13 @@
 #' @param rmv_chr vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary. Default is X, Y and mitochondrial. 
 #' @param on_ref_genome Binary Should a check take place that all SNPs are on the reference genome by SNP ID. Default is TRUE
 #' @param strand_ambig_filter Binary Should SNPs with strand-ambiguous alleles be removed. Default is FALSE
-#' @param allele_flip_check Binary Should the allele columns be chacked against reference genome to infer if flipping is necessary. Default is TRUE
+#' @param allele_flip_check Binary Should the allele columns be checked against reference genome to infer if flipping is necessary. Default is TRUE
 #' @param bi_allelic_filter Binary Should non-biallelic SNPs be removed. Default is TRUE
 #' @importFrom data.table fread
 #' @importFrom data.table fwrite
 #' @importFrom data.table setcolorder
 #' @importFrom utils read.table
+#' @importFrom utils data
 #' @export
 format_sumstats <- function(path,ref_genome="GRCh37", convert_small_p=TRUE,
                               convert_n_int=TRUE, analysis_trait=NULL,
@@ -60,23 +63,30 @@ format_sumstats <- function(path,ref_genome="GRCh37", convert_small_p=TRUE,
   writeLines(sumstats_file, con=tmp)
   path <- tmp
   
-
   # Check 1: Check if the file is in VCF format
   sumstats_file <- check_vcf(sumstats_file, path)
 
   # Check 2: Ensure that tabs separate rows
   sumstats_file <- check_tab_delimited(sumstats_file)
-
+  
+  #ALL CHECKS BELOW HERE ARE MADE THROUGH DT
+  rm(sumstats_file)#remove to free memory
+  sumstats_dt <- data.table::fread(path)
+  #set up dt in list for uniformity across all checks
+  sumstats_return <- list("sumstats_dt"=sumstats_dt)
+  rm(sumstats_dt)#clean up memory
+  
   # Check 3:Standardise headers for all OS
-  sumstats_file <-
-    standardise_sumstats_column_headers_crossplatform(sumstats_file, path)
+  sumstats_return <-
+    standardise_sumstats_column_headers_crossplatform(
+      sumstats_return$sumstats_dt, path)
 
   # Check 4: Check if multiple models used or multiple traits tested in GWAS
-  sumstats_file <-  check_multi_gwas(sumstats_file, path, analysis_trait)
+  sumstats_return <-  
+    check_multi_gwas(sumstats_return$sumstats_dt, path, analysis_trait)
 
-  col_headers <- sumstats_file[1]
-  col_headers <- strsplit(col_headers, "\t")[[1]]
-
+  col_headers <- names(sumstats_return$sumstats_dt)
+  
   # Series of checks if CHR or BP columns aren't present
   if(!sum(c("CHR","BP") %in% col_headers)==2){
     msg <- paste0("Summary statistics file does not have obvious CHR/BP colum",
@@ -84,90 +94,103 @@ format_sumstats <- function(path,ref_genome="GRCh37", convert_small_p=TRUE,
     message(msg)
 
     #Check 5: check if CHR:BP:A2:A1 merged to 1 column
-    sumstats_file <- check_four_step_col(sumstats_file, path) 
+    sumstats_return <- check_four_step_col(sumstats_return$sumstats_dt, path) 
 
     # Check 6: check if there is a column of data with CHR:BP format
-    sumstats_file <- check_two_step_col(sumstats_file, path) 
+    sumstats_return <- check_two_step_col(sumstats_return$sumstats_dt, path) 
 
     # Re-standardise in case the joined column headers were unusual
-    sumstats_file <-
-      standardise_sumstats_column_headers_crossplatform(sumstats_file, path)
+    sumstats_return <-
+      standardise_sumstats_column_headers_crossplatform(
+        sumstats_return$sumstats_dt, path)
   }
   
-  #ALL CHECKS BELOW HERE ARE MADE THROUGH DT
-  sumstats_file <- data.table::fread(path)
-
   # Check 7: check if CHR and BP are missing but SNP is present
-  sumstats_file <- check_no_chr_bp(sumstats_file, path, ref_genome,
-                                    rsids)
+  sumstats_return <- 
+    check_no_chr_bp(sumstats_return$sumstats_dt, path, ref_genome, rsids)
+  rsids <- sumstats_return$rsids #update rsids
+  sumstats_return$rsids <- NULL
   
   # Check 8: check if CHR and BP are present but SNP is missing
-  sumstats_file <- check_no_snp(sumstats_file, path, ref_genome)
+  sumstats_return <- check_no_snp(sumstats_return$sumstats_dt, path, ref_genome)
   
   # Check 9: check if SNP is present but A1 and/or A2 is missing
-  sumstats_file <- check_no_allele(sumstats_file, path, ref_genome,
-                                    rsids)
+  sumstats_return <- 
+    check_no_allele(sumstats_return$sumstats_dt, path, ref_genome, rsids)
+  rsids <- sumstats_return$rsids #update rsids
+  sumstats_return$rsids <- NULL
   
   # Check 10: check that all the vital columns are present
-  check_vital_col(sumstats_file)
+  check_vital_col(sumstats_return$sumstats_dt)
   
   # Check 11: check there is at least one signed sumstats column
-  check_signed_col(sumstats_file)
+  check_signed_col(sumstats_return$sumstats_dt)
   
   # Check 12: check for allele flipping
-  sumstats_file <- check_allele_flip(sumstats_file, path, ref_genome,
-                                     rsids,allele_flip_check)
-
+  sumstats_return <- 
+    check_allele_flip(sumstats_return$sumstats_dt, path, ref_genome, rsids,
+                        allele_flip_check)
+  rsids <- sumstats_return$rsids #update rsids
+  sumstats_return$rsids <- NULL
+  
   # Check 13: check first three column headers are SNP, CHR, BP (in that order)
-  sumstats_file <- check_col_order(sumstats_file, path)
+  sumstats_return <- check_col_order(sumstats_return$sumstats_dt, path)
 
   #Check 14: Keep only rows which have the number of columns expected
-  sumstats_file <- check_miss_data(sumstats_file, path)
+  sumstats_return <- check_miss_data(sumstats_return$sumstats_dt, path)
 
   # The formatting process can (rarely) result in duplicated columns,
   # i.e. CHR, if CHR:BP is expanded and one already exists... delete duplicates
   # Check 15: check for duplicated columns
-  sumstats_file <- check_dup_col(sumstats_file, path)
+  sumstats_return <- check_dup_col(sumstats_return$sumstats_dt, path)
   
   #Check 16: check for small P-values (3e-400 or lower)
-  sumstats_file <- check_small_p_val(sumstats_file, path, convert_small_p)
+  sumstats_return <- 
+    check_small_p_val(sumstats_return$sumstats_dt, path, convert_small_p)
 
   #Check 17: check is N column not all integers, if so round it up
-  sumstats_file <- check_n_int(sumstats_file, path, convert_n_int)
+  sumstats_return <- 
+    check_n_int(sumstats_return$sumstats_dt, path, convert_n_int)
 
   #Check 18: check all rows have SNPs starting with SNP or rs, drop those don't
-  sumstats_file <- check_row_snp(sumstats_file, path)
+  sumstats_return <- check_row_snp(sumstats_return$sumstats_dt, path)
 
   #Check 19: check all rows for duplicated SNPs, remove any that are
-  sumstats_file <- check_dup_snp(sumstats_file, path)
+  sumstats_return <- check_dup_snp(sumstats_return$sumstats_dt, path)
   
   #Check 20: check all rows for duplicated BPs, remove any that are
-  sumstats_file <- check_dup_bp(sumstats_file, path)
+  sumstats_return <- check_dup_bp(sumstats_return$sumstats_dt, path)
   
   #Check 21: check for low INFO scores
-  sumstats_file <- check_info_score(sumstats_file, path, INFO_filter)
+  sumstats_return <- 
+    check_info_score(sumstats_return$sumstats_dt, path, INFO_filter)
   
   #Check 22: check for N > X std dev above mean
-  sumstats_file <- check_n_num(sumstats_file, path, N_std)
+  sumstats_return <- check_n_num(sumstats_return$sumstats_dt, path, N_std)
   
   #Check 23: check that no snps are on specific chromosomes
-  sumstats_file <- check_chr(sumstats_file, path, rmv_chr)
+  sumstats_return <- check_chr(sumstats_return$sumstats_dt, path, rmv_chr)
   
   #Check 24: check that all snps are present on reference genome
-  sumstats_file <- 
-    check_on_ref_genome(sumstats_file, path, ref_genome, on_ref_genome,rsids)
+  sumstats_return <- check_on_ref_genome(sumstats_return$sumstats_dt, path, 
+                                          ref_genome, on_ref_genome,rsids)
+  rsids <- sumstats_return$rsids #update rsids
+  sumstats_return$rsids <- NULL
   
   #Check 25: check that all snps are not strand ambiguous
-  sumstats_file <- 
-    check_strand_ambiguous(sumstats_file, path, ref_genome, strand_ambig_filter)
+  sumstats_return <- check_strand_ambiguous(sumstats_return$sumstats_dt, path, 
+                                              ref_genome, strand_ambig_filter)
   
   #Check 26: check for non-biallelic SNPS
-  sumstats_file <- 
-    check_bi_allelic(sumstats_file, path, ref_genome, bi_allelic_filter,
-                           rsids)
+  sumstats_return <- check_bi_allelic(sumstats_return$sumstats_dt, path, 
+                                        ref_genome, bi_allelic_filter, rsids)
+  rsids <- sumstats_return$rsids #update rsids
+  sumstats_return$rsids <- NULL
   
   #WRITE DT DATA TO PATH
-  data.table::fwrite(sumstats_file,file=path,sep="\t")
+  data.table::fwrite(sumstats_return$sumstats_dt,file=path,sep="\t")
+  rm(sumstats_return)#free up memory
+  rm(rsids)#free up memory
   #read in the first few lines to preview
   sumstats_file <- readLines(path,5L)
   

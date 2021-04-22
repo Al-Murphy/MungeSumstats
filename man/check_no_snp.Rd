@@ -4,18 +4,19 @@
 \alias{check_no_snp}
 \title{Ensure that SNP is present if not can find it with CHR and BP}
 \usage{
-check_no_snp(sumstats_file, path, ref_genome)
+check_no_snp(sumstats_dt, path, ref_genome)
 }
 \arguments{
-\item{sumstats_file}{The summary statistics file for the GWAS}
+\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
 
 \item{path}{Filepath for the summary statistics file to be formatted}
 
 \item{ref_genome}{name of the reference genome used for the GWAS (GRCh37 or GRCh38)}
 }
 \value{
-The modified sumstats_file
+list containing sumstats_dt, the modified summary statistics data table object
 }
 \description{
 Ensure that SNP is present if not can find it with CHR and BP
 }
+\keyword{internal}

@@ -1,7 +1,9 @@
 test_that("Test that allele columns and effect columns flipped correctly", {
   file <- tempfile()
-  #The datsset's alleles need to be flipped as they relate to risk/nonrisk 
-  eduAttainOkbay_missing <- MungeSumstats::eduAttainOkbay
+  #The dataset's alleles need to be flipped as they relate to risk/nonrisk 
+  eduAttainOkbay <- readLines(system.file("extdata","eduAttainOkbay.txt",
+                                   package="MungeSumstats"))
+  eduAttainOkbay_missing <- eduAttainOkbay
   eduAttainOkbay_missing[1]<-
     "MarkerName\tCHR\tPOS\tA2\tA1\tEAF\tBeta\tSE\tPval"
   #write the Educational Attainment GWAS to a temp file for testing
@@ -24,7 +26,7 @@ test_that("Test that allele columns and effect columns flipped correctly", {
                                                   allele_flip_check=TRUE)
     reformatted_lines <- readLines(reformatted)
     #Should equal org since the effect should be corrected
-    writeLines(MungeSumstats::eduAttainOkbay,con = file)
+    writeLines(eduAttainOkbay,con = file)
     org <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37",
                                           on_ref_genome = TRUE,
                                           strand_ambig_filter=FALSE,

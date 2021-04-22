@@ -1,24 +1,33 @@
 #' Summary Statistics Column Headers
 #'
-#' List of uncorrected column headers often found in GWAS Summary Statistics
-#' column headers
+#' @description List of uncorrected column headers often found in GWAS Summary 
+#' Statistics column headers
 #'
 #' @source The code to prepare the .Rda file file from the marker file is:
 #' \code{
 #' # Most the data in the below table comes from the LDSC github wiki
 #' sumstatsColHeaders <- read.csv("inst/extdata/Magma_Column_headers.csv",
 #'      stringsAsFactors = FALSE)
-#' usethis::use_data(sumstatsColHeaders,overwrite = TRUE)
+#' usethis::use_data(sumstatsColHeaders,overwrite = TRUE, internal=TRUE)
 #' }
 #' @format dataframe with 82 rows nd 2 columns
+#' @usage data("sumstatsColHeaders")
 "sumstatsColHeaders"
 
 #' GWAS Educational Attainment Okbay 2016 - Subset
 #'
-#' GWAS Summary Statistics on Educational Attainment by Okbay et al 2016:
+#' @description GWAS Summary Statistics on Educational Attainment by Okbay et 
+#' al 2016:
 #' PMID: 27898078 PMCID: PMC5509058 DOI: 10.1038/ng1216-1587b.
 #' A subset of 93 SNPs
+#' 
+#' @details GWAS Summary Statistics on Educational Attainment by Okbay et 
+#' al 2016 has been subsetted here to act as an example summary statistic file
+#' which has some issues in the formatting. MungeSumstats can correct these 
+#' issues. 
 #'
+#' @name raw_eduAttainOkbay
+#' @section eduAttainOkbay.txt
 #' @source The summary statistics file was downloaded from
 #' https://www.nature.com/articles/ng.3552
 #' and formatted to a .rda with the following:
@@ -38,26 +47,34 @@
 #' eduAttainOkbay <- eduAttainOkbay[!MarkerName %in% rmv,]
 #' data.table::fwrite(eduAttainOkbay,file=tmp,sep="\t")
 #' eduAttainOkbay <- readLines(tmp)
-#' usethis::use_data(eduAttainOkbay,overwrite = TRUE)
+#' writeLines(eduAttainOkbay,"inst/extdata/eduAttainOkbay.txt")
 #' }
-#' @format character vector with 94 items
-"eduAttainOkbay"
+#' @format txt document with 94 items
+NULL
 
 #' GWAS Amyotrophic lateral sclerosis ieu open GWAS project - Subset
 #'
-#' VCF (VCFv4.2) of the GWAS Amyotrophic lateral sclerosis ieu open GWAS project
-#' Dataset: ebi-a-GCST005647.
+#' @description VCF (VCFv4.2) of the GWAS Amyotrophic lateral sclerosis ieu 
+#' open GWAS project Dataset: ebi-a-GCST005647.
 #' A subset of 99 SNPs
 #'
+#' @name raw_ALSvcf
+#' @section ALSvcf.vcf
+#' @details A VCF file (VCFv4.2) of the GWAS Amyotrophic lateral sclerosis ieu 
+#' open GWAS project has been subsetted here to act as an example summary 
+#' statistic file in VCF format which has some issues in the formatting. 
+#' MungeSumstats can correct these issues and produced a standardised summary 
+#' statistics format. 
 #' @source The summary statistics VCF (VCFv4.2) file was downloaded from
 #' https://gwas.mrcieu.ac.uk/datasets/ebi-a-GCST005647/
 #' and formatted to a .rda with the following:
 #' \code{
 #' #Get example VCF dataset, use GWAS Amyotrophic lateral sclerosis
-#' AML_GWAS_VCF <- readLines("ebi-a-GCST005647.vcf.gz")
+#' ALS_GWAS_VCF <- readLines("ebi-a-GCST005647.vcf.gz")
 #' #Subset to just the first 99 SNPs
-#' ieuAmlVcf <- AML_GWAS_VCF[1:528]
-#' usethis::use_data(ieuAmlVcf,overwrite = TRUE)
+#' ALSvcf <- ALS_GWAS_VCF[1:528]
+#' writeLines(ALSvcf,"inst/extdata/ALSvcf.vcf")
 #' }
-#' @format character vector with 528 items relating to 99 SNPs
-"ieuAmlVcf"
+#' @format vcf document with 528 items relating to 99 SNPs
+#' @details NULL
+NULL

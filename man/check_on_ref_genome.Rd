@@ -4,10 +4,10 @@
 \alias{check_on_ref_genome}
 \title{Ensure all SNPs are on the reference genome}
 \usage{
-check_on_ref_genome(sumstats_file, path, ref_genome, on_ref_genome, rsids)
+check_on_ref_genome(sumstats_dt, path, ref_genome, on_ref_genome, rsids)
 }
 \arguments{
-\item{sumstats_file}{The summary statistics file for the GWAS}
+\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
 
 \item{path}{Filepath for the summary statistics file to be formatted}
 
@@ -18,8 +18,13 @@ check_on_ref_genome(sumstats_file, path, ref_genome, on_ref_genome, rsids)
 \item{rsids}{datatable of snpsById, filtered to SNPs of interest if loaded already. Or else NULL}
 }
 \value{
-The modified sumstats_file
+A list containing two data tables:
+\itemize{
+\item \code{sumstats_dt}: the modified summary statistics data table object
+\item \code{rsids}: snpsById, filtered to SNPs of interest if loaded already. Or else NULL
+}
 }
 \description{
 Ensure all SNPs are on the reference genome
 }
+\keyword{internal}
