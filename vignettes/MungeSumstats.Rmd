@@ -3,15 +3,19 @@ title: "Standardise the format of summary statistics from GWAS with *MungeSumsta
 author: "Alan Murphy and Nathan Skene"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  BiocStyle::html_document:
+    self_contained: yes
     toc: true
+    toc_float: true
+    toc_depth: 3
+    code_folding: show
     df_print: paged
-csl: vignettes/nature.csl
+csl: nature.csl
 vignette: >
     %\VignetteIndexEntry{Standardise the format of summary statistics from GWAS with MungeSumstats} 
     %\usepackage[utf8]{inputenc}
-    %\VignetteEngine{knitr::knitr} 
-bibliography: vignettes/MungeSumstats.bib
+    %\VignetteEngine{knitr::rmarkdown} 
+bibliography: MungeSumstats.bib
 editor_options: 
   markdown: 
     wrap: 72
