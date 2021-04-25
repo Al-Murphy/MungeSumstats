@@ -14,8 +14,7 @@ check_dup_bp <- function(sumstats_dt, path){
     data.table::setkey(sumstats_dt,BP)
     dups <- duplicated(sumstats_dt, by = data.table::key(sumstats_dt))
     if(sum(dups)>0){
-      dup_snps <- sumstats_dt$BP[dups]
-      msg <- paste0(paste(dup_snps, collapse = ", ")," base-pair Positions are",
+      msg <- paste0(sum(dups)," base-pair Positions are",
                     " duplicated in the sumstats file. These duplicates will",
                     " be removed")
       message(msg)

@@ -85,6 +85,10 @@ format_sumstats <- function(path,ref_genome="GRCh37", convert_small_p=TRUE,
   sumstats_return <-  
     check_multi_gwas(sumstats_return$sumstats_dt, path, analysis_trait)
 
+  # Check 5: Check for uniformity in SNP col - no mix of rs/missing rs/chr:bp 
+  sumstats_return <- 
+    check_no_rs_snp(sumstats_return$sumstats_dt, path, ref_genome)
+  
   col_headers <- names(sumstats_return$sumstats_dt)
   
   # Series of checks if CHR or BP columns aren't present
@@ -93,10 +97,10 @@ format_sumstats <- function(path,ref_genome="GRCh37", convert_small_p=TRUE,
                   "ns. Checking to see if they are joined in another column")
     message(msg)
 
-    #Check 5: check if CHR:BP:A2:A1 merged to 1 column
+    #Check 6: check if CHR:BP:A2:A1 merged to 1 column
     sumstats_return <- check_four_step_col(sumstats_return$sumstats_dt, path) 
 
-    # Check 6: check if there is a column of data with CHR:BP format
+    # Check 7: check if there is a column of data with CHR:BP format
     sumstats_return <- check_two_step_col(sumstats_return$sumstats_dt, path) 
 
     # Re-standardise in case the joined column headers were unusual
@@ -105,83 +109,83 @@ format_sumstats <- function(path,ref_genome="GRCh37", convert_small_p=TRUE,
         sumstats_return$sumstats_dt, path)
   }
   
-  # Check 7: check if CHR and BP are missing but SNP is present
+  # Check 8: check if CHR and BP are missing but SNP is present
   sumstats_return <- 
     check_no_chr_bp(sumstats_return$sumstats_dt, path, ref_genome, rsids)
   rsids <- sumstats_return$rsids #update rsids
   sumstats_return$rsids <- NULL
   
-  # Check 8: check if CHR and BP are present but SNP is missing
+  # Check 9: check if CHR and BP are present but SNP is missing
   sumstats_return <- check_no_snp(sumstats_return$sumstats_dt, path, ref_genome)
   
-  # Check 9: check if SNP is present but A1 and/or A2 is missing
+  # Check 10: check if SNP is present but A1 and/or A2 is missing
   sumstats_return <- 
     check_no_allele(sumstats_return$sumstats_dt, path, ref_genome, rsids)
   rsids <- sumstats_return$rsids #update rsids
   sumstats_return$rsids <- NULL
   
-  # Check 10: check that all the vital columns are present
+  # Check 11: check that all the vital columns are present
   check_vital_col(sumstats_return$sumstats_dt)
   
-  # Check 11: check there is at least one signed sumstats column
+  # Check 12: check there is at least one signed sumstats column
   check_signed_col(sumstats_return$sumstats_dt)
   
-  # Check 12: check for allele flipping
+  # Check 13: check for allele flipping
   sumstats_return <- 
     check_allele_flip(sumstats_return$sumstats_dt, path, ref_genome, rsids,
                         allele_flip_check)
   rsids <- sumstats_return$rsids #update rsids
   sumstats_return$rsids <- NULL
   
-  # Check 13: check first three column headers are SNP, CHR, BP (in that order)
+  # Check 14: check first three column headers are SNP, CHR, BP (in that order)
   sumstats_return <- check_col_order(sumstats_return$sumstats_dt, path)
 
-  #Check 14: Keep only rows which have the number of columns expected
+  #Check 15: Keep only rows which have the number of columns expected
   sumstats_return <- check_miss_data(sumstats_return$sumstats_dt, path)
 
   # The formatting process can (rarely) result in duplicated columns,
   # i.e. CHR, if CHR:BP is expanded and one already exists... delete duplicates
-  # Check 15: check for duplicated columns
+  # Check 16: check for duplicated columns
   sumstats_return <- check_dup_col(sumstats_return$sumstats_dt, path)
   
-  #Check 16: check for small P-values (3e-400 or lower)
+  #Check 17: check for small P-values (3e-400 or lower)
   sumstats_return <- 
     check_small_p_val(sumstats_return$sumstats_dt, path, convert_small_p)
 
-  #Check 17: check is N column not all integers, if so round it up
+  #Check 18: check is N column not all integers, if so round it up
   sumstats_return <- 
     check_n_int(sumstats_return$sumstats_dt, path, convert_n_int)
 
-  #Check 18: check all rows have SNPs starting with SNP or rs, drop those don't
+  #Check 19: check all rows have SNPs starting with SNP or rs, drop those don't
   sumstats_return <- check_row_snp(sumstats_return$sumstats_dt, path)
 
-  #Check 19: check all rows for duplicated SNPs, remove any that are
+  #Check 20: check all rows for duplicated SNPs, remove any that are
   sumstats_return <- check_dup_snp(sumstats_return$sumstats_dt, path)
   
-  #Check 20: check all rows for duplicated BPs, remove any that are
+  #Check 21: check all rows for duplicated BPs, remove any that are
   sumstats_return <- check_dup_bp(sumstats_return$sumstats_dt, path)
   
-  #Check 21: check for low INFO scores
+  #Check 22: check for low INFO scores
   sumstats_return <- 
     check_info_score(sumstats_return$sumstats_dt, path, INFO_filter)
   
-  #Check 22: check for N > X std dev above mean
+  #Check 23: check for N > X std dev above mean
   sumstats_return <- check_n_num(sumstats_return$sumstats_dt, path, N_std)
   
-  #Check 23: check that no snps are on specific chromosomes
+  #Check 24: check that no snps are on specific chromosomes
   sumstats_return <- check_chr(sumstats_return$sumstats_dt, path, rmv_chr)
   
-  #Check 24: check that all snps are present on reference genome
+  #Check 25: check that all snps are present on reference genome
   sumstats_return <- check_on_ref_genome(sumstats_return$sumstats_dt, path, 
                                           ref_genome, on_ref_genome,rsids)
   rsids <- sumstats_return$rsids #update rsids
   sumstats_return$rsids <- NULL
   
-  #Check 25: check that all snps are not strand ambiguous
+  #Check 26: check that all snps are not strand ambiguous
   sumstats_return <- check_strand_ambiguous(sumstats_return$sumstats_dt, path, 
                                               ref_genome, strand_ambig_filter)
   
-  #Check 26: check for non-biallelic SNPS
+  #Check 27: check for non-biallelic SNPS
   sumstats_return <- check_bi_allelic(sumstats_return$sumstats_dt, path, 
                                         ref_genome, bi_allelic_filter, rsids)
   rsids <- sumstats_return$rsids #update rsids

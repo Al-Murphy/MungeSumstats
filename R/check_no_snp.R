@@ -18,6 +18,8 @@ check_no_snp <- function(sumstats_dt, path, ref_genome){
   col_headers <- names(sumstats_dt)
   if(sum(c("CHR","BP") %in% col_headers)==2 & sum("SNP" %in% col_headers)==0){
     SNP_LOC_DATA <- load_snp_loc_data(ref_genome,"SNP")
+    #if chromosome col has chr prefix remove it
+    sumstats_dt[,CHR:=gsub("chr","",CHR)]
     gr_snp <- GenomicRanges::makeGRangesFromDataFrame(copy(sumstats_dt),
                                                       keep.extra.columns = TRUE,
                                                       seqnames.field = "CHR",

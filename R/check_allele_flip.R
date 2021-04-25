@@ -19,7 +19,7 @@
 #' @importFrom data.table copy
 check_allele_flip <- 
   function(sumstats_dt, path, ref_genome, rsids, allele_flip_check){
-  SNP = i.seqnames = CHR = BP = i.pos = LP = P = A1 = A2 = 
+  SNP = i.seqnames = CHR = BP = i.pos = LP = P = A1 = A2 = eff_i =
     i.A1 = i.A2 = ss_A1 = ss_A2 = NULL
   # If SNP present but no A1/A2 then need to find them
   col_headers <- names(sumstats_dt)
@@ -58,8 +58,7 @@ check_allele_flip <-
       effect_columns <- c("BETA","OR","Z","LOG_ODDS","SIGNED_SUMSTAT")
       effect_columns <- effect_columns[effect_columns %in% names(sumstats_dt)]
       for(eff_i in effect_columns){#set updates quicker for DT
-        data.table::set(sumstats_dt, i=NULL, j=eff_i, 
-                          value=sumstats_dt[[eff_i]]*-1)
+        sumstats_dt[,(eff_i):=get(eff_i)*-1]
       }  
       return(list("sumstats_dt"=sumstats_dt,"rsids"=rsids))
     }  

@@ -89,6 +89,7 @@ Tests run by *MungeSumstats* include:
   * Check tab, space or comma delimited
   * Check for header name synonyms
   * Check for multiple models or traits in GWAS
+  * Check for uniformity in SNP ID - no mix of rs/missing rs/chr:bp 
   * Check for CHR:BP:A2:A1 all in one column
   * Check for CHR:BP in one column
   * Check if CHR and/or BP is missing (infer from reference genome)
