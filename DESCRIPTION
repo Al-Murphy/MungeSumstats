@@ -1,7 +1,7 @@
 Package: MungeSumstats
 Type: Package
 Title: Standardise summary statistics from GWAS
-Version: 0.99.16
+Version: 0.99.17
 Authors@R:
     c(person(given = "Alan",
            family = "Murphy",
@@ -21,7 +21,7 @@ Description:
 URL: https://github.com/neurogenomics/MungeSumstats
 BugReports: https://github.com/neurogenomics/MungeSumstats/issues
 License: Artistic-2.0
-Depends: R(>= 3.6)
+Depends: R(>= 4.0)
 Imports: 
     data.table,
     utils,
