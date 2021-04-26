@@ -1,7 +1,7 @@
 Package: MungeSumstats
 Type: Package
 Title: Standardise summary statistics from GWAS
-Version: 0.99.19
+Version: 0.99.20
 Authors@R:
     c(person(given = "Alan",
            family = "Murphy",
@@ -40,6 +40,11 @@ Suggests:
     SNPlocs.Hsapiens.dbSNP144.GRCh38,
     BSgenome.Hsapiens.1000genomes.hs37d5,
     BSgenome.Hsapiens.NCBI.GRCh38,
+    methods, 
+    BiocGenerics, 
+    S4Vectors, 
+    IRanges, 
+    GenomeInfoDb,
     rmarkdown,
     markdown,
     knitr,
