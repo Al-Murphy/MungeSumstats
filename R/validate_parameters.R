@@ -25,6 +25,30 @@ validate_parameters <- function(path,ref_genome, convert_small_p,
   #Check genome build is valid option
   if(!(toupper(ref_genome) %in% c("GRCH37","GRCH38")))
     stop("The chosen genome build must be one of GRCh37 or GRCh38")
+  
+  #checks for installed packages
+  GRCH37_msg1 <- paste0("Install 'SNPlocs.Hsapiens.dbSNP144.GRCh37' to use ",
+                          "'GRCh37' as 'ref_genome'")
+  GRCH37_msg2 <- paste0("Install 'BSgenome.Hsapiens.1000genomes.hs37d5' to ",
+                          "use 'GRCh37' as 'ref_genome'")
+  if(toupper(ref_genome)=="GRCH37" && 
+      !requireNamespace("SNPlocs.Hsapiens.dbSNP144.GRCh37", quietly = TRUE))
+    stop(GRCH37_msg1)
+  if(toupper(ref_genome)=="GRCH37" && 
+      !requireNamespace("BSgenome.Hsapiens.1000genomes.hs37d5", quietly = TRUE))
+    stop(GRCH37_msg2)
+  
+  GRCH38_msg1 <- paste0("Install 'SNPlocs.Hsapiens.dbSNP144.GRCh38' to use ",
+                          "'GRCh38' as 'ref_genome'")
+  GRCH38_msg2 <- paste0("Install 'BSgenome.Hsapiens.NCBI.GRCh38' to ",
+                          "use 'GRCh38' as 'ref_genome'")
+  if(toupper(ref_genome)=="GRCH38" && 
+     !requireNamespace("SNPlocs.Hsapiens.dbSNP144.GRCh38", quietly = TRUE))
+    stop(GRCH38_msg1)
+  if(toupper(ref_genome)=="GRCH38" && 
+     !requireNamespace("BSgenome.Hsapiens.NCBI.GRCh38", quietly = TRUE))
+    stop(GRCH38_msg2)
+
 
   #Check binary values
   if(!is.logical(convert_small_p))

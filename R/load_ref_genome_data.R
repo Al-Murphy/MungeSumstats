@@ -10,17 +10,18 @@
 #' @importFrom data.table setnames
 #' @importFrom data.table setorder
 #' @importFrom BSgenome snpsById
-#' @importFrom BSgenome.Hsapiens.NCBI.GRCh38 BSgenome.Hsapiens.NCBI.GRCh38
-#' @importFrom BSgenome.Hsapiens.1000genomes.hs37d5 BSgenome.Hsapiens.1000genomes.hs37d5
+# #' @importFrom BSgenome.Hsapiens.NCBI.GRCh38 BSgenome.Hsapiens.NCBI.GRCh38
+# #' @importFrom BSgenome.Hsapiens.1000genomes.hs37d5 BSgenome.Hsapiens.1000genomes.hs37d5
 load_ref_genome_data <- function(snps, ref_genome, msg=NULL){
   SNP = NULL
   SNP_LOC_DATA <- load_snp_loc_data(ref_genome,msg = msg)
   #Get correct ref genome
   if(toupper(ref_genome)=="GRCH37"){
-    genome <- BSgenome.Hsapiens.1000genomes.hs37d5
+    genome <- 
+      BSgenome.Hsapiens.1000genomes.hs37d5::BSgenome.Hsapiens.1000genomes.hs37d5
   }
   else{#=="GRCH38"
-    genome <- BSgenome.Hsapiens.NCBI.GRCh38
+    genome <- BSgenome.Hsapiens.NCBI.GRCh38::BSgenome.Hsapiens.NCBI.GRCh38
   }
   gr_rsids <- BSgenome::snpsById(SNP_LOC_DATA, snps, 
                                  genome=genome,ifnotfound="drop")

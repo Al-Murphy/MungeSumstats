@@ -10,8 +10,8 @@
 #' SNP_LOC_DATA <- load_snp_loc_data("GRCH38")
 #'
 #' @export
-#' @importFrom SNPlocs.Hsapiens.dbSNP144.GRCh37 SNPlocs.Hsapiens.dbSNP144.GRCh37
-#' @importFrom SNPlocs.Hsapiens.dbSNP144.GRCh38 SNPlocs.Hsapiens.dbSNP144.GRCh38
+# #' @importFrom SNPlocs.Hsapiens.dbSNP144.GRCh37 SNPlocs.Hsapiens.dbSNP144.GRCh37
+# #' @importFrom SNPlocs.Hsapiens.dbSNP144.GRCh38 SNPlocs.Hsapiens.dbSNP144.GRCh38
 load_snp_loc_data <- function(ref_genome, msg=NULL){
   ref_genome <- toupper(ref_genome)
   if(!is.null(msg)){

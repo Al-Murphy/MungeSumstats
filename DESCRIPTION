@@ -1,7 +1,7 @@
 Package: MungeSumstats
 Type: Package
 Title: Standardise summary statistics from GWAS
-Version: 0.99.17
+Version: 0.99.18
 Authors@R:
     c(person(given = "Alan",
            family = "Murphy",
@@ -28,11 +28,7 @@ Imports:
     stats,
     GenomicRanges,
     BSgenome,
-    Biostrings,
-    SNPlocs.Hsapiens.dbSNP144.GRCh37,
-    SNPlocs.Hsapiens.dbSNP144.GRCh38,
-    BSgenome.Hsapiens.1000genomes.hs37d5,
-    BSgenome.Hsapiens.NCBI.GRCh38
+    Biostrings
 biocViews: 
     SNP, WholeGenome, Genetics, ComparativeGenomics, 
     GenomeWideAssociation, GenomicVariation, Preprocessing
@@ -40,6 +36,10 @@ RoxygenNote: 7.1.1
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Suggests: 
+    SNPlocs.Hsapiens.dbSNP144.GRCh37,
+    SNPlocs.Hsapiens.dbSNP144.GRCh38,
+    BSgenome.Hsapiens.1000genomes.hs37d5,
+    BSgenome.Hsapiens.NCBI.GRCh38,
     rmarkdown,
     markdown,
     knitr,
