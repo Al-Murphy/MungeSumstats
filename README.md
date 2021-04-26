@@ -2,7 +2,7 @@ Standardise the format of summary statistics from GWAS with
 *MungeSumstats*
 ================
 Alan Murphy and Nathan Skene
-2021-04-25
+2021-04-26
 
 <!-- Readme.md is generated from Readme.Rmd. Please edit that file -->
 <!-- badges: start -->
@@ -36,23 +36,11 @@ steps.
 
 # Installing MungeSumstats
 
-The *MungeSumstats* is in the process of being added to Bioconductor
-but, in the meantime, is available from github. To be able to install
-the package one needs to install the devel version of R (version 4.1)
-which can be found at <https://cran.r-project.org/> and then run the
-following lines of code:
-
-    if (!require("devtools")) {
-      install.packages("devtools")
-    }
-    devtools::install_github("neurogenomics/MungeSumstats")
-
 To install *MungeSumstats* on Bioconductor run:
 
     if (!require("BiocManager"))
         install.packages("BiocManager")
 
-    BiocManager::install(version = "devel")
     BiocManager::install("MungeSumstats")
 
 You can then load the package and data package:

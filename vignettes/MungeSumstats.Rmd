@@ -122,7 +122,7 @@ The *MungeSumstats* package contains small subsets of GWAS summary
 statistics files. Firstly, on Educational Attainment by Okbay et al 2016: PMID:
 27898078 PMCID: PMC5509058 DOI: 10.1038/ng1216-1587b.
 
-Secondly, a VCF file (VCFv4.2)relating to the GWAS Amyotrophic lateral 
+Secondly, a VCF file (VCFv4.2) relating to the GWAS Amyotrophic lateral 
 sclerosis from ieu open GWAS project. Dataset: ebi-a-GCST005647:
 https://gwas.mrcieu.ac.uk/datasets/ebi-a-GCST005647/
 
