@@ -21,6 +21,6 @@ Loads the SNP locations and alleles for Homo sapiens extracted from
 NCBI dbSNP Build 144. Reference genome version is dependent on user input.
 }
 \examples{
-SNP_LOC_DATA <- load_snp_loc_data("GRCH38")
+SNP_LOC_DATA <- load_snp_loc_data("GRCH37")
 
 }

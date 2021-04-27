@@ -15,6 +15,8 @@
 #' @importFrom data.table setkey
 #' @importFrom data.table :=
 #' @importFrom data.table copy
+#' @importFrom data.table rbindlist
+#' @importFrom data.table setcolorder
 check_on_ref_genome <- 
   function(sumstats_dt, path, ref_genome, on_ref_genome, rsids){
   CHR = SNP = NULL
@@ -28,12 +30,31 @@ check_on_ref_genome <-
     #check for SNPs not on ref genome
     if(num_bad_ids>0){
       msg <- paste0(num_bad_ids, " SNPs are not on the reference genome. ",
-                    " These will be removed")
+                    " These will be corrected from the reference genome.")
       message(msg)
       # join using SNP
       data.table::setkey(sumstats_dt,SNP)
-      #remove rows missing from the reference genome
-      sumstats_dt <- sumstats_dt[rsids$SNP,]
+      #if the dataset has CHR & BP, try impute the correct ones
+      if(sum(c("CHR","BP") %in% col_headers)==2){
+        bad_snp <- sumstats_dt[!rsids$SNP,]
+        #remove snp column and pass to function to impute snp
+        bad_snp <- bad_snp[,SNP:=NULL]
+        corrected_snp <- check_no_snp(bad_snp, path=tempfile(), ref_genome)
+        corrected_snp <- corrected_snp$sumstats_dt 
+        #make sure columns in correct order
+        data.table::setcolorder(corrected_snp,names(sumstats_dt))
+        #remove rows missing from the reference genome and combine
+        sumstats_dt <- 
+          data.table::rbindlist(list(sumstats_dt[rsids$SNP,],corrected_snp))
+      }
+      else{
+        msg <- paste0(num_bad_ids, " SNPs are not on the reference genome. ",
+                    " These will be removed")
+        message(msg)
+        
+        #remove rows missing from the reference genome
+        sumstats_dt <- sumstats_dt[rsids$SNP,]
+      }
     }
   }
   return(list("sumstats_dt"=sumstats_dt,"rsids"=rsids))

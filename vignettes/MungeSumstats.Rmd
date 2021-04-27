@@ -105,7 +105,7 @@ Tests run by *MungeSumstats* include:
   * Check SNPs are RS ID's
   * Check for duplicated rows, based on SNP ID
   * Check for duplicated rows, based on base-pair position
-  * Check for SNPs on reference genome
+  * Check for SNPs on reference genome. Correct not found SNP IDs using CHR and BP (infer from reference genome)
   * Check INFO score
   * Check for strand-ambiguous SNPs
   * Check for non-biallelic SNPs (infer from reference genome)
@@ -172,7 +172,7 @@ analysis_trait If multiple traits were studied, name of the trait for analysis f
 INFO_filter numeric The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9
   * *N_std* Numeric, the number of standard deviations above the mean a SNP's N is needed to be removed. Default is 5.
 rmv_chr vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary. Default is X, Y and mitochondrial. 
-  * *on_ref_genome* Binary, should a check take place that all SNPs are on the reference genome by SNP ID. Default is TRUE
+  * *on_ref_genome* Binary, should a check take place that all SNPs are on the reference genome by SNP ID. Any that aren't on SNPs not on the reference genome, will be corrected from the reference genome (if possible) from the chromosome and base pair postion data. Default is TRUE
   * *strand_ambig_filter* Binary, should SNPs with strand-ambiguous alleles be removed. Default is FALSE
   * *allele_flip_check* Binary, should the allele columns be chacked against reference genome to infer if flipping is necessary. Default is TRUE
   * *bi_allelic_filter* Binary, should non-biallelic SNPs be removed. Default is TRUE

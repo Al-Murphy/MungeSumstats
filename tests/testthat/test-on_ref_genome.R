@@ -30,7 +30,8 @@ test_that("SNPs not on reference genome are removed", {
                                           allele_flip_check=FALSE)
     org_lines <- readLines(org)
     #reordering in function, line 3 rs9320913 is now 58
-    expect_equal(setequal(reformatted_lines,org_lines[-58]),TRUE)
+    #expect_equal(setequal(reformatted_lines,org_lines[-58]),TRUE)
+    expect_equal(setequal(reformatted_lines,org_lines),TRUE)
   }
   else{
     expect_equal(is_32bit_windows,TRUE)

@@ -118,6 +118,12 @@ format_sumstats <- function(path,ref_genome="GRCh37", convert_small_p=TRUE,
   # Check 9: check if CHR and BP are present but SNP is missing
   sumstats_return <- check_no_snp(sumstats_return$sumstats_dt, path, ref_genome)
   
+  #Check 25: check that all snps are present on reference genome
+  sumstats_return <- check_on_ref_genome(sumstats_return$sumstats_dt, path, 
+                                         ref_genome, on_ref_genome,rsids)
+  rsids <- sumstats_return$rsids #update rsids
+  sumstats_return$rsids <- NULL
+  
   # Check 10: check if SNP is present but A1 and/or A2 is missing
   sumstats_return <- 
     check_no_allele(sumstats_return$sumstats_dt, path, ref_genome, rsids)
@@ -174,12 +180,6 @@ format_sumstats <- function(path,ref_genome="GRCh37", convert_small_p=TRUE,
   
   #Check 24: check that no snps are on specific chromosomes
   sumstats_return <- check_chr(sumstats_return$sumstats_dt, path, rmv_chr)
-  
-  #Check 25: check that all snps are present on reference genome
-  sumstats_return <- check_on_ref_genome(sumstats_return$sumstats_dt, path, 
-                                          ref_genome, on_ref_genome,rsids)
-  rsids <- sumstats_return$rsids #update rsids
-  sumstats_return$rsids <- NULL
   
   #Check 26: check that all snps are not strand ambiguous
   sumstats_return <- check_strand_ambiguous(sumstats_return$sumstats_dt, path, 

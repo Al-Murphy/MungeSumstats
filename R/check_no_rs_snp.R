@@ -24,8 +24,29 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome){
     #first case is chr:bp together - impute SNP for these
     miss_rs_chr_bp <- miss_rs[grep(":",SNP),]
     if(nrow(miss_rs)!=nrow(sumstats_dt) && nrow(miss_rs_chr_bp)>0){
-      #remove snps missing rs
-      sumstats_dt <- sumstats_dt[grep("^rs",SNP),]
+      #check if impute of correct SNP ID possible
+      if(sum(c("CHR","BP") %in% col_headers)==2 && 
+          nrow(miss_rs[!grep(":",SNP),])>0){
+        bad_snp <- miss_rs[!grep(":",SNP),]
+        msg <- paste0(nrow(bad_snp), " SNPs are not on the reference genome. ",
+                      " These will be corrected from the reference genome.")
+        message(msg)
+        #remove snp column and pass to function to impute snp
+        bad_snp <- bad_snp[,SNP:=NULL]
+        #now impute correct RS ID for those missing it
+        corrected_snp <- check_no_snp(bad_snp, path=tempfile(), ref_genome)
+        corrected_snp <- corrected_snp$sumstats_dt
+        #make sure columns in correct order
+        data.table::setcolorder(corrected_snp,names(sumstats_dt))
+        #remove rows missing from the reference genome and combine
+        sumstats_dt <- 
+          data.table::rbindlist(list(sumstats_dt[grep("^rs",SNP),],
+                                      corrected_snp))
+      }
+      else{
+        #remove snps missing rs
+        sumstats_dt <- sumstats_dt[grep("^rs",SNP),]
+      }
       #check if any have more than 1 ":" remove these
       miss_rs_chr_bp <- miss_rs_chr_bp[!grep(".*:.*:.*",SNP)]
       msg <- paste0(nrow(miss_rs_chr_bp)," SNP IDs appear to be made up of ",
@@ -76,13 +97,34 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome){
     }
     if(nrow(miss_rs)!=nrow(sumstats_dt) && nrow(miss_rs)!=0){
       if(nrow(miss_rs_chr_bp)==0){#don't filter twice if hit prev condition
+        #check if impute of correct SNP ID possible
+        if(sum(c("CHR","BP") %in% col_headers)==2 && 
+           nrow(sumstats_dt[!grep("^rs",SNP),])>0){
+          bad_snp <- sumstats_dt[grep("^rs",SNP),]
+          msg <- paste0(nrow(bad_snp), " SNPs are not on the reference genome.",
+                        " These will be corrected from the reference genome.")
+          message(msg)
+          #remove snp column and pass to function to impute snp
+          bad_snp <- bad_snp[,SNP:=NULL]
+          #now impute correct RS ID for those missing it
+          corrected_snp <- check_no_snp(bad_snp, path=tempfile(), ref_genome)
+          corrected_snp <- corrected_snp$sumstats_dt
+          #make sure columns in correct order
+          data.table::setcolorder(corrected_snp,names(sumstats_dt))
+          #remove rows missing from the reference genome and combine
+          sumstats_dt <- 
+            data.table::rbindlist(list(sumstats_dt[grep("^rs",SNP),],
+                                       corrected_snp))
+        }
         #remove snps missing rs
         sumstats_dt <- sumstats_dt[grep("^rs",SNP),]
       }  
       #if any weird SNP rows left that aren't chr:bp or rs id's remove them
-      msg <- paste0(nrow(miss_rs) - nrow(miss_rs_chr_bp)," SNP IDs are not ",
-                    "correctly formatted and will be removed")
-      message(msg)
+      if(sum(c("CHR","BP") %in% col_headers)!=2){
+        msg <- paste0(nrow(miss_rs) - nrow(miss_rs_chr_bp)," SNP IDs are not ",
+                      "correctly formatted and will be removed")
+        message(msg)
+      }
     }
     return(list("sumstats_dt"=sumstats_dt))
   }

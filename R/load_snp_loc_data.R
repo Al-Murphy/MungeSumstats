@@ -7,7 +7,7 @@
 #' from NCBI dbSNP Build 144
 #'
 #' @examples
-#' SNP_LOC_DATA <- load_snp_loc_data("GRCH38")
+#' SNP_LOC_DATA <- load_snp_loc_data("GRCH37")
 #'
 #' @export
 # #' @importFrom SNPlocs.Hsapiens.dbSNP144.GRCh37 SNPlocs.Hsapiens.dbSNP144.GRCh37
