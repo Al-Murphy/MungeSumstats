@@ -28,8 +28,7 @@ Imports:
     stats,
     GenomicRanges,
     BSgenome,
-    Biostrings,
-    S4Vectors
+    Biostrings
 biocViews: 
     SNP, WholeGenome, Genetics, ComparativeGenomics, 
     GenomeWideAssociation, GenomicVariation, Preprocessing
@@ -45,6 +44,7 @@ Suggests:
     BiocGenerics,
     IRanges, 
     GenomeInfoDb,
+    S4Vectors,
     rmarkdown,
     markdown,
     knitr,

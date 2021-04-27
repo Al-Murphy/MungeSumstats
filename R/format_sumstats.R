@@ -37,7 +37,6 @@
 #' @importFrom data.table setcolorder
 #' @importFrom utils read.table
 #' @importFrom utils data
-#' @importFrom S4Vectors combineRows
 #' @export
 format_sumstats <- function(path,ref_genome="GRCh37", convert_small_p=TRUE,
                               convert_n_int=TRUE, analysis_trait=NULL,
