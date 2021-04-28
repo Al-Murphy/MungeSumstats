@@ -89,6 +89,10 @@ format_sumstats <- function(path,ref_genome="GRCh37", convert_small_p=TRUE,
   sumstats_return <- 
     check_no_rs_snp(sumstats_return$sumstats_dt, path, ref_genome)
   
+  # Check 28: Check for combined allele column (A1 and A2)
+  sumstats_return <- 
+    check_allele_merge(sumstats_return$sumstats_dt, path)
+  
   col_headers <- names(sumstats_return$sumstats_dt)
   
   # Series of checks if CHR or BP columns aren't present

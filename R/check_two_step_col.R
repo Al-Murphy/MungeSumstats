@@ -40,7 +40,7 @@ check_two_step_col <- function(sumstats_dt, path){
                                                     split=":", fixed=TRUE)]
     #remove combined column
     sumstats_dt[, (keep_col) := NULL]
-    msg <- paste0("Column",keep_col," has been separated into the columns ",
+    msg <- paste0("Column ",keep_col," has been separated into the columns ",
                   paste(format,collapse=", "))
     message(msg)
     
