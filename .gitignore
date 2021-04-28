@@ -16,8 +16,6 @@ hssGWAS.Rproj
 .DS_Store
 inst/.DS_Store
 vignettes/.DS_Store
-docs
-docs/
 data/SNP_LOC_DATA.rda
 inst/doc
 /doc/
