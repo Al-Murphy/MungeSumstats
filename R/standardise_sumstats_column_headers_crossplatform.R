@@ -25,8 +25,6 @@ standardise_sumstats_column_headers_crossplatform <-
     cr <- sumstatsColHeaders[headerI, 2]
     if (un %in% column_headers & (!cr %in% column_headers)) {
       data.table::setnames(sumstats_dt,un,cr)
-      print(un)
-      print(cr)
     }
   }
   return(list("sumstats_dt"=sumstats_dt))
