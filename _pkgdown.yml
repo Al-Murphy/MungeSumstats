@@ -1,0 +1,6 @@
+title: MungeSumstats
+url: https://neurogenomics.github.io/MungeSumstats/index.html
+template:
+  params:
+    bootswatch: flatly
+    ganalytics: UA-175929032-1
