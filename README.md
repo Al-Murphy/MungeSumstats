@@ -1,5 +1,4 @@
-Standardise the format of summary statistics from GWAS with
-*MungeSumstats*
+Standardise the format of GWAS summary statistics with *MungeSumstats*
 ================
 Alan Murphy and Nathan Skene
 2021-04-28
@@ -36,6 +35,8 @@ steps.
 
 # Installing MungeSumstats
 
+*MungeSumstats* is avaiable on
+[Bioconductor](https://bioconductor.org/packages/MungeSumstats) (v3.13).
 To install *MungeSumstats* on Bioconductor run:
 
     if (!require("BiocManager"))
@@ -51,9 +52,9 @@ library(MungeSumstats)
 
 # Getting started
 
-See the vignette for use cases of *MungeSumstats*:
-
-    browseVignettes("MungeSumstats")
+See the [vignette
+website](https://neurogenomics.github.io/MungeSumstats/articles/MungeSumstats.html)
+for up-to-date instructions on usage.
 
 If you have any problems please do file an issue here on github.
 
@@ -76,12 +77,14 @@ statistic file header.
 We also encourage people to edit the code to resolve their particular
 issues too and are happy to incorporate these through pull requests on
 github. If your summary statistic file headers are not recognised by
-*MungeSumstats* but correspond to one of SNP, BP, CHR, A1, A2, P, Z, OR,
-BETA, LOG\_ODDS, SIGNED\_SUMSTAT, N, N\_CAS, N\_CON, NSTUDY, INFO or
-FRQ, feel free to update the `MungeSumstats::sumstatsColHeaders`
-following the approach in the data.R file and add your mapping. Then use
-a pull request on github and we will incorporate this change into the
-package.
+*MungeSumstats* but correspond to one of
+
+    SNP, BP, CHR, A1, A2, P, Z, OR, BETA, LOG_ODDS, SIGNED_SUMSTAT, N, N_CAS, N_CON, 
+    NSTUDY, INFO or FRQ, 
+
+feel free to update the `MungeSumstats::sumstatsColHeaders` following
+the approach in the data.R file and add your mapping. Then use a pull
+request on github and we will incorporate this change into the package.
 
 # References
 
