@@ -29,7 +29,7 @@ check_allele_flip <-
       rsids <- load_ref_genome_data(copy(sumstats_dt$SNP), ref_genome, NULL)
     }
     #ensure rsids is up-to-date with filtered sumstats_dt
-    rsids <- rsids[sumstats_dt$SNP,,nomatch=NULL]
+    rsids <- rsids[unique(sumstats_dt$SNP),,nomatch=NULL]
     data.table::setkey(rsids,SNP)
     #Check if reference genome ref allele matches A1 or A2 better in the data
     #If it matches A2 better, flip and flip effect too!

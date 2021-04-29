@@ -27,7 +27,7 @@ check_on_ref_genome <-
       rsids <- load_ref_genome_data(copy(sumstats_dt$SNP), ref_genome)
     }
     #ensure rsids is up-to-date with filtered sumstats_dt
-    rsids <- rsids[sumstats_dt$SNP,,nomatch=NULL]
+    rsids <- rsids[unique(sumstats_dt$SNP),,nomatch=NULL]
     data.table::setkey(rsids,SNP)
     num_bad_ids <- length(sumstats_dt$SNP) - length(rsids$SNP)
     #check for SNPs not on ref genome

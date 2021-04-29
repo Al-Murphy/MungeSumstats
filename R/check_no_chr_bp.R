@@ -40,7 +40,7 @@ check_no_chr_bp <- function(sumstats_dt, path, ref_genome,rsids){
       message(print_msg)
     }
     #ensure rsids is up-to-date with filtered sumstats_dt
-    rsids <- rsids[sumstats_dt$SNP,,nomatch=NULL]
+    rsids <- rsids[unique(sumstats_dt$SNP),,nomatch=NULL]
     data.table::setkey(rsids,SNP)
     # join on CHR BP to sumstats
     data.table::setkey(sumstats_dt,SNP)
