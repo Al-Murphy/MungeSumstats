@@ -38,6 +38,9 @@ check_no_allele <- function(sumstats_dt, path, ref_genome, rsids){
                           " other column information.")
       message(print_msg)
     }
+    #ensure rsids is up-to-date with filtered sumstats_dt
+    rsids <- rsids[sumstats_dt$SNP,,nomatch=NULL]
+    data.table::setkey(rsids,SNP)
     
     # join based on SNP as key
     data.table::setkey(sumstats_dt,SNP)

@@ -30,7 +30,7 @@ test_that("Handle rs ID in row", {
   org_lines <- readLines(org)
   
   #reordering makes line 3 got to 58
-  expect_equal(reformatted_lines,org_lines[-58])
+  expect_equal(reformatted_lines,org_lines)
   }
   else{
     expect_equal(is_32bit_windows,TRUE)

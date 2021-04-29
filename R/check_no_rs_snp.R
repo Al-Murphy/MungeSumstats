@@ -28,13 +28,14 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome){
       if(sum(c("CHR","BP") %in% col_headers)==2 && 
           nrow(miss_rs[!grep(":",SNP),])>0){
         bad_snp <- miss_rs[!grep(":",SNP),]
-        msg <- paste0(nrow(bad_snp), " SNPs are not on the reference genome. ",
+        msg <- paste0(nrow(bad_snp), " SNP IDs are not correctly formatted.",
                       " These will be corrected from the reference genome.")
         message(msg)
         #remove snp column and pass to function to impute snp
         bad_snp <- bad_snp[,SNP:=NULL]
         #now impute correct RS ID for those missing it
-        corrected_snp <- check_no_snp(bad_snp, path=tempfile(), ref_genome)
+        corrected_snp <- 
+          check_no_snp(bad_snp, path=tempfile(), ref_genome, verbose=FALSE)
         corrected_snp <- corrected_snp$sumstats_dt
         #make sure columns in correct order
         data.table::setcolorder(corrected_snp,names(sumstats_dt))
@@ -100,14 +101,15 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome){
         #check if impute of correct SNP ID possible
         if(sum(c("CHR","BP") %in% col_headers)==2 && 
            nrow(sumstats_dt[!grep("^rs",SNP),])>0){
-          bad_snp <- sumstats_dt[grep("^rs",SNP),]
-          msg <- paste0(nrow(bad_snp), " SNPs are not on the reference genome.",
+          bad_snp <- sumstats_dt[!grep("^rs",SNP),]
+          msg <- paste0(nrow(bad_snp), " SNP IDs are not correctly formatted.",
                         " These will be corrected from the reference genome.")
           message(msg)
           #remove snp column and pass to function to impute snp
           bad_snp <- bad_snp[,SNP:=NULL]
           #now impute correct RS ID for those missing it
-          corrected_snp <- check_no_snp(bad_snp, path=tempfile(), ref_genome)
+          corrected_snp <- 
+            check_no_snp(bad_snp, path=tempfile(), ref_genome, verbose=FALSE)
           corrected_snp <- corrected_snp$sumstats_dt
           #make sure columns in correct order
           data.table::setcolorder(corrected_snp,names(sumstats_dt))

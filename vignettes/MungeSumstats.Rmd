@@ -33,7 +33,7 @@ knitr::opts_chunk$set(tidy         = FALSE,
 If you use the MungeSumstats package, please cite
 
 [Skene, et al. Genetic identification of brain cell types underlying
-schizophrenia, 2016.](https://www.nature.com/articles/s41588-018-0129-5)
+schizophrenia, 2018.](https://www.nature.com/articles/s41588-018-0129-5)
 
 # Overview
 
@@ -72,46 +72,48 @@ disequilibrium score regression (LDSC) and MAGMA.
 *MungeSumstats* will ensure that the all essential columns for analysis are 
 present and syntactically correct. Generally, summary statistic files include 
 (but are not limited to) the columns: 
-  * SNP : SNP ID (rs IDs) 
-  * CHR : Chromosome number 
-  * BP : Base pair positions
-  * A1 : Effect allele 
-  * A2 : Non-effect allele
-  * Z : Z-score
-  * BETA : Effect size estimate relative to the alternative allele 
-  * P : Unadjusted p-value for SNP
-  * N : Sample size
-  * INFO: The imputation information score
-  * FRQ: The minor allele frequency (MAF) of the SNP
+
+* SNP : SNP ID (rs IDs) 
+* CHR : Chromosome number 
+* BP : Base pair positions
+* A1 : Effect allele 
+* A2 : Non-effect allele
+* Z : Z-score
+* BETA : Effect size estimate relative to the alternative allele 
+* P : Unadjusted p-value for SNP
+* N : Sample size
+* INFO: The imputation information score
+* FRQ: The minor allele frequency (MAF) of the SNP
 
 Tests run by *MungeSumstats* include:
-  * Check VCF format
-  * Check tab, space or comma delimited
-  * Check for header name synonyms
-  * Check for multiple models or traits in GWAS
-  * Check for uniformity in SNP ID - no mix of rs/missing rs/chr:bp 
-  * Check for CHR:BP:A2:A1 all in one column
-  * Check for CHR:BP in one column
-  * Check for A1/A2 in one column
-  * Check if CHR and/or BP is missing (infer from reference genome)
-  * Check if SNP ID is missing (infer from reference genome)
-  * Check if A1 and/or A2 are missing (infer from reference genome)
-  * Check that vital columns are present (SNP,CHR,BP,P,A1,A2)
-  * Check for one signed/effect column (Z,OR,BETA,LOG_ODDS,SIGNED_SUMSTAT)
-  * Check for missing data
-  * Check for duplicated columns
-  * Check for small p-values (lower than  5e-324)
-  * Check N column is an integer
-  * Check for SNPs with N greater than 5 times standard dev. plus the mean  
-  * Check SNPs are RS ID's
-  * Check for duplicated rows, based on SNP ID
-  * Check for duplicated rows, based on base-pair position
-  * Check for SNPs on reference genome. Correct not found SNP IDs using CHR and BP (infer from reference genome)
-  * Check INFO score
-  * Check for strand-ambiguous SNPs
-  * Check for non-biallelic SNPs (infer from reference genome)
-  * Check for allele flipping
-  * Check for SNPs on chromosome X, Y, and mitochondrial SNPs (MT)
+
+* Check VCF format
+* Check tab, space or comma delimited
+* Check for header name synonyms
+* Check for multiple models or traits in GWAS
+* Check for uniformity in SNP ID - no mix of rs/missing rs/chr:bp 
+* Check for CHR:BP:A2:A1 all in one column
+* Check for CHR:BP in one column
+* Check for A1/A2 in one column
+* Check if CHR and/or BP is missing (infer from reference genome)
+* Check if SNP ID is missing (infer from reference genome)
+* Check if A1 and/or A2 are missing (infer from reference genome)
+* Check that vital columns are present (SNP,CHR,BP,P,A1,A2)
+* Check for one signed/effect column (Z,OR,BETA,LOG_ODDS,SIGNED_SUMSTAT)
+* Check for missing data
+* Check for duplicated columns
+* Check for small p-values (lower than  5e-324)
+* Check N column is an integer
+* Check for SNPs with N greater than 5 times standard dev. plus the mean  
+* Check SNPs are RS ID's
+* Check for duplicated rows, based on SNP ID
+* Check for duplicated rows, based on base-pair position
+* Check for SNPs on reference genome. Correct not found SNP IDs using CHR and BP (infer from reference genome)
+* Check INFO score
+* Check for strand-ambiguous SNPs
+* Check for non-biallelic SNPs (infer from reference genome)
+* Check for allele flipping
+* Check for SNPs on chromosome X, Y, and mitochondrial SNPs (MT)
   
 If a test is failed, the user will be notified and if possible, the input will 
 be corrected. The QC steps from the checks above can also be adjusted to suit 
@@ -167,16 +169,17 @@ reformatted <-
 
 The hyperparameters `format_sumstats` in that control the level of QC conducted 
 by *MungeSumstats* are:
-  * *convert_small_p* Binary, should p-values < 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.
-  * *convert_n_int* Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE.
+
+* *convert_small_p* Binary, should p-values < 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.
+* *convert_n_int* Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE.
 analysis_trait If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL
 INFO_filter numeric The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9
-  * *N_std* Numeric, the number of standard deviations above the mean a SNP's N is needed to be removed. Default is 5.
+* *N_std* Numeric, the number of standard deviations above the mean a SNP's N is needed to be removed. Default is 5.
 rmv_chr vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary. Default is X, Y and mitochondrial. 
-  * *on_ref_genome* Binary, should a check take place that all SNPs are on the reference genome by SNP ID. Any that aren't on SNPs not on the reference genome, will be corrected from the reference genome (if possible) from the chromosome and base pair postion data. Default is TRUE
-  * *strand_ambig_filter* Binary, should SNPs with strand-ambiguous alleles be removed. Default is FALSE
-  * *allele_flip_check* Binary, should the allele columns be chacked against reference genome to infer if flipping is necessary. Default is TRUE
-  * *bi_allelic_filter* Binary, should non-biallelic SNPs be removed. Default is TRUE
+* *on_ref_genome* Binary, should a check take place that all SNPs are on the reference genome by SNP ID. Any that aren't on SNPs not on the reference genome, will be corrected from the reference genome (if possible) from the chromosome and base pair postion data. Default is TRUE
+* *strand_ambig_filter* Binary, should SNPs with strand-ambiguous alleles be removed. Default is FALSE
+* *allele_flip_check* Binary, should the allele columns be chacked against reference genome to infer if flipping is necessary. Default is TRUE
+* *bi_allelic_filter* Binary, should non-biallelic SNPs be removed. Default is TRUE
 
 VCF files can also be standardised to the same format as other summary statistic
 files. A subset of the Amyotrophic lateral sclerosis GWAS from the ieu open GWAS
@@ -187,8 +190,9 @@ other summary statistic files:
 ```{r, message=TRUE}
 #save ALS GWAS from the ieu open GWAS project to a temp directory
 ALSvcfPth <- system.file("extdata","ALSvcf.vcf",package="MungeSumstats")
+#set a low INFO filter so we get a return
 reformatted_vcf <- 
-  MungeSumstats::format_sumstats(path=ALSvcfPth, ref_genome="GRCh37")
+  MungeSumstats::format_sumstats(path=ALSvcfPth, ref_genome="GRCh37",INFO_filter=0.1)
 ```
 
 # Future Enhancements

@@ -28,6 +28,9 @@ check_bi_allelic <-
       #get chars for SNPs not bi/tri allelic or strand ambig from IUPAC_CODE_MAP
       nonambig_IUPAC_CODE_MAP <- 
         names(Biostrings::IUPAC_CODE_MAP[nchar(Biostrings::IUPAC_CODE_MAP)<3])
+      #ensure rsids is up-to-date with filtered sumstats_dt
+      rsids <- rsids[sumstats_dt$SNP,,nomatch=NULL]
+      data.table::setkey(rsids,SNP)
       num_bad_ids <- nrow(rsids[!alleles_as_ambig %in% nonambig_IUPAC_CODE_MAP])
       #check for SNPs not on ref genome
       if(num_bad_ids>0){

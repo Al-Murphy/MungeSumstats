@@ -26,6 +26,9 @@ check_on_ref_genome <-
     if(is.null(rsids)){
       rsids <- load_ref_genome_data(copy(sumstats_dt$SNP), ref_genome)
     }
+    #ensure rsids is up-to-date with filtered sumstats_dt
+    rsids <- rsids[sumstats_dt$SNP,,nomatch=NULL]
+    data.table::setkey(rsids,SNP)
     num_bad_ids <- length(sumstats_dt$SNP) - length(rsids$SNP)
     #check for SNPs not on ref genome
     if(num_bad_ids>0){
@@ -39,7 +42,8 @@ check_on_ref_genome <-
         bad_snp <- sumstats_dt[!rsids$SNP,]
         #remove snp column and pass to function to impute snp
         bad_snp <- bad_snp[,SNP:=NULL]
-        corrected_snp <- check_no_snp(bad_snp, path=tempfile(), ref_genome)
+        corrected_snp <- 
+          check_no_snp(bad_snp, path=tempfile(), ref_genome, verbose=FALSE)
         corrected_snp <- corrected_snp$sumstats_dt 
         #make sure columns in correct order
         data.table::setcolorder(corrected_snp,names(sumstats_dt))

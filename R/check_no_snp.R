@@ -3,6 +3,7 @@
 #' @param sumstats_dt data table obj of the summary statistics file for the GWAS
 #' @param path Filepath for the summary statistics file to be formatted
 #' @param ref_genome name of the reference genome used for the GWAS (GRCh37 or GRCh38)
+#' @param verbose should messages be printed. Default it TRUE.
 #' @return list containing sumstats_dt, the modified summary statistics data table object
 #' @keywords internal
 #' @importFrom data.table setDT
@@ -12,12 +13,15 @@
 #' @importFrom data.table copy
 #' @importFrom BSgenome snpsByOverlaps
 #' @importFrom GenomicRanges makeGRangesFromDataFrame
-check_no_snp <- function(sumstats_dt, path, ref_genome){
+check_no_snp <- function(sumstats_dt, path, ref_genome, verbose=TRUE){
   SNP = CHR = i.RefSNP_id = NULL
   # If CHR and BP are present BUT not SNP then need to find the relevant SNP ids
   col_headers <- names(sumstats_dt)
   if(sum(c("CHR","BP") %in% col_headers)==2 & sum("SNP" %in% col_headers)==0){
-    SNP_LOC_DATA <- load_snp_loc_data(ref_genome,"SNP")
+    msg <- "SNP"
+    if(isFALSE(verbose))
+      msg <- NULL
+    SNP_LOC_DATA <- load_snp_loc_data(ref_genome,msg)
     #if chromosome col has chr prefix remove it
     sumstats_dt[,CHR:=gsub("chr","",CHR)]
     gr_snp <- GenomicRanges::makeGRangesFromDataFrame(copy(sumstats_dt),

@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.26</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.29</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@
 </h1>
                         <h4 class="author">Alan Murphy and Nathan Skene</h4>
             
-            <h4 class="date">2021-04-28</h4>
+            <h4 class="date">2021-04-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/MungeSumstats/blob/master/vignettes/MungeSumstats.Rmd"><code>vignettes/MungeSumstats.Rmd</code></a></small>
       <div class="hidden name"><code>MungeSumstats.Rmd</code></div>
@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <h1 class="hasAnchor">
 <a href="#citation" class="anchor"></a>Citation</h1>
 <p>If you use the MungeSumstats package, please cite</p>
-<p><a href="https://www.nature.com/articles/s41588-018-0129-5">Skene, et al. Genetic identification of brain cell types underlying schizophrenia, 2016.</a></p>
+<p><a href="https://www.nature.com/articles/s41588-018-0129-5">Skene, et al. Genetic identification of brain cell types underlying schizophrenia, 2018.</a></p>
 </div>
 <div id="overview" class="section level1">
 <h1 class="hasAnchor">
@@ -122,9 +122,51 @@ document.addEventListener("DOMContentLoaded", function() {
 <div id="aim" class="section level1">
 <h1 class="hasAnchor">
 <a href="#aim" class="anchor"></a>Aim</h1>
-<p><em>MungeSumstats</em> will ensure that the all essential columns for analysis are present and syntactically correct. Generally, summary statistic files include (but are not limited to) the columns: * SNP : SNP ID (rs IDs) * CHR : Chromosome number * BP : Base pair positions * A1 : Effect allele * A2 : Non-effect allele * Z : Z-score * BETA : Effect size estimate relative to the alternative allele * P : Unadjusted p-value for SNP * N : Sample size * INFO: The imputation information score * FRQ: The minor allele frequency (MAF) of the SNP</p>
-<p>Tests run by <em>MungeSumstats</em> include: * Check VCF format * Check tab, space or comma delimited * Check for header name synonyms * Check for multiple models or traits in GWAS * Check for uniformity in SNP ID - no mix of rs/missing rs/chr:bp * Check for CHR:BP:A2:A1 all in one column * Check for CHR:BP in one column * Check for A1/A2 in one column * Check if CHR and/or BP is missing (infer from reference genome) * Check if SNP ID is missing (infer from reference genome) * Check if A1 and/or A2 are missing (infer from reference genome) * Check that vital columns are present (SNP,CHR,BP,P,A1,A2) * Check for one signed/effect column (Z,OR,BETA,LOG_ODDS,SIGNED_SUMSTAT) * Check for missing data * Check for duplicated columns * Check for small p-values (lower than 5e-324) * Check N column is an integer * Check for SNPs with N greater than 5 times standard dev. plus the mean<br>
-* Check SNPs are RS ID’s * Check for duplicated rows, based on SNP ID * Check for duplicated rows, based on base-pair position * Check for SNPs on reference genome. Correct not found SNP IDs using CHR and BP (infer from reference genome) * Check INFO score * Check for strand-ambiguous SNPs * Check for non-biallelic SNPs (infer from reference genome) * Check for allele flipping * Check for SNPs on chromosome X, Y, and mitochondrial SNPs (MT)</p>
+<p><em>MungeSumstats</em> will ensure that the all essential columns for analysis are present and syntactically correct. Generally, summary statistic files include (but are not limited to) the columns:</p>
+<ul>
+<li>SNP : SNP ID (rs IDs)</li>
+<li>CHR : Chromosome number</li>
+<li>BP : Base pair positions</li>
+<li>A1 : Effect allele</li>
+<li>A2 : Non-effect allele</li>
+<li>Z : Z-score</li>
+<li>BETA : Effect size estimate relative to the alternative allele</li>
+<li>P : Unadjusted p-value for SNP</li>
+<li>N : Sample size</li>
+<li>INFO: The imputation information score</li>
+<li>FRQ: The minor allele frequency (MAF) of the SNP</li>
+</ul>
+<p>Tests run by <em>MungeSumstats</em> include:</p>
+<ul>
+<li>Check VCF format</li>
+<li>Check tab, space or comma delimited</li>
+<li>Check for header name synonyms</li>
+<li>Check for multiple models or traits in GWAS</li>
+<li>Check for uniformity in SNP ID - no mix of rs/missing rs/chr:bp</li>
+<li>Check for CHR:BP:A2:A1 all in one column</li>
+<li>Check for CHR:BP in one column</li>
+<li>Check for A1/A2 in one column</li>
+<li>Check if CHR and/or BP is missing (infer from reference genome)</li>
+<li>Check if SNP ID is missing (infer from reference genome)</li>
+<li>Check if A1 and/or A2 are missing (infer from reference genome)</li>
+<li>Check that vital columns are present (SNP,CHR,BP,P,A1,A2)</li>
+<li>Check for one signed/effect column (Z,OR,BETA,LOG_ODDS,SIGNED_SUMSTAT)</li>
+<li>Check for missing data</li>
+<li>Check for duplicated columns</li>
+<li>Check for small p-values (lower than 5e-324)</li>
+<li>Check N column is an integer</li>
+<li>Check for SNPs with N greater than 5 times standard dev. plus the mean<br>
+</li>
+<li>Check SNPs are RS ID’s</li>
+<li>Check for duplicated rows, based on SNP ID</li>
+<li>Check for duplicated rows, based on base-pair position</li>
+<li>Check for SNPs on reference genome. Correct not found SNP IDs using CHR and BP (infer from reference genome)</li>
+<li>Check INFO score</li>
+<li>Check for strand-ambiguous SNPs</li>
+<li>Check for non-biallelic SNPs (infer from reference genome)</li>
+<li>Check for allele flipping</li>
+<li>Check for SNPs on chromosome X, Y, and mitochondrial SNPs (MT)</li>
+</ul>
 <p>If a test is failed, the user will be notified and if possible, the input will be corrected. The QC steps from the checks above can also be adjusted to suit the user’s analysis, see <code><a href="../reference/format_sumstats.html">MungeSumstats::format_sumstats</a></code>.</p>
 </div>
 <div id="data" class="section level1">
@@ -154,49 +196,45 @@ BiocManager::install("MungeSumstats")</code></pre>
   <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/format_sumstats.html">format_sumstats</a></span><span class="op">(</span>path<span class="op">=</span><span class="va">eduAttainOkbayPth</span>,ref_genome<span class="op">=</span><span class="st">"GRCh37"</span><span class="op">)</span></code></pre></div>
 <pre><code>## First line of summary statistics file:</code></pre>
 <pre><code>## MarkerName   CHR POS A1  A2  EAF Beta    SE  Pval    </code></pre>
-<pre><code>## [1] "MARKERNAME"
-## [1] "SNP"
-## [1] "PVAL"
-## [1] "P"
-## [1] "EAF"
-## [1] "FRQ"
-## [1] "POS"
-## [1] "BP"</code></pre>
 <pre><code>## Succesfully finished preparing sumstats file, preview:</code></pre>
 <pre><code>## SNP  CHR BP  A1  A2  FRQ BETA    SE  P</code></pre>
 <pre><code>## rs12646808   4   3249828 T   C   0.6418  0.016   0.003   4.002e-08</code></pre>
 <pre><code>## rs301800 1   8490603 T   C   0.1791  0.019   0.003   1.794e-08</code></pre>
-<p>The hyperparameters <code>format_sumstats</code> in that control the level of QC conducted by <em>MungeSumstats</em> are: * <em>convert_small_p</em> Binary, should p-values &lt; 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE. * <em>convert_n_int</em> Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE. analysis_trait If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL INFO_filter numeric The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9 * <em>N_std</em> Numeric, the number of standard deviations above the mean a SNP’s N is needed to be removed. Default is 5. rmv_chr vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary. Default is X, Y and mitochondrial. * <em>on_ref_genome</em> Binary, should a check take place that all SNPs are on the reference genome by SNP ID. Any that aren’t on SNPs not on the reference genome, will be corrected from the reference genome (if possible) from the chromosome and base pair postion data. Default is TRUE * <em>strand_ambig_filter</em> Binary, should SNPs with strand-ambiguous alleles be removed. Default is FALSE * <em>allele_flip_check</em> Binary, should the allele columns be chacked against reference genome to infer if flipping is necessary. Default is TRUE * <em>bi_allelic_filter</em> Binary, should non-biallelic SNPs be removed. Default is TRUE</p>
+<p>The hyperparameters <code>format_sumstats</code> in that control the level of QC conducted by <em>MungeSumstats</em> are:</p>
+<ul>
+<li>
+<em>convert_small_p</em> Binary, should p-values &lt; 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.</li>
+<li>
+<em>convert_n_int</em> Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE. analysis_trait If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL INFO_filter numeric The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9</li>
+<li>
+<em>N_std</em> Numeric, the number of standard deviations above the mean a SNP’s N is needed to be removed. Default is 5. rmv_chr vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary. Default is X, Y and mitochondrial.</li>
+<li>
+<em>on_ref_genome</em> Binary, should a check take place that all SNPs are on the reference genome by SNP ID. Any that aren’t on SNPs not on the reference genome, will be corrected from the reference genome (if possible) from the chromosome and base pair postion data. Default is TRUE</li>
+<li>
+<em>strand_ambig_filter</em> Binary, should SNPs with strand-ambiguous alleles be removed. Default is FALSE</li>
+<li>
+<em>allele_flip_check</em> Binary, should the allele columns be chacked against reference genome to infer if flipping is necessary. Default is TRUE</li>
+<li>
+<em>bi_allelic_filter</em> Binary, should non-biallelic SNPs be removed. Default is TRUE</li>
+</ul>
 <p>VCF files can also be standardised to the same format as other summary statistic files. A subset of the Amyotrophic lateral sclerosis GWAS from the ieu open GWAS project (a .vcf file) has been added to <em>MungeSumstats</em> to demonstrate this functionality.Simply pass the path to the file in the same manner you would for other summary statistic files:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#save ALS GWAS from the ieu open GWAS project to a temp directory</span>
 <span class="va">ALSvcfPth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"ALSvcf.vcf"</span>,package<span class="op">=</span><span class="st">"MungeSumstats"</span><span class="op">)</span>
+<span class="co">#set a low INFO filter so we get a return</span>
 <span class="va">reformatted_vcf</span> <span class="op">&lt;-</span> 
-  <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/format_sumstats.html">format_sumstats</a></span><span class="op">(</span>path<span class="op">=</span><span class="va">ALSvcfPth</span>, ref_genome<span class="op">=</span><span class="st">"GRCh37"</span><span class="op">)</span></code></pre></div>
+  <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/format_sumstats.html">format_sumstats</a></span><span class="op">(</span>path<span class="op">=</span><span class="va">ALSvcfPth</span>, ref_genome<span class="op">=</span><span class="st">"GRCh37"</span>,INFO_filter<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></code></pre></div>
 <pre><code>## VCF format detected, this will be converted to a standard summary statistics file format.</code></pre>
 <pre><code>## Inputted VCF format has -log10 P-values, these will be converted to unadjusted p-values in the 'P' column.</code></pre>
 <pre><code>## First line of summary statistics file:</code></pre>
 <pre><code>## CHROM    POS REF ALT INFO    ES  SE  LP  AF  ID  P   </code></pre>
-<pre><code>## [1] "POS"
-## [1] "BP"
-## [1] "REF"
-## [1] "A1"
-## [1] "ALT"
-## [1] "A2"
-## [1] "ID"
-## [1] "SNP"
-## [1] "ES"
-## [1] "BETA"
-## [1] "CHROM"
-## [1] "CHR"</code></pre>
 <pre><code>## 12 SNPs are not on the reference genome.  These will be corrected from the reference genome.</code></pre>
-<pre><code>## There is no SNP column found within the data. It must be inferred from other column information.</code></pre>
 <pre><code>## Reordering so first three column headers are SNP, CHR and BP in this order.</code></pre>
-<pre><code>## 93 SNPs are below the INFO threshold of 0.9 and will be removed</code></pre>
+<pre><code>## 67 SNPs are below the INFO threshold of 0.1 and will be removed</code></pre>
 <pre><code>## Succesfully finished preparing sumstats file, preview:</code></pre>
 <pre><code>## SNP  CHR BP  A1  A2  INFO    BETA    SE  LP  AF  P</code></pre>
-<pre><code>## NA</code></pre>
-<pre><code>## NA</code></pre>
+<pre><code>## rs58108140   1   10583   G   A   0.1589  0.0312  0.0393  0.369267    0.1589  0.427300105456596</code></pre>
+<pre><code>## rs806731 1   30923   G   T   0.7843  -0.0114 0.0353  0.126854    0.7843  0.746699739815279</code></pre>
 </div>
 <div id="future-enhancements" class="section level1">
 <h1 class="hasAnchor">
@@ -222,7 +260,7 @@ BiocManager::install("MungeSumstats")</code></pre>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] MungeSumstats_0.99.26 BiocStyle_2.19.2     
+## [1] MungeSumstats_0.99.29 BiocStyle_2.19.2     
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] SummarizedExperiment_1.21.3                
