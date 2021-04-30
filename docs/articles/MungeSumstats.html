@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.29</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.31</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@
 </h1>
                         <h4 class="author">Alan Murphy and Nathan Skene</h4>
             
-            <h4 class="date">2021-04-29</h4>
+            <h4 class="date">2021-04-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/MungeSumstats/blob/master/vignettes/MungeSumstats.Rmd"><code>vignettes/MungeSumstats.Rmd</code></a></small>
       <div class="hidden name"><code>MungeSumstats.Rmd</code></div>
@@ -205,9 +205,13 @@ BiocManager::install("MungeSumstats")</code></pre>
 <li>
 <em>convert_small_p</em> Binary, should p-values &lt; 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.</li>
 <li>
-<em>convert_n_int</em> Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE. analysis_trait If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL INFO_filter numeric The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9</li>
+<em>convert_n_int</em> Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE. analysis_trait If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL</li>
 <li>
-<em>N_std</em> Numeric, the number of standard deviations above the mean a SNP’s N is needed to be removed. Default is 5. rmv_chr vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary. Default is X, Y and mitochondrial.</li>
+<em>INFO_filter</em> 0-1 The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9</li>
+<li>
+<em>N_std</em> Numeric, the number of standard deviations above the mean a SNP’s N is needed to be removed. Default is 5.</li>
+<li>
+<em>rmv_chr</em> vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary. Default is X, Y and mitochondrial.</li>
 <li>
 <em>on_ref_genome</em> Binary, should a check take place that all SNPs are on the reference genome by SNP ID. Any that aren’t on SNPs not on the reference genome, will be corrected from the reference genome (if possible) from the chromosome and base pair postion data. Default is TRUE</li>
 <li>
@@ -260,7 +264,7 @@ BiocManager::install("MungeSumstats")</code></pre>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] MungeSumstats_0.99.29 BiocStyle_2.19.2     
+## [1] MungeSumstats_0.99.31 BiocStyle_2.19.2     
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] SummarizedExperiment_1.21.3                
