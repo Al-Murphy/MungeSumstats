@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   MungeSumstats: MungeSumstats.html
-last_built: 2021-04-30T11:53Z
+last_built: 2021-05-04T11:45Z
 urls:
   reference: https://neurogenomics.github.io/MungeSumstats/index.html/reference
   article: https://neurogenomics.github.io/MungeSumstats/index.html/articles

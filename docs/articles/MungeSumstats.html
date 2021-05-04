@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.31</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.32</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@
 </h1>
                         <h4 class="author">Alan Murphy and Nathan Skene</h4>
             
-            <h4 class="date">2021-04-30</h4>
+            <h4 class="date">2021-05-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/MungeSumstats/blob/master/vignettes/MungeSumstats.Rmd"><code>vignettes/MungeSumstats.Rmd</code></a></small>
       <div class="hidden name"><code>MungeSumstats.Rmd</code></div>
@@ -188,8 +188,15 @@ BiocManager::install("MungeSumstats")</code></pre>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/neurogenomics/MungeSumstats">MungeSumstats</a></span><span class="op">)</span></code></pre></div>
 <p>To standardise the summary statistics’ file format, simply call <code><a href="../reference/format_sumstats.html">format_sumstats()</a></code> passing in the path to your summary statistics file. You must also specify which genome build was used in the GWAS(GRCh37 or GRCh38). The reference genome is used for multiple checks like deriving missing data such SNP/BP/CHR/A1/A2 and for QC steps like removing non-biallelic SNPs or strand-ambiguous SNPs. The path to the reformatted summary statistics file is returned by the function call.</p>
+<p>Note that for a number of the checks implored by <em>MungeSumstats</em> a reference genome is used. If your GWAS summary statistics file of interest relates to <em>GRCh38</em>, you will need to install <code>SNPlocs.Hsapiens.dbSNP144.GRCh38</code> and <code>BSgenome.Hsapiens.NCBI.GRCh38</code> from Bioconductor as follows:</p>
+<pre><code><a href="https://rdrr.io/pkg/BiocManager/man/install.html">BiocManager::install("SNPlocs.Hsapiens.dbSNP144.GRCh38")
+BiocManager::install("BSgenome.Hsapiens.NCBI.GRCh38")</a></code></pre>
+<p>If your GWAS summary statistics file of interest relates to <em>GRCh37</em>, you will need to install <code>SNPlocs.Hsapiens.dbSNP144.GRCh37</code> and <code>BSgenome.Hsapiens.1000genomes.hs37d5</code> from Bioconductor as follows:</p>
+<pre><code><a href="https://rdrr.io/pkg/BiocManager/man/install.html">BiocManager::install("SNPlocs.Hsapiens.dbSNP144.GRCh37")
+BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
+<p>These may take some time to install and are not included in the package as some users may only need one of <em>GRCh37</em>/<em>GRCh38</em>.</p>
 <p>The Educational Attainment by Okbay GWAS summary statistics file is saved as a text document in the package’s external data folder so we can just pass the file path to it straight to <em>MungeSumstats</em>.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">eduAttainOkbayPth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"eduAttainOkbay.txt"</span>,
                                   package<span class="op">=</span><span class="st">"MungeSumstats"</span><span class="op">)</span>
 <span class="va">reformatted</span> <span class="op">&lt;-</span> 
@@ -203,26 +210,26 @@ BiocManager::install("MungeSumstats")</code></pre>
 <p>The hyperparameters <code>format_sumstats</code> in that control the level of QC conducted by <em>MungeSumstats</em> are:</p>
 <ul>
 <li>
-<em>convert_small_p</em> Binary, should p-values &lt; 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.</li>
+<strong>convert_small_p</strong> Binary, should p-values &lt; 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.</li>
 <li>
-<em>convert_n_int</em> Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE. analysis_trait If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL</li>
+<strong>convert_n_int</strong> Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE. analysis_trait If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL</li>
 <li>
-<em>INFO_filter</em> 0-1 The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9</li>
+<strong>INFO_filter</strong> 0-1 The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9</li>
 <li>
-<em>N_std</em> Numeric, the number of standard deviations above the mean a SNP’s N is needed to be removed. Default is 5.</li>
+<strong>N_std</strong> Numeric, the number of standard deviations above the mean a SNP’s N is needed to be removed. Default is 5.</li>
 <li>
-<em>rmv_chr</em> vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary. Default is X, Y and mitochondrial.</li>
+<strong>rmv_chr</strong> vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary. Default is X, Y and mitochondrial.</li>
 <li>
-<em>on_ref_genome</em> Binary, should a check take place that all SNPs are on the reference genome by SNP ID. Any that aren’t on SNPs not on the reference genome, will be corrected from the reference genome (if possible) from the chromosome and base pair postion data. Default is TRUE</li>
+<strong>on_ref_genome</strong> Binary, should a check take place that all SNPs are on the reference genome by SNP ID. Any that aren’t on SNPs not on the reference genome, will be corrected from the reference genome (if possible) from the chromosome and base pair postion data. Default is TRUE</li>
 <li>
-<em>strand_ambig_filter</em> Binary, should SNPs with strand-ambiguous alleles be removed. Default is FALSE</li>
+<strong>strand_ambig_filter</strong> Binary, should SNPs with strand-ambiguous alleles be removed. Default is FALSE</li>
 <li>
-<em>allele_flip_check</em> Binary, should the allele columns be chacked against reference genome to infer if flipping is necessary. Default is TRUE</li>
+<strong>allele_flip_check</strong> Binary, should the allele columns be chacked against reference genome to infer if flipping is necessary. Default is TRUE</li>
 <li>
-<em>bi_allelic_filter</em> Binary, should non-biallelic SNPs be removed. Default is TRUE</li>
+<strong>bi_allelic_filter</strong> Binary, should non-biallelic SNPs be removed. Default is TRUE</li>
 </ul>
 <p>VCF files can also be standardised to the same format as other summary statistic files. A subset of the Amyotrophic lateral sclerosis GWAS from the ieu open GWAS project (a .vcf file) has been added to <em>MungeSumstats</em> to demonstrate this functionality.Simply pass the path to the file in the same manner you would for other summary statistic files:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#save ALS GWAS from the ieu open GWAS project to a temp directory</span>
 <span class="va">ALSvcfPth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"ALSvcf.vcf"</span>,package<span class="op">=</span><span class="st">"MungeSumstats"</span><span class="op">)</span>
 <span class="co">#set a low INFO filter so we get a return</span>
@@ -244,7 +251,10 @@ BiocManager::install("MungeSumstats")</code></pre>
 <h1 class="hasAnchor">
 <a href="#future-enhancements" class="anchor"></a>Future Enhancements</h1>
 <p>The <em>MungeSumstats</em> package aims to be able to handle the most common summary statistic file formats including VCF. If your file can not be formatted by <em>MungeSumstats</em> feel free to report the bug on github: <a href="https://github.com/neurogenomics/MungeSumstats" class="uri">https://github.com/neurogenomics/MungeSumstats</a> along with your summary statistic file header.</p>
-<p>We also encourage people to edit the code to resolve their particular issues too and are happy to incorporate these through pull requests on github. If your summary statistic file headers are not recognised by <em>MungeSumstats</em> but correspond to one of SNP, BP, CHR, A1, A2, P, Z, OR, BETA, LOG_ODDS, SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ, feel free to update the <code><a href="../reference/sumstatsColHeaders.html">MungeSumstats::sumstatsColHeaders</a></code> following the approach in the data.R file and add your mapping. Then use a pull request on github and we will incorporate this change into the package.</p>
+<p>We also encourage people to edit the code to resolve their particular issues too and are happy to incorporate these through pull requests on github. If your summary statistic file headers are not recognised by <em>MungeSumstats</em> but correspond to one of:</p>
+<pre><code>SNP, BP, CHR, A1, A2, P, Z, OR, BETA, LOG_ODDS,
+SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
+<p>feel free to update the <code><a href="../reference/sumstatsColHeaders.html">MungeSumstats::sumstatsColHeaders</a></code> following the approach in the data.R file and add your mapping. Then use a pull request on github and we will incorporate this change into the package.</p>
 </div>
 <div id="session-information" class="section level1">
 <h1 class="hasAnchor">
@@ -264,7 +274,7 @@ BiocManager::install("MungeSumstats")</code></pre>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] MungeSumstats_0.99.31 BiocStyle_2.19.2     
+## [1] MungeSumstats_0.99.32 BiocStyle_2.19.2     
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] SummarizedExperiment_1.21.3                
@@ -298,11 +308,11 @@ BiocManager::install("MungeSumstats")</code></pre>
 ## [29] GenomeInfoDb_1.27.11                       
 ## [30] parallel_4.1.0                             
 ## [31] BSgenome.Hsapiens.1000genomes.hs37d5_0.99.1
-## [32] BSgenome_1.59.2                            
+## [32] BSgenome_1.59.4                            
 ## [33] BiocManager_1.30.12                        
 ## [34] SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20   
 ## [35] cachem_1.0.4                               
-## [36] DelayedArray_0.17.10                       
+## [36] DelayedArray_0.17.11                       
 ## [37] S4Vectors_0.29.17                          
 ## [38] desc_1.3.0                                 
 ## [39] jsonlite_1.7.2                             

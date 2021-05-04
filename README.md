@@ -1,7 +1,7 @@
 Standardise the format of GWAS summary statistics with *MungeSumstats*
 ================
 Alan Murphy and Nathan Skene
-2021-04-30
+2021-05-04
 
 <!-- Readme.md is generated from Readme.Rmd. Please edit that file -->
 <!-- badges: start -->
@@ -49,6 +49,25 @@ You can then load the package and data package:
 ``` r
 library(MungeSumstats)
 ```
+
+Note that for a number of the checks implored by *MungeSumstats* a
+reference genome is used. If your GWAS summary statistics file of
+interest relates to *GRCh38*, you will need to install
+`SNPlocs.Hsapiens.dbSNP144.GRCh38` and `BSgenome.Hsapiens.NCBI.GRCh38`
+from Bioconductor as follows:
+
+    BiocManager::install("SNPlocs.Hsapiens.dbSNP144.GRCh38")
+    BiocManager::install("BSgenome.Hsapiens.NCBI.GRCh38")
+
+If your GWAS summary statistics file of interest relates to *GRCh37*,
+you will need to install `SNPlocs.Hsapiens.dbSNP144.GRCh37` and
+`BSgenome.Hsapiens.1000genomes.hs37d5` from Bioconductor as follows:
+
+    BiocManager::install("SNPlocs.Hsapiens.dbSNP144.GRCh37")
+    BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")
+
+These may take some time to install and are not included in the package
+as some users may only need one of *GRCh37*/*GRCh38*.
 
 # Getting started
 

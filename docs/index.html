@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.31</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.32</span>
       </span>
     </div>
 
@@ -87,7 +87,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#standardise-the-format-of-gwas-summary-statistics-with-mungesumstats" class="anchor"></a>Standardise the format of GWAS summary statistics with <em>MungeSumstats</em>
 </h1></div>
-<p>Alan Murphy and Nathan Skene 2021-04-29</p>
+<p>Alan Murphy and Nathan Skene 2021-05-04</p>
 <!-- Readme.md is generated from Readme.Rmd. Please edit that file -->
 <!-- badges: start -->
 <p><a href="https://github.com/neurogenomics/MungeSumstats/actions"><img src="https://github.com/neurogenomics/MungeSumstats/workflows/R-full/badge.svg" alt="R-CMD-check"></a> <a href="https://codecov.io/gh/neurogenomics/MungeSumstats?branch=master"><img src="https://codecov.io/gh/neurogenomics/MungeSumstats/branch/master/graph/badge.svg" alt="Codecov test coverage"></a> <!-- badges: end --></p>
@@ -114,6 +114,13 @@
 <p>You can then load the package and data package:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/neurogenomics/MungeSumstats">MungeSumstats</a></span><span class="op">)</span></code></pre></div>
+<p>Note that for a number of the checks implored by <em>MungeSumstats</em> a reference genome is used. If your GWAS summary statistics file of interest relates to <em>GRCh38</em>, you will need to install <code>SNPlocs.Hsapiens.dbSNP144.GRCh38</code> and <code>BSgenome.Hsapiens.NCBI.GRCh38</code> from Bioconductor as follows:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"SNPlocs.Hsapiens.dbSNP144.GRCh38"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"BSgenome.Hsapiens.NCBI.GRCh38"</span>)</span></code></pre></div>
+<p>If your GWAS summary statistics file of interest relates to <em>GRCh37</em>, you will need to install <code>SNPlocs.Hsapiens.dbSNP144.GRCh37</code> and <code>BSgenome.Hsapiens.1000genomes.hs37d5</code> from Bioconductor as follows:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"SNPlocs.Hsapiens.dbSNP144.GRCh37"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"BSgenome.Hsapiens.1000genomes.hs37d5"</span>)</span></code></pre></div>
+<p>These may take some time to install and are not included in the package as some users may only need one of <em>GRCh37</em>/<em>GRCh38</em>.</p>
 </div>
 <div id="getting-started" class="section level1">
 <h1 class="hasAnchor">
@@ -132,8 +139,8 @@
 <a href="#future-enhancements" class="anchor"></a>Future Enhancements</h1>
 <p>The <em>MungeSumstats</em> package aims to be able to handle the most common summary statistic file formats including VCF. If your file can not be formatted by <em>MungeSumstats</em> feel free to report the bug on github: <a href="https://github.com/neurogenomics/MungeSumstats" class="uri">https://github.com/neurogenomics/MungeSumstats</a> along with your summary statistic file header.</p>
 <p>We also encourage people to edit the code to resolve their particular issues too and are happy to incorporate these through pull requests on github. If your summary statistic file headers are not recognised by <em>MungeSumstats</em> but correspond to one of</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>SNP, BP, CHR, A1, A2, P, Z, OR, BETA, LOG_ODDS, SIGNED_SUMSTAT, N, N_CAS, N_CON, </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>NSTUDY, INFO or FRQ, </span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>SNP, BP, CHR, A1, A2, P, Z, OR, BETA, LOG_ODDS, SIGNED_SUMSTAT, N, N_CAS, N_CON, </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>NSTUDY, INFO or FRQ, </span></code></pre></div>
 <p>feel free to update the <code><a href="reference/sumstatsColHeaders.html">MungeSumstats::sumstatsColHeaders</a></code> following the approach in the data.R file and add your mapping. Then use a pull request on github and we will incorporate this change into the package.</p>
 </div>
 <div id="references" class="section level1">

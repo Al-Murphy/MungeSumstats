@@ -156,6 +156,24 @@ data such SNP/BP/CHR/A1/A2 and for QC steps like removing non-biallelic
 SNPs or strand-ambiguous SNPs. The path to the reformatted summary statistics 
 file is returned by the function call.
 
+Note that for a number of the checks implored by *MungeSumstats* a reference 
+genome is used. If your GWAS summary statistics file of interest relates to
+*GRCh38*, you will need to install `SNPlocs.Hsapiens.dbSNP144.GRCh38` and 
+`BSgenome.Hsapiens.NCBI.GRCh38` from Bioconductor as follows:
+```
+BiocManager::install("SNPlocs.Hsapiens.dbSNP144.GRCh38")
+BiocManager::install("BSgenome.Hsapiens.NCBI.GRCh38")
+```
+If your GWAS summary statistics file of interest relates to *GRCh37*, you will 
+need to install `SNPlocs.Hsapiens.dbSNP144.GRCh37` and 
+`BSgenome.Hsapiens.1000genomes.hs37d5` from Bioconductor as follows:
+```
+BiocManager::install("SNPlocs.Hsapiens.dbSNP144.GRCh37")
+BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")
+```
+These may take some time to install and are not included in the package as some 
+users may only need one of *GRCh37*/*GRCh38*.
+
 The Educational Attainment by Okbay GWAS summary statistics file is saved as a 
 text document in the package's external data folder so we can just pass the file
 path to it straight to *MungeSumstats*.
@@ -170,16 +188,16 @@ reformatted <-
 The hyperparameters `format_sumstats` in that control the level of QC conducted 
 by *MungeSumstats* are:
 
-* *convert_small_p* Binary, should p-values < 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.
-* *convert_n_int* Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE.
+* **convert_small_p** Binary, should p-values < 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.
+* **convert_n_int** Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE.
 analysis_trait If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL
-* *INFO_filter* 0-1 The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9
-* *N_std* Numeric, the number of standard deviations above the mean a SNP's N is needed to be removed. Default is 5.
-* *rmv_chr* vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary. Default is X, Y and mitochondrial. 
-* *on_ref_genome* Binary, should a check take place that all SNPs are on the reference genome by SNP ID. Any that aren't on SNPs not on the reference genome, will be corrected from the reference genome (if possible) from the chromosome and base pair postion data. Default is TRUE
-* *strand_ambig_filter* Binary, should SNPs with strand-ambiguous alleles be removed. Default is FALSE
-* *allele_flip_check* Binary, should the allele columns be chacked against reference genome to infer if flipping is necessary. Default is TRUE
-* *bi_allelic_filter* Binary, should non-biallelic SNPs be removed. Default is TRUE
+* **INFO_filter** 0-1 The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9
+* **N_std** Numeric, the number of standard deviations above the mean a SNP's N is needed to be removed. Default is 5.
+* **rmv_chr** vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary. Default is X, Y and mitochondrial. 
+* **on_ref_genome** Binary, should a check take place that all SNPs are on the reference genome by SNP ID. Any that aren't on SNPs not on the reference genome, will be corrected from the reference genome (if possible) from the chromosome and base pair postion data. Default is TRUE
+* **strand_ambig_filter** Binary, should SNPs with strand-ambiguous alleles be removed. Default is FALSE
+* **allele_flip_check** Binary, should the allele columns be chacked against reference genome to infer if flipping is necessary. Default is TRUE
+* **bi_allelic_filter** Binary, should non-biallelic SNPs be removed. Default is TRUE
 
 VCF files can also be standardised to the same format as other summary statistic
 files. A subset of the Amyotrophic lateral sclerosis GWAS from the ieu open GWAS
@@ -206,11 +224,14 @@ statistic file header.
 We also encourage people to edit the code to resolve their particular issues 
 too and are happy to incorporate these through pull requests on github. If your
 summary statistic file headers are not recognised by *MungeSumstats* but 
-correspond to one of SNP, BP, CHR, A1, A2, P, Z, OR, BETA, LOG_ODDS,
-SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ, feel free to update the 
-`MungeSumstats::sumstatsColHeaders` following the approach in the data.R file
-and add your mapping. Then use a pull request on github and we will incorporate 
-this change into the package.
+correspond to one of: 
+```
+SNP, BP, CHR, A1, A2, P, Z, OR, BETA, LOG_ODDS,
+SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ 
+```
+feel free to update the `MungeSumstats::sumstatsColHeaders` following the 
+approach in the data.R file and add your mapping. Then use a pull request on 
+github and we will incorporate this change into the package.
 
 # Session Information
 ```{r, message=TRUE, echo=FALSE}
