@@ -32,8 +32,7 @@ knitr::opts_chunk$set(tidy         = FALSE,
 
 If you use the MungeSumstats package, please cite
 
-[Skene, et al. Genetic identification of brain cell types underlying
-schizophrenia, 2018.](https://www.nature.com/articles/s41588-018-0129-5)
+[Murphy, et al. MungeSumstats: A Bioconductor package for the standardisation and quality control of many GWAS summary statistics](https://www.biorxiv.org/content/10.1101/2021.06.21.449239v1).
 
 # Overview
 

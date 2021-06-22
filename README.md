@@ -1,7 +1,7 @@
 Standardise the format of GWAS summary statistics with *MungeSumstats*
 ================
 Alan Murphy and Nathan Skene
-2021-05-04
+2021-06-22
 
 <!-- Readme.md is generated from Readme.Rmd. Please edit that file -->
 <!-- badges: start -->
@@ -15,7 +15,10 @@ coverage](https://codecov.io/gh/neurogenomics/MungeSumstats/branch/master/graph/
 
 The *MungeSumstats* package is designed to facilitate the
 standardisation of GWAS summary statistics as utilised in our Nature
-Genetics paper.<sup>1</sup>
+Genetics paper.<sup>1</sup> If you use MungeSumstats, please cite our
+preprint [Murphy, et al. MungeSumstats: A Bioconductor package for the
+standardisation and quality control of many GWAS summary
+statistics](https://www.biorxiv.org/content/10.1101/2021.06.21.449239v1).
 
 # Overview
 
@@ -79,11 +82,11 @@ If you have any problems please do file an issue here on github.
 
 # Citation
 
-If you use the MungeSumstats package as well then please cite
+If you use the MungeSumstats package then please cite
 
-[Skene, et al. Genetic identification of brain cell types underlying
-schizophrenia. Nature Genetics,
-2018.](https://www.nature.com/articles/s41588-018-0129-5)
+[Murphy, et al. MungeSumstats: A Bioconductor package for the
+standardisation and quality control of many GWAS summary
+statistics](https://www.biorxiv.org/content/10.1101/2021.06.21.449239v1).
 
 # Future Enhancements
 
