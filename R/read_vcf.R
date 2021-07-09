@@ -10,6 +10,8 @@
 #' @importFrom data.table tstrsplit
 #' @importFrom data.table :=
 #' @importFrom dplyr %>% rename 
+#' @importFrom utils head
+#' @importFrom stringr str_split
 read_vcf <- function(path, 
                      nThread=1, 
                      temp_save=FALSE,
@@ -21,10 +23,7 @@ read_vcf <- function(path,
     # 3. [seqminer](https://cran.r-project.org/web/packages/seqminer/index.html) 
     # 4. [Rsamtools](https://bioconductor.org/packages/release/bioc/html/Rsamtools.html) 
     ##################################
-    
-    # path <- "~/Desktop/ewce/MAGMA_Celltyping/ieu-b-2.vcf.gz" ### Directly from Open GWAS
-    # path <- "Test.vcf.gz" ### Exported with VariantAnnotation
-    
+     
     message("Reading VCF file.")  
     # fileformat <- gsub("^##fileformat=","",header[1])
     # #First get the name of data column, held in the ##SAMPLE row 

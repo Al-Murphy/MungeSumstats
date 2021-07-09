@@ -12,6 +12,7 @@
 #' @importFrom data.table setnames
 standardise_sumstats_column_headers_crossplatform <-
   function(sumstats_dt, path) {
+  # sumstatsColHeaders <- MungeSumstats:::sumstatsColHeaders
   message("First line of summary statistics file: ")
   msg <- paste0(names(sumstats_dt),split="\t")
   message(msg)
@@ -19,8 +20,7 @@ standardise_sumstats_column_headers_crossplatform <-
   data.table::setnames(sumstats_dt,toupper(names(sumstats_dt)))
   column_headers <- names(sumstats_dt)
   #load synonym mapping - internal data no loading
-  #Go through each and get correct spelling
-  sumstatsColHeaders <- MungeSumstats:::sumstatsColHeaders
+  #Go through each and get correct spelling 
   for (headerI in seq_len(nrow(sumstatsColHeaders))) {
     un <- sumstatsColHeaders[headerI, 1]
     cr <- sumstatsColHeaders[headerI, 2]

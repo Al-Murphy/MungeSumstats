@@ -36,7 +36,7 @@
 #' @param strand_ambig_filter Binary Should SNPs with strand-ambiguous alleles be removed. Default is FALSE.
 #' @param allele_flip_check Binary Should the allele columns be checked against reference genome to infer if flipping is necessary. Default is TRUE.
 #' @param bi_allelic_filter Binary Should non-biallelic SNPs be removed. Default is TRUE.
-#' @param sort_coords Whether to sort by coordinates.
+#' @param sort_coordinates Whether to sort by coordinates.
 #' @param nThread Number of threads to use for parallel processes. 
 #' @param save_path File path to save formatted data. Defaults to \code{paste0(tempfile(),".tsv.gz")}.
 #' @param write_vcf Whether to write as VCF (TRUE) or tabular file (FALSE). 

@@ -6,7 +6,7 @@
 #' @return list containing sumstats_dt, the modified summary statistics data table object
 #' @keywords internal
 check_multi_gwas <- function(sumstats_dt, path, analysis_trait){
-  sumstatsColHeaders <- MungeSumstats:::sumstatsColHeaders
+  # sumstatsColHeaders <- MungeSumstats:::sumstatsColHeaders
   col_headers <- names(sumstats_dt)
   #load synonym mapping - internal data no loading
   #Check for multiple p values and other columns, if found choose 1 to continue

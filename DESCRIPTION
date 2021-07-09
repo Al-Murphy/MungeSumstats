@@ -58,7 +58,6 @@ Suggests:
     testthat (>= 3.0.0),
     UpSetR,
     BiocStyle,
-    covr,  
-    VariantAnnotation 
+    covr 
 Config/testthat/edition: 3
 VignetteBuilder: knitr
