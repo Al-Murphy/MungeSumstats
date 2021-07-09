@@ -26,7 +26,7 @@ check_allele_flip <-
   if(sum(c("A1","A2") %in% col_headers)==2 & allele_flip_check){
     #check if rsids loaded if not do so
     if(is.null(rsids)){
-      rsids <- load_ref_genome_data(copy(sumstats_dt$SNP), ref_genome, NULL)
+      rsids <- load_ref_genome_data(data.table::copy(sumstats_dt$SNP), ref_genome, NULL)
     }
     #ensure rsids is up-to-date with filtered sumstats_dt
     rsids <- rsids[unique(sumstats_dt$SNP),,nomatch=NULL]

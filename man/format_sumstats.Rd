@@ -16,7 +16,10 @@ format_sumstats(
   on_ref_genome = TRUE,
   strand_ambig_filter = FALSE,
   allele_flip_check = TRUE,
-  bi_allelic_filter = TRUE
+  bi_allelic_filter = TRUE,
+  nThread = 1,
+  save_path = paste0(tempfile(), ".tsv.gz"),
+  return_data = FALSE
 )
 }
 \arguments{
@@ -28,21 +31,27 @@ format_sumstats(
 
 \item{convert_n_int}{Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE.}
 
-\item{analysis_trait}{If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL}
+\item{analysis_trait}{If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL.}
 
-\item{INFO_filter}{numeric The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9}
+\item{INFO_filter}{numeric The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9.}
 
 \item{N_std}{numeric The number of standard deviations above the mean a SNP's N is needed to be removed. Default is 5.}
 
 \item{rmv_chr}{vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary. Default is X, Y and mitochondrial.}
 
-\item{on_ref_genome}{Binary Should a check take place that all SNPs are on the reference genome by SNP ID. Default is TRUE}
+\item{on_ref_genome}{Binary Should a check take place that all SNPs are on the reference genome by SNP ID. Default is TRUE.}
 
-\item{strand_ambig_filter}{Binary Should SNPs with strand-ambiguous alleles be removed. Default is FALSE}
+\item{strand_ambig_filter}{Binary Should SNPs with strand-ambiguous alleles be removed. Default is FALSE.}
 
-\item{allele_flip_check}{Binary Should the allele columns be checked against reference genome to infer if flipping is necessary. Default is TRUE}
+\item{allele_flip_check}{Binary Should the allele columns be checked against reference genome to infer if flipping is necessary. Default is TRUE.}
 
-\item{bi_allelic_filter}{Binary Should non-biallelic SNPs be removed. Default is TRUE}
+\item{bi_allelic_filter}{Binary Should non-biallelic SNPs be removed. Default is TRUE.}
+
+\item{nThread}{Number of threads to use for parallel processes.}
+
+\item{save_path}{File path to save formatted data. Defaults to \code{paste0(tempfile(),".tsv.gz")}.}
+
+\item{return_data}{Return \code{data.table} directly to user. Otherwise, return the path to the save data. Default is FALSE.}
 }
 \value{
 The address for the modified sumstats file
@@ -59,13 +68,15 @@ package="MungeSumstats")
 ## which is more than what 32-bit Windows can handle so remove certain checks
 is_32bit_windows <- .Platform$OS.type == "windows" && .Platform$r_arch == "i386"
 if (!is_32bit_windows) {
-reformatted <- MungeSumstats::format_sumstats(eduAttainOkbayPth,
-ref_genome="GRCh37")
+reformatted <- MungeSumstats::format_sumstats(path=eduAttainOkbayPth,
+                                              ref_genome="GRCh37")
 } else{
-reformatted <- MungeSumstats::format_sumstats(eduAttainOkbayPth,
-ref_genome="GRCh37",on_ref_genome = FALSE,strand_ambig_filter=FALSE,
-bi_allelic_filter=FALSE,
-allele_flip_check=FALSE)
+reformatted <- MungeSumstats::format_sumstats(path=eduAttainOkbayPth,
+                                              ref_genome="GRCh37",
+                                              on_ref_genome = FALSE,
+                                              strand_ambig_filter=FALSE,
+                                              bi_allelic_filter=FALSE,
+                                              allele_flip_check=FALSE)
 }
 #returned location has the updated summary statistics file
 }

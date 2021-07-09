@@ -1,10 +1,10 @@
 #' Ensure that tabs separate rows
 #'
-#' @param sumstats_file The summary statistics file for the GWAS
-#' @return The modified sumstats_file
+#' @param header The summary statistics file for the GWAS
+#' @return The modified header
 #' @keywords internal
-check_tab_delimited <-function(sumstats_file){
-  row_of_data <- strsplit(sumstats_file[2], "\t")[[1]]
+check_tab_delimited <-function(header){
+  row_of_data <- strsplit(header, "\t")[[1]]
   #check if readLines picked up headers as single char
   if (length(row_of_data) == 1){
     #check presence of space - space delimited
@@ -13,9 +13,9 @@ check_tab_delimited <-function(sumstats_file){
                     " instead of tabs (unusual, not proper input for MAGMA).\n",
                     "Temp file with corrected FS created and used instead.")
       message(msg)
-      sumstats_file <-
-        gsub(pattern = " ", replacement = "\t", x = sumstats_file)
-      return(sumstats_file)
+      header <-
+        gsub(pattern = " ", replacement = "\t", x = header)
+      return(header)
     }
     #check presence of comma - comma delimited
     if (length(grep(",", row_of_data))!=0){
@@ -23,12 +23,12 @@ check_tab_delimited <-function(sumstats_file){
                     " instead of tabs (unusual, not proper input for MAGMA).\n",
                       "Temp file with corrected FS created and used instead.")
       message(msg)
-      sumstats_file <-
-        gsub(pattern = ",", replacement = "\t", x = sumstats_file)
-      return(sumstats_file)
+      header <-
+        gsub(pattern = ",", replacement = "\t", x = header)
+      return(header)
     }
   }
   else{
-    return(sumstats_file)
+    return(header)
   }
 }

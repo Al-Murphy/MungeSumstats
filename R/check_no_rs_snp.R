@@ -70,7 +70,7 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome){
       #if chromosome col has chr prefix remove it
       miss_rs_chr_bp[,CHR1:=gsub("chr","",CHR1)]
       gr_snp <- 
-        GenomicRanges::makeGRangesFromDataFrame(copy(miss_rs_chr_bp),
+        GenomicRanges::makeGRangesFromDataFrame(data.table::copy(miss_rs_chr_bp),
                                                 keep.extra.columns = TRUE,
                                                 seqnames.field = "CHR1",
                                                 start.field = "BP1",

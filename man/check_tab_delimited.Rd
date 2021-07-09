@@ -4,13 +4,13 @@
 \alias{check_tab_delimited}
 \title{Ensure that tabs separate rows}
 \usage{
-check_tab_delimited(sumstats_file)
+check_tab_delimited(header)
 }
 \arguments{
-\item{sumstats_file}{The summary statistics file for the GWAS}
+\item{header}{The summary statistics file for the GWAS}
 }
 \value{
-The modified sumstats_file
+The modified header
 }
 \description{
 Ensure that tabs separate rows

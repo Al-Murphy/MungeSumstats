@@ -8,6 +8,11 @@ Authors@R:
            role = c("cre"),
            email = "alanmurph94@hotmail.com",
            comment = c(ORCID = "0000-0002-2487-8753")),
+     person(given = "Brian",
+           family = "Schilder",
+           role = c("ctd"),
+           email = "brian_schilder@alumni.brown.edu",
+           comment = c(ORCID = "0000-0001-5949-2191")),
     person(given = "Nathan",
            family = "Skene",
            role = c("aut"),
@@ -51,6 +56,7 @@ Suggests:
     testthat (>= 3.0.0),
     UpSetR,
     BiocStyle,
-    covr
+    covr,  
+    VariantAnnotation 
 Config/testthat/edition: 3
 VignetteBuilder: knitr

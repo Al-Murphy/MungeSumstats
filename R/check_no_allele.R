@@ -29,7 +29,7 @@ check_no_allele <- function(sumstats_dt, path, ref_genome, rsids){
   if(sum(c("A1","A2") %in% col_headers)<=1 & sum("SNP" %in% col_headers)==1){
     #check if rsids loaded if not do so
     if(is.null(rsids)){
-      rsids <- load_ref_genome_data(copy(sumstats_dt$SNP), ref_genome,
+      rsids <- load_ref_genome_data(data.table::copy(sumstats_dt$SNP), ref_genome,
                                       "A1 or A2 allele information")
     }
     else{

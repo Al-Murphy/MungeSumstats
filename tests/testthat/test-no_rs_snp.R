@@ -12,7 +12,7 @@ test_that("Check SNP ID formatting", {
   sumstats_dt_missing[MarkerName=="rs12987662",
                         MarkerName:=paste0(CHR,":",POS)]
   #have copy where CHR & POS not removed
-  sumstats_dt_missing2 <- copy(sumstats_dt_missing)
+  sumstats_dt_missing2 <- data.table::copy(sumstats_dt_missing)
   #Now remove CHR POS
   sumstats_dt_missing[,CHR:=NULL]
   sumstats_dt_missing[,POS:=NULL]

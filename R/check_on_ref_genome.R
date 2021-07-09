@@ -24,7 +24,7 @@ check_on_ref_genome <-
   col_headers <- names(sumstats_dt)
   if("SNP" %in% col_headers && !isFALSE(on_ref_genome)){
     if(is.null(rsids)){
-      rsids <- load_ref_genome_data(copy(sumstats_dt$SNP), ref_genome)
+      rsids <- load_ref_genome_data(data.table::copy(sumstats_dt$SNP), ref_genome)
     }
     #ensure rsids is up-to-date with filtered sumstats_dt
     rsids <- rsids[unique(sumstats_dt$SNP),,nomatch=NULL]

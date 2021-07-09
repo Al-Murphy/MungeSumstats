@@ -2,19 +2,17 @@
 % Please edit documentation in R/check_vcf.R
 \name{check_vcf}
 \alias{check_vcf}
-\title{Check if the inputted file is in VCF format, if so reformat as standard}
+\title{Check if the inputted file is in VCF format}
 \usage{
-check_vcf(sumstats_file, path)
+check_vcf(header)
 }
 \arguments{
-\item{sumstats_file}{The summary statistics file for the GWAS}
-
-\item{path}{Filepath for the summary statistics file to be formatted}
+\item{header}{Header of the GWAS summary statistics file.}
 }
 \value{
-The modified sumstats_file
+Whether the file is vcf or not
 }
 \description{
-Check if the inputted file is in VCF format, if so reformat as standard
+Check if the inputted file is in VCF format
 }
 \keyword{internal}

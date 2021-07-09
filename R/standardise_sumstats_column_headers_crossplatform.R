@@ -20,6 +20,7 @@ standardise_sumstats_column_headers_crossplatform <-
   column_headers <- names(sumstats_dt)
   #load synonym mapping - internal data no loading
   #Go through each and get correct spelling
+  sumstatsColHeaders <- MungeSumstats:::sumstatsColHeaders
   for (headerI in seq_len(nrow(sumstatsColHeaders))) {
     un <- sumstatsColHeaders[headerI, 1]
     cr <- sumstatsColHeaders[headerI, 2]

@@ -23,7 +23,7 @@ check_bi_allelic <-
     col_headers <- names(sumstats_dt)
     if("SNP" %in% col_headers && !isFALSE(bi_allelic_filter)){
       if(is.null(rsids)){
-        rsids <- load_ref_genome_data(copy(sumstats_dt$SNP), ref_genome)
+        rsids <- load_ref_genome_data(data.table::copy(sumstats_dt$SNP), ref_genome)
       }
       #get chars for SNPs not bi/tri allelic or strand ambig from IUPAC_CODE_MAP
       nonambig_IUPAC_CODE_MAP <- 

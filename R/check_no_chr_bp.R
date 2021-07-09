@@ -30,7 +30,7 @@ check_no_chr_bp <- function(sumstats_dt, path, ref_genome,rsids){
     }
     #check if rsids loaded if not do so
     if(is.null(rsids)){
-      rsids <- load_ref_genome_data(copy(sumstats_dt$SNP), ref_genome,
+      rsids <- load_ref_genome_data(data.table::copy(sumstats_dt$SNP), ref_genome,
                                       "Chromosome or Base Pair Position")
     }
     else{
