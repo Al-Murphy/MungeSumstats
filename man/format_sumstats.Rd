@@ -17,8 +17,10 @@ format_sumstats(
   strand_ambig_filter = FALSE,
   allele_flip_check = TRUE,
   bi_allelic_filter = TRUE,
+  sort_coordinates = TRUE,
   nThread = 1,
   save_path = paste0(tempfile(), ".tsv.gz"),
+  write_vcf = FALSE,
   return_data = FALSE
 )
 }
@@ -51,7 +53,11 @@ format_sumstats(
 
 \item{save_path}{File path to save formatted data. Defaults to \code{paste0(tempfile(),".tsv.gz")}.}
 
+\item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
+
 \item{return_data}{Return \code{data.table} directly to user. Otherwise, return the path to the save data. Default is FALSE.}
+
+\item{sort_coords}{Whether to sort by coordinates.}
 }
 \value{
 The address for the modified sumstats file
@@ -61,11 +67,13 @@ Check that summary statistics from GWAS are in a homogeneous format
 }
 \examples{
 #Pass path to Educational Attainment Okbay sumstat file to a temp directory
-eduAttainOkbayPth <- system.file("extdata","eduAttainOkbay.txt",
-package="MungeSumstats")
-#pass path to format_sumstats
+
+eduAttainOkbayPth <- system.file("extdata","eduAttainOkbay.txt", 
+                                 package="MungeSumstats")
+
 ## Call uses reference genome as default with more than 2GB of memory,
 ## which is more than what 32-bit Windows can handle so remove certain checks
+
 is_32bit_windows <- .Platform$OS.type == "windows" && .Platform$r_arch == "i386"
 if (!is_32bit_windows) {
 reformatted <- MungeSumstats::format_sumstats(path=eduAttainOkbayPth,

@@ -4,7 +4,7 @@
 \alias{read_header}
 \title{Read in file header}
 \usage{
-read_header(path, n = 1)
+read_header(path, n = 2)
 }
 \arguments{
 \item{path}{Filepath for the summary statistics file to be formatted}

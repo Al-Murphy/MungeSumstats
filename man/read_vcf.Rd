@@ -4,12 +4,24 @@
 \alias{read_vcf}
 \title{Read in VCF format}
 \usage{
-read_vcf(path, nThread = 1)
+read_vcf(
+  path,
+  nThread = 1,
+  temp_save = FALSE,
+  keep_extra_cols = FALSE,
+  save_path = tempfile()
+)
 }
 \arguments{
 \item{path}{Filepath for the summary statistics file to be formatted}
 
 \item{nThread}{Number of threads to use for parallel processes.}
+
+\item{temp_save}{Save temprorary file before proceeding,}
+
+\item{keep_extra_cols}{Keep non-standard columns.}
+
+\item{save_path}{File path to save formatted data. Defaults to \code{paste0(tempfile(),".tsv.gz")}.}
 }
 \value{
 The modified sumstats_file

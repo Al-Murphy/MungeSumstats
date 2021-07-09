@@ -35,12 +35,14 @@ read_vcf <- function(path,
     sumstats_file <- sumstats_file %>% dplyr::rename(CHROM="#CHROM")
     
     if(is.null(sample_id)){
-        #### Infer sample ID from data colnames
+        #### Infer sample ID from data colnames if necessary #### 
         idcol_index <- grep("FORMAT",colnames(sumstats_file),ignore.case = TRUE)
         if(any(length(colnames(sumstats_file))>=idcol_index)){
             sample_id <- colnames(sumstats_file)[seq(idcol_index[1]+1,length(colnames(sumstats_file)))] 
+            message("sample ID(s) inferred from data colnames: ",paste(sample_id,collapse = ", "))
+        } else {
+            stop("Sample ID(s) could not be extracted from VCF header or inferred from data colnames.")
         }
-        message("sample ID(s) inferred from data colnames: ",paste(sample_id,collapse = ", "))
     }
     
     ## Get format of FORMAT col for parsing
