@@ -41,6 +41,7 @@
 #' @param save_path File path to save formatted data. Defaults to \code{paste0(tempfile(),".tsv.gz")}.
 #' @param write_vcf Whether to write as VCF (TRUE) or tabular file (FALSE). 
 #' @param return_data Return \code{data.table} directly to user. Otherwise, return the path to the save data. Default is FALSE.
+#' @inheritParams convert_sumstats 
 #' @importFrom data.table fread
 #' @importFrom data.table fwrite
 #' @importFrom data.table setcolorder

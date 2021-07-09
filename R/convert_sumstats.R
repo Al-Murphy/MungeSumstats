@@ -1,7 +1,9 @@
 #' Convert sumstats to desired object type
 #'
 #' @inheritParams format_sumstats
-#' @param return_format Object type to convert to 
+#' @param return_format Object type to convert to;
+#'  \code{"data.table"}, \code{"GenomicRanges"} or 
+#'  \code{"VRanges"}(default is \code{"data.table"}).
 #' @keywords internal 
 convert_sumstats <- function(sumstats_dt,
                              return_format=c("data.table","vranges","granges")){

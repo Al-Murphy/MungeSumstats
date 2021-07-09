@@ -58,6 +58,10 @@ format_sumstats(
 
 \item{return_data}{Return \code{data.table} directly to user. Otherwise, return the path to the save data. Default is FALSE.}
 
+\item{return_format}{Object type to convert to;
+\code{"data.table"}, \code{"GenomicRanges"} or
+\code{"VRanges"}(default is \code{"data.table"}).}
+
 \item{sort_coords}{Whether to sort by coordinates.}
 }
 \value{

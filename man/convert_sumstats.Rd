@@ -10,7 +10,9 @@ convert_sumstats(
 )
 }
 \arguments{
-\item{return_format}{Object type to convert to}
+\item{return_format}{Object type to convert to;
+\code{"data.table"}, \code{"GenomicRanges"} or
+\code{"VRanges"}(default is \code{"data.table"}).}
 }
 \description{
 Convert sumstats to desired object type
