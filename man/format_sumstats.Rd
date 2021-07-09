@@ -21,7 +21,8 @@ format_sumstats(
   nThread = 1,
   save_path = paste0(tempfile(), ".tsv.gz"),
   write_vcf = FALSE,
-  return_data = FALSE
+  return_data = FALSE,
+  return_format = "data.table"
 )
 }
 \arguments{

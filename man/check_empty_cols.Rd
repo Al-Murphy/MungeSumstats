@@ -7,7 +7,8 @@
 check_empty_cols(sumstats_file, sampled_rows = 1000)
 }
 \arguments{
-\item{sampled_rows}{First N rows to sample
+\item{sampled_rows}{First N rows to sample.
+Set \code{NULL} to use full \code{sumstats_file}.
 when determining whether cols are empty.}
 }
 \value{

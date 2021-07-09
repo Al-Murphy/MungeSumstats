@@ -9,7 +9,7 @@ to_GRanges <- function(sumstats_dt){
     gr <- GenomicRanges::makeGRangesFromDataFrame(sumstats_dt, 
                                                   keep.extra.columns = TRUE, 
                                                   seqnames.field = "CHR", 
-                                                  start.field = "POS", 
-                                                  end.field = "POS")
+                                                  start.field = "BP", 
+                                                  end.field = "BP")
     return(gr)
 }

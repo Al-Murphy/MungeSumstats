@@ -2,7 +2,8 @@
 #'
 #' Empty columns contain only ".", NA, or 0
 #' @inheritParams format_sumstats 
-#' @param sampled_rows First N rows to sample 
+#' @param sampled_rows First N rows to sample. 
+#' Set \code{NULL} to use full \code{sumstats_file}.
 #' when determining whether cols are empty. 
 #' @return empty_cols
 #' @keywords internal 

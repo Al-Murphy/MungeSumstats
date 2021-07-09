@@ -34,8 +34,8 @@ read_vcf <- function(path,
     sumstats_file <- data.table::fread(path, nThread = nThread, sep="\t", skip = "#CHR") 
     sumstats_file <- sumstats_file %>% dplyr::rename(CHROM="#CHROM")
     
+    #### Infer sample ID from data colnames if necessary #### 
     if(is.null(sample_id)){
-        #### Infer sample ID from data colnames if necessary #### 
         idcol_index <- grep("FORMAT",colnames(sumstats_file),ignore.case = TRUE)
         if(any(length(colnames(sumstats_file))>=idcol_index)){
             sample_id <- colnames(sumstats_file)[seq(idcol_index[1]+1,length(colnames(sumstats_file)))] 

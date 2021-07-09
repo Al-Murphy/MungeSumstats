@@ -61,9 +61,10 @@ format_sumstats <- function(path,
                             bi_allelic_filter=TRUE,
                             sort_coordinates=TRUE,
                             nThread=1,
-                            save_path=paste0(tempfile(),".tsv.gz"),
+                            save_path=paste0(tempfile(),".tsv.gz"), 
                             write_vcf=FALSE,
-                            return_data=FALSE
+                            return_data=FALSE,
+                            return_format="data.table"
                             ){ 
   #### Check 1: Ensure save_path is correct.   #### 
   check_save_out <- check_save_path(save_path = save_path)
@@ -250,7 +251,7 @@ format_sumstats <- function(path,
   sumstats_return$rsids <- NULL
   
   #### WRITE data.table TO PATH ####
-  write_sumstats(sumstats_dt = sumstats_dt,
+  write_sumstats(sumstats_dt = sumstats_return$sumstats_dt,
                  check_save_out = check_save_out,
                  write_vcf = write_vcf,
                  nThread = nThread)
@@ -270,8 +271,10 @@ format_sumstats <- function(path,
   message(line2_data)
   
   if(return_data){
-    message("Returning data.table directly.")
-    return(sumstats_return$sumstats_dt)
+    message("Returning data directly.")
+    out <- convert_sumstats(sumstats_dt = sumstats_return$sumstats_dt, 
+                            return_format = return_format)
+    return(out)
   } else {
     message("Returning path to saved data.")
     return(check_save_out$save_path) # Returns address of modified file
