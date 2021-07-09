@@ -39,6 +39,7 @@
 #' @param sort_coords Whether to sort by coordinates.
 #' @param nThread Number of threads to use for parallel processes. 
 #' @param save_path File path to save formatted data. Defaults to \code{paste0(tempfile(),".tsv.gz")}.
+#' @param write_vcf Whether to write as VCF (TRUE) or tabular file (FALSE). 
 #' @param return_data Return \code{data.table} directly to user. Otherwise, return the path to the save data. Default is FALSE.
 #' @importFrom data.table fread
 #' @importFrom data.table fwrite
@@ -61,8 +62,9 @@ format_sumstats <- function(path,
                             sort_coordinates=TRUE,
                             nThread=1,
                             save_path=paste0(tempfile(),".tsv.gz"),
+                            write_vcf=FALSE,
                             return_data=FALSE
-                            ){
+                            ){ 
   #### Check 1: Ensure save_path is correct.   #### 
   check_save_out <- check_save_path(save_path = save_path)
   #Avoid reloading ref genome every time, save it to this parent environment
@@ -87,8 +89,8 @@ format_sumstats <- function(path,
   
   ####  Check 2: Check input format and import ####
   sumstats_return <- list()
-  sumstats_return[["sumstats_dt"]] <- sumstats_reader(path = path, 
-                                                      nThread = nThread)
+  sumstats_return[["sumstats_dt"]] <- read_sumstats(path = path, 
+                                                    nThread = nThread)
   
   #### Check 3:Standardise headers for all OS ####
   sumstats_return <-
@@ -248,14 +250,14 @@ format_sumstats <- function(path,
   sumstats_return$rsids <- NULL
   
   #### WRITE data.table TO PATH ####
-  data.table::fwrite(sumstats_return$sumstats_dt,
-                     file=check_save_out$save_path,
-                     sep=check_save_out$sep, 
-                     nThread = nThread) 
+  write_sumstats(sumstats_dt = sumstats_dt,
+                 check_save_out = check_save_out,
+                 write_vcf = write_vcf,
+                 nThread = nThread)
   rm(rsids)#free up memory
   
   #### read in the first few lines to preview ####
-  preview <- readLines(check_save_out$save_path, 5L)
+  preview <- readLines(con = check_save_out$save_path, n = 5L)
   # Show how the data now looks
   message("Succesfully finished preparing sumstats file, preview:")
   sep <- check_save_out$sep

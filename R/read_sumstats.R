@@ -2,7 +2,7 @@
 #'
 #' @inheritParams format_sumstats
 #' @keywords internal 
-sumstats_reader <- function(path,   
+read_sumstats <- function(path,   
                             nThread=1){
     header <- read_header(path = path)
     is_vcf <- check_vcf(header = header)  

@@ -1,36 +1,61 @@
 #' Read in VCF format
 #'
 #' @inheritParams format_sumstats
+#' @param temp_save Save temprorary file before proceeding,
+#' @param keep_extra_cols Keep non-standard columns.
 #' @return The modified sumstats_file
 #' @keywords internal
 #' @importFrom data.table fread
 #' @importFrom data.table fwrite
 #' @importFrom data.table tstrsplit
 #' @importFrom data.table :=
+#' @importFrom dplyr %>% rename 
 read_vcf <- function(path, 
-                     nThread=1){ 
-    sumstats_file <- data.table::fread(path, nThread = nThread)
-    #First get the name of data column, held in the ##SAMPLE row
-    sample_id <- sumstats_file[grepl("^##SAMPLE",sumstats_file)]#gets ##SAMPLE
-    sample_id <- gsub(",.*$", "", sample_id)#get rid of everything after ID
-    sample_id <- substr(sample_id,10,nchar(sample_id))# get rid of ##SAMPLE=
-    sample_id <- sub('.+=(.+)', '\\1', sample_id)# remove things before equals
-    #Now remove all lines starting with ## to leave just the data rows
-    sumstats_file <- sumstats_file[!grepl("^##",sumstats_file)]
-    #Remove # at start of header line
-    sumstats_file[1] <- gsub("^#","",sumstats_file[1])
-    #Now write the data to the path and read in as DT
-    writeLines(sumstats_file, con=path)
-    sumstats_file <- data.table::fread(path)
-    #Get format column values too
-    format <- sumstats_file$FORMAT[1]#assume format same for all rows except 
-    #where INFO="." then can be missing AF**
-    #Remove unnecessary cols - need sample_id and FORMAT column
-    colsToRemove <-
-        names(sumstats_file)[!names(sumstats_file) %in% c("CHROM","POS","ID",
-                                                          "REF","ALT","INFO",
-                                                          sample_id)]
-    sumstats_file[,(colsToRemove):=NULL]
+                     nThread=1, 
+                     temp_save=FALSE,
+                     keep_extra_cols=FALSE, 
+                     save_path=tempfile()){ 
+    ########## OTHER VCF READERS/WRITERS ###########
+    # 1. [vcfR](https://cran.r-project.org/web/packages/vcfR/vcfR.pdf)
+    # 2. [VariantAnnotation](https://bioconductor.org/packages/release/bioc/html/VariantAnnotation.html)
+    # 3. [seqminer](https://cran.r-project.org/web/packages/seqminer/index.html) 
+    # 4. [Rsamtools](https://bioconductor.org/packages/release/bioc/html/Rsamtools.html) 
+    ##################################
+    
+    # path <- "~/Desktop/ewce/MAGMA_Celltyping/ieu-b-2.vcf.gz" ### Directly from Open GWAS
+    # path <- "Test.vcf.gz" ### Exported with VariantAnnotation
+    
+    message("Reading VCF file.")  
+    # fileformat <- gsub("^##fileformat=","",header[1])
+    # #First get the name of data column, held in the ##SAMPLE row 
+    sample_id <- get_vcf_sample_ids(path = path) 
+    
+    #### Read in full data ####
+    sumstats_file <- data.table::fread(path, nThread = nThread, sep="\t", skip = "#CHR") 
+    sumstats_file <- sumstats_file %>% dplyr::rename(CHROM="#CHROM")
+    
+    if(is.null(sample_id)){
+        #### Infer sample ID from data colnames
+        idcol_index <- grep("FORMAT",colnames(sumstats_file),ignore.case = TRUE)
+        if(any(length(colnames(sumstats_file))>=idcol_index)){
+            sample_id <- colnames(sumstats_file)[seq(idcol_index[1]+1,length(colnames(sumstats_file)))] 
+        }
+        message("sample ID(s) inferred from data colnames: ",paste(sample_id,collapse = ", "))
+    }
+    
+    ## Get format of FORMAT col for parsing
+    format <- sumstats_file$FORMAT[1]
+    format_cols <- stringr::str_split(format, ":")[[1]]
+    
+    # where INFO="." then can be missing AF**
+    # Remove unnecessary cols - need sample_id and FORMAT column
+    keep_cols <- c("CHROM","POS","ID", "REF","ALT","INFO", sample_id)
+    colsToRemove <- names(sumstats_file)[!names(sumstats_file) %in% keep_cols]
+    if(!is.null(colsToRemove) && keep_extra_cols==FALSE){
+        message("Removing non-standard columns: ", paste(colsToRemove, collapse = ", "))
+        sumstats_file[,(colsToRemove):=NULL]
+    }
+     
     #sample_id and FORMAT col will look like:
     #               FORMAT                                           IEU-a-2
     #1: ES:SE:LP:AF:SS:ID  -0.0067:0.0145:0.193006:0.9322:109823:rs12565286
@@ -46,15 +71,18 @@ read_vcf <- function(path,
     #>    NC A      Number of cases used to estimate genetic effect
     #>    ID 1      Study variant identifier
     #
+    
     #if sample_id col present, split it out into separate columns
+    message("Parsing '",sample_id,"' data column.")
     if(length(sample_id)!=0){
         #split out format into separate values
-        format <- strsplit(format,":")[[1]]
+        # format <- strsplit(format,":")[[1]]
         #First, there is an issue where INFO=".", AF from FORMAT is missing
         #Need to impute 0 for these values
         #See dataset for example of this: 
-        #http://fileserve.mrcieu.ac.uk/vcf/IEU-a-2.vcf.gz
-        if("AF" %in% format && "INFO" %in% names(sumstats_file) && 
+        #http://fileserve.mrcieu.ac.uk/vcf/IEU-a-2.vcf.gz 
+        if("AF" %in% format && 
+           "INFO" %in% names(sumstats_file) && 
            nrow(sumstats_file[INFO=="."])>0){
             #get positions of ":" separators for each SNP
             find_splits <- gregexpr(":", sumstats_file[,get(sample_id)])
@@ -92,7 +120,9 @@ read_vcf <- function(path,
                 }
             }  
         }  
-        sumstats_file[, (format) :=
+    
+        
+        sumstats_file[, (format_cols) :=
                           data.table::tstrsplit(get(sample_id),
                                                 split=":", fixed=TRUE)]
         #Now remove sample_id column
@@ -103,14 +133,35 @@ read_vcf <- function(path,
     #EZ to Z
     #NC to N_CAS
     #SS to N
-    #ES ro BETA* -need confirmation
+    #ES ro BETA* -need confirmation 
     
-    #Need to convert P-value, currently -log10
+    #### Check for empty columns #### 
+    empty_cols <- check_empty_cols(sumstats_file = sumstats_file, 
+                                   sampled_rows=1000)
+
+    
+    if("MarkerName" %in% colnames(sumstats_file)){ 
+        if("ID" %in% empty_cols){
+            message("Replacing empty ID col with MarkerName col.")
+            sumstats_file$ID <- sumstats_file$MarkerName
+            sumstats_file[,("MarkerName"):=NULL]
+        }
+    }
+    
+    #Need to convert P-value, currently -log10 
+    if("Pval" %in% colnames(sumstats_file)){
+        sumstats_file <- sumstats_file %>% dplyr::rename(P=Pval)
+    } 
     if("LP" %in% names(sumstats_file)){
-        msg <- paste0("Inputted VCF format has -log10 P-values, these will be ",
-                      "converted to unadjusted p-values in the 'P' column.")
-        message(msg)
-        sumstats_file[,P:=10^(-1*as.numeric(LP))]
+        
+        if("LP" %in% empty_cols){
+            message("LP column is empty. Cannot compute raw p-values.")
+        } else {
+            msg <- paste0("Inputted VCF format has -log10 P-values, these will be ",
+                          "converted to unadjusted p-values in the 'P' column.")
+            message(msg)
+            sumstats_file[,P:=10^(-1*as.numeric(LP))]
+        }
     }
     
     #Need to remove "AF=" at start of INFO column and replace any "." with 0
@@ -120,13 +171,23 @@ read_vcf <- function(path,
         #update to numeric
         sumstats_file[,INFO:=as.numeric(INFO)]
     }
+    if("INFO" %in% empty_cols){
+        message("WARNING: All INFO scores are empty. Replacing all with 1.")
+        sumstats_file$INFO <- 1
+    }
     
     #VCF format has dups of each row, get unique
     sumstats_file <- unique(sumstats_file)
     
-    #write new data
-    data.table::fwrite(sumstats_file,file=path,sep="\t")
-    sumstats_file <- readLines(path)
-    
+    # #write new data
+    if(temp_save){
+        message("Storing intermediate file before proceeding ==> ",path)
+        data.table::fwrite(x = sumstats_file,
+                           file = save_path,
+                           nThread = nThread,
+                           sep="\t") 
+    } 
     return(sumstats_file)
 }
+
+ 
