@@ -39,6 +39,8 @@ Imports:
 biocViews: 
     SNP, WholeGenome, Genetics, ComparativeGenomics, 
     GenomeWideAssociation, GenomicVariation, Preprocessing
+Remotes: 
+  github::MRCIEU/ieugwasr 
 RoxygenNote: 7.1.1
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -58,6 +60,7 @@ Suggests:
     testthat (>= 3.0.0),
     UpSetR,
     BiocStyle,
-    covr 
+    covr,
+    ieugwasr 
 Config/testthat/edition: 3
 VignetteBuilder: knitr

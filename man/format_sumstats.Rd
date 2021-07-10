@@ -50,6 +50,8 @@ format_sumstats(
 
 \item{bi_allelic_filter}{Binary Should non-biallelic SNPs be removed. Default is TRUE.}
 
+\item{sort_coordinates}{Whether to sort by coordinates.}
+
 \item{nThread}{Number of threads to use for parallel processes.}
 
 \item{save_path}{File path to save formatted data. Defaults to \code{paste0(tempfile(),".tsv.gz")}.}
@@ -61,8 +63,6 @@ format_sumstats(
 \item{return_format}{Object type to convert to;
 \code{"data.table"}, \code{"GenomicRanges"} or
 \code{"VRanges"}(default is \code{"data.table"}).}
-
-\item{sort_coords}{Whether to sort by coordinates.}
 }
 \value{
 The address for the modified sumstats file

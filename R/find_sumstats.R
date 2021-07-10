@@ -1,0 +1,96 @@
+#' Search Open GWAS for datasets matching criteria 
+#' 
+#' 
+#' For each  argument, searches for any datasets matching 
+#' a case-insensitive substring search in the respective metadata column. 
+#' Users can supply a single character string or a list/vector of character strings. 
+#' 
+#' By default, returns metadata for all studies currently in Open GWAS database.
+#' 
+#' @param ids List of Open GWAS study IDs (e.g. \code{c("prot-a-664", "ieu-b-4760")}).
+#' @param traits List of traits (e.g. \code{c("parkinson", "Alzheimer")}).
+#' @param years List of years (e.g. \code{seq(2015,2021)} or \code{c(2010, 2012, 2021)}).
+#' @param consortia List of consortia (e.g. \code{c("MRC-IEU","Neale Lab")}.
+#' @param authors List of authors (e.g. \code{c("Elsworth","Kunkle","Neale")}).
+#' @param categories List of categories (e.g. \code{c("Binary","Continuous","Disease","Risk factor"))}).
+#' @param subcategories List of categories (e.g. \code{c("neurological","Immune","cardio"))}).
+#' @param builds List of genome builds (e.g. \code{c("hg19","grch37")}).
+#' @param pmids List of PubMed ID (exact matches only) (e.g. \code{c(29875488, 30305740, 28240269)}).
+#' @param min_sample_size Minimum total number of study participants (e.g. \code{5000}).
+#' @param min_ncase Minimum number of case participants (e.g. \code{1000}).
+#' @param min_ncontrol Minimum number of control participants (e.g. \code{1000}).
+#' @inheritParams ieugwasr::check_access_token
+#' 
+#' @examples
+#' ### By ID
+#' metagwas <- MungeSumstats::search_sumstats(ids=c("ieu-b-4760","prot-a-1725","prot-a-664" ))
+#' ### By ID amd sample size
+#' metagwas <- MungeSumstats::search_sumstats(ids=c("ieu-b-4760","prot-a-1725","prot-a-664"),
+#'                                            min_sample_size=5000)
+#' 
+#' ### By criteria
+#' metagwas <- MungeSumstats::search_sumstats(traits=c("alzheimer","parkinson"),
+#'                                            years = seq(2015,2021))
+#' Returns corrected \code{save_path}, the file type, and the separator.
+#' @inheritParams format_sumstats
+#' @export
+#' @importFrom ieugwasr gwasinfo
+#' @importFrom ieugwasr check_access_token
+find_sumstats <- function(ids=NULL,
+                          traits=NULL, 
+                          years=NULL,
+                          consortia=NULL,
+                          authors=NULL,
+                          populations=NULL,
+                          categories=NULL,
+                          subcategories=NULL,
+                          builds=NULL,
+                          pmids=NULL,
+                          min_sample_size=NULL,
+                          min_ncase=NULL,
+                          min_ncontrol=NULL,
+                          include_NAs=FALSE,
+                          access_token = ieugwasr::check_access_token()){
+    message("Collecting metadata from Open GWAS.")
+    if(!is.null(ids)) {
+        # ids <- c("ieu-b-4760","prot-a-1725","prot-a-664" )
+        metagwas <- ieugwasr::gwasinfo(id = ids, 
+                                       access_token = access_token)    
+    }else {
+        metagwas <- ieugwasr::gwasinfo() 
+    }
+    message("Filtering metadata by substring criteria.") 
+    if(!is.null(traits)) metagwas <- metagwas[grepl(paste(traits, collapse = "|"), metagwas$trait, ignore.case = TRUE),]
+    if(!is.null(years)) metagwas <- metagwas[grepl(paste(years, collapse = "|"), metagwas$year, ignore.case = TRUE),]
+    if(!is.null(consortia)) metagwas <- metagwas[grepl(paste(consortia, collapse = "|"), metagwas$consortium, ignore.case = TRUE),]
+    if(!is.null(authors)) metagwas <- metagwas[grepl(paste(authors, collapse = "|"), metagwas$author, ignore.case = TRUE),]
+    if(!is.null(populations)) metagwas <- metagwas[grepl(paste(populations, collapse = "|"), metagwas$population, ignore.case = TRUE),]
+    if(!is.null(categories)) metagwas <- metagwas[grepl(paste(categories, collapse = "|"), metagwas$category, ignore.case = TRUE),] 
+    if(!is.null(subcategories)) metagwas <- metagwas[grepl(paste(subcategories, collapse = "|"), metagwas$subcategory, ignore.case = TRUE),] 
+    if(!is.null(builds)) metagwas <- metagwas[grepl(paste(builds, collapse = "|"), metagwas$build, ignore.case = TRUE),] 
+    if(!is.null(pmids)) metagwas <- metagwas[metagwas$pmid %in% pmids,] 
+    
+    if(any(!is.null(min_sample_size), !is.null(min_ncase), !is.null(min_ncontrol))){
+        message("Filtering metadata by sample/case/control size criteria.")
+        if(include_NAs){
+            message("Including sample/case/control size with NAs.")
+            if(!is.null(min_sample_size)) metagwas <- subset(metagwas, sample_size>=min_sample_size | is.na(sample_size) | sample_size=="NA")
+            if(!is.null(min_ncase)) metagwas <- subset(metagwas, ncase>=min_ncase | is.na(ncase) | ncase=="NA")
+            if(!is.null(min_ncontrol)) metagwas <- subset(metagwas, ncontrol>=min_ncontrol | is.na(ncontrol) | ncontrol=="NA") 
+        }else {
+            message("Excluding sample/case/control size with NAs.")
+            if(!is.null(min_sample_size)) metagwas <- subset(metagwas, sample_size>=min_sample_size)
+            if(!is.null(min_ncase)) metagwas <- subset(metagwas, ncase>=min_ncase)
+            if(!is.null(min_ncontrol)) metagwas <- subset(metagwas, ncontrol>=min_ncontrol) 
+        } 
+    } 
+    message("Found ",formatC(nrow(metagwas),big.mark = ",")," studies matching search criteria across:",
+            "\n   - ",formatC(length(unique(metagwas$trait)),big.mark = ",")," traits",
+            "\n   - ",formatC(length(unique(metagwas$population)),big.mark = ",")," populations",
+            "\n   - ",formatC(length(unique(metagwas$category)),big.mark = ",")," categories",
+            "\n   - ",formatC(length(unique(metagwas$subcategory)),big.mark = ",")," subcategories",
+            "\n   - ",formatC(length(unique(metagwas$pmid)),big.mark = ",")," publications",
+            "\n   - ",formatC(length(unique(metagwas$consortium)),big.mark = ",")," consortia",
+            "\n   - ",formatC(length(unique(metagwas$build)),big.mark = ",")," genome build(s)")
+    return(metagwas)
+}

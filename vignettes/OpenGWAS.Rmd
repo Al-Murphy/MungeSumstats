@@ -1,0 +1,132 @@
+---
+title: "OpenGWAS"
+author: "Brian M. Schilder"
+date: "08/07/2021"
+output: html_document
+---
+
+```{r setup, include=T, message=F}
+knitr::opts_chunk$set(echo = T, root.dir=here::here())
+knitr::opts_knit$set(root.dir=here::here())
+
+# devtools::install_github("mrcieu/gwasglue") 
+# remotes::install_github("jrs95/gassocplot") 
+
+# BiocManager::install("MungeSumstats")
+# BiocManager::install("SNPlocs.Hsapiens.dbSNP144.GRCh37")
+# BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")
+
+suppressPackageStartupMessages(suppressWarnings({
+    library(gwasglue)
+    library(dplyr)
+    library(gassocplot)
+    library(coloc)
+    
+    library(MungeSumstats)
+})) 
+```
+
+
+Query and import data from the MRC IEU [Open GWAS Project](https://gwas.mrcieu.ac.uk/).
+
+# Import data 
+
+[ieugwasr](https://mrcieu.github.io/ieugwasr/articles/guide.html) gives you programmatic access to 40k+ GWAS summary stats. 
+
+[Kunkle2019 AD GWAS](https://gwas.mrcieu.ac.uk/datasets/ieu-b-2/) 
+
+[LAVA](https://ctg.cncr.nl/software/lava) 
+
+```{r}
+
+metagwas <- search_sumstats(traits=c("alzheimer","parkinson"),
+                            years = seq(2015,2021))
+
+
+
+meta_sub <- meta[grepl("alzheimer",meta$trait, ignore.case = T),] %>%
+    dplyr::arrange(desc(ncase), desc(year))
+
+top <- ieugwasr::tophits(id = meta_sub$id) %>%
+    dplyr::arrange(p)
+
+top_top <- top %>%
+    dplyr::group_by(id, trait) %>%
+    dplyr::summarise(top_snps=n()) %>%
+    dplyr::arrange(desc(top_snps))
+top_top
+
+
+### Query specific variants from specific GWAS
+# query <- ieugwasr::associations(variants = top$rsid, id = top$id)
+# ancestry <- ieugwasr::infer_ancestry(d = query)
+
+
+a <- mygene::getGene("1017", fields="genomic_pos_hg19")
+r <- paste0(a[[1]]$genomic_pos_hg19$chr, ":", 
+            a[[1]]$genomic_pos_hg19$start, "-",
+            a[[1]]$genomic_pos_hg19$end)
+b <- ieugwasr::associations(r, meta_sub$id, maf_threshold = 0)
+
+
+library(VariantAnnotation)
+id <- "ieu-b-2"
+vcf_url <- file.path("https://gwas.mrcieu.ac.uk/files",id,paste0(id,".vcf.gz"))
+save_path <- file.path(tempdir(),basename(vcf_url))
+system(paste0("axel ",vcf_url," -o ",save_path))
+system(paste0("axel ",vcf_url,".tbi -o ",save_path,".tbi"))
+
+header <- VariantAnnotation::scanVcfHeader(save_path)
+# vcf <- VariantAnnotation::scanVcf(url(vcf_url))
+vcf <- VariantAnnotation::readVcf(save_path) 
+
+col_info <- data.frame(geno(header(vcf)))
+head(rowRanges(vcf))
+if(sum(!is.na(VariantAnnotation::info(vcf)[,1]))==0){
+    message("All INFO scores are NA. Setting to 1.")
+    VariantAnnotation::info(vcf)[,1] <- 1
+    VariantAnnotation::writeVcf(vcf, filename = "ieu-b-2.vcf.gz")
+}
+
+dat <- geno(vcf)
+
+select_cols <- "ES" #c("ES","SE","LP")
+dat2 <- lapply(select_cols,  function(x){dat[[x]]}) %>%
+    `names<-`(select_cols) %>%
+    do.call(what = "cbind") %>%
+    as("sparseMatrix")  
+
+ 
+
+reformatted <- MungeSumstats::format_sumstats(path="ieu-b-2.vcf.gz",
+                                              ref_genome="GRCh37") 
+# gwas <- data.table::fread(reformatted)
+
+upstream_kb <- 35
+downstream_kb <- 10
+# tmpSumStatsPath = MAGMA.Celltyping::format_sumstats_for_magma(path=reformatted)
+genesOutPath = MAGMA.Celltyping::map.snps.to.genes(path_formatted=reformatted,
+                                                   upstream_kb = upstream_kb,
+                                                   downstream_kb = downstream_kb, 
+                                                   N = 63926,  genome_ref_path="~/Desktop/model_celltype_conservation/raw_data/MAGMA/g1000_eur/g1000_eur")
+
+magma_files_dir <- "~/Desktop/model_celltype_conservation/raw_data/MAGMA/MAGMA_Files"
+prefix <- paste0(id,".annotated.",upstream_kb,"UP.",downstream_kb,"DOWN")
+out_dir <- path.expand(file.path(magma_files_dir,prefix))
+dir.create(out_dir, showWarnings = F, recursive = T)
+file.copy("/var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmppBCUtx/MAGMA_Files/file20113e1ace84.35UP.10DOWN/file20113e1ace84.35UP.10DOWN.genes.out",
+          paste0(out_dir,"/",prefix,".genes.out"))
+file.copy("/var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmppBCUtx/MAGMA_Files/file20113e1ace84.35UP.10DOWN/file20113e1ace84.35UP.10DOWN.genes.raw",
+          paste0(out_dir,"/",prefix,".genes.raw")) 
+```
+
+# Colocalization 
+
+```{r}
+chrpos <- paste0(top$chr[1], ":", top$position[1] - 50000, "-", top$position[1] + 50000)
+out <- ieugwasr_to_coloc(id1=meta_sub$id[1], id2=meta_sub$id[2], chrompos=chrpos)
+res <- coloc::coloc.abf(out[[1]], out[[2]])
+temp <- coloc_to_gassocplot(out)
+gassocplot::stack_assoc_plot(temp$markers, temp$z, temp$corr, traits=temp$traits)
+```
+
