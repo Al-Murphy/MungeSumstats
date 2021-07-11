@@ -4,7 +4,13 @@
 \alias{write_sumstats}
 \title{Write sum stats file to disk}
 \usage{
-write_sumstats(sumstats_dt, check_save_out, write_vcf = FALSE, nThread = 1)
+write_sumstats(
+  sumstats_dt,
+  check_save_out,
+  write_vcf = FALSE,
+  tabix_index = FALSE,
+  nThread = 1
+)
 }
 \arguments{
 \item{sumstats_dt}{data table obj of the summary statistics file for the GWAS.}

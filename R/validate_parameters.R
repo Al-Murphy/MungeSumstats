@@ -19,9 +19,10 @@ validate_parameters <- function(path,ref_genome, convert_small_p,
                             N_std, rmv_chr, on_ref_genome, strand_ambig_filter,
                             allele_flip_check, bi_allelic_filter){
   # Checking if the file exists should happen first
-  if (!file.exists(path))
+  if (!file.exists(path) && !startsWith(path,"https://gwas.mrcieu.ac.uk"))
     stop("Path to GWAS sumstats is not valid")
-
+  
+  
   #Check genome build is valid option
   if(!(toupper(ref_genome) %in% c("GRCH37","GRCH38")))
     stop("The chosen genome build must be one of GRCh37 or GRCh38")

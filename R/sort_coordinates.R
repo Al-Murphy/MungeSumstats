@@ -9,7 +9,7 @@ sort_coords <- function(sumstats_dt,
     if(sort_coordinates){
         message("Sorting coordinates")
         sumstats_sorted <- sumstats_dt %>%
-            dplyr::arrange(CHR, POS)
+            dplyr::arrange(CHR, BP)
         return(sumstats_sorted)
     } else { return(sumstats_dt) }  
 }

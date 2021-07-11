@@ -4,6 +4,7 @@
 #' @return Whether the file is vcf or not
 #' @keywords internal 
 check_vcf <- function(header){
+  if(is(header,"VCFHeader")) return(TRUE)
   P = LP = INFO = NULL
   #if the file is a VCF, first line will look like: ##fileformat=VCFv4.2
   first_line <- header[[1]]

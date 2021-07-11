@@ -30,19 +30,25 @@ read_vcf <- function(path,
     sample_id <- get_vcf_sample_ids(path = path) 
     
     #### Read in full data ####
-    sumstats_file <- data.table::fread(path, nThread = nThread, sep="\t", skip = "#CHR") 
+    
+    #### If the VCF is remotely stored, data.table automatically 
+    # downloads it to a tmpdir without telling you where. This lets you know where.
+    if(startsWith(path,"https://gwas.mrcieu.ac.uk")){
+        vcf_suffixes <- supported_suffixes(tabular = FALSE, tabular_compressed = FALSE)
+        tmpdir <- file.path(tempdir(),gsub(paste(vcf_suffixes,collapse = "|"),"",basename(path)),"")
+        dir.create(tmpdir, showWarnings = FALSE, recursive = TRUE)
+        message("Downloading VCF ==> ",tmpdir) 
+    }else {
+        tmpdir <- tempdir()
+    }
+    
+    sumstats_file <- data.table::fread(path, nThread = nThread, sep="\t", skip = "#CHR", 
+                                       tmpdir = tmpdir) 
     sumstats_file <- sumstats_file %>% dplyr::rename(CHROM="#CHROM")
     
     #### Infer sample ID from data colnames if necessary #### 
-    if(is.null(sample_id)){
-        idcol_index <- grep("FORMAT",colnames(sumstats_file),ignore.case = TRUE)
-        if(any(length(colnames(sumstats_file))>=idcol_index)){
-            sample_id <- colnames(sumstats_file)[seq(idcol_index[1]+1,length(colnames(sumstats_file)))] 
-            message("sample ID(s) inferred from data colnames: ",paste(sample_id,collapse = ", "))
-        } else {
-            stop("Sample ID(s) could not be extracted from VCF header or inferred from data colnames.")
-        }
-    }
+    sample_id <- infer_vcf_sample_ids(sample_id = sample_id,
+                                      sumstats_file = sumstats_file) 
     
     ## Get format of FORMAT col for parsing
     format <- sumstats_file$FORMAT[1]
@@ -50,12 +56,9 @@ read_vcf <- function(path,
     
     # where INFO="." then can be missing AF**
     # Remove unnecessary cols - need sample_id and FORMAT column
-    keep_cols <- c("CHROM","POS","ID", "REF","ALT","INFO", sample_id)
-    colsToRemove <- names(sumstats_file)[!names(sumstats_file) %in% keep_cols]
-    if(!is.null(colsToRemove) && keep_extra_cols==FALSE){
-        message("Removing non-standard columns: ", paste(colsToRemove, collapse = ", "))
-        sumstats_file[,(colsToRemove):=NULL]
-    }
+    sumstats_file <- remove_nonstandard_vcf_cols(sample_id = sample_id,
+                                                 sumstats_file = sumstats_file,
+                                                 keep_extra_cols = keep_extra_cols)
      
     #sample_id and FORMAT col will look like:
     #               FORMAT                                           IEU-a-2
@@ -153,12 +156,11 @@ read_vcf <- function(path,
     if("Pval" %in% colnames(sumstats_file)){
         sumstats_file <- sumstats_file %>% dplyr::rename(P=Pval)
     } 
-    if("LP" %in% names(sumstats_file)){
-        
+    if("LP" %in% names(sumstats_file)){ 
         if("LP" %in% empty_cols){
             message("LP column is empty. Cannot compute raw p-values.")
         } else {
-            msg <- paste0("Inputted VCF format has -log10 P-values, these will be ",
+            msg <- paste0("VCF file has -log10 P-values, these will be ",
                           "converted to unadjusted p-values in the 'P' column.")
             message(msg)
             sumstats_file[,P:=10^(-1*as.numeric(LP))]
@@ -167,12 +169,13 @@ read_vcf <- function(path,
     
     #Need to remove "AF=" at start of INFO column and replace any "." with 0
     if("INFO" %in% names(sumstats_file)){
+        message("Formatting INFO column.")
         sumstats_file[,INFO:=gsub("^AF=","",INFO)]
         sumstats_file[INFO==".",INFO:=0]
         #update to numeric
         sumstats_file[,INFO:=as.numeric(INFO)]
     }
-    if("INFO" %in% empty_cols){
+    if("INFO" %in% names(empty_cols)){
         message("WARNING: All INFO scores are empty. Replacing all with 1.")
         sumstats_file$INFO <- 1
     }

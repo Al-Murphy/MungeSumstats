@@ -7,6 +7,7 @@
 #' @importFrom data.table tstrsplit
 #' @importFrom data.table :=
 check_allele_merge <- function(sumstats_dt, path){
+  message("Checking for merged allele column.")
   #get col headers
   col_headers <- names(sumstats_dt)
   # Obtain a row of the actual data

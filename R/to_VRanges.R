@@ -6,11 +6,7 @@
 #' @importFrom GenomicRanges makeGRangesFromDataFrame
 #' @importFrom VariantAnnotation makeVRangesFromGRanges
 to_VRanges <- function(sumstats_dt){ 
-    gr <- GenomicRanges::makeGRangesFromDataFrame(sumstats_dt, 
-                                                  keep.extra.columns = TRUE, 
-                                                  seqnames.field = "CHR", 
-                                                  start.field = "BP", 
-                                                  end.field = "BP")
+    gr <- to_GRanges(sumstats_dt)
     message("Converting summary statistics to VRanges.")
     gr$dummy <- "GWAS"
     vr <- VariantAnnotation::makeVRangesFromGRanges(gr, 

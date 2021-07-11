@@ -4,10 +4,12 @@
 \alias{check_save_path}
 \title{Check if save path is appropriate}
 \usage{
-check_save_path(save_path)
+check_save_path(save_path, write_vcf = FALSE)
 }
 \arguments{
 \item{save_path}{File path to save formatted data. Defaults to \code{paste0(tempfile(),".tsv.gz")}.}
+
+\item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
 }
 \description{
 Returns corrected \code{save_path}, the file type, and the separator.

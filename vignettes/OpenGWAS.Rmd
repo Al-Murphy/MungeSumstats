@@ -39,13 +39,8 @@ Query and import data from the MRC IEU [Open GWAS Project](https://gwas.mrcieu.a
 
 ```{r}
 
-metagwas <- search_sumstats(traits=c("alzheimer","parkinson"),
-                            years = seq(2015,2021))
-
-
-
-meta_sub <- meta[grepl("alzheimer",meta$trait, ignore.case = T),] %>%
-    dplyr::arrange(desc(ncase), desc(year))
+metagwas <- find_sumstats(traits = c("parkinson","alzheimer"), 
+                          min_sample_size = 5000)
 
 top <- ieugwasr::tophits(id = meta_sub$id) %>%
     dplyr::arrange(p)

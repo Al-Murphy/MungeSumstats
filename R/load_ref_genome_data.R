@@ -22,8 +22,12 @@ load_ref_genome_data <- function(snps, ref_genome, msg=NULL){
   } else{#=="GRCH38"
     genome <- BSgenome.Hsapiens.NCBI.GRCh38::BSgenome.Hsapiens.NCBI.GRCh38
   }
-  gr_rsids <- BSgenome::snpsById(SNP_LOC_DATA, snps, 
-                                 genome=genome,ifnotfound="drop")
+  
+
+  gr_rsids <- BSgenome::snpsById(x = SNP_LOC_DATA, 
+                                 id = snps, 
+                                 genome=genome,
+                                 ifnotfound="drop")
   rsids <- data.table::setDT(data.frame(gr_rsids))
   data.table::setnames(rsids,"RefSNP_id","SNP")
   data.table::setorder(rsids,SNP)

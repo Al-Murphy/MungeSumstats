@@ -10,12 +10,20 @@
 write_sumstats <- function(sumstats_dt,
                            check_save_out,
                            write_vcf=FALSE,
+                           tabix_index=FALSE,
                            nThread=1){
-    if(write_vcf){
-        message("Writing in VCF format ==> ",check_save_out$save_path)
-        # gr <- to_GRanges(sumstats_dt = sumstats_dt)
-        vr <- to_VRanges(sumstats_dt = sumstats_dt)
-        VariantAnnotation::writeVcf(vr, filename = check_save_out$save_path)
+    if(write_vcf){  
+        vr <- to_VRanges(sumstats_dt = sumstats_dt) 
+        if(tabix_index) {
+            suffixes <- supported_suffixes(tabular = FALSE, tabular_compressed = FALSE) 
+            message("Writing in VCF format ==> ",gsub(paste(suffixes,collapse = "|"),
+                                                      ".vcf.bgz",check_save_out$save_path))
+            message("Compressing with bgzip and indexing with tabix.")
+        } else { 
+            message("Writing in VCF format ==> ",check_save_out$save_path) 
+        }
+        VariantAnnotation::writeVcf(vr, filename = check_save_out$save_path, 
+                                    index = tabix_index)  
         
     } else {
         message("Writing in tabular format ==> ",check_save_out$save_path)

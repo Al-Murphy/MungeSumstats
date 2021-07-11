@@ -1,0 +1,60 @@
+
+
+#' Import full genome-wide GWAS summary statistics from Open GWAS  
+#' 
+#' @param ids List of Open GWAS study IDs (e.g. \code{c("prot-a-664", "ieu-b-4760")}). 
+#' @param vcf_download Download the original VCF from Open GWAS. 
+#' @param vcf_dir Where to download the original VCF from Open GWAS.
+#' @param force_new Overwrite a previously downloaded VCF with the same path name.
+#' @param ... Additional arguments to be passed to \code{MungeSumstats::format_sumstats}.
+#' @inheritParams format_sumstats
+#' 
+#' @examples 
+#' ### Search by criteria
+#' metagwas <- MungeSumstats::find_sumstats()
+#' ### Only use a subset for testing purposes                                           
+#' ids <- (dplyr::arrange(metagwas, nsnp))$id[1:2]                                     
+#' datasets <- MungeSumstats::import_sumstats(ids = ids)                                           
+#' @return Either a named list of data objects or paths, depending on the arguments passed to 
+#' @export
+#' @importFrom VariantAnnotation readVcf geno 
+import_sumstats <- function(ids, 
+                            vcf_download=FALSE,
+                            vcf_dir=tempdir(),
+                            force_new=FALSE,  
+                            ...){ 
+    # ids <- c("ieu-b-2"); id <- ids[1]
+    ids <- unique(ids)
+    message("Processing ",length(ids)," from Open GWAS.") 
+    
+    ouputs <- lapply(ids, function(id){
+        start <- Sys.time()
+        out <-  tryCatch(expr = {
+            message("\n========== Dataset : ",id," ==========\n") 
+            vcf_url <- file.path("https://gwas.mrcieu.ac.uk/files",id,paste0(id,".vcf.gz"))
+            
+            #### Optional:: download VCF ####
+            save_path <- file.path(vcf_dir,basename(vcf_url))
+            if(file.exists(save_path) & force_new==FALSE){
+                message("Using previously downlaoded VCF.") 
+                vcf_url <- save_path
+            } else { 
+                if(vcf_download){
+                    message("Downloading VCF ==> ",save_path) 
+                    download.file(vcf_url, save_path)
+                    # system(paste0("axel ",vcf_url," -o ",save_path))
+                    # system(paste0("axel ",vcf_url,".tbi -o ",save_path,".tbi"))
+                    vcf_url <- save_path 
+                } 
+            }
+            reformatted <- format_sumstats(path=vcf_url,
+                                           ...)   
+            return(reformatted)
+            
+        }, error = function(e){return(as.character(e))}) 
+        end <- Sys.time() 
+        message(id," : Done in ",round(difftime(end, start, units='mins'), 2)," minutes.")
+        return(out)
+    }) %>% `names<-`(ids)
+    return(ouputs) 
+}

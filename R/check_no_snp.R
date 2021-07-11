@@ -14,6 +14,7 @@
 #' @importFrom BSgenome snpsByOverlaps
 #' @importFrom GenomicRanges makeGRangesFromDataFrame
 check_no_snp <- function(sumstats_dt, path, ref_genome, verbose=TRUE){
+  message("Checking SNP RSIDs.")
   SNP = CHR = i.RefSNP_id = NULL
   # If CHR and BP are present BUT not SNP then need to find the relevant SNP ids
   col_headers <- names(sumstats_dt)

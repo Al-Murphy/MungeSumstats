@@ -18,6 +18,7 @@ find_sumstats(
   min_sample_size = NULL,
   min_ncase = NULL,
   min_ncontrol = NULL,
+  min_nsnp = NULL,
   include_NAs = FALSE,
   access_token = ieugwasr::check_access_token()
 )
@@ -46,6 +47,11 @@ find_sumstats(
 \item{min_ncase}{Minimum number of case participants (e.g. \code{1000}).}
 
 \item{min_ncontrol}{Minimum number of control participants (e.g. \code{1000}).}
+
+\item{min_nsnp}{Minimum number of SNPs (e.g. \code{200000}).}
+
+\item{include_NAs}{Include datasets with missing metadata for size criteria
+(i.e. \code{min_sample_size}, \code{min_ncase}, or \code{min_ncontrol}).}
 }
 \description{
 For each  argument, searches for any datasets matching
@@ -57,13 +63,12 @@ By default, returns metadata for all studies currently in Open GWAS database.
 }
 \examples{
 ### By ID
-metagwas <- MungeSumstats::search_sumstats(ids=c("ieu-b-4760","prot-a-1725","prot-a-664" ))
+metagwas <- MungeSumstats::find_sumstats(ids=c("ieu-b-4760","prot-a-1725","prot-a-664" ))
 ### By ID amd sample size
-metagwas <- MungeSumstats::search_sumstats(ids=c("ieu-b-4760","prot-a-1725","prot-a-664"),
-                                           min_sample_size=5000)
+metagwas <- MungeSumstats::find_sumstats(ids=c("ieu-b-4760","prot-a-1725","prot-a-664"),
+                                         min_sample_size=5000)
 
 ### By criteria
-metagwas <- MungeSumstats::search_sumstats(traits=c("alzheimer","parkinson"),
-                                           years = seq(2015,2021))
-Returns corrected \code{save_path}, the file type, and the separator.
+metagwas <- MungeSumstats::find_sumstats(traits=c("alzheimer","parkinson"),
+                                         years = seq(2015,2021)) 
 }

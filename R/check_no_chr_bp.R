@@ -19,6 +19,7 @@
 #' @importFrom data.table setorder
 #' @importFrom data.table copy
 check_no_chr_bp <- function(sumstats_dt, path, ref_genome,rsids){
+  message("Ensuring CHR and BP aren't missing.")
   SNP = i.seqnames = CHR = BP = i.pos = LP = P = NULL
   # If SNP present but no CHR/BP then need to find them
   col_headers <- names(sumstats_dt)

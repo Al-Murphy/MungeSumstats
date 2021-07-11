@@ -16,6 +16,6 @@ check_empty_cols <- function(sumstats_file,
         (sum(head(sumstats_file, sampled_rows)[[x]]==0)!=0)
     })
     empty_cols <- empty_cols[empty_cols]
-    # message(length(empty_cols)," empty columns detected.")
+    message(length(empty_cols)," empty columns detected.")
     return(empty_cols)
 }

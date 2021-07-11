@@ -15,6 +15,7 @@
 #' @importFrom BSgenome snpsByOverlaps
 #' @importFrom GenomicRanges makeGRangesFromDataFrame
 check_no_rs_snp <- function(sumstats_dt, path, ref_genome){
+  message("Checking SNP RSIDs.")
   # test case has X:102670736:T_TAT, chr1:60320992 and rs2326918 all in SNP col   
   SNP = CHR = CHR1 = BP1 = i.RefSNP_id = NULL
   # If SNP column doesn't start with rs

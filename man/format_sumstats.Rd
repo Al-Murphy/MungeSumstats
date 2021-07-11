@@ -21,8 +21,10 @@ format_sumstats(
   nThread = 1,
   save_path = paste0(tempfile(), ".tsv.gz"),
   write_vcf = FALSE,
+  tabix_index = FALSE,
   return_data = FALSE,
-  return_format = "data.table"
+  return_format = "data.table",
+  force_new = FALSE
 )
 }
 \arguments{
@@ -57,6 +59,8 @@ format_sumstats(
 \item{save_path}{File path to save formatted data. Defaults to \code{paste0(tempfile(),".tsv.gz")}.}
 
 \item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
+
+\item{tabix_index}{Index the formatted summary statistics with \href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
 
 \item{return_data}{Return \code{data.table} directly to user. Otherwise, return the path to the save data. Default is FALSE.}
 
