@@ -25,7 +25,7 @@ import_sumstats <- function(ids,
                             ...){ 
     # ids <- c("ieu-b-2"); id <- ids[1]
     ids <- unique(ids)
-    message("Processing ",length(ids)," from Open GWAS.") 
+    message("Processing ",length(ids)," datasets from Open GWAS.") 
     
     ouputs <- lapply(ids, function(id){
         start <- Sys.time()
@@ -51,7 +51,7 @@ import_sumstats <- function(ids,
                                            ...)   
             return(reformatted)
             
-        }, error = function(e){return(as.character(e))}) 
+        }, error = function(e){message(e);return(as.character(e))}) 
         end <- Sys.time() 
         message(id," : Done in ",round(difftime(end, start, units='mins'), 2)," minutes.")
         return(out)
