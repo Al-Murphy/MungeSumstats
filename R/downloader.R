@@ -48,7 +48,7 @@ downloader <- function(input_url,
                              # conda_env=conda_env,
                              check_certificates=check_certificates)
         } else {
-            message("+ downloader:: Axel not installed.\n",
+            message("+ downloader:: axel not installed.\n",
                     "For Mac users, please install via brew in the command line (`brew install axel`)\n",
                     "or visit https://github.com/axel-download-accelerator/axel for more details");
             message("downloader:: Defaulting to download.file")

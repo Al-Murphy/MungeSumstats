@@ -6,8 +6,8 @@
 \usage{
 import_sumstats(
   ids,
-  vcf_download = FALSE,
   vcf_dir = tempdir(),
+  vcf_download = TRUE,
   download_method = "download.file",
   quiet = TRUE,
   force_new = FALSE,
@@ -18,9 +18,9 @@ import_sumstats(
 \arguments{
 \item{ids}{List of Open GWAS study IDs (e.g. \code{c("prot-a-664", "ieu-b-4760")}).}
 
-\item{vcf_download}{Download the original VCF from Open GWAS.}
-
 \item{vcf_dir}{Where to download the original VCF from Open GWAS.}
+
+\item{vcf_download}{Download the original VCF from Open GWAS.}
 
 \item{download_method}{\code{"axel"} (multi-threaded) or \code{"download.file"} (single-threaded) .}
 
@@ -42,6 +42,10 @@ Import full genome-wide GWAS summary statistics from Open GWAS
 ### Search by criteria
 metagwas <- MungeSumstats::find_sumstats()
 ### Only use a subset for testing purposes                                           
-ids <- (dplyr::arrange(metagwas, nsnp))$id[1:2]                                     
-datasets <- MungeSumstats::import_sumstats(ids = ids)                                           
+ids <- (dplyr::arrange(metagwas, nsnp))$id[1:2]     
+datasets <- MungeSumstats::import_sumstats(ids = ids)
+                                
+#### Speed up with multi-threaded download via axel 
+# datasets <- MungeSumstats::import_sumstats(ids = ids, vcf_download=TRUE, download_method="axel", nThread=10)                                           
+
 }

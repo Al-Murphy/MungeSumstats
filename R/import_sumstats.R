@@ -14,14 +14,18 @@
 #' ### Search by criteria
 #' metagwas <- MungeSumstats::find_sumstats()
 #' ### Only use a subset for testing purposes                                           
-#' ids <- (dplyr::arrange(metagwas, nsnp))$id[1:2]                                     
-#' datasets <- MungeSumstats::import_sumstats(ids = ids)                                           
+#' ids <- (dplyr::arrange(metagwas, nsnp))$id[1:2]     
+#' datasets <- MungeSumstats::import_sumstats(ids = ids)
+#'                                 
+#' #### Speed up with multi-threaded download via axel 
+#' # datasets <- MungeSumstats::import_sumstats(ids = ids, vcf_download=TRUE, download_method="axel", nThread=10)                                           
+#' 
 #' @return Either a named list of data objects or paths, depending on the arguments passed to 
 #' @export
 #' @importFrom VariantAnnotation readVcf geno 
-import_sumstats <- function(ids, 
-                            vcf_download=FALSE,
+import_sumstats <- function(ids,  
                             vcf_dir=tempdir(),
+                            vcf_download=TRUE,
                             download_method="download.file",
                             quiet=TRUE,
                             force_new=FALSE,

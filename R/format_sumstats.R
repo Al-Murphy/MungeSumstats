@@ -278,6 +278,8 @@ format_sumstats <- function(path,
   }
   
   
+  #### Report summary ####
+  report_summary(sumstats_dt = sumstats_return$sumstats_dt)
   #### Preview sumstats ####
   preview_sumstats(save_path = check_save_out$save_path,
                    nrows = 5L)
