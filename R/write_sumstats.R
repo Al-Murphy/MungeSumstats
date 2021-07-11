@@ -12,6 +12,10 @@ write_sumstats <- function(sumstats_dt,
                            write_vcf=FALSE,
                            tabix_index=FALSE,
                            nThread=1){
+    #### Make sure the directory actually exists
+    dir.create(dirname(check_save_out$save_path), 
+               showWarnings = FALSE, recursive = TRUE)
+    
     if(write_vcf){  
         vr <- to_VRanges(sumstats_dt = sumstats_dt) 
         if(tabix_index) {

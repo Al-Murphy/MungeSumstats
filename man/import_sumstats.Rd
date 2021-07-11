@@ -8,7 +8,10 @@ import_sumstats(
   ids,
   vcf_download = FALSE,
   vcf_dir = tempdir(),
+  download_method = "download.file",
+  quiet = TRUE,
   force_new = FALSE,
+  nThread = 1,
   ...
 )
 }
@@ -19,7 +22,13 @@ import_sumstats(
 
 \item{vcf_dir}{Where to download the original VCF from Open GWAS.}
 
+\item{download_method}{\code{"axel"} (multi-threaded) or \code{"download.file"} (single-threaded) .}
+
+\item{quiet}{Run quietly.}
+
 \item{force_new}{Overwrite a previously downloaded VCF with the same path name.}
+
+\item{nThread}{Number of threads to use for parallel processes.}
 
 \item{...}{Additional arguments to be passed to \code{MungeSumstats::format_sumstats}.}
 }

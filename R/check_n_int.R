@@ -15,7 +15,7 @@ check_n_int <- function(sumstats_dt, path, convert_n_int){
       msg <- paste0("The sumstats N column is not all integers, this could ",
                       "effect downstream analysis.")
       if (convert_n_int) { #if user wants to correct
-        msg2 <- paste0(msg,"These will be converted to integers.")
+        msg2 <- paste0(msg," These will be converted to integers.")
         message(msg2)
         sumstats_dt[,N:=round(N,0)]
 

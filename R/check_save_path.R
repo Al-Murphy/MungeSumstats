@@ -5,7 +5,7 @@
 #' @keywords internal 
 check_save_path <- function(save_path,
                             write_vcf=FALSE){
-    suffixes <- supported_suffixes(vcf = FALSE, vcf_compressed = FALSE)
+    suffixes <- supported_suffixes()
     if(is.null(save_path)){ 
         save_path <- paste0(tempfile(),".tsv.gz")
         file_type <- "tempfile" 
@@ -17,14 +17,13 @@ check_save_path <- function(save_path,
             sep <- if(file_type==".csv") "," else "\t"
         } else {
             if(write_vcf==FALSE) { 
-                stop("save_path file format not recognized.\n",
-                     "Must be one of: \n   ", paste(all_suffixes, collapse = "\n   "))
+                stop("save_path file format not recognized: ",save_path,
+                     "\nMust be one of: \n   ", paste(suffixes, collapse = "\n   "))
             } 
         }
     } 
-    if(write_vcf){
-        all_suffixes <- supported_suffixes()
-        save_path <- gsub(paste(all_suffixes,collapse = "|"),".vcf.gz", save_path)
+    if(write_vcf){ 
+        save_path <- gsub(paste(suffixes,collapse = "|"),".vcf.gz", save_path)
         sep = "\t"
         file_type = "vcf"
     }
