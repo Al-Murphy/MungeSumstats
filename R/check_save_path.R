@@ -14,7 +14,7 @@ check_save_path <- function(save_path,
         suffix_match <- sapply(suffixes, function(x){grepl(x, tolower(save_path), ignore.case = TRUE)}) 
         if(sum(suffix_match)>0){
             file_type <- names(suffix_match)[suffix_match][1]
-            sep <- if(file_type==".csv") "," else "\t"
+            sep <- if(grepl(".csv",file_type)) "," else "\t"
         } else {
             if(write_vcf==FALSE) { 
                 stop("save_path file format not recognized: ",save_path,
@@ -26,9 +26,18 @@ check_save_path <- function(save_path,
         save_path <- gsub(paste(suffixes,collapse = "|"),".vcf.gz", save_path)
         sep = "\t"
         file_type = "vcf"
+    } else {
+        #### Account for mismatch between write_vcf and save_path ####
+        suffixes.vcf <- supported_suffixes(tabular = FALSE, tabular_compressed = FALSE)
+        if(any(endsWith(save_path,suffixes.vcf))){
+            message("`write_vcf=FALSE` but `save_path` suggests VCF output format. ",
+                    "Switching output to tabular format (.tsv.gz).")
+            save_path <- gsub(paste(suffixes.vcf,collapse = "|"),".tsv.gz", save_path)
+            sep = "\t"
+            file_type = ".tsv"
+        } 
     } 
-    
-    message("Results will be saved to ==> ",save_path) 
+    message("Formatted summary statistics will be saved to ==> ",save_path) 
     return(list(
         save_path=save_path,
         file_type=file_type,

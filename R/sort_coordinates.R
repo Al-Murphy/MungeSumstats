@@ -8,7 +8,7 @@
 sort_coords <- function(sumstats_dt,
                         sort_coordinates=TRUE){  
     if(sort_coordinates){
-        message("Sorting coordinates")
+        message("Sorting coordinates.")
         chr_order <- c(1:22,"X","Y")
         ### Double check that X and Y are uppercase
         sumstats_dt[,CHR:=toupper(CHR)]

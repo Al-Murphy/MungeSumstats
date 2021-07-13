@@ -8,6 +8,8 @@ import_sumstats(
   ids,
   vcf_dir = tempdir(),
   vcf_download = TRUE,
+  save_dir = "./formatted",
+  write_vcf = FALSE,
   download_method = "download.file",
   quiet = TRUE,
   force_new = FALSE,
@@ -21,6 +23,10 @@ import_sumstats(
 \item{vcf_dir}{Where to download the original VCF from Open GWAS.}
 
 \item{vcf_download}{Download the original VCF from Open GWAS.}
+
+\item{save_dir}{Directory to save formatted summary statistics in.}
+
+\item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
 
 \item{download_method}{\code{"axel"} (multi-threaded) or \code{"download.file"} (single-threaded) .}
 
@@ -48,6 +54,6 @@ ids <- (dplyr::arrange(metagwas, nsnp))$id[1:2]
 # datasets <- MungeSumstats::import_sumstats(ids = ids)
                                 
 #### Speed up with multi-threaded download via axel 
-# datasets <- MungeSumstats::import_sumstats(ids = ids, vcf_download=TRUE, download_method="axel", nThread=10)                                           
+# datasets <- MungeSumstats::import_sumstats(ids = ids,  download_method="axel", nThread=10)                                           
 
 }

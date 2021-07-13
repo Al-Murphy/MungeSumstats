@@ -38,7 +38,7 @@
 #' @param bi_allelic_filter Binary Should non-biallelic SNPs be removed. Default is TRUE.
 #' @param sort_coordinates Whether to sort by coordinates.
 #' @param nThread Number of threads to use for parallel processes. 
-#' @param save_path File path to save formatted data. Defaults to \code{paste0(tempfile(),".tsv.gz")}.
+#' @param save_path File path to save formatted data. Defaults to \code{file.path("./formatted",basename(path),".tsv.gz")}.
 #' @param write_vcf Whether to write as VCF (TRUE) or tabular file (FALSE). 
 #' @param tabix_index Index the formatted summary statistics with \href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying. 
 #' @param return_data Return \code{data.table} directly to user. Otherwise, return the path to the save data. Default is FALSE.
@@ -64,7 +64,7 @@ format_sumstats <- function(path,
                             bi_allelic_filter=TRUE,
                             sort_coordinates=TRUE,
                             nThread=1,
-                            save_path=paste0(tempfile(),".tsv.gz"), 
+                            save_path=file.path("./formatted",basename(path),".tsv.gz"),
                             write_vcf=FALSE,
                             tabix_index=FALSE,
                             return_data=FALSE,
@@ -88,6 +88,7 @@ format_sumstats <- function(path,
   #### Recognize previously formatted files ####
   if(file.exists(check_save_out$save_path) & force_new==FALSE){
     message("Importing previously formatted file. Set `force_new=TRUE` to override this.")
+    message("    ",check_save_out$save_path)
   } else { 
     #Avoid reloading ref genome every time, save it to this parent environment
     #after being made once - speed up code

@@ -5,6 +5,7 @@
 #' @param ids List of Open GWAS study IDs (e.g. \code{c("prot-a-664", "ieu-b-4760")}). 
 #' @param vcf_download Download the original VCF from Open GWAS. 
 #' @param vcf_dir Where to download the original VCF from Open GWAS.
+#' @param save_dir Directory to save formatted summary statistics in.
 #' @param force_new Overwrite a previously downloaded VCF with the same path name.
 #' @param ... Additional arguments to be passed to \code{MungeSumstats::format_sumstats}.
 #' @inheritParams format_sumstats
@@ -20,7 +21,7 @@
 #' # datasets <- MungeSumstats::import_sumstats(ids = ids)
 #'                                 
 #' #### Speed up with multi-threaded download via axel 
-#' # datasets <- MungeSumstats::import_sumstats(ids = ids, vcf_download=TRUE, download_method="axel", nThread=10)                                           
+#' # datasets <- MungeSumstats::import_sumstats(ids = ids,  download_method="axel", nThread=10)                                           
 #' 
 #' @return Either a named list of data objects or paths, depending on the arguments passed to 
 #' @export
@@ -28,8 +29,10 @@
 import_sumstats <- function(ids,  
                             vcf_dir=tempdir(),
                             vcf_download=TRUE,
+                            save_dir="./formatted",
+                            write_vcf=FALSE,
                             download_method="download.file",
-                            quiet=TRUE,
+                            quiet=TRUE, 
                             force_new=FALSE,
                             nThread=1, 
                             ...){  
@@ -52,12 +55,14 @@ import_sumstats <- function(ids,
                                       quiet=quiet,
                                       nThread=nThread) 
             #### format_sumstats ####
+            save_path <- file.path(save_dir,basename(vcf_url))
+            if(!write_vcf) save_path <- gsub(".vcf.gz",".tsv.gz",save_path)
             reformatted <- format_sumstats(path=vcf_paths$save_path,
+                                           save_path=save_path,
                                            force_new=force_new,
                                            nThread=nThread, 
                                            ...)   
-            return(reformatted)
-            
+            return(reformatted) 
         }, error = function(e){message(e);return(as.character(e))}) 
         
         end <- Sys.time() 

@@ -20,7 +20,7 @@ format_sumstats(
   bi_allelic_filter = TRUE,
   sort_coordinates = TRUE,
   nThread = 1,
-  save_path = paste0(tempfile(), ".tsv.gz"),
+  save_path = file.path("./formatted", basename(path), ".tsv.gz"),
   write_vcf = FALSE,
   tabix_index = FALSE,
   return_data = FALSE,
@@ -57,7 +57,7 @@ format_sumstats(
 
 \item{nThread}{Number of threads to use for parallel processes.}
 
-\item{save_path}{File path to save formatted data. Defaults to \code{paste0(tempfile(),".tsv.gz")}.}
+\item{save_path}{File path to save formatted data. Defaults to \code{file.path("./formatted",basename(path),".tsv.gz")}.}
 
 \item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
 

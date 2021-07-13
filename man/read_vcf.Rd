@@ -21,7 +21,7 @@ read_vcf(
 
 \item{keep_extra_cols}{Keep non-standard columns.}
 
-\item{save_path}{File path to save formatted data. Defaults to \code{paste0(tempfile(),".tsv.gz")}.}
+\item{save_path}{File path to save formatted data. Defaults to \code{file.path("./formatted",basename(path),".tsv.gz")}.}
 }
 \value{
 The modified sumstats_file

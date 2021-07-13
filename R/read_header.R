@@ -16,7 +16,7 @@ read_header <- function(path,
             # preview <- VariantAnnotation::readVcf(save_path, param = param)
             # preview <- VariantAnnotation::scanVcf(save_path, param=param)
             # data.table::fread(save_path, skip = "#", nrows = 10)
-            header <- readLines(save_path, n = 100)
+            header <- readLines(path, n = 100)
             i <- which(startsWith(header,"#CHR")) 
             header <- data.table::fread(text =  header[seq(i,i+n)] )   
         } else {
