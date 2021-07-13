@@ -71,6 +71,12 @@ format_sumstats <- function(path,
                             return_format="data.table",
                             force_new=FALSE
                             ){  
+  #### Setup multi-threading ####
+  data.table::setDTthreads(threads = nThread)
+  #### Setup empty variables ####
+  rsids = NULL
+  orig_dims = NULL
+  
   #### Check 1: Ensure save_path is correct.   #### 
   check_save_out <- check_save_path(save_path = save_path, 
                                     write_vcf = write_vcf)
@@ -85,7 +91,7 @@ format_sumstats <- function(path,
   } else { 
     #Avoid reloading ref genome every time, save it to this parent environment
     #after being made once - speed up code
-    rsids = NULL
+    
     #Check input parameters
     validate_parameters(path=path,
                         ref_genome=ref_genome, 
@@ -109,6 +115,9 @@ format_sumstats <- function(path,
     sumstats_return <- list()
     sumstats_return[["sumstats_dt"]] <- read_sumstats(path = path, 
                                                       nThread = nThread)
+    
+    report_summary(sumstats_dt = sumstats_return$sumstats_dt)
+    orig_dims <- dim(sumstats_return$sumstats_dt)
     
     #### Check 3:Standardise headers for all OS ####
     sumstats_return <-
@@ -287,8 +296,9 @@ format_sumstats <- function(path,
                    nThread = nThread)
     rm(rsids)#free up memory 
     
-    #### Report summary ####
-    report_summary(sumstats_dt = sumstats_return$sumstats_dt)
+    #### Report summary #### 
+    report_summary(sumstats_dt = sumstats_return$sumstats_dt,
+                   orig_dims = orig_dims) 
   }
   
   

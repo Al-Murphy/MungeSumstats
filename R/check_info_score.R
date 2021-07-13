@@ -12,7 +12,7 @@ check_info_score <- function(sumstats_dt, path, INFO_filter){
     #use data table for speed
     num_bad_ids <- nrow(sumstats_dt[INFO<INFO_filter,])
     if(num_bad_ids>0){
-      msg <- paste0(num_bad_ids, " SNPs",
+      msg <- paste0(formatC(num_bad_ids,big.mark = ","), " SNPs",
                     " are below the INFO threshold of ",INFO_filter,
                     " and will be removed")
       message(msg)

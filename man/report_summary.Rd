@@ -4,7 +4,7 @@
 \alias{report_summary}
 \title{Report info on current state of the summary statistics}
 \usage{
-report_summary(sumstats_dt)
+report_summary(sumstats_dt, orig_dims = NULL)
 }
 \arguments{
 \item{sumstats_dt}{data table obj of the summary statistics file for the GWAS.}

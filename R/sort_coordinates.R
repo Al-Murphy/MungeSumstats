@@ -17,7 +17,7 @@ sort_coords <- function(sumstats_dt,
         ### setorderv is much more efficient than dplyr::arrange 
         data.table::setorderv(sumstats_dt, c("CHR", "BP"))
         ### Now set CHR back to character to avoid issues when merging with other dts
-        sumstats_dt[,CHR:=as.character(CHR)]  
-        return(sumstats_sorted)
-    } else { return(sumstats_dt) }  
+        sumstats_dt[,CHR:=as.character(CHR)]   
+    } 
+    return(sumstats_dt)
 }
