@@ -2,6 +2,7 @@
 
 export(find_sumstats)
 export(format_sumstats)
+export(get_genome_build)
 export(import_sumstats)
 export(load_snp_loc_data)
 importFrom(BSgenome,snpsById)

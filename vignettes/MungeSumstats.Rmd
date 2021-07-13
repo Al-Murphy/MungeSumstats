@@ -32,7 +32,7 @@ knitr::opts_chunk$set(tidy         = FALSE,
 
 If you use the MungeSumstats package, please cite
 
-[Murphy, et al. MungeSumstats: A Bioconductor package for the standardisation and quality control of many GWAS summary statistics](https://www.biorxiv.org/content/10.1101/2021.06.21.449239v1).
+[Murphy and Skene. MungeSumstats: A Bioconductor package for the standardisation and quality control of many GWAS summary statistics](https://www.biorxiv.org/content/10.1101/2021.06.21.449239v1).
 
 # Overview
 
@@ -149,11 +149,11 @@ library(MungeSumstats)
 
 To standardise the summary statistics' file format, simply call
 `format_sumstats()` passing in the path to your summary statistics file.
-You must also specify which genome build was used in the GWAS(GRCh37 or GRCh38).
-The reference genome is used for multiple checks like deriving missing 
-data such SNP/BP/CHR/A1/A2 and for QC steps like removing non-biallelic
-SNPs or strand-ambiguous SNPs. The path to the reformatted summary statistics 
-file is returned by the function call.
+You can specify which genome build was used in the GWAS(GRCh37 or GRCh38) or, as
+default, infer the genome build from the data.The reference genome is used for 
+multiple checks like deriving missing data such SNP/BP/CHR/A1/A2 and for QC 
+steps like removing non-biallelic SNPs or strand-ambiguous SNPs. The path to the
+reformatted summary statistics file is returned by the function call.
 
 Note that for a number of the checks implored by *MungeSumstats* a reference 
 genome is used. If your GWAS summary statistics file of interest relates to
