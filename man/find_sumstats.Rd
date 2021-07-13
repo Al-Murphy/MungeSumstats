@@ -20,7 +20,7 @@ find_sumstats(
   min_ncontrol = NULL,
   min_nsnp = NULL,
   include_NAs = FALSE,
-  access_token = ieugwasr::check_access_token()
+  access_token = check_access_token()
 )
 }
 \arguments{

@@ -21,7 +21,7 @@
 #' @param min_nsnp Minimum number of SNPs (e.g. \code{200000}).
 #' @param include_NAs Include datasets with missing metadata for size criteria  
 #' (i.e. \code{min_sample_size}, \code{min_ncase}, or \code{min_ncontrol}). 
-#' @inheritParams ieugwasr::check_access_token
+#' @inheritParams check_access_token
 #' 
 #' @examples
 #' ### By ID
@@ -34,9 +34,7 @@
 #' metagwas <- MungeSumstats::find_sumstats(traits=c("alzheimer","parkinson"),
 #'                                          years = seq(2015,2021)) 
 #' @inheritParams format_sumstats
-#' @export
-#' @importFrom ieugwasr gwasinfo
-#' @importFrom ieugwasr check_access_token
+#' @export 
 #' @importFrom dplyr %>% arrange desc 
 find_sumstats <- function(ids=NULL,
                           traits=NULL, 
@@ -53,14 +51,22 @@ find_sumstats <- function(ids=NULL,
                           min_ncontrol=NULL, 
                           min_nsnp=NULL,
                           include_NAs=FALSE,
-                          access_token = ieugwasr::check_access_token()){
+                          access_token = check_access_token()){
     message("Collecting metadata from Open GWAS.")
     if(!is.null(ids)) {
         # ids <- c("ieu-b-4760","prot-a-1725","prot-a-664" )
-        metagwas <- ieugwasr::gwasinfo(id = ids, 
-                                       access_token = access_token)    
+        metagwas <- gwasinfo(id = ids, 
+                             access_token = access_token)  
+        ## gwasinfo() doesn't always return all columns for some reason
+        missing_cols <- c("ncase","ncontrols")
+        missing_cols <- missing_cols[!missing_cols %in% colnames(metagwas)]
+        if(length(missing_cols)>0){
+            for(x in missing_cols){
+                metagwas[[x]] <- NA
+            }
+        }
     }else {
-        metagwas <- ieugwasr::gwasinfo() 
+        metagwas <- gwasinfo() 
     }
     message("Filtering metadata by substring criteria.") 
     if(!is.null(traits)) metagwas <- metagwas[grepl(paste(traits, collapse = "|"), metagwas$trait, ignore.case = TRUE),]

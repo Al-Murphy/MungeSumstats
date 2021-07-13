@@ -42,8 +42,10 @@ Import full genome-wide GWAS summary statistics from Open GWAS
 ### Search by criteria
 metagwas <- MungeSumstats::find_sumstats()
 ### Only use a subset for testing purposes                                           
-ids <- (dplyr::arrange(metagwas, nsnp))$id[1:2]     
-datasets <- MungeSumstats::import_sumstats(ids = ids)
+ids <- (dplyr::arrange(metagwas, nsnp))$id[1:2]    
+
+### Default usage   
+# datasets <- MungeSumstats::import_sumstats(ids = ids)
                                 
 #### Speed up with multi-threaded download via axel 
 # datasets <- MungeSumstats::import_sumstats(ids = ids, vcf_download=TRUE, download_method="axel", nThread=10)                                           

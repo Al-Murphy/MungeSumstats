@@ -37,39 +37,23 @@ metagwas <- MungeSumstats::find_sumstats(traits = c("parkinson","alzheimer"),
                                          min_sample_size = 5000)
 ```
 
-# Import top results 
-
-```{r}
-#### Extract the top hits ####
-top <- ieugwasr::tophits(id = meta_sub$id) %>%
-    dplyr::arrange(p) 
-top_top <- top %>%
-    dplyr::group_by(id, trait) %>%
-    dplyr::summarise(top_snps=n()) %>%
-    dplyr::arrange(desc(top_snps))
-top_top 
-```
-
 # Import full results
 
 ```{r}
 ids <- (dplyr::arrange(metagwas, nsnp))$id[1:2]     
 datasets <- MungeSumstats::import_sumstats(ids = ids)
-                                
-#### Speed up with multi-threaded download via axel 
-# datasets <- MungeSumstats::import_sumstats(ids = ids, vcf_download=TRUE, download_method="axel", nThread=10)
 ```
 
-# Colocalization 
+# Import full results (parallel)
 
-```{r}
-chrpos <- paste0(top$chr[1], ":", top$position[1] - 50000, "-", top$position[1] + 50000)
-out <- ieugwasr_to_coloc(id1=meta_sub$id[1], id2=meta_sub$id[2], chrompos=chrpos)
-res <- coloc::coloc.abf(out[[1]], out[[2]])
-temp <- coloc_to_gassocplot(out)
-gassocplot::stack_assoc_plot(temp$markers, temp$z, temp$corr, traits=temp$traits)
+*Optional*: Speed up with multi-threaded download via [axel](https://github.com/axel-download-accelerator/axel).  
+
+```{r, eval=FALSE}
+datasets <- MungeSumstats::import_sumstats(ids = ids, 
+                                           vcf_download = TRUE, 
+                                           download_method = "axel", 
+                                           nThread = max(2,future::availableCores()-2))
 ```
-
 
 # Session Info
 

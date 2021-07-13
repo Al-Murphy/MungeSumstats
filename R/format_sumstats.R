@@ -275,17 +275,25 @@ format_sumstats <- function(path,
                    tabix_index = tabix_index,
                    nThread = nThread)
     rm(rsids)#free up memory 
+    
+    #### Report summary ####
+    report_summary(sumstats_dt = sumstats_return$sumstats_dt)
   }
   
   
-  #### Report summary ####
-  report_summary(sumstats_dt = sumstats_return$sumstats_dt)
+
   #### Preview sumstats ####
   preview_sumstats(save_path = check_save_out$save_path,
                    nrows = 5L)
   
   if(return_data){
     message("Returning data directly.")
+    #### Load data into memory when a pre-existing file is being used 
+    if(!exists("sumstats_return")){
+      sumstats_return <- list()
+      sumstats_return[["sumstats_dt"]] <- read_sumstats(path = check_save_out$save_path, 
+                                                        nThread = nThread)
+    }
     out <- convert_sumstats(sumstats_dt = sumstats_return$sumstats_dt, 
                             return_format = return_format)
     return(out)

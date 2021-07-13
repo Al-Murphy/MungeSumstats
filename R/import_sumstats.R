@@ -14,8 +14,10 @@
 #' ### Search by criteria
 #' metagwas <- MungeSumstats::find_sumstats()
 #' ### Only use a subset for testing purposes                                           
-#' ids <- (dplyr::arrange(metagwas, nsnp))$id[1:2]     
-#' datasets <- MungeSumstats::import_sumstats(ids = ids)
+#' ids <- (dplyr::arrange(metagwas, nsnp))$id[1:2]    
+#' 
+#' ### Default usage   
+#' # datasets <- MungeSumstats::import_sumstats(ids = ids)
 #'                                 
 #' #### Speed up with multi-threaded download via axel 
 #' # datasets <- MungeSumstats::import_sumstats(ids = ids, vcf_download=TRUE, download_method="axel", nThread=10)                                           
@@ -38,35 +40,17 @@ import_sumstats <- function(ids,
         start <- Sys.time()
         out <-  tryCatch(expr = {
             message("\n========== Processing dataset : ",id," ==========\n") 
-            vcf_url <- file.path("https://gwas.mrcieu.ac.uk/files",id,paste0(id,".vcf.gz"))
-            
-            #### Create save_path ####
-            save_path <- file.path(vcf_dir,basename(vcf_url)) 
-            dir.create(dirname(save_path), showWarnings = FALSE, recursive = TRUE)
+            vcf_url <- file.path("https://gwas.mrcieu.ac.uk/files",id,paste0(id,".vcf.gz")) 
             #### Optional:: download VCF ####
-            if(file.exists(save_path) & force_new==FALSE){
-                message("Using previously downloaded VCF.") 
-                vcf_url <- save_path
-            } else { 
-                if(vcf_download){
-                    message("Downloading VCF ==> ",save_path)  
-                    #### Download main VCF file
-                    save_path <- downloader(input_url = vcf_url, 
-                                            output_path = vcf_dir, 
-                                            download_method = download_method,
-                                            force_overwrite = force_new,
-                                            quiet = quiet,
-                                            nThread = nThread)
-                    #### Download tabix index file
-                    index_path <- downloader(input_url = paste0(vcf_url,".tbi"), 
-                                             output_path = paste0(save_path,".tbi"), 
-                                             download_method = download_method,
-                                             force_overwrite = force_new,
-                                             quiet = quiet,
-                                             nThread = nThread)
-                    vcf_url <- save_path 
-                } 
-            }
+            vcf_paths <- download_vcf(vcf_url=vcf_url,
+                                      vcf_dir=vcf_dir, 
+                                      vcf_download=vcf_download,
+                                      download_method=download_method,
+                                      force_new=force_new,
+                                      quiet=quiet,
+                                      nThread=nThread)
+            vcf_url <- vcf_paths$save_path 
+            #### format_sumstats ####
             reformatted <- format_sumstats(path=vcf_url,
                                            save_path=save_path,
                                            force_new=force_new,

@@ -26,7 +26,8 @@ check_save_path <- function(save_path,
         save_path <- gsub(paste(suffixes,collapse = "|"),".vcf.gz", save_path)
         sep = "\t"
         file_type = "vcf"
-    }
+    } 
+    
     message("Results will be saved to ==> ",save_path) 
     return(list(
         save_path=save_path,
