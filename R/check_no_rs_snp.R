@@ -29,7 +29,7 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome){
       if(sum(c("CHR","BP") %in% col_headers)==2 && 
           nrow(miss_rs[!grep(":",SNP),])>0){
         bad_snp <- miss_rs[!grep(":",SNP),]
-        msg <- paste0(nrow(bad_snp), " SNP IDs are not correctly formatted.",
+        msg <- paste0(formatC(nrow(bad_snp),big.mark = ","), " SNP IDs are not correctly formatted.",
                       " These will be corrected from the reference genome.")
         message(msg)
         #remove snp column and pass to function to impute snp
@@ -51,7 +51,7 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome){
       }
       #check if any have more than 1 ":" remove these
       miss_rs_chr_bp <- miss_rs_chr_bp[!grep(".*:.*:.*",SNP)]
-      msg <- paste0(nrow(miss_rs_chr_bp)," SNP IDs appear to be made up of ",
+      msg <- paste0(formatC(nrow(miss_rs_chr_bp),big.mark = ",")," SNP IDs appear to be made up of ",
                       "chr:bp, these will be replaced by their SNP ID from the",
                       " reference genome")
       message(msg)
@@ -103,7 +103,7 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome){
         if(sum(c("CHR","BP") %in% col_headers)==2 && 
            nrow(sumstats_dt[!grep("^rs",SNP),])>0){
           bad_snp <- sumstats_dt[!grep("^rs",SNP),]
-          msg <- paste0(nrow(bad_snp), " SNP IDs are not correctly formatted.",
+          msg <- paste0(formatC(nrow(bad_snp),big.mark = ","), " SNP IDs are not correctly formatted.",
                         " These will be corrected from the reference genome.")
           message(msg)
           #remove snp column and pass to function to impute snp
@@ -124,7 +124,7 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome){
       }  
       #if any weird SNP rows left that aren't chr:bp or rs id's remove them
       if(sum(c("CHR","BP") %in% col_headers)!=2){
-        msg <- paste0(nrow(miss_rs) - nrow(miss_rs_chr_bp)," SNP IDs are not ",
+        msg <- paste0(formatC(nrow(miss_rs) - nrow(miss_rs_chr_bp),big.mark = ",")," SNP IDs are not ",
                       "correctly formatted and will be removed")
         message(msg)
       }

@@ -12,6 +12,7 @@ format_sumstats(
   analysis_trait = NULL,
   INFO_filter = 0.9,
   N_std = 5,
+  N_dropNA = TRUE,
   rmv_chr = c("X", "Y", "MT"),
   on_ref_genome = TRUE,
   strand_ambig_filter = FALSE,

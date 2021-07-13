@@ -19,8 +19,9 @@ check_strand_ambiguous <-
     num_bad_ids <- length(A_T_ambig)+length(C_G_ambig)
     #check for SNPs not on ref genome
     if(num_bad_ids>0){
-      msg <- paste0(num_bad_ids, " SNPs are strand-ambiguous alleles including",
-                      " ",length(A_T_ambig)," A/T and ",length(C_G_ambig),
+      msg <- paste0(formatC(num_bad_ids,big.mark = ","), " SNPs are strand-ambiguous alleles including",
+                      " ", formatC(length(A_T_ambig),big.mark = ","),
+                    " A/T and ",formatC(length(C_G_ambig),big.mark = ","),
                       " C/G ambiguous SNPs. These will be removed")
       message(msg)
       rmv_snps <- c(A_T_ambig, C_G_ambig)

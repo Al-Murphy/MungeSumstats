@@ -34,7 +34,7 @@ check_on_ref_genome <-
     num_bad_ids <- length(sumstats_dt$SNP) - length(rsids$SNP)
     #check for SNPs not on ref genome
     if(num_bad_ids>0){
-      msg <- paste0(num_bad_ids, " SNPs are not on the reference genome. ",
+      msg <- paste0(formatC(num_bad_ids,big.mark = ","), " SNPs are not on the reference genome.",
                     " These will be corrected from the reference genome.")
       message(msg)
       # join using SNP
@@ -54,7 +54,7 @@ check_on_ref_genome <-
           data.table::rbindlist(list(sumstats_dt[rsids$SNP,],corrected_snp))
       }
       else{
-        msg <- paste0(num_bad_ids, " SNPs are not on the reference genome. ",
+        msg <- paste0(formatC(num_bad_ids,big.mark = ","), " SNPs are not on the reference genome. ",
                     " These will be removed")
         message(msg)
         

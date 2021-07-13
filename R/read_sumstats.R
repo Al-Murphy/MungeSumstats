@@ -4,7 +4,7 @@
 #' @keywords internal 
 #' @importFrom data.table fread
 read_sumstats <- function(path,   
-                            nThread=1){
+                          nThread=1){
     header <- read_header(path = path)
     is_vcf <- check_vcf(header = header)  
     if(is_vcf){

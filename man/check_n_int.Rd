@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_n_int.R
 \name{check_n_int}
 \alias{check_n_int}
-\title{Ensure that the N column are all integers}
+\title{Ensure that the N column is all integers}
 \usage{
 check_n_int(sumstats_dt, path, convert_n_int)
 }
@@ -17,6 +17,6 @@ check_n_int(sumstats_dt, path, convert_n_int)
 list containing sumstats_dt, the modified summary statistics data table object
 }
 \description{
-Ensure that the N column are all integers
+Ensure that the N column is all integers
 }
 \keyword{internal}

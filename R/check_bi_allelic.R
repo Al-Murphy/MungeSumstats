@@ -34,8 +34,8 @@ check_bi_allelic <-
       num_bad_ids <- nrow(rsids[!alleles_as_ambig %in% nonambig_IUPAC_CODE_MAP])
       #check for SNPs not on ref genome
       if(num_bad_ids>0){
-        msg <- paste0(num_bad_ids, " SNPs are non-biallelic. ",
-                      " These will be removed")
+        msg <- paste0(formatC(num_bad_ids,big.mark = ","), " SNPs are non-biallelic.",
+                      " These will be removed.")
         message(msg)
         # join using SNP
         data.table::setkey(sumstats_dt,SNP)

@@ -10,6 +10,8 @@ sort_coords(sumstats_dt, sort_coordinates = TRUE)
 \item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
 
 \item{sort_coords}{Whether to sort by coordinates.}
+
+\item{make_ordered}{Make CHR into an ordered factor to ensure they go from 1-22, X, Y.}
 }
 \description{
 Sort sum stats by genomic coordinates

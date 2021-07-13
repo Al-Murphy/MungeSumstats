@@ -2,8 +2,10 @@
 #' from the data
 #'
 #' @param sumstats data table/data frame obj of the summary statistics file for
-#' the GWAS or file path to summary statistics file
+#' the GWAS ,or file path to summary statistics file.
 #' @param nThread Number of threads to use for parallel processes. 
+#' @param sampled_snps Downsample the number of SNPs used when inferring genome build to save time.
+#' @param standardise_headers Run \code{standardise_sumstats_column_headers_crossplatform}.  
 #' @return ref_genome the genome build of the data
 #'
 #' @examples
@@ -15,7 +17,11 @@
 #'
 #' @export
 #' @importFrom data.table setDT
-get_genome_build <- function(sumstats, nThread = 1){
+get_genome_build <- function(sumstats, 
+                             nThread = 1,
+                             sampled_snps = 10000, 
+                             standardise_headers=TRUE){
+  message("Inferring genome build.")
   #if not a data.table, must be a path
   if(!is.data.frame(sumstats)){
     # Checking if the file exists should happen first
@@ -23,18 +29,19 @@ get_genome_build <- function(sumstats, nThread = 1){
       stop("Path to GWAS sumstats is not valid") 
     #read in data
     sumstats <- read_sumstats(path = sumstats, 
-                                nThread = nThread)
+                              nThread = nThread)
   }else{
     #ensure data table obj
     sumstats <- data.table::setDT(sumstats)
   }
   #need SNP ID column (RS ID) CHR and BP (POS) to infer build - check these are 
   #present, considering all known names
-  sumstats_return <-
-    standardise_sumstats_column_headers_crossplatform(sumstats_dt = sumstats,
-                                                      path =  NULL)
-  sumstats <- sumstats_return$sumstats_dt
-  
+  if(standardise_headers){
+    sumstats_return <-
+      standardise_sumstats_column_headers_crossplatform(sumstats_dt = sumstats,
+                                                        path =  NULL)
+    sumstats <- sumstats_return$sumstats_dt
+  } 
   
   err_msg <- 
     paste0("SNP ID column (RS ID) CHR and BP (POSITION) columns are needed to ",
@@ -42,10 +49,21 @@ get_genome_build <- function(sumstats, nThread = 1){
            "Please specify the genome build manually to run format_sumstats()")
   if(!all(c("SNP","CHR","BP") %in% colnames(sumstats)))
     stop(err_msg)
+  
+  #### Do some filtering first to avoid errors ####
+  sumstats <- sumstats[complete.cases(SNP)]
+  
+  #### Downsample SNPs to save time #### 
+  if((nrow(sumstats)>sampled_snps) && !(is.null(sampled_snps))){ 
+    snps <- sample(sumstats$SNP,sampled_snps)
+  } else {snps <- sumstats$SNP}
+  
+  sumstats <- sumstats[SNP %in% snps,]
+  
   #otherwise SNP, CHR, BP were all found and can infer
-  snp_loc_data_37 <- load_ref_genome_data(snps = sumstats$SNP,
-                                            ref_genome = "GRCH37")
-  snp_loc_data_38 <- load_ref_genome_data(snps = sumstats$SNP,
+  snp_loc_data_37 <- load_ref_genome_data(snps = snps,
+                                          ref_genome = "GRCH37")
+  snp_loc_data_38 <- load_ref_genome_data(snps = snps,
                                           ref_genome = "GRCH38")
   #convert CHR filed in ref genomes to character not factor
   snp_loc_data_37[,seqnames:=as.character(seqnames)]
@@ -57,7 +75,7 @@ get_genome_build <- function(sumstats, nThread = 1){
     nrow(snp_loc_data_37[sumstats, , on = c(SNP="SNP", pos="BP",seqnames="CHR"),
                           nomatch=FALSE])
   num_38 <- 
-    nrow(snp_loc_data_37[sumstats, , on = c(SNP="SNP", pos="BP",seqnames="CHR"),
+    nrow(snp_loc_data_38[sumstats, , on = c(SNP="SNP", pos="BP",seqnames="CHR"),
                          nomatch=FALSE])
   if(num_37>num_38){
     ref_gen_num <- num_37
@@ -67,11 +85,13 @@ get_genome_build <- function(sumstats, nThread = 1){
     ref_gen_num <- num_38
     ref_genome <- "GRCH38"
   }  
+  
+  message("Inferred genome build: ",ref_genome)
   #add a warning if low proportion of matches found
   msg <- paste0("WARNING: Less than 10% of your SNPs matched that of either ",
                 "reference genome, this question the quality of your summary ",
                 "statistics file.")
-  if(ref_gen_num/nrow(sumstats)<0.1)
-    message(msg)
+  if(ref_gen_num/length(snps)<0.1)  message(msg) 
+  
   return(ref_genome)
 }

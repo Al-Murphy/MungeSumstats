@@ -6,11 +6,12 @@
 #' @keywords internal
 #' @importFrom stats complete.cases
 check_miss_data <- function(sumstats_dt, path){
+  message("Checking for missing data.")
   #use data table for speed
   #check for rows missing data to be excluded
   if(nrow(sumstats_dt[!complete.cases(sumstats_dt),])>0){
     msg <- paste0("WARNING: ",
-                  nrow(sumstats_dt[!complete.cases(sumstats_dt),]),
+                  formatC(nrow(sumstats_dt[!complete.cases(sumstats_dt),]),big.mark = ","),
                   " rows in sumstats file are missing data and will ",
                   "be removed.")
     message(msg)

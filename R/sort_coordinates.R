@@ -2,14 +2,22 @@
 #'
 #' @param sumstats_dt data table obj of the summary statistics file for the GWAS
 #' @param sort_coords Whether to sort by coordinates.
-#' @keywords internal 
-#' @importFrom dplyr %>% arrange 
+#' @param make_ordered Make CHR into an ordered factor to ensure they go from 1-22, X, Y.
+#' @keywords internal  
+#' @importFrom data.table setorderv
 sort_coords <- function(sumstats_dt,
-                        sort_coordinates=TRUE){
+                        sort_coordinates=TRUE){  
     if(sort_coordinates){
         message("Sorting coordinates")
-        sumstats_sorted <- sumstats_dt %>%
-            dplyr::arrange(CHR, BP)
+        chr_order <- c(1:22,"X","Y")
+        ### Double check that X and Y are uppercase
+        sumstats_dt[,CHR:=toupper(CHR)]
+        ### Turn CHR into an ordered factor to account for X and Y chroms
+        sumstats_dt[,CHR:=factor(CHR, levels = chr_order, ordered = T)] 
+        ### setorderv is much more efficient than dplyr::arrange 
+        data.table::setorderv(sumstats_dt, c("CHR", "BP"))
+        ### Now set CHR back to character to avoid issues when merging with other dts
+        sumstats_dt[,CHR:=as.character(CHR)]  
         return(sumstats_sorted)
     } else { return(sumstats_dt) }  
 }

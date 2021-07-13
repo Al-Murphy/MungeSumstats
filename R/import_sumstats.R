@@ -33,6 +33,8 @@ import_sumstats <- function(ids,
                             force_new=FALSE,
                             nThread=1, 
                             ...){  
+    # vcf_dir=tempdir(); vcf_download=TRUE;download_method="axel";quiet=FALSE;force_new=FALSE;nThread=10; ids=c("ieu-a-1124","ieu-a-1125"); id=ids[1]; ref_genome=NULL;
+    
     ids <- unique(ids)
     message("Processing ",length(ids)," datasets from Open GWAS.") 
     
@@ -48,11 +50,9 @@ import_sumstats <- function(ids,
                                       download_method=download_method,
                                       force_new=force_new,
                                       quiet=quiet,
-                                      nThread=nThread)
-            vcf_url <- vcf_paths$save_path 
+                                      nThread=nThread) 
             #### format_sumstats ####
-            reformatted <- format_sumstats(path=vcf_url,
-                                           save_path=save_path,
+            reformatted <- format_sumstats(path=vcf_paths$save_path,
                                            force_new=force_new,
                                            nThread=nThread, 
                                            ...)   

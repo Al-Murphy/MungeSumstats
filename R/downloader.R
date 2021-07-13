@@ -47,6 +47,10 @@ downloader <- function(input_url,
                              alternate=alternate,
                              # conda_env=conda_env,
                              check_certificates=check_certificates)
+            if(!file.exists(out_file)){
+                message("axel download failed. Trying with download.file.")
+                download_method <- "download.file"
+            } 
         } else {
             message("+ downloader:: axel not installed.\n",
                     "For Mac users, please install via brew in the command line (`brew install axel`)\n",
@@ -56,7 +60,7 @@ downloader <- function(input_url,
         }
         
     }
-    if(download_method=="download.file"){
+    if(download_method=="download.file"){ 
         message("Downloading with download.file.")
         options(timeout=timeout) 
         out_file <- file.path(output_path, basename(input_url))

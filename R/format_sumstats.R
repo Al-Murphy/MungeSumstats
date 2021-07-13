@@ -56,6 +56,7 @@ format_sumstats <- function(path,
                             analysis_trait=NULL,
                             INFO_filter=0.9, 
                             N_std=5, 
+                            N_dropNA=TRUE,
                             rmv_chr=c("X","Y","MT"),
                             on_ref_genome=TRUE,
                             strand_ambig_filter=FALSE, 
@@ -69,7 +70,7 @@ format_sumstats <- function(path,
                             return_data=FALSE,
                             return_format="data.table",
                             force_new=FALSE
-                            ){ 
+                            ){  
   #### Check 1: Ensure save_path is correct.   #### 
   check_save_out <- check_save_path(save_path = save_path, 
                                     write_vcf = write_vcf)
@@ -92,12 +93,14 @@ format_sumstats <- function(path,
                         convert_n_int=convert_n_int, 
                         analysis_trait=analysis_trait, 
                         INFO_filter=INFO_filter, 
-                        N_std=N_std, 
+                        N_std=N_std,
+                        N_dropNA=N_dropNA,
                         rmv_chr=rmv_chr,
                         on_ref_genome=on_ref_genome, 
                         strand_ambig_filter=strand_ambig_filter, 
                         allele_flip_check=allele_flip_check,
-                        bi_allelic_filter=bi_allelic_filter)
+                        bi_allelic_filter=bi_allelic_filter,
+                        write_vcf=write_vcf)
     # This almost surely modifies the file (since most sumstats from different
     # studies are differently formatted), so it makes more sense to just make a
     # temporary file <tmp>, and return the address of the temp 
@@ -120,7 +123,9 @@ format_sumstats <- function(path,
     
     #### Infer reference genome if necessary ####
     if(is.null(ref_genome))
-      ref_genome <- get_genome_build(sumstats = sumstats_return$sumstats_dt)
+      ref_genome <- get_genome_build(sumstats = sumstats_return$sumstats_dt, 
+                                     standardise_headers = FALSE, 
+                                     sampled_snps = 10000)
     
     #### Check 5: Check for uniformity in SNP col - no mix of rs/missing rs/chr:bp ####
     sumstats_return <- 
@@ -246,7 +251,8 @@ format_sumstats <- function(path,
     #### Check 23: check for N > X std dev above mean ####
     sumstats_return <- check_n_num(sumstats_dt = sumstats_return$sumstats_dt, 
                                    path = path, 
-                                   N_std = N_std)
+                                   N_std = N_std, 
+                                   N_dropNA = N_dropNA)
     
     #### Check 24: check that no snps are on specific chromosomes ####
     sumstats_return <- check_chr(sumstats_dt = sumstats_return$sumstats_dt,
@@ -268,6 +274,7 @@ format_sumstats <- function(path,
     rsids <- sumstats_return$rsids #update rsids
     sumstats_return$rsids <- NULL
     
+    #### Check 28: Sort rows by genomic coordinates ####
     sumstats_return$sumstats_dt <- sort_coords(sumstats_dt =  sumstats_return$sumstats_dt, 
                                                sort_coordinates = sort_coordinates)
     

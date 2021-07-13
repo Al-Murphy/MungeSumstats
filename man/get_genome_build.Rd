@@ -5,13 +5,22 @@
 \title{Infers the genome build of the summary statistics file (GRCh37 or GRCh38)
 from the data}
 \usage{
-get_genome_build(sumstats, nThread = 1)
+get_genome_build(
+  sumstats,
+  nThread = 1,
+  sampled_snps = 10000,
+  standardise_headers = TRUE
+)
 }
 \arguments{
 \item{sumstats}{data table/data frame obj of the summary statistics file for
-the GWAS or file path to summary statistics file}
+the GWAS ,or file path to summary statistics file.}
 
 \item{nThread}{Number of threads to use for parallel processes.}
+
+\item{sampled_snps}{Downsample the number of SNPs used when inferring genome build to save time.}
+
+\item{standardise_headers}{Run \code{standardise_sumstats_column_headers_crossplatform}.}
 }
 \value{
 ref_genome the genome build of the data

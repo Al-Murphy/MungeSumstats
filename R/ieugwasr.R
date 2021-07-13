@@ -262,3 +262,32 @@ get_query_content <- function(response)
 	}
 }
 
+
+
+
+#' Toggle API address between development and release
+#'
+#' @param where Which API to use. Choice between "local", "release", "test". Default = "local"
+#'
+#' @keywords internal
+#' @return NULL
+select_api <- function(where="public")
+{
+    url <- switch(where,
+                  public = "http://gwas-api.mrcieu.ac.uk/",
+                  private = "http://ieu-db-interface.epi.bris.ac.uk:8082/",
+                  dev1 = "http://localhost:8019/",
+                  dev2 = "http://127.0.0.1:5000/"
+    )
+    if(is.null(url))
+    {
+        url <- options()$ieugwasr_api
+        warning("A valid API was not selected. No change")
+    }
+    
+    options(ieugwasr_api=url)
+    message("API: ", where, ": ", url)
+}
+
+
+

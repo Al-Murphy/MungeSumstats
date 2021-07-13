@@ -5,6 +5,7 @@
 #' @return list containing sumstats_dt, the modified summary statistics data table object
 #' @keywords internal
 check_dup_col <- function(sumstats_dt, path){
+  message("Checking for duplicate columns.")
   ..notDup = NULL
   col_headers = names(sumstats_dt)
   if(sum(duplicated(col_headers))>0){

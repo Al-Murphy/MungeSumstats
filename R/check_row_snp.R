@@ -12,7 +12,7 @@ check_row_snp <- function(sumstats_dt, path){
   #use data table for speed
   num_bad_ids <- nrow(sumstats_dt[!grep("^rs",SNP),])
   if(num_bad_ids>0){
-    msg <- paste0(num_bad_ids, " SNPs",
+    msg <- paste0(formatC(num_bad_ids,big.mark = ","), " SNPs",
                   " don't start with 'rs' and will be removed")
     message(msg)
     sumstats_dt <- sumstats_dt[grep("^rs",SNP),]

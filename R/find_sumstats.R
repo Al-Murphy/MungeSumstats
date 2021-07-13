@@ -58,7 +58,7 @@ find_sumstats <- function(ids=NULL,
         metagwas <- gwasinfo(id = ids, 
                              access_token = access_token)  
         ## gwasinfo() doesn't always return all columns for some reason
-        missing_cols <- c("ncase","ncontrols")
+        missing_cols <- c("ncase","ncontrol")
         missing_cols <- missing_cols[!missing_cols %in% colnames(metagwas)]
         if(length(missing_cols)>0){
             for(x in missing_cols){

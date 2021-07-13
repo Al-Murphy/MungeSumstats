@@ -4,14 +4,17 @@
 \alias{check_n_num}
 \title{Ensure all SNPs have N less than X std dev below mean}
 \usage{
-check_n_num(sumstats_dt, path, N_std)
+check_n_num(sumstats_dt, path, N_std, N_dropNA = FALSE)
 }
 \arguments{
 \item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
 
 \item{path}{Filepath for the summary statistics file to be formatted}
 
-\item{N_std}{numeric The number of standard deviations above the mean a SNP's N is needed to be removed. Default is 5.}
+\item{N_std}{numeric The number of standard deviations above the mean a
+SNP's N is needed to be removed. Default is 5.}
+
+\item{N_dropNA}{Whether to keep rows where N is \code{NA}. Default is FALSE.}
 }
 \value{
 list containing sumstats_dt, the modified summary statistics data table object

@@ -28,6 +28,8 @@ download_vcf(
 \item{nThread}{Number of threads to parallelize over.}
 }
 \description{
-Download VCF file and its index file from Open GWAS
+Ideally, we would use \href{https://github.com/MRCIEU/gwasvcf}{gwasvcf} instead
+but it hasn't been made available on CRAN or Bioconductor yet,
+so we can't include it as a dep.
 }
 \keyword{internal}
