@@ -25,7 +25,7 @@
 #' }
 #' #returned location has the updated summary statistics file
 #' @param path Filepath for the summary statistics file to be formatted
-#' @param ref_genome name of the reference genome used for the GWAS (GRCh37 or GRCh38). Default is GRCh37.
+#' @param ref_genome name of the reference genome used for the GWAS (GRCh37 or GRCh38). Default is NULL which infers the reference genome from the data.
 #' @param convert_small_p Binary, should p-values < 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.
 #' @param convert_n_int Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE.
 #' @param analysis_trait If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL.
@@ -50,7 +50,7 @@
 #' @importFrom utils data
 #' @export
 format_sumstats <- function(path,
-                            ref_genome="GRCh37", 
+                            ref_genome=NULL, 
                             convert_small_p=TRUE,
                             convert_n_int=TRUE, 
                             analysis_trait=NULL,
@@ -117,6 +117,10 @@ format_sumstats <- function(path,
       check_multi_gwas(sumstats_dt = sumstats_return$sumstats_dt,
                        path = path, 
                        analysis_trait = analysis_trait)
+    
+    #### Infer reference genome if necessary ####
+    if(is.null(ref_genome))
+      ref_genome <- get_genome_build(sumstats = sumstats_return$sumstats_dt)
     
     #### Check 5: Check for uniformity in SNP col - no mix of rs/missing rs/chr:bp ####
     sumstats_return <- 

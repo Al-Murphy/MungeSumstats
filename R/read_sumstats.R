@@ -2,6 +2,7 @@
 #'
 #' @inheritParams format_sumstats
 #' @keywords internal 
+#' @importFrom data.table fread
 read_sumstats <- function(path,   
                             nThread=1){
     header <- read_header(path = path)

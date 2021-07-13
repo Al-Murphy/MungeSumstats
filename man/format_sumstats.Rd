@@ -6,7 +6,7 @@
 \usage{
 format_sumstats(
   path,
-  ref_genome = "GRCh37",
+  ref_genome = NULL,
   convert_small_p = TRUE,
   convert_n_int = TRUE,
   analysis_trait = NULL,
@@ -30,7 +30,7 @@ format_sumstats(
 \arguments{
 \item{path}{Filepath for the summary statistics file to be formatted}
 
-\item{ref_genome}{name of the reference genome used for the GWAS (GRCh37 or GRCh38). Default is GRCh37.}
+\item{ref_genome}{name of the reference genome used for the GWAS (GRCh37 or GRCh38). Default is NULL which infers the reference genome from the data.}
 
 \item{convert_small_p}{Binary, should p-values < 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.}
 
