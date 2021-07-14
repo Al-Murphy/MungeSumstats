@@ -29,6 +29,8 @@ test_that("non-biallelic SNPs are removed", {
                                           bi_allelic_filter=TRUE,
                                           allele_flip_check=FALSE)
     org_lines <- readLines(org)
+    all.equal(reformatted_lines, org_lines[-58]) 
+    
     #reordering in function, line 3 rs9320913 is now 58
     testthat:: expect_equal(setequal(reformatted_lines,org_lines[-58]),TRUE)
   } else{

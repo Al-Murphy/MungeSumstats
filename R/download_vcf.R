@@ -5,11 +5,14 @@
 #' Ideally, we would use \href{https://github.com/MRCIEU/gwasvcf}{gwasvcf} instead 
 #' but it hasn't been made available on CRAN or Bioconductor yet, 
 #' so we can't include it as a dep.
+#' 
 #' @inheritParams downloader
 #' @inheritParams import_sumstats
-#' @keywords internal
+#' @export
+#' @examples 
+#' out_paths <- download_vcf(vcf_url="https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz")
 download_vcf <- function(vcf_url,
-                         vcf_dir,
+                         vcf_dir=tempdir(),
                          vcf_download=TRUE,
                          download_method="download.file",
                          force_new=FALSE,
@@ -34,8 +37,9 @@ download_vcf <- function(vcf_url,
                                     quiet = quiet,
                                     nThread = nThread)
             #### Download tabix index file
+            message("Downloading VCF index ==> ",paste0(vcf_url,".tbi"))   
             index_path <- downloader(input_url = paste0(vcf_url,".tbi"), 
-                                     output_path = paste0(save_path,".tbi"), 
+                                     output_path = vcf_dir, 
                                      download_method = download_method,
                                      force_overwrite = force_new,
                                      quiet = quiet,

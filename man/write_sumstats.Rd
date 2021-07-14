@@ -6,7 +6,8 @@
 \usage{
 write_sumstats(
   sumstats_dt,
-  check_save_out,
+  save_path,
+  sep,
   write_vcf = FALSE,
   tabix_index = FALSE,
   nThread = 1
@@ -15,9 +16,9 @@ write_sumstats(
 \arguments{
 \item{sumstats_dt}{data table obj of the summary statistics file for the GWAS.}
 
-\item{check_save_out}{Output of \code{check_save_path()}.}
-
 \item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
+
+\item{check_save_out}{Output of \code{check_save_path()}.}
 }
 \value{
 \code{VRanges} object
@@ -25,4 +26,10 @@ write_sumstats(
 \description{
 Write sum stats file to disk
 }
-\keyword{internal}
+\examples{
+ eduAttainOkbay <- MungeSumstats::read_sumstats(path = system.file("extdata","eduAttainOkbay.txt",
+                                                                   package="MungeSumstats"))
+MungeSumstats::write_sumstats(sumstats_dt=eduAttainOkbay, 
+                              save_path=tempfile(fileext=".tsv.gz"), 
+                              sep="\t")
+}

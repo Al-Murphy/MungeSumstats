@@ -14,4 +14,7 @@ read_sumstats(path, nThread = 1)
 \description{
 Determine sum stats file type and reda them into memory
 }
-\keyword{internal}
+\examples{
+ eduAttainOkbay <- MungeSumstats::read_sumstats(path = system.file("extdata","eduAttainOkbay.txt",
+                                                                   package="MungeSumstats"))
+}

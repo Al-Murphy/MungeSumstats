@@ -1,8 +1,11 @@
 #' Determine sum stats file type and reda them into memory
 #'
 #' @inheritParams format_sumstats
-#' @keywords internal 
+#' @export 
 #' @importFrom data.table fread
+#' @examples
+#'  eduAttainOkbay <- MungeSumstats::read_sumstats(path = system.file("extdata","eduAttainOkbay.txt",
+#'                                                                    package="MungeSumstats"))
 read_sumstats <- function(path,   
                           nThread=1){
     header <- read_header(path = path)

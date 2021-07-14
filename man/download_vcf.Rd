@@ -6,7 +6,7 @@
 \usage{
 download_vcf(
   vcf_url,
-  vcf_dir,
+  vcf_dir = tempdir(),
   vcf_download = TRUE,
   download_method = "download.file",
   force_new = FALSE,
@@ -35,4 +35,6 @@ Ideally, we would use \href{https://github.com/MRCIEU/gwasvcf}{gwasvcf} instead
 but it hasn't been made available on CRAN or Bioconductor yet,
 so we can't include it as a dep.
 }
-\keyword{internal}
+\examples{
+out_paths <- download_vcf(vcf_url="https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz")
+}

@@ -4,7 +4,7 @@
 #' @inheritParams format_sumstats
 #' @keywords internal 
 check_save_path <- function(save_path,
-                            write_vcf=FALSE){
+                            write_vcf=FALSE){ 
     #### Add warning to users tha temp files arent actually saved ####
     if(dirname(save_path)==tempdir()){
         message("\n\n*****::WARNING::*****\n",
@@ -53,7 +53,10 @@ check_save_path <- function(save_path,
             sep = "\t"
             file_type = ".tsv"
         } 
-    } 
+    }  
+    #### Make sure dir exists 
+    dir.create(dirname(save_path), showWarnings = FALSE, recursive = TRUE) 
+    
     message("Formatted summary statistics will be saved to ==> ",save_path) 
     return(list(
         save_path=save_path,
