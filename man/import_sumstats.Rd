@@ -14,6 +14,7 @@ import_sumstats(
   quiet = TRUE,
   force_new = FALSE,
   nThread = 1,
+  parallel_across_ids = FALSE,
   ...
 )
 }
@@ -39,6 +40,9 @@ Change this to keep the raw VCF file on disk (e.g. \code{vcf_dir="./raw_vcf"}).}
 
 \item{nThread}{Number of threads to use for parallel processes.}
 
+\item{parallel_across_ids}{If \code{parallel_across_ids=TRUE} and \code{nThread>1},
+then each ID in \code{ids} will be processed in parallel.}
+
 \item{...}{Additional arguments to be passed to \code{MungeSumstats::format_sumstats}.}
 }
 \value{
@@ -59,6 +63,6 @@ ids <- (dplyr::arrange(metagwas, nsnp))$id[1:2]
 # datasets <- MungeSumstats::import_sumstats(ids = ids)
                                 
 #### Speed up with multi-threaded download via axel 
-# datasets <- MungeSumstats::import_sumstats(ids = ids,  download_method="axel", nThread=10)                                           
+# datasets <- MungeSumstats::import_sumstats(ids = ids,  download_method="axel", nThread=10, parallel_across_ids=TRUE)                                           
 
 }

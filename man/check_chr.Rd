@@ -4,7 +4,13 @@
 \alias{check_chr}
 \title{Ensure all SNPs on specified chromosomes are removed}
 \usage{
-check_chr(sumstats_dt, path, rmv_chr, make_uppercase = TRUE)
+check_chr(
+  sumstats_dt,
+  path,
+  rmv_chr,
+  make_uppercase = TRUE,
+  rmv_chrPrefix = TRUE
+)
 }
 \arguments{
 \item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
@@ -15,6 +21,8 @@ check_chr(sumstats_dt, path, rmv_chr, make_uppercase = TRUE)
 Use NULL if no filtering necessary. Default is X, Y and mitochondrial.}
 
 \item{make_uppercase}{Make X and Y chromosomes uppercase.}
+
+\item{rmv_chrPrefix}{Remove "chr" or "CHR" from chromosome names.}
 }
 \value{
 list containing sumstats_dt, the modified summary statistics data table object

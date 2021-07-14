@@ -14,6 +14,7 @@ format_sumstats(
   N_std = 5,
   N_dropNA = TRUE,
   rmv_chr = c("X", "Y", "MT"),
+  rmv_chrPrefix = TRUE,
   on_ref_genome = TRUE,
   strand_ambig_filter = FALSE,
   allele_flip_check = TRUE,
@@ -44,7 +45,10 @@ Argument is case-insensitive. Default is NULL which infers the reference genome 
 
 \item{N_std}{numeric The number of standard deviations above the mean a SNP's N is needed to be removed. Default is 5.}
 
-\item{rmv_chr}{vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary. Default is X, Y and mitochondrial.}
+\item{rmv_chr}{vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary.
+Default is X, Y and mitochondrial.}
+
+\item{rmv_chrPrefix}{Remove "chr" or "CHR" from chromosome names.}
 
 \item{on_ref_genome}{Binary Should a check take place that all SNPs are on the reference genome by SNP ID. Default is TRUE.}
 

@@ -32,7 +32,9 @@
 #' @param analysis_trait If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL.
 #' @param INFO_filter numeric The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9.
 #' @param N_std numeric The number of standard deviations above the mean a SNP's N is needed to be removed. Default is 5.
-#' @param rmv_chr vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary. Default is X, Y and mitochondrial. 
+#' @param rmv_chr vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary. 
+#' Default is X, Y and mitochondrial. 
+#' @param rmv_chrPrefix Remove "chr" or "CHR" from chromosome names. 
 #' @param on_ref_genome Binary Should a check take place that all SNPs are on the reference genome by SNP ID. Default is TRUE.
 #' @param strand_ambig_filter Binary Should SNPs with strand-ambiguous alleles be removed. Default is FALSE.
 #' @param allele_flip_check Binary Should the allele columns be checked against reference genome to infer if flipping is necessary. Default is TRUE.
@@ -59,6 +61,7 @@ format_sumstats <- function(path,
                             N_std=5, 
                             N_dropNA=TRUE,
                             rmv_chr=c("X","Y","MT"),
+                            rmv_chrPrefix=TRUE,
                             on_ref_genome=TRUE,
                             strand_ambig_filter=FALSE, 
                             allele_flip_check=TRUE,
@@ -269,7 +272,8 @@ format_sumstats <- function(path,
     #### Check 24: check that no snps are on specific chromosomes ####
     sumstats_return <- check_chr(sumstats_dt = sumstats_return$sumstats_dt,
                                  path = path, 
-                                 rmv_chr = rmv_chr)
+                                 rmv_chr = rmv_chr,
+                                 rmv_chrPrefix = rmv_chrPrefix)
     
     #### Check 26: check that all snps are not strand ambiguous ####
     sumstats_return <- check_strand_ambiguous(sumstats_dt = sumstats_return$sumstats_dt, 

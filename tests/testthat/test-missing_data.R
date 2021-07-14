@@ -6,6 +6,7 @@ test_that("Handle missing data", {
   eduAttainOkbay_missing <- eduAttainOkbay
   eduAttainOkbay_missing[3] <-
     "rs12987662\t2\t100821548\tA\tC\t0.3787\t0.027\t0.003\t"
+  problem_snp <- "rs9320913"
   #write the Educational Attainment GWAS to a temp file for testing
   writeLines(eduAttainOkbay_missing,con = file)
   #Run MungeSumstats code
@@ -13,7 +14,8 @@ test_that("Handle missing data", {
                                                 on_ref_genome = FALSE,
                                                 strand_ambig_filter=FALSE,
                                                 bi_allelic_filter=FALSE,
-                                                allele_flip_check=FALSE)
+                                                allele_flip_check=FALSE,
+                                                sort_coordinates = FALSE)
   reformatted_lines <- readLines(reformatted)
   #Should equal org apart from this one line
   writeLines(eduAttainOkbay,con = file)
@@ -21,8 +23,10 @@ test_that("Handle missing data", {
                                         on_ref_genome = FALSE,
                                         strand_ambig_filter=FALSE,
                                         bi_allelic_filter=FALSE,
-                                        allele_flip_check=FALSE)
+                                        allele_flip_check=FALSE, 
+                                        sort_coordinates = FALSE)
   org_lines <- readLines(org)
+  rsid_index <- grep(problem_snp, org_lines, ignore.case = TRUE) 
   #reordering in function, line 3 is now 58
-  expect_equal(reformatted_lines,org_lines[-58])
+  expect_equal(reformatted_lines, org_lines[-rsid_index])
 })

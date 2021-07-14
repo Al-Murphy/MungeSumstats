@@ -1,12 +1,14 @@
 test_that("non-biallelic SNPs are removed", {
   file <- tempfile()
   #Update ID from line 3 to check it is deleted -
-  # rs1871109 is non-biallelic
+  # rs9320913 is non-biallelic
+  problem_snp <- "rs9320913"
   eduAttainOkbay <- readLines(system.file("extdata","eduAttainOkbay.txt",
                                           package="MungeSumstats"))
   eduAttainOkbay_missing <- eduAttainOkbay
   eduAttainOkbay_missing[3] <-
     "rs1871109\t6\t98584733\tA\tC\t0.5019\t0.024\t0.003\t2.457e-19"
+ 
   #write the Educational Attainment GWAS to a temp file for testing
   writeLines(eduAttainOkbay_missing,con = file)
   ## The following test uses more than 2GB of memory, which is more
@@ -28,11 +30,11 @@ test_that("non-biallelic SNPs are removed", {
                                           strand_ambig_filter=FALSE,
                                           bi_allelic_filter=TRUE,
                                           allele_flip_check=FALSE)
-    org_lines <- readLines(org)
-    all.equal(reformatted_lines, org_lines[-58]) 
+    org_lines <- readLines(org) 
     
+    rsid_index <- grep(problem_snp, org_lines, ignore.case = T) 
     #reordering in function, line 3 rs9320913 is now 58
-    testthat:: expect_equal(setequal(reformatted_lines,org_lines[-58]),TRUE)
+    testthat:: expect_equal(setequal(reformatted_lines,org_lines[-rsid_index]),TRUE)
   } else{
     testthat::expect_equal(is_32bit_windows,TRUE)
   }

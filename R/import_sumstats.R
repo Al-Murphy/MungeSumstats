@@ -10,6 +10,8 @@
 #' Change this to keep the raw VCF file on disk (e.g. \code{vcf_dir="./raw_vcf"}). 
 #' @param save_dir Directory to save formatted summary statistics in.
 #' @param force_new Overwrite a previously downloaded VCF with the same path name.
+#' @param parallel_across_ids If \code{parallel_across_ids=TRUE} and \code{nThread>1}, 
+#' then each ID in \code{ids} will be processed in parallel. 
 #' @param ... Additional arguments to be passed to \code{MungeSumstats::format_sumstats}.
 #' @inheritParams format_sumstats
 #' @inheritParams downloader 
@@ -25,7 +27,7 @@
 #' # datasets <- MungeSumstats::import_sumstats(ids = ids)
 #'                                 
 #' #### Speed up with multi-threaded download via axel 
-#' # datasets <- MungeSumstats::import_sumstats(ids = ids,  download_method="axel", nThread=10)                                           
+#' # datasets <- MungeSumstats::import_sumstats(ids = ids,  download_method="axel", nThread=10, parallel_across_ids=TRUE)                                           
 #' 
 #' @return Either a named list of data objects or paths, 
 #' depending on the arguments passed to \code{format_sumstats}.
@@ -39,16 +41,23 @@ import_sumstats <- function(ids,
                             quiet=TRUE, 
                             force_new=FALSE,
                             nThread=1, 
+                            parallel_across_ids=FALSE,
                             ...){  
     # vcf_dir=tempdir(); vcf_download=TRUE;download_method="axel";quiet=FALSE;force_new=FALSE;nThread=10; ids=c("ieu-a-1124","ieu-a-1125"); id=ids[1]; ref_genome=NULL;
-    
+    start_all <- Sys.time()
     ids <- unique(ids)
-    message("Processing ",length(ids)," datasets from Open GWAS.")  
+    message("Processing ",length(ids)," datasets from Open GWAS.")   
+    #### Handle parallelization parameters ####
+    if(parallel_across_ids) {
+        nThread_acrossIDs <- nThread
+        nThread <- 1
+        message("`parallel_across_ids=TRUE` : most messages will be hidden in this mode.")
+    } else {nThread_acrossIDs <- 1}
     
-    ouputs <- lapply(ids, function(id){ 
+    ouputs <- parallel::mclapply(ids, function(id){ 
         out <-  tryCatch(expr = {
             start <- Sys.time()
-            message("\n========== Processing dataset : ",id," ==========\n") 
+            message_parallel("\n========== Processing dataset : ",id," ==========\n") 
             vcf_url <- file.path("https://gwas.mrcieu.ac.uk/files",id,paste0(id,".vcf.gz")) 
             #### Optional:: download VCF ####
             vcf_paths <- download_vcf(vcf_url=vcf_url,
@@ -72,6 +81,10 @@ import_sumstats <- function(ids,
         }, error = function(e){message(e);return(as.character(e))}) 
          
         return(out)
-    }) %>% `names<-`(ids)
+    }, mc.cores = nThread_acrossIDs) %>% `names<-`(ids)
+    
+    end_all <- Sys.time() 
+    message("\n",id," : Done with all processing in ",
+            round(difftime(end_all, start_all, units='mins'), 2)," minutes.")
     return(ouputs) 
 }

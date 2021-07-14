@@ -37,7 +37,10 @@ Imports:
     BSgenome,
     Biostrings,
     VariantAnnotation,
-    stringr
+    stringr, 
+    googleAuthR,
+    httr,
+    jsonlite 
 biocViews: 
     SNP, WholeGenome, Genetics, ComparativeGenomics, 
     GenomeWideAssociation, GenomicVariation, Preprocessing 
@@ -60,9 +63,6 @@ Suggests:
     testthat (>= 3.0.0),
     UpSetR,
     BiocStyle,
-    covr, 
-    googleAuthR,
-    httr,
-    jsonlite 
+    covr
 Config/testthat/edition: 3
 VignetteBuilder: knitr

@@ -6,6 +6,7 @@ test_that("Handle small p-values", {
   eduAttainOkbay_missing <- eduAttainOkbay
   eduAttainOkbay_missing[3] <-
     "rs9320913\t6\t98584733\tA\tC\t0.5019\t0.024\t0.003\t2.457e-339" 
+  problem_snp <- "rs9320913"
   #write the Educational Attainment GWAS to a temp file for testing
   writeLines(eduAttainOkbay_missing,con = file)
   #Run MungeSumstats code
@@ -23,6 +24,7 @@ test_that("Handle small p-values", {
                                         bi_allelic_filter=FALSE,
                                         allele_flip_check=FALSE)
   org_lines <- readLines(org)
+  rsid_index <- grep(problem_snp, org_lines, ignore.case = TRUE) 
   #rows get reordered in function so 3 -> 58
-  expect_equal(reformatted_lines[-58],org_lines[-58])
+  expect_equal(reformatted_lines[-rsid_index],org_lines[-rsid_index])
 })

@@ -11,12 +11,14 @@ test_that("Multi-trait GWAS handled correctly", {
   writeLines(multi_trait,con = file)
   #Run MungeSumstats code
   reformatted <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37",
-                                                  analysis_trait="smk",
-                                                  on_ref_genome = FALSE,
-                                                  strand_ambig_filter=FALSE,
-                                                  bi_allelic_filter=FALSE,
-                                                  allele_flip_check=FALSE)
-  reformatted_res <- readLines(reformatted)
+                                                analysis_trait="smk",
+                                                on_ref_genome = FALSE,
+                                                strand_ambig_filter=FALSE,
+                                                bi_allelic_filter=FALSE,
+                                                allele_flip_check=FALSE, 
+                                                sort_coordinates = FALSE, 
+                                                rmv_chrPrefix = FALSE)
+  reformatted_res <- readLines(reformatted) 
   #check manually
   multi_trait_res_smk <- c(
     "SNP\tCHR\tBP\tPOSITION_HG18\tA1\tA2\tEAF_HAPMAPCEU\tN\tBETA\tSTDERR\tP\tN_NONSMK\tEFFECT_NONSMK\tSTDERR_NONSMK\tP_VALUE_NONSMK",

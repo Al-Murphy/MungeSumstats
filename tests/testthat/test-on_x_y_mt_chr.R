@@ -10,6 +10,8 @@ test_that("SNPs on X,Y,MT chromosome are removed", {
     "rs11712056\tY\t49914397\tT\tC\t0.5504\t0.024\t0.003\t3.304e-19"
   eduAttainOkbay_missing[5] <-
     "rs148734725\tMT\t49406708\tA\tG\t0.3078\t0.025\t0.003\t1.363e-18"
+  
+  problem_snp <- c("rs9320913","rs11712056","rs148734725")
   #write the Educational Attainment GWAS to a temp file for testing
   writeLines(eduAttainOkbay_missing,con = file)
   #Run MungeSumstats code
@@ -27,7 +29,8 @@ test_that("SNPs on X,Y,MT chromosome are removed", {
                                         bi_allelic_filter=FALSE,
                                         allele_flip_check=FALSE)
   org_lines <- readLines(org)
+  rsid_index <- grep(paste(problem_snp,collapse = "|"), org_lines, ignore.case = T) 
   #reordering in function, line 3,4,5 is now 28,58
   expect_equal(setequal(reformatted_lines,
-                          org_lines[-c(27,28,58)]),TRUE)
+                          org_lines[-rsid_index]),TRUE)
 })
