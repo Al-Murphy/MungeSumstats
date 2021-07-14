@@ -7,7 +7,7 @@
 preview_sumstats(save_path, nrows = 5L)
 }
 \arguments{
-\item{save_path}{File path to save formatted data. Defaults to \code{file.path("./formatted",basename(path),".tsv.gz")}.}
+\item{save_path}{File path to save formatted data. Defaults to \code{tempfile(fileext=".tsv.gz")}.}
 }
 \description{
 Preview formatted sum stats saved to disk

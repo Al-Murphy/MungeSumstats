@@ -24,7 +24,8 @@ validate_parameters(
 \arguments{
 \item{path}{Filepath for the summary statistics file to be formatted}
 
-\item{ref_genome}{name of the reference genome used for the GWAS (GRCh37 or GRCh38). Default is NULL which infers the reference genome from the data.}
+\item{ref_genome}{name of the reference genome used for the GWAS ("GRCh37" or "GRCh38").
+Argument is case-insensitive. Default is NULL which infers the reference genome from the data.}
 
 \item{convert_small_p}{Binary, should p-values < 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.}
 

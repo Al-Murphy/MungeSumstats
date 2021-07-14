@@ -41,6 +41,7 @@ gwasinfo <- function(id=NULL, access_token = check_access_token())
 #'
 #' @keywords internal
 #' @return access token string
+#' @importFrom googleAuthR gar_auth
 get_access_token <- function()
 {
     message("Using access token. For info on how this is used see logging_info()")
@@ -86,6 +87,7 @@ check_access_token <- function()
 #'
 #' @keywords internal
 #' @return vector of back compatible ids
+#' @importFrom dplyr tibble
 legacy_ids <- function(x)
 {
     if(is.null(x)) return(NULL)
@@ -148,6 +150,7 @@ legacy_ids <- function(x)
 #'
 #' @keywords internal
 #' @return httr response object
+#' @importFrom httr add_headers timeout DELETE GET POST 
 api_query <- function(path, query=NULL, access_token=check_access_token(), method="GET", silent=TRUE, encode="json", timeout=300)
 {
 	ntry <- 0
@@ -245,7 +248,10 @@ api_query <- function(path, query=NULL, access_token=check_access_token(), metho
 #' @param response Output from httr
 #'
 #' @keywords internal
-#' @return Parsed json output from query, often in form of data frame. If status code is not successful then return the actual response
+#' @return Parsed json output from query, often in form of data frame. 
+#' If status code is not successful then return the actual response.
+#' @importFrom jsonlite fromJSON
+#' @importFrom httr content status_code
 get_query_content <- function(response)
 {
 	if(httr::status_code(response) >= 200 & httr::status_code(response) < 300)

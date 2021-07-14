@@ -25,7 +25,8 @@
 #' }
 #' #returned location has the updated summary statistics file
 #' @param path Filepath for the summary statistics file to be formatted
-#' @param ref_genome name of the reference genome used for the GWAS (GRCh37 or GRCh38). Default is NULL which infers the reference genome from the data.
+#' @param ref_genome name of the reference genome used for the GWAS ("GRCh37" or "GRCh38"). 
+#' Argument is case-insensitive. Default is NULL which infers the reference genome from the data.
 #' @param convert_small_p Binary, should p-values < 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.
 #' @param convert_n_int Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE.
 #' @param analysis_trait If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL.
@@ -38,7 +39,7 @@
 #' @param bi_allelic_filter Binary Should non-biallelic SNPs be removed. Default is TRUE.
 #' @param sort_coordinates Whether to sort by coordinates.
 #' @param nThread Number of threads to use for parallel processes. 
-#' @param save_path File path to save formatted data. Defaults to \code{file.path("./formatted",basename(path),".tsv.gz")}.
+#' @param save_path File path to save formatted data. Defaults to \code{tempfile(fileext=".tsv.gz")}.
 #' @param write_vcf Whether to write as VCF (TRUE) or tabular file (FALSE). 
 #' @param tabix_index Index the formatted summary statistics with \href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying. 
 #' @param return_data Return \code{data.table} directly to user. Otherwise, return the path to the save data. Default is FALSE.
@@ -64,7 +65,7 @@ format_sumstats <- function(path,
                             bi_allelic_filter=TRUE,
                             sort_coordinates=TRUE,
                             nThread=1,
-                            save_path=file.path("./formatted",basename(path),".tsv.gz"),
+                            save_path=tempfile(fileext=".tsv.gz"),
                             write_vcf=FALSE,
                             tabix_index=FALSE,
                             return_data=FALSE,
@@ -86,7 +87,7 @@ format_sumstats <- function(path,
   }
   
   #### Recognize previously formatted files ####
-  if(file.exists(check_save_out$save_path) & force_new==FALSE){
+  if(file.exists(check_save_out$save_path) && force_new==FALSE){
     message("Importing previously formatted file. Set `force_new=TRUE` to override this.")
     message("    ",check_save_out$save_path)
   } else { 
@@ -115,15 +116,16 @@ format_sumstats <- function(path,
     ####  Check 2: Check input format and import ####
     sumstats_return <- list()
     sumstats_return[["sumstats_dt"]] <- read_sumstats(path = path, 
-                                                      nThread = nThread)
-    
-    report_summary(sumstats_dt = sumstats_return$sumstats_dt)
-    orig_dims <- dim(sumstats_return$sumstats_dt)
+                                                      nThread = nThread) 
     
     #### Check 3:Standardise headers for all OS ####
     sumstats_return <-
       standardise_sumstats_column_headers_crossplatform(sumstats_dt = sumstats_return$sumstats_dt,
-                                                        path =  path)
+                                                        path =  path) 
+    
+    ### Report the number of SNP/CHR/etc. before any filtering (but after header formatting)
+    report_summary(sumstats_dt = sumstats_return$sumstats_dt)
+    orig_dims <- dim(sumstats_return$sumstats_dt)
     
     #### Check 4: Check if multiple models used or multiple traits tested in GWAS ####
     sumstats_return <-  
@@ -134,7 +136,7 @@ format_sumstats <- function(path,
     #### Infer reference genome if necessary ####
     if(is.null(ref_genome))
       ref_genome <- get_genome_build(sumstats = sumstats_return$sumstats_dt, 
-                                     standardise_headers = FALSE, 
+                                     standardise_headers = FALSE, ## Already done previously
                                      sampled_snps = 10000)
     
     #### Check 5: Check for uniformity in SNP col - no mix of rs/missing rs/chr:bp ####

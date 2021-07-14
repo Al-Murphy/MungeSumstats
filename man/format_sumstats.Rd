@@ -20,7 +20,7 @@ format_sumstats(
   bi_allelic_filter = TRUE,
   sort_coordinates = TRUE,
   nThread = 1,
-  save_path = file.path("./formatted", basename(path), ".tsv.gz"),
+  save_path = tempfile(fileext = ".tsv.gz"),
   write_vcf = FALSE,
   tabix_index = FALSE,
   return_data = FALSE,
@@ -31,7 +31,8 @@ format_sumstats(
 \arguments{
 \item{path}{Filepath for the summary statistics file to be formatted}
 
-\item{ref_genome}{name of the reference genome used for the GWAS (GRCh37 or GRCh38). Default is NULL which infers the reference genome from the data.}
+\item{ref_genome}{name of the reference genome used for the GWAS ("GRCh37" or "GRCh38").
+Argument is case-insensitive. Default is NULL which infers the reference genome from the data.}
 
 \item{convert_small_p}{Binary, should p-values < 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.}
 
@@ -57,7 +58,7 @@ format_sumstats(
 
 \item{nThread}{Number of threads to use for parallel processes.}
 
-\item{save_path}{File path to save formatted data. Defaults to \code{file.path("./formatted",basename(path),".tsv.gz")}.}
+\item{save_path}{File path to save formatted data. Defaults to \code{tempfile(fileext=".tsv.gz")}.}
 
 \item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
 

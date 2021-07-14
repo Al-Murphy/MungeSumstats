@@ -7,7 +7,7 @@
 check_save_path(save_path, write_vcf = FALSE)
 }
 \arguments{
-\item{save_path}{File path to save formatted data. Defaults to \code{file.path("./formatted",basename(path),".tsv.gz")}.}
+\item{save_path}{File path to save formatted data. Defaults to \code{tempfile(fileext=".tsv.gz")}.}
 
 \item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
 }

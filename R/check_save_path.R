@@ -5,6 +5,23 @@
 #' @keywords internal 
 check_save_path <- function(save_path,
                             write_vcf=FALSE){
+    #### Add warning to users tha temp files arent actually saved ####
+    if(dirname(save_path)==tempdir()){
+        message("\n\n*****::WARNING::*****\n",
+                "- Formatted results will be saved to `tempdir()` by default.\n",
+                "- This means all formatted summary stats will be deleted upon ending the R session.\n",
+                "- To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),\n",
+                "  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.\n",
+                "*****::******::*****",
+                "\n") 
+    }
+    
+    #### Do a bit of QC to get the full path ####
+    ## Expand "~" into full path bc it isn't recognized in certain envs (eg Python)
+    save_path <- path.expand(save_path) 
+    ## Expand relative path "./" into absolute path bc it's less ambiguous 
+    save_path <- gsub("^[.]/",paste0(getwd(),"/"),save_path)
+    
     suffixes <- supported_suffixes()
     if(is.null(save_path)){ 
         save_path <- paste0(tempfile(),".tsv.gz")

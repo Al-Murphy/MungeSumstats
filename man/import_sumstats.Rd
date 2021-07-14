@@ -8,7 +8,7 @@ import_sumstats(
   ids,
   vcf_dir = tempdir(),
   vcf_download = TRUE,
-  save_dir = "./formatted",
+  save_dir = tempdir(),
   write_vcf = FALSE,
   download_method = "download.file",
   quiet = TRUE,
@@ -20,7 +20,10 @@ import_sumstats(
 \arguments{
 \item{ids}{List of Open GWAS study IDs (e.g. \code{c("prot-a-664", "ieu-b-4760")}).}
 
-\item{vcf_dir}{Where to download the original VCF from Open GWAS.}
+\item{vcf_dir}{Where to download the original VCF from Open GWAS.
+\emph{WARNING:} This is set to \code{tempdir()} by default.
+This means the raw (pre-formatted) VCFs be deleted upon ending the R session.
+Change this to keep the raw VCF file on disk (e.g. \code{vcf_dir="./raw_vcf"}).}
 
 \item{vcf_download}{Download the original VCF from Open GWAS.}
 
@@ -39,14 +42,16 @@ import_sumstats(
 \item{...}{Additional arguments to be passed to \code{MungeSumstats::format_sumstats}.}
 }
 \value{
-Either a named list of data objects or paths, depending on the arguments passed to
+Either a named list of data objects or paths,
+depending on the arguments passed to \code{format_sumstats}.
 }
 \description{
 Import full genome-wide GWAS summary statistics from Open GWAS
 }
 \examples{
 ### Search by criteria
-metagwas <- MungeSumstats::find_sumstats()
+metagwas <- MungeSumstats::find_sumstats(traits = c("parkinson","alzheimer"),
+                                         min_sample_size = 5000)
 ### Only use a subset for testing purposes                                           
 ids <- (dplyr::arrange(metagwas, nsnp))$id[1:2]    
 

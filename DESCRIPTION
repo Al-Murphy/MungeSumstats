@@ -28,6 +28,7 @@ BugReports: https://github.com/neurogenomics/MungeSumstats/issues
 License: Artistic-2.0
 Depends: R(>= 4.0)
 Imports: 
+    magrittr, 
     data.table,
     utils,
     dplyr, 
@@ -59,6 +60,9 @@ Suggests:
     testthat (>= 3.0.0),
     UpSetR,
     BiocStyle,
-    covr
+    covr, 
+    googleAuthR,
+    httr,
+    jsonlite 
 Config/testthat/edition: 3
 VignetteBuilder: knitr

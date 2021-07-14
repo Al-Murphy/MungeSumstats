@@ -14,6 +14,7 @@
 #' @usage data("sumstatsColHeaders")
 "sumstatsColHeaders"
 
+
 #' GWAS Educational Attainment Okbay 2016 - Subset
 #'
 #' @description GWAS Summary Statistics on Educational Attainment by Okbay et 
@@ -52,6 +53,7 @@
 #' @format txt document with 94 items
 NULL
 
+
 #' GWAS Amyotrophic lateral sclerosis ieu open GWAS project - Subset
 #'
 #' @description VCF (VCFv4.2) of the GWAS Amyotrophic lateral sclerosis ieu 
@@ -78,3 +80,4 @@ NULL
 #' @format vcf document with 528 items relating to 99 SNPs
 #' @details NULL
 NULL
+
