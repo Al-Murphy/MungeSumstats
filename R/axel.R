@@ -3,7 +3,9 @@
 #'
 #' R wrapper for axel, which enables multi-threaded download of a single large file.
 #' 
-#' @inheritParams downloader 
+#' @return Path where the file has been downloaded
+#' 
+#' @inheritParams downloader  
 #' @family downloaders
 #' @seealso \url{https://github.com/axel-download-accelerator/axel/}
 #' @keywords internal
@@ -17,7 +19,7 @@ axel <- function(input_url,
                  # conda_env=NULL,
                  check_certificates=F){
     message("Downloading with axel.")
-    dir.create(output_path, showWarnings = F, recursive = T)
+    dir.create(output_path, showWarnings = FALSE, recursive = TRUE)
     out_file <- file.path(output_path,basename(input_url))
     if(force_overwrite){
         message("+ Overwriting pre-existing file.")

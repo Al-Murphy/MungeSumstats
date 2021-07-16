@@ -34,6 +34,6 @@ from the data
 
 eduAttainOkbayPth <- system.file("extdata","eduAttainOkbay.txt", 
                                  package="MungeSumstats")
-ref_genome <- get_genome_build(eduAttainOkbayPth)                                  
+ref_genome <- get_genome_build(sumstats=eduAttainOkbayPth)                                  
 
 }

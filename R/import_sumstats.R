@@ -26,9 +26,11 @@
 #' ### Default usage   
 #' # datasets <- MungeSumstats::import_sumstats(ids = ids)
 #'                                 
-#' #### Speed up with multi-threaded download via axel 
-#' # datasets <- MungeSumstats::import_sumstats(ids = ids,  download_method="axel", nThread=10, parallel_across_ids=TRUE)                                           
-#' 
+#' #### Speed up with multi-threaded download via axel
+#' # datasets <- MungeSumstats::import_sumstats(ids = ids,
+#' #                                            download_method="axel",
+#' #                                            nThread=10,
+#' #                                            parallel_across_ids=TRUE)
 #' @return Either a named list of data objects or paths, 
 #' depending on the arguments passed to \code{format_sumstats}.
 #' @export 
@@ -84,7 +86,7 @@ import_sumstats <- function(ids,
     }, mc.cores = nThread_acrossIDs) %>% `names<-`(ids)
     
     end_all <- Sys.time() 
-    message("\n",id," : Done with all processing in ",
+    message("\nDone with all processing in ",
             round(difftime(end_all, start_all, units='mins'), 2)," minutes.")
     return(ouputs) 
 }

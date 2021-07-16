@@ -6,6 +6,7 @@
 validate_parameters <- function(path,
                                 ref_genome, 
                                 convert_small_p,
+                                compute_z,
                                 convert_n_int, 
                                 analysis_trait, 
                                 INFO_filter,
@@ -16,7 +17,8 @@ validate_parameters <- function(path,
                                 strand_ambig_filter,
                                 allele_flip_check, 
                                 bi_allelic_filter,
-                                write_vcf){
+                                write_vcf,
+                                ldsc_format){
   # Checking if the file exists should happen first
   if (!file.exists(path) && !startsWith(path,"https://gwas.mrcieu.ac.uk"))
     stop("Path to GWAS sumstats is not valid")
@@ -66,6 +68,8 @@ validate_parameters <- function(path,
     stop("N_dropNA must be either TRUE or FALSE")
   if(!is.logical(convert_small_p))
     stop("convert_small_p must be either TRUE or FALSE")
+  if(!is.logical(compute_z))
+    stop("compute_z must be either TRUE or FALSE") 
   if(!is.logical(convert_n_int))
     stop("convert_n_int must be either TRUE or FALSE")
   if(!is.logical(on_ref_genome))
@@ -78,6 +82,8 @@ validate_parameters <- function(path,
     stop("bi_allelic_filter must be either TRUE or FALSE")
   if(!is.logical(write_vcf))
     stop("write_vcf must be either TRUE or FALSE")
+  if(!is.logical(ldsc_format))
+    stop("ldsc_format must be either TRUE or FALSE")
   
   
   #Check numeric

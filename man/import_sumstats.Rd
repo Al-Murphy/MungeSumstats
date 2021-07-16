@@ -62,7 +62,9 @@ ids <- (dplyr::arrange(metagwas, nsnp))$id[1:2]
 ### Default usage   
 # datasets <- MungeSumstats::import_sumstats(ids = ids)
                                 
-#### Speed up with multi-threaded download via axel 
-# datasets <- MungeSumstats::import_sumstats(ids = ids,  download_method="axel", nThread=10, parallel_across_ids=TRUE)                                           
-
+#### Speed up with multi-threaded download via axel
+# datasets <- MungeSumstats::import_sumstats(ids = ids,
+#                                            download_method="axel",
+#                                            nThread=10,
+#                                            parallel_across_ids=TRUE)
 }

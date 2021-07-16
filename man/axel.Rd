@@ -32,6 +32,9 @@ axel(
 
 \item{check_certificates}{check_certificates}
 }
+\value{
+Path where the file has been downloaded
+}
 \description{
 R wrapper for axel, which enables multi-threaded download of a single large file.
 }

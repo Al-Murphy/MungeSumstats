@@ -13,6 +13,7 @@
 # #' @importFrom BSgenome.Hsapiens.NCBI.GRCh38 BSgenome.Hsapiens.NCBI.GRCh38
 # #' @importFrom BSgenome.Hsapiens.1000genomes.hs37d5 BSgenome.Hsapiens.1000genomes.hs37d5
 load_ref_genome_data <- function(snps, ref_genome, msg=NULL){
+  message("Loading reference genome data.")
   SNP = NULL
   SNP_LOC_DATA <- load_snp_loc_data(ref_genome, msg = msg)
   #Get correct ref genome

@@ -5,7 +5,7 @@ test_that("Filter SNPs where INFO<0.9", {
                                           package="MungeSumstats"))
   writeLines(eduAttainOkbay,con = file)
   #read it in and make N
-  sumstats_dt <- data.table::fread(file)
+  sumstats_dt <- data.table::fread(file, nThread = 1)
   #Add N column and make it not an integer
   set.seed(101)
   sumstats_dt[,INFO:=runif(nrow(sumstats_dt))*2]
@@ -19,6 +19,6 @@ test_that("Filter SNPs where INFO<0.9", {
                                                 strand_ambig_filter=FALSE,
                                                 bi_allelic_filter=FALSE,
                                                 allele_flip_check=FALSE)
-  res_dt <- data.table::fread(reformatted)
-  expect_equal(all(!rmv_snps %in% res_dt$SNP),TRUE)
+  res_dt <- data.table::fread(reformatted, nThread = 1)
+  testthat::expect_equal(all(!rmv_snps %in% res_dt$SNP),TRUE)
 })

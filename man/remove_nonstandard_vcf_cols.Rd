@@ -6,6 +6,9 @@
 \usage{
 remove_nonstandard_vcf_cols(sample_id, sumstats_file, keep_extra_cols = FALSE)
 }
+\value{
+sumstats_file
+}
 \description{
 Remove non-standard VCF columns
 }

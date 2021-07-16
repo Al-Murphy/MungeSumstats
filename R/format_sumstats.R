@@ -32,6 +32,7 @@
 #' @param analysis_trait If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL.
 #' @param INFO_filter numeric The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9.
 #' @param N_std numeric The number of standard deviations above the mean a SNP's N is needed to be removed. Default is 5.
+#' @param N_dropNA Drop rows where N is missing. 
 #' @param rmv_chr vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary. 
 #' Default is X, Y and mitochondrial. 
 #' @param rmv_chrPrefix Remove "chr" or "CHR" from chromosome names. 
@@ -45,6 +46,9 @@
 #' @param write_vcf Whether to write as VCF (TRUE) or tabular file (FALSE). 
 #' @param tabix_index Index the formatted summary statistics with \href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying. 
 #' @param return_data Return \code{data.table} directly to user. Otherwise, return the path to the save data. Default is FALSE.
+#' @param force_new If a formatted file of the same names as \code{save_path} exists, 
+#' formatting will be skipped and this file will be imported instead (default). 
+#' Set \code{force_new=TRUE} to override this. 
 #' @inheritParams convert_sumstats 
 #' @importFrom data.table fread
 #' @importFrom data.table fwrite
@@ -55,6 +59,7 @@
 format_sumstats <- function(path,
                             ref_genome=NULL, 
                             convert_small_p=TRUE,
+                            compute_z=FALSE,
                             convert_n_int=TRUE, 
                             analysis_trait=NULL,
                             INFO_filter=0.9, 
@@ -73,6 +78,7 @@ format_sumstats <- function(path,
                             tabix_index=FALSE,
                             return_data=FALSE,
                             return_format="data.table",
+                            ldsc_format=FALSE,
                             force_new=FALSE
                             ){  
   #### Setup multi-threading ####
@@ -101,6 +107,7 @@ format_sumstats <- function(path,
     validate_parameters(path=path,
                         ref_genome=ref_genome, 
                         convert_small_p=convert_small_p, 
+                        compute_z=compute_z,
                         convert_n_int=convert_n_int, 
                         analysis_trait=analysis_trait, 
                         INFO_filter=INFO_filter, 
@@ -111,7 +118,21 @@ format_sumstats <- function(path,
                         strand_ambig_filter=strand_ambig_filter, 
                         allele_flip_check=allele_flip_check,
                         bi_allelic_filter=bi_allelic_filter,
-                        write_vcf=write_vcf)
+                        write_vcf=write_vcf,
+                        ldsc_format=ldsc_format)
+    
+    { 
+      #### If ldsc_format=TRUE, make sure all arguments comply with with.
+      check_ldsc <-  check_ldsc_format(ldsc_format=ldsc_format, 
+                                       convert_n_int=convert_n_int, 
+                                       allele_flip_check=allele_flip_check, 
+                                       compute_z=compute_z)
+      convert_n_int <- check_ldsc$convert_n_int; 
+      allele_flip_check <- check_ldsc$allele_flip_check;
+      compute_z <- check_ldsc$compute_z;
+    }
+    
+    
     # This almost surely modifies the file (since most sumstats from different
     # studies are differently formatted), so it makes more sense to just make a
     # temporary file <tmp>, and return the address of the temp 
@@ -148,7 +169,7 @@ format_sumstats <- function(path,
                       path = path, 
                       ref_genome = ref_genome)
     
-    #### Check 28: Check for combined allele column (A1 and A2) ####
+    #### Check 6: Check for combined allele column (A1 and A2) ####
     sumstats_return <- 
       check_allele_merge(sumstats_dt = sumstats_return$sumstats_dt, 
                          path = path)
@@ -237,7 +258,7 @@ format_sumstats <- function(path,
     sumstats_return <- 
       check_small_p_val(sumstats_dt = sumstats_return$sumstats_dt, 
                         path = path, 
-                        convert_small_p = convert_small_p)
+                        convert_small_p = convert_small_p) 
     
     #### Check 18: check is N column not all integers, if so round it up ####
     sumstats_return <- 
@@ -290,7 +311,12 @@ format_sumstats <- function(path,
     rsids <- sumstats_return$rsids #update rsids
     sumstats_return$rsids <- NULL
     
-    #### Check 28: Sort rows by genomic coordinates ####
+    #### Check 28: Compute Z-score ####
+    sumstats_return <- check_zscore(sumstats_dt = sumstats_return$sumstats_dt, 
+                                    compute_z = compute_z, 
+                                    force_new = TRUE)
+    
+    #### Check 29: Sort rows by genomic coordinates ####
     sumstats_return$sumstats_dt <- sort_coords(sumstats_dt =  sumstats_return$sumstats_dt, 
                                                sort_coordinates = sort_coordinates)
     

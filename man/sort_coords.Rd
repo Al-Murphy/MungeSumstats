@@ -13,6 +13,9 @@ sort_coords(sumstats_dt, sort_coordinates = TRUE)
 
 \item{make_ordered}{Make CHR into an ordered factor to ensure they go from 1-22, X, Y.}
 }
+\value{
+Sorted sumstats_dt
+}
 \description{
 Sort sum stats by genomic coordinates
 }

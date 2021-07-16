@@ -6,6 +6,7 @@
 #' @return list containing sumstats_dt, the modified summary statistics data table object
 #' @keywords internal
 #' @importFrom data.table :=
+#' @importFrom methods is
 check_n_int <- function(sumstats_dt, 
                         path, 
                         convert_n_int){

@@ -3,6 +3,7 @@
 #' @param header Header of the GWAS summary statistics file. 
 #' @return Whether the file is vcf or not
 #' @keywords internal 
+#' @importFrom methods is
 check_vcf <- function(header){
   if(is(header,"VCFHeader")) return(TRUE)
   P = LP = INFO = NULL

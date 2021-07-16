@@ -32,7 +32,7 @@ test_that("non-biallelic SNPs are removed", {
                                           allele_flip_check=FALSE)
     org_lines <- readLines(org) 
     
-    rsid_index <- grep(problem_snp, org_lines, ignore.case = T) 
+    rsid_index <- grep(problem_snp, org_lines, ignore.case = TRUE) 
     #reordering in function, line 3 rs9320913 is now 58
     testthat:: expect_equal(setequal(reformatted_lines,org_lines[-rsid_index]),TRUE)
   } else{

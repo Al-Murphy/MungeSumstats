@@ -13,7 +13,7 @@
 #' 
 #' eduAttainOkbayPth <- system.file("extdata","eduAttainOkbay.txt", 
 #'                                  package="MungeSumstats")
-#' ref_genome <- get_genome_build(eduAttainOkbayPth)                                  
+#' ref_genome <- get_genome_build(sumstats=eduAttainOkbayPth)                                  
 #'
 #' @export
 #' @importFrom data.table setDT
@@ -21,6 +21,7 @@ get_genome_build <- function(sumstats,
                              nThread = 1,
                              sampled_snps = 10000, 
                              standardise_headers=TRUE){
+  seqnames = NULL ### Add this to avoid confusing BiocCheck
   message("Inferring genome build.")
   #if not a data.table, must be a path
   if(!is.data.frame(sumstats)){
@@ -72,10 +73,10 @@ get_genome_build <- function(sumstats,
   sumstats[,CHR:=as.character(CHR)]
   #Now check which genome build has more matches to data
   num_37 <- 
-    nrow(snp_loc_data_37[sumstats, , on = c(SNP="SNP", pos="BP",seqnames="CHR"),
+    nrow(snp_loc_data_37[sumstats, , on = c("SNP"="SNP", "pos"="BP","seqnames"="CHR"),
                           nomatch=FALSE])
   num_38 <- 
-    nrow(snp_loc_data_38[sumstats, , on = c(SNP="SNP", pos="BP",seqnames="CHR"),
+    nrow(snp_loc_data_38[sumstats, , on = c("SNP"="SNP", "pos"="BP","seqnames"="CHR"),
                          nomatch=FALSE])
   if(num_37>num_38){
     ref_gen_num <- num_37

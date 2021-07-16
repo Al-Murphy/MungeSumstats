@@ -9,6 +9,9 @@ read_header(path, n = 2, skip_vcf_metadata = FALSE)
 \arguments{
 \item{path}{Filepath for the summary statistics file to be formatted}
 }
+\value{
+First \code{n} lines of the VCF header
+}
 \description{
 Read in file header
 }

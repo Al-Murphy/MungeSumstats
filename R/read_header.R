@@ -1,5 +1,7 @@
 #' Read in file header
 #'
+#' @return First \code{n} lines of the VCF header 
+#'
 #' @inheritParams format_sumstats
 #' @inheritParams readLines 
 #' @importFrom VariantAnnotation scanVcfHeader

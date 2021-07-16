@@ -1,5 +1,7 @@
 #' Remove non-standard VCF columns
 #'
+#' @return sumstats_file
+#'
 #' @inheritParams format_sumstats
 #' @inheritParams readLines 
 #' @importFrom VariantAnnotation scanVcfHeader

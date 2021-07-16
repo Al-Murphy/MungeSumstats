@@ -1,6 +1,7 @@
 #' Check if save path is appropriate
 #'
-#' Returns corrected \code{save_path}, the file type, and the separator.
+#' @return Corrected \code{save_path}, the file type, and the separator.
+#' 
 #' @inheritParams format_sumstats
 #' @keywords internal 
 check_save_path <- function(save_path,

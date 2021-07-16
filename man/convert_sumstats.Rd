@@ -2,7 +2,7 @@
 % Please edit documentation in R/convert_sumstats.R
 \name{convert_sumstats}
 \alias{convert_sumstats}
-\title{Convert sumstats to desired object type}
+\title{Convert summary statistics to desired object type}
 \usage{
 convert_sumstats(
   sumstats_dt,
@@ -14,7 +14,10 @@ convert_sumstats(
 \code{"data.table"}, \code{"GenomicRanges"} or
 \code{"VRanges"}(default is \code{"data.table"}).}
 }
+\value{
+Summary statistics in the converted format
+}
 \description{
-Convert sumstats to desired object type
+Convert summary statistics to desired object type
 }
 \keyword{internal}

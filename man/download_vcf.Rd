@@ -15,6 +15,8 @@ download_vcf(
 )
 }
 \arguments{
+\item{vcf_url}{Remote URL to VCF file.}
+
 \item{vcf_dir}{Where to download the original VCF from Open GWAS.
 \emph{WARNING:} This is set to \code{tempdir()} by default.
 This means the raw (pre-formatted) VCFs be deleted upon ending the R session.
@@ -30,11 +32,15 @@ Change this to keep the raw VCF file on disk (e.g. \code{vcf_dir="./raw_vcf"}).}
 
 \item{nThread}{Number of threads to parallelize over.}
 }
+\value{
+List containing the paths to the downloaded VCF and its index file.
+}
 \description{
 Ideally, we would use \href{https://github.com/MRCIEU/gwasvcf}{gwasvcf} instead
 but it hasn't been made available on CRAN or Bioconductor yet,
 so we can't include it as a dep.
 }
 \examples{
-out_paths <- download_vcf(vcf_url="https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz")
+vcf_url = "https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz"
+out_paths <- MungeSumstats::download_vcf(vcf_url=vcf_url)
 }

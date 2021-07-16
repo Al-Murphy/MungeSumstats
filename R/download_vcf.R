@@ -6,11 +6,15 @@
 #' but it hasn't been made available on CRAN or Bioconductor yet, 
 #' so we can't include it as a dep.
 #' 
+#' @return List containing the paths to the downloaded VCF and its index file.
+#' 
+#' @param vcf_url Remote URL to VCF file.
 #' @inheritParams downloader
 #' @inheritParams import_sumstats
 #' @export
 #' @examples 
-#' out_paths <- download_vcf(vcf_url="https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz")
+#' vcf_url = "https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz"
+#' out_paths <- MungeSumstats::download_vcf(vcf_url=vcf_url)
 download_vcf <- function(vcf_url,
                          vcf_dir=tempdir(),
                          vcf_download=TRUE,
@@ -37,8 +41,9 @@ download_vcf <- function(vcf_url,
                                     quiet = quiet,
                                     nThread = nThread)
             #### Download tabix index file
-            message("Downloading VCF index ==> ",paste0(vcf_url,".tbi"))   
-            index_path <- downloader(input_url = paste0(vcf_url,".tbi"), 
+            index_url <- paste0(vcf_url,".tbi")
+            message("Downloading VCF index ==> ",index_url)   
+            index_path <- downloader(input_url = index_url, 
                                      output_path = vcf_dir, 
                                      download_method = download_method,
                                      force_overwrite = force_new,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_sumstats.R
 \name{read_sumstats}
 \alias{read_sumstats}
-\title{Determine sum stats file type and reda them into memory}
+\title{Determine summary statistics file type and reda them into memory}
 \usage{
 read_sumstats(path, nThread = 1)
 }
@@ -11,8 +11,11 @@ read_sumstats(path, nThread = 1)
 
 \item{nThread}{Number of threads to use for parallel processes.}
 }
+\value{
+\code{data.table} of formatted summary statistics
+}
 \description{
-Determine sum stats file type and reda them into memory
+Determine summary statistics file type and reda them into memory
 }
 \examples{
  eduAttainOkbay <- MungeSumstats::read_sumstats(path = system.file("extdata","eduAttainOkbay.txt",

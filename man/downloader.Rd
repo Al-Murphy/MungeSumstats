@@ -48,6 +48,8 @@ Passed to \code{download.file}. Default: \code{30*60} (30min).}
 \description{
 R wrapper for \code{"axel"} (multi-threaded) and
 \code{"download.file"} (single-threaded) download functions.
+
+@return Local path to downloaded file.
 }
 \seealso{
 Other downloaders: 

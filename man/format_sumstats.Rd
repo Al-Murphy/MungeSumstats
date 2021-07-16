@@ -8,6 +8,7 @@ format_sumstats(
   path,
   ref_genome = NULL,
   convert_small_p = TRUE,
+  compute_z = FALSE,
   convert_n_int = TRUE,
   analysis_trait = NULL,
   INFO_filter = 0.9,
@@ -26,6 +27,7 @@ format_sumstats(
   tabix_index = FALSE,
   return_data = FALSE,
   return_format = "data.table",
+  ldsc_format = FALSE,
   force_new = FALSE
 )
 }
@@ -44,6 +46,8 @@ Argument is case-insensitive. Default is NULL which infers the reference genome 
 \item{INFO_filter}{numeric The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9.}
 
 \item{N_std}{numeric The number of standard deviations above the mean a SNP's N is needed to be removed. Default is 5.}
+
+\item{N_dropNA}{Drop rows where N is missing.}
 
 \item{rmv_chr}{vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary.
 Default is X, Y and mitochondrial.}
@@ -73,6 +77,10 @@ Default is X, Y and mitochondrial.}
 \item{return_format}{Object type to convert to;
 \code{"data.table"}, \code{"GenomicRanges"} or
 \code{"VRanges"}(default is \code{"data.table"}).}
+
+\item{force_new}{If a formatted file of the same names as \code{save_path} exists,
+formatting will be skipped and this file will be imported instead (default).
+Set \code{force_new=TRUE} to override this.}
 }
 \value{
 The address for the modified sumstats file

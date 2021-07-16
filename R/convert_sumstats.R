@@ -1,5 +1,7 @@
-#' Convert sumstats to desired object type
+#' Convert summary statistics to desired object type
 #'
+#' @return Summary statistics in the converted format
+#' 
 #' @inheritParams format_sumstats
 #' @param return_format Object type to convert to;
 #'  \code{"data.table"}, \code{"GenomicRanges"} or 

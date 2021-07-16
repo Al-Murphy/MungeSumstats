@@ -6,11 +6,14 @@
 #' 
 #' By default, returns metadata for all studies currently in Open GWAS database.
 #' 
+#' @return (Filtered) GWAS metadata table. 
+#' 
 #' @param ids List of Open GWAS study IDs (e.g. \code{c("prot-a-664", "ieu-b-4760")}).
 #' @param traits List of traits (e.g. \code{c("parkinson", "Alzheimer")}).
 #' @param years List of years (e.g. \code{seq(2015,2021)} or \code{c(2010, 2012, 2021)}).
 #' @param consortia List of consortia (e.g. \code{c("MRC-IEU","Neale Lab")}.
 #' @param authors List of authors (e.g. \code{c("Elsworth","Kunkle","Neale")}).
+#' @param populations List of populations (e.g. \code{c("European","Asian")}).
 #' @param categories List of categories (e.g. \code{c("Binary","Continuous","Disease","Risk factor"))}).
 #' @param subcategories List of categories (e.g. \code{c("neurological","Immune","cardio"))}).
 #' @param builds List of genome builds (e.g. \code{c("hg19","grch37")}).
@@ -22,7 +25,7 @@
 #' @param include_NAs Include datasets with missing metadata for size criteria  
 #' (i.e. \code{min_sample_size}, \code{min_ncase}, or \code{min_ncontrol}). 
 #' @inheritParams check_access_token
-#' 
+#' @inheritParams gwasinfo
 #' @examples
 #' ### By ID
 #' metagwas <- MungeSumstats::find_sumstats(ids=c("ieu-b-4760","prot-a-1725","prot-a-664" ))
@@ -95,8 +98,12 @@ find_sumstats <- function(ids=NULL,
             if(!is.null(min_nsnp)) metagwas <- subset(metagwas, nsnp>=min_nsnp)
         } 
     } 
-    ### Sort results 
-    metagwas <- metagwas %>% dplyr::arrange(trait, desc(sample_size),desc(ncase),desc(ncontrol), desc(year))
+    ### Sort results   
+    metagwas <- data.table::data.table(metagwas)
+    data.table::setorderv(metagwas, 
+                          cols=c("trait", "sample_size","ncase","ncontrol","year"),
+                          order=c(1,-1,-1,-1,-1))
+    
     
     message("Found ",formatC(nrow(metagwas),big.mark = ",")," GWAS datasets matching search criteria across:",
             "\n   - ",formatC(length(unique(metagwas$trait)),big.mark = ",")," trait(s)",

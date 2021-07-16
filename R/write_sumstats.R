@@ -1,8 +1,8 @@
 #' Write sum stats file to disk
 #'
-#' @param sumstats_dt data table obj of the summary statistics file for the GWAS.
-#' @param check_save_out Output of \code{check_save_path()}.
-#' @param write_vcf Whether to write as VCF (TRUE) or tabular file (FALSE).
+#' @param sumstats_dt data table obj of the summary statistics file for the GWAS. 
+#' @inheritParams data.table::fread 
+#' @inheritParams format_sumstats
 #' @return \code{VRanges} object
 #' @export
 #' @importFrom GenomicRanges makeGRangesFromDataFrame

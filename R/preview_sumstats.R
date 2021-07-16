@@ -1,7 +1,9 @@
 #' Preview formatted sum stats saved to disk
 #'
+#' @return NULL
 #' @inheritParams format_sumstats
 #' @keywords internal 
+#' @importFrom utils capture.output
 preview_sumstats <- function(save_path,
                              nrows=5L){
     message("Succesfully finished preparing sumstats file, preview:")

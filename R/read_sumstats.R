@@ -1,4 +1,6 @@
-#' Determine sum stats file type and reda them into memory
+#' Determine summary statistics file type and reda them into memory
+#'
+#' @return \code{data.table} of formatted summary statistics 
 #'
 #' @inheritParams format_sumstats
 #' @export 

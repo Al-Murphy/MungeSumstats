@@ -40,7 +40,8 @@ Imports:
     stringr, 
     googleAuthR,
     httr,
-    jsonlite 
+    jsonlite,
+    methods 
 biocViews: 
     SNP, WholeGenome, Genetics, ComparativeGenomics, 
     GenomeWideAssociation, GenomicVariation, Preprocessing 
@@ -51,8 +52,7 @@ Suggests:
     SNPlocs.Hsapiens.dbSNP144.GRCh37,
     SNPlocs.Hsapiens.dbSNP144.GRCh38,
     BSgenome.Hsapiens.1000genomes.hs37d5,
-    BSgenome.Hsapiens.NCBI.GRCh38,
-    methods, 
+    BSgenome.Hsapiens.NCBI.GRCh38, 
     BiocGenerics,
     IRanges, 
     GenomeInfoDb,

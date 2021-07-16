@@ -4,6 +4,8 @@
 #'
 #' R wrapper for \code{"axel"} (multi-threaded) and
 #'  \code{"download.file"} (single-threaded) download functions. 
+#'  
+#'  @return Local path to downloaded file. 
 #' 
 #' @param input_url input_url.
 #' @param output_path output_path.
@@ -54,7 +56,7 @@ downloader <- function(input_url,
         } else {
             message("+ downloader:: axel not installed.\n",
                     "For Mac users, please install via brew in the command line (`brew install axel`)\n",
-                    "or visit https://github.com/axel-download-accelerator/axel for more details");
+                    "or visit axel GitHub repo for more details");
             message("downloader:: Defaulting to download.file")
             download_method <- "download.file"
         }

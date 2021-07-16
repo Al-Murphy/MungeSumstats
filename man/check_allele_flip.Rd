@@ -2,29 +2,57 @@
 % Please edit documentation in R/check_allele_flip.R
 \name{check_allele_flip}
 \alias{check_allele_flip}
-\title{Ensure A1 & A2 are correctly named, if GWAS constructed as Risk/nonrisk alleles this will need to be converted}
+\title{Ensure A1 & A2 are correctly named, if GWAS constructed as
+Risk/Nonrisk alleles this will need to be converted to Reference/Alternative.}
 \usage{
-check_allele_flip(sumstats_dt, path, ref_genome, rsids, allele_flip_check)
+check_allele_flip(
+  sumstats_dt,
+  path,
+  ref_genome,
+  rsids,
+  allele_flip_check,
+  keepEA = FALSE,
+  standardise_headers = FALSE
+)
 }
 \arguments{
-\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
+\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS.}
 
-\item{path}{Filepath for the summary statistics file to be formatted}
+\item{path}{Filepath for the summary statistics file to be formatted.}
 
-\item{ref_genome}{name of the reference genome used for the GWAS (GRCh37 or GRCh38)}
+\item{ref_genome}{name of the reference genome used for
+the GWAS ("GRCh37" or "GRCh38").}
 
-\item{rsids}{datatable of snpsById, filtered to SNPs of interest if loaded already. Or else NULL}
+\item{rsids}{\code{data.table} of snpsById, filtered to SNPs of
+interest if loaded already. Or else NULL.}
 
-\item{allele_flip_check}{Binary Should the allele columns be chacked against reference genome to infer if flipping is necessary. Default is TRUE}
+\item{allele_flip_check}{Binary Should the allele columns be chacked against
+reference genome to infer if flipping is necessary. Default is TRUE.}
+
+\item{keepEA}{Add a column "EA" to record which allele was the effect allele
+in the original summary statistics.}
+
+\item{standardise_headers}{Run \code{standardise_sumstats_column_headers_crossplatform} first.}
 }
 \value{
 A list containing two data tables:
 \itemize{
-\item \code{sumstats_dt}: the modified summary statistics data table object
-\item \code{rsids}: snpsById, filtered to SNPs of interest if loaded already. Or else NULL
+\item \code{sumstats_dt}: the modified summary statistics \code{data.table} object.
+\item \code{rsids}: snpsById, filtered to SNPs of interest if loaded already. Or else NULL.
 }
 }
 \description{
-Ensure A1 & A2 are correctly named, if GWAS constructed as Risk/nonrisk alleles this will need to be converted
+Ensure A1 & A2 are correctly named, if GWAS constructed as
+Risk/Nonrisk alleles this will need to be converted to Reference/Alternative.
+}
+\examples{
+path <- system.file("extdata","eduAttainOkbay.txt", package="MungeSumstats")
+sumstats_dt <- MungeSumstats::read_sumstats(path = path)
+sumstats_return <- check_allele_flip(sumstats_dt = sumstats_dt, 
+                                     path=path, 
+                                     ref_genome="GRCh37",
+                                     rsids=NULL,
+                                     allele_flip_check=TRUE,
+                                     standardise_headers=TRUE) 
 }
 \keyword{internal}

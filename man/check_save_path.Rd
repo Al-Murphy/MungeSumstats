@@ -11,7 +11,10 @@ check_save_path(save_path, write_vcf = FALSE)
 
 \item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
 }
+\value{
+Corrected \code{save_path}, the file type, and the separator.
+}
 \description{
-Returns corrected \code{save_path}, the file type, and the separator.
+Check if save path is appropriate
 }
 \keyword{internal}

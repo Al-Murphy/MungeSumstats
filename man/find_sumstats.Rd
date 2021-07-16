@@ -34,6 +34,8 @@ find_sumstats(
 
 \item{authors}{List of authors (e.g. \code{c("Elsworth","Kunkle","Neale")}).}
 
+\item{populations}{List of populations (e.g. \code{c("European","Asian")}).}
+
 \item{categories}{List of categories (e.g. \code{c("Binary","Continuous","Disease","Risk factor"))}).}
 
 \item{subcategories}{List of categories (e.g. \code{c("neurological","Immune","cardio"))}).}
@@ -52,6 +54,11 @@ find_sumstats(
 
 \item{include_NAs}{Include datasets with missing metadata for size criteria
 (i.e. \code{min_sample_size}, \code{min_ncase}, or \code{min_ncontrol}).}
+
+\item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data}
+}
+\value{
+(Filtered) GWAS metadata table.
 }
 \description{
 For each  argument, searches for any datasets matching

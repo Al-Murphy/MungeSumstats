@@ -8,6 +8,7 @@ validate_parameters(
   path,
   ref_genome,
   convert_small_p,
+  compute_z,
   convert_n_int,
   analysis_trait,
   INFO_filter,
@@ -18,7 +19,8 @@ validate_parameters(
   strand_ambig_filter,
   allele_flip_check,
   bi_allelic_filter,
-  write_vcf
+  write_vcf,
+  ldsc_format
 )
 }
 \arguments{
@@ -36,6 +38,8 @@ Argument is case-insensitive. Default is NULL which infers the reference genome 
 \item{INFO_filter}{numeric The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9.}
 
 \item{N_std}{numeric The number of standard deviations above the mean a SNP's N is needed to be removed. Default is 5.}
+
+\item{N_dropNA}{Drop rows where N is missing.}
 
 \item{rmv_chr}{vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary.
 Default is X, Y and mitochondrial.}

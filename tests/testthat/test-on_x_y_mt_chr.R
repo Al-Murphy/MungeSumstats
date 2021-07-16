@@ -29,7 +29,7 @@ test_that("SNPs on X,Y,MT chromosome are removed", {
                                         bi_allelic_filter=FALSE,
                                         allele_flip_check=FALSE)
   org_lines <- readLines(org)
-  rsid_index <- grep(paste(problem_snp,collapse = "|"), org_lines, ignore.case = T) 
+  rsid_index <- grep(paste(problem_snp,collapse = "|"), org_lines, ignore.case = TRUE) 
   #reordering in function, line 3,4,5 is now 28,58
   expect_equal(setequal(reformatted_lines,
                           org_lines[-rsid_index]),TRUE)
