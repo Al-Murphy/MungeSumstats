@@ -53,6 +53,9 @@ Default is X, Y and mitochondrial.}
 \item{bi_allelic_filter}{Binary Should non-biallelic SNPs be removed. Default is TRUE.}
 
 \item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
+
+\item{ldsc_format}{Ensure that output format meets all requirements
+to be fed directly into LDSC without the need for additional munging.}
 }
 \value{
 No return

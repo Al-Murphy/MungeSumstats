@@ -7,6 +7,7 @@
 #' \href{https://github.com/bulik/ldsc/wiki/Summary-Statistics-File-Format}{LDSC documentation}.
 #' 
 #' @inheritParams format_sumats  
+#' @inheritParams check_zscore 
 #' 
 #' @return Formatted summary statistics  
 #' @source \href{https://github.com/bulik/ldsc}{LDSC GitHub}  

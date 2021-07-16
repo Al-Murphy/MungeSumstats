@@ -78,6 +78,9 @@ Default is X, Y and mitochondrial.}
 \code{"data.table"}, \code{"GenomicRanges"} or
 \code{"VRanges"}(default is \code{"data.table"}).}
 
+\item{ldsc_format}{Ensure that output format meets all requirements
+to be fed directly into LDSC without the need for additional munging.}
+
 \item{force_new}{If a formatted file of the same names as \code{save_path} exists,
 formatting will be skipped and this file will be imported instead (default).
 Set \code{force_new=TRUE} to override this.}

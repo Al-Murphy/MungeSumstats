@@ -46,6 +46,8 @@
 #' @param write_vcf Whether to write as VCF (TRUE) or tabular file (FALSE). 
 #' @param tabix_index Index the formatted summary statistics with \href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying. 
 #' @param return_data Return \code{data.table} directly to user. Otherwise, return the path to the save data. Default is FALSE.
+#' @param ldsc_format Ensure that output format meets all requirements 
+#' to be fed directly into LDSC without the need for additional munging. 
 #' @param force_new If a formatted file of the same names as \code{save_path} exists, 
 #' formatting will be skipped and this file will be imported instead (default). 
 #' Set \code{force_new=TRUE} to override this. 

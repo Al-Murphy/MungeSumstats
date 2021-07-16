@@ -9,6 +9,9 @@
 \usage{
 check_ldsc_format(ldsc_format, convert_n_int, allele_flip_check, compute_z)
 }
+\arguments{
+\item{compute_z}{Whether to include/compute Z-score in \code{sumstats_dt}.}
+}
 \value{
 Formatted summary statistics
 }
