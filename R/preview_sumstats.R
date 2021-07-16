@@ -1,6 +1,9 @@
 #' Preview formatted sum stats saved to disk
+#' 
+#' Prints the first \code{n} lines of the sum stats. 
 #'
-#' @return NULL
+#' @return No return
+#'  
 #' @inheritParams format_sumstats
 #' @keywords internal 
 #' @importFrom utils capture.output

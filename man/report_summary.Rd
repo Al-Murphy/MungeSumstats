@@ -9,7 +9,10 @@ report_summary(sumstats_dt, orig_dims = NULL)
 \arguments{
 \item{sumstats_dt}{data table obj of the summary statistics file for the GWAS.}
 }
+\value{
+No return
+}
 \description{
-Report info on current state of the summary statistics
+Prints report.
 }
 \keyword{internal}

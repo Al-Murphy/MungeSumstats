@@ -17,7 +17,7 @@ axel <- function(input_url,
                  quiet=TRUE,
                  alternate=TRUE,
                  # conda_env=NULL,
-                 check_certificates=F){
+                 check_certificates=FALSE){
     message("Downloading with axel.")
     dir.create(output_path, showWarnings = FALSE, recursive = TRUE)
     out_file <- file.path(output_path,basename(input_url))

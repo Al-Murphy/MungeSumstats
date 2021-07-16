@@ -9,7 +9,10 @@ preview_sumstats(save_path, nrows = 5L)
 \arguments{
 \item{save_path}{File path to save formatted data. Defaults to \code{tempfile(fileext=".tsv.gz")}.}
 }
+\value{
+No return
+}
 \description{
-Preview formatted sum stats saved to disk
+Prints the first \code{n} lines of the sum stats.
 }
 \keyword{internal}

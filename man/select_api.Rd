@@ -9,7 +9,10 @@ select_api(where = "public")
 \arguments{
 \item{where}{Which API to use. Choice between "local", "release", "test". Default = "local"}
 }
+\value{
+No return
+}
 \description{
-Toggle API address between development and release
+From \code{ieugwasr}.
 }
 \keyword{internal}

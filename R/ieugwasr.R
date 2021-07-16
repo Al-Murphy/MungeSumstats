@@ -271,12 +271,15 @@ get_query_content <- function(response)
 
 
 
-#' Toggle API address between development and release
+#' Toggle API address between development and release 
+#' 
+#' From \code{ieugwasr}.
+#'
+#' @return No return
 #'
 #' @param where Which API to use. Choice between "local", "release", "test". Default = "local"
 #'
 #' @keywords internal
-#' @return NULL
 select_api <- function(where="public")
 {
     url <- switch(where,

@@ -12,7 +12,7 @@ axel(
   force_overwrite = FALSE,
   quiet = TRUE,
   alternate = TRUE,
-  check_certificates = F
+  check_certificates = FALSE
 )
 }
 \arguments{

@@ -5,7 +5,7 @@
 #' R wrapper for \code{"axel"} (multi-threaded) and
 #'  \code{"download.file"} (single-threaded) download functions. 
 #'  
-#'  @return Local path to downloaded file. 
+#' @return Local path to downloaded file. 
 #' 
 #' @param input_url input_url.
 #' @param output_path output_path.
@@ -36,7 +36,7 @@ downloader <- function(input_url,
                        # conda_env=NULL,
                        timeout=30*60){
     if(download_method=="axel"){
-        axel_avail <- length(system("which axel",intern = T))!=0
+        axel_avail <- length(system("which axel",intern = TRUE))!=0
         if(axel_avail 
            # | !is.null(conda_env)
            ){
@@ -54,10 +54,9 @@ downloader <- function(input_url,
                 download_method <- "download.file"
             } 
         } else {
-            message("+ downloader:: axel not installed.\n",
-                    "For Mac users, please install via brew in the command line (`brew install axel`)\n",
-                    "or visit axel GitHub repo for more details");
-            message("downloader:: Defaulting to download.file")
+            message("axel not installed.\n",
+                    "For Mac users, please install via brew in the command line (`brew install axel`)");
+            message("Defaulting to download.file")
             download_method <- "download.file"
         }
         
