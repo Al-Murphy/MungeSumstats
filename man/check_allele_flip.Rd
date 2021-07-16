@@ -45,14 +45,4 @@ A list containing two data tables:
 Ensure A1 & A2 are correctly named, if GWAS constructed as
 Risk/Nonrisk alleles this will need to be converted to Reference/Alternative.
 }
-\examples{
-path <- system.file("extdata","eduAttainOkbay.txt", package="MungeSumstats")
-sumstats_dt <- MungeSumstats::read_sumstats(path = path)
-sumstats_return <- check_allele_flip(sumstats_dt = sumstats_dt, 
-                                     path=path, 
-                                     ref_genome="GRCh37",
-                                     rsids=NULL,
-                                     allele_flip_check=TRUE,
-                                     standardise_headers=TRUE) 
-}
 \keyword{internal}

@@ -4,6 +4,9 @@
 #' @keywords internal  
 report_summary <- function(sumstats_dt,
                            orig_dims=NULL){
+    ### Add this to avoid confusing BiocCheck 
+    P = NULL;
+    
     orig_dims_report <- if(!is.null(orig_dims)){
         paste0(" (",round(nrow(sumstats_dt)/orig_dims[1]*100,1),"% of original ",formatC(orig_dims[1],big.mark = ",", format = "fg")," rows)")
     } else {NULL};

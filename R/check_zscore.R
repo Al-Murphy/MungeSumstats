@@ -18,21 +18,16 @@
 #' 
 #' @param sumstats_dt data table obj of the summary statistics file for the GWAS.
 #' @param compute_z Whether to compute Z-score from P.
-#' @param force_new Z-score will be computed from "P" by default (\code{TRUE}).
-#' To use an existing Z column instead, set to \code{FALSE}. 
+#' @param force_new_z When a "Z" column already exists, it will be used by default. 
+#' To override and compute a new Z-score column from P set \code{force_new_z=TRUE}.  
 #' @param standardise_headers Run \code{standardise_sumstats_column_headers_crossplatform} first.  
 #' 
 #' @keywords internal
 #' @importFrom stats qchisq
-#' @examples 
-#' path <- system.file("extdata","eduAttainOkbay.txt", package="MungeSumstats")
-#' sumstats_dt <- MungeSumstats::read_sumstats(path = path)
-#' sumstats_return <- check_zscore(sumstats_dt=sumstats_dt, 
-#'                                 standardise_headers=TRUE)
 check_zscore <- function(sumstats_dt,  
                          compute_z=TRUE,
-                         force_new=TRUE,
-                         standardise_headers=FALSE){ 
+                         force_new_z=FALSE,
+                         standardise_headers=FALSE){   
     ## Set variables to be used in inplace data.table functions to NULL 
     ## to avoid confusing BiocCheck.
     Z = BETA = P = NULL;
@@ -44,7 +39,7 @@ check_zscore <- function(sumstats_dt,
     if(compute_z){
         # message("Checking Z-score.") 
         col_headers <- names(sumstats_dt)
-        if("Z" %in% col_headers && (!force_new)){
+        if("Z" %in% col_headers && (!force_new_z)){
             message("Keeping existing Z-score column.") 
         } else{
             message("Computing Z-score from P using formula: `sign(BETA)*sqrt(stats::qchisq(P,1,lower=FALSE)`")

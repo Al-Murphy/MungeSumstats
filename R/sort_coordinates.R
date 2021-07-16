@@ -9,6 +9,9 @@
 #' @importFrom data.table setorderv
 sort_coords <- function(sumstats_dt,
                         sort_coordinates=TRUE){  
+    ### Add this to avoid confusing BiocCheck 
+    CHR = NULL;
+    
     if(sort_coordinates){
         message("Sorting coordinates.")
         chr_order <- c(1:22,"X","Y")

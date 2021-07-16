@@ -1,6 +1,6 @@
 ---
-title: "OpenGWAS"
-author: "Brian M. Schilder"
+title: "Import GWAS summary statistics from Open GWAS"
+author: "Alan Murphy, Brian Schilder, and Nathan Skene"
 date: "`r Sys.Date()`"
 output:
   BiocStyle::html_document:
@@ -33,20 +33,23 @@ library(MungeSumstats)
 Query and import data from the MRC IEU [Open GWAS Project](https://gwas.mrcieu.ac.uk/).
 
 
-# Find GWAS datasets
+# Find GWAS datasets 
 
 ```{r}
 #### Search for datasets ####
 metagwas <- MungeSumstats::find_sumstats(traits = c("parkinson","alzheimer"), 
                                          min_sample_size = 5000)
 head(metagwas)
-ids <- (dplyr::arrange(metagwas, nsnp))$id[1:2]    
+ids <- (dplyr::arrange(metagwas, nsnp))$id  
 ```
 
 # Import full results
 
+You can supply `import_sumstats()` with a list of as many OpenGWAS IDs as you want, 
+but we'll just give one to save time. 
+
 ```{r}
-datasets <- MungeSumstats::import_sumstats(ids = ids)
+datasets <- MungeSumstats::import_sumstats(ids = ids[1])
 ```
 
 ## Summarise results 

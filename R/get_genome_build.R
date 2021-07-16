@@ -21,7 +21,8 @@ get_genome_build <- function(sumstats,
                              nThread = 1,
                              sampled_snps = 10000, 
                              standardise_headers=TRUE){
-  seqnames = NULL ### Add this to avoid confusing BiocCheck
+  seqnames = CHR = SNP = NULL; ### Add this to avoid confusing BiocCheck
+  
   message("Inferring genome build.")
   #if not a data.table, must be a path
   if(!is.data.frame(sumstats)){

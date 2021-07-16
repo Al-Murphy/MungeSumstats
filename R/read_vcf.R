@@ -24,6 +24,9 @@ read_vcf <- function(path,
     # 4. [Rsamtools](https://bioconductor.org/packages/release/bioc/html/Rsamtools.html) 
     ##################################
      
+    ### Add this to avoid confusing BiocCheck 
+    INFO = Pval = P = LP = NULL;
+    
     message("Reading VCF file.")  
     # fileformat <- gsub("^##fileformat=","",header[1])
     # #First get the name of data column, held in the ##SAMPLE row 
@@ -132,7 +135,7 @@ read_vcf <- function(path,
         #Now remove sample_id column
         sumstats_file[,(sample_id):=NULL]
     }
-    #MungeSumstats::sumstatsColHeaders contains mappings for
+    # sumstatsColHeaders contains mappings for
     #ID to SNP
     #EZ to Z
     #NC to N_CAS

@@ -7,7 +7,7 @@
 check_zscore(
   sumstats_dt,
   compute_z = TRUE,
-  force_new = TRUE,
+  force_new_z = FALSE,
   standardise_headers = FALSE
 )
 }
@@ -16,8 +16,8 @@ check_zscore(
 
 \item{compute_z}{Whether to compute Z-score from P.}
 
-\item{force_new}{Z-score will be computed from "P" by default (\code{TRUE}).
-To use an existing Z column instead, set to \code{FALSE}.}
+\item{force_new_z}{When a "Z" column already exists, it will be used by default.
+To override and compute a new Z-score column from P set \code{force_new_z=TRUE}.}
 
 \item{standardise_headers}{Run \code{standardise_sumstats_column_headers_crossplatform} first.}
 }
@@ -39,11 +39,5 @@ after optimizing for speed using \code{data.table}:
 
 \emph{NOTE}: \code{compute_z} is set to \code{TRUE} by default to ensure standardisation
 of the "Z" column (which can be computed differently in different datasets).
-}
-\examples{
-path <- system.file("extdata","eduAttainOkbay.txt", package="MungeSumstats")
-sumstats_dt <- MungeSumstats::read_sumstats(path = path)
-sumstats_return <- check_zscore(sumstats_dt=sumstats_dt, 
-                                standardise_headers=TRUE)
 }
 \keyword{internal}

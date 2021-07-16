@@ -1,6 +1,6 @@
 ---
-title: "Standardise the format of summary statistics from GWAS with *MungeSumstats*"
-author: "Alan Murphy and Nathan Skene"
+title: "Standardise GWAS summary statistics with *MungeSumstats*"
+author: "Alan Murphy, Brian Schilder, and Nathan Skene"
 date: "`r Sys.Date()`"
 output:
   BiocStyle::html_document:

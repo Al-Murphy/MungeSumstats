@@ -25,16 +25,6 @@
 #' @importFrom data.table set
 #' @importFrom data.table setorder
 #' @importFrom data.table copy
-#' 
-#' @examples
-#' path <- system.file("extdata","eduAttainOkbay.txt", package="MungeSumstats")
-#' sumstats_dt <- MungeSumstats::read_sumstats(path = path)
-#' sumstats_return <- check_allele_flip(sumstats_dt = sumstats_dt, 
-#'                                      path=path, 
-#'                                      ref_genome="GRCh37",
-#'                                      rsids=NULL,
-#'                                      allele_flip_check=TRUE,
-#'                                      standardise_headers=TRUE) 
 check_allele_flip <-  function(sumstats_dt, 
                                path, 
                                ref_genome, 
@@ -45,6 +35,15 @@ check_allele_flip <-  function(sumstats_dt,
   # GenomicSEM' allele flipping strategy:
   # https://github.com/GenomicSEM/GenomicSEM/blob/fc8f17a817a8022d6900acf41824d27b3676f9c4/R/munge.R#L151
   
+  # 
+  # path <- system.file("extdata","eduAttainOkbay.txt", package="MungeSumstats")
+  # sumstats_dt <- MungeSumstats::read_sumstats(path = path)
+  # sumstats_return <- check_allele_flip(sumstats_dt = sumstats_dt,
+  #                                      path=path,
+  #                                      ref_genome="GRCh37",
+  #                                      rsids=NULL,
+  #                                      allele_flip_check=TRUE,
+  #                                      standardise_headers=TRUE)
   
   message("Checking for alleles to flip.")
   ## Set variables to be used in inplace data.table functions to NULL 

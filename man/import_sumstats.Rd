@@ -50,21 +50,18 @@ Either a named list of data objects or paths,
 depending on the arguments passed to \code{format_sumstats}.
 }
 \description{
-Import full genome-wide GWAS summary statistics from Open GWAS
+Requires internet access to run.
 }
 \examples{
 ### Search by criteria
 metagwas <- MungeSumstats::find_sumstats(traits = c("parkinson","alzheimer"),
                                          min_sample_size = 5000)
 ### Only use a subset for testing purposes                                           
-ids <- (dplyr::arrange(metagwas, nsnp))$id[1:2]    
+ids <- (dplyr::arrange(metagwas, nsnp))$id    
 
 ### Default usage   
-# datasets <- MungeSumstats::import_sumstats(ids = ids)
-                                
-#### Speed up with multi-threaded download via axel
-# datasets <- MungeSumstats::import_sumstats(ids = ids,
-#                                            download_method="axel",
-#                                            nThread=10,
-#                                            parallel_across_ids=TRUE)
+## You can supply \code{import_sumstats()}
+## with a list of as many OpenGWAS IDs as you want, 
+## but we'll just give one to save time. 
+datasets <- MungeSumstats::import_sumstats(ids = ids[1]) 
 }

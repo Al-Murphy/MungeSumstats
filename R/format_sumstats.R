@@ -65,6 +65,7 @@ format_sumstats <- function(path,
                             ref_genome=NULL, 
                             convert_small_p=TRUE,
                             compute_z=FALSE,
+                            force_new_z=FALSE,
                             convert_n_int=TRUE, 
                             analysis_trait=NULL,
                             INFO_filter=0.9, 
@@ -319,7 +320,7 @@ format_sumstats <- function(path,
     #### Check 28: Compute Z-score ####
     sumstats_return <- check_zscore(sumstats_dt = sumstats_return$sumstats_dt, 
                                     compute_z = compute_z, 
-                                    force_new = TRUE)
+                                    force_new_z = force_new_z)
     
     #### Check 29: Sort rows by genomic coordinates ####
     sumstats_return$sumstats_dt <- sort_coords(sumstats_dt =  sumstats_return$sumstats_dt, 

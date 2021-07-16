@@ -11,9 +11,9 @@ check_save_path <- function(save_path,
         message("\n\n*****::WARNING::*****\n",
                 "- Formatted results will be saved to `tempdir()` by default.\n",
                 "- This means all formatted summary stats will be deleted upon ending the R session.\n",
-                "- To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),\n",
+                "- To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),",
                 "  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.\n",
-                "*****::******::*****",
+                "********************",
                 "\n") 
     }
     

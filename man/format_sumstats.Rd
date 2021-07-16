@@ -9,6 +9,7 @@ format_sumstats(
   ref_genome = NULL,
   convert_small_p = TRUE,
   compute_z = FALSE,
+  force_new_z = FALSE,
   convert_n_int = TRUE,
   analysis_trait = NULL,
   INFO_filter = 0.9,
@@ -40,6 +41,9 @@ Argument is case-insensitive. Default is NULL which infers the reference genome 
 \item{convert_small_p}{Binary, should p-values < 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.}
 
 \item{compute_z}{Whether to compute Z-score column from P.}
+
+\item{force_new_z}{When a "Z" column already exists, it will be used by default.
+To override and compute a new Z-score column from P set \code{force_new_z=TRUE}.}
 
 \item{convert_n_int}{Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE.}
 

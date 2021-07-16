@@ -11,10 +11,8 @@
 #' @keywords internal
 #' @importFrom data.table setnames
 standardise_sumstats_column_headers_crossplatform <-
-  function(sumstats_dt, path) {
-  message("Standardising column headers.")
-  # sumstatsColHeaders <- MungeSumstats:::sumstatsColHeaders
-  data("sumstatsColHeaders")
+  function(sumstats_dt, path) { 
+  message("Standardising column headers.")  
   message("First line of summary statistics file: ")
   msg <- paste0(names(sumstats_dt),split="\t")
   message(msg)

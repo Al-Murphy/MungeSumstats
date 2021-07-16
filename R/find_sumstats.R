@@ -55,9 +55,12 @@ find_sumstats <- function(ids=NULL,
                           min_nsnp=NULL,
                           include_NAs=FALSE,
                           access_token = check_access_token()){
+    
+    ## Set up fake empty variables to avoid confusing BiocCheck
+    sample_size = ncase = ncontrol = nsnp = NULL;
+    
     message("Collecting metadata from Open GWAS.")
-    if(!is.null(ids)) {
-        # ids <- c("ieu-b-4760","prot-a-1725","prot-a-664" )
+    if(!is.null(ids)) { 
         metagwas <- gwasinfo(id = ids, 
                              access_token = access_token)  
         ## gwasinfo() doesn't always return all columns for some reason
