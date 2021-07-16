@@ -28,6 +28,7 @@
 #' @param ref_genome name of the reference genome used for the GWAS ("GRCh37" or "GRCh38"). 
 #' Argument is case-insensitive. Default is NULL which infers the reference genome from the data.
 #' @param convert_small_p Binary, should p-values < 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.
+#' @param compute_z Whether to compute Z-score column from P. 
 #' @param convert_n_int Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE.
 #' @param analysis_trait If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL.
 #' @param INFO_filter numeric The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9.
@@ -52,6 +53,8 @@
 #' formatting will be skipped and this file will be imported instead (default). 
 #' Set \code{force_new=TRUE} to override this. 
 #' @inheritParams convert_sumstats 
+#' @inheritParams check_zscore 
+#' 
 #' @importFrom data.table fread
 #' @importFrom data.table fwrite
 #' @importFrom data.table setcolorder

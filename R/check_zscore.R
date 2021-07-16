@@ -17,7 +17,7 @@
 #' @return \code{list("sumstats_dt"=sumstats_dt)}
 #' 
 #' @param sumstats_dt data table obj of the summary statistics file for the GWAS.
-#' @param compute_z Whether to include/compute Z-score in \code{sumstats_dt}.
+#' @param compute_z Whether to compute Z-score from P.
 #' @param force_new Z-score will be computed from "P" by default (\code{TRUE}).
 #' To use an existing Z column instead, set to \code{FALSE}. 
 #' @param standardise_headers Run \code{standardise_sumstats_column_headers_crossplatform} first.  

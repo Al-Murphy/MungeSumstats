@@ -14,7 +14,7 @@ check_zscore(
 \arguments{
 \item{sumstats_dt}{data table obj of the summary statistics file for the GWAS.}
 
-\item{compute_z}{Whether to include/compute Z-score in \code{sumstats_dt}.}
+\item{compute_z}{Whether to compute Z-score from P.}
 
 \item{force_new}{Z-score will be computed from "P" by default (\code{TRUE}).
 To use an existing Z column instead, set to \code{FALSE}.}

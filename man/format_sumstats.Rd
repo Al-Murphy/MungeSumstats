@@ -39,6 +39,8 @@ Argument is case-insensitive. Default is NULL which infers the reference genome 
 
 \item{convert_small_p}{Binary, should p-values < 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.}
 
+\item{compute_z}{Whether to compute Z-score column from P.}
+
 \item{convert_n_int}{Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE.}
 
 \item{analysis_trait}{If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL.}
