@@ -16,8 +16,8 @@ check_effect_columns_nonzero <-
         sumstats_dt[,(effect_columns_dat):= lapply(.SD, as.numeric),
                         .SDcols = effect_columns_dat]
         #check if any equal 0 - use data table for speed
-        bad_ids <-
-            sumstats_dt[, Reduce(`|`, lapply(.SD, `==`, 0)),.SDcols = sel.col]
+        bad_ids <-sumstats_dt[, Reduce(`|`, lapply(.SD, `==`, 0)),
+                                .SDcols = effect_columns_dat]
         num_bad_ids <- sum(bad_ids)
         if(num_bad_ids>0){
             msg <- paste0(formatC(num_bad_ids,big.mark = ","), " SNPs",
