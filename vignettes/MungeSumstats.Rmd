@@ -68,6 +68,10 @@ analysis.
 are important prerequisites for downstream analysis like Linkage
 disequilibrium score regression (LDSC) and MAGMA.
 
+Moreover, *MungeSumstats* is efficiently written resulting in all reformatting
+and quality control checks completing in minutes for GWAS summary statistics
+with 500k SNPs on a standard desktop machine.
+
 Currently *MungeSumstats* only works on data from humans, as it uses
 human-based genome references.
 
@@ -110,7 +114,7 @@ Tests run by *MungeSumstats* include:
 -   Check for small p-values (lower than 5e-324)
 -   Check N column is an integer
 -   Check for SNPs with N greater than 5 times standard dev. plus the
-    mean\
+    mean
 -   Check SNPs are RS ID's
 -   Check for duplicated rows, based on SNP ID
 -   Check for duplicated rows, based on base-pair position
@@ -121,11 +125,32 @@ Tests run by *MungeSumstats* include:
 -   Check for non-biallelic SNPs (infer from reference genome)
 -   Check for allele flipping
 -   Check for SNPs on chromosome X, Y, and mitochondrial SNPs (MT)
+-   Check for z-score (Z) and impute if missing
+-   Check output format is LDSC ready
+
+Users can specify which checks to run on their data. A **note** on the allele 
+flipping check: **MungeSumstats** infers the effect allele will always be the 
+A2 allele, this is the approach done for 
+[IEU GWAS VCF](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7805039/) and has 
+such also been adopted here. This inference is first from the inputted file's 
+column headers however, the allele flipping check ensures this by comparing A1, 
+what should be the reference allele, to the reference genome. If a SNP's A1 
+DNA base doesn't match the reference genome but it's A2 (what should be the
+alternative allele) does, the alleles will be flipped along with the effect 
+information (e.g. Beta, Odds Ratio, signed summary statistics, Z-score*).
+
+*-by default the Z-score is assumed to be calculated off the effect size not 
+the P-value and so will be flipped. This can be changed by a user.
 
 If a test is failed, the user will be notified and if possible, the
 input will be corrected. The QC steps from the checks above can also be
 adjusted to suit the user's analysis, see
 `MungeSumstats::format_sumstats`.
+
+*MungeSumstats* can handle VCF, txt, tsv, csv file types or .gz/.bgz versions of
+these file types. The package also gives the suer the flexibility to export the
+reformatted file as tab-delimited, VCF or R native objects such as data.table,
+GRanges or VRanges objects.
 
 # Data
 
@@ -160,9 +185,12 @@ To standardise the summary statistics' file format, simply call
 You can specify which genome build was used in the GWAS(GRCh37 or
 GRCh38) or, as default, infer the genome build from the data.The
 reference genome is used for multiple checks like deriving missing data
-such SNP/BP/CHR/A1/A2 and for QC steps like removing non-biallelic SNPs
-or strand-ambiguous SNPs. The path to the reformatted summary statistics
-file is returned by the function call.
+such SNP/BP/CHR/A1/A2 and for QC steps like removing non-biallelic SNPs,
+strand-ambiguous SNPs or ensuring correct allele and direction of SNP effects. 
+The path to the reformatted summary statistics file can be returned by the 
+function call, the user can specify a location to save the file or the user can 
+return an R native object for the data: data.table, VRanges or GRanges 
+object.
 
 Note that for a number of the checks implored by *MungeSumstats* a
 reference genome is used. If your GWAS summary statistics file of
@@ -187,17 +215,12 @@ The Educational Attainment by Okbay GWAS summary statistics file is
 saved as a text document in the package's external data folder so we can
 just pass the file path to it straight to *MungeSumstats*.
 
-**\*\*\*\*\*::WARNING::\*\*\*\*\***
-
--   Formatted results will be saved to `tempdir()` by default.
-
--   This means all formatted summary stats will be deleted upon ending
-    the R session.
-
--   To keep formatted summary stats, change `save_path` ( e.g.
-    `file.path('./formatted',basename(path))`), or make sure to copy
-    files elsewhere after processing ( e.g.
-    `file.copy(save_path, './formatted/' )`.
+**NOTE** - By default, Formatted results will be saved to `tempdir()`. This 
+means all formatted summary stats will be deleted upon ending the R session if 
+not copied to a local file path. Otherwise, to keep formatted summary stats, 
+change `save_path` ( e.g.`file.path('./formatted',basename(path))`), or make 
+sure to copy files elsewhere after processing 
+( e.g.`file.copy(save_path, './formatted/' )`.
 
 ```{r, message=TRUE}
 eduAttainOkbayPth <- system.file("extdata","eduAttainOkbay.txt",
@@ -210,32 +233,46 @@ reformatted <-
 The arguments `format_sumstats` in that control the level of QC
 conducted by *MungeSumstats* are:
 
--   **convert_small_p** Binary, should p-values \< 5e-324 be converted
+-   **convert_small_p** Binary, should `p-values < 5e-324` be converted
     to 0? Small p-values pass the R limit and can cause errors with
     LDSC/MAGMA and should be converted. Default is TRUE.
--   **convert_n\_int** Binary, if N (the number of samples) is not an
+-   **convert_n_int** Binary, if N (the number of samples) is not an
     integer, should this be rounded? Default is TRUE. analysis_trait If
     multiple traits were studied, name of the trait for analysis from
     the GWAS. Default is NULL
 -   **INFO_filter** 0-1 The minimum value permissible of the imputation
     information score (if present in sumstatsfile). Default 0.9
+-   **pos_se** Binary Should the standard Error (SE) column be checked to ensure
+    it is greater than 0? Those that are, are removed (if present in sumstats 
+    file). Default TRUE.
+-   **effect_columns_nonzero** Binary should the effect columns in the data 
+    BETA,OR (odds ratio),LOG_ODDS,SIGNED_SUMSTAT be checked to ensure no SNP=0. 
+    Those that do are removed(if present in sumstats file). Default TRUE.    
 -   **N_std** Numeric, the number of standard deviations above the mean
-    a SNP's N is needed to be removed. Default is 5.
+    a SNP's N is needed to be removed. Default is 5. **N_dropNA** controls
+    whether the SNPs with a missing N value are dropped or not (Default is TRUE).
 -   **rmv_chr** vector or character The chromosomes on which the SNPs
     should be removed. Use NULL if no filtering necessary. Default is X,
-    Y and mitochondrial.
+    Y and mitochondrial.**rmv_chrPrefix** controls whether "chr"/"CHR" is 
+    removed from chromosome names (Default is TRUE).
 -   **on_ref_genome** Binary, should a check take place that all SNPs
-    are on the reference genome by SNP ID. Any that aren't on SNPs not
-    on the reference genome, will be corrected from the reference genome
-    (if possible) from the chromosome and base pair postion data.
-    Default is TRUE
+    are on the reference genome by SNP ID. Any SNPs not on the reference genome,
+    will be corrected from the reference genome (if possible) using the 
+    chromosome and base pair position data. Default is TRUE
 -   **strand_ambig_filter** Binary, should SNPs with strand-ambiguous
     alleles be removed. Default is FALSE
--   **allele_flip_check** Binary, should the allele columns be chacked
+-   **allele_flip_check** Binary, should the allele columns be checked
     against reference genome to infer if flipping is necessary. Default
-    is TRUE
+    is TRUE. **allele_flip_drop** controls whether the SNPs for which neither 
+    their A1 or A2 base pair values match a reference genome be dropped. Default
+    is TRUE. **allele_flip_drop** controls whether the Z-score value should be 
+    flipped along with effect columns (e.g. Beta). Default is TRUE. 
 -   **bi_allelic_filter** Binary, should non-biallelic SNPs be removed.
     Default is TRUE
+-   **snp_ids_are_rs_ids** Binary, should the SNP IDs inputted be inferred as RS
+    IDs or some arbitrary ID. Default is TRUE.    
+-   **ldsc_format** Ensure that output format meets all requirements to be 
+    passed directly into LDSC without the need for additional munging.     
 
 VCF files can also be standardised to the same format as other summary
 statistic files. A subset of the Amyotrophic lateral sclerosis GWAS from
@@ -253,6 +290,12 @@ reformatted_vcf <-
                                  ref_genome="GRCh37",
                                  INFO_filter=0.1)
 ```
+
+See our publication for further discussion of these checks:
+
+[Murphy and Skene. MungeSumstats: A Bioconductor package for the
+standardisation and quality control of many GWAS summary
+statistics](https://www.biorxiv.org/content/10.1101/2021.06.21.449239v1).
 
 # Future Enhancements
 

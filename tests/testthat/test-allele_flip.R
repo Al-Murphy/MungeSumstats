@@ -1,6 +1,6 @@
 test_that("Test that allele columns and effect columns flipped correctly", {
   file <- tempfile()
-  #The dataset's alleles need to be flipped as they relate to risk/nonrisk 
+  #The dataset's alleles need to be flipped to test
   eduAttainOkbay <- readLines(system.file("extdata","eduAttainOkbay.txt",
                                    package="MungeSumstats"))
   eduAttainOkbay_missing <- eduAttainOkbay
@@ -31,7 +31,7 @@ test_that("Test that allele columns and effect columns flipped correctly", {
                                           on_ref_genome = TRUE,
                                           strand_ambig_filter=FALSE,
                                           bi_allelic_filter=FALSE,
-                                          allele_flip_check=FALSE)
+                                          allele_flip_check=TRUE)
     org_lines <- readLines(org)
     #reordering in function
     expect_equal(setequal(reformatted_lines,org_lines),TRUE)

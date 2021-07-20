@@ -16,13 +16,15 @@ write_sumstats(
 \arguments{
 \item{sumstats_dt}{data table obj of the summary statistics file for the GWAS.}
 
-\item{save_path}{File path to save formatted data. Defaults to \code{tempfile(fileext=".tsv.gz")}.}
+\item{save_path}{File path to save formatted data. Defaults to
+\code{tempfile(fileext=".tsv.gz")}.}
 
 \item{sep}{ The separator between columns. Defaults to the character in the set \code{[,\\t |;:]} that separates the sample of rows into the most number of lines with the same number of fields. Use \code{NULL} or \code{""} to specify no separator; i.e. each line a single character column like \code{base::readLines} does.}
 
 \item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
 
-\item{tabix_index}{Index the formatted summary statistics with \href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
+\item{tabix_index}{Index the formatted summary statistics with
+\href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
 
 \item{nThread}{The number of threads to use. Experiment to see what works best for your data on your hardware.}
 }

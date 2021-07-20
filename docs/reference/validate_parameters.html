@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.32</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
       </span>
     </div>
 
@@ -99,6 +99,18 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/OpenGWAS.html">Import GWAS summary statistics from Open GWAS</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -137,15 +149,22 @@
   <span class='va'>path</span>,
   <span class='va'>ref_genome</span>,
   <span class='va'>convert_small_p</span>,
+  <span class='va'>compute_z</span>,
   <span class='va'>convert_n_int</span>,
   <span class='va'>analysis_trait</span>,
   <span class='va'>INFO_filter</span>,
   <span class='va'>N_std</span>,
+  <span class='va'>N_dropNA</span>,
   <span class='va'>rmv_chr</span>,
   <span class='va'>on_ref_genome</span>,
   <span class='va'>strand_ambig_filter</span>,
   <span class='va'>allele_flip_check</span>,
-  <span class='va'>bi_allelic_filter</span>
+  <span class='va'>allele_flip_drop</span>,
+  <span class='va'>allele_flip_z</span>,
+  <span class='va'>bi_allelic_filter</span>,
+  <span class='va'>write_vcf</span>,
+  <span class='va'>return_format</span>,
+  <span class='va'>ldsc_format</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -157,47 +176,95 @@
     </tr>
     <tr>
       <th>ref_genome</th>
-      <td><p>name of the reference genome used for the GWAS (GRCh37 or GRCh38)</p></td>
+      <td><p>name of the reference genome used for the GWAS ("GRCh37" or
+"GRCh38"). Argument is case-insensitive. Default is NULL which infers the
+reference genome from the data.</p></td>
     </tr>
     <tr>
       <th>convert_small_p</th>
-      <td><p>Binary, should p-values &lt; 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.</p></td>
+      <td><p>Binary, should p-values &lt; 5e-324 be converted to 0?
+Small p-values pass the R limit and can cause errors with LDSC/MAGMA and
+should be converted. Default is TRUE.</p></td>
+    </tr>
+    <tr>
+      <th>compute_z</th>
+      <td><p>Whether to compute Z-score column from P. Default is FALSE.</p></td>
     </tr>
     <tr>
       <th>convert_n_int</th>
-      <td><p>Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE.</p></td>
+      <td><p>Binary, if N (the number of samples) is not an integer,
+should this be rounded? Default is TRUE.</p></td>
     </tr>
     <tr>
       <th>analysis_trait</th>
-      <td><p>If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL</p></td>
+      <td><p>If multiple traits were studied, name of the trait for
+analysis from the GWAS. Default is NULL.</p></td>
     </tr>
     <tr>
       <th>INFO_filter</th>
-      <td><p>numeric The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9</p></td>
+      <td><p>numeric The minimum value permissible of the imputation
+information score (if present in sumstatsfile). Default 0.9.</p></td>
     </tr>
     <tr>
       <th>N_std</th>
-      <td><p>numeric The number of standard deviations above the mean a SNP's N is needed to be removed. Default is 5.</p></td>
+      <td><p>numeric The number of standard deviations above the mean a SNP's
+N is needed to be removed. Default is 5.</p></td>
+    </tr>
+    <tr>
+      <th>N_dropNA</th>
+      <td><p>Drop rows where N is missing.Default is TRUE.</p></td>
     </tr>
     <tr>
       <th>rmv_chr</th>
-      <td><p>vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary. Default is X, Y and mitochondrial.</p></td>
+      <td><p>vector or character The chromosomes on which the SNPs should
+be removed. Use NULL if no filtering necessary. Default is X, Y and
+mitochondrial.</p></td>
     </tr>
     <tr>
       <th>on_ref_genome</th>
-      <td><p>Binary Should a check take place that all SNPs are on the reference genome by SNP ID. Default is TRUE</p></td>
+      <td><p>Binary Should a check take place that all SNPs are on
+the reference genome by SNP ID. Default is TRUE.</p></td>
     </tr>
     <tr>
       <th>strand_ambig_filter</th>
-      <td><p>Binary Should SNPs with strand-ambiguous alleles be removed. Default is FALSE</p></td>
+      <td><p>Binary Should SNPs with strand-ambiguous alleles
+be removed. Default is FALSE.</p></td>
     </tr>
     <tr>
       <th>allele_flip_check</th>
-      <td><p>Binary Should the allele columns be chacked against reference genome to infer if flipping is necessary. Default is TRUE</p></td>
+      <td><p>Binary Should the allele columns be checked against
+reference genome to infer if flipping is necessary. Default is TRUE.</p></td>
+    </tr>
+    <tr>
+      <th>allele_flip_drop</th>
+      <td><p>Binary Should the SNPs for which neither their A1 or
+A2 base pair values match a reference genome be dropped. Default is TRUE.</p></td>
+    </tr>
+    <tr>
+      <th>allele_flip_z</th>
+      <td><p>Binary should the Z-score be flipped along with effect
+columns like Beta? It is assumed to be calculated off the effect size not
+the P-value and so will be flipped i.e. default TRUE.</p></td>
     </tr>
     <tr>
       <th>bi_allelic_filter</th>
-      <td><p>Binary Should non-biallelic SNPs be removed. Default is TRUE</p></td>
+      <td><p>Binary Should non-biallelic SNPs be removed. Default
+is TRUE.</p></td>
+    </tr>
+    <tr>
+      <th>write_vcf</th>
+      <td><p>Whether to write as VCF (TRUE) or tabular file (FALSE).</p></td>
+    </tr>
+    <tr>
+      <th>return_format</th>
+      <td><p>If return_data is TRUE. Object type to be returned
+("data.table","vranges","granges").</p></td>
+    </tr>
+    <tr>
+      <th>ldsc_format</th>
+      <td><p>Binary Ensure that output format meets all requirements
+to be fed directly into LDSC without the need for additional munging. Default
+is FALSE</p></td>
     </tr>
     </table>
 

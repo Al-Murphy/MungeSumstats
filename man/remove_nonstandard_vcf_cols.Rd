@@ -6,6 +6,10 @@
 \usage{
 remove_nonstandard_vcf_cols(sample_id, sumstats_file, keep_extra_cols = FALSE)
 }
+\arguments{
+\item{keep_extra_cols}{logical, should extra, non-essential columns from
+input be kept}
+}
 \value{
 sumstats_file
 }

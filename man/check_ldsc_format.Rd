@@ -10,14 +10,17 @@
 check_ldsc_format(ldsc_format, convert_n_int, allele_flip_check, compute_z)
 }
 \arguments{
-\item{ldsc_format}{Ensure that output format meets all requirements
-to be fed directly into LDSC without the need for additional munging.}
+\item{ldsc_format}{Binary Ensure that output format meets all requirements
+to be fed directly into LDSC without the need for additional munging. Default
+is FALSE}
 
-\item{convert_n_int}{Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE.}
+\item{convert_n_int}{Binary, if N (the number of samples) is not an integer,
+should this be rounded? Default is TRUE.}
 
-\item{allele_flip_check}{Binary Should the allele columns be checked against reference genome to infer if flipping is necessary. Default is TRUE.}
+\item{allele_flip_check}{Binary Should the allele columns be checked against
+reference genome to infer if flipping is necessary. Default is TRUE.}
 
-\item{compute_z}{Whether to compute Z-score column from P.}
+\item{compute_z}{Whether to compute Z-score column from P. Default is FALSE.}
 }
 \value{
 Formatted summary statistics

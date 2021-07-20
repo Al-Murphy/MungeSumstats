@@ -14,7 +14,7 @@ sort_coords <- function(sumstats_dt,
     
     if(sort_coordinates){
         message("Sorting coordinates.")
-        chr_order <- c(1:22,"X","Y")
+        chr_order <- c(seq_len(22),"X","Y")
         ### Double check that X and Y are uppercase
         sumstats_dt[,CHR:=gsub("x|23","X",CHR)]
         sumstats_dt[,CHR:=gsub("y","Y",CHR)]

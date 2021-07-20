@@ -10,11 +10,11 @@
 check_empty_cols <- function(sumstats_file, 
                              sampled_rows=1000){
     if(is.null(sampled_rows)) sampled_rows <- nrow(sumstats_file)
-    empty_cols <- sapply(colnames(sumstats_file), function(x){
+    empty_cols <- vapply(colnames(sumstats_file), function(x){
         (sum(head(sumstats_file, sampled_rows)[[x]]!=".")==0) |
         (sum(!is.na(head(sumstats_file, sampled_rows)[[x]]))==0) |
-        (sum(head(sumstats_file, sampled_rows)[[x]]==0)!=0)
-    })
+        (sum(head(sumstats_file, sampled_rows)[[x]]==0)!=0)},
+        FUN.VALUE=logical(1))
     empty_cols <- empty_cols[empty_cols]
     message(length(empty_cols)," empty column(s) detected.")
     return(empty_cols)

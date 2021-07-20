@@ -11,7 +11,8 @@
 #' ## Call uses reference genome as default with more than 2GB of memory,
 #' ## which is more than what 32-bit Windows can handle so remove certain checks
 #' 
-#' is_32bit_windows <- .Platform$OS.type == "windows" && .Platform$r_arch == "i386"
+#' is_32bit_windows <- 
+#' .Platform$OS.type == "windows" && .Platform$r_arch == "i386"
 #' if (!is_32bit_windows) {
 #' reformatted <- MungeSumstats::format_sumstats(path=eduAttainOkbayPth,
 #'                                               ref_genome="GRCh37")
@@ -25,33 +26,68 @@
 #' }
 #' #returned location has the updated summary statistics file
 #' @param path Filepath for the summary statistics file to be formatted
-#' @param ref_genome name of the reference genome used for the GWAS ("GRCh37" or "GRCh38"). 
-#' Argument is case-insensitive. Default is NULL which infers the reference genome from the data.
-#' @param convert_small_p Binary, should p-values < 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.
-#' @param compute_z Whether to compute Z-score column from P. 
-#' @param convert_n_int Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE.
-#' @param analysis_trait If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL.
-#' @param INFO_filter numeric The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9.
-#' @param N_std numeric The number of standard deviations above the mean a SNP's N is needed to be removed. Default is 5.
-#' @param N_dropNA Drop rows where N is missing. 
-#' @param rmv_chr vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary. 
-#' Default is X, Y and mitochondrial. 
-#' @param rmv_chrPrefix Remove "chr" or "CHR" from chromosome names. 
-#' @param on_ref_genome Binary Should a check take place that all SNPs are on the reference genome by SNP ID. Default is TRUE.
-#' @param strand_ambig_filter Binary Should SNPs with strand-ambiguous alleles be removed. Default is FALSE.
-#' @param allele_flip_check Binary Should the allele columns be checked against reference genome to infer if flipping is necessary. Default is TRUE.
-#' @param bi_allelic_filter Binary Should non-biallelic SNPs be removed. Default is TRUE.
+#' @param ref_genome name of the reference genome used for the GWAS ("GRCh37" or
+#'"GRCh38"). Argument is case-insensitive. Default is NULL which infers the 
+#'reference genome from the data.
+#' @param convert_small_p Binary, should p-values < 5e-324 be converted to 0? 
+#' Small p-values pass the R limit and can cause errors with LDSC/MAGMA and 
+#' should be converted. Default is TRUE.
+#' @param compute_z Whether to compute Z-score column from P. Default is FALSE.
+#' @param convert_n_int Binary, if N (the number of samples) is not an integer, 
+#' should this be rounded? Default is TRUE.
+#' @param analysis_trait If multiple traits were studied, name of the trait for
+#' analysis from the GWAS. Default is NULL.
+#' @param INFO_filter numeric The minimum value permissible of the imputation 
+#' information score (if present in sumstats file). Default 0.9.
+#' @param pos_se Binary Should the standard Error (SE) column be checked to 
+#' ensure it is greater than 0? Those that are, are removed (if present in 
+#' sumstats file). Default TRUE.
+#' @param effect_columns_nonzero Binary should the effect columns in the data 
+#' BETA,OR (odds ratio),LOG_ODDS,SIGNED_SUMSTAT be checked to ensure no SNP=0. 
+#' Those that do are removed(if present in sumstats file). Default TRUE.
+#' @param N_std numeric The number of standard deviations above the mean a SNP's
+#' N is needed to be removed. Default is 5.
+#' @param N_dropNA Drop rows where N is missing.Default is TRUE. 
+#' @param rmv_chr vector or character The chromosomes on which the SNPs should 
+#' be removed. Use NULL if no filtering necessary. Default is X, Y and 
+#' mitochondrial. 
+#' @param rmv_chrPrefix Remove "chr" or "CHR" from chromosome names. Default is 
+#' TRUE. 
+#' @param on_ref_genome Binary Should a check take place that all SNPs are on 
+#' the reference genome by SNP ID. Default is TRUE.
+#' @param strand_ambig_filter Binary Should SNPs with strand-ambiguous alleles 
+#' be removed. Default is FALSE.
+#' @param allele_flip_check Binary Should the allele columns be checked against
+#' reference genome to infer if flipping is necessary. Default is TRUE.
+#' @param allele_flip_drop Binary Should the SNPs for which neither their A1 or 
+#' A2 base pair values match a reference genome be dropped. Default is TRUE.
+#' @param allele_flip_z Binary should the Z-score be flipped along with effect 
+#' columns like Beta? It is assumed to be calculated off the effect size not 
+#' the P-value and so will be flipped i.e. default TRUE.
+#' @param bi_allelic_filter Binary Should non-biallelic SNPs be removed. Default
+#' is TRUE.
+#' @param snp_ids_are_rs_ids Binary Should the supplied SNP ID's be assumed to 
+#' be RS IDs. If not, imputation using the SNP ID for other columns like 
+#' base-pair position or chromosome will not be possible. If set to FALSE, the 
+#' SNP RS ID will be imputed from the reference genome if possible. Default is 
+#' TRUE.
 #' @param sort_coordinates Whether to sort by coordinates.
 #' @param nThread Number of threads to use for parallel processes. 
-#' @param save_path File path to save formatted data. Defaults to \code{tempfile(fileext=".tsv.gz")}.
+#' @param save_path File path to save formatted data. Defaults to 
+#' \code{tempfile(fileext=".tsv.gz")}.
 #' @param write_vcf Whether to write as VCF (TRUE) or tabular file (FALSE). 
-#' @param tabix_index Index the formatted summary statistics with \href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying. 
-#' @param return_data Return \code{data.table} directly to user. Otherwise, return the path to the save data. Default is FALSE.
-#' @param ldsc_format Ensure that output format meets all requirements 
-#' to be fed directly into LDSC without the need for additional munging. 
-#' @param force_new If a formatted file of the same names as \code{save_path} exists, 
-#' formatting will be skipped and this file will be imported instead (default). 
-#' Set \code{force_new=TRUE} to override this. 
+#' @param tabix_index Index the formatted summary statistics with 
+#' \href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying. 
+#' @param return_data Return \code{data.table} directly to user. Otherwise, 
+#' return the path to the save data. Default is FALSE.
+#' @param return_format If return_data is TRUE. Object type to be returned 
+#' ("data.table","vranges","granges"). 
+#' @param ldsc_format Binary Ensure that output format meets all requirements 
+#' to be fed directly into LDSC without the need for additional munging. Default
+#' is FALSE  
+#' @param force_new If a formatted file of the same names as \code{save_path} 
+#' exists, formatting will be skipped and this file will be imported instead 
+#' (default). Set \code{force_new=TRUE} to override this. 
 #' @inheritParams convert_sumstats 
 #' @inheritParams check_zscore 
 #' 
@@ -68,7 +104,9 @@ format_sumstats <- function(path,
                             force_new_z=FALSE,
                             convert_n_int=TRUE, 
                             analysis_trait=NULL,
-                            INFO_filter=0.9, 
+                            INFO_filter=0.9,
+                            pos_se=TRUE,
+                            effect_columns_nonzero=TRUE,
                             N_std=5, 
                             N_dropNA=TRUE,
                             rmv_chr=c("X","Y","MT"),
@@ -76,7 +114,10 @@ format_sumstats <- function(path,
                             on_ref_genome=TRUE,
                             strand_ambig_filter=FALSE, 
                             allele_flip_check=TRUE,
+                            allele_flip_drop=TRUE,
+                            allele_flip_z=TRUE,
                             bi_allelic_filter=TRUE,
+                            snp_ids_are_rs_ids=TRUE,
                             sort_coordinates=TRUE,
                             nThread=1,
                             save_path=tempfile(fileext=".tsv.gz"),
@@ -116,15 +157,21 @@ format_sumstats <- function(path,
                         compute_z=compute_z,
                         convert_n_int=convert_n_int, 
                         analysis_trait=analysis_trait, 
-                        INFO_filter=INFO_filter, 
+                        INFO_filter=INFO_filter,
+                        pos_se=pos_se,
+                        effect_columns_nonzero=effect_columns_nonzero,
                         N_std=N_std,
                         N_dropNA=N_dropNA,
                         rmv_chr=rmv_chr,
                         on_ref_genome=on_ref_genome, 
                         strand_ambig_filter=strand_ambig_filter, 
                         allele_flip_check=allele_flip_check,
+                        allele_flip_drop=allele_flip_drop,
+                        allele_flip_z=allele_flip_z,
                         bi_allelic_filter=bi_allelic_filter,
+                        snp_ids_are_rs_ids=snp_ids_are_rs_ids,
                         write_vcf=write_vcf,
+                        return_format=return_format,
                         ldsc_format=ldsc_format)
     
     { 
@@ -133,9 +180,9 @@ format_sumstats <- function(path,
                                        convert_n_int=convert_n_int, 
                                        allele_flip_check=allele_flip_check, 
                                        compute_z=compute_z)
-      convert_n_int <- check_ldsc$convert_n_int; 
-      allele_flip_check <- check_ldsc$allele_flip_check;
-      compute_z <- check_ldsc$compute_z;
+      convert_n_int <- check_ldsc$convert_n_int 
+      allele_flip_check <- check_ldsc$allele_flip_check
+      compute_z <- check_ldsc$compute_z
     }
     
     
@@ -153,11 +200,12 @@ format_sumstats <- function(path,
       standardise_sumstats_column_headers_crossplatform(sumstats_dt = sumstats_return$sumstats_dt,
                                                         path =  path) 
     
-    ### Report the number of SNP/CHR/etc. before any filtering (but after header formatting)
+    ### Report the number of SNP/CHR/etc. before any filtering 
+    ### (but after header formatting)
     report_summary(sumstats_dt = sumstats_return$sumstats_dt)
     orig_dims <- dim(sumstats_return$sumstats_dt)
     
-    #### Check 4: Check if multiple models used or multiple traits tested in GWAS ####
+    #### Check 4: Check if multi models used or multi traits tested in GWAS ####
     sumstats_return <-  
       check_multi_gwas(sumstats_dt = sumstats_return$sumstats_dt,
                        path = path, 
@@ -166,14 +214,16 @@ format_sumstats <- function(path,
     #### Infer reference genome if necessary ####
     if(is.null(ref_genome))
       ref_genome <- get_genome_build(sumstats = sumstats_return$sumstats_dt, 
-                                     standardise_headers = FALSE, ## Already done previously
+                                     standardise_headers = FALSE, ## done prev
                                      sampled_snps = 10000)
     
-    #### Check 5: Check for uniformity in SNP col - no mix of rs/missing rs/chr:bp ####
+    #### Check 5: Check for uniformity in SNP col - ####
+    #### no mix of rs/missing rs/chr:bp ####
     sumstats_return <- 
       check_no_rs_snp(sumstats_dt = sumstats_return$sumstats_dt,
                       path = path, 
-                      ref_genome = ref_genome)
+                      ref_genome = ref_genome,
+                      snp_ids_are_rs_ids=snp_ids_are_rs_ids)
     
     #### Check 6: Check for combined allele column (A1 and A2) ####
     sumstats_return <- 
@@ -184,12 +234,14 @@ format_sumstats <- function(path,
     
     # Series of checks if CHR or BP columns aren't present
     if(sum(c("CHR","BP") %in% col_headers)!=2){
-      msg <- paste0("Summary statistics file does not have obvious CHR/BP colum",
+      msg <- 
+        paste0("Summary statistics file does not have obvious CHR/BP colum",
                     "ns. Checking to see if they are joined in another column")
       message(msg)
       
       ####Check 6: check if CHR:BP:A2:A1 merged to 1 column
-      sumstats_return <- check_four_step_col(sumstats_dt = sumstats_return$sumstats_dt, 
+      sumstats_return <- check_four_step_col(sumstats_dt = 
+                                               sumstats_return$sumstats_dt, 
                                              path = path) 
       
       #### Check 7: check if there is a column of data with CHR:BP format ####
@@ -242,11 +294,14 @@ format_sumstats <- function(path,
                         path = path, 
                         ref_genome = ref_genome,
                         rsids = rsids,
-                        allele_flip_check = allele_flip_check)
+                        allele_flip_check = allele_flip_check,
+                        allele_flip_drop = allele_flip_drop,
+                        allele_flip_z = allele_flip_z)
     rsids <- sumstats_return$rsids #update rsids
     sumstats_return$rsids <- NULL
     
-    #### Check 14: check first three column headers are SNP, CHR, BP (in that order) ####
+    #### Check 14: check first three column headers are SNP, CHR, BP ###
+    ###(in that order) and also check A1 and A2 are fourth and fifth####
     sumstats_return <- check_col_order(sumstats_dt = sumstats_return$sumstats_dt,
                                        path = path)
     
@@ -272,7 +327,8 @@ format_sumstats <- function(path,
                   path = path, 
                   convert_n_int = convert_n_int)
     
-    #### Check 19: check all rows have SNPs starting with SNP or rs, drop those don't ####
+    #### Check 19: check all rows have SNPs starting with SNP or rs, ####
+    #### drop those that don't ####
     sumstats_return <- check_row_snp(sumstats_dt = sumstats_return$sumstats_dt, 
                                      path = path)
     
@@ -290,6 +346,18 @@ format_sumstats <- function(path,
                        path = path, 
                        INFO_filter = INFO_filter)
     
+    #### Check 30: check standard error is positive ####
+    sumstats_return <- 
+      check_pos_se(sumstats_dt = sumstats_return$sumstats_dt,
+                   path = path, 
+                   pos_se = pos_se)
+    
+    #### Check 31: check effect columns are not 0 ####
+    sumstats_return <- 
+      check_effect_columns_nonzero(sumstats_dt = sumstats_return$sumstats_dt, 
+                       path = path, 
+                       effect_columns_nonzero = effect_columns_nonzero)
+    
     #### Check 23: check for N > X std dev above mean ####
     sumstats_return <- check_n_num(sumstats_dt = sumstats_return$sumstats_dt, 
                                    path = path, 
@@ -303,13 +371,16 @@ format_sumstats <- function(path,
                                  rmv_chrPrefix = rmv_chrPrefix)
     
     #### Check 26: check that all snps are not strand ambiguous ####
-    sumstats_return <- check_strand_ambiguous(sumstats_dt = sumstats_return$sumstats_dt, 
+    sumstats_return <- check_strand_ambiguous(sumstats_dt = 
+                                                sumstats_return$sumstats_dt, 
                                               path = path,
                                               ref_genome = ref_genome, 
-                                              strand_ambig_filter = strand_ambig_filter)
+                                              strand_ambig_filter = 
+                                                strand_ambig_filter)
     
     #### Check 27: check for non-biallelic SNPS ####
-    sumstats_return <- check_bi_allelic(sumstats_dt = sumstats_return$sumstats_dt, 
+    sumstats_return <- check_bi_allelic(sumstats_dt = 
+                                          sumstats_return$sumstats_dt, 
                                         path = path, 
                                         ref_genome = ref_genome, 
                                         bi_allelic_filter = bi_allelic_filter, 
@@ -318,13 +389,16 @@ format_sumstats <- function(path,
     sumstats_return$rsids <- NULL
     
     #### Check 28: Compute Z-score ####
-    sumstats_return <- check_zscore(sumstats_dt = sumstats_return$sumstats_dt, 
+    sumstats_return <- check_zscore(sumstats_dt = 
+                                      sumstats_return$sumstats_dt, 
                                     compute_z = compute_z, 
                                     force_new_z = force_new_z)
     
     #### Check 29: Sort rows by genomic coordinates ####
-    sumstats_return$sumstats_dt <- sort_coords(sumstats_dt =  sumstats_return$sumstats_dt, 
-                                               sort_coordinates = sort_coordinates)
+    sumstats_return$sumstats_dt <- sort_coords(sumstats_dt =  
+                                                 sumstats_return$sumstats_dt, 
+                                               sort_coordinates = 
+                                                 sort_coordinates)
     
     
     #### WRITE data.table TO PATH ####
@@ -352,8 +426,8 @@ format_sumstats <- function(path,
     #### Load data into memory when a pre-existing file is being used 
     if(!exists("sumstats_return")){ 
       sumstats_return <- list()
-      sumstats_return[["sumstats_dt"]] <- read_sumstats(path = check_save_out$save_path, 
-                                                        nThread = nThread)
+      sumstats_return[["sumstats_dt"]] <- 
+        read_sumstats(path = check_save_out$save_path, nThread = nThread)
     }
     out <- convert_sumstats(sumstats_dt = sumstats_return$sumstats_dt, 
                             return_format = return_format)

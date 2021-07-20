@@ -14,6 +14,7 @@ check_strand_ambiguous <-
   # If SNP present and user specified to remove
   col_headers <- names(sumstats_dt)
   if("SNP" %in% col_headers && !isFALSE(strand_ambig_filter)){
+    message("Checking for strand ambiguous SNPs.")
     A_T_ambig <- sumstats_dt[A1=="A"&A2=="T" | A1=="T"&A2=="A",]$SNP
     C_G_ambig <- sumstats_dt[A1=="C"&A2=="G" | A1=="G"&A2=="C",]$SNP
     num_bad_ids <- length(A_T_ambig)+length(C_G_ambig)

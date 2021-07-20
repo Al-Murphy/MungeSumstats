@@ -31,8 +31,23 @@
 #' ### Default usage   
 #' ## You can supply \code{import_sumstats()}
 #' ## with a list of as many OpenGWAS IDs as you want, 
-#' ## but we'll just give one to save time. 
+#' ## but we'll just give one to save time.
+#' 
+#' ## Call uses reference genome as default with more than 2GB of memory,
+#' ## which is more than what 32-bit Windows can handle so remove certain checks
+#' 
+#' is_32bit_windows <- .Platform$OS.type == "windows" && .Platform$r_arch == "i386"
+#' if (!is_32bit_windows) {
 #' datasets <- MungeSumstats::import_sumstats(ids = ids[1]) 
+#' } else{
+#' reformatted <- MungeSumstats::import_sumstats(ids = ids[1],
+#'                                               ref_genome="GRCh37",
+#'                                               on_ref_genome = FALSE,
+#'                                               strand_ambig_filter=FALSE,
+#'                                               bi_allelic_filter=FALSE,
+#'                                               allele_flip_check=FALSE)
+#' } 
+#' 
 #' @export 
 import_sumstats <- function(ids,  
                             vcf_dir=tempdir(),
@@ -45,7 +60,9 @@ import_sumstats <- function(ids,
                             nThread=1, 
                             parallel_across_ids=FALSE,
                             ...){  
-    # vcf_dir=tempdir(); vcf_download=TRUE;download_method="axel";quiet=FALSE;force_new=FALSE;nThread=10; ids=c("ieu-a-1124","ieu-a-1125"); id=ids[1]; ref_genome=NULL;
+    # vcf_dir=tempdir(); vcf_download=TRUE;download_method="axel";quiet=FALSE;
+    #force_new=FALSE;nThread=10; ids=c("ieu-a-1124","ieu-a-1125"); id=ids[1]; 
+    #ref_genome=NULL;
      
     start_all <- Sys.time()
     ids <- unique(ids)
@@ -54,7 +71,8 @@ import_sumstats <- function(ids,
     if(parallel_across_ids) {
         nThread_acrossIDs <- nThread
         nThread <- 1
-        message("`parallel_across_ids=TRUE` : most messages will be hidden in this mode.")
+        message("`parallel_across_ids=TRUE`: ",
+                "most notes will be hidden in this mode.")
     } else {nThread_acrossIDs <- 1}
     
     ouputs <- parallel::mclapply(ids, function(id){ 

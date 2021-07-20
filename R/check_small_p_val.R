@@ -7,7 +7,6 @@
 #' @keywords internal
 #' @importFrom data.table :=
 check_small_p_val <- function(sumstats_dt, path, convert_small_p){
-  message("Checking for p-vales < 5e-324.")
   P = NULL
   # Sometimes the N column is not all integers... so round it up
   col_headers <- names(sumstats_dt)

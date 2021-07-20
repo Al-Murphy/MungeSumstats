@@ -10,6 +10,7 @@ check_dup_bp <- function(sumstats_dt, path){
   BP = NULL
   col_headers <- names(sumstats_dt)
   if("BP" %in% col_headers){
+    message("Checking for SNPs with duplicated base-pair positions")
     # Try to remove duplicated Positions
     data.table::setkey(sumstats_dt,BP)
     dups <- duplicated(sumstats_dt, by = data.table::key(sumstats_dt))

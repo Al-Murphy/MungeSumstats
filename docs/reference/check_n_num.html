@@ -83,7 +83,7 @@ have substantially more samples than others. These will be removed." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.32</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
       </span>
     </div>
 
@@ -100,6 +100,18 @@ have substantially more samples than others. These will be removed." />
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/OpenGWAS.html">Import GWAS summary statistics from Open GWAS</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -135,7 +147,7 @@ have substantially more samples than others. These will be removed." />
 have substantially more samples than others. These will be removed.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>check_n_num</span><span class='op'>(</span><span class='va'>sumstats_dt</span>, <span class='va'>path</span>, <span class='va'>N_std</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>check_n_num</span><span class='op'>(</span><span class='va'>sumstats_dt</span>, <span class='va'>path</span>, <span class='va'>N_std</span>, N_dropNA <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -150,7 +162,12 @@ have substantially more samples than others. These will be removed.</p>
     </tr>
     <tr>
       <th>N_std</th>
-      <td><p>numeric The number of standard deviations above the mean a SNP's N is needed to be removed. Default is 5.</p></td>
+      <td><p>numeric The number of standard deviations above the mean a
+SNP's N is needed to be removed. Default is 5.</p></td>
+    </tr>
+    <tr>
+      <th>N_dropNA</th>
+      <td><p>Whether to keep rows where N is <code>NA</code>. Default is FALSE.</p></td>
     </tr>
     </table>
 

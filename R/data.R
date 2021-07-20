@@ -1,16 +1,28 @@
 #' Summary Statistics Column Headers
 #'
 #' @description List of uncorrected column headers often found in GWAS Summary 
-#' Statistics column headers
+#' Statistics column headers. Note the effect allele will always be the A2 
+#' allele, this is the approach done for 
+#' VCF(https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7805039/). This is enforced
+#' with the column header corrections here and also the check allele flipping
+#' test.
 #'
 #' @source The code to prepare the .Rda file file from the marker file is:
 #' \code{
 #' # Most the data in the below table comes from the LDSC github wiki
-#' sumstatsColHeaders <- read.csv("inst/extdata/Magma_Column_headers.csv",
-#'      stringsAsFactors = FALSE)
+#' data("sumstatsColHeaders")
+#' # Make additions to sumstatsColHeaders using github version of MungeSumstats- 
+#' # shown is an example of adding columns for Standard Error (SE)
+#' #se_cols <- data.frame("Uncorrected"=c("SE","se","STANDARD.ERROR","STANDARD_ERROR","STANDARD-ERROR"), 
+#' #                      "Corrected"=rep("SE",5))
+#' #sumstatsColHeaders <- rbind(sumstatsColHeaders,se_cols)
+#' #Once additions are made, save the new mapping dataset
 #' usethis::use_data(sumstatsColHeaders,overwrite = TRUE, internal=TRUE)
+#' save(sumstatsColHeaders,
+#'       file="data/sumstatsColHeaders.rda")
+#' # You will need to restart your r session for effects to take account      
 #' }
-#' @format dataframe with 82 rows nd 2 columns
+#' @format dataframe with 99 rows and 2 columns
 #' @usage data("sumstatsColHeaders")
 "sumstatsColHeaders"
 

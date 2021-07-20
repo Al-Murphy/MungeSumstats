@@ -31,7 +31,5 @@ test_that("Can correctly separate CHR:BP:A2:A1, two columns", {
                                         bi_allelic_filter=FALSE,
                                         allele_flip_check=FALSE)
   org_dt <- data.table::fread(org)
-  #Need to move A1 and A2 to end
-  setcolorder(org_dt, c("SNP","CHR","BP","FRQ","BETA","SE","P","A2","A1"))
   expect_equal(all.equal(org_dt,res_dt,ignore.row.order=TRUE),TRUE)
 })

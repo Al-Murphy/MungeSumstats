@@ -2,7 +2,8 @@
 % Please edit documentation in R/check_col_order.R
 \name{check_col_order}
 \alias{check_col_order}
-\title{Ensure that the first three columns are SNP, CHR, BP in that order}
+\title{Ensure that the first three columns are SNP, CHR, BP in that order and
+then A1, A2 if present}
 \usage{
 check_col_order(sumstats_dt, path)
 }
@@ -12,9 +13,11 @@ check_col_order(sumstats_dt, path)
 \item{path}{Filepath for the summary statistics file to be formatted}
 }
 \value{
-list containing sumstats_dt, the modified summary statistics data table object
+list containing sumstats_dt, the modified summary statistics
+data table object
 }
 \description{
-Ensure that the first three columns are SNP, CHR, BP in that order
+Ensure that the first three columns are SNP, CHR, BP in that order and
+then A1, A2 if present
 }
 \keyword{internal}

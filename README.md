@@ -1,7 +1,7 @@
 Standardise the format of GWAS summary statistics with *MungeSumstats*
 ================
-Alan Murphy and Nathan Skene
-2021-07-13
+Alan Murphy, Brian Schilder and Nathan Skene
+2021-07-19
 
 <!-- Readme.md is generated from Readme.Rmd. Please edit that file -->
 <!-- badges: start -->
@@ -33,8 +33,7 @@ remain closed access, these repositories are not all encompassing.
 GWAS summary statistics, including those in VCF format, enabling
 downstream integration and analysis. The package works by addressing the
 most common discrepancies across summary statistic files.
-*MungeSumstats* also offers a range of adjustable, Quality Control (QC)
-steps.
+*MungeSumstats* also offers a range of adjustable, Quality Control (QC).
 
 # Installing MungeSumstats
 
@@ -70,13 +69,21 @@ you will need to install `SNPlocs.Hsapiens.dbSNP144.GRCh37` and
     BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")
 
 These may take some time to install and are not included in the package
-as some users may only need one of *GRCh37*/*GRCh38*.
+as some users may only need one of *GRCh37*/*GRCh38*. If you are unsure
+of the genome build, MungeSumstats can also infer this information from
+your data.
 
 # Getting started
 
-See the [vignette
+See the [Getting started vignette
 website](https://neurogenomics.github.io/MungeSumstats/articles/MungeSumstats.html)
 for up-to-date instructions on usage.
+
+See the [OpenGWAS vignette
+website](https://neurogenomics.github.io/MungeSumstats/articles/OpenGWAS.html)
+for information on how to use MungeSumstats to access, standardise and
+perform quality control on GWAS Summary Statistics from the MRC IEU
+[Open GWAS Project](https://gwas.mrcieu.ac.uk/).
 
 If you have any problems please do file an issue here on github.
 

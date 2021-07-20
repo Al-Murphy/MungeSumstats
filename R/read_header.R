@@ -3,7 +3,10 @@
 #' @return First \code{n} lines of the VCF header 
 #'
 #' @inheritParams format_sumstats
-#' @inheritParams readLines 
+#' @param n integer. The (maximal) number of lines to read. Negative values 
+#' indicate that one should read up to the end of input on the connection.
+#' @param skip_vcf_metadata logical, should VCF metadata be ignored
+# @inheritParams readLines 
 #' @importFrom VariantAnnotation scanVcfHeader
 #' @keywords internal 
 read_header <- function(path,

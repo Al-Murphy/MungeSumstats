@@ -30,7 +30,8 @@ knitr::opts_chunk$set(tidy         = FALSE,
 library(MungeSumstats)
 ```
 
-Query and import data from the MRC IEU [Open GWAS Project](https://gwas.mrcieu.ac.uk/).
+MungeSumstats now offers high throughput query and import functionality to data 
+from the MRC IEU [Open GWAS Project](https://gwas.mrcieu.ac.uk/).
 
 
 # Find GWAS datasets 
@@ -45,8 +46,8 @@ ids <- (dplyr::arrange(metagwas, nsnp))$id
 
 # Import full results
 
-You can supply `import_sumstats()` with a list of as many OpenGWAS IDs as you want, 
-but we'll just give one to save time. 
+You can supply `import_sumstats()` with a list of as many OpenGWAS IDs as you 
+want, but we'll just give one to save time. 
 
 ```{r}
 datasets <- MungeSumstats::import_sumstats(ids = ids[1])
@@ -54,8 +55,9 @@ datasets <- MungeSumstats::import_sumstats(ids = ids[1])
 
 ## Summarise results 
 
-By default, `import_sumstats` results a named list where the names are the Open GWAS dataset IDs 
-and the items are the respective paths to the formatted summary statistics.
+By default, `import_sumstats` results a named list where the names are the Open 
+GWAS dataset IDs and the items are the respective paths to the formatted summary
+statistics.
 
 ```{r}
 print(datasets)

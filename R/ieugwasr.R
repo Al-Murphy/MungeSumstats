@@ -223,18 +223,22 @@ api_query <- function(path, query=NULL, access_token=check_access_token(), metho
 
 	if(r$status_code >= 500 & r$status_code < 600)
 	{
-		message("Server error: ", r$status_code)
-		message("Failed to retrieve results from server. See error status message in the returned object and contact the developers if the problem persists.")
+		message("Server issue: ", r$status_code)
+		message("Unable to retrieve results from server. See status in",
+		        " the returned object and contact the developers if the ",
+		        "problem persists.")
 		return(r)
 	}
 	if('try-error' %in% class(r))
 	{
-		if(grepl("Could not resolve host", as.character(attributes(r)$condition)))
+		if(grepl("Could not resolve host", 
+		            as.character(attributes(r)$condition)))
 		{
-			stop("The MR-Base server appears to be down, the following error was received:\n", as.character(attributes(r)$condition))
+			stop("The MR-Base server appears to be down, the following issue", 
+			        " was received:\n", as.character(attributes(r)$condition))
 		} else {
-			stop("The following error was encountered in trying to query the MR-Base server:\n",
-				as.character(attributes(r)$condition)
+			stop("The following issue was encountered in trying to query the ",
+			     "MR-Base server:\n",as.character(attributes(r)$condition)
 			)
 		}
 	}

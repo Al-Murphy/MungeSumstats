@@ -28,7 +28,7 @@ check_zscore <- function(sumstats_dt,
                          compute_z=TRUE,
                          force_new_z=FALSE,
                          standardise_headers=FALSE){   
-    ## Set variables to be used in inplace data.table functions to NULL 
+    ## Set variables to be used in in place data.table functions to NULL 
     ## to avoid confusing BiocCheck.
     Z = BETA = P = NULL;
     

@@ -4,6 +4,15 @@
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/index.html</loc>
   </url>
   <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/api_query.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/axel.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_access_token.html</loc>
+  </url>
+  <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_allele_flip.html</loc>
   </url>
   <url>
@@ -28,10 +37,16 @@
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_dup_snp.html</loc>
   </url>
   <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_empty_cols.html</loc>
+  </url>
+  <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_four_step_col.html</loc>
   </url>
   <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_info_score.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_ldsc_format.html</loc>
   </url>
   <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_miss_data.html</loc>
@@ -64,6 +79,9 @@
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_row_snp.html</loc>
   </url>
   <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_save_path.html</loc>
+  </url>
+  <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_signed_col.html</loc>
   </url>
   <url>
@@ -76,6 +94,9 @@
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_tab_delimited.html</loc>
   </url>
   <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_tabular.html</loc>
+  </url>
+  <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_two_step_col.html</loc>
   </url>
   <url>
@@ -85,7 +106,46 @@
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_vital_col.html</loc>
   </url>
   <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_zscore.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/convert_sumstats.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/download_vcf.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/downloader.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/find_sumstats.html</loc>
+  </url>
+  <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/format_sumstats.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/get_access_token.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/get_genome_build.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/get_query_content.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/get_vcf_sample_ids.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/gwasinfo.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/import_sumstats.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/infer_vcf_sample_ids.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/legacy_ids.html</loc>
   </url>
   <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/load_ref_genome_data.html</loc>
@@ -94,10 +154,37 @@
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/load_snp_loc_data.html</loc>
   </url>
   <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/message_parallel.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/preview_sumstats.html</loc>
+  </url>
+  <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/raw_ALSvcf.html</loc>
   </url>
   <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/raw_eduAttainOkbay.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/read_header.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/read_sumstats.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/read_vcf.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/remove_nonstandard_vcf_cols.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/report_summary.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/select_api.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/sort_coords.html</loc>
   </url>
   <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/standardise_sumstats_column_headers_crossplatform.html</loc>
@@ -106,9 +193,24 @@
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/sumstatsColHeaders.html</loc>
   </url>
   <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/supported_suffixes.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/to_GRanges.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/to_VRanges.html</loc>
+  </url>
+  <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/validate_parameters.html</loc>
   </url>
   <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/write_sumstats.html</loc>
+  </url>
+  <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/articles/MungeSumstats.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/articles/OpenGWAS.html</loc>
   </url>
 </urlset>

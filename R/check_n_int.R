@@ -10,7 +10,6 @@
 check_n_int <- function(sumstats_dt, 
                         path, 
                         convert_n_int){
-  message("Ensuring that the N column is all integers.")
   N = N_tmp = NULL
   # Sometimes the N column is not all integers... so round it up
   col_headers <- names(sumstats_dt)
@@ -19,6 +18,7 @@ check_n_int <- function(sumstats_dt,
       msg <- paste0("The sumstats N column is not all integers, this could ",
                       "effect downstream analysis.")
       if (convert_n_int) { #if user wants to correct
+        message("Ensuring that the N column is all integers.")
         msg2 <- paste0(msg," These will be converted to integers.")
         message(msg2)
         if(is(sumstats_dt$N,"character")) suppressWarnings(sumstats_dt[,N:=as.integer(N)] )

@@ -179,7 +179,7 @@ read_vcf <- function(path,
         sumstats_file[,INFO:=as.numeric(INFO)]
     }
     if("INFO" %in% names(empty_cols)){
-        message("WARNING: All INFO scores are empty. Replacing all with 1.")
+        message("NOTE: All INFO scores are empty. Replacing all with 1.")
         sumstats_file$INFO <- 1
     }
     

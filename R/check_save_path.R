@@ -8,7 +8,7 @@ check_save_path <- function(save_path,
                             write_vcf=FALSE){ 
     #### Add warning to users tha temp files arent actually saved ####
     if(dirname(save_path)==tempdir()){
-        message("\n\n*****::WARNING::*****\n",
+        message("\n\n*****::NOTE::*****\n",
                 "- Formatted results will be saved to `tempdir()` by default.\n",
                 "- This means all formatted summary stats will be deleted upon ending the R session.\n",
                 "- To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),",
@@ -29,14 +29,18 @@ check_save_path <- function(save_path,
         file_type <- "tempfile" 
         sep <- "\t"
     } else {  
-        suffix_match <- sapply(suffixes, function(x){grepl(x, tolower(save_path), ignore.case = TRUE)}) 
+        suffix_match <- 
+            vapply(suffixes, function(x){grepl(x, tolower(save_path), 
+                                                ignore.case = TRUE)},
+                               FUN.VALUE=logical(1))
         if(sum(suffix_match)>0){
             file_type <- names(suffix_match)[suffix_match][1]
             sep <- if(grepl(".csv",file_type)) "," else "\t"
         } else {
             if(write_vcf==FALSE) { 
                 stop("save_path file format not recognized: ",save_path,
-                     "\nMust be one of: \n   ", paste(suffixes, collapse = "\n   "))
+                     "\nMust be one of: \n   ", 
+                        paste(suffixes, collapse = "\n   "))
             } 
         }
     } 
@@ -46,11 +50,13 @@ check_save_path <- function(save_path,
         file_type = "vcf"
     } else {
         #### Account for mismatch between write_vcf and save_path ####
-        suffixes.vcf <- supported_suffixes(tabular = FALSE, tabular_compressed = FALSE)
+        suffixes.vcf <- supported_suffixes(tabular = FALSE, 
+                                            tabular_compressed = FALSE)
         if(any(endsWith(save_path,suffixes.vcf))){
             message("`write_vcf=FALSE` but `save_path` suggests VCF output format. ",
                     "Switching output to tabular format (.tsv.gz).")
-            save_path <- gsub(paste(suffixes.vcf,collapse = "|"),".tsv.gz", save_path)
+            save_path <- 
+                gsub(paste(suffixes.vcf,collapse = "|"),".tsv.gz", save_path)
             sep = "\t"
             file_type = ".tsv"
         } 

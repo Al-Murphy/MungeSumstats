@@ -10,6 +10,7 @@ check_dup_snp <- function(sumstats_dt, path){
   SNP = NULL
   col_headers <- names(sumstats_dt)
   if("SNP" %in% col_headers){
+    message("Checking for duplicate SNPs from SNP ID.")
     # Try to remove duplicated RSIDs
     data.table::setkey(sumstats_dt,SNP)
     dups <- duplicated(sumstats_dt, by = data.table::key(sumstats_dt))

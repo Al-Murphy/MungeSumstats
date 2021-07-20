@@ -11,12 +11,14 @@ check_no_snp(sumstats_dt, path, ref_genome, verbose = TRUE)
 
 \item{path}{Filepath for the summary statistics file to be formatted}
 
-\item{ref_genome}{name of the reference genome used for the GWAS (GRCh37 or GRCh38)}
+\item{ref_genome}{name of the reference genome used for the GWAS (GRCh37 or
+GRCh38)}
 
 \item{verbose}{should messages be printed. Default it TRUE.}
 }
 \value{
-list containing sumstats_dt, the modified summary statistics data table object
+list containing sumstats_dt, the modified summary statistics data
+table object
 }
 \description{
 Ensure that SNP is present if not can find it with CHR and BP

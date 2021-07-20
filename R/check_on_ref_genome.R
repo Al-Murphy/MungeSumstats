@@ -19,11 +19,11 @@
 #' @importFrom data.table setcolorder
 check_on_ref_genome <- 
   function(sumstats_dt, path, ref_genome, on_ref_genome, rsids){
-    message("Ensuring all SNPs are on the reference genome.")
   CHR = SNP = NULL
   # If CHR present and user specified chromosome to have SNPs removed
   col_headers <- names(sumstats_dt)
   if("SNP" %in% col_headers && !isFALSE(on_ref_genome)){
+    message("Ensuring all SNPs are on the reference genome.")
     if(is.null(rsids)){
       rsids <- load_ref_genome_data(snps = data.table::copy(sumstats_dt$SNP), 
                                     ref_genome = ref_genome)

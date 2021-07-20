@@ -22,6 +22,7 @@ check_bi_allelic <-
     # If SNP present and user specified to remove
     col_headers <- names(sumstats_dt)
     if("SNP" %in% col_headers && !isFALSE(bi_allelic_filter)){
+      message("Checking for bi-allelic SNPs.")
       if(is.null(rsids)){
         rsids <- load_ref_genome_data(data.table::copy(sumstats_dt$SNP), ref_genome)
       }

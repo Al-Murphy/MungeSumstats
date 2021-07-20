@@ -2,21 +2,29 @@
 % Please edit documentation in R/check_no_rs_snp.R
 \name{check_no_rs_snp}
 \alias{check_no_rs_snp}
-\title{Ensure that SNP starts with rs}
+\title{Ensure that SNP appears to be valid RS IDs (starts with rs)}
 \usage{
-check_no_rs_snp(sumstats_dt, path, ref_genome)
+check_no_rs_snp(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids)
 }
 \arguments{
 \item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
 
 \item{path}{Filepath for the summary statistics file to be formatted}
 
-\item{ref_genome}{name of the reference genome used for the GWAS (GRCh37 or GRCh38)}
+\item{ref_genome}{name of the reference genome used for the GWAS (GRCh37 or
+GRCh38)}
+
+\item{snp_ids_are_rs_ids}{Binary Should the supplied SNP ID's be assumed to
+be RS IDs. If not, imputation using the SNP ID for other columns like
+base-pair position or chromosome will not be possible. If set to FALSE, the
+SNP RS ID will be imputed from the reference genome if possible. Default is
+TRUE.}
 }
 \value{
-list containing sumstats_dt, the modified summary statistics data table object
+list containing sumstats_dt, the modified summary statistics data
+table object
 }
 \description{
-Ensure that SNP starts with rs
+Ensure that SNP appears to be valid RS IDs (starts with rs)
 }
 \keyword{internal}

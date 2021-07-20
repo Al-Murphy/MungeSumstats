@@ -2,8 +2,10 @@
 % Please edit documentation in R/check_allele_flip.R
 \name{check_allele_flip}
 \alias{check_allele_flip}
-\title{Ensure A1 & A2 are correctly named, if GWAS constructed as
-Risk/Nonrisk alleles this will need to be converted to Reference/Alternative.}
+\title{Ensure A1 & A2 are correctly named, if GWAS SNP constructed as
+Alternative/Reference or Risk/Nonrisk alleles these SNPs will need to be
+converted to Reference/Alternative or Nonrisk/Risk. Here nonrisk is defined
+as what's on the reference genome (this may not always be the case).}
 \usage{
 check_allele_flip(
   sumstats_dt,
@@ -11,6 +13,8 @@ check_allele_flip(
   ref_genome,
   rsids,
   allele_flip_check,
+  allele_flip_drop,
+  allele_flip_z,
   keepEA = FALSE,
   standardise_headers = FALSE
 )
@@ -26,8 +30,11 @@ the GWAS ("GRCh37" or "GRCh38").}
 \item{rsids}{\code{data.table} of snpsById, filtered to SNPs of
 interest if loaded already. Or else NULL.}
 
-\item{allele_flip_check}{Binary Should the allele columns be chacked against
+\item{allele_flip_check}{Binary Should the allele columns be checked against
 reference genome to infer if flipping is necessary. Default is TRUE.}
+
+\item{allele_flip_drop}{Binary Should the SNPs for which neither their A1 or
+A2 base pair values match a reference genome be dropped. Default is TRUE.}
 
 \item{keepEA}{Add a column "EA" to record which allele was the effect allele
 in the original summary statistics.}
@@ -42,7 +49,9 @@ A list containing two data tables:
 }
 }
 \description{
-Ensure A1 & A2 are correctly named, if GWAS constructed as
-Risk/Nonrisk alleles this will need to be converted to Reference/Alternative.
+Ensure A1 & A2 are correctly named, if GWAS SNP constructed as
+Alternative/Reference or Risk/Nonrisk alleles these SNPs will need to be
+converted to Reference/Alternative or Nonrisk/Risk. Here nonrisk is defined
+as what's on the reference genome (this may not always be the case).
 }
 \keyword{internal}

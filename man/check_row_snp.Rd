@@ -12,7 +12,8 @@ check_row_snp(sumstats_dt, path)
 \item{path}{Filepath for the summary statistics file to be formatted}
 }
 \value{
-list containing sumstats_dt, the modified summary statistics data table object
+list containing sumstats_dt, the modified summary statistics data
+table object
 }
 \description{
 Ensure all rows have SNPs beginning with rs or SNP, drop those that don't

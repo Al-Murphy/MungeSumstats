@@ -62,6 +62,21 @@ ids <- (dplyr::arrange(metagwas, nsnp))$id
 ### Default usage   
 ## You can supply \code{import_sumstats()}
 ## with a list of as many OpenGWAS IDs as you want, 
-## but we'll just give one to save time. 
+## but we'll just give one to save time.
+
+## Call uses reference genome as default with more than 2GB of memory,
+## which is more than what 32-bit Windows can handle so remove certain checks
+
+is_32bit_windows <- .Platform$OS.type == "windows" && .Platform$r_arch == "i386"
+if (!is_32bit_windows) {
 datasets <- MungeSumstats::import_sumstats(ids = ids[1]) 
+} else{
+reformatted <- MungeSumstats::import_sumstats(ids = ids[1],
+                                              ref_genome="GRCh37",
+                                              on_ref_genome = FALSE,
+                                              strand_ambig_filter=FALSE,
+                                              bi_allelic_filter=FALSE,
+                                              allele_flip_check=FALSE)
+} 
+
 }

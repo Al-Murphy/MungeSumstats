@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Check if the inputted file is in VCF format, if so reformat as standard — check_vcf • MungeSumstats</title>
+<title>Check if the inputted file is in VCF format — check_vcf • MungeSumstats</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Check if the inputted file is in VCF format, if so reformat as standard — check_vcf" />
-<meta property="og:description" content="Check if the inputted file is in VCF format, if so reformat as standard" />
+<meta property="og:title" content="Check if the inputted file is in VCF format — check_vcf" />
+<meta property="og:description" content="Check if the inputted file is in VCF format" />
 
 
 
@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.32</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
       </span>
     </div>
 
@@ -99,6 +99,18 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/OpenGWAS.html">Import GWAS summary statistics from Open GWAS</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -124,33 +136,29 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Check if the inputted file is in VCF format, if so reformat as standard</h1>
+    <h1>Check if the inputted file is in VCF format</h1>
     <small class="dont-index">Source: <a href='https://github.com/neurogenomics/MungeSumstats/blob/master/R/check_vcf.R'><code>R/check_vcf.R</code></a></small>
     <div class="hidden name"><code>check_vcf.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Check if the inputted file is in VCF format, if so reformat as standard</p>
+    <p>Check if the inputted file is in VCF format</p>
     </div>
 
-    <pre class="usage"><span class='fu'>check_vcf</span><span class='op'>(</span><span class='va'>sumstats_file</span>, <span class='va'>path</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>check_vcf</span><span class='op'>(</span><span class='va'>header</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>sumstats_file</th>
-      <td><p>The summary statistics file for the GWAS</p></td>
-    </tr>
-    <tr>
-      <th>path</th>
-      <td><p>Filepath for the summary statistics file to be formatted</p></td>
+      <th>header</th>
+      <td><p>Header of the GWAS summary statistics file.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The modified sumstats_file</p>
+    <p>Whether the file is vcf or not</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

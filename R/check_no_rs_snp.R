@@ -1,9 +1,16 @@
-#' Ensure that SNP starts with rs
+#' Ensure that SNP appears to be valid RS IDs (starts with rs)
 #'
 #' @param sumstats_dt data table obj of the summary statistics file for the GWAS
 #' @param path Filepath for the summary statistics file to be formatted
-#' @param ref_genome name of the reference genome used for the GWAS (GRCh37 or GRCh38)
-#' @return list containing sumstats_dt, the modified summary statistics data table object
+#' @param ref_genome name of the reference genome used for the GWAS (GRCh37 or 
+#' GRCh38)
+#' @param snp_ids_are_rs_ids Binary Should the supplied SNP ID's be assumed to 
+#' be RS IDs. If not, imputation using the SNP ID for other columns like 
+#' base-pair position or chromosome will not be possible. If set to FALSE, the 
+#' SNP RS ID will be imputed from the reference genome if possible. Default is 
+#' TRUE.
+#' @return list containing sumstats_dt, the modified summary statistics data 
+#' table object
 #' @keywords internal
 #' @importFrom data.table setDT
 #' @importFrom data.table setkeyv
@@ -14,13 +21,15 @@
 #' @importFrom data.table rbindlist
 #' @importFrom BSgenome snpsByOverlaps
 #' @importFrom GenomicRanges makeGRangesFromDataFrame
-check_no_rs_snp <- function(sumstats_dt, path, ref_genome){
-  message("Checking SNP RSIDs.")
-  # test case has X:102670736:T_TAT, chr1:60320992 and rs2326918 all in SNP col   
+check_no_rs_snp <- function(sumstats_dt, path, ref_genome,snp_ids_are_rs_ids){
   SNP = CHR = CHR1 = BP1 = i.RefSNP_id = NULL
+  #if snp ids aren't rs ids rename the column to ID's so RS IDs can be inferred
+  if((!snp_ids_are_rs_ids) & sum("SNP" %in% names(sumstats_dt))==1)
+    data.table::setnames(sumstats_dt,"SNP","ID")
   # If SNP column doesn't start with rs
   col_headers <- names(sumstats_dt)
   if(sum("SNP" %in% col_headers)==1){
+    message("Checking SNP RSIDs.")
     miss_rs <- sumstats_dt[!grep("^rs",SNP),]
     #first case is chr:bp together - impute SNP for these
     miss_rs_chr_bp <- miss_rs[grep(":",SNP),]
@@ -29,7 +38,8 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome){
       if(sum(c("CHR","BP") %in% col_headers)==2 && 
           nrow(miss_rs[!grep(":",SNP),])>0){
         bad_snp <- miss_rs[!grep(":",SNP),]
-        msg <- paste0(formatC(nrow(bad_snp),big.mark = ","), " SNP IDs are not correctly formatted.",
+        msg <- paste0(formatC(nrow(bad_snp),big.mark = ","), 
+                      " SNP IDs are not correctly formatted.",
                       " These will be corrected from the reference genome.")
         message(msg)
         #remove snp column and pass to function to impute snp
@@ -51,7 +61,8 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome){
       }
       #check if any have more than 1 ":" remove these
       miss_rs_chr_bp <- miss_rs_chr_bp[!grep(".*:.*:.*",SNP)]
-      msg <- paste0(formatC(nrow(miss_rs_chr_bp),big.mark = ",")," SNP IDs appear to be made up of ",
+      msg <- paste0(formatC(nrow(miss_rs_chr_bp),big.mark = ","),
+                      " SNP IDs appear to be made up of ",
                       "chr:bp, these will be replaced by their SNP ID from the",
                       " reference genome")
       message(msg)
@@ -103,7 +114,8 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome){
         if(sum(c("CHR","BP") %in% col_headers)==2 && 
            nrow(sumstats_dt[!grep("^rs",SNP),])>0){
           bad_snp <- sumstats_dt[!grep("^rs",SNP),]
-          msg <- paste0(formatC(nrow(bad_snp),big.mark = ","), " SNP IDs are not correctly formatted.",
+          msg <- paste0(formatC(nrow(bad_snp),big.mark = ","), 
+                        " SNP IDs are not correctly formatted.",
                         " These will be corrected from the reference genome.")
           message(msg)
           #remove snp column and pass to function to impute snp
@@ -124,8 +136,9 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome){
       }  
       #if any weird SNP rows left that aren't chr:bp or rs id's remove them
       if(sum(c("CHR","BP") %in% col_headers)!=2){
-        msg <- paste0(formatC(nrow(miss_rs) - nrow(miss_rs_chr_bp),big.mark = ",")," SNP IDs are not ",
-                      "correctly formatted and will be removed")
+        msg <- 
+          paste0(formatC(nrow(miss_rs) - nrow(miss_rs_chr_bp),big.mark = ","),
+                 " SNP IDs are not correctly formatted and will be removed")
         message(msg)
       }
     }

@@ -1,6 +1,6 @@
 ---
 title: "Standardise the format of GWAS summary statistics with *MungeSumstats*"
-author: "Alan Murphy and Nathan Skene"
+author: "Alan Murphy, Brian Schilder and Nathan Skene"
 date: "`r Sys.Date()`"
 bibliography: vignettes/MungeSumstats.bib
 csl: vignettes/nature.csl
@@ -33,7 +33,7 @@ The *MungeSumstats* package is designed to facilitate the standardisation of GWA
 
 The package is designed to handle the lack of standardisation of output files by the GWAS community. There is a group who have now manually standardised many GWAS: [R interface to the IEU GWAS database API • ieugwasr](https://mrcieu.github.io/ieugwasr/) and [gwasvcf](https://github.com/MRCIEU/gwasvcf) but because a lot of GWAS remain closed access, these repositories are not all encompassing. 
 
-*MungeSumstats* provides a framework to standardise the format for any GWAS summary statistics, including those in VCF format, enabling downstream integration and analysis. The package works by addressing the most common discrepancies across summary statistic files. *MungeSumstats* also offers a range of adjustable, Quality Control (QC) steps.
+*MungeSumstats* provides a framework to standardise the format for any GWAS summary statistics, including those in VCF format, enabling downstream integration and analysis. The package works by addressing the most common discrepancies across summary statistic files. *MungeSumstats* also offers a range of adjustable, Quality Control (QC).
 
 # Installing MungeSumstats
 
@@ -70,12 +70,17 @@ BiocManager::install("SNPlocs.Hsapiens.dbSNP144.GRCh37")
 BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")
 ```
 These may take some time to install and are not included in the package as some 
-users may only need one of *GRCh37*/*GRCh38*.
+users may only need one of *GRCh37*/*GRCh38*. If you are unsure of the genome 
+build, MungeSumstats can also infer this information from your data.
 
 # Getting started
 
-See the [vignette website](https://neurogenomics.github.io/MungeSumstats/articles/MungeSumstats.html)
+See the [Getting started vignette website](https://neurogenomics.github.io/MungeSumstats/articles/MungeSumstats.html)
 for up-to-date instructions on usage.
+
+See the [OpenGWAS vignette website](https://neurogenomics.github.io/MungeSumstats/articles/OpenGWAS.html)
+for information on how to use MungeSumstats to access, standardise and perform
+quality control on GWAS Summary Statistics from the MRC IEU [Open GWAS Project](https://gwas.mrcieu.ac.uk/).
 
 If you have any problems please do file an issue here on github.
 

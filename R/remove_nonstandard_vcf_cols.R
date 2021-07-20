@@ -3,7 +3,9 @@
 #' @return sumstats_file
 #'
 #' @inheritParams format_sumstats
-#' @inheritParams readLines 
+#' @param keep_extra_cols logical, should extra, non-essential columns from 
+#' input be kept
+# @inheritParams readLines 
 #' @importFrom VariantAnnotation scanVcfHeader
 #' @keywords internal 
 remove_nonstandard_vcf_cols <- function(sample_id,
@@ -12,7 +14,8 @@ remove_nonstandard_vcf_cols <- function(sample_id,
     keep_cols <- c("CHROM","POS","ID", "REF","ALT","INFO", sample_id)
     colsToRemove <- names(sumstats_file)[!names(sumstats_file) %in% keep_cols]
     if(!is.null(colsToRemove) && keep_extra_cols==FALSE){
-        message("Removing non-standard columns: ", paste(colsToRemove, collapse = ", "))
+        message("Removing non-standard columns: ", 
+                    paste(colsToRemove, collapse = ", "))
         sumstats_file[,(colsToRemove):=NULL]
     }
     return(sumstats_file)
