@@ -17,7 +17,7 @@ jobs:
     runs-on: macOS-latest
     strategy:
       matrix:
-        r: ['4.0','devel']
+        r: ['release']
         #r:['devel']
     steps:
       - uses: actions/checkout@v1
@@ -63,6 +63,9 @@ jobs:
 
   windows:
     runs-on: windows-latest
+    strategy:
+      matrix:
+        r: ['release']
     steps:
       - uses: actions/checkout@v1
       - uses: r-lib/actions/setup-r@master
