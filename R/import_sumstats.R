@@ -35,18 +35,8 @@
 #' 
 #' ## Call uses reference genome as default with more than 2GB of memory,
 #' ## which is more than what 32-bit Windows can handle so remove certain checks
-#' 
-#' is_32bit_windows <- .Platform$OS.type == "windows" && .Platform$r_arch == "i386"
-#' if (!is_32bit_windows) {
-#' datasets <- MungeSumstats::import_sumstats(ids = ids[1]) 
-#' } else{
-#' reformatted <- MungeSumstats::import_sumstats(ids = ids[1],
-#'                                               ref_genome="GRCh37",
-#'                                               on_ref_genome = FALSE,
-#'                                               strand_ambig_filter=FALSE,
-#'                                               bi_allelic_filter=FALSE,
-#'                                               allele_flip_check=FALSE)
-#' } 
+#' ## commented out down to runtime
+#' #datasets <- MungeSumstats::import_sumstats(ids = ids) 
 #' 
 #' @export 
 import_sumstats <- function(ids,  
@@ -63,7 +53,13 @@ import_sumstats <- function(ids,
     # vcf_dir=tempdir(); vcf_download=TRUE;download_method="axel";quiet=FALSE;
     #force_new=FALSE;nThread=10; ids=c("ieu-a-1124","ieu-a-1125"); id=ids[1]; 
     #ref_genome=NULL;
-     
+    #quick input error handling
+    msg_dwnld <- paste0("download_method must be `download.file` (single threa",
+                        "d) or `axel` (multi threaded).")
+    if(!tolower(download_method) %in% c("download.file","axel"))
+        stop(msg_dwnld)
+    download_method <- tolower(download_method)
+    
     start_all <- Sys.time()
     ids <- unique(ids)
     message("Processing ",length(ids)," datasets from Open GWAS.")   
@@ -78,8 +74,11 @@ import_sumstats <- function(ids,
     ouputs <- parallel::mclapply(ids, function(id){ 
         out <-  tryCatch(expr = {
             start <- Sys.time()
-            message_parallel("\n========== Processing dataset : ",id," ==========\n") 
-            vcf_url <- file.path("https://gwas.mrcieu.ac.uk/files",id,paste0(id,".vcf.gz")) 
+            message_parallel("\n========== Processing dataset : ",id,
+                                " ==========\n") 
+            vcf_url <- 
+                file.path("https://gwas.mrcieu.ac.uk/files",id,
+                            paste0(id,".vcf.gz")) 
             #### Optional:: download VCF ####
             vcf_paths <- download_vcf(vcf_url=vcf_url,
                                       vcf_dir=vcf_dir, 
@@ -97,7 +96,8 @@ import_sumstats <- function(ids,
                                            nThread=nThread, 
                                            ...)   
             end <- Sys.time() 
-            message("\n",id," : Done in ",round(difftime(end, start, units='mins'), 2)," minutes.")
+            message("\n",id," : Done in ",
+                    round(difftime(end, start, units='mins'), 2)," minutes.")
             return(reformatted) 
         }, error = function(e){message(e);return(as.character(e))}) 
          

@@ -9,7 +9,8 @@
 #' 
 #' @param input_url input_url.
 #' @param output_path output_path.
-#' @param download_method \code{"axel"} (multi-threaded) or \code{"download.file"} (single-threaded) .
+#' @param download_method \code{"axel"} (multi-threaded) or 
+#' \code{"download.file"} (single-threaded) .
 #' @param background Run in background 
 #' @param force_overwrite Overwrite existing file.
 #' @param quiet Run quietly.
@@ -55,7 +56,8 @@ downloader <- function(input_url,
             } 
         } else {
             message("axel not installed.\n",
-                    "For Mac users, please install via brew in the command line (`brew install axel`)");
+                    "For Mac users, please install via brew in the command ",
+                    "line (`brew install axel`)");
             message("Defaulting to download.file")
             download_method <- "download.file"
         }
@@ -65,7 +67,13 @@ downloader <- function(input_url,
         message("Downloading with download.file.")
         options(timeout=timeout) 
         out_file <- file.path(output_path, basename(input_url))
-        utils::download.file(input_url, out_file) 
+        catch_fail <- tryCatch(utils::download.file(input_url, out_file),
+                                error = function(e) e,warning = function(w) w)
+        msg <- paste0("Failed to download from:\n",input_url,
+                      "\nThis is likely caused by inputting an ID which ",
+                      "couldn't be found. Check this and the URL.")
+        if(is(catch_fail,"error")|is(catch_fail,"warning"))
+            stop(msg)
     }
     return(out_file)
 }

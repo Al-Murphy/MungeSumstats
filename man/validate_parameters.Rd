@@ -9,6 +9,7 @@ validate_parameters(
   ref_genome,
   convert_small_p,
   compute_z,
+  compute_n,
   convert_n_int,
   analysis_trait,
   INFO_filter,
@@ -26,11 +27,15 @@ validate_parameters(
   snp_ids_are_rs_ids,
   write_vcf,
   return_format,
-  ldsc_format
+  ldsc_format,
+  imputation_ind,
+  log_folder_ind,
+  log_mungesumstats_msgs
 )
 }
 \arguments{
-\item{path}{Filepath for the summary statistics file to be formatted}
+\item{path}{Filepath for the summary statistics file to be formatted. Default
+is a temporary file.}
 
 \item{ref_genome}{name of the reference genome used for the GWAS ("GRCh37" or
 "GRCh38"). Argument is case-insensitive. Default is NULL which infers the
@@ -40,7 +45,15 @@ reference genome from the data.}
 Small p-values pass the R limit and can cause errors with LDSC/MAGMA and
 should be converted. Default is TRUE.}
 
-\item{compute_z}{Whether to compute Z-score column from P. Default is FALSE.}
+\item{compute_z}{Whether to compute Z-score column from P. Default is FALSE.
+\strong{Note} that imputing the Z-score for every SNP will not correct be
+perfectly correct and may result in a loss of power. This should only be done
+as a last resort.}
+
+\item{compute_n}{Whether to impute N. Default of 0 won't impute, any other
+integer will be imputed as the N (sample size) for every SNP in the dataset.
+\strong{Note} that imputing the sample size for every SNP is not correct and
+should only be done as a last resort.}
 
 \item{convert_n_int}{Binary, if N (the number of samples) is not an integer,
 should this be rounded? Default is TRUE.}
@@ -101,6 +114,23 @@ TRUE.}
 \item{ldsc_format}{Binary Ensure that output format meets all requirements
 to be fed directly into LDSC without the need for additional munging. Default
 is FALSE}
+
+\item{imputation_ind}{Binary Should a column be added for each imputation
+step to show what SNPs have imputed values for differing fields. This
+includes a field denoting SNP allele flipping (flipped). On the flipped
+value, this denoted whether the alelles where switched based on
+MungeSumstats initial choice of A1, A2 from the input column headers and thus
+may not align with what the creator intended.\strong{Note} these columns will be
+in the formatted summary statistics returned. Default is FALSE.}
+
+\item{log_folder_ind}{Binary Should log files be stored containing all
+filtered out SNPs (separate file per filter). The data is outputted in the
+same format specified for the resulting sumstats file. The only exception to
+this rule is if output is vcf, then log file saved as .tsv.gz. Default is
+FALSE.}
+
+\item{log_mungesumstats_msgs}{Binary Should a log be stored containing all
+messages and errors printed by MungeSumstats in a run. Default is FALSE}
 }
 \value{
 No return

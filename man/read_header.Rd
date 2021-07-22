@@ -7,7 +7,8 @@
 read_header(path, n = 2, skip_vcf_metadata = FALSE)
 }
 \arguments{
-\item{path}{Filepath for the summary statistics file to be formatted}
+\item{path}{Filepath for the summary statistics file to be formatted. Default
+is a temporary file.}
 
 \item{n}{integer. The (maximal) number of lines to read. Negative values
 indicate that one should read up to the end of input on the connection.}

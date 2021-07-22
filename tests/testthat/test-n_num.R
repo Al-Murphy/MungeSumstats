@@ -24,7 +24,22 @@ test_that("Handle n when its 5 std dev > mean", {
                                                   on_ref_genome = FALSE,
                                                   strand_ambig_filter=FALSE,
                                                   bi_allelic_filter=FALSE,
-                                                  allele_flip_check=FALSE)
-  res_dt <- data.table::fread(reformatted)
+                                                  allele_flip_check=FALSE,
+                                                  log_folder_ind = TRUE)
+  res_dt <- data.table::fread(reformatted$sumstats)
+  expect_equal(!(rmv_snp %in% res_dt$SNP),TRUE)
+  
+  #Run MungeSumstats code
+  #Don't convert n to integers as this may round down
+  #set N_dropNA to TRUE
+  reformatted <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37",
+                                                N_std=5,convert_n_int=FALSE,
+                                                on_ref_genome = FALSE,
+                                                strand_ambig_filter=FALSE,
+                                                bi_allelic_filter=FALSE,
+                                                allele_flip_check=FALSE,
+                                                log_folder_ind = TRUE,
+                                                N_dropNA = TRUE)
+  res_dt <- data.table::fread(reformatted$sumstats)
   expect_equal(!(rmv_snp %in% res_dt$SNP),TRUE)
 })

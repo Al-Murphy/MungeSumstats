@@ -6,14 +6,13 @@
 #' @keywords internal
 check_dup_col <- function(sumstats_dt, path){
   message("Checking for duplicate columns.")
-  ..notDup = NULL
   col_headers = names(sumstats_dt)
   if(sum(duplicated(col_headers))>0){
     msg <- paste0("There are ",sum(duplicated(col_headers)),
                   " duplicated columns which will be removed.")
     message(msg)
     notDup <- which(!duplicated(col_headers))
-    sumstats_dt <- sumstats_dt[, ..notDup]
+    sumstats_dt <- sumstats_dt[, notDup,with=FALSE]
     return(list("sumstats_dt"=sumstats_dt))
   }
   else{

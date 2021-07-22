@@ -145,7 +145,7 @@
     <p>Ensure that the p values are not 5e-324 or lower, if so set to 0</p>
     </div>
 
-    <pre class="usage"><span class='fu'>check_small_p_val</span><span class='op'>(</span><span class='va'>sumstats_dt</span>, <span class='va'>path</span>, <span class='va'>convert_small_p</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>check_small_p_val</span><span class='op'>(</span><span class='va'>sumstats_dt</span>, <span class='va'>path</span>, <span class='va'>convert_small_p</span>, <span class='va'>imputation_ind</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -160,7 +160,17 @@
     </tr>
     <tr>
       <th>convert_small_p</th>
-      <td><p>Binary, should p-values &lt; 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.</p></td>
+      <td><p>Binary, should p-values &lt; 5e-324 be converted to 0?
+Small p-values pass the R limit and can cause errors with LDSC/MAGMA and
+should be converted. Default is TRUE.</p></td>
+    </tr>
+    <tr>
+      <th>imputation_ind</th>
+      <td><p>Binary Should a column be added for each imputation
+step to show what SNPs have imputed values for differing fields. This
+includes a field denoting SNP allele flipping (flipped). <strong>Note</strong>
+these columns will be in the formatted summary statistics returned. Default
+is FALSE.</p></td>
     </tr>
     </table>
 

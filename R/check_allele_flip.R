@@ -3,24 +3,16 @@
 #' converted to Reference/Alternative or Nonrisk/Risk. Here nonrisk is defined
 #' as what's on the reference genome (this may not always be the case). 
 #'
-#' @param sumstats_dt data table obj of the summary statistics file for the GWAS.
-#' @param path Filepath for the summary statistics file to be formatted.
-#' @param ref_genome name of the reference genome used for
-#'  the GWAS ("GRCh37" or "GRCh38").
-#' @param rsids \code{data.table} of snpsById, filtered to SNPs of 
-#' interest if loaded already. Or else NULL.
-#' @param allele_flip_check Binary Should the allele columns be checked against 
-#' reference genome to infer if flipping is necessary. Default is TRUE.
-#' @param allele_flip_drop Binary Should the SNPs for which neither their A1 or 
-#' A2 base pair values match a reference genome be dropped. Default is TRUE.
-#' @param keepEA Add a column "EA" to record which allele was the effect allele 
-#' in the original summary statistics.
-#' @param standardise_headers Run \code{standardise_sumstats_column_headers_crossplatform} first.  
+#' @inheritParams format_sumstats  
+#' @param log_files list of log file locations
+#' @param standardise_headers Run 
+#' \code{standardise_sumstats_column_headers_crossplatform} first.  
 #' 
 #' @return A list containing two data tables:
 #' \itemize{
 #'   \item \code{sumstats_dt}: the modified summary statistics \code{data.table} object.
 #'   \item \code{rsids}: snpsById, filtered to SNPs of interest if loaded already. Or else NULL.
+#'   \item \code{log_files}: log file list
 #' }
 #' @keywords internal
 #' @import R.utils
@@ -30,14 +22,10 @@
 #' @importFrom data.table set
 #' @importFrom data.table setorder
 #' @importFrom data.table copy
-check_allele_flip <-  function(sumstats_dt, 
-                               path, 
-                               ref_genome, 
-                               rsids, 
-                               allele_flip_check,
-                               allele_flip_drop,
-                               allele_flip_z,
-                               keepEA=FALSE,
+check_allele_flip <-  function(sumstats_dt, path, ref_genome, rsids, 
+                               allele_flip_check,allele_flip_drop,allele_flip_z,
+                               imputation_ind,log_folder_ind, check_save_out,
+                               tabix_index, nThread, log_files,
                                standardise_headers=FALSE){ 
   # GenomicSEM' allele flipping strategy:
   # https://github.com/GenomicSEM/GenomicSEM/blob/fc8f17a817a8022d6900acf41824d27b3676f9c4/R/munge.R#L151
@@ -55,7 +43,7 @@ check_allele_flip <-  function(sumstats_dt,
   ## to avoid confusing BiocCheck.
   SNP = i.seqnames = CHR = BP = i.pos = LP = P = A1 = A2 = eff_i =
     i.A1 = i.A2 = ss_A1 = ss_A2 = i.ref_allele = ref_gen_allele = match_type = 
-    tmp = NULL;
+    tmp = flipped = NULL
   if(standardise_headers){
     sumstats_dt <- standardise_sumstats_column_headers_crossplatform(sumstats_dt = sumstats_dt)[["sumstats_dt"]]
   }
@@ -89,6 +77,22 @@ check_allele_flip <-  function(sumstats_dt,
                " SNPs where neither A1 nor A2 match the reference genome.",
                "\nThese will be removed.")
       message(print_msg0)
+      #If user wants log, save it to there
+      if(log_folder_ind){
+        name <- "alleles_dont_match_ref_gen"
+        name <- get_unique_name_log_file(name=name,log_files=log_files)
+        write_sumstats(sumstats_dt = sumstats_dt[(A1!=ref_gen_allele & 
+                                                    A2!=ref_gen_allele),],
+                       save_path=
+                         paste0(check_save_out$log_folder,
+                                "/",name,
+                                check_save_out$extension),
+                       sep=check_save_out$sep,
+                       tabix_index = tabix_index,
+                       nThread = nThread)
+        log_files[[name]] <- 
+          paste0(check_save_out$log_folder,"/",name,check_save_out$extension)
+      } 
       sumstats_dt <- sumstats_dt[!(A1!=ref_gen_allele & A2!=ref_gen_allele),]
     }
     else{
@@ -114,13 +118,15 @@ check_allele_flip <-  function(sumstats_dt,
       for(eff_i in effect_columns){#set updates quicker for DT
         #conversion done in case, VCF beta column may not be numeric
         sumstats_dt[match_type==FALSE,(eff_i):=as.numeric(get(eff_i))*-1]
-      }  
+      }
+      if(imputation_ind)
+        sumstats_dt[match_type==FALSE,flipped:=TRUE]
     }
     #remove extra created columns and return
     sumstats_dt[,ref_gen_allele:=NULL]
     sumstats_dt[,match_type:=NULL]
 
-    return(list("sumstats_dt"=sumstats_dt,"rsids"=rsids))
+    return(list("sumstats_dt"=sumstats_dt,"rsids"=rsids,"log_files"=log_files))
   }  
-  return(list("sumstats_dt"=sumstats_dt,"rsids"=rsids))
+  return(list("sumstats_dt"=sumstats_dt,"rsids"=rsids,"log_files"=log_files))
 }

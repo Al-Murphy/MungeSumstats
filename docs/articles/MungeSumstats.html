@@ -95,7 +95,7 @@
 </h1>
                         <h4 class="author">Alan Murphy, Brian Schilder, and Nathan Skene</h4>
             
-            <h4 class="date">2021-07-19</h4>
+            <h4 class="date">2021-07-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/MungeSumstats/blob/master/vignettes/MungeSumstats.Rmd"><code>vignettes/MungeSumstats.Rmd</code></a></small>
       <div class="hidden name"><code>MungeSumstats.Rmd</code></div>
@@ -129,8 +129,8 @@ document.addEventListener("DOMContentLoaded", function() {
 <p>The <a href="https://github.com/mikegloudemans/gwas-download">GWAS-Download project</a> has collated summary statistics from 200+ GWAS. This repository has been utilsed to identify the most common formats, all of which can be standardised with <em>MungeSumstats</em>.</p>
 <p>Moreover, there is an emerging standard of VCF format for summary statistics files with multiple, useful, associated R packages such as <em>vcfR</em>. However, there is currently no method to convert VCF formats to a standardised format that matches older approaches.</p>
 <p>The <em>MungeSumstats</em> package standardises both VCF and the most common summary statistic file formats to enable downstream integration and analysis.</p>
-<p><em>MungeSumstats</em> also offers a number of Quality Control (QC) steps which are important prerequisites for downstream analysis like Linkage disequilibrium score regression (LDSC) and MAGMA.</p>
-<p>Moreover, <em>MungeSumstats</em> is efficiently written resulting in all reformatting and quality control checks completing in minutes for GWAS summary statistics with 500k SNPs on a standard desktop machine.</p>
+<p><em>MungeSumstats</em> also offers comprehensive Quality Control (QC) steps which are important prerequisites for downstream analysis like Linkage disequilibrium score regression (LDSC) and MAGMA.</p>
+<p>Moreover, <em>MungeSumstats</em> is efficiently written resulting in all reformatting and quality control checks completing in minutes for GWAS summary statistics with 500k SNPs on a standard desktop machine. This speed can be increased further by increasing the number of threads (nThread) for <code>data.table</code> to use.</p>
 <p>Currently <em>MungeSumstats</em> only works on data from humans, as it uses human-based genome references.</p>
 </div>
 <div id="aim" class="section level1">
@@ -141,19 +141,21 @@ document.addEventListener("DOMContentLoaded", function() {
 <li>SNP : SNP ID (rs IDs)</li>
 <li>CHR : Chromosome number</li>
 <li>BP : Base pair positions</li>
-<li>A1 : Effect allele</li>
-<li>A2 : Non-effect allele</li>
+<li>A1 : reference allele</li>
+<li>A2 : alternative allele</li>
 <li>Z : Z-score</li>
 <li>BETA : Effect size estimate relative to the alternative allele</li>
 <li>P : Unadjusted p-value for SNP</li>
+<li>SE : The standard error</li>
 <li>N : Sample size</li>
 <li>INFO: The imputation information score</li>
 <li>FRQ: The minor allele frequency (MAF) of the SNP</li>
 </ul>
-<p>Tests run by <em>MungeSumstats</em> include:</p>
+<p><em>MungeSumstats</em> uses a mapping file to infer the inputted column names (run <code><a href="https://rdrr.io/r/utils/data.html">data("sumstatsColHeaders")</a></code> to view these). This mapping file is far more comprehensive than any other publicly available munging tool containing 177 unique mappings at the time of writing this vignette.</p>
+<p><em>MungeSumstats</em> offers unmatched levels of quality control to ensure, for example, consistency of allele assignment and direction of effects. Tests run by <em>MungeSumstats</em> include:</p>
 <ul>
 <li>Check VCF format</li>
-<li>Check tab, space or comma delimited</li>
+<li>Check tab, space or comma delimited, zipped, csv or tsv file</li>
 <li>Check for header name synonyms</li>
 <li>Check for multiple models or traits in GWAS</li>
 <li>Check for uniformity in SNP ID - no mix of rs/missing rs/chr:bp</li>
@@ -169,24 +171,26 @@ document.addEventListener("DOMContentLoaded", function() {
 <li>Check for duplicated columns</li>
 <li>Check for small p-values (lower than 5e-324)</li>
 <li>Check N column is an integer</li>
-<li>Check for SNPs with N greater than 5 times standard dev. plus the mean<br>
-</li>
+<li>Check for SNPs with N greater than 5 times standard dev. plus the mean</li>
 <li>Check SNPs are RS ID’s</li>
 <li>Check for duplicated rows, based on SNP ID</li>
 <li>Check for duplicated rows, based on base-pair position</li>
 <li>Check for SNPs on reference genome. Correct not found SNP IDs using CHR and BP (infer from reference genome)</li>
 <li>Check INFO score</li>
+<li>Check that the SNPs’ standard error (SE) is positive.</li>
+<li>Check that SNPs’ effect columns (like BETA) aren’t equal to 0.</li>
 <li>Check for strand-ambiguous SNPs</li>
 <li>Check for non-biallelic SNPs (infer from reference genome)</li>
 <li>Check for allele flipping</li>
 <li>Check for SNPs on chromosome X, Y, and mitochondrial SNPs (MT)</li>
 <li>Check for z-score (Z) and impute if missing</li>
+<li>Check for N and impute if missing</li>
 <li>Check output format is LDSC ready</li>
 </ul>
 <p>Users can specify which checks to run on their data. A <strong>note</strong> on the allele flipping check: <strong>MungeSumstats</strong> infers the effect allele will always be the A2 allele, this is the approach done for <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7805039/">IEU GWAS VCF</a> and has such also been adopted here. This inference is first from the inputted file’s column headers however, the allele flipping check ensures this by comparing A1, what should be the reference allele, to the reference genome. If a SNP’s A1 DNA base doesn’t match the reference genome but it’s A2 (what should be the alternative allele) does, the alleles will be flipped along with the effect information (e.g. Beta, Odds Ratio, signed summary statistics, Z-score*).</p>
 <p>*-by default the Z-score is assumed to be calculated off the effect size not the P-value and so will be flipped. This can be changed by a user.</p>
 <p>If a test is failed, the user will be notified and if possible, the input will be corrected. The QC steps from the checks above can also be adjusted to suit the user’s analysis, see <code><a href="../reference/format_sumstats.html">MungeSumstats::format_sumstats</a></code>.</p>
-<p><em>MungeSumstats</em> can handle VCF, txt, tsv, csv file types or .gz/.bgz versions of these file types. The package also gives the suer the flexibility to export the reformatted file as tab-delimited, VCF or R native objects such as data.table, GRanges or VRanges objects.</p>
+<p><em>MungeSumstats</em> can handle VCF, txt, tsv, csv file types or .gz/.bgz versions of these file types. The package also gives the user the flexibility to export the reformatted file as tab-delimited, VCF or R native objects such as data.table, GRanges or VRanges objects. The output can also be outputted in an <strong>LDSC ready</strong> format which means the file can be fed directly into LDSC without the need for additional munging.</p>
 </div>
 <div id="data" class="section level1">
 <h1 class="hasAnchor">
@@ -225,12 +229,14 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
                                  ref_genome<span class="op">=</span><span class="st">"GRCh37"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## 
-## *****::NOTE::*****
+## ******::NOTE::******
 ## - Formatted results will be saved to `tempdir()` by default.
 ## - This means all formatted summary stats will be deleted upon ending the R session.
-## - To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.
+## - To keep formatted summary stats, change `save_path`
+## ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing
+## ( e.g. `file.copy(save_path, './formatted/' )`.
 ## ********************</code></pre>
-<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpuXB0yI/fileda246780e41a.tsv.gz</code></pre>
+<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpxSFVYF/filea53b65f891a8.tsv.gz</code></pre>
 <pre><code>## Reading header.</code></pre>
 <pre><code>## Tabular format detected.</code></pre>
 <pre><code>## Importing.</code></pre>
@@ -243,6 +249,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ##    - 70 genome-wide significant variants (P&lt;5e-8)
 ##    - 20 chromosomes</code></pre>
 <pre><code>## Checking for multi-GWAS.</code></pre>
+<pre><code>## Checking for multiple RS IDs on one row.</code></pre>
 <pre><code>## Checking SNP RSIDs.</code></pre>
 <pre><code>## Checking for merged allele column.</code></pre>
 <pre><code>## Ensuring all SNPs are on the reference genome.</code></pre>
@@ -254,12 +261,14 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Checking for duplicate columns.</code></pre>
 <pre><code>## Checking for duplicate SNPs from SNP ID.</code></pre>
 <pre><code>## Checking for SNPs with duplicated base-pair positions</code></pre>
-<pre><code>## Ensuring all SNPs have N&lt;5 std dev below mean.</code></pre>
+<pre><code>## Filtering SNPs, ensuring SE &gt;0.</code></pre>
+<pre><code>## Filtering effect columns, ensuring none equal 0.</code></pre>
+<pre><code>## Ensuring all SNPs have N&lt;5 std dev above mean.</code></pre>
 <pre><code>## Removing 'chr' prefix from CHR.</code></pre>
 <pre><code>## Making X/Y CHR uppercase.</code></pre>
 <pre><code>## Checking for bi-allelic SNPs.</code></pre>
 <pre><code>## Sorting coordinates.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpuXB0yI/fileda246780e41a.tsv.gz</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpxSFVYF/filea53b65f891a8.tsv.gz</code></pre>
 <pre><code>## Summary statistics report:
 ##    - 93 rows (100% of original 93 rows)
 ##    - 93 unique variants
@@ -282,6 +291,11 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <li>
 <strong>INFO_filter</strong> 0-1 The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9</li>
 <li>
+<strong>pos_se</strong> Binary Should the standard Error (SE) column be checked to ensure it is greater than 0? Those that are, are removed (if present in sumstats file). Default TRUE.</li>
+<li>
+<strong>effect_columns_nonzero</strong> Binary should the effect columns in the data BETA,OR (odds ratio),LOG_ODDS,SIGNED_SUMSTAT be checked to ensure no SNP=0. Those that do are removed(if present in sumstats file). Default TRUE.<br>
+</li>
+<li>
 <strong>N_std</strong> Numeric, the number of standard deviations above the mean a SNP’s N is needed to be removed. Default is 5. <strong>N_dropNA</strong> controls whether the SNPs with a missing N value are dropped or not (Default is TRUE).</li>
 <li>
 <strong>rmv_chr</strong> vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary. Default is X, Y and mitochondrial.<strong>rmv_chrPrefix</strong> controls whether “chr”/“CHR” is removed from chromosome names (Default is TRUE).</li>
@@ -294,10 +308,21 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <li>
 <strong>bi_allelic_filter</strong> Binary, should non-biallelic SNPs be removed. Default is TRUE</li>
 <li>
+<strong>snp_ids_are_rs_ids</strong> Binary, should the SNP IDs inputted be inferred as RS IDs or some arbitrary ID. Default is TRUE.<br>
+</li>
+<li>
 <strong>ldsc_format</strong> Ensure that output format meets all requirements to be passed directly into LDSC without the need for additional munging.</li>
+<li><strong>MungeSumstats_log_msg</strong></li>
+<li>
+<strong>log_folder_ind</strong> Should log files be stored containing all filtered out SNPs (separate file per filter). The data is outputted in the same format specified for the resulting sumstats file.</li>
+<li>
+<strong>log_mungesumstats_msgs</strong> Binary Should a log be stored containing all messages and errors printed by MungeSumstats in a run.</li>
+<li>
+<strong>imputation_ind</strong> Binary Should a column be added for each imputation step to show what SNPs have imputed values for differing fields. This includes a field denoting SNP allele flipping (flipped). On the flipped value, this denoted whether the alelles where switched based on MungeSumstats initial choice of A1, A2 from the input column headers and thus may not align with what the creator intended.<strong>Note</strong> these columns will be in the formatted summary statistics returned.</li>
 </ul>
+<p>See <code>?MungeSumstats::format_sumstats()</code> for the full list of parameters to control MungeSumstats QC and standardisation steps.</p>
 <p>VCF files can also be standardised to the same format as other summary statistic files. A subset of the Amyotrophic lateral sclerosis GWAS from the ieu open GWAS project (a .vcf file) has been added to <em>MungeSumstats</em> to demonstrate this functionality.Simply pass the path to the file in the same manner you would for other summary statistic files:</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#save ALS GWAS from the ieu open GWAS project to a temp directory</span>
 <span class="va">ALSvcfPth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"ALSvcf.vcf"</span>, package<span class="op">=</span><span class="st">"MungeSumstats"</span><span class="op">)</span>
 <span class="co">#set a low INFO filter so we get a return</span>
@@ -307,12 +332,14 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
                                  INFO_filter<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## 
-## *****::NOTE::*****
+## ******::NOTE::******
 ## - Formatted results will be saved to `tempdir()` by default.
 ## - This means all formatted summary stats will be deleted upon ending the R session.
-## - To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.
+## - To keep formatted summary stats, change `save_path`
+## ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing
+## ( e.g. `file.copy(save_path, './formatted/' )`.
 ## ********************</code></pre>
-<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpuXB0yI/fileda2468a76b2b.tsv.gz</code></pre>
+<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpxSFVYF/filea53b379a2a15.tsv.gz</code></pre>
 <pre><code>## Reading header.</code></pre>
 <pre><code>## Importing.</code></pre>
 <pre><code>## Reading VCF file.</code></pre>
@@ -330,6 +357,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ##    - 0 genome-wide significant variants (P&lt;5e-8)
 ##    - 1 chromosomes</code></pre>
 <pre><code>## Checking for multi-GWAS.</code></pre>
+<pre><code>## Checking for multiple RS IDs on one row.</code></pre>
 <pre><code>## Checking SNP RSIDs.</code></pre>
 <pre><code>## Checking for merged allele column.</code></pre>
 <pre><code>## Ensuring all SNPs are on the reference genome.</code></pre>
@@ -344,12 +372,14 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Checking for SNPs with duplicated base-pair positions</code></pre>
 <pre><code>## Filtering SNPs based on INFO score.</code></pre>
 <pre><code>## 67 SNPs are below the INFO threshold of 0.1 and will be removed</code></pre>
-<pre><code>## Ensuring all SNPs have N&lt;5 std dev below mean.</code></pre>
+<pre><code>## Filtering SNPs, ensuring SE &gt;0.</code></pre>
+<pre><code>## Filtering effect columns, ensuring none equal 0.</code></pre>
+<pre><code>## Ensuring all SNPs have N&lt;5 std dev above mean.</code></pre>
 <pre><code>## Removing 'chr' prefix from CHR.</code></pre>
 <pre><code>## Making X/Y CHR uppercase.</code></pre>
 <pre><code>## Checking for bi-allelic SNPs.</code></pre>
 <pre><code>## Sorting coordinates.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpuXB0yI/fileda2468a76b2b.tsv.gz</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpxSFVYF/filea53b379a2a15.tsv.gz</code></pre>
 <pre><code>## Summary statistics report:
 ##    - 26 rows (26.3% of original 99 rows)
 ##    - 26 unique variants
@@ -363,7 +393,167 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ## 4: rs141149254   1 54490  G  A 0.1353  0.0963 0.0423 1.641870 0.1353 0.02281025
 ## 5:   rs2462492   1 54676  C  T 0.1543 -0.0567 0.0407 0.786217 0.1543 0.16359989</code></pre>
 <pre><code>## Returning path to saved data.</code></pre>
-<p>See our publication for further discussion of these checks:</p>
+<p>You can also get more information on the SNPs which have had data imputed or have been filtered out by <em>MungeSumstats</em> by using the <code>imputation_ind</code> and <code>log_folder_ind</code> parameters respectively. For example:</p>
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#set</span>
+<span class="va">reformatted_vcf_2</span> <span class="op">&lt;-</span> 
+  <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/format_sumstats.html">format_sumstats</a></span><span class="op">(</span>path<span class="op">=</span><span class="va">ALSvcfPth</span>,
+                                 ref_genome<span class="op">=</span><span class="st">"GRCh37"</span>,
+                                 INFO_filter <span class="op">=</span> <span class="fl">0.1</span>,
+                                 log_folder_ind<span class="op">=</span><span class="cn">TRUE</span>,
+                                 imputation_ind<span class="op">=</span><span class="cn">TRUE</span>,
+                                 log_mungesumstats_msgs<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+## 
+## ******::NOTE::******
+## - Formatted results will be saved to `tempdir()` by default.
+## - This means all formatted summary stats will be deleted upon ending the R session.
+## - To keep formatted summary stats, change `save_path`
+## ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing
+## ( e.g. `file.copy(save_path, './formatted/' )`.
+## ********************</code></pre>
+<pre><code>## ******::NOTE::******
+## - Log results will be saved to `tempdir()` by default.
+## - This means all log data from the run will be deleted upon ending the R session.
+## - To keep it, change `log_folder` to an actual directory (e.g. log_foler='./').
+## ********************</code></pre>
+<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpxSFVYF/filea53bcf175e0.tsv.gz</code></pre>
+<pre><code>## Log data to be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpxSFVYF</code></pre>
+<pre><code>## Reading header.</code></pre>
+<pre><code>## Importing.</code></pre>
+<pre><code>## Reading VCF file.</code></pre>
+<pre><code>## Removing non-standard columns: QUAL, FILTER, FORMAT</code></pre>
+<pre><code>## Parsing 'EBI-a-GCST005647' data column.</code></pre>
+<pre><code>## 0 empty column(s) detected.</code></pre>
+<pre><code>## VCF file has -log10 P-values, these will be converted to unadjusted p-values in the 'P' column.</code></pre>
+<pre><code>## Formatting INFO column.</code></pre>
+<pre><code>## Standardising column headers.</code></pre>
+<pre><code>## First line of summary statistics file:</code></pre>
+<pre><code>## CHROM    POS ID  REF ALT INFO    ES  SE  LP  AF  P   </code></pre>
+<pre><code>## Summary statistics report:
+##    - 99 rows
+##    - 99 unique variants
+##    - 0 genome-wide significant variants (P&lt;5e-8)
+##    - 1 chromosomes</code></pre>
+<pre><code>## Checking for multi-GWAS.</code></pre>
+<pre><code>## Checking for multiple RS IDs on one row.</code></pre>
+<pre><code>## Checking SNP RSIDs.</code></pre>
+<pre><code>## Checking for merged allele column.</code></pre>
+<pre><code>## Ensuring all SNPs are on the reference genome.</code></pre>
+<pre><code>## Loading reference genome data.</code></pre>
+<pre><code>## 12 SNPs are not on the reference genome. These will be corrected from the reference genome.</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpxSFVYF/snp_not_found_from_chr_bp.tsv</code></pre>
+<pre><code>## Checking for correct direction of A1 (reference) and A2 (alternative allele).</code></pre>
+<pre><code>## Reordering so first three column headers are SNP, CHR and BP in this order.</code></pre>
+<pre><code>## Reordering so first fourth and fifth columns are A1 and A2.</code></pre>
+<pre><code>## Checking for missing data.</code></pre>
+<pre><code>## Checking for duplicate columns.</code></pre>
+<pre><code>## Checking for duplicate SNPs from SNP ID.</code></pre>
+<pre><code>## Checking for SNPs with duplicated base-pair positions</code></pre>
+<pre><code>## Filtering SNPs based on INFO score.</code></pre>
+<pre><code>## 67 SNPs are below the INFO threshold of 0.1 and will be removed</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpxSFVYF/info_filter.tsv</code></pre>
+<pre><code>## Filtering SNPs, ensuring SE &gt;0.</code></pre>
+<pre><code>## Filtering effect columns, ensuring none equal 0.</code></pre>
+<pre><code>## Ensuring all SNPs have N&lt;5 std dev above mean.</code></pre>
+<pre><code>## Removing 'chr' prefix from CHR.</code></pre>
+<pre><code>## Making X/Y CHR uppercase.</code></pre>
+<pre><code>## Checking for bi-allelic SNPs.</code></pre>
+<pre><code>## Sorting coordinates.</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpxSFVYF/filea53bcf175e0.tsv.gz</code></pre>
+<pre><code>## Summary statistics report:
+##    - 26 rows (26.3% of original 99 rows)
+##    - 26 unique variants
+##    - 0 genome-wide significant variants (P&lt;5e-8)
+##    - 1 chromosomes</code></pre>
+<pre><code>## Succesfully finished preparing sumstats file, preview:</code></pre>
+<pre><code>##            SNP CHR    BP A1 A2   INFO    BETA     SE       LP     AF          P
+## 1:  rs58108140   1 10583  G  A 0.1589  0.0312 0.0393 0.369267 0.1589 0.42730011
+## 2:    rs806731   1 30923  G  T 0.7843 -0.0114 0.0353 0.126854 0.7843 0.74669974
+## 3: rs116400033   1 51479  T  A 0.1829  0.0711 0.0370 1.262410 0.1829 0.05464998
+## 4: rs141149254   1 54490  G  A 0.1353  0.0963 0.0423 1.641870 0.1353 0.02281025
+## 5:   rs2462492   1 54676  C  T 0.1543 -0.0567 0.0407 0.786217 0.1543 0.16359989
+##    IMPUTATION_SNP
+## 1:             NA
+## 2:             NA
+## 3:             NA
+## 4:             NA
+## 5:             NA</code></pre>
+<pre><code>## Returning path to saved data.</code></pre>
+<p>Note that using <code>log_folder_ind</code> returns a list from <code>format_sumstats</code> which includes the file locations of the differing classes of removed SNPs. Using <code>log_mungesumstats_msgs</code> saves the messages to the console to a file which is returned in the same list. Note that not all the messages will also print to screen anymore when you set <code>log_mungesumstats_msgs</code>:</p>
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">reformatted_vcf_2</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] "sumstats"  "log_files"</code></pre>
+<p>A user can load a file to view the excluded SNPs:</p>
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="va">reformatted_vcf_2</span><span class="op">$</span><span class="va">log_files</span><span class="op">$</span><span class="va">info_filter</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></code></pre></div>
+<pre><code>##             SNP CHR    BP A1 A2   INFO    BETA     SE        LP     AF
+##  1: rs146477069   1 54421  A  G 0.0352 -0.0240 0.0830 0.1121020 0.0352
+##  2: rs143174675   1 54753  T  G 0.0188 -0.0766 0.1108 0.3103360 0.0188
+##  3: rs114420996   1 58814  G  A 0.0693  0.0096 0.0574 0.0618807 0.0693
+##  4:  rs62637815   1 59040  T  C 0.0637  0.0265 0.0593 0.1837590 0.0637
+##  5:  rs56992750   1 61462  T  A 0.0141  0.1307 0.1183 0.5699250 0.0141
+##  6: rs181431124   1 64649  A  C 0.0224  0.0284 0.1060 0.1030330 0.0224
+##  7:  rs12401368   1 66507  T  A 0.0232  0.0549 0.1025 0.2275320 0.0232
+##  8: rs188023513   1 77462  G  A 0.0458  0.1022 0.0714 0.8173000 0.0458
+##  9:  rs62641297   1 77874  G  A 0.0231  0.0595 0.0994 0.2601110 0.0231
+## 10:  rs78385339   1 77961  G  A 0.0347  0.1147 0.0852 0.7490920 0.0347
+##             P IMPUTATION_SNP
+##  1: 0.7724991             NA
+##  2: 0.4894000             NA
+##  3: 0.8672001             NA
+##  4: 0.6549995             NA
+##  5: 0.2692000             NA
+##  6: 0.7888002             NA
+##  7: 0.5921995             NA
+##  8: 0.1523000           TRUE
+##  9: 0.5494004             NA
+## 10: 0.1782001             NA</code></pre>
+<p>And we can see all these SNPs had lower INFO values that our set threshold.</p>
+<p>The different types of exclusion which lead to the names are explained below:</p>
+<ul>
+<li>
+<strong>snp_multi_rs_one_row</strong> - Where the SNP (RS ID) contained more than one RS ID.</li>
+<li>
+<strong>snp_missing_rs</strong> - Where the SNP (RS ID) was missing the rs prefix. Note that these are only removed when other snps have an rs prefix.</li>
+<li>
+<strong>snp_multi_colon</strong> - Where the SNP ID has mutliple colons (“:”) in one SNP.</li>
+<li>
+<strong>snp_not_found_from_bp_chr</strong> - Where the RS ID was attempted to be imputed from the CHR and BP (Base-Pair) information, using the reference genome, but wasn’t successful.</li>
+<li>
+<strong>ch_bp_not_found_from_snp</strong> - Where the CHR and BP (Base-Pair) was attempted to be imputed from the SNP (RS ID), using the reference genome, but wasn’t successful.</li>
+<li>
+<strong>alleles_not_found_from_snp</strong> - Where the alleles (A1 and/or A2) was attempted to be imputed from the SNP (RS ID), using the reference genome, but wasn’t successful.</li>
+<li>
+<strong>alleles_dont_match_ref_gen</strong> - Where the alleles (A1 and/or A2) don’t match what’s on the reference genome.</li>
+<li>
+<strong>missing_data</strong> - Where there is data missing across the inputted columns.</li>
+<li>
+<strong>dup_snp_id</strong> - Where the SNP ID is duplicated in the input.</li>
+<li>
+<strong>dup_base_pair_position</strong> - Where the base-pair position is duplicated in the input.</li>
+<li>
+<strong>info_filter</strong> - SNP INFO value below the specified threshold.</li>
+<li>
+<strong>se_neg</strong> - SNPs SE (Standard Error) value is 0 or negative.</li>
+<li>
+<strong>effect_col_zero</strong> - SNPs effect column(s) value is zero e.g. BETA=0.</li>
+<li>
+<strong>n_large</strong> - SNPs N is N standard deviations greater than the mean.</li>
+<li>
+<strong>n_null</strong> - SNPs N is null.</li>
+<li>
+<strong>chr_excl</strong> - SNP is on a chromosome specified to be excluded.</li>
+<li>
+<strong>snp_strand_ambiguous</strong> - SNP is strand ambiguous.</li>
+<li>
+<strong>snp_bi_allelic</strong> - SNP is not bi-allelic.</li>
+<li>
+<strong>MungeSumstats_log_msg</strong> - Text file of all messages to the console created during MungeSumstats run.</li>
+<li>
+<strong>MungeSumstats_log_output</strong> - Text file of all errors to the console created during MungeSumstats run.</li>
+</ul>
+<p>See our publication for further discussion of these checks and options:</p>
 <p><a href="https://www.biorxiv.org/content/10.1101/2021.06.21.449239v1">Murphy and Skene. MungeSumstats: A Bioconductor package for the standardisation and quality control of many GWAS summary statistics</a>.</p>
 </div>
 <div id="future-enhancements" class="section level1">

@@ -64,13 +64,14 @@ The *MungeSumstats* package standardises both VCF and the most common
 summary statistic file formats to enable downstream integration and
 analysis.
 
-*MungeSumstats* also offers a number of Quality Control (QC) steps which
+*MungeSumstats* also offers comprehensive Quality Control (QC) steps which
 are important prerequisites for downstream analysis like Linkage
 disequilibrium score regression (LDSC) and MAGMA.
 
 Moreover, *MungeSumstats* is efficiently written resulting in all reformatting
 and quality control checks completing in minutes for GWAS summary statistics
-with 500k SNPs on a standard desktop machine.
+with 500k SNPs on a standard desktop machine. This speed can be increased 
+further by increasing the number of threads (nThread) for `data.table` to use.
 
 Currently *MungeSumstats* only works on data from humans, as it uses
 human-based genome references.
@@ -84,19 +85,27 @@ files include (but are not limited to) the columns:
 -   SNP : SNP ID (rs IDs)
 -   CHR : Chromosome number
 -   BP : Base pair positions
--   A1 : Effect allele
--   A2 : Non-effect allele
+-   A1 : reference allele
+-   A2 : alternative allele
 -   Z : Z-score
 -   BETA : Effect size estimate relative to the alternative allele
 -   P : Unadjusted p-value for SNP
+-   SE : The standard error
 -   N : Sample size
 -   INFO: The imputation information score
 -   FRQ: The minor allele frequency (MAF) of the SNP
 
-Tests run by *MungeSumstats* include:
+*MungeSumstats* uses a mapping file to infer the inputted column names (run
+`data("sumstatsColHeaders")` to view these). This mapping file is far more 
+comprehensive than any other publicly available munging tool containing 177
+unique mappings at the time of writing this vignette.
+
+*MungeSumstats* offers unmatched levels of quality control to ensure, for 
+example, consistency of allele assignment and direction of effects. Tests run by
+*MungeSumstats* include:
 
 -   Check VCF format
--   Check tab, space or comma delimited
+-   Check tab, space or comma delimited, zipped, csv or tsv file
 -   Check for header name synonyms
 -   Check for multiple models or traits in GWAS
 -   Check for uniformity in SNP ID - no mix of rs/missing rs/chr:bp
@@ -121,11 +130,14 @@ Tests run by *MungeSumstats* include:
 -   Check for SNPs on reference genome. Correct not found SNP IDs using
     CHR and BP (infer from reference genome)
 -   Check INFO score
+-   Check that the SNPs' standard error (SE) is positive.
+-   Check that SNPs' effect columns (like BETA) aren't equal to 0.
 -   Check for strand-ambiguous SNPs
 -   Check for non-biallelic SNPs (infer from reference genome)
 -   Check for allele flipping
 -   Check for SNPs on chromosome X, Y, and mitochondrial SNPs (MT)
 -   Check for z-score (Z) and impute if missing
+-   Check for N and impute if missing
 -   Check output format is LDSC ready
 
 Users can specify which checks to run on their data. A **note** on the allele 
@@ -148,9 +160,11 @@ adjusted to suit the user's analysis, see
 `MungeSumstats::format_sumstats`.
 
 *MungeSumstats* can handle VCF, txt, tsv, csv file types or .gz/.bgz versions of
-these file types. The package also gives the suer the flexibility to export the
+these file types. The package also gives the user the flexibility to export the
 reformatted file as tab-delimited, VCF or R native objects such as data.table,
-GRanges or VRanges objects.
+GRanges or VRanges objects. The output can also be outputted in an 
+**LDSC ready** format which means the file can be fed directly into LDSC without
+the need for additional munging.
 
 # Data
 
@@ -272,8 +286,24 @@ conducted by *MungeSumstats* are:
 -   **snp_ids_are_rs_ids** Binary, should the SNP IDs inputted be inferred as RS
     IDs or some arbitrary ID. Default is TRUE.    
 -   **ldsc_format** Ensure that output format meets all requirements to be 
-    passed directly into LDSC without the need for additional munging.     
+    passed directly into LDSC without the need for additional munging.
+-   **MungeSumstats_log_msg** 
+-   **log_folder_ind** Should log files be stored containing all filtered out 
+    SNPs (separate file per filter). The data is outputted in the same format 
+    specified for the resulting sumstats file. 
+-   **log_mungesumstats_msgs** Binary Should a log be stored containing all 
+    messages and errors printed by MungeSumstats in a run.
+-   **imputation_ind** Binary Should a column be added for each imputation 
+    step to show what SNPs have imputed values for differing fields. This 
+    includes a field denoting SNP allele flipping (flipped). On the flipped 
+    value, this denoted whether the alelles where switched based on 
+    MungeSumstats initial choice of A1, A2 from the input column headers and 
+    thus may not align with what the creator intended.**Note** these columns 
+    will be in the formatted summary statistics returned.
 
+See `?MungeSumstats::format_sumstats()` for the full list of parameters to 
+control MungeSumstats QC and standardisation steps.
+    
 VCF files can also be standardised to the same format as other summary
 statistic files. A subset of the Amyotrophic lateral sclerosis GWAS from
 the ieu open GWAS project (a .vcf file) has been added to
@@ -291,7 +321,76 @@ reformatted_vcf <-
                                  INFO_filter=0.1)
 ```
 
-See our publication for further discussion of these checks:
+You can also get more information on the SNPs which have had data imputed or 
+have been filtered out by *MungeSumstats* by using the `imputation_ind` and 
+`log_folder_ind` parameters respectively. For example:
+
+```{r, message=TRUE}
+#set
+reformatted_vcf_2 <- 
+  MungeSumstats::format_sumstats(path=ALSvcfPth,
+                                 ref_genome="GRCh37",
+                                 INFO_filter = 0.1,
+                                 log_folder_ind=TRUE,
+                                 imputation_ind=TRUE,
+                                 log_mungesumstats_msgs=TRUE)
+```
+
+Note that using `log_folder_ind` returns a list from `format_sumstats` which
+includes the file locations of the differing classes of removed SNPs. Using 
+`log_mungesumstats_msgs` saves the messages to the console to a file which is 
+returned in the same list. Note that not all the messages will also print to 
+screen anymore when you set `log_mungesumstats_msgs`:
+
+```{r, message=TRUE}
+names(reformatted_vcf_2)
+```
+
+A user can load a file to view the excluded SNPs:
+```{r, message=TRUE}
+data.table::fread(reformatted_vcf_2$log_files$info_filter)[1:10]
+```
+
+And we can see all these SNPs had lower INFO values that our set threshold.
+
+
+The different types of exclusion which lead to the names are explained below:
+
+-   **snp_multi_rs_one_row** - Where the SNP (RS ID) contained more than one RS 
+    ID.
+-   **snp_missing_rs** - Where the SNP (RS ID) was missing the rs prefix. Note 
+    that these are only removed when other snps have an rs prefix.
+-   **snp_multi_colon** - Where the SNP ID has mutliple colons (":") in one SNP.
+-   **snp_not_found_from_bp_chr** - Where the RS ID was attempted to be imputed
+    from the CHR and BP (Base-Pair) information, using the reference genome, but
+    wasn't successful.
+-   **ch_bp_not_found_from_snp** - Where the CHR and BP (Base-Pair) was 
+    attempted to be imputed from the SNP (RS ID), using the reference genome, 
+    but wasn't successful. 
+-   **alleles_not_found_from_snp** - Where the alleles (A1 and/or A2) was 
+    attempted to be imputed from the SNP (RS ID), using the reference genome, 
+    but wasn't successful.
+-   **alleles_dont_match_ref_gen** - Where the alleles (A1 and/or A2) don't 
+    match what's on the reference genome.
+-   **missing_data** - Where there is data missing across the inputted columns.
+-   **dup_snp_id** - Where the SNP ID is duplicated in the input.
+-   **dup_base_pair_position** - Where the base-pair position is duplicated in 
+    the input.
+-   **info_filter** - SNP INFO value below the specified threshold.
+-   **se_neg** - SNPs SE (Standard Error) value is 0 or negative.
+-   **effect_col_zero** - SNPs effect column(s) value is zero e.g. BETA=0.
+-   **n_large** - SNPs N is N standard deviations greater than the mean.
+-   **n_null** - SNPs N is null.
+-   **chr_excl** - SNP is on a chromosome specified to be excluded.
+-   **snp_strand_ambiguous** - SNP is strand ambiguous.
+-   **snp_bi_allelic** - SNP is not bi-allelic.
+-   **MungeSumstats_log_msg** - Text file of all messages to the console created
+    during MungeSumstats run.
+-   **MungeSumstats_log_output** - Text file of all errors to the console 
+    created during MungeSumstats run.
+
+
+See our publication for further discussion of these checks and options:
 
 [Murphy and Skene. MungeSumstats: A Bioconductor package for the
 standardisation and quality control of many GWAS summary

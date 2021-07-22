@@ -4,19 +4,45 @@
 \alias{check_strand_ambiguous}
 \title{Remove SNPs with strand-ambiguous alleles}
 \usage{
-check_strand_ambiguous(sumstats_dt, path, ref_genome, strand_ambig_filter)
+check_strand_ambiguous(
+  sumstats_dt,
+  path,
+  ref_genome,
+  strand_ambig_filter,
+  log_folder_ind,
+  check_save_out,
+  tabix_index,
+  nThread,
+  log_files
+)
 }
 \arguments{
-\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
+\item{path}{Filepath for the summary statistics file to be formatted. Default
+is a temporary file.}
 
-\item{path}{Filepath for the summary statistics file to be formatted}
+\item{ref_genome}{name of the reference genome used for the GWAS ("GRCh37" or
+"GRCh38"). Argument is case-insensitive. Default is NULL which infers the
+reference genome from the data.}
 
-\item{ref_genome}{name of the reference genome used for the GWAS (GRCh37 or GRCh38). Default is GRCh37.}
+\item{strand_ambig_filter}{Binary Should SNPs with strand-ambiguous alleles
+be removed. Default is FALSE.}
 
-\item{strand_ambig_filter}{Binary Should SNPs with strand-ambiguous alleles be removed. Default is FALSE}
+\item{log_folder_ind}{Binary Should log files be stored containing all
+filtered out SNPs (separate file per filter). The data is outputted in the
+same format specified for the resulting sumstats file. The only exception to
+this rule is if output is vcf, then log file saved as .tsv.gz. Default is
+FALSE.}
+
+\item{tabix_index}{Index the formatted summary statistics with
+\href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
+
+\item{nThread}{Number of threads to use for parallel processes.}
+
+\item{log_files}{list of log file locations}
 }
 \value{
-list containing sumstats_dt, the modified summary statistics data table object
+list containing sumstats_dt, the modified summary statistics data
+table object and the log file list
 }
 \description{
 Remove SNPs with strand-ambiguous alleles

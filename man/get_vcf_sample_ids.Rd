@@ -7,7 +7,8 @@
 get_vcf_sample_ids(path)
 }
 \arguments{
-\item{path}{Filepath for the summary statistics file to be formatted}
+\item{path}{Filepath for the summary statistics file to be formatted. Default
+is a temporary file.}
 }
 \value{
 Tsample_id

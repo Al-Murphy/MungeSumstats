@@ -37,6 +37,9 @@
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_dup_snp.html</loc>
   </url>
   <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_effect_columns_nonzero.html</loc>
+  </url>
+  <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_empty_cols.html</loc>
   </url>
   <url>
@@ -53,6 +56,9 @@
   </url>
   <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_multi_gwas.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_multi_rs_snp.html</loc>
   </url>
   <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_n_int.html</loc>
@@ -76,6 +82,9 @@
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_on_ref_genome.html</loc>
   </url>
   <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_pos_se.html</loc>
+  </url>
+  <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_row_snp.html</loc>
   </url>
   <url>
@@ -91,9 +100,6 @@
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_strand_ambiguous.html</loc>
   </url>
   <url>
-    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_tab_delimited.html</loc>
-  </url>
-  <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_tabular.html</loc>
   </url>
   <url>
@@ -107,6 +113,9 @@
   </url>
   <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/check_zscore.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/compute_nsize.html</loc>
   </url>
   <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/convert_sumstats.html</loc>
@@ -131,6 +140,9 @@
   </url>
   <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/get_query_content.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/get_unique_name_log_file.html</loc>
   </url>
   <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/get_vcf_sample_ids.html</loc>

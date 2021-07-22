@@ -151,6 +151,7 @@ used in <a href='https://github.com/bulik/ldsc/blob/aa33296abac9569a6422ee6ba7eb
 
     <pre class="usage"><span class='fu'>check_zscore</span><span class='op'>(</span>
   <span class='va'>sumstats_dt</span>,
+  <span class='va'>imputation_ind</span>,
   compute_z <span class='op'>=</span> <span class='cn'>TRUE</span>,
   force_new_z <span class='op'>=</span> <span class='cn'>FALSE</span>,
   standardise_headers <span class='op'>=</span> <span class='cn'>FALSE</span>
@@ -161,20 +162,34 @@ used in <a href='https://github.com/bulik/ldsc/blob/aa33296abac9569a6422ee6ba7eb
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>sumstats_dt</th>
-      <td><p>data table obj of the summary statistics file for the GWAS.</p></td>
+      <td><p>data table obj of the summary statistics file for the
+GWAS.</p></td>
+    </tr>
+    <tr>
+      <th>imputation_ind</th>
+      <td><p>Binary Should a column be added for each imputation
+step to show what SNPs have imputed values for differing fields. This
+includes a field denoting SNP allele flipping (flipped). <strong>Note</strong>
+these columns will be in the formatted summary statistics returned. Default
+is FALSE.</p></td>
     </tr>
     <tr>
       <th>compute_z</th>
-      <td><p>Whether to compute Z-score from P.</p></td>
+      <td><p>Whether to compute Z-score column from P. Default is FALSE.
+<strong>Note</strong> that imputing the Z-score for every SNP will not correct be
+perfectly correct and may result in a loss of power. This should only be done
+as a last resort.</p></td>
     </tr>
     <tr>
       <th>force_new_z</th>
-      <td><p>When a "Z" column already exists, it will be used by default.
-To override and compute a new Z-score column from P set <code>force_new_z=TRUE</code>.</p></td>
+      <td><p>When a "Z" column already exists, it will be used by
+default. To override and compute a new Z-score column from P set
+<code>force_new_z=TRUE</code>.</p></td>
     </tr>
     <tr>
       <th>standardise_headers</th>
-      <td><p>Run <code>standardise_sumstats_column_headers_crossplatform</code> first.</p></td>
+      <td><p>Run
+<code>standardise_sumstats_column_headers_crossplatform</code> first.</p></td>
     </tr>
     </table>
 

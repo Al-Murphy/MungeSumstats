@@ -10,6 +10,7 @@ format_sumstats(
   convert_small_p = TRUE,
   compute_z = FALSE,
   force_new_z = FALSE,
+  compute_n = 0L,
   convert_n_int = TRUE,
   analysis_trait = NULL,
   INFO_filter = 0.9,
@@ -26,6 +27,7 @@ format_sumstats(
   allele_flip_z = TRUE,
   bi_allelic_filter = TRUE,
   snp_ids_are_rs_ids = TRUE,
+  remove_multi_rs_snp = FALSE,
   sort_coordinates = TRUE,
   nThread = 1,
   save_path = tempfile(fileext = ".tsv.gz"),
@@ -34,11 +36,16 @@ format_sumstats(
   return_data = FALSE,
   return_format = "data.table",
   ldsc_format = FALSE,
+  log_folder_ind = FALSE,
+  log_mungesumstats_msgs = FALSE,
+  log_folder = tempdir(),
+  imputation_ind = FALSE,
   force_new = FALSE
 )
 }
 \arguments{
-\item{path}{Filepath for the summary statistics file to be formatted}
+\item{path}{Filepath for the summary statistics file to be formatted. Default
+is a temporary file.}
 
 \item{ref_genome}{name of the reference genome used for the GWAS ("GRCh37" or
 "GRCh38"). Argument is case-insensitive. Default is NULL which infers the
@@ -48,10 +55,19 @@ reference genome from the data.}
 Small p-values pass the R limit and can cause errors with LDSC/MAGMA and
 should be converted. Default is TRUE.}
 
-\item{compute_z}{Whether to compute Z-score column from P. Default is FALSE.}
+\item{compute_z}{Whether to compute Z-score column from P. Default is FALSE.
+\strong{Note} that imputing the Z-score for every SNP will not correct be
+perfectly correct and may result in a loss of power. This should only be done
+as a last resort.}
 
-\item{force_new_z}{When a "Z" column already exists, it will be used by default.
-To override and compute a new Z-score column from P set \code{force_new_z=TRUE}.}
+\item{force_new_z}{When a "Z" column already exists, it will be used by
+default. To override and compute a new Z-score column from P set
+\code{force_new_z=TRUE}.}
+
+\item{compute_n}{Whether to impute N. Default of 0 won't impute, any other
+integer will be imputed as the N (sample size) for every SNP in the dataset.
+\strong{Note} that imputing the sample size for every SNP is not correct and
+should only be done as a last resort.}
 
 \item{convert_n_int}{Binary, if N (the number of samples) is not an integer,
 should this be rounded? Default is TRUE.}
@@ -107,6 +123,12 @@ base-pair position or chromosome will not be possible. If set to FALSE, the
 SNP RS ID will be imputed from the reference genome if possible. Default is
 TRUE.}
 
+\item{remove_multi_rs_snp}{Binary Sometimes summary statistics can have
+multiple RS IDs on one row (i.e. related to one SNP), for example
+"rs5772025_rs397784053". This can cause an error so by default, the first
+RS ID will be kept and the rest removed e.g."rs5772025". If you want to just
+remove these SNPs entirely, set it to TRUE. Default is FALSE.}
+
 \item{sort_coordinates}{Whether to sort by coordinates.}
 
 \item{nThread}{Number of threads to use for parallel processes.}
@@ -129,12 +151,34 @@ return the path to the save data. Default is FALSE.}
 to be fed directly into LDSC without the need for additional munging. Default
 is FALSE}
 
+\item{log_folder_ind}{Binary Should log files be stored containing all
+filtered out SNPs (separate file per filter). The data is outputted in the
+same format specified for the resulting sumstats file. The only exception to
+this rule is if output is vcf, then log file saved as .tsv.gz. Default is
+FALSE.}
+
+\item{log_mungesumstats_msgs}{Binary Should a log be stored containing all
+messages and errors printed by MungeSumstats in a run. Default is FALSE}
+
+\item{log_folder}{Filepath to the directory for the log files and the log of
+MungeSumstats messages to be stored. Default is a temporary directory.}
+
+\item{imputation_ind}{Binary Should a column be added for each imputation
+step to show what SNPs have imputed values for differing fields. This
+includes a field denoting SNP allele flipping (flipped). On the flipped
+value, this denoted whether the alelles where switched based on
+MungeSumstats initial choice of A1, A2 from the input column headers and thus
+may not align with what the creator intended.\strong{Note} these columns will be
+in the formatted summary statistics returned. Default is FALSE.}
+
 \item{force_new}{If a formatted file of the same names as \code{save_path}
 exists, formatting will be skipped and this file will be imported instead
 (default). Set \code{force_new=TRUE} to override this.}
 }
 \value{
-The address for the modified sumstats file
+The address for the modified sumstats file or the actual data
+dependent on user choice. Also, if log files wanted by the user, the return
+in both above instances are a list.
 }
 \description{
 Check that summary statistics from GWAS are in a homogeneous format

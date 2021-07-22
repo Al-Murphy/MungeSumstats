@@ -4,17 +4,40 @@
 \alias{check_info_score}
 \title{Ensure all SNPs have info score above threshold}
 \usage{
-check_info_score(sumstats_dt, path, INFO_filter)
+check_info_score(
+  sumstats_dt,
+  path,
+  INFO_filter,
+  log_folder_ind,
+  check_save_out,
+  tabix_index,
+  nThread,
+  log_files
+)
 }
 \arguments{
-\item{path}{Filepath for the summary statistics file to be formatted}
+\item{path}{Filepath for the summary statistics file to be formatted. Default
+is a temporary file.}
 
 \item{INFO_filter}{numeric The minimum value permissible of the imputation
 information score (if present in sumstats file). Default 0.9.}
+
+\item{log_folder_ind}{Binary Should log files be stored containing all
+filtered out SNPs (separate file per filter). The data is outputted in the
+same format specified for the resulting sumstats file. The only exception to
+this rule is if output is vcf, then log file saved as .tsv.gz. Default is
+FALSE.}
+
+\item{tabix_index}{Index the formatted summary statistics with
+\href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
+
+\item{nThread}{Number of threads to use for parallel processes.}
+
+\item{log_files}{list of log file locations}
 }
 \value{
 list containing sumstats_dt, the modified summary statistics data
-table object
+table object and the log file list
 }
 \description{
 Ensure all SNPs have info score above threshold

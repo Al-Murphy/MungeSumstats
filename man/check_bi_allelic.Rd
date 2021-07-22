@@ -4,24 +4,49 @@
 \alias{check_bi_allelic}
 \title{Remove non-biallelic SNPs}
 \usage{
-check_bi_allelic(sumstats_dt, path, ref_genome, bi_allelic_filter, rsids)
+check_bi_allelic(
+  sumstats_dt,
+  path,
+  ref_genome,
+  bi_allelic_filter,
+  rsids,
+  log_folder_ind,
+  check_save_out,
+  tabix_index,
+  nThread,
+  log_files
+)
 }
 \arguments{
-\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
+\item{path}{Filepath for the summary statistics file to be formatted. Default
+is a temporary file.}
 
-\item{path}{Filepath for the summary statistics file to be formatted}
+\item{ref_genome}{name of the reference genome used for the GWAS ("GRCh37" or
+"GRCh38"). Argument is case-insensitive. Default is NULL which infers the
+reference genome from the data.}
 
-\item{ref_genome}{name of the reference genome used for the GWAS (GRCh37 or GRCh38). Default is GRCh37.}
+\item{bi_allelic_filter}{Binary Should non-biallelic SNPs be removed. Default
+is TRUE.}
 
-\item{bi_allelic_filter}{Binary Should non-biallelic SNPs be removed. Default is TRUE}
+\item{log_folder_ind}{Binary Should log files be stored containing all
+filtered out SNPs (separate file per filter). The data is outputted in the
+same format specified for the resulting sumstats file. The only exception to
+this rule is if output is vcf, then log file saved as .tsv.gz. Default is
+FALSE.}
 
-\item{rsids}{datatable of snpsById, filtered to SNPs of interest if loaded already. Or else NULL}
+\item{tabix_index}{Index the formatted summary statistics with
+\href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
+
+\item{nThread}{Number of threads to use for parallel processes.}
+
+\item{log_files}{list of log file locations}
 }
 \value{
 A list containing two data tables:
 \itemize{
 \item \code{sumstats_dt}: the modified summary statistics data table object
 \item \code{rsids}: snpsById, filtered to SNPs of interest if loaded already. Or else NULL
+\item \code{log_files}: log file list
 }
 }
 \description{

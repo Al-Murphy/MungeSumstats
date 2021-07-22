@@ -1,13 +1,12 @@
 #' Ensure that CHR and BP are missing if SNP is present, can find them
 #'
-#' @param sumstats_dt data table obj of the summary statistics file for the GWAS
-#' @param path Filepath for the summary statistics file to be formatted
-#' @param ref_genome name of the reference genome used for the GWAS (GRCh37 or GRCh38)
-#' @param rsids datatable of snpsById, filtered to SNPs of interest if loaded already. Or else NULL
+#' @inheritParams format_sumstats  
+#' @param log_files list of log file locations
 #' @return A list containing two data tables:
 #' \itemize{
 #'   \item \code{sumstats_dt}: the modified summary statistics data table object
 #'   \item \code{rsids}: snpsById, filtered to SNPs of interest if loaded already. Or else NULL
+#'   \item \code{log_files}: log file list
 #' }
 #' @keywords internal
 #' @importFrom data.table setDT
@@ -18,8 +17,11 @@
 #' @importFrom BSgenome snpsById
 #' @importFrom data.table setorder
 #' @importFrom data.table copy
-check_no_chr_bp <- function(sumstats_dt, path, ref_genome,rsids){
-  SNP = i.seqnames = CHR = BP = i.pos = LP = P = NULL
+check_no_chr_bp <- function(sumstats_dt, path, ref_genome,rsids,imputation_ind,
+                            log_folder_ind,check_save_out,tabix_index, nThread,
+                            log_files){
+  SNP = i.seqnames = CHR = BP = i.pos = LP = P = IMPUTATION_CHR = 
+    IMPUTATION_BP = NULL
   # If SNP present but no CHR/BP then need to find them
   col_headers <- names(sumstats_dt)
   if(sum(c("CHR","BP") %in% col_headers)<=1 & sum("SNP" %in% col_headers)==1){
@@ -48,15 +50,38 @@ check_no_chr_bp <- function(sumstats_dt, path, ref_genome,rsids){
     sumstats_dt[rsids,CHR:=i.seqnames]
     sumstats_dt[rsids,BP:=i.pos]
     #remove rows where CHR/BP couldn't be found
-    sumstats_dt <- sumstats_dt[complete.cases(sumstats_dt),]
+    #If user wants log, save it to there
+    if(log_folder_ind){
+      name <- "chr_bp_not_found_from_snp"
+      name <- get_unique_name_log_file(name=name,log_files=log_files)
+      write_sumstats(sumstats_dt = 
+                       sumstats_dt[!complete.cases(sumstats_dt[,c("CHR",
+                                                                  "BP")]),],
+                     save_path=
+                       paste0(check_save_out$log_folder,
+                              "/",name,
+                              check_save_out$extension),
+                     sep=check_save_out$sep,
+                     tabix_index = tabix_index,
+                     nThread = nThread)
+      log_files[[name]] <- 
+        paste0(check_save_out$log_folder,"/",name,check_save_out$extension)
+    } 
+    sumstats_dt <- sumstats_dt[complete.cases(sumstats_dt[,c("CHR","BP")]),]
     #move SNP, CHR, BP to start
     other_cols <-
       names(sumstats_dt)[!names(sumstats_dt) %in% c("SNP","CHR","BP")]
     data.table::setcolorder(sumstats_dt, c("SNP","CHR","BP", other_cols))
-
-    return(list("sumstats_dt"=sumstats_dt,"rsids"=rsids))
+    
+    #if user specifies add a column to notify of the imputation
+    if(imputation_ind){
+      sumstats_dt[,IMPUTATION_CHR:=TRUE]
+      sumstats_dt[,IMPUTATION_BP:=TRUE]
+    }  
+    
+    return(list("sumstats_dt"=sumstats_dt,"rsids"=rsids,"log_files"=log_files))
   }
   else{
-    return(list("sumstats_dt"=sumstats_dt,"rsids"=rsids))
+    return(list("sumstats_dt"=sumstats_dt,"rsids"=rsids,"log_files"=log_files))
   }
 }

@@ -149,11 +149,23 @@ Linkage Disequilibrium SCore (LDSC) regression without the need
 to use their <code>munge_sumstats.py</code> script first.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>check_ldsc_format</span><span class='op'>(</span><span class='va'>ldsc_format</span>, <span class='va'>convert_n_int</span>, <span class='va'>allele_flip_check</span>, <span class='va'>compute_z</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>check_ldsc_format</span><span class='op'>(</span>
+  <span class='va'>sumstats_dt</span>,
+  <span class='va'>ldsc_format</span>,
+  <span class='va'>convert_n_int</span>,
+  <span class='va'>allele_flip_check</span>,
+  <span class='va'>compute_z</span>,
+  <span class='va'>compute_n</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>sumstats_dt</th>
+      <td><p>data table obj of the summary statistics file for the
+GWAS.</p></td>
+    </tr>
     <tr>
       <th>ldsc_format</th>
       <td><p>Binary Ensure that output format meets all requirements
@@ -172,7 +184,17 @@ reference genome to infer if flipping is necessary. Default is TRUE.</p></td>
     </tr>
     <tr>
       <th>compute_z</th>
-      <td><p>Whether to compute Z-score column from P. Default is FALSE.</p></td>
+      <td><p>Whether to compute Z-score column from P. Default is FALSE.
+<strong>Note</strong> that imputing the Z-score for every SNP will not correct be
+perfectly correct and may result in a loss of power. This should only be done
+as a last resort.</p></td>
+    </tr>
+    <tr>
+      <th>compute_n</th>
+      <td><p>Whether to impute N. Default of 0 won't impute, any other
+integer will be imputed as the N (sample size) for every SNP in the dataset.
+<strong>Note</strong> that imputing the sample size for every SNP is not correct and
+should only be done as a last resort.</p></td>
     </tr>
     </table>
 

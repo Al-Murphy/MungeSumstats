@@ -94,7 +94,7 @@
       <h1 data-toc-skip>Import GWAS summary statistics from Open GWAS</h1>
                         <h4 class="author">Alan Murphy, Brian Schilder, and Nathan Skene</h4>
             
-            <h4 class="date">2021-07-19</h4>
+            <h4 class="date">2021-07-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/MungeSumstats/blob/master/vignettes/OpenGWAS.Rmd"><code>vignettes/OpenGWAS.Rmd</code></a></small>
       <div class="hidden name"><code>OpenGWAS.Rmd</code></div>
@@ -190,7 +190,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span></code></pre></div>
 <pre><code>## $`ieu-a-298`
-## [1] "/var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpT4WWe5/ieu-a-298.tsv.gz"</code></pre>
+## [1] "/var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpbYzvrK/ieu-a-298.tsv.gz"</code></pre>
 <p>You can easily turn this into a data.frame as well.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">results_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span>, 
@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <pre><code>##                  id
 ## ieu-a-298 ieu-a-298
 ##                                                                                    path
-## ieu-a-298 /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpT4WWe5/ieu-a-298.tsv.gz</code></pre>
+## ieu-a-298 /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpbYzvrK/ieu-a-298.tsv.gz</code></pre>
 </div>
 </div>
 <div id="import-full-results-parallel" class="section level1">

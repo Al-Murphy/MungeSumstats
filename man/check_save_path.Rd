@@ -2,20 +2,30 @@
 % Please edit documentation in R/check_save_path.R
 \name{check_save_path}
 \alias{check_save_path}
-\title{Check if save path is appropriate}
+\title{Check if save path and log folder is appropriate}
 \usage{
-check_save_path(save_path, write_vcf = FALSE)
+check_save_path(save_path, log_folder, log_folder_ind, write_vcf = FALSE)
 }
 \arguments{
 \item{save_path}{File path to save formatted data. Defaults to
 \code{tempfile(fileext=".tsv.gz")}.}
 
+\item{log_folder}{Filepath to the directory for the log files and the log of
+MungeSumstats messages to be stored. Default is a temporary directory.}
+
+\item{log_folder_ind}{Binary Should log files be stored containing all
+filtered out SNPs (separate file per filter). The data is outputted in the
+same format specified for the resulting sumstats file. The only exception to
+this rule is if output is vcf, then log file saved as .tsv.gz. Default is
+FALSE.}
+
 \item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
 }
 \value{
-Corrected \code{save_path}, the file type, and the separator.
+Corrected \code{save_path}, the file type, the separator, corrected
+\code{log_folder},the log file extension
 }
 \description{
-Check if save path is appropriate
+Check if save path and log folder is appropriate
 }
 \keyword{internal}

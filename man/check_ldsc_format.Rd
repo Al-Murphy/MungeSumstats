@@ -7,9 +7,19 @@
 \href{https://github.com/bulik/ldsc}{LDSC GitHub}
 }
 \usage{
-check_ldsc_format(ldsc_format, convert_n_int, allele_flip_check, compute_z)
+check_ldsc_format(
+  sumstats_dt,
+  ldsc_format,
+  convert_n_int,
+  allele_flip_check,
+  compute_z,
+  compute_n
+)
 }
 \arguments{
+\item{sumstats_dt}{data table obj of the summary statistics file for the
+GWAS.}
+
 \item{ldsc_format}{Binary Ensure that output format meets all requirements
 to be fed directly into LDSC without the need for additional munging. Default
 is FALSE}
@@ -20,7 +30,15 @@ should this be rounded? Default is TRUE.}
 \item{allele_flip_check}{Binary Should the allele columns be checked against
 reference genome to infer if flipping is necessary. Default is TRUE.}
 
-\item{compute_z}{Whether to compute Z-score column from P. Default is FALSE.}
+\item{compute_z}{Whether to compute Z-score column from P. Default is FALSE.
+\strong{Note} that imputing the Z-score for every SNP will not correct be
+perfectly correct and may result in a loss of power. This should only be done
+as a last resort.}
+
+\item{compute_n}{Whether to impute N. Default of 0 won't impute, any other
+integer will be imputed as the N (sample size) for every SNP in the dataset.
+\strong{Note} that imputing the sample size for every SNP is not correct and
+should only be done as a last resort.}
 }
 \value{
 Formatted summary statistics

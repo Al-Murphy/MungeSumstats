@@ -8,24 +8,42 @@ check_chr(
   sumstats_dt,
   path,
   rmv_chr,
+  log_folder_ind,
+  check_save_out,
+  tabix_index,
+  nThread,
+  log_files,
   make_uppercase = TRUE,
   rmv_chrPrefix = TRUE
 )
 }
 \arguments{
-\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
+\item{path}{Filepath for the summary statistics file to be formatted. Default
+is a temporary file.}
 
-\item{path}{Filepath for the summary statistics file to be formatted}
+\item{rmv_chr}{vector or character The chromosomes on which the SNPs should
+be removed. Use NULL if no filtering necessary. Default is X, Y and
+mitochondrial.}
 
-\item{rmv_chr}{vector or character The chromosomes on which the SNPs should be removed.
-Use NULL if no filtering necessary. Default is X, Y and mitochondrial.}
+\item{log_folder_ind}{Binary Should log files be stored containing all
+filtered out SNPs (separate file per filter). The data is outputted in the
+same format specified for the resulting sumstats file. The only exception to
+this rule is if output is vcf, then log file saved as .tsv.gz. Default is
+FALSE.}
 
-\item{make_uppercase}{Make X and Y chromosomes uppercase.}
+\item{tabix_index}{Index the formatted summary statistics with
+\href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
 
-\item{rmv_chrPrefix}{Remove "chr" or "CHR" from chromosome names.}
+\item{nThread}{Number of threads to use for parallel processes.}
+
+\item{log_files}{list of log file locations}
+
+\item{rmv_chrPrefix}{Remove "chr" or "CHR" from chromosome names. Default is
+TRUE.}
 }
 \value{
-list containing sumstats_dt, the modified summary statistics data table object
+list containing sumstats_dt, the modified summary statistics data
+table object and the log file list
 }
 \description{
 Ensure all SNPs on specified chromosomes are removed

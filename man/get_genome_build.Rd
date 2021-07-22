@@ -3,7 +3,7 @@
 \name{get_genome_build}
 \alias{get_genome_build}
 \title{Infers the genome build of the summary statistics file (GRCh37 or GRCh38)
-from the data}
+from the data. Uses SNP (RS ID) & CHR & BP to get genome build.}
 \usage{
 get_genome_build(
   sumstats,
@@ -18,16 +18,18 @@ the GWAS ,or file path to summary statistics file.}
 
 \item{nThread}{Number of threads to use for parallel processes.}
 
-\item{sampled_snps}{Downsample the number of SNPs used when inferring genome build to save time.}
+\item{sampled_snps}{Downsample the number of SNPs used when inferring genome
+build to save time.}
 
-\item{standardise_headers}{Run \code{standardise_sumstats_column_headers_crossplatform}.}
+\item{standardise_headers}{Run
+\code{standardise_sumstats_column_headers_crossplatform}.}
 }
 \value{
 ref_genome the genome build of the data
 }
 \description{
 Infers the genome build of the summary statistics file (GRCh37 or GRCh38)
-from the data
+from the data. Uses SNP (RS ID) & CHR & BP to get genome build.
 }
 \examples{
 #Pass path to Educational Attainment Okbay sumstat file to a temp directory

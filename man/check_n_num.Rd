@@ -4,23 +4,46 @@
 \alias{check_n_num}
 \title{Ensure all SNPs have N less than X std dev below mean}
 \usage{
-check_n_num(sumstats_dt, path, N_std, N_dropNA = FALSE)
+check_n_num(
+  sumstats_dt,
+  path,
+  N_std,
+  N_dropNA = FALSE,
+  log_folder_ind,
+  check_save_out,
+  tabix_index,
+  nThread,
+  log_files
+)
 }
 \arguments{
-\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
+\item{path}{Filepath for the summary statistics file to be formatted. Default
+is a temporary file.}
 
-\item{path}{Filepath for the summary statistics file to be formatted}
+\item{N_std}{numeric The number of standard deviations above the mean a SNP's
+N is needed to be removed. Default is 5.}
 
-\item{N_std}{numeric The number of standard deviations above the mean a
-SNP's N is needed to be removed. Default is 5.}
+\item{N_dropNA}{Drop rows where N is missing.Default is TRUE.}
 
-\item{N_dropNA}{Whether to keep rows where N is \code{NA}. Default is FALSE.}
+\item{log_folder_ind}{Binary Should log files be stored containing all
+filtered out SNPs (separate file per filter). The data is outputted in the
+same format specified for the resulting sumstats file. The only exception to
+this rule is if output is vcf, then log file saved as .tsv.gz. Default is
+FALSE.}
+
+\item{tabix_index}{Index the formatted summary statistics with
+\href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
+
+\item{nThread}{Number of threads to use for parallel processes.}
+
+\item{log_files}{list of log file locations}
 }
 \value{
-list containing sumstats_dt, the modified summary statistics data table object
+list containing sumstats_dt, the modified summary statistics data
+table object and the log file list
 }
 \description{
-Incase some SNPs were genotyped by a specialized genotyping array and
+In case some SNPs were genotyped by a specialized genotyping array and
 have substantially more samples than others. These will be removed.
 }
 \keyword{internal}

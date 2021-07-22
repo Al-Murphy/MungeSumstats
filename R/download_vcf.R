@@ -2,8 +2,8 @@
 #' Download VCF file and its index file from Open GWAS
 #' 
 #' 
-#' Ideally, we would use \href{https://github.com/MRCIEU/gwasvcf}{gwasvcf} instead 
-#' but it hasn't been made available on CRAN or Bioconductor yet, 
+#' Ideally, we would use \href{https://github.com/MRCIEU/gwasvcf}{gwasvcf} 
+#' instead but it hasn't been made available on CRAN or Bioconductor yet, 
 #' so we can't include it as a dep.
 #' 
 #' @return List containing the paths to the downloaded VCF and its index file.
@@ -32,7 +32,8 @@ download_vcf <- function(vcf_url,
     } else { 
         if(vcf_download){
             message("Downloading VCF ==> ",save_path)   
-            dir.create(dirname(save_path), showWarnings = FALSE, recursive = TRUE)
+            dir.create(dirname(save_path), showWarnings = FALSE, 
+                        recursive = TRUE)
             #### Download main VCF file
             save_path <- downloader(input_url = vcf_url, 
                                     output_path = vcf_dir, 

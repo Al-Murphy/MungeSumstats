@@ -17,7 +17,15 @@ data("sumstatsColHeaders")
 #se_cols <- data.frame("Uncorrected"=c("SE","se","STANDARD.ERROR","STANDARD_ERROR","STANDARD-ERROR"), 
 #                      "Corrected"=rep("SE",5))
 #sumstatsColHeaders <- rbind(sumstatsColHeaders,se_cols)
-#Once additions are made, save the new mapping dataset
+#Once additions are made, order & save the new mapping dataset
+#now sort ordering -important for logic that uncorrected=corrected comes first
+sumstatsColHeaders$ordering <- 
+    sumstatsColHeaders$Uncorrected==sumstatsColHeaders$Corrected
+sumstatsColHeaders <-
+    sumstatsColHeaders[order(sumstatsColHeaders$Corrected,
+                             sumstatsColHeaders$ordering,decreasing = TRUE),]
+rownames(sumstatsColHeaders)<-1:nrow(sumstatsColHeaders)
+sumstatsColHeaders$ordering <- NULL
 usethis::use_data(sumstatsColHeaders,overwrite = TRUE, internal=TRUE)
 save(sumstatsColHeaders,
       file="data/sumstatsColHeaders.rda")

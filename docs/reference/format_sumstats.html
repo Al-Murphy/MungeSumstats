@@ -151,9 +151,12 @@
   convert_small_p <span class='op'>=</span> <span class='cn'>TRUE</span>,
   compute_z <span class='op'>=</span> <span class='cn'>FALSE</span>,
   force_new_z <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  compute_n <span class='op'>=</span> <span class='fl'>0L</span>,
   convert_n_int <span class='op'>=</span> <span class='cn'>TRUE</span>,
   analysis_trait <span class='op'>=</span> <span class='cn'>NULL</span>,
   INFO_filter <span class='op'>=</span> <span class='fl'>0.9</span>,
+  pos_se <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  effect_columns_nonzero <span class='op'>=</span> <span class='cn'>TRUE</span>,
   N_std <span class='op'>=</span> <span class='fl'>5</span>,
   N_dropNA <span class='op'>=</span> <span class='cn'>TRUE</span>,
   rmv_chr <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"X"</span>, <span class='st'>"Y"</span>, <span class='st'>"MT"</span><span class='op'>)</span>,
@@ -164,6 +167,8 @@
   allele_flip_drop <span class='op'>=</span> <span class='cn'>TRUE</span>,
   allele_flip_z <span class='op'>=</span> <span class='cn'>TRUE</span>,
   bi_allelic_filter <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  snp_ids_are_rs_ids <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  remove_multi_rs_snp <span class='op'>=</span> <span class='cn'>FALSE</span>,
   sort_coordinates <span class='op'>=</span> <span class='cn'>TRUE</span>,
   nThread <span class='op'>=</span> <span class='fl'>1</span>,
   save_path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span>fileext <span class='op'>=</span> <span class='st'>".tsv.gz"</span><span class='op'>)</span>,
@@ -172,6 +177,10 @@
   return_data <span class='op'>=</span> <span class='cn'>FALSE</span>,
   return_format <span class='op'>=</span> <span class='st'>"data.table"</span>,
   ldsc_format <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  log_folder_ind <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  log_mungesumstats_msgs <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  log_folder <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>,
+  imputation_ind <span class='op'>=</span> <span class='cn'>FALSE</span>,
   force_new <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
 
@@ -180,7 +189,8 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>path</th>
-      <td><p>Filepath for the summary statistics file to be formatted</p></td>
+      <td><p>Filepath for the summary statistics file to be formatted. Default
+is a temporary file.</p></td>
     </tr>
     <tr>
       <th>ref_genome</th>
@@ -196,12 +206,23 @@ should be converted. Default is TRUE.</p></td>
     </tr>
     <tr>
       <th>compute_z</th>
-      <td><p>Whether to compute Z-score column from P. Default is FALSE.</p></td>
+      <td><p>Whether to compute Z-score column from P. Default is FALSE.
+<strong>Note</strong> that imputing the Z-score for every SNP will not correct be
+perfectly correct and may result in a loss of power. This should only be done
+as a last resort.</p></td>
     </tr>
     <tr>
       <th>force_new_z</th>
-      <td><p>When a "Z" column already exists, it will be used by default.
-To override and compute a new Z-score column from P set <code>force_new_z=TRUE</code>.</p></td>
+      <td><p>When a "Z" column already exists, it will be used by
+default. To override and compute a new Z-score column from P set
+<code>force_new_z=TRUE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>compute_n</th>
+      <td><p>Whether to impute N. Default of 0 won't impute, any other
+integer will be imputed as the N (sample size) for every SNP in the dataset.
+<strong>Note</strong> that imputing the sample size for every SNP is not correct and
+should only be done as a last resort.</p></td>
     </tr>
     <tr>
       <th>convert_n_int</th>
@@ -216,7 +237,19 @@ analysis from the GWAS. Default is NULL.</p></td>
     <tr>
       <th>INFO_filter</th>
       <td><p>numeric The minimum value permissible of the imputation
-information score (if present in sumstatsfile). Default 0.9.</p></td>
+information score (if present in sumstats file). Default 0.9.</p></td>
+    </tr>
+    <tr>
+      <th>pos_se</th>
+      <td><p>Binary Should the standard Error (SE) column be checked to
+ensure it is greater than 0? Those that are, are removed (if present in
+sumstats file). Default TRUE.</p></td>
+    </tr>
+    <tr>
+      <th>effect_columns_nonzero</th>
+      <td><p>Binary should the effect columns in the data
+BETA,OR (odds ratio),LOG_ODDS,SIGNED_SUMSTAT be checked to ensure no SNP=0.
+Those that do are removed(if present in sumstats file). Default TRUE.</p></td>
     </tr>
     <tr>
       <th>N_std</th>
@@ -270,6 +303,22 @@ the P-value and so will be flipped i.e. default TRUE.</p></td>
 is TRUE.</p></td>
     </tr>
     <tr>
+      <th>snp_ids_are_rs_ids</th>
+      <td><p>Binary Should the supplied SNP ID's be assumed to
+be RS IDs. If not, imputation using the SNP ID for other columns like
+base-pair position or chromosome will not be possible. If set to FALSE, the
+SNP RS ID will be imputed from the reference genome if possible. Default is
+TRUE.</p></td>
+    </tr>
+    <tr>
+      <th>remove_multi_rs_snp</th>
+      <td><p>Binary Sometimes summary statistics can have
+multiple RS IDs on one row (i.e. related to one SNP), for example
+"rs5772025_rs397784053". This can cause an error so by default, the first
+RS ID will be kept and the rest removed e.g."rs5772025". If you want to just
+remove these SNPs entirely, set it to TRUE. Default is FALSE.</p></td>
+    </tr>
+    <tr>
       <th>sort_coordinates</th>
       <td><p>Whether to sort by coordinates.</p></td>
     </tr>
@@ -308,6 +357,34 @@ to be fed directly into LDSC without the need for additional munging. Default
 is FALSE</p></td>
     </tr>
     <tr>
+      <th>log_folder_ind</th>
+      <td><p>Binary Should log files be stored containing all
+filtered out SNPs (separate file per filter). The data is outputted in the
+same format specified for the resulting sumstats file. The only exception to
+this rule is if output is vcf, then log file saved as .tsv.gz. Default is
+FALSE.</p></td>
+    </tr>
+    <tr>
+      <th>log_mungesumstats_msgs</th>
+      <td><p>Binary Should a log be stored containing all
+messages and errors printed by MungeSumstats in a run. Default is FALSE</p></td>
+    </tr>
+    <tr>
+      <th>log_folder</th>
+      <td><p>Filepath to the directory for the log files and the log of
+MungeSumstats messages to be stored. Default is a temporary directory.</p></td>
+    </tr>
+    <tr>
+      <th>imputation_ind</th>
+      <td><p>Binary Should a column be added for each imputation
+step to show what SNPs have imputed values for differing fields. This
+includes a field denoting SNP allele flipping (flipped). On the flipped
+value, this denoted whether the alelles where switched based on
+MungeSumstats initial choice of A1, A2 from the input column headers and thus
+may not align with what the creator intended.<strong>Note</strong> these columns will be
+in the formatted summary statistics returned. Default is FALSE.</p></td>
+    </tr>
+    <tr>
       <th>force_new</th>
       <td><p>If a formatted file of the same names as <code>save_path</code>
 exists, formatting will be skipped and this file will be imported instead
@@ -317,7 +394,9 @@ exists, formatting will be skipped and this file will be imported instead
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The address for the modified sumstats file</p>
+    <p>The address for the modified sumstats file or the actual data
+dependent on user choice. Also, if log files wanted by the user, the return
+in both above instances are a list.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>#Pass path to Educational Attainment Okbay sumstat file to a temp directory</span>
@@ -343,16 +422,18 @@ exists, formatting will be skipped and this file will be imported instead
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>*****::NOTE::*****</span>
+#&gt; <span class='message'>******::NOTE::******</span>
 #&gt; <span class='message'>- Formatted results will be saved to `tempdir()` by default.</span>
 #&gt; <span class='message'>- This means all formatted summary stats will be deleted upon ending the R session.</span>
-#&gt; <span class='message'>- To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.</span>
-#&gt; <span class='message'>********************</span></div><div class='output co'>#&gt; <span class='message'>Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpBrro5o/filed9fe69b648a3.tsv.gz</span></div><div class='output co'>#&gt; <span class='message'>Reading header.</span></div><div class='output co'>#&gt; <span class='message'>Tabular format detected.</span></div><div class='output co'>#&gt; <span class='message'>Importing.</span></div><div class='output co'>#&gt; <span class='message'>Standardising column headers.</span></div><div class='output co'>#&gt; <span class='message'>First line of summary statistics file: </span></div><div class='output co'>#&gt; <span class='message'>MarkerName	CHR	POS	A1	A2	EAF	Beta	SE	Pval	</span></div><div class='output co'>#&gt; <span class='message'>Summary statistics report:</span>
+#&gt; <span class='message'>- To keep formatted summary stats, change `save_path`</span>
+#&gt; <span class='message'>( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing</span>
+#&gt; <span class='message'>( e.g. `file.copy(save_path, './formatted/' )`.</span>
+#&gt; <span class='message'>********************</span></div><div class='output co'>#&gt; <span class='message'>Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpwKOzsf/filea50f49c1b089.tsv.gz</span></div><div class='output co'>#&gt; <span class='message'>Reading header.</span></div><div class='output co'>#&gt; <span class='message'>Tabular format detected.</span></div><div class='output co'>#&gt; <span class='message'>Importing.</span></div><div class='output co'>#&gt; <span class='message'>Standardising column headers.</span></div><div class='output co'>#&gt; <span class='message'>First line of summary statistics file: </span></div><div class='output co'>#&gt; <span class='message'>MarkerName	CHR	POS	A1	A2	EAF	Beta	SE	Pval	</span></div><div class='output co'>#&gt; <span class='message'>Summary statistics report:</span>
 #&gt; <span class='message'>   - 93 rows</span>
 #&gt; <span class='message'>   - 93 unique variants</span>
 #&gt; <span class='message'>   - 70 genome-wide significant variants (P&lt;5e-8)</span>
-#&gt; <span class='message'>   - 20 chromosomes</span></div><div class='output co'>#&gt; <span class='message'>Checking for multi-GWAS.</span></div><div class='output co'>#&gt; <span class='message'>Checking SNP RSIDs.</span></div><div class='output co'>#&gt; <span class='message'>Checking for merged allele column.</span></div><div class='output co'>#&gt; <span class='message'>Ensuring all SNPs are on the reference genome.</span></div><div class='output co'>#&gt; <span class='message'>Loading reference genome data.</span></div><div class='output co'>#&gt; <span class='message'>Checking for correct direction of A1 (reference) and A2 (alternative allele).</span></div><div class='output co'>#&gt; <span class='message'>There are 46 SNPs where A1 doesn't match the reference genome.</span>
-#&gt; <span class='message'>These will be flipped with their effect columns.</span></div><div class='output co'>#&gt; <span class='message'>Checking for missing data.</span></div><div class='output co'>#&gt; <span class='message'>Checking for duplicate columns.</span></div><div class='output co'>#&gt; <span class='message'>Checking for duplicate SNPs from SNP ID.</span></div><div class='output co'>#&gt; <span class='message'>Checking for SNPs with duplicated base-pair positions</span></div><div class='output co'>#&gt; <span class='message'>Ensuring all SNPs have N&lt;5 std dev below mean.</span></div><div class='output co'>#&gt; <span class='message'>Removing 'chr' prefix from CHR.</span></div><div class='output co'>#&gt; <span class='message'>Making X/Y CHR uppercase.</span></div><div class='output co'>#&gt; <span class='message'>Checking for bi-allelic SNPs.</span></div><div class='output co'>#&gt; <span class='message'>Sorting coordinates.</span></div><div class='output co'>#&gt; <span class='message'>Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpBrro5o/filed9fe69b648a3.tsv.gz</span></div><div class='output co'>#&gt; <span class='message'>Summary statistics report:</span>
+#&gt; <span class='message'>   - 20 chromosomes</span></div><div class='output co'>#&gt; <span class='message'>Checking for multi-GWAS.</span></div><div class='output co'>#&gt; <span class='message'>Checking for multiple RS IDs on one row.</span></div><div class='output co'>#&gt; <span class='message'>Checking SNP RSIDs.</span></div><div class='output co'>#&gt; <span class='message'>Checking for merged allele column.</span></div><div class='output co'>#&gt; <span class='message'>Ensuring all SNPs are on the reference genome.</span></div><div class='output co'>#&gt; <span class='message'>Loading reference genome data.</span></div><div class='output co'>#&gt; <span class='message'>Checking for correct direction of A1 (reference) and A2 (alternative allele).</span></div><div class='output co'>#&gt; <span class='message'>There are 46 SNPs where A1 doesn't match the reference genome.</span>
+#&gt; <span class='message'>These will be flipped with their effect columns.</span></div><div class='output co'>#&gt; <span class='message'>Checking for missing data.</span></div><div class='output co'>#&gt; <span class='message'>Checking for duplicate columns.</span></div><div class='output co'>#&gt; <span class='message'>Checking for duplicate SNPs from SNP ID.</span></div><div class='output co'>#&gt; <span class='message'>Checking for SNPs with duplicated base-pair positions</span></div><div class='output co'>#&gt; <span class='message'>Filtering SNPs, ensuring SE &gt;0.</span></div><div class='output co'>#&gt; <span class='message'>Filtering effect columns, ensuring none equal 0.</span></div><div class='output co'>#&gt; <span class='message'>Ensuring all SNPs have N&lt;5 std dev above mean.</span></div><div class='output co'>#&gt; <span class='message'>Removing 'chr' prefix from CHR.</span></div><div class='output co'>#&gt; <span class='message'>Making X/Y CHR uppercase.</span></div><div class='output co'>#&gt; <span class='message'>Checking for bi-allelic SNPs.</span></div><div class='output co'>#&gt; <span class='message'>Sorting coordinates.</span></div><div class='output co'>#&gt; <span class='message'>Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpwKOzsf/filea50f49c1b089.tsv.gz</span></div><div class='output co'>#&gt; <span class='message'>Summary statistics report:</span>
 #&gt; <span class='message'>   - 93 rows (100% of original 93 rows)</span>
 #&gt; <span class='message'>   - 93 unique variants</span>
 #&gt; <span class='message'>   - 70 genome-wide significant variants (P&lt;5e-8)</span>

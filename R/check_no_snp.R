@@ -1,12 +1,10 @@
 #' Ensure that SNP is present if not can find it with CHR and BP
 #'
-#' @param sumstats_dt data table obj of the summary statistics file for the GWAS
-#' @param path Filepath for the summary statistics file to be formatted
-#' @param ref_genome name of the reference genome used for the GWAS (GRCh37 or 
-#' GRCh38)
+#' @inheritParams format_sumstats  
+#' @param log_files list of log file locations
 #' @param verbose should messages be printed. Default it TRUE.
 #' @return list containing sumstats_dt, the modified summary statistics data 
-#' table object
+#' table object and the log files list
 #' @keywords internal
 #' @importFrom data.table setDT
 #' @importFrom data.table setkeyv
@@ -15,8 +13,10 @@
 #' @importFrom data.table copy
 #' @importFrom BSgenome snpsByOverlaps
 #' @importFrom GenomicRanges makeGRangesFromDataFrame
-check_no_snp <- function(sumstats_dt, path, ref_genome, verbose=TRUE){
-  SNP = CHR = i.RefSNP_id = NULL
+check_no_snp <- function(sumstats_dt, path, ref_genome, imputation_ind,
+                         log_folder_ind,check_save_out,tabix_index, nThread,
+                         log_files, verbose=TRUE){
+  SNP = CHR = i.RefSNP_id = IMPUTATION_SNP = NULL
   # If CHR and BP are present BUT not SNP then need to find the relevant SNP ids
   col_headers <- names(sumstats_dt)
   if(sum(c("CHR","BP") %in% col_headers)==2 & sum("SNP" %in% col_headers)==0){
@@ -45,14 +45,34 @@ check_no_snp <- function(sumstats_dt, path, ref_genome, verbose=TRUE){
     data.table::setkeyv(rsids,c("CHR","BP"))
     sumstats_dt[rsids,SNP:=i.RefSNP_id]
     #remove rows where SNP couldn't be found
-    sumstats_dt <- sumstats_dt[complete.cases(sumstats_dt),]
+    #If user wants log, save it to there
+    if(log_folder_ind){
+      name <- "snp_not_found_from_chr_bp"
+      name <- get_unique_name_log_file(name=name,log_files=log_files)
+      write_sumstats(sumstats_dt = 
+                       sumstats_dt[!complete.cases(sumstats_dt[,c("SNP")]),],
+                     save_path=
+                       paste0(check_save_out$log_folder,
+                              "/",name,
+                              check_save_out$extension),
+                     sep=check_save_out$sep,
+                     tabix_index = tabix_index,
+                     nThread = nThread)
+      log_files[[name]] <- 
+        paste0(check_save_out$log_folder,"/",name,check_save_out$extension)
+    } 
+    sumstats_dt <- sumstats_dt[complete.cases(sumstats_dt[,"SNP"]),]
     #move SNP to start
     other_cols <- names(sumstats_dt)[names(sumstats_dt)!="SNP"]
     data.table::setcolorder(sumstats_dt, c("SNP", other_cols))
+    
+    #if user specifies add a column to notify of the imputation
+    if(imputation_ind)
+      sumstats_dt[,IMPUTATION_SNP:=TRUE]
 
-    return(list("sumstats_dt"=sumstats_dt))
+    return(list("sumstats_dt"=sumstats_dt,"log_files"=log_files))
   }
   else{
-    return(list("sumstats_dt"=sumstats_dt))
+    return(list("sumstats_dt"=sumstats_dt,"log_files"=log_files))
   }
 }

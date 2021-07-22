@@ -21,8 +21,9 @@ test_that("Imputation of CHR and BP correctly", {
                                                   on_ref_genome = FALSE,
                                                   strand_ambig_filter=FALSE,
                                                   bi_allelic_filter=FALSE,
-                                                  allele_flip_check=FALSE)
-    res_dt <- data.table::fread(reformatted)
+                                                  allele_flip_check=FALSE,
+                                                  log_folder_ind = TRUE)
+    res_dt <- data.table::fread(reformatted$sumstats)
     #correct names of MungeSumstats::eduAttainOkbay
     names(sumstats_dt) <- c("SNP","CHR","BP","A1","A2","FRQ","Beta","SE","P")
     #get order same

@@ -32,7 +32,8 @@ Change this to keep the raw VCF file on disk (e.g. \code{vcf_dir="./raw_vcf"}).}
 
 \item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
 
-\item{download_method}{\code{"axel"} (multi-threaded) or \code{"download.file"} (single-threaded) .}
+\item{download_method}{\code{"axel"} (multi-threaded) or
+\code{"download.file"} (single-threaded) .}
 
 \item{quiet}{Run quietly.}
 
@@ -66,17 +67,7 @@ ids <- (dplyr::arrange(metagwas, nsnp))$id
 
 ## Call uses reference genome as default with more than 2GB of memory,
 ## which is more than what 32-bit Windows can handle so remove certain checks
-
-is_32bit_windows <- .Platform$OS.type == "windows" && .Platform$r_arch == "i386"
-if (!is_32bit_windows) {
-datasets <- MungeSumstats::import_sumstats(ids = ids[1]) 
-} else{
-reformatted <- MungeSumstats::import_sumstats(ids = ids[1],
-                                              ref_genome="GRCh37",
-                                              on_ref_genome = FALSE,
-                                              strand_ambig_filter=FALSE,
-                                              bi_allelic_filter=FALSE,
-                                              allele_flip_check=FALSE)
-} 
+## commented out down to runtime
+#datasets <- MungeSumstats::import_sumstats(ids = ids) 
 
 }

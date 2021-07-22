@@ -7,6 +7,7 @@ validate_parameters <- function(path,
                                 ref_genome, 
                                 convert_small_p,
                                 compute_z,
+                                compute_n,
                                 convert_n_int, 
                                 analysis_trait, 
                                 INFO_filter,
@@ -24,7 +25,10 @@ validate_parameters <- function(path,
                                 snp_ids_are_rs_ids,
                                 write_vcf,
                                 return_format,
-                                ldsc_format){
+                                ldsc_format,
+                                imputation_ind,
+                                log_folder_ind,
+                                log_mungesumstats_msgs){
   # Checking if the file exists should happen first
   if (!file.exists(path) && !startsWith(path,"https://gwas.mrcieu.ac.uk"))
     stop("Path to GWAS sumstats is not valid")
@@ -102,16 +106,20 @@ validate_parameters <- function(path,
     stop("pos_se must be either TRUE or FALSE")
   if(!is.logical(effect_columns_nonzero))
     stop("effect_columns_nonzero must be either TRUE or FALSE")
-  
-  
-  effect_columns_nonzero
-  
+  if(!is.logical(effect_columns_nonzero))
+    stop("imputation_ind must be either TRUE or FALSE")
+  if(!is.logical(log_folder_ind))
+    stop("log_folder_ind must be either TRUE or FALSE")
+  if(!is.logical(log_mungesumstats_msgs))
+    stop("log_mungesumstats_msgs must be either TRUE or FALSE")
   
   #Check numeric
   if(!is.numeric(INFO_filter))
     stop("INFO_filter must be numeric")
   if(!is.numeric(N_std))
     stop("N_std must be numeric")
+  if(!is.numeric(compute_n)||compute_n<0)
+    stop("compute_n must be 0 or an integer value")
   
   #Check rmv_chr choices all valid chromosomes
   chrs <- c(as.character(seq_len(22)),"X","Y","MT")
@@ -128,6 +136,4 @@ validate_parameters <- function(path,
   if(!(tolower(return_format) %in% c("vr","vranges","gr","granges",
                                       "genomicranges","data.table"))) 
     stop(rf_msg)
-
-
 }

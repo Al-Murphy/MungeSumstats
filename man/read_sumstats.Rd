@@ -7,7 +7,8 @@
 read_sumstats(path, nThread = 1)
 }
 \arguments{
-\item{path}{Filepath for the summary statistics file to be formatted}
+\item{path}{Filepath for the summary statistics file to be formatted. Default
+is a temporary file.}
 
 \item{nThread}{Number of threads to use for parallel processes.}
 }

@@ -21,8 +21,9 @@ test_that("non-biallelic SNPs are removed", {
                                                   on_ref_genome = FALSE,
                                                   strand_ambig_filter=FALSE,
                                                   bi_allelic_filter=TRUE,
-                                                  allele_flip_check=FALSE)
-    reformatted_lines <- readLines(reformatted)
+                                                  allele_flip_check=FALSE,
+                                                  log_folder_ind = TRUE)
+    reformatted_lines <- readLines(reformatted$sumstats)
     #Should equal org apart from this one line
     writeLines(eduAttainOkbay,con = file)
     org <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37",
@@ -34,7 +35,8 @@ test_that("non-biallelic SNPs are removed", {
     
     rsid_index <- grep(problem_snp, org_lines, ignore.case = TRUE) 
     #reordering in function, line 3 rs9320913 is now 58
-    testthat:: expect_equal(setequal(reformatted_lines,org_lines[-rsid_index]),TRUE)
+    testthat::expect_equal(setequal(reformatted_lines,org_lines[-rsid_index]),
+                            TRUE)
   } else{
     testthat::expect_equal(is_32bit_windows,TRUE)
   }

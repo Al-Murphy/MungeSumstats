@@ -1,11 +1,13 @@
 #' Infers the genome build of the summary statistics file (GRCh37 or GRCh38) 
-#' from the data
+#' from the data. Uses SNP (RS ID) & CHR & BP to get genome build.
 #'
 #' @param sumstats data table/data frame obj of the summary statistics file for
 #' the GWAS ,or file path to summary statistics file.
 #' @param nThread Number of threads to use for parallel processes. 
-#' @param sampled_snps Downsample the number of SNPs used when inferring genome build to save time.
-#' @param standardise_headers Run \code{standardise_sumstats_column_headers_crossplatform}.  
+#' @param sampled_snps Downsample the number of SNPs used when inferring genome 
+#' build to save time.
+#' @param standardise_headers Run 
+#' \code{standardise_sumstats_column_headers_crossplatform}.  
 #' @return ref_genome the genome build of the data
 #'
 #' @examples
@@ -21,7 +23,7 @@ get_genome_build <- function(sumstats,
                              nThread = 1,
                              sampled_snps = 10000, 
                              standardise_headers=TRUE){
-  seqnames = CHR = SNP = NULL; ### Add this to avoid confusing BiocCheck
+  seqnames = CHR = SNP = BP = NULL; ### Add this to avoid confusing BiocCheck
   
   message("Inferring genome build.")
   #if not a data.table, must be a path
@@ -46,19 +48,40 @@ get_genome_build <- function(sumstats,
   } 
   
   err_msg <- 
-    paste0("SNP ID column (RS ID) CHR and BP (POSITION) columns are needed to ",
-           "infer the genome build. These could not be found in your dataset. ",
-           "Please specify the genome build manually to run format_sumstats()")
+    paste0("SNP ID column (RS ID), CHR and BP (POSITION) columns are needed ",
+           "to infer the genome build. These could not be\nfound in your ",
+           "dataset. Please specify the genome build manually to run ",
+           "format_sumstats().")
+  #Infer genome build using SNP & CHR & BP
   if(!all(c("SNP","CHR","BP") %in% colnames(sumstats)))
     stop(err_msg)
   
   #### Do some filtering first to avoid errors ####
-  sumstats <- sumstats[complete.cases(SNP)]
-  
+  nrow_org <- nrow(sumstats)
+  sumstats <- sumstats[complete.cases(SNP,BP,CHR)]
+  err_msg2 <- 
+    paste0("SNP ID column (RS ID), CHR and BP (POSITION) columns are needed to",
+           " infer the genome build. These contain too many\nmissing values in",
+           " your dataset to be used. Please specify the genome build manually",
+           " to run format_sumstats()")
+  #also remove common incorrect formatting of SNP
+  sumstats <- sumstats[grepl("^rs",SNP),]
+  sumstats <- sumstats[SNP!=".",]
+  #if removing erroneous cases leads to <min(10k,50% org dataset) will fail -
+  # NOT ENOUGH DATA TO INFER
+  nrow_clean <- nrow(sumstats)
+  size_okay<-FALSE
+  if(nrow_clean>sampled_snps||(nrow(sumstats)!=0 && nrow_clean/nrow_org>.5))
+    size_okay<-TRUE
+  if(!size_okay)
+    stop(err_msg2)
   #### Downsample SNPs to save time #### 
   if((nrow(sumstats)>sampled_snps) && !(is.null(sampled_snps))){ 
     snps <- sample(sumstats$SNP,sampled_snps)
-  } else {snps <- sumstats$SNP}
+  } 
+  else{ #nrow(sumstats)<10k
+    snps <- sumstats$SNP
+  }
   
   sumstats <- sumstats[SNP %in% snps,]
   
@@ -74,10 +97,12 @@ get_genome_build <- function(sumstats,
   sumstats[,CHR:=as.character(CHR)]
   #Now check which genome build has more matches to data
   num_37 <- 
-    nrow(snp_loc_data_37[sumstats, , on = c("SNP"="SNP", "pos"="BP","seqnames"="CHR"),
-                          nomatch=FALSE])
+    nrow(snp_loc_data_37[sumstats, , 
+                         on = c("SNP"="SNP", "pos"="BP","seqnames"="CHR"),
+                         nomatch=FALSE])
   num_38 <- 
-    nrow(snp_loc_data_38[sumstats, , on = c("SNP"="SNP", "pos"="BP","seqnames"="CHR"),
+    nrow(snp_loc_data_38[sumstats, , 
+                         on = c("SNP"="SNP", "pos"="BP","seqnames"="CHR"),
                          nomatch=FALSE])
   if(num_37>num_38){
     ref_gen_num <- num_37
@@ -90,10 +115,11 @@ get_genome_build <- function(sumstats,
   
   message("Inferred genome build: ",ref_genome)
   #add a warning if low proportion of matches found
-  msg <- paste0("WARNING: Less than 10% of your SNPs matched that of either ",
-                "reference genome, this question the quality of your summary ",
-                "statistics file.")
-  if(ref_gen_num/length(snps)<0.1)  message(msg) 
+  msg <- paste0("WARNING: Less than 10% of your sampled SNPs matched that of ",
+                "either reference genome, this may question the quality of ",
+                "your summary statistics file.")
+  if(ref_gen_num/length(snps)<0.1)  
+    message(msg) 
   
   return(ref_genome)
 }

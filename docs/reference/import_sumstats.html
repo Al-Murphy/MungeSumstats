@@ -187,7 +187,8 @@ Change this to keep the raw VCF file on disk (e.g. <code>vcf_dir="./raw_vcf"</co
     </tr>
     <tr>
       <th>download_method</th>
-      <td><p><code>"axel"</code> (multi-threaded) or <code>"download.file"</code> (single-threaded) .</p></td>
+      <td><p><code>"axel"</code> (multi-threaded) or
+<code>"download.file"</code> (single-threaded) .</p></td>
     </tr>
     <tr>
       <th>quiet</th>
@@ -238,40 +239,9 @@ depending on the arguments passed to <code>format_sumstats</code>.</p>
 
 <span class='co'>## Call uses reference genome as default with more than 2GB of memory,</span>
 <span class='co'>## which is more than what 32-bit Windows can handle so remove certain checks</span>
+<span class='co'>## commented out down to runtime</span>
+<span class='co'>#datasets &lt;- MungeSumstats::import_sumstats(ids = ids) </span>
 
-<span class='va'>is_32bit_windows</span> <span class='op'>&lt;-</span> <span class='va'>.Platform</span><span class='op'>$</span><span class='va'>OS.type</span> <span class='op'>==</span> <span class='st'>"windows"</span> <span class='op'>&amp;&amp;</span> <span class='va'>.Platform</span><span class='op'>$</span><span class='va'>r_arch</span> <span class='op'>==</span> <span class='st'>"i386"</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='op'>!</span><span class='va'>is_32bit_windows</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>datasets</span> <span class='op'>&lt;-</span> <span class='fu'>MungeSumstats</span><span class='fu'>::</span><span class='fu'>import_sumstats</span><span class='op'>(</span>ids <span class='op'>=</span> <span class='va'>ids</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span> 
-<span class='op'>}</span> <span class='kw'>else</span><span class='op'>{</span>
-<span class='va'>reformatted</span> <span class='op'>&lt;-</span> <span class='fu'>MungeSumstats</span><span class='fu'>::</span><span class='fu'>import_sumstats</span><span class='op'>(</span>ids <span class='op'>=</span> <span class='va'>ids</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>,
-                                              ref_genome<span class='op'>=</span><span class='st'>"GRCh37"</span>,
-                                              on_ref_genome <span class='op'>=</span> <span class='cn'>FALSE</span>,
-                                              strand_ambig_filter<span class='op'>=</span><span class='cn'>FALSE</span>,
-                                              bi_allelic_filter<span class='op'>=</span><span class='cn'>FALSE</span>,
-                                              allele_flip_check<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
-<span class='op'>}</span> 
-</div><div class='output co'>#&gt; <span class='message'>Processing 1 datasets from Open GWAS.</span></div><div class='output co'>#&gt; <span class='message'>Using previously downloaded VCF.</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>*****::NOTE::*****</span>
-#&gt; <span class='message'>- Formatted results will be saved to `tempdir()` by default.</span>
-#&gt; <span class='message'>- This means all formatted summary stats will be deleted upon ending the R session.</span>
-#&gt; <span class='message'>- To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.</span>
-#&gt; <span class='message'>********************</span></div><div class='output co'>#&gt; <span class='message'>Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpBrro5o/ieu-a-298.tsv.gz</span></div><div class='output co'>#&gt; <span class='message'>Reading header.</span></div><div class='output co'>#&gt; <span class='message'>Importing.</span></div><div class='output co'>#&gt; <span class='message'>Reading VCF file.</span></div><div class='output co'>#&gt; <span class='message'>Removing non-standard columns: QUAL, FILTER, FORMAT</span></div><div class='output co'>#&gt; <span class='message'>Parsing 'ieu-a-298' data column.</span></div><div class='output co'>#&gt; <span class='message'>1 empty column(s) detected.</span></div><div class='output co'>#&gt; <span class='message'>VCF file has -log10 P-values, these will be converted to unadjusted p-values in the 'P' column.</span></div><div class='output co'>#&gt; <span class='message'>Formatting INFO column.</span></div><div class='output co'>#&gt; <span class='message'>NOTE: All INFO scores are empty. Replacing all with 1.</span></div><div class='output co'>#&gt; <span class='message'>Standardising column headers.</span></div><div class='output co'>#&gt; <span class='message'>First line of summary statistics file: </span></div><div class='output co'>#&gt; <span class='message'>CHROM	POS	ID	REF	ALT	INFO	ES	SE	LP	SS	P	</span></div><div class='output co'>#&gt; <span class='message'>Summary statistics report:</span>
-#&gt; <span class='message'>   - 10,684 rows</span>
-#&gt; <span class='message'>   - 10,684 unique variants</span>
-#&gt; <span class='message'>   - 553 genome-wide significant variants (P&lt;5e-8)</span>
-#&gt; <span class='message'>   - 22 chromosomes</span></div><div class='output co'>#&gt; <span class='message'>Checking for multi-GWAS.</span></div><div class='output co'>#&gt; <span class='message'>Inferring genome build.</span></div><div class='output co'>#&gt; <span class='message'>Loading reference genome data.</span></div><div class='output co'>#&gt; <span class='message'>Loading reference genome data.</span></div><div class='output co'>#&gt; <span class='message'>Inferred genome build: GRCH37</span></div><div class='output co'>#&gt; <span class='message'>Checking SNP RSIDs.</span></div><div class='output co'>#&gt; <span class='message'>Checking for merged allele column.</span></div><div class='output co'>#&gt; <span class='message'>Ensuring all SNPs are on the reference genome.</span></div><div class='output co'>#&gt; <span class='message'>Loading reference genome data.</span></div><div class='output co'>#&gt; <span class='message'>273 SNPs are not on the reference genome. These will be corrected from the reference genome.</span></div><div class='output co'>#&gt; <span class='message'>Checking for correct direction of A1 (reference) and A2 (alternative allele).</span></div><div class='output co'>#&gt; <span class='message'>Reordering so first three column headers are SNP, CHR and BP in this order.</span></div><div class='output co'>#&gt; <span class='message'>Reordering so first fourth and fifth columns are A1 and A2.</span></div><div class='output co'>#&gt; <span class='message'>Checking for missing data.</span></div><div class='output co'>#&gt; <span class='message'>Checking for duplicate columns.</span></div><div class='output co'>#&gt; <span class='message'>Ensuring that the N column is all integers.</span></div><div class='output co'>#&gt; <span class='message'>The sumstats N column is not all integers, this could effect downstream analysis. These will be converted to integers.</span></div><div class='output co'>#&gt; <span class='message'>Checking for duplicate SNPs from SNP ID.</span></div><div class='output co'>#&gt; <span class='message'>Checking for SNPs with duplicated base-pair positions</span></div><div class='output co'>#&gt; <span class='message'>Filtering SNPs based on INFO score.</span></div><div class='output co'>#&gt; <span class='message'>Ensuring all SNPs have N&lt;5 std dev below mean.</span></div><div class='output co'>#&gt; <span class='message'>Removing 'chr' prefix from CHR.</span></div><div class='output co'>#&gt; <span class='message'>Making X/Y CHR uppercase.</span></div><div class='output co'>#&gt; <span class='message'>Checking for bi-allelic SNPs.</span></div><div class='output co'>#&gt; <span class='message'>326 SNPs are non-biallelic. These will be removed.</span></div><div class='output co'>#&gt; <span class='message'>Sorting coordinates.</span></div><div class='output co'>#&gt; <span class='message'>Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpBrro5o/ieu-a-298.tsv.gz</span></div><div class='output co'>#&gt; <span class='message'>Summary statistics report:</span>
-#&gt; <span class='message'>   - 10,085 rows (94.4% of original 10,684 rows)</span>
-#&gt; <span class='message'>   - 10,085 unique variants</span>
-#&gt; <span class='message'>   - 478 genome-wide significant variants (P&lt;5e-8)</span>
-#&gt; <span class='message'>   - 22 chromosomes</span></div><div class='output co'>#&gt; <span class='message'>Succesfully finished preparing sumstats file, preview:</span></div><div class='output co'>#&gt; <span class='message'>          SNP CHR      BP A1 A2 INFO   BETA     SE      LP     N           P</span>
-#&gt; <span class='message'>1: rs76805690   1 2256288  C  A    1 0.0389 0.0175 1.58536 74046 0.025980051</span>
-#&gt; <span class='message'>2: rs75379543   1 2261983  C  A    1 0.0427 0.0167 1.96738 74046 0.010780031</span>
-#&gt; <span class='message'>3: rs75273719   1 2263666  G  A    1 0.0502 0.0171 2.47353 74046 0.003361012</span>
-#&gt; <span class='message'>4:   rs903904   1 2263888  C  T    1 0.0413 0.0169 1.82769 74046 0.014869967</span>
-#&gt; <span class='message'>5: rs80107522   1 2265070  T  C    1 0.0446 0.0168 2.11328 74046 0.007704066</span></div><div class='output co'>#&gt; <span class='message'>Returning path to saved data.</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>ieu-a-298 : Done in 0.88 minutes.</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Done with all processing in 0.88 minutes.</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

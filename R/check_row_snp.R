@@ -1,13 +1,14 @@
 #' Ensure all rows have SNPs beginning with rs or SNP, drop those that don't
 #'
-#' @param sumstats_dt data table obj of the summary statistics file for the GWAS
-#' @param path Filepath for the summary statistics file to be formatted
+#' @inheritParams format_sumstats  
+#' @param log_files list of log file locations
 #' @return list containing sumstats_dt, the modified summary statistics data 
-#' table object
+#' table object and log file list
 #' @keywords internal
 #' @importFrom data.table fread
 #' @importFrom data.table fwrite
-check_row_snp <- function(sumstats_dt, path){
+check_row_snp <- function(sumstats_dt, path, log_folder_ind, check_save_out,
+                          tabix_index, nThread, log_files){
   SNP = NULL
   # All rows should start with either SNP or rs... if they don't drop them
   #use data table for speed
@@ -21,11 +22,26 @@ check_row_snp <- function(sumstats_dt, path){
     msg <- paste0(formatC(num_bad_ids,big.mark = ","), " SNPs (inferred as ",
                   "RS IDs) don't start with 'rs' and will be removed")
     message(msg)
+    #If user wants log, save it to there
+    if(log_folder_ind){
+      name <- "snp_missing_rs"
+      name <- get_unique_name_log_file(name=name,log_files=log_files)
+      write_sumstats(sumstats_dt = sumstats_dt[!grep("^rs",SNP),],
+                     save_path=
+                       paste0(check_save_out$log_folder,
+                              "/",name,
+                              check_save_out$extension),
+                     sep=check_save_out$sep,
+                     tabix_index = tabix_index,
+                     nThread = nThread)
+      log_files[[name]] <- 
+        paste0(check_save_out$log_folder,"/",name,check_save_out$extension)
+    } 
     sumstats_dt <- sumstats_dt[grep("^rs",SNP),]
 
-    return(list("sumstats_dt"=sumstats_dt))
+    return(list("sumstats_dt"=sumstats_dt,"log_files"=log_files))
   }
   else{
-    return(list("sumstats_dt"=sumstats_dt))
+    return(list("sumstats_dt"=sumstats_dt,"log_files"=log_files))
   }
 }

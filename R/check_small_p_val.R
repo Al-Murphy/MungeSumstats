@@ -2,12 +2,20 @@
 #'
 #' @param sumstats_dt data table obj of the summary statistics file for the GWAS
 #' @param path Filepath for the summary statistics file to be formatted
-#' @param convert_small_p Binary, should p-values < 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.
+#' @param convert_small_p Binary, should p-values < 5e-324 be converted to 0? 
+#' Small p-values pass the R limit and can cause errors with LDSC/MAGMA and 
+#' should be converted. Default is TRUE.
+#' @param imputation_ind Binary Should a column be added for each imputation 
+#' step to show what SNPs have imputed values for differing fields. This 
+#' includes a field denoting SNP allele flipping (flipped). **Note** 
+#' these columns will be in the formatted summary statistics returned. Default 
+#' is FALSE.
 #' @return list containing sumstats_dt, the modified summary statistics data table object
 #' @keywords internal
 #' @importFrom data.table :=
-check_small_p_val <- function(sumstats_dt, path, convert_small_p){
-  P = NULL
+check_small_p_val <- function(sumstats_dt, path, convert_small_p,
+                                imputation_ind){
+  P = convert_small_p_0 = NULL
   # Sometimes the N column is not all integers... so round it up
   col_headers <- names(sumstats_dt)
   if("P" %in% col_headers) {
@@ -30,6 +38,9 @@ check_small_p_val <- function(sumstats_dt, path, convert_small_p){
         msg2 <- paste0(msg,"These will be converted to 0.")
         message(msg2)
         sumstats_dt[,P:=as.numeric(as.character(P))]
+        #if users want edited snps, return information
+        if(imputation_ind)
+          sumstats_dt[P==0,convert_small_p_0:=TRUE]
 
         return(list("sumstats_dt"=sumstats_dt))
       }

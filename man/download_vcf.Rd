@@ -24,7 +24,8 @@ Change this to keep the raw VCF file on disk (e.g. \code{vcf_dir="./raw_vcf"}).}
 
 \item{vcf_download}{Download the original VCF from Open GWAS.}
 
-\item{download_method}{\code{"axel"} (multi-threaded) or \code{"download.file"} (single-threaded) .}
+\item{download_method}{\code{"axel"} (multi-threaded) or
+\code{"download.file"} (single-threaded) .}
 
 \item{force_new}{Overwrite a previously downloaded VCF with the same path name.}
 
@@ -36,8 +37,8 @@ Change this to keep the raw VCF file on disk (e.g. \code{vcf_dir="./raw_vcf"}).}
 List containing the paths to the downloaded VCF and its index file.
 }
 \description{
-Ideally, we would use \href{https://github.com/MRCIEU/gwasvcf}{gwasvcf} instead
-but it hasn't been made available on CRAN or Bioconductor yet,
+Ideally, we would use \href{https://github.com/MRCIEU/gwasvcf}{gwasvcf}
+instead but it hasn't been made available on CRAN or Bioconductor yet,
 so we can't include it as a dep.
 }
 \examples{

@@ -19,8 +19,9 @@ test_that("SNPs on X,Y,MT chromosome are removed", {
                                                 on_ref_genome = FALSE,
                                                 strand_ambig_filter=FALSE,
                                                 bi_allelic_filter=FALSE,
-                                                allele_flip_check=FALSE)
-  reformatted_lines <- readLines(reformatted)
+                                                allele_flip_check=FALSE,
+                                                log_folder_ind = TRUE)
+  reformatted_lines <- readLines(reformatted$sumstats)
   #Should equal org apart from this one line
   writeLines(eduAttainOkbay,con = file)
   org <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37",
@@ -29,7 +30,8 @@ test_that("SNPs on X,Y,MT chromosome are removed", {
                                         bi_allelic_filter=FALSE,
                                         allele_flip_check=FALSE)
   org_lines <- readLines(org)
-  rsid_index <- grep(paste(problem_snp,collapse = "|"), org_lines, ignore.case = TRUE) 
+  rsid_index <- grep(paste(problem_snp,collapse = "|"), org_lines, 
+                      ignore.case = TRUE) 
   #reordering in function, line 3,4,5 is now 28,58
   expect_equal(setequal(reformatted_lines,
                           org_lines[-rsid_index]),TRUE)

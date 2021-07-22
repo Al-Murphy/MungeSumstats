@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Check if save path is appropriate — check_save_path • MungeSumstats</title>
+<title>Check if save path and log folder is appropriate — check_save_path • MungeSumstats</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Check if save path is appropriate — check_save_path" />
-<meta property="og:description" content="Check if save path is appropriate" />
+<meta property="og:title" content="Check if save path and log folder is appropriate — check_save_path" />
+<meta property="og:description" content="Check if save path and log folder is appropriate" />
 
 
 
@@ -136,16 +136,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Check if save path is appropriate</h1>
+    <h1>Check if save path and log folder is appropriate</h1>
     <small class="dont-index">Source: <a href='https://github.com/neurogenomics/MungeSumstats/blob/master/R/check_save_path.R'><code>R/check_save_path.R</code></a></small>
     <div class="hidden name"><code>check_save_path.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Check if save path is appropriate</p>
+    <p>Check if save path and log folder is appropriate</p>
     </div>
 
-    <pre class="usage"><span class='fu'>check_save_path</span><span class='op'>(</span><span class='va'>save_path</span>, write_vcf <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>check_save_path</span><span class='op'>(</span><span class='va'>save_path</span>, <span class='va'>log_folder</span>, <span class='va'>log_folder_ind</span>, write_vcf <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -156,6 +156,19 @@
 <code><a href='https://rdrr.io/r/base/tempfile.html'>tempfile(fileext=".tsv.gz")</a></code>.</p></td>
     </tr>
     <tr>
+      <th>log_folder</th>
+      <td><p>Filepath to the directory for the log files and the log of
+MungeSumstats messages to be stored. Default is a temporary directory.</p></td>
+    </tr>
+    <tr>
+      <th>log_folder_ind</th>
+      <td><p>Binary Should log files be stored containing all
+filtered out SNPs (separate file per filter). The data is outputted in the
+same format specified for the resulting sumstats file. The only exception to
+this rule is if output is vcf, then log file saved as .tsv.gz. Default is
+FALSE.</p></td>
+    </tr>
+    <tr>
       <th>write_vcf</th>
       <td><p>Whether to write as VCF (TRUE) or tabular file (FALSE).</p></td>
     </tr>
@@ -163,7 +176,8 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Corrected <code>save_path</code>, the file type, and the separator.</p>
+    <p>Corrected <code>save_path</code>, the file type, the separator, corrected
+<code>log_folder</code>,the log file extension</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

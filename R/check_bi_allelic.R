@@ -1,14 +1,12 @@
 #' Remove non-biallelic SNPs
 #'
-#' @param sumstats_dt data table obj of the summary statistics file for the GWAS
-#' @param path Filepath for the summary statistics file to be formatted
-#' @param ref_genome name of the reference genome used for the GWAS (GRCh37 or GRCh38). Default is GRCh37.
-#' @param bi_allelic_filter Binary Should non-biallelic SNPs be removed. Default is TRUE
-#' @param rsids datatable of snpsById, filtered to SNPs of interest if loaded already. Or else NULL
+#' @inheritParams format_sumstats
+#' @param log_files list of log file locations
 #' @return A list containing two data tables:
 #' \itemize{
 #'   \item \code{sumstats_dt}: the modified summary statistics data table object
 #'   \item \code{rsids}: snpsById, filtered to SNPs of interest if loaded already. Or else NULL
+#'   \item \code{log_files}: log file list   
 #' }
 #' @keywords internal
 #' @importFrom data.table setDT
@@ -17,7 +15,8 @@
 #' @importFrom data.table copy
 #' @importFrom Biostrings IUPAC_CODE_MAP
 check_bi_allelic <- 
-  function(sumstats_dt, path, ref_genome, bi_allelic_filter, rsids){
+  function(sumstats_dt, path, ref_genome, bi_allelic_filter, rsids, 
+           log_folder_ind, check_save_out, tabix_index, nThread, log_files){
     CHR = alleles_as_ambig = SNP = NULL
     # If SNP present and user specified to remove
     col_headers <- names(sumstats_dt)
@@ -35,18 +34,37 @@ check_bi_allelic <-
       num_bad_ids <- nrow(rsids[!alleles_as_ambig %in% nonambig_IUPAC_CODE_MAP])
       #check for SNPs not on ref genome
       if(num_bad_ids>0){
-        msg <- paste0(formatC(num_bad_ids,big.mark = ","), " SNPs are non-biallelic.",
+        msg <- paste0(formatC(num_bad_ids,big.mark = ","), 
+                      " SNPs are non-biallelic.",
                       " These will be removed.")
         message(msg)
         # join using SNP
         data.table::setkey(sumstats_dt,SNP)
         keep_snps <- rsids[alleles_as_ambig %in% nonambig_IUPAC_CODE_MAP]$SNP
-        #remove rows missing from the reference genome
+        #remove rows not bi-allelic
+        #If user wants log, save it to there
+        if(log_folder_ind){
+          name <- "snp_bi_allelic"
+          name <- get_unique_name_log_file(name=name,log_files=log_files)
+          write_sumstats(sumstats_dt = sumstats_dt[!keep_snps,],
+                         save_path=
+                           paste0(check_save_out$log_folder,
+                                  "/",name,
+                                  check_save_out$extension),
+                         sep=check_save_out$sep,
+                         tabix_index = tabix_index,
+                         nThread = nThread)
+          log_files[[name]] <- 
+            paste0(check_save_out$log_folder,"/",name,
+                   check_save_out$extension)
+        } 
         sumstats_dt <- sumstats_dt[keep_snps,]
       }
-      return(list("sumstats_dt"=sumstats_dt,"rsids"=rsids))
+      return(list("sumstats_dt"=sumstats_dt,"rsids"=rsids,
+                    "log_files"=log_files))
     }
     else{
-      return(list("sumstats_dt"=sumstats_dt,"rsids"=rsids))
+      return(list("sumstats_dt"=sumstats_dt,"rsids"=rsids,
+                    "log_files"=log_files))
     }
   }

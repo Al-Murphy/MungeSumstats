@@ -4,21 +4,53 @@
 \alias{check_no_snp}
 \title{Ensure that SNP is present if not can find it with CHR and BP}
 \usage{
-check_no_snp(sumstats_dt, path, ref_genome, verbose = TRUE)
+check_no_snp(
+  sumstats_dt,
+  path,
+  ref_genome,
+  imputation_ind,
+  log_folder_ind,
+  check_save_out,
+  tabix_index,
+  nThread,
+  log_files,
+  verbose = TRUE
+)
 }
 \arguments{
-\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
+\item{path}{Filepath for the summary statistics file to be formatted. Default
+is a temporary file.}
 
-\item{path}{Filepath for the summary statistics file to be formatted}
+\item{ref_genome}{name of the reference genome used for the GWAS ("GRCh37" or
+"GRCh38"). Argument is case-insensitive. Default is NULL which infers the
+reference genome from the data.}
 
-\item{ref_genome}{name of the reference genome used for the GWAS (GRCh37 or
-GRCh38)}
+\item{imputation_ind}{Binary Should a column be added for each imputation
+step to show what SNPs have imputed values for differing fields. This
+includes a field denoting SNP allele flipping (flipped). On the flipped
+value, this denoted whether the alelles where switched based on
+MungeSumstats initial choice of A1, A2 from the input column headers and thus
+may not align with what the creator intended.\strong{Note} these columns will be
+in the formatted summary statistics returned. Default is FALSE.}
+
+\item{log_folder_ind}{Binary Should log files be stored containing all
+filtered out SNPs (separate file per filter). The data is outputted in the
+same format specified for the resulting sumstats file. The only exception to
+this rule is if output is vcf, then log file saved as .tsv.gz. Default is
+FALSE.}
+
+\item{tabix_index}{Index the formatted summary statistics with
+\href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
+
+\item{nThread}{Number of threads to use for parallel processes.}
+
+\item{log_files}{list of log file locations}
 
 \item{verbose}{should messages be printed. Default it TRUE.}
 }
 \value{
 list containing sumstats_dt, the modified summary statistics data
-table object
+table object and the log files list
 }
 \description{
 Ensure that SNP is present if not can find it with CHR and BP

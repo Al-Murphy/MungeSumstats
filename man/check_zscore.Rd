@@ -6,20 +6,33 @@
 \usage{
 check_zscore(
   sumstats_dt,
+  imputation_ind,
   compute_z = TRUE,
   force_new_z = FALSE,
   standardise_headers = FALSE
 )
 }
 \arguments{
-\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS.}
+\item{sumstats_dt}{data table obj of the summary statistics file for the
+GWAS.}
 
-\item{compute_z}{Whether to compute Z-score from P.}
+\item{imputation_ind}{Binary Should a column be added for each imputation
+step to show what SNPs have imputed values for differing fields. This
+includes a field denoting SNP allele flipping (flipped). \strong{Note}
+these columns will be in the formatted summary statistics returned. Default
+is FALSE.}
 
-\item{force_new_z}{When a "Z" column already exists, it will be used by default.
-To override and compute a new Z-score column from P set \code{force_new_z=TRUE}.}
+\item{compute_z}{Whether to compute Z-score column from P. Default is FALSE.
+\strong{Note} that imputing the Z-score for every SNP will not correct be
+perfectly correct and may result in a loss of power. This should only be done
+as a last resort.}
 
-\item{standardise_headers}{Run \code{standardise_sumstats_column_headers_crossplatform} first.}
+\item{force_new_z}{When a "Z" column already exists, it will be used by
+default. To override and compute a new Z-score column from P set
+\code{force_new_z=TRUE}.}
+
+\item{standardise_headers}{Run
+\code{standardise_sumstats_column_headers_crossplatform} first.}
 }
 \value{
 \code{list("sumstats_dt"=sumstats_dt)}

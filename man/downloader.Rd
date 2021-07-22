@@ -24,7 +24,8 @@ downloader(
 
 \item{output_path}{output_path.}
 
-\item{download_method}{\code{"axel"} (multi-threaded) or \code{"download.file"} (single-threaded) .}
+\item{download_method}{\code{"axel"} (multi-threaded) or
+\code{"download.file"} (single-threaded) .}
 
 \item{background}{Run in background}
 

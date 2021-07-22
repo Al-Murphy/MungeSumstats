@@ -4,14 +4,21 @@
 \alias{check_n_int}
 \title{Ensure that the N column is all integers}
 \usage{
-check_n_int(sumstats_dt, path, convert_n_int)
+check_n_int(sumstats_dt, path, convert_n_int, imputation_ind)
 }
 \arguments{
 \item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
 
 \item{path}{Filepath for the summary statistics file to be formatted}
 
-\item{convert_n_int}{Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE.}
+\item{convert_n_int}{Binary, if N (the number of samples) is not an integer,
+should this be rounded? Default is TRUE.}
+
+\item{imputation_ind}{Binary Should a column be added for each imputation
+step to show what SNPs have imputed values for differing fields. This
+includes a field denoting SNP allele flipping (flipped). \strong{Note}
+these columns will be in the formatted summary statistics returned. Default
+is FALSE.}
 }
 \value{
 list containing sumstats_dt, the modified summary statistics data table object

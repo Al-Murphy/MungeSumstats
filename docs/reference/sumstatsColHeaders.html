@@ -160,17 +160,31 @@ test.</p>
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>dataframe with 82 rows nd 2 columns</p>
+    <p>dataframe with 99 rows and 2 columns</p>
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
     <p>The code to prepare the .Rda file file from the marker file is:
 <code><a href='https://rdrr.io/r/utils/data.html'>
 # Most the data in the below table comes from the LDSC github wiki
 data("sumstatsColHeaders")
-# Make additions to sumstatsColHeaders
+# Make additions to sumstatsColHeaders using github version of MungeSumstats- 
+# shown is an example of adding columns for Standard Error (SE)
+#se_cols &lt;- data.frame("Uncorrected"=c("SE","se","STANDARD.ERROR","STANDARD_ERROR","STANDARD-ERROR"), 
+#                      "Corrected"=rep("SE",5))
+#sumstatsColHeaders &lt;- rbind(sumstatsColHeaders,se_cols)
+#Once additions are made, order &amp; save the new mapping dataset
+#now sort ordering -important for logic that uncorrected=corrected comes first
+sumstatsColHeaders$ordering &lt;- 
+    sumstatsColHeaders$Uncorrected==sumstatsColHeaders$Corrected
+sumstatsColHeaders &lt;-
+    sumstatsColHeaders[order(sumstatsColHeaders$Corrected,
+                             sumstatsColHeaders$ordering,decreasing = TRUE),]
+rownames(sumstatsColHeaders)&lt;-1:nrow(sumstatsColHeaders)
+sumstatsColHeaders$ordering &lt;- NULL
 usethis::use_data(sumstatsColHeaders,overwrite = TRUE, internal=TRUE)
 save(sumstatsColHeaders,
       file="data/sumstatsColHeaders.rda")
+# You will need to restart your r session for effects to take account      
 </a></code></p>
 
   </div>

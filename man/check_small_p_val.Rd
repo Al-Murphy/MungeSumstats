@@ -4,14 +4,22 @@
 \alias{check_small_p_val}
 \title{Ensure that the p values are not 5e-324 or lower, if so set to 0}
 \usage{
-check_small_p_val(sumstats_dt, path, convert_small_p)
+check_small_p_val(sumstats_dt, path, convert_small_p, imputation_ind)
 }
 \arguments{
 \item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
 
 \item{path}{Filepath for the summary statistics file to be formatted}
 
-\item{convert_small_p}{Binary, should p-values < 5e-324 be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.}
+\item{convert_small_p}{Binary, should p-values < 5e-324 be converted to 0?
+Small p-values pass the R limit and can cause errors with LDSC/MAGMA and
+should be converted. Default is TRUE.}
+
+\item{imputation_ind}{Binary Should a column be added for each imputation
+step to show what SNPs have imputed values for differing fields. This
+includes a field denoting SNP allele flipping (flipped). \strong{Note}
+these columns will be in the formatted summary statistics returned. Default
+is FALSE.}
 }
 \value{
 list containing sumstats_dt, the modified summary statistics data table object

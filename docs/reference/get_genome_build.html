@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Infers the genome build of the summary statistics file (GRCh37 or GRCh38)
-from the data — get_genome_build • MungeSumstats</title>
+from the data. Uses SNP (RS ID) &amp; CHR &amp; BP to get genome build. — get_genome_build • MungeSumstats</title>
 
 
 <!-- jquery -->
@@ -41,9 +41,9 @@ from the data — get_genome_build • MungeSumstats</title>
 
 
 <meta property="og:title" content="Infers the genome build of the summary statistics file (GRCh37 or GRCh38)
-from the data — get_genome_build" />
+from the data. Uses SNP (RS ID) &amp; CHR &amp; BP to get genome build. — get_genome_build" />
 <meta property="og:description" content="Infers the genome build of the summary statistics file (GRCh37 or GRCh38)
-from the data" />
+from the data. Uses SNP (RS ID) &amp;amp; CHR &amp;amp; BP to get genome build." />
 
 
 
@@ -140,14 +140,14 @@ from the data" />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Infers the genome build of the summary statistics file (GRCh37 or GRCh38)
-from the data</h1>
+from the data. Uses SNP (RS ID) &amp; CHR &amp; BP to get genome build.</h1>
     <small class="dont-index">Source: <a href='https://github.com/neurogenomics/MungeSumstats/blob/master/R/get_genome_build.R'><code>R/get_genome_build.R</code></a></small>
     <div class="hidden name"><code>get_genome_build.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Infers the genome build of the summary statistics file (GRCh37 or GRCh38)
-from the data</p>
+from the data. Uses SNP (RS ID) &amp; CHR &amp; BP to get genome build.</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_genome_build</span><span class='op'>(</span>
@@ -171,11 +171,13 @@ the GWAS ,or file path to summary statistics file.</p></td>
     </tr>
     <tr>
       <th>sampled_snps</th>
-      <td><p>Downsample the number of SNPs used when inferring genome build to save time.</p></td>
+      <td><p>Downsample the number of SNPs used when inferring genome
+build to save time.</p></td>
     </tr>
     <tr>
       <th>standardise_headers</th>
-      <td><p>Run <code>standardise_sumstats_column_headers_crossplatform</code>.</p></td>
+      <td><p>Run
+<code>standardise_sumstats_column_headers_crossplatform</code>.</p></td>
     </tr>
     </table>
 

@@ -3,14 +3,15 @@
 #' More care needs to be taken if one of A1/A2 is present, before imputing the 
 #' other allele flipping needs to be checked 
 #'
-#' @param sumstats_dt data table obj of the summary statistics file for the GWAS
-#' @param path Filepath for the summary statistics file to be formatted
-#' @param ref_genome name of the reference genome used for the GWAS (GRCh37 or GRCh38)
-#' @param rsids datatable of snpsById, filtered to SNPs of interest if loaded already. Or else NULL
+#' @inheritParams format_sumstats  
+#' @param log_files list of log file locations
 #' @return A list containing two data tables:
 #' \itemize{
 #'   \item \code{sumstats_dt}: the modified summary statistics data table object
 #'   \item \code{rsids}: snpsById, filtered to SNPs of interest if loaded already. Or else NULL
+#'   \item \code{allele_flip_check}: does the dataset require allele flip check
+#'   \item \code{log_files}: log file list
+#'   \item \code{bi_allelic_filter}: should multi-allelic SNPs be filtered out
 #' }
 #' @keywords internal
 #' @importFrom data.table setDT
@@ -21,15 +22,30 @@
 #' @importFrom data.table setorder
 #' @importFrom data.table copy
 #' @importFrom Biostrings IUPAC_CODE_MAP 
-check_no_allele <- function(sumstats_dt, path, ref_genome, rsids){
+check_no_allele <- function(sumstats_dt, path, ref_genome, rsids,
+                              imputation_ind, allele_flip_check,log_folder_ind,
+                              check_save_out,tabix_index, nThread,log_files,
+                              bi_allelic_filter){
   SNP = i.seqnames = CHR = BP = i.pos = LP = P = A1 = A2 = 
-    i.ref_allele = i.alt_alleles = alt_alleles = ss_A = alleles_as_ambig = NULL
+    i.ref_allele = i.alt_alleles = alt_alleles = ss_A = alleles_as_ambig = 
+    IMPUTATION_A2 = IMPUTATION_A1 = NULL
   # If SNP present but no A1/A2 then need to find them
   col_headers <- names(sumstats_dt)
   if(sum(c("A1","A2") %in% col_headers)<=1 & sum("SNP" %in% col_headers)==1){
+    #if A2 is missing need to remove multi-allelic SNPs as we don't know which 
+    #is the one the author is thinking of
+    msg_a2 <- paste0("WARNING: No A2 column found in the data, multi-allelic ",
+                     "can't not be accurately chosen (as any\nof the choices ",
+                     "could be valid). bi_allelic_filter has been forced to ",
+                     "TRUE.")
+    if(!"A2"%in% col_headers && !bi_allelic_filter){
+      bi_allelic_filter=TRUE
+      message(msg_a2)
+    }  
     #check if rsids loaded if not do so
     if(is.null(rsids)){
-      rsids <- load_ref_genome_data(data.table::copy(sumstats_dt$SNP), ref_genome,
+      rsids <- load_ref_genome_data(data.table::copy(sumstats_dt$SNP), 
+                                      ref_genome,
                                       "A1 or A2 allele information")
     }
     else{
@@ -46,53 +62,23 @@ check_no_allele <- function(sumstats_dt, path, ref_genome, rsids){
     data.table::setkey(sumstats_dt,SNP)
     #if one allele in dataset join other
     if(sum(c("A1","A2") %in% col_headers)==1){ #one allele missing
-      # First check if reference genome ref/alt allele matches allele better 
-      # If it matches allele not equal to data allele's name better, 
-      # flip and flip effect too! e.g. If have A1 but matches A2 in ref flip
-      #get col name in data
+      #NOTE: This is the old flipping code but doesn't matter since the 
+      #flipping check will correct
+      message("One of A1/A2 are missing, allele flipping will be tested")
+      allele_flip_check <- TRUE
+      msg_a <- paste0("WARNING: One of A1/A2 are missing, bi_allelic_filter ",
+                       "has been forced to TRUE to test imputation.")
+      if(!allele_flip_check){
+        allele_flip_check=TRUE
+        message(msg_a)
+      }  
+      # First get col name in data for allele we have
       ssA <- c("A1","A2")[c("A1","A2") %in% col_headers]
       # join based on SNP as key
       data.table::setorder(sumstats_dt,SNP)
       data.table::setkey(sumstats_dt,SNP)
-      
-      rsids[sumstats_dt,ss_A:=get(ssA)]
-      #exclude bi/tri allelic from check
-      #get chars for SNPs not bi/tri allelic or strand ambig from IUPAC_CODE_MAP
-      nonambig_IUPAC_CODE_MAP <- 
-        names(Biostrings::IUPAC_CODE_MAP[nchar(Biostrings::IUPAC_CODE_MAP)<3])
-      A1_match <-sum(rsids[alleles_as_ambig %in% 
-                             nonambig_IUPAC_CODE_MAP]$ref_allele==rsids$ss_A)
-      #convert to char as currently a list for bi/tri allelic
-      A2_match <-sum(as.character(rsids[alleles_as_ambig %in% 
-                             nonambig_IUPAC_CODE_MAP]$alt_allele)==rsids$ss_A)
-      match_scores <- c("A1"=A1_match,"A2"=A2_match)
-      more_matched_allele <- names(which.max(match_scores))
-      rsids[, ss_A:=NULL]
-      data.table::setorder(rsids,SNP)
-      data.table::setkey(rsids,SNP)
-      
-      if(more_matched_allele!=ssA){
-        print_msg <- paste0("There are more matches to the reference genome",
-                            " found when the supplied allele is flipped. This ",
-                            "will be flipped along with the effect column.")
-        message(print_msg)
-        #Update name to other allele
-        data.table::setnames(sumstats_dt,
-                             names(match_scores)[!names(match_scores) %in% 
-                                                   more_matched_allele],
-                             more_matched_allele)
-        #flip effect column(s) - BETA, OR, z, log_odds, SIGNED_SUMSTAT
-        effect_columns <- c("BETA","OR","Z","LOG_ODDS","SIGNED_SUMSTAT")
-        effect_columns <- 
-          effect_columns[effect_columns %in% names(sumstats_dt)]
-        for(eff_i in effect_columns){#set updates quicker for DT
-          data.table::set(sumstats_dt, i=NULL, j=eff_i, 
-                          value=sumstats_dt[[eff_i]]*-1)
-        }  
-      }
-      
-      #Now that we have the correct allele name, add other allele from ref gen
-      if("A1" %in% names(sumstats_dt)){
+      #different rules for each
+      if("A1" == ssA){
         message("Deriving A2 from reference genome")
         msg <- paste0("WARNING: Inferring the alternative allele (A2) from the",
                       " reference genome. In some instances, there are more ",
@@ -108,10 +94,18 @@ check_no_allele <- function(sumstats_dt, path, ref_genome, rsids){
                         as.character(lapply(alt_alleles, 
                                             function(x) paste0(x,
                                                                collapse= ",")))]
+        #if user specifies add a column to notify of the imputation
+        if(imputation_ind){
+          sumstats_dt[,IMPUTATION_A2:=TRUE]
+        }
       }
-      else{ #A2 in input
+      else{ #A2 == ssA
         message("Deriving A1 from reference genome")
         sumstats_dt[rsids,A1:=i.ref_allele]
+        #if user specifies add a column to notify of the imputation
+        if(imputation_ind){
+          sumstats_dt[,IMPUTATION_A1:=TRUE]
+        }
       }
     }
     else{ #get both A1, A2 from ref genome - choose an A2 value where multiple
@@ -131,9 +125,31 @@ check_no_allele <- function(sumstats_dt, path, ref_genome, rsids){
                       as.character(lapply(alt_alleles, 
                                           function(x) paste0(x,
                                                              collapse = ",")))]
+      #if user specifies add a column to notify of the imputation
+      if(imputation_ind){
+        sumstats_dt[,IMPUTATION_A1:=TRUE]
+        sumstats_dt[,IMPUTATION_A2:=TRUE]
+      }
     }
     #remove rows where A1/A2 couldn't be found
-    sumstats_dt <- sumstats_dt[complete.cases(sumstats_dt),]
+    #If user wants log, save it to there
+    if(log_folder_ind){
+      name <- "alleles_not_found_from_snp"
+      name <- get_unique_name_log_file(name=name,log_files=log_files)
+      write_sumstats(sumstats_dt = 
+                       sumstats_dt[!complete.cases(sumstats_dt[,c("A1",
+                                                                    "A2")]),],
+                     save_path=
+                       paste0(check_save_out$log_folder,
+                              "/",name,
+                              check_save_out$extension),
+                     sep=check_save_out$sep,
+                     tabix_index = tabix_index,
+                     nThread = nThread)
+      log_files[[name]] <- 
+        paste0(check_save_out$log_folder,"/",name,check_save_out$extension)
+    } 
+    sumstats_dt <- sumstats_dt[complete.cases(sumstats_dt[,c("A1","A2")]),]
     #move SNP, CHR, BP, A1 and A2 to start
     other_cols <-
       names(sumstats_dt)[!names(sumstats_dt) %in% 
@@ -141,9 +157,13 @@ check_no_allele <- function(sumstats_dt, path, ref_genome, rsids){
     data.table::setcolorder(sumstats_dt, 
                               c("SNP","CHR","BP", "A1", "A2", other_cols))
     
-    return(list("sumstats_dt"=sumstats_dt,"rsids"=rsids))
+    return(list("sumstats_dt"=sumstats_dt,"rsids"=rsids,
+                "allele_flip_check"=allele_flip_check,"log_files"=log_files,
+                "bi_allelic_filter"=bi_allelic_filter))
   }
   else{
-    return(list("sumstats_dt"=sumstats_dt,"rsids"=rsids))
+    return(list("sumstats_dt"=sumstats_dt,"rsids"=rsids,
+                  "allele_flip_check"=allele_flip_check,"log_files"=log_files,
+                  "bi_allelic_filter"=bi_allelic_filter))
   }
 }

@@ -145,30 +145,69 @@
     <p>Ensure all SNPs are on the reference genome</p>
     </div>
 
-    <pre class="usage"><span class='fu'>check_on_ref_genome</span><span class='op'>(</span><span class='va'>sumstats_dt</span>, <span class='va'>path</span>, <span class='va'>ref_genome</span>, <span class='va'>on_ref_genome</span>, <span class='va'>rsids</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>check_on_ref_genome</span><span class='op'>(</span>
+  <span class='va'>sumstats_dt</span>,
+  <span class='va'>path</span>,
+  <span class='va'>ref_genome</span>,
+  <span class='va'>on_ref_genome</span>,
+  <span class='va'>rsids</span>,
+  <span class='va'>imputation_ind</span>,
+  <span class='va'>log_folder_ind</span>,
+  <span class='va'>check_save_out</span>,
+  <span class='va'>tabix_index</span>,
+  <span class='va'>nThread</span>,
+  <span class='va'>log_files</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>sumstats_dt</th>
-      <td><p>data table obj of the summary statistics file for the GWAS</p></td>
-    </tr>
-    <tr>
       <th>path</th>
-      <td><p>Filepath for the summary statistics file to be formatted</p></td>
+      <td><p>Filepath for the summary statistics file to be formatted. Default
+is a temporary file.</p></td>
     </tr>
     <tr>
       <th>ref_genome</th>
-      <td><p>name of the reference genome used for the GWAS (GRCh37 or GRCh38). Default is GRCh37.</p></td>
+      <td><p>name of the reference genome used for the GWAS ("GRCh37" or
+"GRCh38"). Argument is case-insensitive. Default is NULL which infers the
+reference genome from the data.</p></td>
     </tr>
     <tr>
       <th>on_ref_genome</th>
-      <td><p>Binary Should a check take place that all SNPs are on the reference genome by SNP ID. Default is TRUE</p></td>
+      <td><p>Binary Should a check take place that all SNPs are on
+the reference genome by SNP ID. Default is TRUE.</p></td>
     </tr>
     <tr>
-      <th>rsids</th>
-      <td><p>datatable of snpsById, filtered to SNPs of interest if loaded already. Or else NULL</p></td>
+      <th>imputation_ind</th>
+      <td><p>Binary Should a column be added for each imputation
+step to show what SNPs have imputed values for differing fields. This
+includes a field denoting SNP allele flipping (flipped). On the flipped
+value, this denoted whether the alelles where switched based on
+MungeSumstats initial choice of A1, A2 from the input column headers and thus
+may not align with what the creator intended.<strong>Note</strong> these columns will be
+in the formatted summary statistics returned. Default is FALSE.</p></td>
+    </tr>
+    <tr>
+      <th>log_folder_ind</th>
+      <td><p>Binary Should log files be stored containing all
+filtered out SNPs (separate file per filter). The data is outputted in the
+same format specified for the resulting sumstats file. The only exception to
+this rule is if output is vcf, then log file saved as .tsv.gz. Default is
+FALSE.</p></td>
+    </tr>
+    <tr>
+      <th>tabix_index</th>
+      <td><p>Index the formatted summary statistics with
+<a href='http://www.htslib.org/doc/tabix.html'>tabix</a> for fast querying.</p></td>
+    </tr>
+    <tr>
+      <th>nThread</th>
+      <td><p>Number of threads to use for parallel processes.</p></td>
+    </tr>
+    <tr>
+      <th>log_files</th>
+      <td><p>list of log file locations</p></td>
     </tr>
     </table>
 
@@ -177,6 +216,7 @@
     <p>A list containing two data tables:</p><ul>
 <li><p><code>sumstats_dt</code>: the modified summary statistics data table object</p></li>
 <li><p><code>rsids</code>: snpsById, filtered to SNPs of interest if loaded already. Or else NULL</p></li>
+<li><p><code>log_files</code>: log file list</p></li>
 </ul>
 
 

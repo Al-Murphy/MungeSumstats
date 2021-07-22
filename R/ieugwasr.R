@@ -151,7 +151,8 @@ legacy_ids <- function(x)
 #' @keywords internal
 #' @return httr response object
 #' @importFrom httr add_headers timeout DELETE GET POST 
-api_query <- function(path, query=NULL, access_token=check_access_token(), method="GET", silent=TRUE, encode="json", timeout=300)
+api_query <- function(path, query=NULL, access_token=check_access_token(), 
+                        method="GET", silent=TRUE, encode="json", timeout=300)
 {
 	ntry <- 0
 	ntries <- 5
@@ -200,7 +201,8 @@ api_query <- function(path, query=NULL, access_token=check_access_token(), metho
 		{
 			if(grepl("Timeout", as.character(attributes(r)$condition)))
 			{
-				stop("The query to MR-Base exceeded ", timeout, " seconds and timed out. Please simplify the query")
+				stop("The query to MR-Base exceeded ", timeout, 
+				        " seconds and timed out. Please simplify the query")
 			}
 		}
 		if(! 'try-error' %in% class(r))

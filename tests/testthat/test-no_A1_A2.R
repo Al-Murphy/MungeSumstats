@@ -21,9 +21,14 @@ test_that("Imputation of A1/A2 correctly", {
                                                   on_ref_genome = FALSE,
                                                   strand_ambig_filter=FALSE,
                                                   bi_allelic_filter=FALSE,
-                                                  allele_flip_check=FALSE)
-    res_dt <- data.table::fread(reformatted)
-    
+                                                  allele_flip_check=FALSE,
+                                                  imputation_ind = TRUE,
+                                                  log_folder_ind = TRUE)
+    res_dt <- data.table::fread(reformatted$sumstats)
+    #imputation cols - check they are there, then drop
+    expect_equal(sum(c("IMPUTATION_A1","IMPUTATION_A2") %in% names(res_dt)),2)
+    res_dt[,IMPUTATION_A1:=NULL]
+    res_dt[,IMPUTATION_A2:=NULL]
     #Check with just one of A1 A2
     #write the Educational Attainment GWAS to a temp file for testing
     writeLines(eduAttainOkbay,con = file)
@@ -38,9 +43,14 @@ test_that("Imputation of A1/A2 correctly", {
                                                   on_ref_genome = FALSE,
                                                   strand_ambig_filter=FALSE,
                                                   bi_allelic_filter=FALSE,
-                                                  allele_flip_check=FALSE)
-    res_dt2 <- data.table::fread(reformatted2)
-    
+                                                  allele_flip_check=FALSE,
+                                                  imputation_ind = TRUE,
+                                                  log_folder_ind = TRUE)
+    res_dt2 <- data.table::fread(reformatted2$sumstats)
+    #imputation cols - check they are there, then drop
+    expect_equal(sum(c("IMPUTATION_A1","flipped") %in% names(res_dt2)),2)
+    res_dt2[,IMPUTATION_A1:=NULL]
+    res_dt2[,flipped:=NULL]
     #Check with just one of A1 A2
     #write the Educational Attainment GWAS to a temp file for testing
     writeLines(eduAttainOkbay,con = file)
@@ -55,8 +65,14 @@ test_that("Imputation of A1/A2 correctly", {
                                                    on_ref_genome = FALSE,
                                                    strand_ambig_filter=FALSE,
                                                    bi_allelic_filter=FALSE,
-                                                   allele_flip_check=FALSE)
-    res_dt3 <- data.table::fread(reformatted3)
+                                                   allele_flip_check=FALSE,
+                                                   allele_flip_drop=FALSE,
+                                                   imputation_ind = TRUE,
+                                                   log_folder_ind = TRUE)
+    res_dt3 <- data.table::fread(reformatted3$sumstats)
+    #imputation cols - check they are there, then drop
+    expect_equal("IMPUTATION_A2" %in% names(res_dt3),TRUE)
+    res_dt3[,IMPUTATION_A2:=NULL]
     
     #correct names of MungeSumstats::eduAttainOkbay
     names(sumstats_dt) <- c("SNP","CHR","BP","A1","A2","FRQ","Beta","SE","P")
@@ -91,8 +107,29 @@ test_that("Imputation of A1/A2 correctly", {
     A2_valid2 <- mean(sumstats_dt$A2==sumstats_dt$A2_der2)>0.45 #45% threshold
     #expect A2s to be equal, all won't be since can be multiple A2s
     expect_equal(A2_valid2,TRUE)
+    
+    #now check if ran org through allele flip check
+    writeLines(eduAttainOkbay,con = file)
+    org_rtrn <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37",
+                                                   on_ref_genome = FALSE,
+                                                   strand_ambig_filter=FALSE,
+                                                   bi_allelic_filter=FALSE,
+                                                   allele_flip_check=TRUE)
+    res_org <- data.table::fread(org_rtrn)
+    setkey(res_org,SNP)
+    #add A1 to org from one allele missing run
+    res_org[res_dt2,A1_der:=i.A1]
+    #add A2 to org from one allele missing run
+    res_org[res_dt3,A2_der:=i.A2]
+    
+    expect_equal(all(res_org$A1==res_org$A1_der)&&
+                  all(res_org$A2==res_org$A2_der),TRUE)
   }
   else{
+    expect_equal(is_32bit_windows,TRUE)
+    expect_equal(is_32bit_windows,TRUE)
+    expect_equal(is_32bit_windows,TRUE)
+    expect_equal(is_32bit_windows,TRUE)
     expect_equal(is_32bit_windows,TRUE)
     expect_equal(is_32bit_windows,TRUE)
     expect_equal(is_32bit_windows,TRUE)

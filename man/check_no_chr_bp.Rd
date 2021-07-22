@@ -4,22 +4,54 @@
 \alias{check_no_chr_bp}
 \title{Ensure that CHR and BP are missing if SNP is present, can find them}
 \usage{
-check_no_chr_bp(sumstats_dt, path, ref_genome, rsids)
+check_no_chr_bp(
+  sumstats_dt,
+  path,
+  ref_genome,
+  rsids,
+  imputation_ind,
+  log_folder_ind,
+  check_save_out,
+  tabix_index,
+  nThread,
+  log_files
+)
 }
 \arguments{
-\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
+\item{path}{Filepath for the summary statistics file to be formatted. Default
+is a temporary file.}
 
-\item{path}{Filepath for the summary statistics file to be formatted}
+\item{ref_genome}{name of the reference genome used for the GWAS ("GRCh37" or
+"GRCh38"). Argument is case-insensitive. Default is NULL which infers the
+reference genome from the data.}
 
-\item{ref_genome}{name of the reference genome used for the GWAS (GRCh37 or GRCh38)}
+\item{imputation_ind}{Binary Should a column be added for each imputation
+step to show what SNPs have imputed values for differing fields. This
+includes a field denoting SNP allele flipping (flipped). On the flipped
+value, this denoted whether the alelles where switched based on
+MungeSumstats initial choice of A1, A2 from the input column headers and thus
+may not align with what the creator intended.\strong{Note} these columns will be
+in the formatted summary statistics returned. Default is FALSE.}
 
-\item{rsids}{datatable of snpsById, filtered to SNPs of interest if loaded already. Or else NULL}
+\item{log_folder_ind}{Binary Should log files be stored containing all
+filtered out SNPs (separate file per filter). The data is outputted in the
+same format specified for the resulting sumstats file. The only exception to
+this rule is if output is vcf, then log file saved as .tsv.gz. Default is
+FALSE.}
+
+\item{tabix_index}{Index the formatted summary statistics with
+\href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
+
+\item{nThread}{Number of threads to use for parallel processes.}
+
+\item{log_files}{list of log file locations}
 }
 \value{
 A list containing two data tables:
 \itemize{
 \item \code{sumstats_dt}: the modified summary statistics data table object
 \item \code{rsids}: snpsById, filtered to SNPs of interest if loaded already. Or else NULL
+\item \code{log_files}: log file list
 }
 }
 \description{

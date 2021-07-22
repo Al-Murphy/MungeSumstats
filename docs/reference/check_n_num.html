@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Ensure all SNPs have N less than X std dev below mean — check_n_num" />
-<meta property="og:description" content="Incase some SNPs were genotyped by a specialized genotyping array and
+<meta property="og:description" content="In case some SNPs were genotyped by a specialized genotyping array and
 have substantially more samples than others. These will be removed." />
 
 
@@ -143,37 +143,66 @@ have substantially more samples than others. These will be removed." />
     </div>
 
     <div class="ref-description">
-    <p>Incase some SNPs were genotyped by a specialized genotyping array and
+    <p>In case some SNPs were genotyped by a specialized genotyping array and
 have substantially more samples than others. These will be removed.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>check_n_num</span><span class='op'>(</span><span class='va'>sumstats_dt</span>, <span class='va'>path</span>, <span class='va'>N_std</span>, N_dropNA <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>check_n_num</span><span class='op'>(</span>
+  <span class='va'>sumstats_dt</span>,
+  <span class='va'>path</span>,
+  <span class='va'>N_std</span>,
+  N_dropNA <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>log_folder_ind</span>,
+  <span class='va'>check_save_out</span>,
+  <span class='va'>tabix_index</span>,
+  <span class='va'>nThread</span>,
+  <span class='va'>log_files</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>sumstats_dt</th>
-      <td><p>data table obj of the summary statistics file for the GWAS</p></td>
-    </tr>
-    <tr>
       <th>path</th>
-      <td><p>Filepath for the summary statistics file to be formatted</p></td>
+      <td><p>Filepath for the summary statistics file to be formatted. Default
+is a temporary file.</p></td>
     </tr>
     <tr>
       <th>N_std</th>
-      <td><p>numeric The number of standard deviations above the mean a
-SNP's N is needed to be removed. Default is 5.</p></td>
+      <td><p>numeric The number of standard deviations above the mean a SNP's
+N is needed to be removed. Default is 5.</p></td>
     </tr>
     <tr>
       <th>N_dropNA</th>
-      <td><p>Whether to keep rows where N is <code>NA</code>. Default is FALSE.</p></td>
+      <td><p>Drop rows where N is missing.Default is TRUE.</p></td>
+    </tr>
+    <tr>
+      <th>log_folder_ind</th>
+      <td><p>Binary Should log files be stored containing all
+filtered out SNPs (separate file per filter). The data is outputted in the
+same format specified for the resulting sumstats file. The only exception to
+this rule is if output is vcf, then log file saved as .tsv.gz. Default is
+FALSE.</p></td>
+    </tr>
+    <tr>
+      <th>tabix_index</th>
+      <td><p>Index the formatted summary statistics with
+<a href='http://www.htslib.org/doc/tabix.html'>tabix</a> for fast querying.</p></td>
+    </tr>
+    <tr>
+      <th>nThread</th>
+      <td><p>Number of threads to use for parallel processes.</p></td>
+    </tr>
+    <tr>
+      <th>log_files</th>
+      <td><p>list of log file locations</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>list containing sumstats_dt, the modified summary statistics data table object</p>
+    <p>list containing sumstats_dt, the modified summary statistics data
+table object and the log file list</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
