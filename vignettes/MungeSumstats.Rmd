@@ -364,7 +364,7 @@ The different types of exclusion which lead to the names are explained below:
 -   **snp_not_found_from_bp_chr** - Where the RS ID was attempted to be imputed
     from the CHR and BP (Base-Pair) information, using the reference genome, but
     wasn't successful.
--   **ch_bp_not_found_from_snp** - Where the CHR and BP (Base-Pair) was 
+-   **chr_bp_not_found_from_snp** - Where the CHR and BP (Base-Pair) was 
     attempted to be imputed from the SNP (RS ID), using the reference genome, 
     but wasn't successful. 
 -   **alleles_not_found_from_snp** - Where the alleles (A1 and/or A2) was 
@@ -389,6 +389,21 @@ The different types of exclusion which lead to the names are explained below:
 -   **MungeSumstats_log_output** - Text file of all errors to the console 
     created during MungeSumstats run.
 
+
+Note to export to another type such as R native objects includign data.table, 
+GRanges, VRanges or save as a VCF file, set `return_format`:
+
+```{r, message=FALSE,eval=FALSE}
+#set
+reformatted_vcf_2 <- 
+  MungeSumstats::format_sumstats(path=ALSvcfPth,
+                                 ref_genome="GRCh37",
+                                 INFO_filter = 0.1,
+                                 log_folder_ind=TRUE,
+                                 imputation_ind=TRUE,
+                                 log_mungesumstats_msgs=TRUE,
+                                 return_format="GRanges")
+```
 
 See our publication for further discussion of these checks and options:
 

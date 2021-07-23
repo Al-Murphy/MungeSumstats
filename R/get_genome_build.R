@@ -12,11 +12,17 @@
 #'
 #' @examples
 #' #Pass path to Educational Attainment Okbay sumstat file to a temp directory
-#' 
+#'
 #' eduAttainOkbayPth <- system.file("extdata","eduAttainOkbay.txt", 
 #'                                  package="MungeSumstats")
+#' 
+#' ## Call uses reference genome as default with more than 2GB of memory,
+#' ## which is more than what 32-bit Windows can handle so remove certain checks
+#' is_32bit_windows <- 
+#' .Platform$OS.type == "windows" && .Platform$r_arch == "i386"
+#' if (!is_32bit_windows) {
 #' ref_genome <- get_genome_build(sumstats=eduAttainOkbayPth)                                  
-#'
+#'}
 #' @export
 #' @importFrom data.table setDT
 get_genome_build <- function(sumstats, 
