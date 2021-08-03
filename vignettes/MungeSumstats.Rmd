@@ -93,12 +93,14 @@ files include (but are not limited to) the columns:
 -   SE : The standard error
 -   N : Sample size
 -   INFO: The imputation information score
--   FRQ: The minor allele frequency (MAF) of the SNP
+-   FRQ: The minor/effect allele frequency (MAF/EAF) of the SNP
 
 *MungeSumstats* uses a mapping file to infer the inputted column names (run
 `data("sumstatsColHeaders")` to view these). This mapping file is far more 
 comprehensive than any other publicly available munging tool containing 177
-unique mappings at the time of writing this vignette.
+unique mappings at the time of writing this vignette. However, if your column 
+headers are missing or if you want to change the mapping, you can do so by 
+passing your own mapping file (see `format_sumstats(mapping_file)`).
 
 *MungeSumstats* offers unmatched levels of quality control to ensure, for 
 example, consistency of allele assignment and direction of effects. Tests run by
@@ -149,7 +151,7 @@ column headers however, the allele flipping check ensures this by comparing A1,
 what should be the reference allele, to the reference genome. If a SNP's A1 
 DNA base doesn't match the reference genome but it's A2 (what should be the
 alternative allele) does, the alleles will be flipped along with the effect 
-information (e.g. Beta, Odds Ratio, signed summary statistics, Z-score*).
+information (e.g. Beta, Odds Ratio, signed summary statistics, FRQ, Z-score*).
 
 *-by default the Z-score is assumed to be calculated off the effect size not 
 the P-value and so will be flipped. This can be changed by a user.
@@ -279,8 +281,10 @@ conducted by *MungeSumstats* are:
     against reference genome to infer if flipping is necessary. Default
     is TRUE. **allele_flip_drop** controls whether the SNPs for which neither 
     their A1 or A2 base pair values match a reference genome be dropped. Default
-    is TRUE. **allele_flip_drop** controls whether the Z-score value should be 
-    flipped along with effect columns (e.g. Beta). Default is TRUE. 
+    is TRUE. **allele_flip_z** controls whether the Z-score value should be 
+    flipped along with effect and FRQ columns (e.g. Beta). Default is TRUE.
+    **allele_flip_frq**  controls whether the frequency (FRQ) value should be 
+    flipped along with effect and Z-score columns (e.g. Beta). Default is TRUE.
 -   **bi_allelic_filter** Binary, should non-biallelic SNPs be removed.
     Default is TRUE
 -   **snp_ids_are_rs_ids** Binary, should the SNP IDs inputted be inferred as RS

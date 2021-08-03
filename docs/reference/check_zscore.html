@@ -84,7 +84,7 @@ used in LDSC's munge_sumstats.py:" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.6</span>
       </span>
     </div>
 
@@ -154,7 +154,8 @@ used in <a href='https://github.com/bulik/ldsc/blob/aa33296abac9569a6422ee6ba7eb
   <span class='va'>imputation_ind</span>,
   compute_z <span class='op'>=</span> <span class='cn'>TRUE</span>,
   force_new_z <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  standardise_headers <span class='op'>=</span> <span class='cn'>FALSE</span>
+  standardise_headers <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>mapping_file</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -190,6 +191,15 @@ default. To override and compute a new Z-score column from P set
       <th>standardise_headers</th>
       <td><p>Run
 <code>standardise_sumstats_column_headers_crossplatform</code> first.</p></td>
+    </tr>
+    <tr>
+      <th>mapping_file</th>
+      <td><p>MungeSumstats has a pre-defined column-name mapping file
+which should cover the most common column headers and their interpretations.
+However, if a column header that is in youf file is missing of the mapping we
+give is incorrect you can supply your own mapping file. Must be a 2 column
+dataframe with column names "Uncorrected" and "Corrected". See
+data(sumstatsColHeaders) for default mapping and necessary format.</p></td>
     </tr>
     </table>
 

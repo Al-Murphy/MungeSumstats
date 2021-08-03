@@ -19,8 +19,9 @@ test_that("SNPs not on reference genome are removed", {
                                                   on_ref_genome = TRUE,
                                                   strand_ambig_filter=FALSE,
                                                   bi_allelic_filter=FALSE,
-                                                  allele_flip_check=FALSE)
-    reformatted_lines <- readLines(reformatted)
+                                                  allele_flip_check=FALSE,
+                                                  log_folder_ind = TRUE)
+    reformatted_lines <- readLines(reformatted$sumstats)
     #Should equal org apart from this one line
     writeLines(eduAttainOkbay,con = file)
     org <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37",

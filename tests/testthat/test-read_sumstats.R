@@ -2,7 +2,8 @@ test_that("Test that different kinds of files can be read in.", {
     ### read data
     path <- system.file("extdata","eduAttainOkbay.txt", package="MungeSumstats")
     sumstats_dt =  data.table::fread(path, nThread = 1)
-    sumstats_dt <- standardise_sumstats_column_headers_crossplatform(sumstats_dt = sumstats_dt)[["sumstats_dt"]]
+    sumstats_dt <- standardise_sumstats_column_headers_crossplatform(sumstats_dt = sumstats_dt,
+                                                                     mapping_file=sumstatsColHeaders)[["sumstats_dt"]]
     col_order <- colnames(sumstats_dt)
     ### Test tsv 
     tsv_ss <-  sumstats_dt
@@ -22,7 +23,8 @@ test_that("Test that different kinds of files can be read in.", {
     write_sumstats(sumstats_dt = sumstats_dt, 
                    save_path = vcf_tmp, sep="\t", write_vcf = TRUE) 
     vcf_ss <- MungeSumstats::read_sumstats(path = vcf_tmp)   
-    vcf_ss <- standardise_sumstats_column_headers_crossplatform(sumstats_dt = vcf_ss)[["sumstats_dt"]]
+    vcf_ss <- standardise_sumstats_column_headers_crossplatform(sumstats_dt = vcf_ss,
+                                                                mapping_file=sumstatsColHeaders)[["sumstats_dt"]]
     empty_cols <- names(check_empty_cols(sumstats_file = vcf_ss))
     vcf_ss[,(empty_cols):=NULL]
     vcf_ss[,INFO:=NULL]

@@ -1,6 +1,6 @@
 #' Ensure A1 & A2 are correctly named, if GWAS SNP constructed as 
 #' Alternative/Reference or Risk/Nonrisk alleles these SNPs will need to be 
-#' converted to Reference/Alternative or Nonrisk/Risk. Here nonrisk is defined
+#' converted to Reference/Alternative or Nonrisk/Risk. Here non-risk is defined
 #' as what's on the reference genome (this may not always be the case). 
 #'
 #' @inheritParams format_sumstats  
@@ -24,9 +24,10 @@
 #' @importFrom data.table copy
 check_allele_flip <-  function(sumstats_dt, path, ref_genome, rsids, 
                                allele_flip_check,allele_flip_drop,allele_flip_z,
-                               imputation_ind,log_folder_ind, check_save_out,
-                               tabix_index, nThread, log_files,
-                               standardise_headers=FALSE){ 
+                               allele_flip_frq,bi_allelic_filter,
+                               imputation_ind,log_folder_ind, 
+                               check_save_out,tabix_index, nThread, log_files,
+                               standardise_headers=FALSE,mapping_file){ 
   # GenomicSEM' allele flipping strategy:
   # https://github.com/GenomicSEM/GenomicSEM/blob/fc8f17a817a8022d6900acf41824d27b3676f9c4/R/munge.R#L151
   
@@ -45,7 +46,10 @@ check_allele_flip <-  function(sumstats_dt, path, ref_genome, rsids,
     i.A1 = i.A2 = ss_A1 = ss_A2 = i.ref_allele = ref_gen_allele = match_type = 
     tmp = flipped = NULL
   if(standardise_headers){
-    sumstats_dt <- standardise_sumstats_column_headers_crossplatform(sumstats_dt = sumstats_dt)[["sumstats_dt"]]
+    sumstats_dt <- 
+      standardise_sumstats_column_headers_crossplatform(sumstats_dt=sumstats_dt,
+                                                        mapping_file = 
+                                                          mapping_file)[["sumstats_dt"]]
   }
   # If SNP present but no A1/A2 then need to find them
   col_headers <- names(sumstats_dt)
@@ -110,11 +114,26 @@ check_allele_flip <-  function(sumstats_dt, path, ref_genome, rsids,
       sumstats_dt[match_type==FALSE,A1:=tmp]
       sumstats_dt[,tmp:=NULL]
       
-      #flip effect column(s) - BETA, OR, z, log_odds, SIGNED_SUMSTAT
+      #flip effect column(s) - BETA, OR, z, log_odds, SIGNED_SUMSTAT, FRQ
       effect_columns <- c("BETA","OR","LOG_ODDS","SIGNED_SUMSTAT")
       if(allele_flip_z)
-        effect_columns <- c("BETA","OR","Z","LOG_ODDS","SIGNED_SUMSTAT")
+        effect_columns <- c(effect_columns,"Z")
+      if(allele_flip_frq)
+        effect_columns <- c(effect_columns,"FRQ")
       effect_columns <- effect_columns[effect_columns %in% names(sumstats_dt)]
+      #if FRQ present and needs to be flipped for SNPs ensure 
+      #bi_allelic_filter is TRUE
+      stp_msg <- paste0("Certain SNPs need to be flipped along with their ",
+                        "effect columns and frequency column. However to flip ",
+                        "the\nFRQ column, only bi-allelic SNPs can be ",
+                        "considered. It is recommended to set ",
+                        "bi_allelic_filter to TRUE so\nnon-bi-allelic SNPs are",
+                        " removed. Otherwise, set allele_flip_frq to FALSE to ",
+                        "not flip the FRQ column but note\nthis could lead to ",
+                        "incorrect FRQ values.")
+      if(nrow(sumstats_dt[match_type==FALSE,])>0 && "FRQ" %in% effect_columns &&
+          !bi_allelic_filter)
+        stop(stp_msg)
       for(eff_i in effect_columns){#set updates quicker for DT
         #conversion done in case, VCF beta column may not be numeric
         sumstats_dt[match_type==FALSE,(eff_i):=as.numeric(get(eff_i))*-1]

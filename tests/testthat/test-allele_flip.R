@@ -11,6 +11,7 @@ test_that("Test that allele columns and effect columns flipped correctly", {
   #read in and manually change effect columns
   eduAttainOkbay_missing_dt <- data.table::fread(file)
   eduAttainOkbay_missing_dt[,Beta:=Beta*-1]
+  eduAttainOkbay_missing_dt[,EAF:=EAF*-1]
   data.table::fwrite(eduAttainOkbay_missing_dt,
                       file=file,sep="\t")
   ## The following test uses more than 2GB of memory, which is more
@@ -22,7 +23,7 @@ test_that("Test that allele columns and effect columns flipped correctly", {
     reformatted <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37",
                                                   on_ref_genome = FALSE,
                                                   strand_ambig_filter=FALSE,
-                                                  bi_allelic_filter=FALSE,
+                                                  bi_allelic_filter=TRUE,
                                                   allele_flip_check=TRUE)
     reformatted_lines <- readLines(reformatted)
     #Should equal org since the effect should be corrected
@@ -30,7 +31,7 @@ test_that("Test that allele columns and effect columns flipped correctly", {
     org <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37",
                                           on_ref_genome = TRUE,
                                           strand_ambig_filter=FALSE,
-                                          bi_allelic_filter=FALSE,
+                                          bi_allelic_filter=TRUE,
                                           allele_flip_check=TRUE)
     org_lines <- readLines(org)
     #reordering in function

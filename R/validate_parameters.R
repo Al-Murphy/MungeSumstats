@@ -21,6 +21,7 @@ validate_parameters <- function(path,
                                 allele_flip_check,
                                 allele_flip_drop,
                                 allele_flip_z,
+                                allele_flip_frq,
                                 bi_allelic_filter,
                                 snp_ids_are_rs_ids,
                                 write_vcf,
@@ -28,7 +29,8 @@ validate_parameters <- function(path,
                                 ldsc_format,
                                 imputation_ind,
                                 log_folder_ind,
-                                log_mungesumstats_msgs){
+                                log_mungesumstats_msgs,
+                                mapping_file){
   # Checking if the file exists should happen first
   if (!file.exists(path) && !startsWith(path,"https://gwas.mrcieu.ac.uk"))
     stop("Path to GWAS sumstats is not valid")
@@ -94,6 +96,8 @@ validate_parameters <- function(path,
     stop("allele_flip_drop must be either TRUE or FALSE")
   if(!is.logical(allele_flip_z))
     stop("allele_flip_z must be either TRUE or FALSE")
+  if(!is.logical(allele_flip_frq))
+    stop("allele_flip_frq must be either TRUE or FALSE")
   if(!is.logical(bi_allelic_filter))
     stop("bi_allelic_filter must be either TRUE or FALSE")
   if(!is.logical(snp_ids_are_rs_ids))
@@ -136,4 +140,28 @@ validate_parameters <- function(path,
   if(!(tolower(return_format) %in% c("vr","vranges","gr","granges",
                                       "genomicranges","data.table"))) 
     stop(rf_msg)
+  
+  #check if mapping file correct - in case user defined
+  essential_cols <- c("SNP","CHR","BP","P","A1","A2")
+  signed_cols <- c("Z","OR","BETA","LOG_ODDS","SIGNED_SUMSTAT")
+  mapping_file_msg <- paste0("User supplied mapping file should be a 2 column ",
+                             "dataframe with columns Corrected and Uncorrected",
+                             ".\nMappings for at least  all essential and one ",
+                             "signed column must be included.\nThe essential ",
+                             "columns are: ",
+                             paste(essential_cols,collapse = ','),".\n",
+                             "The signed columns are: ",
+                             paste(signed_cols,collapse = ','),".\n",
+                             "If your inputted column headers ",
+                             "already have these headers correctly, make sure ",
+                             "to include a mapping for these too.\nFor example",
+                             ", SNP -> SNP. See data(sumstatsColHeaders) for ",
+                             "format.")
+  if(!is.data.frame(mapping_file)||ncol(mapping_file)!=2||
+      !all(toupper(colnames(mapping_file)) %in% c("UNCORRECTED","CORRECTED"))||
+      !all(essential_cols %in% 
+            mapping_file[,toupper(colnames(mapping_file))=="CORRECTED"])||
+      !any(signed_cols %in% 
+          mapping_file[,toupper(colnames(mapping_file))=="CORRECTED"]))
+    stop(mapping_file_msg)
 }

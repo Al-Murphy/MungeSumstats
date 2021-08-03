@@ -41,5 +41,18 @@ test_that("Handle n when its 5 std dev > mean", {
                                                 log_folder_ind = TRUE,
                                                 N_dropNA = TRUE)
   res_dt <- data.table::fread(reformatted$sumstats)
+  
+  #set N_dropNA to FALSE
+  reformatted2 <- MungeSumstats::format_sumstats(file,ref_genome="GRCh37",
+                                                N_std=5,convert_n_int=FALSE,
+                                                on_ref_genome = FALSE,
+                                                strand_ambig_filter=FALSE,
+                                                bi_allelic_filter=FALSE,
+                                                allele_flip_check=FALSE,
+                                                log_folder_ind = TRUE,
+                                                N_dropNA = FALSE)
+  res_dt2 <- data.table::fread(reformatted2$sumstats)
   expect_equal(!(rmv_snp %in% res_dt$SNP),TRUE)
+  #should be no na's
+  expect_equal(all.equal(res_dt,res_dt2),TRUE)
 })

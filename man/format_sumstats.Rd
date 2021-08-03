@@ -25,6 +25,7 @@ format_sumstats(
   allele_flip_check = TRUE,
   allele_flip_drop = TRUE,
   allele_flip_z = TRUE,
+  allele_flip_frq = TRUE,
   bi_allelic_filter = TRUE,
   snp_ids_are_rs_ids = TRUE,
   remove_multi_rs_snp = FALSE,
@@ -40,7 +41,8 @@ format_sumstats(
   log_mungesumstats_msgs = FALSE,
   log_folder = tempdir(),
   imputation_ind = FALSE,
-  force_new = FALSE
+  force_new = FALSE,
+  mapping_file = sumstatsColHeaders
 )
 }
 \arguments{
@@ -111,8 +113,11 @@ reference genome to infer if flipping is necessary. Default is TRUE.}
 A2 base pair values match a reference genome be dropped. Default is TRUE.}
 
 \item{allele_flip_z}{Binary should the Z-score be flipped along with effect
-columns like Beta? It is assumed to be calculated off the effect size not
-the P-value and so will be flipped i.e. default TRUE.}
+and FRQ columns like Beta? It is assumed to be calculated off the effect size
+not the P-value and so will be flipped i.e. default TRUE.}
+
+\item{allele_flip_frq}{Binary should the frequency (FRQ) column be flipped
+along with effect and z-score columns like Beta? Default TRUE.}
 
 \item{bi_allelic_filter}{Binary Should non-biallelic SNPs be removed. Default
 is TRUE.}
@@ -174,6 +179,13 @@ in the formatted summary statistics returned. Default is FALSE.}
 \item{force_new}{If a formatted file of the same names as \code{save_path}
 exists, formatting will be skipped and this file will be imported instead
 (default). Set \code{force_new=TRUE} to override this.}
+
+\item{mapping_file}{MungeSumstats has a pre-defined column-name mapping file
+which should cover the most common column headers and their interpretations.
+However, if a column header that is in youf file is missing of the mapping we
+give is incorrect you can supply your own mapping file. Must be a 2 column
+dataframe with column names "Uncorrected" and "Corrected". See
+data(sumstatsColHeaders) for default mapping and necessary format.}
 }
 \value{
 The address for the modified sumstats file or the actual data

@@ -9,7 +9,8 @@ get_genome_build(
   sumstats,
   nThread = 1,
   sampled_snps = 10000,
-  standardise_headers = TRUE
+  standardise_headers = TRUE,
+  mapping_file = sumstatsColHeaders
 )
 }
 \arguments{
@@ -23,6 +24,13 @@ build to save time.}
 
 \item{standardise_headers}{Run
 \code{standardise_sumstats_column_headers_crossplatform}.}
+
+\item{mapping_file}{MungeSumstats has a pre-defined column-name mapping file
+which should cover the most common column headers and their interpretations.
+However, if a column header that is in youf file is missing of the mapping we
+give is incorrect you can supply your own mapping file. Must be a 2 column
+dataframe with column names "Uncorrected" and "Corrected". See
+data(sumstatsColHeaders) for default mapping and necessary format.}
 }
 \value{
 ref_genome the genome build of the data

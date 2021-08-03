@@ -3,22 +3,34 @@
 %   R/standardise_sumstats_column_headers_crossplatform.R
 \name{standardise_sumstats_column_headers_crossplatform}
 \alias{standardise_sumstats_column_headers_crossplatform}
-\title{Standardise the column headers in the Summary Statistics files (CROSSPLATFORM)}
+\title{Standardise the column headers in the Summary Statistics files}
 \usage{
-standardise_sumstats_column_headers_crossplatform(sumstats_dt, path)
+standardise_sumstats_column_headers_crossplatform(
+  sumstats_dt,
+  path,
+  mapping_file
+)
 }
 \arguments{
-\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
+\item{path}{Filepath for the summary statistics file to be formatted. Default
+is a temporary file.}
 
-\item{path}{Filepath for the summary statistics file to be formatted}
+\item{mapping_file}{MungeSumstats has a pre-defined column-name mapping file
+which should cover the most common column headers and their interpretations.
+However, if a column header that is in youf file is missing of the mapping we
+give is incorrect you can supply your own mapping file. Must be a 2 column
+dataframe with column names "Uncorrected" and "Corrected". See
+data(sumstatsColHeaders) for default mapping and necessary format.}
 }
 \value{
-list containing sumstats_dt, the modified summary statistics data table object
+list containing sumstats_dt, the modified summary statistics data
+table object
 }
 \description{
 Use a reference data table of common column header names (stored in
-sumstatsColHeaders) convert them to a standard set, i.e. chromosome -> CHR
-This function does not check that all the required column headers are present
-The amended header is written directly back into the file
+sumstatsColHeaders or user inputted mapping file) to convert them to a
+standard set, i.e. chromosome -> CHR. This function does not check that all
+the required column headers are present. The amended header is written
+directly back into the file
 }
 \keyword{internal}

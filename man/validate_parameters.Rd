@@ -23,6 +23,7 @@ validate_parameters(
   allele_flip_check,
   allele_flip_drop,
   allele_flip_z,
+  allele_flip_frq,
   bi_allelic_filter,
   snp_ids_are_rs_ids,
   write_vcf,
@@ -30,7 +31,8 @@ validate_parameters(
   ldsc_format,
   imputation_ind,
   log_folder_ind,
-  log_mungesumstats_msgs
+  log_mungesumstats_msgs,
+  mapping_file
 )
 }
 \arguments{
@@ -94,8 +96,11 @@ reference genome to infer if flipping is necessary. Default is TRUE.}
 A2 base pair values match a reference genome be dropped. Default is TRUE.}
 
 \item{allele_flip_z}{Binary should the Z-score be flipped along with effect
-columns like Beta? It is assumed to be calculated off the effect size not
-the P-value and so will be flipped i.e. default TRUE.}
+and FRQ columns like Beta? It is assumed to be calculated off the effect size
+not the P-value and so will be flipped i.e. default TRUE.}
+
+\item{allele_flip_frq}{Binary should the frequency (FRQ) column be flipped
+along with effect and z-score columns like Beta? Default TRUE.}
 
 \item{bi_allelic_filter}{Binary Should non-biallelic SNPs be removed. Default
 is TRUE.}
@@ -131,6 +136,13 @@ FALSE.}
 
 \item{log_mungesumstats_msgs}{Binary Should a log be stored containing all
 messages and errors printed by MungeSumstats in a run. Default is FALSE}
+
+\item{mapping_file}{MungeSumstats has a pre-defined column-name mapping file
+which should cover the most common column headers and their interpretations.
+However, if a column header that is in youf file is missing of the mapping we
+give is incorrect you can supply your own mapping file. Must be a 2 column
+dataframe with column names "Uncorrected" and "Corrected". See
+data(sumstatsColHeaders) for default mapping and necessary format.}
 }
 \value{
 No return

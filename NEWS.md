@@ -34,12 +34,16 @@ changed to a different directory by setting:
 `format_sumstats(log_folder_ind=TRUE,log_folder=tempdir())`
 *   All imputed data can now be identified with a column in the output using:
 `format_sumstats(imputation_ind=TRUE)`
+*   Users can now input their own mapping file to be used for the column header 
+mapping in place of `data(sumstatsColHeaders)`. See 
+`format_sumstats(mapping_file = mapping_file)`.
 
 
 ### Bug fixes 
 
 *   CHR column now standardised (X and Y caps, no "chr" prefix).
 *   Allele flipping done on a per-SNP basis (instead of whole-column). 
+*   Allele flipping now includes FRQ column as well as effect columns.
 *   The effect allele is now interpreted as the A2 allele consistent with [IEU GWAS VCF approach](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7805039/). A1 will always be the reference allele.
 *   `read_vcf` upgraded to account for more VCF formats. 
 *   `check_n_num` now accounts for situations where N is a character vector and converts to numeric.  

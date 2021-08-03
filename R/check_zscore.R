@@ -32,6 +32,12 @@
 #' \code{force_new_z=TRUE}.  
 #' @param standardise_headers Run 
 #' \code{standardise_sumstats_column_headers_crossplatform} first.  
+#' @param mapping_file MungeSumstats has a pre-defined column-name mapping file
+#' which should cover the most common column headers and their interpretations. 
+#' However, if a column header that is in youf file is missing of the mapping we
+#' give is incorrect you can supply your own mapping file. Must be a 2 column 
+#' dataframe with column names "Uncorrected" and "Corrected". See 
+#' data(sumstatsColHeaders) for default mapping and necessary format.
 #' 
 #' @keywords internal
 #' @importFrom stats qchisq
@@ -39,13 +45,18 @@ check_zscore <- function(sumstats_dt,
                          imputation_ind,
                          compute_z=TRUE,
                          force_new_z=FALSE,
-                         standardise_headers=FALSE){   
+                         standardise_headers=FALSE,
+                         mapping_file){   
     ## Set variables to be used in in place data.table functions to NULL 
     ## to avoid confusing BiocCheck.
     Z = BETA = P = IMPUTATION_z_score = NULL
     
     if(standardise_headers){
-        sumstats_dt <- standardise_sumstats_column_headers_crossplatform(sumstats_dt = sumstats_dt)[["sumstats_dt"]]
+        sumstats_dt <- 
+            standardise_sumstats_column_headers_crossplatform(sumstats_dt = 
+                                                                  sumstats_dt,
+                                                              mapping_file = 
+                                                                  mapping_file)[["sumstats_dt"]]
     }
     
     if(compute_z){

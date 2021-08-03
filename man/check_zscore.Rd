@@ -9,7 +9,8 @@ check_zscore(
   imputation_ind,
   compute_z = TRUE,
   force_new_z = FALSE,
-  standardise_headers = FALSE
+  standardise_headers = FALSE,
+  mapping_file
 )
 }
 \arguments{
@@ -33,6 +34,13 @@ default. To override and compute a new Z-score column from P set
 
 \item{standardise_headers}{Run
 \code{standardise_sumstats_column_headers_crossplatform} first.}
+
+\item{mapping_file}{MungeSumstats has a pre-defined column-name mapping file
+which should cover the most common column headers and their interpretations.
+However, if a column header that is in youf file is missing of the mapping we
+give is incorrect you can supply your own mapping file. Must be a 2 column
+dataframe with column names "Uncorrected" and "Corrected". See
+data(sumstatsColHeaders) for default mapping and necessary format.}
 }
 \value{
 \code{list("sumstats_dt"=sumstats_dt)}

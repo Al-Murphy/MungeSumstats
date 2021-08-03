@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.6</span>
       </span>
     </div>
 
@@ -95,7 +95,7 @@
 </h1>
                         <h4 class="author">Alan Murphy, Brian Schilder, and Nathan Skene</h4>
             
-            <h4 class="date">2021-07-23</h4>
+            <h4 class="date">2021-08-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/MungeSumstats/blob/master/vignettes/MungeSumstats.Rmd"><code>vignettes/MungeSumstats.Rmd</code></a></small>
       <div class="hidden name"><code>MungeSumstats.Rmd</code></div>
@@ -149,9 +149,9 @@ document.addEventListener("DOMContentLoaded", function() {
 <li>SE : The standard error</li>
 <li>N : Sample size</li>
 <li>INFO: The imputation information score</li>
-<li>FRQ: The minor allele frequency (MAF) of the SNP</li>
+<li>FRQ: The minor/effect allele frequency (MAF/EAF) of the SNP</li>
 </ul>
-<p><em>MungeSumstats</em> uses a mapping file to infer the inputted column names (run <code><a href="https://rdrr.io/r/utils/data.html">data("sumstatsColHeaders")</a></code> to view these). This mapping file is far more comprehensive than any other publicly available munging tool containing 177 unique mappings at the time of writing this vignette.</p>
+<p><em>MungeSumstats</em> uses a mapping file to infer the inputted column names (run <code><a href="https://rdrr.io/r/utils/data.html">data("sumstatsColHeaders")</a></code> to view these). This mapping file is far more comprehensive than any other publicly available munging tool containing 177 unique mappings at the time of writing this vignette. However, if your column headers are missing or if you want to change the mapping, you can do so by passing your own mapping file (see <code><a href="../reference/format_sumstats.html">format_sumstats(mapping_file)</a></code>).</p>
 <p><em>MungeSumstats</em> offers unmatched levels of quality control to ensure, for example, consistency of allele assignment and direction of effects. Tests run by <em>MungeSumstats</em> include:</p>
 <ul>
 <li>Check VCF format</li>
@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <li>Check for N and impute if missing</li>
 <li>Check output format is LDSC ready</li>
 </ul>
-<p>Users can specify which checks to run on their data. A <strong>note</strong> on the allele flipping check: <strong>MungeSumstats</strong> infers the effect allele will always be the A2 allele, this is the approach done for <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7805039/">IEU GWAS VCF</a> and has such also been adopted here. This inference is first from the inputted file’s column headers however, the allele flipping check ensures this by comparing A1, what should be the reference allele, to the reference genome. If a SNP’s A1 DNA base doesn’t match the reference genome but it’s A2 (what should be the alternative allele) does, the alleles will be flipped along with the effect information (e.g. Beta, Odds Ratio, signed summary statistics, Z-score*).</p>
+<p>Users can specify which checks to run on their data. A <strong>note</strong> on the allele flipping check: <strong>MungeSumstats</strong> infers the effect allele will always be the A2 allele, this is the approach done for <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7805039/">IEU GWAS VCF</a> and has such also been adopted here. This inference is first from the inputted file’s column headers however, the allele flipping check ensures this by comparing A1, what should be the reference allele, to the reference genome. If a SNP’s A1 DNA base doesn’t match the reference genome but it’s A2 (what should be the alternative allele) does, the alleles will be flipped along with the effect information (e.g. Beta, Odds Ratio, signed summary statistics, FRQ, Z-score*).</p>
 <p>*-by default the Z-score is assumed to be calculated off the effect size not the P-value and so will be flipped. This can be changed by a user.</p>
 <p>If a test is failed, the user will be notified and if possible, the input will be corrected. The QC steps from the checks above can also be adjusted to suit the user’s analysis, see <code><a href="../reference/format_sumstats.html">MungeSumstats::format_sumstats</a></code>.</p>
 <p><em>MungeSumstats</em> can handle VCF, txt, tsv, csv file types or .gz/.bgz versions of these file types. The package also gives the user the flexibility to export the reformatted file as tab-delimited, VCF or R native objects such as data.table, GRanges or VRanges objects. The output can also be outputted in an <strong>LDSC ready</strong> format which means the file can be fed directly into LDSC without the need for additional munging.</p>
@@ -236,7 +236,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ## ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing
 ## ( e.g. `file.copy(save_path, './formatted/' )`.
 ## ********************</code></pre>
-<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpuxRbVp/file121e48ecd31f.tsv.gz</code></pre>
+<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp8TsEUW/file40094e509cd4.tsv.gz</code></pre>
 <pre><code>## Reading header.</code></pre>
 <pre><code>## Tabular format detected.</code></pre>
 <pre><code>## Importing.</code></pre>
@@ -268,19 +268,19 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Making X/Y CHR uppercase.</code></pre>
 <pre><code>## Checking for bi-allelic SNPs.</code></pre>
 <pre><code>## Sorting coordinates.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpuxRbVp/file121e48ecd31f.tsv.gz</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp8TsEUW/file40094e509cd4.tsv.gz</code></pre>
 <pre><code>## Summary statistics report:
 ##    - 93 rows (100% of original 93 rows)
 ##    - 93 unique variants
 ##    - 70 genome-wide significant variants (P&lt;5e-8)
 ##    - 20 chromosomes</code></pre>
 <pre><code>## Succesfully finished preparing sumstats file, preview:</code></pre>
-<pre><code>##           SNP CHR       BP A1 A2     FRQ   BETA    SE         P
-## 1:   rs301800   1  8490603  T  C 0.17910  0.019 0.003 1.794e-08
-## 2: rs11210860   1 43982527  G  A 0.36940 -0.017 0.003 2.359e-10
-## 3: rs34305371   1 72733610  G  A 0.08769 -0.035 0.005 3.762e-14
-## 4:  rs2568955   1 72762169  T  C 0.23690 -0.017 0.003 1.797e-08
-## 5:  rs1008078   1 91189731  C  T 0.37310  0.016 0.003 6.005e-10</code></pre>
+<pre><code>##           SNP CHR       BP A1 A2      FRQ   BETA    SE         P
+## 1:   rs301800   1  8490603  T  C  0.17910  0.019 0.003 1.794e-08
+## 2: rs11210860   1 43982527  G  A -0.36940 -0.017 0.003 2.359e-10
+## 3: rs34305371   1 72733610  G  A -0.08769 -0.035 0.005 3.762e-14
+## 4:  rs2568955   1 72762169  T  C  0.23690 -0.017 0.003 1.797e-08
+## 5:  rs1008078   1 91189731  C  T -0.37310  0.016 0.003 6.005e-10</code></pre>
 <pre><code>## Returning path to saved data.</code></pre>
 <p>The arguments <code>format_sumstats</code> in that control the level of QC conducted by <em>MungeSumstats</em> are:</p>
 <ul>
@@ -304,7 +304,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <li>
 <strong>strand_ambig_filter</strong> Binary, should SNPs with strand-ambiguous alleles be removed. Default is FALSE</li>
 <li>
-<strong>allele_flip_check</strong> Binary, should the allele columns be checked against reference genome to infer if flipping is necessary. Default is TRUE. <strong>allele_flip_drop</strong> controls whether the SNPs for which neither their A1 or A2 base pair values match a reference genome be dropped. Default is TRUE. <strong>allele_flip_drop</strong> controls whether the Z-score value should be flipped along with effect columns (e.g. Beta). Default is TRUE.</li>
+<strong>allele_flip_check</strong> Binary, should the allele columns be checked against reference genome to infer if flipping is necessary. Default is TRUE. <strong>allele_flip_drop</strong> controls whether the SNPs for which neither their A1 or A2 base pair values match a reference genome be dropped. Default is TRUE. <strong>allele_flip_z</strong> controls whether the Z-score value should be flipped along with effect and FRQ columns (e.g. Beta). Default is TRUE. <strong>allele_flip_frq</strong> controls whether the frequency (FRQ) value should be flipped along with effect and Z-score columns (e.g. Beta). Default is TRUE.</li>
 <li>
 <strong>bi_allelic_filter</strong> Binary, should non-biallelic SNPs be removed. Default is TRUE</li>
 <li>
@@ -339,7 +339,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ## ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing
 ## ( e.g. `file.copy(save_path, './formatted/' )`.
 ## ********************</code></pre>
-<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpuxRbVp/file121e41f698af.tsv.gz</code></pre>
+<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp8TsEUW/file400956d518c5.tsv.gz</code></pre>
 <pre><code>## Reading header.</code></pre>
 <pre><code>## Importing.</code></pre>
 <pre><code>## Reading VCF file.</code></pre>
@@ -379,7 +379,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Making X/Y CHR uppercase.</code></pre>
 <pre><code>## Checking for bi-allelic SNPs.</code></pre>
 <pre><code>## Sorting coordinates.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpuxRbVp/file121e41f698af.tsv.gz</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp8TsEUW/file400956d518c5.tsv.gz</code></pre>
 <pre><code>## Summary statistics report:
 ##    - 26 rows (26.3% of original 99 rows)
 ##    - 26 unique variants
@@ -417,8 +417,8 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ## - This means all log data from the run will be deleted upon ending the R session.
 ## - To keep it, change `log_folder` to an actual directory (e.g. log_foler='./').
 ## ********************</code></pre>
-<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpuxRbVp/file121e4d37c86c.tsv.gz</code></pre>
-<pre><code>## Log data to be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpuxRbVp</code></pre>
+<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp8TsEUW/file40091345fbb.tsv.gz</code></pre>
+<pre><code>## Log data to be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp8TsEUW</code></pre>
 <pre><code>## Reading header.</code></pre>
 <pre><code>## Importing.</code></pre>
 <pre><code>## Reading VCF file.</code></pre>
@@ -442,7 +442,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Ensuring all SNPs are on the reference genome.</code></pre>
 <pre><code>## Loading reference genome data.</code></pre>
 <pre><code>## 12 SNPs are not on the reference genome. These will be corrected from the reference genome.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpuxRbVp/snp_not_found_from_chr_bp.tsv</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp8TsEUW/snp_not_found_from_chr_bp.tsv</code></pre>
 <pre><code>## Checking for correct direction of A1 (reference) and A2 (alternative allele).</code></pre>
 <pre><code>## Reordering so first three column headers are SNP, CHR and BP in this order.</code></pre>
 <pre><code>## Reordering so first fourth and fifth columns are A1 and A2.</code></pre>
@@ -452,7 +452,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Checking for SNPs with duplicated base-pair positions</code></pre>
 <pre><code>## Filtering SNPs based on INFO score.</code></pre>
 <pre><code>## 67 SNPs are below the INFO threshold of 0.1 and will be removed</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpuxRbVp/info_filter.tsv</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp8TsEUW/info_filter.tsv</code></pre>
 <pre><code>## Filtering SNPs, ensuring SE &gt;0.</code></pre>
 <pre><code>## Filtering effect columns, ensuring none equal 0.</code></pre>
 <pre><code>## Ensuring all SNPs have N&lt;5 std dev above mean.</code></pre>
@@ -460,7 +460,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Making X/Y CHR uppercase.</code></pre>
 <pre><code>## Checking for bi-allelic SNPs.</code></pre>
 <pre><code>## Sorting coordinates.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpuxRbVp/file121e4d37c86c.tsv.gz</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp8TsEUW/file40091345fbb.tsv.gz</code></pre>
 <pre><code>## Summary statistics report:
 ##    - 26 rows (26.3% of original 99 rows)
 ##    - 26 unique variants
@@ -594,7 +594,7 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] MungeSumstats_1.1.5 BiocStyle_2.20.2   
+## [1] MungeSumstats_1.1.6 BiocStyle_2.20.2   
 ## 
 ## loaded via a namespace (and not attached):
 ##   [1] bitops_1.0-7                               

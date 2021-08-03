@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Standardise the column headers in the Summary Statistics files (CROSSPLATFORM) — standardise_sumstats_column_headers_crossplatform • MungeSumstats</title>
+<title>Standardise the column headers in the Summary Statistics files — standardise_sumstats_column_headers_crossplatform • MungeSumstats</title>
 
 
 <!-- jquery -->
@@ -39,11 +39,12 @@
 
 
 
-<meta property="og:title" content="Standardise the column headers in the Summary Statistics files (CROSSPLATFORM) — standardise_sumstats_column_headers_crossplatform" />
+<meta property="og:title" content="Standardise the column headers in the Summary Statistics files — standardise_sumstats_column_headers_crossplatform" />
 <meta property="og:description" content="Use a reference data table of common column header names (stored in
-sumstatsColHeaders) convert them to a standard set, i.e. chromosome -&amp;gt; CHR
-This function does not check that all the required column headers are present
-The amended header is written directly back into the file" />
+sumstatsColHeaders or user inputted mapping file) to convert them to a
+standard set, i.e. chromosome -&amp;gt; CHR. This function does not check that all
+the required column headers are present. The amended header is written
+directly back into the file" />
 
 
 
@@ -85,7 +86,7 @@ The amended header is written directly back into the file" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.6</span>
       </span>
     </div>
 
@@ -139,36 +140,48 @@ The amended header is written directly back into the file" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Standardise the column headers in the Summary Statistics files (CROSSPLATFORM)</h1>
+    <h1>Standardise the column headers in the Summary Statistics files</h1>
     <small class="dont-index">Source: <a href='https://github.com/neurogenomics/MungeSumstats/blob/master/R/standardise_sumstats_column_headers_crossplatform.R'><code>R/standardise_sumstats_column_headers_crossplatform.R</code></a></small>
     <div class="hidden name"><code>standardise_sumstats_column_headers_crossplatform.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Use a reference data table of common column header names (stored in
-sumstatsColHeaders) convert them to a standard set, i.e. chromosome -&gt; CHR
-This function does not check that all the required column headers are present
-The amended header is written directly back into the file</p>
+sumstatsColHeaders or user inputted mapping file) to convert them to a
+standard set, i.e. chromosome -&gt; CHR. This function does not check that all
+the required column headers are present. The amended header is written
+directly back into the file</p>
     </div>
 
-    <pre class="usage"><span class='fu'>standardise_sumstats_column_headers_crossplatform</span><span class='op'>(</span><span class='va'>sumstats_dt</span>, <span class='va'>path</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>standardise_sumstats_column_headers_crossplatform</span><span class='op'>(</span>
+  <span class='va'>sumstats_dt</span>,
+  <span class='va'>path</span>,
+  <span class='va'>mapping_file</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>sumstats_dt</th>
-      <td><p>data table obj of the summary statistics file for the GWAS</p></td>
+      <th>path</th>
+      <td><p>Filepath for the summary statistics file to be formatted. Default
+is a temporary file.</p></td>
     </tr>
     <tr>
-      <th>path</th>
-      <td><p>Filepath for the summary statistics file to be formatted</p></td>
+      <th>mapping_file</th>
+      <td><p>MungeSumstats has a pre-defined column-name mapping file
+which should cover the most common column headers and their interpretations.
+However, if a column header that is in youf file is missing of the mapping we
+give is incorrect you can supply your own mapping file. Must be a 2 column
+dataframe with column names "Uncorrected" and "Corrected". See
+data(sumstatsColHeaders) for default mapping and necessary format.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>list containing sumstats_dt, the modified summary statistics data table object</p>
+    <p>list containing sumstats_dt, the modified summary statistics data
+table object</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

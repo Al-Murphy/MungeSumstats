@@ -75,8 +75,10 @@
 #' @param allele_flip_drop Binary Should the SNPs for which neither their A1 or 
 #' A2 base pair values match a reference genome be dropped. Default is TRUE.
 #' @param allele_flip_z Binary should the Z-score be flipped along with effect 
-#' columns like Beta? It is assumed to be calculated off the effect size not 
-#' the P-value and so will be flipped i.e. default TRUE.
+#' and FRQ columns like Beta? It is assumed to be calculated off the effect size
+#' not the P-value and so will be flipped i.e. default TRUE.
+#' @param allele_flip_frq Binary should the frequency (FRQ) column be flipped 
+#' along with effect and z-score columns like Beta? Default TRUE.
 #' @param bi_allelic_filter Binary Should non-biallelic SNPs be removed. Default
 #' is TRUE.
 #' @param snp_ids_are_rs_ids Binary Should the supplied SNP ID's be assumed to 
@@ -122,6 +124,12 @@
 #' @param force_new If a formatted file of the same names as \code{save_path} 
 #' exists, formatting will be skipped and this file will be imported instead 
 #' (default). Set \code{force_new=TRUE} to override this.
+#' @param mapping_file MungeSumstats has a pre-defined column-name mapping file
+#' which should cover the most common column headers and their interpretations. 
+#' However, if a column header that is in youf file is missing of the mapping we
+#' give is incorrect you can supply your own mapping file. Must be a 2 column 
+#' dataframe with column names "Uncorrected" and "Corrected". See 
+#' data(sumstatsColHeaders) for default mapping and necessary format.
 #' 
 #' @importFrom data.table fread
 #' @importFrom data.table fwrite
@@ -149,6 +157,7 @@ format_sumstats <- function(path,
                             allele_flip_check=TRUE,
                             allele_flip_drop=TRUE,
                             allele_flip_z=TRUE,
+                            allele_flip_frq=TRUE,
                             bi_allelic_filter=TRUE,
                             snp_ids_are_rs_ids=TRUE,
                             remove_multi_rs_snp=FALSE,
@@ -164,7 +173,8 @@ format_sumstats <- function(path,
                             log_mungesumstats_msgs = FALSE,
                             log_folder=tempdir(),
                             imputation_ind=FALSE,
-                            force_new=FALSE
+                            force_new=FALSE,
+                            mapping_file=sumstatsColHeaders
                             ){  
   #### Setup multi-threading ####
   data.table::setDTthreads(threads = nThread)
@@ -210,6 +220,7 @@ format_sumstats <- function(path,
                         allele_flip_check=allele_flip_check,
                         allele_flip_drop=allele_flip_drop,
                         allele_flip_z=allele_flip_z,
+                        allele_flip_frq=allele_flip_frq,
                         bi_allelic_filter=bi_allelic_filter,
                         snp_ids_are_rs_ids=snp_ids_are_rs_ids,
                         write_vcf=write_vcf,
@@ -217,7 +228,8 @@ format_sumstats <- function(path,
                         ldsc_format=ldsc_format,
                         imputation_ind=imputation_ind,
                         log_folder_ind=log_folder_ind,
-                        log_mungesumstats_msgs=log_mungesumstats_msgs)
+                        log_mungesumstats_msgs=log_mungesumstats_msgs,
+                        mapping_file=mapping_file)
     
     #save messages to file if user specified
     if(log_mungesumstats_msgs){
@@ -246,7 +258,9 @@ format_sumstats <- function(path,
     #### Check 3:Standardise headers for all OS ####
     sumstats_return <-
       standardise_sumstats_column_headers_crossplatform(sumstats_dt = sumstats_return$sumstats_dt,
-                                                        path =  path) 
+                                                        path =  path,
+                                                        mapping_file = 
+                                                            mapping_file) 
     
     
     #### If ldsc_format=TRUE, make sure all arguments comply with with.
@@ -269,7 +283,8 @@ format_sumstats <- function(path,
     sumstats_return <-  
       check_multi_gwas(sumstats_dt = sumstats_return$sumstats_dt,
                        path = path, 
-                       analysis_trait = analysis_trait)
+                       analysis_trait = analysis_trait,
+                       mapping_file = mapping_file)
     
     #### Check 33: Check if multi RS ID SNPs in one line ####
     sumstats_return <-  
@@ -289,7 +304,8 @@ format_sumstats <- function(path,
     if(is.null(ref_genome))
       ref_genome <- get_genome_build(sumstats = sumstats_return$sumstats_dt, 
                                      standardise_headers = FALSE, ## done prev
-                                     sampled_snps = 10000)
+                                     sampled_snps = 10000,
+                                     mapping_file = mapping_file)
     
     #### Check 5: Check for uniformity in SNP col - ####
     #### no mix of rs/missing rs/chr:bp ####
@@ -333,7 +349,9 @@ format_sumstats <- function(path,
       #### Re-standardise in case the joined column headers were unusual ####
       sumstats_return <-
         standardise_sumstats_column_headers_crossplatform(sumstats_dt = sumstats_return$sumstats_dt, 
-                                                          path = path)
+                                                          path = path,
+                                                          mapping_file = 
+                                                            mapping_file)
     }
     
     #### Check 8: check if CHR and BP are missing but SNP is present ####
@@ -419,12 +437,15 @@ format_sumstats <- function(path,
                         allele_flip_check = allele_flip_check,
                         allele_flip_drop = allele_flip_drop,
                         allele_flip_z = allele_flip_z,
+                        allele_flip_frq=allele_flip_frq,
+                        bi_allelic_filter=bi_allelic_filter,
                         imputation_ind = imputation_ind,
                         log_folder_ind=log_folder_ind,
                         check_save_out=check_save_out,
                         tabix_index = tabix_index,
                         nThread = nThread,
-                        log_files = log_files)
+                        log_files = log_files,
+                        mapping_file = mapping_file)
     #update values
     log_files <- sumstats_return$log_files
     rsids <- sumstats_return$rsids #update rsids
@@ -604,7 +625,8 @@ format_sumstats <- function(path,
                                       sumstats_return$sumstats_dt, 
                                     compute_z = compute_z, 
                                     force_new_z = force_new_z,
-                                    imputation_ind = imputation_ind)
+                                    imputation_ind = imputation_ind,
+                                    mapping_file = mapping_file)
 
     #### Check 32: Compute N ####
     sumstats_return <- compute_nsize(sumstats_dt = 

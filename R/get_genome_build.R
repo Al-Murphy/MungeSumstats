@@ -8,6 +8,13 @@
 #' build to save time.
 #' @param standardise_headers Run 
 #' \code{standardise_sumstats_column_headers_crossplatform}.  
+#' @param mapping_file MungeSumstats has a pre-defined column-name mapping file
+#' which should cover the most common column headers and their interpretations. 
+#' However, if a column header that is in youf file is missing of the mapping we
+#' give is incorrect you can supply your own mapping file. Must be a 2 column 
+#' dataframe with column names "Uncorrected" and "Corrected". See 
+#' data(sumstatsColHeaders) for default mapping and necessary format.
+#' 
 #' @return ref_genome the genome build of the data
 #'
 #' @examples
@@ -28,7 +35,8 @@
 get_genome_build <- function(sumstats, 
                              nThread = 1,
                              sampled_snps = 10000, 
-                             standardise_headers=TRUE){
+                             standardise_headers=TRUE,
+                             mapping_file=sumstatsColHeaders){
   seqnames = CHR = SNP = BP = NULL; ### Add this to avoid confusing BiocCheck
   
   message("Inferring genome build.")
@@ -49,7 +57,9 @@ get_genome_build <- function(sumstats,
   if(standardise_headers){
     sumstats_return <-
       standardise_sumstats_column_headers_crossplatform(sumstats_dt = sumstats,
-                                                        path =  NULL)
+                                                        path =  NULL,
+                                                        mapping_file = 
+                                                          mapping_file)
     sumstats <- sumstats_return$sumstats_dt
   } 
   

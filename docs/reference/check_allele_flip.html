@@ -8,7 +8,7 @@
 
 <title>Ensure A1 &amp; A2 are correctly named, if GWAS SNP constructed as
 Alternative/Reference or Risk/Nonrisk alleles these SNPs will need to be
-converted to Reference/Alternative or Nonrisk/Risk. Here nonrisk is defined
+converted to Reference/Alternative or Nonrisk/Risk. Here non-risk is defined
 as what's on the reference genome (this may not always be the case). — check_allele_flip • MungeSumstats</title>
 
 
@@ -44,11 +44,11 @@ as what's on the reference genome (this may not always be the case). — check_a
 
 <meta property="og:title" content="Ensure A1 &amp; A2 are correctly named, if GWAS SNP constructed as
 Alternative/Reference or Risk/Nonrisk alleles these SNPs will need to be
-converted to Reference/Alternative or Nonrisk/Risk. Here nonrisk is defined
+converted to Reference/Alternative or Nonrisk/Risk. Here non-risk is defined
 as what's on the reference genome (this may not always be the case). — check_allele_flip" />
 <meta property="og:description" content="Ensure A1 &amp;amp; A2 are correctly named, if GWAS SNP constructed as
 Alternative/Reference or Risk/Nonrisk alleles these SNPs will need to be
-converted to Reference/Alternative or Nonrisk/Risk. Here nonrisk is defined
+converted to Reference/Alternative or Nonrisk/Risk. Here non-risk is defined
 as what's on the reference genome (this may not always be the case)." />
 
 
@@ -91,7 +91,7 @@ as what's on the reference genome (this may not always be the case)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.6</span>
       </span>
     </div>
 
@@ -147,7 +147,7 @@ as what's on the reference genome (this may not always be the case)." />
     <div class="page-header">
     <h1>Ensure A1 &amp; A2 are correctly named, if GWAS SNP constructed as
 Alternative/Reference or Risk/Nonrisk alleles these SNPs will need to be
-converted to Reference/Alternative or Nonrisk/Risk. Here nonrisk is defined
+converted to Reference/Alternative or Nonrisk/Risk. Here non-risk is defined
 as what's on the reference genome (this may not always be the case).</h1>
     <small class="dont-index">Source: <a href='https://github.com/neurogenomics/MungeSumstats/blob/master/R/check_allele_flip.R'><code>R/check_allele_flip.R</code></a></small>
     <div class="hidden name"><code>check_allele_flip.Rd</code></div>
@@ -156,7 +156,7 @@ as what's on the reference genome (this may not always be the case).</h1>
     <div class="ref-description">
     <p>Ensure A1 &amp; A2 are correctly named, if GWAS SNP constructed as
 Alternative/Reference or Risk/Nonrisk alleles these SNPs will need to be
-converted to Reference/Alternative or Nonrisk/Risk. Here nonrisk is defined
+converted to Reference/Alternative or Nonrisk/Risk. Here non-risk is defined
 as what's on the reference genome (this may not always be the case).</p>
     </div>
 
@@ -168,13 +168,16 @@ as what's on the reference genome (this may not always be the case).</p>
   <span class='va'>allele_flip_check</span>,
   <span class='va'>allele_flip_drop</span>,
   <span class='va'>allele_flip_z</span>,
+  <span class='va'>allele_flip_frq</span>,
+  <span class='va'>bi_allelic_filter</span>,
   <span class='va'>imputation_ind</span>,
   <span class='va'>log_folder_ind</span>,
   <span class='va'>check_save_out</span>,
   <span class='va'>tabix_index</span>,
   <span class='va'>nThread</span>,
   <span class='va'>log_files</span>,
-  standardise_headers <span class='op'>=</span> <span class='cn'>FALSE</span>
+  standardise_headers <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>mapping_file</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -204,8 +207,18 @@ A2 base pair values match a reference genome be dropped. Default is TRUE.</p></t
     <tr>
       <th>allele_flip_z</th>
       <td><p>Binary should the Z-score be flipped along with effect
-columns like Beta? It is assumed to be calculated off the effect size not
-the P-value and so will be flipped i.e. default TRUE.</p></td>
+and FRQ columns like Beta? It is assumed to be calculated off the effect size
+not the P-value and so will be flipped i.e. default TRUE.</p></td>
+    </tr>
+    <tr>
+      <th>allele_flip_frq</th>
+      <td><p>Binary should the frequency (FRQ) column be flipped
+along with effect and z-score columns like Beta? Default TRUE.</p></td>
+    </tr>
+    <tr>
+      <th>bi_allelic_filter</th>
+      <td><p>Binary Should non-biallelic SNPs be removed. Default
+is TRUE.</p></td>
     </tr>
     <tr>
       <th>imputation_ind</th>
@@ -242,6 +255,15 @@ FALSE.</p></td>
       <th>standardise_headers</th>
       <td><p>Run
 <code>standardise_sumstats_column_headers_crossplatform</code> first.</p></td>
+    </tr>
+    <tr>
+      <th>mapping_file</th>
+      <td><p>MungeSumstats has a pre-defined column-name mapping file
+which should cover the most common column headers and their interpretations.
+However, if a column header that is in youf file is missing of the mapping we
+give is incorrect you can supply your own mapping file. Must be a 2 column
+dataframe with column names "Uncorrected" and "Corrected". See
+data(sumstatsColHeaders) for default mapping and necessary format.</p></td>
     </tr>
     </table>
 

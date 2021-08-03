@@ -45,7 +45,8 @@ test_that("Imputation of A1/A2 correctly", {
                                                   bi_allelic_filter=FALSE,
                                                   allele_flip_check=FALSE,
                                                   imputation_ind = TRUE,
-                                                  log_folder_ind = TRUE)
+                                                  log_folder_ind = TRUE,
+                                                  allele_flip_frq=FALSE)
     res_dt2 <- data.table::fread(reformatted2$sumstats)
     #imputation cols - check they are there, then drop
     expect_equal(sum(c("IMPUTATION_A1","flipped") %in% names(res_dt2)),2)
@@ -114,7 +115,8 @@ test_that("Imputation of A1/A2 correctly", {
                                                    on_ref_genome = FALSE,
                                                    strand_ambig_filter=FALSE,
                                                    bi_allelic_filter=FALSE,
-                                                   allele_flip_check=TRUE)
+                                                   allele_flip_check=TRUE,
+                                                   allele_flip_frq=FALSE)
     res_org <- data.table::fread(org_rtrn)
     setkey(res_org,SNP)
     #add A1 to org from one allele missing run

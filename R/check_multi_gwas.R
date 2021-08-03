@@ -2,10 +2,18 @@
 #'
 #' @param sumstats_dt data table obj of the summary statistics file for the GWAS
 #' @param path Filepath for the summary statistics file to be formatted
-#' @param analysis_trait If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL
-#' @return list containing sumstats_dt, the modified summary statistics data table object
+#' @param analysis_trait If multiple traits were studied, name of the trait for
+#' analysis from the GWAS. Default is NULL
+#' @param mapping_file MungeSumstats has a pre-defined column-name mapping file
+#' which should cover the most common column headers and their interpretations. 
+#' However, if a column header that is in youf file is missing of the mapping we
+#' give is incorrect you can supply your own mapping file. Must be a 2 column 
+#' dataframe with column names "Uncorrected" and "Corrected". See 
+#' data(sumstatsColHeaders) for default mapping and necessary format.
+#' @return list containing sumstats_dt, the modified summary statistics data 
+#' table object
 #' @keywords internal
-check_multi_gwas <- function(sumstats_dt, path, analysis_trait){
+check_multi_gwas <- function(sumstats_dt, path, analysis_trait, mapping_file){
   message("Checking for multi-GWAS.")  
   col_headers <- names(sumstats_dt)
   #load synonym mapping - internal data no loading
@@ -61,7 +69,9 @@ check_multi_gwas <- function(sumstats_dt, path, analysis_trait){
     data.table::setnames(sumstats_dt,chnge_header_names,new_names)
     #RE-standardise headers for all OS
     sumstats_return <-
-      standardise_sumstats_column_headers_crossplatform(sumstats_dt, path)
+      standardise_sumstats_column_headers_crossplatform(sumstats_dt, path,
+                                                        mapping_file=
+                                                            mapping_file)
 
     return(sumstats_return)
   }
