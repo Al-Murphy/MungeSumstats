@@ -11,7 +11,7 @@ test_that("Test that allele columns and effect columns flipped correctly", {
   #read in and manually change effect columns
   eduAttainOkbay_missing_dt <- data.table::fread(file)
   eduAttainOkbay_missing_dt[,Beta:=Beta*-1]
-  eduAttainOkbay_missing_dt[,EAF:=EAF*-1]
+  eduAttainOkbay_missing_dt[,EAF:=1-EAF]
   data.table::fwrite(eduAttainOkbay_missing_dt,
                       file=file,sep="\t")
   ## The following test uses more than 2GB of memory, which is more

@@ -136,7 +136,10 @@ check_allele_flip <-  function(sumstats_dt, path, ref_genome, rsids,
         stop(stp_msg)
       for(eff_i in effect_columns){#set updates quicker for DT
         #conversion done in case, VCF beta column may not be numeric
-        sumstats_dt[match_type==FALSE,(eff_i):=as.numeric(get(eff_i))*-1]
+        if(eff_i=="FRQ")
+          sumstats_dt[match_type==FALSE,(eff_i):=(1-as.numeric(get(eff_i)))]
+        else
+          sumstats_dt[match_type==FALSE,(eff_i):=as.numeric(get(eff_i))*-1]
       }
       if(imputation_ind)
         sumstats_dt[match_type==FALSE,flipped:=TRUE]
