@@ -9,7 +9,7 @@ test_that("Test connection to IEU GWAS - metadata, download", {
     metagwas2 <- 
         MungeSumstats::find_sumstats(ids=c("ieu-b-4760","prot-a-1725",
                                             "prot-a-664"),
-                                        min_sample_size=5000)
+                                        min_sample_size=1000)
  
     ### By criteria
     metagwas3 <- MungeSumstats::find_sumstats(traits=c("alzheimer","parkinson"),

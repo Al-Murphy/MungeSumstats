@@ -84,7 +84,7 @@ Users can supply a single character string or a list/vector of character strings
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.9</span>
       </span>
     </div>
 
@@ -248,24 +248,24 @@ Users can supply a single character string or a list/vector of character strings
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>### By ID</span>
 <span class='va'>metagwas</span> <span class='op'>&lt;-</span> <span class='fu'>MungeSumstats</span><span class='fu'>::</span><span class='fu'>find_sumstats</span><span class='op'>(</span>ids<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ieu-b-4760"</span>,<span class='st'>"prot-a-1725"</span>,<span class='st'>"prot-a-664"</span> <span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Collecting metadata from Open GWAS.</span></div><div class='output co'>#&gt; <span class='message'>Filtering metadata by substring criteria.</span></div><div class='output co'>#&gt; <span class='message'>Found 3 GWAS datasets matching search criteria across:</span>
-#&gt; <span class='message'>   - 3 trait(s)</span>
-#&gt; <span class='message'>   - 1 population(s)</span>
-#&gt; <span class='message'>   - 2 category(ies)</span>
-#&gt; <span class='message'>   - 2 subcategory(ies)</span>
-#&gt; <span class='message'>   - 2 publication(s)</span>
-#&gt; <span class='message'>   - 2 consortia(ium)</span>
-#&gt; <span class='message'>   - 1 genome build(s)</span></div><div class='input'><span class='co'>### By ID amd sample size</span>
-<span class='va'>metagwas</span> <span class='op'>&lt;-</span> <span class='fu'>MungeSumstats</span><span class='fu'>::</span><span class='fu'>find_sumstats</span><span class='op'>(</span>ids<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ieu-b-4760"</span>,<span class='st'>"prot-a-1725"</span>,<span class='st'>"prot-a-664"</span><span class='op'>)</span>,
-                                         min_sample_size<span class='op'>=</span><span class='fl'>5000</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Collecting metadata from Open GWAS.</span></div><div class='output co'>#&gt; <span class='message'>Filtering metadata by substring criteria.</span></div><div class='output co'>#&gt; <span class='message'>Filtering metadata by sample/case/control/SNP size criteria.</span></div><div class='output co'>#&gt; <span class='message'>Excluding sample/case/control size with NAs.</span></div><div class='output co'>#&gt; <span class='message'>Found 1 GWAS datasets matching search criteria across:</span>
-#&gt; <span class='message'>   - 1 trait(s)</span>
+</div><div class='output co'>#&gt; <span class='message'>Collecting metadata from Open GWAS.</span></div><div class='output co'>#&gt; <span class='message'>Filtering metadata by substring criteria.</span></div><div class='output co'>#&gt; <span class='message'>Found 2 GWAS datasets matching search criteria across:</span>
+#&gt; <span class='message'>   - 2 trait(s)</span>
 #&gt; <span class='message'>   - 1 population(s)</span>
 #&gt; <span class='message'>   - 1 category(ies)</span>
 #&gt; <span class='message'>   - 1 subcategory(ies)</span>
 #&gt; <span class='message'>   - 1 publication(s)</span>
 #&gt; <span class='message'>   - 1 consortia(ium)</span>
-#&gt; <span class='message'>   - 1 genome build(s)</span></div><div class='input'>
+#&gt; <span class='message'>   - 1 genome build(s)</span></div><div class='input'><span class='co'>### By ID amd sample size</span>
+<span class='va'>metagwas</span> <span class='op'>&lt;-</span> <span class='fu'>MungeSumstats</span><span class='fu'>::</span><span class='fu'>find_sumstats</span><span class='op'>(</span>ids<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ieu-b-4760"</span>,<span class='st'>"prot-a-1725"</span>,<span class='st'>"prot-a-664"</span><span class='op'>)</span>,
+                                         min_sample_size<span class='op'>=</span><span class='fl'>5000</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Collecting metadata from Open GWAS.</span></div><div class='output co'>#&gt; <span class='message'>Filtering metadata by substring criteria.</span></div><div class='output co'>#&gt; <span class='message'>Filtering metadata by sample/case/control/SNP size criteria.</span></div><div class='output co'>#&gt; <span class='message'>Excluding sample/case/control size with NAs.</span></div><div class='output co'>#&gt; <span class='message'>Found 0 GWAS datasets matching search criteria across:</span>
+#&gt; <span class='message'>   - 0 trait(s)</span>
+#&gt; <span class='message'>   - 0 population(s)</span>
+#&gt; <span class='message'>   - 0 category(ies)</span>
+#&gt; <span class='message'>   - 0 subcategory(ies)</span>
+#&gt; <span class='message'>   - 0 publication(s)</span>
+#&gt; <span class='message'>   - 0 consortia(ium)</span>
+#&gt; <span class='message'>   - 0 genome build(s)</span></div><div class='input'>
 <span class='co'>### By criteria</span>
 <span class='va'>metagwas</span> <span class='op'>&lt;-</span> <span class='fu'>MungeSumstats</span><span class='fu'>::</span><span class='fu'>find_sumstats</span><span class='op'>(</span>traits<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"alzheimer"</span>,<span class='st'>"parkinson"</span><span class='op'>)</span>,
                                          years <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>2015</span>,<span class='fl'>2021</span><span class='op'>)</span><span class='op'>)</span> 

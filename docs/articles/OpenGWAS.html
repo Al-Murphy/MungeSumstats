@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.9</span>
       </span>
     </div>
 
@@ -94,7 +94,7 @@
       <h1 data-toc-skip>Import GWAS summary statistics from Open GWAS</h1>
                         <h4 class="author">Alan Murphy, Brian Schilder, and Nathan Skene</h4>
             
-            <h4 class="date">2021-08-03</h4>
+            <h4 class="date">2021-08-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/MungeSumstats/blob/master/vignettes/OpenGWAS.Rmd"><code>vignettes/OpenGWAS.Rmd</code></a></small>
       <div class="hidden name"><code>OpenGWAS.Rmd</code></div>
@@ -132,13 +132,13 @@ document.addEventListener("DOMContentLoaded", function() {
 ## 4: ebi-a-GCST002245                  Alzheimer's disease (late onset)
 ## 5: ebi-a-GCST005921             Family history of Alzheimer's disease
 ## 6:        ukb-b-323 Illnesses of father: Alzheimer's disease/dementia
-##    group_name year
-## 1:     public 2013
-## 2:     public 2019
-## 3:     public 2013
-## 4:     public 2013
-## 5:     public 2018
-## 6:     public 2018
+##    group_name year mr       author
+## 1:     public 2013  1      Lambert
+## 2:     public 2019  1    Kunkle BW
+## 3:     public 2013  1      Lambert
+## 4:     public 2013  1   Lambert JC
+## 5:     public 2018  1   Marioni RE
+## 6:     public 2018  1 Ben Elsworth
 ##                                                                                                                                                                                                                                                                                                                     consortium
 ## 1:                                                                                                                                                                                                                                                                                                                        IGAP
 ## 2: Alzheimer Disease Genetics Consortium (ADGC), European Alzheimer's Disease Initiative (EADI), Cohorts for Heart and Aging Research in Genomic Epidemiology Consortium (CHARGE), Genetic and Environmental Risk in AD/Defining Genetic, Polygenic and Environmental Risk for Alzheimer's Disease Consortium (GERAD/PERADES),
@@ -146,20 +146,20 @@ document.addEventListener("DOMContentLoaded", function() {
 ## 4:                                                                                                                                                                                                                                                                                                                          NA
 ## 5:                                                                                                                                                                                                                                                                                                                          NA
 ## 6:                                                                                                                                                                                                                                                                                                                     MRC-IEU
-##          author               sex population     unit sample_size     nsnp
-## 1:      Lambert Males and Females   European log odds       74046    11633
-## 2:    Kunkle BW Males and Females   European       NA       63926 10528610
-## 3:      Lambert Males and Females   European log odds       54162  7055882
-## 4:   Lambert JC                NA   European    logOR       55134  7022150
-## 5:   Marioni RE                NA   European       NA      314278  7746640
-## 6: Ben Elsworth Males and Females   European       SD      399793  9851867
-##          build category                subcategory ontology
-## 1: HG19/GRCh37  Disease Psychiatric / neurological       NA
-## 2: HG19/GRCh37   Binary Psychiatric / neurological       NA
-## 3: HG19/GRCh37  Disease Psychiatric / neurological       NA
-## 4: HG19/GRCh37       NA                         NA       NA
-## 5: HG19/GRCh37       NA                         NA       NA
-## 6: HG19/GRCh37   Binary                         NA       NA
+##                  sex priority     pmid population sd     unit     nsnp
+## 1: Males and Females        1 24162737   European NA log odds    11633
+## 2: Males and Females        0 30820047   European NA       NA 10528610
+## 3: Males and Females        2 24162737   European NA log odds  7055882
+## 4:                NA        0 24162737   European NA    logOR  7022150
+## 5:                NA        0 29777097   European NA       NA  7746640
+## 6: Males and Females        1       NA   European NA       SD  9851867
+##    sample_size       build                subcategory category ontology
+## 1:       74046 HG19/GRCh37 Psychiatric / neurological  Disease       NA
+## 2:       63926 HG19/GRCh37 Psychiatric / neurological   Binary       NA
+## 3:       54162 HG19/GRCh37 Psychiatric / neurological  Disease       NA
+## 4:       55134 HG19/GRCh37                         NA       NA       NA
+## 5:      314278 HG19/GRCh37                         NA       NA       NA
+## 6:      399793 HG19/GRCh37                         NA   Binary       NA
 ##                                                                                  note
 ## 1:            Exposure only; Effect allele frequencies are missing; forward(+) strand
 ## 2:                                                                                 NA
@@ -167,13 +167,13 @@ document.addEventListener("DOMContentLoaded", function() {
 ## 4:                                                                                 NA
 ## 5:                                                                                 NA
 ## 6: 20107#10: Output from GWAS pipeline using Phesant derived variables from UKBiobank
-##    mr     pmid priority ncase ncontrol sd
-## 1:  1 24162737        1 25580    48466 NA
-## 2:  1 30820047        0 21982    41944 NA
-## 3:  1 24162737        2 17008    37154 NA
-## 4:  1 24162737        0 17008    37154 NA
-## 5:  1 29777097        0    NA       NA NA
-## 6:  1       NA        1 19255   380538 NA</code></pre>
+##    ncase ncontrol
+## 1: 25580    48466
+## 2: 21982    41944
+## 3: 17008    37154
+## 4: 17008    37154
+## 5:    NA       NA
+## 6: 19255   380538</code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ids</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">metagwas</span>, <span class="va">nsnp</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">id</span>  </code></pre></div>
 </div>
@@ -190,7 +190,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span></code></pre></div>
 <pre><code>## $`ieu-a-298`
-## [1] "/var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpO1ECKj/ieu-a-298.tsv.gz"</code></pre>
+## [1] "/var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpQHggk0/ieu-a-298.tsv.gz"</code></pre>
 <p>You can easily turn this into a data.frame as well.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">results_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span>, 
@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <pre><code>##                  id
 ## ieu-a-298 ieu-a-298
 ##                                                                                    path
-## ieu-a-298 /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpO1ECKj/ieu-a-298.tsv.gz</code></pre>
+## ieu-a-298 /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpQHggk0/ieu-a-298.tsv.gz</code></pre>
 </div>
 </div>
 <div id="import-full-results-parallel" class="section level1">
@@ -232,11 +232,11 @@ document.addEventListener("DOMContentLoaded", function() {
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] MungeSumstats_1.1.6 BiocStyle_2.20.2   
+## [1] MungeSumstats_1.1.9 BiocStyle_2.20.2   
 ## 
 ## loaded via a namespace (and not attached):
 ##   [1] bitops_1.0-7                               
-##   [2] matrixStats_0.59.0                         
+##   [2] matrixStats_0.60.0                         
 ##   [3] fs_1.5.0                                   
 ##   [4] bit64_4.0.5                                
 ##   [5] filelock_1.0.2                             
@@ -247,7 +247,7 @@ document.addEventListener("DOMContentLoaded", function() {
 ##  [10] GenomeInfoDb_1.28.1                        
 ##  [11] tools_4.1.0                                
 ##  [12] bslib_0.2.5.1                              
-##  [13] utf8_1.2.1                                 
+##  [13] utf8_1.2.2                                 
 ##  [14] R6_2.5.0                                   
 ##  [15] DBI_1.1.1                                  
 ##  [16] BiocGenerics_0.38.0                        
@@ -256,7 +256,7 @@ document.addEventListener("DOMContentLoaded", function() {
 ##  [19] curl_4.3.2                                 
 ##  [20] bit_4.0.4                                  
 ##  [21] compiler_4.1.0                             
-##  [22] cli_3.0.0                                  
+##  [22] cli_3.0.1                                  
 ##  [23] textshaping_0.3.5                          
 ##  [24] Biobase_2.52.0                             
 ##  [25] xml2_1.3.2                                 
@@ -282,67 +282,68 @@ document.addEventListener("DOMContentLoaded", function() {
 ##  [45] fastmap_1.1.0                              
 ##  [46] BSgenome_1.60.0                            
 ##  [47] rlang_0.4.11                               
-##  [48] RSQLite_2.2.7                              
-##  [49] jquerylib_0.1.4                            
-##  [50] BiocIO_1.2.0                               
-##  [51] generics_0.1.0                             
-##  [52] jsonlite_1.7.2                             
-##  [53] BiocParallel_1.26.1                        
-##  [54] dplyr_1.0.7                                
-##  [55] R.oo_1.24.0                                
-##  [56] VariantAnnotation_1.38.0                   
-##  [57] RCurl_1.98-1.3                             
-##  [58] magrittr_2.0.1                             
-##  [59] GenomeInfoDbData_1.2.6                     
-##  [60] Matrix_1.3-4                               
-##  [61] Rcpp_1.0.7                                 
-##  [62] S4Vectors_0.30.0                           
-##  [63] fansi_0.5.0                                
-##  [64] lifecycle_1.0.0                            
-##  [65] R.methodsS3_1.8.1                          
-##  [66] stringi_1.6.2                              
-##  [67] yaml_2.2.1                                 
-##  [68] SummarizedExperiment_1.22.0                
-##  [69] zlibbioc_1.38.0                            
-##  [70] BiocFileCache_2.0.0                        
-##  [71] grid_4.1.0                                 
-##  [72] blob_1.2.1                                 
-##  [73] parallel_4.1.0                             
-##  [74] crayon_1.4.1                               
-##  [75] lattice_0.20-44                            
-##  [76] Biostrings_2.60.1                          
-##  [77] GenomicFeatures_1.44.0                     
-##  [78] hms_1.1.0                                  
-##  [79] KEGGREST_1.32.0                            
-##  [80] knitr_1.33                                 
-##  [81] pillar_1.6.1                               
-##  [82] GenomicRanges_1.44.0                       
-##  [83] rjson_0.2.20                               
-##  [84] BSgenome.Hsapiens.NCBI.GRCh38_1.3.1000     
-##  [85] biomaRt_2.48.2                             
-##  [86] stats4_4.1.0                               
-##  [87] XML_3.99-0.6                               
-##  [88] glue_1.4.2                                 
-##  [89] evaluate_0.14                              
-##  [90] SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20   
-##  [91] data.table_1.14.0                          
-##  [92] BiocManager_1.30.16                        
-##  [93] SNPlocs.Hsapiens.dbSNP144.GRCh38_0.99.20   
-##  [94] png_0.1-7                                  
-##  [95] vctrs_0.3.8                                
-##  [96] purrr_0.3.4                                
-##  [97] assertthat_0.2.1                           
-##  [98] cachem_1.0.5                               
-##  [99] xfun_0.24                                  
-## [100] restfulr_0.0.13                            
-## [101] ragg_1.1.3                                 
-## [102] gargle_1.2.0                               
-## [103] tibble_3.1.2                               
-## [104] GenomicAlignments_1.28.0                   
-## [105] AnnotationDbi_1.54.1                       
-## [106] memoise_2.0.0                              
-## [107] IRanges_2.26.0                             
-## [108] ellipsis_0.3.2</code></pre>
+##  [48] rstudioapi_0.13                            
+##  [49] RSQLite_2.2.7                              
+##  [50] jquerylib_0.1.4                            
+##  [51] BiocIO_1.2.0                               
+##  [52] generics_0.1.0                             
+##  [53] jsonlite_1.7.2                             
+##  [54] BiocParallel_1.26.1                        
+##  [55] dplyr_1.0.7                                
+##  [56] R.oo_1.24.0                                
+##  [57] VariantAnnotation_1.38.0                   
+##  [58] RCurl_1.98-1.3                             
+##  [59] magrittr_2.0.1                             
+##  [60] GenomeInfoDbData_1.2.6                     
+##  [61] Matrix_1.3-4                               
+##  [62] Rcpp_1.0.7                                 
+##  [63] S4Vectors_0.30.0                           
+##  [64] fansi_0.5.0                                
+##  [65] lifecycle_1.0.0                            
+##  [66] R.methodsS3_1.8.1                          
+##  [67] stringi_1.7.3                              
+##  [68] yaml_2.2.1                                 
+##  [69] SummarizedExperiment_1.22.0                
+##  [70] zlibbioc_1.38.0                            
+##  [71] BiocFileCache_2.0.0                        
+##  [72] grid_4.1.0                                 
+##  [73] blob_1.2.2                                 
+##  [74] parallel_4.1.0                             
+##  [75] crayon_1.4.1                               
+##  [76] lattice_0.20-44                            
+##  [77] Biostrings_2.60.1                          
+##  [78] GenomicFeatures_1.44.0                     
+##  [79] hms_1.1.0                                  
+##  [80] KEGGREST_1.32.0                            
+##  [81] knitr_1.33                                 
+##  [82] pillar_1.6.2                               
+##  [83] GenomicRanges_1.44.0                       
+##  [84] rjson_0.2.20                               
+##  [85] BSgenome.Hsapiens.NCBI.GRCh38_1.3.1000     
+##  [86] biomaRt_2.48.2                             
+##  [87] stats4_4.1.0                               
+##  [88] XML_3.99-0.6                               
+##  [89] glue_1.4.2                                 
+##  [90] evaluate_0.14                              
+##  [91] SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20   
+##  [92] data.table_1.14.0                          
+##  [93] BiocManager_1.30.16                        
+##  [94] SNPlocs.Hsapiens.dbSNP144.GRCh38_0.99.20   
+##  [95] png_0.1-7                                  
+##  [96] vctrs_0.3.8                                
+##  [97] purrr_0.3.4                                
+##  [98] assertthat_0.2.1                           
+##  [99] cachem_1.0.5                               
+## [100] xfun_0.24                                  
+## [101] restfulr_0.0.13                            
+## [102] ragg_1.1.3                                 
+## [103] gargle_1.2.0                               
+## [104] tibble_3.1.3                               
+## [105] GenomicAlignments_1.28.0                   
+## [106] AnnotationDbi_1.54.1                       
+## [107] memoise_2.0.0                              
+## [108] IRanges_2.26.0                             
+## [109] ellipsis_0.3.2</code></pre>
 </details>
 </div>
   </div>
