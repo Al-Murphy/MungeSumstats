@@ -31,9 +31,12 @@ validate_parameters <- function(path,
                                 log_folder_ind,
                                 log_mungesumstats_msgs,
                                 mapping_file){
-  # Checking if the file exists should happen first
-  if (!file.exists(path) && !startsWith(path,"https://gwas.mrcieu.ac.uk"))
-    stop("Path to GWAS sumstats is not valid")
+  # Checking if the file exists should happen first - can pass dt/df of sumstats
+  pth_msg <- paste0("Path to GWAS sumstats is not valid, pass a file path or a",
+                    "dataframe/data.table object to the path parameter")
+  if (!is.data.frame(path) && !file.exists(path) && 
+        !startsWith(path,"https://gwas.mrcieu.ac.uk"))
+    stop(pth_msg)
   
   gen_msg <- paste0("The chosen genome build must be one of GRCh37 or GRCh38 ",
                       "or left as null so the genome build will be inferred ",

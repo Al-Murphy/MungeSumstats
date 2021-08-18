@@ -12,17 +12,30 @@ check_multi_rs_snp <- function(sumstats_dt, path, remove_multi_rs_snp,
     SNP = convert_multi_rs_SNP = NULL
     message("Checking for multiple RS IDs on one row.")
     col_headers <- names(sumstats_dt)
-    if(sum("SNP" %in% col_headers)==1 && sum(grepl("_rs",sumstats_dt$SNP))>0){
+    #check for "rs1234;rs5678","rs1234,rs5678","rs1234_rs5678","rs1234-rs5678"
+    #"rs1234-rs5678" should also deal with a space in each of the above
+    if(sum("SNP" %in% col_headers)==1 && 
+       (sum(grepl("[[:punct:]]rs",sumstats_dt$SNP))>0)||
+       (sum(grepl("[[:punct:]] rs",sumstats_dt$SNP))>0)){
         if(!remove_multi_rs_snp){ #take first
-            msg<-paste0(sum(grepl("_rs",sumstats_dt$SNP))," SNPs found with ",
+            msg<-paste0((sum(grepl("[[:punct:]]rs",sumstats_dt$SNP))+
+                            sum(grepl("[[:punct:]] rs",sumstats_dt$SNP))),
+                        " SNPs found with ",
                         " multiple RS IDs on one row, the first will be ",
                         "taken. If you would rather remove these SNPs set\n",
                         "`remove_multi_rs_snp`=TRUE")
             message(msg)
             #if user specifies add a column to notify of the imputation
-            if(imputation_ind)
-                sumstats_dt[grepl("_rs",SNP),convert_multi_rs_SNP:=TRUE]
-            sumstats_dt[grepl("_rs",SNP),SNP:=gsub("\\_rs.*","\\",SNP)]
+            if(imputation_ind){
+                sumstats_dt[grepl("[[:punct:]]rs",SNP),
+                                convert_multi_rs_SNP:=TRUE]
+                sumstats_dt[grepl("[[:punct:]] rs",SNP),
+                                convert_multi_rs_SNP:=TRUE]
+            }    
+            sumstats_dt[grepl("[[:punct:]]rs",SNP),
+                            SNP:=gsub("([[:punct:]])rs.*","",SNP)]
+            sumstats_dt[grepl("[[:punct:]] rs",SNP),
+                        SNP:=gsub("([[:punct:]]) rs.*","",SNP)]
         }
         else{ # remove rows
             msg<-paste0(sum(grepl("_rs",sumstats_dt$SNP))," SNPs found with",
@@ -33,7 +46,9 @@ check_multi_rs_snp <- function(sumstats_dt, path, remove_multi_rs_snp,
             if(log_folder_ind){
                 name <- "snp_multi_rs_one_row"
                 name <- get_unique_name_log_file(name=name,log_files=log_files)
-                write_sumstats(sumstats_dt = sumstats_dt[grepl("_rs",SNP),], 
+                write_sumstats(sumstats_dt = 
+                                   sumstats_dt[grepl("[[:punct:]]rs",SNP)|
+                                                   grepl("[[:punct:]] rs",SNP),], 
                                save_path=
                                    paste0(check_save_out$log_folder,
                                             "/",name,
@@ -46,7 +61,8 @@ check_multi_rs_snp <- function(sumstats_dt, path, remove_multi_rs_snp,
                             check_save_out$extension)
             }    
             message(msg)
-            sumstats_dt <- sumstats_dt[!grepl("_rs",SNP),]
+            sumstats_dt <- sumstats_dt[!(grepl("[[:punct:]]rs",SNP)|
+                                           grepl("[[:punct:]] rs",SNP)),]
         }
         
         return(list("sumstats_dt"=sumstats_dt,"log_files"=log_files))

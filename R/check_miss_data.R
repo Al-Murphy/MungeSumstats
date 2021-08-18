@@ -1,4 +1,4 @@
-#' Ensure that only one model in GWAS sumstats or only one trait tested
+#' Remove SNPs with missing data
 #'
 #' @inheritParams format_sumstats  
 #' @param log_files list of log file locations

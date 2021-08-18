@@ -197,7 +197,8 @@ library(MungeSumstats)
 ```
 
 To standardise the summary statistics' file format, simply call
-`format_sumstats()` passing in the path to your summary statistics file.
+`format_sumstats()` passing in the path to your summary statistics file or 
+directly pass the summary statistics as a dataframe or datatable.
 You can specify which genome build was used in the GWAS(GRCh37 or
 GRCh38) or, as default, infer the genome build from the data.The
 reference genome is used for multiple checks like deriving missing data
@@ -394,7 +395,7 @@ The different types of exclusion which lead to the names are explained below:
     created during MungeSumstats run.
 
 
-Note to export to another type such as R native objects includign data.table, 
+Note to export to another type such as R native objects including data.table, 
 GRanges, VRanges or save as a VCF file, set `return_format`:
 
 ```{r, message=FALSE,eval=FALSE}
@@ -434,6 +435,21 @@ github. If your summary statistic file headers are not recognised by
 feel free to update the `MungeSumstats::sumstatsColHeaders` following
 the approach in the data.R file and add your mapping. Then use a pull
 request on github and we will incorporate this change into the package.
+
+A note on `MungeSumstats::sumstatsColHeaders` for summary statistic files with
+A0/A1. The mapping in `MungeSumstats::sumstatsColHeaders` converts A0 to A*, 
+this is a special case so that the code knows to map A0/A1 to A1/A2 (ref/alt). 
+The special case is needed since ordinarily A1 refers to the reference not the
+alternative allele.
+
+# Further functionality
+
+See the [Open GWAS vignette](https://neurogenomics.github.io/MungeSumstats/articles/OpenGWAS.html)
+for how MungeSumstats can be used along with data from the MRC IEU Open GWAS 
+Project and also Mungesumstats' functionality to handle lists of summary 
+statistics files.
+
+
 
 # Session Information
 

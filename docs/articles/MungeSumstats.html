@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.11</span>
       </span>
     </div>
 
@@ -95,7 +95,7 @@
 </h1>
                         <h4 class="author">Alan Murphy, Brian Schilder, and Nathan Skene</h4>
             
-            <h4 class="date">2021-08-12</h4>
+            <h4 class="date">2021-08-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/MungeSumstats/blob/master/vignettes/MungeSumstats.Rmd"><code>vignettes/MungeSumstats.Rmd</code></a></small>
       <div class="hidden name"><code>MungeSumstats.Rmd</code></div>
@@ -211,7 +211,7 @@ BiocManager::install("MungeSumstats")</code></pre>
 <p>Once installed, load the package:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/neurogenomics/MungeSumstats">MungeSumstats</a></span><span class="op">)</span></code></pre></div>
-<p>To standardise the summary statistics’ file format, simply call <code><a href="../reference/format_sumstats.html">format_sumstats()</a></code> passing in the path to your summary statistics file. You can specify which genome build was used in the GWAS(GRCh37 or GRCh38) or, as default, infer the genome build from the data.The reference genome is used for multiple checks like deriving missing data such SNP/BP/CHR/A1/A2 and for QC steps like removing non-biallelic SNPs, strand-ambiguous SNPs or ensuring correct allele and direction of SNP effects. The path to the reformatted summary statistics file can be returned by the function call, the user can specify a location to save the file or the user can return an R native object for the data: data.table, VRanges or GRanges object.</p>
+<p>To standardise the summary statistics’ file format, simply call <code><a href="../reference/format_sumstats.html">format_sumstats()</a></code> passing in the path to your summary statistics file or directly pass the summary statistics as a dataframe or datatable. You can specify which genome build was used in the GWAS(GRCh37 or GRCh38) or, as default, infer the genome build from the data.The reference genome is used for multiple checks like deriving missing data such SNP/BP/CHR/A1/A2 and for QC steps like removing non-biallelic SNPs, strand-ambiguous SNPs or ensuring correct allele and direction of SNP effects. The path to the reformatted summary statistics file can be returned by the function call, the user can specify a location to save the file or the user can return an R native object for the data: data.table, VRanges or GRanges object.</p>
 <p>Note that for a number of the checks implored by <em>MungeSumstats</em> a reference genome is used. If your GWAS summary statistics file of interest relates to <em>GRCh38</em>, you will need to install <code>SNPlocs.Hsapiens.dbSNP144.GRCh38</code> and <code>BSgenome.Hsapiens.NCBI.GRCh38</code> from Bioconductor as follows:</p>
 <pre><code><a href="https://rdrr.io/pkg/BiocManager/man/install.html">BiocManager::install("SNPlocs.Hsapiens.dbSNP144.GRCh38")
 BiocManager::install("BSgenome.Hsapiens.NCBI.GRCh38")</a></code></pre>
@@ -236,7 +236,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ## ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing
 ## ( e.g. `file.copy(save_path, './formatted/' )`.
 ## ********************</code></pre>
-<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmppOI1Nh/file72a7206740a4.tsv.gz</code></pre>
+<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmprldDAH/file5c7c58bfee74.tsv.gz</code></pre>
 <pre><code>## Reading header.</code></pre>
 <pre><code>## Tabular format detected.</code></pre>
 <pre><code>## Importing.</code></pre>
@@ -268,7 +268,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Making X/Y CHR uppercase.</code></pre>
 <pre><code>## Checking for bi-allelic SNPs.</code></pre>
 <pre><code>## Sorting coordinates.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmppOI1Nh/file72a7206740a4.tsv.gz</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmprldDAH/file5c7c58bfee74.tsv.gz</code></pre>
 <pre><code>## Summary statistics report:
 ##    - 93 rows (100% of original 93 rows)
 ##    - 93 unique variants
@@ -339,7 +339,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ## ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing
 ## ( e.g. `file.copy(save_path, './formatted/' )`.
 ## ********************</code></pre>
-<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmppOI1Nh/file72a739b3c199.tsv.gz</code></pre>
+<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmprldDAH/file5c7c3ca66397.tsv.gz</code></pre>
 <pre><code>## Reading header.</code></pre>
 <pre><code>## Importing.</code></pre>
 <pre><code>## Reading VCF file.</code></pre>
@@ -379,7 +379,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Making X/Y CHR uppercase.</code></pre>
 <pre><code>## Checking for bi-allelic SNPs.</code></pre>
 <pre><code>## Sorting coordinates.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmppOI1Nh/file72a739b3c199.tsv.gz</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmprldDAH/file5c7c3ca66397.tsv.gz</code></pre>
 <pre><code>## Summary statistics report:
 ##    - 26 rows (26.3% of original 99 rows)
 ##    - 26 unique variants
@@ -417,8 +417,8 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ## - This means all log data from the run will be deleted upon ending the R session.
 ## - To keep it, change `log_folder` to an actual directory (e.g. log_foler='./').
 ## ********************</code></pre>
-<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmppOI1Nh/file72a77983f2ee.tsv.gz</code></pre>
-<pre><code>## Log data to be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmppOI1Nh</code></pre>
+<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmprldDAH/file5c7c799e0937.tsv.gz</code></pre>
+<pre><code>## Log data to be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmprldDAH</code></pre>
 <pre><code>## Reading header.</code></pre>
 <pre><code>## Importing.</code></pre>
 <pre><code>## Reading VCF file.</code></pre>
@@ -442,7 +442,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Ensuring all SNPs are on the reference genome.</code></pre>
 <pre><code>## Loading reference genome data.</code></pre>
 <pre><code>## 12 SNPs are not on the reference genome. These will be corrected from the reference genome.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmppOI1Nh/snp_not_found_from_chr_bp.tsv</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmprldDAH/snp_not_found_from_chr_bp.tsv</code></pre>
 <pre><code>## Checking for correct direction of A1 (reference) and A2 (alternative allele).</code></pre>
 <pre><code>## Reordering so first three column headers are SNP, CHR and BP in this order.</code></pre>
 <pre><code>## Reordering so first fourth and fifth columns are A1 and A2.</code></pre>
@@ -452,7 +452,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Checking for SNPs with duplicated base-pair positions</code></pre>
 <pre><code>## Filtering SNPs based on INFO score.</code></pre>
 <pre><code>## 67 SNPs are below the INFO threshold of 0.1 and will be removed</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmppOI1Nh/info_filter.tsv</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmprldDAH/info_filter.tsv</code></pre>
 <pre><code>## Filtering SNPs, ensuring SE &gt;0.</code></pre>
 <pre><code>## Filtering effect columns, ensuring none equal 0.</code></pre>
 <pre><code>## Ensuring all SNPs have N&lt;5 std dev above mean.</code></pre>
@@ -460,7 +460,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Making X/Y CHR uppercase.</code></pre>
 <pre><code>## Checking for bi-allelic SNPs.</code></pre>
 <pre><code>## Sorting coordinates.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmppOI1Nh/file72a77983f2ee.tsv.gz</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmprldDAH/file5c7c799e0937.tsv.gz</code></pre>
 <pre><code>## Summary statistics report:
 ##    - 26 rows (26.3% of original 99 rows)
 ##    - 26 unique variants
@@ -553,7 +553,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <li>
 <strong>MungeSumstats_log_output</strong> - Text file of all errors to the console created during MungeSumstats run.</li>
 </ul>
-<p>Note to export to another type such as R native objects includign data.table, GRanges, VRanges or save as a VCF file, set <code>return_format</code>:</p>
+<p>Note to export to another type such as R native objects including data.table, GRanges, VRanges or save as a VCF file, set <code>return_format</code>:</p>
 <div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#set</span>
 <span class="va">reformatted_vcf_2</span> <span class="op">&lt;-</span> 
@@ -575,6 +575,12 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>SNP, BP, CHR, A1, A2, P, Z, OR, BETA, LOG_ODDS,
 SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 <p>feel free to update the <code><a href="../reference/sumstatsColHeaders.html">MungeSumstats::sumstatsColHeaders</a></code> following the approach in the data.R file and add your mapping. Then use a pull request on github and we will incorporate this change into the package.</p>
+<p>A note on <code><a href="../reference/sumstatsColHeaders.html">MungeSumstats::sumstatsColHeaders</a></code> for summary statistic files with A0/A1. The mapping in <code><a href="../reference/sumstatsColHeaders.html">MungeSumstats::sumstatsColHeaders</a></code> converts A0 to A*, this is a special case so that the code knows to map A0/A1 to A1/A2 (ref/alt). The special case is needed since ordinarily A1 refers to the reference not the alternative allele.</p>
+</div>
+<div id="further-functionality" class="section level1">
+<h1 class="hasAnchor">
+<a href="#further-functionality" class="anchor"></a>Further functionality</h1>
+<p>See the <a href="https://neurogenomics.github.io/MungeSumstats/articles/OpenGWAS.html">Open GWAS vignette</a> for how MungeSumstats can be used along with data from the MRC IEU Open GWAS Project and also Mungesumstats’ functionality to handle lists of summary statistics files.</p>
 </div>
 <div id="session-information" class="section level1">
 <h1 class="hasAnchor">
@@ -594,7 +600,7 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] MungeSumstats_1.1.9 BiocStyle_2.20.2   
+## [1] MungeSumstats_1.1.11 BiocStyle_2.20.2    
 ## 
 ## loaded via a namespace (and not attached):
 ##   [1] bitops_1.0-7                               

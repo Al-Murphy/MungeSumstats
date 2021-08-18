@@ -17,8 +17,9 @@ check_n_num(
 )
 }
 \arguments{
-\item{path}{Filepath for the summary statistics file to be formatted. Default
-is a temporary file.}
+\item{path}{Filepath for the summary statistics file to be formatted. A
+dataframe or datatable of the summary statistics file can also be passed
+directly to MungeSumstats using the path parameter.}
 
 \item{N_std}{numeric The number of standard deviations above the mean a SNP's
 N is needed to be removed. Default is 5.}

@@ -1,3 +1,15 @@
+## CHANGES IN VERSION 1.1.11
+
+### New Features
+
+* `check_multi_rs_snp` can now handle all punctuation with/without spaces. So if
+a row contains `rs1234,rs5678` or `rs1234, rs5678` or any other punctuation 
+character other than `,` these can be handled.
+* `format_sumstats(path)` can now be passed a dataframe/datatable of the summary
+statistics directly as well as a path to their saved location.
+* Input summary statistics with `A0/A1` corresponding to ref/alt can now be 
+handled by the mappign file as well as `A1/A2` corresponding to ref/alt.
+
 ## CHANGES IN VERSION 1.1.2
 
 ### New Features

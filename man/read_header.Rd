@@ -7,8 +7,9 @@
 read_header(path, n = 2, skip_vcf_metadata = FALSE)
 }
 \arguments{
-\item{path}{Filepath for the summary statistics file to be formatted. Default
-is a temporary file.}
+\item{path}{Filepath for the summary statistics file to be formatted. A
+dataframe or datatable of the summary statistics file can also be passed
+directly to MungeSumstats using the path parameter.}
 
 \item{n}{integer. The (maximal) number of lines to read. Negative values
 indicate that one should read up to the end of input on the connection.}

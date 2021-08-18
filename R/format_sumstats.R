@@ -27,8 +27,9 @@
 #'                                               allele_flip_check=FALSE)
 #' }
 #' #returned location has the updated summary statistics file
-#' @param path Filepath for the summary statistics file to be formatted. Default
-#' is a temporary file.
+#' @param path Filepath for the summary statistics file to be formatted. A 
+#' dataframe or datatable of the summary statistics file can also be passed
+#' directly to MungeSumstats using the path parameter.
 #' @param ref_genome name of the reference genome used for the GWAS ("GRCh37" or
 #'"GRCh38"). Argument is case-insensitive. Default is NULL which infers the 
 #'reference genome from the data.
@@ -134,6 +135,7 @@
 #' @importFrom data.table fread
 #' @importFrom data.table fwrite
 #' @importFrom data.table setcolorder
+#' @importFrom data.table as.data.table
 #' @importFrom utils read.table
 #' @importFrom utils data
 #' @export
@@ -252,8 +254,16 @@ format_sumstats <- function(path,
     
     ####  Check 2: Check input format and import ####
     sumstats_return <- list()
-    sumstats_return[["sumstats_dt"]] <- read_sumstats(path = path, 
-                                                      nThread = nThread) 
+    #if data.frame/data.table read it in directly, otherwise read from path
+    if(is.data.frame(path)){
+      sumstats_return[["sumstats_dt"]] <- data.table::as.data.table(path)
+      #update path in case it causes issue later and for space
+      path = ""
+    }  
+    else{
+      sumstats_return[["sumstats_dt"]] <- read_sumstats(path = path, 
+                                                          nThread = nThread) 
+    }  
     
     #### Check 3:Standardise headers for all OS ####
     sumstats_return <-

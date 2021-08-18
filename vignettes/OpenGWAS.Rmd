@@ -85,6 +85,12 @@ datasets <- MungeSumstats::import_sumstats(ids = ids,
                                            nThread = max(2,future::availableCores()-2))
 ```
 
+# Further functionality
+
+See the [Getting started vignette](https://neurogenomics.github.io/MungeSumstats/articles/MungeSumstats.html)
+for more information on how to use MungeSumstats and its functionality.
+
+
 # Session Info
 
 <details>

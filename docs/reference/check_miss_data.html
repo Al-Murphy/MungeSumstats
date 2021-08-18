@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Ensure that only one model in GWAS sumstats or only one trait tested — check_miss_data • MungeSumstats</title>
+<title>Remove SNPs with missing data — check_miss_data • MungeSumstats</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Ensure that only one model in GWAS sumstats or only one trait tested — check_miss_data" />
-<meta property="og:description" content="Ensure that only one model in GWAS sumstats or only one trait tested" />
+<meta property="og:title" content="Remove SNPs with missing data — check_miss_data" />
+<meta property="og:description" content="Remove SNPs with missing data" />
 
 
 
@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.11</span>
       </span>
     </div>
 
@@ -136,13 +136,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Ensure that only one model in GWAS sumstats or only one trait tested</h1>
+    <h1>Remove SNPs with missing data</h1>
     <small class="dont-index">Source: <a href='https://github.com/neurogenomics/MungeSumstats/blob/master/R/check_miss_data.R'><code>R/check_miss_data.R</code></a></small>
     <div class="hidden name"><code>check_miss_data.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Ensure that only one model in GWAS sumstats or only one trait tested</p>
+    <p>Remove SNPs with missing data</p>
     </div>
 
     <pre class="usage"><span class='fu'>check_miss_data</span><span class='op'>(</span>
@@ -160,8 +160,9 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>path</th>
-      <td><p>Filepath for the summary statistics file to be formatted. Default
-is a temporary file.</p></td>
+      <td><p>Filepath for the summary statistics file to be formatted. A
+dataframe or datatable of the summary statistics file can also be passed
+directly to MungeSumstats using the path parameter.</p></td>
     </tr>
     <tr>
       <th>log_folder_ind</th>

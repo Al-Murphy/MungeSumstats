@@ -31,5 +31,16 @@ standardise_sumstats_column_headers_crossplatform <-
       data.table::setnames(sumstats_dt,un,cr)
     }
   }
+  #Special case!! A0/A1 -> ref/alt so A1 flips meaning, A0 is A* in mapping
+  # but usually A1/A2 -> ref/alt so if A* found, swap A1 to A2 and make A* -> A1
+  new_headers <- colnames(sumstats_dt)
+  if("A*" %in% new_headers){
+    #if A1 and A2 also present need to rename A2
+    if("A1" %in% new_headers && "A2" %in% new_headers)
+      data.table::setnames(sumstats_dt,"A2","A2_from_input")
+    #if A1 present change to A2, doesn't have to be, can be inputted
+    data.table::setnames(sumstats_dt,"A1","A2",skip_absent = TRUE)
+    data.table::setnames(sumstats_dt,"A*","A1")
+  }
   return(list("sumstats_dt"=sumstats_dt))
 }
