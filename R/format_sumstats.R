@@ -58,7 +58,7 @@
 #' sumstats file). Default TRUE.
 #' @param effect_columns_nonzero Binary should the effect columns in the data 
 #' BETA,OR (odds ratio),LOG_ODDS,SIGNED_SUMSTAT be checked to ensure no SNP=0. 
-#' Those that do are removed(if present in sumstats file). Default TRUE.
+#' Those that do are removed(if present in sumstats file). Default FALSE.
 #' @param N_std numeric The number of standard deviations above the mean a SNP's
 #' N is needed to be removed. Default is 5.
 #' @param N_dropNA Drop rows where N is missing.Default is TRUE. 
@@ -149,7 +149,7 @@ format_sumstats <- function(path,
                             analysis_trait=NULL,
                             INFO_filter=0.9,
                             pos_se=TRUE,
-                            effect_columns_nonzero=TRUE,
+                            effect_columns_nonzero=FALSE,
                             N_std=5, 
                             N_dropNA=TRUE,
                             rmv_chr=c("X","Y","MT"),

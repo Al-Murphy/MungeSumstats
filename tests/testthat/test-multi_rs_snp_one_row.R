@@ -80,7 +80,7 @@ test_that("Handle more than 1 rs IDs in one row", {
                                            )
         
         #expect 7 log files
-        expect_equal(length(reformatted_log$log_files),8)
+        expect_equal(length(reformatted_log$log_files),7)
         #next check number of rows in each
         results<-c()
         for (log_i in reformatted_log$log_files){

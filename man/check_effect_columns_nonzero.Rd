@@ -22,7 +22,7 @@ directly to MungeSumstats using the path parameter.}
 
 \item{effect_columns_nonzero}{Binary should the effect columns in the data
 BETA,OR (odds ratio),LOG_ODDS,SIGNED_SUMSTAT be checked to ensure no SNP=0.
-Those that do are removed(if present in sumstats file). Default TRUE.}
+Those that do are removed(if present in sumstats file). Default FALSE.}
 
 \item{log_folder_ind}{Binary Should log files be stored containing all
 filtered out SNPs (separate file per filter). The data is outputted in the

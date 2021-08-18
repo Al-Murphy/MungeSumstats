@@ -66,6 +66,9 @@ check_zscore <- function(sumstats_dt,
             message("Keeping existing Z-score column.") 
         } else{
             message("Computing Z-score from P using formula: `sign(BETA)*sqrt(stats::qchisq(P,1,lower=FALSE)`")
+            #ensure BETA, P are numeric
+            sumstats_dt[,BETA:=as.numeric(BETA)]
+            sumstats_dt[,P:=as.numeric(P)]
             sumstats_dt[,Z:=sign(BETA)*sqrt(stats::qchisq(P,1,lower=FALSE))]
             #if user wants information, give SNPs where Z-score calculated
             if(imputation_ind)
