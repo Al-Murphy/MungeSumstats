@@ -1,11 +1,13 @@
 #' Infer VCF sample ID(s)
 #'
 #' @inheritParams format_sumstats  
-#' @return Tsample_id
+#' @return sample_id
 #' @keywords internal 
 infer_vcf_sample_ids <- function(sample_id=NULL,
                                  sumstats_file){
-    if(is.null(sample_id)){
+    #sometimes name for sample taken from VCF can be wrong and not match the col
+    #if this is the case also infer from the column
+    if(is.null(sample_id)||!(sample_id %in% names(sumstats_file))){
         idcol_index <- grep("FORMAT",colnames(sumstats_file),ignore.case = TRUE)
         if(any(length(colnames(sumstats_file))>=idcol_index)){
             sample_id <- 

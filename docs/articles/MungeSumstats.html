@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.15</span>
       </span>
     </div>
 
@@ -95,7 +95,7 @@
 </h1>
                         <h4 class="author">Alan Murphy, Brian Schilder, and Nathan Skene</h4>
             
-            <h4 class="date">2021-08-18</h4>
+            <h4 class="date">2021-08-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/MungeSumstats/blob/master/vignettes/MungeSumstats.Rmd"><code>vignettes/MungeSumstats.Rmd</code></a></small>
       <div class="hidden name"><code>MungeSumstats.Rmd</code></div>
@@ -236,7 +236,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ## ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing
 ## ( e.g. `file.copy(save_path, './formatted/' )`.
 ## ********************</code></pre>
-<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmprldDAH/file5c7c58bfee74.tsv.gz</code></pre>
+<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmpa4v0Gu/file139c26033736d.tsv.gz</code></pre>
 <pre><code>## Reading header.</code></pre>
 <pre><code>## Tabular format detected.</code></pre>
 <pre><code>## Importing.</code></pre>
@@ -249,7 +249,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ##    - 70 genome-wide significant variants (P&lt;5e-8)
 ##    - 20 chromosomes</code></pre>
 <pre><code>## Checking for multi-GWAS.</code></pre>
-<pre><code>## Checking for multiple RS IDs on one row.</code></pre>
+<pre><code>## Checking for multiple RSIDs on one row.</code></pre>
 <pre><code>## Checking SNP RSIDs.</code></pre>
 <pre><code>## Checking for merged allele column.</code></pre>
 <pre><code>## Ensuring all SNPs are on the reference genome.</code></pre>
@@ -261,14 +261,13 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Checking for duplicate columns.</code></pre>
 <pre><code>## Checking for duplicate SNPs from SNP ID.</code></pre>
 <pre><code>## Checking for SNPs with duplicated base-pair positions</code></pre>
-<pre><code>## Filtering SNPs, ensuring SE &gt;0.</code></pre>
-<pre><code>## Filtering effect columns, ensuring none equal 0.</code></pre>
+<pre><code>## Filtering SNPs, ensuring SE&gt;0.</code></pre>
 <pre><code>## Ensuring all SNPs have N&lt;5 std dev above mean.</code></pre>
 <pre><code>## Removing 'chr' prefix from CHR.</code></pre>
 <pre><code>## Making X/Y CHR uppercase.</code></pre>
 <pre><code>## Checking for bi-allelic SNPs.</code></pre>
 <pre><code>## Sorting coordinates.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmprldDAH/file5c7c58bfee74.tsv.gz</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmpa4v0Gu/file139c26033736d.tsv.gz</code></pre>
 <pre><code>## Summary statistics report:
 ##    - 93 rows (100% of original 93 rows)
 ##    - 93 unique variants
@@ -322,7 +321,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 </ul>
 <p>See <code>?MungeSumstats::format_sumstats()</code> for the full list of parameters to control MungeSumstats QC and standardisation steps.</p>
 <p>VCF files can also be standardised to the same format as other summary statistic files. A subset of the Amyotrophic lateral sclerosis GWAS from the ieu open GWAS project (a .vcf file) has been added to <em>MungeSumstats</em> to demonstrate this functionality.Simply pass the path to the file in the same manner you would for other summary statistic files:</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#save ALS GWAS from the ieu open GWAS project to a temp directory</span>
 <span class="va">ALSvcfPth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"ALSvcf.vcf"</span>, package<span class="op">=</span><span class="st">"MungeSumstats"</span><span class="op">)</span>
 <span class="co">#set a low INFO filter so we get a return</span>
@@ -339,7 +338,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ## ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing
 ## ( e.g. `file.copy(save_path, './formatted/' )`.
 ## ********************</code></pre>
-<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmprldDAH/file5c7c3ca66397.tsv.gz</code></pre>
+<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmpa4v0Gu/file139c291770bf.tsv.gz</code></pre>
 <pre><code>## Reading header.</code></pre>
 <pre><code>## Importing.</code></pre>
 <pre><code>## Reading VCF file.</code></pre>
@@ -357,7 +356,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ##    - 0 genome-wide significant variants (P&lt;5e-8)
 ##    - 1 chromosomes</code></pre>
 <pre><code>## Checking for multi-GWAS.</code></pre>
-<pre><code>## Checking for multiple RS IDs on one row.</code></pre>
+<pre><code>## Checking for multiple RSIDs on one row.</code></pre>
 <pre><code>## Checking SNP RSIDs.</code></pre>
 <pre><code>## Checking for merged allele column.</code></pre>
 <pre><code>## Ensuring all SNPs are on the reference genome.</code></pre>
@@ -372,14 +371,13 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Checking for SNPs with duplicated base-pair positions</code></pre>
 <pre><code>## Filtering SNPs based on INFO score.</code></pre>
 <pre><code>## 67 SNPs are below the INFO threshold of 0.1 and will be removed</code></pre>
-<pre><code>## Filtering SNPs, ensuring SE &gt;0.</code></pre>
-<pre><code>## Filtering effect columns, ensuring none equal 0.</code></pre>
+<pre><code>## Filtering SNPs, ensuring SE&gt;0.</code></pre>
 <pre><code>## Ensuring all SNPs have N&lt;5 std dev above mean.</code></pre>
 <pre><code>## Removing 'chr' prefix from CHR.</code></pre>
 <pre><code>## Making X/Y CHR uppercase.</code></pre>
 <pre><code>## Checking for bi-allelic SNPs.</code></pre>
 <pre><code>## Sorting coordinates.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmprldDAH/file5c7c3ca66397.tsv.gz</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmpa4v0Gu/file139c291770bf.tsv.gz</code></pre>
 <pre><code>## Summary statistics report:
 ##    - 26 rows (26.3% of original 99 rows)
 ##    - 26 unique variants
@@ -394,7 +392,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ## 5:   rs2462492   1 54676  C  T 0.1543 -0.0567 0.0407 0.786217 0.1543 0.16359989</code></pre>
 <pre><code>## Returning path to saved data.</code></pre>
 <p>You can also get more information on the SNPs which have had data imputed or have been filtered out by <em>MungeSumstats</em> by using the <code>imputation_ind</code> and <code>log_folder_ind</code> parameters respectively. For example:</p>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#set</span>
 <span class="va">reformatted_vcf_2</span> <span class="op">&lt;-</span> 
   <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/format_sumstats.html">format_sumstats</a></span><span class="op">(</span>path<span class="op">=</span><span class="va">ALSvcfPth</span>,
@@ -417,8 +415,8 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ## - This means all log data from the run will be deleted upon ending the R session.
 ## - To keep it, change `log_folder` to an actual directory (e.g. log_foler='./').
 ## ********************</code></pre>
-<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmprldDAH/file5c7c799e0937.tsv.gz</code></pre>
-<pre><code>## Log data to be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmprldDAH</code></pre>
+<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmpa4v0Gu/file139c21aca5885.tsv.gz</code></pre>
+<pre><code>## Log data to be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmpa4v0Gu</code></pre>
 <pre><code>## Reading header.</code></pre>
 <pre><code>## Importing.</code></pre>
 <pre><code>## Reading VCF file.</code></pre>
@@ -436,13 +434,13 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ##    - 0 genome-wide significant variants (P&lt;5e-8)
 ##    - 1 chromosomes</code></pre>
 <pre><code>## Checking for multi-GWAS.</code></pre>
-<pre><code>## Checking for multiple RS IDs on one row.</code></pre>
+<pre><code>## Checking for multiple RSIDs on one row.</code></pre>
 <pre><code>## Checking SNP RSIDs.</code></pre>
 <pre><code>## Checking for merged allele column.</code></pre>
 <pre><code>## Ensuring all SNPs are on the reference genome.</code></pre>
 <pre><code>## Loading reference genome data.</code></pre>
 <pre><code>## 12 SNPs are not on the reference genome. These will be corrected from the reference genome.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmprldDAH/snp_not_found_from_chr_bp.tsv</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmpa4v0Gu/snp_not_found_from_chr_bp.tsv</code></pre>
 <pre><code>## Checking for correct direction of A1 (reference) and A2 (alternative allele).</code></pre>
 <pre><code>## Reordering so first three column headers are SNP, CHR and BP in this order.</code></pre>
 <pre><code>## Reordering so first fourth and fifth columns are A1 and A2.</code></pre>
@@ -452,15 +450,14 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Checking for SNPs with duplicated base-pair positions</code></pre>
 <pre><code>## Filtering SNPs based on INFO score.</code></pre>
 <pre><code>## 67 SNPs are below the INFO threshold of 0.1 and will be removed</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmprldDAH/info_filter.tsv</code></pre>
-<pre><code>## Filtering SNPs, ensuring SE &gt;0.</code></pre>
-<pre><code>## Filtering effect columns, ensuring none equal 0.</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmpa4v0Gu/info_filter.tsv</code></pre>
+<pre><code>## Filtering SNPs, ensuring SE&gt;0.</code></pre>
 <pre><code>## Ensuring all SNPs have N&lt;5 std dev above mean.</code></pre>
 <pre><code>## Removing 'chr' prefix from CHR.</code></pre>
 <pre><code>## Making X/Y CHR uppercase.</code></pre>
 <pre><code>## Checking for bi-allelic SNPs.</code></pre>
 <pre><code>## Sorting coordinates.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmprldDAH/file5c7c799e0937.tsv.gz</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmpa4v0Gu/file139c21aca5885.tsv.gz</code></pre>
 <pre><code>## Summary statistics report:
 ##    - 26 rows (26.3% of original 99 rows)
 ##    - 26 unique variants
@@ -481,11 +478,11 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ## 5:             NA</code></pre>
 <pre><code>## Returning path to saved data.</code></pre>
 <p>Note that using <code>log_folder_ind</code> returns a list from <code>format_sumstats</code> which includes the file locations of the differing classes of removed SNPs. Using <code>log_mungesumstats_msgs</code> saves the messages to the console to a file which is returned in the same list. Note that not all the messages will also print to screen anymore when you set <code>log_mungesumstats_msgs</code>:</p>
-<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">reformatted_vcf_2</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "sumstats"  "log_files"</code></pre>
 <p>A user can load a file to view the excluded SNPs:</p>
-<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="va">reformatted_vcf_2</span><span class="op">$</span><span class="va">log_files</span><span class="op">$</span><span class="va">info_filter</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></code></pre></div>
 <pre><code>##             SNP CHR    BP A1 A2   INFO    BETA     SE        LP     AF
 ##  1: rs146477069   1 54421  A  G 0.0352 -0.0240 0.0830 0.1121020 0.0352
@@ -554,7 +551,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <strong>MungeSumstats_log_output</strong> - Text file of all errors to the console created during MungeSumstats run.</li>
 </ul>
 <p>Note to export to another type such as R native objects including data.table, GRanges, VRanges or save as a VCF file, set <code>return_format</code>:</p>
-<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#set</span>
 <span class="va">reformatted_vcf_2</span> <span class="op">&lt;-</span> 
   <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/format_sumstats.html">format_sumstats</a></span><span class="op">(</span>path<span class="op">=</span><span class="va">ALSvcfPth</span>,
@@ -600,7 +597,7 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] MungeSumstats_1.1.11 BiocStyle_2.20.2    
+## [1] MungeSumstats_1.1.15 BiocStyle_2.20.2    
 ## 
 ## loaded via a namespace (and not attached):
 ##   [1] bitops_1.0-7                               

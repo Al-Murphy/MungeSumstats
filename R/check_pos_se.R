@@ -10,7 +10,7 @@ check_pos_se <- function(sumstats_dt, path, pos_se,log_folder_ind,
     SE = .SD = NULL
     col_headers <- names(sumstats_dt)
     if("SE" %in% col_headers && pos_se){
-        message("Filtering SNPs, ensuring SE >0.")
+        message("Filtering SNPs, ensuring SE>0.")
         #use data table for speed
         num_bad_ids <- nrow(sumstats_dt[SE<=0,])
         if(num_bad_ids>0){

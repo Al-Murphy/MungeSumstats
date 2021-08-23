@@ -12,7 +12,7 @@ import_sumstats(
   write_vcf = FALSE,
   download_method = "download.file",
   quiet = TRUE,
-  force_new = FALSE,
+  force_new_vcf = FALSE,
   nThread = 1,
   parallel_across_ids = FALSE,
   ...
@@ -37,7 +37,7 @@ Change this to keep the raw VCF file on disk (e.g. \code{vcf_dir="./raw_vcf"}).}
 
 \item{quiet}{Run quietly.}
 
-\item{force_new}{Overwrite a previously downloaded VCF with the same path name.}
+\item{force_new_vcf}{Overwrite a previously downloaded VCF with the same path name.}
 
 \item{nThread}{Number of threads to use for parallel processes.}
 

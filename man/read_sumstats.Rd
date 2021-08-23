@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_sumstats.R
 \name{read_sumstats}
 \alias{read_sumstats}
-\title{Determine summary statistics file type and reda them into memory}
+\title{Determine summary statistics file type and read them into memory}
 \usage{
 read_sumstats(path, nThread = 1)
 }
@@ -17,7 +17,7 @@ directly to MungeSumstats using the path parameter.}
 \code{data.table} of formatted summary statistics
 }
 \description{
-Determine summary statistics file type and reda them into memory
+Determine summary statistics file type and read them into memory
 }
 \examples{
  eduAttainOkbay <- MungeSumstats::read_sumstats(path = system.file("extdata","eduAttainOkbay.txt",

@@ -2,7 +2,7 @@
 #'
 #' @inheritParams format_sumstats 
 #' @importFrom VariantAnnotation scanVcfHeader
-#' @return Tsample_id
+#' @return sample_id
 #' @keywords internal 
 get_vcf_sample_ids <- function(path){
     if(startsWith(path,"https://gwas.mrcieu.ac.uk")){
@@ -17,8 +17,8 @@ get_vcf_sample_ids <- function(path){
             sample_id <- header[grepl("^##SAMPLE",header)]#gets ##SAMPLE
         }
         sample_id <- gsub(",.*$", "", sample_id)#get rid of everything after ID
-        sample_id <- base::substr(sample_id,10,nchar(sample_id))# get rid of ##SAMPLE=
-        sample_id <- sub('.+=(.+)', '\\1', sample_id)# remove things before equals  
+        sample_id <- base::substr(sample_id,10,nchar(sample_id))#rmv ##SAMPLE=
+        sample_id <- sub('.+=(.+)', '\\1', sample_id)#rmv things before equals  
     } 
     if(length(sample_id)==0){ 
         message("No ##SAMPLE row found. Will infer sample name(s) from data colnames.")

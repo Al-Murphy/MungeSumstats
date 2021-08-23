@@ -23,7 +23,7 @@ read_vcf <- function(path,
     # 3. [seqminer](https://cran.r-project.org/web/packages/seqminer/index.html) 
     # 4. [Rsamtools](https://bioconductor.org/packages/release/bioc/html/Rsamtools.html) 
     ##################################
-     
+    save(path,nThread,temp_save,keep_extra_cols,file="~/Downloads/temp.RData") 
     ### Add this to avoid confusing BiocCheck 
     INFO = Pval = P = LP = NULL;
     
@@ -37,16 +37,19 @@ read_vcf <- function(path,
     #### If the VCF is remotely stored, data.table automatically 
     # downloads it to a tmpdir without telling you where. This lets you know where.
     if(startsWith(path,"https://gwas.mrcieu.ac.uk")){
-        vcf_suffixes <- supported_suffixes(tabular = FALSE, tabular_compressed = FALSE)
-        tmpdir <- file.path(tempdir(),gsub(paste(vcf_suffixes,collapse = "|"),"",basename(path)),"")
+        vcf_suffixes <- supported_suffixes(tabular = FALSE, 
+                                            tabular_compressed = FALSE)
+        tmpdir <- 
+            file.path(tempdir(),gsub(paste(vcf_suffixes,collapse = "|"),"",
+                                        basename(path)),"")
         dir.create(tmpdir, showWarnings = FALSE, recursive = TRUE)
         message("Downloading VCF ==> ",tmpdir) 
     }else {
         tmpdir <- tempdir()
     }
     
-    sumstats_file <- data.table::fread(path, nThread = nThread, sep="\t", skip = "#CHR", 
-                                       tmpdir = tmpdir) 
+    sumstats_file <- data.table::fread(path, nThread = nThread, sep="\t", 
+                                       skip = "#CHR", tmpdir = tmpdir) 
     sumstats_file <- sumstats_file %>% dplyr::rename(CHROM="#CHROM")
     
     #### Infer sample ID from data colnames if necessary #### 

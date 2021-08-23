@@ -10,7 +10,7 @@ check_multi_rs_snp <- function(sumstats_dt, path, remove_multi_rs_snp,
                                 imputation_ind,log_folder_ind,check_save_out,
                                 tabix_index, nThread, log_files){
     SNP = convert_multi_rs_SNP = NULL
-    message("Checking for multiple RS IDs on one row.")
+    message("Checking for multiple RSIDs on one row.")
     col_headers <- names(sumstats_dt)
     #check for "rs1234;rs5678","rs1234,rs5678","rs1234_rs5678","rs1234-rs5678"
     #"rs1234-rs5678" should also deal with a space in each of the above
@@ -18,10 +18,11 @@ check_multi_rs_snp <- function(sumstats_dt, path, remove_multi_rs_snp,
        (sum(grepl("[[:punct:]]rs",sumstats_dt$SNP))>0)||
        (sum(grepl("[[:punct:]] rs",sumstats_dt$SNP))>0)){
         if(!remove_multi_rs_snp){ #take first
-            msg<-paste0((sum(grepl("[[:punct:]]rs",sumstats_dt$SNP))+
-                            sum(grepl("[[:punct:]] rs",sumstats_dt$SNP))),
+            msg<-paste0(formatC((sum(grepl("[[:punct:]]rs",sumstats_dt$SNP))+
+                                sum(grepl("[[:punct:]] rs",sumstats_dt$SNP))),
+                                big.mark = ","),
                         " SNPs found with ",
-                        " multiple RS IDs on one row, the first will be ",
+                        "multiple RS IDs on one row, the first will be ",
                         "taken. If you would rather remove these SNPs set\n",
                         "`remove_multi_rs_snp`=TRUE")
             message(msg)

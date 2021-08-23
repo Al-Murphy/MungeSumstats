@@ -12,7 +12,7 @@ dataframe or datatable of the summary statistics file can also be passed
 directly to MungeSumstats using the path parameter.}
 }
 \value{
-Tsample_id
+sample_id
 }
 \description{
 Get VCF sample ID(s)

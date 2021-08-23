@@ -7,7 +7,7 @@
 infer_vcf_sample_ids(sample_id = NULL, sumstats_file)
 }
 \value{
-Tsample_id
+sample_id
 }
 \description{
 Infer VCF sample ID(s)

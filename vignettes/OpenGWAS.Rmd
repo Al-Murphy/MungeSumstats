@@ -39,7 +39,7 @@ from the MRC IEU [Open GWAS Project](https://gwas.mrcieu.ac.uk/).
 ```{r}
 #### Search for datasets ####
 metagwas <- MungeSumstats::find_sumstats(traits = c("parkinson","alzheimer"), 
-                                         min_sample_size = 5000)
+                                         min_sample_size = 1000)
 head(metagwas)
 ids <- (dplyr::arrange(metagwas, nsnp))$id  
 ```

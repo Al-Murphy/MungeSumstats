@@ -9,6 +9,7 @@
 #' @return List containing the paths to the downloaded VCF and its index file.
 #' 
 #' @param vcf_url Remote URL to VCF file.
+#' @param force_new Overwrite a previously downloaded VCF with the same path name.
 #' @inheritParams downloader
 #' @inheritParams import_sumstats
 #' @export

@@ -11,7 +11,7 @@
 #' This means the raw (pre-formatted) VCFs be deleted upon ending the R session.
 #' Change this to keep the raw VCF file on disk (e.g. \code{vcf_dir="./raw_vcf"}). 
 #' @param save_dir Directory to save formatted summary statistics in.
-#' @param force_new Overwrite a previously downloaded VCF with the same path name.
+#' @param force_new_vcf Overwrite a previously downloaded VCF with the same path name.
 #' @param parallel_across_ids If \code{parallel_across_ids=TRUE} and \code{nThread>1}, 
 #' then each ID in \code{ids} will be processed in parallel. 
 #' @param ... Additional arguments to be passed to \code{MungeSumstats::format_sumstats}.
@@ -46,7 +46,7 @@ import_sumstats <- function(ids,
                             write_vcf=FALSE,
                             download_method="download.file",
                             quiet=TRUE, 
-                            force_new=FALSE,
+                            force_new_vcf=FALSE,
                             nThread=1, 
                             parallel_across_ids=FALSE,
                             ...){  
@@ -84,7 +84,7 @@ import_sumstats <- function(ids,
                                       vcf_dir=vcf_dir, 
                                       vcf_download=vcf_download,
                                       download_method=download_method,
-                                      force_new=force_new,
+                                      force_new=force_new_vcf,
                                       quiet=quiet,
                                       nThread=nThread) 
             #### format_sumstats ####
@@ -92,7 +92,6 @@ import_sumstats <- function(ids,
             if(!write_vcf) save_path <- gsub(".vcf.gz",".tsv.gz",save_path)
             reformatted <- format_sumstats(path=vcf_paths$save_path,
                                            save_path=save_path,
-                                           force_new=force_new,
                                            nThread=nThread, 
                                            ...)   
             end <- Sys.time() 
