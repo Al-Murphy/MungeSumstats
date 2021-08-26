@@ -147,8 +147,9 @@ remove these SNPs entirely, set it to TRUE. Default is FALSE.}
 \item{tabix_index}{Index the formatted summary statistics with
 \href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
 
-\item{return_data}{Return \code{data.table} directly to user. Otherwise,
-return the path to the save data. Default is FALSE.}
+\item{return_data}{Return \code{data.table}, \code{GRanges} or \code{VRanges}
+directly to user. Otherwise, return the path to the save data. Default is
+FALSE.}
 
 \item{return_format}{If return_data is TRUE. Object type to be returned
 ("data.table","vranges","granges").}

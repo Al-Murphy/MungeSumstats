@@ -21,7 +21,7 @@ check_col_order <- function(sumstats_dt, path){
     whichBP <- which(col_headers=="BP")[1]
     #if A1 and A2 present, put them as four and five
     if(sum(c("A1","A2") %in% col_headers)==2){
-      message("Reordering so first fourth and fifth columns are A1 and A2.")
+      message("Reordering so the fourth and fifth columns are A1 and A2.")
       whichA1 <- which(col_headers=="A1")[1]
       whichA2 <- which(col_headers=="A2")[1]
       otherCols <- setdiff(seq_len(length(col_headers)),

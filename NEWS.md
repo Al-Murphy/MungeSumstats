@@ -1,5 +1,16 @@
 ## CHANGES IN VERSION 1.1.11
 
+### Bug fixes
+
+* `check_no_rs_snp` can now handle extra information after an RS ID. So if you 
+have `rs1234:A:G` that will be separated into two columns.
+* `check_two_step_col` and `check_four_step_col`, the two checks for when 
+multiple columns are in one, have been updated so if not all SNPs have multiple
+columns or some have more than the expected number, this can now be handled.
+* Extra mappings for the `FRQ` column have been added to the mapping file
+
+## CHANGES IN VERSION 1.1.11
+
 ### New Features
 
 * `check_multi_rs_snp` can now handle all punctuation with/without spaces. So if

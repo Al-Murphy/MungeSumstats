@@ -77,7 +77,8 @@ check_allele_flip <-  function(sumstats_dt, path, ref_genome, rsids,
         nrow(sumstats_dt[A1!=ref_gen_allele & A2!=ref_gen_allele,])>0){
       print_msg0 <- 
         paste0("There are ",
-               nrow(sumstats_dt[A1!=ref_gen_allele & A2!=ref_gen_allele,]),
+               formatC(nrow(sumstats_dt[A1!=ref_gen_allele & 
+                                          A2!=ref_gen_allele,]),big.mark = ","),
                " SNPs where neither A1 nor A2 match the reference genome.",
                "\nThese will be removed.")
       message(print_msg0)

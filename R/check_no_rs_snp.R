@@ -18,7 +18,7 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome,snp_ids_are_rs_ids,
                               imputation_ind,log_folder_ind,check_save_out,
                               tabix_index, nThread, log_files){
   SNP = CHR = CHR1 = BP1 = i.RefSNP_id = IMPUTATION_SNP = 
-    SNP_old_temp= NULL
+    SNP_old_temp= SNP_INFO = NULL
   #if snp ids aren't rs ids rename the column to ID's so RS IDs can be inferred
   if((!snp_ids_are_rs_ids) & sum("SNP" %in% names(sumstats_dt))==1)
     data.table::setnames(sumstats_dt,"SNP","ID")
@@ -113,14 +113,24 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome,snp_ids_are_rs_ids,
         format <- c("BP1","CHR1")
       miss_rs_chr_bp[, (format) := data.table::tstrsplit(SNP,
                                                       split=":", fixed=TRUE)]
+      #if BP col has other info after, drop it
+      if(sum(grepl("[[:punct:]].*",miss_rs_chr_bp$BP1))>0)
+        miss_rs_chr_bp[,BP1:=gsub("([[:punct:]]).*","",BP1)]
       #ensure integer col
       miss_rs_chr_bp[,BP1:=as.integer(BP1)]
       #now drop SNP
       miss_rs_chr_bp[,SNP := NULL]
       #if chromosome col has chr prefix remove it
       miss_rs_chr_bp[,CHR1:=gsub("chr","",CHR1)]
+      #if chromosome col has other info after, drop it
+      if(sum(grepl("[[:punct:]].*",miss_rs_chr_bp$CHR1))>0)
+        miss_rs_chr_bp[,CHR1:=gsub("([[:punct:]]).*","",CHR1)]
+      #avoid SNPs with NA values in chr or bp
+      gr_snp <- data.table::copy(miss_rs_chr_bp)
+      incl_cols <- c("CHR1","BP1")
+      gr_snp <- gr_snp[complete.cases(gr_snp[,incl_cols,with = FALSE])]
       gr_snp <- 
-        GenomicRanges::makeGRangesFromDataFrame(data.table::copy(miss_rs_chr_bp),
+        GenomicRanges::makeGRangesFromDataFrame(gr_snp,
                                                 keep.extra.columns = TRUE,
                                                 seqnames.field = "CHR1",
                                                 start.field = "BP1",
@@ -222,6 +232,31 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome,snp_ids_are_rs_ids,
                  " SNP IDs are not correctly formatted and will be removed")
         message(msg)
       }
+    }
+    #also check for weirdly formatted SNPs like rs1234:.....
+    #remove everything after : and put in separate column 
+    #(can extend code to infer info from this separate column later)
+    rs_plus <- sumstats_dt[intersect(grep("^rs",SNP),grep(":",SNP)),]
+    if(nrow(rs_plus)!=0){
+      msg <- paste0(formatC(nrow(rs_plus),big.mark = ","), 
+                    " SNP IDs contain other information in the same column.",
+                    " These will be separated.")
+      message(msg)
+      setnames(rs_plus,"SNP","SNP_INFO")
+      #isolate RS ID
+      rs_plus[,SNP := sub("\\:.*", "", SNP_INFO)]
+      #isolate extra info
+      rs_plus[,SNP_INFO := sub("^.*?:", "", SNP_INFO)]
+      #join back
+      #add extra column
+      sumstats_dt[,SNP_INFO:=NA]
+      #make sure columns in correct order
+      data.table::setcolorder(rs_plus,names(sumstats_dt))
+      #update values
+      sumstats_dt <- 
+        data.table::rbindlist(list(sumstats_dt[!intersect(grep("^rs",SNP),
+                                                            grep(":",SNP)),],
+                                   rs_plus))
     }
     #if imputation_ind return column specifying imputed
     if(imputation_ind){

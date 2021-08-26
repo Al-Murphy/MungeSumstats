@@ -38,7 +38,8 @@ check_four_step_col <- function(sumstats_dt, path){
     if(length(format)!=4)#If neither found assign name
       format <- c("CHR","BP","A2","A1")
     sumstats_dt[, (format) := data.table::tstrsplit(get(keep_col),
-                                                      split=":", fixed=TRUE)]
+                                                    split=":", fixed=TRUE,
+                                                    type.convert=TRUE)]
     #remove combined column
     sumstats_dt[, (keep_col) := NULL]
     msg <- paste0("Column ",keep_col," has been separated into the columns ",

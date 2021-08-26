@@ -9,7 +9,7 @@
 #' @importFrom utils capture.output
 preview_sumstats <- function(save_path,
                              nrows=5L){
-    message("Succesfully finished preparing sumstats file, preview:")
+    message("Successfully finished preparing sumstats file, preview:")
     vcf_suffixes <- supported_suffixes(tabular = FALSE, tabular_compressed = FALSE)
     if(any(endsWith(save_path,vcf_suffixes))){ 
         preview <- read_header(path = save_path, 

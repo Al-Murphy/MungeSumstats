@@ -16,7 +16,7 @@
 check_no_snp <- function(sumstats_dt, path, ref_genome, imputation_ind,
                          log_folder_ind,check_save_out,tabix_index, nThread,
                          log_files, verbose=TRUE){
-  SNP = CHR = i.RefSNP_id = IMPUTATION_SNP = NULL
+  SNP = CHR = i.RefSNP_id = IMPUTATION_SNP = BP = NULL
   # If CHR and BP are present BUT not SNP then need to find the relevant SNP ids
   col_headers <- names(sumstats_dt)
   if(sum(c("CHR","BP") %in% col_headers)==2 & sum("SNP" %in% col_headers)==0){
@@ -26,8 +26,12 @@ check_no_snp <- function(sumstats_dt, path, ref_genome, imputation_ind,
     SNP_LOC_DATA <- load_snp_loc_data(ref_genome,msg)
     #if chromosome col has chr prefix remove it
     sumstats_dt[,CHR:=gsub("chr","",CHR)]
+    #avoid SNPs with NA values in chr or bp
+    gr_snp <- data.table::copy(sumstats_dt)
+    incl_cols <- c("CHR","BP")
+    gr_snp <- gr_snp[complete.cases(gr_snp[,incl_cols,with = FALSE])]
     gr_snp <- 
-      GenomicRanges::makeGRangesFromDataFrame(data.table::copy(sumstats_dt),
+      GenomicRanges::makeGRangesFromDataFrame(gr_snp,
                                               keep.extra.columns = TRUE,
                                               seqnames.field = "CHR",
                                               start.field = "BP",
@@ -40,7 +44,9 @@ check_no_snp <- function(sumstats_dt, path, ref_genome, imputation_ind,
     #in case there is CHR8 and chr8
     rsids[,CHR:=tolower(as.character(CHR))]
     sumstats_dt[,CHR:=tolower(as.character(CHR))]
-    # join on SNP ID to sumstats
+    #ensure bp is numeric
+    sumstats_dt[,BP:=as.numeric(BP)]
+    # join on SCHR BP to sumstats
     data.table::setkeyv(sumstats_dt,c("CHR","BP"))
     data.table::setkeyv(rsids,c("CHR","BP"))
     sumstats_dt[rsids,SNP:=i.RefSNP_id]

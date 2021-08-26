@@ -23,7 +23,7 @@ check_small_p_val <- function(sumstats_dt, path, convert_small_p,
     char_check <- FALSE
     num_check <- FALSE
     if(is.numeric(sumstats_dt$P)){
-      if(min(sumstats_dt$P)<=5e-324)
+      if(min(sumstats_dt$P,na.rm=TRUE)<=5e-324)
         num_check <- TRUE
     }
     else{#char check

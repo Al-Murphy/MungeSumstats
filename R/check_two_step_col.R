@@ -36,8 +36,12 @@ check_two_step_col <- function(sumstats_dt, path){
       format <- strsplit(keep_col,"_")[[1]]
     if(length(format)!=2)#If neither found assign name
       format <- c("CHR","BP")
+    #keep ensures that even if certain rows have 3 values e.g.16:23609681:ID
+    #only first two taken
     sumstats_dt[, (format) := data.table::tstrsplit(get(keep_col),
-                                                    split=":", fixed=TRUE)]
+                                                    split=":", fixed=TRUE,
+                                                    keep=c(1,2),
+                                                    type.convert=TRUE)]
     #remove combined column
     sumstats_dt[, (keep_col) := NULL]
     msg <- paste0("Column ",keep_col," has been separated into the columns ",
