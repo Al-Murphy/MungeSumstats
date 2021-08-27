@@ -20,7 +20,7 @@ editor_options:
     wrap: 72
 ---
 
-```{r style, echo=FALSE, results='asis', message=FALSE}
+```{r style, echo=FALSE, results='asis', message=FALSE, dpi=400}
 BiocStyle::markdown()
 knitr::opts_chunk$set(tidy         = FALSE,
                       message      = FALSE)

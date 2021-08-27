@@ -22,5 +22,4 @@ NCBI dbSNP Build 144. Reference genome version is dependent on user input.
 }
 \examples{
 SNP_LOC_DATA <- load_snp_loc_data("GRCH37")
-
 }

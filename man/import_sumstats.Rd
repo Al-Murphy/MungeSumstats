@@ -55,19 +55,20 @@ Requires internet access to run.
 }
 \examples{
 ### Search by criteria
-metagwas <- MungeSumstats::find_sumstats(traits = c("parkinson","alzheimer"),
-                                         min_sample_size = 5000)
-### Only use a subset for testing purposes                                           
-ids <- (dplyr::arrange(metagwas, nsnp))$id    
+metagwas <- find_sumstats(
+    traits = c("parkinson", "alzheimer"),
+    min_sample_size = 5000
+)
+### Only use a subset for testing purposes
+ids <- (dplyr::arrange(metagwas, nsnp))$id
 
-### Default usage   
+### Default usage
 ## You can supply \code{import_sumstats()}
-## with a list of as many OpenGWAS IDs as you want, 
+## with a list of as many OpenGWAS IDs as you want,
 ## but we'll just give one to save time.
 
 ## Call uses reference genome as default with more than 2GB of memory,
 ## which is more than what 32-bit Windows can handle so remove certain checks
 ## commented out down to runtime
-#datasets <- MungeSumstats::import_sumstats(ids = ids) 
-
+# datasets <- import_sumstats(ids = ids[1])
 }

@@ -13,9 +13,16 @@ vignettes/.build.timestamp
 vignettes/hssGWAS_cache/*
 vignettes/hssGWAS_files/*
 hssGWAS.Rproj
-.DS_Store
-inst/.DS_Store
-vignettes/.DS_Store
+
+# find . -name .DS_Store -print0 | xargs -0 git rm -f --ignore-unmatch
+./.DS_Store
+./**/.DS_Store
+./**/**/.DS_Store
+./**/**/**/.DS_Store
+./**/**/**/**/.DS_Store
+./**/**/**/**/**/.DS_Store
+./**/**/**/**/**/**/.DS_Store
+
 data/SNP_LOC_DATA.rda
 inst/doc
 /doc/

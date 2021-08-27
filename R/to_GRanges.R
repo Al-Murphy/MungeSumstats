@@ -4,12 +4,13 @@
 #' @return \code{GRanges} object
 #' @keywords internal
 #' @importFrom GenomicRanges makeGRangesFromDataFrame
-to_GRanges <- function(sumstats_dt){
+to_GRanges <- function(sumstats_dt) {
     message("Converting summary statistics to Genomic Ranges.")
-    gr <- GenomicRanges::makeGRangesFromDataFrame(sumstats_dt, 
-                                                  keep.extra.columns = TRUE, 
-                                                  seqnames.field = "CHR", 
-                                                  start.field = "BP", 
-                                                  end.field = "BP")
+    gr <- GenomicRanges::makeGRangesFromDataFrame(sumstats_dt,
+        keep.extra.columns = TRUE,
+        seqnames.field = "CHR",
+        start.field = "BP",
+        end.field = "BP"
+    )
     return(gr)
 }

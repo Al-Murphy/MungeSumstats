@@ -12,14 +12,14 @@ The code to prepare the .Rda file file from the marker file is:
 \code{
 # Most the data in the below table comes from the LDSC github wiki
 data("sumstatsColHeaders")
-# Make additions to sumstatsColHeaders using github version of MungeSumstats- 
+# Make additions to sumstatsColHeaders using github version of MungeSumstats-
 # shown is an example of adding columns for Standard Error (SE)
-#se_cols <- data.frame("Uncorrected"=c("SE","se","STANDARD.ERROR","STANDARD_ERROR","STANDARD-ERROR"), 
+#se_cols <- data.frame("Uncorrected"=c("SE","se","STANDARD.ERROR","STANDARD_ERROR","STANDARD-ERROR"),
 #                      "Corrected"=rep("SE",5))
 #sumstatsColHeaders <- rbind(sumstatsColHeaders,se_cols)
 #Once additions are made, order & save the new mapping dataset
 #now sort ordering -important for logic that uncorrected=corrected comes first
-sumstatsColHeaders$ordering <- 
+sumstatsColHeaders$ordering <-
     sumstatsColHeaders$Uncorrected==sumstatsColHeaders$Corrected
 sumstatsColHeaders <-
     sumstatsColHeaders[order(sumstatsColHeaders$Corrected,
@@ -29,7 +29,7 @@ sumstatsColHeaders$ordering <- NULL
 usethis::use_data(sumstatsColHeaders,overwrite = TRUE, internal=TRUE)
 save(sumstatsColHeaders,
       file="data/sumstatsColHeaders.rda")
-# You will need to restart your r session for effects to take account      
+# You will need to restart your r session for effects to take account
 }
 }
 \usage{

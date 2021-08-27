@@ -7,14 +7,15 @@
 write_sumstats(
   sumstats_dt,
   save_path,
-  sep,
+  sep = "\\t",
   write_vcf = FALSE,
   tabix_index = FALSE,
   nThread = 1
 )
 }
 \arguments{
-\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS.}
+\item{sumstats_dt}{data table obj of the summary statistics
+file for the GWAS.}
 
 \item{save_path}{File path to save formatted data. Defaults to
 \code{tempfile(fileext=".tsv.gz")}.}
@@ -35,9 +36,10 @@ write_sumstats(
 Write sum stats file to disk
 }
 \examples{
- eduAttainOkbay <- MungeSumstats::read_sumstats(path = system.file("extdata","eduAttainOkbay.txt",
-                                                                   package="MungeSumstats"))
-MungeSumstats::write_sumstats(sumstats_dt=eduAttainOkbay, 
-                              save_path=tempfile(fileext=".tsv.gz"), 
-                              sep="\t")
+path <- system.file("extdata", "eduAttainOkbay.txt",
+    package = "MungeSumstats"
+)
+eduAttainOkbay <- read_sumstats(path = path)
+write_sumstats(sumstats_dt = eduAttainOkbay,
+               save_path = tempfile(fileext = ".tsv.gz"))
 }

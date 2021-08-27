@@ -7,15 +7,10 @@
 \usage{
 standardise_sumstats_column_headers_crossplatform(
   sumstats_dt,
-  path,
-  mapping_file
+  mapping_file = sumstatsColHeaders
 )
 }
 \arguments{
-\item{path}{Filepath for the summary statistics file to be formatted. A
-dataframe or datatable of the summary statistics file can also be passed
-directly to MungeSumstats using the path parameter.}
-
 \item{mapping_file}{MungeSumstats has a pre-defined column-name mapping file
 which should cover the most common column headers and their interpretations.
 However, if a column header that is in youf file is missing of the mapping we

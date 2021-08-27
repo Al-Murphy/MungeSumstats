@@ -1,0 +1,166 @@
+---
+title: "MungeSumstats: hex sticker"
+author: "Alan Murphy, Brian Schilder, and Nathan Skene"
+date: "`r Sys.Date()`"
+output:
+  BiocStyle::html_document:
+    self_contained: yes
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    code_folding: show
+    df_print: paged
+csl: nature.csl
+vignette: >
+    %\VignetteIndexEntry{hexSticker} 
+    %\usepackage[utf8]{inputenc}
+    %\VignetteEngine{knitr::rmarkdown}  
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r style, echo=FALSE, results='asis', message=FALSE}
+BiocStyle::markdown()
+knitr::opts_chunk$set(tidy         = FALSE,
+                      message      = FALSE)
+```
+
+```{r setup, include=TRUE, message=FALSE} 
+library(hexSticker)
+
+library(dplyr)
+library(ggplot2)
+library(ggimage) 
+library(magick)
+# https://github.com/emitanaka/anicon
+```
+
+# Prepare images
+
+## Manhattan plot
+
+[qqman](https://www.r-graph-gallery.com/101_Manhattan_plot.html)
+
+```{r, eval=FALSE}
+library(qqman)
+data("gwasResults") 
+don <- gwasResults %>%  
+  # Compute chromosome size
+  group_by(CHR) %>% 
+  summarise(chr_len=max(BP)) %>%  
+  # Calculate cumulative position of each chromosome
+  mutate(tot=cumsum(chr_len)-chr_len) %>%
+  select(-chr_len) %>% 
+  # Add this info to the initial dataset
+  left_join(gwasResults, ., by=c("CHR"="CHR")) %>% 
+  # Add a cumulative position of each SNP
+  arrange(CHR, BP) %>%
+  mutate( BPcum=BP+tot) %>%
+  # subset(P>5e-8) %>%
+  tibble::rowid_to_column("id") %>%
+  data.table::data.table(key = "id")  
+#### Make more significant P-values line up with the mountain peak ####
+set.seed(2020)
+for(r in seq(1,15)){
+  don_sub <- don %>% 
+  subset(CHR %in% c(7,8)) %>%
+  dplyr::group_by(CHR) %>%
+  dplyr::slice_sample(prop = .1) %>%
+  dplyr::mutate(P=P/10) %>%
+  data.table::data.table(key = "id") 
+  don[don_sub$id,"P"] <- don_sub$P
+}
+#### scatter plot ####
+mp <- ggplot(don, aes(x=BPcum, y=-log10(P))) +  
+    geom_point( aes(color=as.factor(CHR)), alpha=0.5, size=1.3, show.legend = FALSE) + 
+    scale_color_manual(values = rep(c("grey", "black"), 22 )) +  
+    theme_void() +
+    theme(panel.background = element_rect(fill = "transparent"))
+print(mp)
+# ggplot2::ggsave(here::here("inst/hex/gwas.png"), mp, width = 10, dpi = 400)
+```
+
+## Modify PNGs
+
+[magick](https://cran.r-project.org/web/packages/magick/vignettes/intro.html)
+
+```{r, eval=FALSE}
+#### david #### 
+david_neg <- here::here("inst/hex/david.png") %>% 
+  magick::image_read() %>% 
+  magick::image_negate()
+magick::image_write(david_neg, here::here("inst/hex/david_negative.png"), 
+                    quality = 100, density = 400)
+
+#### mountain #### 
+# mountain_reflect <-  here::here("inst/hex/mountain2.png") %>%
+#   magick::image_read() %>% 
+#   magick::image_flip() %>%
+#   magick::image_transparent(color = "grey")
+# magick::image_write(mountain_reflect, here::here("inst/hex/mountain_reflect.png"))
+```
+
+## Create plotting data
+
+```{r, eval=FALSE} 
+d <- data.frame(x = c(1,1,1),
+                y = c(1,1.1,.5),
+                size = c(.5,.5,1),
+                image = c(here::here("inst/hex/mountain2.png"),
+                          here::here("inst/hex/gwas.png"),
+                          here::here("inst/hex/david_negative.png")
+                          ),
+                fill=factor(c("mountain","gwas","david"),ordered = T)
+                )  
+```
+
+## ggimage subplot
+
+[ggimage](https://yulab-smu.top/pkgdocs/ggimage.html)
+
+```{r, eval=FALSE}
+tr <- function(img,a=.8) {
+  magick::image_fx(img, expression = paste0(a,"*a"), channel = "alpha") %>%
+    image_flop()
+}
+gp <- ggplot() + 
+  #### mountain ####
+  ggimage::geom_image(data = d[1,], aes(x,y,image=image), size=I(1)) +
+  #### gwas ####
+  ggimage::geom_image(data = d[2,], aes(x,y*1.2,image=image), size=I(1.2), image_fun=tr) + 
+  ggimage::geom_image(data = d[2,], aes(x,y*.66,image=image), size=I(.66),  image_fun=tr) + 
+  ggimage::geom_image(data = d[2,], aes(x,y*.33,image=image), size=I(.33),  image_fun=tr) + 
+  #### david ####
+  ggimage::geom_image(data = d[3,], aes(x,y,image=image), size=I(.2)) +
+  xlim(c(0,2)) + ylim(c(0,2)) + 
+  theme_void() 
+# print(gp)
+```
+
+
+## hexSticker 
+
+[hexSticker](https://github.com/GuangchuangYu/hexSticker)
+
+```{r, eval=FALSE}    
+s_size = 1.5
+stick <- hexSticker::sticker(subplot = gp, package="MungeSumstats", 
+                             p_size=20, 
+                             s_x=1, s_y=.9, s_width = s_size, s_height = s_size,
+        h_fill = "black", h_color = "#C0C0C0",
+        spotlight = TRUE, l_alpha = .3,
+        filename=here::here("inst/hex/MungeSumstats.png"), dpi = 400)
+print(stick)
+```
+
+
+# Session Info
+
+<details>
+
+```{r}
+utils::sessionInfo()
+```
+
+</details>

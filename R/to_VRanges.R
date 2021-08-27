@@ -5,13 +5,14 @@
 #' @keywords internal
 #' @importFrom GenomicRanges makeGRangesFromDataFrame
 #' @importFrom VariantAnnotation makeVRangesFromGRanges
-to_VRanges <- function(sumstats_dt){ 
+to_VRanges <- function(sumstats_dt) {
     gr <- to_GRanges(sumstats_dt)
     message("Converting summary statistics to VRanges.")
     gr$dummy <- "GWAS"
-    vr <- VariantAnnotation::makeVRangesFromGRanges(gr, 
-                                                    ref.field = "A1", alt.field = "A2", 
-                                                    keep.extra.columns = TRUE,
-                                                    sampleNames.field = "dummy")
+    vr <- VariantAnnotation::makeVRangesFromGRanges(gr,
+        ref.field = "A1", alt.field = "A2",
+        keep.extra.columns = TRUE,
+        sampleNames.field = "dummy"
+    )
     return(vr)
 }

@@ -9,7 +9,8 @@ read_vcf(
   nThread = 1,
   temp_save = FALSE,
   keep_extra_cols = FALSE,
-  save_path = tempfile()
+  save_path = tempfile(),
+  nrows = Inf
 )
 }
 \arguments{
@@ -25,6 +26,9 @@ directly to MungeSumstats using the path parameter.}
 
 \item{save_path}{File path to save formatted data. Defaults to
 \code{tempfile(fileext=".tsv.gz")}.}
+
+\item{nrows}{integer. The (maximal) number of lines to read.
+If \code{Inf}, will read in all rows.}
 }
 \value{
 The modified sumstats_file

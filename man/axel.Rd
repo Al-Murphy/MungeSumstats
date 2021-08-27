@@ -36,7 +36,8 @@ axel(
 Path where the file has been downloaded
 }
 \description{
-R wrapper for axel, which enables multi-threaded download of a single large file.
+R wrapper for axel, which enables multi-threaded download
+of a single large file.
 }
 \seealso{
 \url{https://github.com/axel-download-accelerator/axel/}
