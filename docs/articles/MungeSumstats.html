@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.16</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.19</span>
       </span>
     </div>
 
@@ -88,14 +88,14 @@
 
       
 
-      </header><script src="MungeSumstats_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><script src="MungeSumstats_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Standardise GWAS summary statistics with <em>MungeSumstats</em>
 </h1>
                         <h4 class="author">Alan Murphy, Brian Schilder, and Nathan Skene</h4>
             
-            <h4 class="date">2021-08-26</h4>
+            <h4 class="date">2021-09-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/MungeSumstats/blob/master/vignettes/MungeSumstats.Rmd"><code>vignettes/MungeSumstats.Rmd</code></a></small>
       <div class="hidden name"><code>MungeSumstats.Rmd</code></div>
@@ -231,15 +231,13 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ## 
 ## ******::NOTE::******
 ## - Formatted results will be saved to `tempdir()` by default.
-## - This means all formatted summary stats will be deleted upon ending the R session.
-## - To keep formatted summary stats, change `save_path`
-## ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing
-## ( e.g. `file.copy(save_path, './formatted/' )`.
+## - This means all formatted summary stats will be deletedupon ending the R session.
+## - To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.
 ## ********************</code></pre>
-<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpRLsOVo/file58095bc0d87.tsv.gz</code></pre>
+<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp1b2YQw/file125b36b4f7ebb.tsv.gz</code></pre>
 <pre><code>## Reading header.</code></pre>
 <pre><code>## Tabular format detected.</code></pre>
-<pre><code>## Importing.</code></pre>
+<pre><code>## Importing tabular file: /private/var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T/RtmpybTkfG/temp_libpath112a4254b8072/MungeSumstats/extdata/eduAttainOkbay.txt</code></pre>
 <pre><code>## Standardising column headers.</code></pre>
 <pre><code>## First line of summary statistics file:</code></pre>
 <pre><code>## MarkerName   CHR POS A1  A2  EAF Beta    SE  Pval    </code></pre>
@@ -266,8 +264,9 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Removing 'chr' prefix from CHR.</code></pre>
 <pre><code>## Making X/Y CHR uppercase.</code></pre>
 <pre><code>## Checking for bi-allelic SNPs.</code></pre>
+<pre><code>## Warning: When method is an integer, must be &gt;0.</code></pre>
 <pre><code>## Sorting coordinates.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpRLsOVo/file58095bc0d87.tsv.gz</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp1b2YQw/file125b36b4f7ebb.tsv.gz</code></pre>
 <pre><code>## Summary statistics report:
 ##    - 93 rows (100% of original 93 rows)
 ##    - 93 unique variants
@@ -321,7 +320,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 </ul>
 <p>See <code>?MungeSumstats::format_sumstats()</code> for the full list of parameters to control MungeSumstats QC and standardisation steps.</p>
 <p>VCF files can also be standardised to the same format as other summary statistic files. A subset of the Amyotrophic lateral sclerosis GWAS from the ieu open GWAS project (a .vcf file) has been added to <em>MungeSumstats</em> to demonstrate this functionality.Simply pass the path to the file in the same manner you would for other summary statistic files:</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#save ALS GWAS from the ieu open GWAS project to a temp directory</span>
 <span class="va">ALSvcfPth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"ALSvcf.vcf"</span>, package<span class="op">=</span><span class="st">"MungeSumstats"</span><span class="op">)</span>
 <span class="co">#set a low INFO filter so we get a return</span>
@@ -333,14 +332,12 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ## 
 ## ******::NOTE::******
 ## - Formatted results will be saved to `tempdir()` by default.
-## - This means all formatted summary stats will be deleted upon ending the R session.
-## - To keep formatted summary stats, change `save_path`
-## ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing
-## ( e.g. `file.copy(save_path, './formatted/' )`.
+## - This means all formatted summary stats will be deletedupon ending the R session.
+## - To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.
 ## ********************</code></pre>
-<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpRLsOVo/file580914145c49.tsv.gz</code></pre>
+<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp1b2YQw/file125b34120a95.tsv.gz</code></pre>
 <pre><code>## Reading header.</code></pre>
-<pre><code>## Importing.</code></pre>
+<pre><code>## Importing VCF file: /private/var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T/RtmpybTkfG/temp_libpath112a4254b8072/MungeSumstats/extdata/ALSvcf.vcf</code></pre>
 <pre><code>## Reading VCF file.</code></pre>
 <pre><code>## Removing non-standard columns: QUAL, FILTER, FORMAT</code></pre>
 <pre><code>## Parsing 'EBI-a-GCST005647' data column.</code></pre>
@@ -376,8 +373,9 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Removing 'chr' prefix from CHR.</code></pre>
 <pre><code>## Making X/Y CHR uppercase.</code></pre>
 <pre><code>## Checking for bi-allelic SNPs.</code></pre>
+<pre><code>## Warning: When method is an integer, must be &gt;0.</code></pre>
 <pre><code>## Sorting coordinates.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpRLsOVo/file580914145c49.tsv.gz</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp1b2YQw/file125b34120a95.tsv.gz</code></pre>
 <pre><code>## Summary statistics report:
 ##    - 26 rows (26.3% of original 99 rows)
 ##    - 26 unique variants
@@ -392,7 +390,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ## 5:   rs2462492   1 54676  C  T 0.1543 -0.0567 0.0407 0.786217 0.1543 0.16359989</code></pre>
 <pre><code>## Returning path to saved data.</code></pre>
 <p>You can also get more information on the SNPs which have had data imputed or have been filtered out by <em>MungeSumstats</em> by using the <code>imputation_ind</code> and <code>log_folder_ind</code> parameters respectively. For example:</p>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#set</span>
 <span class="va">reformatted_vcf_2</span> <span class="op">&lt;-</span> 
   <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/format_sumstats.html">format_sumstats</a></span><span class="op">(</span>path<span class="op">=</span><span class="va">ALSvcfPth</span>,
@@ -405,20 +403,18 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ## 
 ## ******::NOTE::******
 ## - Formatted results will be saved to `tempdir()` by default.
-## - This means all formatted summary stats will be deleted upon ending the R session.
-## - To keep formatted summary stats, change `save_path`
-## ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing
-## ( e.g. `file.copy(save_path, './formatted/' )`.
+## - This means all formatted summary stats will be deletedupon ending the R session.
+## - To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.
 ## ********************</code></pre>
 <pre><code>## ******::NOTE::******
 ## - Log results will be saved to `tempdir()` by default.
 ## - This means all log data from the run will be deleted upon ending the R session.
-## - To keep it, change `log_folder` to an actual directory (e.g. log_foler='./').
+## - To keep it, change `log_folder` to an actual directory (e.g. log_folder='./').
 ## ********************</code></pre>
-<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpRLsOVo/file58093099ca7e.tsv.gz</code></pre>
-<pre><code>## Log data to be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpRLsOVo</code></pre>
+<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp1b2YQw/file125b3177d5086.tsv.gz</code></pre>
+<pre><code>## Log data to be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp1b2YQw</code></pre>
 <pre><code>## Reading header.</code></pre>
-<pre><code>## Importing.</code></pre>
+<pre><code>## Importing VCF file: /private/var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T/RtmpybTkfG/temp_libpath112a4254b8072/MungeSumstats/extdata/ALSvcf.vcf</code></pre>
 <pre><code>## Reading VCF file.</code></pre>
 <pre><code>## Removing non-standard columns: QUAL, FILTER, FORMAT</code></pre>
 <pre><code>## Parsing 'EBI-a-GCST005647' data column.</code></pre>
@@ -440,7 +436,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Ensuring all SNPs are on the reference genome.</code></pre>
 <pre><code>## Loading reference genome data.</code></pre>
 <pre><code>## 12 SNPs are not on the reference genome. These will be corrected from the reference genome.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpRLsOVo/snp_not_found_from_chr_bp.tsv</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp1b2YQw/snp_not_found_from_chr_bp.tsv</code></pre>
 <pre><code>## Checking for correct direction of A1 (reference) and A2 (alternative allele).</code></pre>
 <pre><code>## Reordering so first three column headers are SNP, CHR and BP in this order.</code></pre>
 <pre><code>## Reordering so the fourth and fifth columns are A1 and A2.</code></pre>
@@ -450,14 +446,15 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Checking for SNPs with duplicated base-pair positions</code></pre>
 <pre><code>## Filtering SNPs based on INFO score.</code></pre>
 <pre><code>## 67 SNPs are below the INFO threshold of 0.1 and will be removed</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpRLsOVo/info_filter.tsv</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp1b2YQw/info_filter.tsv</code></pre>
 <pre><code>## Filtering SNPs, ensuring SE&gt;0.</code></pre>
 <pre><code>## Ensuring all SNPs have N&lt;5 std dev above mean.</code></pre>
 <pre><code>## Removing 'chr' prefix from CHR.</code></pre>
 <pre><code>## Making X/Y CHR uppercase.</code></pre>
 <pre><code>## Checking for bi-allelic SNPs.</code></pre>
+<pre><code>## Warning: When method is an integer, must be &gt;0.</code></pre>
 <pre><code>## Sorting coordinates.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpRLsOVo/file58093099ca7e.tsv.gz</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp1b2YQw/file125b3177d5086.tsv.gz</code></pre>
 <pre><code>## Summary statistics report:
 ##    - 26 rows (26.3% of original 99 rows)
 ##    - 26 unique variants
@@ -478,11 +475,11 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ## 5:             NA</code></pre>
 <pre><code>## Returning path to saved data.</code></pre>
 <p>Note that using <code>log_folder_ind</code> returns a list from <code>format_sumstats</code> which includes the file locations of the differing classes of removed SNPs. Using <code>log_mungesumstats_msgs</code> saves the messages to the console to a file which is returned in the same list. Note that not all the messages will also print to screen anymore when you set <code>log_mungesumstats_msgs</code>:</p>
-<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">reformatted_vcf_2</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "sumstats"  "log_files"</code></pre>
 <p>A user can load a file to view the excluded SNPs:</p>
-<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="va">reformatted_vcf_2</span><span class="op">$</span><span class="va">log_files</span><span class="op">$</span><span class="va">info_filter</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></code></pre></div>
 <pre><code>##             SNP CHR    BP A1 A2   INFO    BETA     SE        LP     AF
 ##  1: rs146477069   1 54421  A  G 0.0352 -0.0240 0.0830 0.1121020 0.0352
@@ -551,7 +548,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <strong>MungeSumstats_log_output</strong> - Text file of all errors to the console created during MungeSumstats run.</li>
 </ul>
 <p>Note to export to another type such as R native objects including data.table, GRanges, VRanges or save as a VCF file, set <code>return_format</code>:</p>
-<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#set</span>
 <span class="va">reformatted_vcf_2</span> <span class="op">&lt;-</span> 
   <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/format_sumstats.html">format_sumstats</a></span><span class="op">(</span>path<span class="op">=</span><span class="va">ALSvcfPth</span>,
@@ -563,6 +560,18 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
                                  return_format<span class="op">=</span><span class="st">"GRanges"</span><span class="op">)</span></code></pre></div>
 <p>See our publication for further discussion of these checks and options:</p>
 <p><a href="https://www.biorxiv.org/content/10.1101/2021.06.21.449239v1">Murphy and Skene. MungeSumstats: A Bioconductor package for the standardisation and quality control of many GWAS summary statistics</a>.</p>
+</div>
+<div id="extra-functionality" class="section level1">
+<h1 class="hasAnchor">
+<a href="#extra-functionality" class="anchor"></a>Extra Functionality</h1>
+<p><em>MungeSumstats</em> also contains a function to quickly infer the genome build of multiple summary statistic files. This can be called separately to <code><a href="../reference/format_sumstats.html">format_sumstats()</a></code> which is useful if you want to just quickly check the genome build:</p>
+<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Pass path to Educational Attainment Okbay sumstat file to a temp directory</span>
+<span class="va">eduAttainOkbayPth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"eduAttainOkbay.txt"</span>,
+                                  package <span class="op">=</span> <span class="st">"MungeSumstats"</span><span class="op">)</span>
+<span class="va">sumstats_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>ss1 <span class="op">=</span> <span class="va">eduAttainOkbayPth</span>, ss2 <span class="op">=</span> <span class="va">eduAttainOkbayPth</span><span class="op">)</span>
+
+<span class="va">ref_genomes</span> <span class="op">&lt;-</span> <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/get_genome_builds.html">get_genome_builds</a></span><span class="op">(</span>sumstats_list <span class="op">=</span> <span class="va">sumstats_list</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="future-enhancements" class="section level1">
 <h1 class="hasAnchor">
@@ -597,11 +606,11 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] MungeSumstats_1.1.16 BiocStyle_2.20.2    
+## [1] MungeSumstats_1.1.19 BiocStyle_2.20.2    
 ## 
 ## loaded via a namespace (and not attached):
 ##   [1] bitops_1.0-7                               
-##   [2] matrixStats_0.60.0                         
+##   [2] matrixStats_0.60.1                         
 ##   [3] fs_1.5.0                                   
 ##   [4] bit64_4.0.5                                
 ##   [5] filelock_1.0.2                             
@@ -613,7 +622,7 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 ##  [11] tools_4.1.0                                
 ##  [12] bslib_0.2.5.1                              
 ##  [13] utf8_1.2.2                                 
-##  [14] R6_2.5.0                                   
+##  [14] R6_2.5.1                                   
 ##  [15] DBI_1.1.1                                  
 ##  [16] BiocGenerics_0.38.0                        
 ##  [17] tidyselect_1.1.1                           
@@ -627,8 +636,8 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 ##  [25] xml2_1.3.2                                 
 ##  [26] desc_1.3.0                                 
 ##  [27] DelayedArray_0.18.0                        
-##  [28] rtracklayer_1.52.0                         
-##  [29] bookdown_0.22                              
+##  [28] rtracklayer_1.52.1                         
+##  [29] bookdown_0.23                              
 ##  [30] sass_0.4.0                                 
 ##  [31] rappdirs_0.3.3                             
 ##  [32] pkgdown_1.6.1                              
@@ -636,28 +645,28 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 ##  [34] stringr_1.4.0                              
 ##  [35] digest_0.6.27                              
 ##  [36] Rsamtools_2.8.0                            
-##  [37] rmarkdown_2.9                              
+##  [37] rmarkdown_2.10                             
 ##  [38] R.utils_2.10.1                             
 ##  [39] XVector_0.32.0                             
 ##  [40] BSgenome.Hsapiens.1000genomes.hs37d5_0.99.1
 ##  [41] pkgconfig_2.0.3                            
-##  [42] htmltools_0.5.1.1                          
-##  [43] MatrixGenerics_1.4.0                       
+##  [42] htmltools_0.5.2                            
+##  [43] MatrixGenerics_1.4.2                       
 ##  [44] dbplyr_2.1.1                               
 ##  [45] fastmap_1.1.0                              
 ##  [46] BSgenome_1.60.0                            
 ##  [47] rlang_0.4.11                               
 ##  [48] rstudioapi_0.13                            
-##  [49] RSQLite_2.2.7                              
+##  [49] RSQLite_2.2.8                              
 ##  [50] jquerylib_0.1.4                            
 ##  [51] BiocIO_1.2.0                               
 ##  [52] generics_0.1.0                             
 ##  [53] jsonlite_1.7.2                             
-##  [54] BiocParallel_1.26.1                        
+##  [54] BiocParallel_1.26.2                        
 ##  [55] dplyr_1.0.7                                
 ##  [56] R.oo_1.24.0                                
 ##  [57] VariantAnnotation_1.38.0                   
-##  [58] RCurl_1.98-1.3                             
+##  [58] RCurl_1.98-1.4                             
 ##  [59] magrittr_2.0.1                             
 ##  [60] GenomeInfoDbData_1.2.6                     
 ##  [61] Matrix_1.3-4                               
@@ -666,7 +675,7 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 ##  [64] fansi_0.5.0                                
 ##  [65] lifecycle_1.0.0                            
 ##  [66] R.methodsS3_1.8.1                          
-##  [67] stringi_1.7.3                              
+##  [67] stringi_1.7.4                              
 ##  [68] yaml_2.2.1                                 
 ##  [69] SummarizedExperiment_1.22.0                
 ##  [70] zlibbioc_1.38.0                            
@@ -676,17 +685,17 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 ##  [74] parallel_4.1.0                             
 ##  [75] crayon_1.4.1                               
 ##  [76] lattice_0.20-44                            
-##  [77] Biostrings_2.60.1                          
-##  [78] GenomicFeatures_1.44.0                     
+##  [77] Biostrings_2.60.2                          
+##  [78] GenomicFeatures_1.44.1                     
 ##  [79] hms_1.1.0                                  
 ##  [80] KEGGREST_1.32.0                            
 ##  [81] knitr_1.33                                 
 ##  [82] pillar_1.6.2                               
 ##  [83] GenomicRanges_1.44.0                       
 ##  [84] rjson_0.2.20                               
-##  [85] biomaRt_2.48.2                             
+##  [85] biomaRt_2.48.3                             
 ##  [86] stats4_4.1.0                               
-##  [87] XML_3.99-0.6                               
+##  [87] XML_3.99-0.7                               
 ##  [88] glue_1.4.2                                 
 ##  [89] evaluate_0.14                              
 ##  [90] SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20   
@@ -696,12 +705,12 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 ##  [94] vctrs_0.3.8                                
 ##  [95] purrr_0.3.4                                
 ##  [96] assertthat_0.2.1                           
-##  [97] cachem_1.0.5                               
-##  [98] xfun_0.24                                  
+##  [97] cachem_1.0.6                               
+##  [98] xfun_0.25                                  
 ##  [99] restfulr_0.0.13                            
 ## [100] ragg_1.1.3                                 
 ## [101] gargle_1.2.0                               
-## [102] tibble_3.1.3                               
+## [102] tibble_3.1.4                               
 ## [103] GenomicAlignments_1.28.0                   
 ## [104] AnnotationDbi_1.54.1                       
 ## [105] memoise_2.0.0                              

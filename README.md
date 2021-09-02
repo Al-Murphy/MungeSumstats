@@ -1,7 +1,7 @@
 Standardise the format of GWAS summary statistics with *MungeSumstats*
 ================
 Alan Murphy, Brian Schilder and Nathan Skene
-2021-08-26
+2021-09-02
 
 <!-- Readme.md is generated from Readme.Rmd. Please edit that file -->
 <!-- badges: start -->

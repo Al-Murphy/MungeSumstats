@@ -53,18 +53,22 @@
 #'
 #' @param force_new If "Neff" (or "N") already exists in \code{sumstats_dt},
 #' replace it with the recomputed version.
+#' @param append_method_name should Neff column have an indicator to explain the 
+#' method that makes it., Default is FALSE unless multiple methods are passed
 #'
 #' @return A data.table with a new column "Neff" or "N"
 #' @keywords internal
 compute_sample_size <- function(sumstats_dt,
                                 method = c("ldsc", "giant", "metal", "sum"),
-                                force_new = FALSE) {
+                                force_new = FALSE,
+                                append_method_name=FALSE) {
     if (is.character(method)) {
         #### Compute Neff/N ###
         compute_sample_size_neff(
             sumstats_dt = sumstats_dt,
             method = method,
-            force_new = force_new
+            force_new = force_new,
+            append_method_name=append_method_name
         )
     } else if (is.numeric(method)) {
         #### Add user-supplied N ###

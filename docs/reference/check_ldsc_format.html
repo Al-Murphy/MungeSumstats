@@ -84,7 +84,7 @@ to use their munge_sumstats.py script first." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.16</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.19</span>
       </span>
     </div>
 
@@ -194,7 +194,11 @@ as a last resort.</p></td>
       <td><p>Whether to impute N. Default of 0 won't impute, any other
 integer will be imputed as the N (sample size) for every SNP in the dataset.
 <strong>Note</strong> that imputing the sample size for every SNP is not correct and
-should only be done as a last resort.</p></td>
+should only be done as a last resort. N can also be inputted with "ldsc",
+"sum", "giant" or "metal" by passing one of these for this field or a vector
+of multiple. Sum and an integer value creates an N column in the output
+whereas giant, metal or ldsc create an Neff or effective sample size. If
+multiples are passed, the formula used to derive it will be indicated.</p></td>
     </tr>
     </table>
 

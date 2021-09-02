@@ -1,3 +1,8 @@
+#' Add user supplied sample size
+#'
+#' @inheritParams compute_sample_size
+#' @return No return
+#' @keywords internal
 compute_sample_size_n <- function(sumstats_dt,
                                   method,
                                   force_new = FALSE) {

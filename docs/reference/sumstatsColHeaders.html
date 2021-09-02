@@ -87,7 +87,7 @@ test." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.16</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.19</span>
       </span>
     </div>
 
@@ -167,14 +167,14 @@ test.</p>
 <code><a href='https://rdrr.io/r/utils/data.html'>
 # Most the data in the below table comes from the LDSC github wiki
 data("sumstatsColHeaders")
-# Make additions to sumstatsColHeaders using github version of MungeSumstats- 
+# Make additions to sumstatsColHeaders using github version of MungeSumstats-
 # shown is an example of adding columns for Standard Error (SE)
-#se_cols &lt;- data.frame("Uncorrected"=c("SE","se","STANDARD.ERROR","STANDARD_ERROR","STANDARD-ERROR"), 
+#se_cols &lt;- data.frame("Uncorrected"=c("SE","se","STANDARD.ERROR","STANDARD_ERROR","STANDARD-ERROR"),
 #                      "Corrected"=rep("SE",5))
 #sumstatsColHeaders &lt;- rbind(sumstatsColHeaders,se_cols)
 #Once additions are made, order &amp; save the new mapping dataset
 #now sort ordering -important for logic that uncorrected=corrected comes first
-sumstatsColHeaders$ordering &lt;- 
+sumstatsColHeaders$ordering &lt;-
     sumstatsColHeaders$Uncorrected==sumstatsColHeaders$Corrected
 sumstatsColHeaders &lt;-
     sumstatsColHeaders[order(sumstatsColHeaders$Corrected,
@@ -184,7 +184,7 @@ sumstatsColHeaders$ordering &lt;- NULL
 usethis::use_data(sumstatsColHeaders,overwrite = TRUE, internal=TRUE)
 save(sumstatsColHeaders,
       file="data/sumstatsColHeaders.rda")
-# You will need to restart your r session for effects to take account      
+# You will need to restart your r session for effects to take account
 </a></code></p>
 
   </div>

@@ -5,6 +5,7 @@
 #' @keywords internal
 validate_parameters <- function(path,
                                 ref_genome,
+                                convert_ref_genome,
                                 convert_small_p,
                                 compute_z,
                                 compute_n,
@@ -47,9 +48,21 @@ validate_parameters <- function(path,
         "from the data."
     )
     # Check genome build is valid option
-    if (!is.null(ref_genome) && !(toupper(ref_genome) %in% c("GRCH37", "GRCH38"))) {
+    if (!is.null(ref_genome) && !(toupper(ref_genome) %in% 
+                                    c("GRCH37","GRCH38"))) {
           stop(gen_msg)
-      }
+    }
+    
+    gen_msg2 <- paste0(
+      "The chosen genome build to convert to must be one of GRCh37 or GRCh38 ",
+      "or left as null so the genome build will be inferred ",
+      "from the data."
+    )
+    
+    if (!is.null(convert_ref_genome) && !(toupper(convert_ref_genome) %in% 
+                                  c("GRCH37","GRCH38"))) {
+      stop(gen_msg2)
+    }
 
     # checks for installed packages
     GRCH37_msg1 <- paste0(
@@ -169,7 +182,17 @@ validate_parameters <- function(path,
           stop("N_std must be numeric")
       }
     if (!is.numeric(compute_n) || compute_n < 0) {
-          stop("compute_n must be 0 or an integer value")
+          if(is.character(compute_n)){
+            methods <- c("ldsc", "giant", "metal", "sum")
+            msg_methods <- paste0("Valid methods to compute N are: ",
+                                    paste(methods,collapse=", "),
+                                    ". Please update compute_n.")
+            if(!all(tolower(compute_n) %in% methods))
+              stop(msg_methods)
+          }
+          else{
+            stop("compute_n must be 0 or an integer value")
+          }  
       }
 
     # Check rmv_chr choices all valid chromosomes

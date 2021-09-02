@@ -38,6 +38,9 @@
 #' @param ref_genome name of the reference genome used for the GWAS ("GRCh37" or
 #' "GRCh38"). Argument is case-insensitive. Default is NULL which infers the
 #' reference genome from the data.
+#' @param convert_ref_genome name of the reference genome to convert to 
+#' ("GRCh37" or "GRCh38"). This will only occur if the current genome build does
+#' not match. Default is not to convert the genome build (NULL).
 #' @param convert_small_p Binary, should p-values < 5e-324 be converted to 0?
 #' Small p-values pass the R limit and can cause errors with LDSC/MAGMA and
 #' should be converted. Default is TRUE.
@@ -51,7 +54,11 @@
 #' @param compute_n Whether to impute N. Default of 0 won't impute, any other
 #' integer will be imputed as the N (sample size) for every SNP in the dataset.
 #' **Note** that imputing the sample size for every SNP is not correct and
-#' should only be done as a last resort.
+#' should only be done as a last resort. N can also be inputted with "ldsc", 
+#' "sum", "giant" or "metal" by passing one of these for this field or a vector 
+#' of multiple. Sum and an integer value creates an N column in the output 
+#' whereas giant, metal or ldsc create an Neff or effective sample size. If 
+#' multiples are passed, the formula used to derive it will be indicated.
 #' @param convert_n_int Binary, if N (the number of samples) is not an integer,
 #' should this be rounded? Default is TRUE.
 #' @param analysis_trait If multiple traits were studied, name of the trait for
@@ -147,6 +154,7 @@
 #' @export
 format_sumstats <- function(path,
                             ref_genome = NULL,
+                            convert_ref_genome = NULL,
                             convert_small_p = TRUE,
                             compute_z = FALSE,
                             force_new_z = FALSE,
@@ -221,6 +229,7 @@ format_sumstats <- function(path,
         validate_parameters(
             path = path,
             ref_genome = ref_genome,
+            convert_ref_genome = convert_ref_genome,
             convert_small_p = convert_small_p,
             compute_z = compute_z,
             compute_n = compute_n,
@@ -747,6 +756,15 @@ format_sumstats <- function(path,
             imputation_ind = imputation_ind
         )
 
+        #### Check 34: Perform liftover ####
+        sumstats_return$sumstats_dt <- liftover(
+            sumstats_dt =
+                sumstats_return$sumstats_dt,
+            convert_ref_genome = convert_ref_genome,
+            ref_genome = ref_genome,
+            imputation_ind = imputation_ind
+        )
+        
         #### Check 29: Sort rows by genomic coordinates ####
         sumstats_return$sumstats_dt <- sort_coords(
             sumstats_dt =

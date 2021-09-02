@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.16</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.19</span>
       </span>
     </div>
 
@@ -148,6 +148,7 @@
     <pre class="usage"><span class='fu'>format_sumstats</span><span class='op'>(</span>
   <span class='va'>path</span>,
   ref_genome <span class='op'>=</span> <span class='cn'>NULL</span>,
+  convert_ref_genome <span class='op'>=</span> <span class='cn'>NULL</span>,
   convert_small_p <span class='op'>=</span> <span class='cn'>TRUE</span>,
   compute_z <span class='op'>=</span> <span class='cn'>FALSE</span>,
   force_new_z <span class='op'>=</span> <span class='cn'>FALSE</span>,
@@ -202,6 +203,12 @@ directly to MungeSumstats using the path parameter.</p></td>
 reference genome from the data.</p></td>
     </tr>
     <tr>
+      <th>convert_ref_genome</th>
+      <td><p>name of the reference genome to convert to
+("GRCh37" or "GRCh38"). This will only occur if the current genome build does
+not match. Default is not to convert the genome build (NULL).</p></td>
+    </tr>
+    <tr>
       <th>convert_small_p</th>
       <td><p>Binary, should p-values &lt; 5e-324 be converted to 0?
 Small p-values pass the R limit and can cause errors with LDSC/MAGMA and
@@ -225,7 +232,11 @@ default. To override and compute a new Z-score column from P set
       <td><p>Whether to impute N. Default of 0 won't impute, any other
 integer will be imputed as the N (sample size) for every SNP in the dataset.
 <strong>Note</strong> that imputing the sample size for every SNP is not correct and
-should only be done as a last resort.</p></td>
+should only be done as a last resort. N can also be inputted with "ldsc",
+"sum", "giant" or "metal" by passing one of these for this field or a vector
+of multiple. Sum and an integer value creates an N column in the output
+whereas giant, metal or ldsc create an Neff or effective sample size. If
+multiples are passed, the formula used to derive it will be indicated.</p></td>
     </tr>
     <tr>
       <th>convert_n_int</th>
@@ -417,41 +428,44 @@ dependent on user choice. Also, if log files wanted by the user, the return
 in both above instances are a list.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>#Pass path to Educational Attainment Okbay sumstat file to a temp directory</span>
+    <pre class="examples"><div class='input'><span class='co'># Pass path to Educational Attainment Okbay sumstat file to a temp directory</span>
 
-<span class='va'>eduAttainOkbayPth</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>,<span class='st'>"eduAttainOkbay.txt"</span>, 
-                                 package<span class='op'>=</span><span class='st'>"MungeSumstats"</span><span class='op'>)</span>
+<span class='va'>eduAttainOkbayPth</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"eduAttainOkbay.txt"</span>,
+    package <span class='op'>=</span> <span class='st'>"MungeSumstats"</span>
+<span class='op'>)</span>
 
 <span class='co'>## Call uses reference genome as default with more than 2GB of memory,</span>
 <span class='co'>## which is more than what 32-bit Windows can handle so remove certain checks</span>
 
-<span class='va'>is_32bit_windows</span> <span class='op'>&lt;-</span> 
-<span class='va'>.Platform</span><span class='op'>$</span><span class='va'>OS.type</span> <span class='op'>==</span> <span class='st'>"windows"</span> <span class='op'>&amp;&amp;</span> <span class='va'>.Platform</span><span class='op'>$</span><span class='va'>r_arch</span> <span class='op'>==</span> <span class='st'>"i386"</span>
+<span class='va'>is_32bit_windows</span> <span class='op'>&lt;-</span>
+    <span class='va'>.Platform</span><span class='op'>$</span><span class='va'>OS.type</span> <span class='op'>==</span> <span class='st'>"windows"</span> <span class='op'>&amp;&amp;</span> <span class='va'>.Platform</span><span class='op'>$</span><span class='va'>r_arch</span> <span class='op'>==</span> <span class='st'>"i386"</span>
 <span class='kw'>if</span> <span class='op'>(</span><span class='op'>!</span><span class='va'>is_32bit_windows</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>reformatted</span> <span class='op'>&lt;-</span> <span class='fu'>MungeSumstats</span><span class='fu'>::</span><span class='fu'>format_sumstats</span><span class='op'>(</span>path<span class='op'>=</span><span class='va'>eduAttainOkbayPth</span>,
-                                              ref_genome<span class='op'>=</span><span class='st'>"GRCh37"</span><span class='op'>)</span>
-<span class='op'>}</span> <span class='kw'>else</span><span class='op'>{</span>
-<span class='va'>reformatted</span> <span class='op'>&lt;-</span> <span class='fu'>MungeSumstats</span><span class='fu'>::</span><span class='fu'>format_sumstats</span><span class='op'>(</span>path<span class='op'>=</span><span class='va'>eduAttainOkbayPth</span>,
-                                              ref_genome<span class='op'>=</span><span class='st'>"GRCh37"</span>,
-                                              on_ref_genome <span class='op'>=</span> <span class='cn'>FALSE</span>,
-                                              strand_ambig_filter<span class='op'>=</span><span class='cn'>FALSE</span>,
-                                              bi_allelic_filter<span class='op'>=</span><span class='cn'>FALSE</span>,
-                                              allele_flip_check<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
+    <span class='va'>reformatted</span> <span class='op'>&lt;-</span> <span class='fu'>format_sumstats</span><span class='op'>(</span>
+        path <span class='op'>=</span> <span class='va'>eduAttainOkbayPth</span>,
+        ref_genome <span class='op'>=</span> <span class='st'>"GRCh37"</span>
+    <span class='op'>)</span>
+<span class='op'>}</span> <span class='kw'>else</span> <span class='op'>{</span>
+    <span class='va'>reformatted</span> <span class='op'>&lt;-</span> <span class='fu'>format_sumstats</span><span class='op'>(</span>
+        path <span class='op'>=</span> <span class='va'>eduAttainOkbayPth</span>,
+        ref_genome <span class='op'>=</span> <span class='st'>"GRCh37"</span>,
+        on_ref_genome <span class='op'>=</span> <span class='cn'>FALSE</span>,
+        strand_ambig_filter <span class='op'>=</span> <span class='cn'>FALSE</span>,
+        bi_allelic_filter <span class='op'>=</span> <span class='cn'>FALSE</span>,
+        allele_flip_check <span class='op'>=</span> <span class='cn'>FALSE</span>
+    <span class='op'>)</span>
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>******::NOTE::******</span>
 #&gt; <span class='message'>- Formatted results will be saved to `tempdir()` by default.</span>
-#&gt; <span class='message'>- This means all formatted summary stats will be deleted upon ending the R session.</span>
-#&gt; <span class='message'>- To keep formatted summary stats, change `save_path`</span>
-#&gt; <span class='message'>( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing</span>
-#&gt; <span class='message'>( e.g. `file.copy(save_path, './formatted/' )`.</span>
-#&gt; <span class='message'>********************</span></div><div class='output co'>#&gt; <span class='message'>Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmptWSUiR/file57d366f03437.tsv.gz</span></div><div class='output co'>#&gt; <span class='message'>Reading header.</span></div><div class='output co'>#&gt; <span class='message'>Tabular format detected.</span></div><div class='output co'>#&gt; <span class='message'>Importing.</span></div><div class='output co'>#&gt; <span class='message'>Standardising column headers.</span></div><div class='output co'>#&gt; <span class='message'>First line of summary statistics file: </span></div><div class='output co'>#&gt; <span class='message'>MarkerName	CHR	POS	A1	A2	EAF	Beta	SE	Pval	</span></div><div class='output co'>#&gt; <span class='message'>Summary statistics report:</span>
+#&gt; <span class='message'>- This means all formatted summary stats will be deletedupon ending the R session.</span>
+#&gt; <span class='message'>- To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.</span>
+#&gt; <span class='message'>********************</span></div><div class='output co'>#&gt; <span class='message'>Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpPDBHYH/file1258029f68ce1.tsv.gz</span></div><div class='output co'>#&gt; <span class='message'>Reading header.</span></div><div class='output co'>#&gt; <span class='message'>Tabular format detected.</span></div><div class='output co'>#&gt; <span class='message'>Importing tabular file: /private/var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T/RtmpybTkfG/temp_libpath112a4254b8072/MungeSumstats/extdata/eduAttainOkbay.txt</span></div><div class='output co'>#&gt; <span class='message'>Standardising column headers.</span></div><div class='output co'>#&gt; <span class='message'>First line of summary statistics file: </span></div><div class='output co'>#&gt; <span class='message'>MarkerName	CHR	POS	A1	A2	EAF	Beta	SE	Pval	</span></div><div class='output co'>#&gt; <span class='message'>Summary statistics report:</span>
 #&gt; <span class='message'>   - 93 rows</span>
 #&gt; <span class='message'>   - 93 unique variants</span>
 #&gt; <span class='message'>   - 70 genome-wide significant variants (P&lt;5e-8)</span>
 #&gt; <span class='message'>   - 20 chromosomes</span></div><div class='output co'>#&gt; <span class='message'>Checking for multi-GWAS.</span></div><div class='output co'>#&gt; <span class='message'>Checking for multiple RSIDs on one row.</span></div><div class='output co'>#&gt; <span class='message'>Checking SNP RSIDs.</span></div><div class='output co'>#&gt; <span class='message'>Checking for merged allele column.</span></div><div class='output co'>#&gt; <span class='message'>Ensuring all SNPs are on the reference genome.</span></div><div class='output co'>#&gt; <span class='message'>Loading reference genome data.</span></div><div class='output co'>#&gt; <span class='message'>Checking for correct direction of A1 (reference) and A2 (alternative allele).</span></div><div class='output co'>#&gt; <span class='message'>There are 46 SNPs where A1 doesn't match the reference genome.</span>
-#&gt; <span class='message'>These will be flipped with their effect columns.</span></div><div class='output co'>#&gt; <span class='message'>Checking for missing data.</span></div><div class='output co'>#&gt; <span class='message'>Checking for duplicate columns.</span></div><div class='output co'>#&gt; <span class='message'>Checking for duplicate SNPs from SNP ID.</span></div><div class='output co'>#&gt; <span class='message'>Checking for SNPs with duplicated base-pair positions</span></div><div class='output co'>#&gt; <span class='message'>Filtering SNPs, ensuring SE&gt;0.</span></div><div class='output co'>#&gt; <span class='message'>Ensuring all SNPs have N&lt;5 std dev above mean.</span></div><div class='output co'>#&gt; <span class='message'>Removing 'chr' prefix from CHR.</span></div><div class='output co'>#&gt; <span class='message'>Making X/Y CHR uppercase.</span></div><div class='output co'>#&gt; <span class='message'>Checking for bi-allelic SNPs.</span></div><div class='output co'>#&gt; <span class='message'>Sorting coordinates.</span></div><div class='output co'>#&gt; <span class='message'>Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmptWSUiR/file57d366f03437.tsv.gz</span></div><div class='output co'>#&gt; <span class='message'>Summary statistics report:</span>
+#&gt; <span class='message'>These will be flipped with their effect columns.</span></div><div class='output co'>#&gt; <span class='message'>Checking for missing data.</span></div><div class='output co'>#&gt; <span class='message'>Checking for duplicate columns.</span></div><div class='output co'>#&gt; <span class='message'>Checking for duplicate SNPs from SNP ID.</span></div><div class='output co'>#&gt; <span class='message'>Checking for SNPs with duplicated base-pair positions</span></div><div class='output co'>#&gt; <span class='message'>Filtering SNPs, ensuring SE&gt;0.</span></div><div class='output co'>#&gt; <span class='message'>Ensuring all SNPs have N&lt;5 std dev above mean.</span></div><div class='output co'>#&gt; <span class='message'>Removing 'chr' prefix from CHR.</span></div><div class='output co'>#&gt; <span class='message'>Making X/Y CHR uppercase.</span></div><div class='output co'>#&gt; <span class='message'>Checking for bi-allelic SNPs.</span></div><div class='output co'>#&gt; <span class='message'>Warning: When method is an integer, must be &gt;0.</span></div><div class='output co'>#&gt; <span class='message'>Sorting coordinates.</span></div><div class='output co'>#&gt; <span class='message'>Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpPDBHYH/file1258029f68ce1.tsv.gz</span></div><div class='output co'>#&gt; <span class='message'>Summary statistics report:</span>
 #&gt; <span class='message'>   - 93 rows (100% of original 93 rows)</span>
 #&gt; <span class='message'>   - 93 unique variants</span>
 #&gt; <span class='message'>   - 70 genome-wide significant variants (P&lt;5e-8)</span>
@@ -460,7 +474,7 @@ in both above instances are a list.</p>
 #&gt; <span class='message'>2: rs11210860   1 43982527  G  A 0.63060 -0.017 0.003 2.359e-10</span>
 #&gt; <span class='message'>3: rs34305371   1 72733610  G  A 0.91231 -0.035 0.005 3.762e-14</span>
 #&gt; <span class='message'>4:  rs2568955   1 72762169  T  C 0.23690 -0.017 0.003 1.797e-08</span>
-#&gt; <span class='message'>5:  rs1008078   1 91189731  C  T 0.62690  0.016 0.003 6.005e-10</span></div><div class='output co'>#&gt; <span class='message'>Returning path to saved data.</span></div><div class='input'><span class='co'>#returned location has the updated summary statistics file</span>
+#&gt; <span class='message'>5:  rs1008078   1 91189731  C  T 0.62690  0.016 0.003 6.005e-10</span></div><div class='output co'>#&gt; <span class='message'>Returning path to saved data.</span></div><div class='input'><span class='co'># returned location has the updated summary statistics file</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

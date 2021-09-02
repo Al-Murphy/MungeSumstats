@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.16</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.19</span>
       </span>
     </div>
 
@@ -150,7 +150,8 @@
   nThread <span class='op'>=</span> <span class='fl'>1</span>,
   temp_save <span class='op'>=</span> <span class='cn'>FALSE</span>,
   keep_extra_cols <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  save_path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span>
+  save_path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span>,
+  nrows <span class='op'>=</span> <span class='cn'>Inf</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -178,6 +179,11 @@ directly to MungeSumstats using the path parameter.</p></td>
       <th>save_path</th>
       <td><p>File path to save formatted data. Defaults to
 <code><a href='https://rdrr.io/r/base/tempfile.html'>tempfile(fileext=".tsv.gz")</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>nrows</th>
+      <td><p>integer. The (maximal) number of lines to read.
+If <code>Inf</code>, will read in all rows.</p></td>
     </tr>
     </table>
 

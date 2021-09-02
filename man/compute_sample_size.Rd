@@ -7,7 +7,8 @@
 compute_sample_size(
   sumstats_dt,
   method = c("ldsc", "giant", "metal", "sum"),
-  force_new = FALSE
+  force_new = FALSE,
+  append_method_name = FALSE
 )
 }
 \arguments{
@@ -54,6 +55,9 @@ for every row.
 
 \item{force_new}{If "Neff" (or "N") already exists in \code{sumstats_dt},
 replace it with the recomputed version.}
+
+\item{append_method_name}{should Neff column have an indicator to explain the
+method that makes it., Default is FALSE unless multiple methods are passed}
 }
 \value{
 A data.table with a new column "Neff" or "N"

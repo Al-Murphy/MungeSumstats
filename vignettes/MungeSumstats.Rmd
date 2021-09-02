@@ -416,6 +416,23 @@ See our publication for further discussion of these checks and options:
 standardisation and quality control of many GWAS summary
 statistics](https://www.biorxiv.org/content/10.1101/2021.06.21.449239v1).
 
+# Extra Functionality
+
+*MungeSumstats* also contains a function to quickly infer the genome build of 
+multiple summary statistic files. This can be called separately to 
+`format_sumstats()` which is useful if you want to just quickly check the genome
+build:
+
+```{r, message=FALSE,eval=FALSE}
+# Pass path to Educational Attainment Okbay sumstat file to a temp directory
+eduAttainOkbayPth <- system.file("extdata", "eduAttainOkbay.txt",
+                                  package = "MungeSumstats")
+sumstats_list <- list(ss1 = eduAttainOkbayPth, ss2 = eduAttainOkbayPth)
+
+ref_genomes <- MungeSumstats::get_genome_builds(sumstats_list = sumstats_list)
+
+```
+
 # Future Enhancements
 
 The *MungeSumstats* package aims to be able to handle the most common

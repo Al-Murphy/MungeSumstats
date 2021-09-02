@@ -7,6 +7,7 @@
 validate_parameters(
   path,
   ref_genome,
+  convert_ref_genome,
   convert_small_p,
   compute_z,
   compute_n,
@@ -44,6 +45,10 @@ directly to MungeSumstats using the path parameter.}
 "GRCh38"). Argument is case-insensitive. Default is NULL which infers the
 reference genome from the data.}
 
+\item{convert_ref_genome}{name of the reference genome to convert to
+("GRCh37" or "GRCh38"). This will only occur if the current genome build does
+not match. Default is not to convert the genome build (NULL).}
+
 \item{convert_small_p}{Binary, should p-values < 5e-324 be converted to 0?
 Small p-values pass the R limit and can cause errors with LDSC/MAGMA and
 should be converted. Default is TRUE.}
@@ -56,7 +61,11 @@ as a last resort.}
 \item{compute_n}{Whether to impute N. Default of 0 won't impute, any other
 integer will be imputed as the N (sample size) for every SNP in the dataset.
 \strong{Note} that imputing the sample size for every SNP is not correct and
-should only be done as a last resort.}
+should only be done as a last resort. N can also be inputted with "ldsc",
+"sum", "giant" or "metal" by passing one of these for this field or a vector
+of multiple. Sum and an integer value creates an N column in the output
+whereas giant, metal or ldsc create an Neff or effective sample size. If
+multiples are passed, the formula used to derive it will be indicated.}
 
 \item{convert_n_int}{Binary, if N (the number of samples) is not an integer,
 should this be rounded? Default is TRUE.}

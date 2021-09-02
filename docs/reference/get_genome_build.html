@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Infers the genome build of the summary statistics file (GRCh37 or GRCh38)
-from the data. Uses SNP (RS ID) &amp; CHR &amp; BP to get genome build. — get_genome_build • MungeSumstats</title>
+from the data. Uses SNP (RSID) &amp; CHR &amp; BP to get genome build. — get_genome_build • MungeSumstats</title>
 
 
 <!-- jquery -->
@@ -41,9 +41,9 @@ from the data. Uses SNP (RS ID) &amp; CHR &amp; BP to get genome build. — get_
 
 
 <meta property="og:title" content="Infers the genome build of the summary statistics file (GRCh37 or GRCh38)
-from the data. Uses SNP (RS ID) &amp; CHR &amp; BP to get genome build. — get_genome_build" />
+from the data. Uses SNP (RSID) &amp; CHR &amp; BP to get genome build. — get_genome_build" />
 <meta property="og:description" content="Infers the genome build of the summary statistics file (GRCh37 or GRCh38)
-from the data. Uses SNP (RS ID) &amp;amp; CHR &amp;amp; BP to get genome build." />
+from the data. Uses SNP (RSID) &amp;amp; CHR &amp;amp; BP to get genome build." />
 
 
 
@@ -85,7 +85,7 @@ from the data. Uses SNP (RS ID) &amp;amp; CHR &amp;amp; BP to get genome build."
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.16</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.19</span>
       </span>
     </div>
 
@@ -140,14 +140,14 @@ from the data. Uses SNP (RS ID) &amp;amp; CHR &amp;amp; BP to get genome build."
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Infers the genome build of the summary statistics file (GRCh37 or GRCh38)
-from the data. Uses SNP (RS ID) &amp; CHR &amp; BP to get genome build.</h1>
+from the data. Uses SNP (RSID) &amp; CHR &amp; BP to get genome build.</h1>
     <small class="dont-index">Source: <a href='https://github.com/neurogenomics/MungeSumstats/blob/master/R/get_genome_build.R'><code>R/get_genome_build.R</code></a></small>
     <div class="hidden name"><code>get_genome_build.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Infers the genome build of the summary statistics file (GRCh37 or GRCh38)
-from the data. Uses SNP (RS ID) &amp; CHR &amp; BP to get genome build.</p>
+from the data. Uses SNP (RSID) &amp; CHR &amp; BP to get genome build.</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_genome_build</span><span class='op'>(</span>
@@ -155,7 +155,8 @@ from the data. Uses SNP (RS ID) &amp; CHR &amp; BP to get genome build.</p>
   nThread <span class='op'>=</span> <span class='fl'>1</span>,
   sampled_snps <span class='op'>=</span> <span class='fl'>10000</span>,
   standardise_headers <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  mapping_file <span class='op'>=</span> <span class='va'>sumstatsColHeaders</span>
+  mapping_file <span class='op'>=</span> <span class='va'>sumstatsColHeaders</span>,
+  header_only <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -182,12 +183,20 @@ build to save time.</p></td>
     </tr>
     <tr>
       <th>mapping_file</th>
-      <td><p>MungeSumstats has a pre-defined column-name mapping file
+      <td><p><span class="pkg">MungeSumstats</span> has a pre-defined
+column-name mapping file
 which should cover the most common column headers and their interpretations.
-However, if a column header that is in youf file is missing of the mapping we
+However, if a column header that is in your file is missing of the mapping we
 give is incorrect you can supply your own mapping file. Must be a 2 column
 dataframe with column names "Uncorrected" and "Corrected". See
-data(sumstatsColHeaders) for default mapping and necessary format.</p></td>
+<code><a href='https://rdrr.io/r/utils/data.html'>data(sumstatsColHeaders)</a></code> for default mapping and necessary format.</p></td>
+    </tr>
+    <tr>
+      <th>header_only</th>
+      <td><p>Instead of reading in the entire <code>sumstats</code> file,
+only read in the first N rows where N=<code>sampled_snps</code>.
+This should help speed up cases where you have to read in <code>sumstats</code>
+from disk each time.</p></td>
     </tr>
     </table>
 
@@ -195,20 +204,6 @@ data(sumstatsColHeaders) for default mapping and necessary format.</p></td>
 
     <p>ref_genome the genome build of the data</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>#Pass path to Educational Attainment Okbay sumstat file to a temp directory</span>
-
-<span class='va'>eduAttainOkbayPth</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>,<span class='st'>"eduAttainOkbay.txt"</span>, 
-                                 package<span class='op'>=</span><span class='st'>"MungeSumstats"</span><span class='op'>)</span>
-
-<span class='co'>## Call uses reference genome as default with more than 2GB of memory,</span>
-<span class='co'>## which is more than what 32-bit Windows can handle so remove certain checks</span>
-<span class='va'>is_32bit_windows</span> <span class='op'>&lt;-</span> 
-<span class='va'>.Platform</span><span class='op'>$</span><span class='va'>OS.type</span> <span class='op'>==</span> <span class='st'>"windows"</span> <span class='op'>&amp;&amp;</span> <span class='va'>.Platform</span><span class='op'>$</span><span class='va'>r_arch</span> <span class='op'>==</span> <span class='st'>"i386"</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='op'>!</span><span class='va'>is_32bit_windows</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>ref_genome</span> <span class='op'>&lt;-</span> <span class='fu'>get_genome_build</span><span class='op'>(</span>sumstats<span class='op'>=</span><span class='va'>eduAttainOkbayPth</span><span class='op'>)</span>                                  
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; <span class='message'>Inferring genome build.</span></div><div class='output co'>#&gt; <span class='message'>Reading header.</span></div><div class='output co'>#&gt; <span class='message'>Tabular format detected.</span></div><div class='output co'>#&gt; <span class='message'>Importing.</span></div><div class='output co'>#&gt; <span class='message'>Standardising column headers.</span></div><div class='output co'>#&gt; <span class='message'>First line of summary statistics file: </span></div><div class='output co'>#&gt; <span class='message'>MarkerName	CHR	POS	A1	A2	EAF	Beta	SE	Pval	</span></div><div class='output co'>#&gt; <span class='message'>Loading reference genome data.</span></div><div class='output co'>#&gt; <span class='message'>Loading reference genome data.</span></div><div class='output co'>#&gt; <span class='message'>Inferred genome build: GRCH37</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

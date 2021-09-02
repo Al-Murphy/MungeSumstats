@@ -8,7 +8,9 @@
 
 <title>Check for N column if not present and user wants, impute N based on user's
 sample size. NOTE this will be the same value for each SNP which is not
-necessarily correct and may cause issues down the line. — compute_nsize • MungeSumstats</title>
+necessarily correct and may cause issues down the line. N can also be
+inputted with "ldsc", "sum", "giant" or "metal" by passing one or
+multiple of these. — compute_nsize • MungeSumstats</title>
 
 
 <!-- jquery -->
@@ -43,10 +45,14 @@ necessarily correct and may cause issues down the line. — compute_nsize • Mu
 
 <meta property="og:title" content="Check for N column if not present and user wants, impute N based on user's
 sample size. NOTE this will be the same value for each SNP which is not
-necessarily correct and may cause issues down the line. — compute_nsize" />
+necessarily correct and may cause issues down the line. N can also be
+inputted with "ldsc", "sum", "giant" or "metal" by passing one or
+multiple of these. — compute_nsize" />
 <meta property="og:description" content="Check for N column if not present and user wants, impute N based on user's
 sample size. NOTE this will be the same value for each SNP which is not
-necessarily correct and may cause issues down the line." />
+necessarily correct and may cause issues down the line. N can also be
+inputted with &quot;ldsc&quot;, &quot;sum&quot;, &quot;giant&quot; or &quot;metal&quot; by passing one or
+multiple of these." />
 
 
 
@@ -88,7 +94,7 @@ necessarily correct and may cause issues down the line." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.16</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.19</span>
       </span>
     </div>
 
@@ -144,7 +150,9 @@ necessarily correct and may cause issues down the line." />
     <div class="page-header">
     <h1>Check for N column if not present and user wants, impute N based on user's
 sample size. <strong>NOTE</strong> this will be the same value for each SNP which is not
-necessarily correct and may cause issues down the line.</h1>
+necessarily correct and may cause issues down the line. N can also be
+inputted with "ldsc", "sum", "giant" or "metal" by passing one or
+multiple of these.</h1>
     <small class="dont-index">Source: <a href='https://github.com/neurogenomics/MungeSumstats/blob/master/R/compute_nsize.R'><code>R/compute_nsize.R</code></a></small>
     <div class="hidden name"><code>compute_nsize.Rd</code></div>
     </div>
@@ -152,10 +160,17 @@ necessarily correct and may cause issues down the line.</h1>
     <div class="ref-description">
     <p>Check for N column if not present and user wants, impute N based on user's
 sample size. <strong>NOTE</strong> this will be the same value for each SNP which is not
-necessarily correct and may cause issues down the line.</p>
+necessarily correct and may cause issues down the line. N can also be
+inputted with "ldsc", "sum", "giant" or "metal" by passing one or
+multiple of these.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>compute_nsize</span><span class='op'>(</span><span class='va'>sumstats_dt</span>, <span class='va'>imputation_ind</span>, compute_n <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>compute_nsize</span><span class='op'>(</span>
+  <span class='va'>sumstats_dt</span>,
+  imputation_ind <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  compute_n <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ldsc"</span>, <span class='st'>"giant"</span>, <span class='st'>"metal"</span>, <span class='st'>"sum"</span><span class='op'>)</span>,
+  force_new <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -175,9 +190,17 @@ is FALSE.</p></td>
     </tr>
     <tr>
       <th>compute_n</th>
-      <td><p>Whether to impute N. Default of 0 won't impute, any other
-integer will be imputed as the N (sample size) for every SNP in the dataset.
-<strong>Note</strong> that imputing the sample size for every SNP is not correct and</p></td>
+      <td><p>How to compute per-SNP sample size (new column "N").</p><ul>
+<li><p><code>0</code>: N will not be computed.</p></li>
+<li><p><code>&gt;0</code>: If any number &gt;0 is provided,
+that value will be set as N for every row.
+<strong>Note</strong>: Computing N this way is incorrect and should be avoided
+if at all possible.</p></li>
+<li><p><code>"sum"</code>: N will be computed as:
+cases (N_CAS) + controls (N_CON), so long as both columns are present.</p></li>
+<li><p><code>"effective"</code>: N will be computed as effective sample size:
+cases (N_CAS) + controls (N_CON), so long as both columns are present.</p></li>
+</ul></td>
     </tr>
     </table>
 

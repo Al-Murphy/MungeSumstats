@@ -1,3 +1,15 @@
+## CHANGES IN VERSION 1.1.19
+
+### New Features
+
+* `get_genome_builds()` can now be called to quickly get the genome build 
+without running the whole reformatting.
+* `format_sumstats(compute_n)` now has more methods to compute the effective 
+sample size with "ldsc", "sum", "giant" or "metal". 
+* `format_sumstats(convert_ref_genome)` now implemented which can perform 
+liftover to GRCh38 from GRCh37 and vice-versa enabling better cohesion between
+different study's summary statistics.
+
 ## CHANGES IN VERSION 1.1.11
 
 ### Bug fixes

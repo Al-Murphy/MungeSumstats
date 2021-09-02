@@ -38,7 +38,17 @@ test_that("SNPs not on reference genome are removed", {
         # reordering in function, line 3 rs9320913 is now 58
         # expect_equal(setequal(reformatted_lines,org_lines[-58]),TRUE)
         expect_equal(setequal(reformatted_lines, org_lines), TRUE)
+        
+        #also check get genome builds works
+        eduAttainOkbayPth <- system.file("extdata", "eduAttainOkbay.txt",
+             package = "MungeSumstats")
+        sumstats_list <- list(ss1 = eduAttainOkbayPth)
+        ref_genomes <- get_genome_builds(sumstats_list = sumstats_list,
+                                         sampled_snps = 50)
+        expect_equal(all.equal(ref_genomes,list("ss1"="GRCH37")),TRUE)
+        
     } else {
+        expect_equal(is_32bit_windows, TRUE)
         expect_equal(is_32bit_windows, TRUE)
     }
 })

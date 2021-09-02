@@ -118,6 +118,15 @@
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/compute_nsize.html</loc>
   </url>
   <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/compute_sample_size.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/compute_sample_size_n.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/compute_sample_size_neff.html</loc>
+  </url>
+  <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/convert_sumstats.html</loc>
   </url>
   <url>
@@ -125,6 +134,9 @@
   </url>
   <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/downloader.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/dt_to_granges.html</loc>
   </url>
   <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/find_sumstats.html</loc>
@@ -136,7 +148,13 @@
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/get_access_token.html</loc>
   </url>
   <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/get_chain_file.html</loc>
+  </url>
+  <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/get_genome_build.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/get_genome_builds.html</loc>
   </url>
   <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/get_query_content.html</loc>
@@ -158,6 +176,9 @@
   </url>
   <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/legacy_ids.html</loc>
+  </url>
+  <url>
+    <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/liftover.html</loc>
   </url>
   <url>
     <loc>https://neurogenomics.github.io/MungeSumstats/index.html/reference/load_ref_genome_data.html</loc>

@@ -4,12 +4,14 @@
 \alias{compute_nsize}
 \title{Check for N column if not present and user wants, impute N based on user's
 sample size. \strong{NOTE} this will be the same value for each SNP which is not
-necessarily correct and may cause issues down the line.}
+necessarily correct and may cause issues down the line. N can also be
+inputted with "ldsc", "sum", "giant" or "metal" by passing one or
+multiple of these.}
 \usage{
 compute_nsize(
   sumstats_dt,
   imputation_ind = FALSE,
-  compute_n = c("ldsc", "sum"),
+  compute_n = c("ldsc", "giant", "metal", "sum"),
   force_new = FALSE
 )
 }
@@ -42,6 +44,8 @@ cases (N_CAS) + controls (N_CON), so long as both columns are present}.
 \description{
 Check for N column if not present and user wants, impute N based on user's
 sample size. \strong{NOTE} this will be the same value for each SNP which is not
-necessarily correct and may cause issues down the line.
+necessarily correct and may cause issues down the line. N can also be
+inputted with "ldsc", "sum", "giant" or "metal" by passing one or
+multiple of these.
 }
 \keyword{internal}
