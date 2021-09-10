@@ -1,7 +1,7 @@
 Package: MungeSumstats
 Type: Package
 Title: Standardise summary statistics from GWAS
-Version: 1.1.20
+Version: 1.1.21
 Authors@R:
     c(person(given = "Alan",
            family = "Murphy",
@@ -35,6 +35,7 @@ Imports:
     dplyr, 
     stats,
     GenomicRanges,
+    GenomeInfoDb,
     BSgenome,
     Biostrings,
     VariantAnnotation,
@@ -44,7 +45,6 @@ Imports:
     jsonlite,
     methods,
     parallel,
-    GenomeInfoDb,
     rtracklayer
 biocViews: 
     SNP, WholeGenome, Genetics, ComparativeGenomics, 
