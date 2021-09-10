@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.20</span>
       </span>
     </div>
 
@@ -99,7 +99,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#standardise-the-format-of-gwas-summary-statistics-with-mungesumstats" class="anchor"></a>Standardise the format of GWAS summary statistics with <em>MungeSumstats</em>
 </h1></div>
-<p>Alan Murphy, Brian Schilder and Nathan Skene 2021-09-02</p>
+<p>Alan Murphy, Brian Schilder and Nathan Skene 2021-09-10</p>
 <!-- Readme.md is generated from Readme.Rmd. Please edit that file -->
 <!-- badges: start -->
 <p><a href="https://github.com/neurogenomics/MungeSumstats/actions"><img src="https://github.com/neurogenomics/MungeSumstats/workflows/R-full/badge.svg" alt="R-CMD-check"></a> <a href="https://codecov.io/gh/neurogenomics/MungeSumstats?branch=master"><img src="https://codecov.io/gh/neurogenomics/MungeSumstats/branch/master/graph/badge.svg" alt="Codecov test coverage"></a> <!-- badges: end --></p>
@@ -154,7 +154,7 @@
 <p>We also encourage people to edit the code to resolve their particular issues too and are happy to incorporate these through pull requests on github. If your summary statistic file headers are not recognised by <em>MungeSumstats</em> but correspond to one of</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>SNP, BP, CHR, A1, A2, P, Z, OR, BETA, LOG_ODDS, SIGNED_SUMSTAT, N, N_CAS, N_CON, </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>NSTUDY, INFO or FRQ, </span></code></pre></div>
-<p>feel free to update the <code><a href="reference/sumstatsColHeaders.html">MungeSumstats::sumstatsColHeaders</a></code> following the approach in the data.R file and add your mapping. Then use a pull request on github and we will incorporate this change into the package.</p>
+<p>feel free to update the <code><a href="https://rdrr.io/r/utils/data.html">data("sumstatsColHeaders")</a></code> following the approach in the data.R file and add your mapping. Then use a pull request on github and we will incorporate this change into the package.</p>
 </div>
 <div id="references" class="section level1">
 <h1 class="hasAnchor">

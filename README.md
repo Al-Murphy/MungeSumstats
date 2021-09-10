@@ -1,7 +1,7 @@
 Standardise the format of GWAS summary statistics with *MungeSumstats*
 ================
 Alan Murphy, Brian Schilder and Nathan Skene
-2021-09-02
+2021-09-10
 
 <!-- Readme.md is generated from Readme.Rmd. Please edit that file -->
 <!-- badges: start -->
@@ -111,8 +111,8 @@ github. If your summary statistic file headers are not recognised by
     SNP, BP, CHR, A1, A2, P, Z, OR, BETA, LOG_ODDS, SIGNED_SUMSTAT, N, N_CAS, N_CON, 
     NSTUDY, INFO or FRQ, 
 
-feel free to update the `MungeSumstats::sumstatsColHeaders` following
-the approach in the data.R file and add your mapping. Then use a pull
+feel free to update the `data("sumstatsColHeaders")` following the
+approach in the data.R file and add your mapping. Then use a pull
 request on github and we will incorporate this change into the package.
 
 # References

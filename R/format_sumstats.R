@@ -399,7 +399,7 @@ format_sumstats <- function(path,
             msg <-
                 paste0(
                     "Summary statistics file does not have",
-                    "obvious CHR/BP columns.",
+                    " obvious CHR/BP columns. ",
                     "Checking to see if they are joined in another column."
                 )
             message(msg)
