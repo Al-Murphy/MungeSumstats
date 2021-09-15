@@ -1,3 +1,12 @@
+## CHANGES IN VERSION 1.1.23
+
+### New Features
+
+* `format_sumstats(FRQ_filter)` added so SNPs can now be filtered by allele 
+frequency 
+* Mapping file now has mappings for allele frequency (AF) to FRQ
+* VCF files with AF in INFO column e.g. 'AF=...' now converted to AF column
+
 ## CHANGES IN VERSION 1.1.19
 
 ### New Features

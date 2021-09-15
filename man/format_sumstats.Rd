@@ -15,6 +15,7 @@ format_sumstats(
   convert_n_int = TRUE,
   analysis_trait = NULL,
   INFO_filter = 0.9,
+  FRQ_filter = 0,
   pos_se = TRUE,
   effect_columns_nonzero = FALSE,
   N_std = 5,
@@ -89,6 +90,10 @@ analysis from the GWAS. Default is NULL.}
 
 \item{INFO_filter}{numeric The minimum value permissible of the imputation
 information score (if present in sumstats file). Default 0.9.}
+
+\item{FRQ_filter}{numeric The minimum value permissible of the frequency(FRQ)
+of the SNP (i.e. Allele Frequency (AF)) (if present in sumstats file). By
+default no filtering is done, i.e. value of 0.}
 
 \item{pos_se}{Binary Should the standard Error (SE) column be checked to
 ensure it is greater than 0? Those that are, are removed (if present in

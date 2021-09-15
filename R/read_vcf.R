@@ -30,7 +30,7 @@ read_vcf <- function(path,
     # save(path, nThread, temp_save, keep_extra_cols, file = "~/Downloads/temp.RData")
 
     ### Add this to avoid confusing BiocCheck
-    INFO <- Pval <- P <- LP <- NULL
+    INFO <- Pval <- P <- LP <- AF <- NULL
 
     message("Reading VCF file.")
     # fileformat <- gsub("^##fileformat=","",header[1])
@@ -161,7 +161,8 @@ read_vcf <- function(path,
     # EZ to Z
     # NC to N_CAS
     # SS to N
-    # ES ro BETA* -need confirmation
+    # AF to FRQ
+    # ES to BETA* -need confirmation
 
     #### Check for empty columns ####
     empty_cols <- check_empty_cols(
@@ -198,12 +199,24 @@ read_vcf <- function(path,
     # Need to remove "AF=" at start of INFO column and replace any "." with 0
     if ("INFO" %in% names(sumstats_file)) {
         message("Formatting INFO column.")
+        #if info col = "AF=..." then it isn't info, rename to AF if available
+        #check first 10k only, or all if less
+        num_check <- min(nrow(sumstats_file),10000)
+        #if more than half are, take the column as AF
+        if(sum(grepl("^AF=",sumstats_file$INFO))>num_check/2){
+            message("INFO column is actually AF, it will be converted.")
+            #don't overwirte AF column if it exists
+            if (!"AF" %in% names(sumstats_file)){
+                sumstats_file[,AF:=INFO]
+                sumstats_file[, AF := gsub("^AF=", "", AF)]
+            }    
+        }
         sumstats_file[, INFO := gsub("^AF=", "", INFO)]
         sumstats_file[INFO == ".", INFO := 0]
         # update to numeric
         sumstats_file[, INFO := as.numeric(INFO)]
     }
-    if ("INFO" %in% names(empty_cols)) {
+    if ("INFO" %in% names(empty_cols) && "INFO" %in% names(sumstats_file)) {
         message("NOTE: All INFO scores are empty. Replacing all with 1.")
         sumstats_file$INFO <- 1
     }

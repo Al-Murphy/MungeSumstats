@@ -17,7 +17,7 @@ test_that("VCF is correctly formatted", {
     reformatted_lines <- readLines(reformatted)
     # check manually against first five SNPs
     corr_res <- c(
-        "SNP\tCHR\tBP\tA1\tA2\tINFO\tBETA\tSE\tLP\tAF\tP",
+        "SNP\tCHR\tBP\tA1\tA2\tINFO\tBETA\tSE\tLP\tFRQ\tP",
         "rs58108140\t1\t10583\tG\tA\t0.1589\t0.0312\t0.0393\t0.369267\t0.1589\t0.427300105456596",
         "rs806731\t1\t30923\tG\tT\t0.7843\t-0.0114\t0.0353\t0.126854\t0.7843\t0.746699739815279",
         "rs116400033\t1\t51479\tT\tA\t0.1829\t0.0711\t0.037\t1.26241\t0.1829\t0.0546499790752282",
@@ -36,7 +36,9 @@ test_that("VCF is correctly formatted", {
     snp_of_interest <- "rs146477069"
     rsid_index <- grep(snp_of_interest, ALSvcf, ignore.case = TRUE)
     ALSvcf[rsid_index] <-
-        "1\t54421\trs146477069\tG\tA\t.\tPASS\tAF=0.0352\tES:SE:LP:AF:ID\t+0.024:0.083:0.112102:0.0352:rs146477069"
+        #"1\t54421\trs146477069\tG\tA\t.\tPASS\tAF=0.0352\tES:SE:LP:AF:ID\t+0.024:0.083:0.112102:0.0352:rs146477069"
+        #flip FRQ
+        "1\t54421\trs146477069\tG\tA\t.\tPASS\tAF=0.0352\tES:SE:LP:AF:ID\t+0.024:0.083:0.112102:0.9648:rs146477069"
     writeLines(ALSvcf, con = file2)
 
     # Run MungeSumstats code
@@ -50,14 +52,14 @@ test_that("VCF is correctly formatted", {
                 ref_genome = "GRCh37",
                 on_ref_genome = FALSE,
                 strand_ambig_filter = FALSE,
-                bi_allelic_filter = FALSE,
+                bi_allelic_filter = TRUE,
                 allele_flip_check = TRUE,
                 allele_flip_drop = FALSE,
                 INFO_filter = 0.01
             )
         reformatted_lines_af <- readLines(reformatted_allelic_flip)
         expect_equal(reformatted_lines, reformatted_lines_af)
-        # also check outputing as different types
+        # also check outputting as different types
         pth <- system.file("extdata", "ALSvcf.vcf", package = "MungeSumstats")
         rtrn_dt <- MungeSumstats::format_sumstats(pth,
             ref_genome = "GRCh37",

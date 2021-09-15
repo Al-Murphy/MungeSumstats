@@ -12,6 +12,7 @@ validate_parameters <- function(path,
                                 convert_n_int,
                                 analysis_trait,
                                 INFO_filter,
+                                FRQ_filter,
                                 pos_se,
                                 effect_columns_nonzero,
                                 N_std,
@@ -177,7 +178,10 @@ validate_parameters <- function(path,
     # Check numeric
     if (!is.numeric(INFO_filter)) {
           stop("INFO_filter must be numeric")
-      }
+    }
+    if (!is.numeric(FRQ_filter)) {
+      stop("FRQ_filter must be numeric")
+    }
     if (!is.numeric(N_std)) {
           stop("N_std must be numeric")
       }

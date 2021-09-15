@@ -65,6 +65,9 @@
 #' analysis from the GWAS. Default is NULL.
 #' @param INFO_filter numeric The minimum value permissible of the imputation
 #' information score (if present in sumstats file). Default 0.9.
+#' @param FRQ_filter numeric The minimum value permissible of the frequency(FRQ)
+#' of the SNP (i.e. Allele Frequency (AF)) (if present in sumstats file). By 
+#' default no filtering is done, i.e. value of 0.
 #' @param pos_se Binary Should the standard Error (SE) column be checked to
 #' ensure it is greater than 0? Those that are, are removed (if present in
 #' sumstats file). Default TRUE.
@@ -162,6 +165,7 @@ format_sumstats <- function(path,
                             convert_n_int = TRUE,
                             analysis_trait = NULL,
                             INFO_filter = 0.9,
+                            FRQ_filter = 0,
                             pos_se = TRUE,
                             effect_columns_nonzero = FALSE,
                             N_std = 5,
@@ -236,6 +240,7 @@ format_sumstats <- function(path,
             convert_n_int = convert_n_int,
             analysis_trait = analysis_trait,
             INFO_filter = INFO_filter,
+            FRQ_filter = FRQ_filter,
             pos_se = pos_se,
             effect_columns_nonzero = effect_columns_nonzero,
             N_std = N_std,
@@ -633,6 +638,21 @@ format_sumstats <- function(path,
                 sumstats_dt = sumstats_return$sumstats_dt,
                 path = path,
                 INFO_filter = INFO_filter,
+                log_folder_ind = log_folder_ind,
+                check_save_out = check_save_out,
+                tabix_index = tabix_index,
+                nThread = nThread,
+                log_files = log_files
+            )
+        # update values
+        log_files <- sumstats_return$log_files
+        
+        #### Check 35: check for low FRQ scores ####
+        sumstats_return <-
+            check_frq(
+                sumstats_dt = sumstats_return$sumstats_dt,
+                path = path,
+                FRQ_filter = FRQ_filter,
                 log_folder_ind = log_folder_ind,
                 check_save_out = check_save_out,
                 tabix_index = tabix_index,

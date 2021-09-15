@@ -17,13 +17,14 @@ check_info_score <- function(sumstats_dt, path, INFO_filter, log_folder_ind,
             msg <- paste0(
                 formatC(num_bad_ids, big.mark = ","), " SNPs",
                 " are below the INFO threshold of ", INFO_filter,
-                " and will be removed"
+                " and will be removed."
             )
             message(msg)
             # If user wants log, save it to there
             if (log_folder_ind) {
                 name <- "info_filter"
-                name <- get_unique_name_log_file(name = name, log_files = log_files)
+                name <- get_unique_name_log_file(name = name, 
+                                                    log_files = log_files)
                 write_sumstats(
                     sumstats_dt = sumstats_dt[INFO < INFO_filter, ],
                     save_path =
@@ -37,7 +38,8 @@ check_info_score <- function(sumstats_dt, path, INFO_filter, log_folder_ind,
                     nThread = nThread
                 )
                 log_files[[name]] <-
-                    paste0(check_save_out$log_folder, "/", name, check_save_out$extension)
+                    paste0(check_save_out$log_folder, "/", name, 
+                            check_save_out$extension)
             }
             sumstats_dt <- sumstats_dt[INFO >= INFO_filter, ]
         }
