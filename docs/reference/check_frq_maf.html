@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Page not found (404) • MungeSumstats</title>
+<title>Check that FRQ column refers to minor/effect allele frequency not major — check_frq_maf • MungeSumstats</title>
 
 
 <!-- jquery -->
@@ -18,8 +18,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
 <!-- bootstrap-toc -->
-<link rel="stylesheet" href="https://neurogenomics.github.io/MungeSumstats/index.html/bootstrap-toc.css">
-<script src="https://neurogenomics.github.io/MungeSumstats/index.html/bootstrap-toc.js"></script>
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
@@ -33,13 +33,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="https://neurogenomics.github.io/MungeSumstats/index.html/pkgdown.css" rel="stylesheet">
-<script src="https://neurogenomics.github.io/MungeSumstats/index.html/pkgdown.js"></script>
+<link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script>
 
 
 
 
-<meta property="og:title" content="Page not found (404)" />
+<meta property="og:title" content="Check that FRQ column refers to minor/effect allele frequency not major — check_frq_maf" />
+<meta property="og:description" content="Check that FRQ column refers to minor/effect allele frequency not major" />
 
 
 
@@ -68,7 +69,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-title-body">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -80,7 +81,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="https://neurogenomics.github.io/MungeSumstats/index.html/index.html">MungeSumstats</a>
+        <a class="navbar-link" href="../index.html">MungeSumstats</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.24</span>
       </span>
     </div>
@@ -88,16 +89,16 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">
+  <a href="../index.html">
     <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="articles/MungeSumstats.html">Get started</a>
+  <a href="../articles/MungeSumstats.html">Get started</a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -107,12 +108,12 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="articles/OpenGWAS.html">Import GWAS summary statistics from Open GWAS</a>
+      <a href="../articles/OpenGWAS.html">Import GWAS summary statistics from Open GWAS</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="news/index.html">Changelog</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -133,23 +134,44 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Page not found (404)</h1>
+    <h1>Check that FRQ column refers to minor/effect allele frequency not major</h1>
+    <small class="dont-index">Source: <a href='https://github.com/neurogenomics/MungeSumstats/blob/master/R/check_frq_maf.R'><code>R/check_frq_maf.R</code></a></small>
+    <div class="hidden name"><code>check_frq_maf.Rd</code></div>
     </div>
 
-Content not found. Please use links in the navbar.
+    <div class="ref-description">
+    <p>Check that FRQ column refers to minor/effect allele frequency not major</p>
+    </div>
+
+    <pre class="usage"><span class='fu'>check_frq_maf</span><span class='op'>(</span><span class='va'>sumstats_dt</span>, <span class='va'>frq_is_maf</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>frq_is_maf</th>
+      <td><p>Conventionally the FRQ column is intended to show the
+minor/effect allele frequency (MAF) but sometimes the major allele frequency
+can be inferred as the FRQ column. This logical variable indicates that the
+FRQ column should be renamed to MAJOR_ALLELE_FRQ if the frequency values
+appear to relate to the major allele i.e. &gt;0.5. By default this mapping won't
+occur i.e. is TRUE.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>sumstats_dt, the modified summary statistics data table object</p>
 
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
-
 
 
       <footer>

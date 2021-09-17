@@ -6,6 +6,10 @@
 frequency 
 * Mapping file now has mappings for allele frequency (AF) to FRQ
 * VCF files with AF in INFO column e.g. 'AF=...' now converted to AF column
+* `format_sumstats(frq_is_maf)` check added to infer if FRQ column values are
+minor/effect allele frequencies or not. frq_is_maf allows users to rename the
+FRQ column as MAJOR_ALLELE_FRQ if some values appear to be major allele 
+frequencies
 
 ## CHANGES IN VERSION 1.1.19
 

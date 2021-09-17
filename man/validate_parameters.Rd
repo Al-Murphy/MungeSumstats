@@ -28,6 +28,8 @@ validate_parameters(
   allele_flip_frq,
   bi_allelic_filter,
   snp_ids_are_rs_ids,
+  remove_multi_rs_snp,
+  frq_is_maf,
   write_vcf,
   return_format,
   ldsc_format,
@@ -125,6 +127,19 @@ be RS IDs. If not, imputation using the SNP ID for other columns like
 base-pair position or chromosome will not be possible. If set to FALSE, the
 SNP RS ID will be imputed from the reference genome if possible. Default is
 TRUE.}
+
+\item{remove_multi_rs_snp}{Binary Sometimes summary statistics can have
+multiple RS IDs on one row (i.e. related to one SNP), for example
+"rs5772025_rs397784053". This can cause an error so by default, the first
+RS ID will be kept and the rest removed e.g."rs5772025". If you want to just
+remove these SNPs entirely, set it to TRUE. Default is FALSE.}
+
+\item{frq_is_maf}{Conventionally the FRQ column is intended to show the
+minor/effect allele frequency (MAF) but sometimes the major allele frequency
+can be inferred as the FRQ column. This logical variable indicates that the
+FRQ column should be renamed to MAJOR_ALLELE_FRQ if the frequency values
+appear to relate to the major allele i.e. >0.5. By default this mapping won't
+occur i.e. is TRUE.}
 
 \item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
 

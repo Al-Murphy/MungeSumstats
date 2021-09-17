@@ -31,6 +31,7 @@ format_sumstats(
   bi_allelic_filter = TRUE,
   snp_ids_are_rs_ids = TRUE,
   remove_multi_rs_snp = FALSE,
+  frq_is_maf = TRUE,
   sort_coordinates = TRUE,
   nThread = 1,
   save_path = tempfile(fileext = ".tsv.gz"),
@@ -148,6 +149,13 @@ multiple RS IDs on one row (i.e. related to one SNP), for example
 "rs5772025_rs397784053". This can cause an error so by default, the first
 RS ID will be kept and the rest removed e.g."rs5772025". If you want to just
 remove these SNPs entirely, set it to TRUE. Default is FALSE.}
+
+\item{frq_is_maf}{Conventionally the FRQ column is intended to show the
+minor/effect allele frequency (MAF) but sometimes the major allele frequency
+can be inferred as the FRQ column. This logical variable indicates that the
+FRQ column should be renamed to MAJOR_ALLELE_FRQ if the frequency values
+appear to relate to the major allele i.e. >0.5. By default this mapping won't
+occur i.e. is TRUE.}
 
 \item{sort_coordinates}{Whether to sort by coordinates.}
 

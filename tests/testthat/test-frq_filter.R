@@ -26,4 +26,21 @@ test_that("Filter SNPs based on FRQ", {
     )
     res_dt <- data.table::fread(reformatted$sumstats, nThread = 1)
     testthat::expect_equal(all(!rmv_snps %in% res_dt$SNP), TRUE)
+    
+    #Now check with renaming FRQ column to major
+    reformatted2 <- MungeSumstats::format_sumstats(file,
+                                                  ref_genome = "GRCh37",
+                                                  FRQ_filter = 0.9,
+                                                  on_ref_genome = FALSE,
+                                                  strand_ambig_filter = FALSE,
+                                                  bi_allelic_filter = FALSE,
+                                                  allele_flip_check = FALSE,
+                                                  frq_is_maf=FALSE,
+                                                  log_folder_ind = TRUE,
+                                                  imputation_ind = TRUE
+    )
+    #should be the same as above if column renamed
+    res_dt2 <- data.table::fread(reformatted2$sumstats, nThread = 1)
+    setnames(res_dt2,"MAJOR_ALLELE_FRQ","FRQ")
+    testthat::expect_equal(all.equal(res_dt,res_dt2),TRUE)
 })

@@ -26,6 +26,8 @@ validate_parameters <- function(path,
                                 allele_flip_frq,
                                 bi_allelic_filter,
                                 snp_ids_are_rs_ids,
+                                remove_multi_rs_snp,
+                                frq_is_maf,
                                 write_vcf,
                                 return_format,
                                 ldsc_format,
@@ -152,6 +154,12 @@ validate_parameters <- function(path,
       }
     if (!is.logical(snp_ids_are_rs_ids)) {
           stop("snp_ids_are_rs_ids must be either TRUE or FALSE")
+      }
+    if (!is.logical(remove_multi_rs_snp)) {
+      stop("remove_multi_rs_snp must be either TRUE or FALSE")
+      }
+    if (!is.logical(frq_is_maf)) {
+      stop("frq_is_maf must be either TRUE or FALSE")
       }
     if (!is.logical(write_vcf)) {
           stop("write_vcf must be either TRUE or FALSE")

@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.23</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.24</span>
       </span>
     </div>
 
@@ -169,6 +169,8 @@
   <span class='va'>allele_flip_frq</span>,
   <span class='va'>bi_allelic_filter</span>,
   <span class='va'>snp_ids_are_rs_ids</span>,
+  <span class='va'>remove_multi_rs_snp</span>,
+  <span class='va'>frq_is_maf</span>,
   <span class='va'>write_vcf</span>,
   <span class='va'>return_format</span>,
   <span class='va'>ldsc_format</span>,
@@ -314,6 +316,23 @@ be RS IDs. If not, imputation using the SNP ID for other columns like
 base-pair position or chromosome will not be possible. If set to FALSE, the
 SNP RS ID will be imputed from the reference genome if possible. Default is
 TRUE.</p></td>
+    </tr>
+    <tr>
+      <th>remove_multi_rs_snp</th>
+      <td><p>Binary Sometimes summary statistics can have
+multiple RS IDs on one row (i.e. related to one SNP), for example
+"rs5772025_rs397784053". This can cause an error so by default, the first
+RS ID will be kept and the rest removed e.g."rs5772025". If you want to just
+remove these SNPs entirely, set it to TRUE. Default is FALSE.</p></td>
+    </tr>
+    <tr>
+      <th>frq_is_maf</th>
+      <td><p>Conventionally the FRQ column is intended to show the
+minor/effect allele frequency (MAF) but sometimes the major allele frequency
+can be inferred as the FRQ column. This logical variable indicates that the
+FRQ column should be renamed to MAJOR_ALLELE_FRQ if the frequency values
+appear to relate to the major allele i.e. &gt;0.5. By default this mapping won't
+occur i.e. is TRUE.</p></td>
     </tr>
     <tr>
       <th>write_vcf</th>

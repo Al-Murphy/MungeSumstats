@@ -107,6 +107,12 @@
 #' "rs5772025_rs397784053". This can cause an error so by default, the first
 #' RS ID will be kept and the rest removed e.g."rs5772025". If you want to just
 #' remove these SNPs entirely, set it to TRUE. Default is FALSE.
+#' @param frq_is_maf Conventionally the FRQ column is intended to show the 
+#' minor/effect allele frequency (MAF) but sometimes the major allele frequency 
+#' can be inferred as the FRQ column. This logical variable indicates that the 
+#' FRQ column should be renamed to MAJOR_ALLELE_FRQ if the frequency values 
+#' appear to relate to the major allele i.e. >0.5. By default this mapping won't
+#' occur i.e. is TRUE.
 #' @param sort_coordinates Whether to sort by coordinates.
 #' @param nThread Number of threads to use for parallel processes.
 #' @param save_path File path to save formatted data. Defaults to
@@ -181,6 +187,7 @@ format_sumstats <- function(path,
                             bi_allelic_filter = TRUE,
                             snp_ids_are_rs_ids = TRUE,
                             remove_multi_rs_snp = FALSE,
+                            frq_is_maf = TRUE,
                             sort_coordinates = TRUE,
                             nThread = 1,
                             save_path = tempfile(fileext = ".tsv.gz"),
@@ -254,6 +261,8 @@ format_sumstats <- function(path,
             allele_flip_frq = allele_flip_frq,
             bi_allelic_filter = bi_allelic_filter,
             snp_ids_are_rs_ids = snp_ids_are_rs_ids,
+            remove_multi_rs_snp = remove_multi_rs_snp,
+            frq_is_maf =frq_is_maf,
             write_vcf = write_vcf,
             return_format = return_format,
             ldsc_format = ldsc_format,
@@ -775,6 +784,14 @@ format_sumstats <- function(path,
             compute_n = compute_n,
             imputation_ind = imputation_ind
         )
+        
+        #### Check 36: Ensure FRQ is MAF ####
+        sumstats_return$sumstats_dt <- check_frq_maf(
+            sumstats_dt =
+                sumstats_return$sumstats_dt,
+            frq_is_maf=frq_is_maf
+        )
+        
 
         #### Check 34: Perform liftover ####
         sumstats_return$sumstats_dt <- liftover(
