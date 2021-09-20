@@ -21,8 +21,8 @@ liftover <- function(sumstats_dt,convert_ref_genome,ref_genome,imputation_ind,
     if(!is.null(convert_ref_genome) && 
         toupper(convert_ref_genome)!=toupper(ref_genome)){
         
-        msg <- paste0("Performing data liftover from ",ref_genome," to",
-                      convert_ref_genome)
+        msg <- paste0("Performing data liftover from ",ref_genome," to ",
+                      convert_ref_genome,".")
         message(msg)
         
         if(toupper(convert_ref_genome)=="GRCH38"){
