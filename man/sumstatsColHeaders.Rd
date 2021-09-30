@@ -5,7 +5,7 @@
 \alias{sumstatsColHeaders}
 \title{Summary Statistics Column Headers}
 \format{
-dataframe with 99 rows and 2 columns
+dataframe with 2 columns
 }
 \source{
 The code to prepare the .Rda file file from the marker file is:

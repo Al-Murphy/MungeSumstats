@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.24</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.26</span>
       </span>
     </div>
 
@@ -88,14 +88,14 @@
 
       
 
-      </header><script src="MungeSumstats_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
+      </header><script src="MungeSumstats_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Standardise GWAS summary statistics with <em>MungeSumstats</em>
 </h1>
                         <h4 class="author">Alan Murphy, Brian Schilder, and Nathan Skene</h4>
             
-            <h4 class="date">2021-09-17</h4>
+            <h4 class="date">2021-09-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/MungeSumstats/blob/master/vignettes/MungeSumstats.Rmd"><code>vignettes/MungeSumstats.Rmd</code></a></small>
       <div class="hidden name"><code>MungeSumstats.Rmd</code></div>
@@ -234,10 +234,10 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ## - This means all formatted summary stats will be deletedupon ending the R session.
 ## - To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.
 ## ********************</code></pre>
-<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp9yeVIg/file5d4955677b3b.tsv.gz</code></pre>
+<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpC3g7FI/file22913eb02725.tsv.gz</code></pre>
 <pre><code>## Reading header.</code></pre>
 <pre><code>## Tabular format detected.</code></pre>
-<pre><code>## Importing tabular file: /private/var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T/Rtmp8MQyb7/temp_libpath5a4514255aab/MungeSumstats/extdata/eduAttainOkbay.txt</code></pre>
+<pre><code>## Importing tabular file: /private/var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T/Rtmp6hFEUF/temp_libpath1dd8717f06f1/MungeSumstats/extdata/eduAttainOkbay.txt</code></pre>
 <pre><code>## Standardising column headers.</code></pre>
 <pre><code>## First line of summary statistics file:</code></pre>
 <pre><code>## MarkerName   CHR POS A1  A2  EAF Beta    SE  Pval    </code></pre>
@@ -267,11 +267,11 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Warning: When method is an integer, must be &gt;0.</code></pre>
 <pre><code>## 67 SNPs (72%) have FRQ values &gt; 0.5. Conventionally the FRQ column is intended to show the minor/effect allele frequency.
 ## The FRQ column was  mapped from one of the following from the inputted  summary statistics file:
-## FRQ, EAF, MAF, FRQ_U, F_U, FREQUENCY, FREQ, FREQ_TESTED_ALLELE, FRQ_TESTED_ALLELE, FREQ_EFFECT_ALLELE, FRQ_EFFECT_ALLELE, EFFECT_ALLELE_FREQUENCY, EFFECT_ALLELE_FREQ, EFFECT_ALLELE_FRQ, A1FREQ, A1FRQ, A2FREQ, A2FRQ, ALLELE_FREQUENCY, ALLELE_FREQ, ALLELE_FRQ, AF</code></pre>
+## FRQ, EAF, MAF, FRQ_U, F_U, FREQUENCY, FREQ, FREQ_TESTED_ALLELE, FRQ_TESTED_ALLELE, FREQ_EFFECT_ALLELE, FRQ_EFFECT_ALLELE, EFFECT_ALLELE_FREQUENCY, EFFECT_ALLELE_FREQ, EFFECT_ALLELE_FRQ, A1FREQ, A1FRQ, A2FREQ, A2FRQ, ALLELE_FREQUENCY, ALLELE_FREQ, ALLELE_FRQ, AF, MINOR_AF, EFFECT_AF, A2_AF, EFF_AF, ALT_AF, ALTERNATIVE_AF, INC_AF, A_2_AF, TESTED_AF</code></pre>
 <pre><code>## As frq_is_maf=TRUE, the FRQ column will not be renamed. If the FRQ values were intended to represent major allele frequency,
 ## set frq_is_maf=FALSE to rename the column as MAJOR_ALLELE_FRQ and differentiate it from minor/effect allele frequency.</code></pre>
 <pre><code>## Sorting coordinates.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp9yeVIg/file5d4955677b3b.tsv.gz</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpC3g7FI/file22913eb02725.tsv.gz</code></pre>
 <pre><code>## Summary statistics report:
 ##    - 93 rows (100% of original 93 rows)
 ##    - 93 unique variants
@@ -340,9 +340,9 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ## - This means all formatted summary stats will be deletedupon ending the R session.
 ## - To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.
 ## ********************</code></pre>
-<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp9yeVIg/file5d4943d642e8.tsv.gz</code></pre>
+<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpC3g7FI/file22913f0387e4.tsv.gz</code></pre>
 <pre><code>## Reading header.</code></pre>
-<pre><code>## Importing VCF file: /private/var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T/Rtmp8MQyb7/temp_libpath5a4514255aab/MungeSumstats/extdata/ALSvcf.vcf</code></pre>
+<pre><code>## Importing VCF file: /private/var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T/Rtmp6hFEUF/temp_libpath1dd8717f06f1/MungeSumstats/extdata/ALSvcf.vcf</code></pre>
 <pre><code>## Reading VCF file.</code></pre>
 <pre><code>## Removing non-standard columns: QUAL, FILTER, FORMAT</code></pre>
 <pre><code>## Parsing 'EBI-a-GCST005647' data column.</code></pre>
@@ -382,11 +382,11 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Warning: When method is an integer, must be &gt;0.</code></pre>
 <pre><code>## 2 SNPs (7.7%) have FRQ values &gt; 0.5. Conventionally the FRQ column is intended to show the minor/effect allele frequency.
 ## The FRQ column was  mapped from one of the following from the inputted  summary statistics file:
-## FRQ, EAF, MAF, FRQ_U, F_U, FREQUENCY, FREQ, FREQ_TESTED_ALLELE, FRQ_TESTED_ALLELE, FREQ_EFFECT_ALLELE, FRQ_EFFECT_ALLELE, EFFECT_ALLELE_FREQUENCY, EFFECT_ALLELE_FREQ, EFFECT_ALLELE_FRQ, A1FREQ, A1FRQ, A2FREQ, A2FRQ, ALLELE_FREQUENCY, ALLELE_FREQ, ALLELE_FRQ, AF</code></pre>
+## FRQ, EAF, MAF, FRQ_U, F_U, FREQUENCY, FREQ, FREQ_TESTED_ALLELE, FRQ_TESTED_ALLELE, FREQ_EFFECT_ALLELE, FRQ_EFFECT_ALLELE, EFFECT_ALLELE_FREQUENCY, EFFECT_ALLELE_FREQ, EFFECT_ALLELE_FRQ, A1FREQ, A1FRQ, A2FREQ, A2FRQ, ALLELE_FREQUENCY, ALLELE_FREQ, ALLELE_FRQ, AF, MINOR_AF, EFFECT_AF, A2_AF, EFF_AF, ALT_AF, ALTERNATIVE_AF, INC_AF, A_2_AF, TESTED_AF</code></pre>
 <pre><code>## As frq_is_maf=TRUE, the FRQ column will not be renamed. If the FRQ values were intended to represent major allele frequency,
 ## set frq_is_maf=FALSE to rename the column as MAJOR_ALLELE_FRQ and differentiate it from minor/effect allele frequency.</code></pre>
 <pre><code>## Sorting coordinates.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp9yeVIg/file5d4943d642e8.tsv.gz</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpC3g7FI/file22913f0387e4.tsv.gz</code></pre>
 <pre><code>## Summary statistics report:
 ##    - 26 rows (26.3% of original 99 rows)
 ##    - 26 unique variants
@@ -422,10 +422,10 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ## - This means all log data from the run will be deleted upon ending the R session.
 ## - To keep it, change `log_folder` to an actual directory (e.g. log_folder='./').
 ## ********************</code></pre>
-<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp9yeVIg/file5d4974a855e0.tsv.gz</code></pre>
-<pre><code>## Log data to be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp9yeVIg</code></pre>
+<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpC3g7FI/file2291699e77b8.tsv.gz</code></pre>
+<pre><code>## Log data to be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpC3g7FI</code></pre>
 <pre><code>## Reading header.</code></pre>
-<pre><code>## Importing VCF file: /private/var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T/Rtmp8MQyb7/temp_libpath5a4514255aab/MungeSumstats/extdata/ALSvcf.vcf</code></pre>
+<pre><code>## Importing VCF file: /private/var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T/Rtmp6hFEUF/temp_libpath1dd8717f06f1/MungeSumstats/extdata/ALSvcf.vcf</code></pre>
 <pre><code>## Reading VCF file.</code></pre>
 <pre><code>## Removing non-standard columns: QUAL, FILTER, FORMAT</code></pre>
 <pre><code>## Parsing 'EBI-a-GCST005647' data column.</code></pre>
@@ -448,7 +448,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Ensuring all SNPs are on the reference genome.</code></pre>
 <pre><code>## Loading reference genome data.</code></pre>
 <pre><code>## 12 SNPs are not on the reference genome. These will be corrected from the reference genome.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp9yeVIg/snp_not_found_from_chr_bp.tsv</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpC3g7FI/snp_not_found_from_chr_bp.tsv</code></pre>
 <pre><code>## Checking for correct direction of A1 (reference) and A2 (alternative allele).</code></pre>
 <pre><code>## Reordering so first three column headers are SNP, CHR and BP in this order.</code></pre>
 <pre><code>## Reordering so the fourth and fifth columns are A1 and A2.</code></pre>
@@ -458,7 +458,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Checking for SNPs with duplicated base-pair positions</code></pre>
 <pre><code>## Filtering SNPs based on INFO score.</code></pre>
 <pre><code>## 67 SNPs are below the INFO threshold of 0.1 and will be removed.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp9yeVIg/info_filter.tsv</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpC3g7FI/info_filter.tsv</code></pre>
 <pre><code>## Filtering SNPs, ensuring SE&gt;0.</code></pre>
 <pre><code>## Ensuring all SNPs have N&lt;5 std dev above mean.</code></pre>
 <pre><code>## Removing 'chr' prefix from CHR.</code></pre>
@@ -467,11 +467,11 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Warning: When method is an integer, must be &gt;0.</code></pre>
 <pre><code>## 2 SNPs (7.7%) have FRQ values &gt; 0.5. Conventionally the FRQ column is intended to show the minor/effect allele frequency.
 ## The FRQ column was  mapped from one of the following from the inputted  summary statistics file:
-## FRQ, EAF, MAF, FRQ_U, F_U, FREQUENCY, FREQ, FREQ_TESTED_ALLELE, FRQ_TESTED_ALLELE, FREQ_EFFECT_ALLELE, FRQ_EFFECT_ALLELE, EFFECT_ALLELE_FREQUENCY, EFFECT_ALLELE_FREQ, EFFECT_ALLELE_FRQ, A1FREQ, A1FRQ, A2FREQ, A2FRQ, ALLELE_FREQUENCY, ALLELE_FREQ, ALLELE_FRQ, AF</code></pre>
+## FRQ, EAF, MAF, FRQ_U, F_U, FREQUENCY, FREQ, FREQ_TESTED_ALLELE, FRQ_TESTED_ALLELE, FREQ_EFFECT_ALLELE, FRQ_EFFECT_ALLELE, EFFECT_ALLELE_FREQUENCY, EFFECT_ALLELE_FREQ, EFFECT_ALLELE_FRQ, A1FREQ, A1FRQ, A2FREQ, A2FRQ, ALLELE_FREQUENCY, ALLELE_FREQ, ALLELE_FRQ, AF, MINOR_AF, EFFECT_AF, A2_AF, EFF_AF, ALT_AF, ALTERNATIVE_AF, INC_AF, A_2_AF, TESTED_AF</code></pre>
 <pre><code>## As frq_is_maf=TRUE, the FRQ column will not be renamed. If the FRQ values were intended to represent major allele frequency,
 ## set frq_is_maf=FALSE to rename the column as MAJOR_ALLELE_FRQ and differentiate it from minor/effect allele frequency.</code></pre>
 <pre><code>## Sorting coordinates.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmp9yeVIg/file5d4974a855e0.tsv.gz</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpC3g7FI/file2291699e77b8.tsv.gz</code></pre>
 <pre><code>## Summary statistics report:
 ##    - 26 rows (26.3% of original 99 rows)
 ##    - 26 unique variants
@@ -623,11 +623,11 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] MungeSumstats_1.1.24 BiocStyle_2.20.2    
+## [1] MungeSumstats_1.1.26 BiocStyle_2.20.2    
 ## 
 ## loaded via a namespace (and not attached):
 ##   [1] bitops_1.0-7                               
-##   [2] matrixStats_0.60.1                         
+##   [2] matrixStats_0.61.0                         
 ##   [3] fs_1.5.0                                   
 ##   [4] bit64_4.0.5                                
 ##   [5] filelock_1.0.2                             
@@ -635,9 +635,9 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 ##   [7] httr_1.4.2                                 
 ##   [8] googleAuthR_1.4.0                          
 ##   [9] rprojroot_2.0.2                            
-##  [10] GenomeInfoDb_1.28.1                        
+##  [10] GenomeInfoDb_1.28.4                        
 ##  [11] tools_4.1.0                                
-##  [12] bslib_0.2.5.1                              
+##  [12] bslib_0.3.0                                
 ##  [13] utf8_1.2.2                                 
 ##  [14] R6_2.5.1                                   
 ##  [15] DBI_1.1.1                                  
@@ -651,24 +651,24 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 ##  [23] textshaping_0.3.5                          
 ##  [24] Biobase_2.52.0                             
 ##  [25] xml2_1.3.2                                 
-##  [26] desc_1.3.0                                 
+##  [26] desc_1.4.0                                 
 ##  [27] DelayedArray_0.18.0                        
 ##  [28] rtracklayer_1.52.1                         
-##  [29] bookdown_0.23                              
+##  [29] bookdown_0.24                              
 ##  [30] sass_0.4.0                                 
 ##  [31] rappdirs_0.3.3                             
 ##  [32] pkgdown_1.6.1                              
 ##  [33] systemfonts_1.0.2                          
 ##  [34] stringr_1.4.0                              
-##  [35] digest_0.6.27                              
+##  [35] digest_0.6.28                              
 ##  [36] Rsamtools_2.8.0                            
-##  [37] rmarkdown_2.10                             
-##  [38] R.utils_2.10.1                             
+##  [37] rmarkdown_2.11                             
+##  [38] R.utils_2.11.0                             
 ##  [39] XVector_0.32.0                             
 ##  [40] BSgenome.Hsapiens.1000genomes.hs37d5_0.99.1
 ##  [41] pkgconfig_2.0.3                            
 ##  [42] htmltools_0.5.2                            
-##  [43] MatrixGenerics_1.4.2                       
+##  [43] MatrixGenerics_1.4.3                       
 ##  [44] dbplyr_2.1.1                               
 ##  [45] fastmap_1.1.0                              
 ##  [46] BSgenome_1.60.0                            
@@ -683,14 +683,14 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 ##  [55] dplyr_1.0.7                                
 ##  [56] R.oo_1.24.0                                
 ##  [57] VariantAnnotation_1.38.0                   
-##  [58] RCurl_1.98-1.4                             
+##  [58] RCurl_1.98-1.5                             
 ##  [59] magrittr_2.0.1                             
 ##  [60] GenomeInfoDbData_1.2.6                     
 ##  [61] Matrix_1.3-4                               
 ##  [62] Rcpp_1.0.7                                 
-##  [63] S4Vectors_0.30.0                           
+##  [63] S4Vectors_0.30.1                           
 ##  [64] fansi_0.5.0                                
-##  [65] lifecycle_1.0.0                            
+##  [65] lifecycle_1.0.1                            
 ##  [66] R.methodsS3_1.8.1                          
 ##  [67] stringi_1.7.4                              
 ##  [68] yaml_2.2.1                                 
@@ -701,18 +701,18 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 ##  [73] blob_1.2.2                                 
 ##  [74] parallel_4.1.0                             
 ##  [75] crayon_1.4.1                               
-##  [76] lattice_0.20-44                            
+##  [76] lattice_0.20-45                            
 ##  [77] Biostrings_2.60.2                          
-##  [78] GenomicFeatures_1.44.1                     
-##  [79] hms_1.1.0                                  
+##  [78] GenomicFeatures_1.44.2                     
+##  [79] hms_1.1.1                                  
 ##  [80] KEGGREST_1.32.0                            
-##  [81] knitr_1.33                                 
-##  [82] pillar_1.6.2                               
+##  [81] knitr_1.34                                 
+##  [82] pillar_1.6.3                               
 ##  [83] GenomicRanges_1.44.0                       
 ##  [84] rjson_0.2.20                               
 ##  [85] biomaRt_2.48.3                             
 ##  [86] stats4_4.1.0                               
-##  [87] XML_3.99-0.7                               
+##  [87] XML_3.99-0.8                               
 ##  [88] glue_1.4.2                                 
 ##  [89] evaluate_0.14                              
 ##  [90] SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20   
@@ -723,7 +723,7 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 ##  [95] purrr_0.3.4                                
 ##  [96] assertthat_0.2.1                           
 ##  [97] cachem_1.0.6                               
-##  [98] xfun_0.25                                  
+##  [98] xfun_0.26                                  
 ##  [99] restfulr_0.0.13                            
 ## [100] ragg_1.1.3                                 
 ## [101] gargle_1.2.0                               

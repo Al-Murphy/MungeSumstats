@@ -1,3 +1,9 @@
+## CHANGES IN VERSION 1.1.26
+
+### New Features
+
+* Extra mappings for FRQ column, see `data("sumstatsColHeaders")` for details
+
 ## CHANGES IN VERSION 1.1.23
 
 ### New Features

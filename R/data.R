@@ -30,7 +30,7 @@
 #'       file="data/sumstatsColHeaders.rda")
 #' # You will need to restart your r session for effects to take account
 #' }
-#' @format dataframe with 99 rows and 2 columns
+#' @format dataframe with 2 columns
 #' @usage data("sumstatsColHeaders")
 "sumstatsColHeaders"
 
