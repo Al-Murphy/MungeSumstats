@@ -35,11 +35,11 @@ check_two_step_col <- function(sumstats_dt, path) {
         # split out col into separate values, keep names
         format <- strsplit(keep_col, ":")[[1]]
         if (length(format) != 2) { # check : and underscore in name
-              format <- strsplit(keep_col, "_")[[1]]
-          }
+            format <- strsplit(keep_col, "_")[[1]]
+        }
         if (length(format) != 2) { # If neither found assign name
-              format <- c("CHR", "BP")
-          }
+            format <- c("CHR", "BP")
+        }
         # keep ensures that even if certain rows have 3 values e.g.16:23609681:ID
         # only first two taken
         sumstats_dt[, (format) := data.table::tstrsplit(get(keep_col),

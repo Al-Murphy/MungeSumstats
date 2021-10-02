@@ -22,9 +22,14 @@ check_miss_data <- function(sumstats_dt, path, log_folder_ind, check_save_out,
     if (nrow(sumstats_dt[!complete.cases(sumstats_dt[, incl_cols,
         with = FALSE
     ]), ]) > 0) {
+        n_missing <- nrow(
+            sumstats_dt[!complete.cases(
+                sumstats_dt[, incl_cols, with = FALSE]
+            ), ]
+        )
         msg <- paste0(
             "WARNING: ",
-            formatC(nrow(sumstats_dt[!complete.cases(sumstats_dt[, incl_cols, with = FALSE]), ]), big.mark = ","),
+            formatC(n_missing, big.mark = ","),
             " rows in sumstats file are missing data and will ",
             "be removed."
         )
@@ -32,7 +37,10 @@ check_miss_data <- function(sumstats_dt, path, log_folder_ind, check_save_out,
         # If user wants log, save it to there
         if (log_folder_ind) {
             name <- "missing_data"
-            name <- get_unique_name_log_file(name = name, log_files = log_files)
+            name <- get_unique_name_log_file(
+                name = name,
+                log_files = log_files
+            )
             write_sumstats(
                 sumstats_dt =
                     sumstats_dt[!complete.cases(sumstats_dt[, incl_cols,
@@ -49,13 +57,20 @@ check_miss_data <- function(sumstats_dt, path, log_folder_ind, check_save_out,
                 nThread = nThread
             )
             log_files[[name]] <-
-                paste0(check_save_out$log_folder, "/", name, check_save_out$extension)
+                paste0(
+                    check_save_out$log_folder, "/",
+                    name, check_save_out$extension
+                )
         }
         sumstats_dt <-
             sumstats_dt[complete.cases(sumstats_dt[, incl_cols, with = FALSE])]
         if (nrow(sumstats_dt) == 0) {
-              stop("All SNPs have been filtered out of your summary statistics dataset")
-          }
+            stop_msg <- paste(
+                "All SNPs have been filtered out of",
+                " your summary statistics dataset"
+            )
+            stop(stop_msg)
+        }
 
         return(list("sumstats_dt" = sumstats_dt, "log_files" = log_files))
     } else {

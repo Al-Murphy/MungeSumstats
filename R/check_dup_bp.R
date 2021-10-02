@@ -7,12 +7,17 @@
 #' @keywords internal
 #' @importFrom data.table key
 #' @importFrom data.table setkey
-check_dup_bp <- function(sumstats_dt, path, log_folder_ind, check_save_out,
-                         tabix_index, nThread, log_files) {
+check_dup_bp <- function(sumstats_dt,
+                         path,
+                         log_folder_ind,
+                         check_save_out,
+                         tabix_index,
+                         nThread,
+                         log_files) {
     BP <- CHR <- NULL
     col_headers <- names(sumstats_dt)
     if (sum(c("BP", "CHR") %in% col_headers) == 2) {
-        message("Checking for SNPs with duplicated base-pair positions")
+        message("Checking for SNPs with duplicated base-pair positions.")
         # Try to remove duplicated Positions
         data.table::setkey(sumstats_dt, BP, CHR)
         dups <- duplicated(sumstats_dt, by = data.table::key(sumstats_dt))
@@ -27,7 +32,10 @@ check_dup_bp <- function(sumstats_dt, path, log_folder_ind, check_save_out,
             # If user wants log, save it to there
             if (log_folder_ind) {
                 name <- "dup_base_pair_position"
-                name <- get_unique_name_log_file(name = name, log_files = log_files)
+                name <- get_unique_name_log_file(
+                    name = name,
+                    log_files = log_files
+                )
                 write_sumstats(
                     sumstats_dt = sumstats_dt[dups, ],
                     save_path =
@@ -41,11 +49,19 @@ check_dup_bp <- function(sumstats_dt, path, log_folder_ind, check_save_out,
                     nThread = nThread
                 )
                 log_files[[name]] <-
-                    paste0(check_save_out$log_folder, "/", name, check_save_out$extension)
+                    paste0(
+                        check_save_out$log_folder, "/",
+                        name, check_save_out$extension
+                    )
             }
-            sumstats_dt <- unique(sumstats_dt, by = data.table::key(sumstats_dt))
+            sumstats_dt <- unique(sumstats_dt,
+                by = data.table::key(sumstats_dt)
+            )
 
-            return(list("sumstats_dt" = sumstats_dt, "log_files" = log_files))
+            return(list(
+                "sumstats_dt" = sumstats_dt,
+                "log_files" = log_files
+            ))
         }
     }
     return(list("sumstats_dt" = sumstats_dt, "log_files" = log_files))

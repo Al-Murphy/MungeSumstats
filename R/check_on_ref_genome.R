@@ -63,8 +63,8 @@ check_on_ref_genome <-
                     # remove rows missing from the reference genome and combine
                     # If IMPUTATION column added add it to other DT
                     if (imputation_ind && !"IMPUTATION_SNP" %in% names(sumstats_dt)) {
-                          sumstats_dt[, IMPUTATION_SNP := NA]
-                      }
+                        sumstats_dt[, IMPUTATION_SNP := NA]
+                    }
                     sumstats_dt <-
                         data.table::rbindlist(list(sumstats_dt[rsids$SNP, ], corrected_snp))
                 } else {

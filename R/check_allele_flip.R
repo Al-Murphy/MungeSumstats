@@ -24,14 +24,24 @@
 #' @importFrom data.table set
 #' @importFrom data.table setorder
 #' @importFrom data.table copy
-check_allele_flip <- function(sumstats_dt, path, ref_genome, rsids,
-                              allele_flip_check, allele_flip_drop, allele_flip_z,
-                              allele_flip_frq, bi_allelic_filter,
-                              imputation_ind, log_folder_ind,
-                              check_save_out, tabix_index, nThread, log_files,
-                              standardise_headers = FALSE, mapping_file) {
-    # GenomicSEM' allele flipping strategy:
-    # https://github.com/GenomicSEM/GenomicSEM/blob/fc8f17a817a8022d6900acf41824d27b3676f9c4/R/munge.R#L151
+check_allele_flip <- function(sumstats_dt, path,
+                              ref_genome, rsids,
+                              allele_flip_check,
+                              allele_flip_drop,
+                              allele_flip_z,
+                              allele_flip_frq,
+                              bi_allelic_filter,
+                              imputation_ind,
+                              log_folder_ind,
+                              check_save_out,
+                              tabix_index,
+                              nThread,
+                              log_files,
+                              standardise_headers = FALSE,
+                              mapping_file) {
+    # # GenomicSEM' allele flipping strategy:
+    # file.path("https://github.com/GenomicSEM/GenomicSEM/blob",
+    #           "fc8f17a817a8022d6900acf41824d27b3676f9c4/R/munge.R#L151")
 
     # #example
     # path <- system.file("extdata","eduAttainOkbay.txt",
@@ -93,7 +103,7 @@ check_allele_flip <- function(sumstats_dt, path, ref_genome, rsids,
                     formatC(nrow(sumstats_dt[A1 != ref_gen_allele &
                         A2 != ref_gen_allele, ]), big.mark = ","),
                     " SNPs where neither A1 nor A2 match the reference genome.",
-                    "\nThese will be removed."
+                    " These will be removed."
                 )
             message(print_msg0)
             # If user wants log, save it to there
@@ -133,7 +143,9 @@ check_allele_flip <- function(sumstats_dt, path, ref_genome, rsids,
         # continue if flipping necessary
         if (nrow(sumstats_dt[match_type == FALSE, ]) > 0) {
             print_msg <- paste0(
-                "There are ", nrow(sumstats_dt[match_type == FALSE, ]),
+                "There are ", 
+                formatC(nrow(sumstats_dt[match_type == FALSE, ]),
+                        big.mark = ","),
                 " SNPs where A1 doesn't match the reference genome.",
                 "\nThese will be flipped with their effect columns."
             )

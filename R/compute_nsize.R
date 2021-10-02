@@ -1,7 +1,7 @@
 #' Check for N column if not present and user wants, impute N based on user's
 #' sample size. **NOTE** this will be the same value for each SNP which is not
-#' necessarily correct and may cause issues down the line. N can also be 
-#' inputted with "ldsc", "sum", "giant" or "metal" by passing one or 
+#' necessarily correct and may cause issues down the line. N can also be
+#' inputted with "ldsc", "sum", "giant" or "metal" by passing one or
 #' multiple of these.
 #'
 #' @return \code{list("sumstats_dt"=sumstats_dt)}
@@ -24,7 +24,7 @@
 #' cases (N_CAS) + controls (N_CON), so long as both columns are present}.
 #' \item{\code{"effective"}: }{N will be computed as effective sample size:
 #' cases (N_CAS) + controls (N_CON), so long as both columns are present}.
-#' } 
+#' }
 #'
 #' @keywords internal
 compute_nsize <- function(sumstats_dt,
@@ -32,15 +32,16 @@ compute_nsize <- function(sumstats_dt,
                           compute_n = c("ldsc", "giant", "metal", "sum"),
                           force_new = FALSE) {
     ## Avoid confusing BiocCheck.
-    IMPUTATION_n = IMPUTATION_Neff = NULL
-    
-    #if you want an Neff column for more than one method need to ensure
-    #you can tell which is which
+    IMPUTATION_n <- IMPUTATION_Neff <- NULL
+
+    # if you want an Neff column for more than one method need to ensure
+    # you can tell which is which
     append_method_name <- FALSE
-    if(is.vector(compute_n)){
-        #sum makes an N column not an Neff column 
-        if(length(compute_n[!compute_n=="sum"])>1)
-            append_method_name <- TRUE
+    if (is.vector(compute_n)) {
+        # sum makes an N column not an Neff column
+        if (length(compute_n[!compute_n == "sum"]) > 1) {
+              append_method_name <- TRUE
+          }
     }
     for (method in compute_n) {
         compute_sample_size(
@@ -54,7 +55,7 @@ compute_nsize <- function(sumstats_dt,
     ## Evaluate the conditions under which N would have been calculate by
     ## compute_sample_size()
     if (imputation_ind &&
-        is.numeric(compute_n) && compute_n!=0L &&
+        is.numeric(compute_n) && compute_n != 0L &&
         (!"N" %in% names(sumstats_dt))) {
         sumstats_dt[, IMPUTATION_n := TRUE]
     }

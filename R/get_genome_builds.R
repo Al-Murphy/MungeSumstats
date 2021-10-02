@@ -27,7 +27,7 @@
 #'     package = "MungeSumstats"
 #' )
 #' sumstats_list <- list(ss1 = eduAttainOkbayPth, ss2 = eduAttainOkbayPth)
-#' 
+#'
 #' ## Call uses reference genome as default with more than 2GB of memory,
 #' ## which is more than what 32-bit Windows can handle so remove certain checks
 #' is_32bit_windows <-

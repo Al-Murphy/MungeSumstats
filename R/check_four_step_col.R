@@ -2,7 +2,8 @@
 #'
 #' @param sumstats_dt data table obj of the summary statistics file for the GWAS
 #' @param path Filepath for the summary statistics file to be formatted
-#' @return list containing sumstats_dt, the modified summary statistics data table object
+#' @return list containing sumstats_dt, the modified
+#' summary statistics data table object
 #' @keywords internal
 #' @importFrom data.table tstrsplit
 #' @importFrom data.table :=
@@ -15,7 +16,8 @@ check_four_step_col <- function(sumstats_dt, path) {
     fourStepCol <- grep(".*:.*:\\w:\\w", row_of_data)
     # in case there are more than one column with ":", just take first one
     if (length(fourStepCol) > 1) {
-        # sort to get most recent genome build by default (cols: SNP_hg19, SNP_hg18)
+        # sort to get most recent genome build by default
+        # (cols: SNP_hg19, SNP_hg18)
         keep_col <- sort(col_headers[fourStepCol], decreasing = TRUE)[1]
         drop_cols <- sort(col_headers[fourStepCol], decreasing = TRUE)[-1]
         msg <- paste0(
@@ -36,11 +38,11 @@ check_four_step_col <- function(sumstats_dt, path) {
         # split out col into separate values, keep names
         format <- strsplit(keep_col, ":")[[1]]
         if (length(format) != 4) { # check : and underscore in name
-              format <- strsplit(keep_col, "_")[[1]]
-          }
+            format <- strsplit(keep_col, "_")[[1]]
+        }
         if (length(format) != 4) { # If neither found assign name
-              format <- c("CHR", "BP", "A2", "A1")
-          }
+            format <- c("CHR", "BP", "A2", "A1")
+        }
         sumstats_dt[, (format) := data.table::tstrsplit(get(keep_col),
             split = ":", fixed = TRUE,
             type.convert = TRUE

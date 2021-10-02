@@ -92,10 +92,10 @@ test_that("Handle more than 1 rs IDs in one row", {
         for (log_i in reformatted_log$log_files) {
             data_log_i <- data.table::fread(log_i)
             if (grepl("snp_strand_ambiguous", log_i)) {
-                  results <- c(results, nrow(data_log_i) == 8)
-              } else {
-                  results <- c(results, nrow(data_log_i) == 1)
-              }
+                results <- c(results, nrow(data_log_i) == 8)
+            } else {
+                results <- c(results, nrow(data_log_i) == 1)
+            }
         }
         expect_equal(all(results), TRUE)
     } else {

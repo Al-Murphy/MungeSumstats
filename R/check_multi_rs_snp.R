@@ -24,9 +24,9 @@ check_multi_rs_snp <- function(sumstats_dt, path, remove_multi_rs_snp,
                 big.mark = ","
                 ),
                 " SNPs found with ",
-                "multiple RS IDs on one row, the first will be ",
+                "multiple RSIDs on one row, the first will be ",
                 "taken. If you would rather remove these SNPs set\n",
-                "`remove_multi_rs_snp`=TRUE"
+                "`remove_multi_rs_snp=TRUE`."
             )
             message(msg)
             # if user specifies add a column to notify of the imputation
@@ -51,14 +51,17 @@ check_multi_rs_snp <- function(sumstats_dt, path, remove_multi_rs_snp,
         } else { # remove rows
             msg <- paste0(
                 sum(grepl("_rs", sumstats_dt$SNP)), " SNPs found with",
-                " multiple RS IDs on one row, these will be ",
+                " multiple RSIDs on one row, these will be ",
                 "removed. If you would rather take the first RS ID ",
                 "set\n`remove_multi_rs_snp`=FALSE"
             )
             # If user wants log, save it to there
             if (log_folder_ind) {
                 name <- "snp_multi_rs_one_row"
-                name <- get_unique_name_log_file(name = name, log_files = log_files)
+                name <- get_unique_name_log_file(
+                    name = name,
+                    log_files = log_files
+                )
                 write_sumstats(
                     sumstats_dt =
                         sumstats_dt[grepl("[[:punct:]]rs", SNP) |
@@ -84,8 +87,14 @@ check_multi_rs_snp <- function(sumstats_dt, path, remove_multi_rs_snp,
                 grepl("[[:punct:]] rs", SNP)), ]
         }
 
-        return(list("sumstats_dt" = sumstats_dt, "log_files" = log_files))
+        return(list(
+            "sumstats_dt" = sumstats_dt,
+            "log_files" = log_files
+        ))
     } else {
-        return(list("sumstats_dt" = sumstats_dt, "log_files" = log_files))
+        return(list(
+            "sumstats_dt" = sumstats_dt,
+            "log_files" = log_files
+        ))
     }
 }

@@ -28,8 +28,10 @@ test_that("Imputation of CHR and BP correctly", {
         )
         res_dt <- data.table::fread(reformatted$sumstats)
         # correct names of MungeSumstats::eduAttainOkbay
-        names(sumstats_dt) <- c("SNP", "CHR", "BP", "A1", "A2",
-                                "FRQ", "Beta", "SE", "P")
+        names(sumstats_dt) <- c(
+            "SNP", "CHR", "BP", "A1", "A2",
+            "FRQ", "Beta", "SE", "P"
+        )
         # get order same
         setkey(res_dt, SNP)
         setkey(sumstats_dt, SNP)

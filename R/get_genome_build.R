@@ -8,7 +8,7 @@
 #' build to save time.
 #' @param standardise_headers Run
 #' \code{standardise_sumstats_column_headers_crossplatform}.
-#' @param mapping_file \pkg{MungeSumstats} has a pre-defined 
+#' @param mapping_file \pkg{MungeSumstats} has a pre-defined
 #' column-name mapping file
 #' which should cover the most common column headers and their interpretations.
 #' However, if a column header that is in your file is missing of the mapping we
@@ -21,7 +21,7 @@
 #' from disk each time.
 #'
 #' @return ref_genome the genome build of the data
-#' @importFrom data.table setDT 
+#' @importFrom data.table setDT
 #' @keywords internal
 get_genome_build <- function(sumstats,
                              nThread = 1,

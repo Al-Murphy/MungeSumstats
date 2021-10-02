@@ -5,9 +5,16 @@
 #' @return list containing sumstats_dt, the modified summary statistics data
 #' table object and the log file list
 #' @keywords internal
-check_chr <- function(sumstats_dt, path, rmv_chr, log_folder_ind,
-                      check_save_out, tabix_index, nThread, log_files,
-                      make_uppercase = TRUE, rmv_chrPrefix = TRUE) {
+check_chr <- function(sumstats_dt,
+                      path,
+                      rmv_chr,
+                      log_folder_ind,
+                      check_save_out,
+                      tabix_index,
+                      nThread,
+                      log_files,
+                      make_uppercase = TRUE,
+                      rmv_chrPrefix = TRUE) {
     CHR <- NULL
     # If CHR present and user specified chromosome to have SNPs removed
     col_headers <- names(sumstats_dt)
@@ -44,7 +51,10 @@ check_chr <- function(sumstats_dt, path, rmv_chr, log_folder_ind,
             # If user wants log, save it to there
             if (log_folder_ind) {
                 name <- "chr_excl"
-                name <- get_unique_name_log_file(name = name, log_files = log_files)
+                name <- get_unique_name_log_file(
+                    name = name,
+                    log_files = log_files
+                )
                 write_sumstats(
                     sumstats_dt = sumstats_dt[CHR %in% (rmv_chr), ],
                     save_path =

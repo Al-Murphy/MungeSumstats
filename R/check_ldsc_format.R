@@ -4,7 +4,8 @@
 #' Linkage Disequilibrium SCore (LDSC) regression without the need
 #' to use their \code{munge_sumstats.py} script first.
 #'
-#' \href{https://github.com/bulik/ldsc/wiki/Summary-Statistics-File-Format}{LDSC documentation}.
+#' \href{https://github.com/bulik/ldsc/wiki/Summary-Statistics-File-Format}{
+#' LDSC documentation}.
 #'
 #' @inheritParams format_sumstats
 #' @inheritParams check_zscore
@@ -25,7 +26,11 @@ check_ldsc_format <- function(sumstats_dt, ldsc_format, convert_n_int,
             convert_n_int <- TRUE
         }
         if (!allele_flip_check) {
-            message("Setting `allele_flip_check=TRUE` to comply with LDSC format.")
+            msg <- paste(
+                "Setting `allele_flip_check=TRUE`",
+                "to comply with LDSC format."
+            )
+            message()
             allele_flip_check <- TRUE
         }
         if (!compute_z && !z_present) {
@@ -41,8 +46,8 @@ check_ldsc_format <- function(sumstats_dt, ldsc_format, convert_n_int,
             " was known."
         )
         if (compute_n == 0L && !n_present) {
-              stop(n_msg)
-          }
+            stop(n_msg)
+        }
     }
     return(list(
         ldsc_format = ldsc_format,

@@ -1,4 +1,4 @@
-#' Ensure that SNP appears to be valid RS IDs (starts with rs)
+#' Ensure that SNP appears to be valid RSIDs (starts with rs)
 #'
 #' @inheritParams format_sumstats
 #' @param log_files list of log file locations
@@ -19,18 +19,19 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                             tabix_index, nThread, log_files) {
     SNP <- CHR <- CHR1 <- BP1 <- i.RefSNP_id <- IMPUTATION_SNP <-
         SNP_old_temp <- SNP_INFO <- NULL
-    # if snp ids aren't rs ids rename the column to ID's so RS IDs can be inferred
+    # if snp ids aren't rs ids rename the column to ID's 
+    # so RSIDs can be inferred
     if ((!snp_ids_are_rs_ids) & sum("SNP" %in% names(sumstats_dt)) == 1) {
-          data.table::setnames(sumstats_dt, "SNP", "ID")
-      }
+        data.table::setnames(sumstats_dt, "SNP", "ID")
+    }
     # If SNP column doesn't start with rs
     col_headers <- names(sumstats_dt)
     if (sum("SNP" %in% col_headers) == 1) {
         message("Checking SNP RSIDs.")
         # needed for later to join and match SNPs
         if (imputation_ind) {
-              sumstats_dt[, SNP_old_temp := SNP]
-          }
+            sumstats_dt[, SNP_old_temp := SNP]
+        }
         miss_rs <- sumstats_dt[!grep("^rs", SNP), ]
         # first case is chr:bp together - impute SNP for these
         miss_rs_chr_bp <- miss_rs[grep(":", SNP), ]
@@ -51,10 +52,14 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                 corrected_snp <-
                     check_no_snp(
                         sumstats_dt = bad_snp, path = tempfile(),
-                        ref_genome = ref_genome, imputation_ind = imputation_ind,
+                        ref_genome = ref_genome,
+                        imputation_ind = imputation_ind,
                         log_folder_ind = log_folder_ind,
-                        check_save_out = check_save_out, tabix_index = tabix_index,
-                        nThread = nThread, log_files = log_files, verbose = FALSE
+                        check_save_out = check_save_out, 
+                        tabix_index = tabix_index,
+                        nThread = nThread, 
+                        log_files = log_files, 
+                        verbose = FALSE
                     )
                 log_files <- corrected_snp$log_files
                 corrected_snp <- corrected_snp$sumstats_dt
@@ -62,9 +67,10 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                 data.table::setcolorder(corrected_snp, names(sumstats_dt))
                 # remove rows missing from the reference genome and combine
                 # If IMPUTATION column added add it to other DT
-                if (imputation_ind && !"IMPUTATION_SNP" %in% names(sumstats_dt)) {
-                      sumstats_dt[, IMPUTATION_SNP := NA]
-                  }
+                if (imputation_ind &&
+                    !"IMPUTATION_SNP" %in% names(sumstats_dt)) {
+                    sumstats_dt[, IMPUTATION_SNP := NA]
+                }
                 sumstats_dt <-
                     data.table::rbindlist(list(
                         sumstats_dt[grep("^rs", SNP), ],
@@ -75,7 +81,8 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                 # If user wants log, save it to there
                 if (log_folder_ind) {
                     name <- "snp_missing_rs"
-                    name <- get_unique_name_log_file(name = name, log_files = log_files)
+                    name <- get_unique_name_log_file(name = name,
+                                                     log_files = log_files)
                     write_sumstats(
                         sumstats_dt = sumstats_dt[!grepl("^rs", SNP), ],
                         save_path =
@@ -89,7 +96,8 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                         nThread = nThread
                     )
                     log_files[[name]] <-
-                        paste0(check_save_out$log_folder, "/", name, check_save_out$extension)
+                        paste0(check_save_out$log_folder,
+                               "/", name, check_save_out$extension)
                 }
                 sumstats_dt <- sumstats_dt[grep("^rs", SNP), ]
             }
@@ -97,7 +105,8 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
             # If user wants log, save it to there
             if (log_folder_ind) {
                 name <- "snp_multi_colon"
-                name <- get_unique_name_log_file(name = name, log_files = log_files)
+                name <- get_unique_name_log_file(name = name,
+                                                 log_files = log_files)
                 write_sumstats(
                     sumstats_dt = miss_rs_chr_bp[grep(".*:.*:.*", SNP)],
                     save_path =
@@ -126,19 +135,20 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
             message(msg)
             SNP_LOC_DATA <- load_snp_loc_data(ref_genome, NULL)
             # split out chr:bp - check if chr or bp first by longer of two
-            splits <- strsplit(miss_rs_chr_bp[1, SNP], split = ":", fixed = TRUE)[[1]]
+            splits <- strsplit(miss_rs_chr_bp[1, SNP],
+                               split = ":", fixed = TRUE)[[1]]
             if (nchar(splits[1]) < nchar(splits[2])) {
-                  format <- c("CHR1", "BP1")
-              } else {
-                  format <- c("BP1", "CHR1")
-              }
+                format <- c("CHR1", "BP1")
+            } else {
+                format <- c("BP1", "CHR1")
+            }
             miss_rs_chr_bp[, (format) := data.table::tstrsplit(SNP,
                 split = ":", fixed = TRUE
             )]
             # if BP col has other info after, drop it
             if (sum(grepl("[[:punct:]].*", miss_rs_chr_bp$BP1)) > 0) {
-                  miss_rs_chr_bp[, BP1 := gsub("([[:punct:]]).*", "", BP1)]
-              }
+                miss_rs_chr_bp[, BP1 := gsub("([[:punct:]]).*", "", BP1)]
+            }
             # ensure integer col
             miss_rs_chr_bp[, BP1 := as.integer(BP1)]
             # now drop SNP
@@ -147,12 +157,13 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
             miss_rs_chr_bp[, CHR1 := gsub("chr", "", CHR1)]
             # if chromosome col has other info after, drop it
             if (sum(grepl("[[:punct:]].*", miss_rs_chr_bp$CHR1)) > 0) {
-                  miss_rs_chr_bp[, CHR1 := gsub("([[:punct:]]).*", "", CHR1)]
-              }
+                miss_rs_chr_bp[, CHR1 := gsub("([[:punct:]]).*", "", CHR1)]
+            }
             # avoid SNPs with NA values in chr or bp
             gr_snp <- data.table::copy(miss_rs_chr_bp)
             incl_cols <- c("CHR1", "BP1")
-            gr_snp <- gr_snp[complete.cases(gr_snp[, incl_cols, with = FALSE])]
+            gr_snp <- gr_snp[complete.cases(
+                gr_snp[, incl_cols, with = FALSE])]
             gr_snp <-
                 GenomicRanges::makeGRangesFromDataFrame(gr_snp,
                     keep.extra.columns = TRUE,
@@ -176,10 +187,12 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
             # If user wants log, save it to there
             if (log_folder_ind) {
                 name <- "snp_not_found_from_bp_chr"
-                name <- get_unique_name_log_file(name = name, log_files = log_files)
+                name <- get_unique_name_log_file(name = name,
+                                                 log_files = log_files)
                 write_sumstats(
                     sumstats_dt =
-                        miss_rs_chr_bp[!complete.cases(miss_rs_chr_bp[, "SNP"]), ],
+                        miss_rs_chr_bp[!complete.cases(
+                            miss_rs_chr_bp[, "SNP"]), ],
                     save_path =
                         paste0(
                             check_save_out$log_folder,
@@ -196,20 +209,24 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                         check_save_out$extension
                     )
             }
-            miss_rs_chr_bp <- miss_rs_chr_bp[complete.cases(miss_rs_chr_bp[, "SNP"]), ]
+            miss_rs_chr_bp <- miss_rs_chr_bp[complete.cases(
+                miss_rs_chr_bp[, "SNP"]), ]
             # remove temp columns
             miss_rs_chr_bp[, (format) := NULL]
             # get columns in same order as rest of data table
             data.table::setcolorder(miss_rs_chr_bp, col_headers)
             # join with full dataset
             # If IMPUTATION column added add it to other DT
-            if (imputation_ind && !"IMPUTATION_SNP" %in% names(miss_rs_chr_bp)) {
-                  miss_rs_chr_bp[, IMPUTATION_SNP := NA]
-              }
-            sumstats_dt <- data.table::rbindlist(list(sumstats_dt, miss_rs_chr_bp))
+            if (imputation_ind &&
+                !"IMPUTATION_SNP" %in% names(miss_rs_chr_bp)) {
+                miss_rs_chr_bp[, IMPUTATION_SNP := NA]
+            }
+            sumstats_dt <- data.table::rbindlist(
+                list(sumstats_dt, miss_rs_chr_bp))
         }
         if (nrow(miss_rs) != nrow(sumstats_dt) && nrow(miss_rs) != 0) {
-            if (nrow(miss_rs_chr_bp) == 0) { # don't filter twice if hit prev condition
+            if (nrow(miss_rs_chr_bp) == 0) {
+                # don't filter twice if hit prev condition
                 # check if impute of correct SNP ID possible
                 if (sum(c("CHR", "BP") %in% col_headers) == 2 &&
                     nrow(sumstats_dt[!grep("^rs", SNP), ]) > 0) {
@@ -226,20 +243,26 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                     corrected_snp <-
                         check_no_snp(
                             sumstats_dt = bad_snp, path = tempfile(),
-                            ref_genome = ref_genome, imputation_ind = imputation_ind,
+                            ref_genome = ref_genome, 
+                            imputation_ind = imputation_ind,
                             log_folder_ind = log_folder_ind,
-                            check_save_out = check_save_out, tabix_index = tabix_index,
-                            nThread = nThread, log_files = log_files, verbose = FALSE
+                            check_save_out = check_save_out,
+                            tabix_index = tabix_index,
+                            nThread = nThread, 
+                            log_files = log_files,
+                            verbose = FALSE
                         )
                     log_files <- corrected_snp$log_files
                     corrected_snp <- corrected_snp$sumstats_dt
                     # make sure columns in correct order
-                    data.table::setcolorder(corrected_snp, names(sumstats_dt))
+                    data.table::setcolorder(corrected_snp,
+                                            names(sumstats_dt))
                     # remove rows missing from the reference genome and combine
                     # If IMPUTATION column added add it to other DT
-                    if (imputation_ind && !"IMPUTATION_SNP" %in% names(sumstats_dt)) {
-                          sumstats_dt[, IMPUTATION_SNP := NA]
-                      }
+                    if (imputation_ind &&
+                        !"IMPUTATION_SNP" %in% names(sumstats_dt)) {
+                        sumstats_dt[, IMPUTATION_SNP := NA]
+                    }
                     sumstats_dt <-
                         data.table::rbindlist(list(
                             sumstats_dt[grep("^rs", SNP), ],
@@ -248,9 +271,11 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                 }
                 # remove snps missing rs
                 # If user wants log, save it to there
-                if (log_folder_ind && nrow(sumstats_dt[!grep("^rs", SNP), ]) > 0) {
+                if (log_folder_ind &&
+                    nrow(sumstats_dt[!grep("^rs", SNP), ]) > 0) {
                     name <- "snp_missing_rs"
-                    name <- get_unique_name_log_file(name = name, log_files = log_files)
+                    name <- get_unique_name_log_file(name = name,
+                                                     log_files = log_files)
                     write_sumstats(
                         sumstats_dt = sumstats_dt[!grepl("^rs", SNP), ],
                         save_path =
@@ -264,16 +289,20 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                         nThread = nThread
                     )
                     log_files[[name]] <-
-                        paste0(check_save_out$log_folder, "/", name, check_save_out$extension)
+                        paste0(check_save_out$log_folder, "/",
+                               name, check_save_out$extension)
                 }
                 sumstats_dt <- sumstats_dt[grep("^rs", SNP), ]
             }
-            # if any weird SNP rows left that aren't chr:bp or rs id's remove them
+            # if any weird SNP rows left that aren't 
+            # chr:bp or rs id's remove them
             if (sum(c("CHR", "BP") %in% col_headers) != 2) {
                 msg <-
                     paste0(
-                        formatC(nrow(miss_rs) - nrow(miss_rs_chr_bp), big.mark = ","),
-                        " SNP IDs are not correctly formatted and will be removed"
+                        formatC(nrow(miss_rs) - nrow(miss_rs_chr_bp),
+                                big.mark = ","),
+                        " SNP IDs are not correctly",
+                        " formatted and will be removed."
                     )
                 message(msg)
             }

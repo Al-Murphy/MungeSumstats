@@ -34,7 +34,10 @@ check_effect_columns_nonzero <- function(sumstats_dt, path,
             # If user wants log, save it to there
             if (log_folder_ind) {
                 name <- "effect_col_zero"
-                name <- get_unique_name_log_file(name = name, log_files = log_files)
+                name <- get_unique_name_log_file(
+                    name = name,
+                    log_files = log_files
+                )
                 write_sumstats(
                     sumstats_dt = sumstats_dt[bad_ids, ],
                     save_path =

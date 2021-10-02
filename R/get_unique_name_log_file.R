@@ -8,8 +8,8 @@
 get_unique_name_log_file <- function(name, log_files) {
     used_names <- names(log_files)
     if (!name %in% used_names) { # if it isn't present return to be used
-          return(name)
-      }
+        return(name)
+    }
     # else append number to end of name
     i <- 2
     need_unique_name <- TRUE

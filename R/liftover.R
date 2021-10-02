@@ -14,26 +14,26 @@
 #' @importFrom rtracklayer liftOver width strand end
 #' @importFrom GenomeInfoDb seqnames
 #' @importFrom data.table data.table
-liftover <- function(sumstats_dt,convert_ref_genome,ref_genome,imputation_ind,
-                        verbose = TRUE){
-    IMPUTATION_gen_build = NULL
-    #check it's necessary i.e. the desired ref genome isn't the current one
-    if(!is.null(convert_ref_genome) && 
-        toupper(convert_ref_genome)!=toupper(ref_genome)){
-        
-        msg <- paste0("Performing data liftover from ",ref_genome," to ",
-                      convert_ref_genome,".")
+liftover <- function(sumstats_dt, convert_ref_genome, ref_genome, imputation_ind,
+                     verbose = TRUE) {
+    IMPUTATION_gen_build <- NULL
+    # check it's necessary i.e. the desired ref genome isn't the current one
+    if (!is.null(convert_ref_genome) &&
+        toupper(convert_ref_genome) != toupper(ref_genome)) {
+        msg <- paste0(
+            "Performing data liftover from ", ref_genome, " to ",
+            convert_ref_genome, "."
+        )
         message(msg)
-        
-        if(toupper(convert_ref_genome)=="GRCH38"){
-            build_conversion <-"hg38ToHg19"
+
+        if (toupper(convert_ref_genome) == "GRCH38") {
+            build_conversion <- "hg38ToHg19"
             ucsc_ref <- "hg38"
-        }    
-        else{
-            build_conversion <-"hg19ToHg38"
+        } else {
+            build_conversion <- "hg19ToHg38"
             ucsc_ref <- "hg19"
-        }    
-        
+        }
+
         #### Convert to GRanges ####
         gr <- dt_to_granges(
             dat = sumstats_dt,
@@ -53,15 +53,15 @@ liftover <- function(sumstats_dt,convert_ref_genome,ref_genome,imputation_ind,
             x = gr,
             chain = chain
         ))
-        
+
         sumstats_dt <- as.data.table(gr_lifted)
-        #rename columns back to org
-        sumstats_dt[,width:=NULL]
-        sumstats_dt[,strand:=NULL]
-        sumstats_dt[,end:=NULL]
-        sumstats_dt[,seqnames:=NULL]
-        setnames(sumstats_dt,"start","BP")
-        #lastly rearrange the order again
+        # rename columns back to org
+        sumstats_dt[, width := NULL]
+        sumstats_dt[, strand := NULL]
+        sumstats_dt[, end := NULL]
+        sumstats_dt[, seqnames := NULL]
+        setnames(sumstats_dt, "start", "BP")
+        # lastly rearrange the order again
         sumstats_dt <- check_col_order(
             sumstats_dt = sumstats_dt,
             path = NULL

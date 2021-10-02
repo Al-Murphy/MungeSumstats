@@ -15,16 +15,16 @@ check_row_snp <- function(sumstats_dt, path, log_folder_ind, check_save_out,
     num_bad_ids <- nrow(sumstats_dt[!grep("^rs", SNP), ])
     if (num_bad_ids > 0) {
         stop_msg <- paste0(
-            "No SNPs (inferred as RS IDs) in the dataset start with",
+            "No SNPs (inferred as RSIDs) in the dataset start with",
             "'rs'. If these IDs are just some arbitrary value ",
-            "rather than RS IDs, set `snp_ids_are_rs_ids=FALSE`"
+            "rather than RSIDs, set `snp_ids_are_rs_ids=FALSE`"
         )
         if (num_bad_ids == nrow(sumstats_dt)) {
-              stop(stop_msg)
-          }
+            stop(stop_msg)
+        }
         msg <- paste0(
             formatC(num_bad_ids, big.mark = ","), " SNPs (inferred as ",
-            "RS IDs) don't start with 'rs' and will be removed"
+            "RSIDs) don't start with 'rs' and will be removed"
         )
         message(msg)
         # If user wants log, save it to there

@@ -41,26 +41,26 @@ test_that("Check that imputation columns added correctly", {
         for (col_i in imputat_cols) {
             col_i_val <- res[[col_i]]
             if (length(col_i_val[!is.na(col_i_val)]) == 0) {
-                  have_value <- FALSE
-              }
+                have_value <- FALSE
+            }
         }
         expect_equal(have_value, TRUE)
-        
-        #check other compute_n values
+
+        # check other compute_n values
         eduAttainOkbay <- data.table::fread(pth)
-        eduAttainOkbay[,N_CON:=100]
-        eduAttainOkbay[,N_CAS:=120]
+        eduAttainOkbay[, N_CON := 100]
+        eduAttainOkbay[, N_CAS := 120]
         # write to temp dir
         file <- tempfile()
         data.table::fwrite(eduAttainOkbay, file)
         methods <- c("ldsc", "sum", "giant", "metal")
         reformatted <- MungeSumstats::format_sumstats(file,
-                                                      ref_genome = "GRCh37",
-                                                      compute_n = methods)
+            ref_genome = "GRCh37",
+            compute_n = methods
+        )
         res <- data.table::fread(reformatted)
-        expect_equal(all(paste0("Neff_",c("ldsc","giant","metal")) %in% 
-                             colnames(res)),TRUE)
-        
+        expect_equal(all(paste0("Neff_", c("ldsc", "giant", "metal")) %in%
+            colnames(res)), TRUE)
     } else {
         expect_equal(is_32bit_windows, TRUE)
         expect_equal(is_32bit_windows, TRUE)

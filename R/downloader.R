@@ -79,8 +79,8 @@ downloader <- function(input_url,
             "couldn't be found. Check this and the URL."
         )
         if (is(catch_fail, "error") | is(catch_fail, "warning")) {
-              stop(msg)
-          }
+            stop(msg)
+        }
     }
     return(out_file)
 }

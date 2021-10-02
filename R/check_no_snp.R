@@ -22,8 +22,8 @@ check_no_snp <- function(sumstats_dt, path, ref_genome, imputation_ind,
     if (sum(c("CHR", "BP") %in% col_headers) == 2 & sum("SNP" %in% col_headers) == 0) {
         msg <- "SNP"
         if (isFALSE(verbose)) {
-              msg <- NULL
-          }
+            msg <- NULL
+        }
         SNP_LOC_DATA <- load_snp_loc_data(ref_genome, msg)
         # if chromosome col has chr prefix remove it
         sumstats_dt[, CHR := gsub("chr", "", CHR)]
@@ -80,8 +80,8 @@ check_no_snp <- function(sumstats_dt, path, ref_genome, imputation_ind,
 
         # if user specifies add a column to notify of the imputation
         if (imputation_ind) {
-              sumstats_dt[, IMPUTATION_SNP := TRUE]
-          }
+            sumstats_dt[, IMPUTATION_SNP := TRUE]
+        }
 
         return(list("sumstats_dt" = sumstats_dt, "log_files" = log_files))
     } else {

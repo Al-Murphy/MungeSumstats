@@ -7,7 +7,8 @@
 #' data table object
 #' @keywords internal
 #' @importFrom data.table setcolorder
-check_col_order <- function(sumstats_dt, path) {
+check_col_order <- function(sumstats_dt,
+                            path) {
     col_headers <- names(sumstats_dt)
     # Use data tables for speed
     if (!sum(col_headers[seq_len(3)] == c("SNP", "CHR", "BP")) == 3 | (
@@ -36,7 +37,10 @@ check_col_order <- function(sumstats_dt, path) {
             ))
         } else {
             otherCols <-
-                setdiff(seq_len(length(col_headers)), c(whichSNP, whichCHR, whichBP))
+                setdiff(
+                    seq_len(length(col_headers)),
+                    c(whichSNP, whichCHR, whichBP)
+                )
             data.table::setcolorder(
                 sumstats_dt,
                 c(whichSNP, whichCHR, whichBP, otherCols)

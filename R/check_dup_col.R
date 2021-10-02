@@ -2,7 +2,8 @@
 #'
 #' @param sumstats_dt data table obj of the summary statistics file for the GWAS
 #' @param path Filepath for the summary statistics file to be formatted
-#' @return list containing sumstats_dt, the modified summary statistics data table object
+#' @return list containing sumstats_dt, the modified
+#' summary statistics data table object
 #' @keywords internal
 check_dup_col <- function(sumstats_dt, path) {
     message("Checking for duplicate columns.")

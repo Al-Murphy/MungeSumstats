@@ -38,7 +38,7 @@
 #' @param ref_genome name of the reference genome used for the GWAS ("GRCh37" or
 #' "GRCh38"). Argument is case-insensitive. Default is NULL which infers the
 #' reference genome from the data.
-#' @param convert_ref_genome name of the reference genome to convert to 
+#' @param convert_ref_genome name of the reference genome to convert to
 #' ("GRCh37" or "GRCh38"). This will only occur if the current genome build does
 #' not match. Default is not to convert the genome build (NULL).
 #' @param convert_small_p Binary, should p-values < 5e-324 be converted to 0?
@@ -54,10 +54,10 @@
 #' @param compute_n Whether to impute N. Default of 0 won't impute, any other
 #' integer will be imputed as the N (sample size) for every SNP in the dataset.
 #' **Note** that imputing the sample size for every SNP is not correct and
-#' should only be done as a last resort. N can also be inputted with "ldsc", 
-#' "sum", "giant" or "metal" by passing one of these for this field or a vector 
-#' of multiple. Sum and an integer value creates an N column in the output 
-#' whereas giant, metal or ldsc create an Neff or effective sample size. If 
+#' should only be done as a last resort. N can also be inputted with "ldsc",
+#' "sum", "giant" or "metal" by passing one of these for this field or a vector
+#' of multiple. Sum and an integer value creates an N column in the output
+#' whereas giant, metal or ldsc create an Neff or effective sample size. If
 #' multiples are passed, the formula used to derive it will be indicated.
 #' @param convert_n_int Binary, if N (the number of samples) is not an integer,
 #' should this be rounded? Default is TRUE.
@@ -66,7 +66,7 @@
 #' @param INFO_filter numeric The minimum value permissible of the imputation
 #' information score (if present in sumstats file). Default 0.9.
 #' @param FRQ_filter numeric The minimum value permissible of the frequency(FRQ)
-#' of the SNP (i.e. Allele Frequency (AF)) (if present in sumstats file). By 
+#' of the SNP (i.e. Allele Frequency (AF)) (if present in sumstats file). By
 #' default no filtering is done, i.e. value of 0.
 #' @param pos_se Binary Should the standard Error (SE) column be checked to
 #' ensure it is greater than 0? Those that are, are removed (if present in
@@ -98,19 +98,19 @@
 #' @param bi_allelic_filter Binary Should non-biallelic SNPs be removed. Default
 #' is TRUE.
 #' @param snp_ids_are_rs_ids Binary Should the supplied SNP ID's be assumed to
-#' be RS IDs. If not, imputation using the SNP ID for other columns like
+#' be RSIDs. If not, imputation using the SNP ID for other columns like
 #' base-pair position or chromosome will not be possible. If set to FALSE, the
 #' SNP RS ID will be imputed from the reference genome if possible. Default is
 #' TRUE.
 #' @param remove_multi_rs_snp Binary Sometimes summary statistics can have
-#' multiple RS IDs on one row (i.e. related to one SNP), for example
+#' multiple RSIDs on one row (i.e. related to one SNP), for example
 #' "rs5772025_rs397784053". This can cause an error so by default, the first
 #' RS ID will be kept and the rest removed e.g."rs5772025". If you want to just
 #' remove these SNPs entirely, set it to TRUE. Default is FALSE.
-#' @param frq_is_maf Conventionally the FRQ column is intended to show the 
-#' minor/effect allele frequency (MAF) but sometimes the major allele frequency 
-#' can be inferred as the FRQ column. This logical variable indicates that the 
-#' FRQ column should be renamed to MAJOR_ALLELE_FRQ if the frequency values 
+#' @param frq_is_maf Conventionally the FRQ column is intended to show the
+#' minor/effect allele frequency (MAF) but sometimes the major allele frequency
+#' can be inferred as the FRQ column. This logical variable indicates that the
+#' FRQ column should be renamed to MAJOR_ALLELE_FRQ if the frequency values
 #' appear to relate to the major allele i.e. >0.5. By default this mapping won't
 #' occur i.e. is TRUE.
 #' @param sort_coordinates Whether to sort by coordinates.
@@ -262,7 +262,7 @@ format_sumstats <- function(path,
             bi_allelic_filter = bi_allelic_filter,
             snp_ids_are_rs_ids = snp_ids_are_rs_ids,
             remove_multi_rs_snp = remove_multi_rs_snp,
-            frq_is_maf =frq_is_maf,
+            frq_is_maf = frq_is_maf,
             write_vcf = write_vcf,
             return_format = return_format,
             ldsc_format = ldsc_format,
@@ -655,7 +655,7 @@ format_sumstats <- function(path,
             )
         # update values
         log_files <- sumstats_return$log_files
-        
+
         #### Check 35: check for low FRQ scores ####
         sumstats_return <-
             check_frq(
@@ -784,14 +784,14 @@ format_sumstats <- function(path,
             compute_n = compute_n,
             imputation_ind = imputation_ind
         )
-        
+
         #### Check 36: Ensure FRQ is MAF ####
         sumstats_return$sumstats_dt <- check_frq_maf(
             sumstats_dt =
                 sumstats_return$sumstats_dt,
-            frq_is_maf=frq_is_maf
+            frq_is_maf = frq_is_maf
         )
-        
+
 
         #### Check 34: Perform liftover ####
         sumstats_return$sumstats_dt <- liftover(
@@ -801,7 +801,7 @@ format_sumstats <- function(path,
             ref_genome = ref_genome,
             imputation_ind = imputation_ind
         )
-        
+
         #### Check 29: Sort rows by genomic coordinates ####
         sumstats_return$sumstats_dt <- sort_coords(
             sumstats_dt =

@@ -36,8 +36,8 @@ test_that("VCF is correctly formatted", {
     snp_of_interest <- "rs146477069"
     rsid_index <- grep(snp_of_interest, ALSvcf, ignore.case = TRUE)
     ALSvcf[rsid_index] <-
-        #"1\t54421\trs146477069\tG\tA\t.\tPASS\tAF=0.0352\tES:SE:LP:AF:ID\t+0.024:0.083:0.112102:0.0352:rs146477069"
-        #flip FRQ
+        # "1\t54421\trs146477069\tG\tA\t.\tPASS\tAF=0.0352\tES:SE:LP:AF:ID\t+0.024:0.083:0.112102:0.0352:rs146477069"
+        # flip FRQ
         "1\t54421\trs146477069\tG\tA\t.\tPASS\tAF=0.0352\tES:SE:LP:AF:ID\t+0.024:0.083:0.112102:0.9648:rs146477069"
     writeLines(ALSvcf, con = file2)
 

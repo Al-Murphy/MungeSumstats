@@ -24,13 +24,13 @@ check_small_p_val <- function(sumstats_dt, path, convert_small_p,
         num_check <- FALSE
         if (is.numeric(sumstats_dt$P)) {
             if (min(sumstats_dt$P, na.rm = TRUE) <= 5e-324) {
-                  num_check <- TRUE
-              }
+                num_check <- TRUE
+            }
         } else { # char check
             max_minus_power <- max(as.numeric(gsub(".*-", "", sumstats_dt$P)))
             if (max_minus_power >= 324) {
-                  char_check <- TRUE
-              }
+                char_check <- TRUE
+            }
         }
         if (char_check | num_check) { # check if any smaller or equal to 5e-324 limit
             msg <- paste0(
@@ -43,8 +43,8 @@ check_small_p_val <- function(sumstats_dt, path, convert_small_p,
                 sumstats_dt[, P := as.numeric(as.character(P))]
                 # if users want edited snps, return information
                 if (imputation_ind) {
-                      sumstats_dt[P == 0, convert_small_p_0 := TRUE]
-                  }
+                    sumstats_dt[P == 0, convert_small_p_0 := TRUE]
+                }
 
                 return(list("sumstats_dt" = sumstats_dt))
             } else {

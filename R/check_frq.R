@@ -6,7 +6,7 @@
 #' table object and the log file list
 #' @keywords internal
 check_frq <- function(sumstats_dt, path, FRQ_filter, log_folder_ind,
-                             check_save_out, tabix_index, nThread, log_files) {
+                      check_save_out, tabix_index, nThread, log_files) {
     FRQ <- NULL
     col_headers <- names(sumstats_dt)
     if ("FRQ" %in% col_headers && FRQ_filter > 0) {
@@ -23,8 +23,10 @@ check_frq <- function(sumstats_dt, path, FRQ_filter, log_folder_ind,
             # If user wants log, save it to there
             if (log_folder_ind) {
                 name <- "frq_filter"
-                name <- get_unique_name_log_file(name = name, 
-                                                    log_files = log_files)
+                name <- get_unique_name_log_file(
+                    name = name,
+                    log_files = log_files
+                )
                 write_sumstats(
                     sumstats_dt = sumstats_dt[FRQ < FRQ_filter, ],
                     save_path =
@@ -38,8 +40,10 @@ check_frq <- function(sumstats_dt, path, FRQ_filter, log_folder_ind,
                     nThread = nThread
                 )
                 log_files[[name]] <-
-                    paste0(check_save_out$log_folder, "/", name, 
-                            check_save_out$extension)
+                    paste0(
+                        check_save_out$log_folder, "/", name,
+                        check_save_out$extension
+                    )
             }
             sumstats_dt <- sumstats_dt[FRQ >= FRQ_filter, ]
         }

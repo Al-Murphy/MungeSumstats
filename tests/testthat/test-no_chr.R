@@ -10,10 +10,12 @@ test_that("Imputation of CHR correctly", {
     # Keep Org to validate values
     sumstats_dt_missing <- data.table::copy(sumstats_dt)
     sumstats_dt_missing[, CHR := NULL]
-    data.table::fwrite(x = sumstats_dt_missing,
-                       file = file,
-                       sep = "\t", 
-                       nThread = 1)
+    data.table::fwrite(
+        x = sumstats_dt_missing,
+        file = file,
+        sep = "\t",
+        nThread = 1
+    )
     ## The following test uses more than 2GB of memory, which is more
     ## than what 32-bit Windows can handle:
     is_32bit_windows <- .Platform$OS.type == "windows" &&
@@ -29,8 +31,10 @@ test_that("Imputation of CHR correctly", {
         )
         res_dt <- data.table::fread(reformatted, nThread = 1)
         # correct names of MungeSumstats::eduAttainOkbay
-        names(sumstats_dt) <- c("SNP", "CHR", "BP", "A1", "A2",
-                                "FRQ", "Beta", "SE", "P")
+        names(sumstats_dt) <- c(
+            "SNP", "CHR", "BP", "A1", "A2",
+            "FRQ", "Beta", "SE", "P"
+        )
         # get order same
         setkey(res_dt, SNP)
         setkey(sumstats_dt, SNP)

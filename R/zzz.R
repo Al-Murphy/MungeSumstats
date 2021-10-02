@@ -9,16 +9,18 @@
         googleAuthR.client_secret = "zkihPnJnNRlHTinpzI0NUs4R",
         googleAuthR.webapp.port = 4018,
         googleAuthR.jsonlite.simplifyVector = TRUE,
-        googleAuthR.scopes.selected = c("https://www.googleapis.com/auth/userinfo.profile",
-                                        "https://www.googleapis.com/auth/userinfo.email"),
-        googleAuthR.ok_content_types=c("application/json; charset=UTF-8", ("text/html; charset=UTF-8")),
-        googleAuthR.securitycode = 
-            paste0(base::sample(c(seq(1,9), LETTERS, letters), 20, replace = TRUE), collapse=''),
+        googleAuthR.scopes.selected = c(
+            "https://www.googleapis.com/auth/userinfo.profile",
+            "https://www.googleapis.com/auth/userinfo.email"
+        ),
+        googleAuthR.ok_content_types = c("application/json; charset=UTF-8", ("text/html; charset=UTF-8")),
+        googleAuthR.securitycode =
+            paste0(base::sample(c(seq(1, 9), LETTERS, letters), 20, replace = TRUE), collapse = ""),
         googleAuthR.tryAttempts = 5
     )
-    
+
     options(op.googleAuthR)
     select_api("public")
-    
+
     invisible()
 }

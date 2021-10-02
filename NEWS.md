@@ -1,8 +1,22 @@
+## CHANGES IN VERSION 1.1.27
+
+### Bug fixes
+
+* `validate_parameters` can now handle `ref_genome=NULL`  
+* *.tsv.gz* no longer assigned suffix *.tsv*.   
+* Made code width <80 characters.  
+
+### New Features
+
+* Added tests for `get_genome_builds`  
+* Added early check for making sure the directory `save_path` is in was 
+actually created (as opposed to finding out at the very end of the pipeline). 
+
 ## CHANGES IN VERSION 1.1.26
 
 ### New Features
 
-* Extra mappings for FRQ column, see `data("sumstatsColHeaders")` for details
+* Extra mappings for FRQ column, see `data("sumstatsColHeaders")` for details  
 
 ## CHANGES IN VERSION 1.1.23
 

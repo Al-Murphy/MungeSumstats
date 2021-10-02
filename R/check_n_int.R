@@ -9,7 +9,8 @@
 #' includes a field denoting SNP allele flipping (flipped). **Note**
 #' these columns will be in the formatted summary statistics returned. Default
 #' is FALSE.
-#' @return list containing sumstats_dt, the modified summary statistics data table object
+#' @return list containing sumstats_dt, the modified summary 
+#' statistics data table object.
 #' @keywords internal
 #' @importFrom data.table :=
 #' @importFrom methods is
@@ -32,11 +33,11 @@ check_n_int <- function(sumstats_dt,
                 message(msg2)
                 # if user wants information, give SNPs without integer N
                 if (imputation_ind) {
-                      sumstats_dt[N %% 1 != 0, convert_n_integer := TRUE]
-                  }
+                    sumstats_dt[N %% 1 != 0, convert_n_integer := TRUE]
+                }
                 if (is(sumstats_dt$N, "character")) {
-                      suppressWarnings(sumstats_dt[, N := as.integer(N)])
-                  }
+                    suppressWarnings(sumstats_dt[, N := as.integer(N)])
+                }
                 sumstats_dt[, N := round(N, 0)]
                 return(list("sumstats_dt" = sumstats_dt))
             } else {

@@ -15,12 +15,13 @@ dt_to_granges <- function(dat,
                           start_col = "POS",
                           end_col = "POS") {
     dat[["SEQnames"]] <- dat[[chrom_col]]
-    gr.snp <- 
+    gr.snp <-
         GenomicRanges::makeGRangesFromDataFrame(dat,
-                                                seqnames.field = "SEQnames",
-                                                start.field = start_col,
-                                                end.field = end_col,
-                                                keep.extra.columns = TRUE)
+            seqnames.field = "SEQnames",
+            start.field = start_col,
+            end.field = end_col,
+            keep.extra.columns = TRUE
+        )
     suppressMessages(suppressWarnings(
         GenomeInfoDb::seqlevelsStyle(gr.snp) <- style[1]
     ))

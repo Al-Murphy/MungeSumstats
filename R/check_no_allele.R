@@ -8,7 +8,8 @@
 #' @return A list containing two data tables:
 #' \itemize{
 #'   \item \code{sumstats_dt}: the modified summary statistics data table object
-#'   \item \code{rsids}: snpsById, filtered to SNPs of interest if loaded already. Or else NULL
+#'   \item \code{rsids}: snpsById, filtered to SNPs of interest 
+#'   if loaded already. Or else NULL.
 #'   \item \code{allele_flip_check}: does the dataset require allele flip check
 #'   \item \code{log_files}: log file list
 #'   \item \code{bi_allelic_filter}: should multi-allelic SNPs be filtered out
@@ -22,18 +23,27 @@
 #' @importFrom data.table setorder
 #' @importFrom data.table copy
 #' @importFrom Biostrings IUPAC_CODE_MAP
-check_no_allele <- function(sumstats_dt, path, ref_genome, rsids,
-                            imputation_ind, allele_flip_check, log_folder_ind,
-                            check_save_out, tabix_index, nThread, log_files,
+check_no_allele <- function(sumstats_dt, 
+                            path, 
+                            ref_genome, 
+                            rsids,
+                            imputation_ind, 
+                            allele_flip_check, 
+                            log_folder_ind,
+                            check_save_out, 
+                            tabix_index, 
+                            nThread, 
+                            log_files,
                             bi_allelic_filter) {
     SNP <- i.seqnames <- CHR <- BP <- i.pos <- LP <- P <- A1 <- A2 <-
-        i.ref_allele <- i.alt_alleles <- alt_alleles <- ss_A <- alleles_as_ambig <-
-        IMPUTATION_A2 <- IMPUTATION_A1 <- NULL
+        i.ref_allele <- i.alt_alleles <- alt_alleles <- ss_A <-
+        alleles_as_ambig <- IMPUTATION_A2 <- IMPUTATION_A1 <- NULL
     # If SNP present but no A1/A2 then need to find them
     col_headers <- names(sumstats_dt)
-    if (sum(c("A1", "A2") %in% col_headers) <= 1 & sum("SNP" %in% col_headers) == 1) {
-        # if A2 is missing need to remove multi-allelic SNPs as we don't know which
-        # is the one the author is thinking of
+    if (sum(c("A1", "A2") %in% col_headers) <= 1 &
+        sum("SNP" %in% col_headers) == 1) {
+        # if A2 is missing need to remove multi-allelic SNPs 
+        # as we don't know which is the one the author is thinking of
         msg_a2 <- paste0(
             "WARNING: No A2 column found in the data, multi-allelic ",
             "can't not be accurately chosen (as any\nof the choices ",
@@ -97,7 +107,8 @@ check_no_allele <- function(sumstats_dt, path, ref_genome, rsids,
                 message(msg)
                 sumstats_dt[rsids, alt_alleles := i.alt_alleles]
                 # just take first A2 value arbitrarily
-                sumstats_dt[, A2 := as.character(lapply(alt_alleles, function(x) x[1]))]
+                sumstats_dt[, A2 := as.character(
+                    lapply(alt_alleles,function(x) x[1]))]
                 # collapse alt_alleles into character type sep by columns
                 sumstats_dt[, alt_alleles :=
                     as.character(lapply(
@@ -120,7 +131,9 @@ check_no_allele <- function(sumstats_dt, path, ref_genome, rsids,
                     sumstats_dt[, IMPUTATION_A1 := TRUE]
                 }
             }
-        } else { # get both A1, A2 from ref genome - choose an A2 value where multiple
+        } else {
+            # get both A1, A2 from ref genome - 
+            # choose an A2 value where multiple
             message("Deriving both A1 and A2 from reference genome")
             sumstats_dt[rsids, A1 := i.ref_allele]
             msg <- paste0(
@@ -133,7 +146,8 @@ check_no_allele <- function(sumstats_dt, path, ref_genome, rsids,
             message(msg)
             sumstats_dt[rsids, alt_alleles := i.alt_alleles]
             # just take first A2 value arbitrarily
-            sumstats_dt[, A2 := as.character(lapply(alt_alleles, function(x) x[1]))]
+            sumstats_dt[, A2 := as.character(
+                lapply(alt_alleles, function(x) x[1]))]
             # collapse alt_alleles into character type sep by columns
             sumstats_dt[, alt_alleles :=
                 as.character(lapply(
@@ -154,7 +168,8 @@ check_no_allele <- function(sumstats_dt, path, ref_genome, rsids,
         # If user wants log, save it to there
         if (log_folder_ind) {
             name <- "alleles_not_found_from_snp"
-            name <- get_unique_name_log_file(name = name, log_files = log_files)
+            name <- get_unique_name_log_file(name = name,
+                                             log_files = log_files)
             write_sumstats(
                 sumstats_dt =
                     sumstats_dt[!complete.cases(sumstats_dt[, c(
@@ -172,9 +187,11 @@ check_no_allele <- function(sumstats_dt, path, ref_genome, rsids,
                 nThread = nThread
             )
             log_files[[name]] <-
-                paste0(check_save_out$log_folder, "/", name, check_save_out$extension)
+                paste0(check_save_out$log_folder, "/",
+                       name, check_save_out$extension)
         }
-        sumstats_dt <- sumstats_dt[complete.cases(sumstats_dt[, c("A1", "A2")]), ]
+        sumstats_dt <- sumstats_dt[complete.cases(
+            sumstats_dt[, c("A1", "A2")]), ]
         # move SNP, CHR, BP, A1 and A2 to start
         other_cols <-
             names(sumstats_dt)[!names(sumstats_dt) %in%
@@ -185,14 +202,18 @@ check_no_allele <- function(sumstats_dt, path, ref_genome, rsids,
         )
 
         return(list(
-            "sumstats_dt" = sumstats_dt, "rsids" = rsids,
-            "allele_flip_check" = allele_flip_check, "log_files" = log_files,
+            "sumstats_dt" = sumstats_dt,
+            "rsids" = rsids,
+            "allele_flip_check" = allele_flip_check,
+            "log_files" = log_files,
             "bi_allelic_filter" = bi_allelic_filter
         ))
     } else {
         return(list(
-            "sumstats_dt" = sumstats_dt, "rsids" = rsids,
-            "allele_flip_check" = allele_flip_check, "log_files" = log_files,
+            "sumstats_dt" = sumstats_dt, 
+            "rsids" = rsids,
+            "allele_flip_check" = allele_flip_check,
+            "log_files" = log_files,
             "bi_allelic_filter" = bi_allelic_filter
         ))
     }

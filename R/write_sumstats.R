@@ -15,8 +15,10 @@
 #'     package = "MungeSumstats"
 #' )
 #' eduAttainOkbay <- read_sumstats(path = path)
-#' write_sumstats(sumstats_dt = eduAttainOkbay,
-#'                save_path = tempfile(fileext = ".tsv.gz"))
+#' write_sumstats(
+#'     sumstats_dt = eduAttainOkbay,
+#'     save_path = tempfile(fileext = ".tsv.gz")
+#' )
 write_sumstats <- function(sumstats_dt,
                            save_path,
                            sep = "\t",
@@ -26,8 +28,8 @@ write_sumstats <- function(sumstats_dt,
     #### Make sure the directory actually exists
     if (is.character(save_path)) {
         dir.create(dirname(save_path),
-                   showWarnings = FALSE, 
-                   recursive = TRUE
+            showWarnings = FALSE,
+            recursive = TRUE
         )
     }
     if (write_vcf) {

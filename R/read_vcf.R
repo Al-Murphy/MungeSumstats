@@ -115,8 +115,10 @@ read_vcf <- function(path,
             # Update sumstats_file where number of splits isn't correct
             # get row identifiers
             update_rows <-
-                (lengths(regmatches(sumstats_file[, get(sample_id)],
-                                    find_splits)) != length(format) - 1)
+                (lengths(regmatches(
+                    sumstats_file[, get(sample_id)],
+                    find_splits
+                )) != length(format) - 1)
             # get char pos for imputation
             find_splits <- unlist(lapply(find_splits, function(x) x[AF_pos - 1]))
             # add to dt
@@ -199,17 +201,17 @@ read_vcf <- function(path,
     # Need to remove "AF=" at start of INFO column and replace any "." with 0
     if ("INFO" %in% names(sumstats_file)) {
         message("Formatting INFO column.")
-        #if info col = "AF=..." then it isn't info, rename to AF if available
-        #check first 10k only, or all if less
-        num_check <- min(nrow(sumstats_file),10000)
-        #if more than half are, take the column as AF
-        if(sum(grepl("^AF=",sumstats_file$INFO))>num_check/2){
+        # if info col = "AF=..." then it isn't info, rename to AF if available
+        # check first 10k only, or all if less
+        num_check <- min(nrow(sumstats_file), 10000)
+        # if more than half are, take the column as AF
+        if (sum(grepl("^AF=", sumstats_file$INFO)) > num_check / 2) {
             message("INFO column is actually AF, it will be converted.")
-            #don't overwirte AF column if it exists
-            if (!"AF" %in% names(sumstats_file)){
-                sumstats_file[,AF:=INFO]
+            # don't overwirte AF column if it exists
+            if (!"AF" %in% names(sumstats_file)) {
+                sumstats_file[, AF := INFO]
                 sumstats_file[, AF := gsub("^AF=", "", AF)]
-            }    
+            }
         }
         sumstats_file[, INFO := gsub("^AF=", "", INFO)]
         sumstats_file[INFO == ".", INFO := 0]

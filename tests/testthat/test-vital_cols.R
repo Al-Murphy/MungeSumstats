@@ -9,10 +9,12 @@ test_that("will fail without a vital column", {
     sumstats_dt <- data.table::fread(file, nThread = 1)
     # Remove vital column - P
     sumstats_dt[, Pval := NULL]
-    data.table::fwrite(x = sumstats_dt, 
-                       file = file, 
-                       sep = "\t", 
-                       nThread = 1)
+    data.table::fwrite(
+        x = sumstats_dt,
+        file = file,
+        sep = "\t",
+        nThread = 1
+    )
     # Run MungeSumstats code
     error_return <-
         tryCatch(MungeSumstats::format_sumstats(file,

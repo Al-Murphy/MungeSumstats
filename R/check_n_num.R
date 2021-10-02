@@ -9,8 +9,15 @@
 #' table object and the log file list
 #' @keywords internal
 #' @importFrom stats sd
-check_n_num <- function(sumstats_dt, path, N_std, N_dropNA = FALSE, log_folder_ind,
-                        check_save_out, tabix_index, nThread, log_files) {
+check_n_num <- function(sumstats_dt, 
+                        path, 
+                        N_std, 
+                        N_dropNA = FALSE,
+                        log_folder_ind,
+                        check_save_out, 
+                        tabix_index, 
+                        nThread, 
+                        log_files) {
     message("Ensuring all SNPs have N<", N_std, " std dev above mean.")
     N <- NULL
     col_headers <- names(sumstats_dt)
@@ -28,7 +35,8 @@ check_n_num <- function(sumstats_dt, path, N_std, N_dropNA = FALSE, log_folder_i
             # If user wants log, save it to there
             if (log_folder_ind) {
                 name <- "n_large"
-                name <- get_unique_name_log_file(name = name, log_files = log_files)
+                name <- get_unique_name_log_file(name = name,
+                                                 log_files = log_files)
                 write_sumstats(
                     sumstats_dt = sumstats_dt[N > ((N_std * sd_N) + mean_N), ],
                     save_path =
@@ -59,7 +67,8 @@ check_n_num <- function(sumstats_dt, path, N_std, N_dropNA = FALSE, log_folder_i
             # If user wants log, save it to there
             if (log_folder_ind) {
                 name <- "n_null"
-                name <- get_unique_name_log_file(name = name, log_files = log_files)
+                name <- get_unique_name_log_file(name = name,
+                                                 log_files = log_files)
                 write_sumstats(
                     sumstats_dt = sumstats_dt[!complete.cases(N)],
                     save_path =
@@ -80,8 +89,10 @@ check_n_num <- function(sumstats_dt, path, N_std, N_dropNA = FALSE, log_folder_i
             }
             sumstats_dt <- sumstats_dt[complete.cases(N)]
         }
-        return(list("sumstats_dt" = sumstats_dt, "log_files" = log_files))
+        return(list("sumstats_dt" = sumstats_dt,
+                    "log_files" = log_files))
     } else {
-        return(list("sumstats_dt" = sumstats_dt, "log_files" = log_files))
+        return(list("sumstats_dt" = sumstats_dt,
+                    "log_files" = log_files))
     }
 }

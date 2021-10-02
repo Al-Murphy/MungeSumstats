@@ -5,8 +5,8 @@
 #'
 #' @inheritParams format_sumstats
 #' @keywords internal
-check_save_path <- function(save_path, 
-                            log_folder, 
+check_save_path <- function(save_path,
+                            log_folder,
                             log_folder_ind,
                             write_vcf = FALSE) {
     #### Add warning to users that temp files aren't actually saved ####
@@ -59,12 +59,13 @@ check_save_path <- function(save_path,
         sep <- "\t"
     } else {
         suffix_match <-
-            vapply(suffixes, function(x) { 
-                grepl(paste0("*",x,"$"), tolower(save_path),
+            vapply(suffixes, function(x) {
+                grepl(paste0("*", x, "$"), tolower(save_path),
                     ignore.case = TRUE
                 )
             },
-            FUN.VALUE = logical(1) )
+            FUN.VALUE = logical(1)
+            )
         if (sum(suffix_match) > 0) {
             file_type <- names(suffix_match)[suffix_match][1]
             # get extension of save path for log files
@@ -81,7 +82,8 @@ check_save_path <- function(save_path,
         }
     }
     if (write_vcf) {
-        save_path <- gsub(paste(suffixes, collapse = "|"), ".vcf.gz", save_path)
+        save_path <- gsub(paste(suffixes, collapse = "|"),
+                          ".vcf.gz", save_path)
         sep <- "\t"
         file_type <- "vcf"
     } else {
@@ -96,7 +98,8 @@ check_save_path <- function(save_path,
                 "format. Switching output to tabular format (.tsv.gz)."
             )
             save_path <-
-                gsub(paste(suffixes.vcf, collapse = "|"), ".tsv.gz", save_path)
+                gsub(paste(suffixes.vcf, collapse = "|"),
+                     ".tsv.gz", save_path)
             sep <- "\t"
             file_type <- ".tsv"
             # get extension of save path for log files
@@ -118,6 +121,16 @@ check_save_path <- function(save_path,
     message("Formatted summary statistics will be saved to ==> ", save_path)
     if (log_folder_ind) {
         message("Log data to be saved to ==> ", log_folder)
+    }
+    
+    #### Check the folder for save_path was indeed created ####
+    if(!dir.exists(dirname(save_path))){
+        stop_msg <- paste("Unable to create folder for save_path :",
+                          dirname(save_path),
+                          "\nDo you have permission to write here,",
+                          "is there space on the disk,",
+                          "and does the path exist?")
+        stop(stop_msg)
     }
 
     return(list(
