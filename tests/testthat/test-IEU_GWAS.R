@@ -23,15 +23,17 @@ test_that("Test connection to IEU GWAS - metadata, download", {
         years = seq(2015, 2021)
     )
     # test these worked
-    testthat::expect_equal(all(
-        nrow(metagwas3) > 0, nrow(metagwas2) > 0,
-        nrow(metagwas) > 0
-    ), TRUE)
+    testthat::expect_gt(nrow(metagwas), 0)
+    testthat::expect_gt(nrow(metagwas2), 0)
+    testthat::expect_gt(nrow(metagwas3), 0)
+    
+    
     # test download
     vcf_url <- "https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz"
-    out_paths <- MungeSumstats::download_vcf(vcf_url = vcf_url, force_new = TRUE)
+    out_paths <- MungeSumstats::download_vcf(vcf_url = vcf_url,
+                                             force_new = TRUE)
     # test this worked
-    testthat::expect_equal(file.exists(out_paths$save_path), TRUE)
+    testthat::expect_true(file.exists(out_paths$save_path))
 
     # test importing
     ### Only use a subset for testing purposes
@@ -49,23 +51,24 @@ test_that("Test connection to IEU GWAS - metadata, download", {
         ),
         error = function(e) e, warning = function(w) w
         )
-    testthat::expect_equal(is(err_catch, "error"), TRUE)
+    testthat::expect_true(is(err_catch, "error"))
     # try import with axel - again should get warning about 1 thread
-    axel_warn_catch <-
+    axel_catch <-
         tryCatch(MungeSumstats::import_sumstats(
-            ids = "a-fake-id",
+            ids = "ieu-a-298",
             ref_genome = "GRCh37",
             on_ref_genome = FALSE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
             allele_flip_check = FALSE,
             force_new = TRUE,
+            nThread = 1,
             download_method = "axel"
         ),
         error = function(e) e, warning = function(w) w
         )
-    testthat::expect_equal(is(err_catch, "error"), TRUE)
-    testthat::expect_equal(is(axel_warn_catch, "warning"), TRUE)
+    testthat::expect_true(file.exists(axel_catch[[1]]))
+    
     # don't run last check too time intensive, it is also in the vignette anyway
     # reformatted <- MungeSumstats::import_sumstats(ids = ids[1],
     #                                              ref_genome="GRCh37",
