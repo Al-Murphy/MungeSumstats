@@ -59,7 +59,7 @@ check_save_path <- function(save_path,
         sep <- "\t"
     } else {
         suffix_match <-
-            vapply(suffixes, function(x) {
+            vapply(suffixes, function(x) { 
                 grepl(paste0("*",x,"$"), tolower(save_path),
                     ignore.case = TRUE
                 )
