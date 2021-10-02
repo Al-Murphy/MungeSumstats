@@ -29,6 +29,8 @@ jobs:
           r-version: ${{ matrix.r }}
       - uses: r-lib/actions/setup-pandoc@master
       - uses: r-lib/actions/setup-tinytex@master
+      - name: Install via brew
+        run: brew install axel
       - name: Install dependencies
         env:
           R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
