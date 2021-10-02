@@ -152,16 +152,25 @@ test_that("validate parameters", {
         error = function(e) e,
         warning = function(w) w
         )
+    
+    # Make sure ref_genome=NULL works
+    pass_return1 <-
+        tryCatch(MungeSumstats::format_sumstats(path = file,
+                                                ref_genome = NULL),
+        error = function(e) e,
+        warning = function(w) w
+        )
 
-    expect_equal(is(error_return, "error"), TRUE)
-    expect_equal(is(error_return2, "error"), TRUE)
-    expect_equal(is(error_return3, "error"), TRUE)
-    expect_equal(is(error_return4, "error"), TRUE)
-    expect_equal(is(error_return5, "error"), TRUE)
-    expect_equal(is(error_return6, "error"), TRUE)
-    expect_equal(is(error_return7, "error"), TRUE)
-    expect_equal(is(error_return8, "error"), TRUE)
-    expect_equal(is(error_return9, "error"), TRUE)
-    expect_equal(is(error_return10, "error"), TRUE)
-    expect_equal(is(error_return11, "error"), TRUE)
+    expect_true(is(error_return, "error"))
+    expect_true(is(error_return2, "error"))
+    expect_true(is(error_return3, "error"))
+    expect_true(is(error_return4, "error"))
+    expect_true(is(error_return5, "error"))
+    expect_true(is(error_return6, "error"))
+    expect_true(is(error_return7, "error"))
+    expect_true(is(error_return8, "error"))
+    expect_true(is(error_return9, "error"))
+    expect_true(is(error_return10, "error"))
+    expect_true(is(error_return11, "error"))
+    expect_true(file.exists(pass_return1))
 })

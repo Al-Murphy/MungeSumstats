@@ -76,12 +76,14 @@ validate_parameters <- function(path,
         "Install 'BSgenome.Hsapiens.1000genomes.hs37d5' to ",
         "use 'GRCh37' as 'ref_genome'"
     )
-    if (toupper(ref_genome) == "GRCH37" &&
-        !requireNamespace("SNPlocs.Hsapiens.dbSNP144.GRCh37", quietly = TRUE)) {
+    if (any(toupper(ref_genome) == "GRCH37") &&
+        !requireNamespace("SNPlocs.Hsapiens.dbSNP144.GRCh37",
+                          quietly = TRUE)) {
           stop(GRCH37_msg1)
       }
-    if (toupper(ref_genome) == "GRCH37" &&
-        !requireNamespace("BSgenome.Hsapiens.1000genomes.hs37d5", quietly = TRUE)) {
+    if (any(toupper(ref_genome) == "GRCH37") &&
+        !requireNamespace("BSgenome.Hsapiens.1000genomes.hs37d5",
+                          quietly = TRUE)) {
           stop(GRCH37_msg2)
       }
 
@@ -93,26 +95,32 @@ validate_parameters <- function(path,
         "Install 'BSgenome.Hsapiens.NCBI.GRCh38' to ",
         "use 'GRCh38' as 'ref_genome'"
     )
-    if (toupper(ref_genome) == "GRCH38" &&
-        !requireNamespace("SNPlocs.Hsapiens.dbSNP144.GRCh38", quietly = TRUE)) {
+    if (any(toupper(ref_genome) == "GRCH38") &&
+        !requireNamespace("SNPlocs.Hsapiens.dbSNP144.GRCh38",
+                          quietly = TRUE)) {
           stop(GRCH38_msg1)
       }
-    if (toupper(ref_genome) == "GRCH38" &&
-        !requireNamespace("BSgenome.Hsapiens.NCBI.GRCh38", quietly = TRUE)) {
+    if (any(toupper(ref_genome) == "GRCH38") &&
+        !requireNamespace("BSgenome.Hsapiens.NCBI.GRCh38",
+                          quietly = TRUE)) {
           stop(GRCH38_msg2)
       }
 
     if (is.null(ref_genome)) {
-        if (!requireNamespace("SNPlocs.Hsapiens.dbSNP144.GRCh37", quietly = TRUE)) {
+        if (!requireNamespace("SNPlocs.Hsapiens.dbSNP144.GRCh37",
+                              quietly = TRUE)) {
               stop(GRCH37_msg1)
           }
-        if (!requireNamespace("BSgenome.Hsapiens.1000genomes.hs37d5", quietly = TRUE)) {
+        if (!requireNamespace("BSgenome.Hsapiens.1000genomes.hs37d5",
+                              quietly = TRUE)) {
               stop(GRCH37_msg2)
           }
-        if (!requireNamespace("SNPlocs.Hsapiens.dbSNP144.GRCh38", quietly = TRUE)) {
+        if (!requireNamespace("SNPlocs.Hsapiens.dbSNP144.GRCh38",
+                              quietly = TRUE)) {
               stop(GRCH38_msg1)
           }
-        if (!requireNamespace("BSgenome.Hsapiens.NCBI.GRCh38", quietly = TRUE)) {
+        if (!requireNamespace("BSgenome.Hsapiens.NCBI.GRCh38",
+                              quietly = TRUE)) {
               stop(GRCH38_msg2)
           }
     }
@@ -251,7 +259,11 @@ validate_parameters <- function(path,
         "format."
     )
     if (!is.data.frame(mapping_file) || ncol(mapping_file) != 2 ||
-        !all(toupper(colnames(mapping_file)) %in% c("UNCORRECTED", "CORRECTED")) ||
+        !all(
+          toupper(
+            colnames(mapping_file)
+            ) %in% c("UNCORRECTED", "CORRECTED")
+          ) ||
         !all(essential_cols %in%
             mapping_file[, toupper(colnames(mapping_file)) == "CORRECTED"]) ||
         !any(signed_cols %in%

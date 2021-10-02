@@ -60,12 +60,11 @@ check_save_path <- function(save_path,
     } else {
         suffix_match <-
             vapply(suffixes, function(x) {
-                grepl(x, tolower(save_path),
+                grepl(paste0("*",x,"$"), tolower(save_path),
                     ignore.case = TRUE
                 )
             },
-            FUN.VALUE = logical(1)
-            )
+            FUN.VALUE = logical(1) )
         if (sum(suffix_match) > 0) {
             file_type <- names(suffix_match)[suffix_match][1]
             # get extension of save path for log files

@@ -216,7 +216,7 @@ format_sumstats <- function(path,
         log_folder_ind = log_folder_ind,
         write_vcf = write_vcf
     )
-    if (tabix_index && sort_coordinates == FALSE) {
+    if (isTRUE(tabix_index) && (sort_coordinates == FALSE)) {
         message(
             "Setting `sort_coordinates=TRUE` in ",
             "order to tabix-index results."
@@ -225,7 +225,7 @@ format_sumstats <- function(path,
     }
 
     #### Recognize previously formatted files ####
-    if (file.exists(check_save_out$save_path) && force_new == FALSE) {
+    if (file.exists(check_save_out$save_path) && (force_new == FALSE)) {
         message(
             "Importing previously formatted file.",
             "Set `force_new=TRUE` to override this."
