@@ -6,12 +6,15 @@ test_that("Imputation of A1/A2 correctly", {
     ))
     writeLines(eduAttainOkbay, con = file)
     # read it in and drop CHR BP columns
-    sumstats_dt <- data.table::fread(file)
+    sumstats_dt <- data.table::fread(file, nThread = 1)
     # Keep Org to validate values
     sumstats_dt_missing <- data.table::copy(sumstats_dt)
     sumstats_dt_missing[, A1 := NULL]
     sumstats_dt_missing[, A2 := NULL]
-    data.table::fwrite(x = sumstats_dt_missing, file = file, sep = "\t")
+    data.table::fwrite(x = sumstats_dt_missing,
+                       file = file,
+                       sep = "\t", 
+                       nThread = 1)
     ## The following test uses more than 2GB of memory, which is more
     ## than what 32-bit Windows can handle:
     is_32bit_windows <- .Platform$OS.type == "windows" &&

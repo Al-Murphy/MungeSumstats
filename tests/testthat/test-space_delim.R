@@ -6,7 +6,7 @@ test_that("Can handle space delimited files", {
     ))
     writeLines(eduAttainOkbay, con = file)
     # read it in and write as space delimited
-    sumstats_dt <- data.table::fread(file)
+    sumstats_dt <- data.table::fread(file, nThread = 1)
     data.table::fwrite(x = sumstats_dt, file = file, sep = " ")
     # Run MungeSumstats code
     reformatted <- MungeSumstats::format_sumstats(file,
@@ -16,7 +16,7 @@ test_that("Can handle space delimited files", {
         bi_allelic_filter = FALSE,
         allele_flip_check = FALSE
     )
-    res_dt <- data.table::fread(reformatted)
+    res_dt <- data.table::fread(reformatted, nThread = 1)
     # check against results of normal run should be the exact same
     file2 <- tempfile()
     # write the Educational Attainment GWAS to a temp file for testing
@@ -28,6 +28,6 @@ test_that("Can handle space delimited files", {
         bi_allelic_filter = FALSE,
         allele_flip_check = FALSE
     )
-    org_dt <- data.table::fread(org)
+    org_dt <- data.table::fread(org, nThread = 1)
     expect_equal(res_dt, org_dt)
 })

@@ -7,7 +7,8 @@ test_that("Input has correct headers", {
     writeLines(eduAttainOkbay, con = file)
     # read it in and correct column headers
     sumstats_dt <- data.table::fread(file)
-    names(sumstats_dt) <- c("SNP", "CHR", "BP", "A1", "A2", "FRQ", "BETA", "SE", "P")
+    names(sumstats_dt) <- c("SNP", "CHR", "BP", "A1", "A2",
+                            "FRQ", "BETA", "SE", "P")
     data.table::fwrite(x = sumstats_dt, file = file, sep = "\t")
     # Run MungeSumstats code
     reformatted <- MungeSumstats::format_sumstats(file,

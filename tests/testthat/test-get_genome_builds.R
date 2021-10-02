@@ -16,5 +16,8 @@ test_that("get_genome_builds works", {
         ref_genomes <- MungeSumstats::get_genome_builds(
             sumstats_list = sumstats_list)
         testthat::expect_true(all(ref_genomes=="GRCH37"))
-    } 
+        testthat::expect_length(ref_genomes,2)
+    } else {
+        testthat::expect_true(is_32bit_windows)
+    }
 })
