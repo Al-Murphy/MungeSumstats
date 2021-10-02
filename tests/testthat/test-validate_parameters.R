@@ -154,12 +154,21 @@ test_that("validate parameters", {
         )
     
     # Make sure ref_genome=NULL works
-    pass_return1 <-
-        tryCatch(MungeSumstats::format_sumstats(path = file,
-                                                ref_genome = NULL),
-        error = function(e) e,
-        warning = function(w) w
-        )
+    ## Call uses reference genome as default with more than 2GB of memory,
+    ## which is more than what 32-bit Windows can handle so
+    # remove certain checks
+    is_32bit_windows <-
+        .Platform$OS.type == "windows" && .Platform$r_arch == "i386"
+    if (!is_32bit_windows) {
+        pass_return1 <-
+            tryCatch(MungeSumstats::format_sumstats(path = file,
+                                                    ref_genome = NULL),
+                     error = function(e) e,
+                     warning = function(w) w
+            )
+        expect_true(file.exists(pass_return1))
+    } 
+    
 
     expect_true(is(error_return, "error"))
     expect_true(is(error_return2, "error"))
@@ -171,6 +180,5 @@ test_that("validate parameters", {
     expect_true(is(error_return8, "error"))
     expect_true(is(error_return9, "error"))
     expect_true(is(error_return10, "error"))
-    expect_true(is(error_return11, "error"))
-    expect_true(file.exists(pass_return1))
+    expect_true(is(error_return11, "error")) 
 })
