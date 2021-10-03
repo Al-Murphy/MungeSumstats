@@ -71,13 +71,6 @@ read_vcf <- function(path,
     
     is_parsed <- is_vcf_parsed(sumstats_file = sumstats_file, 
                                verbose = TRUE)
-    sumstats_file <- remove_nonstandard_vcf_cols(
-        sample_id = sample_id, 
-        sumstats_file = sumstats_file,
-        keep_extra_cols = keep_extra_cols, 
-        standardise_headers = TRUE)
-    #### standardise_headers makes sample_id uppercase ####
-    sample_id <- toupper(sample_id)
     ## Get format of FORMAT col for parsing
     format <- sumstats_file$FORMAT[1]
     if(!is_parsed && !is.null(format)){   
@@ -85,6 +78,14 @@ read_vcf <- function(path,
     }else {
         format_cols <- NULL
     }
+    sumstats_file <- remove_nonstandard_vcf_cols(
+        sample_id = sample_id, 
+        sumstats_file = sumstats_file,
+        keep_extra_cols = keep_extra_cols, 
+        standardise_headers = TRUE)
+    #### standardise_headers makes sample_id uppercase ####
+    sample_id <- toupper(sample_id)
+    
     
 
     # if sample_id col present, split it out into separate columns
