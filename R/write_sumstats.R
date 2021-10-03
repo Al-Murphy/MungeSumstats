@@ -42,24 +42,29 @@ write_sumstats <- function(sumstats_dt,
         vr <- to_vranges(sumstats_dt = sumstats_dt)
         if (tabix_index) {
             suffixes <- supported_suffixes(
-                tabular = FALSE,
-                tabular_compressed = FALSE
+                tabular = TRUE,
+                tabular_compressed = TRUE
             )
-            message("Writing in VCF format ==> ", gsub(
-                paste(suffixes, collapse = "|"),
-                ".vcf.bgz", save_path
-            ))
+            #### Update save_path ####
+            new_path <- gsub(paste(suffixes, collapse = "|"),
+                              ".vcf.bgz", save_path)
+            msg1 <- paste("Writing in VCF format ==>",save_path)
+            message(msg1)
             message("Compressing with bgzip and indexing with tabix.")
         } else {
-            message("Writing in VCF format ==> ", save_path)
+            msg2 <- paste("Writing in VCF format ==>", save_path)
+            message(msg2)
         }
         VariantAnnotation::writeVcf(
             obj = vr,
             filename = save_path,
             index = tabix_index
         )
+        ## Replace save_path after writing
+        save_path <- new_path
     } else {
-        message("Writing in tabular format ==> ", save_path)
+        msg3 <- paste0("Writing in tabular format ==>", save_path)
+        message(msg3)
         data.table::fwrite(
             x = sumstats_dt,
             file = save_path,

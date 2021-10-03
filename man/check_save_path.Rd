@@ -8,8 +8,8 @@ check_save_path(
   save_path,
   log_folder,
   log_folder_ind,
-  write_vcf = FALSE,
-  tabix_index = FALSE
+  tabix_index,
+  write_vcf = FALSE
 )
 }
 \arguments{
@@ -25,10 +25,10 @@ same format specified for the resulting sumstats file. The only exception to
 this rule is if output is vcf, then log file saved as .tsv.gz. Default is
 FALSE.}
 
-\item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
-
 \item{tabix_index}{Index the formatted summary statistics with
 \href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
+
+\item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
 }
 \value{
 Corrected \code{save_path}, the file type, the separator, corrected
