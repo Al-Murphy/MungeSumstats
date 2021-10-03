@@ -157,19 +157,20 @@ test_that("validate parameters", {
     ## Call uses reference genome as default with more than 2GB of memory,
     ## which is more than what 32-bit Windows can handle so
     # remove certain checks
-    is_32bit_windows <-
-        .Platform$OS.type == "windows" && .Platform$r_arch == "i386"
-    if (!is_32bit_windows) {
-        pass_return1 <-
-            tryCatch(MungeSumstats::format_sumstats(
-                path = file,
-                ref_genome = NULL
-            ),
-            error = function(e) e,
-            warning = function(w) w
-            )
-        expect_true(file.exists(pass_return1))
-    }
+    ## Removing for now, too time-intensive and is covered by other tests.
+    # is_32bit_windows <-
+    #     .Platform$OS.type == "windows" && .Platform$r_arch == "i386"
+    # if (!is_32bit_windows) {
+    #     pass_return1 <-
+    #         tryCatch(MungeSumstats::format_sumstats(
+    #             path = file,
+    #             ref_genome = NULL
+    #         ),
+    #         error = function(e) e,
+    #         warning = function(w) w
+    #         )
+    #     expect_true(file.exists(pass_return1))
+    # }
 
 
     expect_true(is(error_return, "error"))

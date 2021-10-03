@@ -5,6 +5,7 @@
 #' 
 #' @keywords internal
 #' @importFrom Biostrings strsplit
+#' @importFrom utils type.convert
 vcf2df = function(v, 
                   expand = TRUE) {
     v2df <- function(x, 
@@ -26,7 +27,7 @@ vcf2df = function(v,
                 do.call(rbind,
                         c(dfannempty[1:ncls], dd))),
                             stringsAsFactors=FALSE)
-            yy = data.frame(lapply(yy,type.convert))
+            yy = data.frame(lapply(yy,utils::type.convert))
             colnames(yy) = paste("ANN",anncols[1:ncls],sep="..")
             return(yy)
         }

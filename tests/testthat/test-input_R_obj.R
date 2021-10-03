@@ -6,7 +6,7 @@ test_that("Can pass in R objects of summary statistics", {
     ))
     writeLines(eduAttainOkbay, con = file)
     # read it in and combine CHR BP columns
-    sumstats_dt <- data.table::fread(file)
+    sumstats_dt <- data.table::fread(file, nThread = 1)
     # Run MungeSumstats code
     path_return <- MungeSumstats::format_sumstats(file,
         ref_genome = "GRCh37",
@@ -22,7 +22,7 @@ test_that("Can pass in R objects of summary statistics", {
         bi_allelic_filter = FALSE,
         allele_flip_check = FALSE
     )
-    sumstats_rtrn_path <- data.table::fread(path_return)
-    sumstats_rtrn_dt <- data.table::fread(dt_return)
+    sumstats_rtrn_path <- data.table::fread(path_return, nThread = 1)
+    sumstats_rtrn_dt <- data.table::fread(dt_return, nThread = 1)
     expect_equal(all.equal(sumstats_rtrn_dt, sumstats_rtrn_path), TRUE)
 })

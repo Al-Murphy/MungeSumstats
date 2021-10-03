@@ -39,7 +39,7 @@ index_tabular <- function(path,
     #### Make sure input file isn't empty ####
     if (file.size(path) == 0) {
         msg2 <- paste("Removing empty file:", path)
-        messager(msg2)
+        message(msg2)
         out <- file.remove(path)
     }
     ### File MUST be bgzipped first

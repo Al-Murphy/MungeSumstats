@@ -7,6 +7,7 @@
 * Made code width <80 characters.  
 * Changed `to_GRanges`/`to_GRanges` functions to all-lowercase functions
 (for consistency with other functions). 
+* Set `nThread=1` in `data.table` test functions.
 
 ### New Features
 
@@ -14,6 +15,7 @@
 * Added early check for making sure the directory `save_path` is in was 
 actually created (as opposed to finding out at the very end of the pipeline). 
 * Tabix-indexing now available for tabular output data.
+* `read_header` and `read_sumstats` now both work with .bgz files.  
 
 ## CHANGES IN VERSION 1.1.26
 

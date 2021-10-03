@@ -2,6 +2,8 @@ read_vcf_data <- function(path,
                           nThread = 1,
                           tmpdir = tempdir(),
                           nrows  = Inf){
+    start <- seqnames <- PARSED <- NULL;
+    
     sumstats_file <- tryCatch(expr = {
         data.table::fread(
             input = path,

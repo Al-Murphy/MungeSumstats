@@ -97,7 +97,7 @@ check_save_path <- function(save_path,
             tabular_compressed = FALSE
         )
         if (any(endsWith(save_path, suffixes.vcf))) {
-            vcf_msg <- path(
+            vcf_msg <- paste(
                 "save_path suggests VCF output but write_vcf=FALSE.",
                 "Switching output to tabular format (.tsv.gz)."
             )
