@@ -1,3 +1,5 @@
+#' VCF to DF
+#' 
 #' Function to convert VariantAnnotation CollapsedVCF/ExpandedVCF
 #'  objects to a data frame
 #'  
@@ -9,6 +11,9 @@
 #' vcf <- VariantAnnotation::readVcf(file = vcf_file)
 #' vcf_df <- vcf2df(vcf = vcf)
 #' }
+#' 
+#' @return data.frame version of VCF
+#' 
 #' @keywords internal
 #' @importFrom Biostrings strsplit
 #' @importFrom utils type.convert
@@ -24,14 +29,14 @@ vcf2df <- function(vcf,
                     headerstring),' \\| ')[[1]]
             dfannempty = data.frame(matrix(vector(), 0, length(anncols),
                                            dimnames=list(c(), anncols)),
-                                    stringsAsFactors=F)
+                                    stringsAsFactors=FALSE)
             dd <- lapply(lapply(anncol,`[`,1),
                          function(x){Biostrings:::strsplit(x,'\\|')[[1]]})
             ncls <- max(unlist(lapply(dd, length)))
             
             yy = data.frame(suppressWarnings(
                 do.call(rbind,
-                        c(dfannempty[1:ncls], dd))),
+                        c(dfannempty[seq(1,ncls)], dd))),
                             stringsAsFactors=FALSE)
             yy = data.frame(lapply(yy,utils::type.convert))
             colnames(yy) = paste("ANN",anncols[seq(1,ncls)],sep="..")

@@ -28,6 +28,9 @@ index_tabular(
 
 \item{verbose}{Print messages.}
 }
+\value{
+Path to tabix-indexed tabular file
+}
 \description{
 Convert summary stats file to tabix format
 }

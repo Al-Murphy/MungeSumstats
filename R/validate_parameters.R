@@ -59,7 +59,8 @@ validate_parameters <- function(path,
     }
 
     gen_msg2 <- paste0(
-        "The chosen genome build to convert to must be one of GRCh37 or GRCh38 ",
+        "The chosen genome build to convert to must be one of ",
+        "GRCh37 or GRCh38 ",
         "or left as null so the genome build will be inferred ",
         "from the data."
     )

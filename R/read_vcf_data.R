@@ -17,7 +17,7 @@ read_vcf_data <- function(path,
         #### Read VCF ####
         vcf <- VariantAnnotation::readVcf(file = path)
         #### Parse VCF ####
-        sumstats_file <- vcf2df(v = vcf)  %>%
+        sumstats_file <- vcf2df(vcf = vcf)  %>%
             dplyr::rename(CHROM = seqnames, 
                           BP = start) 
         #### Remove sample_id suffixes from columns ####

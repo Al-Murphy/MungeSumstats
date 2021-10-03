@@ -2,8 +2,7 @@
 % Please edit documentation in R/vcf2df.R
 \name{vcf2df}
 \alias{vcf2df}
-\title{Function to convert VariantAnnotation CollapsedVCF/ExpandedVCF
-objects to a data frame}
+\title{VCF to DF}
 \source{
 https://gist.github.com/zhujack/849b75f5a8305edaeca1001dfb9c3fe9
 
@@ -16,6 +15,9 @@ vcf_df <- vcf2df(vcf = vcf)
 }
 \usage{
 vcf2df(vcf, expand = TRUE)
+}
+\value{
+data.frame version of VCF
 }
 \description{
 Function to convert VariantAnnotation CollapsedVCF/ExpandedVCF

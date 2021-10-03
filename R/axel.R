@@ -1,4 +1,3 @@
-
 #' axel downloader
 #'
 #' R wrapper for axel, which enables multi-threaded download
