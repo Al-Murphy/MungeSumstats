@@ -66,6 +66,8 @@ Suggests:
     testthat (>= 3.0.0),
     UpSetR,
     BiocStyle,
-    covr
+    covr,
+    seqminer,
+    Rsamtools
 Config/testthat/edition: 3
 VignetteBuilder: knitr

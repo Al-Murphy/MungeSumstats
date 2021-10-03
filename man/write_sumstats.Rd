@@ -10,7 +10,8 @@ write_sumstats(
   sep = "\\t",
   write_vcf = FALSE,
   tabix_index = FALSE,
-  nThread = 1
+  nThread = 1,
+  return_path = FALSE
 )
 }
 \arguments{
@@ -28,9 +29,15 @@ file for the GWAS.}
 \href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
 
 \item{nThread}{The number of threads to use. Experiment to see what works best for your data on your hardware.}
+
+\item{return_path}{Return \code{save_path}.
+This will have been modified in some cases
+(e.g. after compressing and tabix-indexing a
+previously un-compressed file).}
 }
 \value{
-\code{VRanges} object
+If \code{return_path=TRUE}, returns \code{save_path}.
+Else returns \code{NULL}.
 }
 \description{
 Write sum stats file to disk

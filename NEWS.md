@@ -13,6 +13,7 @@
 * Added tests for `get_genome_builds`  
 * Added early check for making sure the directory `save_path` is in was 
 actually created (as opposed to finding out at the very end of the pipeline). 
+* Tabix-indexing now available for tabular output data.
 
 ## CHANGES IN VERSION 1.1.26
 

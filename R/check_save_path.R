@@ -8,7 +8,8 @@
 check_save_path <- function(save_path,
                             log_folder,
                             log_folder_ind,
-                            write_vcf = FALSE) {
+                            write_vcf = FALSE,
+                            tabix_index = FALSE) {
     #### Add warning to users that temp files aren't actually saved ####
     if (dirname(save_path) == tempdir()) {
         message(
@@ -81,11 +82,14 @@ check_save_path <- function(save_path,
             }
         }
     }
+    #### Distinguish between VCF and tabular formats ####
     if (write_vcf) {
         save_path <- gsub(paste(suffixes, collapse = "|"),
                           ".vcf.gz", save_path)
         sep <- "\t"
         file_type <- "vcf"
+        # Don't have to worry about tabix_index bc if writing to VCF format, 
+        # will always be compresed (vcf.gz) anyway.
     } else {
         #### Account for mismatch between write_vcf and save_path ####
         suffixes.vcf <- supported_suffixes(
@@ -106,13 +110,22 @@ check_save_path <- function(save_path,
             # if output vcf, save log file .tsv.gz
             extension <- ".tsv.gz"
         }
-        # get extension of save path for log files
+        #### Check for tabix-indexing ####
+        if(tabix_index){
+            # Using slightly modified version of 
+            #  Rsamtools::bgzip default
+            save_path <- sprintf("%s.bgz",
+                                 sub("\\.gz$|\\.bgz$", "", save_path)) 
+            extension <- sprintf("%s.bgz",
+                                 sub("\\.gz$|\\.bgz$", "", extension)) 
+        }
+        #### get extension of save path for log files ###
         if (!exists("extension")) {
             # if output vcf, save log file type just .tsv.gz
             extension <- ".tsv.gz"
-        }
-    }
-    #### Make sure dir exists
+        } 
+    } 
+    #### Make sure dir exists ####
     if (is.character(save_path)) {
         dir.create(dirname(save_path),
                    showWarnings = FALSE, recursive = TRUE)

@@ -2,10 +2,15 @@
 #'
 #' @param sumstats_dt data table obj of the summary statistics
 #' file for the GWAS.
+#' @param return_path Return \code{save_path}.
+#'  This will have been modified in some cases
+#'   (e.g. after compressing and tabix-indexing a
+#'    previously un-compressed file).
 #' @inheritParams data.table::fread
 #' @inheritParams format_sumstats
 #'
-#' @return \code{VRanges} object
+#' @returns If \code{return_path=TRUE}, returns \code{save_path}.
+#'  Else returns \code{NULL}.
 #'
 #' @export
 #' @importFrom GenomicRanges makeGRangesFromDataFrame
@@ -24,7 +29,8 @@ write_sumstats <- function(sumstats_dt,
                            sep = "\t",
                            write_vcf = FALSE,
                            tabix_index = FALSE,
-                           nThread = 1) {
+                           nThread = 1,
+                           return_path = FALSE) {
     #### Make sure the directory actually exists
     if (is.character(save_path)) {
         dir.create(dirname(save_path),
@@ -47,7 +53,8 @@ write_sumstats <- function(sumstats_dt,
         } else {
             message("Writing in VCF format ==> ", save_path)
         }
-        VariantAnnotation::writeVcf(vr,
+        VariantAnnotation::writeVcf(
+            obj = vr,
             filename = save_path,
             index = tabix_index
         )
@@ -59,5 +66,12 @@ write_sumstats <- function(sumstats_dt,
             sep = sep,
             nThread = nThread
         )
+        if(tabix_index){
+            save_path <- index_tabular(path = save_path,
+                                       chrom_col = "CHR", 
+                                       start_col = "BP", 
+                                       verbose = TRUE)
+        }
     }
+    if(return_path) return(save_path)
 }

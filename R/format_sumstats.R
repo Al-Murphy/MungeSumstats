@@ -812,13 +812,14 @@ format_sumstats <- function(path,
 
 
         #### WRITE data.table TO PATH ####
-        write_sumstats(
+        check_save_out$save_path <- write_sumstats(
             sumstats_dt = sumstats_return$sumstats_dt,
             save_path = check_save_out$save_path,
             sep = check_save_out$sep,
             write_vcf = write_vcf,
             tabix_index = tabix_index,
-            nThread = nThread
+            nThread = nThread,
+            return_path = TRUE
         )
         rm(rsids) # free up memory
 
