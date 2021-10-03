@@ -8,8 +8,8 @@
 check_save_path <- function(save_path,
                             log_folder,
                             log_folder_ind,
-                            write_vcf = FALSE,
-                            tabix_index = FALSE) {
+                            tabix_index,
+                            write_vcf = FALSE) {
     #### Add warning to users that temp files aren't actually saved ####
     if (dirname(save_path) == tempdir()) {
         message(

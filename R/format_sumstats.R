@@ -214,7 +214,8 @@ format_sumstats <- function(path,
         save_path = save_path,
         log_folder = log_folder,
         log_folder_ind = log_folder_ind,
-        write_vcf = write_vcf
+        write_vcf = write_vcf, 
+        tabix_index = tabix_index
     )
     if (isTRUE(tabix_index) && (sort_coordinates == FALSE)) {
         message(
