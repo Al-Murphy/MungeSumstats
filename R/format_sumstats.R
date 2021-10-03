@@ -270,7 +270,8 @@ format_sumstats <- function(path,
             imputation_ind = imputation_ind,
             log_folder_ind = log_folder_ind,
             log_mungesumstats_msgs = log_mungesumstats_msgs,
-            mapping_file = mapping_file
+            mapping_file = mapping_file,
+            tabix_index = tabix_index
         )
 
         # save messages to file if user specified

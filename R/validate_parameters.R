@@ -34,7 +34,8 @@ validate_parameters <- function(path,
                                 imputation_ind,
                                 log_folder_ind,
                                 log_mungesumstats_msgs,
-                                mapping_file) {
+                                mapping_file,
+                                tabix_index) {
     # Checking if the file exists should happen first - 
     # can pass dt/df of sumstats
     pth_msg <- paste0(
@@ -280,5 +281,13 @@ validate_parameters <- function(path,
         !any(signed_cols %in%
             mapping_file[, toupper(colnames(mapping_file)) == "CORRECTED"])) {
         stop(mapping_file_msg)
+    }
+    
+    if(tabix_index && 
+       any(!requireNamespace("Rsamtools", quietly = TRUE),
+           !requireNamespace("seqminer", quietly = TRUE)) ){
+        tbx_msg <- paste(
+            "Rsamtools and seqminer must be installed when tabix_index=TRUE.")
+        stop(tbx_msg)
     }
 }

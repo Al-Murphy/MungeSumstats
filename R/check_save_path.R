@@ -116,7 +116,7 @@ check_save_path <- function(save_path,
             # Using slightly modified version of 
             #  Rsamtools::bgzip default
             if(grepl("\\.gz$",save_path)){
-                bgz_msg <- path(
+                bgz_msg <- paste(
                     "save_path suggests .gz output but tabix_index=TRUE",
                     "Switching output to tabix-indexed format (.bgz)."
                 )

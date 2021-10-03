@@ -36,7 +36,8 @@ validate_parameters(
   imputation_ind,
   log_folder_ind,
   log_mungesumstats_msgs,
-  mapping_file
+  mapping_file,
+  tabix_index
 )
 }
 \arguments{
@@ -173,6 +174,9 @@ However, if a column header that is in youf file is missing of the mapping we
 give is incorrect you can supply your own mapping file. Must be a 2 column
 dataframe with column names "Uncorrected" and "Corrected". See
 data(sumstatsColHeaders) for default mapping and necessary format.}
+
+\item{tabix_index}{Index the formatted summary statistics with
+\href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
 }
 \value{
 No return

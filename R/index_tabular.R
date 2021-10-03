@@ -22,8 +22,6 @@
 #'     
 #' indexed_file <- MungeSumstats::index_tabular(path = path)
 #' @export
-#' @importFrom Rsamtools bgzip
-#' @importFrom seqminer tabix.createIndex
 index_tabular <- function(path,
                           chrom_col = "CHR",
                           start_col = "BP",
@@ -52,7 +50,15 @@ index_tabular <- function(path,
                                                     path)),
                                  overwrite = TRUE)
     ### Tabix-index file
-    message("Tabix-indexing file.")
+    message("Tabix-indexing file.") 
+    # Rsamtools::indexTabix is not user-friendly, 
+    # and is prone to errors without additional wrappers functions
+    #(ie seqminer::tabix.createIndex)
+    # tbx <- Rsamtools::indexTabix(file = bgz_file,
+    #                               seq = chrom_col,
+    #                               start = start_col,
+    #                               comment = "SNP", 
+    #                               end = end_col)
     seqminer::tabix.createIndex(
         bgzipFile = bgz_file,
         sequenceColumn = cdict[[chrom_col]],
