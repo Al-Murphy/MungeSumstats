@@ -311,7 +311,8 @@ get_query_content <- function(response) {
 #' Choice between "local", "release", "test". Default = "local"
 #'
 #' @keywords internal
-select_api <- function(where = "public") {
+select_api <- function(where = "public",
+                       verbose = TRUE) {
     url <- switch(where,
         public = "http://gwas-api.mrcieu.ac.uk/",
         private = "http://ieu-db-interface.epi.bris.ac.uk:8082/",
@@ -324,5 +325,7 @@ select_api <- function(where = "public") {
     }
 
     options(ieugwasr_api = url)
-    message("API: ", where, ": ", url)
+    if(verbose){
+        message("API: ", where, ": ", url)
+    }  
 }

@@ -31,7 +31,7 @@ vcf2df <- function(vcf,
                                            dimnames=list(c(), anncols)),
                                     stringsAsFactors=FALSE)
             dd <- lapply(lapply(anncol,`[`,1),
-                         function(x){Biostrings:::strsplit(x,'\\|')[[1]]})
+                         function(x){Biostrings::strsplit(x,'\\|')[[1]]})
             ncls <- max(unlist(lapply(dd, length)))
             
             yy = data.frame(suppressWarnings(
