@@ -6,9 +6,16 @@
 objects to a data frame}
 \source{
 https://gist.github.com/zhujack/849b75f5a8305edaeca1001dfb9c3fe9
+
+\code{
+vcf_file <- system.file("extdata", "ALSvcf.vcf",
+                        package = "MungeSumstats")
+vcf <- VariantAnnotation::readVcf(file = vcf_file)
+vcf_df <- vcf2df(vcf = vcf)
+}
 }
 \usage{
-vcf2df(v, expand = TRUE)
+vcf2df(vcf, expand = TRUE)
 }
 \description{
 Function to convert VariantAnnotation CollapsedVCF/ExpandedVCF

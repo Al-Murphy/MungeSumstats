@@ -285,9 +285,14 @@ validate_parameters <- function(path,
     
     if(tabix_index && 
        any(!requireNamespace("Rsamtools", quietly = TRUE),
-           !requireNamespace("seqminer", quietly = TRUE)) ){
-        tbx_msg <- paste(
-            "Rsamtools and seqminer must be installed when tabix_index=TRUE.")
+           !requireNamespace("seqminer", quietly = TRUE),
+           !requireNamespace("MatrixGenerics", quietly = TRUE)) ){
+        pkgs <- c("Rsamtools","seqminer","MatrixGenerics")
+        missing_pkgs <- pkgs[!pkgs %in% rownames(utils::installed.packages())]
+        tbx_msg <- paste0(
+            "The following packages must be installed when tabix_index=TRUE:\n",
+            paste(" -",missing_pkgs,
+                  collapse = "\n"))
         stop(tbx_msg)
     }
 }
