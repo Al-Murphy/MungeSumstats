@@ -15,6 +15,7 @@ remove_nonstandard_vcf_cols <- function(sample_id,
     if(standardise_headers){
         sumstats_file <- standardise_sumstats_column_headers_crossplatform(
             sumstats_dt = sumstats_file)$sumstats_dt
+        sample_id <- toupper(sample_id)
     }
     keep_cols <- c("CHROM", "POS", "ID", "REF", "ALT", "INFO", sample_id,
                    sumstatsColHeaders$Corrected)
