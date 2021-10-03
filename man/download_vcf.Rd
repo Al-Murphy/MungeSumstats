@@ -20,14 +20,16 @@ download_vcf(
 \item{vcf_dir}{Where to download the original VCF from Open GWAS.
 \emph{WARNING:} This is set to \code{tempdir()} by default.
 This means the raw (pre-formatted) VCFs be deleted upon ending the R session.
-Change this to keep the raw VCF file on disk (e.g. \code{vcf_dir="./raw_vcf"}).}
+Change this to keep the raw VCF file on disk
+(e.g. \code{vcf_dir="./raw_vcf"}).}
 
 \item{vcf_download}{Download the original VCF from Open GWAS.}
 
 \item{download_method}{\code{"axel"} (multi-threaded) or
 \code{"download.file"} (single-threaded) .}
 
-\item{force_new}{Overwrite a previously downloaded VCF with the same path name.}
+\item{force_new}{Overwrite a previously downloaded VCF
+with the same path name.}
 
 \item{quiet}{Run quietly.}
 

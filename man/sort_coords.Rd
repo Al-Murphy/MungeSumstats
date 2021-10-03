@@ -11,7 +11,8 @@ sort_coords(sumstats_dt, sort_coordinates = TRUE)
 
 \item{sort_coords}{Whether to sort by coordinates.}
 
-\item{make_ordered}{Make CHR into an ordered factor to ensure they go from 1-22, X, Y.}
+\item{make_ordered}{Make CHR into an ordered factor to ensure
+they go from 1-22, X, Y.}
 }
 \value{
 Sorted sumstats_dt

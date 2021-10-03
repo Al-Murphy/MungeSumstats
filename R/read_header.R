@@ -13,8 +13,10 @@ read_header <- function(path,
                         n = 2,
                         skip_vcf_metadata = FALSE) {
     message("Reading header.")
-    vcf_suffixes <- supported_suffixes(tabular = FALSE, tabular_compressed = FALSE)
-    if (startsWith(path, "https://gwas.mrcieu.ac.uk") | any(endsWith(path, vcf_suffixes))) {
+    vcf_suffixes <- supported_suffixes(tabular = FALSE,
+                                       tabular_compressed = FALSE)
+    if (startsWith(path, "https://gwas.mrcieu.ac.uk") | 
+        any(endsWith(path, vcf_suffixes))) {
         if (skip_vcf_metadata) {
             # gr <- GenomicRanges::GRanges(seqnames = 1, ranges = 1:10000)
             # param <- VariantAnnotation::ScanVcfParam(save_path, which=gr)
@@ -29,7 +31,8 @@ read_header <- function(path,
         }
     } else {
         header <- readLines(con = path, n = n)
-        # Deal with strange, not recognised characters in header like '\' e.g 'xa6\xc2'
+        # Deal with strange, not recognised characters in header
+        # like '\' e.g 'xa6\xc2'
         header[[1]] <- iconv(enc2utf8(header[[1]]), sub = "byte")
     }
     return(header)

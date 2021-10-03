@@ -5,6 +5,8 @@
 * `validate_parameters` can now handle `ref_genome=NULL`  
 * *.tsv.gz* no longer assigned suffix *.tsv*.   
 * Made code width <80 characters.  
+* Changed `to_GRanges`/`to_GRanges` functions to all-lowercase functions
+(for consistency with other functions). 
 
 ### New Features
 

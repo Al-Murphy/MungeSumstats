@@ -1,15 +1,19 @@
 
 ################################################################
-## Functions extracted from ieugwasr because Bioconductor doesn't allow any remotes.
-## All code in this file was written by the ieugwasr team and is available on GitHub:
+## Functions extracted from ieugwasr because Bioconductor doesn't
+## allow any remotes.
+## All code in this file was written by the ieugwasr team 
+##  and is available on GitHub:
 ## https://github.com/MRCIEU/ieugwasr
 ################################################################
 
 
 #' Get list of studies with available GWAS summary statistics through API
 #'
-#' @param id List of MR-Base IDs to retrieve. If NULL (default) retrieves all available datasets
-#' @param access_token Google OAuth2 access token. Used to authenticate level of access to data
+#' @param id List of MR-Base IDs to retrieve. If NULL (default) 
+#' retrieves all available datasets
+#' @param access_token Google OAuth2 access token. 
+#' Used to authenticate level of access to data
 #'
 #' @importFrom magrittr %>%
 #' @keywords internal
@@ -18,9 +22,12 @@ gwasinfo <- function(id = NULL, access_token = check_access_token()) {
     id <- legacy_ids(id)
     if (!is.null(id)) {
         stopifnot(is.vector(id))
-        out <- api_query("gwasinfo", query = list(id = id), access_token = access_token) %>% get_query_content()
+        out <- api_query("gwasinfo", 
+                         query = list(id = id),
+                         access_token = access_token) %>% get_query_content()
     } else {
-        out <- api_query("gwasinfo", access_token = access_token) %>% get_query_content()
+        out <- api_query("gwasinfo", access_token = access_token) %>%
+            get_query_content()
     }
     if (length(out) == 0) {
         return(dplyr::tibble())
@@ -40,14 +47,18 @@ gwasinfo <- function(id = NULL, access_token = check_access_token()) {
 #' @return access token string
 #' @importFrom googleAuthR gar_auth
 get_access_token <- function() {
-    message("Using access token. For info on how this is used see logging_info()")
+    msg <- "Using access token. For info on how this is used see logging_info()"
+    message(msg)
     tf <- basename(tempfile())
     check <- suppressWarnings(file.create(tf))
     if (!check) {
         stop(
-            "You are currently in a directory which doesn't have write access.\n",
-            "  In order to authenticate we need to store the credentials in a file called '.httr-oauth'.\n",
-            "  Please setwd() to a different directory where you have write access."
+            "You are currently in a directory",
+            " which doesn't have write access.\n",
+            "  In order to authenticate we need to store",
+            " the credentials in a file called '.httr-oauth'.\n",
+            "  Please setwd() to a different directory",
+            " where you have write access."
         )
     } else {
         unlink(tf)
@@ -62,7 +73,9 @@ get_access_token <- function() {
 
 #' Check if authentication has been made
 #'
-#' If a call to get_access_token() has been made then it will have generated mrbase.oauth. Pass the token if it is present, if not, return NULL and do not authenticate.
+#' If a call to get_access_token() has been made then it will 
+#' have generated mrbase.oauth. Pass the token if it is present, 
+#' if not, return NULL and do not authenticate.
 #'
 #' @keywords internal
 #' @return NULL or access_token depending on current authentication state
@@ -117,8 +130,13 @@ legacy_ids <- function(x) {
 
     overallindex <- y != x
     if (any(overallindex)) {
-        message("Deprecated IDs being used? Detected numeric IDs. Trying to fix, but please note the changes below for future.")
-        message(paste(y[overallindex], " -> ", x[overallindex], collapse = "\n"))
+        msg <- paste(
+            "Deprecated IDs being used? Detected numeric IDs.",
+            "Trying to fix, but please note the changes below for future."
+            )
+        message(msg)
+        message(paste(y[overallindex], " -> ", x[overallindex],
+                      collapse = "\n"))
     }
     return(x)
 }
@@ -129,27 +147,40 @@ legacy_ids <- function(x) {
 
 #' Wrapper for sending queries and payloads to API
 #'
-#' There are a number of different GET and POST endpoints in the GWAS database API. This is a generic way to access them
+#' There are a number of different GET and POST endpoints 
+#' in the GWAS database API. This is a generic way to access them
 #'
-#' @param path Either a full query path (e.g. for get) or an endpoint (e.g. for post) queries
-#' @param query If post query, provide a list of arguments as the payload. NULL by default
-#' @param access_token Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication
+#' @param path Either a full query path (e.g. for get) or 
+#' an endpoint (e.g. for post) queries
+#' @param query If post query, provide a list of arguments as the payload.
+#'  NULL by default
+#' @param access_token Google OAuth2 access token. Used to authenticate
+#'  level of access to data. By default, checks if already authenticated 
+#'  through \code{get_access_token} and if not then does 
+#'  not perform authentication.
 #' @param method GET (default) or POST, DELETE etc
 #' @param silent TRUE/FALSE to be passed to httr call. TRUE by default
 #' @param encode Default = json, see httr::POST for options
-#' @param timeout Default = 300, avoid increasing this, preferentially simplify the query first.
+#' @param timeout Default = 300, avoid increasing this, 
+#' preferentially simplify the query first.
 #'
 #' @keywords internal
 #' @return httr response object
 #' @importFrom httr add_headers timeout DELETE GET POST
-api_query <- function(path, query = NULL, access_token = check_access_token(),
-                      method = "GET", silent = TRUE, encode = "json", timeout = 300) {
+api_query <- function(path, 
+                      query = NULL, 
+                      access_token = check_access_token(),
+                      method = "GET", 
+                      silent = TRUE, 
+                      encode = "json", 
+                      timeout = 300) {
     ntry <- 0
     ntries <- 5
     headers <- httr::add_headers(
         # 'Content-Type'='application/json; charset=UTF-8',
         "X-Api-Token" = access_token,
-        "X-Api-Source" = ifelse(is.null(options()$mrbase.environment), "R/TwoSampleMR", "mr-base-shiny")
+        "X-Api-Source" = ifelse(is.null(options()$mrbase.environment),
+                                "R/TwoSampleMR", "mr-base-shiny")
     )
 
     retry_flag <- FALSE
@@ -195,7 +226,10 @@ api_query <- function(path, query = NULL, access_token = check_access_token(),
         }
         if (!"try-error" %in% class(r)) {
             if (r$status_code >= 500 & r$status_code < 600) {
-                message("Server code: ", r$status_code, "; Server is possibly experiencing traffic, trying again...")
+                message("Server code: ",
+                        r$status_code, 
+                        "; Server is possibly experiencing traffic,",
+                        " trying again...")
                 retry_flag <- TRUE
                 Sys.sleep(1)
             } else {
@@ -248,15 +282,19 @@ api_query <- function(path, query = NULL, access_token = check_access_token(),
 #' @importFrom jsonlite fromJSON
 #' @importFrom httr content status_code
 get_query_content <- function(response) {
-    if (httr::status_code(response) >= 200 & httr::status_code(response) < 300) {
-        o <- jsonlite::fromJSON(httr::content(response, "text", encoding = "UTF-8"))
+    if (httr::status_code(response) >= 200 &
+        httr::status_code(response) < 300) {
+        o <- jsonlite::fromJSON(
+            httr::content(response, "text", encoding = "UTF-8"))
         if ("eaf" %in% names(o)) {
             o[["eaf"]] <- as.numeric(o[["eaf"]])
         }
         return(o)
     } else {
         return(response)
-        # stop("error code: ", httr::status_code(response), "\n  message: ", jsonlite::fromJSON(httr::content(response, "text", encoding='UTF-8')))
+        # stop("error code: ", httr::status_code(response),
+        #"\n  message: ", 
+        #jsonlite::fromJSON(httr::content(response, "text", encoding='UTF-8')))
     }
 }
 
@@ -269,7 +307,8 @@ get_query_content <- function(response) {
 #'
 #' @return No return
 #'
-#' @param where Which API to use. Choice between "local", "release", "test". Default = "local"
+#' @param where Which API to use. 
+#' Choice between "local", "release", "test". Default = "local"
 #'
 #' @keywords internal
 select_api <- function(where = "public") {

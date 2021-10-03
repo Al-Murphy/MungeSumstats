@@ -22,7 +22,8 @@ these columns will be in the formatted summary statistics returned. Default
 is FALSE.}
 }
 \value{
-list containing sumstats_dt, the modified summary statistics data table object
+list containing sumstats_dt,
+the modified summary statistics data table object
 }
 \description{
 Ensure that the p values are not 5e-324 or lower, if so set to 0

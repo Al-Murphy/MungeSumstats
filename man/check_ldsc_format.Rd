@@ -53,5 +53,6 @@ Linkage Disequilibrium SCore (LDSC) regression without the need
 to use their \code{munge_sumstats.py} script first.
 }
 \details{
-\href{https://github.com/bulik/ldsc/wiki/Summary-Statistics-File-Format}{LDSC documentation}.
+\href{https://github.com/bulik/ldsc/wiki/Summary-Statistics-File-Format}{
+LDSC documentation}.
 }

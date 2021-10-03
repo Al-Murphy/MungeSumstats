@@ -10,7 +10,8 @@
 #' includes a field denoting SNP allele flipping (flipped). **Note**
 #' these columns will be in the formatted summary statistics returned. Default
 #' is FALSE.
-#' @return list containing sumstats_dt, the modified summary statistics data table object
+#' @returns list containing sumstats_dt, 
+#' the modified summary statistics data table object
 #' @keywords internal
 #' @importFrom data.table :=
 check_small_p_val <- function(sumstats_dt, path, convert_small_p,
@@ -27,12 +28,15 @@ check_small_p_val <- function(sumstats_dt, path, convert_small_p,
                 num_check <- TRUE
             }
         } else { # char check
-            max_minus_power <- max(as.numeric(gsub(".*-", "", sumstats_dt$P)))
+            max_minus_power <- max(
+                as.numeric(gsub(".*-", "", sumstats_dt$P)),
+                na.rm = TRUE)
             if (max_minus_power >= 324) {
                 char_check <- TRUE
             }
         }
-        if (char_check | num_check) { # check if any smaller or equal to 5e-324 limit
+        if (char_check | num_check) { 
+            # check if any smaller or equal to 5e-324 limit
             msg <- paste0(
                 "There are existing p-values as low as 5e-324 which ",
                 "LDSC/MAGMA may not be able to handle. "

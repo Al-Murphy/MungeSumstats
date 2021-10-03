@@ -40,6 +40,8 @@ path <- system.file("extdata", "eduAttainOkbay.txt",
     package = "MungeSumstats"
 )
 eduAttainOkbay <- read_sumstats(path = path)
-write_sumstats(sumstats_dt = eduAttainOkbay,
-               save_path = tempfile(fileext = ".tsv.gz"))
+write_sumstats(
+    sumstats_dt = eduAttainOkbay,
+    save_path = tempfile(fileext = ".tsv.gz")
+)
 }

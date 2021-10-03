@@ -1,5 +1,3 @@
-
-
 #' downloader wrapper
 #'
 #' R wrapper for \code{"axel"} (multi-threaded) and

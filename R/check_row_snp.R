@@ -30,7 +30,8 @@ check_row_snp <- function(sumstats_dt, path, log_folder_ind, check_save_out,
         # If user wants log, save it to there
         if (log_folder_ind) {
             name <- "snp_missing_rs"
-            name <- get_unique_name_log_file(name = name, log_files = log_files)
+            name <- get_unique_name_log_file(name = name,
+                                             log_files = log_files)
             write_sumstats(
                 sumstats_dt = sumstats_dt[!grep("^rs", SNP), ],
                 save_path =
@@ -44,7 +45,8 @@ check_row_snp <- function(sumstats_dt, path, log_folder_ind, check_save_out,
                 nThread = nThread
             )
             log_files[[name]] <-
-                paste0(check_save_out$log_folder, "/", name, check_save_out$extension)
+                paste0(check_save_out$log_folder, "/",
+                       name, check_save_out$extension)
         }
         sumstats_dt <- sumstats_dt[grep("^rs", SNP), ]
 

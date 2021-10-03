@@ -33,7 +33,7 @@ write_sumstats <- function(sumstats_dt,
         )
     }
     if (write_vcf) {
-        vr <- to_VRanges(sumstats_dt = sumstats_dt)
+        vr <- to_vranges(sumstats_dt = sumstats_dt)
         if (tabix_index) {
             suffixes <- supported_suffixes(
                 tabular = FALSE,

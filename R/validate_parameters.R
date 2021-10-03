@@ -35,7 +35,8 @@ validate_parameters <- function(path,
                                 log_folder_ind,
                                 log_mungesumstats_msgs,
                                 mapping_file) {
-    # Checking if the file exists should happen first - can pass dt/df of sumstats
+    # Checking if the file exists should happen first - 
+    # can pass dt/df of sumstats
     pth_msg <- paste0(
         "Path to GWAS sumstats is not valid, pass a file path or a",
         "dataframe/data.table object to the path parameter"

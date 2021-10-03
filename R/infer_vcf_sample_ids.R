@@ -5,10 +5,11 @@
 #' @keywords internal
 infer_vcf_sample_ids <- function(sample_id = NULL,
                                  sumstats_file) {
-    # sometimes name for sample taken from VCF can be wrong and not match the col
-    # if this is the case also infer from the column
+    # sometimes name for sample taken from VCF can be wrong 
+    # and not match the col. If this is the case also infer from the column.
     if (is.null(sample_id) || !(sample_id %in% names(sumstats_file))) {
-        idcol_index <- grep("FORMAT", colnames(sumstats_file), ignore.case = TRUE)
+        idcol_index <- grep("FORMAT", colnames(sumstats_file),
+                            ignore.case = TRUE)
         if (any(length(colnames(sumstats_file)) >= idcol_index)) {
             sample_id <-
                 colnames(sumstats_file)[seq(
@@ -20,7 +21,8 @@ infer_vcf_sample_ids <- function(sample_id = NULL,
                 paste(sample_id, collapse = ", ")
             )
         } else {
-            stop("Sample ID(s) could not be extracted from VCF header or inferred from data colnames.")
+            stop("Sample ID(s) could not be extracted from VCF",
+                 "header or inferred from data colnames.")
         }
     }
     return(sample_id)

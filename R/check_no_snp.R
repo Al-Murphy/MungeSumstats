@@ -17,9 +17,11 @@ check_no_snp <- function(sumstats_dt, path, ref_genome, imputation_ind,
                          log_folder_ind, check_save_out, tabix_index, nThread,
                          log_files, verbose = TRUE) {
     SNP <- CHR <- i.RefSNP_id <- IMPUTATION_SNP <- BP <- NULL
-    # If CHR and BP are present BUT not SNP then need to find the relevant SNP ids
+    # If CHR and BP are present BUT not SNP then need 
+    # to find the relevant SNP ids
     col_headers <- names(sumstats_dt)
-    if (sum(c("CHR", "BP") %in% col_headers) == 2 & sum("SNP" %in% col_headers) == 0) {
+    if (sum(c("CHR", "BP") %in% col_headers) == 2 &
+        sum("SNP" %in% col_headers) == 0) {
         msg <- "SNP"
         if (isFALSE(verbose)) {
             msg <- NULL
@@ -56,7 +58,8 @@ check_no_snp <- function(sumstats_dt, path, ref_genome, imputation_ind,
         # If user wants log, save it to there
         if (log_folder_ind) {
             name <- "snp_not_found_from_chr_bp"
-            name <- get_unique_name_log_file(name = name, log_files = log_files)
+            name <- get_unique_name_log_file(name = name,
+                                             log_files = log_files)
             write_sumstats(
                 sumstats_dt =
                     sumstats_dt[!complete.cases(sumstats_dt[, c("SNP")]), ],
@@ -71,7 +74,8 @@ check_no_snp <- function(sumstats_dt, path, ref_genome, imputation_ind,
                 nThread = nThread
             )
             log_files[[name]] <-
-                paste0(check_save_out$log_folder, "/", name, check_save_out$extension)
+                paste0(check_save_out$log_folder, "/",
+                       name, check_save_out$extension)
         }
         sumstats_dt <- sumstats_dt[complete.cases(sumstats_dt[, "SNP"]), ]
         # move SNP to start
@@ -83,8 +87,10 @@ check_no_snp <- function(sumstats_dt, path, ref_genome, imputation_ind,
             sumstats_dt[, IMPUTATION_SNP := TRUE]
         }
 
-        return(list("sumstats_dt" = sumstats_dt, "log_files" = log_files))
+        return(list("sumstats_dt" = sumstats_dt,
+                    "log_files" = log_files))
     } else {
-        return(list("sumstats_dt" = sumstats_dt, "log_files" = log_files))
+        return(list("sumstats_dt" = sumstats_dt,
+                    "log_files" = log_files))
     }
 }

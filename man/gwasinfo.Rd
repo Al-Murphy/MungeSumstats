@@ -7,9 +7,11 @@
 gwasinfo(id = NULL, access_token = check_access_token())
 }
 \arguments{
-\item{id}{List of MR-Base IDs to retrieve. If NULL (default) retrieves all available datasets}
+\item{id}{List of MR-Base IDs to retrieve. If NULL (default)
+retrieves all available datasets}
 
-\item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data}
+\item{access_token}{Google OAuth2 access token.
+Used to authenticate level of access to data}
 }
 \value{
 Dataframe of details for all available studies

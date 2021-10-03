@@ -7,7 +7,8 @@
 check_signed_col(sumstats_dt)
 }
 \arguments{
-\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
+\item{sumstats_dt}{data table obj of the summary statistics
+file for the GWAS}
 }
 \value{
 null

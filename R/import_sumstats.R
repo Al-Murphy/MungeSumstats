@@ -2,17 +2,22 @@
 #'
 #' Requires internet access to run.
 #'
-#' @param ids List of Open GWAS study IDs (e.g. \code{c("prot-a-664", "ieu-b-4760")}).
+#' @param ids List of Open GWAS study IDs 
+#' (e.g. \code{c("prot-a-664", "ieu-b-4760")}).
 #' @param vcf_download Download the original VCF from Open GWAS.
 #' @param vcf_dir Where to download the original VCF from Open GWAS.
 #' \emph{WARNING:} This is set to \code{tempdir()} by default.
 #' This means the raw (pre-formatted) VCFs be deleted upon ending the R session.
-#' Change this to keep the raw VCF file on disk (e.g. \code{vcf_dir="./raw_vcf"}).
+#' Change this to keep the raw VCF file on disk 
+#' (e.g. \code{vcf_dir="./raw_vcf"}).
 #' @param save_dir Directory to save formatted summary statistics in.
-#' @param force_new_vcf Overwrite a previously downloaded VCF with the same path name.
-#' @param parallel_across_ids If \code{parallel_across_ids=TRUE} and \code{nThread>1},
+#' @param force_new_vcf Overwrite a previously downloaded VCF 
+#' with the same path name.
+#' @param parallel_across_ids If \code{parallel_across_ids=TRUE} 
+#' and \code{nThread>1}, 
 #' then each ID in \code{ids} will be processed in parallel.
-#' @param ... Additional arguments to be passed to \code{MungeSumstats::format_sumstats}.
+#' @param ... Additional arguments passed to 
+#' \link[MungeSumstats]{format_sumstats}.
 #' @inheritParams format_sumstats
 #' @inheritParams downloader
 #'

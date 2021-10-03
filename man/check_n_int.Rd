@@ -21,7 +21,8 @@ these columns will be in the formatted summary statistics returned. Default
 is FALSE.}
 }
 \value{
-list containing sumstats_dt, the modified summary statistics data table object
+list containing sumstats_dt, the modified summary
+statistics data table object.
 }
 \description{
 Ensure that the N column is all integers

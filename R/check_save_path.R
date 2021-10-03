@@ -114,9 +114,11 @@ check_save_path <- function(save_path,
     }
     #### Make sure dir exists
     if (is.character(save_path)) {
-        dir.create(dirname(save_path), showWarnings = FALSE, recursive = TRUE)
+        dir.create(dirname(save_path),
+                   showWarnings = FALSE, recursive = TRUE)
     }
-    dir.create(log_folder, showWarnings = FALSE, recursive = TRUE)
+    dir.create(log_folder,
+               showWarnings = FALSE, recursive = TRUE)
 
     message("Formatted summary statistics will be saved to ==> ", save_path)
     if (log_folder_ind) {

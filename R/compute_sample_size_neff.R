@@ -42,12 +42,17 @@ compute_sample_size_neff <- function(sumstats_dt,
                 sumstats_dt[, P_ldsc := N_CAS / N_ldsc]
 
                 sumstats_dt[, eval(N_col) :=
-                    as.integer(N_ldsc * P_ldsc / mean(P_ldsc[N_ldsc == max(N_ldsc)]))]
+                    as.integer(N_ldsc * P_ldsc / 
+                                   mean(P_ldsc[N_ldsc == max(
+                                       N_ldsc, na.rm = TRUE)],
+                                        na.rm=TRUE ))]
                 ### Drop tmp cols
                 sumstats_dt[, c("N_ldsc", "P_ldsc") := NULL]
                 ### All in one go *but super confusing a liable to typos!
-                # sumstats_dt[,Neff:=as.integer((N_CAS+N_CON) * (N_CAS/(N_CAS+N_CON)) /
-                #        mean((N_CAS/(N_CAS+N_CON))[(N_CAS+N_CON) =max(N_CAS+N_CON)]))]
+                # sumstats_dt[,Neff:=as.integer((N_CAS+N_CON) *
+                # (N_CAS/(N_CAS+N_CON)) / 
+                # mean((N_CAS/(N_CAS+N_CON))[(N_CAS+N_CON)
+                # =max(N_CAS+N_CON)]))]
             }
         } else if (method == "metal") {
             if (add_col(sumstats_dt, N_col, force_new)) {

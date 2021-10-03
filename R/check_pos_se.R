@@ -22,7 +22,8 @@ check_pos_se <- function(sumstats_dt, path, pos_se, log_folder_ind,
             # If user wants log, save it to there
             if (log_folder_ind) {
                 name <- "se_neg"
-                name <- get_unique_name_log_file(name = name, log_files = log_files)
+                name <- get_unique_name_log_file(name = name,
+                                                 log_files = log_files)
                 write_sumstats(
                     sumstats_dt = sumstats_dt[SE <= 0, ],
                     save_path =

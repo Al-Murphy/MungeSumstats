@@ -7,7 +7,8 @@
 select_api(where = "public")
 }
 \arguments{
-\item{where}{Which API to use. Choice between "local", "release", "test". Default = "local"}
+\item{where}{Which API to use.
+Choice between "local", "release", "test". Default = "local"}
 }
 \value{
 No return

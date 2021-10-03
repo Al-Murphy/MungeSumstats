@@ -29,7 +29,8 @@ get_genome_build <- function(sumstats,
                              standardise_headers = TRUE,
                              mapping_file = sumstatsColHeaders,
                              header_only = FALSE) {
-    seqnames <- CHR <- SNP <- BP <- NULL ### Add this to avoid confusing BiocCheck
+    ### Add this to avoid confusing BiocCheck
+    seqnames <- CHR <- SNP <- BP <- NULL 
 
     message("Inferring genome build.")
     # if not a data.table, must be a path
@@ -40,7 +41,8 @@ get_genome_build <- function(sumstats,
         }
         if (header_only) {
             # Read in N lines of the data
-            message("Reading in only the first ", sampled_snps, " rows of sumstats.")
+            message("Reading in only the first ",
+                    sampled_snps, " rows of sumstats.")
             sumstats <- read_sumstats(
                 path = sumstats,
                 nThread = nThread,
@@ -57,8 +59,8 @@ get_genome_build <- function(sumstats,
         # ensure data table obj
         sumstats <- data.table::setDT(sumstats)
     }
-    # need SNP ID column (RS ID) CHR and BP (POS) to infer build - check these are
-    # present, considering all known names
+    # need SNP ID column (RS ID) CHR and BP (POS) to infer build 
+    # - check these are present, considering all known names
     if (standardise_headers) {
         sumstats_return <-
             standardise_sumstats_column_headers_crossplatform(
@@ -85,9 +87,12 @@ get_genome_build <- function(sumstats,
     sumstats <- sumstats[complete.cases(SNP, BP, CHR)]
     err_msg2 <-
         paste0(
-            "SNP ID column (RS ID), CHR and BP (POSITION) columns are needed to",
-            " infer the genome build. These contain too many\nmissing values in",
-            " your dataset to be used. Please specify the genome build manually",
+            "SNP ID column (RS ID), CHR and BP (POSITION)",
+            "columns are needed to",
+            " infer the genome build.",
+            "These contain too many\nmissing values in",
+            " your dataset to be used.",
+            "Please specify the genome build manually",
             " to run format_sumstats()"
         )
     # also remove common incorrect formatting of SNP
@@ -97,7 +102,8 @@ get_genome_build <- function(sumstats,
     # NOT ENOUGH DATA TO INFER
     nrow_clean <- nrow(sumstats)
     size_okay <- FALSE
-    if (nrow_clean > sampled_snps || (nrow(sumstats) != 0 && nrow_clean / nrow_org > .5)) {
+    if (nrow_clean > sampled_snps || (nrow(sumstats) != 0 && 
+                                      nrow_clean / nrow_org > .5)) {
         size_okay <- TRUE
     }
     if (!size_okay) {

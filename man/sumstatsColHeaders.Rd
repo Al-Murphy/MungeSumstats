@@ -14,11 +14,13 @@ The code to prepare the .Rda file file from the marker file is:
 data("sumstatsColHeaders")
 # Make additions to sumstatsColHeaders using github version of MungeSumstats-
 # shown is an example of adding columns for Standard Error (SE)
-#se_cols <- data.frame("Uncorrected"=c("SE","se","STANDARD.ERROR","STANDARD_ERROR","STANDARD-ERROR"),
-#                      "Corrected"=rep("SE",5))
+#se_cols <- data.frame("Uncorrected"=c("SE","se","STANDARD.ERROR",
+#                                      "STANDARD_ERROR","STANDARD-ERROR"),
+#                     "Corrected"=rep("SE",5))
 #sumstatsColHeaders <- rbind(sumstatsColHeaders,se_cols)
 #Once additions are made, order & save the new mapping dataset
-#now sort ordering -important for logic that uncorrected=corrected comes first
+#now sort ordering -important for logic that 
+# uncorrected=corrected comes first
 sumstatsColHeaders$ordering <-
     sumstatsColHeaders$Uncorrected==sumstatsColHeaders$Corrected
 sumstatsColHeaders <-

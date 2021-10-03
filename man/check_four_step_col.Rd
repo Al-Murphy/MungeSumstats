@@ -12,7 +12,8 @@ check_four_step_col(sumstats_dt, path)
 \item{path}{Filepath for the summary statistics file to be formatted}
 }
 \value{
-list containing sumstats_dt, the modified summary statistics data table object
+list containing sumstats_dt, the modified
+summary statistics data table object
 }
 \description{
 Ensure that CHR:BP:A2:A1 aren't merged into 1 column

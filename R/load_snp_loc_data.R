@@ -1,7 +1,8 @@
 #' Loads the SNP locations and alleles for Homo sapiens extracted from
 #' NCBI dbSNP Build 144. Reference genome version is dependent on user input.
 #'
-#' @param ref_genome name of the reference genome used for the GWAS (GRCh37 or GRCh38)
+#' @param ref_genome name of the reference genome used for the GWAS 
+#' (GRCh37 or GRCh38)
 #' @param msg Optional name of the column missing from the dataset in question
 #' @return SNP_LOC_DATA SNP positions and alleles for Homo sapiens extracted
 #' from NCBI dbSNP Build 144
@@ -9,8 +10,6 @@
 #' @examples
 #' SNP_LOC_DATA <- load_snp_loc_data("GRCH37")
 #' @export
-# #' @importFrom SNPlocs.Hsapiens.dbSNP144.GRCh37 SNPlocs.Hsapiens.dbSNP144.GRCh37
-# #' @importFrom SNPlocs.Hsapiens.dbSNP144.GRCh38 SNPlocs.Hsapiens.dbSNP144.GRCh38
 load_snp_loc_data <- function(ref_genome,
                               msg = NULL) {
     ref_genome <- toupper(ref_genome)

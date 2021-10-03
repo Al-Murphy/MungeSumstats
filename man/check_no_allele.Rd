@@ -59,7 +59,8 @@ is TRUE.}
 A list containing two data tables:
 \itemize{
 \item \code{sumstats_dt}: the modified summary statistics data table object
-\item \code{rsids}: snpsById, filtered to SNPs of interest if loaded already. Or else NULL
+\item \code{rsids}: snpsById, filtered to SNPs of interest
+if loaded already. Or else NULL.
 \item \code{allele_flip_check}: does the dataset require allele flip check
 \item \code{log_files}: log file list
 \item \code{bi_allelic_filter}: should multi-allelic SNPs be filtered out

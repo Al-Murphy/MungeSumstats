@@ -58,7 +58,8 @@ after optimizing for speed using \code{data.table}:
 
 \code{sumstats_dt[,Z:=sign(BETA)*sqrt(stats::qchisq(P,1,lower=FALSE))]}
 
-\emph{NOTE}: \code{compute_z} is set to \code{TRUE} by default to ensure standardisation
+\emph{NOTE}: \code{compute_z} is set to \code{TRUE} by
+default to ensure standardisation
 of the "Z" column (which can be computed differently in different datasets).
 }
 \keyword{internal}

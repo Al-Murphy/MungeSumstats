@@ -22,12 +22,14 @@ read_vcf <- function(path,
                      save_path = tempfile(),
                      nrows = Inf) {
     ########## OTHER VCF READERS/WRITERS ###########
-    # 1. [vcfR](https://cran.r-project.org/web/packages/vcfR/vcfR.pdf)
-    # 2. [VariantAnnotation](https://bioconductor.org/packages/release/bioc/html/VariantAnnotation.html)
-    # 3. [seqminer](https://cran.r-project.org/web/packages/seqminer/index.html)
-    # 4. [Rsamtools](https://bioconductor.org/packages/release/bioc/html/Rsamtools.html)
+    # 1. vcfR
+    # 2. VariantAnnotation
+    # 3. seqminer
+    # 4. Rsamtools
+    # 5. echotabix (GH repo: RajLabMSSM/echotabix)
     ##################################
-    # save(path, nThread, temp_save, keep_extra_cols, file = "~/Downloads/temp.RData")
+    save(path, nThread, temp_save, keep_extra_cols,
+         file = "~/Downloads/temp.RData")
 
     ### Add this to avoid confusing BiocCheck
     INFO <- Pval <- P <- LP <- AF <- NULL
@@ -120,7 +122,8 @@ read_vcf <- function(path,
                     find_splits
                 )) != length(format) - 1)
             # get char pos for imputation
-            find_splits <- unlist(lapply(find_splits, function(x) x[AF_pos - 1]))
+            find_splits <- unlist(lapply(find_splits,
+                                         function(x) x[AF_pos - 1]))
             # add to dt
             sumstats_file[, find_splits := find_splits]
             # Now update these by imputing 0 for AF

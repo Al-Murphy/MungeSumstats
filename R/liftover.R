@@ -14,7 +14,10 @@
 #' @importFrom rtracklayer liftOver width strand end
 #' @importFrom GenomeInfoDb seqnames
 #' @importFrom data.table data.table
-liftover <- function(sumstats_dt, convert_ref_genome, ref_genome, imputation_ind,
+liftover <- function(sumstats_dt, 
+                     convert_ref_genome, 
+                     ref_genome, 
+                     imputation_ind,
                      verbose = TRUE) {
     IMPUTATION_gen_build <- NULL
     # check it's necessary i.e. the desired ref genome isn't the current one

@@ -19,12 +19,14 @@ import_sumstats(
 )
 }
 \arguments{
-\item{ids}{List of Open GWAS study IDs (e.g. \code{c("prot-a-664", "ieu-b-4760")}).}
+\item{ids}{List of Open GWAS study IDs
+(e.g. \code{c("prot-a-664", "ieu-b-4760")}).}
 
 \item{vcf_dir}{Where to download the original VCF from Open GWAS.
 \emph{WARNING:} This is set to \code{tempdir()} by default.
 This means the raw (pre-formatted) VCFs be deleted upon ending the R session.
-Change this to keep the raw VCF file on disk (e.g. \code{vcf_dir="./raw_vcf"}).}
+Change this to keep the raw VCF file on disk
+(e.g. \code{vcf_dir="./raw_vcf"}).}
 
 \item{vcf_download}{Download the original VCF from Open GWAS.}
 
@@ -37,14 +39,17 @@ Change this to keep the raw VCF file on disk (e.g. \code{vcf_dir="./raw_vcf"}).}
 
 \item{quiet}{Run quietly.}
 
-\item{force_new_vcf}{Overwrite a previously downloaded VCF with the same path name.}
+\item{force_new_vcf}{Overwrite a previously downloaded VCF
+with the same path name.}
 
 \item{nThread}{Number of threads to use for parallel processes.}
 
-\item{parallel_across_ids}{If \code{parallel_across_ids=TRUE} and \code{nThread>1},
+\item{parallel_across_ids}{If \code{parallel_across_ids=TRUE}
+and \code{nThread>1},
 then each ID in \code{ids} will be processed in parallel.}
 
-\item{...}{Additional arguments to be passed to \code{MungeSumstats::format_sumstats}.}
+\item{...}{Additional arguments passed to
+\link[MungeSumstats]{format_sumstats}.}
 }
 \value{
 Either a named list of data objects or paths,

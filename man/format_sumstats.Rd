@@ -139,13 +139,13 @@ along with effect and z-score columns like Beta? Default TRUE.}
 is TRUE.}
 
 \item{snp_ids_are_rs_ids}{Binary Should the supplied SNP ID's be assumed to
-be RS IDs. If not, imputation using the SNP ID for other columns like
+be RSIDs. If not, imputation using the SNP ID for other columns like
 base-pair position or chromosome will not be possible. If set to FALSE, the
 SNP RS ID will be imputed from the reference genome if possible. Default is
 TRUE.}
 
 \item{remove_multi_rs_snp}{Binary Sometimes summary statistics can have
-multiple RS IDs on one row (i.e. related to one SNP), for example
+multiple RSIDs on one row (i.e. related to one SNP), for example
 "rs5772025_rs397784053". This can cause an error so by default, the first
 RS ID will be kept and the rest removed e.g."rs5772025". If you want to just
 remove these SNPs entirely, set it to TRUE. Default is FALSE.}

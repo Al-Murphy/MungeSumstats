@@ -1,8 +1,10 @@
 #' Ensure that CHR:BP aren't merged into 1 column
 #'
-#' @param sumstats_dt data table obj of the summary statistics file for the GWAS
+#' @param sumstats_dt data table obj of the summary statistics
+#'  file for the GWAS
 #' @param path Filepath for the summary statistics file to be formatted
-#' @return list containing sumstats_dt, the modified summary statistics data table object
+#' @returns list containing sumstats_dt, the modified summary
+#'  statistics data table object
 #' @keywords internal
 #' @importFrom data.table tstrsplit
 #' @importFrom data.table :=
@@ -14,7 +16,8 @@ check_two_step_col <- function(sumstats_dt, path) {
     twoStepCol <- grep(".*:.*", row_of_data)
     # in case there are more than one column with ":", just take first one
     if (length(twoStepCol) > 1) {
-        # sort to get most recent genome build by default (cols: SNP_hg19, SNP_hg18)
+        # sort to get most recent genome build by 
+        # default (cols: SNP_hg19, SNP_hg18)
         keep_col <- sort(col_headers[twoStepCol], decreasing = TRUE)[1]
         drop_cols <- sort(col_headers[twoStepCol], decreasing = TRUE)[-1]
         msg <- paste0(
@@ -40,7 +43,8 @@ check_two_step_col <- function(sumstats_dt, path) {
         if (length(format) != 2) { # If neither found assign name
             format <- c("CHR", "BP")
         }
-        # keep ensures that even if certain rows have 3 values e.g.16:23609681:ID
+        # keep ensures that even if certain rows have 3 values
+        # e.g.16:23609681:ID
         # only first two taken
         sumstats_dt[, (format) := data.table::tstrsplit(get(keep_col),
             split = ":", fixed = TRUE,

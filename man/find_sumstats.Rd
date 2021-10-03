@@ -69,7 +69,8 @@ find_sumstats(
 \item{include_NAs}{Include datasets with missing metadata for size criteria
 (i.e. \code{min_sample_size}, \code{min_ncase}, or \code{min_ncontrol}).}
 
-\item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data}
+\item{access_token}{Google OAuth2 access token.
+Used to authenticate level of access to data}
 }
 \value{
 (Filtered) GWAS metadata table.
