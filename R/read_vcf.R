@@ -27,9 +27,7 @@ read_vcf <- function(path,
     # 3. seqminer
     # 4. Rsamtools
     # 5. echotabix (GH repo: RajLabMSSM/echotabix)
-    ##################################
-    save(path, nThread, temp_save, keep_extra_cols,
-         file = "~/Downloads/temp.RData")
+    ################################## 
 
     ### Add this to avoid confusing BiocCheck
     INFO <- Pval <- P <- LP <- AF <- NULL
@@ -59,44 +57,32 @@ read_vcf <- function(path,
     } else {
         tmpdir <- tempdir()
     }
-    sumstats_file <- data.table::fread(path,
-        nThread = nThread,
-        sep = "\t",
-        skip = "#CHR",
-        tmpdir = tmpdir,
-        nrows = nrows
-    )
-    sumstats_file <- sumstats_file %>% dplyr::rename(CHROM = "#CHROM")
+    
+    #### Read in the data contents of VCF ####
+    sumstats_file <- read_vcf_data(path = path, 
+                                   nThread = nThread, 
+                                   tmpdir = tmpdir,
+                                   nrows = nrows) 
     #### Infer sample ID from data colnames if necessary ####
     sample_id <- infer_vcf_sample_ids(
         sample_id = sample_id,
         sumstats_file = sumstats_file
     )
+    
+    is_parsed <- is_vcf_parsed(sumstats_file = sumstats_file, 
+                               verbose = TRUE)
+    sumstats_file <- remove_nonstandard_vcf_cols(
+        sample_id = sample_id, 
+        sumstats_file = sumstats_file,
+        keep_extra_cols = keep_extra_cols)
     ## Get format of FORMAT col for parsing
     format <- sumstats_file$FORMAT[1]
-    format_cols <- stringr::str_split(format, ":")[[1]]
-    # where INFO="." then can be missing AF**
-    # Remove unnecessary cols - need sample_id and FORMAT column
-    sumstats_file <- remove_nonstandard_vcf_cols(
-        sample_id = sample_id,
-        sumstats_file = sumstats_file,
-        keep_extra_cols = keep_extra_cols
-    )
-    # sample_id and FORMAT col will look like:
-    #               FORMAT                                           IEU-a-2
-    # 1: ES:SE:LP:AF:SS:ID  -0.0067:0.0145:0.193006:0.9322:109823:rs12565286
-    # Values stand for:
-    #>       Number Description
-    #>    ES A      Effect size estimate relative to the alternative allele
-    #>    SE A      Standard error of effect size estimate
-    #>    LP A      -log10 p-value for effect estimate
-    #>    AF A      Alternate allele frequency in the association study
-    #>    SS A      Sample size used to estimate genetic effect
-    #>    EZ A      Z-score provided if it was used to derive the EFFECT and...
-    #>    SI A      Accuracy score of summary data imputation
-    #>    NC A      Number of cases used to estimate genetic effect
-    #>    ID 1      Study variant identifier
-    #
+    if(!is_parsed && !is.null(format)){   
+        format_cols <- stringr::str_split(format, ":")[[1]] 
+    }else {
+        format_cols <- NULL
+    }
+    
 
     # if sample_id col present, split it out into separate columns
     message("Parsing '", sample_id, "' data column.")
@@ -154,12 +140,15 @@ read_vcf <- function(path,
                 }
             }
         }
-        sumstats_file[, (format_cols) :=
-            data.table::tstrsplit(get(sample_id),
-                split = ":", fixed = TRUE
-            )]
-        # Now remove sample_id column
-        sumstats_file[, (sample_id) := NULL]
+        if(sample_id %in% colnames(sumstats_file) && 
+           !is.null(format_cols)){
+            sumstats_file[, (format_cols) :=
+                              data.table::tstrsplit(get(sample_id),
+                                                    split = ":", fixed = TRUE
+                              )]
+            # Now remove sample_id column
+            sumstats_file[, (sample_id) := NULL]
+        }
     }
     # sumstatsColHeaders contains mappings for
     # ID to SNP

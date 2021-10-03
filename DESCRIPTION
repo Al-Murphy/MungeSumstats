@@ -68,6 +68,7 @@ Suggests:
     BiocStyle,
     covr,
     seqminer,
-    Rsamtools
+    Rsamtools,
+    MatrixGenerics
 Config/testthat/edition: 3
 VignetteBuilder: knitr

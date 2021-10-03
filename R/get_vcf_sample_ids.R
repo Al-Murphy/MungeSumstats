@@ -4,11 +4,11 @@
 #' @importFrom VariantAnnotation scanVcfHeader
 #' @return sample_id
 #' @keywords internal
-get_vcf_sample_ids <- function(path) {
-    if (startsWith(path, "https://gwas.mrcieu.ac.uk")) {
-        header <- VariantAnnotation::scanVcfHeader(file = path)
-        sample_id <- header@samples
-    } else {
+get_vcf_sample_ids <- function(path) { 
+    header <- VariantAnnotation::scanVcfHeader(file = path)
+    sample_id <- tryCatch(expr = {header@samples},
+                          error=function(e){NULL})
+    if (is.null(sample_id)) {
         header <- readLines(path, 100)
         sample_id <- header[grepl("^##SAMPLE", header)] # gets ##SAMPLE
         if (length(sample_id) == 0) {

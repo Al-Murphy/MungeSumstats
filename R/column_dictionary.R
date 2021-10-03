@@ -31,7 +31,7 @@ column_dictionary <- function(file_path) {
                           # fread won't be able to parse text
                           n = 2, 
                           skip_vcf_metadata = TRUE) 
-    cNames <- colnames(data.table::fread(text = header))
+    cNames <- colnames(header)
     colDict <- stats::setNames(seq(1, length(cNames)), cNames)
     return(colDict)
 }

@@ -30,15 +30,25 @@ read_sumstats <- function(path,
         is_vcf <- check_vcf(header = header)
         if (is_vcf) {
             message("Importing VCF file: ", path)
-            sumstats_file <- read_vcf(path = path, nThread = nThread)
+            sumstats_file <- read_vcf(path = path,
+                                      nThread = nThread)
         } else {
             is_tabular <- check_tabular(header = header)
             if (is_tabular) {
-                message("Importing tabular file: ", path)
-                sumstats_file <- data.table::fread(path,
-                    nThread = nThread,
-                    nrows = nrows
-                )
+                if(endsWith(path,".bgz")){
+                    message("Importing tabular bgz file: ", path)
+                    sumstats_file <- data.table::fread(
+                        cmd = paste("gunzip -c",path),
+                        nThread = nThread,
+                        nrows = nrows)
+                }else {
+                    message("Importing tabular file: ", path)
+                    sumstats_file <- data.table::fread(
+                        path,
+                        nThread = nThread,
+                        nrows = nrows)
+                }
+               
             } else {
                 suffixes <- supported_suffixes()
                 stop(

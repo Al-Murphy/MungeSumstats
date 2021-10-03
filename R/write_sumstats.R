@@ -61,22 +61,24 @@ write_sumstats <- function(sumstats_dt,
             index = tabix_index
         )
         ## Replace save_path after writing
-        save_path <- new_path
+        if(tabix_index) save_path <- new_path
     } else {
-        msg3 <- paste0("Writing in tabular format ==>", save_path)
+        msg3 <- paste0("Writing in tabular format ==> ", save_path)
         message(msg3)
+        #### If indexing as bgz, must first save as gz ####
+        gz_path <- gsub("\\.bgz$","\\.gz",save_path)
         data.table::fwrite(
-            x = sumstats_dt,
-            file = save_path,
+            x = sumstats_dt, 
+            file = gz_path,
             sep = sep,
             nThread = nThread
         )
         if(tabix_index){
-            save_path <- index_tabular(path = save_path,
+            save_path <- index_tabular(path = gz_path,
                                        chrom_col = "CHR", 
                                        start_col = "BP", 
                                        verbose = TRUE)
-        }
+        } 
     }
     if(return_path) return(save_path)
 }

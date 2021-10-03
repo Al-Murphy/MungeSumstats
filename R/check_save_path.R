@@ -97,10 +97,11 @@ check_save_path <- function(save_path,
             tabular_compressed = FALSE
         )
         if (any(endsWith(save_path, suffixes.vcf))) {
-            message(
-                "`write_vcf=FALSE` but `save_path` suggests VCF output ",
-                "format. Switching output to tabular format (.tsv.gz)."
+            vcf_msg <- path(
+                "save_path suggests VCF output but write_vcf=FALSE.",
+                "Switching output to tabular format (.tsv.gz)."
             )
+            message(vcf_msg)
             save_path <-
                 gsub(paste(suffixes.vcf, collapse = "|"),
                      ".tsv.gz", save_path)
@@ -114,6 +115,13 @@ check_save_path <- function(save_path,
         if(tabix_index){
             # Using slightly modified version of 
             #  Rsamtools::bgzip default
+            if(grepl("\\.gz$",save_path)){
+                bgz_msg <- path(
+                    "save_path suggests .gz output but tabix_index=TRUE",
+                    "Switching output to tabix-indexed format (.bgz)."
+                )
+                message(bgz_msg)
+            }
             save_path <- sprintf("%s.bgz",
                                  sub("\\.gz$|\\.bgz$", "", save_path)) 
             extension <- sprintf("%s.bgz",
