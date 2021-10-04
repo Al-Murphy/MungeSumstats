@@ -87,7 +87,7 @@ test." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.26</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.27</span>
       </span>
     </div>
 
@@ -169,11 +169,13 @@ test.</p>
 data("sumstatsColHeaders")
 # Make additions to sumstatsColHeaders using github version of MungeSumstats-
 # shown is an example of adding columns for Standard Error (SE)
-#se_cols &lt;- data.frame("Uncorrected"=c("SE","se","STANDARD.ERROR","STANDARD_ERROR","STANDARD-ERROR"),
-#                      "Corrected"=rep("SE",5))
+#se_cols &lt;- data.frame("Uncorrected"=c("SE","se","STANDARD.ERROR",
+#                                      "STANDARD_ERROR","STANDARD-ERROR"),
+#                     "Corrected"=rep("SE",5))
 #sumstatsColHeaders &lt;- rbind(sumstatsColHeaders,se_cols)
 #Once additions are made, order &amp; save the new mapping dataset
-#now sort ordering -important for logic that uncorrected=corrected comes first
+#now sort ordering -important for logic that 
+# uncorrected=corrected comes first
 sumstatsColHeaders$ordering &lt;-
     sumstatsColHeaders$Uncorrected==sumstatsColHeaders$Corrected
 sumstatsColHeaders &lt;-
@@ -198,7 +200,7 @@ save(sumstatsColHeaders,
 
       <footer>
       <div class="copyright">
-  <p>Developed by Alan Murphy, Nathan Skene.</p>
+  <p>Developed by Alan Murphy, Brian Schilder, Nathan Skene.</p>
 </div>
 
 <div class="pkgdown">

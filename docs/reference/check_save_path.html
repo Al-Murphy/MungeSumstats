@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.26</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.27</span>
       </span>
     </div>
 
@@ -145,7 +145,13 @@
     <p>Check if save path and log folder is appropriate</p>
     </div>
 
-    <pre class="usage"><span class='fu'>check_save_path</span><span class='op'>(</span><span class='va'>save_path</span>, <span class='va'>log_folder</span>, <span class='va'>log_folder_ind</span>, write_vcf <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>check_save_path</span><span class='op'>(</span>
+  <span class='va'>save_path</span>,
+  <span class='va'>log_folder</span>,
+  <span class='va'>log_folder_ind</span>,
+  <span class='va'>tabix_index</span>,
+  write_vcf <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -169,6 +175,11 @@ this rule is if output is vcf, then log file saved as .tsv.gz. Default is
 FALSE.</p></td>
     </tr>
     <tr>
+      <th>tabix_index</th>
+      <td><p>Index the formatted summary statistics with
+<a href='http://www.htslib.org/doc/tabix.html'>tabix</a> for fast querying.</p></td>
+    </tr>
+    <tr>
       <th>write_vcf</th>
       <td><p>Whether to write as VCF (TRUE) or tabular file (FALSE).</p></td>
     </tr>
@@ -190,7 +201,7 @@ FALSE.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Alan Murphy, Nathan Skene.</p>
+  <p>Developed by Alan Murphy, Brian Schilder, Nathan Skene.</p>
 </div>
 
 <div class="pkgdown">

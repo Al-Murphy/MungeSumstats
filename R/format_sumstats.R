@@ -276,6 +276,14 @@ format_sumstats <- function(path,
 
         # save messages to file if user specified
         if (log_mungesumstats_msgs) {
+            msg <- paste0("Saving output messages to:\n",
+                          paste0(check_save_out$log_folder,
+                                    "/MungeSumstats_log_msg.txt"),"\n",
+                          "Any runtime errors will be saved to:\n",
+                          paste0(check_save_out$log_folder,
+                                 "/MungeSumstats_log_output.txt"),"\n",
+                          "Messages will not be printed to terminal.")
+            message(msg)
             msgcon <-
                 file(paste0(
                     check_save_out$log_folder,

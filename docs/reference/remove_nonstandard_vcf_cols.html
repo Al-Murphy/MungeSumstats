@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.26</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.27</span>
       </span>
     </div>
 
@@ -145,7 +145,12 @@
     <p>Remove non-standard VCF columns</p>
     </div>
 
-    <pre class="usage"><span class='fu'>remove_nonstandard_vcf_cols</span><span class='op'>(</span><span class='va'>sample_id</span>, <span class='va'>sumstats_file</span>, keep_extra_cols <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>remove_nonstandard_vcf_cols</span><span class='op'>(</span>
+  <span class='va'>sample_id</span>,
+  <span class='va'>sumstats_file</span>,
+  keep_extra_cols <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  standardise_headers <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,7 +177,7 @@ input be kept</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Alan Murphy, Nathan Skene.</p>
+  <p>Developed by Alan Murphy, Brian Schilder, Nathan Skene.</p>
 </div>
 
 <div class="pkgdown">

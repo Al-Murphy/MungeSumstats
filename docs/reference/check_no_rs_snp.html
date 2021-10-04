@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Ensure that SNP appears to be valid RS IDs (starts with rs) — check_no_rs_snp • MungeSumstats</title>
+<title>Ensure that SNP appears to be valid RSIDs (starts with rs) — check_no_rs_snp • MungeSumstats</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Ensure that SNP appears to be valid RS IDs (starts with rs) — check_no_rs_snp" />
-<meta property="og:description" content="Ensure that SNP appears to be valid RS IDs (starts with rs)" />
+<meta property="og:title" content="Ensure that SNP appears to be valid RSIDs (starts with rs) — check_no_rs_snp" />
+<meta property="og:description" content="Ensure that SNP appears to be valid RSIDs (starts with rs)" />
 
 
 
@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.26</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.27</span>
       </span>
     </div>
 
@@ -136,13 +136,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Ensure that SNP appears to be valid RS IDs (starts with rs)</h1>
+    <h1>Ensure that SNP appears to be valid RSIDs (starts with rs)</h1>
     <small class="dont-index">Source: <a href='https://github.com/neurogenomics/MungeSumstats/blob/master/R/check_no_rs_snp.R'><code>R/check_no_rs_snp.R</code></a></small>
     <div class="hidden name"><code>check_no_rs_snp.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Ensure that SNP appears to be valid RS IDs (starts with rs)</p>
+    <p>Ensure that SNP appears to be valid RSIDs (starts with rs)</p>
     </div>
 
     <pre class="usage"><span class='fu'>check_no_rs_snp</span><span class='op'>(</span>
@@ -176,7 +176,7 @@ reference genome from the data.</p></td>
     <tr>
       <th>snp_ids_are_rs_ids</th>
       <td><p>Binary Should the supplied SNP ID's be assumed to
-be RS IDs. If not, imputation using the SNP ID for other columns like
+be RSIDs. If not, imputation using the SNP ID for other columns like
 base-pair position or chromosome will not be possible. If set to FALSE, the
 SNP RS ID will be imputed from the reference genome if possible. Default is
 TRUE.</p></td>
@@ -230,7 +230,7 @@ table object and the log file list.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Alan Murphy, Nathan Skene.</p>
+  <p>Developed by Alan Murphy, Brian Schilder, Nathan Skene.</p>
 </div>
 
 <div class="pkgdown">

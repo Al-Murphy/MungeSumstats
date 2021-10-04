@@ -84,7 +84,7 @@ used in LDSC's munge_sumstats.py:" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.26</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.27</span>
       </span>
     </div>
 
@@ -212,7 +212,8 @@ data(sumstatsColHeaders) for default mapping and necessary format.</p></td>
 <p>The R implementation is adapted from the <code>GenomicSEM::munge</code> function,
 after optimizing for speed using <code>data.table</code>:</p>
 <p><code>sumstats_dt[,Z:=sign(BETA)*sqrt(stats::qchisq(P,1,lower=FALSE))]</code></p>
-<p><em>NOTE</em>: <code>compute_z</code> is set to <code>TRUE</code> by default to ensure standardisation
+<p><em>NOTE</em>: <code>compute_z</code> is set to <code>TRUE</code> by
+default to ensure standardisation
 of the "Z" column (which can be computed differently in different datasets).</p>
 
   </div>
@@ -226,7 +227,7 @@ of the "Z" column (which can be computed differently in different datasets).</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Alan Murphy, Nathan Skene.</p>
+  <p>Developed by Alan Murphy, Brian Schilder, Nathan Skene.</p>
 </div>
 
 <div class="pkgdown">

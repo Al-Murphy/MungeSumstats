@@ -40,7 +40,8 @@
 
 
 <meta property="og:title" content="Wrapper for sending queries and payloads to API — api_query" />
-<meta property="og:description" content="There are a number of different GET and POST endpoints in the GWAS database API. This is a generic way to access them" />
+<meta property="og:description" content="There are a number of different GET and POST endpoints
+in the GWAS database API. This is a generic way to access them" />
 
 
 
@@ -82,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.26</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.27</span>
       </span>
     </div>
 
@@ -142,7 +143,8 @@
     </div>
 
     <div class="ref-description">
-    <p>There are a number of different GET and POST endpoints in the GWAS database API. This is a generic way to access them</p>
+    <p>There are a number of different GET and POST endpoints
+in the GWAS database API. This is a generic way to access them</p>
     </div>
 
     <pre class="usage"><span class='fu'>api_query</span><span class='op'>(</span>
@@ -160,15 +162,20 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>path</th>
-      <td><p>Either a full query path (e.g. for get) or an endpoint (e.g. for post) queries</p></td>
+      <td><p>Either a full query path (e.g. for get) or
+an endpoint (e.g. for post) queries</p></td>
     </tr>
     <tr>
       <th>query</th>
-      <td><p>If post query, provide a list of arguments as the payload. NULL by default</p></td>
+      <td><p>If post query, provide a list of arguments as the payload.
+NULL by default</p></td>
     </tr>
     <tr>
       <th>access_token</th>
-      <td><p>Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through <code>get_access_token</code> and if not then does not perform authentication</p></td>
+      <td><p>Google OAuth2 access token. Used to authenticate
+level of access to data. By default, checks if already authenticated
+through <code>get_access_token</code> and if not then does
+not perform authentication.</p></td>
     </tr>
     <tr>
       <th>method</th>
@@ -184,7 +191,8 @@
     </tr>
     <tr>
       <th>timeout</th>
-      <td><p>Default = 300, avoid increasing this, preferentially simplify the query first.</p></td>
+      <td><p>Default = 300, avoid increasing this,
+preferentially simplify the query first.</p></td>
     </tr>
     </table>
 
@@ -203,7 +211,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Alan Murphy, Nathan Skene.</p>
+  <p>Developed by Alan Murphy, Brian Schilder, Nathan Skene.</p>
 </div>
 
 <div class="pkgdown">

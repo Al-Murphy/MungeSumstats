@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.26</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.27</span>
       </span>
     </div>
 
@@ -164,14 +164,16 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>ids</th>
-      <td><p>List of Open GWAS study IDs (e.g. <code><a href='https://rdrr.io/r/base/c.html'>c("prot-a-664", "ieu-b-4760")</a></code>).</p></td>
+      <td><p>List of Open GWAS study IDs
+(e.g. <code><a href='https://rdrr.io/r/base/c.html'>c("prot-a-664", "ieu-b-4760")</a></code>).</p></td>
     </tr>
     <tr>
       <th>vcf_dir</th>
       <td><p>Where to download the original VCF from Open GWAS.
 <em>WARNING:</em> This is set to <code><a href='https://rdrr.io/r/base/tempfile.html'>tempdir()</a></code> by default.
 This means the raw (pre-formatted) VCFs be deleted upon ending the R session.
-Change this to keep the raw VCF file on disk (e.g. <code>vcf_dir="./raw_vcf"</code>).</p></td>
+Change this to keep the raw VCF file on disk
+(e.g. <code>vcf_dir="./raw_vcf"</code>).</p></td>
     </tr>
     <tr>
       <th>vcf_download</th>
@@ -196,7 +198,8 @@ Change this to keep the raw VCF file on disk (e.g. <code>vcf_dir="./raw_vcf"</co
     </tr>
     <tr>
       <th>force_new_vcf</th>
-      <td><p>Overwrite a previously downloaded VCF with the same path name.</p></td>
+      <td><p>Overwrite a previously downloaded VCF
+with the same path name.</p></td>
     </tr>
     <tr>
       <th>nThread</th>
@@ -204,12 +207,14 @@ Change this to keep the raw VCF file on disk (e.g. <code>vcf_dir="./raw_vcf"</co
     </tr>
     <tr>
       <th>parallel_across_ids</th>
-      <td><p>If <code>parallel_across_ids=TRUE</code> and <code>nThread&gt;1</code>,
+      <td><p>If <code>parallel_across_ids=TRUE</code>
+and <code>nThread&gt;1</code>,
 then each ID in <code>ids</code> will be processed in parallel.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional arguments to be passed to <code><a href='format_sumstats.html'>MungeSumstats::format_sumstats</a></code>.</p></td>
+      <td><p>Additional arguments passed to
+<a href='format_sumstats.html'>format_sumstats</a>.</p></td>
     </tr>
     </table>
 
@@ -255,7 +260,7 @@ depending on the arguments passed to <code>format_sumstats</code>.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Alan Murphy, Nathan Skene.</p>
+  <p>Developed by Alan Murphy, Brian Schilder, Nathan Skene.</p>
 </div>
 
 <div class="pkgdown">

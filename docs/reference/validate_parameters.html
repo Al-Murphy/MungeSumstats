@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.26</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.27</span>
       </span>
     </div>
 
@@ -177,7 +177,8 @@
   <span class='va'>imputation_ind</span>,
   <span class='va'>log_folder_ind</span>,
   <span class='va'>log_mungesumstats_msgs</span>,
-  <span class='va'>mapping_file</span>
+  <span class='va'>mapping_file</span>,
+  <span class='va'>tabix_index</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -312,7 +313,7 @@ is TRUE.</p></td>
     <tr>
       <th>snp_ids_are_rs_ids</th>
       <td><p>Binary Should the supplied SNP ID's be assumed to
-be RS IDs. If not, imputation using the SNP ID for other columns like
+be RSIDs. If not, imputation using the SNP ID for other columns like
 base-pair position or chromosome will not be possible. If set to FALSE, the
 SNP RS ID will be imputed from the reference genome if possible. Default is
 TRUE.</p></td>
@@ -320,7 +321,7 @@ TRUE.</p></td>
     <tr>
       <th>remove_multi_rs_snp</th>
       <td><p>Binary Sometimes summary statistics can have
-multiple RS IDs on one row (i.e. related to one SNP), for example
+multiple RSIDs on one row (i.e. related to one SNP), for example
 "rs5772025_rs397784053". This can cause an error so by default, the first
 RS ID will be kept and the rest removed e.g."rs5772025". If you want to just
 remove these SNPs entirely, set it to TRUE. Default is FALSE.</p></td>
@@ -381,6 +382,11 @@ give is incorrect you can supply your own mapping file. Must be a 2 column
 dataframe with column names "Uncorrected" and "Corrected". See
 data(sumstatsColHeaders) for default mapping and necessary format.</p></td>
     </tr>
+    <tr>
+      <th>tabix_index</th>
+      <td><p>Index the formatted summary statistics with
+<a href='http://www.htslib.org/doc/tabix.html'>tabix</a> for fast querying.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -398,7 +404,7 @@ data(sumstatsColHeaders) for default mapping and necessary format.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Alan Murphy, Nathan Skene.</p>
+  <p>Developed by Alan Murphy, Brian Schilder, Nathan Skene.</p>
 </div>
 
 <div class="pkgdown">
