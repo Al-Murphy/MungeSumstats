@@ -69,8 +69,7 @@ test_that("Test connection to IEU GWAS - metadata, download", {
         ),
         error = function(e) e, warning = function(w) w
         )
-    testthat::expect_true(is(axel_catch, "warning")||"warning" %in% 
-                                                            class(axel_catch))
+    testthat::expect_true(!is(axel_catch, "error"))
 
     # don't run last check too time intensive, it is also in the vignette anyway
     # reformatted <- MungeSumstats::import_sumstats(ids = ids[1],
