@@ -50,7 +50,8 @@ You can supply `import_sumstats()` with a list of as many OpenGWAS IDs as you
 want, but we'll just give one to save time. 
 
 ```{r}
-datasets <- MungeSumstats:: import_sumstats(ids = ids[1])
+datasets <- MungeSumstats::import_sumstats(ids = "ieu-a-298",
+                                           ref_genome = "GRCH37")
 ```
 
 ## Summarise results 
