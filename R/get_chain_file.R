@@ -28,17 +28,35 @@ get_chain_file <- function(build_conversion = c("hg38ToHg19", "hg19ToHg38"),
     local_path <- file.path(save_dir, basename(remote_path))
     local_path_gunzip <- gsub(".gz", "", local_path)
     ### Download chain file ####
-    if (file.exists(local_path_gunzip)) {
-        if (verbose) {
-              message("Using existing chain file.")
-          }
-    } else {
-        if (verbose) {
-              message("Downloading chain file from UCSC Genome Browser.")
-          }
-        utils::download.file(remote_path, local_path)
-        print(local_path)
-        R.utils::gunzip(local_path)
+    if(file.exists(local_path_gunzip)){
+        if(verbose)
+            message("Using existing chain file.")
+    } 
+    else{
+        if(verbose)
+            message("Downloading chain file from UCSC Genome Browser.")
+        error_dwnld <-
+            tryCatch(utils::download.file(remote_path, local_path),
+            error = function(e) e,
+            warning = function(w) w
+            )
+        #if download failed use file in package
+        if(grepl("Couldn't connect to server",error_dwnld$message)){
+            chain_file <- paste0(build_conversion[1],".over.chain.gz")
+            #download.file will create an empty file even if download fails
+            if(file.exists(local_path))
+                rmvd <- file.remove(local_path)
+            copied <- copyFile(srcPathname = 
+                                   system.file("extdata",chain_file,
+                                                package="MungeSumstats"), 
+                                   save_dir)
+            msg <- paste0("Download of chain file from UCSC Genome Browser ",
+                            "failed, using package snapshot from 2021-10-07 ",
+                            "instead.")
+            message(msg)
+        }
+        message(local_path)
+        R.utils::gunzip(local_path,overwrite=TRUE)
     }
     #### Import ####
     chain <- rtracklayer::import.chain(local_path_gunzip)

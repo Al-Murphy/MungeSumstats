@@ -27,7 +27,7 @@ check_frq_maf <- function(sumstats_dt, frq_is_maf) {
                     formatC(num_major, big.mark = ",", format = "fg"),
                     " SNPs (", per_major, "%) have FRQ values > 0.5. ",
                     "Conventionally the FRQ column is intended to show the",
-                    " minor/effect allele frequency.\nThe FRQ column was ",
+                    " minor/effect allele frequency.\nThe FRQ column was",
                     " mapped from one of the following from the inputted ",
                     " summary statistics file:\n", frq_choices
                 )

@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.27</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.29</span>
       </span>
     </div>
 
@@ -95,7 +95,7 @@
 </h1>
                         <h4 class="author">Alan Murphy, Brian Schilder, and Nathan Skene</h4>
             
-            <h4 class="date">2021-10-04</h4>
+            <h4 class="date">2021-10-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/MungeSumstats/blob/master/vignettes/MungeSumstats.Rmd"><code>vignettes/MungeSumstats.Rmd</code></a></small>
       <div class="hidden name"><code>MungeSumstats.Rmd</code></div>
@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <li>INFO: The imputation information score</li>
 <li>FRQ: The minor/effect allele frequency (MAF/EAF) of the SNP</li>
 </ul>
-<p><em>MungeSumstats</em> uses a mapping file to infer the inputted column names (run <code><a href="https://rdrr.io/r/utils/data.html">data("sumstatsColHeaders")</a></code> to view these). This mapping file is far more comprehensive than any other publicly available munging tool containing 177 unique mappings at the time of writing this vignette. However, if your column headers are missing or if you want to change the mapping, you can do so by passing your own mapping file (see <code><a href="../reference/format_sumstats.html">format_sumstats(mapping_file)</a></code>).</p>
+<p><em>MungeSumstats</em> uses a mapping file to infer the inputted column names (run <code><a href="https://rdrr.io/r/utils/data.html">data("sumstatsColHeaders")</a></code> to view these). This mapping file is far more comprehensive than any other publicly available munging tool containing more than 200 unique mappings at the time of writing this vignette. However, if your column headers are missing or if you want to change the mapping, you can do so by passing your own mapping file (see <code><a href="../reference/format_sumstats.html">format_sumstats(mapping_file)</a></code>).</p>
 <p><em>MungeSumstats</em> offers unmatched levels of quality control to ensure, for example, consistency of allele assignment and direction of effects. Tests run by <em>MungeSumstats</em> include:</p>
 <ul>
 <li>Check VCF format</li>
@@ -173,12 +173,15 @@ document.addEventListener("DOMContentLoaded", function() {
 <li>Check N column is an integer</li>
 <li>Check for SNPs with N greater than 5 times standard dev. plus the mean</li>
 <li>Check SNPs are RS ID’s</li>
+<li>Check for uniformity of SNP ID format</li>
 <li>Check for duplicated rows, based on SNP ID</li>
 <li>Check for duplicated rows, based on base-pair position</li>
 <li>Check for SNPs on reference genome. Correct not found SNP IDs using CHR and BP (infer from reference genome)</li>
 <li>Check INFO score</li>
-<li>Check that the SNPs’ standard error (SE) is positive.</li>
-<li>Check that SNPs’ effect columns (like BETA) aren’t equal to 0.</li>
+<li>Check FRQ value</li>
+<li>Check FRQ is minor allele frequency (MAF)</li>
+<li>Check that the SNPs’ standard error (SE) is positive</li>
+<li>Check that SNPs’ effect columns (like BETA) aren’t equal to 0</li>
 <li>Check for strand-ambiguous SNPs</li>
 <li>Check for non-biallelic SNPs (infer from reference genome)</li>
 <li>Check for allele flipping</li>
@@ -186,6 +189,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <li>Check for z-score (Z) and impute if missing</li>
 <li>Check for N and impute if missing</li>
 <li>Check output format is LDSC ready</li>
+<li>Check and perform liftover to desired reference genome if necessary</li>
 </ul>
 <p>Users can specify which checks to run on their data. A <strong>note</strong> on the allele flipping check: <strong>MungeSumstats</strong> infers the effect allele will always be the A2 allele, this is the approach done for <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7805039/">IEU GWAS VCF</a> and has such also been adopted here. This inference is first from the inputted file’s column headers however, the allele flipping check ensures this by comparing A1, what should be the reference allele, to the reference genome. If a SNP’s A1 DNA base doesn’t match the reference genome but it’s A2 (what should be the alternative allele) does, the alleles will be flipped along with the effect information (e.g. Beta, Odds Ratio, signed summary statistics, FRQ, Z-score*).</p>
 <p>*-by default the Z-score is assumed to be calculated off the effect size not the P-value and so will be flipped. This can be changed by a user.</p>
@@ -234,10 +238,10 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ## - This means all formatted summary stats will be deletedupon ending the R session.
 ## - To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.
 ## ********************</code></pre>
-<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpjTaDNv/file12e1628a69ef2.tsv.gz</code></pre>
+<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpG1GXnw/file68271e8bbad2.tsv.gz</code></pre>
 <pre><code>## Reading header.</code></pre>
 <pre><code>## Tabular format detected.</code></pre>
-<pre><code>## Importing tabular file: /private/var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T/Rtmp6hFEUF/temp_libpath1dd811711de6/MungeSumstats/extdata/eduAttainOkbay.txt</code></pre>
+<pre><code>## Importing tabular file: /private/var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T/RtmpQvPXso/temp_libpath5f95645cb8/MungeSumstats/extdata/eduAttainOkbay.txt</code></pre>
 <pre><code>## Standardising column headers.</code></pre>
 <pre><code>## First line of summary statistics file:</code></pre>
 <pre><code>## MarkerName   CHR POS A1  A2  EAF Beta    SE  Pval    </code></pre>
@@ -266,12 +270,12 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Checking for bi-allelic SNPs.</code></pre>
 <pre><code>## Warning: When method is an integer, must be &gt;0.</code></pre>
 <pre><code>## 67 SNPs (72%) have FRQ values &gt; 0.5. Conventionally the FRQ column is intended to show the minor/effect allele frequency.
-## The FRQ column was  mapped from one of the following from the inputted  summary statistics file:
+## The FRQ column was mapped from one of the following from the inputted  summary statistics file:
 ## FRQ, EAF, MAF, FRQ_U, F_U, FREQUENCY, FREQ, FREQ_TESTED_ALLELE, FRQ_TESTED_ALLELE, FREQ_EFFECT_ALLELE, FRQ_EFFECT_ALLELE, EFFECT_ALLELE_FREQUENCY, EFFECT_ALLELE_FREQ, EFFECT_ALLELE_FRQ, A1FREQ, A1FRQ, A2FREQ, A2FRQ, ALLELE_FREQUENCY, ALLELE_FREQ, ALLELE_FRQ, AF, MINOR_AF, EFFECT_AF, A2_AF, EFF_AF, ALT_AF, ALTERNATIVE_AF, INC_AF, A_2_AF, TESTED_AF</code></pre>
 <pre><code>## As frq_is_maf=TRUE, the FRQ column will not be renamed. If the FRQ values were intended to represent major allele frequency,
 ## set frq_is_maf=FALSE to rename the column as MAJOR_ALLELE_FRQ and differentiate it from minor/effect allele frequency.</code></pre>
 <pre><code>## Sorting coordinates.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpjTaDNv/file12e1628a69ef2.tsv.gz</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpG1GXnw/file68271e8bbad2.tsv.gz</code></pre>
 <pre><code>## Summary statistics report:
 ##    - 93 rows (100% of original 93 rows)
 ##    - 93 unique variants
@@ -294,6 +298,9 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <li>
 <strong>INFO_filter</strong> 0-1 The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9</li>
 <li>
+<strong>FRQ_filter</strong> 0-1 The minimum value permissible of the frequency(FRQ) of the SNP (i.e. Allele Frequency (AF)) (if present in sumstats file). By default no filtering is done, i.e. value of 0.<br>
+</li>
+<li>
 <strong>pos_se</strong> Binary Should the standard Error (SE) column be checked to ensure it is greater than 0? Those that are, are removed (if present in sumstats file). Default TRUE.</li>
 <li>
 <strong>effect_columns_nonzero</strong> Binary should the effect columns in the data BETA,OR (odds ratio),LOG_ODDS,SIGNED_SUMSTAT be checked to ensure no SNP=0. Those that do are removed(if present in sumstats file). Default TRUE.<br>
@@ -314,14 +321,32 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <strong>snp_ids_are_rs_ids</strong> Binary, should the SNP IDs inputted be inferred as RS IDs or some arbitrary ID. Default is TRUE.<br>
 </li>
 <li>
+<strong>frq_is_maf</strong> Binary, conventionally the FRQ column is intended to show the minor/effect allele frequency (MAF) but sometimes the major allele frequency can be inferred as the FRQ column. This logical variable indicates that the FRQ column should be renamed to MAJOR_ALLELE_FRQ if the frequency values appear to relate to the major allele i.e. &gt;0.5. By default mapping won’t occur i.e. is TRUE.</li>
+<li>
+<strong>sort_coordinates</strong> Whether to sort by coordinates of resulting sumstats.<br>
+</li>
+<li>
+<strong>nThread</strong> Number of threads to use for parallel processes.</li>
+<li>
+<strong>write_vcf</strong> Whether to write as VCF (TRUE) or tabular file (FALSE). While <strong>tabix_index</strong> is a binary input for whether to index the formatted summary statistics with <a href="http://www.htslib.org/doc/tabix.html">tabix</a> for fast querying.</li>
+<li>
+<strong>return_data</strong> Return <code>data.table</code>, <code>GRanges</code> or <code>VRanges</code>directly to user. Otherwise, return the path to the save data. Default is FALSE.</li>
+<li>
+<strong>return_format</strong> If return_data is TRUE. Object type to be returned (“data.table”,“vranges”,“granges”).</li>
+<li>
 <strong>ldsc_format</strong> Ensure that output format meets all requirements to be passed directly into LDSC without the need for additional munging.</li>
-<li><strong>MungeSumstats_log_msg</strong></li>
 <li>
 <strong>log_folder_ind</strong> Should log files be stored containing all filtered out SNPs (separate file per filter). The data is outputted in the same format specified for the resulting sumstats file.</li>
 <li>
 <strong>log_mungesumstats_msgs</strong> Binary Should a log be stored containing all messages and errors printed by MungeSumstats in a run.</li>
 <li>
 <strong>imputation_ind</strong> Binary Should a column be added for each imputation step to show what SNPs have imputed values for differing fields. This includes a field denoting SNP allele flipping (flipped). On the flipped value, this denoted whether the alelles where switched based on MungeSumstats initial choice of A1, A2 from the input column headers and thus may not align with what the creator intended.<strong>Note</strong> these columns will be in the formatted summary statistics returned.</li>
+<li>
+<strong>log_folder</strong> File path to the directory for the log files and the log of MungeSumstats messages to be stored. Default is a temporary directory.</li>
+<li>
+<strong>force_new</strong> If a formatted file of the same names as  exists, formatting will be skipped and this file will be imported instead (default). Set  to override this.</li>
+<li>
+<strong>mapping_file</strong> MungeSumstats has a pre-defined column-name mapping file which should cover the most common column headers and their interpretations. However, if a column header that is in youf file is missing of the mapping we give is incorrect you can supply your own mapping file. Must be a 2 column dataframe with column names “Uncorrected” and “Corrected”. See <code><a href="https://rdrr.io/r/utils/data.html">data(sumstatsColHeaders)</a></code> for default mapping and necessary format.</li>
 </ul>
 <p>See <code>?MungeSumstats::format_sumstats()</code> for the full list of parameters to control MungeSumstats QC and standardisation steps.</p>
 <p>VCF files can also be standardised to the same format as other summary statistic files. A subset of the Amyotrophic lateral sclerosis GWAS from the ieu open GWAS project (a .vcf file) has been added to <em>MungeSumstats</em> to demonstrate this functionality.Simply pass the path to the file in the same manner you would for other summary statistic files:</p>
@@ -340,9 +365,9 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ## - This means all formatted summary stats will be deletedupon ending the R session.
 ## - To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.
 ## ********************</code></pre>
-<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpjTaDNv/file12e1642886b33.tsv.gz</code></pre>
+<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpG1GXnw/file6827482b0398.tsv.gz</code></pre>
 <pre><code>## Reading header.</code></pre>
-<pre><code>## Importing VCF file: /private/var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T/Rtmp6hFEUF/temp_libpath1dd811711de6/MungeSumstats/extdata/ALSvcf.vcf</code></pre>
+<pre><code>## Importing VCF file: /private/var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T/RtmpQvPXso/temp_libpath5f95645cb8/MungeSumstats/extdata/ALSvcf.vcf</code></pre>
 <pre><code>## Reading VCF file.</code></pre>
 <pre><code>## Standardising column headers.</code></pre>
 <pre><code>## First line of summary statistics file:</code></pre>
@@ -384,12 +409,12 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Checking for bi-allelic SNPs.</code></pre>
 <pre><code>## Warning: When method is an integer, must be &gt;0.</code></pre>
 <pre><code>## 2 SNPs (7.7%) have FRQ values &gt; 0.5. Conventionally the FRQ column is intended to show the minor/effect allele frequency.
-## The FRQ column was  mapped from one of the following from the inputted  summary statistics file:
+## The FRQ column was mapped from one of the following from the inputted  summary statistics file:
 ## FRQ, EAF, MAF, FRQ_U, F_U, FREQUENCY, FREQ, FREQ_TESTED_ALLELE, FRQ_TESTED_ALLELE, FREQ_EFFECT_ALLELE, FRQ_EFFECT_ALLELE, EFFECT_ALLELE_FREQUENCY, EFFECT_ALLELE_FREQ, EFFECT_ALLELE_FRQ, A1FREQ, A1FRQ, A2FREQ, A2FRQ, ALLELE_FREQUENCY, ALLELE_FREQ, ALLELE_FRQ, AF, MINOR_AF, EFFECT_AF, A2_AF, EFF_AF, ALT_AF, ALTERNATIVE_AF, INC_AF, A_2_AF, TESTED_AF</code></pre>
 <pre><code>## As frq_is_maf=TRUE, the FRQ column will not be renamed. If the FRQ values were intended to represent major allele frequency,
 ## set frq_is_maf=FALSE to rename the column as MAJOR_ALLELE_FRQ and differentiate it from minor/effect allele frequency.</code></pre>
 <pre><code>## Sorting coordinates.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpjTaDNv/file12e1642886b33.tsv.gz</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpG1GXnw/file6827482b0398.tsv.gz</code></pre>
 <pre><code>## Summary statistics report:
 ##    - 26 rows (25.7% of original 101 rows)
 ##    - 26 unique variants
@@ -430,15 +455,15 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ## - This means all log data from the run will be deleted upon ending the R session.
 ## - To keep it, change `log_folder` to an actual directory (e.g. log_folder='./').
 ## ********************</code></pre>
-<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpjTaDNv/file12e16163eb83.tsv.gz</code></pre>
-<pre><code>## Log data to be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpjTaDNv</code></pre>
+<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpG1GXnw/file68275b0ffd7d.tsv.gz</code></pre>
+<pre><code>## Log data to be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpG1GXnw</code></pre>
 <pre><code>## Saving output messages to:
-## /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpjTaDNv/MungeSumstats_log_msg.txt
+## /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpG1GXnw/MungeSumstats_log_msg.txt
 ## Any runtime errors will be saved to:
-## /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpjTaDNv/MungeSumstats_log_output.txt
+## /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpG1GXnw/MungeSumstats_log_output.txt
 ## Messages will not be printed to terminal.</code></pre>
 <pre><code>## Reading header.</code></pre>
-<pre><code>## Importing VCF file: /private/var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T/Rtmp6hFEUF/temp_libpath1dd811711de6/MungeSumstats/extdata/ALSvcf.vcf</code></pre>
+<pre><code>## Importing VCF file: /private/var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T/RtmpQvPXso/temp_libpath5f95645cb8/MungeSumstats/extdata/ALSvcf.vcf</code></pre>
 <pre><code>## Reading VCF file.</code></pre>
 <pre><code>## Standardising column headers.</code></pre>
 <pre><code>## First line of summary statistics file:</code></pre>
@@ -464,7 +489,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Ensuring all SNPs are on the reference genome.</code></pre>
 <pre><code>## Loading reference genome data.</code></pre>
 <pre><code>## 14 SNPs are not on the reference genome. These will be corrected from the reference genome.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpjTaDNv/snp_not_found_from_chr_bp.tsv.gz</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpG1GXnw/snp_not_found_from_chr_bp.tsv.gz</code></pre>
 <pre><code>## Checking for correct direction of A1 (reference) and A2 (alternative allele).</code></pre>
 <pre><code>## Reordering so first three column headers are SNP, CHR and BP in this order.</code></pre>
 <pre><code>## Reordering so the fourth and fifth columns are A1 and A2.</code></pre>
@@ -474,7 +499,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Checking for SNPs with duplicated base-pair positions.</code></pre>
 <pre><code>## Filtering SNPs based on INFO score.</code></pre>
 <pre><code>## 67 SNPs are below the INFO threshold of 0.1 and will be removed.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpjTaDNv/info_filter.tsv.gz</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpG1GXnw/info_filter.tsv.gz</code></pre>
 <pre><code>## Filtering SNPs, ensuring SE&gt;0.</code></pre>
 <pre><code>## Ensuring all SNPs have N&lt;5 std dev above mean.</code></pre>
 <pre><code>## Removing 'chr' prefix from CHR.</code></pre>
@@ -482,12 +507,12 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## Checking for bi-allelic SNPs.</code></pre>
 <pre><code>## Warning: When method is an integer, must be &gt;0.</code></pre>
 <pre><code>## 2 SNPs (7.7%) have FRQ values &gt; 0.5. Conventionally the FRQ column is intended to show the minor/effect allele frequency.
-## The FRQ column was  mapped from one of the following from the inputted  summary statistics file:
+## The FRQ column was mapped from one of the following from the inputted  summary statistics file:
 ## FRQ, EAF, MAF, FRQ_U, F_U, FREQUENCY, FREQ, FREQ_TESTED_ALLELE, FRQ_TESTED_ALLELE, FREQ_EFFECT_ALLELE, FRQ_EFFECT_ALLELE, EFFECT_ALLELE_FREQUENCY, EFFECT_ALLELE_FREQ, EFFECT_ALLELE_FRQ, A1FREQ, A1FRQ, A2FREQ, A2FRQ, ALLELE_FREQUENCY, ALLELE_FREQ, ALLELE_FRQ, AF, MINOR_AF, EFFECT_AF, A2_AF, EFF_AF, ALT_AF, ALTERNATIVE_AF, INC_AF, A_2_AF, TESTED_AF</code></pre>
 <pre><code>## As frq_is_maf=TRUE, the FRQ column will not be renamed. If the FRQ values were intended to represent major allele frequency,
 ## set frq_is_maf=FALSE to rename the column as MAJOR_ALLELE_FRQ and differentiate it from minor/effect allele frequency.</code></pre>
 <pre><code>## Sorting coordinates.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpjTaDNv/file12e16163eb83.tsv.gz</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpG1GXnw/file68275b0ffd7d.tsv.gz</code></pre>
 <pre><code>## Summary statistics report:
 ##    - 26 rows (25.7% of original 101 rows)
 ##    - 26 unique variants
@@ -638,7 +663,7 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] MungeSumstats_1.1.27 BiocStyle_2.20.2    
+## [1] MungeSumstats_1.1.29 BiocStyle_2.20.2    
 ## 
 ## loaded via a namespace (and not attached):
 ##   [1] bitops_1.0-7                               

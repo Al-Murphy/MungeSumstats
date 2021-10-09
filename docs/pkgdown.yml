@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   MungeSumstats: MungeSumstats.html
   OpenGWAS: OpenGWAS.html
-last_built: 2021-10-04T09:07Z
+last_built: 2021-10-09T15:15Z
 urls:
   reference: https://neurogenomics.github.io/MungeSumstats/index.html/reference
   article: https://neurogenomics.github.io/MungeSumstats/index.html/articles

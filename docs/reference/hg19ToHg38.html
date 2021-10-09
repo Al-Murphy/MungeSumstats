@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Remove SNPs with strand-ambiguous alleles — check_strand_ambiguous • MungeSumstats</title>
+<title>UCSC Chain file hg19 to hg38 — hg19ToHg38 • MungeSumstats</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="Remove SNPs with strand-ambiguous alleles — check_strand_ambiguous" />
-<meta property="og:description" content="Remove SNPs with strand-ambiguous alleles" />
+<meta property="og:title" content="UCSC Chain file hg19 to hg38 — hg19ToHg38" />
+<meta property="og:description" content="UCSC Chain file hg19 to hg38, .chain.gz file, downloaded from
+https://hgdownload.cse.ucsc.edu/goldenpath/hg19/liftOver/ on 09/10/21" />
 
 
 
@@ -136,74 +137,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Remove SNPs with strand-ambiguous alleles</h1>
-    <small class="dont-index">Source: <a href='https://github.com/neurogenomics/MungeSumstats/blob/master/R/check_strand_ambiguous.R'><code>R/check_strand_ambiguous.R</code></a></small>
-    <div class="hidden name"><code>check_strand_ambiguous.Rd</code></div>
+    <h1>UCSC Chain file hg19 to hg38</h1>
+    <small class="dont-index">Source: <a href='https://github.com/neurogenomics/MungeSumstats/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>hg19ToHg38.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Remove SNPs with strand-ambiguous alleles</p>
+    <p>UCSC Chain file hg19 to hg38, .chain.gz file, downloaded from
+https://hgdownload.cse.ucsc.edu/goldenpath/hg19/liftOver/ on 09/10/21</p>
     </div>
 
-    <pre class="usage"><span class='fu'>check_strand_ambiguous</span><span class='op'>(</span>
-  <span class='va'>sumstats_dt</span>,
-  <span class='va'>path</span>,
-  <span class='va'>ref_genome</span>,
-  <span class='va'>strand_ambig_filter</span>,
-  <span class='va'>log_folder_ind</span>,
-  <span class='va'>check_save_out</span>,
-  <span class='va'>tabix_index</span>,
-  <span class='va'>nThread</span>,
-  <span class='va'>log_files</span>
-<span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>path</th>
-      <td><p>Filepath for the summary statistics file to be formatted. A
-dataframe or datatable of the summary statistics file can also be passed
-directly to MungeSumstats using the path parameter.</p></td>
-    </tr>
-    <tr>
-      <th>ref_genome</th>
-      <td><p>name of the reference genome used for the GWAS ("GRCh37" or
-"GRCh38"). Argument is case-insensitive. Default is NULL which infers the
-reference genome from the data.</p></td>
-    </tr>
-    <tr>
-      <th>strand_ambig_filter</th>
-      <td><p>Binary Should SNPs with strand-ambiguous alleles
-be removed. Default is FALSE.</p></td>
-    </tr>
-    <tr>
-      <th>log_folder_ind</th>
-      <td><p>Binary Should log files be stored containing all
-filtered out SNPs (separate file per filter). The data is outputted in the
-same format specified for the resulting sumstats file. The only exception to
-this rule is if output is vcf, then log file saved as .tsv.gz. Default is
-FALSE.</p></td>
-    </tr>
-    <tr>
-      <th>tabix_index</th>
-      <td><p>Index the formatted summary statistics with
-<a href='http://www.htslib.org/doc/tabix.html'>tabix</a> for fast querying.</p></td>
-    </tr>
-    <tr>
-      <th>nThread</th>
-      <td><p>Number of threads to use for parallel processes.</p></td>
-    </tr>
-    <tr>
-      <th>log_files</th>
-      <td><p>list of log file locations</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>list containing sumstats_dt, the modified summary statistics data
-table object and the log file list</p>
+    <p>gunzipped chain file</p>
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+
+    <p>The chain file was downloaded from
+https://hgdownload.cse.ucsc.edu/goldenpath/hg19/liftOver/
+<code><a href='https://rdrr.io/r/utils/download.file.html'>
+utils::download.file('ftp://hgdownload.cse.ucsc.edu/goldenPath/hg19/liftOver/hg19ToHg38.over.chain.gz',tempdir())
+</a></code></p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>UCSC Chain file hg19 to hg38, .chain.gz file, downloaded on 09/10/21
+To be used as a back up if the download from UCSC fails.</p>
+    <h2 class="hasAnchor" id="hg-tohg-over-chain-gz"><a class="anchor" href="#hg-tohg-over-chain-gz"></a>hg19ToHg38.over.chain.gz</h2>
+
+    <p>NA</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

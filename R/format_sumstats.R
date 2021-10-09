@@ -113,7 +113,7 @@
 #' FRQ column should be renamed to MAJOR_ALLELE_FRQ if the frequency values
 #' appear to relate to the major allele i.e. >0.5. By default this mapping won't
 #' occur i.e. is TRUE.
-#' @param sort_coordinates Whether to sort by coordinates.
+#' @param sort_coordinates Whether to sort by coordinates of resulting sumstats
 #' @param nThread Number of threads to use for parallel processes.
 #' @param save_path File path to save formatted data. Defaults to
 #' \code{tempfile(fileext=".tsv.gz")}.

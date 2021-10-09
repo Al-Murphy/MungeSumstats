@@ -29,7 +29,7 @@ liftover <- function(sumstats_dt,
         )
         message(msg)
 
-        if (toupper(convert_ref_genome) == "GRCH38") {
+        if (toupper(ref_genome) == "GRCH38") {#convert_ref_genome
             build_conversion <- "hg38ToHg19"
             ucsc_ref <- "hg38"
         } else {
@@ -56,7 +56,6 @@ liftover <- function(sumstats_dt,
             x = gr,
             chain = chain
         ))
-
         sumstats_dt <- as.data.table(gr_lifted)
         # rename columns back to org
         sumstats_dt[, width := NULL]
