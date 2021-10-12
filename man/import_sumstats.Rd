@@ -59,6 +59,8 @@ depending on the arguments passed to \code{format_sumstats}.
 Requires internet access to run.
 }
 \examples{
+#only run the examples if user has internet access:
+if(try(is.character(getURL("www.google.com")))==TRUE){
 ### Search by criteria
 metagwas <- find_sumstats(
     traits = c("parkinson", "alzheimer"),
@@ -76,4 +78,5 @@ ids <- (dplyr::arrange(metagwas, nsnp))$id
 ## which is more than what 32-bit Windows can handle so remove certain checks
 ## commented out down to runtime
 # datasets <- import_sumstats(ids = ids[1])
+}
 }

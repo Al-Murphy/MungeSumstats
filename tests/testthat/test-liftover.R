@@ -10,6 +10,35 @@ test_that("liftover", {
     is_32bit_windows <- .Platform$OS.type == "windows" #&&
         #.Platform$r_arch == "i386"
     if (!is_32bit_windows) {
+        #use stashed versions of chain files to speed up test
+        #move them to temp dir so found and avoid download
+        save_dir <- tempdir()
+        build_conversion <- c("hg38ToHg19", "hg19ToHg38")
+        chain_file <- paste0(build_conversion[1],".over.chain.gz")
+        chain_file2 <- paste0(build_conversion[2],".over.chain.gz")
+        
+        
+        local_path <- paste0(save_dir,"/",chain_file)
+        local_path2 <- paste0(save_dir,"/",chain_file2)
+        local_path_gunzip <- gsub(".gz", "", local_path)
+        local_path_gunzip2 <- gsub(".gz", "", local_path2)
+        
+        if(!file.exists(local_path_gunzip)){
+            if(!file.exists(local_path))
+                copied <- copyFile(srcPathname = 
+                                       system.file("extdata",chain_file,
+                                                   package="MungeSumstats"), 
+                                   save_dir)
+            R.utils::gunzip(local_path,overwrite=TRUE)
+        }
+        if(!file.exists(local_path_gunzip2)){
+            if(!file.exists(local_path2))    
+                copied2 <- copyFile(srcPathname = 
+                                       system.file("extdata",chain_file2,
+                                                   package="MungeSumstats"), 
+                                   save_dir)
+            R.utils::gunzip(local_path2,overwrite=TRUE)
+        }
         # Run MungeSumstats code
         reformatted <- MungeSumstats::format_sumstats(
             path = file,

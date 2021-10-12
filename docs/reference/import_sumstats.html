@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.29</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.31</span>
       </span>
     </div>
 
@@ -224,19 +224,14 @@ then each ID in <code>ids</code> will be processed in parallel.</p></td>
 depending on the arguments passed to <code>format_sumstats</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>### Search by criteria</span>
+    <pre class="examples"><div class='input'><span class='co'>#only run the examples if user has internet access:</span>
+<span class='kw'>if</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/character.html'>is.character</a></span><span class='op'>(</span><span class='fu'>getURL</span><span class='op'>(</span><span class='st'>"www.google.com"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>==</span><span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>{</span>
+<span class='co'>### Search by criteria</span>
 <span class='va'>metagwas</span> <span class='op'>&lt;-</span> <span class='fu'><a href='find_sumstats.html'>find_sumstats</a></span><span class='op'>(</span>
     traits <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"parkinson"</span>, <span class='st'>"alzheimer"</span><span class='op'>)</span>,
     min_sample_size <span class='op'>=</span> <span class='fl'>5000</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Collecting metadata from Open GWAS.</span></div><div class='output co'>#&gt; <span class='message'>Filtering metadata by substring criteria.</span></div><div class='output co'>#&gt; <span class='message'>Filtering metadata by sample/case/control/SNP size criteria.</span></div><div class='output co'>#&gt; <span class='message'>Excluding sample/case/control size with NAs.</span></div><div class='output co'>#&gt; <span class='message'>Found 16 GWAS datasets matching search criteria across:</span>
-#&gt; <span class='message'>   - 12 trait(s)</span>
-#&gt; <span class='message'>   - 1 population(s)</span>
-#&gt; <span class='message'>   - 3 category(ies)</span>
-#&gt; <span class='message'>   - 2 subcategory(ies)</span>
-#&gt; <span class='message'>   - 5 publication(s)</span>
-#&gt; <span class='message'>   - 6 consortia(ium)</span>
-#&gt; <span class='message'>   - 1 genome build(s)</span></div><div class='input'><span class='co'>### Only use a subset for testing purposes</span>
+<span class='co'>### Only use a subset for testing purposes</span>
 <span class='va'>ids</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='va'>metagwas</span>, <span class='va'>nsnp</span><span class='op'>)</span><span class='op'>)</span><span class='op'>$</span><span class='va'>id</span>
 
 <span class='co'>### Default usage</span>
@@ -248,7 +243,8 @@ depending on the arguments passed to <code>format_sumstats</code>.</p>
 <span class='co'>## which is more than what 32-bit Windows can handle so remove certain checks</span>
 <span class='co'>## commented out down to runtime</span>
 <span class='co'># datasets &lt;- import_sumstats(ids = ids[1])</span>
-</div></pre>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; Error in getURL("www.google.com") : could not find function "getURL"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

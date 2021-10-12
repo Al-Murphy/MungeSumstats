@@ -15,8 +15,11 @@
 #' @inheritParams import_sumstats
 #' @export
 #' @examples
+#' #only run the examples if user has internet access:
+#' if(try(is.character(getURL("www.google.com")))==TRUE){
 #' vcf_url <- "https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz"
 #' out_paths <- download_vcf(vcf_url = vcf_url)
+#' }
 download_vcf <- function(vcf_url,
                          vcf_dir = tempdir(),
                          vcf_download = TRUE,

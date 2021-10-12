@@ -84,7 +84,7 @@ so we can't include it as a dep." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.29</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.31</span>
       </span>
     </div>
 
@@ -203,9 +203,12 @@ with the same path name.</p></td>
     <p>List containing the paths to the downloaded VCF and its index file.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>vcf_url</span> <span class='op'>&lt;-</span> <span class='st'>"https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz"</span>
+    <pre class="examples"><div class='input'><span class='co'>#only run the examples if user has internet access:</span>
+<span class='kw'>if</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/character.html'>is.character</a></span><span class='op'>(</span><span class='fu'>getURL</span><span class='op'>(</span><span class='st'>"www.google.com"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>==</span><span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>{</span>
+<span class='va'>vcf_url</span> <span class='op'>&lt;-</span> <span class='st'>"https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz"</span>
 <span class='va'>out_paths</span> <span class='op'>&lt;-</span> <span class='fu'>download_vcf</span><span class='op'>(</span>vcf_url <span class='op'>=</span> <span class='va'>vcf_url</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Downloading VCF ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpdfCbr6/ieu-a-298.vcf.gz</span></div><div class='output co'>#&gt; <span class='message'>Downloading with download.file.</span></div><div class='output co'>#&gt; <span class='message'>Downloading VCF index ==&gt; https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz.tbi</span></div><div class='output co'>#&gt; <span class='message'>Downloading with download.file.</span></div></pre>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; Error in getURL("www.google.com") : could not find function "getURL"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

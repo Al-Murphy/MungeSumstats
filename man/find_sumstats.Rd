@@ -85,6 +85,8 @@ list/vector of character strings.
 By default, returns metadata for all studies currently in Open GWAS database.
 }
 \examples{
+#only run the examples if user has internet access:
+if(try(is.character(getURL("www.google.com")))==TRUE){
 ### By ID
 metagwas <- find_sumstats(ids = c(
     "ieu-b-4760",
@@ -101,4 +103,5 @@ metagwas <- find_sumstats(
     traits = c("alzheimer", "parkinson"),
     years = seq(2015, 2021)
 )
+}
 }

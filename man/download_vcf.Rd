@@ -44,6 +44,9 @@ instead but it hasn't been made available on CRAN or Bioconductor yet,
 so we can't include it as a dep.
 }
 \examples{
+#only run the examples if user has internet access:
+if(try(is.character(getURL("www.google.com")))==TRUE){
 vcf_url <- "https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz"
 out_paths <- download_vcf(vcf_url = vcf_url)
+}
 }

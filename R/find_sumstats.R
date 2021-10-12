@@ -42,6 +42,8 @@
 #' @inheritParams check_access_token
 #' @inheritParams gwasinfo
 #' @examples
+#' #only run the examples if user has internet access:
+#' if(try(is.character(getURL("www.google.com")))==TRUE){
 #' ### By ID
 #' metagwas <- find_sumstats(ids = c(
 #'     "ieu-b-4760",
@@ -58,6 +60,7 @@
 #'     traits = c("alzheimer", "parkinson"),
 #'     years = seq(2015, 2021)
 #' )
+#' }
 #' @inheritParams format_sumstats
 #' @export
 #' @importFrom dplyr %>% arrange desc mutate

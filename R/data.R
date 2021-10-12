@@ -138,3 +138,19 @@ NULL
 #' @format gunzipped chain file
 #' @details NULL
 NULL
+
+#' Local ieu-a-298 file from IEU Open GWAS
+#'
+#' @description Local ieu-a-298 file from IEU Open GWAS, downloaded on 09/10/21.
+#'
+#' @name ieu-a-298
+#' @section ieu-a-298.tsv.gz
+#' @details Local ieu-a-298 file from IEU Open GWAS, downlaoded on 09/10/21. 
+#' This is done in case the download in the package vignette fails.
+#' @source The file was downloaded with:
+#' \code{
+#' MungeSumstats::import_sumstats(ids = "ieu-a-298",ref_genome = "GRCH37")
+#' }
+#' @format gunzipped tsv file
+#' @details NULL
+NULL

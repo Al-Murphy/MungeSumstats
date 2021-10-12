@@ -25,6 +25,8 @@
 #' depending on the arguments passed to \code{format_sumstats}.
 #'
 #' @examples
+#' #only run the examples if user has internet access:
+#' if(try(is.character(getURL("www.google.com")))==TRUE){
 #' ### Search by criteria
 #' metagwas <- find_sumstats(
 #'     traits = c("parkinson", "alzheimer"),
@@ -42,8 +44,10 @@
 #' ## which is more than what 32-bit Windows can handle so remove certain checks
 #' ## commented out down to runtime
 #' # datasets <- import_sumstats(ids = ids[1])
+#' }
 #' @export
 #' @importFrom dplyr %>%
+#' @importFrom RCurl getURL
 import_sumstats <- function(ids,
                             vcf_dir = tempdir(),
                             vcf_download = TRUE,
