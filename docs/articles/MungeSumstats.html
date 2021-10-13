@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.31</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.32</span>
       </span>
     </div>
 
@@ -95,7 +95,7 @@
 </h1>
                         <h4 class="author">Alan Murphy, Brian Schilder, and Nathan Skene</h4>
             
-            <h4 class="date">2021-10-12</h4>
+            <h4 class="date">2021-10-14</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/MungeSumstats/blob/master/vignettes/MungeSumstats.Rmd"><code>vignettes/MungeSumstats.Rmd</code></a></small>
       <div class="hidden name"><code>MungeSumstats.Rmd</code></div>
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <h1 class="hasAnchor">
 <a href="#citation" class="anchor"></a>Citation</h1>
 <p>If you use the MungeSumstats package, please cite</p>
-<p><a href="https://www.biorxiv.org/content/10.1101/2021.06.21.449239v1">Murphy and Skene. MungeSumstats: A Bioconductor package for the standardisation and quality control of many GWAS summary statistics</a>.</p>
+<p><a href="https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btab665/6380562">Murphy et al. MungeSumstats: A Bioconductor package for the standardisation and quality control of many GWAS summary statistics</a>.</p>
 </div>
 <div id="overview" class="section level1">
 <h1 class="hasAnchor">
@@ -238,10 +238,10 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 ## - This means all formatted summary stats will be deletedupon ending the R session.
 ## - To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.
 ## ********************</code></pre>
-<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmpcwf5l9/file16cae22312170.tsv.gz</code></pre>
+<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpmvjCvG/file8135341a78f8.tsv.gz</code></pre>
 <pre><code>## Reading header.</code></pre>
 <pre><code>## Tabular format detected.</code></pre>
-<pre><code>## Importing tabular file: /private/var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T/RtmpPjFCzD/temp_libpath16886ab3258d/MungeSumstats/extdata/eduAttainOkbay.txt</code></pre>
+<pre><code>## Importing tabular file: /private/var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T/RtmpGVW9kk/temp_libpath71c113f0514e/MungeSumstats/extdata/eduAttainOkbay.txt</code></pre>
 <pre><code>## Standardising column headers.</code></pre>
 <pre><code>## First line of summary statistics file:</code></pre>
 <pre><code>## MarkerName   CHR POS A1  A2  EAF Beta    SE  Pval    </code></pre>
@@ -275,7 +275,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <pre><code>## As frq_is_maf=TRUE, the FRQ column will not be renamed. If the FRQ values were intended to represent major allele frequency,
 ## set frq_is_maf=FALSE to rename the column as MAJOR_ALLELE_FRQ and differentiate it from minor/effect allele frequency.</code></pre>
 <pre><code>## Sorting coordinates.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmpcwf5l9/file16cae22312170.tsv.gz</code></pre>
+<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//RtmpmvjCvG/file8135341a78f8.tsv.gz</code></pre>
 <pre><code>## Summary statistics report:
 ##    - 93 rows (100% of original 93 rows)
 ##    - 93 unique variants
@@ -352,89 +352,15 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <p>VCF files can also be standardised to the same format as other summary statistic files. A subset of the Amyotrophic lateral sclerosis GWAS from the ieu open GWAS project (a .vcf file) has been added to <em>MungeSumstats</em> to demonstrate this functionality.Simply pass the path to the file in the same manner you would for other summary statistic files:</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#save ALS GWAS from the ieu open GWAS project to a temp directory</span>
-<span class="va">ALSvcfPth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"ALSvcf.vcf"</span>, package<span class="op">=</span><span class="st">"MungeSumstats"</span><span class="op">)</span>
-<span class="co">#set a low INFO filter so we get a return</span>
+<span class="va">ALSvcfPth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"ALSvcf.vcf"</span>, package<span class="op">=</span><span class="st">"MungeSumstats"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#set a low INFO filter so we get a return</span>
 <span class="va">reformatted_vcf</span> <span class="op">&lt;-</span> 
   <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/format_sumstats.html">format_sumstats</a></span><span class="op">(</span>path<span class="op">=</span><span class="va">ALSvcfPth</span>, 
                                  ref_genome<span class="op">=</span><span class="st">"GRCh37"</span>,
                                  INFO_filter<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-## 
-## ******::NOTE::******
-## - Formatted results will be saved to `tempdir()` by default.
-## - This means all formatted summary stats will be deletedupon ending the R session.
-## - To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.
-## ********************</code></pre>
-<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmpcwf5l9/file16cae7d7f5c3f.tsv.gz</code></pre>
-<pre><code>## Reading header.</code></pre>
-<pre><code>## Importing VCF file: /private/var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T/RtmpPjFCzD/temp_libpath16886ab3258d/MungeSumstats/extdata/ALSvcf.vcf</code></pre>
-<pre><code>## Reading VCF file.</code></pre>
-<pre><code>## Standardising column headers.</code></pre>
-<pre><code>## First line of summary statistics file:</code></pre>
-<pre><code>## CHROM    POS ID  REF ALT QUAL    FILTER  INFO    FORMAT  EBI-a-GCST005647    </code></pre>
-<pre><code>## Removing non-standard columns: QUAL, FILTER, FORMAT</code></pre>
-<pre><code>## Parsing 'EBI-A-GCST005647' data column.</code></pre>
-<pre><code>## 0 empty column(s) detected.</code></pre>
-<pre><code>## VCF file has -log10 P-values, these will be converted to unadjusted p-values in the 'P' column.</code></pre>
-<pre><code>## Formatting INFO column.</code></pre>
-<pre><code>## INFO column is actually AF, it will be converted.</code></pre>
-<pre><code>## Standardising column headers.</code></pre>
-<pre><code>## First line of summary statistics file:</code></pre>
-<pre><code>## CHR  BP  SNP A1  A2  INFO    ES  SE  LP  AF  ID  P   </code></pre>
-<pre><code>## Summary statistics report:
-##    - 101 rows
-##    - 101 unique variants
-##    - 0 genome-wide significant variants (P&lt;5e-8)
-##    - 1 chromosomes</code></pre>
-<pre><code>## Checking for multi-GWAS.</code></pre>
-<pre><code>## Checking for multiple RSIDs on one row.</code></pre>
-<pre><code>## Checking SNP RSIDs.</code></pre>
-<pre><code>## Checking for merged allele column.</code></pre>
-<pre><code>## Ensuring all SNPs are on the reference genome.</code></pre>
-<pre><code>## Loading reference genome data.</code></pre>
-<pre><code>## 14 SNPs are not on the reference genome. These will be corrected from the reference genome.</code></pre>
-<pre><code>## Checking for correct direction of A1 (reference) and A2 (alternative allele).</code></pre>
-<pre><code>## Reordering so first three column headers are SNP, CHR and BP in this order.</code></pre>
-<pre><code>## Reordering so the fourth and fifth columns are A1 and A2.</code></pre>
-<pre><code>## Checking for missing data.</code></pre>
-<pre><code>## Checking for duplicate columns.</code></pre>
-<pre><code>## Checking for duplicate SNPs from SNP ID.</code></pre>
-<pre><code>## Checking for SNPs with duplicated base-pair positions.</code></pre>
-<pre><code>## Filtering SNPs based on INFO score.</code></pre>
-<pre><code>## 67 SNPs are below the INFO threshold of 0.1 and will be removed.</code></pre>
-<pre><code>## Filtering SNPs, ensuring SE&gt;0.</code></pre>
-<pre><code>## Ensuring all SNPs have N&lt;5 std dev above mean.</code></pre>
-<pre><code>## Removing 'chr' prefix from CHR.</code></pre>
-<pre><code>## Making X/Y CHR uppercase.</code></pre>
-<pre><code>## Checking for bi-allelic SNPs.</code></pre>
-<pre><code>## Warning: When method is an integer, must be &gt;0.</code></pre>
-<pre><code>## 2 SNPs (7.7%) have FRQ values &gt; 0.5. Conventionally the FRQ column is intended to show the minor/effect allele frequency.
-## The FRQ column was mapped from one of the following from the inputted  summary statistics file:
-## FRQ, EAF, MAF, FRQ_U, F_U, FREQUENCY, FREQ, FREQ_TESTED_ALLELE, FRQ_TESTED_ALLELE, FREQ_EFFECT_ALLELE, FRQ_EFFECT_ALLELE, EFFECT_ALLELE_FREQUENCY, EFFECT_ALLELE_FREQ, EFFECT_ALLELE_FRQ, A1FREQ, A1FRQ, A2FREQ, A2FRQ, ALLELE_FREQUENCY, ALLELE_FREQ, ALLELE_FRQ, AF, MINOR_AF, EFFECT_AF, A2_AF, EFF_AF, ALT_AF, ALTERNATIVE_AF, INC_AF, A_2_AF, TESTED_AF</code></pre>
-<pre><code>## As frq_is_maf=TRUE, the FRQ column will not be renamed. If the FRQ values were intended to represent major allele frequency,
-## set frq_is_maf=FALSE to rename the column as MAJOR_ALLELE_FRQ and differentiate it from minor/effect allele frequency.</code></pre>
-<pre><code>## Sorting coordinates.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmpcwf5l9/file16cae7d7f5c3f.tsv.gz</code></pre>
-<pre><code>## Summary statistics report:
-##    - 26 rows (25.7% of original 101 rows)
-##    - 26 unique variants
-##    - 0 genome-wide significant variants (P&lt;5e-8)
-##    - 1 chromosomes</code></pre>
-<pre><code>## Successfully finished preparing sumstats file, preview:</code></pre>
-<pre><code>## Reading header.</code></pre>
-<pre><code>##            SNP CHR    BP A1 A2   INFO    BETA     SE       LP    FRQ
-## 1:  rs58108140   1 10583  G  A 0.1589  0.0312 0.0393 0.369267 0.1589
-## 2:    rs806731   1 30923  G  T 0.7843 -0.0114 0.0353 0.126854 0.7843
-## 3: rs116400033   1 51479  T  A 0.1829  0.0711 0.0370 1.262410 0.1829
-## 4: rs141149254   1 54490  G  A 0.1353  0.0963 0.0423 1.641870 0.1353
-##             ID          P
-## 1:  rs58108140 0.42730011
-## 2:    rs806731 0.74669974
-## 3: rs116400033 0.05464998
-## 4: rs141149254 0.02281025</code></pre>
-<pre><code>## Returning path to saved data.</code></pre>
 <p>You can also get more information on the SNPs which have had data imputed or have been filtered out by <em>MungeSumstats</em> by using the <code>imputation_ind</code> and <code>log_folder_ind</code> parameters respectively. For example:</p>
-<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#set</span>
 <span class="va">reformatted_vcf_2</span> <span class="op">&lt;-</span> 
   <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/format_sumstats.html">format_sumstats</a></span><span class="op">(</span>path<span class="op">=</span><span class="va">ALSvcfPth</span>,
@@ -443,100 +369,12 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
                                  log_folder_ind<span class="op">=</span><span class="cn">TRUE</span>,
                                  imputation_ind<span class="op">=</span><span class="cn">TRUE</span>,
                                  log_mungesumstats_msgs<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-## 
-## ******::NOTE::******
-## - Formatted results will be saved to `tempdir()` by default.
-## - This means all formatted summary stats will be deletedupon ending the R session.
-## - To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.
-## ********************</code></pre>
-<pre><code>## ******::NOTE::******
-## - Log results will be saved to `tempdir()` by default.
-## - This means all log data from the run will be deleted upon ending the R session.
-## - To keep it, change `log_folder` to an actual directory (e.g. log_folder='./').
-## ********************</code></pre>
-<pre><code>## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmpcwf5l9/file16cae62cc2024.tsv.gz</code></pre>
-<pre><code>## Log data to be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmpcwf5l9</code></pre>
-<pre><code>## Saving output messages to:
-## /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmpcwf5l9/MungeSumstats_log_msg.txt
-## Any runtime errors will be saved to:
-## /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmpcwf5l9/MungeSumstats_log_output.txt
-## Messages will not be printed to terminal.</code></pre>
-<pre><code>## Reading header.</code></pre>
-<pre><code>## Importing VCF file: /private/var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T/RtmpPjFCzD/temp_libpath16886ab3258d/MungeSumstats/extdata/ALSvcf.vcf</code></pre>
-<pre><code>## Reading VCF file.</code></pre>
-<pre><code>## Standardising column headers.</code></pre>
-<pre><code>## First line of summary statistics file:</code></pre>
-<pre><code>## CHROM    POS ID  REF ALT QUAL    FILTER  INFO    FORMAT  EBI-a-GCST005647    </code></pre>
-<pre><code>## Removing non-standard columns: QUAL, FILTER, FORMAT</code></pre>
-<pre><code>## Parsing 'EBI-A-GCST005647' data column.</code></pre>
-<pre><code>## 0 empty column(s) detected.</code></pre>
-<pre><code>## VCF file has -log10 P-values, these will be converted to unadjusted p-values in the 'P' column.</code></pre>
-<pre><code>## Formatting INFO column.</code></pre>
-<pre><code>## INFO column is actually AF, it will be converted.</code></pre>
-<pre><code>## Standardising column headers.</code></pre>
-<pre><code>## First line of summary statistics file:</code></pre>
-<pre><code>## CHR  BP  SNP A1  A2  INFO    ES  SE  LP  AF  ID  P   </code></pre>
-<pre><code>## Summary statistics report:
-##    - 101 rows
-##    - 101 unique variants
-##    - 0 genome-wide significant variants (P&lt;5e-8)
-##    - 1 chromosomes</code></pre>
-<pre><code>## Checking for multi-GWAS.</code></pre>
-<pre><code>## Checking for multiple RSIDs on one row.</code></pre>
-<pre><code>## Checking SNP RSIDs.</code></pre>
-<pre><code>## Checking for merged allele column.</code></pre>
-<pre><code>## Ensuring all SNPs are on the reference genome.</code></pre>
-<pre><code>## Loading reference genome data.</code></pre>
-<pre><code>## 14 SNPs are not on the reference genome. These will be corrected from the reference genome.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmpcwf5l9/snp_not_found_from_chr_bp.tsv.gz</code></pre>
-<pre><code>## Checking for correct direction of A1 (reference) and A2 (alternative allele).</code></pre>
-<pre><code>## Reordering so first three column headers are SNP, CHR and BP in this order.</code></pre>
-<pre><code>## Reordering so the fourth and fifth columns are A1 and A2.</code></pre>
-<pre><code>## Checking for missing data.</code></pre>
-<pre><code>## Checking for duplicate columns.</code></pre>
-<pre><code>## Checking for duplicate SNPs from SNP ID.</code></pre>
-<pre><code>## Checking for SNPs with duplicated base-pair positions.</code></pre>
-<pre><code>## Filtering SNPs based on INFO score.</code></pre>
-<pre><code>## 67 SNPs are below the INFO threshold of 0.1 and will be removed.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmpcwf5l9/info_filter.tsv.gz</code></pre>
-<pre><code>## Filtering SNPs, ensuring SE&gt;0.</code></pre>
-<pre><code>## Ensuring all SNPs have N&lt;5 std dev above mean.</code></pre>
-<pre><code>## Removing 'chr' prefix from CHR.</code></pre>
-<pre><code>## Making X/Y CHR uppercase.</code></pre>
-<pre><code>## Checking for bi-allelic SNPs.</code></pre>
-<pre><code>## Warning: When method is an integer, must be &gt;0.</code></pre>
-<pre><code>## 2 SNPs (7.7%) have FRQ values &gt; 0.5. Conventionally the FRQ column is intended to show the minor/effect allele frequency.
-## The FRQ column was mapped from one of the following from the inputted  summary statistics file:
-## FRQ, EAF, MAF, FRQ_U, F_U, FREQUENCY, FREQ, FREQ_TESTED_ALLELE, FRQ_TESTED_ALLELE, FREQ_EFFECT_ALLELE, FRQ_EFFECT_ALLELE, EFFECT_ALLELE_FREQUENCY, EFFECT_ALLELE_FREQ, EFFECT_ALLELE_FRQ, A1FREQ, A1FRQ, A2FREQ, A2FRQ, ALLELE_FREQUENCY, ALLELE_FREQ, ALLELE_FRQ, AF, MINOR_AF, EFFECT_AF, A2_AF, EFF_AF, ALT_AF, ALTERNATIVE_AF, INC_AF, A_2_AF, TESTED_AF</code></pre>
-<pre><code>## As frq_is_maf=TRUE, the FRQ column will not be renamed. If the FRQ values were intended to represent major allele frequency,
-## set frq_is_maf=FALSE to rename the column as MAJOR_ALLELE_FRQ and differentiate it from minor/effect allele frequency.</code></pre>
-<pre><code>## Sorting coordinates.</code></pre>
-<pre><code>## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmpcwf5l9/file16cae62cc2024.tsv.gz</code></pre>
-<pre><code>## Summary statistics report:
-##    - 26 rows (25.7% of original 101 rows)
-##    - 26 unique variants
-##    - 0 genome-wide significant variants (P&lt;5e-8)
-##    - 1 chromosomes</code></pre>
-<pre><code>## Successfully finished preparing sumstats file, preview:</code></pre>
-<pre><code>## Reading header.</code></pre>
-<pre><code>##            SNP CHR    BP A1 A2   INFO    BETA     SE       LP    FRQ
-## 1:  rs58108140   1 10583  G  A 0.1589  0.0312 0.0393 0.369267 0.1589
-## 2:    rs806731   1 30923  G  T 0.7843 -0.0114 0.0353 0.126854 0.7843
-## 3: rs116400033   1 51479  T  A 0.1829  0.0711 0.0370 1.262410 0.1829
-## 4: rs141149254   1 54490  G  A 0.1353  0.0963 0.0423 1.641870 0.1353
-##             ID          P IMPUTATION_SNP
-## 1:  rs58108140 0.42730011             NA
-## 2:    rs806731 0.74669974             NA
-## 3: rs116400033 0.05464998             NA
-## 4: rs141149254 0.02281025             NA</code></pre>
-<pre><code>## Returning path to saved data.</code></pre>
 <p>Note that using <code>log_folder_ind</code> returns a list from <code>format_sumstats</code> which includes the file locations of the differing classes of removed SNPs. Using <code>log_mungesumstats_msgs</code> saves the messages to the console to a file which is returned in the same list. Note that not all the messages will also print to screen anymore when you set <code>log_mungesumstats_msgs</code>:</p>
-<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">reformatted_vcf_2</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "sumstats"  "log_files"</code></pre>
 <p>A user can load a file to view the excluded SNPs:</p>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="va">reformatted_vcf_2</span><span class="op">$</span><span class="va">log_files</span><span class="op">$</span><span class="va">info_filter</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></code></pre></div>
 <pre><code>##             SNP CHR    BP A1 A2   INFO    BETA     SE        LP    FRQ
 ##  1: rs146477069   1 54421  A  G 0.0352 -0.0240 0.0830 0.1121020 0.0352
@@ -605,7 +443,7 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
 <strong>MungeSumstats_log_output</strong> - Text file of all errors to the console created during MungeSumstats run.</li>
 </ul>
 <p>Note to export to another type such as R native objects including data.table, GRanges, VRanges or save as a VCF file, set <code>return_format</code>:</p>
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#set</span>
 <span class="va">reformatted_vcf_2</span> <span class="op">&lt;-</span> 
   <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/format_sumstats.html">format_sumstats</a></span><span class="op">(</span>path<span class="op">=</span><span class="va">ALSvcfPth</span>,
@@ -616,13 +454,13 @@ BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")</a></code></pre>
                                  log_mungesumstats_msgs<span class="op">=</span><span class="cn">TRUE</span>,
                                  return_format<span class="op">=</span><span class="st">"GRanges"</span><span class="op">)</span></code></pre></div>
 <p>See our publication for further discussion of these checks and options:</p>
-<p><a href="https://www.biorxiv.org/content/10.1101/2021.06.21.449239v1">Murphy and Skene. MungeSumstats: A Bioconductor package for the standardisation and quality control of many GWAS summary statistics</a>.</p>
+<p><a href="https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btab665/6380562">Murphy et al. MungeSumstats: A Bioconductor package for the standardisation and quality control of many GWAS summary statistics</a>.</p>
 </div>
 <div id="extra-functionality" class="section level1">
 <h1 class="hasAnchor">
 <a href="#extra-functionality" class="anchor"></a>Extra Functionality</h1>
 <p><em>MungeSumstats</em> also contains a function to quickly infer the genome build of multiple summary statistic files. This can be called separately to <code><a href="../reference/format_sumstats.html">format_sumstats()</a></code> which is useful if you want to just quickly check the genome build:</p>
-<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Pass path to Educational Attainment Okbay sumstat file to a temp directory</span>
 <span class="va">eduAttainOkbayPth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"eduAttainOkbay.txt"</span>,
                                   package <span class="op">=</span> <span class="st">"MungeSumstats"</span><span class="op">)</span>
@@ -663,7 +501,7 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] MungeSumstats_1.1.31 BiocStyle_2.20.2    
+## [1] MungeSumstats_1.1.32 BiocStyle_2.20.2    
 ## 
 ## loaded via a namespace (and not attached):
 ##   [1] bitops_1.0-7                               

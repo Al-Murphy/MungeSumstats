@@ -18,8 +18,8 @@ test_that("Test that allele columns and effect columns flipped correctly", {
     )
     ## The following test uses more than 2GB of memory, which is more
     ## than what 32-bit Windows can handle:
-    is_32bit_windows <- .Platform$OS.type == "windows" &&
-        .Platform$r_arch == "i386"
+    is_32bit_windows <- .Platform$OS.type == "windows" ##&&
+        ##.Platform$r_arch == "i386"
     if (!is_32bit_windows) {
         # Run MungeSumstats code
         reformatted <- MungeSumstats::format_sumstats(file,

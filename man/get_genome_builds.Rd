@@ -53,6 +53,11 @@ sumstats_list <- list(ss1 = eduAttainOkbayPth, ss2 = eduAttainOkbayPth)
 is_32bit_windows <-
     .Platform$OS.type == "windows" && .Platform$r_arch == "i386"
 if (!is_32bit_windows) {
-    ref_genomes <- get_genome_builds(sumstats_list = sumstats_list)
+    
+    #multiple sumstats can be passed at once to get all their genome builds:
+    #ref_genomes <- get_genome_builds(sumstats_list = sumstats_list)
+    #just passing first here for speed
+    sumstats_list_quick <- list(ss1 = eduAttainOkbayPth)
+    ref_genomes <- get_genome_builds(sumstats_list = sumstats_list_quick)
 }
 }

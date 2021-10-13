@@ -32,7 +32,7 @@ test_that("Test that different kinds of files can be read in.", {
         mapping_file = sumstatsColHeaders
     )[["sumstats_dt"]]
     empty_cols <- names(check_empty_cols(sumstats_file = vcf_ss))
-    vcf_ss[, (empty_cols) := NULL]
+    #vcf_ss[, (empty_cols) := NULL]
     vcf_ss[, INFO := NULL]
     for (x in c("FRQ", "BETA", "SE", "P")) {
         vcf_ss[, (x) := as.numeric(get(x))]

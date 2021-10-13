@@ -32,9 +32,9 @@ knitr::opts_chunk$set(tidy         = FALSE,
 
 If you use the MungeSumstats package, please cite
 
-[Murphy and Skene. MungeSumstats: A Bioconductor package for the
+[Murphy et al. MungeSumstats: A Bioconductor package for the
 standardisation and quality control of many GWAS summary
-statistics](https://www.biorxiv.org/content/10.1101/2021.06.21.449239v1).
+statistics](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btab665/6380562).
 
 # Overview
 
@@ -353,6 +353,9 @@ files:
 ```{r, message=TRUE}
 #save ALS GWAS from the ieu open GWAS project to a temp directory
 ALSvcfPth <- system.file("extdata","ALSvcf.vcf", package="MungeSumstats")
+```
+
+```{r,eval=FALSE}
 #set a low INFO filter so we get a return
 reformatted_vcf <- 
   MungeSumstats::format_sumstats(path=ALSvcfPth, 
@@ -364,7 +367,7 @@ You can also get more information on the SNPs which have had data imputed or
 have been filtered out by *MungeSumstats* by using the `imputation_ind` and 
 `log_folder_ind` parameters respectively. For example:
 
-```{r, message=TRUE}
+```{r, message=FALSE}
 #set
 reformatted_vcf_2 <- 
   MungeSumstats::format_sumstats(path=ALSvcfPth,
@@ -446,9 +449,9 @@ reformatted_vcf_2 <-
 
 See our publication for further discussion of these checks and options:
 
-[Murphy and Skene. MungeSumstats: A Bioconductor package for the
+[Murphy et al. MungeSumstats: A Bioconductor package for the
 standardisation and quality control of many GWAS summary
-statistics](https://www.biorxiv.org/content/10.1101/2021.06.21.449239v1).
+statistics](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btab665/6380562).
 
 # Extra Functionality
 
