@@ -1,55 +1,54 @@
 test_that("VCF is correctly formatted", {
-    ## IMPORTANT: Must have .vcf file extension, 
-    # or else MungeSumstats won't know it's a VCF.
-    file <- tempfile(fileext = ".vcf")
-    # write the ALS GWAS, VCF file to a temp file for testing
-    ALSvcf <- readLines(system.file("extdata", "ALSvcf.vcf",
-        package = "MungeSumstats"
-    ))
-    writeLines(ALSvcf, con = file)
-    # vcf <- MungeSumstats:::read_vcf(path = file)
-    # Run MungeSumstats code
-    reformatted <- MungeSumstats::format_sumstats(
-        path = file,
-        ref_genome = "GRCh37",
-        on_ref_genome = FALSE,
-        strand_ambig_filter = FALSE,
-        bi_allelic_filter = FALSE,
-        allele_flip_check = FALSE,
-        INFO_filter = 0.01
-    )
-    reformatted_lines <- readLines(reformatted)
-    # check manually against first five SNPs
-    corr_res <- c(
-        "SNP\tCHR\tBP\tA1\tA2\tINFO\tBETA\tSE\tLP\tFRQ\tID\tP",
-        "rs58108140\t1\t10583\tG\tA\t0.1589\t0.0312\t0.0393\t0.369267\t0.1589\trs58108140\t0.427300105456596",
-        "rs806731\t1\t30923\tG\tT\t0.7843\t-0.0114\t0.0353\t0.126854\t0.7843\trs806731\t0.746699739815279",
-        "rs116400033\t1\t51479\tT\tA\t0.1829\t0.0711\t0.037\t1.26241\t0.1829\trs116400033\t0.0546499790752282",
-        "rs146477069\t1\t54421\tA\tG\t0.0352\t-0.024\t0.083\t0.112102\t0.0352\trs146477069\t0.772499131799648"
-    )
-    testthat::expect_equal(reformatted_lines[1:5], corr_res)
-
-    # check allelic flipping with VCF
-    file2 <- tempfile(fileext = ".vcf")
-    # write the ALS GWAS, VCF file to a temp file for testing
-    ALSvcf <- readLines(system.file("extdata", "ALSvcf.vcf",
-        package = "MungeSumstats"
-    ))
-    # update last SNP, flipping allelic direction
-    snp_of_interest <- "rs146477069"
-    rsid_index <- grep(snp_of_interest, ALSvcf, ignore.case = TRUE)
-    ALSvcf[rsid_index] <-
-        # "1\t54421\trs146477069\tG\tA\t.\tPASS\tAF=0.0352\tES:SE:LP:AF:ID\t+0.024:0.083:0.112102:0.0352:rs146477069"
-        # flip FRQ
-        "1\t54421\trs146477069\tG\tA\t.\tPASS\tAF=0.0352\tES:SE:LP:AF:ID\t+0.024:0.083:0.112102:0.9648:rs146477069"
-    writeLines(ALSvcf, con = file2)
-
     # Run MungeSumstats code
     ## The following test uses more than 2GB of memory, which is more
     ## than what 32-bit Windows can handle:
-    is_32bit_windows <- .Platform$OS.type == "windows" &&
-        .Platform$r_arch == "i386"
+    is_32bit_windows <- .Platform$OS.type == "windows" ##&&
+        ##.Platform$r_arch == "i386"
     if (!is_32bit_windows) {
+        ## IMPORTANT: Must have .vcf file extension, 
+        # or else MungeSumstats won't know it's a VCF.
+        file <- tempfile(fileext = ".vcf")
+        # write the ALS GWAS, VCF file to a temp file for testing
+        ALSvcf <- readLines(system.file("extdata", "ALSvcf.vcf",
+                                        package = "MungeSumstats"
+        ))
+        writeLines(ALSvcf, con = file)
+        # vcf <- MungeSumstats:::read_vcf(path = file)
+        # Run MungeSumstats code
+        reformatted <- MungeSumstats::format_sumstats(
+            path = file,
+            ref_genome = "GRCh37",
+            on_ref_genome = FALSE,
+            strand_ambig_filter = FALSE,
+            bi_allelic_filter = FALSE,
+            allele_flip_check = FALSE,
+            INFO_filter = 0.01
+        )
+        reformatted_lines <- readLines(reformatted)
+        # check manually against first five SNPs
+        corr_res <- c(
+            "SNP\tCHR\tBP\tA1\tA2\tINFO\tBETA\tSE\tLP\tFRQ\tID\tP",
+            "rs58108140\t1\t10583\tG\tA\t0.1589\t0.0312\t0.0393\t0.369267\t0.1589\trs58108140\t0.427300105456596",
+            "rs806731\t1\t30923\tG\tT\t0.7843\t-0.0114\t0.0353\t0.126854\t0.7843\trs806731\t0.746699739815279",
+            "rs116400033\t1\t51479\tT\tA\t0.1829\t0.0711\t0.037\t1.26241\t0.1829\trs116400033\t0.0546499790752282",
+            "rs146477069\t1\t54421\tA\tG\t0.0352\t-0.024\t0.083\t0.112102\t0.0352\trs146477069\t0.772499131799648"
+        )
+        testthat::expect_equal(reformatted_lines[1:5], corr_res)
+        
+        # check allelic flipping with VCF
+        file2 <- tempfile(fileext = ".vcf")
+        # write the ALS GWAS, VCF file to a temp file for testing
+        ALSvcf <- readLines(system.file("extdata", "ALSvcf.vcf",
+                                        package = "MungeSumstats"
+        ))
+        # update last SNP, flipping allelic direction
+        snp_of_interest <- "rs146477069"
+        rsid_index <- grep(snp_of_interest, ALSvcf, ignore.case = TRUE)
+        ALSvcf[rsid_index] <-
+            # "1\t54421\trs146477069\tG\tA\t.\tPASS\tAF=0.0352\tES:SE:LP:AF:ID\t+0.024:0.083:0.112102:0.0352:rs146477069"
+            # flip FRQ
+            "1\t54421\trs146477069\tG\tA\t.\tPASS\tAF=0.0352\tES:SE:LP:AF:ID\t+0.024:0.083:0.112102:0.9648:rs146477069"
+        writeLines(ALSvcf, con = file2)
         reformatted_allelic_flip <-
             MungeSumstats::format_sumstats(
                 path = file2,
@@ -137,12 +136,13 @@ test_that("VCF is correctly formatted", {
         # https://github.com/bulik/ldsc/wiki/Summary-Statistics-File-Format
         ldsc_cols <- c("SNP", "N", "A1", "A2", "Z")
         testthat::expect_true(all(ldsc_cols %in% names(res)))
+        
+        testthat::expect_equal(reformatted_lines[1:5], corr_res)
     } else {
         testthat::expect_true(is_32bit_windows)
         testthat::expect_true(is_32bit_windows)
         testthat::expect_true(is_32bit_windows)
         testthat::expect_true(is_32bit_windows)
+        testthat::expect_true(is_32bit_windows)
     }
-
-    testthat::expect_equal(reformatted_lines[1:5], corr_res)
 })

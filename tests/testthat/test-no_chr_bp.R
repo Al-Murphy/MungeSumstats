@@ -1,22 +1,22 @@
 test_that("Imputation of CHR and BP correctly", {
-    file <- tempfile()
-    # write the Educational Attainment GWAS to a temp file for testing
-    eduAttainOkbay <- readLines(system.file("extdata", "eduAttainOkbay.txt",
-        package = "MungeSumstats"
-    ))
-    writeLines(eduAttainOkbay, con = file)
-    # read it in and drop CHR BP columns
-    sumstats_dt <- data.table::fread(file)
-    # Keep Org to validate values
-    sumstats_dt_missing <- data.table::copy(sumstats_dt)
-    sumstats_dt_missing[, CHR := NULL]
-    sumstats_dt_missing[, POS := NULL]
-    data.table::fwrite(x = sumstats_dt_missing, file = file, sep = "\t")
     ## The following test uses more than 2GB of memory, which is more
     ## than what 32-bit Windows can handle:
-    is_32bit_windows <- .Platform$OS.type == "windows" &&
-        .Platform$r_arch == "i386"
+    is_32bit_windows <- .Platform$OS.type == "windows" ##&&
+        ##.Platform$r_arch == "i386"
     if (!is_32bit_windows) {
+        file <- tempfile()
+        # write the Educational Attainment GWAS to a temp file for testing
+        eduAttainOkbay <- readLines(system.file("extdata", "eduAttainOkbay.txt",
+                                                package = "MungeSumstats"
+        ))
+        writeLines(eduAttainOkbay, con = file)
+        # read it in and drop CHR BP columns
+        sumstats_dt <- data.table::fread(file)
+        # Keep Org to validate values
+        sumstats_dt_missing <- data.table::copy(sumstats_dt)
+        sumstats_dt_missing[, CHR := NULL]
+        sumstats_dt_missing[, POS := NULL]
+        data.table::fwrite(x = sumstats_dt_missing, file = file, sep = "\t")
         # Run MungeSumstats code
         reformatted <- MungeSumstats::format_sumstats(file,
             ref_genome = "GRCh37",

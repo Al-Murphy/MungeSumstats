@@ -40,24 +40,56 @@ from the MRC IEU [Open GWAS Project](https://gwas.mrcieu.ac.uk/).
 #### Search for datasets ####
 metagwas <- MungeSumstats::find_sumstats(traits = c("parkinson","alzheimer"), 
                                          min_sample_size = 1000)
-head(metagwas)
+head(metagwas,3)
 ids <- (dplyr::arrange(metagwas, nsnp))$id  
 ```
 
 ```{r,echo=FALSE}
 #### Search for datasets ####
-error_dwnld <-
-            tryCatch(
-              metagwas <- MungeSumstats::find_sumstats(traits = c("parkinson",
-                                                                  "alzheimer"), 
-                                         min_sample_size = 1000),
-            error = function(e) e,
-            warning = function(w) w
-            )
-if(exists("metagwas")&&is.data.frame(metagwas)){#if exists downloaded fine
-  head(metagwas)
-  ids <- (dplyr::arrange(metagwas, nsnp))$id  
-}
+#error_dwnld <-
+#            tryCatch(
+#              metagwas <- MungeSumstats::find_sumstats(traits = c("parkinson",
+#                                                                  "alzheimer"), 
+#                                         min_sample_size = 1000),
+#            error = function(e) e,
+#            warning = function(w) w
+#            )
+#if(exists("metagwas")&&is.data.frame(metagwas)){#if exists downloaded fine
+#  head(metagwas,3)
+#  ids <- (dplyr::arrange(metagwas, nsnp))$id  
+#}
+
+#to speed up build just create results
+metagwas2 <- 
+    data.frame(
+        id=c("ieu-a-298","ieu-b-2","ieu-a-297"),
+        trait = rep("Alzheimer's disease",3),
+        group_name = rep("public",3),
+        year=c(2013, 2019, 2013),
+        author=c("Lambert","Kunkle BW","Lambert"),
+        consortium=c("IGAP",
+                     "Alzheimer Disease Genetics Consortium (ADGC), European Alzheimer's Disease Initiative (EADI), Cohorts for Heart and Aging Research in Genomic Epidemiology Consortium (CHARGE), Genetic and Environmental Risk in AD/Defining Genetic, Polygenic and Environmental Risk for Alzheimer's Disease Consortium (GERAD/PERADES),",
+                     "IGAP" ),
+        sex=rep("Males and Females",3),
+        population=rep("European",3),
+        unit=c("log odds","NA","log odds"),
+        nsnp=c(11633,10528610,7055882),
+        sample_size=c(74046,63926,54162),
+        build=rep("HG19/GRCh37",3),
+        category=c("Disease","Binary","Disease"),
+        subcategory=rep("Psychiatric / neurological",3),
+        ontology=rep("NA",3),
+        mr=rep(1,3),
+        priority=c(1,0,2),
+        pmid=c(24162737,30820047,24162737),
+        sd=rep(NA,3),
+        note=c("Exposure only; Effect allele frequencies are missing; forward(+) strand",
+               "NA","Effect allele frequencies are missing; forward(+) strand"),
+        ncase=c(25580,21982,17008),
+        ncontrol=c(48466,41944,37154),
+        N=c(74046,63926,54162)
+    )
+print(head(metagwas2,3))
 ```
 
 # Import full results
@@ -71,18 +103,12 @@ datasets <- MungeSumstats::import_sumstats(ids = "ieu-a-298",
 ```
 
 ```{r,echo=FALSE}
-error_dwnld <-
-            tryCatch(
-              datasets <- MungeSumstats::import_sumstats(ids = "ieu-a-298",
-                                           ref_genome = "GRCH37"),
-            error = function(e) e,
-            warning = function(w) w
-            )
+#don't actually run as this takes some time, use stashed version
+datasets <- list("ieu-a-298"=paste0(tempdir(),"/ieu-a-298.tsv.gz"))
+#stashed value
+datasets_data <- list("ieu-a-298"=system.file("extdata","ieu-a-298.tsv.gz",
+                                                package="MungeSumstats"))
 
-if(!exists("datasets")){
-  datasets <- list("ieu-a-298"=system.file("extdata","ieu-a-298.tsv.gz",
-                                            package="MungeSumstats"))
-}
 ```
 
 ## Summarise results 

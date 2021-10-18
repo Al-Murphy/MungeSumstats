@@ -1,23 +1,22 @@
 test_that("Check that imputation columns added correctly", {
-    pth <- system.file("extdata", "eduAttainOkbay.txt",
-        package = "MungeSumstats"
-    )
-    eduAttainOkbay <- data.table::fread(pth)
-    # edit to make an rs id be imputed
-    eduAttainOkbay[1, "MarkerName"] <-
-        substring(
-            eduAttainOkbay[1, "MarkerName"], 3,
-            nchar(eduAttainOkbay[1, "MarkerName"])
-        )
-    # write to temp dir
-    file <- tempfile()
-    data.table::fwrite(eduAttainOkbay, file)
-
     ## The following test uses more than 2GB of memory, which is more
     ## than what 32-bit Windows can handle:
     is_32bit_windows <- .Platform$OS.type == "windows" #&&
         #.Platform$r_arch == "i386"
     if (!is_32bit_windows) {
+        pth <- system.file("extdata", "eduAttainOkbay.txt",
+                           package = "MungeSumstats"
+        )
+        eduAttainOkbay <- data.table::fread(pth)
+        # edit to make an rs id be imputed
+        eduAttainOkbay[1, "MarkerName"] <-
+            substring(
+                eduAttainOkbay[1, "MarkerName"], 3,
+                nchar(eduAttainOkbay[1, "MarkerName"])
+            )
+        # write to temp dir
+        file <- tempfile()
+        data.table::fwrite(eduAttainOkbay, file)
         # run
         reformatted <- MungeSumstats::format_sumstats(file,
             ref_genome = "GRCh37",

@@ -26,8 +26,10 @@ knitr::opts_chunk$set(tidy         = FALSE,
 
 # Introduction
 
-The *MungeSumstats* package is designed to facilitate the standardisation of GWAS summary statistics as utilised in our Nature Genetics paper [@Skene2018]. If you use MungeSumstats, please cite our preprint
-[Murphy and Skene. MungeSumstats: A Bioconductor package for the standardisation and quality control of many GWAS summary statistics](https://www.biorxiv.org/content/10.1101/2021.06.21.449239v1).
+The *MungeSumstats* package is designed to facilitate the standardisation of GWAS summary statistics as utilised in our Nature Genetics paper [@Skene2018]. If you use MungeSumstats, please cite
+[Murphy et al. MungeSumstats: A Bioconductor package for the
+standardisation and quality control of many GWAS summary
+statistics](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btab665/6380562)
 
 # Overview
 
@@ -38,7 +40,7 @@ The package is designed to handle the lack of standardisation of output files by
 # Installing MungeSumstats
 
 *MungeSumstats* is avaiable on 
-[Bioconductor](https://bioconductor.org/packages/MungeSumstats) (v3.13). 
+[Bioconductor](https://bioconductor.org/packages/MungeSumstats) (v3.13+). 
 To install *MungeSumstats* on Bioconductor run:
 
 ```
@@ -88,7 +90,9 @@ If you have any problems please do file an issue here on github.
 
 If you use the MungeSumstats package then please cite
 
-[Murphy and Skene. MungeSumstats: A Bioconductor package for the standardisation and quality control of many GWAS summary statistics](https://www.biorxiv.org/content/10.1101/2021.06.21.449239v1).
+[Murphy et al. MungeSumstats: A Bioconductor package for the
+standardisation and quality control of many GWAS summary
+statistics](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btab665/6380562).
 
 # Future Enhancements
 

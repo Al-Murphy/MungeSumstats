@@ -1,7 +1,7 @@
 Standardise the format of GWAS summary statistics with *MungeSumstats*
 ================
 Alan Murphy, Brian Schilder and Nathan Skene
-2021-10-14
+2021-10-18
 
 <!-- Readme.md is generated from Readme.Rmd. Please edit that file -->
 <!-- badges: start -->
@@ -15,10 +15,10 @@ coverage](https://codecov.io/gh/neurogenomics/MungeSumstats/branch/master/graph/
 
 The *MungeSumstats* package is designed to facilitate the
 standardisation of GWAS summary statistics as utilised in our Nature
-Genetics paper.<sup>1</sup> If you use MungeSumstats, please cite our
-preprint [Murphy and Skene. MungeSumstats: A Bioconductor package for
-the standardisation and quality control of many GWAS summary
-statistics](https://www.biorxiv.org/content/10.1101/2021.06.21.449239v1).
+Genetics paper.<sup>1</sup> If you use MungeSumstats, please cite
+[Murphy et al. MungeSumstats: A Bioconductor package for the
+standardisation and quality control of many GWAS summary
+statistics](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btab665/6380562)
 
 # Overview
 
@@ -38,8 +38,8 @@ most common discrepancies across summary statistic files.
 # Installing MungeSumstats
 
 *MungeSumstats* is avaiable on
-[Bioconductor](https://bioconductor.org/packages/MungeSumstats) (v3.13).
-To install *MungeSumstats* on Bioconductor run:
+[Bioconductor](https://bioconductor.org/packages/MungeSumstats)
+(v3.13+). To install *MungeSumstats* on Bioconductor run:
 
     if (!require("BiocManager"))
         install.packages("BiocManager")
@@ -91,9 +91,9 @@ If you have any problems please do file an issue here on github.
 
 If you use the MungeSumstats package then please cite
 
-[Murphy and Skene. MungeSumstats: A Bioconductor package for the
+[Murphy et al. MungeSumstats: A Bioconductor package for the
 standardisation and quality control of many GWAS summary
-statistics](https://www.biorxiv.org/content/10.1101/2021.06.21.449239v1).
+statistics](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btab665/6380562).
 
 # Future Enhancements
 

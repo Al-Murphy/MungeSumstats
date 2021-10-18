@@ -243,11 +243,24 @@ change `save_path` ( e.g.`file.path('./formatted',basename(path))`), or make
 sure to copy files elsewhere after processing 
 ( e.g.`file.copy(save_path, './formatted/' )`.
 
-```{r, message=TRUE}
+```{r, eval=FALSE, message=TRUE}
 eduAttainOkbayPth <- system.file("extdata","eduAttainOkbay.txt",
                                   package="MungeSumstats")
 reformatted <- 
   MungeSumstats::format_sumstats(path=eduAttainOkbayPth,
+                                 ref_genome="GRCh37")
+```
+
+```{r,echo=FALSE}
+#don't run time intensive checks
+eduAttainOkbayPth <- system.file("extdata","eduAttainOkbay.txt",
+                                  package="MungeSumstats")
+reformatted <- 
+  MungeSumstats::format_sumstats(path=eduAttainOkbayPth,
+                                 on_ref_genome = FALSE,
+                                 strand_ambig_filter = FALSE,
+                                 bi_allelic_filter = FALSE,
+                                 allele_flip_check = FALSE,
                                  ref_genome="GRCh37")
 ```
 
@@ -367,7 +380,7 @@ You can also get more information on the SNPs which have had data imputed or
 have been filtered out by *MungeSumstats* by using the `imputation_ind` and 
 `log_folder_ind` parameters respectively. For example:
 
-```{r, message=FALSE}
+```{r, eval=FALSE,message=FALSE}
 #set
 reformatted_vcf_2 <- 
   MungeSumstats::format_sumstats(path=ALSvcfPth,
@@ -376,6 +389,21 @@ reformatted_vcf_2 <-
                                  log_folder_ind=TRUE,
                                  imputation_ind=TRUE,
                                  log_mungesumstats_msgs=TRUE)
+```
+
+```{r,echo=FALSE,message=FALSE}
+#don't run time intensive checks
+reformatted_vcf_2 <- 
+  MungeSumstats::format_sumstats(path=ALSvcfPth,
+                                 ref_genome="GRCh37",
+                                 INFO_filter = 0.1,
+                                 log_folder_ind=TRUE,
+                                 imputation_ind=TRUE,
+                                 log_mungesumstats_msgs=TRUE,
+                                 on_ref_genome = FALSE,
+                                 strand_ambig_filter = FALSE,
+                                 bi_allelic_filter = FALSE,
+                                 allele_flip_check = FALSE)
 ```
 
 Note that using `log_folder_ind` returns a list from `format_sumstats` which
@@ -446,6 +474,7 @@ reformatted_vcf_2 <-
                                  log_mungesumstats_msgs=TRUE,
                                  return_format="GRanges")
 ```
+
 
 See our publication for further discussion of these checks and options:
 
