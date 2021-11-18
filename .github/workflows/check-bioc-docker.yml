@@ -190,6 +190,7 @@ jobs:
           ## Alternatively use https://storage.googleapis.com/bioconductor_docker/packages/
           ## though based on https://bit.ly/bioc2021-package-binaries
           ## the Azure link will be the main one going forward.
+          options(timeout = 60*10) # Raise install time limit
           bioc_ver <- BiocManager::version()
           gha_repos <- if(
               .Platform$OS.type == "unix" && Sys.info()["sysname"] != "Darwin"
@@ -217,6 +218,7 @@ jobs:
           ## Pass #2 at installing dependencies
           ## This pass does not use AnVIL and will thus update any packages
           ## that have seen been updated in Bioconductor
+          options(timeout = 60*10) # Raise install time limit
           message(paste('****', Sys.time(), 'pass number 2 at installing dependencies: any remaining dependencies ****'))
           remotes::install_local(dependencies = TRUE, repos = BiocManager::repositories(), build_vignettes = TRUE, upgrade = TRUE, force = TRUE)
         shell: Rscript {0}

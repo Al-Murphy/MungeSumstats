@@ -48,7 +48,7 @@ RUN mkdir /buildzone
 ADD . /buildzone
 WORKDIR /buildzone
 # Install dependencies with AnVil (faster)
-RUN Rscript -e 'options(download.file.method= "libcurl"); \
+RUN Rscript -e 'options(download.file.method= "libcurl", timeout = 60*10); \
                 if(!"BiocManager" %in% rownames(utils::installed.packages)) {install.packages("BiocManager")}; \
                 if(!"AnVIL" %in% rownames(utils::installed.packages)) {BiocManager::install("AnVIL", ask = FALSE)}; \
                 try({remotes::install_github("bergant/rapiclient")}); \
