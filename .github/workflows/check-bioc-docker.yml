@@ -258,7 +258,7 @@ jobs:
           DISPLAY: 99.0
         run: |
           options(crayon.enabled = TRUE)
-          if(!require("sessioninfo")) install.packages("rcmdcheck")
+          if(!require("rcmdcheck")) install.packages("rcmdcheck")
           rcmdcheck::rcmdcheck(
               args = c("--no-manual", "--timings"),
               build_args = c("--no-manual", "--keep-empty-dirs", "--no-resave-data"),
