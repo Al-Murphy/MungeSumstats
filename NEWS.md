@@ -14,13 +14,17 @@ to test logs files.
 * Added unit tests for `list_sumstats` and `parse_logs`. 
 * Added new Docker vignette.  
 * Updated GHA workflows using [r_workflows](https://github.com/neurogenomics/r_workflows).  
-* Made documentation in README more clear and concise. 
+* Remove *docs/* folder as the website will now be pushed to 
+the `gh-pages` branch automatically by new GHA workflow.  
+* Made documentation in README more clear and concise.
 
 ### Bug fixes
 
 * Reduced vignette sizes.
-* Remove usage of `suppressWarnings` where possible.  
-* Configure *.Rproj* so it doesn't store large data files.  
+* Removed usage of `suppressWarnings` where possible.  
+* Deleted old *.Rproj* file and hidden folder (contained large files). 
+* Configured *.Rproj* so it doesn't store large data files. 
+
 
 ## CHANGES IN VERSION 1.3.0
 
