@@ -9,3 +9,6 @@
 ^docs$
 ^pkgdown$
 ^ieugwasr_oauth$
+
+Dockerfile
+.dockerignore

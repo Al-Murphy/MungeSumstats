@@ -42,7 +42,7 @@
 #' @inheritParams check_access_token
 #' @inheritParams gwasinfo
 #' @examples
-#' #only run the examples if user has internet access:
+#' # Only run the examples if user has internet access:
 #' if(try(is.character(getURL("www.google.com")))==TRUE){
 #' ### By ID
 #' metagwas <- find_sumstats(ids = c(

@@ -50,7 +50,7 @@ get_access_token <- function() {
     msg <- "Using access token. For info on how this is used see logging_info()"
     message(msg)
     tf <- basename(tempfile())
-    check <- suppressWarnings(file.create(tf))
+    check <- file.create(tf, showWarnings = FALSE)
     if (!check) {
         stop(
             "You are currently in a directory",

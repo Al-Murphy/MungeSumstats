@@ -85,7 +85,7 @@ list/vector of character strings.
 By default, returns metadata for all studies currently in Open GWAS database.
 }
 \examples{
-#only run the examples if user has internet access:
+# Only run the examples if user has internet access:
 if(try(is.character(getURL("www.google.com")))==TRUE){
 ### By ID
 metagwas <- find_sumstats(ids = c(

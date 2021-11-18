@@ -1,3 +1,33 @@
+## CHANGES IN VERSION 1.3.1
+
+### New Features
+
+* `import_sumstats`: Create individual folders for each GWAS dataset,
+with a respective `logs` subfolder to avoid overwriting log files
+when processing multiple GWAS.  
+* `parse_logs`: **New function** to convert logs from one or more munged GWAS
+into a `data.table`.  
+* `list_sumstats`: **New function** to recursively search for local 
+summary stats files previously munged with `MungeSumstats`.  
+* Added new dataset `inst/extdata/MungeSumstats_log_msg.txt` 
+to test logs files.  
+* Added unit tests for `list_sumstats` and `parse_logs`. 
+* Added new Docker vignette.  
+* Updated GHA workflows using [r_workflows](https://github.com/neurogenomics/r_workflows).  
+* Made documentation in README more clear and concise. 
+
+### Bug fixes
+
+* Reduced vignette sizes.
+* Remove usage of `suppressWarnings` where possible.  
+* Configure *.Rproj* so it doesn't store large data files.  
+
+## CHANGES IN VERSION 1.3.0
+
+### New Features
+
+* Version bump to align with Bioconductor release 3.14.
+
 ## CHANGES IN VERSION 1.1.27
 
 ### Bug fixes

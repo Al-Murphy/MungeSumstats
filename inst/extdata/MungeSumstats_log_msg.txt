@@ -1,0 +1,90 @@
+Reading header.
+Importing VCF file: /tmp/RtmpEEhXeV/finn-a-AD_AM.vcf.gz
+Reading VCF file.
+|--------------------------------------------------|
+|==================================================|
+Standardising column headers.
+First line of summary statistics file: 
+CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	finn-a-AD_AM	
+Removing non-standard columns: QUAL, FILTER, FORMAT
+Parsing 'FINN-A-AD_AM' data column.
+0 empty column(s) detected.
+VCF file has -log10 P-values, these will be converted to unadjusted p-values in the 'P' column.
+Formatting INFO column.
+INFO column is actually AF, it will be converted.
+Standardising column headers.
+First line of summary statistics file: 
+CHR	BP	SNP	A1	A2	INFO	ES	SE	LP	AF	ID	P	
+Summary statistics report:
+   - 7,720,803 rows
+   - 7,135,239 unique variants
+   - 13 genome-wide significant variants (P<5e-8)
+   - 23 chromosomes
+Checking for multi-GWAS.
+Checking for multiple RSIDs on one row.
+71,861 SNPs found with multiple RSIDs on one row, the first will be taken. If you would rather remove these SNPs set
+`remove_multi_rs_snp=TRUE`.
+Inferring genome build.
+Loading reference genome data.
+Loading reference genome data.
+Inferred genome build: GRCH38
+Checking SNP RSIDs.
+569,190 SNP IDs are not correctly formatted. These will be corrected from the reference genome.
+Writing in tabular format ==> /home/rstudio/raid1/bschilder/projects/MAGMA_Files_Public/data/GWAS_sumstats/finn-a-AD_AM/logs/snp_not_found_from_chr_bp.tsv.gz
+Checking for merged allele column.
+Ensuring all SNPs are on the reference genome.
+Loading reference genome data.
+1,230,626 SNPs are not on the reference genome. These will be corrected from the reference genome.
+Writing in tabular format ==> /home/rstudio/raid1/bschilder/projects/MAGMA_Files_Public/data/GWAS_sumstats/finn-a-AD_AM/logs/snp_not_found_from_chr_bp_2.tsv.gz
+Checking for correct direction of A1 (reference) and A2 (alternative allele).
+There are 1,312 SNPs where neither A1 nor A2 match the reference genome. These will be removed.
+Writing in tabular format ==> /home/rstudio/raid1/bschilder/projects/MAGMA_Files_Public/data/GWAS_sumstats/finn-a-AD_AM/logs/alleles_dont_match_ref_gen.tsv.gz
+There are 2,883,415 SNPs where A1 doesn't match the reference genome.
+These will be flipped with their effect columns.
+Reordering so first three column headers are SNP, CHR and BP in this order.
+Reordering so the fourth and fifth columns are A1 and A2.
+Checking for missing data.
+Checking for duplicate columns.
+Checking for duplicate SNPs from SNP ID.
+56,044 RSIDs are duplicated in the sumstats file. These duplicates will be removed
+Writing in tabular format ==> /home/rstudio/raid1/bschilder/projects/MAGMA_Files_Public/data/GWAS_sumstats/finn-a-AD_AM/logs/dup_snp_id.tsv.gz
+Checking for SNPs with duplicated base-pair positions.
+367 base-pair positions are duplicated in the sumstats file. These duplicates will be removed.
+Writing in tabular format ==> /home/rstudio/raid1/bschilder/projects/MAGMA_Files_Public/data/GWAS_sumstats/finn-a-AD_AM/logs/dup_base_pair_position.tsv.gz
+Filtering SNPs based on INFO score.
+3,959,881 SNPs are below the INFO threshold of 0.9 and will be removed.
+Writing in tabular format ==> /home/rstudio/raid1/bschilder/projects/MAGMA_Files_Public/data/GWAS_sumstats/finn-a-AD_AM/logs/info_filter.tsv.gz
+Filtering SNPs, ensuring SE>0.
+Ensuring all SNPs have N<5 std dev above mean.
+Removing 'chr' prefix from CHR.
+Making X/Y CHR uppercase.
+57,709 SNPs are on chromosomes X, Y, MT and will be removed
+Writing in tabular format ==> /home/rstudio/raid1/bschilder/projects/MAGMA_Files_Public/data/GWAS_sumstats/finn-a-AD_AM/logs/chr_excl.tsv.gz
+Checking for bi-allelic SNPs.
+63,741 SNPs are non-biallelic. These will be removed.
+Writing in tabular format ==> /home/rstudio/raid1/bschilder/projects/MAGMA_Files_Public/data/GWAS_sumstats/finn-a-AD_AM/logs/snp_bi_allelic.tsv.gz
+Warning: When method is an integer, must be >0.
+121,278 SNPs (6.6%) have FRQ values > 0.5. Conventionally the FRQ column is intended to show the minor/effect allele frequency.
+The FRQ column was mapped from one of the following from the inputted  summary statistics file:
+FRQ, EAF, MAF, FRQ_U, F_U, FREQUENCY, FREQ, FREQ_TESTED_ALLELE, FRQ_TESTED_ALLELE, FREQ_EFFECT_ALLELE, FRQ_EFFECT_ALLELE, EFFECT_ALLELE_FREQUENCY, EFFECT_ALLELE_FREQ, EFFECT_ALLELE_FRQ, A1FREQ, A1FRQ, A2FREQ, A2FRQ, ALLELE_FREQUENCY, ALLELE_FREQ, ALLELE_FRQ, AF, MINOR_AF, EFFECT_AF, A2_AF, EFF_AF, ALT_AF, ALTERNATIVE_AF, INC_AF, A_2_AF, TESTED_AF
+As frq_is_maf=TRUE, the FRQ column will not be renamed. If the FRQ values were intended to represent major allele frequency,
+set frq_is_maf=FALSE to rename the column as MAJOR_ALLELE_FRQ and differentiate it from minor/effect allele frequency.
+Sorting coordinates.
+Writing in tabular format ==> /home/rstudio/raid1/bschilder/projects/MAGMA_Files_Public/data/GWAS_sumstats/finn-a-AD_AM/finn-a-AD_AM.tsv.gz
+Summary statistics report:
+   - 1,848,283 rows (23.9% of original 7,720,803 rows)
+   - 1,845,349 unique variants
+   - 0 genome-wide significant variants (P<5e-8)
+   - 22 chromosomes
+Successfully finished preparing sumstats file, preview:
+Reading header.
+           SNP CHR     BP A1 A2     INFO    BETA     SE       LP      FRQ          ID
+1: rs556300838   1 589557  C  T 0.999639  5.6749 2.9012 1.297050 0.000361 rs556300838
+2:  rs28760963   1 591353  C  T 0.995904 -0.5621 0.9146 0.268572 0.004096  rs28760963
+3: rs368254419   1 610932  C  T 0.966580 -0.4784 0.3780 0.686766 0.033420 rs368254419
+4: rs778009914   1 630224  G  A 0.999744  2.5121 6.4864 0.155834 0.000256 rs778009914
+            P
+1: 0.05046032
+2: 0.53880051
+3: 0.20569986
+4: 0.69849934

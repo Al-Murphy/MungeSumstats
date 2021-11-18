@@ -21,8 +21,8 @@ axel <- function(input_url,
     dir.create(output_path, showWarnings = FALSE, recursive = TRUE)
     out_file <- file.path(output_path, basename(input_url))
     if (force_overwrite) {
-        message("+ Overwriting pre-existing file.")
-        suppressWarnings(file.remove(out_file))
+        message("Overwriting pre-existing file.")
+        if(file.exists(out_file)) file.remove(out_file, showWarnings = FALSE)
     }
     axel <- "axel"
     cmd <- paste(
