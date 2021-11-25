@@ -14,7 +14,7 @@
 #' 
 #' @examples 
 #' save_dir <- system.file("extdata",package = "MungeSumstats")
-#' log_data <- parse_logs(save_dir = save_dir)
+#' log_data <- MungeSumstats::parse_logs(save_dir = save_dir)
 #' 
 #' @export
 #' @importFrom data.table data.table rbindlist
@@ -36,12 +36,12 @@ parse_logs <- function(save_dir = getwd(),
             #### Infer ID from directory names ####
             id = basename(dirname(dirname(f))),
             id_standard = parse_idStandard(l = l),
-            #### Get metrics before format_sumstats ####
+            #### Get metrics before munging ####
             rows_start = parse_report(l = l, entry = 1, line = 1),
             snps_start = parse_report(l = l, entry = 1, line = 2),
             sig_snps_start = parse_report(l = l, entry = 1, line = 3),
             chroms_start = parse_report(l = l, entry = 1, line = 4),
-            #### Get metrics after format_sumstats ####
+            #### Get metrics after munging ####
             rows_end = parse_report(l = l, entry = -1, line = 1),
             snps_end = parse_report(l = l, entry = -1, line = 2),
             sig_snps_end = parse_report(l = l, entry = -1, line = 3),
@@ -56,6 +56,10 @@ parse_logs <- function(save_dir = getwd(),
             snps_dropped_nonA1A2 = parse_dropped_nonA1A2(l = l),
             snps_dropped_duplicates = parse_dropped_duplicates(l = l),
             snps_dropped_chrom = parse_dropped_chrom(l = l),
+            #### Problematic p-values ####
+            snps_pval_small = parse_pval_small(l = l),
+            snps_pval_large = parse_pval_large(l = l),
+            snps_pval_neg = parse_pval_neg(l = l),
             #### Path info ####
             log_path = f
         )  
