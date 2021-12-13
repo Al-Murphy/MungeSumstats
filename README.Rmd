@@ -15,7 +15,7 @@ vignette: >
 
 ```{r, echo=FALSE}
 knitr::opts_chunk$set(tidy = FALSE,
-                      warning = FALSE,
+                      warning = FALSE, 
                       message = FALSE)
 ```
 
