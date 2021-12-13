@@ -35,14 +35,14 @@ and `check_small_p_val`.
 in *inst/extdata*, and includes documentation on how it was created.  
 * Both `check_range_p_val` and `check_small_p_val` now use `#' @inheritParams format_sumstats` to improve consistency of documentation.  
 
-
-
 ### Bug fixes
 
 * Reduced vignette sizes.
 * Removed usage of `suppressWarnings` where possible.  
 * Deleted old *.Rproj* file and hidden folder (contained large files). 
 * Configured *.Rproj* so it doesn't store large data files. 
+* Fix badger issues: https://github.com/GuangchuangYu/badger/issues/34 
+* Prevent *test-index_tabix.R* from running due to errors (for now). 
 
 
 ## CHANGES IN VERSION 1.3.0
