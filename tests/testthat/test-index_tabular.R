@@ -1,8 +1,10 @@
 test_that("index_tabular works", {
     ## Call uses reference genome as default with more than 2GB of memory,
     ## which is more than what 32-bit Windows can handle so remove tests
+  
+    #### Don't run on Windows at all for now, since tabix-
     is_32bit_windows <-
-      .Platform$OS.type == "windows" && .Platform$r_arch == "i386"
+      .Platform$OS.type == "windows"## && .Platform$r_arch == "i386"
     if (!is_32bit_windows) {
       eduAttainOkbayPth <- system.file("extdata", "eduAttainOkbay.txt",
                                        package = "MungeSumstats")

@@ -41,9 +41,16 @@
 #' @param convert_ref_genome name of the reference genome to convert to
 #' ("GRCh37" or "GRCh38"). This will only occur if the current genome build does
 #' not match. Default is not to convert the genome build (NULL).
-#' @param convert_small_p Binary, should p-values < 5e-324 be converted to 0?
+#' @param convert_small_p Binary, should non-negative 
+#' p-values <= 5e-324 be converted to 0?
 #' Small p-values pass the R limit and can cause errors with LDSC/MAGMA and
 #' should be converted. Default is TRUE.
+#' @param convert_large_p Binary, should p-values >1 be converted to 1?
+#' P-values >1 should not be possible and can cause errors with LDSC/MAGMA and
+#' should be converted. Default is TRUE.
+#' @param convert_neg_p Binary, should p-values <0 be converted to 0?
+#' Negative p-values should not be possible and can cause errors 
+#' with LDSC/MAGMA and should be converted. Default is TRUE.
 #' @param compute_z Whether to compute Z-score column from P. Default is FALSE.
 #' **Note** that imputing the Z-score for every SNP will not correct be
 #' perfectly correct and may result in a loss of power. This should only be done
@@ -165,6 +172,8 @@ format_sumstats <- function(path,
                             ref_genome = NULL,
                             convert_ref_genome = NULL,
                             convert_small_p = TRUE,
+                            convert_large_p = TRUE,
+                            convert_neg_p = TRUE,
                             compute_z = FALSE,
                             force_new_z = FALSE,
                             compute_n = 0L,
@@ -590,12 +599,20 @@ format_sumstats <- function(path,
             path = path
         )
 
-        #### Check 17: check for small P-values (3e-400 or lower) ####
+        #### Check 17: check for small P-values (<=5e-324) ####
         sumstats_return <-
             check_small_p_val(
                 sumstats_dt = sumstats_return$sumstats_dt,
-                path = path,
                 convert_small_p = convert_small_p,
+                imputation_ind = imputation_ind
+            )
+        
+        #### Check 17.5: check for large (>1) and neg (<0)  p-values ####
+        sumstats_return <-
+            check_range_p_val(
+                sumstats_dt = sumstats_return$sumstats_dt,
+                convert_large_p = convert_large_p, 
+                convert_neg_p = convert_neg_p,
                 imputation_ind = imputation_ind
             )
 

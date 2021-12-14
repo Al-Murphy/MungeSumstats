@@ -1,3 +1,56 @@
+## CHANGES IN VERSION 1.3.1
+
+### New Features
+
+* `import_sumstats`: Create individual folders for each GWAS dataset,
+with a respective `logs` subfolder to avoid overwriting log files
+when processing multiple GWAS.  
+* `parse_logs`: **New function** to convert logs from one or more munged GWAS
+into a `data.table`.  
+* `list_sumstats`: **New function** to recursively search for local 
+summary stats files previously munged with `MungeSumstats`.  
+* Added new dataset `inst/extdata/MungeSumstats_log_msg.txt` 
+to test logs files.  
+* Added unit tests for `list_sumstats` and `parse_logs`. 
+* Added new Docker vignette.  
+* Updated GHA workflows using [r_workflows](https://github.com/neurogenomics/r_workflows).  
+* Remove *docs/* folder as the website will now be pushed to 
+the `gh-pages` branch automatically by new GHA workflow.  
+* Made documentation in README more clear and concise.  
+* Added checks for p-values >1 or <0 via args `convert_large_p` and 
+`convert_neg_p`, respectively.
+These are both handled by the new internal function `check_range_p_val`, 
+which also reports the number of SNPs found meeting these criteria 
+to the console/logs.  
+* `check_small_p_val` records which SNPs were imputed in a  more robust way, 
+by recording which SNPs met the criteria before making the changes (as opposed to inferred this info from which columns are 0 after making the changes). This 
+function now only handles non-negative p-values, so that rows with negative
+p-values can be recorded/reported separately in the `check_range_p_val` step.  
+* `check_small_p_val` now reports the number of SNPs <= 5e-324 to console/logs. 
+* Unit tests have been added for both `check_range_p_val` 
+and `check_small_p_val`. 
+* `parse_logs` can now extract information reported by `check_range_p_val` and 
+`check_small_p_val`.  
+* New internal function `logs_example` provides easy access to log file stored 
+in *inst/extdata*, and includes documentation on how it was created.  
+* Both `check_range_p_val` and `check_small_p_val` now use `#' @inheritParams format_sumstats` to improve consistency of documentation.  
+
+### Bug fixes
+
+* Reduced vignette sizes.
+* Removed usage of `suppressWarnings` where possible.  
+* Deleted old *.Rproj* file and hidden folder (contained large files). 
+* Configured *.Rproj* so it doesn't store large data files. 
+* Fix badger issues: https://github.com/GuangchuangYu/badger/issues/34 
+* Prevent *test-index_tabix.R* from running due to errors (for now). 
+
+
+## CHANGES IN VERSION 1.3.0
+
+### New Features
+
+* Version bump to align with Bioconductor release 3.14.
+
 ## CHANGES IN VERSION 1.1.27
 
 ### Bug fixes

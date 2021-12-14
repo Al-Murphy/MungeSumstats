@@ -62,7 +62,8 @@ import_sumstats <- function(ids,
     # vcf_dir=tempdir(); vcf_download=TRUE;download_method="axel";quiet=FALSE;
     # force_new=FALSE;nThread=10; ids=c("ieu-a-1124","ieu-a-1125"); id=ids[1];
     # ref_genome=NULL;
-    # quick input error handling
+    
+    #### Check download method ####
     msg_dwnld <- paste0(
         "download_method must be `download.file` (single threa",
         "d) or `axel` (multi threaded)."
@@ -70,8 +71,8 @@ import_sumstats <- function(ids,
     if (!tolower(download_method) %in% c("download.file", "axel")) {
         stop(msg_dwnld)
     }
-    download_method <- tolower(download_method)[1]
-
+    download_method <- tolower(download_method)[1] 
+    #### start overall timer ####
     start_all <- Sys.time()
     ids <- unique(ids)
     message("Processing ", length(ids), " datasets from Open GWAS.")
@@ -86,7 +87,7 @@ import_sumstats <- function(ids,
     } else {
         nThread_acrossIDs <- 1
     }
-
+    #### Iterate over IDS ####
     ouputs <- parallel::mclapply(ids, function(id) {
         out <- tryCatch(expr = {
             start <- Sys.time()
@@ -109,12 +110,20 @@ import_sumstats <- function(ids,
                 quiet = quiet,
                 nThread = nThread
             )
-            #### format_sumstats ####
-            save_path <- file.path(save_dir, basename(vcf_url))
+            #### Create path of the output file ####
+            id_dir <- file.path(save_dir, id)
+            save_path <- file.path(id_dir, basename(vcf_url))
+            dir.create(id_dir, 
+                       showWarnings = FALSE, recursive = TRUE)
+            #### Create dataset-specific folders/paths ####
+            log_folder <- file.path(id_dir,"logs")
+            dir.create(log_folder, showWarnings = FALSE, recursive = TRUE) 
+            #### format_sumstats #### 
             if (!write_vcf) save_path <- gsub(".vcf.gz", ".tsv.gz", save_path)
             reformatted <- format_sumstats(
                 path = vcf_paths$save_path,
                 save_path = save_path,
+                log_folder = log_folder,
                 nThread = nThread,
                 ...
             )

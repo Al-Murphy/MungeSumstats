@@ -1,29 +1,19 @@
 ---
 title: "Import GWAS summary statistics from Open GWAS"
-author: "Alan Murphy, Brian Schilder, and Nathan Skene"
-date: "`r Sys.Date()`"
+author: "<h5><i>Authors</i>: Alan Murphy, Brian Schilder and Nathan Skene</h5>"
+date: "<h5><i>Updated</i>: `r format(Sys.Date(), '%b-%d-%Y')`</h5>"
+csl: nature.csl
 output:
   BiocStyle::html_document:
-    self_contained: yes
-    toc: true
-    toc_float: true
-    toc_depth: 3
-    code_folding: show
-    df_print: paged
-csl: nature.csl
 vignette: >
     %\VignetteIndexEntry{OpenGWAS} 
     %\usepackage[utf8]{inputenc}
-    %\VignetteEngine{knitr::rmarkdown}  
-editor_options: 
-  markdown: 
-    wrap: 72
+    %\VignetteEngine{knitr::rmarkdown}
 ---
 
-```{r style, echo=FALSE, results='asis', message=FALSE, dpi=400}
-BiocStyle::markdown()
-knitr::opts_chunk$set(tidy         = FALSE,
-                      message      = FALSE)
+```{r style, echo=FALSE}
+knitr::opts_chunk$set(tidy = FALSE,
+                      message = FALSE)
 ```
 
 ```{r}

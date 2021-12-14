@@ -9,6 +9,8 @@ format_sumstats(
   ref_genome = NULL,
   convert_ref_genome = NULL,
   convert_small_p = TRUE,
+  convert_large_p = TRUE,
+  convert_neg_p = TRUE,
   compute_z = FALSE,
   force_new_z = FALSE,
   compute_n = 0L,
@@ -61,9 +63,18 @@ reference genome from the data.}
 ("GRCh37" or "GRCh38"). This will only occur if the current genome build does
 not match. Default is not to convert the genome build (NULL).}
 
-\item{convert_small_p}{Binary, should p-values < 5e-324 be converted to 0?
+\item{convert_small_p}{Binary, should non-negative
+p-values <= 5e-324 be converted to 0?
 Small p-values pass the R limit and can cause errors with LDSC/MAGMA and
 should be converted. Default is TRUE.}
+
+\item{convert_large_p}{Binary, should p-values >1 be converted to 1?
+P-values >1 should not be possible and can cause errors with LDSC/MAGMA and
+should be converted. Default is TRUE.}
+
+\item{convert_neg_p}{Binary, should p-values <0 be converted to 0?
+Negative p-values should not be possible and can cause errors
+with LDSC/MAGMA and should be converted. Default is TRUE.}
 
 \item{compute_z}{Whether to compute Z-score column from P. Default is FALSE.
 \strong{Note} that imputing the Z-score for every SNP will not correct be

@@ -1,33 +1,17 @@
 ---
-title: "Standardise GWAS summary statistics with *MungeSumstats*"
-author: "Alan Murphy, Brian Schilder, and Nathan Skene"
-date: "`r Sys.Date()`"
+title: "`MungeSumstats`: Getting started"
+author: "<h5><i>Authors</i>: Alan Murphy, Brian Schilder and Nathan Skene</h5>"
+date: "<h5><i>Updated</i>: `r format(Sys.Date(), '%b-%d-%Y')`</h5>"
+csl: nature.csl
 output:
   BiocStyle::html_document:
-    self_contained: yes
-    toc: true
-    toc_float: true
-    toc_depth: 3
-    code_folding: show
-    df_print: paged
-csl: nature.csl
 vignette: >
-    %\VignetteIndexEntry{Standardise the format of summary statistics from GWAS with MungeSumstats} 
+    %\VignetteIndexEntry{MungeSumstats} 
     %\usepackage[utf8]{inputenc}
     %\VignetteEngine{knitr::rmarkdown} 
 bibliography: MungeSumstats.bib
-editor_options: 
-  markdown: 
-    wrap: 72
 ---
-
-```{r style, echo=FALSE, results='asis', message=FALSE}
-BiocStyle::markdown()
-knitr::opts_chunk$set(tidy         = FALSE,
-                      message      = FALSE)
-
-```
-
+ 
 # Citation
 
 If you use the MungeSumstats package, please cite
