@@ -20,13 +20,12 @@ knitr::opts_chunk$set(tidy = FALSE,
 ```
 
 <!-- badges: start -->
-`r usethis::git_default_branch_rediscover()`
 `r badger::badge_bioc_release(color = "black")`
 `r badger::badge_github_version(color = "black")`
 `r badger::badge_github_actions(action = "DockerHub")`
 `r badger::badge_github_actions(action = "R-CMD-check-bioc")`
-`r badger::badge_last_commit()`
-`r badger::badge_codecov()`
+`r badger::badge_last_commit(branch = "master")`
+`r badger::badge_codecov(branch = "master")`
 `r badger::badge_bioc_download(by = "total", color = "blue")`
 `r badger::badge_license()`
 `r badger::badge_doi(doi = "https://doi.org/10.1093/bioinformatics/btab665", color="blue")`
