@@ -31,7 +31,7 @@ get_chain_file <- function(build_conversion = c("hg38ToHg19", "hg19ToHg38"),
     if(file.exists(local_path_gunzip)){
         if(verbose)
             message("Using existing chain file.")
-    } 
+    }
     else{
         if(verbose)
             message("Downloading chain file from UCSC Genome Browser.")
@@ -41,16 +41,17 @@ get_chain_file <- function(build_conversion = c("hg38ToHg19", "hg19ToHg38"),
             warning = function(w) w
             )
         #if download failed use file in package
-        if(grepl("Couldn't connect to server",error_dwnld$message)||
-            grepl("Couldn't resolve host name",error_dwnld$message)||
-            is(error_dwnld,"warning")||is(error_dwnld,"error")){
+        if(is(error_dwnld,"warning")||is(error_dwnld,"error")||
+           grepl("Couldn't connect to server",error_dwnld$message)||
+            grepl("Couldn't resolve host name",error_dwnld$message)
+            ){
             chain_file <- paste0(build_conversion[1],".over.chain.gz")
             #download.file will create an empty file even if download fails
             if(file.exists(local_path))
                 rmvd <- file.remove(local_path)
-            copied <- copyFile(srcPathname = 
+            copied <- copyFile(srcPathname =
                                    system.file("extdata",chain_file,
-                                                package="MungeSumstats"), 
+                                                package="MungeSumstats"),
                                    save_dir)
             msg <- paste0("Download of chain file from UCSC Genome Browser ",
                             "failed, using package snapshot from 2021-10-07 ",
