@@ -1,3 +1,10 @@
+## CHANGES IN VERSION 1.3.2
+
+### Bug fixes
+* Previously rsids with characters added (e.g. rs1234567w) would cause an error
+when checking for the rsid on the reference genome. This has been fixed and 
+the correct rsid will now be imputed from the reference genome for these cases.
+
 ## CHANGES IN VERSION 1.3.1
 
 ### New Features

@@ -18,13 +18,20 @@ load_ref_genome_data <- function(snps, ref_genome, msg = NULL) {
     SNP_LOC_DATA <- load_snp_loc_data(ref_genome, msg = msg)
     # Get correct ref genome
     if (toupper(ref_genome) == "GRCH37") {
-genome <-
-    BSgenome.Hsapiens.1000genomes.hs37d5::BSgenome.Hsapiens.1000genomes.hs37d5
+        genome <-
+            BSgenome.Hsapiens.1000genomes.hs37d5::BSgenome.Hsapiens.1000genomes.hs37d5
     } else { # =="GRCH38"
         genome <- BSgenome.Hsapiens.NCBI.GRCh38::BSgenome.Hsapiens.NCBI.GRCh38
     }
 
-
+    #snps can contain odd characters, need to sort these
+    #so the snp should be all numeric of should start with rs and then be 
+    #numeric. Find any that aren't and exclude these. The rs id can be inferred]
+    #in a later function
+    snps <-
+        snps[!unlist(lapply(suppressWarnings(as.numeric(substring(snps,
+                                                                  3,length(snps)
+                                                                  ))),is.na))]
     gr_rsids <- BSgenome::snpsById(
         x = SNP_LOC_DATA,
         id = snps,
