@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.2</span>
       </span>
     </div>
 
@@ -97,7 +97,7 @@
 </h5></h4>
             
             <h4 data-toc-skip class="date"><h5>
-<i>Updated</i>: Jan-07-2022
+<i>Updated</i>: Feb-09-2022
 </h5></h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/MungeSumstats/blob/HEAD/vignettes/MungeSumstats.Rmd" class="external-link"><code>vignettes/MungeSumstats.Rmd</code></a></small>
@@ -107,15 +107,15 @@
 
     
     
-<div class="section level1">
-<h1 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
-</h1>
+<div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
 <p>If you use the MungeSumstats package, please cite</p>
 <p><a href="https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btab665/6380562" class="external-link">Murphy et al. MungeSumstats: A Bioconductor package for the standardisation and quality control of many GWAS summary statistics</a>.</p>
 </div>
-<div class="section level1">
-<h1 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
-</h1>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
 <p>The <em>MungeSumstats</em> package is designed to facilitate the standardisation of GWAS summary statistics as utilised in our Nature Genetics paper.<span class="citation"><sup>1</sup></span></p>
 <p>The package is designed to handle the lack of standardisation of output files by the GWAS community. There is a group who have now manually standardised many GWAS: <a href="https://mrcieu.github.io/ieugwasr/" class="external-link">R interface to the IEU GWAS database API • ieugwasr</a> and <a href="https://github.com/MRCIEU/gwasvcf" class="external-link">gwasvcf</a> but because a lot of GWAS remain closed access, these repositories are not all encompassing.</p>
 <p>The <a href="https://github.com/mikegloudemans/gwas-download" class="external-link">GWAS-Download project</a> has collated summary statistics from 200+ GWAS. This repository has been utilsed to identify the most common formats, all of which can be standardised with <em>MungeSumstats</em>.</p>
@@ -125,9 +125,9 @@
 <p>Moreover, <em>MungeSumstats</em> is efficiently written resulting in all reformatting and quality control checks completing in minutes for GWAS summary statistics with 500k SNPs on a standard desktop machine. This speed can be increased further by increasing the number of threads (nThread) for <code>data.table</code> to use.</p>
 <p>Currently <em>MungeSumstats</em> only works on data from humans, as it uses human-based genome references.</p>
 </div>
-<div class="section level1">
-<h1 id="aim">Aim<a class="anchor" aria-label="anchor" href="#aim"></a>
-</h1>
+<div class="section level2">
+<h2 id="aim">Aim<a class="anchor" aria-label="anchor" href="#aim"></a>
+</h2>
 <p><em>MungeSumstats</em> will ensure that the all essential columns for analysis are present and syntactically correct. Generally, summary statistic files include (but are not limited to) the columns:</p>
 <ul>
 <li>SNP : SNP ID (rs IDs)</li>
@@ -188,16 +188,16 @@
 <p>If a test is failed, the user will be notified and if possible, the input will be corrected. The QC steps from the checks above can also be adjusted to suit the user’s analysis, see <code><a href="../reference/format_sumstats.html">MungeSumstats::format_sumstats</a></code>.</p>
 <p><em>MungeSumstats</em> can handle VCF, txt, tsv, csv file types or .gz/.bgz versions of these file types. The package also gives the user the flexibility to export the reformatted file as tab-delimited, VCF or R native objects such as data.table, GRanges or VRanges objects. The output can also be outputted in an <strong>LDSC ready</strong> format which means the file can be fed directly into LDSC without the need for additional munging.</p>
 </div>
-<div class="section level1">
-<h1 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
-</h1>
+<div class="section level2">
+<h2 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
+</h2>
 <p>The <em>MungeSumstats</em> package contains small subsets of GWAS summary statistics files. Firstly, on Educational Attainment by Okbay et al 2016: PMID: 27898078 PMCID: PMC5509058 DOI: 10.1038/ng1216-1587b.</p>
 <p>Secondly, a VCF file (VCFv4.2) relating to the GWAS Amyotrophic lateral sclerosis from ieu open GWAS project. Dataset: ebi-a-GCST005647: <a href="https://gwas.mrcieu.ac.uk/datasets/ebi-a-GCST005647/" class="external-link uri">https://gwas.mrcieu.ac.uk/datasets/ebi-a-GCST005647/</a></p>
 <p>These datasets will be used to showcase <em>MungeSumstats</em> functionality.</p>
 </div>
-<div class="section level1">
-<h1 id="running-mungesumstats">Running <em>MungeSumstats</em><a class="anchor" aria-label="anchor" href="#running-mungesumstats"></a>
-</h1>
+<div class="section level2">
+<h2 id="running-mungesumstats">Running <em>MungeSumstats</em><a class="anchor" aria-label="anchor" href="#running-mungesumstats"></a>
+</h2>
 <p><em>MungeSumstats</em> is available on Bioconductor. To install the package on Bioconductor run the following lines of code:</p>
 <pre><code><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span><span class="op">)</span>
     <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
@@ -229,7 +229,7 @@
 <span class="co">## - This means all formatted summary stats will be deletedupon ending the R session.</span>
 <span class="co">## - To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.</span>
 <span class="co">## ********************</span></code></pre>
-<pre><code><span class="co">## Formatted summary statistics will be saved to ==&gt; /tmp/Rtmpn6AeJw/file564a5b8f9264.tsv.gz</span></code></pre>
+<pre><code><span class="co">## Formatted summary statistics will be saved to ==&gt; /tmp/RtmpVuqS3r/file57931eefdcba.tsv.gz</span></code></pre>
 <pre><code><span class="co">## Reading header.</span></code></pre>
 <pre><code><span class="co">## Tabular format detected.</span></code></pre>
 <pre><code><span class="co">## Importing tabular file: /__w/_temp/Library/MungeSumstats/extdata/eduAttainOkbay.txt</span></code></pre>
@@ -260,7 +260,7 @@
 <pre><code><span class="co">## As frq_is_maf=TRUE, the FRQ column will not be renamed. If the FRQ values were intended to represent major allele frequency,</span>
 <span class="co">## set frq_is_maf=FALSE to rename the column as MAJOR_ALLELE_FRQ and differentiate it from minor/effect allele frequency.</span></code></pre>
 <pre><code><span class="co">## Sorting coordinates.</span></code></pre>
-<pre><code><span class="co">## Writing in tabular format ==&gt; /tmp/Rtmpn6AeJw/file564a5b8f9264.tsv.gz</span></code></pre>
+<pre><code><span class="co">## Writing in tabular format ==&gt; /tmp/RtmpVuqS3r/file57931eefdcba.tsv.gz</span></code></pre>
 <pre><code><span class="co">## Summary statistics report:</span>
 <span class="co">##    - 93 rows (100% of original 93 rows)</span>
 <span class="co">##    - 93 unique variants</span>
@@ -441,9 +441,9 @@
 <p>See our publication for further discussion of these checks and options:</p>
 <p><a href="https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btab665/6380562" class="external-link">Murphy et al. MungeSumstats: A Bioconductor package for the standardisation and quality control of many GWAS summary statistics</a>.</p>
 </div>
-<div class="section level1">
-<h1 id="extra-functionality">Extra Functionality<a class="anchor" aria-label="anchor" href="#extra-functionality"></a>
-</h1>
+<div class="section level2">
+<h2 id="extra-functionality">Extra Functionality<a class="anchor" aria-label="anchor" href="#extra-functionality"></a>
+</h2>
 <p><em>MungeSumstats</em> also contains a function to quickly infer the genome build of multiple summary statistic files. This can be called separately to <code><a href="../reference/format_sumstats.html">format_sumstats()</a></code> which is useful if you want to just quickly check the genome build:</p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Pass path to Educational Attainment Okbay sumstat file to a temp directory</span>
@@ -453,9 +453,9 @@
 
 <span class="va">ref_genomes</span> <span class="op">&lt;-</span> <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/get_genome_builds.html">get_genome_builds</a></span><span class="op">(</span>sumstats_list <span class="op">=</span> <span class="va">sumstats_list</span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level1">
-<h1 id="future-enhancements">Future Enhancements<a class="anchor" aria-label="anchor" href="#future-enhancements"></a>
-</h1>
+<div class="section level2">
+<h2 id="future-enhancements">Future Enhancements<a class="anchor" aria-label="anchor" href="#future-enhancements"></a>
+</h2>
 <p>The <em>MungeSumstats</em> package aims to be able to handle the most common summary statistic file formats including VCF. If your file can not be formatted by <em>MungeSumstats</em> feel free to report the bug on github: <a href="https://github.com/neurogenomics/MungeSumstats" class="external-link uri">https://github.com/neurogenomics/MungeSumstats</a> along with your summary statistic file header.</p>
 <p>We also encourage people to edit the code to resolve their particular issues too and are happy to incorporate these through pull requests on github. If your summary statistic file headers are not recognised by <em>MungeSumstats</em> but correspond to one of:</p>
 <pre><code>SNP, BP, CHR, A1, A2, P, Z, OR, BETA, LOG_ODDS,
@@ -463,15 +463,15 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 <p>feel free to update the <code><a href="../reference/sumstatsColHeaders.html">MungeSumstats::sumstatsColHeaders</a></code> following the approach in the data.R file and add your mapping. Then use a pull request on github and we will incorporate this change into the package.</p>
 <p>A note on <code><a href="../reference/sumstatsColHeaders.html">MungeSumstats::sumstatsColHeaders</a></code> for summary statistic files with A0/A1. The mapping in <code><a href="../reference/sumstatsColHeaders.html">MungeSumstats::sumstatsColHeaders</a></code> converts A0 to A*, this is a special case so that the code knows to map A0/A1 to A1/A2 (ref/alt). The special case is needed since ordinarily A1 refers to the reference not the alternative allele.</p>
 </div>
-<div class="section level1">
-<h1 id="further-functionality">Further functionality<a class="anchor" aria-label="anchor" href="#further-functionality"></a>
-</h1>
+<div class="section level2">
+<h2 id="further-functionality">Further functionality<a class="anchor" aria-label="anchor" href="#further-functionality"></a>
+</h2>
 <p>See the <a href="https://neurogenomics.github.io/MungeSumstats/articles/OpenGWAS.html" class="external-link">Open GWAS vignette</a> for how MungeSumstats can be used along with data from the MRC IEU Open GWAS Project and also Mungesumstats’ functionality to handle lists of summary statistics files.</p>
 </div>
-<div class="section level1">
-<h1 id="session-information">Session Information<a class="anchor" aria-label="anchor" href="#session-information"></a>
-</h1>
-<details><pre><code><span class="co">## R Under development (unstable) (2021-12-30 r81418)</span>
+<div class="section level2">
+<h2 id="session-information">Session Information<a class="anchor" aria-label="anchor" href="#session-information"></a>
+</h2>
+<details><pre><code><span class="co">## R Under development (unstable) (2022-02-03 r81650)</span>
 <span class="co">## Platform: x86_64-pc-linux-gnu (64-bit)</span>
 <span class="co">## Running under: Ubuntu 20.04.3 LTS</span>
 <span class="co">## </span>
@@ -481,7 +481,7 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 <span class="co">## locale:</span>
 <span class="co">##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              </span>
 <span class="co">##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    </span>
-<span class="co">##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=C             </span>
+<span class="co">##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   </span>
 <span class="co">##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 </span>
 <span class="co">##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            </span>
 <span class="co">## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       </span>
@@ -490,7 +490,7 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 <span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
 <span class="co">## </span>
 <span class="co">## other attached packages:</span>
-<span class="co">## [1] MungeSumstats_1.3.1 BiocStyle_2.23.1   </span>
+<span class="co">## [1] MungeSumstats_1.3.2 BiocStyle_2.23.1   </span>
 <span class="co">## </span>
 <span class="co">## loaded via a namespace (and not attached):</span>
 <span class="co">##   [1] bitops_1.0-7                               </span>
@@ -500,9 +500,9 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 <span class="co">##   [5] filelock_1.0.2                             </span>
 <span class="co">##   [6] progress_1.2.2                             </span>
 <span class="co">##   [7] httr_1.4.2                                 </span>
-<span class="co">##   [8] googleAuthR_1.4.1                          </span>
+<span class="co">##   [8] googleAuthR_2.0.0                          </span>
 <span class="co">##   [9] rprojroot_2.0.2                            </span>
-<span class="co">##  [10] GenomeInfoDb_1.31.1                        </span>
+<span class="co">##  [10] GenomeInfoDb_1.31.4                        </span>
 <span class="co">##  [11] tools_4.2.0                                </span>
 <span class="co">##  [12] bslib_0.3.1                                </span>
 <span class="co">##  [13] utf8_1.2.2                                 </span>
@@ -514,8 +514,8 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 <span class="co">##  [19] curl_4.3.2                                 </span>
 <span class="co">##  [20] bit_4.0.4                                  </span>
 <span class="co">##  [21] compiler_4.2.0                             </span>
-<span class="co">##  [22] cli_3.1.0                                  </span>
-<span class="co">##  [23] textshaping_0.3.6                          </span>
+<span class="co">##  [22] textshaping_0.3.6                          </span>
+<span class="co">##  [23] cli_3.1.1                                  </span>
 <span class="co">##  [24] Biobase_2.55.0                             </span>
 <span class="co">##  [25] xml2_1.3.3                                 </span>
 <span class="co">##  [26] desc_1.4.0                                 </span>
@@ -524,7 +524,7 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 <span class="co">##  [29] bookdown_0.24                              </span>
 <span class="co">##  [30] sass_0.4.0                                 </span>
 <span class="co">##  [31] rappdirs_0.3.3                             </span>
-<span class="co">##  [32] pkgdown_2.0.1.9000                         </span>
+<span class="co">##  [32] pkgdown_2.0.2.9000                         </span>
 <span class="co">##  [33] systemfonts_1.0.3                          </span>
 <span class="co">##  [34] stringr_1.4.0                              </span>
 <span class="co">##  [35] digest_0.6.29                              </span>
@@ -538,48 +538,48 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 <span class="co">##  [43] MatrixGenerics_1.7.0                       </span>
 <span class="co">##  [44] dbplyr_2.1.1                               </span>
 <span class="co">##  [45] fastmap_1.1.0                              </span>
-<span class="co">##  [46] BSgenome_1.63.3                            </span>
-<span class="co">##  [47] rlang_0.4.12                               </span>
+<span class="co">##  [46] BSgenome_1.63.4                            </span>
+<span class="co">##  [47] rlang_1.0.1                                </span>
 <span class="co">##  [48] RSQLite_2.2.9                              </span>
 <span class="co">##  [49] jquerylib_0.1.4                            </span>
 <span class="co">##  [50] BiocIO_1.5.0                               </span>
-<span class="co">##  [51] generics_0.1.1                             </span>
-<span class="co">##  [52] jsonlite_1.7.2                             </span>
-<span class="co">##  [53] BiocParallel_1.29.8                        </span>
-<span class="co">##  [54] dplyr_1.0.7                                </span>
+<span class="co">##  [51] generics_0.1.2                             </span>
+<span class="co">##  [52] jsonlite_1.7.3                             </span>
+<span class="co">##  [53] BiocParallel_1.29.12                       </span>
+<span class="co">##  [54] dplyr_1.0.8                                </span>
 <span class="co">##  [55] R.oo_1.24.0                                </span>
 <span class="co">##  [56] VariantAnnotation_1.41.3                   </span>
-<span class="co">##  [57] RCurl_1.98-1.5                             </span>
-<span class="co">##  [58] magrittr_2.0.1                             </span>
+<span class="co">##  [57] RCurl_1.98-1.6                             </span>
+<span class="co">##  [58] magrittr_2.0.2                             </span>
 <span class="co">##  [59] GenomeInfoDbData_1.2.7                     </span>
 <span class="co">##  [60] Matrix_1.4-0                               </span>
-<span class="co">##  [61] Rcpp_1.0.7                                 </span>
-<span class="co">##  [62] S4Vectors_0.33.9                           </span>
-<span class="co">##  [63] fansi_0.5.0                                </span>
+<span class="co">##  [61] Rcpp_1.0.8                                 </span>
+<span class="co">##  [62] S4Vectors_0.33.10                          </span>
+<span class="co">##  [63] fansi_1.0.2                                </span>
 <span class="co">##  [64] lifecycle_1.0.1                            </span>
 <span class="co">##  [65] R.methodsS3_1.8.1                          </span>
 <span class="co">##  [66] stringi_1.7.6                              </span>
-<span class="co">##  [67] yaml_2.2.1                                 </span>
+<span class="co">##  [67] yaml_2.2.2                                 </span>
 <span class="co">##  [68] SummarizedExperiment_1.25.3                </span>
 <span class="co">##  [69] zlibbioc_1.41.0                            </span>
-<span class="co">##  [70] BiocFileCache_2.3.3                        </span>
+<span class="co">##  [70] BiocFileCache_2.3.4                        </span>
 <span class="co">##  [71] grid_4.2.0                                 </span>
 <span class="co">##  [72] blob_1.2.2                                 </span>
 <span class="co">##  [73] parallel_4.2.0                             </span>
 <span class="co">##  [74] crayon_1.4.2                               </span>
 <span class="co">##  [75] lattice_0.20-45                            </span>
 <span class="co">##  [76] Biostrings_2.63.1                          </span>
-<span class="co">##  [77] GenomicFeatures_1.47.5                     </span>
+<span class="co">##  [77] GenomicFeatures_1.47.7                     </span>
 <span class="co">##  [78] hms_1.1.1                                  </span>
 <span class="co">##  [79] KEGGREST_1.35.0                            </span>
 <span class="co">##  [80] knitr_1.37                                 </span>
-<span class="co">##  [81] pillar_1.6.4                               </span>
-<span class="co">##  [82] GenomicRanges_1.47.5                       </span>
-<span class="co">##  [83] rjson_0.2.20                               </span>
-<span class="co">##  [84] biomaRt_2.51.1                             </span>
+<span class="co">##  [81] pillar_1.7.0                               </span>
+<span class="co">##  [82] GenomicRanges_1.47.6                       </span>
+<span class="co">##  [83] rjson_0.2.21                               </span>
+<span class="co">##  [84] biomaRt_2.51.3                             </span>
 <span class="co">##  [85] stats4_4.2.0                               </span>
 <span class="co">##  [86] XML_3.99-0.8                               </span>
-<span class="co">##  [87] glue_1.6.0                                 </span>
+<span class="co">##  [87] glue_1.6.1                                 </span>
 <span class="co">##  [88] evaluate_0.14                              </span>
 <span class="co">##  [89] SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20   </span>
 <span class="co">##  [90] data.table_1.14.2                          </span>
@@ -601,9 +601,9 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 <span class="co">## [106] ellipsis_0.3.2</span></code></pre>
 </details>
 </div>
-<div class="section level1 unnumbered">
-<h1 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h1>
+<div class="section level2">
+<h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <div id="refs" class="references csl-bib-body" line-spacing="2">
 <div id="ref-Skene2018" class="csl-entry">
 <div class="csl-left-margin">1. </div>
@@ -631,7 +631,7 @@ SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
 </div>
 
       </footer>
