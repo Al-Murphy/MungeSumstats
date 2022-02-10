@@ -29,7 +29,7 @@ test_that("Multi-trait GWAS handled correctly", {
         reformatted_res <- readLines(reformatted)
         # check manually
         multi_trait_res_smk <- c(
-            "SNP\tCHR\tBP\tA1\tA2\tPOSITION_HG18\tEAF_HAPMAPCEU\tN\tBETA\tSTDERR\tP\tN_NONSMK\tEFFECT_NONSMK\tSTDERR_NONSMK\tP_VALUE_NONSMK",
+            "SNP\tCHR\tBP\tA1\tA2\tPOSITION_HG18\tEAF_HAPMAPCEU\tN\tBETA\tSE\tP\tN_NONSMK\tEFFECT_NONSMK\tSTDERR_NONSMK\tP_VALUE_NONSMK",
             "rs1000073\tchr1\t155522020\tG\tA\t155522020\t0.3136\t36335\t0.0046\t0.0083\t0.5812\t126780\t0.0038\t0.0045\t0.3979",
             "rs1000050\tchr1\t161003087\tC\tT\t161003087\t0.9\t36257\t1e-04\t0.0109\t0.9931\t127514\t0.0058\t0.0059\t0.3307",
             "rs1000085\tchr1\t66630503\tG\tC\t66630503\t0.1667\t38761\t0.0053\t0.0095\t0.5746\t147259\t-0.0034\t0.0052\t0.5157",
