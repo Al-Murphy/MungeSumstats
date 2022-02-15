@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.4</span>
       </span>
     </div>
 
@@ -96,7 +96,7 @@
 </h5></h4>
             
             <h4 data-toc-skip class="date"><h5>
-<i>Updated</i>: Feb-14-2022
+<i>Updated</i>: Feb-15-2022
 </h5></h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/MungeSumstats/blob/HEAD/vignettes/OpenGWAS.Rmd" class="external-link"><code>vignettes/OpenGWAS.Rmd</code></a></small>
@@ -157,14 +157,14 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## $`ieu-a-298`</span>
-<span class="co">## [1] "/tmp/RtmpNOCpCR/ieu-a-298.tsv.gz"</span></code></pre>
+<span class="co">## [1] "/tmp/RtmpJSCecq/ieu-a-298.tsv.gz"</span></code></pre>
 <p>You can easily turn this into a data.frame as well.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">results_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span>, 
                          path<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">results_df</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">##                  id                             path</span>
-<span class="co">## ieu-a-298 ieu-a-298 /tmp/RtmpNOCpCR/ieu-a-298.tsv.gz</span></code></pre>
+<span class="co">## ieu-a-298 ieu-a-298 /tmp/RtmpJSCecq/ieu-a-298.tsv.gz</span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -206,7 +206,7 @@
 <span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
 <span class="co">## </span>
 <span class="co">## other attached packages:</span>
-<span class="co">## [1] MungeSumstats_1.3.3 BiocStyle_2.23.1   </span>
+<span class="co">## [1] MungeSumstats_1.3.4 BiocStyle_2.23.1   </span>
 <span class="co">## </span>
 <span class="co">## loaded via a namespace (and not attached):</span>
 <span class="co">##   [1] bitops_1.0-7                matrixStats_0.61.0         </span>
@@ -220,7 +220,7 @@
 <span class="co">##  [17] tidyselect_1.1.1            prettyunits_1.1.1          </span>
 <span class="co">##  [19] curl_4.3.2                  bit_4.0.4                  </span>
 <span class="co">##  [21] compiler_4.2.0              textshaping_0.3.6          </span>
-<span class="co">##  [23] cli_3.1.1                   Biobase_2.55.0             </span>
+<span class="co">##  [23] cli_3.2.0                   Biobase_2.55.0             </span>
 <span class="co">##  [25] xml2_1.3.3                  desc_1.4.0                 </span>
 <span class="co">##  [27] DelayedArray_0.21.2         rtracklayer_1.55.3         </span>
 <span class="co">##  [29] bookdown_0.24               sass_0.4.0                 </span>
@@ -245,7 +245,7 @@
 <span class="co">##  [67] SummarizedExperiment_1.25.3 zlibbioc_1.41.0            </span>
 <span class="co">##  [69] BiocFileCache_2.3.4         grid_4.2.0                 </span>
 <span class="co">##  [71] blob_1.2.2                  parallel_4.2.0             </span>
-<span class="co">##  [73] crayon_1.4.2                lattice_0.20-45            </span>
+<span class="co">##  [73] crayon_1.5.0                lattice_0.20-45            </span>
 <span class="co">##  [75] Biostrings_2.63.1           GenomicFeatures_1.47.7     </span>
 <span class="co">##  [77] hms_1.1.1                   KEGGREST_1.35.0            </span>
 <span class="co">##  [79] knitr_1.37                  pillar_1.7.0               </span>
