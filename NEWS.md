@@ -1,3 +1,9 @@
+## CHANGES IN VERSION 1.2.1
+
+### Bug fixes
+
+* Issue installing chain file resolved
+
 ## CHANGES IN VERSION 1.1.27
 
 ### Bug fixes

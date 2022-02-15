@@ -41,9 +41,11 @@ get_chain_file <- function(build_conversion = c("hg38ToHg19", "hg19ToHg38"),
             warning = function(w) w
             )
         #if download failed use file in package
-        if(grepl("Couldn't connect to server",error_dwnld$message)||
-            grepl("Couldn't resolve host name",error_dwnld$message)||
-            is(error_dwnld,"warning")||is(error_dwnld,"error")){
+        if(is(error_dwnld,"warning")||is(error_dwnld,"error")||
+           ("message" %in% names(error_dwnld) &&
+            (grepl("Couldn't connect to server",error_dwnld$message)||
+             grepl("Couldn't resolve host name",error_dwnld$message)))
+            ){
             chain_file <- paste0(build_conversion[1],".over.chain.gz")
             #download.file will create an empty file even if download fails
             if(file.exists(local_path))
