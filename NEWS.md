@@ -1,8 +1,14 @@
+## CHANGES IN VERSION 1.3.4
+
+### Bug fixes
+
+* Issue downloading chain file resolved
+
 ## CHANGES IN VERSION 1.3.3
 
 ### New Features
 
-*more mappings added to default mapping file.
+* More mappings added to default mapping file.
 
 
 ## CHANGES IN VERSION 1.3.2
