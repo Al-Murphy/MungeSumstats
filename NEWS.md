@@ -1,3 +1,9 @@
+## CHANGES IN VERSION 1.3.5
+
+### Bug fixes
+
+* Flipping of Odds Ratio corrected (1/OR rather than -1*OR)
+
 ## CHANGES IN VERSION 1.3.4
 
 ### Bug fixes

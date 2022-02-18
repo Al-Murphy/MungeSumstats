@@ -190,7 +190,13 @@ check_allele_flip <- function(sumstats_dt, path,
                         match_type == FALSE,
                         (eff_i) := (1 - as.numeric(get(eff_i)))
                     ]
-                } else {
+                } else if(eff_i == "OR"){
+                    sumstats_dt[
+                        match_type == FALSE,
+                        (eff_i) := (1/as.numeric(get(eff_i)))
+                    ]
+                }
+                else {
                     sumstats_dt[
                         match_type == FALSE,
                         (eff_i) := as.numeric(get(eff_i)) * -1
