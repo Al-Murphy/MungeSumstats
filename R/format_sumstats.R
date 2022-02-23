@@ -540,7 +540,8 @@ format_sumstats <- function(path,
         check_vital_col(sumstats_dt = sumstats_return$sumstats_dt)
 
         #### Check 12: check there is at least one signed sumstats column ###
-        check_signed_col(sumstats_dt = sumstats_return$sumstats_dt)
+        sumstats_return <- 
+            check_signed_col(sumstats_dt = sumstats_return$sumstats_dt)
 
         #### Check 13: check for allele flipping ####
         sumstats_return <-
