@@ -40,6 +40,7 @@ check_signed_col <- function(sumstats_dt) {
             message(paste0(msg,"Deriving BETA from Z and SE"))
             sumstats_dt[,BETA := Z * SE]
         } else if ("Z" %in% col_headers & "N" %in% col_headers & "FRQ" %in% col_headers){
+            # https://www.biostars.org/p/319584/
             message(paste0(msg,"Deriving BETA from Z, N, and FRQ"))
             sumstats_dt[,BETA := Z/sqrt(2*FRQ*(1-FRQ)*(N+Z^2))]
         } else if ("Z" %in% col_headers & "N" %in% col_headers & "P" %in% col_headers){
@@ -49,7 +50,8 @@ check_signed_col <- function(sumstats_dt) {
         } else if (sum(signed_stat_column_names %in% col_headers) < 1) {
             stop(stp_msg)
         }
-        return(list("sumstats_dt" = sumstats_dt))
+    ## Remove infinite values if introduced 
+    sumstats_dt <- sumstats_dt[!is.infinite(BETA), ]
     }
     return(list("sumstats_dt" = sumstats_dt))
 }
