@@ -24,7 +24,7 @@ check_pos_se <- function(sumstats_dt, path, pos_se, log_folder_ind,
             sumstats_dt[,SE := abs(BETA/ qnorm(P/2))]
         }
         ## Remove infinite values if introduced 
-        sumstats_dt <- sumstats_dt[!is.infinite(SE), ]
+        sumstats_dt <- sumstats_dt[!is.na(SE), ]
     }
     
     if ("SE" %in% col_headers && pos_se) {

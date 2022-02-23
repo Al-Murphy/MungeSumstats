@@ -41,17 +41,17 @@ check_signed_col <- function(sumstats_dt) {
             sumstats_dt[,BETA := Z * SE]
         } else if ("Z" %in% col_headers & "N" %in% col_headers & "FRQ" %in% col_headers){
             # https://www.biostars.org/p/319584/
+            # https://www.nature.com/articles/ng.3538
             message(paste0(msg,"Deriving BETA from Z, N, and FRQ"))
             sumstats_dt[,BETA := Z/sqrt(2*FRQ*(1-FRQ)*(N+Z^2))]
         } else if ("Z" %in% col_headers & "N" %in% col_headers & "P" %in% col_headers){
             message(paste0(msg,"Deriving BETA from Z, N, and P"))
-            stop("Not yet implemented")
-            # sumstats_dt[,BETA := Z/sqrt(chdtri(N, P))]
+            sumstats_dt[,BETA := Z/sqrt(qchisq(P, N))]
         } else if (sum(signed_stat_column_names %in% col_headers) < 1) {
             stop(stp_msg)
         }
     ## Remove infinite values if introduced 
-    sumstats_dt <- sumstats_dt[!is.infinite(BETA), ]
+    sumstats_dt <- sumstats_dt[!is.na(BETA), ]
     }
     return(list("sumstats_dt" = sumstats_dt))
 }
