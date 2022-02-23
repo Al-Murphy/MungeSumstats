@@ -17,7 +17,7 @@ check_pos_se <- function(sumstats_dt, path, pos_se, log_folder_ind,
         
         if ("Z" %in% col_headers & "BETA" %in% col_headers) {
             message(paste0(derive_msg,"Deriving SE from Z and BETA"))
-            sumstats_dt[,SE := BETA * Z]
+            sumstats_dt[,SE := BETA / Z]
         } else if ("BETA" %in% col_headers & "P" %in% col_headers) {
             # https://www.biostars.org/p/431875/ 
             message(paste0(derive_msg,"Deriving SE from Beta and P"))
