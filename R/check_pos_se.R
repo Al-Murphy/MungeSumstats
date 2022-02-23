@@ -7,8 +7,26 @@
 #' @keywords internal
 check_pos_se <- function(sumstats_dt, path, pos_se, log_folder_ind,
                          check_save_out, tabix_index, nThread, log_files) {
+    `%nin%` = negate(`%in%`)
     SE <- .SD <- NULL
     col_headers <- names(sumstats_dt)
+    
+    if ("SE" %nin% col_headers) {
+        
+        derive_msg = message("The sumstats SE column is not present...")
+        
+        if ("Z" %in% col_headers & "BETA" %in% col_headers) {
+            message(paste0(derive_msg,"Deriving SE from Z and BETA"))
+            sumstats_dt[,SE := BETA * Z]
+        } else if ("BETA" %in% col_headers & "P" %in% col_headers) {
+            # https://www.biostars.org/p/431875/ 
+            message(paste0(derive_msg,"Deriving SE from Beta and P"))
+            sumstats_dt[,SE := abs(BETA/ qnorm(P/2))]
+        }
+        ## Remove infinite values if introduced 
+        sumstats_dt <- sumstats_dt[!is.infinite(SE), ]
+    }
+    
     if ("SE" %in% col_headers && pos_se) {
         message("Filtering SNPs, ensuring SE>0.")
         # use data table for speed
