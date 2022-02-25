@@ -178,6 +178,8 @@ format_sumstats <- function(path,
                             force_new_z = FALSE,
                             compute_n = 0L,
                             convert_n_int = TRUE,
+                            impute_beta = FALSE, 
+                            impute_se = FALSE,
                             analysis_trait = NULL,
                             INFO_filter = 0.9,
                             FRQ_filter = 0,
@@ -541,7 +543,20 @@ format_sumstats <- function(path,
 
         #### Check 12: check there is at least one signed sumstats column ###
         sumstats_return <- 
-            check_signed_col(sumstats_dt = sumstats_return$sumstats_dt)
+            check_signed_col(
+                sumstats_dt = sumstats_return$sumstats_dt, 
+                impute_beta = impute_beta,
+                log_folder_ind = log_folder_ind,
+                rsids = rsids, 
+                imputation_ind = imputation_ind,
+                check_save_out = check_save_out,
+                nThread = nThread,
+                log_files = log_files
+                )
+        # update values
+        log_files <- sumstats_return$log_files
+        rsids <- sumstats_return$rsids # update rsids
+        sumstats_return$rsids <- NULL
 
         #### Check 13: check for allele flipping ####
         sumstats_return <-
