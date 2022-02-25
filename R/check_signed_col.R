@@ -99,7 +99,9 @@ check_signed_col <-
             }
             
             ## Remove NA values if introduced
-            sumstats_dt <- sumstats_dt[!is.na(BETA), ]
+            if (impute_beta | "BETA" %in% col_headers ){
+                sumstats_dt <- sumstats_dt[!is.na(BETA), ]
+            } 
             
             return(list(
                 "sumstats_dt" = sumstats_dt,
