@@ -6,7 +6,7 @@
 #' @return list containing sumstats_dt, the modified summary statistics data
 #' table object and the log file list
 #' @keywords internal
-check_pos_se <- function(sumstats_dt, path, pos_se, log_folder_ind,
+check_pos_se <- function(sumstats_dt, path, pos_se, log_folder_ind, imputation_ind,
                          check_save_out, tabix_index, nThread, log_files,
                          impute_se) {
     `%nin%` = negate(`%in%`)
