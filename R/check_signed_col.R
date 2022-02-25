@@ -29,18 +29,12 @@ check_signed_col <-
         beta_imputed <- FALSE
         #impute BETA from other columns
         if ("BETA" %nin% col_headers) {
-            if ("OR" %in% col_headers) {
-                imp_cols <- "OR"
+            if ("Z" %in% col_headers && "N" %in% col_headers &&
+                "P" %in% col_headers){
+                imp_cols <- "Z, N & P"
                 if(impute_beta){
-                    message(paste0(msg,"Deriving BETA from OR"))
-                    sumstats_dt[,BETA := log(OR)]
-                    beta_imputed <- TRUE
-                }
-            } else if ("Z" %in% col_headers & "SE" %in% col_headers) {
-                imp_cols <- "Z & SE"
-                if(impute_beta){
-                    message(paste0(msg,"Deriving BETA from Z and SE"))
-                    sumstats_dt[,BETA := Z * SE]
+                    message(paste0(msg,"Deriving BETA from Z, N, and P"))
+                    sumstats_dt[,BETA := Z/sqrt(qchisq(P, N))]
                     beta_imputed <- TRUE
                 }  
             } else if ("Z" %in% col_headers && "N" %in% col_headers &&
@@ -53,14 +47,20 @@ check_signed_col <-
                     sumstats_dt[,BETA := Z/sqrt(2*FRQ*(1-FRQ)*(N+Z^2))]
                     beta_imputed <- TRUE
                 }  
-            } else if ("Z" %in% col_headers && "N" %in% col_headers &&
-                       "P" %in% col_headers){
-                imp_cols <- "Z, N & P"
+            } else if ("Z" %in% col_headers & "SE" %in% col_headers) {
+                imp_cols <- "Z & SE"
                 if(impute_beta){
-                    message(paste0(msg,"Deriving BETA from Z, N, and P"))
-                    sumstats_dt[,BETA := Z/sqrt(qchisq(P, N))]
+                    message(paste0(msg,"Deriving BETA from Z and SE"))
+                    sumstats_dt[,BETA := Z * SE]
                     beta_imputed <- TRUE
                 }  
+            } else if ("OR" %in% col_headers) {
+                imp_cols <- "OR"
+                if(impute_beta){
+                    message(paste0(msg,"Deriving BETA from OR"))
+                    sumstats_dt[,BETA := log(OR)]
+                    beta_imputed <- TRUE
+                }
             } else if (sum(signed_stat_column_names %in% col_headers) < 1) {
                 stop(stp_msg)
             }

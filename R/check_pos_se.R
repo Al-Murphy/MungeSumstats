@@ -22,14 +22,7 @@ check_pos_se <- function(sumstats_dt, path, pos_se, log_folder_ind, imputation_i
         
         derive_msg = message("The sumstats SE column is not present...")
         
-        if ("Z" %in% col_headers & "BETA" %in% col_headers) {
-            imp_cols <- "Z & BETA"
-            if(impute_se){
-                message(paste0(derive_msg,"Deriving SE from Z and BETA"))
-                sumstats_dt[,SE := BETA / Z]
-                se_imputed <- TRUE
-            }  
-        } else if ("BETA" %in% col_headers & "P" %in% col_headers) {
+        if ("BETA" %in% col_headers & "P" %in% col_headers) {
             imp_cols <- "BETA & P"
             if(impute_se){
                 # https://www.biostars.org/p/431875/
@@ -37,7 +30,14 @@ check_pos_se <- function(sumstats_dt, path, pos_se, log_folder_ind, imputation_i
                 sumstats_dt[,SE := abs(BETA/ qnorm(P/2))]
                 se_imputed <- TRUE
             }  
-        }
+        } else if ("Z" %in% col_headers & "BETA" %in% col_headers) {
+            imp_cols <- "Z & BETA"
+            if(impute_se){
+                message(paste0(derive_msg,"Deriving SE from Z and BETA"))
+                sumstats_dt[,SE := BETA / Z]
+                se_imputed <- TRUE
+            }  
+        }  
         #tell the user if they could impute beta but didn't because of input param
         if(!impute_se && !isFALSE(imp_cols)){
             no_imp_msg <- paste0(no_imp_msg,imp_cols,no_imp_msg2)
