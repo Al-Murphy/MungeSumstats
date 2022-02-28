@@ -8,7 +8,8 @@ NCBI dbSNP Build 144. Reference genome version is dependent on user input.}
 load_snp_loc_data(ref_genome, msg = NULL)
 }
 \arguments{
-\item{ref_genome}{name of the reference genome used for the GWAS (GRCh37 or GRCh38)}
+\item{ref_genome}{name of the reference genome used for the GWAS
+(GRCh37 or GRCh38)}
 
 \item{msg}{Optional name of the column missing from the dataset in question}
 }
@@ -22,5 +23,4 @@ NCBI dbSNP Build 144. Reference genome version is dependent on user input.
 }
 \examples{
 SNP_LOC_DATA <- load_snp_loc_data("GRCH37")
-
 }

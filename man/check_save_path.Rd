@@ -4,7 +4,13 @@
 \alias{check_save_path}
 \title{Check if save path and log folder is appropriate}
 \usage{
-check_save_path(save_path, log_folder, log_folder_ind, write_vcf = FALSE)
+check_save_path(
+  save_path,
+  log_folder,
+  log_folder_ind,
+  tabix_index,
+  write_vcf = FALSE
+)
 }
 \arguments{
 \item{save_path}{File path to save formatted data. Defaults to
@@ -18,6 +24,9 @@ filtered out SNPs (separate file per filter). The data is outputted in the
 same format specified for the resulting sumstats file. The only exception to
 this rule is if output is vcf, then log file saved as .tsv.gz. Default is
 FALSE.}
+
+\item{tabix_index}{Index the formatted summary statistics with
+\href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
 
 \item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
 }

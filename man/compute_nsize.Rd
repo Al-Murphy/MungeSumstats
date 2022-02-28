@@ -4,9 +4,16 @@
 \alias{compute_nsize}
 \title{Check for N column if not present and user wants, impute N based on user's
 sample size. \strong{NOTE} this will be the same value for each SNP which is not
-necessarily correct and may cause issues down the line.}
+necessarily correct and may cause issues down the line. N can also be
+inputted with "ldsc", "sum", "giant" or "metal" by passing one or
+multiple of these.}
 \usage{
-compute_nsize(sumstats_dt, imputation_ind, compute_n = TRUE)
+compute_nsize(
+  sumstats_dt,
+  imputation_ind = FALSE,
+  compute_n = c("ldsc", "giant", "metal", "sum"),
+  force_new = FALSE
+)
 }
 \arguments{
 \item{sumstats_dt}{data table obj of the summary statistics file for the
@@ -18,9 +25,18 @@ includes a field denoting SNP allele flipping (flipped). \strong{Note}
 these columns will be in the formatted summary statistics returned. Default
 is FALSE.}
 
-\item{compute_n}{Whether to impute N. Default of 0 won't impute, any other
-integer will be imputed as the N (sample size) for every SNP in the dataset.
-\strong{Note} that imputing the sample size for every SNP is not correct and}
+\item{compute_n}{How to compute per-SNP sample size (new column "N").
+\itemize{
+\item{\code{0}: }{N will not be computed.}
+\item{\code{>0}: }{If any number >0 is provided,
+that value will be set as N for every row.
+\strong{Note}: Computing N this way is incorrect and should be avoided
+if at all possible.}
+\item{\code{"sum"}: }{N will be computed as:
+cases (N_CAS) + controls (N_CON), so long as both columns are present}.
+\item{\code{"effective"}: }{N will be computed as effective sample size:
+cases (N_CAS) + controls (N_CON), so long as both columns are present}.
+}}
 }
 \value{
 \code{list("sumstats_dt"=sumstats_dt)}
@@ -28,6 +44,8 @@ integer will be imputed as the N (sample size) for every SNP in the dataset.
 \description{
 Check for N column if not present and user wants, impute N based on user's
 sample size. \strong{NOTE} this will be the same value for each SNP which is not
-necessarily correct and may cause issues down the line.
+necessarily correct and may cause issues down the line. N can also be
+inputted with "ldsc", "sum", "giant" or "metal" by passing one or
+multiple of these.
 }
 \keyword{internal}

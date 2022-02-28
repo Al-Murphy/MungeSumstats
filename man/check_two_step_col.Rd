@@ -7,12 +7,14 @@
 check_two_step_col(sumstats_dt, path)
 }
 \arguments{
-\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
+\item{sumstats_dt}{data table obj of the summary statistics
+file for the GWAS}
 
 \item{path}{Filepath for the summary statistics file to be formatted}
 }
 \value{
-list containing sumstats_dt, the modified summary statistics data table object
+list containing sumstats_dt, the modified summary
+statistics data table object
 }
 \description{
 Ensure that CHR:BP aren't merged into 1 column

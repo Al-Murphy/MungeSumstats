@@ -12,7 +12,8 @@ check_dup_col(sumstats_dt, path)
 \item{path}{Filepath for the summary statistics file to be formatted}
 }
 \value{
-list containing sumstats_dt, the modified summary statistics data table object
+list containing sumstats_dt, the modified
+summary statistics data table object
 }
 \description{
 Ensure that no columns are duplicated

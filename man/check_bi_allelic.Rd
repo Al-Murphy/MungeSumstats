@@ -18,8 +18,9 @@ check_bi_allelic(
 )
 }
 \arguments{
-\item{path}{Filepath for the summary statistics file to be formatted. Default
-is a temporary file.}
+\item{path}{Filepath for the summary statistics file to be formatted. A
+dataframe or datatable of the summary statistics file can also be passed
+directly to MungeSumstats using the path parameter.}
 
 \item{ref_genome}{name of the reference genome used for the GWAS ("GRCh37" or
 "GRCh38"). Argument is case-insensitive. Default is NULL which infers the
@@ -45,7 +46,8 @@ FALSE.}
 A list containing two data tables:
 \itemize{
 \item \code{sumstats_dt}: the modified summary statistics data table object
-\item \code{rsids}: snpsById, filtered to SNPs of interest if loaded already. Or else NULL
+\item \code{rsids}: snpsById, filtered to SNPs of interest
+if loaded already. Or else \code{NULL}.
 \item \code{log_files}: log file list
 }
 }

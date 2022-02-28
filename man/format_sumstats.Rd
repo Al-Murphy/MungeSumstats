@@ -7,15 +7,19 @@
 format_sumstats(
   path,
   ref_genome = NULL,
+  convert_ref_genome = NULL,
   convert_small_p = TRUE,
+  convert_large_p = TRUE,
+  convert_neg_p = TRUE,
   compute_z = FALSE,
   force_new_z = FALSE,
   compute_n = 0L,
   convert_n_int = TRUE,
   analysis_trait = NULL,
   INFO_filter = 0.9,
+  FRQ_filter = 0,
   pos_se = TRUE,
-  effect_columns_nonzero = TRUE,
+  effect_columns_nonzero = FALSE,
   N_std = 5,
   N_dropNA = TRUE,
   rmv_chr = c("X", "Y", "MT"),
@@ -25,9 +29,11 @@ format_sumstats(
   allele_flip_check = TRUE,
   allele_flip_drop = TRUE,
   allele_flip_z = TRUE,
+  allele_flip_frq = TRUE,
   bi_allelic_filter = TRUE,
   snp_ids_are_rs_ids = TRUE,
   remove_multi_rs_snp = FALSE,
+  frq_is_maf = TRUE,
   sort_coordinates = TRUE,
   nThread = 1,
   save_path = tempfile(fileext = ".tsv.gz"),
@@ -40,20 +46,35 @@ format_sumstats(
   log_mungesumstats_msgs = FALSE,
   log_folder = tempdir(),
   imputation_ind = FALSE,
-  force_new = FALSE
+  force_new = FALSE,
+  mapping_file = sumstatsColHeaders
 )
 }
 \arguments{
-\item{path}{Filepath for the summary statistics file to be formatted. Default
-is a temporary file.}
+\item{path}{Filepath for the summary statistics file to be formatted. A
+dataframe or datatable of the summary statistics file can also be passed
+directly to MungeSumstats using the path parameter.}
 
 \item{ref_genome}{name of the reference genome used for the GWAS ("GRCh37" or
 "GRCh38"). Argument is case-insensitive. Default is NULL which infers the
 reference genome from the data.}
 
-\item{convert_small_p}{Binary, should p-values < 5e-324 be converted to 0?
+\item{convert_ref_genome}{name of the reference genome to convert to
+("GRCh37" or "GRCh38"). This will only occur if the current genome build does
+not match. Default is not to convert the genome build (NULL).}
+
+\item{convert_small_p}{Binary, should non-negative
+p-values <= 5e-324 be converted to 0?
 Small p-values pass the R limit and can cause errors with LDSC/MAGMA and
 should be converted. Default is TRUE.}
+
+\item{convert_large_p}{Binary, should p-values >1 be converted to 1?
+P-values >1 should not be possible and can cause errors with LDSC/MAGMA and
+should be converted. Default is TRUE.}
+
+\item{convert_neg_p}{Binary, should p-values <0 be converted to 0?
+Negative p-values should not be possible and can cause errors
+with LDSC/MAGMA and should be converted. Default is TRUE.}
 
 \item{compute_z}{Whether to compute Z-score column from P. Default is FALSE.
 \strong{Note} that imputing the Z-score for every SNP will not correct be
@@ -67,7 +88,11 @@ default. To override and compute a new Z-score column from P set
 \item{compute_n}{Whether to impute N. Default of 0 won't impute, any other
 integer will be imputed as the N (sample size) for every SNP in the dataset.
 \strong{Note} that imputing the sample size for every SNP is not correct and
-should only be done as a last resort.}
+should only be done as a last resort. N can also be inputted with "ldsc",
+"sum", "giant" or "metal" by passing one of these for this field or a vector
+of multiple. Sum and an integer value creates an N column in the output
+whereas giant, metal or ldsc create an Neff or effective sample size. If
+multiples are passed, the formula used to derive it will be indicated.}
 
 \item{convert_n_int}{Binary, if N (the number of samples) is not an integer,
 should this be rounded? Default is TRUE.}
@@ -78,13 +103,17 @@ analysis from the GWAS. Default is NULL.}
 \item{INFO_filter}{numeric The minimum value permissible of the imputation
 information score (if present in sumstats file). Default 0.9.}
 
+\item{FRQ_filter}{numeric The minimum value permissible of the frequency(FRQ)
+of the SNP (i.e. Allele Frequency (AF)) (if present in sumstats file). By
+default no filtering is done, i.e. value of 0.}
+
 \item{pos_se}{Binary Should the standard Error (SE) column be checked to
 ensure it is greater than 0? Those that are, are removed (if present in
 sumstats file). Default TRUE.}
 
 \item{effect_columns_nonzero}{Binary should the effect columns in the data
 BETA,OR (odds ratio),LOG_ODDS,SIGNED_SUMSTAT be checked to ensure no SNP=0.
-Those that do are removed(if present in sumstats file). Default TRUE.}
+Those that do are removed(if present in sumstats file). Default FALSE.}
 
 \item{N_std}{numeric The number of standard deviations above the mean a SNP's
 N is needed to be removed. Default is 5.}
@@ -111,25 +140,35 @@ reference genome to infer if flipping is necessary. Default is TRUE.}
 A2 base pair values match a reference genome be dropped. Default is TRUE.}
 
 \item{allele_flip_z}{Binary should the Z-score be flipped along with effect
-columns like Beta? It is assumed to be calculated off the effect size not
-the P-value and so will be flipped i.e. default TRUE.}
+and FRQ columns like Beta? It is assumed to be calculated off the effect size
+not the P-value and so will be flipped i.e. default TRUE.}
+
+\item{allele_flip_frq}{Binary should the frequency (FRQ) column be flipped
+along with effect and z-score columns like Beta? Default TRUE.}
 
 \item{bi_allelic_filter}{Binary Should non-biallelic SNPs be removed. Default
 is TRUE.}
 
 \item{snp_ids_are_rs_ids}{Binary Should the supplied SNP ID's be assumed to
-be RS IDs. If not, imputation using the SNP ID for other columns like
+be RSIDs. If not, imputation using the SNP ID for other columns like
 base-pair position or chromosome will not be possible. If set to FALSE, the
 SNP RS ID will be imputed from the reference genome if possible. Default is
 TRUE.}
 
 \item{remove_multi_rs_snp}{Binary Sometimes summary statistics can have
-multiple RS IDs on one row (i.e. related to one SNP), for example
+multiple RSIDs on one row (i.e. related to one SNP), for example
 "rs5772025_rs397784053". This can cause an error so by default, the first
 RS ID will be kept and the rest removed e.g."rs5772025". If you want to just
 remove these SNPs entirely, set it to TRUE. Default is FALSE.}
 
-\item{sort_coordinates}{Whether to sort by coordinates.}
+\item{frq_is_maf}{Conventionally the FRQ column is intended to show the
+minor/effect allele frequency (MAF) but sometimes the major allele frequency
+can be inferred as the FRQ column. This logical variable indicates that the
+FRQ column should be renamed to MAJOR_ALLELE_FRQ if the frequency values
+appear to relate to the major allele i.e. >0.5. By default this mapping won't
+occur i.e. is TRUE.}
+
+\item{sort_coordinates}{Whether to sort by coordinates of resulting sumstats}
 
 \item{nThread}{Number of threads to use for parallel processes.}
 
@@ -141,8 +180,9 @@ remove these SNPs entirely, set it to TRUE. Default is FALSE.}
 \item{tabix_index}{Index the formatted summary statistics with
 \href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
 
-\item{return_data}{Return \code{data.table} directly to user. Otherwise,
-return the path to the save data. Default is FALSE.}
+\item{return_data}{Return \code{data.table}, \code{GRanges} or \code{VRanges}
+directly to user. Otherwise, return the path to the save data. Default is
+FALSE.}
 
 \item{return_format}{If return_data is TRUE. Object type to be returned
 ("data.table","vranges","granges").}
@@ -174,6 +214,13 @@ in the formatted summary statistics returned. Default is FALSE.}
 \item{force_new}{If a formatted file of the same names as \code{save_path}
 exists, formatting will be skipped and this file will be imported instead
 (default). Set \code{force_new=TRUE} to override this.}
+
+\item{mapping_file}{MungeSumstats has a pre-defined column-name mapping file
+which should cover the most common column headers and their interpretations.
+However, if a column header that is in youf file is missing of the mapping we
+give is incorrect you can supply your own mapping file. Must be a 2 column
+dataframe with column names "Uncorrected" and "Corrected". See
+data(sumstatsColHeaders) for default mapping and necessary format.}
 }
 \value{
 The address for the modified sumstats file or the actual data
@@ -184,26 +231,31 @@ in both above instances are a list.
 Check that summary statistics from GWAS are in a homogeneous format
 }
 \examples{
-#Pass path to Educational Attainment Okbay sumstat file to a temp directory
+# Pass path to Educational Attainment Okbay sumstat file to a temp directory
 
-eduAttainOkbayPth <- system.file("extdata","eduAttainOkbay.txt", 
-                                 package="MungeSumstats")
+eduAttainOkbayPth <- system.file("extdata", "eduAttainOkbay.txt",
+    package = "MungeSumstats"
+)
 
 ## Call uses reference genome as default with more than 2GB of memory,
 ## which is more than what 32-bit Windows can handle so remove certain checks
 
-is_32bit_windows <- 
-.Platform$OS.type == "windows" && .Platform$r_arch == "i386"
+is_32bit_windows <-
+    .Platform$OS.type == "windows" && .Platform$r_arch == "i386"
 if (!is_32bit_windows) {
-reformatted <- MungeSumstats::format_sumstats(path=eduAttainOkbayPth,
-                                              ref_genome="GRCh37")
-} else{
-reformatted <- MungeSumstats::format_sumstats(path=eduAttainOkbayPth,
-                                              ref_genome="GRCh37",
-                                              on_ref_genome = FALSE,
-                                              strand_ambig_filter=FALSE,
-                                              bi_allelic_filter=FALSE,
-                                              allele_flip_check=FALSE)
+    reformatted <- format_sumstats(
+        path = eduAttainOkbayPth,
+        ref_genome = "GRCh37"
+    )
+} else {
+    reformatted <- format_sumstats(
+        path = eduAttainOkbayPth,
+        ref_genome = "GRCh37",
+        on_ref_genome = FALSE,
+        strand_ambig_filter = FALSE,
+        bi_allelic_filter = FALSE,
+        allele_flip_check = FALSE
+    )
 }
-#returned location has the updated summary statistics file
+# returned location has the updated summary statistics file
 }

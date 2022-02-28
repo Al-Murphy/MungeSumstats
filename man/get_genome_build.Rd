@@ -3,13 +3,15 @@
 \name{get_genome_build}
 \alias{get_genome_build}
 \title{Infers the genome build of the summary statistics file (GRCh37 or GRCh38)
-from the data. Uses SNP (RS ID) & CHR & BP to get genome build.}
+from the data. Uses SNP (RSID) & CHR & BP to get genome build.}
 \usage{
 get_genome_build(
   sumstats,
   nThread = 1,
   sampled_snps = 10000,
-  standardise_headers = TRUE
+  standardise_headers = TRUE,
+  mapping_file = sumstatsColHeaders,
+  header_only = FALSE
 )
 }
 \arguments{
@@ -23,19 +25,25 @@ build to save time.}
 
 \item{standardise_headers}{Run
 \code{standardise_sumstats_column_headers_crossplatform}.}
+
+\item{mapping_file}{\pkg{MungeSumstats} has a pre-defined
+column-name mapping file
+which should cover the most common column headers and their interpretations.
+However, if a column header that is in your file is missing of the mapping we
+give is incorrect you can supply your own mapping file. Must be a 2 column
+dataframe with column names "Uncorrected" and "Corrected". See
+\code{data(sumstatsColHeaders)} for default mapping and necessary format.}
+
+\item{header_only}{Instead of reading in the entire \code{sumstats} file,
+only read in the first N rows where N=\code{sampled_snps}.
+This should help speed up cases where you have to read in \code{sumstats}
+from disk each time.}
 }
 \value{
 ref_genome the genome build of the data
 }
 \description{
 Infers the genome build of the summary statistics file (GRCh37 or GRCh38)
-from the data. Uses SNP (RS ID) & CHR & BP to get genome build.
+from the data. Uses SNP (RSID) & CHR & BP to get genome build.
 }
-\examples{
-#Pass path to Educational Attainment Okbay sumstat file to a temp directory
-
-eduAttainOkbayPth <- system.file("extdata","eduAttainOkbay.txt", 
-                                 package="MungeSumstats")
-ref_genome <- get_genome_build(sumstats=eduAttainOkbayPth)                                  
-
-}
+\keyword{internal}

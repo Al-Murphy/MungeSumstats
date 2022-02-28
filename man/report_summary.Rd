@@ -7,7 +7,8 @@
 report_summary(sumstats_dt, orig_dims = NULL)
 }
 \arguments{
-\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS.}
+\item{sumstats_dt}{data table obj of the summary
+statistics file for the GWAS.}
 }
 \value{
 No return

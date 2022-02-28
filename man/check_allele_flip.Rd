@@ -4,7 +4,7 @@
 \alias{check_allele_flip}
 \title{Ensure A1 & A2 are correctly named, if GWAS SNP constructed as
 Alternative/Reference or Risk/Nonrisk alleles these SNPs will need to be
-converted to Reference/Alternative or Nonrisk/Risk. Here nonrisk is defined
+converted to Reference/Alternative or Nonrisk/Risk. Here non-risk is defined
 as what's on the reference genome (this may not always be the case).}
 \usage{
 check_allele_flip(
@@ -15,18 +15,22 @@ check_allele_flip(
   allele_flip_check,
   allele_flip_drop,
   allele_flip_z,
+  allele_flip_frq,
+  bi_allelic_filter,
   imputation_ind,
   log_folder_ind,
   check_save_out,
   tabix_index,
   nThread,
   log_files,
-  standardise_headers = FALSE
+  standardise_headers = FALSE,
+  mapping_file
 )
 }
 \arguments{
-\item{path}{Filepath for the summary statistics file to be formatted. Default
-is a temporary file.}
+\item{path}{Filepath for the summary statistics file to be formatted. A
+dataframe or datatable of the summary statistics file can also be passed
+directly to MungeSumstats using the path parameter.}
 
 \item{ref_genome}{name of the reference genome used for the GWAS ("GRCh37" or
 "GRCh38"). Argument is case-insensitive. Default is NULL which infers the
@@ -39,8 +43,14 @@ reference genome to infer if flipping is necessary. Default is TRUE.}
 A2 base pair values match a reference genome be dropped. Default is TRUE.}
 
 \item{allele_flip_z}{Binary should the Z-score be flipped along with effect
-columns like Beta? It is assumed to be calculated off the effect size not
-the P-value and so will be flipped i.e. default TRUE.}
+and FRQ columns like Beta? It is assumed to be calculated off the effect size
+not the P-value and so will be flipped i.e. default TRUE.}
+
+\item{allele_flip_frq}{Binary should the frequency (FRQ) column be flipped
+along with effect and z-score columns like Beta? Default TRUE.}
+
+\item{bi_allelic_filter}{Binary Should non-biallelic SNPs be removed. Default
+is TRUE.}
 
 \item{imputation_ind}{Binary Should a column be added for each imputation
 step to show what SNPs have imputed values for differing fields. This
@@ -65,19 +75,28 @@ FALSE.}
 
 \item{standardise_headers}{Run
 \code{standardise_sumstats_column_headers_crossplatform} first.}
+
+\item{mapping_file}{MungeSumstats has a pre-defined column-name mapping file
+which should cover the most common column headers and their interpretations.
+However, if a column header that is in youf file is missing of the mapping we
+give is incorrect you can supply your own mapping file. Must be a 2 column
+dataframe with column names "Uncorrected" and "Corrected". See
+data(sumstatsColHeaders) for default mapping and necessary format.}
 }
 \value{
 A list containing two data tables:
 \itemize{
-\item \code{sumstats_dt}: the modified summary statistics \code{data.table} object.
-\item \code{rsids}: snpsById, filtered to SNPs of interest if loaded already. Or else NULL.
+\item \code{sumstats_dt}: the modified summary statistics
+\code{data.table} object.
+\item \code{rsids}: snpsById, filtered to SNPs of interest if
+loaded already. Or else NULL.
 \item \code{log_files}: log file list
 }
 }
 \description{
 Ensure A1 & A2 are correctly named, if GWAS SNP constructed as
 Alternative/Reference or Risk/Nonrisk alleles these SNPs will need to be
-converted to Reference/Alternative or Nonrisk/Risk. Here nonrisk is defined
+converted to Reference/Alternative or Nonrisk/Risk. Here non-risk is defined
 as what's on the reference genome (this may not always be the case).
 }
 \keyword{internal}

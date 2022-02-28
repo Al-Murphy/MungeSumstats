@@ -9,12 +9,14 @@ read_vcf(
   nThread = 1,
   temp_save = FALSE,
   keep_extra_cols = FALSE,
-  save_path = tempfile()
+  save_path = tempfile(),
+  nrows = Inf
 )
 }
 \arguments{
-\item{path}{Filepath for the summary statistics file to be formatted. Default
-is a temporary file.}
+\item{path}{Filepath for the summary statistics file to be formatted. A
+dataframe or datatable of the summary statistics file can also be passed
+directly to MungeSumstats using the path parameter.}
 
 \item{nThread}{Number of threads to use for parallel processes.}
 
@@ -24,6 +26,9 @@ is a temporary file.}
 
 \item{save_path}{File path to save formatted data. Defaults to
 \code{tempfile(fileext=".tsv.gz")}.}
+
+\item{nrows}{integer. The (maximal) number of lines to read.
+If \code{Inf}, will read in all rows.}
 }
 \value{
 The modified sumstats_file

@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_no_rs_snp.R
 \name{check_no_rs_snp}
 \alias{check_no_rs_snp}
-\title{Ensure that SNP appears to be valid RS IDs (starts with rs)}
+\title{Ensure that SNP appears to be valid RSIDs (starts with rs)}
 \usage{
 check_no_rs_snp(
   sumstats_dt,
@@ -18,15 +18,16 @@ check_no_rs_snp(
 )
 }
 \arguments{
-\item{path}{Filepath for the summary statistics file to be formatted. Default
-is a temporary file.}
+\item{path}{Filepath for the summary statistics file to be formatted. A
+dataframe or datatable of the summary statistics file can also be passed
+directly to MungeSumstats using the path parameter.}
 
 \item{ref_genome}{name of the reference genome used for the GWAS ("GRCh37" or
 "GRCh38"). Argument is case-insensitive. Default is NULL which infers the
 reference genome from the data.}
 
 \item{snp_ids_are_rs_ids}{Binary Should the supplied SNP ID's be assumed to
-be RS IDs. If not, imputation using the SNP ID for other columns like
+be RSIDs. If not, imputation using the SNP ID for other columns like
 base-pair position or chromosome will not be possible. If set to FALSE, the
 SNP RS ID will be imputed from the reference genome if possible. Default is
 TRUE.}
@@ -57,6 +58,6 @@ list containing sumstats_dt, the modified summary statistics data
 table object and the log file list.
 }
 \description{
-Ensure that SNP appears to be valid RS IDs (starts with rs)
+Ensure that SNP appears to be valid RSIDs (starts with rs)
 }
 \keyword{internal}

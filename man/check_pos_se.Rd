@@ -16,8 +16,9 @@ check_pos_se(
 )
 }
 \arguments{
-\item{path}{Filepath for the summary statistics file to be formatted. Default
-is a temporary file.}
+\item{path}{Filepath for the summary statistics file to be formatted. A
+dataframe or datatable of the summary statistics file can also be passed
+directly to MungeSumstats using the path parameter.}
 
 \item{pos_se}{Binary Should the standard Error (SE) column be checked to
 ensure it is greater than 0? Those that are, are removed (if present in

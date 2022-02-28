@@ -1,0 +1,103 @@
+Reading header.
+Tabular format detected.
+Importing tabular file: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpVM3Jf1/file1011a3172c43a
+Standardising column headers.
+First line of summary statistics file: 
+MarkerName	CHR	POS	A1	A2	EAF	Beta	SE	Pval	
+Summary statistics report:
+   - 93 rows
+   - 93 unique variants
+   - 64 genome-wide significant variants (P<5e-8)
+   - 20 chromosomes
+Checking for multi-GWAS.
+Checking for multiple RSIDs on one row.
+Checking SNP RSIDs.
+Checking for merged allele column.
+Ensuring all SNPs are on the reference genome.
+Loading reference genome data.
+Checking for correct direction of A1 (reference) and A2 (alternative allele).
+There are 46 SNPs where A1 doesn't match the reference genome.
+These will be flipped with their effect columns.
+Checking for missing data.
+Checking for duplicate columns.
+6 p-values are >1 which LDSC/MAGMA may not be able to handle. These will be converted to 1.
+3 p-values are <0 which LDSC/MAGMA may not be able to handle. These will be converted to 0.
+Checking for duplicate SNPs from SNP ID.
+Checking for SNPs with duplicated base-pair positions.
+Filtering SNPs, ensuring SE>0.
+Ensuring all SNPs have N<5 std dev above mean.
+Removing 'chr' prefix from CHR.
+Making X/Y CHR uppercase.
+Checking for bi-allelic SNPs.
+Warning: When method is an integer, must be >0.
+67 SNPs (72%) have FRQ values > 0.5. Conventionally the FRQ column is intended to show the minor/effect allele frequency.
+The FRQ column was mapped from one of the following from the inputted  summary statistics file:
+FRQ, EAF, MAF, FRQ_U, F_U, FREQUENCY, FREQ, FREQ_TESTED_ALLELE, FRQ_TESTED_ALLELE, FREQ_EFFECT_ALLELE, FRQ_EFFECT_ALLELE, EFFECT_ALLELE_FREQUENCY, EFFECT_ALLELE_FREQ, EFFECT_ALLELE_FRQ, A1FREQ, A1FRQ, A2FREQ, A2FRQ, ALLELE_FREQUENCY, ALLELE_FREQ, ALLELE_FRQ, AF, MINOR_AF, EFFECT_AF, A2_AF, EFF_AF, ALT_AF, ALTERNATIVE_AF, INC_AF, A_2_AF, TESTED_AF
+As frq_is_maf=TRUE, the FRQ column will not be renamed. If the FRQ values were intended to represent major allele frequency,
+set frq_is_maf=FALSE to rename the column as MAJOR_ALLELE_FRQ and differentiate it from minor/effect allele frequency.
+Sorting coordinates.
+Writing in tabular format ==> /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpVM3Jf1/file1011a65b0d532.tsv.gz
+Summary statistics report:
+   - 93 rows (100% of original 93 rows)
+   - 93 unique variants
+   - 64 genome-wide significant variants (P<5e-8)
+   - 20 chromosomes
+Successfully finished preparing sumstats file, preview:
+Reading header.
+          SNP CHR       BP A1 A2     FRQ   BETA    SE         P
+1:   rs301800   1  8490603  T  C 0.17910  0.019 0.003 1.794e-08
+2: rs11210860   1 43982527  G  A 0.63060 -0.017 0.003 1.000e+00
+3: rs34305371   1 72733610  G  A 0.91231 -0.035 0.005 3.762e-14
+4:  rs2568955   1 72762169  T  C 0.23690 -0.017 0.003 1.797e-08
+Reading header.
+Tabular format detected.
+Importing tabular file: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpVM3Jf1/file1011a49a03bf5
+Standardising column headers.
+First line of summary statistics file: 
+MarkerName	CHR	POS	A1	A2	EAF	Beta	SE	Pval	
+Summary statistics report:
+   - 93 rows
+   - 93 unique variants
+   - 64 genome-wide significant variants (P<5e-8)
+   - 20 chromosomes
+Checking for multi-GWAS.
+Checking for multiple RSIDs on one row.
+Checking SNP RSIDs.
+Checking for merged allele column.
+Ensuring all SNPs are on the reference genome.
+Loading reference genome data.
+Checking for correct direction of A1 (reference) and A2 (alternative allele).
+There are 46 SNPs where A1 doesn't match the reference genome.
+These will be flipped with their effect columns.
+Checking for missing data.
+Checking for duplicate columns.
+3 p-values are <=5e-324 which LDSC/MAGMA may not be able to handle.  These will be converted to 0.
+6 p-values are >1 which LDSC/MAGMA may not be able to handle. These will be converted to 1.
+3 p-values are <0 which LDSC/MAGMA may not be able to handle. These will be converted to 0.
+Checking for duplicate SNPs from SNP ID.
+Checking for SNPs with duplicated base-pair positions.
+Filtering SNPs, ensuring SE>0.
+Ensuring all SNPs have N<5 std dev above mean.
+Removing 'chr' prefix from CHR.
+Making X/Y CHR uppercase.
+Checking for bi-allelic SNPs.
+Warning: When method is an integer, must be >0.
+67 SNPs (72%) have FRQ values > 0.5. Conventionally the FRQ column is intended to show the minor/effect allele frequency.
+The FRQ column was mapped from one of the following from the inputted  summary statistics file:
+FRQ, EAF, MAF, FRQ_U, F_U, FREQUENCY, FREQ, FREQ_TESTED_ALLELE, FRQ_TESTED_ALLELE, FREQ_EFFECT_ALLELE, FRQ_EFFECT_ALLELE, EFFECT_ALLELE_FREQUENCY, EFFECT_ALLELE_FREQ, EFFECT_ALLELE_FRQ, A1FREQ, A1FRQ, A2FREQ, A2FRQ, ALLELE_FREQUENCY, ALLELE_FREQ, ALLELE_FRQ, AF, MINOR_AF, EFFECT_AF, A2_AF, EFF_AF, ALT_AF, ALTERNATIVE_AF, INC_AF, A_2_AF, TESTED_AF
+As frq_is_maf=TRUE, the FRQ column will not be renamed. If the FRQ values were intended to represent major allele frequency,
+set frq_is_maf=FALSE to rename the column as MAJOR_ALLELE_FRQ and differentiate it from minor/effect allele frequency.
+Sorting coordinates.
+Writing in tabular format ==> /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpVM3Jf1/file1011a36c07796.tsv.gz
+Summary statistics report:
+   - 93 rows (100% of original 93 rows)
+   - 93 unique variants
+   - 64 genome-wide significant variants (P<5e-8)
+   - 20 chromosomes
+Successfully finished preparing sumstats file, preview:
+Reading header.
+          SNP CHR       BP A1 A2     FRQ   BETA    SE         P
+1:   rs301800   1  8490603  T  C 0.17910  0.019 0.003 1.794e-08
+2: rs11210860   1 43982527  G  A 0.63060 -0.017 0.003 1.000e+00
+3: rs34305371   1 72733610  G  A 0.91231 -0.035 0.005 3.762e-14
+4:  rs2568955   1 72762169  T  C 0.23690 -0.017 0.003 1.797e-08

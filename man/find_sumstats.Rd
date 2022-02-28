@@ -24,38 +24,53 @@ find_sumstats(
 )
 }
 \arguments{
-\item{ids}{List of Open GWAS study IDs (e.g. \code{c("prot-a-664", "ieu-b-4760")}).}
+\item{ids}{List of Open GWAS study IDs
+(e.g. \code{c("prot-a-664", "ieu-b-4760")}).}
 
-\item{traits}{List of traits (e.g. \code{c("parkinson", "Alzheimer")}).}
+\item{traits}{List of traits
+(e.g. \code{c("parkinson", "Alzheimer")}).}
 
-\item{years}{List of years (e.g. \code{seq(2015,2021)} or \code{c(2010, 2012, 2021)}).}
+\item{years}{List of years
+(e.g. \code{seq(2015,2021)} or \code{c(2010, 2012, 2021)}).}
 
-\item{consortia}{List of consortia (e.g. \code{c("MRC-IEU","Neale Lab")}.}
+\item{consortia}{List of consortia
+(e.g. \code{c("MRC-IEU","Neale Lab")}.}
 
-\item{authors}{List of authors (e.g. \code{c("Elsworth","Kunkle","Neale")}).}
+\item{authors}{List of authors
+(e.g. \code{c("Elsworth","Kunkle","Neale")}).}
 
-\item{populations}{List of populations (e.g. \code{c("European","Asian")}).}
+\item{populations}{List of populations
+(e.g. \code{c("European","Asian")}).}
 
-\item{categories}{List of categories (e.g. \code{c("Binary","Continuous","Disease","Risk factor"))}).}
+\item{categories}{List of categories
+(e.g. \code{c("Binary","Continuous","Disease","Risk factor"))}).}
 
-\item{subcategories}{List of categories (e.g. \code{c("neurological","Immune","cardio"))}).}
+\item{subcategories}{List of categories
+(e.g. \code{c("neurological","Immune","cardio"))}).}
 
-\item{builds}{List of genome builds (e.g. \code{c("hg19","grch37")}).}
+\item{builds}{List of genome builds
+(e.g. \code{c("hg19","grch37")}).}
 
-\item{pmids}{List of PubMed ID (exact matches only) (e.g. \code{c(29875488, 30305740, 28240269)}).}
+\item{pmids}{List of PubMed ID (exact matches only)
+(e.g. \code{c(29875488, 30305740, 28240269)}).}
 
-\item{min_sample_size}{Minimum total number of study participants (e.g. \code{5000}).}
+\item{min_sample_size}{Minimum total number of study participants
+(e.g. \code{5000}).}
 
-\item{min_ncase}{Minimum number of case participants (e.g. \code{1000}).}
+\item{min_ncase}{Minimum number of case participants
+(e.g. \code{1000}).}
 
-\item{min_ncontrol}{Minimum number of control participants (e.g. \code{1000}).}
+\item{min_ncontrol}{Minimum number of control participants
+(e.g. \code{1000}).}
 
-\item{min_nsnp}{Minimum number of SNPs (e.g. \code{200000}).}
+\item{min_nsnp}{Minimum number of SNPs
+(e.g. \code{200000}).}
 
 \item{include_NAs}{Include datasets with missing metadata for size criteria
 (i.e. \code{min_sample_size}, \code{min_ncase}, or \code{min_ncontrol}).}
 
-\item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data}
+\item{access_token}{Google OAuth2 access token.
+Used to authenticate level of access to data}
 }
 \value{
 (Filtered) GWAS metadata table.
@@ -63,19 +78,30 @@ find_sumstats(
 \description{
 For each  argument, searches for any datasets matching
 a case-insensitive substring search in the respective metadata column.
-Users can supply a single character string or a list/vector of character strings.
+Users can supply a single character string or a
+list/vector of character strings.
 }
 \details{
 By default, returns metadata for all studies currently in Open GWAS database.
 }
 \examples{
+# Only run the examples if user has internet access:
+if(try(is.character(getURL("www.google.com")))==TRUE){
 ### By ID
-metagwas <- MungeSumstats::find_sumstats(ids=c("ieu-b-4760","prot-a-1725","prot-a-664" ))
+metagwas <- find_sumstats(ids = c(
+    "ieu-b-4760",
+    "prot-a-1725",
+    "prot-a-664"
+))
 ### By ID amd sample size
-metagwas <- MungeSumstats::find_sumstats(ids=c("ieu-b-4760","prot-a-1725","prot-a-664"),
-                                         min_sample_size=5000)
-
+metagwas <- find_sumstats(
+    ids = c("ieu-b-4760", "prot-a-1725", "prot-a-664"),
+    min_sample_size = 5000
+)
 ### By criteria
-metagwas <- MungeSumstats::find_sumstats(traits=c("alzheimer","parkinson"),
-                                         years = seq(2015,2021)) 
+metagwas <- find_sumstats(
+    traits = c("alzheimer", "parkinson"),
+    years = seq(2015, 2021)
+)
+}
 }

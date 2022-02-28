@@ -1,8 +1,8 @@
 #' Summary Statistics Column Headers
 #'
-#' @description List of uncorrected column headers often found in GWAS Summary 
-#' Statistics column headers. Note the effect allele will always be the A2 
-#' allele, this is the approach done for 
+#' @description List of uncorrected column headers often found in GWAS Summary
+#' Statistics column headers. Note the effect allele will always be the A2
+#' allele, this is the approach done for
 #' VCF(https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7805039/). This is enforced
 #' with the column header corrections here and also the check allele flipping
 #' test.
@@ -11,14 +11,16 @@
 #' \code{
 #' # Most the data in the below table comes from the LDSC github wiki
 #' data("sumstatsColHeaders")
-#' # Make additions to sumstatsColHeaders using github version of MungeSumstats- 
+#' # Make additions to sumstatsColHeaders using github version of MungeSumstats-
 #' # shown is an example of adding columns for Standard Error (SE)
-#' #se_cols <- data.frame("Uncorrected"=c("SE","se","STANDARD.ERROR","STANDARD_ERROR","STANDARD-ERROR"), 
-#' #                      "Corrected"=rep("SE",5))
+#' #se_cols <- data.frame("Uncorrected"=c("SE","se","STANDARD.ERROR",
+#' #                                      "STANDARD_ERROR","STANDARD-ERROR"),
+#' #                     "Corrected"=rep("SE",5))
 #' #sumstatsColHeaders <- rbind(sumstatsColHeaders,se_cols)
 #' #Once additions are made, order & save the new mapping dataset
-#' #now sort ordering -important for logic that uncorrected=corrected comes first
-#' sumstatsColHeaders$ordering <- 
+#' #now sort ordering -important for logic that 
+#' # uncorrected=corrected comes first
+#' sumstatsColHeaders$ordering <-
 #'     sumstatsColHeaders$Uncorrected==sumstatsColHeaders$Corrected
 #' sumstatsColHeaders <-
 #'     sumstatsColHeaders[order(sumstatsColHeaders$Corrected,
@@ -28,24 +30,24 @@
 #' usethis::use_data(sumstatsColHeaders,overwrite = TRUE, internal=TRUE)
 #' save(sumstatsColHeaders,
 #'       file="data/sumstatsColHeaders.rda")
-#' # You will need to restart your r session for effects to take account      
+#' # You will need to restart your r session for effects to take account
 #' }
-#' @format dataframe with 99 rows and 2 columns
+#' @format dataframe with 2 columns
 #' @usage data("sumstatsColHeaders")
 "sumstatsColHeaders"
 
 
 #' GWAS Educational Attainment Okbay 2016 - Subset
 #'
-#' @description GWAS Summary Statistics on Educational Attainment by Okbay et 
+#' @description GWAS Summary Statistics on Educational Attainment by Okbay et
 #' al 2016:
 #' PMID: 27898078 PMCID: PMC5509058 DOI: 10.1038/ng1216-1587b.
 #' A subset of 93 SNPs
-#' 
-#' @details GWAS Summary Statistics on Educational Attainment by Okbay et 
+#'
+#' @details GWAS Summary Statistics on Educational Attainment by Okbay et
 #' al 2016 has been subsetted here to act as an example summary statistic file
-#' which has some issues in the formatting. MungeSumstats can correct these 
-#' issues. 
+#' which has some issues in the formatting. MungeSumstats can correct these
+#' issues.
 #'
 #' @name raw_eduAttainOkbay
 #' @section eduAttainOkbay.txt
@@ -76,17 +78,17 @@ NULL
 
 #' GWAS Amyotrophic lateral sclerosis ieu open GWAS project - Subset
 #'
-#' @description VCF (VCFv4.2) of the GWAS Amyotrophic lateral sclerosis ieu 
+#' @description VCF (VCFv4.2) of the GWAS Amyotrophic lateral sclerosis ieu
 #' open GWAS project Dataset: ebi-a-GCST005647.
 #' A subset of 99 SNPs
 #'
 #' @name raw_ALSvcf
 #' @section ALSvcf.vcf
-#' @details A VCF file (VCFv4.2) of the GWAS Amyotrophic lateral sclerosis ieu 
-#' open GWAS project has been subsetted here to act as an example summary 
-#' statistic file in VCF format which has some issues in the formatting. 
-#' MungeSumstats can correct these issues and produced a standardised summary 
-#' statistics format. 
+#' @details A VCF file (VCFv4.2) of the GWAS Amyotrophic lateral sclerosis ieu
+#' open GWAS project has been subsetted here to act as an example summary
+#' statistic file in VCF format which has some issues in the formatting.
+#' MungeSumstats can correct these issues and produced a standardised summary
+#' statistics format.
 #' @source The summary statistics VCF (VCFv4.2) file was downloaded from
 #' https://gwas.mrcieu.ac.uk/datasets/ebi-a-GCST005647/
 #' and formatted to a .rda with the following:
@@ -101,3 +103,54 @@ NULL
 #' @details NULL
 NULL
 
+#' UCSC Chain file hg38 to hg19
+#'
+#' @description UCSC Chain file hg38 to hg19, .chain.gz file, downloaded from 
+#' https://hgdownload.cse.ucsc.edu/goldenpath/hg19/liftOver/ on 09/10/21
+#'
+#' @name hg38ToHg19
+#' @section hg38ToHg19.over.chain.gz
+#' @details UCSC Chain file hg38 to hg19, .chain.gz file, downloaded on 09/10/21
+#' To be used as a back up if the download from UCSC fails.
+#' @source The chain file was downloaded from
+#' https://hgdownload.cse.ucsc.edu/goldenpath/hg38/liftOver/ 
+#' \code{
+#' utils::download.file('ftp://hgdownload.cse.ucsc.edu/goldenPath/hg38/liftOver/hg38ToHg19.over.chain.gz',tempdir())
+#' }
+#' @format gunzipped chain file
+#' @details NULL
+NULL
+
+#' UCSC Chain file hg19 to hg38
+#'
+#' @description UCSC Chain file hg19 to hg38, .chain.gz file, downloaded from 
+#' https://hgdownload.cse.ucsc.edu/goldenpath/hg19/liftOver/ on 09/10/21
+#'
+#' @name hg19ToHg38
+#' @section hg19ToHg38.over.chain.gz
+#' @details UCSC Chain file hg19 to hg38, .chain.gz file, downloaded on 09/10/21
+#' To be used as a back up if the download from UCSC fails.
+#' @source The chain file was downloaded from
+#' https://hgdownload.cse.ucsc.edu/goldenpath/hg19/liftOver/ 
+#' \code{
+#' utils::download.file('ftp://hgdownload.cse.ucsc.edu/goldenPath/hg19/liftOver/hg19ToHg38.over.chain.gz',tempdir())
+#' }
+#' @format gunzipped chain file
+#' @details NULL
+NULL
+
+#' Local ieu-a-298 file from IEU Open GWAS
+#'
+#' @description Local ieu-a-298 file from IEU Open GWAS, downloaded on 09/10/21.
+#'
+#' @name ieu-a-298
+#' @section ieu-a-298.tsv.gz
+#' @details Local ieu-a-298 file from IEU Open GWAS, downlaoded on 09/10/21. 
+#' This is done in case the download in the package vignette fails.
+#' @source The file was downloaded with:
+#' \code{
+#' MungeSumstats::import_sumstats(ids = "ieu-a-298",ref_genome = "GRCH37")
+#' }
+#' @format gunzipped tsv file
+#' @details NULL
+NULL

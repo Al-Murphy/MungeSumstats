@@ -18,8 +18,9 @@ check_chr(
 )
 }
 \arguments{
-\item{path}{Filepath for the summary statistics file to be formatted. Default
-is a temporary file.}
+\item{path}{Filepath for the summary statistics file to be formatted. A
+dataframe or datatable of the summary statistics file can also be passed
+directly to MungeSumstats using the path parameter.}
 
 \item{rmv_chr}{vector or character The chromosomes on which the SNPs should
 be removed. Use NULL if no filtering necessary. Default is X, Y and

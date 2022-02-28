@@ -17,11 +17,12 @@ check_multi_rs_snp(
 )
 }
 \arguments{
-\item{path}{Filepath for the summary statistics file to be formatted. Default
-is a temporary file.}
+\item{path}{Filepath for the summary statistics file to be formatted. A
+dataframe or datatable of the summary statistics file can also be passed
+directly to MungeSumstats using the path parameter.}
 
 \item{remove_multi_rs_snp}{Binary Sometimes summary statistics can have
-multiple RS IDs on one row (i.e. related to one SNP), for example
+multiple RSIDs on one row (i.e. related to one SNP), for example
 "rs5772025_rs397784053". This can cause an error so by default, the first
 RS ID will be kept and the rest removed e.g."rs5772025". If you want to just
 remove these SNPs entirely, set it to TRUE. Default is FALSE.}

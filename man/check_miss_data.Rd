@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_miss_data.R
 \name{check_miss_data}
 \alias{check_miss_data}
-\title{Ensure that only one model in GWAS sumstats or only one trait tested}
+\title{Remove SNPs with missing data}
 \usage{
 check_miss_data(
   sumstats_dt,
@@ -15,8 +15,9 @@ check_miss_data(
 )
 }
 \arguments{
-\item{path}{Filepath for the summary statistics file to be formatted. Default
-is a temporary file.}
+\item{path}{Filepath for the summary statistics file to be formatted. A
+dataframe or datatable of the summary statistics file can also be passed
+directly to MungeSumstats using the path parameter.}
 
 \item{log_folder_ind}{Binary Should log files be stored containing all
 filtered out SNPs (separate file per filter). The data is outputted in the
@@ -36,6 +37,6 @@ list containing sumstats_dt, the modified summary statistics data
 table object and a log file list.
 }
 \description{
-Ensure that only one model in GWAS sumstats or only one trait tested
+Remove SNPs with missing data
 }
 \keyword{internal}

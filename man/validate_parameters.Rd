@@ -7,12 +7,14 @@
 validate_parameters(
   path,
   ref_genome,
+  convert_ref_genome,
   convert_small_p,
   compute_z,
   compute_n,
   convert_n_int,
   analysis_trait,
   INFO_filter,
+  FRQ_filter,
   pos_se,
   effect_columns_nonzero,
   N_std,
@@ -23,25 +25,36 @@ validate_parameters(
   allele_flip_check,
   allele_flip_drop,
   allele_flip_z,
+  allele_flip_frq,
   bi_allelic_filter,
   snp_ids_are_rs_ids,
+  remove_multi_rs_snp,
+  frq_is_maf,
   write_vcf,
   return_format,
   ldsc_format,
   imputation_ind,
   log_folder_ind,
-  log_mungesumstats_msgs
+  log_mungesumstats_msgs,
+  mapping_file,
+  tabix_index
 )
 }
 \arguments{
-\item{path}{Filepath for the summary statistics file to be formatted. Default
-is a temporary file.}
+\item{path}{Filepath for the summary statistics file to be formatted. A
+dataframe or datatable of the summary statistics file can also be passed
+directly to MungeSumstats using the path parameter.}
 
 \item{ref_genome}{name of the reference genome used for the GWAS ("GRCh37" or
 "GRCh38"). Argument is case-insensitive. Default is NULL which infers the
 reference genome from the data.}
 
-\item{convert_small_p}{Binary, should p-values < 5e-324 be converted to 0?
+\item{convert_ref_genome}{name of the reference genome to convert to
+("GRCh37" or "GRCh38"). This will only occur if the current genome build does
+not match. Default is not to convert the genome build (NULL).}
+
+\item{convert_small_p}{Binary, should non-negative
+p-values <= 5e-324 be converted to 0?
 Small p-values pass the R limit and can cause errors with LDSC/MAGMA and
 should be converted. Default is TRUE.}
 
@@ -53,7 +66,11 @@ as a last resort.}
 \item{compute_n}{Whether to impute N. Default of 0 won't impute, any other
 integer will be imputed as the N (sample size) for every SNP in the dataset.
 \strong{Note} that imputing the sample size for every SNP is not correct and
-should only be done as a last resort.}
+should only be done as a last resort. N can also be inputted with "ldsc",
+"sum", "giant" or "metal" by passing one of these for this field or a vector
+of multiple. Sum and an integer value creates an N column in the output
+whereas giant, metal or ldsc create an Neff or effective sample size. If
+multiples are passed, the formula used to derive it will be indicated.}
 
 \item{convert_n_int}{Binary, if N (the number of samples) is not an integer,
 should this be rounded? Default is TRUE.}
@@ -64,13 +81,17 @@ analysis from the GWAS. Default is NULL.}
 \item{INFO_filter}{numeric The minimum value permissible of the imputation
 information score (if present in sumstats file). Default 0.9.}
 
+\item{FRQ_filter}{numeric The minimum value permissible of the frequency(FRQ)
+of the SNP (i.e. Allele Frequency (AF)) (if present in sumstats file). By
+default no filtering is done, i.e. value of 0.}
+
 \item{pos_se}{Binary Should the standard Error (SE) column be checked to
 ensure it is greater than 0? Those that are, are removed (if present in
 sumstats file). Default TRUE.}
 
 \item{effect_columns_nonzero}{Binary should the effect columns in the data
 BETA,OR (odds ratio),LOG_ODDS,SIGNED_SUMSTAT be checked to ensure no SNP=0.
-Those that do are removed(if present in sumstats file). Default TRUE.}
+Those that do are removed(if present in sumstats file). Default FALSE.}
 
 \item{N_std}{numeric The number of standard deviations above the mean a SNP's
 N is needed to be removed. Default is 5.}
@@ -94,17 +115,33 @@ reference genome to infer if flipping is necessary. Default is TRUE.}
 A2 base pair values match a reference genome be dropped. Default is TRUE.}
 
 \item{allele_flip_z}{Binary should the Z-score be flipped along with effect
-columns like Beta? It is assumed to be calculated off the effect size not
-the P-value and so will be flipped i.e. default TRUE.}
+and FRQ columns like Beta? It is assumed to be calculated off the effect size
+not the P-value and so will be flipped i.e. default TRUE.}
+
+\item{allele_flip_frq}{Binary should the frequency (FRQ) column be flipped
+along with effect and z-score columns like Beta? Default TRUE.}
 
 \item{bi_allelic_filter}{Binary Should non-biallelic SNPs be removed. Default
 is TRUE.}
 
 \item{snp_ids_are_rs_ids}{Binary Should the supplied SNP ID's be assumed to
-be RS IDs. If not, imputation using the SNP ID for other columns like
+be RSIDs. If not, imputation using the SNP ID for other columns like
 base-pair position or chromosome will not be possible. If set to FALSE, the
 SNP RS ID will be imputed from the reference genome if possible. Default is
 TRUE.}
+
+\item{remove_multi_rs_snp}{Binary Sometimes summary statistics can have
+multiple RSIDs on one row (i.e. related to one SNP), for example
+"rs5772025_rs397784053". This can cause an error so by default, the first
+RS ID will be kept and the rest removed e.g."rs5772025". If you want to just
+remove these SNPs entirely, set it to TRUE. Default is FALSE.}
+
+\item{frq_is_maf}{Conventionally the FRQ column is intended to show the
+minor/effect allele frequency (MAF) but sometimes the major allele frequency
+can be inferred as the FRQ column. This logical variable indicates that the
+FRQ column should be renamed to MAJOR_ALLELE_FRQ if the frequency values
+appear to relate to the major allele i.e. >0.5. By default this mapping won't
+occur i.e. is TRUE.}
 
 \item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
 
@@ -131,6 +168,16 @@ FALSE.}
 
 \item{log_mungesumstats_msgs}{Binary Should a log be stored containing all
 messages and errors printed by MungeSumstats in a run. Default is FALSE}
+
+\item{mapping_file}{MungeSumstats has a pre-defined column-name mapping file
+which should cover the most common column headers and their interpretations.
+However, if a column header that is in youf file is missing of the mapping we
+give is incorrect you can supply your own mapping file. Must be a 2 column
+dataframe with column names "Uncorrected" and "Corrected". See
+data(sumstatsColHeaders) for default mapping and necessary format.}
+
+\item{tabix_index}{Index the formatted summary statistics with
+\href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
 }
 \value{
 No return

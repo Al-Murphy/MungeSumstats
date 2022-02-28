@@ -4,7 +4,12 @@
 \alias{remove_nonstandard_vcf_cols}
 \title{Remove non-standard VCF columns}
 \usage{
-remove_nonstandard_vcf_cols(sample_id, sumstats_file, keep_extra_cols = FALSE)
+remove_nonstandard_vcf_cols(
+  sample_id,
+  sumstats_file,
+  keep_extra_cols = FALSE,
+  standardise_headers = TRUE
+)
 }
 \arguments{
 \item{keep_extra_cols}{logical, should extra, non-essential columns from

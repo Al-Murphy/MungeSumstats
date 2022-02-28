@@ -12,19 +12,21 @@ import_sumstats(
   write_vcf = FALSE,
   download_method = "download.file",
   quiet = TRUE,
-  force_new = FALSE,
+  force_new_vcf = FALSE,
   nThread = 1,
   parallel_across_ids = FALSE,
   ...
 )
 }
 \arguments{
-\item{ids}{List of Open GWAS study IDs (e.g. \code{c("prot-a-664", "ieu-b-4760")}).}
+\item{ids}{List of Open GWAS study IDs
+(e.g. \code{c("prot-a-664", "ieu-b-4760")}).}
 
 \item{vcf_dir}{Where to download the original VCF from Open GWAS.
 \emph{WARNING:} This is set to \code{tempdir()} by default.
 This means the raw (pre-formatted) VCFs be deleted upon ending the R session.
-Change this to keep the raw VCF file on disk (e.g. \code{vcf_dir="./raw_vcf"}).}
+Change this to keep the raw VCF file on disk
+(e.g. \code{vcf_dir="./raw_vcf"}).}
 
 \item{vcf_download}{Download the original VCF from Open GWAS.}
 
@@ -37,14 +39,17 @@ Change this to keep the raw VCF file on disk (e.g. \code{vcf_dir="./raw_vcf"}).}
 
 \item{quiet}{Run quietly.}
 
-\item{force_new}{Overwrite a previously downloaded VCF with the same path name.}
+\item{force_new_vcf}{Overwrite a previously downloaded VCF
+with the same path name.}
 
 \item{nThread}{Number of threads to use for parallel processes.}
 
-\item{parallel_across_ids}{If \code{parallel_across_ids=TRUE} and \code{nThread>1},
+\item{parallel_across_ids}{If \code{parallel_across_ids=TRUE}
+and \code{nThread>1},
 then each ID in \code{ids} will be processed in parallel.}
 
-\item{...}{Additional arguments to be passed to \code{MungeSumstats::format_sumstats}.}
+\item{...}{Additional arguments passed to
+\link[MungeSumstats]{format_sumstats}.}
 }
 \value{
 Either a named list of data objects or paths,
@@ -54,20 +59,24 @@ depending on the arguments passed to \code{format_sumstats}.
 Requires internet access to run.
 }
 \examples{
+#only run the examples if user has internet access:
+if(try(is.character(getURL("www.google.com")))==TRUE){
 ### Search by criteria
-metagwas <- MungeSumstats::find_sumstats(traits = c("parkinson","alzheimer"),
-                                         min_sample_size = 5000)
-### Only use a subset for testing purposes                                           
-ids <- (dplyr::arrange(metagwas, nsnp))$id    
+metagwas <- find_sumstats(
+    traits = c("parkinson", "alzheimer"),
+    min_sample_size = 5000
+)
+### Only use a subset for testing purposes
+ids <- (dplyr::arrange(metagwas, nsnp))$id
 
-### Default usage   
+### Default usage
 ## You can supply \code{import_sumstats()}
-## with a list of as many OpenGWAS IDs as you want, 
+## with a list of as many OpenGWAS IDs as you want,
 ## but we'll just give one to save time.
 
 ## Call uses reference genome as default with more than 2GB of memory,
 ## which is more than what 32-bit Windows can handle so remove certain checks
 ## commented out down to runtime
-#datasets <- MungeSumstats::import_sumstats(ids = ids) 
-
+# datasets <- import_sumstats(ids = ids[1])
+}
 }
