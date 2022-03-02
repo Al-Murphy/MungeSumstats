@@ -1,11 +1,11 @@
-pandoc: 2.14.0.3
+pandoc: 2.17.1.1
 pkgdown: 2.0.2.9000
 pkgdown_sha: ae7363faac9040a473a54fb3d770decdfb8dfec1
 articles:
   MungeSumstats: MungeSumstats.html
   OpenGWAS: OpenGWAS.html
   docker: docker.html
-last_built: 2022-02-18T18:17Z
+last_built: 2022-03-02T18:58Z
 urls:
   reference: https://neurogenomics.github.io/MungeSumstats/index.html/reference
   article: https://neurogenomics.github.io/MungeSumstats/index.html/articles

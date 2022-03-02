@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.6</span>
       </span>
     </div>
 
@@ -86,6 +86,8 @@
   force_new_z <span class="op">=</span> <span class="cn">FALSE</span>,
   compute_n <span class="op">=</span> <span class="fl">0L</span>,
   convert_n_int <span class="op">=</span> <span class="cn">TRUE</span>,
+  impute_beta <span class="op">=</span> <span class="cn">FALSE</span>,
+  impute_se <span class="op">=</span> <span class="cn">FALSE</span>,
   analysis_trait <span class="op">=</span> <span class="cn">NULL</span>,
   INFO_filter <span class="op">=</span> <span class="fl">0.9</span>,
   FRQ_filter <span class="op">=</span> <span class="fl">0</span>,
@@ -170,6 +172,22 @@ multiples are passed, the formula used to derive it will be indicated.</p></dd>
 <dt>convert_n_int</dt>
 <dd><p>Binary, if N (the number of samples) is not an integer,
 should this be rounded? Default is TRUE.</p></dd>
+<dt>impute_beta</dt>
+<dd><p>Binary, whether BETA should be imputed using other effect
+data if it isn't present in the sumstats. Note that this imputation is an
+approximation so could have an effect on downstream analysis. Use with
+caution. The different methods MungeSumstats will try and impute beta (in
+this order or priority) are:</p><ol><li><p>log(OR)  2. Z x SE  3. Z/sqrt(2xFRQx(1-FRQ)x(N+Z^2))</p></li>
+<li><p>Z/sqrt(qchisq(P, N))
+Default value is FALSE.</p></li>
+</ol></dd>
+<dt>impute_se</dt>
+<dd><p>Binary, whether the standard error should be imputed using
+other effect data if it isn't present in the sumstats. Note that this
+imputation is an approximation so could have an effect on downstream
+analysis. Use with caution. The different methods MungeSumstats will try and
+impute se (in this order or priority) are:</p><ol><li><p>BETA / Z  2. abs(BETA/ qnorm(P/2))</p></li>
+</ol></dd>
 <dt>analysis_trait</dt>
 <dd><p>If multiple traits were studied, name of the trait for
 analysis from the GWAS. Default is NULL.</p></dd>
@@ -338,7 +356,7 @@ in both above instances are a list.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> - This means all formatted summary stats will be deletedupon ending the R session.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> - To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ********************</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Formatted summary statistics will be saved to ==&gt; /tmp/Rtmp1BFfDg/fileac045465500.tsv.gz</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Formatted summary statistics will be saved to ==&gt; /tmp/Rtmp7H4B2E/file513c25def40f.tsv.gz</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading header.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Tabular format detected.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Importing tabular file: /__w/_temp/Library/MungeSumstats/extdata/eduAttainOkbay.txt</span>
@@ -356,6 +374,7 @@ in both above instances are a list.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Checking for merged allele column.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Ensuring all SNPs are on the reference genome.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading reference genome data.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The sumstats BETA column is not present...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Checking for correct direction of A1 (reference) and A2 (alternative allele).</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> There are 46 SNPs where A1 doesn't match the reference genome.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> These will be flipped with their effect columns.</span>
@@ -375,7 +394,7 @@ in both above instances are a list.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> As frq_is_maf=TRUE, the FRQ column will not be renamed. If the FRQ values were intended to represent major allele frequency,</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> set frq_is_maf=FALSE to rename the column as MAJOR_ALLELE_FRQ and differentiate it from minor/effect allele frequency.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Sorting coordinates.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing in tabular format ==&gt; /tmp/Rtmp1BFfDg/fileac045465500.tsv.gz</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing in tabular format ==&gt; /tmp/Rtmp7H4B2E/file513c25def40f.tsv.gz</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Summary statistics report:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>    - 93 rows (100% of original 93 rows)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>    - 93 unique variants</span>
@@ -404,7 +423,8 @@ in both above instances are a list.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.2.9000.</p>
 </div>
 
       </footer></div>
