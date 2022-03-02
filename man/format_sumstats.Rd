@@ -15,6 +15,8 @@ format_sumstats(
   force_new_z = FALSE,
   compute_n = 0L,
   convert_n_int = TRUE,
+  impute_beta = FALSE,
+  impute_se = FALSE,
   analysis_trait = NULL,
   INFO_filter = 0.9,
   FRQ_filter = 0,
@@ -96,6 +98,26 @@ multiples are passed, the formula used to derive it will be indicated.}
 
 \item{convert_n_int}{Binary, if N (the number of samples) is not an integer,
 should this be rounded? Default is TRUE.}
+
+\item{impute_beta}{Binary, whether BETA should be imputed using other effect
+data if it isn't present in the sumstats. Note that this imputation is an
+approximation so could have an effect on downstream analysis. Use with
+caution. The different methods MungeSumstats will try and impute beta (in
+this order or priority) are:
+\enumerate{
+\item log(OR)  2. Z x SE  3. Z/sqrt(2xFRQx(1-FRQ)x(N+Z^2))
+\item Z/sqrt(qchisq(P, N))
+Default value is FALSE.
+}}
+
+\item{impute_se}{Binary, whether the standard error should be imputed using
+other effect data if it isn't present in the sumstats. Note that this
+imputation is an approximation so could have an effect on downstream
+analysis. Use with caution. The different methods MungeSumstats will try and
+impute se (in this order or priority) are:
+\enumerate{
+\item BETA / Z  2. abs(BETA/ qnorm(P/2))
+}}
 
 \item{analysis_trait}{If multiple traits were studied, name of the trait for
 analysis from the GWAS. Default is NULL.}

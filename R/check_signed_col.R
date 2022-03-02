@@ -10,11 +10,11 @@
 
 check_signed_col <-
     function(sumstats_dt,impute_beta, log_folder_ind, rsids, imputation_ind,
-             check_save_out,log_files,nThread) {
+             check_save_out, tabix_index, log_files, nThread) {
+        BETA <- P <- Z <- N <- FRQ <- SE <- OR <- IMPUTATION_BETA <- NULL
         col_headers <- names(sumstats_dt)
         signed_stat_column_names <- c("Z", "OR", "BETA",
                                       "LOG_ODDS", "SIGNED_SUMSTAT")
-        `%nin%` = negate(`%in%`)
         stp_msg <- paste0(
             "ERROR: cannot find a column name representing signed ",
             "statistic in GWAS sumstats file:\n",
@@ -23,31 +23,35 @@ check_signed_col <-
         
         no_imp_msg <- "BETA is not present but can be imputed with "
         no_imp_msg2 <- ". Set impute_beta=TRUE and rerun to do this."
-        msg <- "The sumstats Beta column is not present... "
+        msg <- message("The sumstats BETA column is not present...")
         #message about the last way to impute beta from other columns
         imp_cols <- FALSE
         beta_imputed <- FALSE
         #impute BETA from other columns
-        if ("BETA" %nin% col_headers) {
-            if ("Z" %in% col_headers && "N" %in% col_headers &&
-                "P" %in% col_headers){
-                imp_cols <- "Z, N & P"
-                if(impute_beta){
-                    message(paste0(msg,"Deriving BETA from Z, N, and P"))
-                    sumstats_dt[,BETA := Z/sqrt(qchisq(P, N))]
-                    beta_imputed <- TRUE
-                }  
-            } else if ("Z" %in% col_headers && "N" %in% col_headers &&
-                       "FRQ" %in% col_headers){
-                imp_cols <- "Z, N & FRQ"
-                # https://www.biostars.org/p/319584/
-                # https://www.nature.com/articles/ng.3538
-                if(impute_beta){
-                    message(paste0(msg,"Deriving BETA from Z, N, and FRQ"))
-                    sumstats_dt[,BETA := Z/sqrt(2*FRQ*(1-FRQ)*(N+Z^2))]
-                    beta_imputed <- TRUE
-                }  
-            } else if ("Z" %in% col_headers & "SE" %in% col_headers) {
+        if (!"BETA" %in% col_headers) {
+            #commented out attempts assume that the model that was fit is from a
+            #simple linear regression which is likely not the case
+            #if ("Z" %in% col_headers && "N" %in% col_headers &&
+            #    "P" %in% col_headers){
+            #    imp_cols <- "Z, N & P"
+            #    if(impute_beta){
+            #        message(paste0(msg,"Deriving BETA from Z, N, and P"))
+            #        sumstats_dt[,BETA := Z/sqrt(qchisq(P, N))]
+            #        beta_imputed <- TRUE
+            #    }  
+            #} else if ("Z" %in% col_headers && "N" %in% col_headers &&
+            #           "FRQ" %in% col_headers){
+            #    imp_cols <- "Z, N & FRQ"
+            #    # https://www.biostars.org/p/319584/
+            #    # https://www.nature.com/articles/ng.3538
+            #    if(impute_beta){
+            #        message(paste0(msg,"Deriving BETA from Z, N, and FRQ"))
+            #        sumstats_dt[,BETA := Z/sqrt(2*FRQ*(1-FRQ)*(N+Z^2))]
+            #        beta_imputed <- TRUE
+            #    }  
+            #https://huwenboshi.github.io/data%20management/2017/11/23/tips-for-formatting-gwas-summary-stats.html
+            #} else if ("Z" %in% col_headers & "SE" %in% col_headers) {
+            if ("Z" %in% col_headers & "SE" %in% col_headers) {
                 imp_cols <- "Z & SE"
                 if(impute_beta){
                     message(paste0(msg,"Deriving BETA from Z and SE"))
@@ -55,6 +59,7 @@ check_signed_col <-
                     beta_imputed <- TRUE
                 }  
             } else if ("OR" %in% col_headers) {
+            #if ("OR" %in% col_headers) {
                 imp_cols <- "OR"
                 if(impute_beta){
                     message(paste0(msg,"Deriving BETA from OR"))
@@ -64,7 +69,8 @@ check_signed_col <-
             } else if (sum(signed_stat_column_names %in% col_headers) < 1) {
                 stop(stp_msg)
             }
-            #tell the user if they could impute beta but didn't because of input param
+            #tell the user if they could impute beta but didn't because of 
+            #input param
             if(!impute_beta && !isFALSE(imp_cols)){
                 no_imp_msg <- paste0(no_imp_msg,imp_cols,no_imp_msg2)
                 message(no_imp_msg)

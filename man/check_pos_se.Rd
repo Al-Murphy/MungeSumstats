@@ -2,17 +2,20 @@
 % Please edit documentation in R/check_pos_se.R
 \name{check_pos_se}
 \alias{check_pos_se}
-\title{Ensure that the standard error (se) is positive for all SNPs}
+\title{Ensure that the standard error (se) is positive for all SNPs
+Also impute se if missing}
 \usage{
 check_pos_se(
   sumstats_dt,
   path,
   pos_se,
   log_folder_ind,
+  imputation_ind,
   check_save_out,
   tabix_index,
   nThread,
-  log_files
+  log_files,
+  impute_se
 )
 }
 \arguments{
@@ -30,12 +33,29 @@ same format specified for the resulting sumstats file. The only exception to
 this rule is if output is vcf, then log file saved as .tsv.gz. Default is
 FALSE.}
 
+\item{imputation_ind}{Binary Should a column be added for each imputation
+step to show what SNPs have imputed values for differing fields. This
+includes a field denoting SNP allele flipping (flipped). On the flipped
+value, this denoted whether the alelles where switched based on
+MungeSumstats initial choice of A1, A2 from the input column headers and thus
+may not align with what the creator intended.\strong{Note} these columns will be
+in the formatted summary statistics returned. Default is FALSE.}
+
 \item{tabix_index}{Index the formatted summary statistics with
 \href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
 
 \item{nThread}{Number of threads to use for parallel processes.}
 
 \item{log_files}{list of log file locations}
+
+\item{impute_se}{Binary, whether the standard error should be imputed using
+other effect data if it isn't present in the sumstats. Note that this
+imputation is an approximation so could have an effect on downstream
+analysis. Use with caution. The different methods MungeSumstats will try and
+impute se (in this order or priority) are:
+\enumerate{
+\item BETA / Z  2. abs(BETA/ qnorm(P/2))
+}}
 }
 \value{
 list containing sumstats_dt, the modified summary statistics data
@@ -43,5 +63,6 @@ table object and the log file list
 }
 \description{
 Ensure that the standard error (se) is positive for all SNPs
+Also impute se if missing
 }
 \keyword{internal}

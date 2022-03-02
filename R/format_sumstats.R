@@ -68,6 +68,20 @@
 #' multiples are passed, the formula used to derive it will be indicated.
 #' @param convert_n_int Binary, if N (the number of samples) is not an integer,
 #' should this be rounded? Default is TRUE.
+#' @param impute_beta Binary, whether BETA should be imputed using other effect
+#' data if it isn't present in the sumstats. Note that this imputation is an 
+#' approximation so could have an effect on downstream analysis. Use with 
+#' caution. The different methods MungeSumstats will try and impute beta (in 
+#' this order or priority) are: 
+#' 1. log(OR)  2. Z x SE  3. Z/sqrt(2xFRQx(1-FRQ)x(N+Z^2))  
+#' 4. Z/sqrt(qchisq(P, N))
+#' Default value is FALSE.
+#' @param impute_se Binary, whether the standard error should be imputed using 
+#' other effect data if it isn't present in the sumstats. Note that this 
+#' imputation is an approximation so could have an effect on downstream 
+#' analysis. Use with caution. The different methods MungeSumstats will try and
+#' impute se (in this order or priority) are: 
+#' 1. BETA / Z  2. abs(BETA/ qnorm(P/2))
 #' @param analysis_trait If multiple traits were studied, name of the trait for
 #' analysis from the GWAS. Default is NULL.
 #' @param INFO_filter numeric The minimum value permissible of the imputation
@@ -550,6 +564,7 @@ format_sumstats <- function(path,
                 rsids = rsids, 
                 imputation_ind = imputation_ind,
                 check_save_out = check_save_out,
+                tabix_index = tabix_index,
                 nThread = nThread,
                 log_files = log_files
                 )

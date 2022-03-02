@@ -6,11 +6,11 @@
 #' @return list containing sumstats_dt, the modified summary statistics data
 #' table object and the log file list
 #' @keywords internal
+#' @importFrom stats qnorm
 check_pos_se <- function(sumstats_dt, path, pos_se, log_folder_ind, imputation_ind,
                          check_save_out, tabix_index, nThread, log_files,
                          impute_se) {
-    `%nin%` = negate(`%in%`)
-    SE <- .SD <- NULL
+    SE <- .SD <- BETA <- P <- Z <- IMPUTATION_SE <- NULL
     col_headers <- names(sumstats_dt)
     no_imp_msg <- "SE is not present but can be imputed with "
     no_imp_msg2 <- ". Set impute_se=TRUE and rerun to do this."
@@ -18,7 +18,7 @@ check_pos_se <- function(sumstats_dt, path, pos_se, log_folder_ind, imputation_i
     imp_cols <- FALSE
     se_imputed <- FALSE
     
-    if ("SE" %nin% col_headers) {
+    if (!"SE" %in% col_headers) {
         
         derive_msg = message("The sumstats SE column is not present...")
         

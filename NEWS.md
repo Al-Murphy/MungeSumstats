@@ -1,3 +1,12 @@
+## CHANGES IN VERSION 1.3.6
+
+### New Features
+
+* Columns Beta and Standard Error can now be imputed. However note that this 
+imputation is an approximation so could have an effect on downstream 
+analysis. Use with caution.
+
+
 ## CHANGES IN VERSION 1.3.5
 
 ### Bug fixes
