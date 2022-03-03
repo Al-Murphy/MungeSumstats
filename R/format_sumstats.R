@@ -73,8 +73,7 @@
 #' approximation so could have an effect on downstream analysis. Use with 
 #' caution. The different methods MungeSumstats will try and impute beta (in 
 #' this order or priority) are: 
-#' 1. log(OR)  2. Z x SE  3. Z/sqrt(2xFRQx(1-FRQ)x(N+Z^2))  
-#' 4. Z/sqrt(qchisq(P, N))
+#' 1. log(OR)  2. Z x SE
 #' Default value is FALSE.
 #' @param impute_se Binary, whether the standard error should be imputed using 
 #' other effect data if it isn't present in the sumstats. Note that this 

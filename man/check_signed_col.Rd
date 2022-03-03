@@ -27,8 +27,7 @@ approximation so could have an effect on downstream analysis. Use with
 caution. The different methods MungeSumstats will try and impute beta (in
 this order or priority) are:
 \enumerate{
-\item log(OR)  2. Z x SE  3. Z/sqrt(2xFRQx(1-FRQ)x(N+Z^2))
-\item Z/sqrt(qchisq(P, N))
+\item log(OR)  2. Z x SE
 Default value is FALSE.
 }}
 
