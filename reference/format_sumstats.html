@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.7</span>
       </span>
     </div>
 
@@ -35,7 +35,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -177,8 +177,7 @@ should this be rounded? Default is TRUE.</p></dd>
 data if it isn't present in the sumstats. Note that this imputation is an
 approximation so could have an effect on downstream analysis. Use with
 caution. The different methods MungeSumstats will try and impute beta (in
-this order or priority) are:</p><ol><li><p>log(OR)  2. Z x SE  3. Z/sqrt(2xFRQx(1-FRQ)x(N+Z^2))</p></li>
-<li><p>Z/sqrt(qchisq(P, N))
+this order or priority) are:</p><ol><li><p>log(OR)  2. Z x SE
 Default value is FALSE.</p></li>
 </ol></dd>
 <dt>impute_se</dt>
@@ -356,7 +355,7 @@ in both above instances are a list.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> - This means all formatted summary stats will be deletedupon ending the R session.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> - To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ********************</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Formatted summary statistics will be saved to ==&gt; /tmp/Rtmp7H4B2E/file513c25def40f.tsv.gz</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Formatted summary statistics will be saved to ==&gt; /tmp/Rtmp87MurK/filea0d25e75935.tsv.gz</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading header.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Tabular format detected.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Importing tabular file: /__w/_temp/Library/MungeSumstats/extdata/eduAttainOkbay.txt</span>
@@ -394,7 +393,7 @@ in both above instances are a list.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> As frq_is_maf=TRUE, the FRQ column will not be renamed. If the FRQ values were intended to represent major allele frequency,</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> set frq_is_maf=FALSE to rename the column as MAJOR_ALLELE_FRQ and differentiate it from minor/effect allele frequency.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Sorting coordinates.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing in tabular format ==&gt; /tmp/Rtmp7H4B2E/file513c25def40f.tsv.gz</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing in tabular format ==&gt; /tmp/Rtmp87MurK/filea0d25e75935.tsv.gz</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Summary statistics report:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>    - 93 rows (100% of original 93 rows)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>    - 93 unique variants</span>

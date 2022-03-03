@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.7</span>
       </span>
     </div>
 
@@ -52,7 +52,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -97,7 +97,7 @@ GWAS</h1>
 </h5></h4>
             
             <h4 data-toc-skip class="date"><h5>
-<i>Updated</i>: Mar-02-2022
+<i>Updated</i>: Mar-03-2022
 </h5></h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/MungeSumstats/blob/HEAD/vignettes/OpenGWAS.Rmd" class="external-link"><code>vignettes/OpenGWAS.Rmd</code></a></small>
@@ -162,14 +162,14 @@ paths to the formatted summary statistics.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## $`ieu-a-298`</span>
-<span class="co">## [1] "/tmp/RtmpPkizUK/ieu-a-298.tsv.gz"</span></code></pre>
+<span class="co">## [1] "/tmp/Rtmp5w56pM/ieu-a-298.tsv.gz"</span></code></pre>
 <p>You can easily turn this into a data.frame as well.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">results_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span>, 
                          path<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">results_df</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">##                  id                             path</span>
-<span class="co">## ieu-a-298 ieu-a-298 /tmp/RtmpPkizUK/ieu-a-298.tsv.gz</span></code></pre>
+<span class="co">## ieu-a-298 ieu-a-298 /tmp/Rtmp5w56pM/ieu-a-298.tsv.gz</span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -213,7 +213,7 @@ and its functionality.</p>
 <span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
 <span class="co">## </span>
 <span class="co">## other attached packages:</span>
-<span class="co">## [1] MungeSumstats_1.3.6 BiocStyle_2.23.1   </span>
+<span class="co">## [1] MungeSumstats_1.3.7 BiocStyle_2.23.1   </span>
 <span class="co">## </span>
 <span class="co">## loaded via a namespace (and not attached):</span>
 <span class="co">##   [1] bitops_1.0-7                matrixStats_0.61.0         </span>
@@ -234,7 +234,7 @@ and its functionality.</p>
 <span class="co">##  [31] rappdirs_0.3.3              pkgdown_2.0.2.9000         </span>
 <span class="co">##  [33] systemfonts_1.0.4           stringr_1.4.0              </span>
 <span class="co">##  [35] digest_0.6.29               Rsamtools_2.11.0           </span>
-<span class="co">##  [37] rmarkdown_2.11              R.utils_2.11.0             </span>
+<span class="co">##  [37] rmarkdown_2.12              R.utils_2.11.0             </span>
 <span class="co">##  [39] XVector_0.35.0              pkgconfig_2.0.3            </span>
 <span class="co">##  [41] htmltools_0.5.2             MatrixGenerics_1.7.0       </span>
 <span class="co">##  [43] dbplyr_2.1.1                fastmap_1.1.0              </span>
@@ -263,7 +263,7 @@ and its functionality.</p>
 <span class="co">##  [89] BiocManager_1.30.16         png_0.1-7                  </span>
 <span class="co">##  [91] vctrs_0.3.8                 purrr_0.3.4                </span>
 <span class="co">##  [93] assertthat_0.2.1            cachem_1.0.6               </span>
-<span class="co">##  [95] xfun_0.29                   restfulr_0.0.13            </span>
+<span class="co">##  [95] xfun_0.30                   restfulr_0.0.13            </span>
 <span class="co">##  [97] ragg_1.2.2                  gargle_1.2.0               </span>
 <span class="co">##  [99] tibble_3.1.6                GenomicAlignments_1.31.2   </span>
 <span class="co">## [101] AnnotationDbi_1.57.1        memoise_2.0.1              </span>

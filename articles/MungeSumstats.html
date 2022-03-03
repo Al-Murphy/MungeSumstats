@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.7</span>
       </span>
     </div>
 
@@ -52,7 +52,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -97,7 +97,7 @@
 </h5></h4>
             
             <h4 data-toc-skip class="date"><h5>
-<i>Updated</i>: Mar-02-2022
+<i>Updated</i>: Mar-03-2022
 </h5></h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/MungeSumstats/blob/HEAD/vignettes/MungeSumstats.Rmd" class="external-link"><code>vignettes/MungeSumstats.Rmd</code></a></small>
@@ -326,7 +326,7 @@ e.g.<code>file.copy(save_path, './formatted/' )</code>.</p>
 <span class="co">## - This means all formatted summary stats will be deletedupon ending the R session.</span>
 <span class="co">## - To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.</span>
 <span class="co">## ********************</span></code></pre>
-<pre><code><span class="co">## Formatted summary statistics will be saved to ==&gt; /tmp/RtmpDeANzD/file56a83ca9781f.tsv.gz</span></code></pre>
+<pre><code><span class="co">## Formatted summary statistics will be saved to ==&gt; /tmp/RtmpCR8GMI/filef7956bd1977.tsv.gz</span></code></pre>
 <pre><code><span class="co">## Reading header.</span></code></pre>
 <pre><code><span class="co">## Tabular format detected.</span></code></pre>
 <pre><code><span class="co">## Importing tabular file: /__w/_temp/Library/MungeSumstats/extdata/eduAttainOkbay.txt</span></code></pre>
@@ -358,7 +358,7 @@ e.g.<code>file.copy(save_path, './formatted/' )</code>.</p>
 <pre><code><span class="co">## As frq_is_maf=TRUE, the FRQ column will not be renamed. If the FRQ values were intended to represent major allele frequency,</span>
 <span class="co">## set frq_is_maf=FALSE to rename the column as MAJOR_ALLELE_FRQ and differentiate it from minor/effect allele frequency.</span></code></pre>
 <pre><code><span class="co">## Sorting coordinates.</span></code></pre>
-<pre><code><span class="co">## Writing in tabular format ==&gt; /tmp/RtmpDeANzD/file56a83ca9781f.tsv.gz</span></code></pre>
+<pre><code><span class="co">## Writing in tabular format ==&gt; /tmp/RtmpCR8GMI/filef7956bd1977.tsv.gz</span></code></pre>
 <pre><code><span class="co">## Summary statistics report:</span>
 <span class="co">##    - 93 rows (100% of original 93 rows)</span>
 <span class="co">##    - 93 unique variants</span>
@@ -731,7 +731,7 @@ handle lists of summary statistics files.</p>
 <span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
 <span class="co">## </span>
 <span class="co">## other attached packages:</span>
-<span class="co">## [1] MungeSumstats_1.3.6 BiocStyle_2.23.1   </span>
+<span class="co">## [1] MungeSumstats_1.3.7 BiocStyle_2.23.1   </span>
 <span class="co">## </span>
 <span class="co">## loaded via a namespace (and not attached):</span>
 <span class="co">##   [1] bitops_1.0-7                               </span>
@@ -770,7 +770,7 @@ handle lists of summary statistics files.</p>
 <span class="co">##  [34] stringr_1.4.0                              </span>
 <span class="co">##  [35] digest_0.6.29                              </span>
 <span class="co">##  [36] Rsamtools_2.11.0                           </span>
-<span class="co">##  [37] rmarkdown_2.11                             </span>
+<span class="co">##  [37] rmarkdown_2.12                             </span>
 <span class="co">##  [38] R.utils_2.11.0                             </span>
 <span class="co">##  [39] XVector_0.35.0                             </span>
 <span class="co">##  [40] BSgenome.Hsapiens.1000genomes.hs37d5_0.99.1</span>
@@ -830,7 +830,7 @@ handle lists of summary statistics files.</p>
 <span class="co">##  [94] purrr_0.3.4                                </span>
 <span class="co">##  [95] assertthat_0.2.1                           </span>
 <span class="co">##  [96] cachem_1.0.6                               </span>
-<span class="co">##  [97] xfun_0.29                                  </span>
+<span class="co">##  [97] xfun_0.30                                  </span>
 <span class="co">##  [98] restfulr_0.0.13                            </span>
 <span class="co">##  [99] ragg_1.2.2                                 </span>
 <span class="co">## [100] gargle_1.2.0                               </span>
