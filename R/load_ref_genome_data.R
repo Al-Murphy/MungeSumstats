@@ -24,7 +24,17 @@ genome <-
         genome <- BSgenome.Hsapiens.NCBI.GRCh38::BSgenome.Hsapiens.NCBI.GRCh38
     }
 
-
+    #snps can contain odd characters, need to sort these
+    #so the snp should be all numeric or should start with rs and then be 
+    #numeric. Find any that aren't and exclude these. The rs id can be inferred
+    #in a later function
+    snp_check <- lapply(snps,function(x) suppressWarnings(
+        as.numeric(substring(x,3,nchar(x)))
+    )
+    )
+    snps <-
+        snps[!unlist(lapply(snp_check,is.na))]
+    
     gr_rsids <- BSgenome::snpsById(
         x = SNP_LOC_DATA,
         id = snps,

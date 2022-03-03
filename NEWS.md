@@ -1,3 +1,9 @@
+## CHANGES IN VERSION 1.2.3
+
+### Bug fixes
+
+* Bug in checking for bad characters in RSID fixed
+
 ## CHANGES IN VERSION 1.2.2
 
 ### Bug fixes
