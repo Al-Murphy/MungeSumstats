@@ -130,7 +130,8 @@ GitHub and we will incorporate this change into the package.
 
 # Contributors
 
-We would like to acknowledge all those who have contributed to MungeSumstats:
+We would like to acknowledge all those who have contributed to MungeSumstats 
+development:
 
  * [Alan Murphy](https://github.com/Al-Murphy)
  * [Nathan Skene](https://github.com/NathanSkene)
