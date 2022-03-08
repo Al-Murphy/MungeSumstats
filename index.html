@@ -43,7 +43,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.9</span>
       </span>
     </div>
 
@@ -56,7 +56,7 @@
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -96,15 +96,14 @@
 
 <div class="section level1">
 <div class="page-header"><h1 id="mungesumstats-standardise-the-format-of-gwas-summary-statistics">
-<code>MungeSumstats</code>: Standardise the format of GWAS summary
-statistics<a class="anchor" aria-label="anchor" href="#mungesumstats-standardise-the-format-of-gwas-summary-statistics"></a>
+<code>MungeSumstats</code>: Standardise the format of GWAS summary statistics<a class="anchor" aria-label="anchor" href="#mungesumstats-standardise-the-format-of-gwas-summary-statistics"></a>
 </h1></div>
 <h5 id="mungesumstats-standardise-the-format-of-gwas-summary-statistics-1">
 <i>Authors</i>: Alan Murphy, Brian Schilder and Nathan Skene
 <a class="anchor" aria-label="anchor" href="#mungesumstats-standardise-the-format-of-gwas-summary-statistics-1"></a>
 </h5>
 <h5 id="mungesumstats-standardise-the-format-of-gwas-summary-statistics-2">
-<i>Updated</i>: Mar-03-2022
+<i>Updated</i>: Mar-08-2022
 <a class="anchor" aria-label="anchor" href="#mungesumstats-standardise-the-format-of-gwas-summary-statistics-2"></a>
 </h5>
 <!-- Readme.md is generated from Readme.Rmd. Please edit that file -->
@@ -114,35 +113,19 @@ statistics<a class="anchor" aria-label="anchor" href="#mungesumstats-standardise
 <div class="section level1">
 <h1 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h1>
-<p>The <code>MungeSumstats</code> package is designed to facilitate the
-standardisation of GWAS summary statistics as utilised in our Nature
-Genetics paper<sup>1</sup>.</p>
+<p>The <code>MungeSumstats</code> package is designed to facilitate the standardisation of GWAS summary statistics as utilised in our Nature Genetics paper.<sup>1</sup></p>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>The package is designed to handle the lack of standardisation of
-output files by the GWAS community. The <a href="https://gwas.mrcieu.ac.uk/" class="external-link">MRC IEU Open GWAS</a> team have
-provided full summary statistics for &gt;10k GWAS, which are
-API-accessible via the <a href="https://mrcieu.github.io/ieugwasr/" class="external-link"><code>ieugwasr</code></a> and
-<a href="https://github.com/MRCIEU/gwasvcf" class="external-link"><code>gwasvcf</code></a>
-packages. But these GWAS are only standardised in the sense that they
-are VCF format, and can be fully standardised with
-<code>MungeSumstats</code>.</p>
-<p><code>MungeSumstats</code> provides a framework to standardise the
-format for any GWAS summary statistics, including those in VCF format,
-enabling downstream integration and analysis. It addresses the most
-common discrepancies across summary statistic files, and offers a range
-of adjustable Quality Control (QC) steps.</p>
+<p>The package is designed to handle the lack of standardisation of output files by the GWAS community. The <a href="https://gwas.mrcieu.ac.uk/" class="external-link">MRC IEU Open GWAS</a> team have provided full summary statistics for &gt;10k GWAS, which are API-accessible via the <a href="https://mrcieu.github.io/ieugwasr/" class="external-link"><code>ieugwasr</code></a> and <a href="https://github.com/MRCIEU/gwasvcf" class="external-link"><code>gwasvcf</code></a> packages. But these GWAS are only standardised in the sense that they are VCF format, and can be fully standardised with <code>MungeSumstats</code>.</p>
+<p><code>MungeSumstats</code> provides a framework to standardise the format for any GWAS summary statistics, including those in VCF format, enabling downstream integration and analysis. It addresses the most common discrepancies across summary statistic files, and offers a range of adjustable Quality Control (QC) steps.</p>
 </div>
 <div class="section level2">
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h2>
-<p>If you use <code>MungeSumstats</code>, please cite the original
-authors of the GWAS as well as:</p>
+<p>If you use <code>MungeSumstats</code>, please cite the original authors of the GWAS as well as:</p>
 <blockquote>
-<p>Alan E Murphy, Brian M Schilder, Nathan G Skene (2021) MungeSumstats:
-A Bioconductor package for the standardisation and quality control of
-many GWAS summary statistics. <em>Bioinformatics</em>, btab665, <a href="https://doi.org/10.1093/bioinformatics/btab665" class="external-link uri">https://doi.org/10.1093/bioinformatics/btab665</a></p>
+<p>Alan E Murphy, Brian M Schilder, Nathan G Skene (2021) MungeSumstats: A Bioconductor package for the standardisation and quality control of many GWAS summary statistics. <em>Bioinformatics</em>, btab665, <a href="https://doi.org/10.1093/bioinformatics/btab665" class="external-link uri">https://doi.org/10.1093/bioinformatics/btab665</a></p>
 </blockquote>
 </div>
 </div>
@@ -150,74 +133,43 @@ many GWAS summary statistics. <em>Bioinformatics</em>, btab665, <a href="https:/
 <h1 id="installing-mungesumstats">Installing <code>MungeSumstats</code>
 <a class="anchor" aria-label="anchor" href="#installing-mungesumstats"></a>
 </h1>
-<p><code>MungeSumstats</code> is available on <a href="https://bioconductor.org/packages/MungeSumstats" class="external-link">Bioconductor</a>
-(≥v3.13). To install <code>MungeSumstats</code> on Bioconductor run:</p>
+<p><code>MungeSumstats</code> is available on <a href="https://bioconductor.org/packages/MungeSumstats" class="external-link">Bioconductor</a> (≥v3.13). To install <code>MungeSumstats</code> on Bioconductor run:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"BiocManager"</span>)) <span class="fu">install.packages</span>(<span class="st">"BiocManager"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"MungeSumstats"</span>)</span></code></pre></div>
 <p>You can then load the package and data package:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/neurogenomics/MungeSumstats" class="external-link">MungeSumstats</a></span><span class="op">)</span></code></pre></div>
-<p>Note that for a number of the checks implored by
-<code>MungeSumstats</code> a reference genome is used. If your GWAS
-summary statistics file of interest relates to <em>GRCh38</em>, you will
-need to install <code>SNPlocs.Hsapiens.dbSNP144.GRCh38</code> and
-<code>BSgenome.Hsapiens.NCBI.GRCh38</code> from Bioconductor as
-follows:</p>
+<p>Note that for a number of the checks implored by <code>MungeSumstats</code> a reference genome is used. If your GWAS summary statistics file of interest relates to <em>GRCh38</em>, you will need to install <code>SNPlocs.Hsapiens.dbSNP144.GRCh38</code> and <code>BSgenome.Hsapiens.NCBI.GRCh38</code> from Bioconductor as follows:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"SNPlocs.Hsapiens.dbSNP144.GRCh38"</span><span class="op">)</span>
 <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"BSgenome.Hsapiens.NCBI.GRCh38"</span><span class="op">)</span></code></pre></div>
-<p>If your GWAS summary statistics file of interest relates to
-<em>GRCh37</em>, you will need to install
-<code>SNPlocs.Hsapiens.dbSNP144.GRCh37</code> and
-<code>BSgenome.Hsapiens.1000genomes.hs37d5</code> from Bioconductor as
-follows:</p>
+<p>If your GWAS summary statistics file of interest relates to <em>GRCh37</em>, you will need to install <code>SNPlocs.Hsapiens.dbSNP144.GRCh37</code> and <code>BSgenome.Hsapiens.1000genomes.hs37d5</code> from Bioconductor as follows:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"SNPlocs.Hsapiens.dbSNP144.GRCh37"</span><span class="op">)</span>
 <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"BSgenome.Hsapiens.1000genomes.hs37d5"</span><span class="op">)</span></code></pre></div>
-<p>These may take some time to install and are not included in the
-package as some users may only need one of
-<em>GRCh37</em>/<em>GRCh38</em>. If you are unsure of the genome build,
-MungeSumstats can also infer this information from your data.</p>
+<p>These may take some time to install and are not included in the package as some users may only need one of <em>GRCh37</em>/<em>GRCh38</em>. If you are unsure of the genome build, MungeSumstats can also infer this information from your data.</p>
 </div>
 <div class="section level1">
 <h1 id="getting-started">Getting started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
 </h1>
-<p>See the <a href="https://neurogenomics.github.io/MungeSumstats/articles/MungeSumstats.html" class="external-link">Getting
-started vignette website</a> for up-to-date instructions on usage.</p>
-<p>See the <a href="https://neurogenomics.github.io/MungeSumstats/articles/OpenGWAS.html" class="external-link">OpenGWAS
-vignette website</a> for information on how to use MungeSumstats to
-access, standardise and perform quality control on GWAS Summary
-Statistics from the MRC IEU <a href="https://gwas.mrcieu.ac.uk/" class="external-link">Open
-GWAS Project</a>.</p>
-<p>If you have any problems please do file an <a href="https://github.com/neurogenomics/MungeSumstats/issues" class="external-link">Issue</a>
-here on GitHub.</p>
+<p>See the <a href="https://neurogenomics.github.io/MungeSumstats/articles/MungeSumstats.html" class="external-link">Getting started vignette website</a> for up-to-date instructions on usage.</p>
+<p>See the <a href="https://neurogenomics.github.io/MungeSumstats/articles/OpenGWAS.html" class="external-link">OpenGWAS vignette website</a> for information on how to use MungeSumstats to access, standardise and perform quality control on GWAS Summary Statistics from the MRC IEU <a href="https://gwas.mrcieu.ac.uk/" class="external-link">Open GWAS Project</a>.</p>
+<p>If you have any problems please do file an <a href="https://github.com/neurogenomics/MungeSumstats/issues" class="external-link">Issue</a> here on GitHub.</p>
 </div>
 <div class="section level1">
 <h1 id="future-enhancements">Future Enhancements<a class="anchor" aria-label="anchor" href="#future-enhancements"></a>
 </h1>
-<p>The <code>MungeSumstats</code> package aims to be able to handle the
-most common summary statistic file formats including VCF. If your file
-can not be formatted by <code>MungeSumstats</code> feel free to report
-the <a href="https://github.com/neurogenomics/MungeSumstats/issues" class="external-link">Issue</a>
-on GitHub along with your summary statistics file header.</p>
-<p>We also encourage people to edit the code to resolve their particular
-issues too and are happy to incorporate these through pull requests on
-github. If your summary statistic file headers are not recognised by
-<code>MungeSumstats</code> but correspond to one of</p>
+<p>The <code>MungeSumstats</code> package aims to be able to handle the most common summary statistic file formats including VCF. If your file can not be formatted by <code>MungeSumstats</code> feel free to report the <a href="https://github.com/neurogenomics/MungeSumstats/issues" class="external-link">Issue</a> on GitHub along with your summary statistics file header.</p>
+<p>We also encourage people to edit the code to resolve their particular issues too and are happy to incorporate these through pull requests on github. If your summary statistic file headers are not recognised by <code>MungeSumstats</code> but correspond to one of</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>SNP, BP, CHR, A1, A2, P, Z, OR, BETA, LOG_ODDS, SIGNED_SUMSTAT, N, N_CAS, N_CON, </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>NSTUDY, INFO or FRQ, </span></code></pre></div>
-<p>Feel free to update the <code>data("sumstatsColHeaders")</code>
-following the approach in the <em>data.R</em> file and add your mapping.
-Then use a <a href="https://github.com/neurogenomics/MungeSumstats/pulls" class="external-link">Pull
-Request</a> on GitHub and we will incorporate this change into the
-package.</p>
+<p>Feel free to update the <code>data("sumstatsColHeaders")</code> following the approach in the <em>data.R</em> file and add your mapping. Then use a <a href="https://github.com/neurogenomics/MungeSumstats/pulls" class="external-link">Pull Request</a> on GitHub and we will incorporate this change into the package.</p>
 </div>
 <div class="section level1">
 <h1 id="contributors">Contributors<a class="anchor" aria-label="anchor" href="#contributors"></a>
 </h1>
-<p>We would like to acknowledge all those who have contributed to
-MungeSumstats:</p>
+<p>We would like to acknowledge all those who have contributed to MungeSumstats:</p>
 <ul>
 <li><a href="https://github.com/Al-Murphy" class="external-link">Alan Murphy</a></li>
 <li><a href="https://github.com/NathanSkene" class="external-link">Nathan Skene</a></li>
@@ -231,9 +183,7 @@ MungeSumstats:</p>
 <div id="refs" class="references csl-bib-body" line-spacing="2">
 <div id="ref-Skene2018" class="csl-entry">
 <div class="csl-left-margin">1. </div>
-<div class="csl-right-inline">Nathan G. Skene, T. E. B., Julien Bryois.
-Genetic identification of brain cell types underlying schizophrenia.
-<em>Nature Genetics</em> (2018). <a href="doi:%5B10.1038/s41588-018-0129-5" class="uri">doi:[10.1038/s41588-018-0129-5</a>](<a href="https://doi.org/10.1038/s41588-018-0129-5" class="external-link uri">https://doi.org/10.1038/s41588-018-0129-5</a>)</div>
+<div class="csl-right-inline">Nathan G. Skene, T. E. B., Julien Bryois. Genetic identification of brain cell types underlying schizophrenia. <em>Nature Genetics</em> (2018). <a href="doi:%5B10.1038/s41588-018-0129-5" class="uri">doi:[10.1038/s41588-018-0129-5</a>](<a href="https://doi.org/10.1038/s41588-018-0129-5" class="external-link uri">https://doi.org/10.1038/s41588-018-0129-5</a>)</div>
 </div>
 </div>
 </div>
@@ -277,13 +227,13 @@ Genetic identification of brain cell types underlying schizophrenia.
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.bioconductor.org/packages/MungeSumstats" class="external-link"><img src="https://img.shields.io/badge/release%20version-1.3.5-black.svg"></a></li>
+<li><a href="https://www.bioconductor.org/packages/MungeSumstats" class="external-link"><img src="https://img.shields.io/badge/release%20version-1.2.3-black.svg"></a></li>
 <li><a href="https://github.com/neurogenomics/MungeSumstats" class="external-link"><img src="https://img.shields.io/badge/devel%20version-1.3.8-black.svg"></a></li>
 <li><a href="https://github.com/neurogenomics/MungeSumstats/actions" class="external-link"><img src="https://github.com/neurogenomics/MungeSumstats/workflows/DockerHub/badge.svg" alt="R build status"></a></li>
 <li><a href="https://github.com/neurogenomics/MungeSumstats/actions" class="external-link"><img src="https://github.com/neurogenomics/MungeSumstats/workflows/R-CMD-check-bioc/badge.svg" alt="R build status"></a></li>
 <li><a href="https://github.com/neurogenomics/MungeSumstats/commits/master" class="external-link"><img src="https://img.shields.io/github/last-commit/neurogenomics/MungeSumstats.svg"></a></li>
 <li><a href="https://codecov.io/gh/neurogenomics/MungeSumstats" class="external-link"><img src="https://codecov.io/gh/neurogenomics/MungeSumstats/branch/master/graph/badge.svg"></a></li>
-<li><a href="https://bioconductor.org/packages/stats/bioc/MungeSumstats" class="external-link"><img src="https://img.shields.io/badge/download-694/total-blue.svg"></a></li>
+<li><a href="https://bioconductor.org/packages/stats/bioc/MungeSumstats" class="external-link"><img src="https://img.shields.io/badge/download-721/total-blue.svg"></a></li>
 <li><a href="https://cran.r-project.org/web/licenses/Artistic-2.0" class="external-link"><img src="https://img.shields.io/badge/license-Artistic--2.0-blue.svg" alt="License: Artistic-2.0"></a></li>
 <li><a href="https://doi.org/https://doi.org/10.1093/bioinformatics/btab665" class="external-link"><img src="https://img.shields.io/badge/doi-https://doi.org/10.1093/bioinformatics/btab665-blue.svg"></a></li>
 </ul>
@@ -300,8 +250,7 @@ Genetic identification of brain cell types underlying schizophrenia.
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>

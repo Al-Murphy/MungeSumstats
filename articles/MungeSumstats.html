@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.9</span>
       </span>
     </div>
 
@@ -52,7 +52,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -97,7 +97,7 @@
 </h5></h4>
             
             <h4 data-toc-skip class="date"><h5>
-<i>Updated</i>: Mar-03-2022
+<i>Updated</i>: Mar-08-2022
 </h5></h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/MungeSumstats/blob/HEAD/vignettes/MungeSumstats.Rmd" class="external-link"><code>vignettes/MungeSumstats.Rmd</code></a></small>
@@ -111,50 +111,24 @@
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h2>
 <p>If you use the MungeSumstats package, please cite</p>
-<p><a href="https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btab665/6380562" class="external-link">Murphy
-et al. MungeSumstats: A Bioconductor package for the standardisation and
-quality control of many GWAS summary statistics</a>.</p>
+<p><a href="https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btab665/6380562" class="external-link">Murphy et al. MungeSumstats: A Bioconductor package for the standardisation and quality control of many GWAS summary statistics</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>The <em>MungeSumstats</em> package is designed to facilitate the
-standardisation of GWAS summary statistics as utilised in our Nature
-Genetics paper<span class="citation"><sup>1</sup></span>.</p>
-<p>The package is designed to handle the lack of standardisation of
-output files by the GWAS community. There is a group who have now
-manually standardised many GWAS: <a href="https://mrcieu.github.io/ieugwasr/" class="external-link">R interface to the IEU GWAS
-database API • ieugwasr</a> and <a href="https://github.com/MRCIEU/gwasvcf" class="external-link">gwasvcf</a> but because a lot
-of GWAS remain closed access, these repositories are not all
-encompassing.</p>
-<p>The <a href="https://github.com/mikegloudemans/gwas-download" class="external-link">GWAS-Download
-project</a> has collated summary statistics from 200+ GWAS. This
-repository has been utilsed to identify the most common formats, all of
-which can be standardised with <em>MungeSumstats</em>.</p>
-<p>Moreover, there is an emerging standard of VCF format for summary
-statistics files with multiple, useful, associated R packages such as
-<em>vcfR</em>. However, there is currently no method to convert VCF
-formats to a standardised format that matches older approaches.</p>
-<p>The <em>MungeSumstats</em> package standardises both VCF and the most
-common summary statistic file formats to enable downstream integration
-and analysis.</p>
-<p><em>MungeSumstats</em> also offers comprehensive Quality Control (QC)
-steps which are important prerequisites for downstream analysis like
-Linkage disequilibrium score regression (LDSC) and MAGMA.</p>
-<p>Moreover, <em>MungeSumstats</em> is efficiently written resulting in
-all reformatting and quality control checks completing in minutes for
-GWAS summary statistics with 500k SNPs on a standard desktop machine.
-This speed can be increased further by increasing the number of threads
-(nThread) for <code>data.table</code> to use.</p>
-<p>Currently <em>MungeSumstats</em> only works on data from humans, as
-it uses human-based genome references.</p>
+<p>The <em>MungeSumstats</em> package is designed to facilitate the standardisation of GWAS summary statistics as utilised in our Nature Genetics paper.<span class="citation"><sup>1</sup></span></p>
+<p>The package is designed to handle the lack of standardisation of output files by the GWAS community. There is a group who have now manually standardised many GWAS: <a href="https://mrcieu.github.io/ieugwasr/" class="external-link">R interface to the IEU GWAS database API • ieugwasr</a> and <a href="https://github.com/MRCIEU/gwasvcf" class="external-link">gwasvcf</a> but because a lot of GWAS remain closed access, these repositories are not all encompassing.</p>
+<p>The <a href="https://github.com/mikegloudemans/gwas-download" class="external-link">GWAS-Download project</a> has collated summary statistics from 200+ GWAS. This repository has been utilsed to identify the most common formats, all of which can be standardised with <em>MungeSumstats</em>.</p>
+<p>Moreover, there is an emerging standard of VCF format for summary statistics files with multiple, useful, associated R packages such as <em>vcfR</em>. However, there is currently no method to convert VCF formats to a standardised format that matches older approaches.</p>
+<p>The <em>MungeSumstats</em> package standardises both VCF and the most common summary statistic file formats to enable downstream integration and analysis.</p>
+<p><em>MungeSumstats</em> also offers comprehensive Quality Control (QC) steps which are important prerequisites for downstream analysis like Linkage disequilibrium score regression (LDSC) and MAGMA.</p>
+<p>Moreover, <em>MungeSumstats</em> is efficiently written resulting in all reformatting and quality control checks completing in minutes for GWAS summary statistics with 500k SNPs on a standard desktop machine. This speed can be increased further by increasing the number of threads (nThread) for <code>data.table</code> to use.</p>
+<p>Currently <em>MungeSumstats</em> only works on data from humans, as it uses human-based genome references.</p>
 </div>
 <div class="section level2">
 <h2 id="aim">Aim<a class="anchor" aria-label="anchor" href="#aim"></a>
 </h2>
-<p><em>MungeSumstats</em> will ensure that the all essential columns for
-analysis are present and syntactically correct. Generally, summary
-statistic files include (but are not limited to) the columns:</p>
+<p><em>MungeSumstats</em> will ensure that the all essential columns for analysis are present and syntactically correct. Generally, summary statistic files include (but are not limited to) the columns:</p>
 <ul>
 <li>SNP : SNP ID (rs IDs)</li>
 <li>CHR : Chromosome number</li>
@@ -169,17 +143,8 @@ statistic files include (but are not limited to) the columns:</p>
 <li>INFO: The imputation information score</li>
 <li>FRQ: The minor/effect allele frequency (MAF/EAF) of the SNP</li>
 </ul>
-<p><em>MungeSumstats</em> uses a mapping file to infer the inputted
-column names (run <code>data("sumstatsColHeaders")</code> to view
-these). This mapping file is far more comprehensive than any other
-publicly available munging tool containing more than 200 unique mappings
-at the time of writing this vignette. However, if your column headers
-are missing or if you want to change the mapping, you can do so by
-passing your own mapping file (see
-<code>format_sumstats(mapping_file)</code>).</p>
-<p><em>MungeSumstats</em> offers unmatched levels of quality control to
-ensure, for example, consistency of allele assignment and direction of
-effects. Tests run by <em>MungeSumstats</em> include:</p>
+<p><em>MungeSumstats</em> uses a mapping file to infer the inputted column names (run <code>data("sumstatsColHeaders")</code> to view these). This mapping file is far more comprehensive than any other publicly available munging tool containing more than 200 unique mappings at the time of writing this vignette. However, if your column headers are missing or if you want to change the mapping, you can do so by passing your own mapping file (see <code>format_sumstats(mapping_file)</code>).</p>
+<p><em>MungeSumstats</em> offers unmatched levels of quality control to ensure, for example, consistency of allele assignment and direction of effects. Tests run by <em>MungeSumstats</em> include:</p>
 <ul>
 <li>Check VCF format</li>
 <li>Check tab, space or comma delimited, zipped, csv or tsv file</li>
@@ -193,20 +158,17 @@ effects. Tests run by <em>MungeSumstats</em> include:</p>
 <li>Check if SNP ID is missing (infer from reference genome)</li>
 <li>Check if A1 and/or A2 are missing (infer from reference genome)</li>
 <li>Check that vital columns are present (SNP,CHR,BP,P,A1,A2)</li>
-<li>Check for one signed/effect column
-(Z,OR,BETA,LOG_ODDS,SIGNED_SUMSTAT)</li>
+<li>Check for one signed/effect column (Z,OR,BETA,LOG_ODDS,SIGNED_SUMSTAT)</li>
 <li>Check for missing data</li>
 <li>Check for duplicated columns</li>
 <li>Check for small p-values (lower than 5e-324)</li>
 <li>Check N column is an integer</li>
-<li>Check for SNPs with N greater than 5 times standard dev. plus the
-mean</li>
+<li>Check for SNPs with N greater than 5 times standard dev. plus the mean</li>
 <li>Check SNPs are RS ID’s</li>
 <li>Check for uniformity of SNP ID format</li>
 <li>Check for duplicated rows, based on SNP ID</li>
 <li>Check for duplicated rows, based on base-pair position</li>
-<li>Check for SNPs on reference genome. Correct not found SNP IDs using
-CHR and BP (infer from reference genome)</li>
+<li>Check for SNPs on reference genome. Correct not found SNP IDs using CHR and BP (infer from reference genome)</li>
 <li>Check INFO score</li>
 <li>Check FRQ value</li>
 <li>Check FRQ is minor allele frequency (MAF)</li>
@@ -219,52 +181,24 @@ CHR and BP (infer from reference genome)</li>
 <li>Check for z-score (Z) and impute if missing</li>
 <li>Check for N and impute if missing</li>
 <li>Check output format is LDSC ready</li>
-<li>Check and perform liftover to desired reference genome if
-necessary</li>
+<li>Check and perform liftover to desired reference genome if necessary</li>
 </ul>
-<p>Users can specify which checks to run on their data. A
-<strong>note</strong> on the allele flipping check:
-<strong>MungeSumstats</strong> infers the effect allele will always be
-the A2 allele, this is the approach done for <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7805039/" class="external-link">IEU GWAS
-VCF</a> and has such also been adopted here. This inference is first
-from the inputted file’s column headers however, the allele flipping
-check ensures this by comparing A1, what should be the reference allele,
-to the reference genome. If a SNP’s A1 DNA base doesn’t match the
-reference genome but it’s A2 (what should be the alternative allele)
-does, the alleles will be flipped along with the effect information
-(e.g. Beta, Odds Ratio, signed summary statistics, FRQ, Z-score*).</p>
-<p>*-by default the Z-score is assumed to be calculated off the effect
-size not the P-value and so will be flipped. This can be changed by a
-user.</p>
-<p>If a test is failed, the user will be notified and if possible, the
-input will be corrected. The QC steps from the checks above can also be
-adjusted to suit the user’s analysis, see
-<code><a href="../reference/format_sumstats.html">MungeSumstats::format_sumstats</a></code>.</p>
-<p><em>MungeSumstats</em> can handle VCF, txt, tsv, csv file types or
-.gz/.bgz versions of these file types. The package also gives the user
-the flexibility to export the reformatted file as tab-delimited, VCF or
-R native objects such as data.table, GRanges or VRanges objects. The
-output can also be outputted in an <strong>LDSC ready</strong> format
-which means the file can be fed directly into LDSC without the need for
-additional munging.</p>
+<p>Users can specify which checks to run on their data. A <strong>note</strong> on the allele flipping check: <strong>MungeSumstats</strong> infers the effect allele will always be the A2 allele, this is the approach done for <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7805039/" class="external-link">IEU GWAS VCF</a> and has such also been adopted here. This inference is first from the inputted file’s column headers however, the allele flipping check ensures this by comparing A1, what should be the reference allele, to the reference genome. If a SNP’s A1 DNA base doesn’t match the reference genome but it’s A2 (what should be the alternative allele) does, the alleles will be flipped along with the effect information (e.g. Beta, Odds Ratio, signed summary statistics, FRQ, Z-score*).</p>
+<p>*-by default the Z-score is assumed to be calculated off the effect size not the P-value and so will be flipped. This can be changed by a user.</p>
+<p>If a test is failed, the user will be notified and if possible, the input will be corrected. The QC steps from the checks above can also be adjusted to suit the user’s analysis, see <code><a href="../reference/format_sumstats.html">MungeSumstats::format_sumstats</a></code>.</p>
+<p><em>MungeSumstats</em> can handle VCF, txt, tsv, csv file types or .gz/.bgz versions of these file types. The package also gives the user the flexibility to export the reformatted file as tab-delimited, VCF or R native objects such as data.table, GRanges or VRanges objects. The output can also be outputted in an <strong>LDSC ready</strong> format which means the file can be fed directly into LDSC without the need for additional munging.</p>
 </div>
 <div class="section level2">
 <h2 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
 </h2>
-<p>The <em>MungeSumstats</em> package contains small subsets of GWAS
-summary statistics files. Firstly, on Educational Attainment by Okbay et
-al 2016: PMID: 27898078 PMCID: PMC5509058 DOI: 10.1038/ng1216-1587b.</p>
-<p>Secondly, a VCF file (VCFv4.2) relating to the GWAS Amyotrophic
-lateral sclerosis from ieu open GWAS project. Dataset: ebi-a-GCST005647:
-<a href="https://gwas.mrcieu.ac.uk/datasets/ebi-a-GCST005647/" class="external-link uri">https://gwas.mrcieu.ac.uk/datasets/ebi-a-GCST005647/</a></p>
-<p>These datasets will be used to showcase <em>MungeSumstats</em>
-functionality.</p>
+<p>The <em>MungeSumstats</em> package contains small subsets of GWAS summary statistics files. Firstly, on Educational Attainment by Okbay et al 2016: PMID: 27898078 PMCID: PMC5509058 DOI: 10.1038/ng1216-1587b.</p>
+<p>Secondly, a VCF file (VCFv4.2) relating to the GWAS Amyotrophic lateral sclerosis from ieu open GWAS project. Dataset: ebi-a-GCST005647: <a href="https://gwas.mrcieu.ac.uk/datasets/ebi-a-GCST005647/" class="external-link uri">https://gwas.mrcieu.ac.uk/datasets/ebi-a-GCST005647/</a></p>
+<p>These datasets will be used to showcase <em>MungeSumstats</em> functionality.</p>
 </div>
 <div class="section level2">
 <h2 id="running-mungesumstats">Running <em>MungeSumstats</em><a class="anchor" aria-label="anchor" href="#running-mungesumstats"></a>
 </h2>
-<p><em>MungeSumstats</em> is available on Bioconductor. To install the
-package on Bioconductor run the following lines of code:</p>
+<p><em>MungeSumstats</em> is available on Bioconductor. To install the package on Bioconductor run the following lines of code:</p>
 <pre><code><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span><span class="op">)</span>
     <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
 
@@ -272,48 +206,18 @@ package on Bioconductor run the following lines of code:</p>
 <p>Once installed, load the package:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/neurogenomics/MungeSumstats" class="external-link">MungeSumstats</a></span><span class="op">)</span></code></pre></div>
-<p>To standardise the summary statistics’ file format, simply call
-<code><a href="../reference/format_sumstats.html">format_sumstats()</a></code> passing in the path to your summary
-statistics file or directly pass the summary statistics as a dataframe
-or datatable. You can specify which genome build was used in the
-GWAS(GRCh37 or GRCh38) or, as default, infer the genome build from the
-data.The reference genome is used for multiple checks like deriving
-missing data such SNP/BP/CHR/A1/A2 and for QC steps like removing
-non-biallelic SNPs, strand-ambiguous SNPs or ensuring correct allele and
-direction of SNP effects. The path to the reformatted summary statistics
-file can be returned by the function call, the user can specify a
-location to save the file or the user can return an R native object for
-the data: data.table, VRanges or GRanges object.</p>
-<p>Note that for a number of the checks implored by
-<em>MungeSumstats</em> a reference genome is used. If your GWAS summary
-statistics file of interest relates to <em>GRCh38</em>, you will need to
-install <code>SNPlocs.Hsapiens.dbSNP144.GRCh38</code> and
-<code>BSgenome.Hsapiens.NCBI.GRCh38</code> from Bioconductor as
-follows:</p>
+<pre><code><span class="co">## Warning: package 'MungeSumstats' was built under R version 4.1.2</span></code></pre>
+<p>To standardise the summary statistics’ file format, simply call <code><a href="../reference/format_sumstats.html">format_sumstats()</a></code> passing in the path to your summary statistics file or directly pass the summary statistics as a dataframe or datatable. You can specify which genome build was used in the GWAS(GRCh37 or GRCh38) or, as default, infer the genome build from the data.The reference genome is used for multiple checks like deriving missing data such SNP/BP/CHR/A1/A2 and for QC steps like removing non-biallelic SNPs, strand-ambiguous SNPs or ensuring correct allele and direction of SNP effects. The path to the reformatted summary statistics file can be returned by the function call, the user can specify a location to save the file or the user can return an R native object for the data: data.table, VRanges or GRanges object.</p>
+<p>Note that for a number of the checks implored by <em>MungeSumstats</em> a reference genome is used. If your GWAS summary statistics file of interest relates to <em>GRCh38</em>, you will need to install <code>SNPlocs.Hsapiens.dbSNP144.GRCh38</code> and <code>BSgenome.Hsapiens.NCBI.GRCh38</code> from Bioconductor as follows:</p>
 <pre><code><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"SNPlocs.Hsapiens.dbSNP144.GRCh38"</span><span class="op">)</span>
 <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"BSgenome.Hsapiens.NCBI.GRCh38"</span><span class="op">)</span></code></pre>
-<p>If your GWAS summary statistics file of interest relates to
-<em>GRCh37</em>, you will need to install
-<code>SNPlocs.Hsapiens.dbSNP144.GRCh37</code> and
-<code>BSgenome.Hsapiens.1000genomes.hs37d5</code> from Bioconductor as
-follows:</p>
+<p>If your GWAS summary statistics file of interest relates to <em>GRCh37</em>, you will need to install <code>SNPlocs.Hsapiens.dbSNP144.GRCh37</code> and <code>BSgenome.Hsapiens.1000genomes.hs37d5</code> from Bioconductor as follows:</p>
 <pre><code><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"SNPlocs.Hsapiens.dbSNP144.GRCh37"</span><span class="op">)</span>
 <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"BSgenome.Hsapiens.1000genomes.hs37d5"</span><span class="op">)</span></code></pre>
-<p>These may take some time to install and are not included in the
-package as some users may only need one of
-<em>GRCh37</em>/<em>GRCh38</em>.</p>
-<p>The Educational Attainment by Okbay GWAS summary statistics file is
-saved as a text document in the package’s external data folder so we can
-just pass the file path to it straight to <em>MungeSumstats</em>.</p>
-<p><strong>NOTE</strong> - By default, Formatted results will be saved
-to <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>. This means all formatted summary stats will
-be deleted upon ending the R session if not copied to a local file path.
-Otherwise, to keep formatted summary stats, change
-<code>save_path</code> (
-e.g.<code>file.path('./formatted',basename(path))</code>), or make sure
-to copy files elsewhere after processing (
-e.g.<code>file.copy(save_path, './formatted/' )</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<p>These may take some time to install and are not included in the package as some users may only need one of <em>GRCh37</em>/<em>GRCh38</em>.</p>
+<p>The Educational Attainment by Okbay GWAS summary statistics file is saved as a text document in the package’s external data folder so we can just pass the file path to it straight to <em>MungeSumstats</em>.</p>
+<p><strong>NOTE</strong> - By default, Formatted results will be saved to <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>. This means all formatted summary stats will be deleted upon ending the R session if not copied to a local file path. Otherwise, to keep formatted summary stats, change <code>save_path</code> ( e.g.<code>file.path('./formatted',basename(path))</code>), or make sure to copy files elsewhere after processing ( e.g.<code>file.copy(save_path, './formatted/' )</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">eduAttainOkbayPth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"eduAttainOkbay.txt"</span>,
                                   package<span class="op">=</span><span class="st">"MungeSumstats"</span><span class="op">)</span>
 <span class="va">reformatted</span> <span class="op">&lt;-</span> 
@@ -326,10 +230,10 @@ e.g.<code>file.copy(save_path, './formatted/' )</code>.</p>
 <span class="co">## - This means all formatted summary stats will be deletedupon ending the R session.</span>
 <span class="co">## - To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.</span>
 <span class="co">## ********************</span></code></pre>
-<pre><code><span class="co">## Formatted summary statistics will be saved to ==&gt; /tmp/Rtmpt4ehKH/filee9821db46f4.tsv.gz</span></code></pre>
+<pre><code><span class="co">## Formatted summary statistics will be saved to ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmpjbk5Rg/file6b141abf7129.tsv.gz</span></code></pre>
 <pre><code><span class="co">## Reading header.</span></code></pre>
 <pre><code><span class="co">## Tabular format detected.</span></code></pre>
-<pre><code><span class="co">## Importing tabular file: /__w/_temp/Library/MungeSumstats/extdata/eduAttainOkbay.txt</span></code></pre>
+<pre><code><span class="co">## Importing tabular file: /Users/alanmurphy/Library/R/x86_64/4.1/library/MungeSumstats/extdata/eduAttainOkbay.txt</span></code></pre>
 <pre><code><span class="co">## Standardising column headers.</span></code></pre>
 <pre><code><span class="co">## First line of summary statistics file:</span></code></pre>
 <pre><code><span class="co">## MarkerName   CHR POS A1  A2  EAF Beta    SE  Pval    </span></code></pre>
@@ -342,7 +246,6 @@ e.g.<code>file.copy(save_path, './formatted/' )</code>.</p>
 <pre><code><span class="co">## Checking for multiple RSIDs on one row.</span></code></pre>
 <pre><code><span class="co">## Checking SNP RSIDs.</span></code></pre>
 <pre><code><span class="co">## Checking for merged allele column.</span></code></pre>
-<pre><code><span class="co">## The sumstats BETA column is not present...</span></code></pre>
 <pre><code><span class="co">## Checking for missing data.</span></code></pre>
 <pre><code><span class="co">## Checking for duplicate columns.</span></code></pre>
 <pre><code><span class="co">## Checking for duplicate SNPs from SNP ID.</span></code></pre>
@@ -354,11 +257,11 @@ e.g.<code>file.copy(save_path, './formatted/' )</code>.</p>
 <pre><code><span class="co">## Warning: When method is an integer, must be &gt;0.</span></code></pre>
 <pre><code><span class="co">## 47 SNPs (50.5%) have FRQ values &gt; 0.5. Conventionally the FRQ column is intended to show the minor/effect allele frequency.</span>
 <span class="co">## The FRQ column was mapped from one of the following from the inputted  summary statistics file:</span>
-<span class="co">## FRQ, EAF, MAF, FRQ_U, F_U, FREQUENCY, FREQ, FREQ_TESTED_ALLELE, FRQ_TESTED_ALLELE, FREQ_EFFECT_ALLELE, FRQ_EFFECT_ALLELE, EFFECT_ALLELE_FREQUENCY, EFFECT_ALLELE_FREQ, EFFECT_ALLELE_FRQ, A1FREQ, A1FRQ, A2FREQ, A2FRQ, ALLELE_FREQUENCY, ALLELE_FREQ, ALLELE_FRQ, AF, MINOR_AF, EFFECT_AF, A2_AF, EFF_AF, ALT_AF, ALTERNATIVE_AF, INC_AF, A_2_AF, TESTED_AF, AF1, ALLELEFREQ, ALT_FREQ, EAF_HRC, EFFECTALLELEFREQ, FREQ.A1.1000G.EUR, FREQ.A1.ESP.EUR, FREQ.ALLELE1.HAPMAPCEU, FREQ.B, FREQ1, FREQ1.HAPMAP, FREQ_EUROPEAN_1000GENOMES, FREQ_HAPMAP, FREQ_TESTED_ALLELE_IN_HRS, FRQ_A1, FRQ_U_113154, FRQ_U_31358, FRQ_U_344901, FRQ_U_43456, POOLED_ALT_AF</span></code></pre>
+<span class="co">## FRQ, EAF, MAF, FRQ_U, F_U, FREQUENCY, FREQ, FREQ_TESTED_ALLELE, FRQ_TESTED_ALLELE, FREQ_EFFECT_ALLELE, FRQ_EFFECT_ALLELE, EFFECT_ALLELE_FREQUENCY, EFFECT_ALLELE_FREQ, EFFECT_ALLELE_FRQ, A1FREQ, A1FRQ, A2FREQ, A2FRQ, ALLELE_FREQUENCY, ALLELE_FREQ, ALLELE_FRQ, AF, MINOR_AF, EFFECT_AF, A2_AF, EFF_AF, ALT_AF, ALTERNATIVE_AF, INC_AF, A_2_AF, TESTED_AF</span></code></pre>
 <pre><code><span class="co">## As frq_is_maf=TRUE, the FRQ column will not be renamed. If the FRQ values were intended to represent major allele frequency,</span>
 <span class="co">## set frq_is_maf=FALSE to rename the column as MAJOR_ALLELE_FRQ and differentiate it from minor/effect allele frequency.</span></code></pre>
 <pre><code><span class="co">## Sorting coordinates.</span></code></pre>
-<pre><code><span class="co">## Writing in tabular format ==&gt; /tmp/Rtmpt4ehKH/filee9821db46f4.tsv.gz</span></code></pre>
+<pre><code><span class="co">## Writing in tabular format ==&gt; /var/folders/hd/jm8lzp7s4dl_wlkykzhz66x80000gn/T//Rtmpjbk5Rg/file6b141abf7129.tsv.gz</span></code></pre>
 <pre><code><span class="co">## Summary statistics report:</span>
 <span class="co">##    - 93 rows (100% of original 93 rows)</span>
 <span class="co">##    - 93 unique variants</span>
@@ -372,151 +275,67 @@ e.g.<code>file.copy(save_path, './formatted/' )</code>.</p>
 <span class="co">## 3: rs34305371   1 72733610  A  G 0.08769  0.035 0.005 3.762e-14</span>
 <span class="co">## 4:  rs2568955   1 72762169  T  C 0.23690 -0.017 0.003 1.797e-08</span></code></pre>
 <pre><code><span class="co">## Returning path to saved data.</span></code></pre>
-<p>The arguments <code>format_sumstats</code> in that control the level
-of QC conducted by <em>MungeSumstats</em> are:</p>
+<p>The arguments <code>format_sumstats</code> in that control the level of QC conducted by <em>MungeSumstats</em> are:</p>
 <ul>
 <li>
-<strong>convert_small_p</strong> Binary, should
-<code>p-values &lt; 5e-324</code> be converted to 0? Small p-values pass
-the R limit and can cause errors with LDSC/MAGMA and should be
-converted. Default is TRUE.</li>
+<strong>convert_small_p</strong> Binary, should <code>p-values &lt; 5e-324</code> be converted to 0? Small p-values pass the R limit and can cause errors with LDSC/MAGMA and should be converted. Default is TRUE.</li>
 <li>
-<strong>convert_n_int</strong> Binary, if N (the number of samples)
-is not an integer, should this be rounded? Default is TRUE.
-analysis_trait If multiple traits were studied, name of the trait for
-analysis from the GWAS. Default is NULL</li>
+<strong>convert_n_int</strong> Binary, if N (the number of samples) is not an integer, should this be rounded? Default is TRUE. analysis_trait If multiple traits were studied, name of the trait for analysis from the GWAS. Default is NULL</li>
 <li>
-<strong>INFO_filter</strong> 0-1 The minimum value permissible of
-the imputation information score (if present in sumstatsfile). Default
-0.9</li>
+<strong>INFO_filter</strong> 0-1 The minimum value permissible of the imputation information score (if present in sumstatsfile). Default 0.9</li>
 <li>
-<strong>FRQ_filter</strong> 0-1 The minimum value permissible of the
-frequency(FRQ) of the SNP (i.e. Allele Frequency (AF)) (if present in
-sumstats file). By default no filtering is done, i.e. value of 0.<br>
+<strong>FRQ_filter</strong> 0-1 The minimum value permissible of the frequency(FRQ) of the SNP (i.e. Allele Frequency (AF)) (if present in sumstats file). By default no filtering is done, i.e. value of 0.<br>
 </li>
 <li>
-<strong>pos_se</strong> Binary Should the standard Error (SE) column
-be checked to ensure it is greater than 0? Those that are, are removed
-(if present in sumstats file). Default TRUE.</li>
+<strong>pos_se</strong> Binary Should the standard Error (SE) column be checked to ensure it is greater than 0? Those that are, are removed (if present in sumstats file). Default TRUE.</li>
 <li>
-<strong>effect_columns_nonzero</strong> Binary should the effect
-columns in the data BETA,OR (odds ratio),LOG_ODDS,SIGNED_SUMSTAT be
-checked to ensure no SNP=0. Those that do are removed(if present in
-sumstats file). Default TRUE.<br>
+<strong>effect_columns_nonzero</strong> Binary should the effect columns in the data BETA,OR (odds ratio),LOG_ODDS,SIGNED_SUMSTAT be checked to ensure no SNP=0. Those that do are removed(if present in sumstats file). Default TRUE.<br>
 </li>
 <li>
-<strong>N_std</strong> Numeric, the number of standard deviations
-above the mean a SNP’s N is needed to be removed. Default is 5.
-<strong>N_dropNA</strong> controls whether the SNPs with a missing N
-value are dropped or not (Default is TRUE).</li>
+<strong>N_std</strong> Numeric, the number of standard deviations above the mean a SNP’s N is needed to be removed. Default is 5. <strong>N_dropNA</strong> controls whether the SNPs with a missing N value are dropped or not (Default is TRUE).</li>
 <li>
-<strong>rmv_chr</strong> vector or character The chromosomes on
-which the SNPs should be removed. Use NULL if no filtering necessary.
-Default is X, Y and mitochondrial.<strong>rmv_chrPrefix</strong>
-controls whether “chr”/“CHR” is removed from chromosome names (Default
-is TRUE).</li>
+<strong>rmv_chr</strong> vector or character The chromosomes on which the SNPs should be removed. Use NULL if no filtering necessary. Default is X, Y and mitochondrial.<strong>rmv_chrPrefix</strong> controls whether “chr”/“CHR” is removed from chromosome names (Default is TRUE).</li>
 <li>
-<strong>on_ref_genome</strong> Binary, should a check take place
-that all SNPs are on the reference genome by SNP ID. Any SNPs not on the
-reference genome, will be corrected from the reference genome (if
-possible) using the chromosome and base pair position data. Default is
-TRUE</li>
+<strong>on_ref_genome</strong> Binary, should a check take place that all SNPs are on the reference genome by SNP ID. Any SNPs not on the reference genome, will be corrected from the reference genome (if possible) using the chromosome and base pair position data. Default is TRUE</li>
 <li>
-<strong>strand_ambig_filter</strong> Binary, should SNPs with
-strand-ambiguous alleles be removed. Default is FALSE</li>
+<strong>strand_ambig_filter</strong> Binary, should SNPs with strand-ambiguous alleles be removed. Default is FALSE</li>
 <li>
-<strong>allele_flip_check</strong> Binary, should the allele columns
-be checked against reference genome to infer if flipping is necessary.
-Default is TRUE. <strong>allele_flip_drop</strong> controls whether the
-SNPs for which neither their A1 or A2 base pair values match a reference
-genome be dropped. Default is TRUE. <strong>allele_flip_z</strong>
-controls whether the Z-score value should be flipped along with effect
-and FRQ columns (e.g. Beta). Default is TRUE.
-<strong>allele_flip_frq</strong> controls whether the frequency (FRQ)
-value should be flipped along with effect and Z-score columns
-(e.g. Beta). Default is TRUE.</li>
+<strong>allele_flip_check</strong> Binary, should the allele columns be checked against reference genome to infer if flipping is necessary. Default is TRUE. <strong>allele_flip_drop</strong> controls whether the SNPs for which neither their A1 or A2 base pair values match a reference genome be dropped. Default is TRUE. <strong>allele_flip_z</strong> controls whether the Z-score value should be flipped along with effect and FRQ columns (e.g. Beta). Default is TRUE. <strong>allele_flip_frq</strong> controls whether the frequency (FRQ) value should be flipped along with effect and Z-score columns (e.g. Beta). Default is TRUE.</li>
 <li>
-<strong>bi_allelic_filter</strong> Binary, should non-biallelic SNPs
-be removed. Default is TRUE</li>
+<strong>bi_allelic_filter</strong> Binary, should non-biallelic SNPs be removed. Default is TRUE</li>
 <li>
-<strong>snp_ids_are_rs_ids</strong> Binary, should the SNP IDs
-inputted be inferred as RS IDs or some arbitrary ID. Default is
-TRUE.<br>
+<strong>snp_ids_are_rs_ids</strong> Binary, should the SNP IDs inputted be inferred as RS IDs or some arbitrary ID. Default is TRUE.<br>
 </li>
 <li>
-<strong>frq_is_maf</strong> Binary, conventionally the FRQ column is
-intended to show the minor/effect allele frequency (MAF) but sometimes
-the major allele frequency can be inferred as the FRQ column. This
-logical variable indicates that the FRQ column should be renamed to
-MAJOR_ALLELE_FRQ if the frequency values appear to relate to the major
-allele i.e. &gt;0.5. By default mapping won’t occur i.e. is TRUE.</li>
+<strong>frq_is_maf</strong> Binary, conventionally the FRQ column is intended to show the minor/effect allele frequency (MAF) but sometimes the major allele frequency can be inferred as the FRQ column. This logical variable indicates that the FRQ column should be renamed to MAJOR_ALLELE_FRQ if the frequency values appear to relate to the major allele i.e. &gt;0.5. By default mapping won’t occur i.e. is TRUE.</li>
 <li>
-<strong>sort_coordinates</strong> Whether to sort by coordinates of
-resulting sumstats.<br>
+<strong>sort_coordinates</strong> Whether to sort by coordinates of resulting sumstats.<br>
 </li>
 <li>
-<strong>nThread</strong> Number of threads to use for parallel
-processes.</li>
+<strong>nThread</strong> Number of threads to use for parallel processes.</li>
 <li>
-<strong>write_vcf</strong> Whether to write as VCF (TRUE) or tabular
-file (FALSE). While <strong>tabix_index</strong> is a binary input for
-whether to index the formatted summary statistics with <a href="http://www.htslib.org/doc/tabix.html" class="external-link">tabix</a> for fast
-querying.</li>
+<strong>write_vcf</strong> Whether to write as VCF (TRUE) or tabular file (FALSE). While <strong>tabix_index</strong> is a binary input for whether to index the formatted summary statistics with <a href="http://www.htslib.org/doc/tabix.html" class="external-link">tabix</a> for fast querying.</li>
 <li>
-<strong>return_data</strong> Return <code>data.table</code>,
-<code>GRanges</code> or <code>VRanges</code>directly to user. Otherwise,
-return the path to the save data. Default is FALSE.</li>
+<strong>return_data</strong> Return <code>data.table</code>, <code>GRanges</code> or <code>VRanges</code>directly to user. Otherwise, return the path to the save data. Default is FALSE.</li>
 <li>
-<strong>return_format</strong> If return_data is TRUE. Object type
-to be returned (“data.table”,“vranges”,“granges”).</li>
+<strong>return_format</strong> If return_data is TRUE. Object type to be returned (“data.table”,“vranges”,“granges”).</li>
 <li>
-<strong>ldsc_format</strong> Ensure that output format meets all
-requirements to be passed directly into LDSC without the need for
-additional munging.</li>
+<strong>ldsc_format</strong> Ensure that output format meets all requirements to be passed directly into LDSC without the need for additional munging.</li>
 <li>
-<strong>log_folder_ind</strong> Should log files be stored
-containing all filtered out SNPs (separate file per filter). The data is
-outputted in the same format specified for the resulting sumstats
-file.</li>
+<strong>log_folder_ind</strong> Should log files be stored containing all filtered out SNPs (separate file per filter). The data is outputted in the same format specified for the resulting sumstats file.</li>
 <li>
-<strong>log_mungesumstats_msgs</strong> Binary Should a log be
-stored containing all messages and errors printed by MungeSumstats in a
-run.</li>
+<strong>log_mungesumstats_msgs</strong> Binary Should a log be stored containing all messages and errors printed by MungeSumstats in a run.</li>
 <li>
-<strong>imputation_ind</strong> Binary Should a column be added for
-each imputation step to show what SNPs have imputed values for differing
-fields. This includes a field denoting SNP allele flipping (flipped). On
-the flipped value, this denoted whether the alelles where switched based
-on MungeSumstats initial choice of A1, A2 from the input column headers
-and thus may not align with what the creator
-intended.<strong>Note</strong> these columns will be in the formatted
-summary statistics returned.</li>
+<strong>imputation_ind</strong> Binary Should a column be added for each imputation step to show what SNPs have imputed values for differing fields. This includes a field denoting SNP allele flipping (flipped). On the flipped value, this denoted whether the alelles where switched based on MungeSumstats initial choice of A1, A2 from the input column headers and thus may not align with what the creator intended.<strong>Note</strong> these columns will be in the formatted summary statistics returned.</li>
 <li>
-<strong>log_folder</strong> File path to the directory for the log
-files and the log of MungeSumstats messages to be stored. Default is a
-temporary directory.</li>
+<strong>log_folder</strong> File path to the directory for the log files and the log of MungeSumstats messages to be stored. Default is a temporary directory.</li>
 <li>
-<strong>force_new</strong> If a formatted file of the same names as
-exists, formatting will be skipped and this file will be imported
-instead (default). Set to override this.</li>
+<strong>force_new</strong> If a formatted file of the same names as  exists, formatting will be skipped and this file will be imported instead (default). Set  to override this.</li>
 <li>
-<strong>mapping_file</strong> MungeSumstats has a pre-defined
-column-name mapping file which should cover the most common column
-headers and their interpretations. However, if a column header that is
-in youf file is missing of the mapping we give is incorrect you can
-supply your own mapping file. Must be a 2 column dataframe with column
-names “Uncorrected” and “Corrected”. See
-<code>data(sumstatsColHeaders)</code> for default mapping and necessary
-format.</li>
+<strong>mapping_file</strong> MungeSumstats has a pre-defined column-name mapping file which should cover the most common column headers and their interpretations. However, if a column header that is in youf file is missing of the mapping we give is incorrect you can supply your own mapping file. Must be a 2 column dataframe with column names “Uncorrected” and “Corrected”. See <code>data(sumstatsColHeaders)</code> for default mapping and necessary format.</li>
 </ul>
-<p>See <code>?MungeSumstats::format_sumstats()</code> for the full list
-of parameters to control MungeSumstats QC and standardisation steps.</p>
-<p>VCF files can also be standardised to the same format as other
-summary statistic files. A subset of the Amyotrophic lateral sclerosis
-GWAS from the ieu open GWAS project (a .vcf file) has been added to
-<em>MungeSumstats</em> to demonstrate this functionality.Simply pass the
-path to the file in the same manner you would for other summary
-statistic files:</p>
+<p>See <code>?MungeSumstats::format_sumstats()</code> for the full list of parameters to control MungeSumstats QC and standardisation steps.</p>
+<p>VCF files can also be standardised to the same format as other summary statistic files. A subset of the Amyotrophic lateral sclerosis GWAS from the ieu open GWAS project (a .vcf file) has been added to <em>MungeSumstats</em> to demonstrate this functionality.Simply pass the path to the file in the same manner you would for other summary statistic files:</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#save ALS GWAS from the ieu open GWAS project to a temp directory</span>
 <span class="va">ALSvcfPth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"ALSvcf.vcf"</span>, package<span class="op">=</span><span class="st">"MungeSumstats"</span><span class="op">)</span></code></pre></div>
@@ -526,10 +345,7 @@ statistic files:</p>
   <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/format_sumstats.html">format_sumstats</a></span><span class="op">(</span>path<span class="op">=</span><span class="va">ALSvcfPth</span>, 
                                  ref_genome<span class="op">=</span><span class="st">"GRCh37"</span>,
                                  INFO_filter<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></code></pre></div>
-<p>You can also get more information on the SNPs which have had data
-imputed or have been filtered out by <em>MungeSumstats</em> by using the
-<code>imputation_ind</code> and <code>log_folder_ind</code> parameters
-respectively. For example:</p>
+<p>You can also get more information on the SNPs which have had data imputed or have been filtered out by <em>MungeSumstats</em> by using the <code>imputation_ind</code> and <code>log_folder_ind</code> parameters respectively. For example:</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#set</span>
 <span class="va">reformatted_vcf_2</span> <span class="op">&lt;-</span> 
@@ -539,13 +355,7 @@ respectively. For example:</p>
                                  log_folder_ind<span class="op">=</span><span class="cn">TRUE</span>,
                                  imputation_ind<span class="op">=</span><span class="cn">TRUE</span>,
                                  log_mungesumstats_msgs<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p>Note that using <code>log_folder_ind</code> returns a list from
-<code>format_sumstats</code> which includes the file locations of the
-differing classes of removed SNPs. Using
-<code>log_mungesumstats_msgs</code> saves the messages to the console to
-a file which is returned in the same list. Note that not all the
-messages will also print to screen anymore when you set
-<code>log_mungesumstats_msgs</code>:</p>
+<p>Note that using <code>log_folder_ind</code> returns a list from <code>format_sumstats</code> which includes the file locations of the differing classes of removed SNPs. Using <code>log_mungesumstats_msgs</code> saves the messages to the console to a file which is returned in the same list. Note that not all the messages will also print to screen anymore when you set <code>log_mungesumstats_msgs</code>:</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">reformatted_vcf_2</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## [1] "sumstats"  "log_files"</span></code></pre>
@@ -574,77 +384,51 @@ messages will also print to screen anymore when you set
 <span class="co">##  8:  rs12401368 0.5921995</span>
 <span class="co">##  9:   rs2462497 0.1523000</span>
 <span class="co">## 10:  rs62641297 0.5494004</span></code></pre>
-<p>And we can see all these SNPs had lower INFO values that our set
-threshold.</p>
-<p>The different types of exclusion which lead to the names are
-explained below:</p>
+<p>And we can see all these SNPs had lower INFO values that our set threshold.</p>
+<p>The different types of exclusion which lead to the names are explained below:</p>
 <ul>
 <li>
-<strong>snp_multi_rs_one_row</strong> - Where the SNP (RS ID)
-contained more than one RS ID.</li>
+<strong>snp_multi_rs_one_row</strong> - Where the SNP (RS ID) contained more than one RS ID.</li>
 <li>
-<strong>snp_missing_rs</strong> - Where the SNP (RS ID) was missing
-the rs prefix. Note that these are only removed when other snps have an
-rs prefix.</li>
+<strong>snp_missing_rs</strong> - Where the SNP (RS ID) was missing the rs prefix. Note that these are only removed when other snps have an rs prefix.</li>
 <li>
-<strong>snp_multi_colon</strong> - Where the SNP ID has mutliple
-colons (“:”) in one SNP.</li>
+<strong>snp_multi_colon</strong> - Where the SNP ID has mutliple colons (“:”) in one SNP.</li>
 <li>
-<strong>snp_not_found_from_bp_chr</strong> - Where the RS ID was
-attempted to be imputed from the CHR and BP (Base-Pair) information,
-using the reference genome, but wasn’t successful.</li>
+<strong>snp_not_found_from_bp_chr</strong> - Where the RS ID was attempted to be imputed from the CHR and BP (Base-Pair) information, using the reference genome, but wasn’t successful.</li>
 <li>
-<strong>chr_bp_not_found_from_snp</strong> - Where the CHR and BP
-(Base-Pair) was attempted to be imputed from the SNP (RS ID), using the
-reference genome, but wasn’t successful.</li>
+<strong>chr_bp_not_found_from_snp</strong> - Where the CHR and BP (Base-Pair) was attempted to be imputed from the SNP (RS ID), using the reference genome, but wasn’t successful.</li>
 <li>
-<strong>alleles_not_found_from_snp</strong> - Where the alleles (A1
-and/or A2) was attempted to be imputed from the SNP (RS ID), using the
-reference genome, but wasn’t successful.</li>
+<strong>alleles_not_found_from_snp</strong> - Where the alleles (A1 and/or A2) was attempted to be imputed from the SNP (RS ID), using the reference genome, but wasn’t successful.</li>
 <li>
-<strong>alleles_dont_match_ref_gen</strong> - Where the alleles (A1
-and/or A2) don’t match what’s on the reference genome.</li>
+<strong>alleles_dont_match_ref_gen</strong> - Where the alleles (A1 and/or A2) don’t match what’s on the reference genome.</li>
 <li>
-<strong>missing_data</strong> - Where there is data missing across
-the inputted columns.</li>
+<strong>missing_data</strong> - Where there is data missing across the inputted columns.</li>
 <li>
-<strong>dup_snp_id</strong> - Where the SNP ID is duplicated in the
-input.</li>
+<strong>dup_snp_id</strong> - Where the SNP ID is duplicated in the input.</li>
 <li>
-<strong>dup_base_pair_position</strong> - Where the base-pair
-position is duplicated in the input.</li>
+<strong>dup_base_pair_position</strong> - Where the base-pair position is duplicated in the input.</li>
 <li>
-<strong>info_filter</strong> - SNP INFO value below the specified
-threshold.</li>
+<strong>info_filter</strong> - SNP INFO value below the specified threshold.</li>
 <li>
-<strong>se_neg</strong> - SNPs SE (Standard Error) value is 0 or
-negative.</li>
+<strong>se_neg</strong> - SNPs SE (Standard Error) value is 0 or negative.</li>
 <li>
-<strong>effect_col_zero</strong> - SNPs effect column(s) value is
-zero e.g. BETA=0.</li>
+<strong>effect_col_zero</strong> - SNPs effect column(s) value is zero e.g. BETA=0.</li>
 <li>
-<strong>n_large</strong> - SNPs N is N standard deviations greater
-than the mean.</li>
+<strong>n_large</strong> - SNPs N is N standard deviations greater than the mean.</li>
 <li>
 <strong>n_null</strong> - SNPs N is null.</li>
 <li>
-<strong>chr_excl</strong> - SNP is on a chromosome specified to be
-excluded.</li>
+<strong>chr_excl</strong> - SNP is on a chromosome specified to be excluded.</li>
 <li>
-<strong>snp_strand_ambiguous</strong> - SNP is strand
-ambiguous.</li>
+<strong>snp_strand_ambiguous</strong> - SNP is strand ambiguous.</li>
 <li>
 <strong>snp_bi_allelic</strong> - SNP is not bi-allelic.</li>
 <li>
-<strong>MungeSumstats_log_msg</strong> - Text file of all messages
-to the console created during MungeSumstats run.</li>
+<strong>MungeSumstats_log_msg</strong> - Text file of all messages to the console created during MungeSumstats run.</li>
 <li>
-<strong>MungeSumstats_log_output</strong> - Text file of all errors
-to the console created during MungeSumstats run.</li>
+<strong>MungeSumstats_log_output</strong> - Text file of all errors to the console created during MungeSumstats run.</li>
 </ul>
-<p>Note to export to another type such as R native objects including
-data.table, GRanges, VRanges or save as a VCF file, set
-<code>return_format</code>:</p>
+<p>Note to export to another type such as R native objects including data.table, GRanges, VRanges or save as a VCF file, set <code>return_format</code>:</p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#set</span>
 <span class="va">reformatted_vcf_2</span> <span class="op">&lt;-</span> 
@@ -655,19 +439,13 @@ data.table, GRanges, VRanges or save as a VCF file, set
                                  imputation_ind<span class="op">=</span><span class="cn">TRUE</span>,
                                  log_mungesumstats_msgs<span class="op">=</span><span class="cn">TRUE</span>,
                                  return_format<span class="op">=</span><span class="st">"GRanges"</span><span class="op">)</span></code></pre></div>
-<p>See our publication for further discussion of these checks and
-options:</p>
-<p><a href="https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btab665/6380562" class="external-link">Murphy
-et al. MungeSumstats: A Bioconductor package for the standardisation and
-quality control of many GWAS summary statistics</a>.</p>
+<p>See our publication for further discussion of these checks and options:</p>
+<p><a href="https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btab665/6380562" class="external-link">Murphy et al. MungeSumstats: A Bioconductor package for the standardisation and quality control of many GWAS summary statistics</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="extra-functionality">Extra Functionality<a class="anchor" aria-label="anchor" href="#extra-functionality"></a>
 </h2>
-<p><em>MungeSumstats</em> also contains a function to quickly infer the
-genome build of multiple summary statistic files. This can be called
-separately to <code><a href="../reference/format_sumstats.html">format_sumstats()</a></code> which is useful if you want
-to just quickly check the genome build:</p>
+<p><em>MungeSumstats</em> also contains a function to quickly infer the genome build of multiple summary statistic files. This can be called separately to <code><a href="../reference/format_sumstats.html">format_sumstats()</a></code> which is useful if you want to just quickly check the genome build:</p>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Pass path to Educational Attainment Okbay sumstat file to a temp directory</span>
 <span class="va">eduAttainOkbayPth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"eduAttainOkbay.txt"</span>,
@@ -679,59 +457,37 @@ to just quickly check the genome build:</p>
 <div class="section level2">
 <h2 id="future-enhancements">Future Enhancements<a class="anchor" aria-label="anchor" href="#future-enhancements"></a>
 </h2>
-<p>The <em>MungeSumstats</em> package aims to be able to handle the most
-common summary statistic file formats including VCF. If your file can
-not be formatted by <em>MungeSumstats</em> feel free to report the bug
-on github: <a href="https://github.com/neurogenomics/MungeSumstats" class="external-link uri">https://github.com/neurogenomics/MungeSumstats</a> along
-with your summary statistic file header.</p>
-<p>We also encourage people to edit the code to resolve their particular
-issues too and are happy to incorporate these through pull requests on
-github. If your summary statistic file headers are not recognised by
-<em>MungeSumstats</em> but correspond to one of:</p>
+<p>The <em>MungeSumstats</em> package aims to be able to handle the most common summary statistic file formats including VCF. If your file can not be formatted by <em>MungeSumstats</em> feel free to report the bug on github: <a href="https://github.com/neurogenomics/MungeSumstats" class="external-link uri">https://github.com/neurogenomics/MungeSumstats</a> along with your summary statistic file header.</p>
+<p>We also encourage people to edit the code to resolve their particular issues too and are happy to incorporate these through pull requests on github. If your summary statistic file headers are not recognised by <em>MungeSumstats</em> but correspond to one of:</p>
 <pre><code>SNP, BP, CHR, A1, A2, P, Z, OR, BETA, LOG_ODDS,
 SIGNED_SUMSTAT, N, N_CAS, N_CON, NSTUDY, INFO or FRQ </code></pre>
-<p>feel free to update the
-<code><a href="../reference/sumstatsColHeaders.html">MungeSumstats::sumstatsColHeaders</a></code> following the approach in
-the data.R file and add your mapping. Then use a pull request on github
-and we will incorporate this change into the package.</p>
-<p>A note on <code><a href="../reference/sumstatsColHeaders.html">MungeSumstats::sumstatsColHeaders</a></code> for summary
-statistic files with A0/A1. The mapping in
-<code><a href="../reference/sumstatsColHeaders.html">MungeSumstats::sumstatsColHeaders</a></code> converts A0 to A*, this
-is a special case so that the code knows to map A0/A1 to A1/A2
-(ref/alt). The special case is needed since ordinarily A1 refers to the
-reference not the alternative allele.</p>
+<p>feel free to update the <code><a href="../reference/sumstatsColHeaders.html">MungeSumstats::sumstatsColHeaders</a></code> following the approach in the data.R file and add your mapping. Then use a pull request on github and we will incorporate this change into the package.</p>
+<p>A note on <code><a href="../reference/sumstatsColHeaders.html">MungeSumstats::sumstatsColHeaders</a></code> for summary statistic files with A0/A1. The mapping in <code><a href="../reference/sumstatsColHeaders.html">MungeSumstats::sumstatsColHeaders</a></code> converts A0 to A*, this is a special case so that the code knows to map A0/A1 to A1/A2 (ref/alt). The special case is needed since ordinarily A1 refers to the reference not the alternative allele.</p>
 </div>
 <div class="section level2">
 <h2 id="further-functionality">Further functionality<a class="anchor" aria-label="anchor" href="#further-functionality"></a>
 </h2>
-<p>See the <a href="https://neurogenomics.github.io/MungeSumstats/articles/OpenGWAS.html" class="external-link">Open
-GWAS vignette</a> for how MungeSumstats can be used along with data from
-the MRC IEU Open GWAS Project and also Mungesumstats’ functionality to
-handle lists of summary statistics files.</p>
+<p>See the <a href="https://neurogenomics.github.io/MungeSumstats/articles/OpenGWAS.html" class="external-link">Open GWAS vignette</a> for how MungeSumstats can be used along with data from the MRC IEU Open GWAS Project and also Mungesumstats’ functionality to handle lists of summary statistics files.</p>
 </div>
 <div class="section level2">
 <h2 id="session-information">Session Information<a class="anchor" aria-label="anchor" href="#session-information"></a>
 </h2>
-<details><pre><code><span class="co">## R Under development (unstable) (2022-02-25 r81808)</span>
-<span class="co">## Platform: x86_64-pc-linux-gnu (64-bit)</span>
-<span class="co">## Running under: Ubuntu 20.04.3 LTS</span>
+<details><pre><code><span class="co">## R version 4.1.1 (2021-08-10)</span>
+<span class="co">## Platform: x86_64-apple-darwin17.0 (64-bit)</span>
+<span class="co">## Running under: macOS Big Sur 10.16</span>
 <span class="co">## </span>
 <span class="co">## Matrix products: default</span>
-<span class="co">## BLAS/LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.8.so</span>
+<span class="co">## BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.0.dylib</span>
+<span class="co">## LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib</span>
 <span class="co">## </span>
 <span class="co">## locale:</span>
-<span class="co">##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              </span>
-<span class="co">##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    </span>
-<span class="co">##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   </span>
-<span class="co">##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 </span>
-<span class="co">##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            </span>
-<span class="co">## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       </span>
+<span class="co">## [1] en_IE.UTF-8/en_IE.UTF-8/en_IE.UTF-8/C/en_IE.UTF-8/en_IE.UTF-8</span>
 <span class="co">## </span>
 <span class="co">## attached base packages:</span>
 <span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
 <span class="co">## </span>
 <span class="co">## other attached packages:</span>
-<span class="co">## [1] MungeSumstats_1.3.8 BiocStyle_2.23.1   </span>
+<span class="co">## [1] MungeSumstats_1.2.2 BiocStyle_2.22.0   </span>
 <span class="co">## </span>
 <span class="co">## loaded via a namespace (and not attached):</span>
 <span class="co">##   [1] bitops_1.0-7                               </span>
@@ -743,103 +499,104 @@ handle lists of summary statistics files.</p>
 <span class="co">##   [7] httr_1.4.2                                 </span>
 <span class="co">##   [8] googleAuthR_2.0.0                          </span>
 <span class="co">##   [9] rprojroot_2.0.2                            </span>
-<span class="co">##  [10] GenomeInfoDb_1.31.4                        </span>
-<span class="co">##  [11] tools_4.2.0                                </span>
+<span class="co">##  [10] GenomeInfoDb_1.30.1                        </span>
+<span class="co">##  [11] tools_4.1.1                                </span>
 <span class="co">##  [12] bslib_0.3.1                                </span>
 <span class="co">##  [13] utf8_1.2.2                                 </span>
 <span class="co">##  [14] R6_2.5.1                                   </span>
 <span class="co">##  [15] DBI_1.1.2                                  </span>
-<span class="co">##  [16] BiocGenerics_0.41.2                        </span>
+<span class="co">##  [16] BiocGenerics_0.40.0                        </span>
 <span class="co">##  [17] tidyselect_1.1.2                           </span>
 <span class="co">##  [18] prettyunits_1.1.1                          </span>
 <span class="co">##  [19] curl_4.3.2                                 </span>
 <span class="co">##  [20] bit_4.0.4                                  </span>
-<span class="co">##  [21] compiler_4.2.0                             </span>
+<span class="co">##  [21] compiler_4.1.1                             </span>
 <span class="co">##  [22] textshaping_0.3.6                          </span>
 <span class="co">##  [23] cli_3.2.0                                  </span>
-<span class="co">##  [24] Biobase_2.55.0                             </span>
+<span class="co">##  [24] Biobase_2.54.0                             </span>
 <span class="co">##  [25] xml2_1.3.3                                 </span>
 <span class="co">##  [26] desc_1.4.0                                 </span>
-<span class="co">##  [27] DelayedArray_0.21.2                        </span>
-<span class="co">##  [28] rtracklayer_1.55.3                         </span>
+<span class="co">##  [27] DelayedArray_0.20.0                        </span>
+<span class="co">##  [28] rtracklayer_1.54.0                         </span>
 <span class="co">##  [29] bookdown_0.24                              </span>
 <span class="co">##  [30] sass_0.4.0                                 </span>
 <span class="co">##  [31] rappdirs_0.3.3                             </span>
-<span class="co">##  [32] pkgdown_2.0.2.9000                         </span>
+<span class="co">##  [32] pkgdown_2.0.2                              </span>
 <span class="co">##  [33] systemfonts_1.0.4                          </span>
 <span class="co">##  [34] stringr_1.4.0                              </span>
 <span class="co">##  [35] digest_0.6.29                              </span>
-<span class="co">##  [36] Rsamtools_2.11.0                           </span>
-<span class="co">##  [37] rmarkdown_2.12                             </span>
+<span class="co">##  [36] Rsamtools_2.10.0                           </span>
+<span class="co">##  [37] rmarkdown_2.11                             </span>
 <span class="co">##  [38] R.utils_2.11.0                             </span>
-<span class="co">##  [39] XVector_0.35.0                             </span>
+<span class="co">##  [39] XVector_0.34.0                             </span>
 <span class="co">##  [40] BSgenome.Hsapiens.1000genomes.hs37d5_0.99.1</span>
 <span class="co">##  [41] pkgconfig_2.0.3                            </span>
 <span class="co">##  [42] htmltools_0.5.2                            </span>
-<span class="co">##  [43] MatrixGenerics_1.7.0                       </span>
+<span class="co">##  [43] MatrixGenerics_1.6.0                       </span>
 <span class="co">##  [44] dbplyr_2.1.1                               </span>
 <span class="co">##  [45] fastmap_1.1.0                              </span>
-<span class="co">##  [46] BSgenome_1.63.4                            </span>
+<span class="co">##  [46] BSgenome_1.62.0                            </span>
 <span class="co">##  [47] rlang_1.0.1                                </span>
-<span class="co">##  [48] RSQLite_2.2.10                             </span>
-<span class="co">##  [49] jquerylib_0.1.4                            </span>
-<span class="co">##  [50] BiocIO_1.5.0                               </span>
-<span class="co">##  [51] generics_0.1.2                             </span>
-<span class="co">##  [52] jsonlite_1.8.0                             </span>
-<span class="co">##  [53] BiocParallel_1.29.15                       </span>
-<span class="co">##  [54] dplyr_1.0.8                                </span>
-<span class="co">##  [55] R.oo_1.24.0                                </span>
-<span class="co">##  [56] VariantAnnotation_1.41.3                   </span>
-<span class="co">##  [57] RCurl_1.98-1.6                             </span>
-<span class="co">##  [58] magrittr_2.0.2                             </span>
-<span class="co">##  [59] GenomeInfoDbData_1.2.7                     </span>
-<span class="co">##  [60] Matrix_1.4-0                               </span>
-<span class="co">##  [61] Rcpp_1.0.8                                 </span>
-<span class="co">##  [62] S4Vectors_0.33.10                          </span>
-<span class="co">##  [63] fansi_1.0.2                                </span>
-<span class="co">##  [64] lifecycle_1.0.1                            </span>
-<span class="co">##  [65] R.methodsS3_1.8.1                          </span>
-<span class="co">##  [66] stringi_1.7.6                              </span>
-<span class="co">##  [67] yaml_2.3.5                                 </span>
-<span class="co">##  [68] SummarizedExperiment_1.25.3                </span>
-<span class="co">##  [69] zlibbioc_1.41.0                            </span>
-<span class="co">##  [70] BiocFileCache_2.3.4                        </span>
-<span class="co">##  [71] grid_4.2.0                                 </span>
-<span class="co">##  [72] blob_1.2.2                                 </span>
-<span class="co">##  [73] parallel_4.2.0                             </span>
-<span class="co">##  [74] crayon_1.5.0                               </span>
-<span class="co">##  [75] lattice_0.20-45                            </span>
-<span class="co">##  [76] Biostrings_2.63.1                          </span>
-<span class="co">##  [77] GenomicFeatures_1.47.12                    </span>
-<span class="co">##  [78] hms_1.1.1                                  </span>
-<span class="co">##  [79] KEGGREST_1.35.0                            </span>
-<span class="co">##  [80] knitr_1.37                                 </span>
+<span class="co">##  [48] rstudioapi_0.13                            </span>
+<span class="co">##  [49] RSQLite_2.2.10                             </span>
+<span class="co">##  [50] jquerylib_0.1.4                            </span>
+<span class="co">##  [51] BiocIO_1.4.0                               </span>
+<span class="co">##  [52] generics_0.1.2                             </span>
+<span class="co">##  [53] jsonlite_1.8.0                             </span>
+<span class="co">##  [54] BiocParallel_1.28.3                        </span>
+<span class="co">##  [55] dplyr_1.0.8                                </span>
+<span class="co">##  [56] R.oo_1.24.0                                </span>
+<span class="co">##  [57] VariantAnnotation_1.40.0                   </span>
+<span class="co">##  [58] RCurl_1.98-1.6                             </span>
+<span class="co">##  [59] magrittr_2.0.2                             </span>
+<span class="co">##  [60] GenomeInfoDbData_1.2.7                     </span>
+<span class="co">##  [61] Matrix_1.4-0                               </span>
+<span class="co">##  [62] fansi_1.0.2                                </span>
+<span class="co">##  [63] Rcpp_1.0.8                                 </span>
+<span class="co">##  [64] S4Vectors_0.32.3                           </span>
+<span class="co">##  [65] lifecycle_1.0.1                            </span>
+<span class="co">##  [66] R.methodsS3_1.8.1                          </span>
+<span class="co">##  [67] stringi_1.7.6                              </span>
+<span class="co">##  [68] yaml_2.3.5                                 </span>
+<span class="co">##  [69] SummarizedExperiment_1.24.0                </span>
+<span class="co">##  [70] zlibbioc_1.40.0                            </span>
+<span class="co">##  [71] BiocFileCache_2.2.1                        </span>
+<span class="co">##  [72] grid_4.1.1                                 </span>
+<span class="co">##  [73] blob_1.2.2                                 </span>
+<span class="co">##  [74] parallel_4.1.1                             </span>
+<span class="co">##  [75] crayon_1.5.0                               </span>
+<span class="co">##  [76] lattice_0.20-45                            </span>
+<span class="co">##  [77] Biostrings_2.62.0                          </span>
+<span class="co">##  [78] GenomicFeatures_1.46.5                     </span>
+<span class="co">##  [79] hms_1.1.1                                  </span>
+<span class="co">##  [80] KEGGREST_1.34.0                            </span>
 <span class="co">##  [81] pillar_1.7.0                               </span>
-<span class="co">##  [82] GenomicRanges_1.47.6                       </span>
-<span class="co">##  [83] rjson_0.2.21                               </span>
-<span class="co">##  [84] biomaRt_2.51.3                             </span>
-<span class="co">##  [85] stats4_4.2.0                               </span>
-<span class="co">##  [86] XML_3.99-0.9                               </span>
-<span class="co">##  [87] glue_1.6.2                                 </span>
-<span class="co">##  [88] evaluate_0.15                              </span>
-<span class="co">##  [89] SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20   </span>
-<span class="co">##  [90] data.table_1.14.2                          </span>
-<span class="co">##  [91] BiocManager_1.30.16                        </span>
-<span class="co">##  [92] png_0.1-7                                  </span>
-<span class="co">##  [93] vctrs_0.3.8                                </span>
-<span class="co">##  [94] purrr_0.3.4                                </span>
-<span class="co">##  [95] assertthat_0.2.1                           </span>
-<span class="co">##  [96] cachem_1.0.6                               </span>
-<span class="co">##  [97] xfun_0.30                                  </span>
-<span class="co">##  [98] restfulr_0.0.13                            </span>
-<span class="co">##  [99] ragg_1.2.2                                 </span>
-<span class="co">## [100] gargle_1.2.0                               </span>
-<span class="co">## [101] tibble_3.1.6                               </span>
-<span class="co">## [102] GenomicAlignments_1.31.2                   </span>
-<span class="co">## [103] AnnotationDbi_1.57.1                       </span>
-<span class="co">## [104] memoise_2.0.1                              </span>
-<span class="co">## [105] IRanges_2.29.1                             </span>
-<span class="co">## [106] ellipsis_0.3.2</span></code></pre>
+<span class="co">##  [82] knitr_1.37                                 </span>
+<span class="co">##  [83] GenomicRanges_1.46.1                       </span>
+<span class="co">##  [84] rjson_0.2.21                               </span>
+<span class="co">##  [85] biomaRt_2.50.3                             </span>
+<span class="co">##  [86] stats4_4.1.1                               </span>
+<span class="co">##  [87] XML_3.99-0.9                               </span>
+<span class="co">##  [88] glue_1.6.2                                 </span>
+<span class="co">##  [89] evaluate_0.15                              </span>
+<span class="co">##  [90] SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20   </span>
+<span class="co">##  [91] data.table_1.14.2                          </span>
+<span class="co">##  [92] BiocManager_1.30.16                        </span>
+<span class="co">##  [93] png_0.1-7                                  </span>
+<span class="co">##  [94] vctrs_0.3.8                                </span>
+<span class="co">##  [95] purrr_0.3.4                                </span>
+<span class="co">##  [96] assertthat_0.2.1                           </span>
+<span class="co">##  [97] cachem_1.0.6                               </span>
+<span class="co">##  [98] xfun_0.29                                  </span>
+<span class="co">##  [99] restfulr_0.0.13                            </span>
+<span class="co">## [100] ragg_1.2.2                                 </span>
+<span class="co">## [101] gargle_1.2.0                               </span>
+<span class="co">## [102] tibble_3.1.6                               </span>
+<span class="co">## [103] GenomicAlignments_1.30.0                   </span>
+<span class="co">## [104] AnnotationDbi_1.56.2                       </span>
+<span class="co">## [105] memoise_2.0.1                              </span>
+<span class="co">## [106] IRanges_2.28.0                             </span>
+<span class="co">## [107] ellipsis_0.3.2</span></code></pre>
 </details>
 </div>
 <div class="section level2">
@@ -848,9 +605,7 @@ handle lists of summary statistics files.</p>
 <div id="refs" class="references csl-bib-body" line-spacing="2">
 <div id="ref-Skene2018" class="csl-entry">
 <div class="csl-left-margin">1. </div>
-<div class="csl-right-inline">Nathan G. Skene, T. E. B., Julien Bryois.
-Genetic identification of brain cell types underlying schizophrenia.
-<em>Nature Genetics</em> (2018). doi:<a href="https://doi.org/10.1038/s41588-018-0129-5" class="external-link">10.1038/s41588-018-0129-5</a>
+<div class="csl-right-inline">Nathan G. Skene, T. E. B., Julien Bryois. Genetic identification of brain cell types underlying schizophrenia. <em>Nature Genetics</em> (2018). doi:<a href="https://doi.org/10.1038/s41588-018-0129-5" class="external-link">10.1038/s41588-018-0129-5</a>
 </div>
 </div>
 </div>
@@ -874,8 +629,7 @@ Genetic identification of brain cell types underlying schizophrenia.
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
