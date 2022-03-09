@@ -22,7 +22,7 @@
 * Added Issues templates for Bugs and Feature requests. 
 * Added `.datatable.aware=TRUE` to *.zzz* as [extra precaution](https://rdatatable.gitlab.io/data.table/articles/datatable-importing.html#optionally-import-data-table-suggests).  
 * `vcf2df`: Documented arguments. 
-* Made v2 of hex sticker: *inst/hex/hex.png*  
+* Made v2 of hex sticker: *inst/hex/hex.png*   
 
 ### Bug fixes 
 
