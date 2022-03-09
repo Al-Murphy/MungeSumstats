@@ -5,8 +5,5 @@ articles:
   MungeSumstats: MungeSumstats.html
   OpenGWAS: OpenGWAS.html
   docker: docker.html
-last_built: 2022-03-08T12:03Z
-urls:
-  reference: https://neurogenomics.github.io/MungeSumstats/index.html/reference
-  article: https://neurogenomics.github.io/MungeSumstats/index.html/articles
+last_built: 2022-03-09T05:13Z
 
