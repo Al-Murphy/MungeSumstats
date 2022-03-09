@@ -28,6 +28,8 @@
 
 * Regenerated the *gh-pages* branch after it accidentally got deleted. 
 * Updated GitHub Actions. 
+* Updated *Dockerfile* so it doesn't run checks 
+(this is now take care of by the GHA workflow). 
 * Added Windows-specific folders to *.Rbuildignore*. 
 * Made *to_GRanges.R* and *to_VRanges.R* file names lowercase
 to be congruent with function names.
