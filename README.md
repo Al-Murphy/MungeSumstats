@@ -11,7 +11,7 @@
 <!-- badges: start -->
 
 [![](https://img.shields.io/badge/release%20version-1.2.3-black.svg)](https://www.bioconductor.org/packages/MungeSumstats)
-[![](https://img.shields.io/badge/devel%20version-1.3.8-black.svg)](https://github.com/neurogenomics/MungeSumstats)
+[![](https://img.shields.io/badge/devel%20version-1.3.9-black.svg)](https://github.com/neurogenomics/MungeSumstats)
 [![R build
 status](https://github.com/neurogenomics/MungeSumstats/workflows/DockerHub/badge.svg)](https://github.com/neurogenomics/MungeSumstats/actions)
 [![R build
@@ -28,14 +28,14 @@ Artistic-2.0](https://img.shields.io/badge/license-Artistic--2.0-blue.svg)](http
 
 The `MungeSumstats` package is designed to facilitate the
 standardisation of GWAS summary statistics as utilised in our Nature
-Genetics paper.<sup>1</sup>
+Genetics paper<sup>1</sup>.
 
 ## Overview
 
 The package is designed to handle the lack of standardisation of output
 files by the GWAS community. The [MRC IEU Open
 GWAS](https://gwas.mrcieu.ac.uk/) team have provided full summary
-statistics for &gt;10k GWAS, which are API-accessible via the
+statistics for \>10k GWAS, which are API-accessible via the
 [`ieugwasr`](https://mrcieu.github.io/ieugwasr/) and
 [`gwasvcf`](https://github.com/MRCIEU/gwasvcf) packages. But these GWAS
 are only standardised in the sense that they are VCF format, and can be
@@ -138,7 +138,7 @@ and we will incorporate this change into the package.
 # Contributors
 
 We would like to acknowledge all those who have contributed to
-MungeSumstats:
+`MungeSumstats` development:
 
 -   [Alan Murphy](https://github.com/Al-Murphy)
 -   [Nathan Skene](https://github.com/NathanSkene)
