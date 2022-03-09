@@ -27,6 +27,7 @@
 ### Bug fixes 
 
 * Regenerated the *gh-pages* branch after it accidentally got deleted. 
+* Remove temporary *docs/* folder.  
 * Updated GitHub Actions. 
 * Updated *Dockerfile* so it doesn't run checks 
 (this is now take care of by the GHA workflow). 
