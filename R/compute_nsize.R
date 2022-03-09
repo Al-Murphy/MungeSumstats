@@ -25,15 +25,35 @@
 #' \item{\code{"effective"}: }{N will be computed as effective sample size:
 #' cases (N_CAS) + controls (N_CON), so long as both columns are present}.
 #' }
-#'
-#' @keywords internal
+#' @param return_list Return the \code{sumstats_dt} within a named list 
+#' (default: \code{TRUE}).
+#' @inheritParams compute_sample_size
+#' @inheritParams read_sumstats
+#' @export
+#' @examples 
+#' sumstats_dt <- MungeSumstats::formatted_example()
+#' sumstats_dt2 <- MungeSumstats::compute_nsize(sumstats_dt=sumstats_dt,
+#'                                              compute_n=10000)
 compute_nsize <- function(sumstats_dt,
                           imputation_ind = FALSE,
                           compute_n = c("ldsc", "giant", "metal", "sum"),
-                          force_new = FALSE) {
+                          standardise_headers=FALSE,
+                          force_new = FALSE,
+                          return_list=TRUE) {
     ## Avoid confusing BiocCheck.
-    IMPUTATION_n <- IMPUTATION_Neff <- NULL
-
+    IMPUTATION_n <- IMPUTATION_Neff <- NULL;
+    #### Copy data.table ####
+    ## IMPORTANT!: This makes it so that any subsequent changes made to 
+    ## the internal sumstats_dt variable (and the function output) will not 
+    ## alter the original input data as well. 
+    sumstats_dt <- data.table::copy(sumstats_dt) 
+    #### Standardise the column names before continuing ####
+    if (standardise_headers) {
+        sumstats_dt <-
+            standardise_sumstats_column_headers_crossplatform(
+                sumstats_dt = sumstats_dt, 
+            )[["sumstats_dt"]]
+    }
     # if you want an Neff column for more than one method need to ensure
     # you can tell which is which
     append_method_name <- FALSE
@@ -63,5 +83,10 @@ compute_nsize <- function(sumstats_dt,
         is.character(compute_n)) {
         sumstats_dt[, IMPUTATION_Neff := TRUE]
     }
-    return(list("sumstats_dt" = sumstats_dt))
+    #### Return format ####
+    if(return_list){
+        return(list("sumstats_dt" = sumstats_dt))
+    }else {
+        return(sumstats_dt)
+    } 
 }

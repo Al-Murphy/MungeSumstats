@@ -7,16 +7,28 @@
 \usage{
 standardise_sumstats_column_headers_crossplatform(
   sumstats_dt,
-  mapping_file = sumstatsColHeaders
+  mapping_file = sumstatsColHeaders,
+  uppercase_unmapped = TRUE,
+  return_list = TRUE
 )
 }
 \arguments{
+\item{sumstats_dt}{data table obj of the summary statistics file for the
+GWAS.}
+
 \item{mapping_file}{MungeSumstats has a pre-defined column-name mapping file
 which should cover the most common column headers and their interpretations.
 However, if a column header that is in youf file is missing of the mapping we
 give is incorrect you can supply your own mapping file. Must be a 2 column
 dataframe with column names "Uncorrected" and "Corrected". See
 data(sumstatsColHeaders) for default mapping and necessary format.}
+
+\item{uppercase_unmapped}{For columns that could not be identified in
+the \code{mapping_file}, return them in the same format they were input as
+(without forcing them to uppercase).}
+
+\item{return_list}{Return the \code{sumstats_dt} within a named list
+(default: \code{TRUE}).}
 }
 \value{
 list containing sumstats_dt, the modified summary statistics data
@@ -24,9 +36,14 @@ table object
 }
 \description{
 Use a reference data table of common column header names (stored in
-sumstatsColHeaders or user inputted mapping file) to convert them to a
+\code{sumstatsColHeaders} or user inputted mapping file) to convert them to a
 standard set, i.e. chromosome -> CHR. This function does not check that all
 the required column headers are present. The amended header is written
 directly back into the file
 }
-\keyword{internal}
+\examples{
+sumstats_dt <- data.table::fread(system.file("extdata", "eduAttainOkbay.txt",
+                                             package = "MungeSumstats"))
+sumstats_dt2 <- standardise_sumstats_column_headers_crossplatform(
+    sumstats_dt=sumstats_dt)
+}

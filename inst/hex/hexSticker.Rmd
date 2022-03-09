@@ -78,7 +78,7 @@ mp <- ggplot(don, aes(x=BPcum, y=-log10(P))) +
     theme_void() +
     theme(panel.background = element_rect(fill = "transparent"))
 print(mp)
-# ggplot2::ggsave(here::here("inst/hex/gwas.png"), mp, width = 10, dpi = 400)
+ggplot2::ggsave(here::here("inst/hex/gwas.png"), mp, width = 10, dpi = 400)
 ```
 
 ## Modify PNGs
@@ -104,14 +104,15 @@ magick::image_write(david_neg, here::here("inst/hex/david_negative.png"),
 ## Create plotting data
 
 ```{r, eval=FALSE} 
-d <- data.frame(x = c(1,1,1),
-                y = c(1,1.1,.5),
-                size = c(.5,.5,1),
+d <- data.frame(x = c(1,1,1,1.2),
+                y = c(1.2,1.67,.15,.3),
+                size = c(.8,.9,.6, .05),
                 image = c(here::here("inst/hex/mountain2.png"),
                           here::here("inst/hex/gwas.png"),
-                          here::here("inst/hex/david_negative.png")
+                          here::here("inst/hex/cube1.png"),
+                          here::here("inst/hex/chisel.png")
                           ),
-                fill=factor(c("mountain","gwas","david"),ordered = T)
+                fill=factor(c("mountain","gwas","cube","chisel"),ordered = T)
                 )  
 ```
 
@@ -120,21 +121,28 @@ d <- data.frame(x = c(1,1,1),
 [ggimage](https://yulab-smu.top/pkgdocs/ggimage.html)
 
 ```{r, eval=FALSE}
-tr <- function(img,a=.8) {
+tr <- function(img,a=.7) {
   magick::image_fx(img, expression = paste0(a,"*a"), channel = "alpha") %>%
     image_flop()
 }
-gp <- ggplot() + 
+triangle <- data.frame(x=c(1,0,2), y=c(0,.7,.7))
+
+gp <- ggplot() +  
+  #### triangle ####
+  ggplot2::geom_polygon(data = triangle, aes(x=x, y=y), fill="grey", alpha=.2) +
   #### mountain ####
   ggimage::geom_image(data = d[1,], aes(x,y,image=image), size=I(1)) +
   #### gwas ####
-  ggimage::geom_image(data = d[2,], aes(x,y*1.2,image=image), size=I(1.2), image_fun=tr) + 
-  ggimage::geom_image(data = d[2,], aes(x,y*.66,image=image), size=I(.66),  image_fun=tr) + 
-  ggimage::geom_image(data = d[2,], aes(x,y*.33,image=image), size=I(.33),  image_fun=tr) + 
-  #### david ####
-  ggimage::geom_image(data = d[3,], aes(x,y,image=image), size=I(.2)) +
+  ggimage::geom_image(data = d[2,], aes(x,y*1,image=image), size=I(1.4), image_fun=tr) +  
+  #### cube ####
+  ggimage::geom_image(data = d[3,], aes(x,y,image=image), size=I(.35)) +
+  #### Chisel ####
+  ## Easier to just manually add chisel afterwards, 
+  ## so the spotlight doesn't cover it.
+  # ggimage::geom_image(data = d[4,], aes(x,y,image=image), size=I(.2)) +
+  #### limitss ####
   xlim(c(0,2)) + ylim(c(0,2)) + 
-  theme_void() 
+  theme_void()
 # print(gp)
 ```
 
@@ -145,12 +153,13 @@ gp <- ggplot() +
 
 ```{r, eval=FALSE}    
 s_size = 1.5
-stick <- hexSticker::sticker(subplot = gp, package="MungeSumstats", 
-                             p_size=20, 
-                             s_x=1, s_y=.9, s_width = s_size, s_height = s_size,
-        h_fill = "black", h_color = "#C0C0C0",
-        spotlight = TRUE, l_alpha = .3,
-        filename=here::here("inst/hex/MungeSumstats.png"), dpi = 400)
+stick <- hexSticker::sticker(
+  subplot = gp, package="MungeSumstats", 
+  p_size=25, p_y = 1.5,
+  s_x=1, s_y=1, s_width = s_size, s_height = s_size,
+  h_fill = "black", h_color = "#C0C0C0",
+  spotlight = TRUE, l_alpha = .7, l_width = 2,
+  filename=here::here("inst/hex/hex.png"), dpi = 600)
 print(stick)
 ```
 

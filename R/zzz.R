@@ -1,4 +1,9 @@
 .onLoad <- function(libname, pkgname) {
+    
+    #### Ensure functions recognise you're using data.table #####
+    # https://rdatatable.gitlab.io/data.table/articles/datatable-importing.html
+    .datatable.aware=TRUE;
+    
     op <- options()
     op.googleAuthR <- list(
         gargle_oauth_cache = "ieugwasr_oauth",

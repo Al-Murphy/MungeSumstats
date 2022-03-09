@@ -12,7 +12,9 @@ compute_nsize(
   sumstats_dt,
   imputation_ind = FALSE,
   compute_n = c("ldsc", "giant", "metal", "sum"),
-  force_new = FALSE
+  standardise_headers = FALSE,
+  force_new = FALSE,
+  return_list = TRUE
 )
 }
 \arguments{
@@ -37,6 +39,14 @@ cases (N_CAS) + controls (N_CON), so long as both columns are present}.
 \item{\code{"effective"}: }{N will be computed as effective sample size:
 cases (N_CAS) + controls (N_CON), so long as both columns are present}.
 }}
+
+\item{standardise_headers}{Standardise headers first.}
+
+\item{force_new}{If "Neff" (or "N") already exists in \code{sumstats_dt},
+replace it with the recomputed version.}
+
+\item{return_list}{Return the \code{sumstats_dt} within a named list
+(default: \code{TRUE}).}
 }
 \value{
 \code{list("sumstats_dt"=sumstats_dt)}
@@ -48,4 +58,8 @@ necessarily correct and may cause issues down the line. N can also be
 inputted with "ldsc", "sum", "giant" or "metal" by passing one or
 multiple of these.
 }
-\keyword{internal}
+\examples{
+sumstats_dt <- MungeSumstats::formatted_example()
+sumstats_dt2 <- MungeSumstats::compute_nsize(sumstats_dt=sumstats_dt,
+                                             compute_n=10000)
+}

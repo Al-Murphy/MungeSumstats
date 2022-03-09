@@ -1,3 +1,38 @@
+## CHANGES IN VERSION 1.3.9
+
+### New Features 
+
+* Exported functions. Added examples and unit tests:
+    - `compute_nsize`
+    - `standardise_sumstats_column_headers_crossplatform`
+    - `formatted_example`
+* New arguments:
+    - `standardise_sumstats_column_headers_crossplatform`: 
+    Added arg `uppercase_unmapped` to 
+    to allow users to specify whether they want make the columns that could not be 
+    mapped to a standard name uppercase (default=`TRUE` for backcompatibility).
+    Added arg `return_list` to specify whether to return a named list 
+    (default) or just the `data.table`.
+    - `formatted_example`: 
+    Added args `formatted` to specify whether the file should have its colnames standardised. 
+    Added args `sorted` to specify whether the file should sort the data by coordinates. 
+    Added arg `return_list` to specify whether to return a named list 
+    (default) or just the `data.table`.
+* Removed *codecode.yml* and *_pkgdown.yml* files (no longer necessary).
+* Added Issues templates for Bugs and Feature requests. 
+* Added `.datatable.aware=TRUE` to *.zzz* as [extra precaution](https://rdatatable.gitlab.io/data.table/articles/datatable-importing.html#optionally-import-data-table-suggests).  
+* `vcf2df`: Documented arguments. 
+* Made v2 of hex sticker: *inst/hex/hex.png*  
+
+### Bug fixes 
+
+* Regenerated the *gh-pages* branch after it accidentally got deleted. 
+* Updated GitHub Actions. 
+* Added Windows-specific folders to *.Rbuildignore*. 
+* Made *to_GRanges.R* and *to_VRanges.R* file names lowercase
+to be congruent with function names.
+
+
 ## CHANGES IN VERSION 1.3.7
 
 ### Bug fixes

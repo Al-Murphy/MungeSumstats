@@ -1,24 +1,31 @@
 #' VCF to DF
 #' 
-#' Function to convert VariantAnnotation CollapsedVCF/ExpandedVCF
-#'  objects to a data frame
-#'  
+#' Function to convert a \pkg{VariantAnnotation}
+#'  \code{CollapsedVCF}/\code{ExpandedVCF}
+#'  object to a \code{data.frame}. 
+#' @param vcf Variant Call Format (VCF) file imported into R 
+#' as a \pkg{VariantAnnotation} 
+#' \link[VariantAnnotation]{CollapsedVCF}/
+#' \link[VariantAnnotation]{ExpandedVCF} object. 
+#' @param expand Expand data into multiple columns using
+#'  \code{VariantAnnotation::expand}.
 #' @source https://gist.github.com/zhujack/849b75f5a8305edaeca1001dfb9c3fe9
 #' @source 
 #' \code{
 #' vcf_file <- system.file("extdata", "ALSvcf.vcf",
 #'                         package = "MungeSumstats")
 #' vcf <- VariantAnnotation::readVcf(file = vcf_file)
-#' vcf_df <- vcf2df(vcf = vcf)
-#' }
-#' 
-#' @return data.frame version of VCF
+#' vcf_df <- MungeSumstats::vcf2df(vcf = vcf)
+#' } 
+#' @return data.frame version of VCF 
 #' 
 #' @keywords internal
 #' @importFrom Biostrings strsplit
-#' @importFrom utils type.convert
+#' @importFrom utils type.convert 
 vcf2df <- function(vcf, 
                    expand = TRUE) {
+    requireNamespace("VariantAnnotation")
+    requireNamespace("MatrixGenerics")
     v2df <- function(x, 
                      ...) {
         ## Function to parse ANN column in to a dataframe
