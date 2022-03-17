@@ -9,6 +9,7 @@ check_no_rs_snp(
   path,
   ref_genome,
   snp_ids_are_rs_ids,
+  indels,
   imputation_ind,
   log_folder_ind,
   check_save_out,
@@ -31,6 +32,10 @@ be RSIDs. If not, imputation using the SNP ID for other columns like
 base-pair position or chromosome will not be possible. If set to FALSE, the
 SNP RS ID will be imputed from the reference genome if possible. Default is
 TRUE.}
+
+\item{indels}{Binary does your Sumstats file contain Indels? These don't
+exist in our reference file so they will be excluded from checks if this
+value is TRUE. Default is TRUE.}
 
 \item{imputation_ind}{Binary Should a column be added for each imputation
 step to show what SNPs have imputed values for differing fields. This

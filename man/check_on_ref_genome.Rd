@@ -9,6 +9,7 @@ check_on_ref_genome(
   path,
   ref_genome,
   on_ref_genome,
+  indels = indels,
   rsids,
   imputation_ind,
   log_folder_ind,
@@ -29,6 +30,10 @@ reference genome from the data.}
 
 \item{on_ref_genome}{Binary Should a check take place that all SNPs are on
 the reference genome by SNP ID. Default is TRUE.}
+
+\item{indels}{Binary does your Sumstats file contain Indels? These don't
+exist in our reference file so they will be excluded from checks if this
+value is TRUE. Default is TRUE.}
 
 \item{imputation_ind}{Binary Should a column be added for each imputation
 step to show what SNPs have imputed values for differing fields. This

@@ -13,10 +13,13 @@ check_dup_snp <- function(sumstats_dt,
                           check_save_out,
                           tabix_index,
                           nThread,
-                          log_files) {
+                          log_files,
+                          bi_allelic_filter) {
     SNP <- NULL
     col_headers <- names(sumstats_dt)
-    if ("SNP" %in% col_headers) {
+    #only remove dups if bi-allelic filter selected, RS IDs are not unique for
+    #non bi-allelic SNPs
+    if ("SNP" %in% col_headers && bi_allelic_filter) {
         message("Checking for duplicate SNPs from SNP ID.")
         # Try to remove duplicated RSIDs
         data.table::setkey(sumstats_dt, SNP)

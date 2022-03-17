@@ -29,7 +29,18 @@ read_header <- function(path,
             header <- data.table::fread(text = header[seq(i, i + n)],
                                         nThread = 1)
         } else {
-            header <- VariantAnnotation::scanVcfHeader(path)
+            error_return <-
+                tryCatch(header <-VariantAnnotation::scanVcfHeader(path),
+                error = function(e) e,
+                warning = function(w) w
+                )
+            if(is(error_return, "error")){
+                #variant annotation can fail if so use brut force
+                header <- readLines(path, n = 100)
+                i <- which(startsWith(header, "#CHR"))
+                header <- data.table::fread(text = header[seq(i, i + n)],
+                                        nThread = 1)
+            }    
         }
     } else if (endsWith(path,".bgz")){
         #### Read tabix-indexed tabular #### 

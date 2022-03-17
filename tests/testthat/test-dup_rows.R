@@ -56,7 +56,7 @@ test_that("Handle duplicate rows based on rs ID", {
             ref_genome = "GRCh37",
             on_ref_genome = FALSE,
             strand_ambig_filter = FALSE,
-            bi_allelic_filter = FALSE,
+            bi_allelic_filter = TRUE,
             allele_flip_check = FALSE
         )
         reformatted_lines <- readLines(reformatted)

@@ -8,6 +8,7 @@ check_no_snp(
   sumstats_dt,
   path,
   ref_genome,
+  indels,
   imputation_ind,
   log_folder_ind,
   check_save_out,
@@ -25,6 +26,10 @@ directly to MungeSumstats using the path parameter.}
 \item{ref_genome}{name of the reference genome used for the GWAS ("GRCh37" or
 "GRCh38"). Argument is case-insensitive. Default is NULL which infers the
 reference genome from the data.}
+
+\item{indels}{Binary does your Sumstats file contain Indels? These don't
+exist in our reference file so they will be excluded from checks if this
+value is TRUE. Default is TRUE.}
 
 \item{imputation_ind}{Binary Should a column be added for each imputation
 step to show what SNPs have imputed values for differing fields. This

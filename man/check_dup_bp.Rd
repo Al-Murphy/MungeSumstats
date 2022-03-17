@@ -6,6 +6,8 @@
 \usage{
 check_dup_bp(
   sumstats_dt,
+  bi_allelic_filter,
+  indels,
   path,
   log_folder_ind,
   check_save_out,
@@ -15,6 +17,13 @@ check_dup_bp(
 )
 }
 \arguments{
+\item{bi_allelic_filter}{Binary Should non-biallelic SNPs be removed. Default
+is TRUE.}
+
+\item{indels}{Binary does your Sumstats file contain Indels? These don't
+exist in our reference file so they will be excluded from checks if this
+value is TRUE. Default is TRUE.}
+
 \item{path}{Filepath for the summary statistics file to be formatted. A
 dataframe or datatable of the summary statistics file can also be passed
 directly to MungeSumstats using the path parameter.}

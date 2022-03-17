@@ -1,3 +1,20 @@
+## CHANGES IN VERSION 1.3.11
+
+### New Features 
+
+* MungeSumstats can now handle Indels better. It will:
+    - Not impute the RS ID of a SNP for an Indel
+    - Not remove the Indel based on the RS ID not being present in the SNP ref
+    dataset.
+    - Not remove the Indel if it has the same base-pair location as a SNP in the
+    sumstats.
+* Can now handle vcfs with extensions .vcf.tsv, .vcf.tsv.gz and .vcf.tsv.bgz     
+
+### Bug fixes 
+
+* For non-bi-allelic SNP runs, no longer remove duplicated SNPs based on their 
+base-pair position or their RS ID.
+
 ## CHANGES IN VERSION 1.3.9
 
 ### New Features 

@@ -36,6 +36,7 @@ format_sumstats(
   snp_ids_are_rs_ids = TRUE,
   remove_multi_rs_snp = FALSE,
   frq_is_maf = TRUE,
+  indels = TRUE,
   sort_coordinates = TRUE,
   nThread = 1,
   save_path = tempfile(fileext = ".tsv.gz"),
@@ -188,6 +189,10 @@ can be inferred as the FRQ column. This logical variable indicates that the
 FRQ column should be renamed to MAJOR_ALLELE_FRQ if the frequency values
 appear to relate to the major allele i.e. >0.5. By default this mapping won't
 occur i.e. is TRUE.}
+
+\item{indels}{Binary does your Sumstats file contain Indels? These don't
+exist in our reference file so they will be excluded from checks if this
+value is TRUE. Default is TRUE.}
 
 \item{sort_coordinates}{Whether to sort by coordinates of resulting sumstats}
 

@@ -61,7 +61,8 @@ test_that("VCF is correctly formatted", {
                 INFO_filter = 0.01
             )
         reformatted_lines_af <- readLines(reformatted_allelic_flip)
-        testthat::expect_equal(reformatted_lines, reformatted_lines_af)
+        testthat::expect_equal(sort(reformatted_lines), 
+                                sort(reformatted_lines_af))
         # also check outputting as different types
         pth <- system.file("extdata", "ALSvcf.vcf", package = "MungeSumstats")
         rtrn_dt <- MungeSumstats::format_sumstats(

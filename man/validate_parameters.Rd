@@ -30,6 +30,7 @@ validate_parameters(
   snp_ids_are_rs_ids,
   remove_multi_rs_snp,
   frq_is_maf,
+  indels,
   write_vcf,
   return_format,
   ldsc_format,
@@ -142,6 +143,10 @@ can be inferred as the FRQ column. This logical variable indicates that the
 FRQ column should be renamed to MAJOR_ALLELE_FRQ if the frequency values
 appear to relate to the major allele i.e. >0.5. By default this mapping won't
 occur i.e. is TRUE.}
+
+\item{indels}{Binary does your Sumstats file contain Indels? These don't
+exist in our reference file so they will be excluded from checks if this
+value is TRUE. Default is TRUE.}
 
 \item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
 

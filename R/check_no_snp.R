@@ -13,10 +13,10 @@
 #' @importFrom data.table copy
 #' @importFrom BSgenome snpsByOverlaps
 #' @importFrom GenomicRanges makeGRangesFromDataFrame
-check_no_snp <- function(sumstats_dt, path, ref_genome, imputation_ind,
+check_no_snp <- function(sumstats_dt, path, ref_genome, indels, imputation_ind,
                          log_folder_ind, check_save_out, tabix_index, nThread,
                          log_files, verbose = TRUE) {
-    SNP <- CHR <- i.RefSNP_id <- IMPUTATION_SNP <- BP <- NULL
+    SNP <- CHR <- i.RefSNP_id <- IMPUTATION_SNP <- BP <- A1 <- A2 <- NULL
     # If CHR and BP are present BUT not SNP then need 
     # to find the relevant SNP ids
     col_headers <- names(sumstats_dt)
@@ -31,6 +31,24 @@ check_no_snp <- function(sumstats_dt, path, ref_genome, imputation_ind,
         sumstats_dt[, CHR := gsub("chr", "", CHR)]
         # avoid SNPs with NA values in chr or bp
         gr_snp <- data.table::copy(sumstats_dt)
+        # if indels are in datqset, these should not be imputed as RS ID
+        # will instead relate to a SNP at same position - remove these
+        if(sum(c("A1", "A2") %in% col_headers) == 2 & indels ){
+            #identify Indels based on num char in A1, A2
+            num_indels <- nrow(gr_snp[(nchar(A1)>1 | nchar(A2)>1),])
+            if(num_indels>0){
+                msg <- paste0("Found ",
+                          nrow(num_indels), " Indels. These won'",
+                          "t be checked against the reference ",
+                          "genome as it does not contain ",
+                          "Indels.\nWARNING If your sumstat ",
+                          "doesn't contain Indels, set the ",
+                          "indel param to FALSE & rerun ",
+                          "MungeSumstats::format_sumstats()")
+                message(msg)
+                gr_snp <- gr_snp[!(nchar(A1)>1 | nchar(A2)>1),]
+            }
+        }
         incl_cols <- c("CHR", "BP")
         gr_snp <- gr_snp[complete.cases(gr_snp[, incl_cols, with = FALSE])]
         gr_snp <-

@@ -15,10 +15,13 @@
 #' @importFrom BSgenome snpsByOverlaps
 #' @importFrom GenomicRanges makeGRangesFromDataFrame
 check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
-                            imputation_ind, log_folder_ind, check_save_out,
-                            tabix_index, nThread, log_files) {
+                            indels,imputation_ind, log_folder_ind, 
+                            check_save_out,tabix_index, nThread, log_files) {
     SNP <- CHR <- CHR1 <- BP1 <- i.RefSNP_id <- IMPUTATION_SNP <-
-        SNP_old_temp <- SNP_INFO <- NULL
+        SNP_old_temp <- SNP_INFO <- A1 <- A2 <- NULL
+    save(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
+         indels,imputation_ind, log_folder_ind, 
+         check_save_out,tabix_index, nThread, log_files, file="~/Downloads/temp.RData")
     # if snp ids aren't rs ids rename the column to ID's 
     # so RSIDs can be inferred
     if ((!snp_ids_are_rs_ids) & sum("SNP" %in% names(sumstats_dt)) == 1) {
@@ -53,6 +56,7 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                     check_no_snp(
                         sumstats_dt = bad_snp, path = tempfile(),
                         ref_genome = ref_genome,
+                        indels = indels,
                         imputation_ind = imputation_ind,
                         log_folder_ind = log_folder_ind,
                         check_save_out = check_save_out, 
@@ -161,68 +165,88 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
             }
             # avoid SNPs with NA values in chr or bp
             gr_snp <- data.table::copy(miss_rs_chr_bp)
-            incl_cols <- c("CHR1", "BP1")
-            gr_snp <- gr_snp[complete.cases(
-                gr_snp[, incl_cols, with = FALSE])]
-            gr_snp <-
-                GenomicRanges::makeGRangesFromDataFrame(gr_snp,
-                    keep.extra.columns = TRUE,
-                    seqnames.field = "CHR1",
-                    start.field = "BP1",
-                    end.field = "BP1"
-                )
-            gr_rsids <-
-                BSgenome::snpsByOverlaps(SNP_LOC_DATA, ranges = gr_snp)
-            rsids <- data.table::setDT(data.frame(gr_rsids))
-            data.table::setnames(rsids, "seqnames", "CHR1")
-            data.table::setnames(rsids, "pos", "BP1")
-            # in case there is CHR8 and chr8
-            rsids[, CHR1 := tolower(as.character(CHR1))]
-            miss_rs_chr_bp[, CHR1 := tolower(as.character(CHR1))]
-            # join on SNP ID to sumstats
-            data.table::setkeyv(miss_rs_chr_bp, c("CHR1", "BP1"))
-            data.table::setkeyv(rsids, c("CHR1", "BP1"))
-            miss_rs_chr_bp[rsids, SNP := i.RefSNP_id]
-            # remove rows where SNP couldn't be found
-            # If user wants log, save it to there
-            if (log_folder_ind) {
-                name <- "snp_not_found_from_bp_chr"
-                name <- get_unique_name_log_file(name = name,
-                                                 log_files = log_files)
-                write_sumstats(
-                    sumstats_dt =
-                        miss_rs_chr_bp[!complete.cases(
-                            miss_rs_chr_bp[, "SNP"]), ],
-                    save_path =
-                        paste0(
-                            check_save_out$log_folder,
-                            "/", name,
-                            check_save_out$extension
-                        ),
-                    sep = check_save_out$sep,
-                    tabix_index = tabix_index,
-                    nThread = nThread
-                )
-                log_files[[name]] <-
-                    paste0(
-                        check_save_out$log_folder, "/", name,
-                        check_save_out$extension
+            # if indels are in datqset, these should not be imputed as RS ID
+            # will instead relate to a SNP at same position - remove these
+            if(sum(c("A1", "A2") %in% col_headers) == 2 & indels ){
+                #identify Indels based on num char in A1, A2
+                num_indels <- nrow(gr_snp[(nchar(A1)>1 | nchar(A2)>1),])
+                if(num_indels>0){
+                    msg <- paste0("Found ",
+                                  nrow(num_indels), " Indels. These won'",
+                                  "t be checked against the reference ",
+                                  "genome as it does not contain ",
+                                  "Indels.\nWARNING If your sumstat ",
+                                  "doesn't contain Indels, set the ",
+                                  "indel param to FALSE & rerun ",
+                                  "MungeSumstats::format_sumstats()")
+                    message(msg)
+                    gr_snp <- gr_snp[!(nchar(A1)>1 | nchar(A2)>1),]
+                }
+            }
+            if(nrow(gr_snp)>0){
+                incl_cols <- c("CHR1", "BP1")
+                gr_snp <- gr_snp[complete.cases(
+                    gr_snp[, incl_cols, with = FALSE])]
+                gr_snp <-
+                    GenomicRanges::makeGRangesFromDataFrame(gr_snp,
+                        keep.extra.columns = TRUE,
+                        seqnames.field = "CHR1",
+                        start.field = "BP1",
+                        end.field = "BP1"
                     )
-            }
-            miss_rs_chr_bp <- miss_rs_chr_bp[complete.cases(
-                miss_rs_chr_bp[, "SNP"]), ]
-            # remove temp columns
-            miss_rs_chr_bp[, (format) := NULL]
-            # get columns in same order as rest of data table
-            data.table::setcolorder(miss_rs_chr_bp, col_headers)
-            # join with full dataset
-            # If IMPUTATION column added add it to other DT
-            if (imputation_ind &&
-                !"IMPUTATION_SNP" %in% names(miss_rs_chr_bp)) {
-                miss_rs_chr_bp[, IMPUTATION_SNP := NA]
-            }
-            sumstats_dt <- data.table::rbindlist(
-                list(sumstats_dt, miss_rs_chr_bp))
+                gr_rsids <-
+                    BSgenome::snpsByOverlaps(SNP_LOC_DATA, ranges = gr_snp)
+                rsids <- data.table::setDT(data.frame(gr_rsids))
+                data.table::setnames(rsids, "seqnames", "CHR1")
+                data.table::setnames(rsids, "pos", "BP1")
+                # in case there is CHR8 and chr8
+                rsids[, CHR1 := tolower(as.character(CHR1))]
+                miss_rs_chr_bp[, CHR1 := tolower(as.character(CHR1))]
+                # join on SNP ID to sumstats
+                data.table::setkeyv(miss_rs_chr_bp, c("CHR1", "BP1"))
+                data.table::setkeyv(rsids, c("CHR1", "BP1"))
+                miss_rs_chr_bp[rsids, SNP := i.RefSNP_id]
+                # remove rows where SNP couldn't be found
+                # If user wants log, save it to there
+                if (log_folder_ind) {
+                    name <- "snp_not_found_from_bp_chr"
+                    name <- get_unique_name_log_file(name = name,
+                                                     log_files = log_files)
+                    write_sumstats(
+                        sumstats_dt =
+                            miss_rs_chr_bp[!complete.cases(
+                                miss_rs_chr_bp[, "SNP"]), ],
+                        save_path =
+                            paste0(
+                                check_save_out$log_folder,
+                                "/", name,
+                                check_save_out$extension
+                            ),
+                        sep = check_save_out$sep,
+                        tabix_index = tabix_index,
+                        nThread = nThread
+                    )
+                    log_files[[name]] <-
+                        paste0(
+                            check_save_out$log_folder, "/", name,
+                            check_save_out$extension
+                        )
+                }
+                miss_rs_chr_bp <- miss_rs_chr_bp[complete.cases(
+                    miss_rs_chr_bp[, "SNP"]), ]
+                # remove temp columns
+                miss_rs_chr_bp[, (format) := NULL]
+                # get columns in same order as rest of data table
+                data.table::setcolorder(miss_rs_chr_bp, col_headers)
+                # join with full dataset
+                # If IMPUTATION column added add it to other DT
+                if (imputation_ind &&
+                    !"IMPUTATION_SNP" %in% names(miss_rs_chr_bp)) {
+                    miss_rs_chr_bp[, IMPUTATION_SNP := NA]
+                }
+                sumstats_dt <- data.table::rbindlist(
+                    list(sumstats_dt, miss_rs_chr_bp))
+            }    
         }
         if (nrow(miss_rs) != nrow(sumstats_dt) && nrow(miss_rs) != 0) {
             if (nrow(miss_rs_chr_bp) == 0) {
@@ -239,11 +263,29 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                     message(msg)
                     # remove snp column and pass to function to impute snp
                     bad_snp <- bad_snp[, SNP := NULL]
+                    if(sum(c("A1", "A2") %in% col_headers) == 2 & indels ){
+                        #identify Indels based on num char in A1, A2
+                        num_indels <- nrow(bad_snp[(nchar(A1)>1 | 
+                                                        nchar(A2)>1),])
+                        if(num_indels>0){
+                            msg <- paste0("Found ",
+                                          nrow(num_indels), " Indels. These wo",
+                                          "n't be checked against the referenc",
+                                          "e genome as it does not contain ",
+                                          "Indels.\nWARNING If your sumstat ",
+                                          "doesn't contain Indels, set the ",
+                                          "indel param to FALSE & rerun ",
+                                          "MungeSumstats::format_sumstats()")
+                            message(msg)
+                            bad_snp <- bad_snp[!(nchar(A1)>1 | nchar(A2)>1),]
+                        }
+                    }
                     # now impute correct RS ID for those missing it
                     corrected_snp <-
                         check_no_snp(
                             sumstats_dt = bad_snp, path = tempfile(),
                             ref_genome = ref_genome, 
+                            indels = indels,
                             imputation_ind = imputation_ind,
                             log_folder_ind = log_folder_ind,
                             check_save_out = check_save_out,

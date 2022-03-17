@@ -133,6 +133,9 @@
 #' FRQ column should be renamed to MAJOR_ALLELE_FRQ if the frequency values
 #' appear to relate to the major allele i.e. >0.5. By default this mapping won't
 #' occur i.e. is TRUE.
+#' @param indels Binary does your Sumstats file contain Indels? These don't 
+#' exist in our reference file so they will be excluded from checks if this 
+#' value is TRUE. Default is TRUE.
 #' @param sort_coordinates Whether to sort by coordinates of resulting sumstats
 #' @param nThread Number of threads to use for parallel processes.
 #' @param save_path File path to save formatted data. Defaults to
@@ -212,6 +215,7 @@ format_sumstats <- function(path,
                             snp_ids_are_rs_ids = TRUE,
                             remove_multi_rs_snp = FALSE,
                             frq_is_maf = TRUE,
+                            indels = TRUE,
                             sort_coordinates = TRUE,
                             nThread = 1,
                             save_path = tempfile(fileext = ".tsv.gz"),
@@ -288,6 +292,7 @@ format_sumstats <- function(path,
             snp_ids_are_rs_ids = snp_ids_are_rs_ids,
             remove_multi_rs_snp = remove_multi_rs_snp,
             frq_is_maf = frq_is_maf,
+            indels = indels,
             write_vcf = write_vcf,
             return_format = return_format,
             ldsc_format = ldsc_format,
@@ -360,7 +365,7 @@ format_sumstats <- function(path,
                 sumstats_dt = sumstats_return$sumstats_dt,
                 mapping_file = mapping_file
             )
-
+        print(sumstats_return$sumstats_dt)
         #### If ldsc_format=TRUE, make sure all arguments comply with with.
         check_ldsc <- check_ldsc_format(
             sumstats_dt = sumstats_return$sumstats_dt,
@@ -423,6 +428,7 @@ format_sumstats <- function(path,
                 path = path,
                 ref_genome = ref_genome,
                 snp_ids_are_rs_ids = snp_ids_are_rs_ids,
+                indels=indels,
                 imputation_ind = imputation_ind,
                 log_folder_ind = log_folder_ind,
                 check_save_out = check_save_out,
@@ -499,6 +505,7 @@ format_sumstats <- function(path,
             sumstats_dt = sumstats_return$sumstats_dt,
             path = path,
             ref_genome = ref_genome,
+            indels = indels,
             imputation_ind = imputation_ind,
             log_folder_ind = log_folder_ind,
             check_save_out = check_save_out,
@@ -516,6 +523,7 @@ format_sumstats <- function(path,
             path = path,
             ref_genome = ref_genome,
             on_ref_genome = on_ref_genome,
+            indels=indels,
             rsids = rsids,
             imputation_ind = imputation_ind,
             log_folder_ind = log_folder_ind,
@@ -679,7 +687,8 @@ format_sumstats <- function(path,
             check_save_out = check_save_out,
             tabix_index = tabix_index,
             nThread = nThread,
-            log_files = log_files
+            log_files = log_files,
+            bi_allelic_filter = bi_allelic_filter
         )
         # update values
         log_files <- sumstats_return$log_files
@@ -688,6 +697,8 @@ format_sumstats <- function(path,
         # remove any that are ####
         sumstats_return <- check_dup_bp(
             sumstats_dt = sumstats_return$sumstats_dt,
+            bi_allelic_filter=bi_allelic_filter,
+            indels=indels,
             path = path,
             log_folder_ind = log_folder_ind,
             check_save_out = check_save_out,

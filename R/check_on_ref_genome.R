@@ -22,6 +22,7 @@ check_on_ref_genome <-function(sumstats_dt,
                                path, 
                                ref_genome, 
                                on_ref_genome, 
+                               indels=indels,
                                rsids, 
                                imputation_ind,
                                log_folder_ind, 
@@ -29,7 +30,7 @@ check_on_ref_genome <-function(sumstats_dt,
                                tabix_index, 
                                nThread, 
                                log_files) {
-        CHR <- SNP <- IMPUTATION_SNP <- miss_rs_chr_bp <- NULL
+        CHR <- SNP <- IMPUTATION_SNP <- miss_rs_chr_bp <- A1 <- A2 <- NULL
         # If CHR present and user specified chromosome to have SNPs removed
         col_headers <- names(sumstats_dt)
         if ("SNP" %in% col_headers && !isFALSE(on_ref_genome)) {
@@ -43,7 +44,35 @@ check_on_ref_genome <-function(sumstats_dt,
             # ensure rsids is up-to-date with filtered sumstats_dt
             rsids <- rsids[unique(sumstats_dt$SNP), , nomatch = NULL]
             data.table::setkey(rsids, SNP)
-            num_bad_ids <- length(sumstats_dt$SNP) - length(rsids$SNP)
+            #if indels in dataset, don't check they are present on the ref 
+            # genome as they won't be there
+            if(indels){
+                    data.table::setkey(sumstats_dt, SNP)
+                    #make copy, check if not pres in ref first
+                    indel_dt <-
+                            data.table::copy(sumstats_dt[!unique(rsids$SNP),])
+                    #also check >1 character in A1 A2, use this to define indel
+                    indel_dt <- indel_dt[(nchar(A1)>1 | nchar(A2)>1),]
+                    if(nrow(indel_dt)>0){
+                            #remove indels from sumstats for now
+                            sumstats_dt <- sumstats_dt[!indel_dt$SNP, ]
+                            msg <- paste0("Found ",
+                                          nrow(indel_dt), " Indels. These won'",
+                                          "t be checked against the reference ",
+                                          "genome as it does not contain ",
+                                          "Indels.\nWARNING If your sumstat ",
+                                          "doesn't contain Indels, set the ",
+                                          "indel param to FALSE & rerun ",
+                                          "MungeSumstats::format_sumstats()")
+                            message(msg)
+                    }
+            }else{
+                    # join using SNP
+                    data.table::setkey(sumstats_dt, SNP)
+                    indel_dt <- data.table::data.table()
+            }
+            num_bad_ids <- 
+                    length(sumstats_dt$SNP)-length(rsids$SNP)-nrow(indel_dt)
             # check for SNPs not on ref genome
             if (num_bad_ids > 0) {
                 msg <- paste0(
@@ -52,8 +81,6 @@ check_on_ref_genome <-function(sumstats_dt,
                     " These will be corrected from the reference genome."
                 )
                 message(msg)
-                # join using SNP
-                data.table::setkey(sumstats_dt, SNP)
                 # if the dataset has CHR & BP, try impute the correct ones
                 if (sum(c("CHR", "BP") %in% col_headers) == 2) {
                     bad_snp <- sumstats_dt[!rsids$SNP, ]
@@ -64,6 +91,7 @@ check_on_ref_genome <-function(sumstats_dt,
                             sumstats_dt = bad_snp, 
                             path = tempfile(),
                             ref_genome = ref_genome, 
+                            indels=indels,
                             imputation_ind = imputation_ind,
                             log_folder_ind = log_folder_ind,
                             check_save_out = check_save_out, 
@@ -81,6 +109,8 @@ check_on_ref_genome <-function(sumstats_dt,
                     if (imputation_ind && 
                         !"IMPUTATION_SNP" %in% names(sumstats_dt)) {
                         sumstats_dt[, IMPUTATION_SNP := NA]
+                        #update for indels so can rbind later
+                        indel_dt[, IMPUTATION_SNP := NA]
                     }
                     sumstats_dt <-
                         data.table::rbindlist(
@@ -116,8 +146,16 @@ check_on_ref_genome <-function(sumstats_dt,
                                    name, check_save_out$extension)
                     }
                     sumstats_dt <- sumstats_dt[rsids$SNP, ]
+                    #join back indels
+                    sumstats_dt <-
+                            data.table::rbindlist(
+                                    list(sumstats_dt, indel_dt))
                 }
             }
+            #join back indels
+            sumstats_dt <-
+                    data.table::rbindlist(
+                            list(sumstats_dt, indel_dt))
         }
         return(list("sumstats_dt" = sumstats_dt,
                     "rsids" = rsids, 

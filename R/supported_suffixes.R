@@ -15,7 +15,10 @@ supported_suffixes <- function(tabular = TRUE,
     suffixes.gz <- c(paste0(suffixes, ".gz"), paste0(suffixes, ".bgz"))
     suffixes.vcf <- c(".vcf")
     suffixes.vcf.gz <- c(paste0(suffixes.vcf, ".gz"),
-                         paste0(suffixes.vcf, ".bgz"))
+                         paste0(suffixes.vcf, ".bgz"),
+                         paste0(suffixes.vcf, ".tsv"), 
+                         paste0(suffixes.vcf, ".tsv.gz"), 
+                         paste0(suffixes.vcf, ".tsv.bgz"))
     if (tabular) supported <- c(supported, suffixes)
     if (tabular_compressed) supported <- c(supported, suffixes.gz)
     if (vcf) supported <- c(supported, suffixes.vcf)
