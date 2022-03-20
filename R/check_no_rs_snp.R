@@ -19,9 +19,6 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                             check_save_out,tabix_index, nThread, log_files) {
     SNP <- CHR <- CHR1 <- BP1 <- i.RefSNP_id <- IMPUTATION_SNP <-
         SNP_old_temp <- SNP_INFO <- A1 <- A2 <- NULL
-    save(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
-         indels,imputation_ind, log_folder_ind, 
-         check_save_out,tabix_index, nThread, log_files, file="~/Downloads/temp.RData")
     # if snp ids aren't rs ids rename the column to ID's 
     # so RSIDs can be inferred
     if ((!snp_ids_are_rs_ids) & sum("SNP" %in% names(sumstats_dt)) == 1) {

@@ -81,6 +81,7 @@
 #' analysis. Use with caution. The different methods MungeSumstats will try and
 #' impute se (in this order or priority) are: 
 #' 1. BETA / Z  2. abs(BETA/ qnorm(P/2))
+#' Default is FALSE.
 #' @param analysis_trait If multiple traits were studied, name of the trait for
 #' analysis from the GWAS. Default is NULL.
 #' @param INFO_filter numeric The minimum value permissible of the imputation

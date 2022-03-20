@@ -117,6 +117,7 @@ analysis. Use with caution. The different methods MungeSumstats will try and
 impute se (in this order or priority) are:
 \enumerate{
 \item BETA / Z  2. abs(BETA/ qnorm(P/2))
+Default is FALSE.
 }}
 
 \item{analysis_trait}{If multiple traits were studied, name of the trait for
