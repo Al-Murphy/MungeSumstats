@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.12</span>
       </span>
     </div>
 
@@ -74,6 +74,7 @@
   <span class="va">path</span>,
   <span class="va">ref_genome</span>,
   <span class="va">on_ref_genome</span>,
+  indels <span class="op">=</span> <span class="va">indels</span>,
   <span class="va">rsids</span>,
   <span class="va">imputation_ind</span>,
   <span class="va">log_folder_ind</span>,
@@ -97,6 +98,10 @@ reference genome from the data.</p></dd>
 <dt>on_ref_genome</dt>
 <dd><p>Binary Should a check take place that all SNPs are on
 the reference genome by SNP ID. Default is TRUE.</p></dd>
+<dt>indels</dt>
+<dd><p>Binary does your Sumstats file contain Indels? These don't
+exist in our reference file so they will be excluded from checks if this
+value is TRUE. Default is TRUE.</p></dd>
 <dt>imputation_ind</dt>
 <dd><p>Binary Should a column be added for each imputation
 step to show what SNPs have imputed values for differing fields. This

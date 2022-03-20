@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.12</span>
       </span>
     </div>
 
@@ -95,6 +95,7 @@
   <span class="va">snp_ids_are_rs_ids</span>,
   <span class="va">remove_multi_rs_snp</span>,
   <span class="va">frq_is_maf</span>,
+  <span class="va">indels</span>,
   <span class="va">write_vcf</span>,
   <span class="va">return_format</span>,
   <span class="va">ldsc_format</span>,
@@ -210,6 +211,10 @@ can be inferred as the FRQ column. This logical variable indicates that the
 FRQ column should be renamed to MAJOR_ALLELE_FRQ if the frequency values
 appear to relate to the major allele i.e. &gt;0.5. By default this mapping won't
 occur i.e. is TRUE.</p></dd>
+<dt>indels</dt>
+<dd><p>Binary does your Sumstats file contain Indels? These don't
+exist in our reference file so they will be excluded from checks if this
+value is TRUE. Default is TRUE.</p></dd>
 <dt>write_vcf</dt>
 <dd><p>Whether to write as VCF (TRUE) or tabular file (FALSE).</p></dd>
 <dt>return_format</dt>
