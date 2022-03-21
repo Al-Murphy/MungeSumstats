@@ -20,7 +20,7 @@ check_pos_se <- function(sumstats_dt, path, pos_se, log_folder_ind, imputation_i
     
     if (!"SE" %in% col_headers) {
         
-        derive_msg = message("The sumstats SE column is not present...")
+        derive_msg <- "The sumstats SE column is not present..."
         
         if ("BETA" %in% col_headers & "P" %in% col_headers) {
             imp_cols <- "BETA & P"

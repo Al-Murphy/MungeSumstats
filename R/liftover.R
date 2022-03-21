@@ -6,14 +6,22 @@
 #' @source \href{https://hgdownload.cse.ucsc.edu/goldenpath/hg19/liftOver/}{
 #' UCSC chain files}
 #'
-#' @inheritParams format_sumstats
 #' @param sumstats_dt data table obj of the summary statistics
 #'  file for the GWAS.
+#' @param chrom_col Name of the chromosome column in 
+#' \code{sumstats_dt} (e.g. "CHR").
+#' @param start_col Name of the starting genomic position
+#'  column in \code{sumstats_dt} (e.g. "POS","start").
+#' @param end_col Name of the ending genomic position
+#'  column in \code{sumstats_dt} (e.g. "POS","end"). 
+#'  Can be the same as \code{start_col} when \code{sumstats_dt} 
+#'  only contains SNPs that span 1 base pair (bp) each.
 #' @param as_granges Return results as \link[GenomicRanges]{GRanges} 
 #' instead of a \link[data.table]{data.table} (default: \code{FALSE}).
 #' @param style Style to return \link[GenomicRanges]{GRanges} object in
 #' (e.g.  "NCBI" = 4; "UCSC" = "chr4";) (default: \code{"NCBI"}).
 #' @param verbose Print messages.
+#' @inheritParams format_sumstats
 #' 
 #' @returns Lifted summary stats in \code{data.table} 
 #' or \link[GenomicRanges]{GRanges} format.
@@ -21,6 +29,7 @@
 #' @export
 #' @importFrom rtracklayer liftOver width strand end
 #' @importFrom GenomeInfoDb seqnames mapGenomeBuilds
+#' @importFrom GenomicRanges mcols
 #' @importFrom data.table as.data.table setnames :=
 #' @examples 
 #' sumstats_dt <- MungeSumstats::formatted_example()
@@ -105,6 +114,10 @@ liftover <- function(sumstats_dt,
                 gr = gr_lifted,
                 style = style
             )
+            if(imputation_ind){
+                GenomicRanges::mcols(gr_lifted)[["IMPUTATION_gen_build"]] <-
+                    TRUE
+            }
             return(gr_lifted)
         } else {
             sumstats_dt <- data.table::as.data.table(gr_lifted)
@@ -131,7 +144,7 @@ liftover <- function(sumstats_dt,
             if (imputation_ind) {
                 sumstats_dt[, IMPUTATION_gen_build := TRUE]
             }
-        }
-        return(sumstats_dt)
+        } 
     } 
+    return(sumstats_dt)
 }

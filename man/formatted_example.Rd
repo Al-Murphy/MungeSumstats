@@ -25,7 +25,7 @@ formatted_example(
 \description{
 Returns an example of summary stats that have had their column names
 already standardised with
-\link[MungeSumstats]{standardise_sumstats_column_headers_crossplatform}.
+\link[MungeSumstats]{standardise_header}.
 }
 \examples{
 sumstats_dt <- MungeSumstats::formatted_example()

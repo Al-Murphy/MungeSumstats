@@ -2,7 +2,7 @@
 #' 
 #' Returns an example of summary stats that have had their column names 
 #' already standardised with 
-#' \link[MungeSumstats]{standardise_sumstats_column_headers_crossplatform}.
+#' \link[MungeSumstats]{standardise_header}.
 #' 
 #' @param path Path to raw example file. Default to built-in dataset.
 #' @param formatted Whether the column names should be formatted 
@@ -21,9 +21,8 @@ formatted_example <- function(path=system.file("extdata", "eduAttainOkbay.txt",
         read_sumstats(path = path)
     )
     if(formatted){
-        sumstats_dt <-
-            standardise_sumstats_column_headers_crossplatform(
-                sumstats_dt = sumstats_dt)$sumstats_dt 
+        sumstats_dt <- standardise_header(sumstats_dt = sumstats_dt,
+                                          return_list = FALSE)
     } else {
         if(sorted) {
             messager("Setting sorted=FALSE (required when formatted=FALSE).")

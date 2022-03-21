@@ -43,6 +43,17 @@ MungeSumstats initial choice of A1, A2 from the input column headers and thus
 may not align with what the creator intended.\strong{Note} these columns will be
 in the formatted summary statistics returned. Default is FALSE.}
 
+\item{chrom_col}{Name of the chromosome column in
+\code{sumstats_dt} (e.g. "CHR").}
+
+\item{start_col}{Name of the starting genomic position
+column in \code{sumstats_dt} (e.g. "POS","start").}
+
+\item{end_col}{Name of the ending genomic position
+column in \code{sumstats_dt} (e.g. "POS","end").
+Can be the same as \code{start_col} when \code{sumstats_dt}
+only contains SNPs that span 1 base pair (bp) each.}
+
 \item{as_granges}{Return results as \link[GenomicRanges]{GRanges}
 instead of a \link[data.table]{data.table} (default: \code{FALSE}).}
 

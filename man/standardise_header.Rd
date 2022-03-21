@@ -44,5 +44,5 @@ directly back into the file
 \examples{
 sumstats_dt <- data.table::fread(system.file("extdata", "eduAttainOkbay.txt",
                                              package = "MungeSumstats"))
-sumstats_dt2 <- standarise_header(sumstats_dt=sumstats_dt)
+sumstats_dt2 <- standardise_header(sumstats_dt=sumstats_dt)
 }

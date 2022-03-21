@@ -23,7 +23,7 @@ check_signed_col <-
         
         no_imp_msg <- "BETA is not present but can be imputed with "
         no_imp_msg2 <- ". Set impute_beta=TRUE and rerun to do this."
-        msg <- message("The sumstats BETA column is not present...")
+        msg <- "The sumstats BETA column is not present..."
         #message about the last way to impute beta from other columns
         imp_cols <- FALSE
         beta_imputed <- FALSE

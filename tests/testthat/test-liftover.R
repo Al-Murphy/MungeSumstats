@@ -6,7 +6,8 @@ test_that("liftover works", {
     if (!is_32bit_windows) {
         ##### Test exported function directly ####
         sumstats_dt <- MungeSumstats::formatted_example()
-
+        
+        ## as data.table  
         sumstats_dt_hg38 <- MungeSumstats::liftover(
             sumstats_dt=sumstats_dt,
             ref_genome = "hg19",
@@ -18,7 +19,23 @@ test_that("liftover works", {
         testthat::expect_equal(proportion_positions_changed,1)   
         proportion_snps_changed <- sum(sumstats_dt_hg38$SNP!=sumstats_dt$SNP)/
             nrow(sumstats_dt)
-        testthat::expect_equal(proportion_snps_changed,0)        
+        testthat::expect_equal(proportion_snps_changed,0)     
+        
+        ## as GRAnges  
+        granges_hg38 <- MungeSumstats::liftover(
+            sumstats_dt=sumstats_dt,
+            ref_genome = "hg19",
+            convert_ref_genome="hg38", 
+            as_granges = TRUE)
+        testthat::expect_true("IMPUTATION_gen_build" %in% colnames(sumstats_dt_hg38))
+        testthat::expect_equal(nrow(sumstats_dt_hg38), nrow(sumstats_dt))
+        proportion_positions_changed <- sum(GenomicRanges::start(granges_hg38)!=sumstats_dt$BP)/
+            nrow(sumstats_dt)
+        testthat::expect_equal(proportion_positions_changed,1)   
+        proportion_snps_changed <- sum(granges_hg38$SNP!=sumstats_dt$SNP)/
+            nrow(sumstats_dt)
+        testthat::expect_equal(proportion_snps_changed,0)     
+        
         
         
         

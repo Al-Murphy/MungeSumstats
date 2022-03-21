@@ -1,3 +1,24 @@
+## CHANGES IN VERSION 1.3.14
+
+## New features
+
+* `liftover` 
+    - Now exported function.
+    - Added args for more user flexibility.
+    - Uses `GenomeInfoDb::mapGenomeBuilds` to standardise build names.
+    - Warns users when mapped builds do not match one of the conversion options.
+    - Choice to output as data.table or GRanges.
+    - Added units tests for exported version.
+* `standardise_sumstats_column_headers_crossplatform`
+    - Exported as `standardise_header` while keeping the original function 
+    name as an internal function (they call the same code).
+    - Added unit tests for exported version.
+
+### Bug fixes 
+
+* `check_pos_se`: Remove extra `message()` call around string.
+* `check_signed_col`: Remove extra `message()` call around string.
+
 ## CHANGES IN VERSION 1.3.13
 
 ### New Features 
