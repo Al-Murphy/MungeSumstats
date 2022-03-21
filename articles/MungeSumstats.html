@@ -320,7 +320,7 @@ e.g.<code>file.copy(save_path, './formatted/' )</code>.</p>
 <span class="co">## - This means all formatted summary stats will be deletedupon ending the R session.</span>
 <span class="co">## - To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.</span>
 <span class="co">## ********************</span></code></pre>
-<pre><code><span class="co">## Formatted summary statistics will be saved to ==&gt; /tmp/Rtmp6bIVV6/filef99692038ca.tsv.gz</span></code></pre>
+<pre><code><span class="co">## Formatted summary statistics will be saved to ==&gt; /tmp/RtmpErHaOS/filef9621bfc1be.tsv.gz</span></code></pre>
 <pre><code><span class="co">## Reading header.</span></code></pre>
 <pre><code><span class="co">## Tabular format detected.</span></code></pre>
 <pre><code><span class="co">## Importing tabular file: /__w/_temp/Library/MungeSumstats/extdata/eduAttainOkbay.txt</span></code></pre>
@@ -355,7 +355,7 @@ e.g.<code>file.copy(save_path, './formatted/' )</code>.</p>
 <span class="co">##  - target_genome</span>
 <span class="co">## These will be inferred from the data.</span></code></pre>
 <pre><code><span class="co">## Sorting coordinates.</span></code></pre>
-<pre><code><span class="co">## Writing in tabular format ==&gt; /tmp/Rtmp6bIVV6/filef99692038ca.tsv.gz</span></code></pre>
+<pre><code><span class="co">## Writing in tabular format ==&gt; /tmp/RtmpErHaOS/filef9621bfc1be.tsv.gz</span></code></pre>
 <pre><code><span class="co">## Summary statistics report:</span>
 <span class="co">##    - 93 rows (100% of original 93 rows)</span>
 <span class="co">##    - 93 unique variants</span>
@@ -732,6 +732,9 @@ quality control of many GWAS summary statistics</a>.</p>
 <div class="section level2">
 <h2 id="extra-functionality">Extra Functionality<a class="anchor" aria-label="anchor" href="#extra-functionality"></a>
 </h2>
+<div class="section level3">
+<h3 id="get-genome-builds">Get genome builds<a class="anchor" aria-label="anchor" href="#get-genome-builds"></a>
+</h3>
 <p><em>MungeSumstats</em> also contains a function to quickly infer the
 genome build of multiple summary statistic files. This can be called
 separately to <code><a href="../reference/format_sumstats.html">format_sumstats()</a></code> which is useful if you want
@@ -743,6 +746,384 @@ to just quickly check the genome build:</p>
 <span class="va">sumstats_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ss1 <span class="op">=</span> <span class="va">eduAttainOkbayPth</span>, ss2 <span class="op">=</span> <span class="va">eduAttainOkbayPth</span><span class="op">)</span>
 
 <span class="va">ref_genomes</span> <span class="op">&lt;-</span> <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/get_genome_builds.html">get_genome_builds</a></span><span class="op">(</span>sumstats_list <span class="op">=</span> <span class="va">sumstats_list</span><span class="op">)</span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="liftover">Liftover<a class="anchor" aria-label="anchor" href="#liftover"></a>
+</h3>
+<p><em>MungeSumstats</em> exposes the <code><a href="../reference/liftover.html">liftover()</a></code> function
+as a general utility for users.</p>
+<p>Useful features include: - Automatic standardisation of genome build
+names (i.e. “hg19”, “hg37”, and “GRCh37” will all be recognized as the
+same genome build.) - Ability to specify <code>chrom_col</code> as well
+as both <code>start_col</code> and <code>end_col</code> (for variants
+that span &gt;1bp). - Ability to return in <code>data.table</code> or
+<code>GRanges</code> format. - Ability to specify which chromosome
+format (e.g. “chr1” vs. 1) to return <code>GRanges</code> as.</p>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sumstats_dt</span> <span class="op">&lt;-</span> <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/formatted_example.html">formatted_example</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## Standardising column headers.</span></code></pre>
+<pre><code><span class="co">## First line of summary statistics file:</span></code></pre>
+<pre><code><span class="co">## MarkerName   CHR POS A1  A2  EAF Beta    SE  Pval    </span></code></pre>
+<pre><code><span class="co">## Sorting coordinates.</span></code></pre>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sumstats_dt_hg38</span> <span class="op">&lt;-</span> <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/liftover.html">liftover</a></span><span class="op">(</span>sumstats_dt <span class="op">=</span> <span class="va">sumstats_dt</span>, 
+                                            ref_genome <span class="op">=</span> <span class="st">"hg19"</span>,
+                                            convert_ref_genome <span class="op">=</span> <span class="st">"hg38"</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## Performing data liftover from hg19 to hg38.</span></code></pre>
+<pre><code><span class="co">## Downloading chain file from UCSC Genome Browser.</span></code></pre>
+<pre><code><span class="co">## /tmp/RtmpErHaOS/hg19ToHg38.over.chain.gz</span></code></pre>
+<pre><code><span class="co">## Reordering so first three column headers are SNP, CHR and BP in this order.</span></code></pre>
+<pre><code><span class="co">## Reordering so the fourth and fifth columns are A1 and A2.</span></code></pre>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">sumstats_dt_hg38</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="14%">
+<col width="5%">
+<col width="11%">
+<col width="3%">
+<col width="3%">
+<col width="10%">
+<col width="8%">
+<col width="7%">
+<col width="7%">
+<col width="26%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">SNP</th>
+<th align="left">CHR</th>
+<th align="right">BP</th>
+<th align="left">A1</th>
+<th align="left">A2</th>
+<th align="right">FRQ</th>
+<th align="right">BETA</th>
+<th align="right">SE</th>
+<th align="right">P</th>
+<th align="left">IMPUTATION_gen_build</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">rs301800</td>
+<td align="left">1</td>
+<td align="right">8430543</td>
+<td align="left">T</td>
+<td align="left">C</td>
+<td align="right">0.17910</td>
+<td align="right">0.019</td>
+<td align="right">0.003</td>
+<td align="right">0e+00</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">rs11210860</td>
+<td align="left">1</td>
+<td align="right">43516856</td>
+<td align="left">A</td>
+<td align="left">G</td>
+<td align="right">0.36940</td>
+<td align="right">0.017</td>
+<td align="right">0.003</td>
+<td align="right">0e+00</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">rs34305371</td>
+<td align="left">1</td>
+<td align="right">72267927</td>
+<td align="left">A</td>
+<td align="left">G</td>
+<td align="right">0.08769</td>
+<td align="right">0.035</td>
+<td align="right">0.005</td>
+<td align="right">0e+00</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">rs2568955</td>
+<td align="left">1</td>
+<td align="right">72296486</td>
+<td align="left">T</td>
+<td align="left">C</td>
+<td align="right">0.23690</td>
+<td align="right">-0.017</td>
+<td align="right">0.003</td>
+<td align="right">0e+00</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">rs1008078</td>
+<td align="left">1</td>
+<td align="right">90724174</td>
+<td align="left">T</td>
+<td align="left">C</td>
+<td align="right">0.37310</td>
+<td align="right">-0.016</td>
+<td align="right">0.003</td>
+<td align="right">0e+00</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">rs61787263</td>
+<td align="left">1</td>
+<td align="right">98153158</td>
+<td align="left">T</td>
+<td align="left">C</td>
+<td align="right">0.76120</td>
+<td align="right">0.016</td>
+<td align="right">0.003</td>
+<td align="right">1e-07</td>
+<td align="left">TRUE</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level3">
+<h3 id="quick-formatting">Quick formatting<a class="anchor" aria-label="anchor" href="#quick-formatting"></a>
+</h3>
+<p>In some cases, users may not want to run the full munging pipeline
+provided by<br><code><a href="../reference/format_sumstats.html">MungeSumstats::format_sumstats</a></code>, but still would like to
+take advantage of the file type conversion and column header
+standardisation features. This will not be nearly as robust as the full
+pipeline, but can still be helpful.</p>
+<div class="section level4">
+<h4 id="from-disk">From disk<a class="anchor" aria-label="anchor" href="#from-disk"></a>
+</h4>
+<p>To do this, simply run the following:</p>
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">eduAttainOkbayPth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"eduAttainOkbay.txt"</span>,
+                                  package <span class="op">=</span> <span class="st">"MungeSumstats"</span><span class="op">)</span>
+<span class="va">formatted_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">"eduAttainOkbay_standardised.tsv.gz"</span><span class="op">)</span>
+
+
+<span class="co">#### 1. Read in the data and standardise header names ####</span>
+<span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/read_sumstats.html">read_sumstats</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">eduAttainOkbayPth</span>, 
+                                    standardise_headers <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## Reading header.</span></code></pre>
+<pre><code><span class="co">## Tabular format detected.</span></code></pre>
+<pre><code><span class="co">## Importing tabular file: /__w/_temp/Library/MungeSumstats/extdata/eduAttainOkbay.txt</span></code></pre>
+<pre><code><span class="co">## Standardising column headers.</span></code></pre>
+<pre><code><span class="co">## First line of summary statistics file:</span></code></pre>
+<pre><code><span class="co">## MarkerName   CHR POS A1  A2  EAF Beta    SE  Pval    </span></code></pre>
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">SNP</th>
+<th align="right">CHR</th>
+<th align="right">BP</th>
+<th align="left">A1</th>
+<th align="left">A2</th>
+<th align="right">FRQ</th>
+<th align="right">BETA</th>
+<th align="right">SE</th>
+<th align="right">P</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">rs12987662</td>
+<td align="right">2</td>
+<td align="right">100821548</td>
+<td align="left">A</td>
+<td align="left">C</td>
+<td align="right">0.3787</td>
+<td align="right">0.027</td>
+<td align="right">0.003</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">rs9320913</td>
+<td align="right">6</td>
+<td align="right">98584733</td>
+<td align="left">A</td>
+<td align="left">C</td>
+<td align="right">0.5019</td>
+<td align="right">0.024</td>
+<td align="right">0.003</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">rs11712056</td>
+<td align="right">3</td>
+<td align="right">49914397</td>
+<td align="left">T</td>
+<td align="left">C</td>
+<td align="right">0.5504</td>
+<td align="right">0.024</td>
+<td align="right">0.003</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">rs148734725</td>
+<td align="right">3</td>
+<td align="right">49406708</td>
+<td align="left">A</td>
+<td align="left">G</td>
+<td align="right">0.3078</td>
+<td align="right">0.025</td>
+<td align="right">0.003</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">rs13294439</td>
+<td align="right">9</td>
+<td align="right">23358875</td>
+<td align="left">A</td>
+<td align="left">C</td>
+<td align="right">0.5765</td>
+<td align="right">-0.023</td>
+<td align="right">0.003</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">rs9537821</td>
+<td align="right">13</td>
+<td align="right">58402771</td>
+<td align="left">A</td>
+<td align="left">G</td>
+<td align="right">0.7631</td>
+<td align="right">0.024</td>
+<td align="right">0.003</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#### 2. Write to disk as a compressed, tab-delimited, tabix-indexed file ####</span>
+<span class="va">formatted_path</span> <span class="op">&lt;-</span> <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/write_sumstats.html">write_sumstats</a></span><span class="op">(</span>sumstats_dt <span class="op">=</span> <span class="va">dat</span>,
+                                                save_path <span class="op">=</span> <span class="va">formatted_path</span>,
+                                                tabix_index <span class="op">=</span> <span class="cn">TRUE</span>,
+                                                write_vcf <span class="op">=</span> <span class="cn">FALSE</span>,
+                                                return_path <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>   </code></pre></div>
+<pre><code><span class="co">## Writing in tabular format ==&gt; /tmp/RtmpErHaOS/filef9669c7ca0aeduAttainOkbay_standardised.tsv.gz</span></code></pre>
+<pre><code><span class="co">## Sorting coordinates.</span></code></pre>
+<pre><code><span class="co">## Converting full summary stats file to tabix format for fast querying...</span></code></pre>
+<pre><code><span class="co">## Reading header.</span></code></pre>
+<pre><code><span class="co">## Ensuring file is bgzipped.</span></code></pre>
+<pre><code><span class="co">## Tabix-indexing file.</span></code></pre>
+</div>
+<div class="section level4">
+<h4 id="from-data-table">From <code>data.table</code><a class="anchor" aria-label="anchor" href="#from-data-table"></a>
+</h4>
+<p>If you already have you data imported as an <code>data.table</code>,
+you can also standardise its headers like so:</p>
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#### Mess up some columns names ####</span>
+<span class="va">dat_raw</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html" class="external-link">copy</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>
+<span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setattr.html" class="external-link">setnames</a></span><span class="op">(</span><span class="va">dat_raw</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SNP"</span>,<span class="st">"CHR"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rsID"</span>,<span class="st">"Seqnames"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#### Add a non-standard column that I want to keep the casing for ####</span>
+<span class="va">dat_raw</span><span class="op">$</span><span class="va">Support</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">dat_raw</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">dat2</span> <span class="op">&lt;-</span> <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/standardise_header.html">standardise_header</a></span><span class="op">(</span>sumstats_dt <span class="op">=</span> <span class="va">dat_raw</span>,
+                                          uppercase_unmapped <span class="op">=</span> <span class="cn">FALSE</span>, 
+                                          return_list <span class="op">=</span> <span class="cn">FALSE</span> <span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## Standardising column headers.</span></code></pre>
+<pre><code><span class="co">## First line of summary statistics file:</span></code></pre>
+<pre><code><span class="co">## rsID Seqnames    BP  A1  A2  FRQ BETA    SE  P   Support </span></code></pre>
+<pre><code><span class="co">## Returning unmapped column names without making them uppercase.</span></code></pre>
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="16%">
+<col width="5%">
+<col width="13%">
+<col width="4%">
+<col width="4%">
+<col width="11%">
+<col width="10%">
+<col width="8%">
+<col width="8%">
+<col width="14%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">SNP</th>
+<th align="left">CHR</th>
+<th align="right">BP</th>
+<th align="left">A1</th>
+<th align="left">A2</th>
+<th align="right">FRQ</th>
+<th align="right">BETA</th>
+<th align="right">SE</th>
+<th align="right">P</th>
+<th align="right">Support</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">rs301800</td>
+<td align="left">1</td>
+<td align="right">8490603</td>
+<td align="left">T</td>
+<td align="left">C</td>
+<td align="right">0.17910</td>
+<td align="right">0.019</td>
+<td align="right">0.003</td>
+<td align="right">0e+00</td>
+<td align="right">0.8617533</td>
+</tr>
+<tr class="even">
+<td align="left">rs11210860</td>
+<td align="left">1</td>
+<td align="right">43982527</td>
+<td align="left">A</td>
+<td align="left">G</td>
+<td align="right">0.36940</td>
+<td align="right">0.017</td>
+<td align="right">0.003</td>
+<td align="right">0e+00</td>
+<td align="right">0.7065278</td>
+</tr>
+<tr class="odd">
+<td align="left">rs34305371</td>
+<td align="left">1</td>
+<td align="right">72733610</td>
+<td align="left">A</td>
+<td align="left">G</td>
+<td align="right">0.08769</td>
+<td align="right">0.035</td>
+<td align="right">0.005</td>
+<td align="right">0e+00</td>
+<td align="right">0.6494052</td>
+</tr>
+<tr class="even">
+<td align="left">rs2568955</td>
+<td align="left">1</td>
+<td align="right">72762169</td>
+<td align="left">T</td>
+<td align="left">C</td>
+<td align="right">0.23690</td>
+<td align="right">-0.017</td>
+<td align="right">0.003</td>
+<td align="right">0e+00</td>
+<td align="right">0.5891422</td>
+</tr>
+<tr class="odd">
+<td align="left">rs1008078</td>
+<td align="left">1</td>
+<td align="right">91189731</td>
+<td align="left">T</td>
+<td align="left">C</td>
+<td align="right">0.37310</td>
+<td align="right">-0.016</td>
+<td align="right">0.003</td>
+<td align="right">0e+00</td>
+<td align="right">0.2379616</td>
+</tr>
+<tr class="even">
+<td align="left">rs61787263</td>
+<td align="left">1</td>
+<td align="right">98618714</td>
+<td align="left">T</td>
+<td align="left">C</td>
+<td align="right">0.76120</td>
+<td align="right">0.016</td>
+<td align="right">0.003</td>
+<td align="right">1e-07</td>
+<td align="right">0.9937643</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="future-enhancements">Future Enhancements<a class="anchor" aria-label="anchor" href="#future-enhancements"></a>
@@ -845,69 +1226,71 @@ handle lists of summary statistics files.</p>
 <span class="co">##  [41] pkgconfig_2.0.3                            </span>
 <span class="co">##  [42] htmltools_0.5.2                            </span>
 <span class="co">##  [43] MatrixGenerics_1.7.0                       </span>
-<span class="co">##  [44] dbplyr_2.1.1                               </span>
-<span class="co">##  [45] fastmap_1.1.0                              </span>
-<span class="co">##  [46] BSgenome_1.63.5                            </span>
-<span class="co">##  [47] rlang_1.0.2                                </span>
-<span class="co">##  [48] RSQLite_2.2.10                             </span>
-<span class="co">##  [49] jquerylib_0.1.4                            </span>
-<span class="co">##  [50] BiocIO_1.5.0                               </span>
-<span class="co">##  [51] generics_0.1.2                             </span>
-<span class="co">##  [52] jsonlite_1.8.0                             </span>
-<span class="co">##  [53] BiocParallel_1.29.17                       </span>
-<span class="co">##  [54] dplyr_1.0.8                                </span>
-<span class="co">##  [55] R.oo_1.24.0                                </span>
-<span class="co">##  [56] VariantAnnotation_1.41.3                   </span>
-<span class="co">##  [57] RCurl_1.98-1.6                             </span>
-<span class="co">##  [58] magrittr_2.0.2                             </span>
-<span class="co">##  [59] GenomeInfoDbData_1.2.7                     </span>
-<span class="co">##  [60] Matrix_1.4-0                               </span>
-<span class="co">##  [61] Rcpp_1.0.8.3                               </span>
-<span class="co">##  [62] S4Vectors_0.33.11                          </span>
-<span class="co">##  [63] fansi_1.0.2                                </span>
-<span class="co">##  [64] lifecycle_1.0.1                            </span>
-<span class="co">##  [65] R.methodsS3_1.8.1                          </span>
-<span class="co">##  [66] stringi_1.7.6                              </span>
-<span class="co">##  [67] yaml_2.3.5                                 </span>
-<span class="co">##  [68] SummarizedExperiment_1.25.3                </span>
-<span class="co">##  [69] zlibbioc_1.41.0                            </span>
-<span class="co">##  [70] BiocFileCache_2.3.4                        </span>
-<span class="co">##  [71] grid_4.2.0                                 </span>
-<span class="co">##  [72] blob_1.2.2                                 </span>
-<span class="co">##  [73] parallel_4.2.0                             </span>
-<span class="co">##  [74] crayon_1.5.0                               </span>
-<span class="co">##  [75] lattice_0.20-45                            </span>
-<span class="co">##  [76] Biostrings_2.63.2                          </span>
-<span class="co">##  [77] GenomicFeatures_1.47.12                    </span>
-<span class="co">##  [78] hms_1.1.1                                  </span>
-<span class="co">##  [79] KEGGREST_1.35.0                            </span>
-<span class="co">##  [80] knitr_1.37                                 </span>
-<span class="co">##  [81] pillar_1.7.0                               </span>
-<span class="co">##  [82] GenomicRanges_1.47.6                       </span>
-<span class="co">##  [83] rjson_0.2.21                               </span>
-<span class="co">##  [84] biomaRt_2.51.3                             </span>
-<span class="co">##  [85] stats4_4.2.0                               </span>
-<span class="co">##  [86] XML_3.99-0.9                               </span>
-<span class="co">##  [87] glue_1.6.2                                 </span>
-<span class="co">##  [88] evaluate_0.15                              </span>
-<span class="co">##  [89] SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20   </span>
-<span class="co">##  [90] data.table_1.14.2                          </span>
-<span class="co">##  [91] BiocManager_1.30.16                        </span>
-<span class="co">##  [92] png_0.1-7                                  </span>
-<span class="co">##  [93] vctrs_0.3.8                                </span>
-<span class="co">##  [94] purrr_0.3.4                                </span>
-<span class="co">##  [95] assertthat_0.2.1                           </span>
-<span class="co">##  [96] cachem_1.0.6                               </span>
-<span class="co">##  [97] xfun_0.30                                  </span>
-<span class="co">##  [98] restfulr_0.0.13                            </span>
-<span class="co">##  [99] ragg_1.2.2                                 </span>
-<span class="co">## [100] gargle_1.2.0                               </span>
-<span class="co">## [101] tibble_3.1.6                               </span>
-<span class="co">## [102] GenomicAlignments_1.31.2                   </span>
-<span class="co">## [103] AnnotationDbi_1.57.1                       </span>
-<span class="co">## [104] memoise_2.0.1                              </span>
-<span class="co">## [105] IRanges_2.29.1                             </span>
-<span class="co">## [106] ellipsis_0.3.2</span></code></pre>
+<span class="co">##  [44] highr_0.9                                  </span>
+<span class="co">##  [45] dbplyr_2.1.1                               </span>
+<span class="co">##  [46] fastmap_1.1.0                              </span>
+<span class="co">##  [47] BSgenome_1.63.5                            </span>
+<span class="co">##  [48] rlang_1.0.2                                </span>
+<span class="co">##  [49] RSQLite_2.2.10                             </span>
+<span class="co">##  [50] jquerylib_0.1.4                            </span>
+<span class="co">##  [51] BiocIO_1.5.0                               </span>
+<span class="co">##  [52] generics_0.1.2                             </span>
+<span class="co">##  [53] jsonlite_1.8.0                             </span>
+<span class="co">##  [54] BiocParallel_1.29.17                       </span>
+<span class="co">##  [55] dplyr_1.0.8                                </span>
+<span class="co">##  [56] R.oo_1.24.0                                </span>
+<span class="co">##  [57] VariantAnnotation_1.41.3                   </span>
+<span class="co">##  [58] RCurl_1.98-1.6                             </span>
+<span class="co">##  [59] magrittr_2.0.2                             </span>
+<span class="co">##  [60] GenomeInfoDbData_1.2.7                     </span>
+<span class="co">##  [61] Matrix_1.4-0                               </span>
+<span class="co">##  [62] Rcpp_1.0.8.3                               </span>
+<span class="co">##  [63] S4Vectors_0.33.11                          </span>
+<span class="co">##  [64] fansi_1.0.2                                </span>
+<span class="co">##  [65] lifecycle_1.0.1                            </span>
+<span class="co">##  [66] R.methodsS3_1.8.1                          </span>
+<span class="co">##  [67] stringi_1.7.6                              </span>
+<span class="co">##  [68] yaml_2.3.5                                 </span>
+<span class="co">##  [69] SummarizedExperiment_1.25.3                </span>
+<span class="co">##  [70] zlibbioc_1.41.0                            </span>
+<span class="co">##  [71] BiocFileCache_2.3.4                        </span>
+<span class="co">##  [72] grid_4.2.0                                 </span>
+<span class="co">##  [73] blob_1.2.2                                 </span>
+<span class="co">##  [74] parallel_4.2.0                             </span>
+<span class="co">##  [75] crayon_1.5.0                               </span>
+<span class="co">##  [76] lattice_0.20-45                            </span>
+<span class="co">##  [77] Biostrings_2.63.2                          </span>
+<span class="co">##  [78] GenomicFeatures_1.47.12                    </span>
+<span class="co">##  [79] hms_1.1.1                                  </span>
+<span class="co">##  [80] KEGGREST_1.35.0                            </span>
+<span class="co">##  [81] seqminer_8.4                               </span>
+<span class="co">##  [82] knitr_1.37                                 </span>
+<span class="co">##  [83] pillar_1.7.0                               </span>
+<span class="co">##  [84] GenomicRanges_1.47.6                       </span>
+<span class="co">##  [85] rjson_0.2.21                               </span>
+<span class="co">##  [86] biomaRt_2.51.3                             </span>
+<span class="co">##  [87] stats4_4.2.0                               </span>
+<span class="co">##  [88] XML_3.99-0.9                               </span>
+<span class="co">##  [89] glue_1.6.2                                 </span>
+<span class="co">##  [90] evaluate_0.15                              </span>
+<span class="co">##  [91] SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20   </span>
+<span class="co">##  [92] data.table_1.14.2                          </span>
+<span class="co">##  [93] BiocManager_1.30.16                        </span>
+<span class="co">##  [94] png_0.1-7                                  </span>
+<span class="co">##  [95] vctrs_0.3.8                                </span>
+<span class="co">##  [96] purrr_0.3.4                                </span>
+<span class="co">##  [97] assertthat_0.2.1                           </span>
+<span class="co">##  [98] cachem_1.0.6                               </span>
+<span class="co">##  [99] xfun_0.30                                  </span>
+<span class="co">## [100] restfulr_0.0.13                            </span>
+<span class="co">## [101] ragg_1.2.2                                 </span>
+<span class="co">## [102] gargle_1.2.0                               </span>
+<span class="co">## [103] tibble_3.1.6                               </span>
+<span class="co">## [104] GenomicAlignments_1.31.2                   </span>
+<span class="co">## [105] AnnotationDbi_1.57.1                       </span>
+<span class="co">## [106] memoise_2.0.1                              </span>
+<span class="co">## [107] IRanges_2.29.1                             </span>
+<span class="co">## [108] ellipsis_0.3.2</span></code></pre>
 </details>
 </div>
 <div class="section level2">
