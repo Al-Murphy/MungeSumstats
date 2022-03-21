@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.13</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.14</span>
       </span>
     </div>
 
@@ -71,7 +71,6 @@
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_chain_file</span><span class="op">(</span>
   build_conversion <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hg38ToHg19"</span>, <span class="st">"hg19ToHg38"</span><span class="op">)</span>,
-  ucsc_ref <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hg19"</span>, <span class="st">"hg38"</span><span class="op">)</span>,
   save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,
   verbose <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span></code></pre></div>
@@ -87,8 +86,6 @@ UCSC chain files</a></p>
     <dl><dt>build_conversion</dt>
 <dd><p>converting from what build to what? hg38ToHg19 or
 hg19ToHg38</p></dd>
-<dt>ucsc_ref</dt>
-<dd><p>converting from what? hg19 or hg38</p></dd>
 <dt>save_dir</dt>
 <dd><p>where is the chain file saved? Default is a temp directory</p></dd>
 <dt>verbose</dt>

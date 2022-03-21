@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.13</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.14</span>
       </span>
     </div>
 
@@ -320,7 +320,7 @@ e.g.<code>file.copy(save_path, './formatted/' )</code>.</p>
 <span class="co">## - This means all formatted summary stats will be deletedupon ending the R session.</span>
 <span class="co">## - To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.</span>
 <span class="co">## ********************</span></code></pre>
-<pre><code><span class="co">## Formatted summary statistics will be saved to ==&gt; /tmp/RtmpZ38DKT/filef965d0dfa91.tsv.gz</span></code></pre>
+<pre><code><span class="co">## Formatted summary statistics will be saved to ==&gt; /tmp/Rtmp6bIVV6/filef99692038ca.tsv.gz</span></code></pre>
 <pre><code><span class="co">## Reading header.</span></code></pre>
 <pre><code><span class="co">## Tabular format detected.</span></code></pre>
 <pre><code><span class="co">## Importing tabular file: /__w/_temp/Library/MungeSumstats/extdata/eduAttainOkbay.txt</span></code></pre>
@@ -338,7 +338,6 @@ e.g.<code>file.copy(save_path, './formatted/' )</code>.</p>
 <pre><code><span class="co">## Checking for merged allele column.</span></code></pre>
 <pre><code><span class="co">## Checking A1 is uppercase</span></code></pre>
 <pre><code><span class="co">## Checking A2 is uppercase</span></code></pre>
-<pre><code><span class="co">## The sumstats BETA column is not present...</span></code></pre>
 <pre><code><span class="co">## Checking for missing data.</span></code></pre>
 <pre><code><span class="co">## Checking for duplicate columns.</span></code></pre>
 <pre><code><span class="co">## Checking for duplicated rows.</span></code></pre>
@@ -352,8 +351,11 @@ e.g.<code>file.copy(save_path, './formatted/' )</code>.</p>
 <span class="co">## FRQ, EAF, MAF, FRQ_U, F_U, FREQUENCY, FREQ, FREQ_TESTED_ALLELE, FRQ_TESTED_ALLELE, FREQ_EFFECT_ALLELE, FRQ_EFFECT_ALLELE, EFFECT_ALLELE_FREQUENCY, EFFECT_ALLELE_FREQ, EFFECT_ALLELE_FRQ, A1FREQ, A1FRQ, A2FREQ, A2FRQ, ALLELE_FREQUENCY, ALLELE_FREQ, ALLELE_FRQ, AF, MINOR_AF, EFFECT_AF, A2_AF, EFF_AF, ALT_AF, ALTERNATIVE_AF, INC_AF, A_2_AF, TESTED_AF, AF1, ALLELEFREQ, ALT_FREQ, EAF_HRC, EFFECTALLELEFREQ, FREQ.A1.1000G.EUR, FREQ.A1.ESP.EUR, FREQ.ALLELE1.HAPMAPCEU, FREQ.B, FREQ1, FREQ1.HAPMAP, FREQ_EUROPEAN_1000GENOMES, FREQ_HAPMAP, FREQ_TESTED_ALLELE_IN_HRS, FRQ_A1, FRQ_U_113154, FRQ_U_31358, FRQ_U_344901, FRQ_U_43456, POOLED_ALT_AF</span></code></pre>
 <pre><code><span class="co">## As frq_is_maf=TRUE, the FRQ column will not be renamed. If the FRQ values were intended to represent major allele frequency,</span>
 <span class="co">## set frq_is_maf=FALSE to rename the column as MAJOR_ALLELE_FRQ and differentiate it from minor/effect allele frequency.</span></code></pre>
+<pre><code><span class="co">## Could not recognize genome build of:</span>
+<span class="co">##  - target_genome</span>
+<span class="co">## These will be inferred from the data.</span></code></pre>
 <pre><code><span class="co">## Sorting coordinates.</span></code></pre>
-<pre><code><span class="co">## Writing in tabular format ==&gt; /tmp/RtmpZ38DKT/filef965d0dfa91.tsv.gz</span></code></pre>
+<pre><code><span class="co">## Writing in tabular format ==&gt; /tmp/Rtmp6bIVV6/filef99692038ca.tsv.gz</span></code></pre>
 <pre><code><span class="co">## Summary statistics report:</span>
 <span class="co">##    - 93 rows (100% of original 93 rows)</span>
 <span class="co">##    - 93 unique variants</span>
@@ -797,7 +799,7 @@ handle lists of summary statistics files.</p>
 <span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
 <span class="co">## </span>
 <span class="co">## other attached packages:</span>
-<span class="co">## [1] MungeSumstats_1.3.13 BiocStyle_2.23.1    </span>
+<span class="co">## [1] MungeSumstats_1.3.14 BiocStyle_2.23.1    </span>
 <span class="co">## </span>
 <span class="co">## loaded via a namespace (and not attached):</span>
 <span class="co">##   [1] bitops_1.0-7                               </span>
