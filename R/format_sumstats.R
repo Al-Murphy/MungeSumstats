@@ -366,7 +366,7 @@ format_sumstats <- function(path,
                 sumstats_dt = sumstats_return$sumstats_dt,
                 mapping_file = mapping_file
             )
-        print(sumstats_return$sumstats_dt)
+        
         #### If ldsc_format=TRUE, make sure all arguments comply with with.
         check_ldsc <- check_ldsc_format(
             sumstats_dt = sumstats_return$sumstats_dt,
@@ -448,7 +448,14 @@ format_sumstats <- function(path,
             )
 
         col_headers <- names(sumstats_return$sumstats_dt)
-
+        
+        #Ensure A1 and A2 are upper case
+        sumstats_return <-
+            make_allele_upper(sumstats_dt = sumstats_return$sumstats_dt,
+                              log_files = log_files)
+        # update values
+        log_files <- sumstats_return$log_files
+        
         # Series of checks if CHR or BP columns aren't present
         if (sum(c("CHR", "BP") %in% col_headers) != 2) {
             msg <-

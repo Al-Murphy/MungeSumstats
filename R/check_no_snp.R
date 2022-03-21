@@ -51,16 +51,25 @@ check_no_snp <- function(sumstats_dt, path, ref_genome, indels, imputation_ind,
         }
         incl_cols <- c("CHR", "BP")
         gr_snp <- gr_snp[complete.cases(gr_snp[, incl_cols, with = FALSE])]
-        gr_snp <-
-            GenomicRanges::makeGRangesFromDataFrame(gr_snp,
-                keep.extra.columns = TRUE,
-                seqnames.field = "CHR",
-                start.field = "BP",
-                end.field = "BP"
-            )
-        gr_rsids <-
-            BSgenome::snpsByOverlaps(SNP_LOC_DATA, ranges = gr_snp)
-        rsids <- data.table::setDT(data.frame(gr_rsids))
+        #could be 0 with indels, causes error
+        if(nrow(gr_snp)>0){
+            gr_snp <-
+                GenomicRanges::makeGRangesFromDataFrame(gr_snp,
+                    keep.extra.columns = TRUE,
+                    seqnames.field = "CHR",
+                    start.field = "BP",
+                    end.field = "BP"
+                )
+            gr_rsids <-
+                BSgenome::snpsByOverlaps(SNP_LOC_DATA, ranges = gr_snp)
+            rsids <- data.table::setDT(data.frame(gr_rsids))
+        }
+        else{
+            #just add fake rsids so no match found
+            rsids <-
+                data.table::data.table(seqnames=0,pos=0,strand="*",
+                                       RefSNP_id="fake",alleles_as_ambig="Y")
+        }
         data.table::setnames(rsids, "seqnames", "CHR")
         data.table::setnames(rsids, "pos", "BP")
         # in case there is CHR8 and chr8
