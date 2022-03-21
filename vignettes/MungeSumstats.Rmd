@@ -588,11 +588,11 @@ formatted_path <- MungeSumstats::write_sumstats(sumstats_dt = dat,
 
 ### From `data.table`
 
-If you already have you data imported as an `data.table`, 
+If you already have your data imported as an `data.table`, 
 you can also standardise its headers like so:
 
 ```{r}
-#### Mess up some columns names ####
+#### Mess up some column names ####
 dat_raw <- data.table::copy(dat)
 data.table::setnames(dat_raw, c("SNP","CHR"), c("rsID","Seqnames"))
 #### Add a non-standard column that I want to keep the casing for ####
