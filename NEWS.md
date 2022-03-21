@@ -1,3 +1,14 @@
+## CHANGES IN VERSION 1.3.13
+
+### New Features 
+
+* Additional mappings for CHR
+* Make A1, A2 upper-case
+
+### Bug fixes 
+
+* Bug fix for dealing with imputing SNP ID when there are indels
+
 ## CHANGES IN VERSION 1.3.11
 
 ### New Features 
