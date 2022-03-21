@@ -515,6 +515,8 @@ statistics](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/
 
 # Extra Functionality
 
+## Get genome builds
+
 *MungeSumstats* also contains a function to quickly infer the genome build of 
 multiple summary statistic files. This can be called separately to 
 `format_sumstats()` which is useful if you want to just quickly check the genome
@@ -529,6 +531,82 @@ sumstats_list <- list(ss1 = eduAttainOkbayPth, ss2 = eduAttainOkbayPth)
 ref_genomes <- MungeSumstats::get_genome_builds(sumstats_list = sumstats_list)
 
 ```
+
+
+## Liftover
+
+*MungeSumstats* exposes the `liftover()` function as a general utility for users.
+
+Useful features include:
+  - Automatic standardisation of genome build names 
+  (i.e. "hg19", "hg37", and "GRCh37" will all be 
+  recognized as the same genome build.)
+  - Ability to specify `chrom_col` as well as both 
+  `start_col` and `end_col` (for variants that span >1bp).
+  - Ability to return in `data.table` or `GRanges` format.
+  - Ability to specify which chromosome format (e.g. "chr1" vs. 1) 
+  to return `GRanges` as.
+
+```{r}
+sumstats_dt <- MungeSumstats::formatted_example()
+sumstats_dt_hg38 <- MungeSumstats::liftover(sumstats_dt = sumstats_dt, 
+                                            ref_genome = "hg19",
+                                            convert_ref_genome = "hg38")
+knitr::kable(head(sumstats_dt_hg38))
+```
+
+
+## Quick formatting
+
+In some cases, users may not want to run the full munging pipeline provided by  
+`MungeSumstats::format_sumstats`, but still would like to take advantage of
+the file type conversion and column header standardisation features. 
+This will not be nearly as robust as the full pipeline, but can still be 
+helpful.
+
+### From disk
+
+To do this, simply run the following:
+
+```{r}
+eduAttainOkbayPth <- system.file("extdata", "eduAttainOkbay.txt",
+                                  package = "MungeSumstats")
+formatted_path <- tempfile(fileext = "eduAttainOkbay_standardised.tsv.gz")
+
+
+#### 1. Read in the data and standardise header names ####
+dat <- MungeSumstats::read_sumstats(path = eduAttainOkbayPth, 
+                                    standardise_headers = TRUE)
+knitr::kable(head(dat))
+#### 2. Write to disk as a compressed, tab-delimited, tabix-indexed file ####
+formatted_path <- MungeSumstats::write_sumstats(sumstats_dt = dat,
+                                                save_path = formatted_path,
+                                                tabix_index = TRUE,
+                                                write_vcf = FALSE,
+                                                return_path = TRUE)   
+```
+
+### From `data.table`
+
+If you already have you data imported as an `data.table`, 
+you can also standardise its headers like so:
+
+```{r}
+#### Mess up some columns names ####
+dat_raw <- data.table::copy(dat)
+data.table::setnames(dat_raw, c("SNP","CHR"), c("rsID","Seqnames"))
+#### Add a non-standard column that I want to keep the casing for ####
+dat_raw$Support <- runif(nrow(dat_raw))
+
+dat2 <- MungeSumstats::standardise_header(sumstats_dt = dat_raw,
+                                          uppercase_unmapped = FALSE, 
+                                          return_list = FALSE )
+knitr::kable(head(dat2))
+```
+
+
+
+
 
 # Future Enhancements
 

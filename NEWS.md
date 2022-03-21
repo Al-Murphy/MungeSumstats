@@ -13,11 +13,17 @@
     - Exported as `standardise_header` while keeping the original function 
     name as an internal function (they call the same code).
     - Added unit tests for exported version.
+* Added chunks to *Getting started` vignette
+    - `liftover` tutorial
+    - "Quick formatting" of headers and file formats.
 
 ### Bug fixes 
 
 * `check_pos_se`: Remove extra `message()` call around string.
 * `check_signed_col`: Remove extra `message()` call around string.
+* `write_sumstats`
+    - Added extra round of sorting when `tabix_index=TRUE` because this is 
+    required for tabix.
 
 ## CHANGES IN VERSION 1.3.13
 

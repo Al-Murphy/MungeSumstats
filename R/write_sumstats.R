@@ -67,6 +67,9 @@ write_sumstats <- function(sumstats_dt,
         message(msg3)
         #### If indexing as bgz, must first save as gz ####
         gz_path <- gsub("\\.bgz$","\\.gz",save_path)
+        #### Sort again just to be sure when tabix-indexing ####
+        if(tabix_index) sumstats_dt <- sort_coords(sumstats_dt=sumstats_dt)
+        #### Write to disk ####
         data.table::fwrite(
             x = sumstats_dt, 
             file = gz_path,
