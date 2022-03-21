@@ -320,7 +320,7 @@ e.g.<code>file.copy(save_path, './formatted/' )</code>.</p>
 <span class="co">## - This means all formatted summary stats will be deletedupon ending the R session.</span>
 <span class="co">## - To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.</span>
 <span class="co">## ********************</span></code></pre>
-<pre><code><span class="co">## Formatted summary statistics will be saved to ==&gt; /tmp/RtmpErHaOS/filef9621bfc1be.tsv.gz</span></code></pre>
+<pre><code><span class="co">## Formatted summary statistics will be saved to ==&gt; /tmp/RtmpQ42wC1/filef98317160f5.tsv.gz</span></code></pre>
 <pre><code><span class="co">## Reading header.</span></code></pre>
 <pre><code><span class="co">## Tabular format detected.</span></code></pre>
 <pre><code><span class="co">## Importing tabular file: /__w/_temp/Library/MungeSumstats/extdata/eduAttainOkbay.txt</span></code></pre>
@@ -355,7 +355,7 @@ e.g.<code>file.copy(save_path, './formatted/' )</code>.</p>
 <span class="co">##  - target_genome</span>
 <span class="co">## These will be inferred from the data.</span></code></pre>
 <pre><code><span class="co">## Sorting coordinates.</span></code></pre>
-<pre><code><span class="co">## Writing in tabular format ==&gt; /tmp/RtmpErHaOS/filef9621bfc1be.tsv.gz</span></code></pre>
+<pre><code><span class="co">## Writing in tabular format ==&gt; /tmp/RtmpQ42wC1/filef98317160f5.tsv.gz</span></code></pre>
 <pre><code><span class="co">## Summary statistics report:</span>
 <span class="co">##    - 93 rows (100% of original 93 rows)</span>
 <span class="co">##    - 93 unique variants</span>
@@ -771,7 +771,7 @@ format (e.g. “chr1” vs. 1) to return <code>GRanges</code> as.</p>
                                             convert_ref_genome <span class="op">=</span> <span class="st">"hg38"</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Performing data liftover from hg19 to hg38.</span></code></pre>
 <pre><code><span class="co">## Downloading chain file from UCSC Genome Browser.</span></code></pre>
-<pre><code><span class="co">## /tmp/RtmpErHaOS/hg19ToHg38.over.chain.gz</span></code></pre>
+<pre><code><span class="co">## /tmp/RtmpQ42wC1/hg19ToHg38.over.chain.gz</span></code></pre>
 <pre><code><span class="co">## Reordering so first three column headers are SNP, CHR and BP in this order.</span></code></pre>
 <pre><code><span class="co">## Reordering so the fourth and fifth columns are A1 and A2.</span></code></pre>
 <div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
@@ -994,8 +994,8 @@ pipeline, but can still be helpful.</p>
                                                 tabix_index <span class="op">=</span> <span class="cn">TRUE</span>,
                                                 write_vcf <span class="op">=</span> <span class="cn">FALSE</span>,
                                                 return_path <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>   </code></pre></div>
-<pre><code><span class="co">## Writing in tabular format ==&gt; /tmp/RtmpErHaOS/filef9669c7ca0aeduAttainOkbay_standardised.tsv.gz</span></code></pre>
 <pre><code><span class="co">## Sorting coordinates.</span></code></pre>
+<pre><code><span class="co">## Writing in tabular format ==&gt; /tmp/RtmpQ42wC1/filef98de37498eduAttainOkbay_standardised.tsv.gz</span></code></pre>
 <pre><code><span class="co">## Converting full summary stats file to tabix format for fast querying...</span></code></pre>
 <pre><code><span class="co">## Reading header.</span></code></pre>
 <pre><code><span class="co">## Ensuring file is bgzipped.</span></code></pre>
@@ -1004,10 +1004,10 @@ pipeline, but can still be helpful.</p>
 <div class="section level4">
 <h4 id="from-data-table">From <code>data.table</code><a class="anchor" aria-label="anchor" href="#from-data-table"></a>
 </h4>
-<p>If you already have you data imported as an <code>data.table</code>,
+<p>If you already have your data imported as an <code>data.table</code>,
 you can also standardise its headers like so:</p>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#### Mess up some columns names ####</span>
+<code class="sourceCode R"><span class="co">#### Mess up some column names ####</span>
 <span class="va">dat_raw</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html" class="external-link">copy</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>
 <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setattr.html" class="external-link">setnames</a></span><span class="op">(</span><span class="va">dat_raw</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SNP"</span>,<span class="st">"CHR"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rsID"</span>,<span class="st">"Seqnames"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#### Add a non-standard column that I want to keep the casing for ####</span>
@@ -1058,7 +1058,7 @@ you can also standardise its headers like so:</p>
 <td align="right">0.019</td>
 <td align="right">0.003</td>
 <td align="right">0e+00</td>
-<td align="right">0.8617533</td>
+<td align="right">0.0192965</td>
 </tr>
 <tr class="even">
 <td align="left">rs11210860</td>
@@ -1070,7 +1070,7 @@ you can also standardise its headers like so:</p>
 <td align="right">0.017</td>
 <td align="right">0.003</td>
 <td align="right">0e+00</td>
-<td align="right">0.7065278</td>
+<td align="right">0.6666461</td>
 </tr>
 <tr class="odd">
 <td align="left">rs34305371</td>
@@ -1082,7 +1082,7 @@ you can also standardise its headers like so:</p>
 <td align="right">0.035</td>
 <td align="right">0.005</td>
 <td align="right">0e+00</td>
-<td align="right">0.6494052</td>
+<td align="right">0.2358405</td>
 </tr>
 <tr class="even">
 <td align="left">rs2568955</td>
@@ -1094,7 +1094,7 @@ you can also standardise its headers like so:</p>
 <td align="right">-0.017</td>
 <td align="right">0.003</td>
 <td align="right">0e+00</td>
-<td align="right">0.5891422</td>
+<td align="right">0.7815513</td>
 </tr>
 <tr class="odd">
 <td align="left">rs1008078</td>
@@ -1106,7 +1106,7 @@ you can also standardise its headers like so:</p>
 <td align="right">-0.016</td>
 <td align="right">0.003</td>
 <td align="right">0e+00</td>
-<td align="right">0.2379616</td>
+<td align="right">0.1111787</td>
 </tr>
 <tr class="even">
 <td align="left">rs61787263</td>
@@ -1118,7 +1118,7 @@ you can also standardise its headers like so:</p>
 <td align="right">0.016</td>
 <td align="right">0.003</td>
 <td align="right">1e-07</td>
-<td align="right">0.9937643</td>
+<td align="right">0.1312551</td>
 </tr>
 </tbody>
 </table>
