@@ -18,9 +18,8 @@
 #' @examples
 #' sumstats_dt <- data.table::fread(system.file("extdata", "eduAttainOkbay.txt",
 #'                                              package = "MungeSumstats"))
-#' sumstats_dt2 <- standardise_sumstats_column_headers_crossplatform(
-#'     sumstats_dt=sumstats_dt)
-standardise_sumstats_column_headers_crossplatform <-
+#' sumstats_dt2 <- standardise_header(sumstats_dt=sumstats_dt)
+standardise_header <- standardise_sumstats_column_headers_crossplatform <-
     function(sumstats_dt,
              mapping_file = sumstatsColHeaders,
              uppercase_unmapped=TRUE,

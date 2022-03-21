@@ -7,48 +7,91 @@
 #' UCSC chain files}
 #'
 #' @inheritParams format_sumstats
-#' @param sumstats_dt data table obj of the summary statistics file for the GWAS
+#' @param sumstats_dt data table obj of the summary statistics
+#'  file for the GWAS.
+#' @param as_granges Return results as \link[GenomicRanges]{GRanges} 
+#' instead of a \link[data.table]{data.table} (default: \code{FALSE}).
+#' @param style Style to return \link[GenomicRanges]{GRanges} object in
+#' (e.g.  "NCBI" = 4; "UCSC" = "chr4";) (default: \code{"NCBI"}).
 #' @param verbose Print messages.
-#' @return \code{list("sumstats_dt"=sumstats_dt)}
-#' @keywords internal
+#' 
+#' @returns Lifted summary stats in \code{data.table} 
+#' or \link[GenomicRanges]{GRanges} format.
+#' 
+#' @export
 #' @importFrom rtracklayer liftOver width strand end
-#' @importFrom GenomeInfoDb seqnames
-#' @importFrom data.table data.table
+#' @importFrom GenomeInfoDb seqnames mapGenomeBuilds
+#' @importFrom data.table as.data.table setnames :=
+#' @examples 
+#' sumstats_dt <- MungeSumstats::formatted_example()
+#'
+#' sumstats_dt_hg38 <- liftover(sumstats_dt=sumstats_dt, 
+#'                              ref_genome = "hg19",
+#'                              convert_ref_genome="hg38")
 liftover <- function(sumstats_dt, 
                      convert_ref_genome, 
                      ref_genome, 
-                     imputation_ind,
+                     imputation_ind = TRUE,
+                     chrom_col = "CHR",
+                     start_col = "BP",
+                     end_col = start_col, 
+                     as_granges = FALSE,
+                     style = "NCBI",
                      verbose = TRUE) {
-    IMPUTATION_gen_build <- NULL
-    # check it's necessary i.e. the desired ref genome isn't the current one
-    if (!is.null(convert_ref_genome) &&
-        toupper(convert_ref_genome) != toupper(ref_genome)) {
+    
+    IMPUTATION_gen_build <- width <- strand <- end <- seqnames <- NULL;
+    
+    #### Map genome build synonyms ####
+    query_ucsc <- if(!is.null(ref_genome)){
+        GenomeInfoDb::mapGenomeBuilds(genome = ref_genome)$ucscID[1]
+    } else {ref_genome}
+    target_ucsc <- if(!is.null(convert_ref_genome)){
+        GenomeInfoDb::mapGenomeBuilds(genome = convert_ref_genome)$ucscID[1]
+    } else {convert_ref_genome}
+     
+    #### Check if one or more of the genomes couldn't be mapped ####
+    null_builds <- c("query_genome", "target_genome")[
+        c(is.null(query_ucsc), is.null(target_ucsc))
+    ] 
+    if(length(null_builds)>0){
+        msg <- paste0("Could not recognize genome build of:\n",
+                      paste(" -",null_builds,collapse = "\n"),
+                      "\nThese will be inferred from the data.")
+        message(msg)
+    } 
+    
+    #### Check if liftover is necessary ####
+    ## i.e. the desired genome build isn't the current one
+    if ((!is.null(query_ucsc) & !is.null(target_ucsc)) &&
+        (query_ucsc != target_ucsc)) {
         msg <- paste0(
-            "Performing data liftover from ", ref_genome, " to ",
-            convert_ref_genome, "."
+            "Performing data liftover from ", query_ucsc, " to ",
+            target_ucsc, "."
         )
         message(msg)
 
-        if (toupper(ref_genome) == "GRCH38") {#convert_ref_genome
+        #### Check that liftover is available ####
+        ## If one or more builds are NULL, this won't be evaluated bc
+        ## the builds will be inferred instead.
+        if(query_ucsc=="hg38" && target_ucsc=="hg19") {
             build_conversion <- "hg38ToHg19"
-            ucsc_ref <- "hg38"
-        } else {
+        } else if (query_ucsc=="hg19" && target_ucsc=="hg38"){
             build_conversion <- "hg19ToHg38"
-            ucsc_ref <- "hg19"
+        } else {
+            stop("Can only perform liftover between hg19 <---> hg38")
         }
 
         #### Convert to GRanges ####
         gr <- dt_to_granges(
             dat = sumstats_dt,
             style = "UCSC",
-            chrom_col = "CHR",
-            start_col = "BP",
-            end_col = "BP"
+            chrom_col = chrom_col,
+            start_col = start_col,
+            end_col = end_col
         )
         #### Specify chain file ####
         chain <- get_chain_file(
             build_conversion = build_conversion,
-            ucsc_ref = ucsc_ref,
             verbose = verbose
         )
         #### Liftover ####
@@ -56,21 +99,39 @@ liftover <- function(sumstats_dt,
             x = gr,
             chain = chain
         ))
-        sumstats_dt <- as.data.table(gr_lifted)
-        # rename columns back to org
-        sumstats_dt[, width := NULL]
-        sumstats_dt[, strand := NULL]
-        sumstats_dt[, end := NULL]
-        sumstats_dt[, seqnames := NULL]
-        setnames(sumstats_dt, "start", "BP")
-        # lastly rearrange the order again
-        sumstats_dt <- check_col_order(
-            sumstats_dt = sumstats_dt,
-            path = NULL
-        )$sumstats_dt
-        if (imputation_ind) {
-            sumstats_dt[, IMPUTATION_gen_build := TRUE]
+        #### Return format ####
+        if (as_granges) {
+            gr_lifted <- granges_style(
+                gr = gr_lifted,
+                style = style
+            )
+            return(gr_lifted)
+        } else {
+            sumstats_dt <- data.table::as.data.table(gr_lifted)
+            #### rename columns back to original ####
+            ## Note: "seqnames" col can be removed since the "CHR" column was 
+            ## retained by dt_to_granges().
+            sumstats_dt[, width := NULL]
+            sumstats_dt[, strand := NULL] 
+            sumstats_dt[, seqnames := NULL]
+            #### Remove end_col if it was the same as start_col ####
+            if (start_col == end_col) {
+                sumstats_dt[, end := NULL]
+                data.table::setnames(sumstats_dt, "start", start_col)
+            } else {
+                data.table::setnames(sumstats_dt, c("start","end"),
+                                     c(start_col, end_col) 
+                )
+            }
+            #### lastly rearrange the order again ####
+            sumstats_dt <- check_col_order(
+                sumstats_dt = sumstats_dt,
+                path = NULL
+            )$sumstats_dt
+            if (imputation_ind) {
+                sumstats_dt[, IMPUTATION_gen_build := TRUE]
+            }
         }
-    }
-    return(sumstats_dt)
+        return(sumstats_dt)
+    } 
 }

@@ -7,6 +7,7 @@
 #' @param sampled_snps Downsample the number of SNPs used when inferring genome
 #' build to save time.
 #' @param standardise_headers Run
+#' @param standardise_headers Run
 #' \code{standardise_sumstats_column_headers_crossplatform}.
 #' @param mapping_file \pkg{MungeSumstats} has a pre-defined
 #' column-name mapping file

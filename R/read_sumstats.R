@@ -6,7 +6,7 @@
 #' If \code{Inf}, will read in all rows.
 #' @param standardise_headers Standardise headers first.
 #' @inheritParams format_sumstats
-#' @inheritParams standardise_sumstats_column_headers_crossplatform
+#' @inheritParams standardise_header
 #' @export
 #' @importFrom data.table fread
 #' @examples

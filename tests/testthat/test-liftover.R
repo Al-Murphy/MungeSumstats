@@ -1,9 +1,29 @@
-test_that("liftover", {
+test_that("liftover works", {
     ## The following test uses more than 2GB of memory, which is more
     ## than what 32-bit Windows can handle:
     is_32bit_windows <- .Platform$OS.type == "windows" #&&
         #.Platform$r_arch == "i386"
     if (!is_32bit_windows) {
+        ##### Test exported function directly ####
+        sumstats_dt <- MungeSumstats::formatted_example()
+
+        sumstats_dt_hg38 <- MungeSumstats::liftover(
+            sumstats_dt=sumstats_dt,
+            ref_genome = "hg19",
+            convert_ref_genome="hg38")
+        testthat::expect_true("IMPUTATION_gen_build" %in% colnames(sumstats_dt_hg38))
+        testthat::expect_equal(nrow(sumstats_dt_hg38), nrow(sumstats_dt))
+        proportion_positions_changed <- sum(sumstats_dt_hg38$BP!=sumstats_dt$BP)/
+            nrow(sumstats_dt)
+        testthat::expect_equal(proportion_positions_changed,1)   
+        proportion_snps_changed <- sum(sumstats_dt_hg38$SNP!=sumstats_dt$SNP)/
+            nrow(sumstats_dt)
+        testthat::expect_equal(proportion_snps_changed,0)        
+        
+        
+        
+        #### Test liftover functionality within format_sumstats ####
+        
         file <- tempfile()
         eduAttainOkbay <- readLines(system.file("extdata", "eduAttainOkbay.txt",
                                                 package = "MungeSumstats"
@@ -25,7 +45,7 @@ test_that("liftover", {
         
         if(!file.exists(local_path_gunzip)){
             if(!file.exists(local_path))
-                copied <- copyFile(srcPathname = 
+                copied <- R.utils::copyFile(srcPathname = 
                                        system.file("extdata",chain_file,
                                                    package="MungeSumstats"), 
                                    save_dir)
@@ -33,7 +53,7 @@ test_that("liftover", {
         }
         if(!file.exists(local_path_gunzip2)){
             if(!file.exists(local_path2))    
-                copied2 <- copyFile(srcPathname = 
+                copied2 <- R.utils::copyFile(srcPathname = 
                                        system.file("extdata",chain_file2,
                                                    package="MungeSumstats"), 
                                    save_dir)

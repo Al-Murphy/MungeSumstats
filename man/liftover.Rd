@@ -14,12 +14,18 @@ liftover(
   sumstats_dt,
   convert_ref_genome,
   ref_genome,
-  imputation_ind,
+  imputation_ind = TRUE,
+  chrom_col = "CHR",
+  start_col = "BP",
+  end_col = start_col,
+  as_granges = FALSE,
+  style = "NCBI",
   verbose = TRUE
 )
 }
 \arguments{
-\item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
+\item{sumstats_dt}{data table obj of the summary statistics
+file for the GWAS.}
 
 \item{convert_ref_genome}{name of the reference genome to convert to
 ("GRCh37" or "GRCh38"). This will only occur if the current genome build does
@@ -37,12 +43,25 @@ MungeSumstats initial choice of A1, A2 from the input column headers and thus
 may not align with what the creator intended.\strong{Note} these columns will be
 in the formatted summary statistics returned. Default is FALSE.}
 
+\item{as_granges}{Return results as \link[GenomicRanges]{GRanges}
+instead of a \link[data.table]{data.table} (default: \code{FALSE}).}
+
+\item{style}{Style to return \link[GenomicRanges]{GRanges} object in
+(e.g.  "NCBI" = 4; "UCSC" = "chr4";) (default: \code{"NCBI"}).}
+
 \item{verbose}{Print messages.}
 }
 \value{
-\code{list("sumstats_dt"=sumstats_dt)}
+Lifted summary stats in \code{data.table}
+or \link[GenomicRanges]{GRanges} format.
 }
 \description{
 Transfer genomic coordinates from one genome build to another.
 }
-\keyword{internal}
+\examples{
+sumstats_dt <- MungeSumstats::formatted_example()
+
+sumstats_dt_hg38 <- liftover(sumstats_dt=sumstats_dt, 
+                             ref_genome = "hg19",
+                             convert_ref_genome="hg38")
+}

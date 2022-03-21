@@ -4,7 +4,7 @@
 <i>Authors</i>: Alan Murphy, Brian Schilder and Nathan Skene
 </h5>
 <h5>
-<i>Updated</i>: Mar-08-2022
+<i>Updated</i>: Mar-09-2022
 </h5>
 
 <!-- Readme.md is generated from Readme.Rmd. Please edit that file -->
@@ -18,7 +18,7 @@ status](https://github.com/neurogenomics/MungeSumstats/workflows/DockerHub/badge
 status](https://github.com/neurogenomics/MungeSumstats/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/neurogenomics/MungeSumstats/actions)
 [![](https://img.shields.io/github/last-commit/neurogenomics/MungeSumstats.svg)](https://github.com/neurogenomics/MungeSumstats/commits/master)
 [![](https://codecov.io/gh/neurogenomics/MungeSumstats/branch/master/graph/badge.svg)](https://codecov.io/gh/neurogenomics/MungeSumstats)
-[![](https://img.shields.io/badge/download-721/total-blue.svg)](https://bioconductor.org/packages/stats/bioc/MungeSumstats)
+[![](https://img.shields.io/badge/download-735/total-blue.svg)](https://bioconductor.org/packages/stats/bioc/MungeSumstats)
 [![License:
 Artistic-2.0](https://img.shields.io/badge/license-Artistic--2.0-blue.svg)](https://cran.r-project.org/web/licenses/Artistic-2.0)
 [![](https://img.shields.io/badge/doi-https://doi.org/10.1093/bioinformatics/btab665-blue.svg)](https://doi.org/https://doi.org/10.1093/bioinformatics/btab665)
@@ -63,9 +63,11 @@ as well as:
 [Bioconductor](https://bioconductor.org/packages/MungeSumstats)
 (≥v3.13). To install `MungeSumstats` on Bioconductor run:
 
-    if (!require("BiocManager")) install.packages("BiocManager")
+``` r
+if (!require("BiocManager")) install.packages("BiocManager")
 
-    BiocManager::install("MungeSumstats")
+BiocManager::install("MungeSumstats")
+```
 
 You can then load the package and data package:
 

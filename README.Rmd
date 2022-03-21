@@ -61,7 +61,7 @@ statistics.
 [Bioconductor](https://bioconductor.org/packages/MungeSumstats) (≥v3.13). 
 To install `MungeSumstats` on Bioconductor run:
 
-```
+```R
 if (!require("BiocManager")) install.packages("BiocManager")
 
 BiocManager::install("MungeSumstats")
