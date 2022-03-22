@@ -85,6 +85,12 @@ check_multi_gwas <- function(sumstats_dt, path, analysis_trait, mapping_file) {
             "_", chosen_trait, "$", "|",
             ".", chosen_trait, "$"
         ), "", chnge_header_names)
+        #if names present already, rename
+        for(new_i in new_names){
+            if(new_i %in% colnames(sumstats_dt)){
+                data.table::setnames(sumstats_dt, new_i, paste0(new_i,"_input"))
+            }
+        }
         data.table::setnames(sumstats_dt, chnge_header_names, new_names)
         # RE-standardise headers for all OS
         sumstats_return <-

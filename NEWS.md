@@ -1,3 +1,14 @@
+## CHANGES IN VERSION 1.3.15
+
+## Bug fixes
+
+* Handle cases for multi-trait GWAS when P columns exists separate to the trait
+specific P value so that when renaming occurs there isn't two P columns. 
+Inputted P column will be renamed to 'P_input'
+* Issue where 'check allele flip' wasn't running when the sumstats had all SNP 
+IDs missing and incorrect direction of A1/A2 and effect columns has now been 
+fixed.
+
 ## CHANGES IN VERSION 1.3.14
 
 ## New features

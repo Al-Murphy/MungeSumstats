@@ -151,6 +151,11 @@ check_on_ref_genome <-function(sumstats_dt,
                             data.table::rbindlist(
                                     list(sumstats_dt, indel_dt))
                 }
+                #update rsid again since new SNP IDs
+                rsids <- load_ref_genome_data(
+                        snps = data.table::copy(sumstats_dt$SNP),
+                        ref_genome = ref_genome
+                )
             }
             #join back indels
             sumstats_dt <-
