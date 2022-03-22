@@ -38,6 +38,9 @@ write_sumstats <- function(sumstats_dt,
             recursive = TRUE
         )
     }
+    #### Sort again just to be sure when tabix-indexing ####
+    if(tabix_index) sumstats_dt <- sort_coords(sumstats_dt=sumstats_dt)
+    #### Select write format ####
     if (write_vcf) {
         vr <- to_vranges(sumstats_dt = sumstats_dt)
         if (tabix_index) {
@@ -66,9 +69,7 @@ write_sumstats <- function(sumstats_dt,
         msg3 <- paste0("Writing in tabular format ==> ", save_path)
         message(msg3)
         #### If indexing as bgz, must first save as gz ####
-        gz_path <- gsub("\\.bgz$","\\.gz",save_path)
-        #### Sort again just to be sure when tabix-indexing ####
-        if(tabix_index) sumstats_dt <- sort_coords(sumstats_dt=sumstats_dt)
+        gz_path <- gsub("\\.bgz$","\\.gz",save_path) 
         #### Write to disk ####
         data.table::fwrite(
             x = sumstats_dt, 
