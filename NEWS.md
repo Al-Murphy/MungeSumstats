@@ -1,3 +1,11 @@
+## CHANGES IN VERSION 1.2.4
+
+## Bug fixes
+
+* Issue where 'check allele flip' wasn't running when the sumstats had all SNP 
+IDs missing and incorrect direction of A1/A2 and effect columns has now been 
+fixed.
+
 ## CHANGES IN VERSION 1.2.3
 
 ### Bug fixes

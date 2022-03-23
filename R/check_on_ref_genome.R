@@ -117,6 +117,11 @@ check_on_ref_genome <-function(sumstats_dt,
                     }
                     sumstats_dt <- sumstats_dt[rsids$SNP, ]
                 }
+                #update rsid again since new SNP IDs
+                rsids <- load_ref_genome_data(
+                        snps = data.table::copy(sumstats_dt$SNP),
+                        ref_genome = ref_genome
+                )                
             }
         }
         return(list("sumstats_dt" = sumstats_dt,
