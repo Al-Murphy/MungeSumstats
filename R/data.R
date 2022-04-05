@@ -27,6 +27,13 @@
 #'                              sumstatsColHeaders$ordering,decreasing = TRUE),]
 #' rownames(sumstatsColHeaders)<-1:nrow(sumstatsColHeaders)
 #' sumstatsColHeaders$ordering <- NULL
+#' #manually move FRWQUENCY to above MAR - github issue 95
+#' frequency <- sumstatsColHeaders[sumstatsColHeaders$Uncorrected=="FREQUENCY",]
+#' maf <- sumstatsColHeaders[sumstatsColHeaders$Uncorrected=="MAF",]
+#' if(as.integer(rownames(frequency))>as.integer(rownames(maf))){
+#'   sumstatsColHeaders[as.integer(rownames(frequency)),] <- maf
+#'   sumstatsColHeaders[as.integer(rownames(maf)),] <- frequency
+#' }   
 #' usethis::use_data(sumstatsColHeaders,overwrite = TRUE, internal=TRUE)
 #' save(sumstatsColHeaders,
 #'       file="data/sumstatsColHeaders.rda")

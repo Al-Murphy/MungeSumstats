@@ -1,3 +1,9 @@
+## CHANGES IN VERSION 1.3.17
+
+## New features
+* Clean up of column header mapping file, including FREQUENCY given priority 
+over MAF and addition of new CHR mappings.
+
 ## CHANGES IN VERSION 1.3.15
 
 ## Bug fixes
