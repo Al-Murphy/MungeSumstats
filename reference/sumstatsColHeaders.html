@@ -22,7 +22,7 @@ test."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathj
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.16</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.17</span>
       </span>
     </div>
 
@@ -108,6 +108,13 @@ sumstatsColHeaders &lt;-
                              sumstatsColHeaders$ordering,decreasing = TRUE),]
 rownames(sumstatsColHeaders)&lt;-1:nrow(sumstatsColHeaders)
 sumstatsColHeaders$ordering &lt;- NULL
+#manually move FRWQUENCY to above MAR - github issue 95
+frequency &lt;- sumstatsColHeaders[sumstatsColHeaders$Uncorrected=="FREQUENCY",]
+maf &lt;- sumstatsColHeaders[sumstatsColHeaders$Uncorrected=="MAF",]
+if(as.integer(rownames(frequency))&gt;as.integer(rownames(maf))){
+  sumstatsColHeaders[as.integer(rownames(frequency)),] &lt;- maf
+  sumstatsColHeaders[as.integer(rownames(maf)),] &lt;- frequency
+}   
 usethis::use_data(sumstatsColHeaders,overwrite = TRUE, internal=TRUE)
 save(sumstatsColHeaders,
       file="data/sumstatsColHeaders.rda")
