@@ -346,17 +346,6 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                 message(msg)
             }
         }
-        #also check if all cases missing 'rs' before, just add rs and warn user
-        if (nrow(miss_rs) == nrow(sumstats_dt)){
-            msg <- paste0(
-                "All SNP RS IDs are missing `rs` at the start of their ID. ",
-                "If these are not RS ID's and are another ID, set ",
-                "`snp_ids_are_rs_ids=False` and rerun `format_sumstats()`. ",
-                "The rs will be appened."
-            )
-            message(msg)
-            sumstats_dt[,SNP:=paste0("rs",SNP)]
-        }
         # also check for weirdly formatted SNPs like rs1234:.....
         # remove everything after : and put in separate column
         # (can extend code to infer info from this separate column later)
