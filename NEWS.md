@@ -1,3 +1,14 @@
+## CHANGES IN VERSION 1.3.18
+
+## New features
+* Can now handle general remote sumstats not just IEU GWAS
+* More column header mappings
+* Added a step that if all SNP values don't start with rs id and 
+snp_ids_are_rs_ids=FALSE, then append rs at the start of each 
+(i.e. "1" => "rs1" etc). This covers cases when a sumstats uses rs ids but 
+doesn't start with rs. A warning has also been added for the user when this 
+happens they are told about the snp_ids_are_rs_ids input variable.
+
 ## CHANGES IN VERSION 1.3.17
 
 ## New features

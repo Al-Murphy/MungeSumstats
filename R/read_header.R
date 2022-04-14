@@ -52,6 +52,9 @@ read_header <- function(path,
         # header <- colnames(data.table::fread(text = header)) 
         header <- data.table::fread(cmd = paste("gunzip -c ",path),
                                     nrows = n) 
+    } else if(startsWith(path, "https://")){
+        #### Read generic remote sumstats ####
+        header <- data.table::fread(path,nrows = n) 
     } else {
         #### Read tabular #### 
         header <- readLines(con = path,

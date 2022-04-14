@@ -42,7 +42,7 @@ check_on_ref_genome <-function(sumstats_dt,
                 )
             }
             # ensure rsids is up-to-date with filtered sumstats_dt
-            rsids <- rsids[unique(sumstats_dt$SNP), , nomatch = NULL]
+            rsids <- rsids[sumstats_dt, ,nomatch = NULL,on="SNP"]
             data.table::setkey(rsids, SNP)
             #if indels in dataset, don't check they are present on the ref 
             # genome as they won't be there

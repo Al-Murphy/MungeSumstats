@@ -40,11 +40,12 @@ validate_parameters <- function(path,
     # Checking if the file exists should happen first - 
     # can pass dt/df of sumstats
     pth_msg <- paste0(
-        "Path to GWAS sumstats is not valid, pass a file path or a",
+        "Path to GWAS sumstats is not valid, pass a file path or a ",
         "dataframe/data.table object to the path parameter"
     )
     if (!is.data.frame(path) && !file.exists(path) &&
-        !startsWith(path, "https://gwas.mrcieu.ac.uk")) {
+        !startsWith(path, "https://gwas.mrcieu.ac.uk") &&
+        !startsWith(path, "https://")) {
         stop(pth_msg)
     }
 

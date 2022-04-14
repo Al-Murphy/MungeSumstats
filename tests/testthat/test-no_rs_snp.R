@@ -62,7 +62,9 @@ test_that("Check SNP ID formatting", {
         )
         res_dt2 <- data.table::fread(reformatted2)
 
-        # should give error as all ID's don't have rs and snp_ids_are_rs_ids=TRUE set
+        # used to give error as all ID's don't have rs and 
+        # snp_ids_are_rs_ids=TRUE set
+        # now will just add rs at start
         fail_return <-
             tryCatch(MungeSumstats::format_sumstats(file3,
                 ref_genome = "GRCh37",
@@ -95,7 +97,7 @@ test_that("Check SNP ID formatting", {
         expect_equal(all.equal(org_dt, res_dt2,
             ignore.row.order = TRUE
         ), TRUE)
-        expect_equal(is(fail_return, "error"), TRUE)
+        expect_equal(!is(fail_return, "error"), TRUE)
     } else {
         expect_equal(is_32bit_windows, TRUE)
         expect_equal(is_32bit_windows, TRUE)
