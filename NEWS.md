@@ -1,18 +1,18 @@
 ## CHANGES IN VERSION 1.3.18
 
-## New features
+### New features
 * Can now handle general remote sumstats not just IEU GWAS
 * More column header mappings
 
 ## CHANGES IN VERSION 1.3.17
 
-## New features
+### New features
 * Clean up of column header mapping file, including FREQUENCY given priority 
 over MAF and addition of new CHR mappings.
 
 ## CHANGES IN VERSION 1.3.15
 
-## Bug fixes
+### Bug fixes
 
 * Handle cases for multi-trait GWAS when P columns exists separate to the trait
 specific P value so that when renaming occurs there isn't two P columns. 
@@ -23,7 +23,7 @@ fixed.
 
 ## CHANGES IN VERSION 1.3.14
 
-## New features
+### New features
 
 * `liftover` 
     - Now exported function.
