@@ -71,7 +71,9 @@ write_sumstats <- function(sumstats_dt,
                 save_path <- Rsamtools::bgzip(tmp_save_path, overwrite=TRUE)
             } else if(endsWith(save_path,".gz")){
                 save_path <- R.utils::gzip(tmp_save_path, overwrite=TRUE)
-            } 
+            } else {
+                save_path <- tmp_save_path 
+            }
         }
     } else { 
         messager("Writing in tabular format ==> ", save_path)

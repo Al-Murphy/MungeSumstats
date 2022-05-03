@@ -39,15 +39,14 @@ index_vcf <- function(path,
     #### When local and non-tabix ####
     } else {
         messager("Compressing and tabix-indexing VCF file.",v=verbose)
-        path <- tryCatch({
-            path2 <- Rsamtools::bgzip(file = path, 
+        if(!endsWith(path,".bgz")){
+            path <- Rsamtools::bgzip(file = path, 
                                       dest = sprintf("%s.bgz",
                                                      sub("\\.gz$|\\.bgz$", "",
                                                          path)),
                                       overwrite = TRUE)
-            path2 <- VariantAnnotation::indexVcf(x = path2)
-            path2$path
-        }, error= function(e){message(e); path})
+        } 
+        path <- VariantAnnotation::indexVcf(x = path)$path 
         return(path)
     } 
 }

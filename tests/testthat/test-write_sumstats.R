@@ -23,10 +23,10 @@ test_that("write_sumstats works", {
                 return_path = TRUE, 
                 save_path_check = save_path_check
             )
-            testthat::expect_true(file.exists(path_out))
+            testthat::expect_true(file.exists(path_out)) 
             
             message("\n=== read tests ===")
-            dat <- MungeSumstats:: read_sumstats(
+            dat <- MungeSumstats::read_sumstats(
                 path = path_out, 
                 standardise_headers = standardise_headers)
             testthat::expect_equal(nrow(dat), nrow(sumstats_dt)) 
@@ -53,9 +53,11 @@ test_that("write_sumstats works", {
         # write_vcf=F
         ### Will write as tsv even though specified vcf suffix
         dat <- run_tests(sumstats_dt = sumstats_dt, 
-                         fileext = ".vcf") 
+                         fileext = ".vcf", 
+                         save_path_check = TRUE) 
         dat <- run_tests(sumstats_dt = sumstats_dt, 
-                         fileext = ".vcf.gz") 
+                         fileext = ".vcf.gz",
+                         save_path_check = TRUE) 
         
         #### VCF formats ####
         # write_vcf=T

@@ -32,17 +32,19 @@ read_sumstats <- function(path,
             sumstats_file <- sumstats_file[seq(1, nrows), ]
         }
     } else {
-        header <- read_header(path = path)
-        is_vcf <- check_vcf(header = header)
+        vcf_suffixes <- supported_suffixes(tabular = FALSE, 
+                                           tabular_compressed = FALSE)
+        is_vcf <- grepl(paste(vcf_suffixes,collapse = "|"), path) 
         if (isTRUE(is_vcf)) {
             sumstats_file <- read_vcf(path = path,
-                                      tabix_index = FALSE,
                                       use_params = TRUE,
                                       samples = samples,
                                       nThread = nThread)
         } else {
-            is_tabular <- check_tabular(header = header)
-            if (is_tabular) {
+            tab_suffixes <- supported_suffixes(vcf = FALSE, 
+                                               vcf_compressed = FALSE)
+            is_tabular <- grepl(paste(tab_suffixes,collapse = "|"), path) 
+            if (isTRUE(is_tabular)) {
                 if(endsWith(path,".bgz")){
                     message("Importing tabular bgz file: ", path)
                     sumstats_file <- data.table::fread(
