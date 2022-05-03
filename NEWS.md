@@ -64,7 +64,6 @@ that don't contain certain info
     - "PosGRCh37" --> "BP"
     - "testedAllele" --> "A1"
 
-
 ## CHANGES IN VERSION 1.3.18
 
 ### New features
