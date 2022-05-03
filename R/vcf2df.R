@@ -7,8 +7,9 @@
 #' as a \pkg{VariantAnnotation} 
 #' \link[VariantAnnotation]{CollapsedVCF}/
 #' \link[VariantAnnotation]{ExpandedVCF} object. 
-#' @param expand Expand data into multiple columns using
-#'  \code{VariantAnnotation::expand}.
+#' @param add_sample_names Append sample names to column names 
+#' (e.g. "EZ" --> "EZ_ubm-a-2929").
+#' 
 #' @source https://gist.github.com/zhujack/849b75f5a8305edaeca1001dfb9c3fe9
 #' @source 
 #' \code{
@@ -20,76 +21,83 @@
 #' @return data.frame version of VCF 
 #' 
 #' @keywords internal
-#' @importFrom Biostrings strsplit
 #' @importFrom utils type.convert 
+#' @importFrom data.table as.data.table
 vcf2df <- function(vcf, 
-                   expand = TRUE) {
+                   add_sample_names=TRUE) {
     requireNamespace("VariantAnnotation")
     requireNamespace("MatrixGenerics")
-    v2df <- function(x, 
-                     ...) {
-        ## Function to parse ANN column in to a dataframe
-        .anncols = function(anncol,
-                            headerstring) {
-            anncols = Biostrings::strsplit(
-                sub("Functional annotations: '",'',
-                    headerstring),' \\| ')[[1]]
-            dfannempty = data.frame(matrix(vector(), 0, length(anncols),
-                                           dimnames=list(c(), anncols)),
-                                    stringsAsFactors=FALSE)
-            dd <- lapply(lapply(anncol,`[`,1),
-                         function(x){Biostrings::strsplit(x,'\\|')[[1]]})
-            ncls <- max(unlist(lapply(dd, length)))
-            
-            yy = data.frame(suppressWarnings(
-                do.call(rbind,
-                        c(dfannempty[seq(1,ncls)], dd))),
-                            stringsAsFactors=FALSE)
-            yy = data.frame(lapply(yy,utils::type.convert))
-            colnames(yy) = paste("ANN",anncols[seq(1,ncls)],sep="..")
-            return(yy)
-        }
-        
-        
-        df = as.data.frame(MatrixGenerics::rowRanges(x)) 
-        df = cbind(df, 
-                   as.data.frame(VariantAnnotation::info(x))
-                   ) 
-        if ( any(c('ANN', 'EFF') %in% names(VariantAnnotation::info(x))) ) {
-            ann = c('ANN', 'EFF')[ c('ANN', 'EFF') %in% names(
-                VariantAnnotation::info(x)) ][1]
+  
+    messager("Converting VCF to data.table.") 
+    #### .anncols function ####
+    .anncols = function(anncol,headerstring) {
+        anncols = strsplit(sub("Functional annotations: '",'',
+                               headerstring),' \\| ')[[1]]
+        dfannempty = data.frame(matrix(vector(), 0, length(anncols),
+                                       dimnames=list(c(), anncols)),
+                                stringsAsFactors=FALSE)
+        yy = data.frame(
+            suppressWarnings(
+                do.call(
+                    rbind,
+                    c(dfannempty,lapply(lapply(anncol,`[`,1),
+                                        function(x){strsplit(x,'\\|')[[1]]})
+                      )
+                    )
+                ),
+                        stringsAsFactors=FALSE)
+        yy = data.frame(lapply(yy,type.convert))
+        colnames(yy) = paste("ANN",anncols,sep="_")
+        return(yy)
+    }
+    #### v2df function ####
+    v2df <- function(x) {
+        t1 <- Sys.time()
+        #### This step takes the longest ####
+        ## as.data.table is better than as.data.frame bc it can handle duplicate
+        ## row names.
+        # path <- "https://gwas.mrcieu.ac.uk/files/ubm-a-2929/ubm-a-2929.vcf.gz"
+        # vcf <- VariantAnnotation::readVcf(file = path)
+        # x <- vcf[1:1000000,] 
+        df <- data.table::data.table(
+            ID = names(MatrixGenerics::rowRanges(x)),
+            granges_to_dt(gr = MatrixGenerics::rowRanges(x)),
+            DF_to_dt(DF = VariantAnnotation::info(x)) 
+        )
+        if('ANN' %in% colnames(df)) {
             dfann = .anncols(
-                df$ANN, 
-                VariantAnnotation::info(
+                anncol = df$ANN,
+                headerstring = VariantAnnotation::info(
                     VariantAnnotation::header(x)
-                )[ann, ]$Description)
-            df = df[, colnames(df) != ann]
-            df = cbind(df, dfann)
+                    )['ANN',]$Description
+            )
+            df <- df[,colnames(df)!="ANN"]
+            df <- cbind(df,dfann)
         }
-        geno_data <- VariantAnnotation::geno(x)
-        SNPs <- rownames(geno_data[[1]])
-        n  = names(geno_data)
-        tmp = lapply(n, function(col) {
-            return(as.data.frame(geno_data[[col]]))
+        ##### Convert geno data ##### 
+        # geno_dt <- DF_to_dt(DF = VariantAnnotation::geno(x))  
+        n <- names(VariantAnnotation::geno(x))
+        tmp <- lapply(n,function(col) { 
+            ## keeps colnames unchanged
+            data.table::as.data.table(
+                VariantAnnotation::geno(x)[[col]]
+            )
         })
-        ncols = unlist(lapply(tmp, FUN = ncol))
-        tmp = do.call(cbind, tmp)
-        rownames(tmp) <- NULL 
-        colnames(tmp) = paste(rep(n, times = ncols), colnames(tmp),
-                              sep = "_")
-        df = cbind(df, tmp)
-        df[vapply(df, is.list, FUN.VALUE = logical(1))] <- 
-            apply(df[vapply(df, is.list, FUN.VALUE = logical(1))], 2, 
-                  function(x) { 
-                      unlist(lapply(x, paste, sep=",", collapse=";"))  } ) 
-        #### Add SNPs back in ####
-        df <- cbind(SNP=SNPs, df)
-        #### Remove duplicate rows ####
-        df <- unique(df)
+        ## Each element can potentially have >1 column 
+        ncols <- sapply(tmp,ncol)
+        tmp <- do.call(cbind, tmp)
+        if(isTRUE(add_sample_names)){
+            colnames(tmp) = paste(rep(n, times = ncols), 
+                                  colnames(tmp),sep = "_") 
+        } else {
+            colnames(tmp) <- rep(n, times = ncols)
+        } 
+        df <- cbind(df, tmp) 
+        methods::show(round(difftime(Sys.time(),t1),1))
         return(df)
     }
-    
-    if (expand) {
+    #### Call functions ####
+    if (methods::is(vcf,"CollapsedVCF")) {
         # message('Expanding VCF first, so number of rows may increase')
         return(v2df(VariantAnnotation::expand(x = vcf)))
     } else {

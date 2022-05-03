@@ -10,5 +10,6 @@ parse_pval_large <- function(l){
     line <- grep(
         "p-values are >1 which LDSC/MAGMA may not be able to handle",l,
         value = TRUE)[1]
+    if(is.na(line)) return(NA)
     as.integer(trimws(gsub(",","",strsplit(line," ")[[1]][1])))
 }

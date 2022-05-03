@@ -4,12 +4,14 @@
 \alias{check_empty_cols}
 \title{Check for empty columns}
 \usage{
-check_empty_cols(sumstats_file, sampled_rows = 1000)
+check_empty_cols(sumstats_dt, sampled_rows = NULL, verbose = TRUE)
 }
 \arguments{
 \item{sampled_rows}{First N rows to sample.
 Set \code{NULL} to use full \code{sumstats_file}.
 when determining whether cols are empty.}
+
+\item{verbose}{Print messages.}
 }
 \value{
 empty_cols

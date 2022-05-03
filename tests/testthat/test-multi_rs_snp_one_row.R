@@ -68,7 +68,7 @@ test_that("Handle more than 1 rs IDs in one row", {
         # remove imputation column
         reformatted_lines[, convert_multi_rs_SNP := NULL]
         # reordering makes line 3 got to 58
-        expect_equal(reformatted_lines, org_lines)
+        testthat::expect_equal(reformatted_lines, org_lines)
 
         # check log files
         # Run MungeSumstats code
@@ -85,7 +85,7 @@ test_that("Handle more than 1 rs IDs in one row", {
             )
 
         # expect 7 log files
-        expect_equal(length(reformatted_log$log_files), 7)
+        testthat::expect_equal(length(reformatted_log$log_files), 7)
         # next check number of rows in each
         results <- c()
         for (log_i in reformatted_log$log_files) {

@@ -447,13 +447,15 @@ screen anymore when you set `log_mungesumstats_msgs`:
 names(reformatted_vcf_2)
 ```
 
-A user can load a file to view the excluded SNPs:
+A user can load a file to view the excluded SNPs.
+
+In this case, no SNPs were filtered based on INFO criterion, 
+so an NA is returned for this value
+(instead of a path to a table of filtered SNPs). 
+
 ```{r, message=TRUE}
-data.table::fread(reformatted_vcf_2$log_files$info_filter)[1:10]
+print(reformatted_vcf_2$log_files$info_filter)
 ```
-
-And we can see all these SNPs had lower INFO values that our set threshold.
-
 
 The different types of exclusion which lead to the names are explained below:
 

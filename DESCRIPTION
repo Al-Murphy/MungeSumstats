@@ -21,8 +21,9 @@ Authors@R:
 Description: 
   The *MungeSumstats* package is designed to facilitate the standardisation of 
   GWAS summary statistics. It reformats inputted summary statisitics to include 
-  SNP, CHR, BP and can look up these values if any are missing. It also removes 
-  duplicates across SNPs.
+  SNP, CHR, BP and can look up these values if any are missing. It also pefrorms 
+  dozens of QC and filtering steps to ensure high data quality and
+  minimise inter-study differences. 
 URL: https://github.com/neurogenomics/MungeSumstats
 BugReports: https://github.com/neurogenomics/MungeSumstats/issues
 License: Artistic-2.0
@@ -35,11 +36,11 @@ Imports:
     dplyr, 
     stats,
     GenomicRanges,
+    IRanges,
     GenomeInfoDb,
     BSgenome,
     Biostrings,
     VariantAnnotation,
-    stringr, 
     googleAuthR,
     httr,
     jsonlite,
@@ -58,8 +59,7 @@ Suggests:
     SNPlocs.Hsapiens.dbSNP144.GRCh38,
     BSgenome.Hsapiens.1000genomes.hs37d5,
     BSgenome.Hsapiens.NCBI.GRCh38, 
-    BiocGenerics,
-    IRanges,
+    BiocGenerics, 
     S4Vectors,
     rmarkdown,
     markdown,

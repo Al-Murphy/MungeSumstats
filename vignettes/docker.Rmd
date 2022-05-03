@@ -1,24 +1,30 @@
 ---
-title: "Docker" 
-author: "<h5><i>Authors</i>: Alan Murphy, Brian Schilder and Nathan Skene</h5>"
-date: "<h5><i>Updated</i>: `r format(Sys.Date(), '%b-%d-%Y')`</h5>"
+title: "Docker/Singularity Containers" 
+author: "<h4>Authors: <i>`r auths <- eval(parse(text = gsub('person','c',read.dcf('../DESCRIPTION', fields = 'Authors@R'))));paste(auths[names(auths)=='given'],auths[names(auths)=='family'], collapse = ', ')`</i></h4>" 
+date: "<h4>Vignette updated: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
 output:
   BiocStyle::html_document:
+    md_extensions: [ 
+      "-autolink_bare_uris" 
+    ]
 vignette: >
-    %\VignetteIndexEntry{Docker} 
+    %\VignetteIndexEntry{docker} 
     %\usepackage[utf8]{inputenc}
     %\VignetteEngine{knitr::rmarkdown}
 ---
-  
+
 
 ```{r setup, include=FALSE}
 #### Package name ####
-pkg <- "MungeSumstats" #desc::desc_get("Package")
+pkg <- read.dcf("../DESCRIPTION", fields = "Package")[1]
+library(pkg, character.only = TRUE)
+## Docker containers must be lowercase
+pkg <- tolower(pkg)
 #### Username of DockerHub account ####
 docker_user <- "neurogenomicslab"
 ```
 
-# Docker
+# DockerHub 
 
 `r pkg` is now available via 
 [DockerHub](https://hub.docker.com/repository/docker/`r docker_user`/`r pkg`) 
@@ -44,22 +50,23 @@ Once the image has been created, you can launch it with:
 ```
 docker run \
   -d \
-  --rm \
   -e ROOT=true \
-  -e PASSWORD=bioc \
+  -e PASSWORD="<your_password>" \
   -v ~/Desktop:/Desktop \
   -v /Volumes:/Volumes \
-  -p 8788:8787 \
+  -p 8787:8787 \
   `r docker_user`/`r pkg`
 ```  
 
+### NOTES
+
+* Make sure to replace `<your_password>` above with whatever you want your password to be.  
+* Change the paths supplied to the `-v` flags for your particular use case. 
 * The `-d` ensures the container will run in "detached" mode,
 which means it will persist even after you've closed your command line session.  
+* The username will be *"rstudio"* by default.  
 * Optionally, you can also install the [Docker Desktop](https://www.docker.com/products/docker-desktop) 
 to easily manage your containers.  
-* You can set the password to whatever you like by changing the 
-`-e PASSWORD=...` flag.  
-* The username will be *"rstudio"* by default.
 
 ## Method 2: via Singularity
 
@@ -76,7 +83,7 @@ singularity pull docker://`r docker_user`/`r pkg`
 
 Finally, launch the containerised Rstudio by entering the 
 following URL in any web browser:
-[http://localhost:8788/](http://localhost:8788/)
+*http://localhost:8787/*
 
 Login using the credentials set during the Installation steps.  
 
@@ -91,3 +98,4 @@ utils::sessionInfo()
 
 </details>  
 
+<br>

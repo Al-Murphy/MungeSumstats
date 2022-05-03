@@ -8,5 +8,6 @@
 #' @keywords internal
 parse_genome_build <- function(l){
     line <- grep("Inferred genome build:",l,value = TRUE)[1]
+    if(is.na(line)) return(NA)
     trimws(strsplit(line,":")[[1]][-1])
 }

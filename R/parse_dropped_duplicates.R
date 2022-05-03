@@ -9,5 +9,6 @@
 parse_dropped_duplicates <- function(l){
     line <- grep("are duplicated in the sumstats file",l,
                  value = TRUE)[1]
+    if(is.na(line)) return(NA)
     as.integer(trimws(gsub(",","",strsplit(line," ")[[1]][1])))
 }

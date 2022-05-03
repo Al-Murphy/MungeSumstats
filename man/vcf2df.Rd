@@ -14,7 +14,7 @@ vcf_df <- MungeSumstats::vcf2df(vcf = vcf)
 }
 }
 \usage{
-vcf2df(vcf, expand = TRUE)
+vcf2df(vcf, add_sample_names = TRUE)
 }
 \arguments{
 \item{vcf}{Variant Call Format (VCF) file imported into R
@@ -22,8 +22,8 @@ as a \pkg{VariantAnnotation}
 \link[VariantAnnotation]{CollapsedVCF}/
 \link[VariantAnnotation]{ExpandedVCF} object.}
 
-\item{expand}{Expand data into multiple columns using
-\code{VariantAnnotation::expand}.}
+\item{add_sample_names}{Append sample names to column names
+(e.g. "EZ" --> "EZ_ubm-a-2929").}
 }
 \value{
 data.frame version of VCF

@@ -12,6 +12,7 @@ import_sumstats(
   write_vcf = FALSE,
   download_method = "download.file",
   quiet = TRUE,
+  force_new = FALSE,
   force_new_vcf = FALSE,
   nThread = 1,
   parallel_across_ids = FALSE,
@@ -38,6 +39,10 @@ Change this to keep the raw VCF file on disk
 \code{"download.file"} (single-threaded) .}
 
 \item{quiet}{Run quietly.}
+
+\item{force_new}{If a formatted file of the same names as \code{save_path}
+exists, formatting will be skipped and this file will be imported instead
+(default). Set \code{force_new=TRUE} to override this.}
 
 \item{force_new_vcf}{Overwrite a previously downloaded VCF
 with the same path name.}

@@ -9,6 +9,7 @@ read_sumstats(
   nThread = 1,
   nrows = Inf,
   standardise_headers = FALSE,
+  add_sample_names = FALSE,
   mapping_file = sumstatsColHeaders
 )
 }
@@ -23,6 +24,9 @@ directly to MungeSumstats using the path parameter.}
 If \code{Inf}, will read in all rows.}
 
 \item{standardise_headers}{Standardise headers first.}
+
+\item{add_sample_names}{Append sample names to column names
+(e.g. "EZ" --> "EZ_ubm-a-2929").}
 
 \item{mapping_file}{MungeSumstats has a pre-defined column-name mapping file
 which should cover the most common column headers and their interpretations.

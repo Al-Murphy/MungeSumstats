@@ -6,13 +6,13 @@ test_that("Test that VCFs can be properly read in.", {
     if (!is_32bit_windows) {
         # write the ALS GWAS, VCF file to a temp file for testing
         vcf_path <- system.file("extdata", "ALSvcf.vcf", 
-                                    package = "MungeSumstats")
+                                package = "MungeSumstats")
         ### Read in original VCF
         sumstats_dt <- read_vcf(path = vcf_path)
-        sumstats_dt <- standardise_sumstats_column_headers_crossplatform(
+        sumstats_dt <- standardise_header(
             sumstats_dt = sumstats_dt,
-            mapping_file = sumstatsColHeaders
-        )[["sumstats_dt"]]
+            return_list = FALSE
+        )
         ### Write this VCF and then read it in again
         tmp_vcf <- tempfile(fileext = ".vcf.gz")
         write_sumstats(
@@ -22,13 +22,18 @@ test_that("Test that VCFs can be properly read in.", {
             write_vcf = TRUE
         )
         sumstats_dt2 <- read_vcf(path = tmp_vcf)
-        sumstats_dt2 <- standardise_sumstats_column_headers_crossplatform(
-            sumstats_dt = sumstats_dt,
-            mapping_file = sumstatsColHeaders
-        )[["sumstats_dt"]]
-        expect_equal(sumstats_dt, sumstats_dt2)
+        sumstats_dt2 <- standardise_header(
+            sumstats_dt = sumstats_dt2,
+            return_list = FALSE
+        )
+        ## Reading in the VCF again adds some new cols and changes their order
+        common_cols <- intersect(names(sumstats_dt), names(sumstats_dt2))
+        testthat::expect_equal(
+            sumstats_dt[,common_cols,with=FALSE], 
+            sumstats_dt2[,common_cols,with=FALSE]
+        )
     }    
     else{
-        expect_equal(is_32bit_windows, TRUE)
+        testthat::expect_equal(is_32bit_windows, TRUE)
     }
 })

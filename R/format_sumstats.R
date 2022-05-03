@@ -720,8 +720,7 @@ format_sumstats <- function(path,
         #### Check 22: check for low INFO scores ####
         sumstats_return <-
             check_info_score(
-                sumstats_dt = sumstats_return$sumstats_dt,
-                path = path,
+                sumstats_dt = sumstats_return$sumstats_dt, 
                 INFO_filter = INFO_filter,
                 log_folder_ind = log_folder_ind,
                 check_save_out = check_save_out,
@@ -939,7 +938,8 @@ format_sumstats <- function(path,
         )
         # if user wants log files return a list
         if (log_folder_ind || log_mungesumstats_msgs) {
-            return(list("sumstats" = out, "log_files" = log_files))
+            return(list("sumstats" = out, 
+                        "log_files" = log_files))
         }
         return(out)
     } else {

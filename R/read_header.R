@@ -30,7 +30,7 @@ read_header <- function(path,
                                         nThread = 1)
         } else {
             error_return <-
-                tryCatch(header <-VariantAnnotation::scanVcfHeader(path),
+                tryCatch(header <- VariantAnnotation::scanVcfHeader(path),
                 error = function(e) e,
                 warning = function(w) w
                 )
@@ -39,7 +39,7 @@ read_header <- function(path,
                 header <- readLines(path, n = 100)
                 i <- which(startsWith(header, "#CHR"))
                 header <- data.table::fread(text = header[seq(i, i + n)],
-                                        nThread = 1)
+                                            nThread = 1)
             }    
         }
     } else if (endsWith(path,".bgz")){

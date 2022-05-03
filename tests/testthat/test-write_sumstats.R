@@ -6,7 +6,6 @@ test_that("write_sumstats works", {
     if (!is_32bit_windows) {
         sumstats_dt <- MungeSumstats:::formatted_example()
         
-        
         run_tests <- function(sumstats_dt,
                               fileext,
                               tabix_index=FALSE,
@@ -22,7 +21,7 @@ test_that("write_sumstats works", {
                                                      write_vcf = write_vcf)
             path_in <- check$save_path
             
-            path_out <- MungeSumstats:: write_sumstats(
+            path_out <- MungeSumstats::write_sumstats(
                 sumstats_dt = sumstats_dt,
                 save_path = path_in,
                 write_vcf = write_vcf,
@@ -63,6 +62,7 @@ test_that("write_sumstats works", {
         dat <- run_tests(sumstats_dt = sumstats_dt, 
                          write_vcf = TRUE,
                          fileext = ".vcf") 
+        ## with indexing
         dat <- run_tests(sumstats_dt = sumstats_dt, 
                          write_vcf = TRUE,
                          tabix_index = TRUE,

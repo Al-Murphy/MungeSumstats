@@ -3,14 +3,40 @@
 \name{read_vcf}
 \alias{read_vcf}
 \title{Read in VCF format}
+\source{
+\code{
+#### Benchmarking ####
+library(VCFWrenchR)
+library(VariantAnnotation)
+
+path <- "https://gwas.mrcieu.ac.uk/files/ubm-a-2929/ubm-a-2929.vcf.gz"
+vcf <- VariantAnnotation::readVcf(file = path)
+N <- 1e5
+vcf_sub <- vcf[1:N,]
+
+res <- microbenchmark::microbenchmark(
+    "vcf2df"={dat1 <- MungeSumstats:::vcf2df(vcf = vcf_sub)},
+    "VCFWrenchR"= {dat2 <- as.data.frame(x = vcf_sub)},
+    "VRanges"={dat3 <- data.table::as.data.table(
+        methods::as(vcf_sub, "VRanges"))},
+    times=1
+)
+}
+
+\href{https://github.com/Bioconductor/VariantAnnotation/issues/57}{
+Discussion on VariantAnnotation GitHub}
+}
 \usage{
 read_vcf(
   path,
+  single_sample = TRUE,
+  write_vcf = FALSE,
+  save_path = NULL,
+  tabix_index = TRUE,
+  which = NULL,
+  use_params = TRUE,
   nThread = 1,
-  temp_save = FALSE,
-  keep_extra_cols = FALSE,
-  save_path = tempfile(),
-  nrows = Inf
+  verbose = TRUE
 )
 }
 \arguments{
@@ -18,22 +44,39 @@ read_vcf(
 dataframe or datatable of the summary statistics file can also be passed
 directly to MungeSumstats using the path parameter.}
 
-\item{nThread}{Number of threads to use for parallel processes.}
+\item{single_sample}{If multiple samples are present in the same VCF,
+only return the first one (default: \code{TRUE}).}
 
-\item{temp_save}{Save temprorary file before proceeding,}
-
-\item{keep_extra_cols}{Keep non-standard columns.}
+\item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
 
 \item{save_path}{File path to save formatted data. Defaults to
 \code{tempfile(fileext=".tsv.gz")}.}
 
-\item{nrows}{integer. The (maximal) number of lines to read.
-If \code{Inf}, will read in all rows.}
+\item{tabix_index}{Index the formatted summary statistics with
+\href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
+
+\item{which}{A \code{\linkS4class{GRanges}} describing the sequences and
+    ranges to be queried. Variants whose \code{POS} lies in the interval(s)
+    \code{[start, end]} are returned. If \code{which} is not specified all
+    ranges are returned. 
+  }
+
+\item{use_params}{When \code{TRUE} (default), increases the speed of reading in the VCF by
+omitting columns that are empty based on the head of the VCF (NAs only).
+NOTE that that this requires the VCF to be sorted, bgzip-compressed,
+tabix-indexed, which \link[MungeSumstats]{read_vcf} will attempt to do.}
+
+\item{nThread}{Number of threads to use for parallel processes.}
+
+\item{verbose}{Print messages.}
 }
 \value{
-The modified sumstats_file
+The VCF file in data.table format.
 }
 \description{
 Read in VCF format
 }
-\keyword{internal}
+\examples{
+path <- system.file("extdata","ALSvcf.vcf", package="MungeSumstats")
+sumstats_dt <- read_vcf(path = path)
+}

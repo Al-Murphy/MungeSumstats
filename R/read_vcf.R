@@ -1,234 +1,133 @@
 #' Read in VCF format
 #'
 #' @inheritParams format_sumstats
-#' @param temp_save Save temprorary file before proceeding,
-#' @param keep_extra_cols Keep non-standard columns.
-#' @param nrows integer. The (maximal) number of lines to read.
-#' If \code{Inf}, will read in all rows.
+#' @param single_sample If multiple samples are present in the same VCF, 
+#' only return the first one (default: \code{TRUE}). 
+#' @param use_params 
+#' When \code{TRUE} (default), increases the speed of reading in the VCF by
+#' omitting columns that are empty based on the head of the VCF (NAs only). 
+#' NOTE that that this requires the VCF to be sorted, bgzip-compressed, 
+#' tabix-indexed, which \link[MungeSumstats]{read_vcf} will attempt to do.
+#' @param verbose Print messages.
+#' @inheritParams VariantAnnotation::ScanVcfParam
 #'
-#' @return The modified sumstats_file
-#' @keywords internal
-#' @importFrom data.table fread
-#' @importFrom data.table fwrite
-#' @importFrom data.table tstrsplit
-#' @importFrom data.table :=
-#' @importFrom dplyr %>% rename
-#' @importFrom utils head
-#' @importFrom stringr str_split
+#' @return The VCF file in data.table format.
+#' @export
+#' @importFrom VariantAnnotation readVcf writeVcf
+#' @importFrom data.table as.data.table setnames
+#' @importFrom methods as show
+#' @source 
+#' \code{
+#' #### Benchmarking ####
+#' library(VCFWrenchR)
+#' library(VariantAnnotation)
+#' 
+#' path <- "https://gwas.mrcieu.ac.uk/files/ubm-a-2929/ubm-a-2929.vcf.gz"
+#' vcf <- VariantAnnotation::readVcf(file = path)
+#' N <- 1e5
+#' vcf_sub <- vcf[1:N,]
+#' 
+#' res <- microbenchmark::microbenchmark(
+#'     "vcf2df"={dat1 <- MungeSumstats:::vcf2df(vcf = vcf_sub)},
+#'     "VCFWrenchR"= {dat2 <- as.data.frame(x = vcf_sub)},
+#'     "VRanges"={dat3 <- data.table::as.data.table(
+#'         methods::as(vcf_sub, "VRanges"))},
+#'     times=1
+#' )
+#' }
+#' @source \href{https://github.com/Bioconductor/VariantAnnotation/issues/57}{
+#' Discussion on VariantAnnotation GitHub}
+#' @examples 
+#' path <- system.file("extdata","ALSvcf.vcf", package="MungeSumstats")
+#' sumstats_dt <- read_vcf(path = path)
 read_vcf <- function(path,
+                     single_sample = TRUE,
+                     write_vcf = FALSE,
+                     save_path = NULL,#tempfile(fileext = ".tsv.gz"),
+                     tabix_index = TRUE,
+                     which = NULL,
+                     use_params = TRUE,
                      nThread = 1,
-                     temp_save = FALSE,
-                     keep_extra_cols = FALSE,
-                     save_path = tempfile(),
-                     nrows = Inf) {
-    ########## OTHER VCF READERS/WRITERS ###########
-    # 1. vcfR
-    # 2. VariantAnnotation
-    # 3. seqminer
-    # 4. Rsamtools
-    # 5. echotabix (GH repo: RajLabMSSM/echotabix)
-    ################################## 
-
-    ### Add this to avoid confusing BiocCheck
-    INFO <- Pval <- P <- LP <- AF <- NULL
-
-    message("Reading VCF file.")
-    # fileformat <- gsub("^##fileformat=","",header[1])
-    # #First get the name of data column, held in the ##SAMPLE row
-    sample_id <- get_vcf_sample_ids(path = path)
-
-    #### Read in full data ####
-
-    #### If the VCF is remotely stored, data.table automatically
-    # downloads it to a tmpdir without telling you where.
-    # This lets you know where.
-    if (startsWith(path, "https://gwas.mrcieu.ac.uk")) {
-        vcf_suffixes <- supported_suffixes(
-            tabular = FALSE,
-            tabular_compressed = FALSE
-        )
-        tmpdir <-
-            file.path(tempdir(), gsub(
-                paste(vcf_suffixes, collapse = "|"), "",
-                basename(path)
-            ), "")
-        dir.create(tmpdir, showWarnings = FALSE, recursive = TRUE)
-        message("Downloading VCF ==> ", tmpdir)
-    } else {
-        tmpdir <- tempdir()
-    }
-    
-    #### Read in the data contents of VCF ####
-    sumstats_file <- read_vcf_data(path = path, 
-                                   nThread = nThread, 
-                                   tmpdir = tmpdir,
-                                   nrows = nrows) 
-    #### Infer sample ID from data colnames if necessary ####
-    sample_id <- infer_vcf_sample_ids(
-        sample_id = sample_id,
-        sumstats_file = sumstats_file
-    )
-    
-    is_parsed <- is_vcf_parsed(sumstats_file = sumstats_file, 
-                               verbose = TRUE)
-    ## Get format of FORMAT col for parsing
-    format <- sumstats_file$FORMAT[1]
-    if(!is_parsed && !is.null(format)){   
-        format_cols <- stringr::str_split(format, ":")[[1]] 
-    }else {
-        format_cols <- NULL
-    }
-    sumstats_file <- remove_nonstandard_vcf_cols(
-        sample_id = sample_id, 
-        sumstats_file = sumstats_file,
-        keep_extra_cols = keep_extra_cols, 
-        standardise_headers = TRUE)
-    #### standardise_headers makes sample_id uppercase ####
-    sample_id <- toupper(sample_id)
-    
-    
-
-    # if sample_id col present, split it out into separate columns
-    message("Parsing '", sample_id, "' data column.")
-    if (length(sample_id) != 0) {
-        # split out format into separate values
-        # format <- strsplit(format,":")[[1]]
-        # First, there is an issue where INFO=".", AF from FORMAT is missing
-        # Need to impute 0 for these values
-        # See dataset for example of this:
-        # http://fileserve.mrcieu.ac.uk/vcf/IEU-a-2.vcf.gz
-        if ("AF" %in% format &&
-            "INFO" %in% names(sumstats_file) &&
-            nrow(sumstats_file[INFO == "."]) > 0) {
-            # get positions of ":" separators for each SNP
-            find_splits <- gregexpr(":", sumstats_file[, get(sample_id)])
-            # get position of AF to be imputed
-            AF_pos <- which("AF" == format)
-            # Update sumstats_file where number of splits isn't correct
-            # get row identifiers
-            update_rows <-
-                (lengths(regmatches(
-                    sumstats_file[, get(sample_id)],
-                    find_splits
-                )) != length(format) - 1)
-            # get char pos for imputation
-            find_splits <- unlist(lapply(find_splits,
-                                         function(x) x[AF_pos - 1]))
-            # add to dt
-            sumstats_file[, find_splits := find_splits]
-            # Now update these by imputing 0 for AF
-            sumstats_file[update_rows, (sample_id) :=
-                paste0(
-                    substr(get(sample_id), 0, find_splits),
-                    "0:", # AF impute
-                    substr(
-                        get(sample_id), find_splits + 1,
-                        nchar(get(sample_id))
-                    )
-                )]
-            sumstats_file[, find_splits := NULL]
-            # Then replace INFO="." with 0 at later stage
-        }
-        # check if any cols already present - ID likely will be, rename if so
-        if (any(format %in% names(sumstats_file))) {
-            format_copy <- format[format %in% names(sumstats_file)]
-            for (format_i in format_copy) {
-                # If it is ID just remove other ID column
-                if (format_i == "ID") {
-                    sumstats_file[, (format_i) := NULL]
-                } else { # otherwise keep both columns just rename one
-                    data.table::setnames(
-                        sumstats_file,
-                        format_i, paste0(format_i, "2")
-                    )
-                }
-            }
-        }
-        if(sample_id %in% colnames(sumstats_file) && 
-           !is.null(format_cols)){
-            sumstats_file[, (format_cols) :=
-                              data.table::tstrsplit(get(sample_id),
-                                                    split = ":", fixed = TRUE
-                              )]
-            # Now remove sample_id column
-            sumstats_file[, (sample_id) := NULL]
-        }
-    }
-    # sumstatsColHeaders contains mappings for
-    # ID to SNP
-    # EZ to Z
-    # NC to N_CAS
-    # SS to N
-    # AF to FRQ
-    # ES to BETA* -need confirmation
-
-    #### Check for empty columns ####
-    empty_cols <- check_empty_cols(
-        sumstats_file = sumstats_file,
-        sampled_rows = 1000
-    )
-
-
-    if ("MarkerName" %in% colnames(sumstats_file)) {
-        if ("ID" %in% empty_cols) {
-            message("Replacing empty ID col with MarkerName col.")
-            sumstats_file$ID <- sumstats_file$MarkerName
-            sumstats_file[, ("MarkerName") := NULL]
-        }
-    }
-
-    # Need to convert P-value, currently -log10
-    if ("Pval" %in% colnames(sumstats_file)) {
-        sumstats_file <- sumstats_file %>% dplyr::rename(P = Pval)
-    }
-    if ("LP" %in% names(sumstats_file)) {
-        if ("LP" %in% empty_cols) {
-            message("LP column is empty. Cannot compute raw p-values.")
+                     verbose = TRUE){ 
+    requireNamespace("VariantAnnotation")  
+    #### Read #### 
+    {
+        t1 <- Sys.time()
+        if((!is.null(which)) || isTRUE(use_params)){
+            param <- select_vcf_fields(path = path, 
+                                       which = which, 
+                                       single_sample = single_sample,
+                                       nThread = nThread)
         } else {
-            msg <- paste0(
-                "VCF file has -log10 P-values, these will be ",
-                "converted to unadjusted p-values in the 'P' column."
+            param <- VariantAnnotation::ScanVcfParam()
+        }
+        messager("Reading VCF file.")
+        vcf <- suppressWarnings(
+            VariantAnnotation::readVcf(file = path,
+                                       param = param)
+        )
+        methods::show(round(difftime(Sys.time(),t1),1))
+    } 
+    #### Check save path ####
+    if(!is.null(save_path)){
+        check_save_path_out <- check_save_path(
+            ### dummy arg, not used here
+            log_folder = "NULL", 
+            ### dummy arg, not used here
+            log_folder_ind = FALSE, 
+            save_path = save_path, 
+            write_vcf = write_vcf,
+            tabix_index = tabix_index)
+        save_path <- check_save_path_out$save_path
+    }
+    #### Save as VCF ####
+    if(isTRUE(write_vcf)) {
+        if(!is.null(save_path)){ 
+            VariantAnnotation::writeVcf(
+                obj = vcf,
+                filename = check_save_path_out$save_path,
+                index = tabix_index
             )
-            message(msg)
-            sumstats_file[, P := 10^(-1 * as.numeric(LP))]
         }
+        messager("Returning as VCF.")
+        return(vcf)
     }
-
-    # Need to remove "AF=" at start of INFO column and replace any "." with 0
-    if ("INFO" %in% names(sumstats_file)) {
-        message("Formatting INFO column.")
-        # if info col = "AF=..." then it isn't info, rename to AF if available
-        # check first 10k only, or all if less
-        num_check <- min(nrow(sumstats_file), 10000)
-        # if more than half are, take the column as AF
-        if (sum(grepl("^AF=", sumstats_file$INFO)) > num_check / 2) {
-            message("INFO column is actually AF, it will be converted.")
-            # don't overwirte AF column if it exists
-            if (!"AF" %in% names(sumstats_file)) {
-                sumstats_file[, AF := INFO]
-                sumstats_file[, AF := gsub("^AF=", "", AF)]
-            }
-        }
-        sumstats_file[, INFO := gsub("^AF=", "", INFO)]
-        sumstats_file[INFO == ".", INFO := 0]
-        # update to numeric
-        sumstats_file[, INFO := as.numeric(INFO)]
-    }
-    if ("INFO" %in% names(empty_cols) && "INFO" %in% names(sumstats_file)) {
-        message("NOTE: All INFO scores are empty. Replacing all with 1.")
-        sumstats_file$INFO <- 1
-    }
-    # VCF format has dups of each row, get unique
-    sumstats_file <- unique(sumstats_file)
-    # #write new data
-    if (temp_save) {
-        message("Storing intermediate file before proceeding ==> ", path)
+    #### Convert to data.table ####  
+    sumstats_dt <- vcf2df(vcf = vcf)
+    sample_id <- rownames(vcf@colData) 
+    remove(vcf) 
+    #### Remove sample suffix ####
+    data.table::setnames(
+        x = sumstats_dt,
+        old = colnames(sumstats_dt), 
+        new = gsub(paste0("_",sample_id,collapse = "|"),"",
+                   colnames(sumstats_dt), 
+                   ignore.case = TRUE)
+    )  
+    #### Remove duplicated columns ####
+    drop_duplicate_cols(dt = sumstats_dt)
+    #### Remove empty columns #####
+    ## No longer necessary with select_vcf_fields
+    # sumstats_dt <- remove_empty_cols(sumstats_dt = sumstats_dt)
+    #### Unlist columns inplace ####
+    unlist_dt(dt = sumstats_dt)
+    #### Prepare SNP column ####
+    read_vcf_markername(sumstats_dt = sumstats_dt) 
+    #### Prepare/un-log P col ####
+    read_vcf_pval(sumstats_dt = sumstats_dt)  
+    #### Prepare INFO col ####
+    read_vcf_info(sumstats_dt = sumstats_dt)  
+    #### Rename start col #####
+    data.table::setnames(sumstats_dt,"start","BP")
+    #### Write new data ####
+    if (!is.null(save_path)) { 
+        messager("Storing intermediate file before proceeding ==>",save_path)
         data.table::fwrite(
-            x = sumstats_file,
-            file = save_path,
+            x = sumstats_dt,
+            file = save_path, 
+            sep = "\t",
             nThread = nThread,
-            sep = "\t"
         )
     }
-    return(sumstats_file)
+    return(sumstats_dt)
 }

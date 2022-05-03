@@ -7,8 +7,10 @@
 #' @param standardise_headers Standardise headers first.
 #' @inheritParams format_sumstats
 #' @inheritParams standardise_header
+#' @inheritParams vcf2df
+#' 
 #' @export
-#' @importFrom data.table fread
+#' @importFrom data.table fread as.data.table setkeyv
 #' @examples
 #' path <- system.file("extdata", "eduAttainOkbay.txt",
 #'     package = "MungeSumstats"
@@ -18,7 +20,9 @@ read_sumstats <- function(path,
                           nThread = 1,
                           nrows = Inf,
                           standardise_headers = FALSE,
+                          add_sample_names = FALSE,
                           mapping_file = sumstatsColHeaders) {
+    
     if (is.data.frame(path)) {
         message("Summary statistics passed as R object.")
         sumstats_file <- data.table::as.data.table(path)
@@ -30,6 +34,9 @@ read_sumstats <- function(path,
         is_vcf <- check_vcf(header = header)
         if (is_vcf) {
             message("Importing VCF file: ", path)
+            # vcf <- VariantAnnotation::readVcf(file = path)
+            # sumstats_file <- vcf2df(vcf = vcf, 
+            #                         add_sample_names = add_sample_names)
             sumstats_file <- read_vcf(path = path,
                                       nThread = nThread)
         } else {
@@ -59,12 +66,24 @@ read_sumstats <- function(path,
             }
         }
     }
-    if (standardise_headers) {
+    #### Drop empty cols ####
+    sumstats_file <- remove_empty_cols(sumstats_dt = sumstats_file) 
+    #### Standardise colnames ####
+    if (isTRUE(standardise_headers)) {
+        CHR <- NULL;
         sumstats_file <-
             standardise_sumstats_column_headers_crossplatform(
                 sumstats_dt = sumstats_file,
                 mapping_file = mapping_file
             )[["sumstats_dt"]]
+        #### Ensure CHR is character ####
+        if("CHR" %in% names(sumstats_file)) {
+            sumstats_file[,CHR:=as.character(CHR)]
+        }
+        #### Ensure SNP is the key ####
+        if("SNP" %in% names(sumstats_file)) {
+            data.table::setkeyv(sumstats_file, cols = "SNP")
+        } 
     }
     return(sumstats_file)
 }

@@ -1,18 +1,86 @@
+## CHANGES IN VERSION 1.3.20
+
+### New features
+
+* Added "query" column to `find_sumstats` output to keep track of 
+search parameters.
+* `import_sumstats`: 
+    - Check if formatted file (`save_path`) exists
+    *before* downloading to save time.  
+    - Pass up `force_new` in additional to `force_new_vcf`. 
+* Updated *Description* tag in DESCRIPTION file to better reflect the scope 
+of `MungeSumstats`. 
+* Upgraded `read_vcf` to be more robust. 
+* Edited Deps/Suggests
+    - Elevate `IRanges` to Imports. 
+    - Remove `stringr` (no longer used)
+* Add new internal function `is_tabix` to check whether a file is already 
+tabix-indexed. 
+
+### Bug fixes
+
+* AF (allele frequency) was accidentally
+being assigned as INFO column in VCFs where the INFO rows started with "AF". 
+This caused a large number of SNPs to be incorrectly dropped 
+during the `check_info_score` step.
+* If INFO score is not available, INFO column is now dropped entirely 
+(rather than assigning all 1s). 
+    - Adjusted *test-vcf_formatting* to reflect this. 
+This avoids ambiguity about whether the INFO score is real or not.
+* `check_info_score`:
+    - Added extra messages in various conditions where INFO is not 
+    used for filtering,
+    and don't add `log_files$info_filter` in these instances.   
+    - Added unit tests.  
+* `check_empty_cols` was accidentally dropping more columns than it should have.
+* Fix GHA pkgdown building: 
+    - The newest version of [git introduced bugs when building pkgdown sites](https://github.com/actions/checkout/issues/760) from within Docker containers (e.g. via my Linux GHA workflow). Adjusting GHA to fix this. 
+* Fix `write_sumstats` when indexing VCF. 
+* Ensure `read_sumstats` can read in any VCF files 
+(local/remote, indexed/non-indexed). 
+* Fix `test-vcf_formatting.R`
+    - line 51: had wrong AF value in string
+    - line 109: encountering error? due to duplicate SNPs?
+* Fix `test-check_impute_se_beta`
+    - lines 51/52: `setkey` on SNP 
+    (now automatically renamed from ID by `read_vcf`). 
+* Fix `test-read_sumstats`:
+    - standardising of headers is now handled internally by `read_sumstats`. 
+    - Ensure CHR is a character vector when being read in.
+    - line 44: Ensure extra cols in `vcf_ss` are dropped. 
+* `parse_logs`: Add lines to parsing subfunctions to allow handling of logs 
+that don't contain certain info 
+(thus avoid warnings when creating the final data.table).  
+
+## CHANGES IN VERSION 1.3.19
+
+### Bug fixes
+
+- `format_sunstats` can now import remote files (other than OpenGWAS). 
+
+### New features  
+
+* New `sumstatsColHeaders` entries:
+    - "PosGRCh37" --> "BP"
+    - "testedAllele" --> "A1"
+
+
 ## CHANGES IN VERSION 1.3.18
 
-## New features
+### New features
+
 * Can now handle general remote sumstats not just IEU GWAS
 * More column header mappings
 
 ## CHANGES IN VERSION 1.3.17
 
-## New features
+### New features
 * Clean up of column header mapping file, including FREQUENCY given priority 
 over MAF and addition of new CHR mappings.
 
 ## CHANGES IN VERSION 1.3.15
 
-## Bug fixes
+### Bug fixes
 
 * Handle cases for multi-trait GWAS when P columns exists separate to the trait
 specific P value so that when renaming occurs there isn't two P columns. 
@@ -23,7 +91,7 @@ fixed.
 
 ## CHANGES IN VERSION 1.3.14
 
-## New features
+### New features
 
 * `liftover` 
     - Now exported function.

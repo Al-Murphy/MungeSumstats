@@ -40,7 +40,11 @@
 #' @param include_NAs Include datasets with missing metadata for size criteria
 #' (i.e. \code{min_sample_size}, \code{min_ncase}, or \code{min_ncontrol}).
 #' @inheritParams check_access_token
-#' @inheritParams gwasinfo
+#' @inheritParams gwasinfo 
+#' @inheritParams format_sumstats
+#' 
+#' @export
+#' @importFrom dplyr %>% arrange desc mutate
 #' @examples
 #' # Only run the examples if user has internet access:
 #' if(try(is.character(getURL("www.google.com")))==TRUE){
@@ -61,9 +65,6 @@
 #'     years = seq(2015, 2021)
 #' )
 #' }
-#' @inheritParams format_sumstats
-#' @export
-#' @importFrom dplyr %>% arrange desc mutate
 find_sumstats <- function(ids = NULL,
                           traits = NULL,
                           years = NULL,
@@ -215,8 +216,12 @@ find_sumstats <- function(ids = NULL,
             sum(ncase, ncontrol, na.rm = TRUE),
             sample_size
         ))
-    #### Sort results  ####
+    #### Ensure data.table format ####
     metagwas <- data.table::data.table(metagwas)
+    #### Add query col to keep track of groups ####
+    param_list <- as.list(match.call())  
+    metagwas$query <- list(param_list[names(param_list)!=""] )
+    #### Sort results  #### 
     data.table::setorderv(metagwas,
         cols = c(
             "trait", "N", "sample_size",

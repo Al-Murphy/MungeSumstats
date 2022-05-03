@@ -1,4 +1,6 @@
-#' Convert summary stats file to tabix format
+#' Tabix-index file: table
+#' 
+#' Convert summary stats file to tabix format.
 #'
 #' @source Borrowed function from 
 #' \href{https://github.com/RajLabMSSM/echotabix/blob/main/R/convert.R}{

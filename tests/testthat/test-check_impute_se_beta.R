@@ -48,13 +48,13 @@ test_that("Check that imputation columns added correctly", {
         expect_equal("SE" %in% colnames(imp_se_dt), TRUE)
         expect_equal("IMPUTATION_SE" %in% colnames(imp_se_dt), TRUE)
         #check how close it is to actual
-        setkey(imp_se_dt,ID)
-        setkey(control_dt,ID)
+        setkey(imp_se_dt,SNP)
+        setkey(control_dt,SNP)
         control_dt[imp_se_dt,imp_se:=i.SE]
         #check diff as percentage of value
         control_dt[,diff_se:=abs((SE-imp_se)/SE)]
         #expect a mean difference below 0.1%
-        expect_equal(mean(control_dt$diff_se)<0.001, TRUE)
+        testthat::expect_equal(mean(control_dt$diff_se)<0.001, TRUE)
         
         
         #-----------
@@ -160,9 +160,9 @@ test_that("Check that imputation columns added correctly", {
         )
         imp_beta_dt <- data.table::fread(reformatted$sumstats)
         #first check it was imputed
-        expect_equal("BETA" %in% colnames(imp_beta_dt), TRUE)
+        testthat::expect_equal("BETA" %in% colnames(imp_beta_dt), TRUE)
         #check imputation column created
-        expect_equal("IMPUTATION_BETA" %in% colnames(imp_beta_dt), TRUE)
+        testthat::expect_equal("IMPUTATION_BETA" %in% colnames(imp_beta_dt), TRUE)
         #check how close it is to actual
         setkey(imp_beta_dt,SNP)
         setkey(sumstats_dt_org,SNP)
@@ -170,7 +170,7 @@ test_that("Check that imputation columns added correctly", {
         #check diff as percentage of value
         sumstats_dt_org[,diff_beta:=abs((BETA-imp_beta)/BETA)]
         #expect a mean difference below 0.1%
-        expect_equal(mean(sumstats_dt_org$diff_beta,na.rm = TRUE)<0.001, TRUE)
+        testthat::expect_equal(mean(sumstats_dt_org$diff_beta,na.rm = TRUE)<0.001, TRUE)
     } else {
         expect_equal(is_32bit_windows, TRUE)
         expect_equal(is_32bit_windows, TRUE)

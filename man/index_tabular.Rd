@@ -2,7 +2,7 @@
 % Please edit documentation in R/index_tabular.R
 \name{index_tabular}
 \alias{index_tabular}
-\title{Convert summary stats file to tabix format}
+\title{Tabix-index file: table}
 \source{
 Borrowed function from
 \href{https://github.com/RajLabMSSM/echotabix/blob/main/R/convert.R}{
@@ -32,7 +32,7 @@ index_tabular(
 Path to tabix-indexed tabular file
 }
 \description{
-Convert summary stats file to tabix format
+Convert summary stats file to tabix format.
 }
 \examples{
 eduAttainOkbayPth <- system.file("extdata", "eduAttainOkbay.txt",
@@ -46,5 +46,9 @@ path <- tempfile(fileext = ".tsv")
 MungeSumstats::write_sumstats(sumstats_dt = sumstats_dt, save_path = path)
     
 indexed_file <- MungeSumstats::index_tabular(path = path)
+}
+\seealso{
+Other tabix: 
+\code{\link{index_vcf}()}
 }
 \concept{tabix}

@@ -321,6 +321,20 @@ jobs:
       - name: Install package
         if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && env.run_pkgdown == 'true' && runner.os == 'Linux'
         run: R CMD INSTALL .
+    
+      - name: Get R package info
+        if: runner.os == 'Linux'
+        run: |
+          #### DockerHub repos must be lowercase (,,) ####
+          name=$(grep '^Package:' DESCRIPTION | cut -d\   -f2)
+          echo "packageName=${name,,}" >> $GITHUB_ENV
+          echo "packageNameOrig=${name}" >> $GITHUB_ENV
+          echo $name
+
+          version=$(grep Version DESCRIPTION | grep -o "[0-9.]\+")
+          echo "packageVersion=${version}" >> $GITHUB_ENV
+          echo $version
+        shell: bash {0}
 
       - name: Render README
         if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && env.run_pkgdown == 'true' && runner.os == 'Linux'
@@ -332,13 +346,14 @@ jobs:
             rmarkdown::render("README.Rmd", output_format = rmarkdown::github_document(html_preview = FALSE));
           }
         shell: Rscript {0}
-
+        
       - name: Build and deploy pkgdown site
         if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && env.run_pkgdown == 'true' && runner.os == 'Linux'
         run: |
-          git config --local user.name "$GITHUB_ACTOR"
-          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          Rscript -e "pkgdown::deploy_to_branch(new_process = FALSE)"
+          git config --global --add safe.directory /__w/${{env.packageNameOrig}}/${{env.packageNameOrig}} 
+          git config --local user.name "$GITHUB_ACTOR" 
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com" 
+          Rscript -e "pkgdown::deploy_to_branch(new_process = FALSE)" 
         shell: bash {0}
         ## Note that you need to run pkgdown::deploy_to_branch(new_process = FALSE)
         ## at least one locally before this will work. This creates the gh-pages
@@ -353,20 +368,6 @@ jobs:
           path: check
 
       # DockerHub steps
-      - name: Get R package info
-        if: "!contains(github.event.head_commit.message, '/nodocker') && env.run_docker == 'true' && runner.os == 'Linux' "
-        run: |
-          #### DockerHub repos must be lowercase (,,) ####
-          name=$(grep '^Package:' DESCRIPTION | cut -d\   -f2)
-          echo "packageName=${name,,}" >> $GITHUB_ENV
-          echo "packageNameOrig=${name}" >> $GITHUB_ENV
-          echo $name
-
-          version=$(grep Version DESCRIPTION | grep -o "[0-9.]\+")
-          echo "packageVersion=${version}" >> $GITHUB_ENV
-          echo $version
-        shell: bash {0}
-
       - name: Build and push to DockerHub
         if: "!contains(github.event.head_commit.message, '/nodocker') && env.run_docker == 'true' && runner.os == 'Linux' "
         uses: docker/build-push-action@v1

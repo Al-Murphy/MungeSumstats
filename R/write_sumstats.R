@@ -39,10 +39,11 @@ write_sumstats <- function(sumstats_dt,
         )
     }
     #### Sort again just to be sure when tabix-indexing ####
-    if(tabix_index) sumstats_dt <- sort_coords(sumstats_dt=sumstats_dt)
+    if(tabix_index || write_vcf) {
+        sumstats_dt <- sort_coords(sumstats_dt=sumstats_dt)
+    }
     #### Select write format ####
-    if (write_vcf) {
-        vr <- to_vranges(sumstats_dt = sumstats_dt)
+    if (write_vcf) { 
         if (tabix_index) {
             suffixes <- supported_suffixes(
                 tabular = TRUE,
@@ -51,19 +52,22 @@ write_sumstats <- function(sumstats_dt,
             #### Update save_path ####
             new_path <- gsub(paste(suffixes, collapse = "|"),
                               ".vcf.bgz", save_path)
-            msg1 <- paste("Writing in VCF format ==>",save_path)
+            msg1 <- paste("Writing in VCF format ==>",new_path)
             message(msg1)
             message("Compressing with bgzip and indexing with tabix.")
         } else {
             msg2 <- paste("Writing in VCF format ==>", save_path)
             message(msg2)
-        }
+        } 
+        #### Convert to VRanges and save ####
+        vr <- to_vranges(sumstats_dt = sumstats_dt) 
         VariantAnnotation::writeVcf(
             obj = vr,
-            filename = save_path,
+            ### Must supply filename without compression suffix
+            filename = gsub(".bgz","",save_path),
             index = tabix_index
-        )
-        ## Replace save_path after writing
+        ) 
+        ## Replace save_path AFTER writing
         if(tabix_index) save_path <- new_path
     } else {
         msg3 <- paste0("Writing in tabular format ==> ", save_path)

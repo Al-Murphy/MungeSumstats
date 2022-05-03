@@ -55,6 +55,7 @@ import_sumstats <- function(ids,
                             write_vcf = FALSE,
                             download_method = "download.file",
                             quiet = TRUE,
+                            force_new = FALSE,
                             force_new_vcf = FALSE,
                             nThread = 1,
                             parallel_across_ids = FALSE,
@@ -100,30 +101,34 @@ import_sumstats <- function(ids,
                     "https://gwas.mrcieu.ac.uk/files", id,
                     paste0(id, ".vcf.gz")
                 )
-            #### Optional:: download VCF ####
-            vcf_paths <- download_vcf(
-                vcf_url = vcf_url,
-                vcf_dir = vcf_dir,
-                vcf_download = vcf_download,
-                download_method = download_method,
-                force_new = force_new_vcf,
-                quiet = quiet,
-                nThread = nThread
-            )
             #### Create path of the output file ####
             id_dir <- file.path(save_dir, id)
             save_path <- file.path(id_dir, basename(vcf_url))
+            if (!write_vcf) save_path <- gsub(".vcf.gz", ".tsv.gz", save_path)
             dir.create(id_dir, 
                        showWarnings = FALSE, recursive = TRUE)
             #### Create dataset-specific folders/paths ####
             log_folder <- file.path(id_dir,"logs")
             dir.create(log_folder, showWarnings = FALSE, recursive = TRUE) 
+            #### Check if formatted file exists BEFORE downloading VCF ####
+            if((!file.exists(save_path)) || isTRUE(force_new)){  
+                #### Optional:: download VCF ####
+                vcf_paths <- download_vcf(
+                    vcf_url = vcf_url,
+                    vcf_dir = vcf_dir,
+                    vcf_download = vcf_download,
+                    download_method = download_method,
+                    force_new = force_new_vcf,
+                    quiet = quiet,
+                    nThread = nThread
+                ) 
+            } 
             #### format_sumstats #### 
-            if (!write_vcf) save_path <- gsub(".vcf.gz", ".tsv.gz", save_path)
             reformatted <- format_sumstats(
                 path = vcf_paths$save_path,
                 save_path = save_path,
                 log_folder = log_folder,
+                force_new = force_new,
                 nThread = nThread,
                 ...
             )
