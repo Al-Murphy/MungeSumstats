@@ -54,7 +54,7 @@ check_signed_col <-
             if ("Z" %in% col_headers & "SE" %in% col_headers) {
                 imp_cols <- "Z & SE"
                 if(impute_beta){
-                    message(paste0(msg,"Deriving BETA from Z and SE"))
+                    messager(paste0(msg,"Deriving BETA from Z and SE"))
                     sumstats_dt[,BETA := Z * SE]
                     beta_imputed <- TRUE
                 }  
@@ -62,7 +62,7 @@ check_signed_col <-
             #if ("OR" %in% col_headers) {
                 imp_cols <- "OR"
                 if(impute_beta){
-                    message(paste0(msg,"Deriving BETA from OR"))
+                    messager(paste0(msg,"Deriving BETA from OR"))
                     sumstats_dt[,BETA := log(OR)]
                     beta_imputed <- TRUE
                 }

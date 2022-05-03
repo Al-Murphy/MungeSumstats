@@ -27,7 +27,7 @@ Description:
 URL: https://github.com/neurogenomics/MungeSumstats
 BugReports: https://github.com/neurogenomics/MungeSumstats/issues
 License: Artistic-2.0
-Depends: R(>= 4.1)
+Depends: R(>= 4.2)
 Imports: 
     magrittr, 
     data.table,

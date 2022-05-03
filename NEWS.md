@@ -1,4 +1,4 @@
-## CHANGES IN VERSION 1.3.20
+## CHANGES IN VERSION 1.5.0 
 
 ### New features
 
@@ -16,6 +16,7 @@ of `MungeSumstats`.
     - Remove `stringr` (no longer used)
 * Add new internal function `is_tabix` to check whether a file is already 
 tabix-indexed. 
+* Bump *Depends: R(>= 4.2)*. 
 
 ### Bug fixes
 
@@ -34,7 +35,9 @@ This avoids ambiguity about whether the INFO score is real or not.
     - Added unit tests.  
 * `check_empty_cols` was accidentally dropping more columns than it should have.
 * Fix GHA pkgdown building: 
-    - The newest version of [git introduced bugs when building pkgdown sites](https://github.com/actions/checkout/issues/760) from within Docker containers (e.g. via my Linux GHA workflow). Adjusting GHA to fix this. 
+    - The newest version of [git introduced bugs when building pkgdown sites](https://github.com/actions/checkout/issues/760) 
+    from within Docker containers (e.g. via my Linux GHA workflow). 
+    Adjusting GHA to fix this. 
 * Fix `write_sumstats` when indexing VCF. 
 * Ensure `read_sumstats` can read in any VCF files 
 (local/remote, indexed/non-indexed). 
@@ -51,12 +54,15 @@ This avoids ambiguity about whether the INFO score is real or not.
 * `parse_logs`: Add lines to parsing subfunctions to allow handling of logs 
 that don't contain certain info 
 (thus avoid warnings when creating the final data.table).  
+* '*Avoid the use of 'paste' in condition signals*' fixed: 
+    - `check_pos_se`
+    - `check_signed_col`
 
 ## CHANGES IN VERSION 1.3.19
 
 ### Bug fixes
 
-- `format_sunstats` can now import remote files (other than OpenGWAS). 
+- `format_sumstats` can now import remote files (other than OpenGWAS). 
 
 ### New features  
 
@@ -74,6 +80,7 @@ that don't contain certain info
 ## CHANGES IN VERSION 1.3.17
 
 ### New features
+
 * Clean up of column header mapping file, including FREQUENCY given priority 
 over MAF and addition of new CHR mappings.
 

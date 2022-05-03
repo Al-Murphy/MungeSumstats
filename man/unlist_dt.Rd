@@ -9,6 +9,9 @@ unlist_dt(dt)
 \arguments{
 \item{dt}{data.table}
 }
+\value{
+\code{dt} with list columns turned into vectors.
+}
 \description{
 Identify columns that are lists and turn them into vectors.
 }

@@ -26,14 +26,14 @@ check_pos_se <- function(sumstats_dt, path, pos_se, log_folder_ind, imputation_i
             imp_cols <- "BETA & P"
             if(impute_se){
                 # https://www.biostars.org/p/431875/
-                message(paste0(derive_msg,"Deriving SE from Beta and P"))
+                messager(paste0(derive_msg,"Deriving SE from Beta and P"))
                 sumstats_dt[,SE := abs(BETA/ qnorm(P/2))]
                 se_imputed <- TRUE
             }  
         } else if ("Z" %in% col_headers & "BETA" %in% col_headers) {
             imp_cols <- "Z & BETA"
             if(impute_se){
-                message(paste0(derive_msg,"Deriving SE from Z and BETA"))
+                messager(paste0(derive_msg,"Deriving SE from Z and BETA"))
                 sumstats_dt[,SE := BETA / Z]
                 se_imputed <- TRUE
             }  

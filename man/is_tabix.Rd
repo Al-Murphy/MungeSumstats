@@ -9,6 +9,9 @@ is_tabix(path)
 \arguments{
 \item{path}{Path to file.}
 }
+\value{
+logical: whether the file is tabix-indexed or not.
+}
 \description{
 Is a file bgz-zip compressed and tabix-indexed.
 }

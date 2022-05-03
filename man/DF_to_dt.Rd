@@ -13,6 +13,9 @@ DF_to_dt(DF)
 \arguments{
 \item{DF}{\link[S4Vectors]{DataFrame} object.}
 }
+\value{
+VCF data in data.table format.
+}
 \description{
 Efficiently convert \link[S4Vectors]{DataFrame} to
 \link[data.table]{data.table}.

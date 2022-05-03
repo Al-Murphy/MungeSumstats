@@ -2,6 +2,7 @@
 #' 
 #' Is a file bgz-zip compressed and tabix-indexed.
 #' @param path Path to file.
+#' @returns logical: whether the file is tabix-indexed or not.
 is_tabix <- function(path) {
     ## Must meet all of these conditions 
     ## in order to use a pre-existing tabix files.
@@ -13,6 +14,6 @@ is_tabix <- function(path) {
             file.size(path) > 0
     }
     #### Iterate over multiple inputs ####
-    res <- sapply(path, check_func)
+    res <- unlist(lapply(path, check_func))
     return(res)
 }

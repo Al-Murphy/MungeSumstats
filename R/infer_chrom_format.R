@@ -7,6 +7,7 @@
 #' 
 #' @keywords internal
 #' @importFrom data.table fread
+#' @returns logical: whether or not the chromosome contains "chr".
 infer_chrom_format <- function(path,
                                nrows,
                                verbose=TRUE){

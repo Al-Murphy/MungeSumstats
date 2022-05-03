@@ -13,6 +13,9 @@ when determining whether cols are empty.}
 
 \item{verbose}{Print messages.}
 }
+\value{
+\code{sumstats_dt} with empty columns removed.
+}
 \description{
 Remote columns that are empty or contain all the same values in a data.table.
 }

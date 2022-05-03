@@ -13,6 +13,9 @@ infer_chrom_format(path, nrows, verbose = TRUE)
 
 \item{verbose}{Print messages.}
 }
+\value{
+logical: whether or not the chromosome contains "chr".
+}
 \description{
 Infer chromosome format of a VCF file.
 }

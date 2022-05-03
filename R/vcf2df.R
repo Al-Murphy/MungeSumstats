@@ -65,7 +65,7 @@ vcf2df <- function(vcf,
             DF_to_dt(DF = VariantAnnotation::info(x)) 
         )
         if('ANN' %in% colnames(df)) {
-            dfann = .anncols(
+            dfann <- .anncols(
                 anncol = df$ANN,
                 headerstring = VariantAnnotation::info(
                     VariantAnnotation::header(x)
@@ -84,7 +84,7 @@ vcf2df <- function(vcf,
             )
         })
         ## Each element can potentially have >1 column 
-        ncols <- sapply(tmp,ncol)
+        ncols <- unlist(lapply(tmp,ncol))
         tmp <- do.call(cbind, tmp)
         if(isTRUE(add_sample_names)){
             colnames(tmp) = paste(rep(n, times = ncols), 
