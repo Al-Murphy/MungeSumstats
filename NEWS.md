@@ -1,4 +1,4 @@
-## CHANGES IN VERSION 1.5.0 
+## CHANGES IN VERSION 1.4.0 
 
 ### New features
 
