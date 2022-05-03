@@ -1,7 +1,8 @@
 #' Check if save path and log folder is appropriate
 #'
 #' @return Corrected \code{save_path}, the file type, the separator, corrected
-#' \code{log_folder},the log file extension
+#' \code{log_folder},the log file extension.
+#' @param verbose Print messages.
 #'
 #' @inheritParams format_sumstats
 #' @keywords internal
@@ -9,10 +10,11 @@ check_save_path <- function(save_path,
                             log_folder,
                             log_folder_ind,
                             tabix_index,
-                            write_vcf = FALSE) {
+                            write_vcf = FALSE,
+                            verbose = TRUE) {
     #### Add warning to users that temp files aren't actually saved ####
     if (dirname(save_path) == tempdir()) {
-        message(
+        messager(
             "\n\n******::NOTE::******\n",
             "- Formatted results will be saved to `tempdir()` by default.\n",
             "- This means all formatted summary stats will be deleted",
@@ -22,7 +24,8 @@ check_save_path <- function(save_path,
             "  or make sure to copy files elsewhere after processing ",
             "( e.g. `file.copy(save_path, './formatted/' )`.\n",
             "********************",
-            "\n"
+            "\n",
+            v=verbose
         )
     }
 
@@ -31,7 +34,7 @@ check_save_path <- function(save_path,
     }
 
     if (log_folder_ind && log_folder == tempdir()) {
-        message(
+        messager(
             "******::NOTE::******\n",
             "- Log results will be saved to `tempdir()` by default.\n",
             "- This means all log data from the run will be ",
@@ -39,7 +42,8 @@ check_save_path <- function(save_path,
             "- To keep it, change `log_folder` to an actual directory ",
             "(e.g. log_folder='./').\n",
             "********************",
-            "\n"
+            "\n",
+            v=verbose
         )
     }
 
@@ -85,7 +89,7 @@ check_save_path <- function(save_path,
     #### Distinguish between VCF and tabular formats ####
     if (write_vcf) {
         save_path <- gsub(paste(suffixes, collapse = "|"),
-                          ".vcf.gz", save_path)
+                          ".vcf.bgz", save_path)
         sep <- "\t"
         file_type <- "vcf"
         # Don't have to worry about tabix_index bc if writing to VCF format, 
@@ -101,7 +105,7 @@ check_save_path <- function(save_path,
                 "save_path suggests VCF output but write_vcf=FALSE.",
                 "Switching output to tabular format (.tsv.gz)."
             )
-            message(vcf_msg)
+            messager(vcf_msg,v=verbose)
             save_path <-
                 gsub(paste(suffixes.vcf, collapse = "|"),
                      ".tsv.gz", save_path)
@@ -120,7 +124,7 @@ check_save_path <- function(save_path,
                     "save_path suggests .gz output but tabix_index=TRUE",
                     "Switching output to tabix-indexed format (.bgz)."
                 )
-                message(bgz_msg)
+                messager(bgz_msg,v=verbose)
             }
             save_path <- sprintf("%s.bgz",
                                  sub("\\.gz$|\\.bgz$", "", save_path)) 
@@ -141,9 +145,10 @@ check_save_path <- function(save_path,
     dir.create(log_folder,
                showWarnings = FALSE, recursive = TRUE)
 
-    message("Formatted summary statistics will be saved to ==> ", save_path)
+    messager("Formatted summary statistics will be saved to ==> ", save_path,
+             v=verbose)
     if (log_folder_ind) {
-        message("Log data to be saved to ==> ", log_folder)
+        messager("Log data to be saved to ==> ", log_folder,v=verbose)
     }
     
     #### Check the folder for save_path was indeed created ####

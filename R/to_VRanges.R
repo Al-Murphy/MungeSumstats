@@ -11,7 +11,8 @@ to_vranges <- function(sumstats_dt) {
     message("Converting summary statistics to VRanges.")
     gr$dummy <- "GWAS"
     vr <- VariantAnnotation::makeVRangesFromGRanges(gr,
-        ref.field = "A1", alt.field = "A2",
+        ref.field = "A1", 
+        alt.field = "A2",
         keep.extra.columns = TRUE,
         sampleNames.field = "dummy"
     )

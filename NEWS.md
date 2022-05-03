@@ -57,6 +57,9 @@ that don't contain certain info
 * '*Avoid the use of 'paste' in condition signals*' fixed: 
     - `check_pos_se`
     - `check_signed_col`
+* Used to rely on *gunzip* to read bgz files, but apparently this functionality is no longer supported (possibly due to changes to how `Rsamtools::bgzip` does compression in Bioc 3.15. Switched to using `fread + readLines` in:
+    - `read_header`
+    - `read_sumstats` 
 
 ## CHANGES IN VERSION 1.3.19
 

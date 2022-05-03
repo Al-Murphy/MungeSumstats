@@ -45,7 +45,7 @@ read_sumstats <- function(path,
                 if(endsWith(path,".bgz")){
                     message("Importing tabular bgz file: ", path)
                     sumstats_file <- data.table::fread(
-                        cmd = paste("gunzip -c",path),
+                        text = readLines(con = path),
                         nThread = nThread,
                         nrows = nrows)
                 }else {

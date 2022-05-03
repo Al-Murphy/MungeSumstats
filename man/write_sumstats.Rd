@@ -11,7 +11,8 @@ write_sumstats(
   write_vcf = FALSE,
   tabix_index = FALSE,
   nThread = 1,
-  return_path = FALSE
+  return_path = FALSE,
+  save_path_check = FALSE
 )
 }
 \arguments{
@@ -34,6 +35,9 @@ file for the GWAS.}
 This will have been modified in some cases
 (e.g. after compressing and tabix-indexing a
 previously un-compressed file).}
+
+\item{save_path_check}{Ensure path name is valid (given the other arguments)
+before writing (default: FALSE).}
 }
 \value{
 If \code{return_path=TRUE}, returns \code{save_path}.

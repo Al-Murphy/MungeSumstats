@@ -9,7 +9,8 @@ check_save_path(
   log_folder,
   log_folder_ind,
   tabix_index,
-  write_vcf = FALSE
+  write_vcf = FALSE,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -29,10 +30,12 @@ FALSE.}
 \href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
 
 \item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
+
+\item{verbose}{Print messages.}
 }
 \value{
 Corrected \code{save_path}, the file type, the separator, corrected
-\code{log_folder},the log file extension
+\code{log_folder},the log file extension.
 }
 \description{
 Check if save path and log folder is appropriate

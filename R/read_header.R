@@ -22,25 +22,20 @@ read_header <- function(path,
             # gr <- GenomicRanges::GRanges(seqnames = 1, ranges = 1:10000)
             # param <- VariantAnnotation::ScanVcfParam(save_path, which=gr)
             # preview <- VariantAnnotation::readVcf(save_path, param = param)
-            # preview <- VariantAnnotation::scanVcf(save_path, param=param)
-            # data.table::fread(save_path, skip = "#", nrows = 10)
+            # preview <- VariantAnnotation::scanVcf(save_path, param=param) 
+            # header <- read_vcf(path = path, which = gr)
+            header <- readLines(path, n = 100)
+            if(length(header)==0) stop("header has length zero.")
+            i <- which(startsWith(header, "#CHR"))
+            if(length(i)==0) stop("Cannot find row in VCF starting with #CHR.")
+            header <- data.table::fread(text = header[seq(i, i + n)],
+                                        nThread = 1)
+        } else {
+            #variant annotation can fail if so use brut force
             header <- readLines(path, n = 100)
             i <- which(startsWith(header, "#CHR"))
             header <- data.table::fread(text = header[seq(i, i + n)],
                                         nThread = 1)
-        } else {
-            error_return <-
-                tryCatch(header <- VariantAnnotation::scanVcfHeader(path),
-                error = function(e) e,
-                warning = function(w) w
-                )
-            if(is(error_return, "error")){
-                #variant annotation can fail if so use brut force
-                header <- readLines(path, n = 100)
-                i <- which(startsWith(header, "#CHR"))
-                header <- data.table::fread(text = header[seq(i, i + n)],
-                                            nThread = 1)
-            }    
         }
     } else if (endsWith(path,".bgz")){
         #### Read tabix-indexed tabular #### 
@@ -49,10 +44,10 @@ read_header <- function(path,
         # header <- seqminer::tabix.read.header(tabixFile = path)$header 
         # header <- Rsamtools::headerTabix(file = path)$header
         # header <- rep(header,n)
-        # header <- colnames(data.table::fread(text = header)) 
-        header <- data.table::fread(cmd = paste("gunzip -c ",path),
-                                    nrows = n) 
-    } else if(startsWith(path, "https://")){
+        # header <- colnames(data.table::fread(text = header))  
+        header <- data.table::fread(text=readLines(con = path,
+                                                   n = n+1L)) 
+    } else if(any(startsWith(path, c("https:","http:")))){
         #### Read generic remote sumstats ####
         header <- data.table::fread(path,nrows = n) 
     } else {

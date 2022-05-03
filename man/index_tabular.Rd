@@ -35,16 +35,11 @@ Path to tabix-indexed tabular file
 Convert summary stats file to tabix format.
 }
 \examples{
-eduAttainOkbayPth <- system.file("extdata", "eduAttainOkbay.txt",
-                                 package = "MungeSumstats")
-sumstats_dt <- data.table::fread(eduAttainOkbayPth, nThread = 1)
-sumstats_dt <- 
-MungeSumstats:::standardise_sumstats_column_headers_crossplatform(
-    sumstats_dt = sumstats_dt)$sumstats_dt
+sumstats_dt <- MungeSumstats::formatted_example()
 sumstats_dt <- MungeSumstats:::sort_coords(sumstats_dt = sumstats_dt)
 path <- tempfile(fileext = ".tsv")
 MungeSumstats::write_sumstats(sumstats_dt = sumstats_dt, save_path = path)
-    
+
 indexed_file <- MungeSumstats::index_tabular(path = path)
 }
 \seealso{

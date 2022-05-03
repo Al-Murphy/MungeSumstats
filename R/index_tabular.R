@@ -13,19 +13,15 @@
 #' @return Path to tabix-indexed tabular file
 #'
 #' @family tabix
-#' @examples 
-#' eduAttainOkbayPth <- system.file("extdata", "eduAttainOkbay.txt",
-#'                                  package = "MungeSumstats")
-#' sumstats_dt <- data.table::fread(eduAttainOkbayPth, nThread = 1)
-#' sumstats_dt <- 
-#' MungeSumstats:::standardise_sumstats_column_headers_crossplatform(
-#'     sumstats_dt = sumstats_dt)$sumstats_dt
+#' @examples
+#' sumstats_dt <- MungeSumstats::formatted_example()
 #' sumstats_dt <- MungeSumstats:::sort_coords(sumstats_dt = sumstats_dt)
 #' path <- tempfile(fileext = ".tsv")
 #' MungeSumstats::write_sumstats(sumstats_dt = sumstats_dt, save_path = path)
-#'     
+#' 
 #' indexed_file <- MungeSumstats::index_tabular(path = path)
 #' @export
+#' @importFrom R.utils gunzip isGzipped
 index_tabular <- function(path,
                           chrom_col = "CHR",
                           start_col = "BP",
@@ -45,6 +41,10 @@ index_tabular <- function(path,
         msg2 <- paste("Removing empty file:", path)
         message(msg2)
         out <- file.remove(path)
+    }
+    #### Ensure it's not already compressed ####
+    if(R.utils::isGzipped(path)){
+        path <- R.utils::gunzip(path, overwrite = TRUE)
     }
     ### File MUST be bgzipped first
     message("Ensuring file is bgzipped.")

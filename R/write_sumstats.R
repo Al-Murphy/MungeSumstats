@@ -6,6 +6,8 @@
 #'  This will have been modified in some cases
 #'   (e.g. after compressing and tabix-indexing a
 #'    previously un-compressed file).
+#' @param save_path_check Ensure path name is valid (given the other arguments) 
+#' before writing (default: FALSE). 
 #' @inheritParams data.table::fread
 #' @inheritParams format_sumstats
 #'
@@ -30,59 +32,60 @@ write_sumstats <- function(sumstats_dt,
                            write_vcf = FALSE,
                            tabix_index = FALSE,
                            nThread = 1,
-                           return_path = FALSE) {
-    #### Make sure the directory actually exists
-    if (is.character(save_path)) {
-        dir.create(dirname(save_path),
-            showWarnings = FALSE,
-            recursive = TRUE
-        )
-    }
+                           return_path = FALSE,
+                           save_path_check = FALSE) {
+    #### Check save_path ####
+    if(isTRUE(save_path_check)){
+        check <- check_save_path(save_path = save_path, 
+                                 log_folder = tempdir(),
+                                 log_folder_ind = FALSE,
+                                 tabix_index = tabix_index, 
+                                 write_vcf = write_vcf,
+                                 verbose = TRUE)
+        save_path <- check$save_path
+    } 
     #### Sort again just to be sure when tabix-indexing ####
-    if(tabix_index || write_vcf) {
-        sumstats_dt <- sort_coords(sumstats_dt=sumstats_dt)
+    if(isTRUE(tabix_index) | isTRUE(write_vcf)) {
+        sumstats_dt <- sort_coords(sumstats_dt = sumstats_dt)
     }
     #### Select write format ####
-    if (write_vcf) { 
-        if (tabix_index) {
-            suffixes <- supported_suffixes(
-                tabular = TRUE,
-                tabular_compressed = TRUE
-            )
-            #### Update save_path ####
-            new_path <- gsub(paste(suffixes, collapse = "|"),
-                              ".vcf.bgz", save_path)
-            msg1 <- paste("Writing in VCF format ==>",new_path)
-            message(msg1)
-            message("Compressing with bgzip and indexing with tabix.")
-        } else {
-            msg2 <- paste("Writing in VCF format ==>", save_path)
-            message(msg2)
-        } 
+    if (isTRUE(write_vcf)) {
+        messager("Writing in VCF format ==> ", save_path)
+        tmp_save_path <- gsub("\\.bgz|\\.gz","",save_path)
         #### Convert to VRanges and save ####
         vr <- to_vranges(sumstats_dt = sumstats_dt) 
         VariantAnnotation::writeVcf(
             obj = vr,
             ### Must supply filename without compression suffix
-            filename = gsub(".bgz","",save_path),
+            filename = tmp_save_path,
             index = tabix_index
-        ) 
-        ## Replace save_path AFTER writing
-        if(tabix_index) save_path <- new_path
-    } else {
-        msg3 <- paste0("Writing in tabular format ==> ", save_path)
-        message(msg3)
-        #### If indexing as bgz, must first save as gz ####
-        gz_path <- gsub("\\.bgz$","\\.gz",save_path) 
-        #### Write to disk ####
+        )
+        #### Compress ####
+        ## only compress if this was not already handled by writeVcf(index=T)
+        if(isFALSE(tabix_index)){
+            if(endsWith(save_path,".bgz")){
+                save_path <- Rsamtools::bgzip(tmp_save_path, overwrite=TRUE)
+            } else if(endsWith(save_path,".gz")){
+                save_path <- R.utils::gzip(tmp_save_path, overwrite=TRUE)
+            } 
+        }
+    } else { 
+        messager("Writing in tabular format ==> ", save_path)
+        if(isTRUE(tabix_index)){
+            tmp_save_path <- gsub(".bgz|.gz","",save_path)
+        } else {
+            tmp_save_path <- save_path
+        }
+        #### Write to disk #### 
         data.table::fwrite(
             x = sumstats_dt, 
-            file = gz_path,
+            ### Must be uncompressed so #### 
+            file = tmp_save_path,
             sep = sep,
             nThread = nThread
         )
-        if(tabix_index){
-            save_path <- index_tabular(path = gz_path,
+        if(isTRUE(tabix_index)){
+            save_path <- index_tabular(path = tmp_save_path,
                                        chrom_col = "CHR", 
                                        start_col = "BP", 
                                        verbose = TRUE)
