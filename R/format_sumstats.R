@@ -356,6 +356,7 @@ format_sumstats <- function(path,
         } else {
             sumstats_return[["sumstats_dt"]] <- read_sumstats(
                 path = path,
+                samples = if(is.null(analysis_trait)) 1 else analysis_trait,
                 nThread = nThread
             )
         }

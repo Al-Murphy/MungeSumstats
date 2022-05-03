@@ -11,10 +11,11 @@
 #' @importFrom VariantAnnotation scanVcfHeader ScanVcfParam 
 #' @importFrom VariantAnnotation readVcf vcfFields vcfWhich
 #' @importFrom GenomicRanges GRanges
+#' @importFrom methods is
 select_vcf_fields <- function(path,
                               sampled_rows=1e7,
                               which=NULL,
-                              single_sample=TRUE,
+                              samples=NULL,
                               nThread=1,
                               verbose=TRUE){
     #### Read header ####
@@ -54,12 +55,28 @@ select_vcf_fields <- function(path,
             ]
     } 
     #### Select samples ####
-    samples <- colnames(vcf_top)
-    if(length(samples)>1 && isTRUE(single_sample)){
-        messager(length(samples),"detected.",
-                 "Only using first:",samples[1])
-        fields$samples <- fields$samples[fields$samples %in% samples[1]]
+    all_samples <- fields$samples
+    if(!is.null(samples)){
+        #### use first sample only ####
+        if(samples==1){
+            if(length(all_samples)>1){
+                messager(length(all_samples),"samples detected.",
+                         "Only using first:",all_samples[1]) 
+                all_samples <- all_samples[1] 
+            } else if (length(all_samples)==1){
+                messager("1 sample detected:",all_samples) 
+            } 
+        #### User-specified samples #####
+        } else if(methods::is(samples,"character")){
+            all_samples <- all_samples[
+                toupper(all_samples) %in% toupper(samples)
+            ]
+        }
     }
+    ## Filter fields$samples 
+    fields$samples <- fields$samples[
+        fields$samples %in% all_samples
+    ] 
     messager("Constructing ScanVcfParam object.")
     #### Select non-empty columns ####
     param <- VariantAnnotation::ScanVcfParam(

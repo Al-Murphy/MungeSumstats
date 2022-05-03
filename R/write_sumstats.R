@@ -10,6 +10,10 @@
 #' before writing (default: FALSE). 
 #' @inheritParams data.table::fread
 #' @inheritParams format_sumstats
+#' 
+#' @source \href{https://github.com/Bioconductor/VariantAnnotation/issues/35}{
+#' VariantAnnotation::writeVcf has some unexpected/silent 
+#' file renaming behavior}
 #'
 #' @returns If \code{return_path=TRUE}, returns \code{save_path}.
 #'  Else returns \code{NULL}.

@@ -17,6 +17,10 @@ of `MungeSumstats`.
 * Add new internal function `is_tabix` to check whether a file is already 
 tabix-indexed. 
 * Bump *Depends: R(>= 4.2)*. 
+* `read_sumstats`: now takes `samples` as an arg. 
+By default, only uses first sample (if multiple are present in file).  
+* Remove `INFO_filter=` from ALS VCF examples in vignettes 
+(no longer necessary now that INFO parsing has been corrected). 
 
 ### Bug fixes
 
@@ -60,6 +64,11 @@ that don't contain certain info
 * Used to rely on *gunzip* to read bgz files, but apparently this functionality is no longer supported (possibly due to changes to how `Rsamtools::bgzip` does compression in Bioc 3.15. Switched to using `fread + readLines` in:
     - `read_header`
     - `read_sumstats` 
+* `read_header`: wasn't reading in enough lines to get past the VCF header.
+Increase to `readLines(n=1000)`.  
+* `read_vcf`: Would sometimes induce duplicate rows. 
+Now only unique rows are used (after sample and columns filtering). 
+    
 
 ## CHANGES IN VERSION 1.3.19
 

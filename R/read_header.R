@@ -24,18 +24,15 @@ read_header <- function(path,
             # preview <- VariantAnnotation::readVcf(save_path, param = param)
             # preview <- VariantAnnotation::scanVcf(save_path, param=param) 
             # header <- read_vcf(path = path, which = gr)
-            header <- readLines(path, n = 100)
+            header <- readLines(path, n = 1000)
             if(length(header)==0) stop("header has length zero.")
             i <- which(startsWith(header, "#CHR"))
             if(length(i)==0) stop("Cannot find row in VCF starting with #CHR.")
             header <- data.table::fread(text = header[seq(i, i + n)],
                                         nThread = 1)
         } else {
-            #variant annotation can fail if so use brut force
-            header <- readLines(path, n = 100)
-            i <- which(startsWith(header, "#CHR"))
-            header <- data.table::fread(text = header[seq(i, i + n)],
-                                        nThread = 1)
+            #### Attempt to read in VCF header as well
+            header <- readLines(path, n = 1000)
         }
     } else if (endsWith(path,".bgz")){
         #### Read tabix-indexed tabular #### 

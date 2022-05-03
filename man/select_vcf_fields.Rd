@@ -8,7 +8,7 @@ select_vcf_fields(
   path,
   sampled_rows = 1e+07,
   which = NULL,
-  single_sample = TRUE,
+  samples = NULL,
   nThread = 1,
   verbose = TRUE
 )
@@ -28,7 +28,16 @@ when determining whether cols are empty.}
     ranges are returned. 
   }
 
-\item{single_sample}{If multiple samples are present in the same VCF,
+\item{samples}{Which samples to use:
+\itemize{
+\item{1 : }{Only the first sample will be used (\emph{DEFAULT}).}
+\item{NULL : }{All samples will be used.}
+\item{c("<sample_id1>","<sample_id2>",...) : }{
+Only user-selected samples will be used (case-insensitive).}
+}
+
+If \code{NULL}, all samples will be used
+If multiple samples are present in the same VCF,
 only return the first one (default: \code{TRUE}).}
 
 \item{nThread}{Number of threads to use for parallel processes.}

@@ -1,7 +1,16 @@
 #' Read in VCF format
 #'
 #' @inheritParams format_sumstats
-#' @param single_sample If multiple samples are present in the same VCF, 
+#' @param samples Which samples to use:
+#' \itemize{
+#' \item{1 : }{Only the first sample will be used (\emph{DEFAULT}).}
+#' \item{NULL : }{All samples will be used.}
+#' \item{c("<sample_id1>","<sample_id2>",...) : }{
+#' Only user-selected samples will be used (case-insensitive).}
+#' }
+#' 
+#' If \code{NULL}, all samples will be used
+#' If multiple samples are present in the same VCF, 
 #' only return the first one (default: \code{TRUE}). 
 #' @param use_params 
 #' When \code{TRUE} (default), increases the speed of reading in the VCF by
@@ -14,7 +23,7 @@
 #'
 #' @return The VCF file in data.table format.
 #' @export
-#' @importFrom VariantAnnotation readVcf writeVcf
+#' @importFrom VariantAnnotation readVcf writeVcf vcfSamples
 #' @importFrom data.table as.data.table setnames fwrite 
 #' @importFrom methods as show
 #' @source 
@@ -44,13 +53,13 @@
 #' sumstats_dt <- read_vcf(path = path)
 #' 
 #' #### Remote file ####
-#' path2 <- "https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz" 
-#' sumstats_dt2 <- read_vcf(path = path2)
-read_vcf <- function(path,
-                     single_sample = TRUE,
+#' path <- "https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz" 
+#' sumstats_dt2 <- read_vcf(path = path)
+read_vcf <- function(path, 
                      write_vcf = FALSE,
-                     save_path = NULL,#tempfile(fileext = ".tsv.gz"),
+                     save_path = NULL,
                      tabix_index = TRUE,
+                     samples = 1,
                      which = NULL,
                      use_params = TRUE,
                      sampled_rows = 1e7,
@@ -62,7 +71,7 @@ read_vcf <- function(path,
         if((!is.null(which)) || isTRUE(use_params)){
             param <- select_vcf_fields(path = path, 
                                        which = which, 
-                                       single_sample = single_sample,
+                                       samples = samples,
                                        sampled_rows = sampled_rows,
                                        nThread = nThread)
         } else {
@@ -100,8 +109,9 @@ read_vcf <- function(path,
         return(vcf)
     }
     #### Convert to data.table ####  
+    samples <- VariantAnnotation::vcfSamples(param)
     sumstats_dt <- vcf2df(vcf = vcf, 
-                          add_sample_names = !single_sample)
+                          add_sample_names = length(samples)!=1)
     sample_id <- rownames(vcf@colData) 
     remove(vcf) 
     #### Remove duplicated columns ####
@@ -118,7 +128,9 @@ read_vcf <- function(path,
     sumstats_dt <- remove_empty_cols(sumstats_dt = sumstats_dt,
                                      sampled_rows = sampled_rows)
     #### Unlist columns inplace ####
-    unlist_dt(dt = sumstats_dt)
+    unlist_dt(dt = sumstats_dt) 
+    #### Remove duplicated rows #### 
+    sumstats_dt <- unique(sumstats_dt)
     #### Prepare SNP column ####
     read_vcf_markername(sumstats_dt = sumstats_dt) 
     #### Prepare/un-log P col ####

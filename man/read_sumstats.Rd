@@ -6,10 +6,11 @@
 \usage{
 read_sumstats(
   path,
-  nThread = 1,
   nrows = Inf,
   standardise_headers = FALSE,
+  samples = 1,
   add_sample_names = FALSE,
+  nThread = 1,
   mapping_file = sumstatsColHeaders
 )
 }
@@ -18,15 +19,27 @@ read_sumstats(
 dataframe or datatable of the summary statistics file can also be passed
 directly to MungeSumstats using the path parameter.}
 
-\item{nThread}{Number of threads to use for parallel processes.}
-
 \item{nrows}{integer. The (maximal) number of lines to read.
 If \code{Inf}, will read in all rows.}
 
 \item{standardise_headers}{Standardise headers first.}
 
+\item{samples}{Which samples to use:
+\itemize{
+\item{1 : }{Only the first sample will be used (\emph{DEFAULT}).}
+\item{NULL : }{All samples will be used.}
+\item{c("<sample_id1>","<sample_id2>",...) : }{
+Only user-selected samples will be used (case-insensitive).}
+}
+
+If \code{NULL}, all samples will be used
+If multiple samples are present in the same VCF,
+only return the first one (default: \code{TRUE}).}
+
 \item{add_sample_names}{Append sample names to column names
 (e.g. "EZ" --> "EZ_ubm-a-2929").}
+
+\item{nThread}{Number of threads to use for parallel processes.}
 
 \item{mapping_file}{MungeSumstats has a pre-defined column-name mapping file
 which should cover the most common column headers and their interpretations.

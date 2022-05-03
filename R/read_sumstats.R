@@ -8,6 +8,7 @@
 #' @inheritParams format_sumstats
 #' @inheritParams standardise_header
 #' @inheritParams vcf2df
+#' @inheritParams read_vcf
 #' 
 #' @export
 #' @importFrom data.table fread as.data.table setkeyv
@@ -16,11 +17,12 @@
 #'     package = "MungeSumstats"
 #' )
 #' eduAttainOkbay <- read_sumstats(path = path)
-read_sumstats <- function(path,
-                          nThread = 1,
+read_sumstats <- function(path, 
                           nrows = Inf,
                           standardise_headers = FALSE,
+                          samples = 1,
                           add_sample_names = FALSE,
+                          nThread = 1,
                           mapping_file = sumstatsColHeaders) {
     
     if (is.data.frame(path)) {
@@ -32,12 +34,9 @@ read_sumstats <- function(path,
     } else {
         header <- read_header(path = path)
         is_vcf <- check_vcf(header = header)
-        if (is_vcf) {
-            message("Importing VCF file: ", path)
-            # vcf <- VariantAnnotation::readVcf(file = path)
-            # sumstats_file <- vcf2df(vcf = vcf, 
-            #                         add_sample_names = add_sample_names)
+        if (isTRUE(is_vcf)) {
             sumstats_file <- read_vcf(path = path,
+                                      samples = samples,
                                       nThread = nThread)
         } else {
             is_tabular <- check_tabular(header = header)

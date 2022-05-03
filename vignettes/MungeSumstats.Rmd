@@ -14,7 +14,7 @@ bibliography: MungeSumstats.bib
  
 # Citation
 
-If you use the MungeSumstats package, please cite
+If you use the *MungeSumstats* package, please cite
 
 [Murphy et al. MungeSumstats: A Bioconductor package for the
 standardisation and quality control of many GWAS summary
@@ -400,23 +400,20 @@ ALSvcfPth <- system.file("extdata","ALSvcf.vcf", package="MungeSumstats")
 ```
 
 ```{r,eval=FALSE}
-#set a low INFO filter so we get a return
 reformatted_vcf <- 
   MungeSumstats::format_sumstats(path=ALSvcfPth, 
-                                 ref_genome="GRCh37",
-                                 INFO_filter=0.1)
+                                 ref_genome="GRCh37")
 ```
 
 You can also get more information on the SNPs which have had data imputed or 
 have been filtered out by *MungeSumstats* by using the `imputation_ind` and 
 `log_folder_ind` parameters respectively. For example:
 
-```{r, eval=FALSE,message=FALSE}
+```{r, eval=FALSE, message=FALSE}
 #set
 reformatted_vcf_2 <- 
   MungeSumstats::format_sumstats(path=ALSvcfPth,
                                  ref_genome="GRCh37",
-                                 INFO_filter = 0.1,
                                  log_folder_ind=TRUE,
                                  imputation_ind=TRUE,
                                  log_mungesumstats_msgs=TRUE)
@@ -427,7 +424,6 @@ reformatted_vcf_2 <-
 reformatted_vcf_2 <- 
   MungeSumstats::format_sumstats(path=ALSvcfPth,
                                  ref_genome="GRCh37",
-                                 INFO_filter = 0.1,
                                  log_folder_ind=TRUE,
                                  imputation_ind=TRUE,
                                  log_mungesumstats_msgs=TRUE,
@@ -500,8 +496,7 @@ GRanges, VRanges or save as a VCF file, set `return_format`:
 #set
 reformatted_vcf_2 <- 
   MungeSumstats::format_sumstats(path=ALSvcfPth,
-                                 ref_genome="GRCh37",
-                                 INFO_filter = 0.1,
+                                 ref_genome="GRCh37", 
                                  log_folder_ind=TRUE,
                                  imputation_ind=TRUE,
                                  log_mungesumstats_msgs=TRUE,

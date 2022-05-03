@@ -29,10 +29,10 @@ Discussion on VariantAnnotation GitHub}
 \usage{
 read_vcf(
   path,
-  single_sample = TRUE,
   write_vcf = FALSE,
   save_path = NULL,
   tabix_index = TRUE,
+  samples = 1,
   which = NULL,
   use_params = TRUE,
   sampled_rows = 1e+07,
@@ -45,9 +45,6 @@ read_vcf(
 dataframe or datatable of the summary statistics file can also be passed
 directly to MungeSumstats using the path parameter.}
 
-\item{single_sample}{If multiple samples are present in the same VCF,
-only return the first one (default: \code{TRUE}).}
-
 \item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
 
 \item{save_path}{File path to save formatted data. Defaults to
@@ -55,6 +52,18 @@ only return the first one (default: \code{TRUE}).}
 
 \item{tabix_index}{Index the formatted summary statistics with
 \href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
+
+\item{samples}{Which samples to use:
+\itemize{
+\item{1 : }{Only the first sample will be used (\emph{DEFAULT}).}
+\item{NULL : }{All samples will be used.}
+\item{c("<sample_id1>","<sample_id2>",...) : }{
+Only user-selected samples will be used (case-insensitive).}
+}
+
+If \code{NULL}, all samples will be used
+If multiple samples are present in the same VCF,
+only return the first one (default: \code{TRUE}).}
 
 \item{which}{A \code{\linkS4class{GRanges}} describing the sequences and
     ranges to be queried. Variants whose \code{POS} lies in the interval(s)
@@ -87,6 +96,6 @@ path <- system.file("extdata","ALSvcf.vcf", package="MungeSumstats")
 sumstats_dt <- read_vcf(path = path)
 
 #### Remote file ####
-path2 <- "https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz" 
-sumstats_dt2 <- read_vcf(path = path2)
+path <- "https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz" 
+sumstats_dt2 <- read_vcf(path = path)
 }

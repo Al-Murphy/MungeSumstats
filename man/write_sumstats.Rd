@@ -3,6 +3,11 @@
 \name{write_sumstats}
 \alias{write_sumstats}
 \title{Write sum stats file to disk}
+\source{
+\href{https://github.com/Bioconductor/VariantAnnotation/issues/35}{
+VariantAnnotation::writeVcf has some unexpected/silent
+file renaming behavior}
+}
 \usage{
 write_sumstats(
   sumstats_dt,
