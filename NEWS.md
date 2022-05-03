@@ -1,7 +1,10 @@
-## CHANGES IN VERSION 1.5.0 
+## CHANGES IN VERSION 1.4.0 
 
 ### New features
 
+* Rebased `RELEASE_3_15` using changes made to master (`MungeSumstats` v1.5.0):    
+    - `git switch RELEASE_3_15`
+    - `git rebase master -s theirs` 
 * Added "query" column to `find_sumstats` output to keep track of 
 search parameters.
 * `import_sumstats`: 
