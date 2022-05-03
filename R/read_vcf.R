@@ -1,5 +1,8 @@
-#' Read in VCF format
-#'
+#' Read in VCF file
+#' 
+#' Read in a VCF file as a \link[VariantAnnotation]{VCF} or a 
+#' \link[data.table]{data.table}. 
+#' Can optionally save the VCF/data.table as well. 
 #' @inheritParams format_sumstats
 #' @param samples Which samples to use:
 #' \itemize{
@@ -8,10 +11,6 @@
 #' \item{c("<sample_id1>","<sample_id2>",...) : }{
 #' Only user-selected samples will be used (case-insensitive).}
 #' }
-#' 
-#' If \code{NULL}, all samples will be used
-#' If multiple samples are present in the same VCF, 
-#' only return the first one (default: \code{TRUE}). 
 #' @param use_params 
 #' When \code{TRUE} (default), increases the speed of reading in the VCF by
 #' omitting columns that are empty based on the head of the VCF (NAs only). 
@@ -24,6 +23,7 @@
 #' @return The VCF file in data.table format.
 #' @export
 #' @importFrom VariantAnnotation readVcf writeVcf vcfSamples
+#' @importFrom GenomicRanges seqinfo
 #' @importFrom data.table as.data.table setnames fwrite 
 #' @importFrom methods as show
 #' @source 
@@ -58,7 +58,7 @@
 read_vcf <- function(path, 
                      write_vcf = FALSE,
                      save_path = NULL,
-                     tabix_index = TRUE,
+                     tabix_index = FALSE,
                      samples = 1,
                      which = NULL,
                      use_params = TRUE,
@@ -69,6 +69,11 @@ read_vcf <- function(path,
     {
         t1 <- Sys.time()
         if((!is.null(which)) || isTRUE(use_params)){
+            #### Make sure file is compressed and indexed ####
+            ## File must be indexed in order to use param 
+            ## (even if only specifying columns) 
+            path <- index_vcf(path = path,
+                              verbose = verbose)
             param <- select_vcf_fields(path = path, 
                                        which = which, 
                                        samples = samples,

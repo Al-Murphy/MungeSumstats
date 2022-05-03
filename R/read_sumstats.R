@@ -36,6 +36,8 @@ read_sumstats <- function(path,
         is_vcf <- check_vcf(header = header)
         if (isTRUE(is_vcf)) {
             sumstats_file <- read_vcf(path = path,
+                                      tabix_index = FALSE,
+                                      use_params = TRUE,
                                       samples = samples,
                                       nThread = nThread)
         } else {

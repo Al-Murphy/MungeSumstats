@@ -21,12 +21,7 @@ select_vcf_fields <- function(path,
     #### Read header ####
     ## Read the first n rows to determine which columns are useful.
     messager("Finding empty VCF columns based on first",sampled_rows,"rows.",
-             v=verbose) 
-    #### Make sure file is compressed and indexed ####
-    ## File must be indexed in order to use param 
-    ## (even if only specifying columns) 
-    path <- index_vcf(path = path, 
-                      verbose = verbose) 
+             v=verbose)  
     #### Get header to extract first chromosome name ####
     header <- VariantAnnotation::scanVcfHeader(file = path)
     # #### Construct ScanVcfParam object ####

@@ -26,7 +26,7 @@ test_that("write_sumstats works", {
             testthat::expect_true(file.exists(path_out))
             
             message("\n=== read tests ===")
-            dat <- MungeSumstats::read_sumstats(
+            dat <- MungeSumstats:: read_sumstats(
                 path = path_out, 
                 standardise_headers = standardise_headers)
             testthat::expect_equal(nrow(dat), nrow(sumstats_dt)) 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_vcf.R
 \name{read_vcf}
 \alias{read_vcf}
-\title{Read in VCF format}
+\title{Read in VCF file}
 \source{
 \code{
 #### Benchmarking ####
@@ -31,7 +31,7 @@ read_vcf(
   path,
   write_vcf = FALSE,
   save_path = NULL,
-  tabix_index = TRUE,
+  tabix_index = FALSE,
   samples = 1,
   which = NULL,
   use_params = TRUE,
@@ -59,11 +59,7 @@ directly to MungeSumstats using the path parameter.}
 \item{NULL : }{All samples will be used.}
 \item{c("<sample_id1>","<sample_id2>",...) : }{
 Only user-selected samples will be used (case-insensitive).}
-}
-
-If \code{NULL}, all samples will be used
-If multiple samples are present in the same VCF,
-only return the first one (default: \code{TRUE}).}
+}}
 
 \item{which}{A \code{\linkS4class{GRanges}} describing the sequences and
     ranges to be queried. Variants whose \code{POS} lies in the interval(s)
@@ -88,7 +84,9 @@ when determining whether cols are empty.}
 The VCF file in data.table format.
 }
 \description{
-Read in VCF format
+Read in a VCF file as a \link[VariantAnnotation]{VCF} or a
+\link[data.table]{data.table}.
+Can optionally save the VCF/data.table as well.
 }
 \examples{
 #### Local file ####

@@ -30,11 +30,7 @@ If \code{Inf}, will read in all rows.}
 \item{NULL : }{All samples will be used.}
 \item{c("<sample_id1>","<sample_id2>",...) : }{
 Only user-selected samples will be used (case-insensitive).}
-}
-
-If \code{NULL}, all samples will be used
-If multiple samples are present in the same VCF,
-only return the first one (default: \code{TRUE}).}
+}}
 
 \item{add_sample_names}{Append sample names to column names
 (e.g. "EZ" --> "EZ_ubm-a-2929").}
