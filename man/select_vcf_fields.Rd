@@ -6,7 +6,7 @@
 \usage{
 select_vcf_fields(
   path,
-  nrows = 1e+07,
+  sampled_rows = 1e+07,
   which = NULL,
   single_sample = TRUE,
   nThread = 1,
@@ -18,7 +18,9 @@ select_vcf_fields(
 dataframe or datatable of the summary statistics file can also be passed
 directly to MungeSumstats using the path parameter.}
 
-\item{nrows}{Number of rows to use when inferring empty columns.}
+\item{sampled_rows}{First N rows to sample.
+Set \code{NULL} to use full \code{sumstats_file}.
+when determining whether cols are empty.}
 
 \item{which}{A \code{\linkS4class{GRanges}} describing the sequences and
     ranges to be queried. Variants whose \code{POS} lies in the interval(s)

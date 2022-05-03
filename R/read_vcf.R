@@ -9,12 +9,13 @@
 #' NOTE that that this requires the VCF to be sorted, bgzip-compressed, 
 #' tabix-indexed, which \link[MungeSumstats]{read_vcf} will attempt to do.
 #' @param verbose Print messages.
+#' @inheritParams check_empty_cols
 #' @inheritParams VariantAnnotation::ScanVcfParam
 #'
 #' @return The VCF file in data.table format.
 #' @export
 #' @importFrom VariantAnnotation readVcf writeVcf
-#' @importFrom data.table as.data.table setnames
+#' @importFrom data.table as.data.table setnames fwrite 
 #' @importFrom methods as show
 #' @source 
 #' \code{
@@ -38,8 +39,13 @@
 #' @source \href{https://github.com/Bioconductor/VariantAnnotation/issues/57}{
 #' Discussion on VariantAnnotation GitHub}
 #' @examples 
+#' #### Local file ####
 #' path <- system.file("extdata","ALSvcf.vcf", package="MungeSumstats")
 #' sumstats_dt <- read_vcf(path = path)
+#' 
+#' #### Remote file ####
+#' path2 <- "https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz" 
+#' sumstats_dt2 <- read_vcf(path = path2)
 read_vcf <- function(path,
                      single_sample = TRUE,
                      write_vcf = FALSE,
@@ -47,9 +53,9 @@ read_vcf <- function(path,
                      tabix_index = TRUE,
                      which = NULL,
                      use_params = TRUE,
+                     sampled_rows = 1e7,
                      nThread = 1,
-                     verbose = TRUE){ 
-    requireNamespace("VariantAnnotation")  
+                     verbose = TRUE){
     #### Read #### 
     {
         t1 <- Sys.time()
@@ -57,6 +63,7 @@ read_vcf <- function(path,
             param <- select_vcf_fields(path = path, 
                                        which = which, 
                                        single_sample = single_sample,
+                                       sampled_rows = sampled_rows,
                                        nThread = nThread)
         } else {
             param <- VariantAnnotation::ScanVcfParam()
@@ -93,9 +100,12 @@ read_vcf <- function(path,
         return(vcf)
     }
     #### Convert to data.table ####  
-    sumstats_dt <- vcf2df(vcf = vcf)
+    sumstats_dt <- vcf2df(vcf = vcf, 
+                          add_sample_names = !single_sample)
     sample_id <- rownames(vcf@colData) 
     remove(vcf) 
+    #### Remove duplicated columns ####
+    drop_duplicate_cols(dt = sumstats_dt)
     #### Remove sample suffix ####
     data.table::setnames(
         x = sumstats_dt,
@@ -103,12 +113,10 @@ read_vcf <- function(path,
         new = gsub(paste0("_",sample_id,collapse = "|"),"",
                    colnames(sumstats_dt), 
                    ignore.case = TRUE)
-    )  
-    #### Remove duplicated columns ####
-    drop_duplicate_cols(dt = sumstats_dt)
+    )   
     #### Remove empty columns #####
-    ## No longer necessary with select_vcf_fields
-    # sumstats_dt <- remove_empty_cols(sumstats_dt = sumstats_dt)
+    sumstats_dt <- remove_empty_cols(sumstats_dt = sumstats_dt,
+                                     sampled_rows = sampled_rows)
     #### Unlist columns inplace ####
     unlist_dt(dt = sumstats_dt)
     #### Prepare SNP column ####

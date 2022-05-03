@@ -1,37 +1,37 @@
 #' Select VCF fields
 #' 
 #' Select non-empty columns from each VCF field type.
-#' 
-#' @param nrows Number of rows to use when inferring empty columns.
 #' @param verbose Print messages.
 #' @inheritParams read_vcf
+#' @inheritParams check_empty_cols
 #' @inheritParams VariantAnnotation::ScanVcfParam
 #' 
 #' @returns \code{ScanVcfParam} object.
 #' @keywords internal
+#' @importFrom VariantAnnotation scanVcfHeader ScanVcfParam 
+#' @importFrom VariantAnnotation readVcf vcfFields vcfWhich
+#' @importFrom GenomicRanges GRanges
 select_vcf_fields <- function(path,
-                              nrows=1e7,
+                              sampled_rows=1e7,
                               which=NULL,
                               single_sample=TRUE,
                               nThread=1,
                               verbose=TRUE){
     #### Read header ####
-    ## Read the first nrows to determine which columns are useful.
-    messager("Finding empty VCF columns based on first",nrows,"rows.",
+    ## Read the first n rows to determine which columns are useful.
+    messager("Finding empty VCF columns based on first",sampled_rows,"rows.",
              v=verbose) 
     #### Make sure file is compressed and indexed ####
     ## File must be indexed in order to use param 
     ## (even if only specifying columns) 
     path <- index_vcf(path = path, 
                       verbose = verbose) 
-    has_chr <- infer_chrom_format(path = path, 
-                                  nrows = nrows, 
-                                  verbose = verbose)
+    #### Get header to extract first chromosome name ####
+    header <- VariantAnnotation::scanVcfHeader(file = path)
     # #### Construct ScanVcfParam object ####
     param <- VariantAnnotation::ScanVcfParam(
         which = GenomicRanges::GRanges(
-            paste0(if(isTRUE(has_chr)) paste0("chr",1) else 1,
-                   ":1-",as.integer(nrows))
+            paste0(header@reference[[1]],":1-",as.integer(sampled_rows))
         )
     )
     vcf_top <- VariantAnnotation::readVcf(file = path,
@@ -43,7 +43,7 @@ select_vcf_fields <- function(path,
     )
     #### Check n rows returned ####
     if(nrow(df)==0) {
-        stop("Query returned no rows. Increase nrows.")
+        stop("Query returned no rows. Increase sampled_rows.")
     }
     #### Check for empty cols #####
     empty_cols <- check_empty_cols(sumstats_dt = df) 

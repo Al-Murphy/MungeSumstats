@@ -35,6 +35,7 @@ read_vcf(
   tabix_index = TRUE,
   which = NULL,
   use_params = TRUE,
+  sampled_rows = 1e+07,
   nThread = 1,
   verbose = TRUE
 )
@@ -66,6 +67,10 @@ omitting columns that are empty based on the head of the VCF (NAs only).
 NOTE that that this requires the VCF to be sorted, bgzip-compressed,
 tabix-indexed, which \link[MungeSumstats]{read_vcf} will attempt to do.}
 
+\item{sampled_rows}{First N rows to sample.
+Set \code{NULL} to use full \code{sumstats_file}.
+when determining whether cols are empty.}
+
 \item{nThread}{Number of threads to use for parallel processes.}
 
 \item{verbose}{Print messages.}
@@ -77,6 +82,11 @@ The VCF file in data.table format.
 Read in VCF format
 }
 \examples{
+#### Local file ####
 path <- system.file("extdata","ALSvcf.vcf", package="MungeSumstats")
 sumstats_dt <- read_vcf(path = path)
+
+#### Remote file ####
+path2 <- "https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz" 
+sumstats_dt2 <- read_vcf(path = path2)
 }

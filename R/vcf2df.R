@@ -31,12 +31,12 @@ vcf2df <- function(vcf,
     messager("Converting VCF to data.table.") 
     #### .anncols function ####
     .anncols = function(anncol,headerstring) {
-        anncols = strsplit(sub("Functional annotations: '",'',
+        anncols <- strsplit(sub("Functional annotations: '",'',
                                headerstring),' \\| ')[[1]]
-        dfannempty = data.frame(matrix(vector(), 0, length(anncols),
+        dfannempty <- data.frame(matrix(vector(), 0, length(anncols),
                                        dimnames=list(c(), anncols)),
                                 stringsAsFactors=FALSE)
-        yy = data.frame(
+        yy <- data.frame(
             suppressWarnings(
                 do.call(
                     rbind,
@@ -45,7 +45,7 @@ vcf2df <- function(vcf,
                       )
                     )
                 ),
-                        stringsAsFactors=FALSE)
+            stringsAsFactors=FALSE)
         yy = data.frame(lapply(yy,type.convert))
         colnames(yy) = paste("ANN",anncols,sep="_")
         return(yy)
@@ -59,11 +59,18 @@ vcf2df <- function(vcf,
         # path <- "https://gwas.mrcieu.ac.uk/files/ubm-a-2929/ubm-a-2929.vcf.gz"
         # vcf <- VariantAnnotation::readVcf(file = path)
         # x <- vcf[1:1000000,] 
+        #### Get rowranges only if available ####
+        if("rowRanges" %in% methods::slotNames(x)){
+            gr <- MatrixGenerics::rowRanges(x)
+        } else {
+            gr <- NULL
+        }
         df <- data.table::data.table(
-            ID = names(MatrixGenerics::rowRanges(x)),
-            granges_to_dt(gr = MatrixGenerics::rowRanges(x)),
+            ID = names(gr),
+            granges_to_dt(gr = gr),
             DF_to_dt(DF = VariantAnnotation::info(x)) 
         )
+        remove(gr)
         if('ANN' %in% colnames(df)) {
             dfann <- .anncols(
                 anncol = df$ANN,
@@ -75,22 +82,29 @@ vcf2df <- function(vcf,
             df <- cbind(df,dfann)
         }
         ##### Convert geno data ##### 
-        # geno_dt <- DF_to_dt(DF = VariantAnnotation::geno(x))  
-        n <- names(VariantAnnotation::geno(x))
-        tmp <- lapply(n,function(col) { 
-            ## keeps colnames unchanged
-            data.table::as.data.table(
-                VariantAnnotation::geno(x)[[col]]
-            )
-        })
-        ## Each element can potentially have >1 column 
-        ncols <- unlist(lapply(tmp,ncol))
-        tmp <- do.call(cbind, tmp)
-        if(isTRUE(add_sample_names)){
-            colnames(tmp) = paste(rep(n, times = ncols), 
-                                  colnames(tmp),sep = "_") 
+        ## Works better for VCFHeader
+        if(methods::is(x,"VCFHeader")){
+            tmp <- data.table::as.data.table(VariantAnnotation::geno(x), 
+                                             keep.rownames = "name")
+            # tmp <- DF_to_dt(DF = VariantAnnotation::geno(x))    
         } else {
-            colnames(tmp) <- rep(n, times = ncols)
+            ## Works better for VCF
+            n <- names(VariantAnnotation::geno(x))
+            tmp <- lapply(n,function(col) { 
+                ## keeps colnames unchanged
+                data.table::as.data.table(
+                    VariantAnnotation::geno(x)[[col]]
+                )
+            })
+            ## Each element can potentially have >1 column 
+            ncols <- unlist(lapply(tmp,ncol))
+            tmp <- do.call(cbind, tmp)
+            if(isTRUE(add_sample_names)){
+                colnames(tmp) = paste(rep(n, times = ncols), 
+                                      colnames(tmp),sep = "_") 
+            } else {
+                colnames(tmp) <- rep(n, times = ncols)
+            } 
         } 
         df <- cbind(df, tmp) 
         methods::show(round(difftime(Sys.time(),t1),1))

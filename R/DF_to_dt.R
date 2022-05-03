@@ -12,7 +12,7 @@
 #' @importFrom Biostrings unstrsplit
 #' @importFrom IRanges CharacterList
 #' @returns VCF data in data.table format.
-DF_to_dt <- function(DF){
+DF_to_dt <- function(DF){ 
     data.table::data.table(
         mapply(DF, 
                FUN=function(s){ 

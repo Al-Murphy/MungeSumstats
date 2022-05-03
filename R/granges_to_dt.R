@@ -11,6 +11,7 @@
 #' @importFrom GenomicRanges seqnames start end elementMetadata
 #' @importFrom data.table data.table
 granges_to_dt  <- function(gr) {
+    if(is.null(gr)) return(gr)
     #### Convert metadata ####
     DF <- GenomicRanges::elementMetadata(gr)
     #### Combine metadata with ranges data ####
