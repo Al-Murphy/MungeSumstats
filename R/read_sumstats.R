@@ -41,9 +41,16 @@ read_sumstats <- function(path,
                                       samples = samples,
                                       nThread = nThread)
         } else {
+            #### Check if tabular 1: infer from file name ####
             tab_suffixes <- supported_suffixes(vcf = FALSE, 
                                                vcf_compressed = FALSE)
             is_tabular <- grepl(paste(tab_suffixes,collapse = "|"), path) 
+            #### Check if tabular 2: infer from data ####
+            if(isFALSE(is_tabular)){
+                header <- read_header(path = path)
+                is_tabular <- check_tabular(header = header)
+            }
+            #### Process tabular ####
             if (isTRUE(is_tabular)) {
                 if(endsWith(path,".bgz")){
                     message("Importing tabular bgz file: ", path)
