@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.1</span>
       </span>
     </div>
 
@@ -129,6 +129,7 @@
 <code>read_header</code>: wasn’t reading in enough lines to get past the VCF header. Increase to <code>readLines(n=1000)</code>.<br></li>
 <li>
 <code>read_vcf</code>: Would sometimes induce duplicate rows. Now only unique rows are used (after sample and columns filtering).</li>
+<li>Issue with mix of chr:bp:a1:a2 and chr:bp and rs id resolved</li>
 </ul></div>
 </div>
     <div class="section level2">
