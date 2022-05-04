@@ -68,6 +68,7 @@ that don't contain certain info
 Increase to `readLines(n=1000)`.  
 * `read_vcf`: Would sometimes induce duplicate rows. 
 Now only unique rows are used (after sample and columns filtering). 
+* Issue with mix of chr:bp:a1:a2 and chr:bp and rs id resolved
     
 
 ## CHANGES IN VERSION 1.3.19

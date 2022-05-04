@@ -2,7 +2,7 @@
     
     #### Ensure functions recognise you're using data.table #####
     # https://rdatatable.gitlab.io/data.table/articles/datatable-importing.html
-    .datatable.aware=TRUE;
+    .datatable.aware<-TRUE;
     
     op <- options()
     op.googleAuthR <- list(

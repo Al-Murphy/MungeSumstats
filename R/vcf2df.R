@@ -30,7 +30,7 @@ vcf2df <- function(vcf,
   
     messager("Converting VCF to data.table.") 
     #### .anncols function ####
-    .anncols = function(anncol,headerstring) {
+    .anncols <- function(anncol,headerstring) {
         anncols <- strsplit(sub("Functional annotations: '",'',
                                headerstring),' \\| ')[[1]]
         dfannempty <- data.frame(matrix(vector(), 0, length(anncols),
@@ -46,8 +46,8 @@ vcf2df <- function(vcf,
                     )
                 ),
             stringsAsFactors=FALSE)
-        yy = data.frame(lapply(yy,type.convert))
-        colnames(yy) = paste("ANN",anncols,sep="_")
+        yy <- data.frame(lapply(yy,type.convert))
+        colnames(yy) <- paste("ANN",anncols,sep="_")
         return(yy)
     }
     #### v2df function ####
@@ -100,7 +100,7 @@ vcf2df <- function(vcf,
             ncols <- unlist(lapply(tmp,ncol))
             tmp <- do.call(cbind, tmp)
             if(isTRUE(add_sample_names)){
-                colnames(tmp) = paste(rep(n, times = ncols), 
+                colnames(tmp) <- paste(rep(n, times = ncols), 
                                       colnames(tmp),sep = "_") 
             } else {
                 colnames(tmp) <- rep(n, times = ncols)
