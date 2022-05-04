@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.17</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -56,7 +56,7 @@
       <a href="../articles/OpenGWAS.html">Import GWAS summary statistics from Open GWAS</a>
     </li>
     <li>
-      <a href="../articles/docker.html">Docker</a>
+      <a href="../articles/docker.html">Docker/Singularity Containers</a>
     </li>
   </ul>
 </li>
@@ -91,7 +91,7 @@
 </h5></h4>
             
             <h4 data-toc-skip class="date"><h5>
-<i>Updated</i>: Apr-05-2022
+<i>Updated</i>: May-04-2022
 </h5></h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/MungeSumstats/blob/HEAD/vignettes/MungeSumstats.Rmd" class="external-link"><code>vignettes/MungeSumstats.Rmd</code></a></small>
@@ -104,7 +104,7 @@
 <div class="section level2">
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h2>
-<p>If you use the MungeSumstats package, please cite</p>
+<p>If you use the <em>MungeSumstats</em> package, please cite</p>
 <p><a href="https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btab665/6380562" class="external-link">Murphy
 et al. MungeSumstats: A Bioconductor package for the standardisation and
 quality control of many GWAS summary statistics</a>.</p>
@@ -316,14 +316,13 @@ e.g.<code>file.copy(save_path, './formatted/' )</code>.</p>
 <pre><code><span class="co">## </span>
 <span class="co">## </span>
 <span class="co">## ******::NOTE::******</span>
-<span class="co">## - Formatted results will be saved to `tempdir()` by default.</span>
-<span class="co">## - This means all formatted summary stats will be deletedupon ending the R session.</span>
-<span class="co">## - To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.</span>
-<span class="co">## ********************</span></code></pre>
-<pre><code><span class="co">## Formatted summary statistics will be saved to ==&gt; /tmp/RtmpNE6oDX/file5bc914da97dc.tsv.gz</span></code></pre>
-<pre><code><span class="co">## Reading header.</span></code></pre>
-<pre><code><span class="co">## Tabular format detected.</span></code></pre>
+<span class="co">##  - Formatted results will be saved to `tempdir()` by default.</span>
+<span class="co">##  - This means all formatted summary stats will be deleted upon ending the R session.</span>
+<span class="co">##  - To keep formatted summary stats, change `save_path`  ( e.g. `save_path=file.path('./formatted',basename(path))` ),   or make sure to copy files elsewhere after processing  ( e.g. `file.copy(save_path, './formatted/' )`.</span>
+<span class="co">##  ********************</span></code></pre>
+<pre><code><span class="co">## Formatted summary statistics will be saved to ==&gt;  /tmp/RtmpH9ySsx/file17fd7755e6a9.tsv.gz</span></code></pre>
 <pre><code><span class="co">## Importing tabular file: /__w/_temp/Library/MungeSumstats/extdata/eduAttainOkbay.txt</span></code></pre>
+<pre><code><span class="co">## Checking for empty columns.</span></code></pre>
 <pre><code><span class="co">## Standardising column headers.</span></code></pre>
 <pre><code><span class="co">## First line of summary statistics file:</span></code></pre>
 <pre><code><span class="co">## MarkerName   CHR POS A1  A2  EAF Beta    SE  Pval    </span></code></pre>
@@ -341,6 +340,7 @@ e.g.<code>file.copy(save_path, './formatted/' )</code>.</p>
 <pre><code><span class="co">## Checking for missing data.</span></code></pre>
 <pre><code><span class="co">## Checking for duplicate columns.</span></code></pre>
 <pre><code><span class="co">## Checking for duplicated rows.</span></code></pre>
+<pre><code><span class="co">## INFO column not available. Skipping INFO score filtering step.</span></code></pre>
 <pre><code><span class="co">## Filtering SNPs, ensuring SE&gt;0.</span></code></pre>
 <pre><code><span class="co">## Ensuring all SNPs have N&lt;5 std dev above mean.</span></code></pre>
 <pre><code><span class="co">## Removing 'chr' prefix from CHR.</span></code></pre>
@@ -355,7 +355,7 @@ e.g.<code>file.copy(save_path, './formatted/' )</code>.</p>
 <span class="co">##  - target_genome</span>
 <span class="co">## These will be inferred from the data.</span></code></pre>
 <pre><code><span class="co">## Sorting coordinates.</span></code></pre>
-<pre><code><span class="co">## Writing in tabular format ==&gt; /tmp/RtmpNE6oDX/file5bc914da97dc.tsv.gz</span></code></pre>
+<pre><code><span class="co">## Writing in tabular format ==&gt;  /tmp/RtmpH9ySsx/file17fd7755e6a9.tsv.gz</span></code></pre>
 <pre><code><span class="co">## Summary statistics report:</span>
 <span class="co">##    - 93 rows (100% of original 93 rows)</span>
 <span class="co">##    - 93 unique variants</span>
@@ -589,11 +589,9 @@ statistic files:</p>
 <code class="sourceCode R"><span class="co">#save ALS GWAS from the ieu open GWAS project to a temp directory</span>
 <span class="va">ALSvcfPth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"ALSvcf.vcf"</span>, package<span class="op">=</span><span class="st">"MungeSumstats"</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#set a low INFO filter so we get a return</span>
-<span class="va">reformatted_vcf</span> <span class="op">&lt;-</span> 
+<code class="sourceCode R"><span class="va">reformatted_vcf</span> <span class="op">&lt;-</span> 
   <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/format_sumstats.html">format_sumstats</a></span><span class="op">(</span>path<span class="op">=</span><span class="va">ALSvcfPth</span>, 
-                                 ref_genome<span class="op">=</span><span class="st">"GRCh37"</span>,
-                                 INFO_filter<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></code></pre></div>
+                                 ref_genome<span class="op">=</span><span class="st">"GRCh37"</span><span class="op">)</span></code></pre></div>
 <p>You can also get more information on the SNPs which have had data
 imputed or have been filtered out by <em>MungeSumstats</em> by using the
 <code>imputation_ind</code> and <code>log_folder_ind</code> parameters
@@ -603,10 +601,12 @@ respectively. For example:</p>
 <span class="va">reformatted_vcf_2</span> <span class="op">&lt;-</span> 
   <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/format_sumstats.html">format_sumstats</a></span><span class="op">(</span>path<span class="op">=</span><span class="va">ALSvcfPth</span>,
                                  ref_genome<span class="op">=</span><span class="st">"GRCh37"</span>,
-                                 INFO_filter <span class="op">=</span> <span class="fl">0.1</span>,
                                  log_folder_ind<span class="op">=</span><span class="cn">TRUE</span>,
                                  imputation_ind<span class="op">=</span><span class="cn">TRUE</span>,
                                  log_mungesumstats_msgs<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## Time difference of 0.2 secs</span>
+<span class="co">## Time difference of 1.3 secs</span>
+<span class="co">## Time difference of 0.1 secs</span></code></pre>
 <p>Note that using <code>log_folder_ind</code> returns a list from
 <code>format_sumstats</code> which includes the file locations of the
 differing classes of removed SNPs. Using
@@ -614,36 +614,16 @@ differing classes of removed SNPs. Using
 a file which is returned in the same list. Note that not all the
 messages will also print to screen anymore when you set
 <code>log_mungesumstats_msgs</code>:</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">reformatted_vcf_2</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## [1] "sumstats"  "log_files"</span></code></pre>
-<p>A user can load a file to view the excluded SNPs:</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">reformatted_vcf_2</span><span class="op">$</span><span class="va">log_files</span><span class="op">$</span><span class="va">info_filter</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></code></pre></div>
-<pre><code><span class="co">##             SNP CHR     BP A1 A2   INFO    BETA     SE        LP    FRQ</span>
-<span class="co">##  1: rs111659307   1 234408  A  G 0.0186 -0.0206 0.1156 0.0662091 0.0186</span>
-<span class="co">##  2: rs113759966   1  88316  G  A 0.0666  0.0385 0.0579 0.2957640 0.0666</span>
-<span class="co">##  3: rs114420996   1  58814  G  A 0.0693  0.0096 0.0574 0.0618807 0.0693</span>
-<span class="co">##  4: rs114608975   1  86028  T  C 0.0955  0.0559 0.0488 0.5985990 0.0955</span>
-<span class="co">##  5: rs115209712   1  86331  A  G 0.0830 -0.0950 0.0528 1.1427900 0.0830</span>
-<span class="co">##  6: rs116504101   1  86065  G  C 0.0955  0.0556 0.0488 0.5941420 0.0955</span>
-<span class="co">##  7:  rs12184306   1  98929  A  G 0.0811 -0.1232 0.0535 1.6718200 0.0811</span>
-<span class="co">##  8:  rs12184307   1  98974  A  G 0.0804 -0.1214 0.0538 1.6190700 0.0804</span>
-<span class="co">##  9:  rs12401368   1  66507  T  A 0.0232  0.0549 0.1025 0.2275320 0.0232</span>
-<span class="co">## 10:  rs13328714   1  91605  C  T 0.0141  0.1339 0.1166 0.6006720 0.0141</span>
-<span class="co">##              ID          P</span>
-<span class="co">##  1: rs111659307 0.85860003</span>
-<span class="co">##  2: rs113759966 0.50609961</span>
-<span class="co">##  3: rs114420996 0.86720006</span>
-<span class="co">##  4: rs114608975 0.25200027</span>
-<span class="co">##  5: rs115209712 0.07197969</span>
-<span class="co">##  6: rs116504101 0.25459977</span>
-<span class="co">##  7:  rs12184306 0.02129021</span>
-<span class="co">##  8:  rs12184307 0.02403975</span>
-<span class="co">##  9:  rs12401368 0.59219945</span>
-<span class="co">## 10:  rs13328714 0.25080027</span></code></pre>
-<p>And we can see all these SNPs had lower INFO values that our set
-threshold.</p>
+<p>A user can load a file to view the excluded SNPs.</p>
+<p>In this case, no SNPs were filtered based on INFO criterion, so an NA
+is returned for this value (instead of a path to a table of filtered
+SNPs).</p>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">reformatted_vcf_2</span><span class="op">$</span><span class="va">log_files</span><span class="op">$</span><span class="va">info_filter</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## NULL</span></code></pre>
 <p>The different types of exclusion which lead to the names are
 explained below:</p>
 <ul>
@@ -713,12 +693,11 @@ to the console created during MungeSumstats run.</li>
 <p>Note to export to another type such as R native objects including
 data.table, GRanges, VRanges or save as a VCF file, set
 <code>return_format</code>:</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#set</span>
 <span class="va">reformatted_vcf_2</span> <span class="op">&lt;-</span> 
   <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/format_sumstats.html">format_sumstats</a></span><span class="op">(</span>path<span class="op">=</span><span class="va">ALSvcfPth</span>,
-                                 ref_genome<span class="op">=</span><span class="st">"GRCh37"</span>,
-                                 INFO_filter <span class="op">=</span> <span class="fl">0.1</span>,
+                                 ref_genome<span class="op">=</span><span class="st">"GRCh37"</span>, 
                                  log_folder_ind<span class="op">=</span><span class="cn">TRUE</span>,
                                  imputation_ind<span class="op">=</span><span class="cn">TRUE</span>,
                                  log_mungesumstats_msgs<span class="op">=</span><span class="cn">TRUE</span>,
@@ -739,7 +718,7 @@ quality control of many GWAS summary statistics</a>.</p>
 genome build of multiple summary statistic files. This can be called
 separately to <code><a href="../reference/format_sumstats.html">format_sumstats()</a></code> which is useful if you want
 to just quickly check the genome build:</p>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Pass path to Educational Attainment Okbay sumstat file to a temp directory</span>
 <span class="va">eduAttainOkbayPth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"eduAttainOkbay.txt"</span>,
                                   package <span class="op">=</span> <span class="st">"MungeSumstats"</span><span class="op">)</span>
@@ -759,22 +738,22 @@ as both <code>start_col</code> and <code>end_col</code> (for variants
 that span &gt;1bp). - Ability to return in <code>data.table</code> or
 <code>GRanges</code> format. - Ability to specify which chromosome
 format (e.g. “chr1” vs. 1) to return <code>GRanges</code> as.</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sumstats_dt</span> <span class="op">&lt;-</span> <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/formatted_example.html">formatted_example</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Standardising column headers.</span></code></pre>
 <pre><code><span class="co">## First line of summary statistics file:</span></code></pre>
 <pre><code><span class="co">## MarkerName   CHR POS A1  A2  EAF Beta    SE  Pval    </span></code></pre>
 <pre><code><span class="co">## Sorting coordinates.</span></code></pre>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sumstats_dt_hg38</span> <span class="op">&lt;-</span> <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/liftover.html">liftover</a></span><span class="op">(</span>sumstats_dt <span class="op">=</span> <span class="va">sumstats_dt</span>, 
                                             ref_genome <span class="op">=</span> <span class="st">"hg19"</span>,
                                             convert_ref_genome <span class="op">=</span> <span class="st">"hg38"</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Performing data liftover from hg19 to hg38.</span></code></pre>
 <pre><code><span class="co">## Downloading chain file from UCSC Genome Browser.</span></code></pre>
-<pre><code><span class="co">## /tmp/RtmpNE6oDX/hg19ToHg38.over.chain.gz</span></code></pre>
+<pre><code><span class="co">## /tmp/RtmpH9ySsx/hg19ToHg38.over.chain.gz</span></code></pre>
 <pre><code><span class="co">## Reordering so first three column headers are SNP, CHR and BP in this order.</span></code></pre>
 <pre><code><span class="co">## Reordering so the fourth and fifth columns are A1 and A2.</span></code></pre>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">sumstats_dt_hg38</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <table style="width:100%;" class="table">
 <colgroup>
@@ -889,7 +868,7 @@ pipeline, but can still be helpful.</p>
 <h4 id="from-disk">From disk<a class="anchor" aria-label="anchor" href="#from-disk"></a>
 </h4>
 <p>To do this, simply run the following:</p>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">eduAttainOkbayPth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"eduAttainOkbay.txt"</span>,
                                   package <span class="op">=</span> <span class="st">"MungeSumstats"</span><span class="op">)</span>
 <span class="va">formatted_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">"eduAttainOkbay_standardised.tsv.gz"</span><span class="op">)</span>
@@ -898,9 +877,8 @@ pipeline, but can still be helpful.</p>
 <span class="co">#### 1. Read in the data and standardise header names ####</span>
 <span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="../reference/read_sumstats.html">read_sumstats</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">eduAttainOkbayPth</span>, 
                                     standardise_headers <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## Reading header.</span></code></pre>
-<pre><code><span class="co">## Tabular format detected.</span></code></pre>
 <pre><code><span class="co">## Importing tabular file: /__w/_temp/Library/MungeSumstats/extdata/eduAttainOkbay.txt</span></code></pre>
+<pre><code><span class="co">## Checking for empty columns.</span></code></pre>
 <pre><code><span class="co">## Standardising column headers.</span></code></pre>
 <pre><code><span class="co">## First line of summary statistics file:</span></code></pre>
 <pre><code><span class="co">## MarkerName   CHR POS A1  A2  EAF Beta    SE  Pval    </span></code></pre>
@@ -909,7 +887,7 @@ pipeline, but can still be helpful.</p>
 <table class="table">
 <thead><tr class="header">
 <th align="left">SNP</th>
-<th align="right">CHR</th>
+<th align="left">CHR</th>
 <th align="right">BP</th>
 <th align="left">A1</th>
 <th align="left">A2</th>
@@ -920,70 +898,70 @@ pipeline, but can still be helpful.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">rs12987662</td>
-<td align="right">2</td>
-<td align="right">100821548</td>
+<td align="left">rs10061788</td>
+<td align="left">5</td>
+<td align="right">87934707</td>
 <td align="left">A</td>
-<td align="left">C</td>
-<td align="right">0.3787</td>
-<td align="right">0.027</td>
-<td align="right">0.003</td>
-<td align="right">0</td>
+<td align="left">G</td>
+<td align="right">0.2164</td>
+<td align="right">0.021</td>
+<td align="right">0.004</td>
+<td align="right">0e+00</td>
 </tr>
 <tr class="even">
-<td align="left">rs9320913</td>
-<td align="right">6</td>
-<td align="right">98584733</td>
-<td align="left">A</td>
-<td align="left">C</td>
-<td align="right">0.5019</td>
-<td align="right">0.024</td>
-<td align="right">0.003</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="left">rs11712056</td>
-<td align="right">3</td>
-<td align="right">49914397</td>
+<td align="left">rs1007883</td>
+<td align="left">16</td>
+<td align="right">51163406</td>
 <td align="left">T</td>
 <td align="left">C</td>
-<td align="right">0.5504</td>
-<td align="right">0.024</td>
+<td align="right">0.3713</td>
+<td align="right">-0.015</td>
 <td align="right">0.003</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">rs148734725</td>
-<td align="right">3</td>
-<td align="right">49406708</td>
-<td align="left">A</td>
-<td align="left">G</td>
-<td align="right">0.3078</td>
-<td align="right">0.025</td>
-<td align="right">0.003</td>
-<td align="right">0</td>
+<td align="right">1e-07</td>
 </tr>
 <tr class="odd">
-<td align="left">rs13294439</td>
-<td align="right">9</td>
-<td align="right">23358875</td>
-<td align="left">A</td>
+<td align="left">rs1008078</td>
+<td align="left">1</td>
+<td align="right">91189731</td>
+<td align="left">T</td>
 <td align="left">C</td>
-<td align="right">0.5765</td>
-<td align="right">-0.023</td>
+<td align="right">0.3731</td>
+<td align="right">-0.016</td>
 <td align="right">0.003</td>
-<td align="right">0</td>
+<td align="right">0e+00</td>
 </tr>
 <tr class="even">
-<td align="left">rs9537821</td>
-<td align="right">13</td>
-<td align="right">58402771</td>
+<td align="left">rs1043209</td>
+<td align="left">14</td>
+<td align="right">23373986</td>
 <td align="left">A</td>
 <td align="left">G</td>
-<td align="right">0.7631</td>
-<td align="right">0.024</td>
+<td align="right">0.6026</td>
+<td align="right">0.018</td>
 <td align="right">0.003</td>
-<td align="right">0</td>
+<td align="right">0e+00</td>
+</tr>
+<tr class="odd">
+<td align="left">rs10496091</td>
+<td align="left">2</td>
+<td align="right">61482261</td>
+<td align="left">A</td>
+<td align="left">G</td>
+<td align="right">0.2705</td>
+<td align="right">-0.018</td>
+<td align="right">0.003</td>
+<td align="right">0e+00</td>
+</tr>
+<tr class="even">
+<td align="left">rs10930008</td>
+<td align="left">2</td>
+<td align="right">161854736</td>
+<td align="left">A</td>
+<td align="left">G</td>
+<td align="right">0.7183</td>
+<td align="right">-0.016</td>
+<td align="right">0.003</td>
+<td align="right">1e-07</td>
 </tr>
 </tbody>
 </table>
@@ -995,7 +973,7 @@ pipeline, but can still be helpful.</p>
                                                 write_vcf <span class="op">=</span> <span class="cn">FALSE</span>,
                                                 return_path <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>   </code></pre></div>
 <pre><code><span class="co">## Sorting coordinates.</span></code></pre>
-<pre><code><span class="co">## Writing in tabular format ==&gt; /tmp/RtmpNE6oDX/file5bc9530c15e5eduAttainOkbay_standardised.tsv.gz</span></code></pre>
+<pre><code><span class="co">## Writing in tabular format ==&gt;  /tmp/RtmpH9ySsx/file17fdd207560eduAttainOkbay_standardised.tsv.gz</span></code></pre>
 <pre><code><span class="co">## Converting full summary stats file to tabix format for fast querying...</span></code></pre>
 <pre><code><span class="co">## Reading header.</span></code></pre>
 <pre><code><span class="co">## Ensuring file is bgzipped.</span></code></pre>
@@ -1058,7 +1036,7 @@ you can also standardise its headers like so:</p>
 <td align="right">0.019</td>
 <td align="right">0.003</td>
 <td align="right">0e+00</td>
-<td align="right">0.6747731</td>
+<td align="right">0.7242527</td>
 </tr>
 <tr class="even">
 <td align="left">rs11210860</td>
@@ -1070,7 +1048,7 @@ you can also standardise its headers like so:</p>
 <td align="right">0.017</td>
 <td align="right">0.003</td>
 <td align="right">0e+00</td>
-<td align="right">0.7613696</td>
+<td align="right">0.0781306</td>
 </tr>
 <tr class="odd">
 <td align="left">rs34305371</td>
@@ -1082,7 +1060,7 @@ you can also standardise its headers like so:</p>
 <td align="right">0.035</td>
 <td align="right">0.005</td>
 <td align="right">0e+00</td>
-<td align="right">0.7010592</td>
+<td align="right">0.5669272</td>
 </tr>
 <tr class="even">
 <td align="left">rs2568955</td>
@@ -1094,7 +1072,7 @@ you can also standardise its headers like so:</p>
 <td align="right">-0.017</td>
 <td align="right">0.003</td>
 <td align="right">0e+00</td>
-<td align="right">0.7837249</td>
+<td align="right">0.9509383</td>
 </tr>
 <tr class="odd">
 <td align="left">rs1008078</td>
@@ -1106,7 +1084,7 @@ you can also standardise its headers like so:</p>
 <td align="right">-0.016</td>
 <td align="right">0.003</td>
 <td align="right">0e+00</td>
-<td align="right">0.3878870</td>
+<td align="right">0.2611266</td>
 </tr>
 <tr class="even">
 <td align="left">rs61787263</td>
@@ -1118,7 +1096,7 @@ you can also standardise its headers like so:</p>
 <td align="right">0.016</td>
 <td align="right">0.003</td>
 <td align="right">1e-07</td>
-<td align="right">0.1911674</td>
+<td align="right">0.4462771</td>
 </tr>
 </tbody>
 </table>
@@ -1161,12 +1139,13 @@ handle lists of summary statistics files.</p>
 <div class="section level2">
 <h2 id="session-information">Session Information<a class="anchor" aria-label="anchor" href="#session-information"></a>
 </h2>
-<details><pre><code><span class="co">## R Under development (unstable) (2022-03-14 r81896)</span>
+<details><pre><code><span class="co">## R version 4.2.0 (2022-04-22)</span>
 <span class="co">## Platform: x86_64-pc-linux-gnu (64-bit)</span>
 <span class="co">## Running under: Ubuntu 20.04.4 LTS</span>
 <span class="co">## </span>
 <span class="co">## Matrix products: default</span>
-<span class="co">## BLAS/LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.8.so</span>
+<span class="co">## BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3</span>
+<span class="co">## LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3</span>
 <span class="co">## </span>
 <span class="co">## locale:</span>
 <span class="co">##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              </span>
@@ -1180,11 +1159,11 @@ handle lists of summary statistics files.</p>
 <span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
 <span class="co">## </span>
 <span class="co">## other attached packages:</span>
-<span class="co">## [1] MungeSumstats_1.3.17 BiocStyle_2.23.1    </span>
+<span class="co">## [1] MungeSumstats_1.5.0 BiocStyle_2.25.0   </span>
 <span class="co">## </span>
 <span class="co">## loaded via a namespace (and not attached):</span>
 <span class="co">##   [1] bitops_1.0-7                               </span>
-<span class="co">##   [2] matrixStats_0.61.0                         </span>
+<span class="co">##   [2] matrixStats_0.62.0                         </span>
 <span class="co">##   [3] fs_1.5.2                                   </span>
 <span class="co">##   [4] bit64_4.0.5                                </span>
 <span class="co">##   [5] filelock_1.0.2                             </span>
@@ -1192,92 +1171,92 @@ handle lists of summary statistics files.</p>
 <span class="co">##   [7] httr_1.4.2                                 </span>
 <span class="co">##   [8] googleAuthR_2.0.0                          </span>
 <span class="co">##   [9] rprojroot_2.0.3                            </span>
-<span class="co">##  [10] GenomeInfoDb_1.31.7                        </span>
+<span class="co">##  [10] GenomeInfoDb_1.33.1                        </span>
 <span class="co">##  [11] tools_4.2.0                                </span>
 <span class="co">##  [12] bslib_0.3.1                                </span>
 <span class="co">##  [13] utf8_1.2.2                                 </span>
 <span class="co">##  [14] R6_2.5.1                                   </span>
 <span class="co">##  [15] DBI_1.1.2                                  </span>
-<span class="co">##  [16] BiocGenerics_0.41.2                        </span>
+<span class="co">##  [16] BiocGenerics_0.43.0                        </span>
 <span class="co">##  [17] tidyselect_1.1.2                           </span>
 <span class="co">##  [18] prettyunits_1.1.1                          </span>
 <span class="co">##  [19] curl_4.3.2                                 </span>
 <span class="co">##  [20] bit_4.0.4                                  </span>
 <span class="co">##  [21] compiler_4.2.0                             </span>
 <span class="co">##  [22] textshaping_0.3.6                          </span>
-<span class="co">##  [23] cli_3.2.0                                  </span>
-<span class="co">##  [24] Biobase_2.55.1                             </span>
+<span class="co">##  [23] cli_3.3.0                                  </span>
+<span class="co">##  [24] Biobase_2.57.0                             </span>
 <span class="co">##  [25] xml2_1.3.3                                 </span>
 <span class="co">##  [26] desc_1.4.1                                 </span>
-<span class="co">##  [27] DelayedArray_0.21.2                        </span>
-<span class="co">##  [28] rtracklayer_1.55.4                         </span>
-<span class="co">##  [29] bookdown_0.25                              </span>
+<span class="co">##  [27] DelayedArray_0.23.0                        </span>
+<span class="co">##  [28] rtracklayer_1.57.0                         </span>
+<span class="co">##  [29] bookdown_0.26                              </span>
 <span class="co">##  [30] sass_0.4.1                                 </span>
 <span class="co">##  [31] rappdirs_0.3.3                             </span>
-<span class="co">##  [32] pkgdown_2.0.2.9000                         </span>
+<span class="co">##  [32] pkgdown_2.0.3.9000                         </span>
 <span class="co">##  [33] systemfonts_1.0.4                          </span>
 <span class="co">##  [34] stringr_1.4.0                              </span>
 <span class="co">##  [35] digest_0.6.29                              </span>
-<span class="co">##  [36] Rsamtools_2.11.0                           </span>
-<span class="co">##  [37] rmarkdown_2.13                             </span>
+<span class="co">##  [36] Rsamtools_2.13.0                           </span>
+<span class="co">##  [37] rmarkdown_2.14                             </span>
 <span class="co">##  [38] R.utils_2.11.0                             </span>
-<span class="co">##  [39] XVector_0.35.0                             </span>
+<span class="co">##  [39] XVector_0.37.0                             </span>
 <span class="co">##  [40] BSgenome.Hsapiens.1000genomes.hs37d5_0.99.1</span>
 <span class="co">##  [41] pkgconfig_2.0.3                            </span>
 <span class="co">##  [42] htmltools_0.5.2                            </span>
-<span class="co">##  [43] MatrixGenerics_1.7.0                       </span>
+<span class="co">##  [43] MatrixGenerics_1.9.0                       </span>
 <span class="co">##  [44] highr_0.9                                  </span>
 <span class="co">##  [45] dbplyr_2.1.1                               </span>
 <span class="co">##  [46] fastmap_1.1.0                              </span>
-<span class="co">##  [47] BSgenome_1.63.6                            </span>
+<span class="co">##  [47] BSgenome_1.65.0                            </span>
 <span class="co">##  [48] rlang_1.0.2                                </span>
-<span class="co">##  [49] RSQLite_2.2.12                             </span>
+<span class="co">##  [49] RSQLite_2.2.13                             </span>
 <span class="co">##  [50] jquerylib_0.1.4                            </span>
-<span class="co">##  [51] BiocIO_1.5.0                               </span>
+<span class="co">##  [51] BiocIO_1.7.0                               </span>
 <span class="co">##  [52] generics_0.1.2                             </span>
 <span class="co">##  [53] jsonlite_1.8.0                             </span>
-<span class="co">##  [54] BiocParallel_1.29.18                       </span>
-<span class="co">##  [55] dplyr_1.0.8                                </span>
+<span class="co">##  [54] BiocParallel_1.31.0                        </span>
+<span class="co">##  [55] dplyr_1.0.9                                </span>
 <span class="co">##  [56] R.oo_1.24.0                                </span>
-<span class="co">##  [57] VariantAnnotation_1.41.3                   </span>
+<span class="co">##  [57] VariantAnnotation_1.43.0                   </span>
 <span class="co">##  [58] RCurl_1.98-1.6                             </span>
 <span class="co">##  [59] magrittr_2.0.3                             </span>
-<span class="co">##  [60] GenomeInfoDbData_1.2.7                     </span>
-<span class="co">##  [61] Matrix_1.4-0                               </span>
+<span class="co">##  [60] GenomeInfoDbData_1.2.8                     </span>
+<span class="co">##  [61] Matrix_1.4-1                               </span>
 <span class="co">##  [62] Rcpp_1.0.8.3                               </span>
-<span class="co">##  [63] S4Vectors_0.33.16                          </span>
+<span class="co">##  [63] S4Vectors_0.35.0                           </span>
 <span class="co">##  [64] fansi_1.0.3                                </span>
 <span class="co">##  [65] lifecycle_1.0.1                            </span>
 <span class="co">##  [66] R.methodsS3_1.8.1                          </span>
 <span class="co">##  [67] stringi_1.7.6                              </span>
 <span class="co">##  [68] yaml_2.3.5                                 </span>
-<span class="co">##  [69] SummarizedExperiment_1.25.3                </span>
-<span class="co">##  [70] zlibbioc_1.41.0                            </span>
-<span class="co">##  [71] BiocFileCache_2.3.4                        </span>
+<span class="co">##  [69] SummarizedExperiment_1.27.1                </span>
+<span class="co">##  [70] zlibbioc_1.43.0                            </span>
+<span class="co">##  [71] BiocFileCache_2.5.0                        </span>
 <span class="co">##  [72] grid_4.2.0                                 </span>
-<span class="co">##  [73] blob_1.2.2                                 </span>
+<span class="co">##  [73] blob_1.2.3                                 </span>
 <span class="co">##  [74] parallel_4.2.0                             </span>
 <span class="co">##  [75] crayon_1.5.1                               </span>
 <span class="co">##  [76] lattice_0.20-45                            </span>
-<span class="co">##  [77] Biostrings_2.63.3                          </span>
-<span class="co">##  [78] GenomicFeatures_1.47.13                    </span>
+<span class="co">##  [77] Biostrings_2.65.0                          </span>
+<span class="co">##  [78] GenomicFeatures_1.49.1                     </span>
 <span class="co">##  [79] hms_1.1.1                                  </span>
-<span class="co">##  [80] KEGGREST_1.35.0                            </span>
+<span class="co">##  [80] KEGGREST_1.37.0                            </span>
 <span class="co">##  [81] seqminer_8.4                               </span>
-<span class="co">##  [82] knitr_1.38                                 </span>
+<span class="co">##  [82] knitr_1.39                                 </span>
 <span class="co">##  [83] pillar_1.7.0                               </span>
-<span class="co">##  [84] GenomicRanges_1.47.6                       </span>
+<span class="co">##  [84] GenomicRanges_1.49.0                       </span>
 <span class="co">##  [85] rjson_0.2.21                               </span>
-<span class="co">##  [86] biomaRt_2.51.3                             </span>
+<span class="co">##  [86] biomaRt_2.53.0                             </span>
 <span class="co">##  [87] stats4_4.2.0                               </span>
 <span class="co">##  [88] XML_3.99-0.9                               </span>
 <span class="co">##  [89] glue_1.6.2                                 </span>
 <span class="co">##  [90] evaluate_0.15                              </span>
 <span class="co">##  [91] SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20   </span>
 <span class="co">##  [92] data.table_1.14.2                          </span>
-<span class="co">##  [93] BiocManager_1.30.16                        </span>
+<span class="co">##  [93] BiocManager_1.30.17                        </span>
 <span class="co">##  [94] png_0.1-7                                  </span>
-<span class="co">##  [95] vctrs_0.4.0                                </span>
+<span class="co">##  [95] vctrs_0.4.1                                </span>
 <span class="co">##  [96] purrr_0.3.4                                </span>
 <span class="co">##  [97] assertthat_0.2.1                           </span>
 <span class="co">##  [98] cachem_1.0.6                               </span>
@@ -1286,10 +1265,10 @@ handle lists of summary statistics files.</p>
 <span class="co">## [101] ragg_1.2.2                                 </span>
 <span class="co">## [102] gargle_1.2.0                               </span>
 <span class="co">## [103] tibble_3.1.6                               </span>
-<span class="co">## [104] GenomicAlignments_1.31.2                   </span>
-<span class="co">## [105] AnnotationDbi_1.57.1                       </span>
+<span class="co">## [104] GenomicAlignments_1.33.0                   </span>
+<span class="co">## [105] AnnotationDbi_1.59.0                       </span>
 <span class="co">## [106] memoise_2.0.1                              </span>
-<span class="co">## [107] IRanges_2.29.1                             </span>
+<span class="co">## [107] IRanges_2.31.0                             </span>
 <span class="co">## [108] ellipsis_0.3.2</span></code></pre>
 </details>
 </div>
@@ -1325,8 +1304,7 @@ Genetic identification of brain cell types underlying schizophrenia.
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
 </div>
 
       </footer>

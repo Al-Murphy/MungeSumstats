@@ -25,6 +25,9 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
+    <loc>/reference/DF_to_dt.html</loc>
+  </url>
+  <url>
     <loc>/reference/api_query.html</loc>
   </url>
   <url>
@@ -172,6 +175,9 @@
     <loc>/reference/downloader.html</loc>
   </url>
   <url>
+    <loc>/reference/drop_duplicate_cols.html</loc>
+  </url>
+  <url>
     <loc>/reference/dt_to_granges.html</loc>
   </url>
   <url>
@@ -205,6 +211,9 @@
     <loc>/reference/get_vcf_sample_ids.html</loc>
   </url>
   <url>
+    <loc>/reference/granges_to_dt.html</loc>
+  </url>
+  <url>
     <loc>/reference/gwasinfo.html</loc>
   </url>
   <url>
@@ -226,7 +235,13 @@
     <loc>/reference/index_tabular.html</loc>
   </url>
   <url>
+    <loc>/reference/index_vcf.html</loc>
+  </url>
+  <url>
     <loc>/reference/infer_vcf_sample_ids.html</loc>
+  </url>
+  <url>
+    <loc>/reference/is_tabix.html</loc>
   </url>
   <url>
     <loc>/reference/legacy_ids.html</loc>
@@ -316,6 +331,18 @@
     <loc>/reference/read_vcf.html</loc>
   </url>
   <url>
+    <loc>/reference/read_vcf_info.html</loc>
+  </url>
+  <url>
+    <loc>/reference/read_vcf_markername.html</loc>
+  </url>
+  <url>
+    <loc>/reference/read_vcf_pval.html</loc>
+  </url>
+  <url>
+    <loc>/reference/remove_empty_cols.html</loc>
+  </url>
+  <url>
     <loc>/reference/remove_nonstandard_vcf_cols.html</loc>
   </url>
   <url>
@@ -323,6 +350,9 @@
   </url>
   <url>
     <loc>/reference/select_api.html</loc>
+  </url>
+  <url>
+    <loc>/reference/select_vcf_fields.html</loc>
   </url>
   <url>
     <loc>/reference/sort_coords.html</loc>
@@ -341,6 +371,9 @@
   </url>
   <url>
     <loc>/reference/to_VRanges.html</loc>
+  </url>
+  <url>
+    <loc>/reference/unlist_dt.html</loc>
   </url>
   <url>
     <loc>/reference/validate_parameters.html</loc>

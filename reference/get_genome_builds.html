@@ -18,7 +18,7 @@ from the data. Uses SNP (RSID) &amp;amp; CHR &amp;amp; BP to get genome build.">
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.17</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -39,7 +39,7 @@ from the data. Uses SNP (RSID) &amp;amp; CHR &amp;amp; BP to get genome build.">
       <a href="../articles/OpenGWAS.html">Import GWAS summary statistics from Open GWAS</a>
     </li>
     <li>
-      <a href="../articles/docker.html">Docker</a>
+      <a href="../articles/docker.html">Docker/Singularity Containers</a>
     </li>
   </ul></li>
 <li>
@@ -133,16 +133,15 @@ Only works if <code>sumstats_list</code> is a list of paths.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Inferring genome build of 1 sumstats file(s).</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Inferring genome build.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading in only the first 10000 rows of sumstats.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Reading header.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Tabular format detected.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Importing tabular file: /__w/_temp/Library/MungeSumstats/extdata/eduAttainOkbay.txt</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Checking for empty columns.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Standardising column headers.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> First line of summary statistics file: </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> MarkerName	CHR	POS	A1	A2	EAF	Beta	SE	Pval	</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading reference genome data.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading reference genome data.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Inferred genome build: GRCH37</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Time difference of 49.22984 secs</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Time difference of 46.44145 secs</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> GRCH37: 1 file(s)</span>
 </code></pre></div>
     </div>
@@ -158,8 +157,7 @@ Only works if <code>sumstats_list</code> is a list of paths.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
 </div>
 
       </footer></div>

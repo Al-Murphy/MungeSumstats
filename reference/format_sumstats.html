@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.17</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -38,7 +38,7 @@
       <a href="../articles/OpenGWAS.html">Import GWAS summary statistics from Open GWAS</a>
     </li>
     <li>
-      <a href="../articles/docker.html">Docker</a>
+      <a href="../articles/docker.html">Docker/Singularity Containers</a>
     </li>
   </ul></li>
 <li>
@@ -351,14 +351,13 @@ in both above instances are a list.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ******::NOTE::******</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> - Formatted results will be saved to `tempdir()` by default.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> - This means all formatted summary stats will be deletedupon ending the R session.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> - To keep formatted summary stats, change `save_path` ( e.g. `save_path=file.path('./formatted',basename(path))` ),  or make sure to copy files elsewhere after processing ( e.g. `file.copy(save_path, './formatted/' )`.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ********************</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Formatted summary statistics will be saved to ==&gt; /tmp/RtmpqI9RI5/file563720fac956.tsv.gz</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Reading header.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Tabular format detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  - Formatted results will be saved to `tempdir()` by default.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  - This means all formatted summary stats will be deleted upon ending the R session.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  - To keep formatted summary stats, change `save_path`  ( e.g. `save_path=file.path('./formatted',basename(path))` ),   or make sure to copy files elsewhere after processing  ( e.g. `file.copy(save_path, './formatted/' )`.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  ******************** </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Formatted summary statistics will be saved to ==&gt;  /tmp/RtmpsoC5Gw/file11e44fa5269b.tsv.gz</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Importing tabular file: /__w/_temp/Library/MungeSumstats/extdata/eduAttainOkbay.txt</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Checking for empty columns.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Standardising column headers.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> First line of summary statistics file: </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> MarkerName	CHR	POS	A1	A2	EAF	Beta	SE	Pval	</span>
@@ -382,6 +381,7 @@ in both above instances are a list.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Checking for duplicate columns.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Checking for duplicate SNPs from SNP ID.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Checking for SNPs with duplicated base-pair positions.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO column not available. Skipping INFO score filtering step.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Filtering SNPs, ensuring SE&gt;0.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Ensuring all SNPs have N&lt;5 std dev above mean.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Removing 'chr' prefix from CHR.</span>
@@ -397,7 +397,7 @@ in both above instances are a list.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  - target_genome</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> These will be inferred from the data.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Sorting coordinates.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing in tabular format ==&gt; /tmp/RtmpqI9RI5/file563720fac956.tsv.gz</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing in tabular format ==&gt;  /tmp/RtmpsoC5Gw/file11e44fa5269b.tsv.gz</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Summary statistics report:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>    - 93 rows (100% of original 93 rows)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>    - 93 unique variants</span>
@@ -426,8 +426,7 @@ in both above instances are a list.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
 </div>
 
       </footer></div>

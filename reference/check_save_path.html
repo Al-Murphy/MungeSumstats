@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.17</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -38,7 +38,7 @@
       <a href="../articles/OpenGWAS.html">Import GWAS summary statistics from Open GWAS</a>
     </li>
     <li>
-      <a href="../articles/docker.html">Docker</a>
+      <a href="../articles/docker.html">Docker/Singularity Containers</a>
     </li>
   </ul></li>
 <li>
@@ -74,7 +74,8 @@
   <span class="va">log_folder</span>,
   <span class="va">log_folder_ind</span>,
   <span class="va">tabix_index</span>,
-  write_vcf <span class="op">=</span> <span class="cn">FALSE</span>
+  write_vcf <span class="op">=</span> <span class="cn">FALSE</span>,
+  verbose <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -97,11 +98,13 @@ FALSE.</p></dd>
 <a href="http://www.htslib.org/doc/tabix.html" class="external-link">tabix</a> for fast querying.</p></dd>
 <dt>write_vcf</dt>
 <dd><p>Whether to write as VCF (TRUE) or tabular file (FALSE).</p></dd>
+<dt>verbose</dt>
+<dd><p>Print messages.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>Corrected <code>save_path</code>, the file type, the separator, corrected
-<code>log_folder</code>,the log file extension</p>
+<code>log_folder</code>,the log file extension.</p>
     </div>
 
   </div>
@@ -116,8 +119,7 @@ FALSE.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
 </div>
 
       </footer></div>

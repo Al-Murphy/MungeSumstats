@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.17</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -38,7 +38,7 @@
       <a href="../articles/OpenGWAS.html">Import GWAS summary statistics from Open GWAS</a>
     </li>
     <li>
-      <a href="../articles/docker.html">Docker</a>
+      <a href="../articles/docker.html">Docker/Singularity Containers</a>
     </li>
   </ul></li>
 <li>
@@ -117,7 +117,11 @@ multiple of these.</p></td>
       </tr><tr><td>
           <p><code><a href="index_tabular.html">index_tabular()</a></code> </p>
         </td>
-        <td><p>Convert summary stats file to tabix format</p></td>
+        <td><p>Tabix-index file: table</p></td>
+      </tr><tr><td>
+          <p><code><a href="is_tabix.html">is_tabix()</a></code> </p>
+        </td>
+        <td><p>Is tabix</p></td>
       </tr><tr><td>
           <p><code><a href="liftover.html">liftover()</a></code> </p>
         </td>
@@ -152,6 +156,10 @@ NCBI dbSNP Build 144. Reference genome version is dependent on user input.</p></
         </td>
         <td><p>Determine summary statistics file type and read them into memory</p></td>
       </tr><tr><td>
+          <p><code><a href="read_vcf.html">read_vcf()</a></code> </p>
+        </td>
+        <td><p>Read in VCF file</p></td>
+      </tr><tr><td>
           <p><code><a href="standardise_header.html">standardise_header()</a></code> </p>
         </td>
         <td><p>Standardise the column headers in the Summary Statistics files</p></td>
@@ -176,8 +184,7 @@ NCBI dbSNP Build 144. Reference genome version is dependent on user input.</p></
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
 </div>
 
       </footer></div>

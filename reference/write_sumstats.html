@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.17</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -38,7 +38,7 @@
       <a href="../articles/OpenGWAS.html">Import GWAS summary statistics from Open GWAS</a>
     </li>
     <li>
-      <a href="../articles/docker.html">Docker</a>
+      <a href="../articles/docker.html">Docker/Singularity Containers</a>
     </li>
   </ul></li>
 <li>
@@ -76,10 +76,17 @@
   write_vcf <span class="op">=</span> <span class="cn">FALSE</span>,
   tabix_index <span class="op">=</span> <span class="cn">FALSE</span>,
   nThread <span class="op">=</span> <span class="fl">1</span>,
-  return_path <span class="op">=</span> <span class="cn">FALSE</span>
+  return_path <span class="op">=</span> <span class="cn">FALSE</span>,
+  save_path_check <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
+    <div id="source">
+    <h2>Source</h2>
+    <p><a href="https://github.com/Bioconductor/VariantAnnotation/issues/35" class="external-link">
+VariantAnnotation::writeVcf has some unexpected/silent
+file renaming behavior</a></p>
+    </div>
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>sumstats_dt</dt>
@@ -102,6 +109,9 @@ file for the GWAS.</p></dd>
 This will have been modified in some cases
 (e.g. after compressing and tabix-indexing a
 previously un-compressed file).</p></dd>
+<dt>save_path_check</dt>
+<dd><p>Ensure path name is valid (given the other arguments)
+before writing (default: FALSE).</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -115,14 +125,13 @@ Else returns <code>NULL</code>.</p>
 <span class="r-in">    package <span class="op">=</span> <span class="st">"MungeSumstats"</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-in"><span class="va">eduAttainOkbay</span> <span class="op">&lt;-</span> <span class="fu"><a href="read_sumstats.html">read_sumstats</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">path</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Reading header.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Tabular format detected.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Importing tabular file: /__w/_temp/Library/MungeSumstats/extdata/eduAttainOkbay.txt</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Checking for empty columns.</span>
 <span class="r-in"><span class="fu">write_sumstats</span><span class="op">(</span></span>
 <span class="r-in">    sumstats_dt <span class="op">=</span> <span class="va">eduAttainOkbay</span>,</span>
 <span class="r-in">    save_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".tsv.gz"</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing in tabular format ==&gt; /tmp/RtmpqI9RI5/file563764aead0d.tsv.gz</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing in tabular format ==&gt;  /tmp/RtmpsoC5Gw/file11e46e4b25a8.tsv.gz</span>
 </code></pre></div>
     </div>
   </div>
@@ -137,8 +146,7 @@ Else returns <code>NULL</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
 </div>
 
       </footer></div>
