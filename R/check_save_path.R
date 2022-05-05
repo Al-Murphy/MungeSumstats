@@ -28,11 +28,11 @@ check_save_path <- function(save_path,
             v=verbose
         )
     }
-
+    
     if (!is.logical(log_folder_ind)) {
         stop("log_folder_ind must be either TRUE or FALSE")
     }
-
+    
     if (log_folder_ind && log_folder == tempdir()) {
         messager(
             "******::NOTE::******\n",
@@ -46,7 +46,7 @@ check_save_path <- function(save_path,
             v=verbose
         )
     }
-
+    
     #### Do a bit of QC to get the full path ####
     ## Expand "~" into full path bc isn't recognized in certain envs(eg Python)
     save_path <- path.expand(save_path)
@@ -54,7 +54,7 @@ check_save_path <- function(save_path,
     ## Expand relative path "./" into absolute path bc it's less ambiguous
     save_path <- gsub("^[.]/", paste0(getwd(), "/"), save_path)
     log_folder <- gsub("^[.]/", paste0(getwd(), "/"), log_folder)
-
+    
     suffixes <- supported_suffixes()
     if (is.null(save_path)) {
         save_path <- paste0(tempfile(), ".tsv.gz")
@@ -66,7 +66,7 @@ check_save_path <- function(save_path,
         suffix_match <-
             vapply(suffixes, function(x) {
                 grepl(paste0("*", x, "$"), tolower(save_path),
-                    ignore.case = TRUE
+                      ignore.case = TRUE
                 )
             },
             FUN.VALUE = logical(1)
@@ -144,7 +144,7 @@ check_save_path <- function(save_path,
     }
     dir.create(log_folder,
                showWarnings = FALSE, recursive = TRUE)
-
+    
     messager("Formatted summary statistics will be saved to ==> ", save_path,
              v=verbose)
     if (log_folder_ind) {
@@ -160,7 +160,7 @@ check_save_path <- function(save_path,
                           "and does the path exist?")
         stop(stop_msg)
     }
-
+    
     return(list(
         save_path = save_path,
         file_type = file_type,

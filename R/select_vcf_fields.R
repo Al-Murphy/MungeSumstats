@@ -47,7 +47,7 @@ select_vcf_fields <- function(path,
     for(x in names(fields)){
         fields[[x]] <- fields[[x]][
             !toupper(fields[[x]]) %in% toupper(names(empty_cols))
-            ]
+        ]
     } 
     #### Select samples ####
     all_samples <- fields$samples
@@ -61,7 +61,7 @@ select_vcf_fields <- function(path,
             } else if (length(all_samples)==1){
                 messager("1 sample detected:",all_samples) 
             } 
-        #### User-specified samples #####
+            #### User-specified samples #####
         } else if(methods::is(samples,"character")){
             all_samples <- all_samples[
                 toupper(all_samples) %in% toupper(samples)

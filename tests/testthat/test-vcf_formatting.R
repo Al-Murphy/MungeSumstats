@@ -3,7 +3,7 @@ test_that("VCF is correctly formatted", {
     ## The following test uses more than 2GB of memory, which is more
     ## than what 32-bit Windows can handle:
     is_32bit_windows <- .Platform$OS.type == "windows" ##&&
-        ##.Platform$r_arch == "i386"
+    ##.Platform$r_arch == "i386"
     if (!is_32bit_windows) {
         ## IMPORTANT: Must have .vcf file extension, 
         # or else MungeSumstats won't know it's a VCF.
@@ -63,7 +63,7 @@ test_that("VCF is correctly formatted", {
             )
         reformatted_lines_af <- readLines(reformatted_allelic_flip)
         testthat::expect_equal(sort(reformatted_lines), 
-                                sort(reformatted_lines_af))
+                               sort(reformatted_lines_af))
         # also check outputting as different types
         pth <- system.file("extdata", "ALSvcf.vcf", package = "MungeSumstats")
         rtrn_dt <- MungeSumstats::format_sumstats(
@@ -105,7 +105,7 @@ test_that("VCF is correctly formatted", {
         testthat::expect_true(is(rtrn_grng,"GRanges"))
         testthat::expect_true(is(rtrn_vrng,"VRanges"))
         testthat::expect_true(is(rtrn_dt,"data.table"))
-
+        
         # also test inferring the genome build
         #### Failing atm? duplicate SNPs?
         # rtrn_dt_infer <- MungeSumstats::format_sumstats(
@@ -120,7 +120,7 @@ test_that("VCF is correctly formatted", {
         #     return_format = "data.table"
         # )
         # testthat::expect_true(all.equal(rtrn_dt, rtrn_dt_infer))
-
+        
         # also test outputting ldsc_format ready format
         rtrn_ldsc <- MungeSumstats::format_sumstats(
             path = pth,

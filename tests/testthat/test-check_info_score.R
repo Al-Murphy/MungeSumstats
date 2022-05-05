@@ -17,12 +17,12 @@ test_that("check_info_score works", {
     
     #### INFO_filter=.9  ####
     sumstats <- MungeSumstats:::check_info_score(sumstats_dt=sumstats_dt, 
-                                 INFO_filter=.9,
-                                 log_folder_ind=TRUE,
-                                 check_save_out=check_save_out, 
-                                 tabix_index=FALSE, 
-                                 nThread=1, 
-                                 log_files=log_files) 
+                                                 INFO_filter=.9,
+                                                 log_folder_ind=TRUE,
+                                                 check_save_out=check_save_out, 
+                                                 tabix_index=FALSE, 
+                                                 nThread=1, 
+                                                 log_files=log_files) 
     testthat::expect_equal(names(sumstats),c( "sumstats_dt","log_files" )) 
     testthat::expect_equal(nrow(sumstats$sumstats_dt),47)
     testthat::expect_lt(nrow(sumstats$sumstats_dt), nrow(sumstats_dt))
@@ -45,12 +45,12 @@ test_that("check_info_score works", {
     #### All INFO==1  ####
     sumstats_dt$INFO <- 1
     sumstats <- MungeSumstats::: check_info_score(sumstats_dt=sumstats_dt, 
-                                                 INFO_filter=.9,
-                                                 log_folder_ind=TRUE,
-                                                 check_save_out=check_save_out, 
-                                                 tabix_index=FALSE, 
-                                                 nThread=1, 
-                                                 log_files=log_files) 
+                                                  INFO_filter=.9,
+                                                  log_folder_ind=TRUE,
+                                                  check_save_out=check_save_out, 
+                                                  tabix_index=FALSE, 
+                                                  nThread=1, 
+                                                  log_files=log_files) 
     testthat::expect_equal(names(sumstats),c( "sumstats_dt","log_files" )) 
     testthat::expect_equal(sumstats$sumstats_dt,sumstats_dt)  
 })

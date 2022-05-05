@@ -32,19 +32,19 @@ index_vcf <- function(path,
        any(startsWith(tolower(path),c("http","ftp")))){  
         messager("File inferred to be remote.",v=verbose)
         return(path)
-    #### When already tabix ####
+        #### When already tabix ####
     } else if(is_tabix(path = path)){
         messager("File already tabix-indexed.",v=verbose)
         return(path)
-    #### When local and non-tabix ####
+        #### When local and non-tabix ####
     } else {
         messager("Compressing and tabix-indexing VCF file.",v=verbose)
         if(!endsWith(path,".bgz")){
             path <- Rsamtools::bgzip(file = path, 
-                                      dest = sprintf("%s.bgz",
-                                                     sub("\\.gz$|\\.bgz$", "",
-                                                         path)),
-                                      overwrite = TRUE)
+                                     dest = sprintf("%s.bgz",
+                                                    sub("\\.gz$|\\.bgz$", "",
+                                                        path)),
+                                     overwrite = TRUE)
         } 
         path <- VariantAnnotation::indexVcf(x = path)$path 
         return(path)

@@ -2,7 +2,7 @@ test_that("write_sumstats works", {
     ## The following test uses more than 2GB of memory, which is more
     ## than what 32-bit Windows can handle:
     is_32bit_windows <- .Platform$OS.type == "windows" ##&&
-        ##.Platform$r_arch == "i386"
+    ##.Platform$r_arch == "i386"
     if (!is_32bit_windows) {
         sumstats_dt <- MungeSumstats::formatted_example()
         
@@ -69,18 +69,18 @@ test_that("write_sumstats works", {
                          fileext = ".vcf.gz") 
         ## with indexing
         # providing the correct suffix is important
-       testthat::expect_failure(
-           dat <- run_tests(sumstats_dt = sumstats_dt, 
-                            write_vcf = TRUE,
-                            tabix_index = TRUE,
-                            fileext = ".vcf", 
-                            save_path_check = FALSE) 
-       )
-       dat <- run_tests(sumstats_dt = sumstats_dt, 
-                        write_vcf = TRUE,
-                        tabix_index = TRUE,
-                        fileext = ".vcf", 
-                        save_path_check = TRUE) 
+        testthat::expect_failure(
+            dat <- run_tests(sumstats_dt = sumstats_dt, 
+                             write_vcf = TRUE,
+                             tabix_index = TRUE,
+                             fileext = ".vcf", 
+                             save_path_check = FALSE) 
+        )
+        dat <- run_tests(sumstats_dt = sumstats_dt, 
+                         write_vcf = TRUE,
+                         tabix_index = TRUE,
+                         fileext = ".vcf", 
+                         save_path_check = TRUE) 
         dat <- run_tests(sumstats_dt = sumstats_dt, 
                          tabix_index = TRUE,
                          write_vcf = TRUE,

@@ -59,7 +59,7 @@ check_signed_col <-
                     beta_imputed <- TRUE
                 }  
             } else if ("OR" %in% col_headers) {
-            #if ("OR" %in% col_headers) {
+                #if ("OR" %in% col_headers) {
                 imp_cols <- "OR"
                 if(impute_beta){
                     messager(paste0(msg,"Deriving BETA from OR"))

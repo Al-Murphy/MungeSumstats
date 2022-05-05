@@ -81,10 +81,10 @@ find_sumstats <- function(ids = NULL,
                           min_nsnp = NULL,
                           include_NAs = FALSE,
                           access_token = check_access_token()) {
-
+    
     ## Set up fake empty variables to avoid confusing BiocCheck
     sample_size <- ncase <- ncontrol <- nsnp <- NULL
-
+    
     message("Collecting metadata from Open GWAS.")
     if (!is.null(ids)) {
         metagwas <- gwasinfo(
@@ -105,54 +105,54 @@ find_sumstats <- function(ids = NULL,
     message("Filtering metadata by substring criteria.")
     if (!is.null(traits)) {
         metagwas <- metagwas[grepl(paste(traits, collapse = "|"),
-            metagwas$trait,
-            ignore.case = TRUE
+                                   metagwas$trait,
+                                   ignore.case = TRUE
         ), ]
     }
     if (!is.null(years)) {
         metagwas <- metagwas[grepl(paste(years, collapse = "|"),
-            metagwas$year,
-            ignore.case = TRUE
+                                   metagwas$year,
+                                   ignore.case = TRUE
         ), ]
     }
     if (!is.null(consortia)) {
         metagwas <- metagwas[grepl(paste(consortia, collapse = "|"),
-            metagwas$consortium,
-            ignore.case = TRUE
+                                   metagwas$consortium,
+                                   ignore.case = TRUE
         ), ]
     }
     if (!is.null(authors)) {
         metagwas <- metagwas[grepl(paste(authors, collapse = "|"),
-            metagwas$author,
-            ignore.case = TRUE
+                                   metagwas$author,
+                                   ignore.case = TRUE
         ), ]
     }
     if (!is.null(populations)) {
         metagwas <- metagwas[grepl(paste(populations, collapse = "|"),
-            metagwas$population,
-            ignore.case = TRUE
+                                   metagwas$population,
+                                   ignore.case = TRUE
         ), ]
     }
     if (!is.null(categories)) {
         metagwas <- metagwas[grepl(paste(categories, collapse = "|"),
-            metagwas$category,
-            ignore.case = TRUE
+                                   metagwas$category,
+                                   ignore.case = TRUE
         ), ]
     }
     if (!is.null(subcategories)) {
         metagwas <- metagwas[grepl(paste(subcategories, collapse = "|"),
-            metagwas$subcategory,
-            ignore.case = TRUE
+                                   metagwas$subcategory,
+                                   ignore.case = TRUE
         ), ]
     }
     if (!is.null(builds)) {
         metagwas <- metagwas[grepl(paste(builds, collapse = "|"),
-            metagwas$build,
-            ignore.case = TRUE
+                                   metagwas$build,
+                                   ignore.case = TRUE
         ), ]
     }
     if (!is.null(pmids)) metagwas <- metagwas[metagwas$pmid %in% pmids, ]
-
+    
     if (any(
         !is.null(min_sample_size),
         !is.null(min_ncase),
@@ -213,8 +213,8 @@ find_sumstats <- function(ids = NULL,
     #### Add N col ####
     metagwas <- metagwas %>%
         dplyr::mutate(N = ifelse(is.na(sample_size),
-            sum(ncase, ncontrol, na.rm = TRUE),
-            sample_size
+                                 sum(ncase, ncontrol, na.rm = TRUE),
+                                 sample_size
         ))
     #### Ensure data.table format ####
     metagwas <- data.table::data.table(metagwas)
@@ -223,35 +223,35 @@ find_sumstats <- function(ids = NULL,
     metagwas$query <- list(param_list[names(param_list)!=""] )
     #### Sort results  #### 
     data.table::setorderv(metagwas,
-        cols = c(
-            "trait", "N", "sample_size",
-            "ncase", "ncontrol", "year"
-        ),
-        order = c(1, -1, -1, -1, -1, -1)
+                          cols = c(
+                              "trait", "N", "sample_size",
+                              "ncase", "ncontrol", "year"
+                          ),
+                          order = c(1, -1, -1, -1, -1, -1)
     )
     message(
         "Found ", formatC(nrow(metagwas), big.mark = ","),
         " GWAS datasets matching search criteria across:",
         "\n   - ", formatC(length(unique(metagwas$trait)),
-            big.mark = ","
+                           big.mark = ","
         ), " trait(s)",
         "\n   - ", formatC(length(unique(metagwas$population)),
-            big.mark = ","
+                           big.mark = ","
         ), " population(s)",
         "\n   - ", formatC(length(unique(metagwas$category)),
-            big.mark = ","
+                           big.mark = ","
         ), " category(ies)",
         "\n   - ", formatC(length(unique(metagwas$subcategory)),
-            big.mark = ","
+                           big.mark = ","
         ), " subcategory(ies)",
         "\n   - ", formatC(length(unique(metagwas$pmid)),
-            big.mark = ","
+                           big.mark = ","
         ), " publication(s)",
         "\n   - ", formatC(length(unique(metagwas$consortium)),
-            big.mark = ","
+                           big.mark = ","
         ), " consortia(ium)",
         "\n   - ", formatC(length(unique(metagwas$build)),
-            big.mark = ","
+                           big.mark = ","
         ), " genome build(s)"
     )
     return(metagwas)

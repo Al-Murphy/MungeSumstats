@@ -29,11 +29,11 @@ check_info_score <- function(sumstats_dt,
             #### If user wants log, save it to there ####
             if (log_folder_ind) {
                 log_out <- check_info_score_log(sumstats_dt=sumstats_dt,
-                                                 log_files=log_files,
-                                                 INFO_filter=INFO_filter,
-                                                 check_save_out=check_save_out,
-                                                 tabix_index=tabix_index,
-                                                 nThread=nThread)
+                                                log_files=log_files,
+                                                INFO_filter=INFO_filter,
+                                                check_save_out=check_save_out,
+                                                tabix_index=tabix_index,
+                                                nThread=nThread)
                 sumstats_dt <- log_out$sumstats_dt
                 log_files <- log_out$log_files
             }

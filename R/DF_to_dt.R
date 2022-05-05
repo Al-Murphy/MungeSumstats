@@ -13,21 +13,21 @@
 #' @importFrom IRanges CharacterList
 #' @returns VCF data in data.table format.
 DF_to_dt <- function(DF){ 
-    data.table::data.table(
-        mapply(DF, 
-               FUN=function(s){ 
-                   # s <- DF[["REF"]]
-                   # s <- DF[["ALT"]]
-                   # s <- DF[[1]]
-                   if(methods::is(s,"DNAStringSet") ){
-                       s <- as.character(s)
-                   } else if(methods::is(s,"DNAStringSetList")){
-                       s <- IRanges::CharacterList(s)
-                       s <- Biostrings::unstrsplit(s, sep=",")
-                   } else {
-                       s <- as.vector(s)
-                   }
-                   return(s)
-               })
-    )
+  data.table::data.table(
+    mapply(DF, 
+           FUN=function(s){ 
+             # s <- DF[["REF"]]
+             # s <- DF[["ALT"]]
+             # s <- DF[[1]]
+             if(methods::is(s,"DNAStringSet") ){
+               s <- as.character(s)
+             } else if(methods::is(s,"DNAStringSetList")){
+               s <- IRanges::CharacterList(s)
+               s <- Biostrings::unstrsplit(s, sep=",")
+             } else {
+               s <- as.vector(s)
+             }
+             return(s)
+           })
+  )
 }

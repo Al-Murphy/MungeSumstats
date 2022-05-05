@@ -2,7 +2,7 @@ test_that("Handle more than 1 rs IDs in one row", {
     ## The following test uses more than 2GB of memory, which is more
     ## than what 32-bit Windows can handle:
     is_32bit_windows <- .Platform$OS.type == "windows" #&&
-        #.Platform$r_arch == "i386"
+    #.Platform$r_arch == "i386"
     if (!is_32bit_windows) {
         file <- tempfile()
         # Remove data from line 3 to check it is deleted
@@ -43,47 +43,47 @@ test_that("Handle more than 1 rs IDs in one row", {
         # Run MungeSumstats code
         reformatted <-
             MungeSumstats::format_sumstats(file,
-                ref_genome = "GRCh37",
-                on_ref_genome = FALSE,
-                strand_ambig_filter = FALSE,
-                bi_allelic_filter = FALSE,
-                allele_flip_check = FALSE,
-                imputation_ind = TRUE,
-                remove_multi_rs_snp = FALSE
+                                           ref_genome = "GRCh37",
+                                           on_ref_genome = FALSE,
+                                           strand_ambig_filter = FALSE,
+                                           bi_allelic_filter = FALSE,
+                                           allele_flip_check = FALSE,
+                                           imputation_ind = TRUE,
+                                           remove_multi_rs_snp = FALSE
             )
         reformatted_lines <- data.table::fread(reformatted)
         # Should equal org apart from this one line
         writeLines(eduAttainOkbay, con = file)
         org <- MungeSumstats::format_sumstats(file,
-            ref_genome = "GRCh37",
-            on_ref_genome = FALSE,
-            strand_ambig_filter = FALSE,
-            bi_allelic_filter = FALSE,
-            allele_flip_check = FALSE,
-            imputation_ind = TRUE,
-            remove_multi_rs_snp = FALSE
+                                              ref_genome = "GRCh37",
+                                              on_ref_genome = FALSE,
+                                              strand_ambig_filter = FALSE,
+                                              bi_allelic_filter = FALSE,
+                                              allele_flip_check = FALSE,
+                                              imputation_ind = TRUE,
+                                              remove_multi_rs_snp = FALSE
         )
         org_lines <- data.table::fread(org)
-
+        
         # remove imputation column
         reformatted_lines[, convert_multi_rs_SNP := NULL]
         # reordering makes line 3 got to 58
         testthat::expect_equal(reformatted_lines, org_lines)
-
+        
         # check log files
         # Run MungeSumstats code
         reformatted_log <-
             MungeSumstats::format_sumstats(file2,
-                ref_genome = "GRCh37",
-                on_ref_genome = TRUE,
-                strand_ambig_filter = TRUE,
-                bi_allelic_filter = TRUE,
-                allele_flip_check = TRUE,
-                imputation_ind = TRUE,
-                remove_multi_rs_snp = TRUE,
-                log_folder_ind = TRUE
+                                           ref_genome = "GRCh37",
+                                           on_ref_genome = TRUE,
+                                           strand_ambig_filter = TRUE,
+                                           bi_allelic_filter = TRUE,
+                                           allele_flip_check = TRUE,
+                                           imputation_ind = TRUE,
+                                           remove_multi_rs_snp = TRUE,
+                                           log_folder_ind = TRUE
             )
-
+        
         # expect 7 log files
         testthat::expect_equal(length(reformatted_log$log_files), 7)
         # next check number of rows in each
