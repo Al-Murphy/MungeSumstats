@@ -50,8 +50,11 @@ Passed to \code{download.file}. Default: \code{30*60} (30min).}
 Local path to downloaded file.
 }
 \description{
-R wrapper for \code{"axel"} (multi-threaded) and
-\code{"download.file"} (single-threaded) download functions.
+R wrapper for
+\href{https://github.com/axel-download-accelerator/axel}{axel}
+(multi-threaded) and
+\link[utils]{download.file} (single-threaded)
+download functions.
 }
 \seealso{
 Other downloaders: 

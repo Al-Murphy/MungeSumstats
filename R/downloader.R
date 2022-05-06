@@ -1,7 +1,12 @@
 #' downloader wrapper
 #'
-#' R wrapper for \code{"axel"} (multi-threaded) and
-#'  \code{"download.file"} (single-threaded) download functions.
+#' R wrapper for 
+#' \href{https://github.com/axel-download-accelerator/axel}{axel} 
+#' (multi-threaded) and
+#'  \link[utils]{download.file} (single-threaded) 
+#'  download functions.
+#' @source \href{https://stackoverflow.com/a/66602496/13214824}{
+#' Suggestion to avoid 'proc$get_built_file() : Build process failed'}
 #'
 #' @return Local path to downloaded file.
 #'
@@ -53,28 +58,48 @@ downloader <- function(input_url,
                 download_method <- "download.file"
             }
         } else {
-            message(
+            messager(
                 "Please install axel first.\n",
                 "- MacOS: brew install axel",
                 "- Linux: sudo apt-get update && sudo apt-get install axel"
             )
-            message("Defaulting to download.file")
+            messager("Defaulting to download.file")
             download_method <- "download.file"
         }
     }
     if (download_method == "download.file") {
-        message("Downloading with download.file.")
+        messager("Downloading with download.file.")
         options(timeout = timeout)
         out_file <- file.path(output_path, basename(input_url))
-        catch_fail <- tryCatch(utils::download.file(input_url, out_file),
-            error = function(e) e, warning = function(w) w
-        )
+        catch_fail <- tryCatch({
+                utils::download.file(url = input_url, 
+                                     destfile = out_file)
+            },
+        error = function(e) {message(e);e}, 
+        warning = function(w) {message(w);w})
         msg <- paste0(
-            "Failed to download from:\n", input_url,
-            "\nThis is likely caused by inputting an ID which ",
-            "couldn't be found. Check this and the URL."
+            "Failed to download:", input_url,
+            "\nThis is likely due to eithr an incorrect ID/URL,",
+            "or an issue with your internet connection."
         )
-        if (is(catch_fail, "error") | is(catch_fail, "warning")) {
+        if (is(catch_fail, "error") || 
+            is(catch_fail, "warning")) {
+            messager(msg)
+        }
+        #### 2nd attempt ###
+        messager("Trying download.file again with different parameters.")
+        catch_fail2 <- tryCatch({
+            utils::download.file(url = input_url, 
+                                 destfile = out_file,
+                                 mode = 'wb',
+                                 method = 'curl',
+                                 extra = '-k')
+        },
+        error = function(e) {message(e);e}, 
+        warning = function(w) {message(w);w})
+        
+        if (is(catch_fail2, "error") || 
+            is(catch_fail2, "warning")) {
             stop(msg)
         }
     }
