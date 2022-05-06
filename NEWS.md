@@ -3,6 +3,7 @@
 ### New features
 
 * `read_vcf` can now be parallised: splits query into chunks, imports them, and (optionally) converts them to `data.table` before rbinding them back into one object. 
+* Add Linux installation instructions for *axel* downloader.
 
 ### Bug fixes 
 

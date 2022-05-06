@@ -119,15 +119,15 @@ path <- system.file("extdata","ALSvcf.vcf", package="MungeSumstats")
 sumstats_dt <- read_vcf(path = path)
 
 #### Remote file ####
-## Small GWAS
-path <- "https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz" 
-sumstats_dt2 <- read_vcf(path = path)
+## Small GWAS (0.2Mb)
+# path <- "https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz" 
+# sumstats_dt2 <- read_vcf(path = path)
 
-## Large GWAS
+## Large GWAS (250Mb)
 # path <- "https://gwas.mrcieu.ac.uk/files/ubm-a-2929/ubm-a-2929.vcf.gz"
 # sumstats_dt3 <- read_vcf(path = path, nThread=11)
 
-### Additional GWAS
+### Very large GWAS (500Mb)
 # path <- "https://gwas.mrcieu.ac.uk/files/ieu-a-1124/ieu-a-1124.vcf.gz"
-# sumstats_dt <- read_vcf(path = path, nThread=11)
+# sumstats_dt4 <- read_vcf(path = path, nThread=11)
 }

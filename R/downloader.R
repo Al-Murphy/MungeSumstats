@@ -36,9 +36,7 @@ downloader <- function(input_url,
                        timeout = 30 * 60) {
     if (download_method == "axel") {
         axel_avail <- length(system("which axel", intern = TRUE)) != 0
-        if (axel_avail
-            # | !is.null(conda_env)
-        ) {
+        if (axel_avail) {
             out_file <- axel(
                 input_url = input_url,
                 output_path = output_path,
@@ -56,9 +54,9 @@ downloader <- function(input_url,
             }
         } else {
             message(
-                "axel not installed.\n",
-                "For Mac users, please install via brew in the command ",
-                "line (`brew install axel`)"
+                "Please install axel first.\n",
+                "- MacOS: brew install axel",
+                "- Linux: sudo apt-get update && sudo apt-get install axel"
             )
             message("Defaulting to download.file")
             download_method <- "download.file"
