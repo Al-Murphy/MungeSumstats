@@ -7,8 +7,8 @@
 #' @return Character
 #' @keywords internal
 parse_idStandard <- function(l){
-    line <- grep("Parsing .*. data column",l,
-                 value = TRUE)[1]
-    if(is.na(line)) return(NA)
-    trimws(strsplit(line," ")[[1]][2], whitespace = "'|[ ]")
+  line <- grep("Parsing .*. data column",l,
+               value = TRUE)[1]
+  if(is.na(line)) return(NA)
+  trimws(strsplit(line," ")[[1]][2], whitespace = "'|[ ]")
 }

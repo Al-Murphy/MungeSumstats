@@ -10,8 +10,11 @@ vignette: >
     %\usepackage[utf8]{inputenc}
     %\VignetteEngine{knitr::rmarkdown} 
 bibliography: MungeSumstats.bib
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
- 
+
 # Citation
 
 If you use the *MungeSumstats* package, please cite
@@ -48,14 +51,15 @@ The *MungeSumstats* package standardises both VCF and the most common
 summary statistic file formats to enable downstream integration and
 analysis.
 
-*MungeSumstats* also offers comprehensive Quality Control (QC) steps which
-are important prerequisites for downstream analysis like Linkage
+*MungeSumstats* also offers comprehensive Quality Control (QC) steps
+which are important prerequisites for downstream analysis like Linkage
 disequilibrium score regression (LDSC) and MAGMA.
 
-Moreover, *MungeSumstats* is efficiently written resulting in all reformatting
-and quality control checks completing in minutes for GWAS summary statistics
-with 500k SNPs on a standard desktop machine. This speed can be increased 
-further by increasing the number of threads (nThread) for `data.table` to use.
+Moreover, *MungeSumstats* is efficiently written resulting in all
+reformatting and quality control checks completing in minutes for GWAS
+summary statistics with 500k SNPs on a standard desktop machine. This
+speed can be increased further by increasing the number of threads
+(nThread) for `data.table` to use.
 
 Currently *MungeSumstats* only works on data from humans, as it uses
 human-based genome references.
@@ -79,16 +83,17 @@ files include (but are not limited to) the columns:
 -   INFO: The imputation information score
 -   FRQ: The minor/effect allele frequency (MAF/EAF) of the SNP
 
-*MungeSumstats* uses a mapping file to infer the inputted column names (run
-`data("sumstatsColHeaders")` to view these). This mapping file is far more 
-comprehensive than any other publicly available munging tool containing more 
-than 200 unique mappings at the time of writing this vignette. However, if your
-column headers are missing or if you want to change the mapping, you can do so 
-by passing your own mapping file (see `format_sumstats(mapping_file)`).
+*MungeSumstats* uses a mapping file to infer the inputted column names
+(run `data("sumstatsColHeaders")` to view these). This mapping file is
+far more comprehensive than any other publicly available munging tool
+containing more than 200 unique mappings at the time of writing this
+vignette. However, if your column headers are missing or if you want to
+change the mapping, you can do so by passing your own mapping file (see
+`format_sumstats(mapping_file)`).
 
-*MungeSumstats* offers unmatched levels of quality control to ensure, for 
-example, consistency of allele assignment and direction of effects. Tests run by
-*MungeSumstats* include:
+*MungeSumstats* offers unmatched levels of quality control to ensure,
+for example, consistency of allele assignment and direction of effects.
+Tests run by *MungeSumstats* include:
 
 -   Check VCF format
 -   Check tab, space or comma delimited, zipped, csv or tsv file
@@ -128,33 +133,36 @@ example, consistency of allele assignment and direction of effects. Tests run by
 -   Check for z-score (Z) and impute if missing
 -   Check for N and impute if missing
 -   Check output format is LDSC ready
--   Check and perform liftover to desired reference genome if necessary 
+-   Check and perform liftover to desired reference genome if necessary
 
-Users can specify which checks to run on their data. A **note** on the allele 
-flipping check: **MungeSumstats** infers the effect allele will always be the 
-A2 allele, this is the approach done for 
-[IEU GWAS VCF](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7805039/) and has 
-such also been adopted here. This inference is first from the inputted file's 
-column headers however, the allele flipping check ensures this by comparing A1, 
-what should be the reference allele, to the reference genome. If a SNP's A1 
-DNA base doesn't match the reference genome but it's A2 (what should be the
-alternative allele) does, the alleles will be flipped along with the effect 
-information (e.g. Beta, Odds Ratio, signed summary statistics, FRQ, Z-score*).
+Users can specify which checks to run on their data. A **note** on the
+allele flipping check: **MungeSumstats** infers the effect allele will
+always be the A2 allele, this is the approach done for [IEU GWAS
+VCF](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7805039/) and has such
+also been adopted here. This inference is first from the inputted file's
+column headers however, the allele flipping check ensures this by
+comparing A1, what should be the reference allele, to the reference
+genome. If a SNP's A1 DNA base doesn't match the reference genome but
+it's A2 (what should be the alternative allele) does, the alleles will
+be flipped along with the effect information (e.g. Beta, Odds Ratio,
+signed summary statistics, FRQ, Z-score\*).
 
-*-by default the Z-score is assumed to be calculated off the effect size not 
-the P-value and so will be flipped. This can be changed by a user.
+\*-by default the Z-score is assumed to be calculated off the effect
+size not the P-value and so will be flipped. This can be changed by a
+user.
 
 If a test is failed, the user will be notified and if possible, the
 input will be corrected. The QC steps from the checks above can also be
 adjusted to suit the user's analysis, see
 `MungeSumstats::format_sumstats`.
 
-*MungeSumstats* can handle VCF, txt, tsv, csv file types or .gz/.bgz versions of
-these file types. The package also gives the user the flexibility to export the
-reformatted file as tab-delimited, VCF or R native objects such as data.table,
-GRanges or VRanges objects. The output can also be outputted in an 
-**LDSC ready** format which means the file can be fed directly into LDSC without
-the need for additional munging.
+*MungeSumstats* can handle VCF, txt, tsv, csv file types or .gz/.bgz
+versions of these file types. The package also gives the user the
+flexibility to export the reformatted file as tab-delimited, VCF or R
+native objects such as data.table, GRanges or VRanges objects. The
+output can also be outputted in an **LDSC ready** format which means the
+file can be fed directly into LDSC without the need for additional
+munging.
 
 # Data
 
@@ -173,9 +181,7 @@ These datasets will be used to showcase *MungeSumstats* functionality.
 *MungeSumstats* is available on Bioconductor. To install the package on
 Bioconductor run the following lines of code:
 
-    if (!require("BiocManager"))
-        install.packages("BiocManager")
-
+    if (!require("BiocManager")) install.packages("BiocManager")
     BiocManager::install("MungeSumstats")
 
 Once installed, load the package:
@@ -185,17 +191,17 @@ library(MungeSumstats)
 ```
 
 To standardise the summary statistics' file format, simply call
-`format_sumstats()` passing in the path to your summary statistics file or 
-directly pass the summary statistics as a dataframe or datatable.
-You can specify which genome build was used in the GWAS(GRCh37 or
-GRCh38) or, as default, infer the genome build from the data.The
-reference genome is used for multiple checks like deriving missing data
-such SNP/BP/CHR/A1/A2 and for QC steps like removing non-biallelic SNPs,
-strand-ambiguous SNPs or ensuring correct allele and direction of SNP effects. 
-The path to the reformatted summary statistics file can be returned by the 
-function call, the user can specify a location to save the file or the user can 
-return an R native object for the data: data.table, VRanges or GRanges 
-object.
+`format_sumstats()` passing in the path to your summary statistics file
+or directly pass the summary statistics as a dataframe or datatable. You
+can specify which genome build was used in the GWAS(GRCh37 or GRCh38)
+or, as default, infer the genome build from the data.The reference
+genome is used for multiple checks like deriving missing data such
+SNP/BP/CHR/A1/A2 and for QC steps like removing non-biallelic SNPs,
+strand-ambiguous SNPs or ensuring correct allele and direction of SNP
+effects. The path to the reformatted summary statistics file can be
+returned by the function call, the user can specify a location to save
+the file or the user can return an R native object for the data:
+data.table, VRanges or GRanges object.
 
 Note that for a number of the checks implored by *MungeSumstats* a
 reference genome is used. If your GWAS summary statistics file of
@@ -203,15 +209,19 @@ interest relates to *GRCh38*, you will need to install
 `SNPlocs.Hsapiens.dbSNP144.GRCh38` and `BSgenome.Hsapiens.NCBI.GRCh38`
 from Bioconductor as follows:
 
-    BiocManager::install("SNPlocs.Hsapiens.dbSNP144.GRCh38")
-    BiocManager::install("BSgenome.Hsapiens.NCBI.GRCh38")
+```
+BiocManager::install("SNPlocs.Hsapiens.dbSNP144.GRCh38")
+BiocManager::install("BSgenome.Hsapiens.NCBI.GRCh38")
+```
 
 If your GWAS summary statistics file of interest relates to *GRCh37*,
 you will need to install `SNPlocs.Hsapiens.dbSNP144.GRCh37` and
 `BSgenome.Hsapiens.1000genomes.hs37d5` from Bioconductor as follows:
 
-    BiocManager::install("SNPlocs.Hsapiens.dbSNP144.GRCh37")
-    BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")
+```
+BiocManager::install("SNPlocs.Hsapiens.dbSNP144.GRCh37")
+BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")
+```
 
 These may take some time to install and are not included in the package
 as some users may only need one of *GRCh37*/*GRCh38*.
@@ -220,12 +230,13 @@ The Educational Attainment by Okbay GWAS summary statistics file is
 saved as a text document in the package's external data folder so we can
 just pass the file path to it straight to *MungeSumstats*.
 
-**NOTE** - By default, Formatted results will be saved to `tempdir()`. This 
-means all formatted summary stats will be deleted upon ending the R session if 
-not copied to a local file path. Otherwise, to keep formatted summary stats, 
-change `save_path` ( e.g.`file.path('./formatted',basename(path))`), or make 
-sure to copy files elsewhere after processing 
-( e.g.`file.copy(save_path, './formatted/' )`.
+**NOTE** - By default, Formatted results will be saved to `tempdir()`.
+This means all formatted summary stats will be deleted upon ending the R
+session if not copied to a local file path. Otherwise, to keep formatted
+summary stats, change `save_path` (
+e.g.`file.path('./formatted',basename(path))`), or make sure to copy
+files elsewhere after processing (
+e.g.`file.copy(save_path, './formatted/' )`.
 
 ```{r, eval=FALSE, message=TRUE}
 eduAttainOkbayPth <- system.file("extdata","eduAttainOkbay.txt",
@@ -254,139 +265,156 @@ conducted by *MungeSumstats* are:
 -   **convert_small_p** Binary, should `p-values < 5e-324` be converted
     to 0? Small p-values pass the R limit and can cause errors with
     LDSC/MAGMA and should be converted. Default is TRUE.
--   **convert_large_p** Binary, should p-values >1 be converted to 1?
-    P-values >1 should not be possible and can cause errors with LDSC/MAGMA and
-    should be converted. Default is TRUE. 
--   **convert_neg_p** Binary, should p-values <0 be converted to 0? Negative 
-    p-values should not be possible and can cause errors with LDSC/MAGMA and 
-    should be converted. Default is TRUE.
--   **compute_z** Whether to compute Z-score column from P. Default is FALSE.
-    **Note** that imputing the Z-score for every SNP will not correct be 
-    perfectly correct and may result in a loss of power. This should only be 
-    done as a last resort.
--   **force_new_z** When a "Z" column already exists, it will be used by 
-    default. To override and compute a new Z-score column from P set to TRUE.
--   **compute_n** Whether to impute N. Default of 0 won't impute, any other
-    integer will be imputed as the N (sample size) for every SNP in the dataset.
-    **Note** that imputing the sample size for every SNP is not correct and
-    should only be done as a last resort. N can also be inputted with "ldsc",
-    "sum", "giant" or "metal" by passing one of these for this field or a vector
-    of multiple. Sum and an integer value creates an N column in the output
-    whereas giant, metal or ldsc create an Neff or effective sample size. If
-    multiples are passed, the formula used to derive it will be indicated.
--   **convert_n_int** Binary, if N (the number of samples) is not an
+-   **convert_large_p** Binary, should p-values \>1 be converted to 1?
+    P-values \>1 should not be possible and can cause errors with
+    LDSC/MAGMA and should be converted. Default is TRUE.
+-   **convert_neg_p** Binary, should p-values \<0 be converted to 0?
+    Negative p-values should not be possible and can cause errors with
+    LDSC/MAGMA and should be converted. Default is TRUE.
+-   **compute_z** Whether to compute Z-score column from P. Default is
+    FALSE. **Note** that imputing the Z-score for every SNP will not
+    correct be perfectly correct and may result in a loss of power. This
+    should only be done as a last resort.
+-   **force_new_z** When a "Z" column already exists, it will be used by
+    default. To override and compute a new Z-score column from P set to
+    TRUE.
+-   **compute_n** Whether to impute N. Default of 0 won't impute, any
+    other integer will be imputed as the N (sample size) for every SNP
+    in the dataset. **Note** that imputing the sample size for every SNP
+    is not correct and should only be done as a last resort. N can also
+    be inputted with "ldsc", "sum", "giant" or "metal" by passing one of
+    these for this field or a vector of multiple. Sum and an integer
+    value creates an N column in the output whereas giant, metal or ldsc
+    create an Neff or effective sample size. If multiples are passed,
+    the formula used to derive it will be indicated.
+-   **convert_n\_int** Binary, if N (the number of samples) is not an
     integer, should this be rounded? Default is TRUE. analysis_trait If
     multiple traits were studied, name of the trait for analysis from
     the GWAS. Default is NULL.
--   **impute_beta** Binary, whether BETA should be imputed using other effect
-    data if it isn't present in the sumstats. Note that this imputation is an 
-    approximation so could have an effect on downstream analysis. Use with 
-    caution. The different methods MungeSumstats will try and impute beta (in 
-    this order or priority) are: 1. log(OR)  2. Z x SE. Default value is FALSE.
--   **impute_se** Binary, whether the standard error should be imputed using 
-    other effect data if it isn't present in the sumstats. Note that this 
-    imputation is an approximation so could have an effect on downstream 
-    analysis. Use with caution. The different methods MungeSumstats will try and
-    impute se (in this order or priority) are: 1. BETA / Z  
-    2. abs(BETA/ qnorm(P/2)). Default value is FALSE.
--   **analysis_trait** If multiple traits were studied, name of the trait for
-    analysis from the GWAS. Default is NULL.
+-   **impute_beta** Binary, whether BETA should be imputed using other
+    effect data if it isn't present in the sumstats. Note that this
+    imputation is an approximation so could have an effect on downstream
+    analysis. Use with caution. The different methods MungeSumstats will
+    try and impute beta (in this order or priority) are: 1. log(OR) 2. Z
+    x SE. Default value is FALSE.
+-   **impute_se** Binary, whether the standard error should be imputed
+    using other effect data if it isn't present in the sumstats. Note
+    that this imputation is an approximation so could have an effect on
+    downstream analysis. Use with caution. The different methods
+    MungeSumstats will try and impute se (in this order or priority)
+    are: 1. BETA / Z
+    2.  abs(BETA/ qnorm(P/2)). Default value is FALSE.
+-   **analysis_trait** If multiple traits were studied, name of the
+    trait for analysis from the GWAS. Default is NULL.
 -   **INFO_filter** 0-1 The minimum value permissible of the imputation
     information score (if present in sumstatsfile). Default 0.9
--   **FRQ_filter** 0-1 The minimum value permissible of the frequency(FRQ)
-    of the SNP (i.e. Allele Frequency (AF)) (if present in sumstats file). By
-    default no filtering is done, i.e. value of 0.    
--   **pos_se** Binary Should the standard Error (SE) column be checked to ensure
-    it is greater than 0? Those that are, are removed (if present in sumstats 
-    file). Default TRUE.
--   **effect_columns_nonzero** Binary should the effect columns in the data 
-    BETA,OR (odds ratio),LOG_ODDS,SIGNED_SUMSTAT be checked to ensure no SNP=0. 
-    Those that do are removed(if present in sumstats file). Default TRUE.    
+-   **FRQ_filter** 0-1 The minimum value permissible of the
+    frequency(FRQ) of the SNP (i.e. Allele Frequency (AF)) (if present
+    in sumstats file). By default no filtering is done, i.e. value of
+    0.\
+-   **pos_se** Binary Should the standard Error (SE) column be checked
+    to ensure it is greater than 0? Those that are, are removed (if
+    present in sumstats file). Default TRUE.
+-   **effect_columns_nonzero** Binary should the effect columns in the
+    data BETA,OR (odds ratio),LOG_ODDS,SIGNED_SUMSTAT be checked to
+    ensure no SNP=0. Those that do are removed(if present in sumstats
+    file). Default TRUE.\
 -   **N_std** Numeric, the number of standard deviations above the mean
-    a SNP's N is needed to be removed. Default is 5. **N_dropNA** controls
-    whether the SNPs with a missing N value are dropped or not (Default is 
-    TRUE).
+    a SNP's N is needed to be removed. Default is 5. **N_dropNA**
+    controls whether the SNPs with a missing N value are dropped or not
+    (Default is TRUE).
 -   **N_dropNA** Drop rows where N is missing.Default is TRUE.
 -   **rmv_chr** vector or character The chromosomes on which the SNPs
     should be removed. Use NULL if no filtering necessary. Default is X,
-    Y and mitochondrial.**rmv_chrPrefix** controls whether "chr"/"CHR" is 
-    removed from chromosome names (Default is TRUE).
--   **rmv_chrPrefix** Remove "chr" or "CHR" from chromosome names. Default is
-    TRUE.
+    Y and mitochondrial.**rmv_chrPrefix** controls whether "chr"/"CHR"
+    is removed from chromosome names (Default is TRUE).
+-   **rmv_chrPrefix** Remove "chr" or "CHR" from chromosome names.
+    Default is TRUE.
 -   **on_ref_genome** Binary, should a check take place that all SNPs
-    are on the reference genome by SNP ID. Any SNPs not on the reference genome,
-    will be corrected from the reference genome (if possible) using the 
-    chromosome and base pair position data. Default is TRUE
+    are on the reference genome by SNP ID. Any SNPs not on the reference
+    genome, will be corrected from the reference genome (if possible)
+    using the chromosome and base pair position data. Default is TRUE
 -   **convert_ref_genome** name of the reference genome to convert to
-    ("GRCh37" or "GRCh38"). This will only occur if the current genome build 
-    does not match. Default is not to convert the genome build (NULL).    
+    ("GRCh37" or "GRCh38"). This will only occur if the current genome
+    build does not match. Default is not to convert the genome build
+    (NULL).\
 -   **strand_ambig_filter** Binary, should SNPs with strand-ambiguous
     alleles be removed. Default is FALSE
 -   **allele_flip_check** Binary, should the allele columns be checked
     against reference genome to infer if flipping is necessary. Default
-    is TRUE. **allele_flip_drop** controls whether the SNPs for which neither 
-    their A1 or A2 base pair values match a reference genome be dropped. Default
-    is TRUE. **allele_flip_z** controls whether the Z-score value should be 
-    flipped along with effect and FRQ columns (e.g. Beta). Default is TRUE.
-    **allele_flip_frq**  controls whether the frequency (FRQ) value should be 
-    flipped along with effect and Z-score columns (e.g. Beta). Default is TRUE.
+    is TRUE. **allele_flip_drop** controls whether the SNPs for which
+    neither their A1 or A2 base pair values match a reference genome be
+    dropped. Default is TRUE. **allele_flip_z** controls whether the
+    Z-score value should be flipped along with effect and FRQ columns
+    (e.g. Beta). Default is TRUE. **allele_flip_frq** controls whether
+    the frequency (FRQ) value should be flipped along with effect and
+    Z-score columns (e.g. Beta). Default is TRUE.
 -   **bi_allelic_filter** Binary, should non-biallelic SNPs be removed.
     Default is TRUE
--   **snp_ids_are_rs_ids** Binary, should the SNP IDs inputted be inferred as RS
-    IDs or some arbitrary ID. Default is TRUE.  
--   **remove_multi_rs_snp** Binary Sometimes summary statistics can have 
-    multiple RSIDs on one row (i.e. related to one SNP), for example 
-    "rs5772025_rs397784053". This can cause an error so by default, the first 
-    RS ID will be kept and the rest removed e.g."rs5772025". If you want to just
-    remove these SNPs entirely, set it to TRUE. Default is FALSE.
--   **frq_is_maf** Binary, conventionally the FRQ column is intended to show the
-    minor/effect allele frequency (MAF) but sometimes the major allele frequency
-    can be inferred as the FRQ column. This logical variable indicates that the
-    FRQ column should be renamed to MAJOR_ALLELE_FRQ if the frequency values
-    appear to relate to the major allele i.e. >0.5. By default mapping won't
-    occur i.e. is TRUE.
--   **indels** Binary does your Sumstats file contain Indels? These don't exist
-    in our reference file so they will be excluded from checks if this value is
-    TRUE. Default is TRUE.
--   **sort_coordinates** Whether to sort by coordinates of resulting sumstats.    
+-   **snp_ids_are_rs_ids** Binary, should the SNP IDs inputted be
+    inferred as RS IDs or some arbitrary ID. Default is TRUE.\
+-   **remove_multi_rs_snp** Binary Sometimes summary statistics can have
+    multiple RSIDs on one row (i.e. related to one SNP), for example
+    "rs5772025_rs397784053". This can cause an error so by default, the
+    first RS ID will be kept and the rest removed e.g."rs5772025". If
+    you want to just remove these SNPs entirely, set it to TRUE. Default
+    is FALSE.
+-   **frq_is_maf** Binary, conventionally the FRQ column is intended to
+    show the minor/effect allele frequency (MAF) but sometimes the major
+    allele frequency can be inferred as the FRQ column. This logical
+    variable indicates that the FRQ column should be renamed to
+    MAJOR_ALLELE_FRQ if the frequency values appear to relate to the
+    major allele i.e. \>0.5. By default mapping won't occur i.e. is
+    TRUE.
+-   **indels** Binary does your Sumstats file contain Indels? These
+    don't exist in our reference file so they will be excluded from
+    checks if this value is TRUE. Default is TRUE.
+-   **sort_coordinates** Whether to sort by coordinates of resulting
+    sumstats.\
 -   **nThread** Number of threads to use for parallel processes.
--   **write_vcf** Whether to write as VCF (TRUE) or tabular file (FALSE). While
-    **tabix_index** is a binary input for whether to index the formatted summary
-    statistics with [tabix](http://www.htslib.org/doc/tabix.html) for fast 
-    querying.
--   **return_data** Return `data.table`, `GRanges` or `VRanges`directly to user.
-    Otherwise, return the path to the save data. Default is FALSE.
+-   **write_vcf** Whether to write as VCF (TRUE) or tabular file
+    (FALSE). While **tabix_index** is a binary input for whether to
+    index the formatted summary statistics with
+    [tabix](http://www.htslib.org/doc/tabix.html) for fast querying.
+-   **return_data** Return `data.table`, `GRanges` or `VRanges`directly
+    to user. Otherwise, return the path to the save data. Default is
+    FALSE.
 -   **return_format** If return_data is TRUE. Object type to be returned
     ("data.table","vranges","granges").
--   **ldsc_format** Ensure that output format meets all requirements to be 
-    passed directly into LDSC without the need for additional munging.
--   **log_folder_ind** Should log files be stored containing all filtered out 
-    SNPs (separate file per filter). The data is outputted in the same format 
-    specified for the resulting sumstats file. 
--   **log_mungesumstats_msgs** Binary Should a log be stored containing all 
-    messages and errors printed by MungeSumstats in a run.
--   **imputation_ind** Binary Should a column be added for each imputation 
-    step to show what SNPs have imputed values for differing fields. This 
-    includes a field denoting SNP allele flipping (flipped). On the flipped 
-    value, this denoted whether the alelles where switched based on 
-    MungeSumstats initial choice of A1, A2 from the input column headers and 
-    thus may not align with what the creator intended.**Note** these columns 
-    will be in the formatted summary statistics returned.
--   **log_folder** File path to the directory for the log files and the log of
-    MungeSumstats messages to be stored. Default is a temporary directory.
--   **force_new** If a formatted file of the same names as \code{save_path}
-    exists, formatting will be skipped and this file will be imported instead
-    (default). Set \code{force_new=TRUE} to override this.
--   **mapping_file** MungeSumstats has a pre-defined column-name mapping file
-    which should cover the most common column headers and their interpretations.
-    However, if a column header that is in youf file is missing of the mapping
-    we give is incorrect you can supply your own mapping file. Must be a 2 
-    column dataframe with column names "Uncorrected" and "Corrected". See
-    `data(sumstatsColHeaders)` for default mapping and necessary format.    
+-   **ldsc_format** Ensure that output format meets all requirements to
+    be passed directly into LDSC without the need for additional
+    munging.
+-   **log_folder_ind** Should log files be stored containing all
+    filtered out SNPs (separate file per filter). The data is outputted
+    in the same format specified for the resulting sumstats file.
+-   **log_mungesumstats_msgs** Binary Should a log be stored containing
+    all messages and errors printed by MungeSumstats in a run.
+-   **imputation_ind** Binary Should a column be added for each
+    imputation step to show what SNPs have imputed values for differing
+    fields. This includes a field denoting SNP allele flipping
+    (flipped). On the flipped value, this denoted whether the alelles
+    where switched based on MungeSumstats initial choice of A1, A2 from
+    the input column headers and thus may not align with what the
+    creator intended.**Note** these columns will be in the formatted
+    summary statistics returned.
+-   **log_folder** File path to the directory for the log files and the
+    log of MungeSumstats messages to be stored. Default is a temporary
+    directory.
+-   **force_new** If a formatted file of the same names as
+    \code{save_path} exists, formatting will be skipped and this file
+    will be imported instead (default). Set \code{force_new=TRUE} to
+    override this.
+-   **mapping_file** MungeSumstats has a pre-defined column-name mapping
+    file which should cover the most common column headers and their
+    interpretations. However, if a column header that is in youf file is
+    missing of the mapping we give is incorrect you can supply your own
+    mapping file. Must be a 2 column dataframe with column names
+    "Uncorrected" and "Corrected". See `data(sumstatsColHeaders)` for
+    default mapping and necessary format.
 
-See `?MungeSumstats::format_sumstats()` for the full list of parameters to 
-control MungeSumstats QC and standardisation steps.
-    
+See `?MungeSumstats::format_sumstats()` for the full list of parameters
+to control MungeSumstats QC and standardisation steps.
+
 VCF files can also be standardised to the same format as other summary
 statistic files. A subset of the Amyotrophic lateral sclerosis GWAS from
 the ieu open GWAS project (a .vcf file) has been added to
@@ -405,9 +433,10 @@ reformatted_vcf <-
                                  ref_genome="GRCh37")
 ```
 
-You can also get more information on the SNPs which have had data imputed or 
-have been filtered out by *MungeSumstats* by using the `imputation_ind` and 
-`log_folder_ind` parameters respectively. For example:
+You can also get more information on the SNPs which have had data
+imputed or have been filtered out by *MungeSumstats* by using the
+`imputation_ind` and `log_folder_ind` parameters respectively. For
+example:
 
 ```{r, eval=FALSE, message=FALSE}
 #set
@@ -433,11 +462,12 @@ reformatted_vcf_2 <-
                                  allele_flip_check = FALSE)
 ```
 
-Note that using `log_folder_ind` returns a list from `format_sumstats` which
-includes the file locations of the differing classes of removed SNPs. Using 
-`log_mungesumstats_msgs` saves the messages to the console to a file which is 
-returned in the same list. Note that not all the messages will also print to 
-screen anymore when you set `log_mungesumstats_msgs`:
+Note that using `log_folder_ind` returns a list from `format_sumstats`
+which includes the file locations of the differing classes of removed
+SNPs. Using `log_mungesumstats_msgs` saves the messages to the console
+to a file which is returned in the same list. Note that not all the
+messages will also print to screen anymore when you set
+`log_mungesumstats_msgs`:
 
 ```{r, message=TRUE}
 names(reformatted_vcf_2)
@@ -445,52 +475,55 @@ names(reformatted_vcf_2)
 
 A user can load a file to view the excluded SNPs.
 
-In this case, no SNPs were filtered based on INFO criterion, 
-so an NA is returned for this value
-(instead of a path to a table of filtered SNPs). 
+In this case, no SNPs were filtered based on INFO criterion, so an NA is
+returned for this value (instead of a path to a table of filtered SNPs).
 
 ```{r, message=TRUE}
 print(reformatted_vcf_2$log_files$info_filter)
 ```
 
-The different types of exclusion which lead to the names are explained below:
+The different types of exclusion which lead to the names are explained
+below:
 
--   **snp_multi_rs_one_row** - Where the SNP (RS ID) contained more than one RS 
-    ID.
--   **snp_missing_rs** - Where the SNP (RS ID) was missing the rs prefix. Note 
-    that these are only removed when other snps have an rs prefix.
--   **snp_multi_colon** - Where the SNP ID has mutliple colons (":") in one SNP.
--   **snp_not_found_from_bp_chr** - Where the RS ID was attempted to be imputed
-    from the CHR and BP (Base-Pair) information, using the reference genome, but
-    wasn't successful.
--   **chr_bp_not_found_from_snp** - Where the CHR and BP (Base-Pair) was 
-    attempted to be imputed from the SNP (RS ID), using the reference genome, 
-    but wasn't successful. 
--   **alleles_not_found_from_snp** - Where the alleles (A1 and/or A2) was 
-    attempted to be imputed from the SNP (RS ID), using the reference genome, 
-    but wasn't successful.
--   **alleles_dont_match_ref_gen** - Where the alleles (A1 and/or A2) don't 
-    match what's on the reference genome.
--   **missing_data** - Where there is data missing across the inputted columns.
+-   **snp_multi_rs_one_row** - Where the SNP (RS ID) contained more than
+    one RS ID.
+-   **snp_missing_rs** - Where the SNP (RS ID) was missing the rs
+    prefix. Note that these are only removed when other snps have an rs
+    prefix.
+-   **snp_multi_colon** - Where the SNP ID has mutliple colons (":") in
+    one SNP.
+-   **snp_not_found_from_bp_chr** - Where the RS ID was attempted to be
+    imputed from the CHR and BP (Base-Pair) information, using the
+    reference genome, but wasn't successful.
+-   **chr_bp_not_found_from_snp** - Where the CHR and BP (Base-Pair) was
+    attempted to be imputed from the SNP (RS ID), using the reference
+    genome, but wasn't successful.
+-   **alleles_not_found_from_snp** - Where the alleles (A1 and/or A2)
+    was attempted to be imputed from the SNP (RS ID), using the
+    reference genome, but wasn't successful.
+-   **alleles_dont_match_ref_gen** - Where the alleles (A1 and/or A2)
+    don't match what's on the reference genome.
+-   **missing_data** - Where there is data missing across the inputted
+    columns.
 -   **dup_snp_id** - Where the SNP ID is duplicated in the input.
--   **dup_base_pair_position** - Where the base-pair position is duplicated in 
-    the input.
+-   **dup_base_pair_position** - Where the base-pair position is
+    duplicated in the input.
 -   **info_filter** - SNP INFO value below the specified threshold.
 -   **se_neg** - SNPs SE (Standard Error) value is 0 or negative.
--   **effect_col_zero** - SNPs effect column(s) value is zero e.g. BETA=0.
+-   **effect_col_zero** - SNPs effect column(s) value is zero e.g.
+    BETA=0.
 -   **n_large** - SNPs N is N standard deviations greater than the mean.
 -   **n_null** - SNPs N is null.
 -   **chr_excl** - SNP is on a chromosome specified to be excluded.
 -   **snp_strand_ambiguous** - SNP is strand ambiguous.
 -   **snp_bi_allelic** - SNP is not bi-allelic.
--   **MungeSumstats_log_msg** - Text file of all messages to the console created
-    during MungeSumstats run.
--   **MungeSumstats_log_output** - Text file of all errors to the console 
+-   **MungeSumstats_log_msg** - Text file of all messages to the console
     created during MungeSumstats run.
+-   **MungeSumstats_log_output** - Text file of all errors to the
+    console created during MungeSumstats run.
 
-
-Note to export to another type such as R native objects including data.table, 
-GRanges, VRanges or save as a VCF file, set `return_format`:
+Note to export to another type such as R native objects including
+data.table, GRanges, VRanges or save as a VCF file, set `return_format`:
 
 ```{r, message=FALSE,eval=FALSE}
 #set
@@ -503,7 +536,6 @@ reformatted_vcf_2 <-
                                  return_format="GRanges")
 ```
 
-
 See our publication for further discussion of these checks and options:
 
 [Murphy et al. MungeSumstats: A Bioconductor package for the
@@ -514,10 +546,10 @@ statistics](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/
 
 ## Get genome builds
 
-*MungeSumstats* also contains a function to quickly infer the genome build of 
-multiple summary statistic files. This can be called separately to 
-`format_sumstats()` which is useful if you want to just quickly check the genome
-build:
+*MungeSumstats* also contains a function to quickly infer the genome
+build of multiple summary statistic files. This can be called separately
+to `format_sumstats()` which is useful if you want to just quickly check
+the genome build:
 
 ```{r, message=FALSE,eval=FALSE}
 # Pass path to Educational Attainment Okbay sumstat file to a temp directory
@@ -529,20 +561,17 @@ ref_genomes <- MungeSumstats::get_genome_builds(sumstats_list = sumstats_list)
 
 ```
 
-
 ## Liftover
 
-*MungeSumstats* exposes the `liftover()` function as a general utility for users.
+*MungeSumstats* exposes the `liftover()` function as a general utility
+for users.
 
-Useful features include:
-  - Automatic standardisation of genome build names 
-  (i.e. "hg19", "hg37", and "GRCh37" will all be 
-  recognized as the same genome build.)
-  - Ability to specify `chrom_col` as well as both 
-  `start_col` and `end_col` (for variants that span >1bp).
-  - Ability to return in `data.table` or `GRanges` format.
-  - Ability to specify which chromosome format (e.g. "chr1" vs. 1) 
-  to return `GRanges` as.
+Useful features include: - Automatic standardisation of genome build
+names (i.e. "hg19", "hg37", and "GRCh37" will all be recognized as the
+same genome build.) - Ability to specify `chrom_col` as well as both
+`start_col` and `end_col` (for variants that span \>1bp). - Ability to
+return in `data.table` or `GRanges` format. - Ability to specify which
+chromosome format (e.g. "chr1" vs. 1) to return `GRanges` as.
 
 ```{r}
 sumstats_dt <- MungeSumstats::formatted_example()
@@ -552,13 +581,13 @@ sumstats_dt_hg38 <- MungeSumstats::liftover(sumstats_dt = sumstats_dt,
 knitr::kable(head(sumstats_dt_hg38))
 ```
 
-
 ## Quick formatting
 
-In some cases, users may not want to run the full munging pipeline provided by  
-`MungeSumstats::format_sumstats`, but still would like to take advantage of
-the file type conversion and column header standardisation features. 
-This will not be nearly as robust as the full pipeline, but can still be 
+In some cases, users may not want to run the full munging pipeline
+provided by\
+`MungeSumstats::format_sumstats`, but still would like to take advantage
+of the file type conversion and column header standardisation features.
+This will not be nearly as robust as the full pipeline, but can still be
 helpful.
 
 ### From disk
@@ -585,8 +614,8 @@ formatted_path <- MungeSumstats::write_sumstats(sumstats_dt = dat,
 
 ### From `data.table`
 
-If you already have your data imported as an `data.table`, 
-you can also standardise its headers like so:
+If you already have your data imported as an `data.table`, you can also
+standardise its headers like so:
 
 ```{r}
 #### Mess up some column names ####
@@ -600,10 +629,6 @@ dat2 <- MungeSumstats::standardise_header(sumstats_dt = dat_raw,
                                           return_list = FALSE )
 knitr::kable(head(dat2))
 ```
-
-
-
-
 
 # Future Enhancements
 
@@ -625,20 +650,19 @@ feel free to update the `MungeSumstats::sumstatsColHeaders` following
 the approach in the data.R file and add your mapping. Then use a pull
 request on github and we will incorporate this change into the package.
 
-A note on `MungeSumstats::sumstatsColHeaders` for summary statistic files with
-A0/A1. The mapping in `MungeSumstats::sumstatsColHeaders` converts A0 to A*, 
-this is a special case so that the code knows to map A0/A1 to A1/A2 (ref/alt). 
-The special case is needed since ordinarily A1 refers to the reference not the
-alternative allele.
+A note on `MungeSumstats::sumstatsColHeaders` for summary statistic
+files with A0/A1. The mapping in `MungeSumstats::sumstatsColHeaders`
+converts A0 to A\*, this is a special case so that the code knows to map
+A0/A1 to A1/A2 (ref/alt). The special case is needed since ordinarily A1
+refers to the reference not the alternative allele.
 
 # Further functionality
 
-See the [Open GWAS vignette](https://neurogenomics.github.io/MungeSumstats/articles/OpenGWAS.html)
-for how MungeSumstats can be used along with data from the MRC IEU Open GWAS 
-Project and also Mungesumstats' functionality to handle lists of summary 
-statistics files.
-
-
+See the [Open GWAS
+vignette](https://neurogenomics.github.io/MungeSumstats/articles/OpenGWAS.html)
+for how MungeSumstats can be used along with data from the MRC IEU Open
+GWAS Project and also Mungesumstats' functionality to handle lists of
+summary statistics files.
 
 # Session Information
 

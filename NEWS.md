@@ -1,3 +1,17 @@
+## CHANGES IN VERSION 1.4.1
+
+### New features
+
+* `read_vcf` can now be parallised: splits query into chunks, imports them, and (optionally) converts them to `data.table` before rbinding them back into one object. 
+* `vcf2df`: Accounted for scenarios where `writeVcf` accidentally converts `geno`
+data into redundant 3D matrices. 
+
+### Bug fixes 
+
+* `select_vcf_field`: Got rid of "REF col doesn't exists" warning by omitting `rowRanges`. 
+* Ensured several unevaluated code chunks in `vignettes/MungeSumstats.Rmd` were
+surrounding by ticks. 
+
 ## CHANGES IN VERSION 1.4.0 
 
 ### New features
@@ -16,10 +30,10 @@ of `MungeSumstats`.
     - Remove `stringr` (no longer used)
 * Add new internal function `is_tabix` to check whether a file is already 
 tabix-indexed. 
-* Bump *Depends: R(>= 4.2)*. 
 * `read_sumstats`: 
     - now takes `samples` as an arg. 
-    - Parallises reading VCF using `GenomicFiles`.
+    - Parallises reading VCF using `GenomicFiles`. 
+* `read_sumstats`: now takes `samples` as an arg.  
 By default, only uses first sample (if multiple are present in file).  
 * Remove `INFO_filter=` from ALS VCF examples in vignettes 
 (no longer necessary now that INFO parsing has been corrected). 
@@ -65,13 +79,16 @@ that don't contain certain info
 * '*Avoid the use of 'paste' in condition signals*' fixed: 
     - `check_pos_se`
     - `check_signed_col`
-* Used to rely on *gunzip* to read bgz files, but apparently this functionality is no longer supported (possibly due to changes to how `Rsamtools::bgzip` does compression in Bioc 3.15. Switched to using `fread + readLines` in:
+* Used to rely on *gunzip* to read bgz files, but apparently this functionality 
+is no longer supported (possibly due to changes to how `Rsamtools::bgzip` does 
+compression in Bioc 3.15. Switched to using `fread + readLines` in:
     - `read_header`
     - `read_sumstats` 
 * `read_header`: wasn't reading in enough lines to get past the VCF header.
 Increase to `readLines(n=1000)`.  
 * `read_vcf`: Would sometimes induce duplicate rows. 
 Now only unique rows are used (after sample and columns filtering). 
+* Issue with mix of chr:bp:a1:a2 and chr:bp and rs id resolved
     
 
 ## CHANGES IN VERSION 1.3.19

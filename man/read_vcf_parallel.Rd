@@ -20,7 +20,7 @@ read_vcf_parallel(
   which = NULL,
   use_params = TRUE,
   as_datatable = TRUE,
-  sampled_rows = 1000,
+  sampled_rows = 10000,
   tilewidth = 10000000L,
   include_xy = FALSE,
   download = TRUE,

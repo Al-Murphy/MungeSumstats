@@ -9,7 +9,6 @@ read_sumstats(
   nrows = Inf,
   standardise_headers = FALSE,
   samples = 1,
-  add_sample_names = FALSE,
   nThread = 1,
   mapping_file = sumstatsColHeaders
 )
@@ -31,9 +30,6 @@ If \code{Inf}, will read in all rows.}
 \item{c("<sample_id1>","<sample_id2>",...) : }{
 Only user-selected samples will be used (case-insensitive).}
 }}
-
-\item{add_sample_names}{Append sample names to column names
-(e.g. "EZ" --> "EZ_ubm-a-2929").}
 
 \item{nThread}{Number of threads to use for parallel processes.}
 

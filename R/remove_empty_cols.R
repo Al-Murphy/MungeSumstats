@@ -20,4 +20,4 @@ remove_empty_cols <- function(sumstats_dt,
         messager("Removing",length(empty_cols),"empty columns.",v=verbose)
         sumstats_dt[,(names(empty_cols)):=NULL] 
     }
-}
+} 

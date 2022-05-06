@@ -38,7 +38,7 @@ read_vcf(
   samples = 1,
   which = NULL,
   use_params = TRUE,
-  sampled_rows = 1000,
+  sampled_rows = 10000,
   download = TRUE,
   vcf_dir = tempdir(),
   download_method = "download.file",

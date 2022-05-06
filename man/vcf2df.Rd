@@ -26,7 +26,7 @@ vcf_df <- data.table::data.table(vcf_df_list$dat)
 }
 }
 \usage{
-vcf2df(vcf, add_sample_names = TRUE, verbose = TRUE)
+vcf2df(vcf, add_sample_names = TRUE, add_rowranges = TRUE, verbose = TRUE)
 }
 \arguments{
 \item{vcf}{Variant Call Format (VCF) file imported into R
@@ -36,6 +36,8 @@ as a \pkg{VariantAnnotation}
 
 \item{add_sample_names}{Append sample names to column names
 (e.g. "EZ" --> "EZ_ubm-a-2929").}
+
+\item{add_rowranges}{Include \code{rowRanges} from VCF as well.}
 
 \item{verbose}{Print messages.}
 }

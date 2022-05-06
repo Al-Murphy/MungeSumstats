@@ -21,7 +21,6 @@ read_sumstats <- function(path,
                           nrows = Inf,
                           standardise_headers = FALSE,
                           samples = 1,
-                          add_sample_names = FALSE,
                           nThread = 1,
                           mapping_file = sumstatsColHeaders) {
     
@@ -39,6 +38,7 @@ read_sumstats <- function(path,
             sumstats_file <- read_vcf(path = path,
                                       use_params = TRUE,
                                       samples = samples,
+                                      as_datatable = TRUE, 
                                       nThread = nThread)
         } else {
             #### Check if tabular 1: infer from file name ####

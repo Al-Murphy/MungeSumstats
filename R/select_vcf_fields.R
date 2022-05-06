@@ -39,6 +39,7 @@ select_vcf_fields <- function(path,
     # #### Warnings generated bc 0 rows are present ####
     df <-  vcf2df(vcf = vcf_top,
                   add_sample_names = FALSE,
+                  add_rowranges = FALSE,
                   verbose = verbose)
     remove(vcf_top)
     #### Check n rows returned ####
@@ -46,11 +47,12 @@ select_vcf_fields <- function(path,
         stop("Query returned no rows. Increase sampled_rows.")
     }
     #### Check for empty cols #####
-    remove_empty_cols(sumstats_dt = df)
+    remove_empty_cols(sumstats_dt = df,
+                      verbose = FALSE)
     for(x in names(fields)[names(fields)!="samples"]){
-        fields[[x]] <- fields[[x]][
+        fields[[x]] <- fields[[x]][ 
             fields[[x]] %in% names(df)
-            ]
+        ]
     } 
     #### Select samples ####
     all_samples <- fields$samples
@@ -64,7 +66,7 @@ select_vcf_fields <- function(path,
             } else if (length(all_samples)==1){
                 messager("1 sample detected:",all_samples) 
             } 
-        #### User-specified samples #####
+            #### User-specified samples #####
         } else if(methods::is(samples,"character")){
             all_samples <- all_samples[
                 toupper(all_samples) %in% toupper(samples)

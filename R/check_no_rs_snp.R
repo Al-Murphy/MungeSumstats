@@ -33,8 +33,10 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
             sumstats_dt[, SNP_old_temp := SNP]
         }
         miss_rs <- sumstats_dt[!grep("^rs", SNP), ]
-        # first case is chr:bp together - impute SNP for these
-        miss_rs_chr_bp <- miss_rs[grep(":", SNP), ]
+        # first case is something other than rs id and chr:bp - impute SNP
+        # second case is chr:bp together - impute SNP for these
+        miss_rs_chr_bp <- miss_rs[grep(":", SNP),] 
+        miss_rs_chr_bp <- miss_rs_chr_bp[!grep(".*:.*:.*", SNP),]
         if (nrow(miss_rs) != nrow(sumstats_dt) && nrow(miss_rs_chr_bp) > 0) {
             # check if impute of correct SNP ID possible
             if (sum(c("CHR", "BP") %in% col_headers) == 2 &&
@@ -126,6 +128,7 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                         check_save_out$extension
                     )
             }
+            #remove cases with more than one colon i.e. not just chr:bp
             miss_rs_chr_bp <- miss_rs_chr_bp[!grep(".*:.*:.*", SNP)]
             msg <- paste0(
                 formatC(nrow(miss_rs_chr_bp), big.mark = ","),
@@ -144,8 +147,8 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                 format <- c("BP1", "CHR1")
             }
             miss_rs_chr_bp[, (format) := data.table::tstrsplit(SNP,
-                split = ":", fixed = TRUE
-            )]
+                                                               split = ":", fixed = TRUE
+            )]#[c(1,2)]]
             # if BP col has other info after, drop it
             if (sum(grepl("[[:punct:]].*", miss_rs_chr_bp$BP1)) > 0) {
                 miss_rs_chr_bp[, BP1 := gsub("([[:punct:]]).*", "", BP1)]
@@ -186,10 +189,10 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                     gr_snp[, incl_cols, with = FALSE])]
                 gr_snp <-
                     GenomicRanges::makeGRangesFromDataFrame(gr_snp,
-                        keep.extra.columns = TRUE,
-                        seqnames.field = "CHR1",
-                        start.field = "BP1",
-                        end.field = "BP1"
+                                                            keep.extra.columns = TRUE,
+                                                            seqnames.field = "CHR1",
+                                                            start.field = "BP1",
+                                                            end.field = "BP1"
                     )
                 gr_rsids <-
                     BSgenome::snpsByOverlaps(SNP_LOC_DATA, ranges = gr_snp)

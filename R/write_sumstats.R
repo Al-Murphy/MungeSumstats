@@ -53,11 +53,11 @@ write_sumstats <- function(sumstats_dt,
         sumstats_dt <- sort_coords(sumstats_dt = sumstats_dt)
     }
     #### Select write format ####
-    if (isTRUE(write_vcf)) {
-        messager("Writing in VCF format ==> ", save_path)
+    if (isTRUE(write_vcf)) { 
         tmp_save_path <- gsub("\\.bgz|\\.gz","",save_path)
         #### Convert to VRanges and save ####
         vr <- to_vranges(sumstats_dt = sumstats_dt) 
+        messager("Writing in VCF format ==> ", save_path)
         VariantAnnotation::writeVcf(
             obj = vr,
             ### Must supply filename without compression suffix

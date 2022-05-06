@@ -2,10 +2,11 @@
 #' 
 #' Register a multi-threaded instances using \pkg{BiocParallel}.
 #' @inheritParams BiocParallel::SnowParam
+#' @returns Null output.
 register_cores <- function(workers=1,
                            progressbar=TRUE){
     requireNamespace("BiocParallel")
-    BPPARAM <- if(.Platform$OS.type=="Windows"){
+    BPPARAM <- if(.Platform$OS.type=="windows"){
         BiocParallel::SnowParam(workers = workers, 
                                 progressbar = progressbar)
     } else {

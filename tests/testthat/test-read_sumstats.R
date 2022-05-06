@@ -6,7 +6,7 @@ test_that("Test that different kinds of files can be read in.", {
     if (!is_32bit_windows) {
         ### read data
         path <- system.file("extdata", "eduAttainOkbay.txt", 
-                                package = "MungeSumstats")
+                            package = "MungeSumstats")
         sumstats_dt <- data.table::fread(path, nThread = 1)
         sumstats_dt <- standardise_header(
             sumstats_dt = sumstats_dt,
@@ -40,7 +40,7 @@ test_that("Test that different kinds of files can be read in.", {
         }
         vcf_ss[,c("ID","END"):=NULL]
         data.table::setcolorder(vcf_ss, col_order) 
-    
+        
         #### Test that all dts are the same
         objs <- mget(c("tsv_ss", "csv_ss", "space_ss", "vcf_ss"))
         #### Ensure all keys are the same ####

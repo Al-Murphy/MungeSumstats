@@ -8,12 +8,15 @@
 #' @param DF \link[S4Vectors]{DataFrame} object.
 #' 
 #' @keywords internal
-#' @importFrom data.table as.data.table
+#' @importFrom data.table as.data.table data.table
 #' @importFrom methods is
 #' @importFrom Biostrings unstrsplit
 #' @importFrom IRanges CharacterList
 #' @returns VCF data in data.table format.
 DF_to_dt <- function(DF){ 
+    #### Check if DF is empty ####
+    # DF <- cbind(DF,dummy=NA)
+    if(nrow(DF)==0 | ncol(DF)==0) return(data.table::data.table())
     m <- mapply(DF, 
                 FUN=function(s){ 
                     # s <- DF[["REF"]]
@@ -32,12 +35,14 @@ DF_to_dt <- function(DF){
                         s <- as.vector(s)
                     }
                     #### Check if empty ####
-                    if(sum(!is.na(s))==0){
+                    if(all(is.na(s)) || 
+                       all(s==".") || 
+                       all(s=="")){
                         return(NULL)
                     } else {
                         return(s)
                     } 
-                })
-    m <- m[!unlist(lapply(m,is.null))]
+            }) 
+    ## Turn named list or matrix into a data.table
     data.table::as.data.table(m)
 }

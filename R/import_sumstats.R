@@ -142,10 +142,10 @@ import_sumstats <- function(ids,
             message(e)
             return(as.character(e))
         })
-
+        
         return(out)
     }, mc.cores = nThread_acrossIDs) %>% `names<-`(ids)
-
+    
     end_all <- Sys.time()
     message(
         "\nDone with all processing in ",

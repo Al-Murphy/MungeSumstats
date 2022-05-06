@@ -7,8 +7,8 @@
 #' @return Numeric
 #' @keywords internal
 parse_dropped_nonA1A2 <- function(l){
-    line <- grep("neither A1 nor A2 match the reference genome",l,
-                 value = TRUE)[1]
-    if(is.na(line)) return(NA)
-    as.integer(trimws(gsub("There are|,","",strsplit(line," SNPs")[[1]][1])))
+  line <- grep("neither A1 nor A2 match the reference genome",l,
+               value = TRUE)[1]
+  if(is.na(line)) return(NA)
+  as.integer(trimws(gsub("There are|,","",strsplit(line," SNPs")[[1]][1])))
 }

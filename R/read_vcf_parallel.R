@@ -28,7 +28,7 @@ read_vcf_parallel <- function(path,
                               which = NULL,
                               use_params = TRUE,
                               as_datatable = TRUE,
-                              sampled_rows = 1e3,
+                              sampled_rows = 1e4,
                               tilewidth = 1e7L,
                               include_xy = FALSE,
                               
@@ -42,7 +42,6 @@ read_vcf_parallel <- function(path,
                               verbose = TRUE){
     # echoverseTemplate:::source_all()
     # echoverseTemplate:::args2vars(read_vcf_parallel) 
-    requireNamespace("BiocParallel")
     requireNamespace("GenomicFiles")
     requireNamespace("VariantAnnotation") 
     
@@ -114,8 +113,8 @@ read_vcf_parallel <- function(path,
         ## Check which chromosome are available. 
         xy <- if(isTRUE(include_xy)) c("X","Y") else NULL
         possible_chr <- c(
-            c(as.character(1:22),xy),
-            paste0("chr",c(as.character(1:22),xy))
+            c(as.character(seq_len(22)),xy),
+            paste0("chr",c(as.character(seq_len(22)),xy))
         )
         used_chr <- possible_chr[possible_chr %in% header@reference]
         ## Tile ranges across the genome 
