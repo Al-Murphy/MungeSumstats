@@ -74,34 +74,34 @@ downloader <- function(input_url,
         catch_fail <- tryCatch({
                 utils::download.file(url = input_url, 
                                      destfile = out_file)
-            },
-        error = function(e) {message(e);e}, 
-        warning = function(w) {message(w);w})
-        msg <- paste0(
+        },
+            error = function(e) {message(e);e}
+        )
+        msg <- paste(
             "Failed to download:", input_url,
-            "\nThis is likely due to eithr an incorrect ID/URL,",
+            "\nThis is likely due to either an incorrect ID/URL,",
             "or an issue with your internet connection."
         )
-        if (is(catch_fail, "error") || 
-            is(catch_fail, "warning")) {
-            messager(msg)
-        }
         #### 2nd attempt ###
-        messager("Trying download.file again with different parameters.")
-        catch_fail2 <- tryCatch({
-            utils::download.file(url = input_url, 
-                                 destfile = out_file,
-                                 mode = 'wb',
-                                 method = 'curl',
-                                 extra = '-k')
-        },
-        error = function(e) {message(e);e}, 
-        warning = function(w) {message(w);w})
-        
-        if (is(catch_fail2, "error") || 
-            is(catch_fail2, "warning")) {
-            stop(msg)
+        if (methods::is(catch_fail, "error") | 
+            methods::is(catch_fail, "warning")) { 
+            messager("Trying download.file again with different parameters.")
+            catch_fail2 <- tryCatch({
+                utils::download.file(url = input_url, 
+                                     destfile = out_file,
+                                     mode = 'wb',
+                                     method = 'curl',
+                                     extra = '-k')
+            },
+            error = function(e) {message(e);e}
+            )
+            
+            if (methods::is(catch_fail2, "error") | 
+                methods::is(catch_fail2, "warning")) {
+                stop(msg)
+            }
         }
+        
     }
     return(out_file)
 }

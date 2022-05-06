@@ -3,9 +3,15 @@
 ### New features
 
 * `read_vcf` can now be parallised: splits query into chunks, imports them, and (optionally) converts them to `data.table` before rbinding them back into one object. 
+    - Added report of VCF size (variants x samples) before processing to give
+    user an idea of long it will take to process. 
 * Added Linux installation instructions for *axel* downloader.
 * Added 2nd `tryCatch` to `downloader` with different `download.file` parameters that may work better on certain machines. 
-* Avoid using `file.path` to specify URL in `get_chain_file`.
+* Avoid using `file.path` to specify URL in:
+    - `get_chain_file`
+    - `import_sumstats` 
+* Allow `download_vcf` to pass URLs directly (without downloading the files) 
+when `vcf_download=FALSE`.  
 
 ### Bug fixes 
 

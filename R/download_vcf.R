@@ -30,11 +30,13 @@ download_vcf <- function(vcf_url,
     #### Create save_path ####
     save_path <- file.path(vcf_dir, basename(vcf_url))
     index_path <- NULL
+    
+    index_url <- paste0(vcf_url, ".tbi")
     #### If actually local ####
     if(file.exists(vcf_url)){
         message("Using local VCF.")
         save_path <- vcf_url
-        index_path <- paste0(vcf_url, ".tbi")
+        index_path <- index_url
     #### If remote but already downloaded ####
     } else if (file.exists(save_path) && force_new == FALSE) {
         message("Using previously downloaded VCF.")
@@ -55,8 +57,7 @@ download_vcf <- function(vcf_url,
                 quiet = quiet,
                 nThread = nThread
             )
-            #### Download tabix index file
-            index_url <- paste0(vcf_url, ".tbi")
+            #### Download tabix index file 
             message("Downloading VCF index ==> ", index_url)
             index_path <- downloader(
                 input_url = index_url,
@@ -66,6 +67,10 @@ download_vcf <- function(vcf_url,
                 quiet = quiet,
                 nThread = nThread
             )
+        } else {
+            messager("Using remote file without downloading.")
+            save_path <- vcf_url
+            index_path <- index_url
         }
     }
     return(list(

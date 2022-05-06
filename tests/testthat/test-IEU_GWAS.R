@@ -49,18 +49,19 @@ test_that("Test connection to IEU GWAS - metadata, download", {
         ids <- (dplyr::arrange(metagwas3, nsnp))$id
         # issues should be caught
         err_catch <-
-            tryCatch(MungeSumstats::import_sumstats(
-                ids = "a-fake-id",
-                ref_genome = "GRCh37",
-                on_ref_genome = FALSE,
-                strand_ambig_filter = FALSE,
-                bi_allelic_filter = FALSE,
-                allele_flip_check = FALSE,
-                force_new = TRUE
-            ),
-            error = function(e) e, warning = function(w) w
+            tryCatch({
+                MungeSumstats:: import_sumstats(
+                    ids = "a-fake-id",
+                    ref_genome = "GRCh37",
+                    on_ref_genome = FALSE,
+                    strand_ambig_filter = FALSE,
+                    bi_allelic_filter = FALSE,
+                    allele_flip_check = FALSE, 
+                    force_new = TRUE)
+            },
+            error = function(e) e 
             )
-        testthat::expect_true(is(err_catch, "error"))
+        testthat::expect_true(methods::is(err_catch, "error"))
         # try import with axel - again should get warning about 1 thread
         axel_catch <-
             tryCatch(MungeSumstats::import_sumstats(
@@ -74,7 +75,8 @@ test_that("Test connection to IEU GWAS - metadata, download", {
                 nThread = 1,
                 download_method = "axel"
             ),
-            error = function(e) e, warning = function(w) w
+            error = function(e) e, 
+            warning = function(w) w
             )
         testthat::expect_true(!is(axel_catch, "error"))
 
@@ -89,6 +91,6 @@ test_that("Test connection to IEU GWAS - metadata, download", {
         # testthat::expect_equal(file.exists(out_paths$save_path),TRUE)
     }
     else{
-        expect_equal(TRUE, TRUE)
+        testthat::expect_equal(TRUE, TRUE)
     }
 })

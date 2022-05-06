@@ -3,6 +3,10 @@
 \name{downloader}
 \alias{downloader}
 \title{downloader wrapper}
+\source{
+\href{https://stackoverflow.com/a/66602496/13214824}{
+Suggestion to avoid 'proc$get_built_file() : Build process failed'}
+}
 \usage{
 downloader(
   input_url,

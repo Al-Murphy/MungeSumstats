@@ -90,7 +90,16 @@ read_vcf_parallel <- function(path,
     samples <- VariantAnnotation::samples(header)
     ## Get genome build
     genome <- header@header$contig$assembly[[1]] 
-    
+    ## Report total variants
+    n_variants <- header@header$SAMPLE$TotalVariants
+    if(!is.null(n_variants) & isTRUE(verbose)){
+        messager("VCF contains:",
+                 formatC(as.integer(n_variants),big.mark = ","),"variant(s)",
+                 "x",
+                 formatC(nrow(header@header$SAMPLE),big.mark = ","),
+                 "sample(s)"
+                 )
+    } 
     #### Single-threaded ####
     t1 <- Sys.time()
     if(nThread==1){

@@ -47,8 +47,8 @@ vcf2df <- function(vcf,
     messager("Converting VCF to data.table.",v=verbose) 
     #### Expand VCF ####
     if (methods::is(vcf,"CollapsedVCF")) {
-        message('Expanding VCF first, so number of rows may increase',
-                v=verbose)
+        messager('Expanding VCF first, so number of rows may increase',
+                 v=verbose)
         ## Not all VCFs work with this function
         vcf <- tryCatch({
             VariantAnnotation::expand(x = vcf)

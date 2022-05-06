@@ -82,7 +82,7 @@ import_sumstats <- function(ids,
         nThread_acrossIDs <- nThread
         nThread <- 1
         message(
-            "`parallel_across_ids=TRUE`: ",
+            "parallel_across_ids=TRUE: ",
             "most notes will be hidden in this mode."
         )
     } else {
@@ -97,9 +97,9 @@ import_sumstats <- function(ids,
                 " ==========\n"
             )
             vcf_url <-
-                file.path(
+                paste(
                     "https://gwas.mrcieu.ac.uk/files", id,
-                    paste0(id, ".vcf.gz")
+                    paste0(id,".vcf.gz"),sep="/"
                 )
             #### Create path of the output file ####
             id_dir <- file.path(save_dir, id)
@@ -135,14 +135,12 @@ import_sumstats <- function(ids,
             end <- Sys.time()
             message(
                 "\n", id, " : Done in ",
-                round(difftime(end, start, units = "mins"), 2), " minutes."
+                round(difftime(end, start, units = "mins"), 3), " minutes."
             )
             return(reformatted)
-        }, error = function(e) {
-            message(e)
-            return(as.character(e))
-        })
-        
+        }, 
+        error = function(e){message(e);e}
+        ) 
         return(out)
     }, mc.cores = nThread_acrossIDs) %>% `names<-`(ids)
     

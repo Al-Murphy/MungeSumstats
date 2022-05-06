@@ -40,7 +40,7 @@ select_vcf_fields <- function(path,
     df <-  vcf2df(vcf = vcf_top,
                   add_sample_names = FALSE,
                   add_rowranges = FALSE,
-                  verbose = verbose)
+                  verbose = FALSE)
     remove(vcf_top)
     #### Check n rows returned ####
     if(nrow(df)==0) {
