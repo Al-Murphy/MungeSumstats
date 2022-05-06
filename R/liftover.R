@@ -88,15 +88,14 @@ liftover <- function(sumstats_dt,
             build_conversion <- "hg19ToHg38"
         } else {
             stop("Can only perform liftover between hg19 <---> hg38")
-        }
-
-        #### Convert to GRanges ####
-        gr <- dt_to_granges(
-            dat = sumstats_dt,
-            style = "UCSC",
-            chrom_col = chrom_col,
-            start_col = start_col,
-            end_col = end_col
+        } 
+        #### Convert to GRanges #### 
+        gr <- to_granges(
+            sumstats_dt = sumstats_dt,
+            style = "UCSC", 
+            seqnames.field = chrom_col,
+            start.field = start_col,
+            end.field = end_col
         )
         #### Specify chain file ####
         chain <- get_chain_file(
@@ -108,12 +107,13 @@ liftover <- function(sumstats_dt,
             x = gr,
             chain = chain
         ))
+        #### Chrom style ####
+        gr_lifted <- granges_style(
+            gr = gr_lifted,
+            style = style
+        )
         #### Return format ####
         if (as_granges) {
-            gr_lifted <- granges_style(
-                gr = gr_lifted,
-                style = style
-            )
             if(imputation_ind){
                 GenomicRanges::mcols(gr_lifted)[["IMPUTATION_gen_build"]] <-
                     TRUE
@@ -121,12 +121,11 @@ liftover <- function(sumstats_dt,
             return(gr_lifted)
         } else {
             sumstats_dt <- data.table::as.data.table(gr_lifted)
-            #### rename columns back to original ####
-            ## Note: "seqnames" col can be removed since the "CHR" column was 
-            ## retained by dt_to_granges().
-            sumstats_dt[, width := NULL]
-            sumstats_dt[, strand := NULL] 
-            sumstats_dt[, seqnames := NULL]
+            #### rename columns back to original #### 
+            void_cols <- c("width","strand")
+            void_cols <- void_cols[void_cols %in% names(sumstats_dt)] 
+            if(length(void_cols)>0) sumstats_dt[,(void_cols):=NULL]
+            data.table::setnames(sumstats_dt,"seqnames","CHR")
             #### Remove end_col if it was the same as start_col ####
             if (start_col == end_col) {
                 sumstats_dt[, end := NULL]

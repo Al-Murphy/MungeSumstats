@@ -20,11 +20,16 @@ index_tabular(
 \arguments{
 \item{path}{Path to GWAS summary statistics file.}
 
-\item{chrom_col}{column for chromosome}
+\item{chrom_col}{Name of the chromosome column in
+\code{sumstats_dt} (e.g. "CHR").}
 
-\item{start_col}{column for start position}
+\item{start_col}{Name of the starting genomic position
+column in \code{sumstats_dt} (e.g. "POS","start").}
 
-\item{end_col}{column for end position (is the same as start for snps)}
+\item{end_col}{Name of the ending genomic position
+column in \code{sumstats_dt} (e.g. "POS","end").
+Can be the same as \code{start_col} when \code{sumstats_dt}
+only contains SNPs that span 1 base pair (bp) each.}
 
 \item{verbose}{Print messages.}
 }

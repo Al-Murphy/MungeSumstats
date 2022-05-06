@@ -126,4 +126,8 @@ sumstats_dt2 <- read_vcf(path = path)
 ## Large GWAS
 # path <- "https://gwas.mrcieu.ac.uk/files/ubm-a-2929/ubm-a-2929.vcf.gz"
 # sumstats_dt3 <- read_vcf(path = path, nThread=11)
+
+### Additional GWAS
+# path <- "https://gwas.mrcieu.ac.uk/files/ieu-a-1124/ieu-a-1124.vcf.gz"
+# sumstats_dt <- read_vcf(path = path, nThread=11)
 }

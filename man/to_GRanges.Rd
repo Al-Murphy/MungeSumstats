@@ -2,18 +2,51 @@
 % Please edit documentation in R/to_granges.R
 \name{to_granges}
 \alias{to_granges}
-\title{Convert to \code{GRanges}}
+\title{To \code{GRanges}}
 \usage{
-to_granges(sumstats_dt)
+to_granges(
+  sumstats_dt,
+  seqnames.field = "CHR",
+  start.field = "BP",
+  end.field = "BP",
+  style = c("NCBI", "UCSC")
+)
 }
 \arguments{
 \item{sumstats_dt}{data table obj of the summary statistics file
 for the GWAS.}
+
+\item{seqnames.field}{
+    A character vector of recognized names for the column in \code{df}
+    that contains the chromosome name (a.k.a. sequence name) associated
+    with each genomic range.
+    Only the first name in \code{seqnames.field} that is found
+    in \code{colnames(df)} is used.
+    If no one is found, then an error is raised.
+  }
+
+\item{start.field}{
+    A character vector of recognized names for the column in \code{df}
+    that contains the start positions of the genomic ranges.
+    Only the first name in \code{start.field} that is found
+    in \code{colnames(df)} is used.
+    If no one is found, then an error is raised.
+  }
+
+\item{end.field}{
+    A character vector of recognized names for the column in \code{df}
+    that contains the end positions of the genomic ranges.
+    Only the first name in \code{start.field} that is found
+    in \code{colnames(df)} is used.
+    If no one is found, then an error is raised.
+  }
+
+\item{style}{\code{GRanges} style to convert to, "NCBI" or "UCSC".}
 }
 \value{
 \code{GRanges} object
 }
 \description{
-Convert to \code{GRanges}
+Convert a \link[data.table]{data.table} to \link[GenomicRanges]{GRanges}.
 }
 \keyword{internal}

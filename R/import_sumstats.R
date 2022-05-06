@@ -66,8 +66,8 @@ import_sumstats <- function(ids,
     
     #### Check download method ####
     msg_dwnld <- paste0(
-        "download_method must be `download.file` (single threa",
-        "d) or `axel` (multi threaded)."
+        "download_method must be `download.file` (single-threaded)",
+        "or `axel` (multi-threaded)."
     )
     if (!tolower(download_method) %in% c("download.file", "axel")) {
         stop(msg_dwnld)

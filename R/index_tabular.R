@@ -8,7 +8,7 @@
 #' 
 #' @param path Path to GWAS summary statistics file.
 #' @param verbose Print messages.
-#' @inheritParams dt_to_granges
+#' @inheritParams liftover
 #' 
 #' @return Path to tabix-indexed tabular file
 #'

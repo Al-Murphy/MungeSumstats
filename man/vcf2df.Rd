@@ -8,10 +8,11 @@ https://gist.github.com/zhujack/849b75f5a8305edaeca1001dfb9c3fe9
 
 \code{
 #### VariantAnnotation ####
-vcf_file <- system.file("extdata", "ALSvcf.vcf",
-                        package = "MungeSumstats")
-vcf <- VariantAnnotation::readVcf(file = vcf_file)
-vcf_df <- MungeSumstats::vcf2df(vcf = vcf)
+# path <- "https://github.com/brentp/vcfanno/raw/master/example/exac.vcf.gz"
+path <- system.file("extdata", "ALSvcf.vcf",
+                    package = "MungeSumstats")
+vcf <- VariantAnnotation::readVcf(file = path)
+vcf_df <- MungeSumstats:::vcf2df(vcf = vcf)
 }
 
 {

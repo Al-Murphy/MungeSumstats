@@ -3,14 +3,22 @@
 ### New features
 
 * `read_vcf` can now be parallised: splits query into chunks, imports them, and (optionally) converts them to `data.table` before rbinding them back into one object. 
-* `vcf2df`: Accounted for scenarios where `writeVcf` accidentally converts `geno`
-data into redundant 3D matrices. 
 
 ### Bug fixes 
 
 * `select_vcf_field`: Got rid of "REF col doesn't exists" warning by omitting `rowRanges`. 
 * Ensured several unevaluated code chunks in `vignettes/MungeSumstats.Rmd` were
-surrounding by ticks. 
+surrounding by ticks.  
+* `vcf2df`: Accounted for scenarios where `writeVcf` accidentally converts `geno`
+data into redundant 3D matrices. 
+* Remove unused functions after `read_vcf` upgrades:
+    - `infer_vcf_sample_ids`
+    - `is_vcf_parsed`
+    - `check_tab_delimited`
+    - `read_vcf_data`
+    - `remove_nonstandard_vcf_cols`
+* Remove redundant `dt_to_granges` by merging functionality into `to_granges`.
+    - Adjusted `liftover` to accommodate the slight change. 
 
 ## CHANGES IN VERSION 1.4.0 
 

@@ -19,6 +19,9 @@ register_cores(workers = 1, progressbar = TRUE)
     \code{logical(1)} Enable progress bar (based on plyr:::progress_text).
   }
 }
+\value{
+Null output.
+}
 \description{
 Register a multi-threaded instances using \pkg{BiocParallel}.
 }

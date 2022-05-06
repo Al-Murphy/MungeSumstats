@@ -16,11 +16,13 @@
 #' @source 
 #' \code{
 #' #### VariantAnnotation ####
-#' vcf_file <- system.file("extdata", "ALSvcf.vcf",
-#'                         package = "MungeSumstats")
-#' vcf <- VariantAnnotation::readVcf(file = vcf_file)
-#' vcf_df <- MungeSumstats::vcf2df(vcf = vcf)
+#' # path <- "https://github.com/brentp/vcfanno/raw/master/example/exac.vcf.gz"
+#' path <- system.file("extdata", "ALSvcf.vcf",
+#'                     package = "MungeSumstats")
+#' vcf <- VariantAnnotation::readVcf(file = path)
+#' vcf_df <- MungeSumstats:::vcf2df(vcf = vcf)
 #' } 
+#' 
 #' @source {
 #' #### vcfR ####
 #' if(!require("pinfsc50")) install.packages("pinfsc50")
@@ -47,7 +49,10 @@ vcf2df <- function(vcf,
     if (methods::is(vcf,"CollapsedVCF")) {
         message('Expanding VCF first, so number of rows may increase',
                 v=verbose)
-        vcf <- VariantAnnotation::expand(x = vcf)
+        ## Not all VCFs work with this function
+        vcf <- tryCatch({
+            VariantAnnotation::expand(x = vcf)
+        }, error = function(e){message(e); vcf})
     }  
     #### Automatically determine whether to add sample names ####
     if(is.null(add_sample_names)){
@@ -72,8 +77,8 @@ vcf2df <- function(vcf,
                     )
                 ),
             stringsAsFactors=FALSE)
-        yy = data.frame(lapply(yy,type.convert))
-        colnames(yy) = paste("ANN",anncols,sep="_")
+        yy <- data.frame(lapply(yy,type.convert))
+        colnames(yy) <- paste("ANN",anncols,sep="_")
         return(yy)
     }
     #### convert to data.table #### 
@@ -156,12 +161,14 @@ vcf2df <- function(vcf,
         ncols <- unlist(lapply(tmp,ncol))
         tmp <- do.call(cbind, tmp)
         #### Add column names ####
-        if(isTRUE(add_sample_names)){
-            colnames(tmp) = paste(rep(n, times = ncols), 
-                                  colnames(tmp),sep = "_") 
-        } else {
-            colnames(tmp) <- rep(n, times = ncols)
-        } 
+        if(!is.null(tmp)){
+            if(isTRUE(add_sample_names)){
+                colnames(tmp) = paste(rep(n, times = ncols), 
+                                      colnames(tmp),sep = "_") 
+            } else {
+                colnames(tmp) <- rep(n, times = ncols)
+            } 
+        }
     } 
     df <- cbind(df, tmp) 
     if(verbose) methods::show(round(difftime(Sys.time(),t1),1))

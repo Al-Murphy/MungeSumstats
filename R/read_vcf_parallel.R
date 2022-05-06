@@ -165,7 +165,7 @@ read_vcf_parallel <- function(path,
                                                genome = genome)
         }) 
         vcf <- REDUCE(vcf)
-    }  
+    }   
     if(verbose) methods::show(round(difftime(Sys.time(),t1),1))
     return(vcf)
 }
