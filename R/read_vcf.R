@@ -66,8 +66,8 @@
 #' 
 #' #### Remote file ####
 #' ## Small GWAS (0.2Mb)
-#' path <- "https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz" 
-#' sumstats_dt2 <- read_vcf(path = path)
+#' # path <- "https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz" 
+#' # sumstats_dt2 <- read_vcf(path = path)
 #' 
 #' ## Large GWAS (250Mb)
 #' # path <- "https://gwas.mrcieu.ac.uk/files/ubm-a-2929/ubm-a-2929.vcf.gz"
