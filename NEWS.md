@@ -17,10 +17,14 @@ of `MungeSumstats`.
 * Add new internal function `is_tabix` to check whether a file is already 
 tabix-indexed. 
 * Bump *Depends: R(>= 4.2)*. 
-* `read_sumstats`: now takes `samples` as an arg. 
+* `read_sumstats`: 
+    - now takes `samples` as an arg. 
+    - Parallises reading VCF using `GenomicFiles`.
 By default, only uses first sample (if multiple are present in file).  
 * Remove `INFO_filter=` from ALS VCF examples in vignettes 
 (no longer necessary now that INFO parsing has been corrected). 
+* `download_vcf` can now handle situations with `vcf_url=`
+is actually a local file (not remote).
 
 ### Bug fixes
 

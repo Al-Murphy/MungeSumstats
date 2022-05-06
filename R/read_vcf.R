@@ -3,7 +3,11 @@
 #' Read in a VCF file as a \link[VariantAnnotation]{VCF} or a 
 #' \link[data.table]{data.table}. 
 #' Can optionally save the VCF/data.table as well. 
-#' @inheritParams format_sumstats
+#' 
+#' @param path Path to local or remote VCF file.
+#' @param as_datatable Return the data as a
+#'  \link[data.table]{data.table} (default: \code{TRUE}) 
+#'  or a \link[VariantAnnotation]{VCF} (\code{FALSE}).
 #' @param samples Which samples to use:
 #' \itemize{
 #' \item{1 : }{Only the first sample will be used (\emph{DEFAULT}).}
@@ -16,16 +20,22 @@
 #' omitting columns that are empty based on the head of the VCF (NAs only). 
 #' NOTE that that this requires the VCF to be sorted, bgzip-compressed, 
 #' tabix-indexed, which \link[MungeSumstats]{read_vcf} will attempt to do.
+#' @param download Download the VCF (and its index file) 
+#' to a temp folder before reading it into R. 
+#' This is important to keep \code{TRUE} when \code{nThread>1} to avoid
+#' making too many queries to remote file. 
 #' @param verbose Print messages.
 #' @inheritParams check_empty_cols
+#' @inheritParams format_sumstats
+#' @inheritParams downloader
+#' @inheritParams download_vcf
+#' @inheritParams import_sumstats
 #' @inheritParams VariantAnnotation::ScanVcfParam
 #'
 #' @return The VCF file in data.table format.
 #' @export
-#' @importFrom VariantAnnotation readVcf writeVcf vcfSamples
-#' @importFrom GenomicRanges seqinfo
+#' @importFrom VariantAnnotation writeVcf 
 #' @importFrom data.table as.data.table setnames fwrite 
-#' @importFrom methods as show
 #' @source 
 #' \code{
 #' #### Benchmarking ####
@@ -47,48 +57,48 @@
 #' }
 #' @source \href{https://github.com/Bioconductor/VariantAnnotation/issues/57}{
 #' Discussion on VariantAnnotation GitHub}
+#' @source \href{https://github.com/Bioconductor/VariantAnnotation/issues/59}{
+#' Discussion on VariantAnnotation GitHub} 
 #' @examples 
 #' #### Local file ####
 #' path <- system.file("extdata","ALSvcf.vcf", package="MungeSumstats")
 #' sumstats_dt <- read_vcf(path = path)
 #' 
 #' #### Remote file ####
+#' ## Small GWAS
 #' path <- "https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz" 
 #' sumstats_dt2 <- read_vcf(path = path)
+#' 
+#' ## Large GWAS
+#' # path <- "https://gwas.mrcieu.ac.uk/files/ubm-a-2929/ubm-a-2929.vcf.gz"
+#' # sumstats_dt3 <- read_vcf(path = path, nThread=11)
 read_vcf <- function(path, 
-                     write_vcf = FALSE,
+                     as_datatable = TRUE,
                      save_path = NULL,
                      tabix_index = FALSE,
                      samples = 1,
                      which = NULL,
                      use_params = TRUE,
-                     sampled_rows = 1e7,
+                     sampled_rows = 1e3,
+                     download = TRUE,
+                     vcf_dir = tempdir(),
+                     download_method = "download.file",
+                     force_new = FALSE,
                      nThread = 1,
-                     verbose = TRUE){
-    #### Read #### 
-    {
-        t1 <- Sys.time()
-        if((!is.null(which)) || isTRUE(use_params)){
-            #### Make sure file is compressed and indexed ####
-            ## File must be indexed in order to use param 
-            ## (even if only specifying columns) 
-            path <- index_vcf(path = path,
-                              verbose = verbose)
-            param <- select_vcf_fields(path = path, 
-                                       which = which, 
-                                       samples = samples,
-                                       sampled_rows = sampled_rows,
-                                       nThread = nThread)
-        } else {
-            param <- VariantAnnotation::ScanVcfParam()
-        }
-        messager("Reading VCF file.")
-        vcf <- suppressWarnings(
-            VariantAnnotation::readVcf(file = path,
-                                       param = param)
-        )
-        methods::show(round(difftime(Sys.time(),t1),1))
-    } 
+                     verbose = TRUE){ 
+    #### Read VCF #### 
+    ## Returns either a VCF or a data.table, depending on as_datatable arg.
+    vcf_dt <- read_vcf_parallel(path = path,
+                                samples = samples,
+                                which = which,
+                                use_params = use_params,
+                                as_datatable = as_datatable,
+                                sampled_rows = sampled_rows,
+                                vcf_dir = vcf_dir,
+                                download_method = download_method,
+                                force_new = force_new, 
+                                nThread = nThread,
+                                verbose = verbose)
     #### Check save path ####
     if(!is.null(save_path)){
         check_save_path_out <- check_save_path(
@@ -97,62 +107,54 @@ read_vcf <- function(path,
             ### dummy arg, not used here
             log_folder_ind = FALSE, 
             save_path = save_path, 
-            write_vcf = write_vcf,
+            write_vcf = !as_datatable,
             tabix_index = tabix_index)
         save_path <- check_save_path_out$save_path
     }
     #### Save as VCF ####
-    if(isTRUE(write_vcf)) {
+    if(isFALSE(as_datatable)) {
         if(!is.null(save_path)){ 
             VariantAnnotation::writeVcf(
-                obj = vcf,
+                obj = vcf_dt,
                 filename = check_save_path_out$save_path,
                 index = tabix_index
             )
         }
         messager("Returning as VCF.")
-        return(vcf)
+        return(vcf_dt)
     }
-    #### Convert to data.table ####  
-    samples <- VariantAnnotation::vcfSamples(param)
-    sumstats_dt <- vcf2df(vcf = vcf, 
-                          add_sample_names = length(samples)!=1)
-    sample_id <- rownames(vcf@colData) 
-    remove(vcf) 
     #### Remove duplicated columns ####
-    drop_duplicate_cols(dt = sumstats_dt)
-    #### Remove sample suffix ####
-    data.table::setnames(
-        x = sumstats_dt,
-        old = colnames(sumstats_dt), 
-        new = gsub(paste0("_",sample_id,collapse = "|"),"",
-                   colnames(sumstats_dt), 
-                   ignore.case = TRUE)
-    )   
+    drop_duplicate_cols(dt = vcf_dt)
     #### Remove empty columns #####
-    sumstats_dt <- remove_empty_cols(sumstats_dt = sumstats_dt,
-                                     sampled_rows = sampled_rows)
+    remove_empty_cols(sumstats_dt = vcf_dt,
+                      sampled_rows = sampled_rows)
     #### Unlist columns inplace ####
-    unlist_dt(dt = sumstats_dt) 
+    unlist_dt(dt = vcf_dt) 
     #### Remove duplicated rows #### 
-    sumstats_dt <- unique(sumstats_dt)
+    vcf_dt <- unique(vcf_dt)
     #### Prepare SNP column ####
-    read_vcf_markername(sumstats_dt = sumstats_dt) 
+    read_vcf_markername(sumstats_dt = vcf_dt) 
     #### Prepare/un-log P col ####
-    read_vcf_pval(sumstats_dt = sumstats_dt)  
+    read_vcf_pval(sumstats_dt = vcf_dt)  
     #### Prepare INFO col ####
-    read_vcf_info(sumstats_dt = sumstats_dt)  
+    read_vcf_info(sumstats_dt = vcf_dt)  
     #### Rename start col #####
-    data.table::setnames(sumstats_dt,"start","BP")
+    data.table::setnames(vcf_dt,"start","BP")
+    #### Report ####
+    messager("sumstats_dt contains",
+             formatC(nrow(vcf_dt),big.mark = ","),"rows x",
+             formatC(ncol(vcf_dt),big.mark = ","),"columns.",
+             v=verbose)
     #### Write new data ####
     if (!is.null(save_path)) { 
-        messager("Storing intermediate file before proceeding ==>",save_path)
+        messager("Storing intermediate file before proceeding ==>",save_path,
+                 v=verbose)
         data.table::fwrite(
-            x = sumstats_dt,
+            x = vcf_dt,
             file = save_path, 
             sep = "\t",
             nThread = nThread,
         )
     }
-    return(sumstats_dt)
+    return(vcf_dt)
 }

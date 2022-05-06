@@ -7,14 +7,26 @@
 https://gist.github.com/zhujack/849b75f5a8305edaeca1001dfb9c3fe9
 
 \code{
+#### VariantAnnotation ####
 vcf_file <- system.file("extdata", "ALSvcf.vcf",
                         package = "MungeSumstats")
 vcf <- VariantAnnotation::readVcf(file = vcf_file)
 vcf_df <- MungeSumstats::vcf2df(vcf = vcf)
 }
+
+{
+\subsection{vcfR}{
+
+if(!require("pinfsc50")) install.packages("pinfsc50")
+vcf_file <- system.file("extdata", "pinf_sc50.vcf.gz", package = "pinfsc50")
+vcf <- read.vcfR( vcf_file, verbose = FALSE )
+vcf_df_list <- vcfR::vcfR2tidy(vcf, single_frame=TRUE)
+vcf_df <- data.table::data.table(vcf_df_list$dat)
+}
+}
 }
 \usage{
-vcf2df(vcf, add_sample_names = TRUE)
+vcf2df(vcf, add_sample_names = TRUE, verbose = TRUE)
 }
 \arguments{
 \item{vcf}{Variant Call Format (VCF) file imported into R
@@ -24,6 +36,8 @@ as a \pkg{VariantAnnotation}
 
 \item{add_sample_names}{Append sample names to column names
 (e.g. "EZ" --> "EZ_ubm-a-2929").}
+
+\item{verbose}{Print messages.}
 }
 \value{
 data.frame version of VCF

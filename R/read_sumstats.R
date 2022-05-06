@@ -77,7 +77,7 @@ read_sumstats <- function(path,
         }
     }
     #### Drop empty cols ####
-    sumstats_file <- remove_empty_cols(sumstats_dt = sumstats_file) 
+    remove_empty_cols(sumstats_dt = sumstats_file) 
     #### Standardise colnames ####
     if (isTRUE(standardise_headers)) {
         CHR <- NULL;

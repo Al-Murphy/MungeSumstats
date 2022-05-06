@@ -71,6 +71,8 @@ Suggests:
     seqminer,
     Rsamtools,
     MatrixGenerics,
-    badger
+    badger,
+    BiocParallel,
+    GenomicFiles
 Config/testthat/edition: 3
 VignetteBuilder: knitr

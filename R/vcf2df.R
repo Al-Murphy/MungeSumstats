@@ -9,26 +9,44 @@
 #' \link[VariantAnnotation]{ExpandedVCF} object. 
 #' @param add_sample_names Append sample names to column names 
 #' (e.g. "EZ" --> "EZ_ubm-a-2929").
+#' @param verbose Print messages.
 #' 
 #' @source https://gist.github.com/zhujack/849b75f5a8305edaeca1001dfb9c3fe9
 #' @source 
 #' \code{
+#' #### VariantAnnotation ####
 #' vcf_file <- system.file("extdata", "ALSvcf.vcf",
 #'                         package = "MungeSumstats")
 #' vcf <- VariantAnnotation::readVcf(file = vcf_file)
 #' vcf_df <- MungeSumstats::vcf2df(vcf = vcf)
 #' } 
+#' @source {
+#' #### vcfR ####
+#' if(!require("pinfsc50")) install.packages("pinfsc50")
+#' vcf_file <- system.file("extdata", "pinf_sc50.vcf.gz", package = "pinfsc50")
+#' vcf <- read.vcfR( vcf_file, verbose = FALSE )
+#' vcf_df_list <- vcfR::vcfR2tidy(vcf, single_frame=TRUE)
+#' vcf_df <- data.table::data.table(vcf_df_list$dat)
+#' }
 #' @return data.frame version of VCF 
 #' 
 #' @keywords internal
 #' @importFrom utils type.convert 
 #' @importFrom data.table as.data.table
 vcf2df <- function(vcf, 
-                   add_sample_names=TRUE) {
+                   add_sample_names=TRUE,
+                   verbose=TRUE) {
     requireNamespace("VariantAnnotation")
     requireNamespace("MatrixGenerics")
   
-    messager("Converting VCF to data.table.") 
+    messager("Converting VCF to data.table.",v=verbose) 
+    #### Automatically determine whether to add sample names ####
+    if(is.null(add_sample_names)){
+        header <- VariantAnnotation::header(x = vcf)
+        samples <- VariantAnnotation::samples(header)
+        add_sample_names <- length(samples)!=1
+    }
+    samples <- VariantAnnotation::samples(header)
     #### .anncols function ####
     .anncols = function(anncol,headerstring) {
         anncols <- strsplit(sub("Functional annotations: '",'',
@@ -90,12 +108,27 @@ vcf2df <- function(vcf,
         } else {
             ## Works better for VCF
             n <- names(VariantAnnotation::geno(x))
-            tmp <- lapply(n,function(col) { 
-                ## keeps colnames unchanged
-                data.table::as.data.table(
-                    VariantAnnotation::geno(x)[[col]]
-                )
+            #### Avoid parsing redundant columns ####
+            if("ID" %in% colnames(df)) n <- n[n!="ID"]
+            tmp <- lapply(n,function(col) {
+                coldat <- VariantAnnotation::geno(x)[[col]]
+                #### Drop empty columns within each matrix ####
+                for(i in ncol(coldat)){
+                    if(sum(!is.na(coldat[,i]))==0){
+                        coldat <- coldat[,-i]
+                    }
+                }
+                if(ncol(coldat)==0 | nrow(coldat)==0){
+                    return(NULL)
+                } else {
+                    ## keeps colnames unchanged
+                    data.table::as.data.table(coldat)
+                } 
             })
+            #### Remove NULL entries ####
+            nulls <- unname(unlist(lapply(tmp,is.null)))
+            tmp <- tmp[!nulls]
+            n <- n[!nulls]
             ## Each element can potentially have >1 column 
             ncols <- unlist(lapply(tmp,ncol))
             tmp <- do.call(cbind, tmp)
@@ -107,7 +140,7 @@ vcf2df <- function(vcf,
             } 
         } 
         df <- cbind(df, tmp) 
-        methods::show(round(difftime(Sys.time(),t1),1))
+        if(verbose) methods::show(round(difftime(Sys.time(),t1),1))
         return(df)
     }
     #### Call functions ####
@@ -117,5 +150,5 @@ vcf2df <- function(vcf,
     } else {
         # message('No VCF Expanding')
         return(v2df(x = vcf))
-    }
+    } 
 }

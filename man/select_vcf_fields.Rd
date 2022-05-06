@@ -6,7 +6,7 @@
 \usage{
 select_vcf_fields(
   path,
-  sampled_rows = 1e+07,
+  sampled_rows = 1000,
   which = NULL,
   samples = NULL,
   nThread = 1,
@@ -14,9 +14,7 @@ select_vcf_fields(
 )
 }
 \arguments{
-\item{path}{Filepath for the summary statistics file to be formatted. A
-dataframe or datatable of the summary statistics file can also be passed
-directly to MungeSumstats using the path parameter.}
+\item{path}{Path to local or remote VCF file.}
 
 \item{sampled_rows}{First N rows to sample.
 Set \code{NULL} to use full \code{sumstats_file}.

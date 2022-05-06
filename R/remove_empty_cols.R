@@ -4,7 +4,7 @@
 #' @inheritParams format_sumstats
 #' @inheritParams check_empty_cols
 #' @keywords internal
-#' @returns \code{sumstats_dt} with empty columns removed. 
+#' @returns Null output.
 remove_empty_cols <- function(sumstats_dt, 
                               sampled_rows=NULL,
                               verbose=TRUE){
@@ -20,5 +20,4 @@ remove_empty_cols <- function(sumstats_dt,
         messager("Removing",length(empty_cols),"empty columns.",v=verbose)
         sumstats_dt[,(names(empty_cols)):=NULL] 
     }
-    return(sumstats_dt)
 }

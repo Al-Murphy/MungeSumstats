@@ -30,10 +30,15 @@ download_vcf <- function(vcf_url,
     #### Create save_path ####
     save_path <- file.path(vcf_dir, basename(vcf_url))
     index_path <- NULL
-
-    if (file.exists(save_path) && force_new == FALSE) {
+    #### If actually local ####
+    if(file.exists(vcf_url)){
+        message("Using local VCF.")
+        save_path <- vcf_url
+        index_path <- paste0(vcf_url, ".tbi")
+    #### If remote but already downloaded ####
+    } else if (file.exists(save_path) && force_new == FALSE) {
         message("Using previously downloaded VCF.")
-        vcf_url <- save_path
+        index_path <- paste0(save_path, ".tbi")
     } else {
         if (vcf_download) {
             message("Downloading VCF ==> ", save_path)

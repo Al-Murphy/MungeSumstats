@@ -17,7 +17,6 @@ granges_to_dt  <- function(gr) {
     #### Combine metadata with ranges data ####
     if( ncol(DF) > 0) { 
         meta <- DF_to_dt(DF = DF)
-        meta <- remove_empty_cols(sumstats_dt = meta)
         DT <- data.table::data.table(
             chr=as.vector(GenomicRanges::seqnames(gr)), 
             start=GenomicRanges::start(gr),
