@@ -28,6 +28,7 @@ data into redundant 3D matrices.
     - `remove_nonstandard_vcf_cols`
 * Remove redundant `dt_to_granges` by merging functionality into `to_granges`.
     - Adjusted `liftover` to accommodate the slight change. 
+* Fix `is_tabix` (I had incorrectly made `path` all lowercase).  
 
 ## CHANGES IN VERSION 1.4.0 
 
