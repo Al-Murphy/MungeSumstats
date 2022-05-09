@@ -16,7 +16,6 @@
 #' @importFrom methods is
 #' @importFrom R.utils gunzip
 #' @importFrom VariantAnnotation indexVcf
-#' @importFrom Rsamtools bgzip
 #' @examples 
 #' eduAttainOkbayPth <- system.file("extdata", "eduAttainOkbay.txt",
 #'                                  package = "MungeSumstats")
@@ -42,6 +41,7 @@ index_vcf <- function(path,
         return(path)
         #### When local and non-tabix ####
     } else {
+        requireNamespace("Rsamtools")
         #### Round 1: assume .gz is bgz-compressed ####
         sfx <- supported_suffixes(tabular = FALSE, 
                                   tabular_compressed = FALSE, 
