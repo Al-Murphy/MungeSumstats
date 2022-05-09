@@ -14,7 +14,7 @@
 #' @importFrom BSgenome snpsById
 #' @source 
 #' \code{
-#' sumstats_dt <- formatted_example()
+#' sumstats_dt <- formatted_example() 
 #' rsids <- MungeSumstats:::load_ref_genome_data(snps = sumstats_dt$SNP,
 #'                                               ref_genome = "GRCH37")
 #' }
