@@ -102,7 +102,7 @@ read_vcf_parallel <- function(path,
                  )
     }  
     #### Make sure multi-threading makes sense given VCF size ####
-    if((n_variants<mt_thresh) && (nThread>1)){
+    if((as.integer(n_variants)<mt_thresh) && (nThread>1)){
         messager("Processing will be more efficient in single-threaded mode",
                  paste0("when nrows<",mt_thresh,"."),
                  "Temporarily setting nThread=1.",

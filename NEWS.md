@@ -11,7 +11,8 @@
     - Added arg `mt_thresh` to avoid using parallelisation when VCFs are small, 
     due to the overhead outweighing the benefits in these cases.
 * Added Linux installation instructions for *axel* downloader.
-* Added 2nd `tryCatch` to `downloader` with different `download.file` parameters that may work better on certain machines. 
+* Added 2nd `tryCatch` to `downloader` with different `download.file` 
+parameters that may work better on certain machines. 
 * Avoid using `file.path` to specify URL in:
     - `get_chain_file`
     - `import_sumstats` 
