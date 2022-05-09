@@ -6,12 +6,9 @@
 #' @param msg Optional name of the column missing from the dataset in question.
 #'  Default is NULL
 #' @return data table of snpsById, filtered to SNPs of interest.
-#' @importFrom data.table setDT
-#' @importFrom data.table setkey
-#' @importFrom data.table :=
-#' @importFrom data.table setnames
-#' @importFrom data.table setorder
+#' @importFrom data.table setDT setkey := setnames setorder
 #' @importFrom BSgenome snpsById
+#' @importFrom stringr str_sub
 #' @source 
 #' \code{
 #' sumstats_dt <- formatted_example()
@@ -37,12 +34,13 @@ load_ref_genome_data <- function(snps,
     #so the snp should be all numeric or should start with rs and then be 
     #numeric. Find any that aren't and exclude these. The rs id can be inferred
     #in a later function
-    snp_check <- lapply(snps,function(x) suppressWarnings(
-        as.numeric(substring(x,3,nchar(x)))
-        )
-    )
-    snps <- snps[!unlist(lapply(snp_check,is.na))]
-    messager("Validating RSIDS of",formatC(length(snps),big.mark = ","),
+    messager("Preprocessing RSIDs.") 
+    snp_check <- suppressMessages(as.numeric(
+        stringr::str_sub(string = snps, start = 3, end = -1L) 
+    ))
+    snps <- snps[!is.na(snp_check)]
+    
+    messager("Validating RSIDs of",formatC(length(snps),big.mark = ","),
              "SNPs using BSgenome::snpsById...")
     tm <- system.time({
         gr_rsids <- BSgenome::snpsById(

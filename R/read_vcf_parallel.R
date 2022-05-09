@@ -90,10 +90,13 @@ read_vcf_parallel <- function(path,
     header <- VariantAnnotation::scanVcfHeader(file = vcf_file)
     samples <- VariantAnnotation::samples(header)
     ## Get genome build
-    genome <- header@header$contig$assembly[[1]] 
+    genome <- read_vcf_genome(header = header, 
+                              default_genome="HG19/GRCh37",
+                              verbose = verbose) 
     ## Report total variants
     n_variants <- header@header$SAMPLE$TotalVariants
-    if(!is.null(n_variants) & isTRUE(verbose)){
+    if(!is.null(n_variants) &&
+       isTRUE(verbose)){
         messager("VCF contains:",
                  formatC(as.integer(n_variants),big.mark = ","),"variant(s)",
                  "x",
@@ -184,6 +187,9 @@ read_vcf_parallel <- function(path,
                                                genome = genome)
         }) 
         vcf <- REDUCE(vcf)
+        #### Set back to 1 to avoid errors in later steps ####
+        register_cores(workers = 1,
+                       progressbar = verbose)
     }   
     if(verbose) methods::show(round(difftime(Sys.time(),t1),1))
     return(vcf)

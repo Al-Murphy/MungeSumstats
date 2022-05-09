@@ -43,7 +43,7 @@ read_vcf(
   vcf_dir = tempdir(),
   download_method = "download.file",
   force_new = FALSE,
-  mt_thresh = 100000000L,
+  mt_thresh = 100000L,
   nThread = 1,
   verbose = TRUE
 )

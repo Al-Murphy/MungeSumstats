@@ -24,6 +24,8 @@ when `vcf_download=FALSE`.
 * `load_ref_genome_data`:
     - Give more informative messages that 
         let user know which steps take a long time.
+    - Speed up substring preprocessing. 
+* `read_vcf_genome`: more robust way to get genome build from VCF. 
     
 
 ### Bug fixes 
