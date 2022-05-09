@@ -92,7 +92,7 @@ read_vcf <- function(path,
                      vcf_dir = tempdir(),
                      download_method = "download.file",
                      force_new = FALSE,
-                     mt_thresh = 1e8L,
+                     mt_thresh = 1e5L,
                      nThread = 1,
                      verbose = TRUE){ 
     #### Read VCF #### 

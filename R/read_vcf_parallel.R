@@ -37,7 +37,7 @@ read_vcf_parallel <- function(path,
                               download_method = "download.file",
                               force_new = FALSE,
                               
-                              mt_thresh = 1e8L,
+                              mt_thresh = 1e5L,
                               nThread = 1,
                               ntile = nThread,
                               verbose = TRUE){
