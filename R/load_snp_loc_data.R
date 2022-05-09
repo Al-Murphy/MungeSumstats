@@ -13,6 +13,7 @@
 load_snp_loc_data <- function(ref_genome,
                               msg = NULL) {
     ref_genome <- toupper(ref_genome)
+    message("Loading SNPlocs data.")
     if (!is.null(msg)) {
         print_msg <- paste0(
             "There is no ", msg, " column found within the data. ",

@@ -125,7 +125,7 @@ read_vcf_parallel <- function(path,
     ## Uses GenomicFiles to parallelise and speed up reading.
     } else {
         messager("Reading VCF file: multi-threaded",
-                 paste0("(",nThread," cores)"),v=verbose)  
+                 paste0("(",nThread," threads)"),v=verbose)  
         register_cores(workers = nThread,
                        progressbar = verbose)
         ## Check which chromosome are available. 

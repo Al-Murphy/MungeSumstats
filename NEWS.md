@@ -21,6 +21,10 @@ when `vcf_download=FALSE`.
 * `download_vcf`:
     - Make timeout 10min instead of 30min.
     - Make axel verbose. 
+* `load_ref_genome_data`:
+    - Give more informative messages that 
+        let user know which steps take a long time.
+    
 
 ### Bug fixes 
 

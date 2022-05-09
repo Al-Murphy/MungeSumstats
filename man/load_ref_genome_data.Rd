@@ -3,6 +3,13 @@
 \name{load_ref_genome_data}
 \alias{load_ref_genome_data}
 \title{Load the reference genome data for SNPs of interest}
+\source{
+\code{
+sumstats_dt <- formatted_example()
+rsids <- MungeSumstats:::load_ref_genome_data(snps = sumstats_dt$SNP,
+                                              ref_genome = "GRCH37")
+}
+}
 \usage{
 load_ref_genome_data(snps, ref_genome, msg = NULL)
 }

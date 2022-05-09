@@ -12,11 +12,20 @@
 #' @importFrom data.table setnames
 #' @importFrom data.table setorder
 #' @importFrom BSgenome snpsById
-load_ref_genome_data <- function(snps, ref_genome, msg = NULL) {
-    message("Loading reference genome data.")
+#' @source 
+#' \code{
+#' sumstats_dt <- formatted_example()
+#' rsids <- MungeSumstats:::load_ref_genome_data(snps = sumstats_dt$SNP,
+#'                                               ref_genome = "GRCH37")
+#' }
+load_ref_genome_data <- function(snps, 
+                                 ref_genome, 
+                                 msg = NULL) {
+    
     SNP <- NULL
     SNP_LOC_DATA <- load_snp_loc_data(ref_genome, msg = msg)
     # Get correct ref genome
+    message("Loading reference genome data.")
     if (toupper(ref_genome) == "GRCH37") {
         genome <-
             BSgenome.Hsapiens.1000genomes.hs37d5::BSgenome.Hsapiens.1000genomes.hs37d5
@@ -32,14 +41,17 @@ load_ref_genome_data <- function(snps, ref_genome, msg = NULL) {
         as.numeric(substring(x,3,nchar(x)))
         )
     )
-    snps <-
-        snps[!unlist(lapply(snp_check,is.na))]
-    gr_rsids <- BSgenome::snpsById(
-        x = SNP_LOC_DATA,
-        id = snps,
-        genome = genome,
-        ifnotfound = "drop"
-    )
+    snps <- snps[!unlist(lapply(snp_check,is.na))]
+    messager("Validating RSIDS of",formatC(length(snps),big.mark = ","),
+             "SNPs using BSgenome::snpsById")
+    system.time({
+        gr_rsids <- BSgenome::snpsById(
+            x = SNP_LOC_DATA,
+            id = snps,
+            genome = genome,
+            ifnotfound = "drop"
+        )
+    })
     rsids <- data.table::setDT(data.frame(gr_rsids))
     data.table::setnames(rsids, "RefSNP_id", "SNP")
     data.table::setorder(rsids, SNP)
