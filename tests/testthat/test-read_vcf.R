@@ -15,11 +15,12 @@ test_that("Test that VCFs can be properly read in.", {
         )
         ### Write this VCF and then read it in again
         tmp_vcf <- tempfile(fileext = ".vcf.gz")
-        write_sumstats(
+        tmp_vcf <- write_sumstats(
             sumstats_dt = sumstats_dt,
-            sep = "\t",
             save_path = tmp_vcf,
-            write_vcf = TRUE
+            write_vcf = TRUE,
+            return_path = TRUE, 
+            save_path_check = TRUE
         )
         sumstats_dt2 <- read_vcf(path = tmp_vcf)
         sumstats_dt2 <- standardise_header(

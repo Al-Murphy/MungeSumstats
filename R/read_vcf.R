@@ -24,6 +24,10 @@
 #' to a temp folder before reading it into R. 
 #' This is important to keep \code{TRUE} when \code{nThread>1} to avoid
 #' making too many queries to remote file. 
+#' @param mt_thresh When the number of rows (variants) in the VCF is 
+#' \code{< mt_thresh}, only use single-threading for reading in the VCF.
+#' This is because the overhead of parallelisation outweighs the speed benefits
+#' when VCFs are small. 
 #' @param verbose Print messages.
 #' @inheritParams check_empty_cols
 #' @inheritParams format_sumstats
@@ -88,6 +92,7 @@ read_vcf <- function(path,
                      vcf_dir = tempdir(),
                      download_method = "download.file",
                      force_new = FALSE,
+                     mt_thresh = 1e8L,
                      nThread = 1,
                      verbose = TRUE){ 
     #### Read VCF #### 
@@ -128,16 +133,7 @@ read_vcf <- function(path,
         }
         messager("Returning as VCF.")
         return(vcf_dt)
-    }
-    #### Remove duplicated columns ####
-    drop_duplicate_cols(dt = vcf_dt)
-    #### Remove empty columns #####
-    remove_empty_cols(sumstats_dt = vcf_dt,
-                      sampled_rows = sampled_rows)
-    #### Unlist columns inplace ####
-    unlist_dt(dt = vcf_dt) 
-    #### Remove duplicated rows #### 
-    vcf_dt <- unique(vcf_dt)
+    } 
     #### Prepare SNP column ####
     read_vcf_markername(sumstats_dt = vcf_dt) 
     #### Prepare/un-log P col ####
@@ -146,11 +142,6 @@ read_vcf <- function(path,
     read_vcf_info(sumstats_dt = vcf_dt)  
     #### Rename start col #####
     data.table::setnames(vcf_dt,"start","BP")
-    #### Report ####
-    messager("sumstats_dt contains",
-             formatC(nrow(vcf_dt),big.mark = ","),"rows x",
-             formatC(ncol(vcf_dt),big.mark = ","),"columns.",
-             v=verbose)
     #### Write new data ####
     if (!is.null(save_path)) { 
         messager("Storing intermediate file before proceeding ==>",save_path,

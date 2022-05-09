@@ -27,11 +27,12 @@ test_that("Test that different kinds of files can be read in.", {
                                                  standardise_headers = TRUE)
         ### Test VCF
         vcf_tmp <- tempfile(fileext = ".vcf.gz")
-        write_sumstats(
+        vcf_tmp <- write_sumstats(
             sumstats_dt = sumstats_dt,
-            save_path = vcf_tmp, 
-            sep = "\t",
-            write_vcf = TRUE
+            save_path = vcf_tmp,
+            write_vcf = TRUE,
+            return_path = TRUE,
+            save_path_check = TRUE
         )
         vcf_ss <- MungeSumstats::read_sumstats(path = vcf_tmp,
                                                standardise_headers = TRUE) 

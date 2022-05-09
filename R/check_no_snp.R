@@ -38,8 +38,9 @@ check_no_snp <- function(sumstats_dt, path, ref_genome, indels, imputation_ind,
             num_indels <- nrow(gr_snp[(nchar(A1)>1 | nchar(A2)>1),])
             if(num_indels>0){
                 msg <- paste0("Found ",
-                          nrow(num_indels), " Indels. These won'",
-                          "t be checked against the reference ",
+                          formatC(nrow(num_indels),big.mark = ","),
+                          " Indels. These won't",
+                          " be checked against the reference ",
                           "genome as it does not contain ",
                           "Indels.\nWARNING If your sumstat ",
                           "doesn't contain Indels, set the ",

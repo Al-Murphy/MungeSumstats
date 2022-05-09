@@ -20,7 +20,7 @@ downloader(
   nThread = 1,
   alternate = TRUE,
   check_certificates = TRUE,
-  timeout = 30 * 60
+  timeout = 10 * 60
 )
 }
 \arguments{
@@ -48,7 +48,7 @@ downloader(
 \item{check_certificates}{check_certificates}
 
 \item{timeout}{How many seconds before giving up on download.
-Passed to \code{download.file}. Default: \code{30*60} (30min).}
+Passed to \code{download.file}. Default: \code{10*60} (10min).}
 }
 \value{
 Local path to downloaded file.

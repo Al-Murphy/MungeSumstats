@@ -25,7 +25,8 @@ download_vcf <- function(vcf_url,
                          vcf_download = TRUE,
                          download_method = "download.file",
                          force_new = FALSE,
-                         quiet = TRUE,
+                         quiet = FALSE,
+                         timeout = 10*60,
                          nThread = 1) {
     #### Create save_path ####
     save_path <- file.path(vcf_dir, basename(vcf_url))
@@ -55,6 +56,7 @@ download_vcf <- function(vcf_url,
                 download_method = download_method,
                 force_overwrite = force_new,
                 quiet = quiet,
+                timeout = timeout,
                 nThread = nThread
             )
             #### Download tabix index file 

@@ -14,7 +14,7 @@ read_vcf_pval <- function(sumstats_dt){
     if ("Pval" %in% colnames(sumstats_dt)) {
         data.table::setnames(sumstats_dt, "P","Pval")
     } else if ("LP" %in% names(sumstats_dt)) {
-        messager("VCF file has -log10 P-values, these will be ",
+        messager("VCF file has -log10 P-values; these will be",
                  "converted to unadjusted p-values in the 'P' column.")
         sumstats_dt[, P := 10^(-1 * as.numeric(LP))]
     } 

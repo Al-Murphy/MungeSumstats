@@ -43,6 +43,7 @@ read_vcf(
   vcf_dir = tempdir(),
   download_method = "download.file",
   force_new = FALSE,
+  mt_thresh = 100000000L,
   nThread = 1,
   verbose = TRUE
 )
@@ -101,6 +102,11 @@ Change this to keep the raw VCF file on disk
 exists, formatting will be skipped and this file will be imported instead
 (default). Set \code{force_new=TRUE} to override this.}
 
+\item{mt_thresh}{When the number of rows (variants) in the VCF is
+\code{< mt_thresh}, only use single-threading for reading in the VCF.
+This is because the overhead of parallelisation outweighs the speed benefits
+when VCFs are small.}
+
 \item{nThread}{Number of threads to use for parallel processes.}
 
 \item{verbose}{Print messages.}
@@ -120,8 +126,8 @@ sumstats_dt <- read_vcf(path = path)
 
 #### Remote file ####
 ## Small GWAS (0.2Mb)
-path <- "https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz" 
-sumstats_dt2 <- read_vcf(path = path)
+# path <- "https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz" 
+# sumstats_dt2 <- read_vcf(path = path)
 
 ## Large GWAS (250Mb)
 # path <- "https://gwas.mrcieu.ac.uk/files/ubm-a-2929/ubm-a-2929.vcf.gz"

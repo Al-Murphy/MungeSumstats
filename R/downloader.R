@@ -23,7 +23,7 @@
 #' @param alternate alternate,
 #' @param check_certificates check_certificates
 #' @param timeout How many seconds before giving up on download.
-#' Passed to \code{download.file}. Default: \code{30*60} (30min).
+#' Passed to \code{download.file}. Default: \code{10*60} (10min).
 #' @family downloaders
 #' @keywords internal
 downloader <- function(input_url,
@@ -38,7 +38,7 @@ downloader <- function(input_url,
                        alternate = TRUE,
                        check_certificates = TRUE,
                        # conda_env=NULL,
-                       timeout = 30 * 60) {
+                       timeout = 10*60) {
     if (download_method == "axel") {
         axel_avail <- length(system("which axel", intern = TRUE)) != 0
         if (axel_avail) {

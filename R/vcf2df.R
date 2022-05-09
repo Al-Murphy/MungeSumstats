@@ -10,19 +10,18 @@
 #' @param add_sample_names Append sample names to column names 
 #' (e.g. "EZ" --> "EZ_ubm-a-2929").
 #' @param add_rowranges Include \code{rowRanges} from VCF as well.
+#' @param drop_empty_cols Drop columns that are filled entirely with: 
+#' \code{NA}, \code{"."}, or \code{""}. 
+#' @param unique_cols Only keep uniquely named columns.
+#' @param unique_rows Only keep unique rows.
+#' @param unlist_cols If any columns are lists instead of vectors, unlist them.
+#' Required to be \code{TRUE} when \code{unique_rows=TRUE}.
 #' @param verbose Print messages.
+#' @inheritParams check_empty_cols
 #' 
-#' @source https://gist.github.com/zhujack/849b75f5a8305edaeca1001dfb9c3fe9
 #' @source 
-#' \code{
-#' #### VariantAnnotation ####
-#' # path <- "https://github.com/brentp/vcfanno/raw/master/example/exac.vcf.gz"
-#' path <- system.file("extdata", "ALSvcf.vcf",
-#'                     package = "MungeSumstats")
-#' vcf <- VariantAnnotation::readVcf(file = path)
-#' vcf_df <- MungeSumstats:::vcf2df(vcf = vcf)
-#' } 
-#' 
+#' \href{https://gist.github.com/zhujack/849b75f5a8305edaeca1001dfb9c3fe9}{
+#' Original code source}
 #' @source {
 #' #### vcfR ####
 #' if(!require("pinfsc50")) install.packages("pinfsc50")
@@ -33,13 +32,26 @@
 #' }
 #' @return data.frame version of VCF 
 #' 
-#' @keywords internal
+#' @export
 #' @importFrom utils type.convert 
 #' @importFrom data.table as.data.table
-#' @importFrom methods slotNames is
+#' @importFrom methods slotNames is show
+#' @examples   
+#' #### VariantAnnotation ####
+#' # path <- "https://github.com/brentp/vcfanno/raw/master/example/exac.vcf.gz"
+#' path <- system.file("extdata", "ALSvcf.vcf",
+#'                     package = "MungeSumstats")
+#'                     
+#' vcf <- VariantAnnotation::readVcf(file = path)
+#' vcf_df <- MungeSumstats:::vcf2df(vcf = vcf)
 vcf2df <- function(vcf, 
                    add_sample_names=TRUE,
                    add_rowranges=TRUE,
+                   drop_empty_cols=TRUE,
+                   unique_cols=TRUE,
+                   unique_rows=TRUE,
+                   unlist_cols=TRUE,
+                   sampled_rows=NULL,
                    verbose=TRUE) {
     requireNamespace("VariantAnnotation")
     requireNamespace("MatrixGenerics")
@@ -47,7 +59,7 @@ vcf2df <- function(vcf,
     messager("Converting VCF to data.table.",v=verbose) 
     #### Expand VCF ####
     if (methods::is(vcf,"CollapsedVCF")) {
-        messager('Expanding VCF first, so number of rows may increase',
+        messager('Expanding VCF first, so number of rows may increase.',
                  v=verbose)
         ## Not all VCFs work with this function
         vcf <- tryCatch({
@@ -138,13 +150,16 @@ vcf2df <- function(vcf,
                 }  
             }
             #### Drop empty columns within each matrix ####
-            for(i in ncol(coldat)){
-                if(all(is.na(coldat[,i])) || 
-                   all(coldat[,i]==".") ||
-                   all(coldat[,i]=="")){
-                    coldat <- coldat[,-i]
+            if(isTRUE(drop_empty_cols)){
+                for(i in ncol(coldat)){
+                    if(all(is.na(coldat[,i])) || 
+                       all(coldat[,i]==".") ||
+                       all(coldat[,i]=="")){
+                        coldat <- coldat[,-i]
+                    }
                 }
-            }
+            } 
+            #### Check if empty ####
             if(ncol(coldat)==0 | nrow(coldat)==0){
                 return(NULL)
             } else {
@@ -171,6 +186,40 @@ vcf2df <- function(vcf,
         }
     } 
     df <- cbind(df, tmp) 
+    remove(tmp)
+    
+    ## ----- Post-processing ----- ####
+    #### Only keep unique rows ####
+    #### Remove duplicated columns ####
+    if(isTRUE(unique_cols)){
+        drop_duplicate_cols(dt = df)
+    } 
+    #### Remove any remaining empty columns #####
+    if(isTRUE(drop_empty_cols)){
+        remove_empty_cols(sumstats_dt = df,
+                          sampled_rows = sampled_rows,
+                          verbose = verbose)
+    }
+    #### Unlist columns inplace ####
+    if(isTRUE(unique_rows) && isFALSE(unlist_cols)){
+        messager("Must set unlist_cols=TRUE to use unique_rows=TRUE.",
+                 "Setting unlist_cols=TRUE.",v=verbose)
+        unlist_cols <- TRUE
+    }
+    if(isTRUE(unlist_cols)){ 
+        unlist_dt(dt = df,
+                  verbose = verbose)
+    } 
+    #### Remove duplicated rows #### 
+    if(isTRUE(unique_rows)){
+        df <- drop_duplicate_rows(dt = df, 
+                                  verbose = verbose)
+    }  
+    #### Report ####
     if(verbose) methods::show(round(difftime(Sys.time(),t1),1))
+    messager("VCF data.table contains:",
+             formatC(nrow(df),big.mark = ","),"rows x",
+             formatC(ncol(df),big.mark = ","),"columns.",
+             v=verbose)
     return(df)
 }

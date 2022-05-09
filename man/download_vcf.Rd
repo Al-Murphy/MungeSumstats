@@ -10,7 +10,8 @@ download_vcf(
   vcf_download = TRUE,
   download_method = "download.file",
   force_new = FALSE,
-  quiet = TRUE,
+  quiet = FALSE,
+  timeout = 10 * 60,
   nThread = 1
 )
 }
@@ -32,6 +33,9 @@ Change this to keep the raw VCF file on disk
 with the same path name.}
 
 \item{quiet}{Run quietly.}
+
+\item{timeout}{How many seconds before giving up on download.
+Passed to \code{download.file}. Default: \code{10*60} (10min).}
 
 \item{nThread}{Number of threads to parallelize over.}
 }

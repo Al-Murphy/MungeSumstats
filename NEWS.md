@@ -2,9 +2,14 @@
 
 ### New features
 
+* Export `vcf2df`.
+    - Move some post-processing function inside this function
+    (e.g. drop duplicate cols/rows). 
 * `read_vcf` can now be parallised: splits query into chunks, imports them, and (optionally) converts them to `data.table` before rbinding them back into one object. 
     - Added report of VCF size (variants x samples) before processing to give
     user an idea of long it will take to process. 
+    - Added arg `mt_thresh` to avoid using parallelisation when VCFs are small, 
+    due to the overhead outweighing the benefits in these cases.
 * Added Linux installation instructions for *axel* downloader.
 * Added 2nd `tryCatch` to `downloader` with different `download.file` parameters that may work better on certain machines. 
 * Avoid using `file.path` to specify URL in:
@@ -12,6 +17,9 @@
     - `import_sumstats` 
 * Allow `download_vcf` to pass URLs directly (without downloading the files) 
 when `vcf_download=FALSE`.  
+* `download_vcf`:
+    - Make timeout 10min instead of 30min.
+    - Make axel verbose. 
 
 ### Bug fixes 
 
@@ -20,6 +28,7 @@ when `vcf_download=FALSE`.
 surrounding by ticks.  
 * `vcf2df`: Accounted for scenarios where `writeVcf` accidentally converts `geno`
 data into redundant 3D matrices. 
+    - Use `data.table::rbindlist(fill=TRUE)` to bind chunks back together. 
 * Remove unused functions after `read_vcf` upgrades:
     - `infer_vcf_sample_ids`
     - `is_vcf_parsed`
@@ -29,6 +38,8 @@ data into redundant 3D matrices.
 * Remove redundant `dt_to_granges` by merging functionality into `to_granges`.
     - Adjusted `liftover` to accommodate the slight change. 
 * Fix `is_tabix` (I had incorrectly made `path` all lowercase).  
+* Let `index_vcf` recognize all compressed vcf suffixes. 
+    - Add extra error handling when .gz is not actually bgz-compressed. 
 
 ## CHANGES IN VERSION 1.4.0 
 

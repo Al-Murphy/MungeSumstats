@@ -172,8 +172,9 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                 num_indels <- nrow(gr_snp[(nchar(A1)>1 | nchar(A2)>1),])
                 if(num_indels>0){
                     msg <- paste0("Found ",
-                                  nrow(num_indels), " Indels. These won'",
-                                  "t be checked against the reference ",
+                                  formatC(nrow(num_indels),big.mark = ","),
+                                  " Indels. These won't",
+                                  " be checked against the reference ",
                                   "genome as it does not contain ",
                                   "Indels.\nWARNING If your sumstat ",
                                   "doesn't contain Indels, set the ",
@@ -269,8 +270,9 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                                                         nchar(A2)>1),])
                         if(num_indels>0){
                             msg <- paste0("Found ",
-                                          nrow(num_indels), " Indels. These wo",
-                                          "n't be checked against the referenc",
+                                          formatC(nrow(num_indels),big.mark = ","),
+                                          " Indels. These won't",
+                                          " be checked against the referenc",
                                           "e genome as it does not contain ",
                                           "Indels.\nWARNING If your sumstat ",
                                           "doesn't contain Indels, set the ",

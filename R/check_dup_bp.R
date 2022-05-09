@@ -30,8 +30,9 @@ check_dup_bp <- function(sumstats_dt,
             num_indels <- nrow(sumstats_dt[(nchar(A1)>1 | nchar(A2)>1),])
             if(num_indels>0){
                 msg <- paste0("Found ",
-                              nrow(num_indels), " Indels. These won'",
-                              "t be checked for duplicates based on base-pair ",
+                              formatC(nrow(num_indels),big.mark = ","),
+                              " Indels. These won't",
+                              " be checked for duplicates based on base-pair ",
                               "position as there can be multiples.",
                               "\nWARNING If your sumstat ",
                               "doesn't contain Indels, set the ",

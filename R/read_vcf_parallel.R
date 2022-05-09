@@ -27,8 +27,8 @@ read_vcf_parallel <- function(path,
                               samples = 1,
                               which = NULL,
                               use_params = TRUE,
-                              as_datatable = TRUE,
-                              sampled_rows = 1e4,
+                              as_datatable = TRUE, 
+                              sampled_rows = 1e4L,
                               tilewidth = 1e7L,
                               include_xy = FALSE,
                               
@@ -37,6 +37,7 @@ read_vcf_parallel <- function(path,
                               download_method = "download.file",
                               force_new = FALSE,
                               
+                              mt_thresh = 1e8L,
                               nThread = 1,
                               ntile = nThread,
                               verbose = TRUE){
@@ -99,7 +100,15 @@ read_vcf_parallel <- function(path,
                  formatC(nrow(header@header$SAMPLE),big.mark = ","),
                  "sample(s)"
                  )
-    } 
+    }  
+    #### Make sure multi-threading makes sense given VCF size ####
+    if((n_variants<mt_thresh) && (nThread>1)){
+        messager("Processing will be more efficient in single-threaded mode",
+                 paste0("when nrows<",mt_thresh,"."),
+                 "Temporarily setting nThread=1.",
+                 v=verbose)
+        nThread <- 1
+    }
     #### Single-threaded ####
     t1 <- Sys.time()
     if(nThread==1){
@@ -157,8 +166,9 @@ read_vcf_parallel <- function(path,
         }
         ## Parallelised query
         #### reduceByRange ####
-        REDUCE <- if(as_datatable){
-            data.table::rbindlist
+        REDUCE <- if(isTRUE(as_datatable)){
+            function(x){data.table::rbindlist(l = x, fill=TRUE)}
+            
         } else {
             function(x){do.call(VariantAnnotation::rbind, x)}
         }

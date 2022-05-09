@@ -57,8 +57,9 @@ check_on_ref_genome <-function(sumstats_dt,
                             #remove indels from sumstats for now
                             sumstats_dt <- sumstats_dt[!indel_dt$SNP, ]
                             msg <- paste0("Found ",
-                                          nrow(indel_dt), " Indels. These won'",
-                                          "t be checked against the reference ",
+                                          formatC(nrow(indel_dt),big.mark = ","),
+                                          " Indels. These won't",
+                                          " be checked against the reference ",
                                           "genome as it does not contain ",
                                           "Indels.\nWARNING If your sumstat ",
                                           "doesn't contain Indels, set the ",

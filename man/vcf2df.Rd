@@ -4,16 +4,8 @@
 \alias{vcf2df}
 \title{VCF to DF}
 \source{
-https://gist.github.com/zhujack/849b75f5a8305edaeca1001dfb9c3fe9
-
-\code{
-#### VariantAnnotation ####
-# path <- "https://github.com/brentp/vcfanno/raw/master/example/exac.vcf.gz"
-path <- system.file("extdata", "ALSvcf.vcf",
-                    package = "MungeSumstats")
-vcf <- VariantAnnotation::readVcf(file = path)
-vcf_df <- MungeSumstats:::vcf2df(vcf = vcf)
-}
+\href{https://gist.github.com/zhujack/849b75f5a8305edaeca1001dfb9c3fe9}{
+Original code source}
 
 {
 \subsection{vcfR}{
@@ -27,7 +19,17 @@ vcf_df <- data.table::data.table(vcf_df_list$dat)
 }
 }
 \usage{
-vcf2df(vcf, add_sample_names = TRUE, add_rowranges = TRUE, verbose = TRUE)
+vcf2df(
+  vcf,
+  add_sample_names = TRUE,
+  add_rowranges = TRUE,
+  drop_empty_cols = TRUE,
+  unique_cols = TRUE,
+  unique_rows = TRUE,
+  unlist_cols = TRUE,
+  sampled_rows = NULL,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{vcf}{Variant Call Format (VCF) file imported into R
@@ -40,6 +42,20 @@ as a \pkg{VariantAnnotation}
 
 \item{add_rowranges}{Include \code{rowRanges} from VCF as well.}
 
+\item{drop_empty_cols}{Drop columns that are filled entirely with:
+\code{NA}, \code{"."}, or \code{""}.}
+
+\item{unique_cols}{Only keep uniquely named columns.}
+
+\item{unique_rows}{Only keep unique rows.}
+
+\item{unlist_cols}{If any columns are lists instead of vectors, unlist them.
+Required to be \code{TRUE} when \code{unique_rows=TRUE}.}
+
+\item{sampled_rows}{First N rows to sample.
+Set \code{NULL} to use full \code{sumstats_file}.
+when determining whether cols are empty.}
+
 \item{verbose}{Print messages.}
 }
 \value{
@@ -50,4 +66,13 @@ Function to convert a \pkg{VariantAnnotation}
 \code{CollapsedVCF}/\code{ExpandedVCF}
 object to a \code{data.frame}.
 }
-\keyword{internal}
+\examples{
+  
+#### VariantAnnotation ####
+# path <- "https://github.com/brentp/vcfanno/raw/master/example/exac.vcf.gz"
+path <- system.file("extdata", "ALSvcf.vcf",
+                    package = "MungeSumstats")
+                    
+vcf <- VariantAnnotation::readVcf(file = path)
+vcf_df <- MungeSumstats:::vcf2df(vcf = vcf)
+}

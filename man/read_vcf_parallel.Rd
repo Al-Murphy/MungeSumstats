@@ -20,13 +20,14 @@ read_vcf_parallel(
   which = NULL,
   use_params = TRUE,
   as_datatable = TRUE,
-  sampled_rows = 10000,
+  sampled_rows = 10000L,
   tilewidth = 10000000L,
   include_xy = FALSE,
   download = TRUE,
   vcf_dir = tempdir(),
   download_method = "download.file",
   force_new = FALSE,
+  mt_thresh = 100000000L,
   nThread = 1,
   ntile = nThread,
   verbose = TRUE
@@ -84,6 +85,11 @@ Change this to keep the raw VCF file on disk
 \item{force_new}{If a formatted file of the same names as \code{save_path}
 exists, formatting will be skipped and this file will be imported instead
 (default). Set \code{force_new=TRUE} to override this.}
+
+\item{mt_thresh}{When the number of rows (variants) in the VCF is
+\code{< mt_thresh}, only use single-threading for reading in the VCF.
+This is because the overhead of parallelisation outweighs the speed benefits
+when VCFs are small.}
 
 \item{nThread}{Number of threads to use for parallel processes.}
 

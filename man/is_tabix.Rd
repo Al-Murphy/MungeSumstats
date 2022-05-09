@@ -11,7 +11,10 @@ is_tabix(path)
 }
 \value{
 logical: whether the file is tabix-indexed or not.
+
+logical
 }
 \description{
-Is a file bgz-zip compressed and tabix-indexed.
+Is a file bgz-compressed and tabix-indexed.
 }
+\keyword{internal}

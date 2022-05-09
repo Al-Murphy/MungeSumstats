@@ -13,6 +13,10 @@
 #'
 #' @family tabix
 #' @keywords internal
+#' @importFrom methods is
+#' @importFrom R.utils gunzip
+#' @importFrom VariantAnnotation indexVcf
+#' @importFrom Rsamtools bgzip
 #' @examples 
 #' eduAttainOkbayPth <- system.file("extdata", "eduAttainOkbay.txt",
 #'                                  package = "MungeSumstats")
@@ -38,15 +42,37 @@ index_vcf <- function(path,
         return(path)
         #### When local and non-tabix ####
     } else {
-        messager("Compressing and tabix-indexing VCF file.",v=verbose)
-        if(!endsWith(path,".bgz")){
+        #### Round 1: assume .gz is bgz-compressed ####
+        sfx <- supported_suffixes(tabular = FALSE, 
+                                  tabular_compressed = FALSE, 
+                                  vcf = FALSE)
+        if(!any(endsWith(path,sfx))){
+            messager("bgzip-compressing VCF file.",v=verbose)
             path <- Rsamtools::bgzip(file = path, 
                                      dest = sprintf("%s.bgz",
                                                     sub("\\.gz$|\\.bgz$", "",
                                                         path)),
                                      overwrite = TRUE)
         } 
-        path <- VariantAnnotation::indexVcf(x = path)$path 
+        out <- tryCatch({
+            VariantAnnotation::indexVcf(x = path)$path
+        }, error = function(e){e}) 
+        #### Round 2: assume .gz is NOT bgz-compressed ####
+        if(methods::is(out,"error") &&
+           grepl("file does not appear to be bgzip",out$message, 
+                 ignore.case = TRUE)
+           ){
+            if(endsWith(tolower(path),".gz")){
+                path <- R.utils::gunzip(path, overwrite=TRUE)
+            }
+            path <- Rsamtools::bgzip(file = path, 
+                                     dest = sprintf("%s.bgz",
+                                                    sub("\\.gz$|\\.bgz$", "",
+                                                        path)),
+                                     overwrite = TRUE)
+            path <- VariantAnnotation::indexVcf(x = path)$path
+            
+        }
         return(path)
     } 
 }

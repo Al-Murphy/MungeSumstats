@@ -4,10 +4,12 @@
 \alias{unlist_dt}
 \title{Unlist a data.table}
 \usage{
-unlist_dt(dt)
+unlist_dt(dt, verbose = TRUE)
 }
 \arguments{
 \item{dt}{data.table}
+
+\item{verbose}{Print messages.}
 }
 \value{
 \code{dt} with list columns turned into vectors.
