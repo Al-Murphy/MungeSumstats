@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.2</span>
       </span>
     </div>
 
@@ -156,14 +156,14 @@ paths to the formatted summary statistics.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## $`ieu-a-298`</span>
-<span class="co">## [1] "/tmp/Rtmp6au6aX/ieu-a-298.tsv.gz"</span></code></pre>
+<span class="co">## [1] "/tmp/RtmpkVhOlK/ieu-a-298.tsv.gz"</span></code></pre>
 <p>You can easily turn this into a data.frame as well.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">results_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span>, 
                          path<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">results_df</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">##                  id                             path</span>
-<span class="co">## ieu-a-298 ieu-a-298 /tmp/Rtmp6au6aX/ieu-a-298.tsv.gz</span></code></pre>
+<span class="co">## ieu-a-298 ieu-a-298 /tmp/RtmpkVhOlK/ieu-a-298.tsv.gz</span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -208,7 +208,7 @@ and its functionality.</p>
 <span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
 <span class="co">## </span>
 <span class="co">## other attached packages:</span>
-<span class="co">## [1] MungeSumstats_1.5.1 BiocStyle_2.25.0   </span>
+<span class="co">## [1] MungeSumstats_1.5.2 BiocStyle_2.25.0   </span>
 <span class="co">## </span>
 <span class="co">## loaded via a namespace (and not attached):</span>
 <span class="co">##   [1] bitops_1.0-7                matrixStats_0.62.0         </span>
