@@ -64,6 +64,66 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="1.5.1" id="changes-in-version-151">CHANGES IN VERSION 1.5.1<a class="anchor" aria-label="anchor" href="#changes-in-version-151"></a></h2>
+<div class="section level3">
+<h3 id="new-features-1-5-1">New features<a class="anchor" aria-label="anchor" href="#new-features-1-5-1"></a></h3>
+<ul><li>Export <code>vcf2df</code>.
+<ul><li>Move some post-processing function inside this function (e.g. drop duplicate cols/rows).</li>
+</ul></li>
+<li>
+<code>read_vcf</code> can now be parallised: splits query into chunks, imports them, and (optionally) converts them to <code>data.table</code> before rbinding them back into one object.
+<ul><li>Added report of VCF size (variants x samples) before processing to give user an idea of long it will take to process.</li>
+<li>Added arg <code>mt_thresh</code> to avoid using parallelisation when VCFs are small, due to the overhead outweighing the benefits in these cases.</li>
+</ul></li>
+<li>Added Linux installation instructions for <em>axel</em> downloader.</li>
+<li>Added 2nd <code>tryCatch</code> to <code>downloader</code> with different <code>download.file</code> parameters that may work better on certain machines.</li>
+<li>Avoid using <code>file.path</code> to specify URL in:
+<ul><li><code>get_chain_file</code></li>
+<li><code>import_sumstats</code></li>
+</ul></li>
+<li>Allow <code>download_vcf</code> to pass URLs directly (without downloading the files) when <code>vcf_download=FALSE</code>.<br></li>
+<li>
+<code>download_vcf</code>:
+<ul><li>Make timeout 10min instead of 30min.</li>
+<li>Make axel verbose.</li>
+</ul></li>
+<li>
+<code>load_ref_genome_data</code>:
+<ul><li>Give more informative messages that let user know which steps take a long time.</li>
+<li>Speed up substring preprocessing.</li>
+</ul></li>
+<li>
+<code>read_vcf_genome</code>: more robust way to get genome build from VCF.</li>
+<li>
+<code>read_sumstats</code>: Speed up by using <code>remove_empty_cols(sampled_rows=)</code>, and only run for tabular file (<code>read_vcf</code> already does this internally).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-1-5-1">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-5-1"></a></h3>
+<ul><li>
+<code>select_vcf_field</code>: Got rid of “REF col doesn’t exists” warning by omitting <code>rowRanges</code>.</li>
+<li>Ensured several unevaluated code chunks in <code>vignettes/MungeSumstats.Rmd</code> were surrounding by ticks.<br></li>
+<li>
+<code>vcf2df</code>: Accounted for scenarios where <code>writeVcf</code> accidentally converts <code>geno</code> data into redundant 3D matrices.
+<ul><li>Use <code>data.table::rbindlist(fill=TRUE)</code> to bind chunks back together.</li>
+</ul></li>
+<li>Remove unused functions after <code>read_vcf</code> upgrades:
+<ul><li><code>infer_vcf_sample_ids</code></li>
+<li><code>is_vcf_parsed</code></li>
+<li><code>check_tab_delimited</code></li>
+<li><code>read_vcf_data</code></li>
+<li><code>remove_nonstandard_vcf_cols</code></li>
+</ul></li>
+<li>Remove redundant <code>dt_to_granges</code> by merging functionality into <code>to_granges</code>.
+<ul><li>Adjusted <code>liftover</code> to accommodate the slight change.</li>
+</ul></li>
+<li>Fix <code>is_tabix</code> (I had incorrectly made <code>path</code> all lowercase).<br></li>
+<li>Let <code>index_vcf</code> recognize all compressed vcf suffixes.
+<ul><li>Add extra error handling when .gz is not actually bgz-compressed.</li>
+</ul></li>
+<li>Set <code>BiocParallel</code> registered threads back to 1 after <code>read_vcf_parallel</code> finishes, to avoid potential conflicts with downstream steps.</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="1.5.0" id="changes-in-version-150">CHANGES IN VERSION 1.5.0<a class="anchor" aria-label="anchor" href="#changes-in-version-150"></a></h2>
 <div class="section level3">
 <h3 id="new-features-1-5-0">New features<a class="anchor" aria-label="anchor" href="#new-features-1-5-0"></a></h3>
@@ -80,10 +140,17 @@
 <li>Remove <code>stringr</code> (no longer used)</li>
 </ul></li>
 <li>Add new internal function <code>is_tabix</code> to check whether a file is already tabix-indexed.</li>
-<li>Bump <em>Depends: R(&gt;= 4.2)</em>.</li>
 <li>
-<code>read_sumstats</code>: now takes <code>samples</code> as an arg. By default, only uses first sample (if multiple are present in file).<br></li>
+<code>read_sumstats</code>:
+<ul><li>now takes <code>samples</code> as an arg.</li>
+<li>Parallises reading VCF using <code>GenomicFiles</code>.</li>
+</ul></li>
+<li>
+<code>read_sumstats</code>: now takes <code>samples</code> as an arg.<br>
+By default, only uses first sample (if multiple are present in file).<br></li>
 <li>Remove <code>INFO_filter=</code> from ALS VCF examples in vignettes (no longer necessary now that INFO parsing has been corrected).</li>
+<li>
+<code>download_vcf</code> can now handle situations with <code>vcf_url=</code> is actually a local file (not remote).</li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-1-5-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-5-0"></a></h3>

@@ -74,7 +74,7 @@
   nrows <span class="op">=</span> <span class="cn">Inf</span>,
   standardise_headers <span class="op">=</span> <span class="cn">FALSE</span>,
   samples <span class="op">=</span> <span class="fl">1</span>,
-  add_sample_names <span class="op">=</span> <span class="cn">FALSE</span>,
+  sampled_rows <span class="op">=</span> <span class="fl">10000L</span>,
   nThread <span class="op">=</span> <span class="fl">1</span>,
   mapping_file <span class="op">=</span> <span class="va">sumstatsColHeaders</span>
 <span class="op">)</span></code></pre></div>
@@ -97,9 +97,10 @@ If <code>Inf</code>, will read in all rows.</p></dd>
 <li><p>c("&lt;sample_id1&gt;","&lt;sample_id2&gt;",...) : 
 Only user-selected samples will be used (case-insensitive).</p></li>
 </ul></dd>
-<dt>add_sample_names</dt>
-<dd><p>Append sample names to column names
-(e.g. "EZ" --&gt; "EZ_ubm-a-2929").</p></dd>
+<dt>sampled_rows</dt>
+<dd><p>First N rows to sample.
+Set <code>NULL</code> to use full <code>sumstats_file</code>.
+when determining whether cols are empty.</p></dd>
 <dt>nThread</dt>
 <dd><p>Number of threads to use for parallel processes.</p></dd>
 <dt>mapping_file</dt>

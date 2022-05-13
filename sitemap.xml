@@ -178,7 +178,7 @@
     <loc>/reference/drop_duplicate_cols.html</loc>
   </url>
   <url>
-    <loc>/reference/dt_to_granges.html</loc>
+    <loc>/reference/drop_duplicate_rows.html</loc>
   </url>
   <url>
     <loc>/reference/find_sumstats.html</loc>
@@ -236,9 +236,6 @@
   </url>
   <url>
     <loc>/reference/index_vcf.html</loc>
-  </url>
-  <url>
-    <loc>/reference/infer_vcf_sample_ids.html</loc>
   </url>
   <url>
     <loc>/reference/is_tabix.html</loc>
@@ -331,19 +328,25 @@
     <loc>/reference/read_vcf.html</loc>
   </url>
   <url>
+    <loc>/reference/read_vcf_genome.html</loc>
+  </url>
+  <url>
     <loc>/reference/read_vcf_info.html</loc>
   </url>
   <url>
     <loc>/reference/read_vcf_markername.html</loc>
   </url>
   <url>
+    <loc>/reference/read_vcf_parallel.html</loc>
+  </url>
+  <url>
     <loc>/reference/read_vcf_pval.html</loc>
   </url>
   <url>
-    <loc>/reference/remove_empty_cols.html</loc>
+    <loc>/reference/register_cores.html</loc>
   </url>
   <url>
-    <loc>/reference/remove_nonstandard_vcf_cols.html</loc>
+    <loc>/reference/remove_empty_cols.html</loc>
   </url>
   <url>
     <loc>/reference/report_summary.html</loc>

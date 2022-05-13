@@ -72,6 +72,14 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">load_ref_genome_data</span><span class="op">(</span><span class="va">snps</span>, <span class="va">ref_genome</span>, msg <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
     </div>
 
+    <div id="source">
+    <h2>Source</h2>
+    <p><code>
+sumstats_dt &lt;- formatted_example()
+rsids &lt;- MungeSumstats:::load_ref_genome_data(snps = sumstats_dt$SNP,
+                                              ref_genome = "GRCH37")
+</code></p>
+    </div>
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>snps</dt>

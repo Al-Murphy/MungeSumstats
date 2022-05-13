@@ -73,18 +73,30 @@ object to a <code>data.frame</code>.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">vcf2df</span><span class="op">(</span><span class="va">vcf</span>, add_sample_names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">vcf2df</span><span class="op">(</span>
+  <span class="va">vcf</span>,
+  add_sample_names <span class="op">=</span> <span class="cn">TRUE</span>,
+  add_rowranges <span class="op">=</span> <span class="cn">TRUE</span>,
+  drop_empty_cols <span class="op">=</span> <span class="cn">TRUE</span>,
+  unique_cols <span class="op">=</span> <span class="cn">TRUE</span>,
+  unique_rows <span class="op">=</span> <span class="cn">TRUE</span>,
+  unlist_cols <span class="op">=</span> <span class="cn">TRUE</span>,
+  sampled_rows <span class="op">=</span> <span class="cn">NULL</span>,
+  verbose <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span></code></pre></div>
     </div>
 
     <div id="source">
     <h2>Source</h2>
-    <p>https://gist.github.com/zhujack/849b75f5a8305edaeca1001dfb9c3fe9</p>
-<p><code>
-vcf_file &lt;- system.file("extdata", "ALSvcf.vcf",
-                        package = "MungeSumstats")
-vcf &lt;- VariantAnnotation::readVcf(file = vcf_file)
-vcf_df &lt;- MungeSumstats::vcf2df(vcf = vcf)
-</code></p>
+    <p><a href="https://gist.github.com/zhujack/849b75f5a8305edaeca1001dfb9c3fe9" class="external-link">
+Original code source</a></p>
+<p></p><div class="section">
+<h3 id="vcfr">vcfR<a class="anchor" aria-label="anchor" href="#vcfr"></a></h3><p>if(!require("pinfsc50")) install.packages("pinfsc50")
+vcf_file &lt;- system.file("extdata", "pinf_sc50.vcf.gz", package = "pinfsc50")
+vcf &lt;- read.vcfR( vcf_file, verbose = FALSE )
+vcf_df_list &lt;- vcfR::vcfR2tidy(vcf, single_frame=TRUE)
+vcf_df &lt;- data.table::data.table(vcf_df_list$dat)</p>
+</div>
     </div>
     <div id="arguments">
     <h2>Arguments</h2>
@@ -96,12 +108,50 @@ as a <span class="pkg">VariantAnnotation</span>
 <dt>add_sample_names</dt>
 <dd><p>Append sample names to column names
 (e.g. "EZ" --&gt; "EZ_ubm-a-2929").</p></dd>
+<dt>add_rowranges</dt>
+<dd><p>Include <code>rowRanges</code> from VCF as well.</p></dd>
+<dt>drop_empty_cols</dt>
+<dd><p>Drop columns that are filled entirely with:
+<code>NA</code>, <code>"."</code>, or <code>""</code>.</p></dd>
+<dt>unique_cols</dt>
+<dd><p>Only keep uniquely named columns.</p></dd>
+<dt>unique_rows</dt>
+<dd><p>Only keep unique rows.</p></dd>
+<dt>unlist_cols</dt>
+<dd><p>If any columns are lists instead of vectors, unlist them.
+Required to be <code>TRUE</code> when <code>unique_rows=TRUE</code>.</p></dd>
+<dt>sampled_rows</dt>
+<dd><p>First N rows to sample.
+Set <code>NULL</code> to use full <code>sumstats_file</code>.
+when determining whether cols are empty.</p></dd>
+<dt>verbose</dt>
+<dd><p>Print messages.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>data.frame version of VCF</p>
     </div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in">  </span>
+<span class="r-in"><span class="co">#### VariantAnnotation ####</span></span>
+<span class="r-in"><span class="co"># path &lt;- "https://github.com/brentp/vcfanno/raw/master/example/exac.vcf.gz"</span></span>
+<span class="r-in"><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"ALSvcf.vcf"</span>,</span>
+<span class="r-in">                    package <span class="op">=</span> <span class="st">"MungeSumstats"</span><span class="op">)</span></span>
+<span class="r-in">                    </span>
+<span class="r-in"><span class="va">vcf</span> <span class="op">&lt;-</span> <span class="fu">VariantAnnotation</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/VariantAnnotation/man/readVcf-methods.html" class="external-link">readVcf</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">path</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">vcf_df</span> <span class="op">&lt;-</span> <span class="fu">MungeSumstats</span><span class="fu">:::</span><span class="fu">vcf2df</span><span class="op">(</span>vcf <span class="op">=</span> <span class="va">vcf</span><span class="op">)</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Converting VCF to data.table.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Expanding VCF first, so number of rows may increase.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Checking for empty columns.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Removing 2 empty columns.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Unlisting 4 columns.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Dropped 314 duplicate rows.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.1 secs</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> VCF data.table contains: 101 rows x 12 columns.</span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

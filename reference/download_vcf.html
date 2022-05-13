@@ -79,7 +79,8 @@ so we can't include it as a dep.</p>
   vcf_download <span class="op">=</span> <span class="cn">TRUE</span>,
   download_method <span class="op">=</span> <span class="st">"download.file"</span>,
   force_new <span class="op">=</span> <span class="cn">FALSE</span>,
-  quiet <span class="op">=</span> <span class="cn">TRUE</span>,
+  quiet <span class="op">=</span> <span class="cn">FALSE</span>,
+  timeout <span class="op">=</span> <span class="fl">10</span> <span class="op">*</span> <span class="fl">60</span>,
   nThread <span class="op">=</span> <span class="fl">1</span>
 <span class="op">)</span></code></pre></div>
     </div>
@@ -104,6 +105,9 @@ Change this to keep the raw VCF file on disk
 with the same path name.</p></dd>
 <dt>quiet</dt>
 <dd><p>Run quietly.</p></dd>
+<dt>timeout</dt>
+<dd><p>How many seconds before giving up on download.
+Passed to <code>download.file</code>. Default: <code>10*60</code> (10min).</p></dd>
 <dt>nThread</dt>
 <dd><p>Number of threads to parallelize over.</p></dd>
 </dl></div>

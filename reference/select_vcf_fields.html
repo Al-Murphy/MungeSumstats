@@ -71,7 +71,7 @@
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">select_vcf_fields</span><span class="op">(</span>
   <span class="va">path</span>,
-  sampled_rows <span class="op">=</span> <span class="fl">1e+07</span>,
+  sampled_rows <span class="op">=</span> <span class="fl">10000L</span>,
   which <span class="op">=</span> <span class="cn">NULL</span>,
   samples <span class="op">=</span> <span class="cn">NULL</span>,
   nThread <span class="op">=</span> <span class="fl">1</span>,
@@ -82,9 +82,7 @@
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>path</dt>
-<dd><p>Filepath for the summary statistics file to be formatted. A
-dataframe or datatable of the summary statistics file can also be passed
-directly to MungeSumstats using the path parameter.</p></dd>
+<dd><p>Path to local or remote VCF file.</p></dd>
 <dt>sampled_rows</dt>
 <dd><p>First N rows to sample.
 Set <code>NULL</code> to use full <code>sumstats_file</code>.
