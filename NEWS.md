@@ -1,4 +1,4 @@
-## CHANGES IN VERSION 1.4.1
+## CHANGES IN VERSION 1.5.1
 
 ### New features
 
@@ -53,7 +53,7 @@ data into redundant 3D matrices.
     `read_vcf_parallel` finishes, to avoid potential 
     conflicts with downstream steps. 
 
-## CHANGES IN VERSION 1.4.0 
+## CHANGES IN VERSION 1.5.0 
 
 ### New features
 
