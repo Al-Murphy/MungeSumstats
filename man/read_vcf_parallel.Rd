@@ -21,12 +21,12 @@ read_vcf_parallel(
   use_params = TRUE,
   as_datatable = TRUE,
   sampled_rows = 10000L,
-  tilewidth = 10000000L,
   include_xy = FALSE,
   download = TRUE,
   vcf_dir = tempdir(),
   download_method = "download.file",
   force_new = FALSE,
+  tilewidth = NULL,
   mt_thresh = 100000L,
   nThread = 1,
   ntile = nThread,
@@ -63,11 +63,6 @@ or a \link[VariantAnnotation]{VCF} (\code{FALSE}).}
 Set \code{NULL} to use full \code{sumstats_file}.
 when determining whether cols are empty.}
 
-\item{tilewidth}{
-    The desired tile width. The effective tile width might be slightly
-    different but is guaranteed to never be more than the desired width.
-  }
-
 \item{download}{Download the VCF (and its index file)
 to a temp folder before reading it into R.
 This is important to keep \code{TRUE} when \code{nThread>1} to avoid
@@ -85,6 +80,11 @@ Change this to keep the raw VCF file on disk
 \item{force_new}{If a formatted file of the same names as \code{save_path}
 exists, formatting will be skipped and this file will be imported instead
 (default). Set \code{force_new=TRUE} to override this.}
+
+\item{tilewidth}{
+    The desired tile width. The effective tile width might be slightly
+    different but is guaranteed to never be more than the desired width.
+  }
 
 \item{mt_thresh}{When the number of rows (variants) in the VCF is
 \code{< mt_thresh}, only use single-threading for reading in the VCF.

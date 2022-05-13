@@ -1,12 +1,22 @@
 #' Read VCF: parallel
 #' 
 #' Read a VCF file across 1 or more threads in parallel.
+#' If \code{tilewidth} is not specified, the size of each chunk will be
+#'  determined by total genome size divided by \code{ntile}. 
+#' By default, \code{ntile} is equal to the number of threads, \code{nThread}.
+#' For further discussion on how this function was optimised, 
+#' see 
+#' \href{https://github.com/Bioconductor/VariantAnnotation/issues/59}{here}
+#' and
+#' \href{https://github.com/Bioconductor/VariantAnnotation/issues/57}{here}.
+#'  
 #' @inheritParams read_vcf
-#' @inheritParams GenomicRanges::tileGenome
-#' @inheritParams BiocParallel::register
+#' @inheritParams check_empty_cols
 #' @inheritParams downloader
 #' @inheritParams download_vcf
 #' @inheritParams import_sumstats
+#' @inheritParams GenomicRanges::tileGenome
+#' @inheritParams BiocParallel::register
 #' 
 #' @keywords internal
 #' @importFrom VariantAnnotation ScanVcfParam VcfFile readVcf rbind
@@ -29,7 +39,6 @@ read_vcf_parallel <- function(path,
                               use_params = TRUE,
                               as_datatable = TRUE, 
                               sampled_rows = 1e4L,
-                              tilewidth = 1e7L,
                               include_xy = FALSE,
                               
                               download = TRUE,
@@ -37,6 +46,7 @@ read_vcf_parallel <- function(path,
                               download_method = "download.file",
                               force_new = FALSE,
                               
+                              tilewidth = NULL, # 1e7L
                               mt_thresh = 1e5L,
                               nThread = 1,
                               ntile = nThread,
@@ -139,12 +149,21 @@ read_vcf_parallel <- function(path,
         )
         used_chr <- possible_chr[possible_chr %in% header@reference]
         ## Tile ranges across the genome 
+        # tilewidth = 1e7L
         tiles <-
             GenomicRanges::seqinfo(vcf_file) |>
-            GenomeInfoDb::keepSeqlevels(used_chr) |>
-            GenomicRanges::tileGenome(cut.last.tile.in.chrom = FALSE,
-                                      ntile = ntile)
-        # param1 <- param
+            GenomeInfoDb::keepSeqlevels(used_chr)
+        #### Determine tile size by tilewidth ####
+        if(!is.null(tilewidth)){
+            tiles <- tiles |> 
+                GenomicRanges::tileGenome(cut.last.tile.in.chrom = FALSE,
+                                          tilewidth = tilewidth)
+        #### Determine tile size by number of threads ####
+        } else {
+            tiles <- tiles |> 
+                GenomicRanges::tileGenome(cut.last.tile.in.chrom = FALSE,
+                                          ntile = ntile)
+        } 
         # Create mapping function
         MAP <- function(range,
                         file,

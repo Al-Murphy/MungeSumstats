@@ -76,7 +76,7 @@ write_sumstats <- function(sumstats_dt,
             }
         }
     } else { 
-        messager("Writing in tabular format ==> ", save_path)
+        messager("Writing in tabular format ==>", save_path)
         if(isTRUE(tabix_index)){
             tmp_save_path <- gsub(".bgz|.gz","",save_path)
         } else {

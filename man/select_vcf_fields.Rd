@@ -6,7 +6,7 @@
 \usage{
 select_vcf_fields(
   path,
-  sampled_rows = 1000,
+  sampled_rows = 10000L,
   which = NULL,
   samples = NULL,
   nThread = 1,

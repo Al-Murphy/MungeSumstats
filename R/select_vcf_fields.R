@@ -13,7 +13,7 @@
 #' @importFrom GenomicRanges GRanges
 #' @importFrom methods is
 select_vcf_fields <- function(path,
-                              sampled_rows=1e3,
+                              sampled_rows=1e4L,
                               which=NULL,
                               samples=NULL,
                               nThread=1,

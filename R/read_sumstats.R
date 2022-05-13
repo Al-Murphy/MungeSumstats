@@ -9,6 +9,7 @@
 #' @inheritParams standardise_header
 #' @inheritParams vcf2df
 #' @inheritParams read_vcf
+#' @inheritParams check_empty_cols
 #' 
 #' @export
 #' @importFrom data.table fread as.data.table setkeyv
@@ -21,6 +22,7 @@ read_sumstats <- function(path,
                           nrows = Inf,
                           standardise_headers = FALSE,
                           samples = 1,
+                          sampled_rows = 1e4L,
                           nThread = 1,
                           mapping_file = sumstatsColHeaders) {
     
@@ -38,6 +40,7 @@ read_sumstats <- function(path,
             sumstats_file <- read_vcf(path = path,
                                       use_params = TRUE,
                                       samples = samples,
+                                      sampled_rows = sampled_rows,
                                       as_datatable = TRUE, 
                                       nThread = nThread)
         } else {
@@ -73,11 +76,12 @@ read_sumstats <- function(path,
                     "Must be one of: \n   ",
                     paste(suffixes, collapse = "\n   ")
                 )
-            }
+            } 
+            #### Drop empty cols ####
+            remove_empty_cols(sumstats_dt = sumstats_file, 
+                              sampled_rows = sampled_rows) 
         }
     }
-    #### Drop empty cols ####
-    remove_empty_cols(sumstats_dt = sumstats_file) 
     #### Standardise colnames ####
     if (isTRUE(standardise_headers)) {
         CHR <- NULL;

@@ -26,6 +26,8 @@ when `vcf_download=FALSE`.
         let user know which steps take a long time.
     - Speed up substring preprocessing. 
 * `read_vcf_genome`: more robust way to get genome build from VCF. 
+* `read_sumstats`: Speed up by using `remove_empty_cols(sampled_rows=)`, 
+    and only run for tabular file (`read_vcf` already does this internally).   
     
 
 ### Bug fixes 
@@ -47,6 +49,9 @@ data into redundant 3D matrices.
 * Fix `is_tabix` (I had incorrectly made `path` all lowercase).  
 * Let `index_vcf` recognize all compressed vcf suffixes. 
     - Add extra error handling when .gz is not actually bgz-compressed. 
+* Set `BiocParallel` registered threads back to 1 after 
+    `read_vcf_parallel` finishes, to avoid potential 
+    conflicts with downstream steps. 
 
 ## CHANGES IN VERSION 1.4.0 
 

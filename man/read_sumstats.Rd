@@ -9,6 +9,7 @@ read_sumstats(
   nrows = Inf,
   standardise_headers = FALSE,
   samples = 1,
+  sampled_rows = 10000L,
   nThread = 1,
   mapping_file = sumstatsColHeaders
 )
@@ -30,6 +31,10 @@ If \code{Inf}, will read in all rows.}
 \item{c("<sample_id1>","<sample_id2>",...) : }{
 Only user-selected samples will be used (case-insensitive).}
 }}
+
+\item{sampled_rows}{First N rows to sample.
+Set \code{NULL} to use full \code{sumstats_file}.
+when determining whether cols are empty.}
 
 \item{nThread}{Number of threads to use for parallel processes.}
 
