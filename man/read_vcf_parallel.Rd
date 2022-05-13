@@ -104,5 +104,13 @@ VCF file.
 }
 \description{
 Read a VCF file across 1 or more threads in parallel.
+If \code{tilewidth} is not specified, the size of each chunk will be
+determined by total genome size divided by \code{ntile}.
+By default, \code{ntile} is equal to the number of threads, \code{nThread}.
+For further discussion on how this function was optimised,
+see
+\href{https://github.com/Bioconductor/VariantAnnotation/issues/59}{here}
+and
+\href{https://github.com/Bioconductor/VariantAnnotation/issues/57}{here}.
 }
 \keyword{internal}
