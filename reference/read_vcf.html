@@ -19,7 +19,7 @@ Can optionally save the VCF/data.table as well."><!-- mathjax --><script src="ht
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.3</span>
       </span>
     </div>
 
@@ -97,10 +97,12 @@ Can optionally save the VCF/data.table as well.</p>
     <p><code><a href="https://rdrr.io/r/base/library.html" class="external-link">
 #### Benchmarking ####
 library(VCFWrenchR)
-library(VariantAnnotation)path &lt;- "https://gwas.mrcieu.ac.uk/files/ubm-a-2929/ubm-a-2929.vcf.gz"
+library(VariantAnnotation)
+path &lt;- "https://gwas.mrcieu.ac.uk/files/ubm-a-2929/ubm-a-2929.vcf.gz"
 vcf &lt;- VariantAnnotation::readVcf(file = path)
 N &lt;- 1e5
-vcf_sub &lt;- vcf[1:N,]res &lt;- microbenchmark::microbenchmark(
+vcf_sub &lt;- vcf[1:N,]
+res &lt;- microbenchmark::microbenchmark(
     "vcf2df"={dat1 &lt;- MungeSumstats:::vcf2df(vcf = vcf_sub)},
     "VCFWrenchR"= {dat2 &lt;- as.data.frame(x = vcf_sub)},
     "VRanges"={dat3 &lt;- data.table::as.data.table(
