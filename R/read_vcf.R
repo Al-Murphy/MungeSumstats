@@ -31,12 +31,10 @@
 #' #### Benchmarking ####
 #' library(VCFWrenchR)
 #' library(VariantAnnotation)
-#' 
 #' path <- "https://gwas.mrcieu.ac.uk/files/ubm-a-2929/ubm-a-2929.vcf.gz"
 #' vcf <- VariantAnnotation::readVcf(file = path)
 #' N <- 1e5
 #' vcf_sub <- vcf[1:N,]
-#' 
 #' res <- microbenchmark::microbenchmark(
 #'     "vcf2df"={dat1 <- MungeSumstats:::vcf2df(vcf = vcf_sub)},
 #'     "VCFWrenchR"= {dat2 <- as.data.frame(x = vcf_sub)},
