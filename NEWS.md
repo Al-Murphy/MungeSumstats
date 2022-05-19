@@ -1,3 +1,14 @@
+## CHANGES IN VERSION 1.5.4
+
+### New features
+
+* Further mappings added
+
+### Bug fixes
+
+* Duplication of non-bi-allelic and indels fixed
+* Correct compute_nsize documentation
+
 ## CHANGES IN VERSION 1.5.1 
 
 ### New features

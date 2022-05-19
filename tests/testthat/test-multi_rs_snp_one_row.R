@@ -84,8 +84,8 @@ test_that("Handle more than 1 rs IDs in one row", {
                                            log_folder_ind = TRUE
             )
         
-        # expect 7 log files
-        testthat::expect_equal(length(reformatted_log$log_files), 7)
+        # expect 8 log files
+        testthat::expect_equal(length(reformatted_log$log_files), 8)
         # next check number of rows in each
         results <- c()
         for (log_i in reformatted_log$log_files) {
@@ -93,7 +93,8 @@ test_that("Handle more than 1 rs IDs in one row", {
             if (grepl("snp_strand_ambiguous", log_i)) {
                 results <- c(results, nrow(data_log_i) == 8)
             } else {
-                results <- c(results, nrow(data_log_i) == 1)
+                results <- c(results, nrow(data_log_i) == 1|
+                               nrow(data_log_i) == 0)
             }
         }
         expect_equal(all(results), TRUE)

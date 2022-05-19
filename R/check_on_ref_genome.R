@@ -43,6 +43,8 @@ check_on_ref_genome <-function(sumstats_dt,
             }
             # ensure rsids is up-to-date with filtered sumstats_dt
             rsids <- rsids[sumstats_dt, ,nomatch = NULL,on="SNP"]
+            #remove dups caused by indels non bi-alllelic SNPs
+            rsids <-unique(rsids,by="SNP")
             data.table::setkey(rsids, SNP)
             #if indels in dataset, don't check they are present on the ref 
             # genome as they won't be there
@@ -146,7 +148,7 @@ check_on_ref_genome <-function(sumstats_dt,
                             paste0(check_save_out$log_folder, "/",
                                    name, check_save_out$extension)
                     }
-                    sumstats_dt <- sumstats_dt[rsids$SNP, ]
+                    sumstats_dt <- sumstats_dt[rsids$SNP, ,on="SNP"]
                     #join back indels
                     sumstats_dt <-
                             data.table::rbindlist(

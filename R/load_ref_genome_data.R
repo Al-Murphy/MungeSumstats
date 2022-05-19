@@ -39,6 +39,8 @@ load_ref_genome_data <- function(snps,
         stringr::str_sub(string = snps, start = 3, end = -1L) 
     ))
     snps <- snps[!is.na(snp_check)]
+    #need to make snps unique for cases where non bi-allelic or indels
+    snps <- unique(snps)
     
     messager("Validating RSIDs of",formatC(length(snps),big.mark = ","),
              "SNPs using BSgenome::snpsById...")
