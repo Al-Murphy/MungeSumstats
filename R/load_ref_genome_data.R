@@ -34,6 +34,9 @@ load_ref_genome_data <- function(snps, ref_genome, msg = NULL) {
     )
     snps <-
         snps[!unlist(lapply(snp_check,is.na))]
+    #need to make snps unique for cases where non bi-allelic or indels
+    snps <- unique(snps)
+    
     gr_rsids <- BSgenome::snpsById(
         x = SNP_LOC_DATA,
         id = snps,
