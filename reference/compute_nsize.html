@@ -28,7 +28,7 @@ multiple of these."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aj
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
       </span>
     </div>
 
@@ -117,8 +117,12 @@ that value will be set as N for every row.
 if at all possible.</p></li>
 <li><p><code>"sum"</code>: N will be computed as:
 cases (N_CAS) + controls (N_CON), so long as both columns are present.</p></li>
-<li><p><code>"effective"</code>: N will be computed as effective sample size:
-cases (N_CAS) + controls (N_CON), so long as both columns are present.</p></li>
+<li><p><code>"ldsc"</code>: N will be computed as effective sample size:
+Neff =(N_CAS+N_CON)*(N_CAS/(N_CAS+N_CON)) / mean((N_CAS/(N_CAS+N_CON))(N_CAS+N_CON)==max(N_CAS+N_CON)).</p></li>
+<li><p><code>"giant"</code>: N will be computed as effective sample size:
+Neff = 2 / (1/N_CAS + 1/N_CON).</p></li>
+<li><p><code>"metal"</code>: N will be computed as effective sample size:
+Neff = 4 / (1/N_CAS + 1/N_CON).</p></li>
 </ul></dd>
 <dt>standardise_headers</dt>
 <dd><p>Standardise headers first.</p></dd>

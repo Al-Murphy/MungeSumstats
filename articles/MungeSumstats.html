@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
       </span>
     </div>
 
@@ -91,7 +91,7 @@
 </h5></h4>
             
             <h4 data-toc-skip class="date"><h5>
-<i>Updated</i>: May-16-2022
+<i>Updated</i>: May-19-2022
 </h5></h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/MungeSumstats/blob/HEAD/vignettes/MungeSumstats.Rmd" class="external-link"><code>vignettes/MungeSumstats.Rmd</code></a></small>
@@ -318,7 +318,7 @@ e.g.<code>file.copy(save_path, './formatted/' )</code>.</p>
 <span class="co">##  - This means all formatted summary stats will be deleted upon ending the R session.</span>
 <span class="co">##  - To keep formatted summary stats, change `save_path`  ( e.g. `save_path=file.path('./formatted',basename(path))` ),   or make sure to copy files elsewhere after processing  ( e.g. `file.copy(save_path, './formatted/' )`.</span>
 <span class="co">##  ********************</span></code></pre>
-<pre><code><span class="co">## Formatted summary statistics will be saved to ==&gt;  /tmp/RtmpuvQPMA/file1e16169104e0.tsv.gz</span></code></pre>
+<pre><code><span class="co">## Formatted summary statistics will be saved to ==&gt;  /tmp/RtmpfZvEzb/file105356f7d393.tsv.gz</span></code></pre>
 <pre><code><span class="co">## Importing tabular file: /__w/_temp/Library/MungeSumstats/extdata/eduAttainOkbay.txt</span></code></pre>
 <pre><code><span class="co">## Checking for empty columns.</span></code></pre>
 <pre><code><span class="co">## Standardising column headers.</span></code></pre>
@@ -353,7 +353,7 @@ e.g.<code>file.copy(save_path, './formatted/' )</code>.</p>
 <span class="co">##  - target_genome</span>
 <span class="co">## These will be inferred from the data.</span></code></pre>
 <pre><code><span class="co">## Sorting coordinates.</span></code></pre>
-<pre><code><span class="co">## Writing in tabular format ==&gt; /tmp/RtmpuvQPMA/file1e16169104e0.tsv.gz</span></code></pre>
+<pre><code><span class="co">## Writing in tabular format ==&gt; /tmp/RtmpfZvEzb/file105356f7d393.tsv.gz</span></code></pre>
 <pre><code><span class="co">## Summary statistics report:</span>
 <span class="co">##    - 93 rows (100% of original 93 rows)</span>
 <span class="co">##    - 93 unique variants</span>
@@ -748,7 +748,7 @@ format (e.g. “chr1” vs. 1) to return <code>GRanges</code> as.</p>
 <pre><code><span class="co">## Performing data liftover from hg19 to hg38.</span></code></pre>
 <pre><code><span class="co">## Converting summary statistics to Genomic Ranges.</span></code></pre>
 <pre><code><span class="co">## Downloading chain file from UCSC Genome Browser.</span></code></pre>
-<pre><code><span class="co">## /tmp/RtmpuvQPMA/hg19ToHg38.over.chain.gz</span></code></pre>
+<pre><code><span class="co">## /tmp/RtmpfZvEzb/hg19ToHg38.over.chain.gz</span></code></pre>
 <pre><code><span class="co">## Reordering so first three column headers are SNP, CHR and BP in this order.</span></code></pre>
 <pre><code><span class="co">## Reordering so the fourth and fifth columns are A1 and A2.</span></code></pre>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
@@ -971,7 +971,7 @@ pipeline, but can still be helpful.</p>
                                                 write_vcf <span class="op">=</span> <span class="cn">FALSE</span>,
                                                 return_path <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>   </code></pre></div>
 <pre><code><span class="co">## Sorting coordinates.</span></code></pre>
-<pre><code><span class="co">## Writing in tabular format ==&gt; /tmp/RtmpuvQPMA/file1e1649268519eduAttainOkbay_standardised.tsv.gz</span></code></pre>
+<pre><code><span class="co">## Writing in tabular format ==&gt; /tmp/RtmpfZvEzb/file105356fc7e0eduAttainOkbay_standardised.tsv.gz</span></code></pre>
 <pre><code><span class="co">## Converting full summary stats file to tabix format for fast querying...</span></code></pre>
 <pre><code><span class="co">## Reading header.</span></code></pre>
 <pre><code><span class="co">## Ensuring file is bgzipped.</span></code></pre>
@@ -1034,7 +1034,7 @@ you can also standardise its headers like so:</p>
 <td align="right">0.019</td>
 <td align="right">0.003</td>
 <td align="right">0e+00</td>
-<td align="right">0.4005382</td>
+<td align="right">0.6278789</td>
 </tr>
 <tr class="even">
 <td align="left">rs11210860</td>
@@ -1046,7 +1046,7 @@ you can also standardise its headers like so:</p>
 <td align="right">0.017</td>
 <td align="right">0.003</td>
 <td align="right">0e+00</td>
-<td align="right">0.7332096</td>
+<td align="right">0.0749058</td>
 </tr>
 <tr class="odd">
 <td align="left">rs34305371</td>
@@ -1058,7 +1058,7 @@ you can also standardise its headers like so:</p>
 <td align="right">0.035</td>
 <td align="right">0.005</td>
 <td align="right">0e+00</td>
-<td align="right">0.2812640</td>
+<td align="right">0.3668854</td>
 </tr>
 <tr class="even">
 <td align="left">rs2568955</td>
@@ -1070,7 +1070,7 @@ you can also standardise its headers like so:</p>
 <td align="right">-0.017</td>
 <td align="right">0.003</td>
 <td align="right">0e+00</td>
-<td align="right">0.2468617</td>
+<td align="right">0.8727748</td>
 </tr>
 <tr class="odd">
 <td align="left">rs1008078</td>
@@ -1082,7 +1082,7 @@ you can also standardise its headers like so:</p>
 <td align="right">-0.016</td>
 <td align="right">0.003</td>
 <td align="right">0e+00</td>
-<td align="right">0.0679739</td>
+<td align="right">0.1167318</td>
 </tr>
 <tr class="even">
 <td align="left">rs61787263</td>
@@ -1094,7 +1094,7 @@ you can also standardise its headers like so:</p>
 <td align="right">0.016</td>
 <td align="right">0.003</td>
 <td align="right">1e-07</td>
-<td align="right">0.5500688</td>
+<td align="right">0.5451525</td>
 </tr>
 </tbody>
 </table>
@@ -1157,7 +1157,7 @@ handle lists of summary statistics files.</p>
 <span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
 <span class="co">## </span>
 <span class="co">## other attached packages:</span>
-<span class="co">## [1] MungeSumstats_1.5.3 BiocStyle_2.25.0   </span>
+<span class="co">## [1] MungeSumstats_1.5.4 BiocStyle_2.25.0   </span>
 <span class="co">## </span>
 <span class="co">## loaded via a namespace (and not attached):</span>
 <span class="co">##   [1] bitops_1.0-7                               </span>
@@ -1238,7 +1238,7 @@ handle lists of summary statistics files.</p>
 <span class="co">##  [76] crayon_1.5.1                               </span>
 <span class="co">##  [77] lattice_0.20-45                            </span>
 <span class="co">##  [78] Biostrings_2.65.0                          </span>
-<span class="co">##  [79] GenomicFeatures_1.49.1                     </span>
+<span class="co">##  [79] GenomicFeatures_1.49.3                     </span>
 <span class="co">##  [80] hms_1.1.1                                  </span>
 <span class="co">##  [81] KEGGREST_1.37.0                            </span>
 <span class="co">##  [82] seqminer_8.4                               </span>
@@ -1246,14 +1246,14 @@ handle lists of summary statistics files.</p>
 <span class="co">##  [84] pillar_1.7.0                               </span>
 <span class="co">##  [85] GenomicRanges_1.49.0                       </span>
 <span class="co">##  [86] rjson_0.2.21                               </span>
-<span class="co">##  [87] biomaRt_2.53.1                             </span>
+<span class="co">##  [87] biomaRt_2.53.2                             </span>
 <span class="co">##  [88] stats4_4.2.0                               </span>
 <span class="co">##  [89] XML_3.99-0.9                               </span>
 <span class="co">##  [90] glue_1.6.2                                 </span>
 <span class="co">##  [91] evaluate_0.15                              </span>
 <span class="co">##  [92] SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20   </span>
 <span class="co">##  [93] data.table_1.14.2                          </span>
-<span class="co">##  [94] BiocManager_1.30.17                        </span>
+<span class="co">##  [94] BiocManager_1.30.18                        </span>
 <span class="co">##  [95] png_0.1-7                                  </span>
 <span class="co">##  [96] vctrs_0.4.1                                </span>
 <span class="co">##  [97] purrr_0.3.4                                </span>

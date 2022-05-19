@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
       </span>
     </div>
 
@@ -91,7 +91,7 @@ GWAS</h1>
 </h5></h4>
             
             <h4 data-toc-skip class="date"><h5>
-<i>Updated</i>: May-16-2022
+<i>Updated</i>: May-19-2022
 </h5></h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/MungeSumstats/blob/HEAD/vignettes/OpenGWAS.Rmd" class="external-link"><code>vignettes/OpenGWAS.Rmd</code></a></small>
@@ -156,14 +156,14 @@ paths to the formatted summary statistics.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## $`ieu-a-298`</span>
-<span class="co">## [1] "/tmp/RtmpgSsClR/ieu-a-298.tsv.gz"</span></code></pre>
+<span class="co">## [1] "/tmp/RtmpF3Y4pq/ieu-a-298.tsv.gz"</span></code></pre>
 <p>You can easily turn this into a data.frame as well.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">results_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span>, 
                          path<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">results_df</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">##                  id                             path</span>
-<span class="co">## ieu-a-298 ieu-a-298 /tmp/RtmpgSsClR/ieu-a-298.tsv.gz</span></code></pre>
+<span class="co">## ieu-a-298 ieu-a-298 /tmp/RtmpF3Y4pq/ieu-a-298.tsv.gz</span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -208,7 +208,7 @@ and its functionality.</p>
 <span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
 <span class="co">## </span>
 <span class="co">## other attached packages:</span>
-<span class="co">## [1] MungeSumstats_1.5.3 BiocStyle_2.25.0   </span>
+<span class="co">## [1] MungeSumstats_1.5.4 BiocStyle_2.25.0   </span>
 <span class="co">## </span>
 <span class="co">## loaded via a namespace (and not attached):</span>
 <span class="co">##   [1] bitops_1.0-7                matrixStats_0.62.0         </span>
@@ -248,14 +248,14 @@ and its functionality.</p>
 <span class="co">##  [69] BiocFileCache_2.5.0         grid_4.2.0                 </span>
 <span class="co">##  [71] blob_1.2.3                  parallel_4.2.0             </span>
 <span class="co">##  [73] crayon_1.5.1                lattice_0.20-45            </span>
-<span class="co">##  [75] Biostrings_2.65.0           GenomicFeatures_1.49.1     </span>
+<span class="co">##  [75] Biostrings_2.65.0           GenomicFeatures_1.49.3     </span>
 <span class="co">##  [77] hms_1.1.1                   KEGGREST_1.37.0            </span>
 <span class="co">##  [79] knitr_1.39                  pillar_1.7.0               </span>
 <span class="co">##  [81] GenomicRanges_1.49.0        rjson_0.2.21               </span>
-<span class="co">##  [83] biomaRt_2.53.1              stats4_4.2.0               </span>
+<span class="co">##  [83] biomaRt_2.53.2              stats4_4.2.0               </span>
 <span class="co">##  [85] XML_3.99-0.9                glue_1.6.2                 </span>
 <span class="co">##  [87] evaluate_0.15               data.table_1.14.2          </span>
-<span class="co">##  [89] BiocManager_1.30.17         png_0.1-7                  </span>
+<span class="co">##  [89] BiocManager_1.30.18         png_0.1-7                  </span>
 <span class="co">##  [91] vctrs_0.4.1                 purrr_0.3.4                </span>
 <span class="co">##  [93] assertthat_0.2.1            cachem_1.0.6               </span>
 <span class="co">##  [95] xfun_0.31                   restfulr_0.0.13            </span>
