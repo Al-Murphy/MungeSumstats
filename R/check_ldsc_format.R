@@ -12,11 +12,12 @@
 #'
 #' @return Formatted summary statistics
 #' @source \href{https://github.com/bulik/ldsc}{LDSC GitHub}
-check_ldsc_format <- function(sumstats_dt, ldsc_format, convert_n_int,
+check_ldsc_format <- function(sumstats_dt, save_format, convert_n_int,
                               allele_flip_check, compute_z, compute_n) {
     # LDSC Requires SNP,N,Z,A1,A2
     # SNP,A1,A2 is enforced by MungeSumstats automatically
-    if (ldsc_format) {
+    if (!is.null(save_format) && 
+          tolower(save_format)=="ldsc") {
         message("Ensuring parameters comply with LDSC format.")
         # check if columns already exist
         z_present <- "Z" %in% names(sumstats_dt)
@@ -50,7 +51,7 @@ check_ldsc_format <- function(sumstats_dt, ldsc_format, convert_n_int,
         }
     }
     return(list(
-        ldsc_format = ldsc_format,
+        save_format = save_format,
         convert_n_int = convert_n_int,
         allele_flip_check = allele_flip_check,
         compute_z = compute_z

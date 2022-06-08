@@ -24,7 +24,8 @@ check_allele_flip(
   nThread,
   log_files,
   standardise_headers = FALSE,
-  mapping_file
+  mapping_file,
+  dbSNP
 )
 }
 \arguments{
@@ -82,6 +83,8 @@ However, if a column header that is in youf file is missing of the mapping we
 give is incorrect you can supply your own mapping file. Must be a 2 column
 dataframe with column names "Uncorrected" and "Corrected". See
 data(sumstatsColHeaders) for default mapping and necessary format.}
+
+\item{dbSNP}{version of dbSNP to be used for imputation (144 or 155).}
 }
 \value{
 A list containing two data tables:

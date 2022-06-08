@@ -15,6 +15,7 @@ check_no_snp(
   tabix_index,
   nThread,
   log_files,
+  dbSNP,
   verbose = TRUE
 )
 }
@@ -51,6 +52,8 @@ FALSE.}
 \item{nThread}{Number of threads to use for parallel processes.}
 
 \item{log_files}{list of log file locations}
+
+\item{dbSNP}{version of dbSNP to be used for imputation (144 or 155).}
 
 \item{verbose}{should messages be printed. Default it TRUE.}
 }

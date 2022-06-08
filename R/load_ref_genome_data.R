@@ -3,6 +3,7 @@
 #' @param snps Character vector SNPs by rs_id from sumstats file of interest.
 #' @param ref_genome Name of the reference genome used for the GWAS
 #'  (GRCh37 or GRCh38)
+#' @param dbSNP version of dbSNP to be used (144 or 155)
 #' @param msg Optional name of the column missing from the dataset in question.
 #'  Default is NULL
 #' @return data table of snpsById, filtered to SNPs of interest.
@@ -13,14 +14,16 @@
 #' \code{
 #' sumstats_dt <- formatted_example()
 #' rsids <- MungeSumstats:::load_ref_genome_data(snps = sumstats_dt$SNP,
-#'                                               ref_genome = "GRCH37")
+#'                                               ref_genome = "GRCH37",
+#'                                               dbSNP=144)
 #' }
 load_ref_genome_data <- function(snps, 
-                                 ref_genome, 
+                                 ref_genome,
+                                 dbSNP=c(144,155),
                                  msg = NULL) {
     
     SNP <- NULL
-    SNP_LOC_DATA <- load_snp_loc_data(ref_genome, msg = msg)
+    SNP_LOC_DATA <- load_snp_loc_data(ref_genome, dbSNP, msg = msg)
     # Get correct ref genome
     message("Loading reference genome data.")
     if (toupper(ref_genome) == "GRCH37") {

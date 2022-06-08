@@ -7,17 +7,20 @@
 \code{
 sumstats_dt <- formatted_example()
 rsids <- MungeSumstats:::load_ref_genome_data(snps = sumstats_dt$SNP,
-                                              ref_genome = "GRCH37")
+                                              ref_genome = "GRCH37",
+                                              dbSNP=144)
 }
 }
 \usage{
-load_ref_genome_data(snps, ref_genome, msg = NULL)
+load_ref_genome_data(snps, ref_genome, dbSNP = c(144, 155), msg = NULL)
 }
 \arguments{
 \item{snps}{Character vector SNPs by rs_id from sumstats file of interest.}
 
 \item{ref_genome}{Name of the reference genome used for the GWAS
 (GRCh37 or GRCh38)}
+
+\item{dbSNP}{version of dbSNP to be used (144 or 155)}
 
 \item{msg}{Optional name of the column missing from the dataset in question.
 Default is NULL}

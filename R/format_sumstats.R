@@ -137,6 +137,7 @@
 #' @param indels Binary does your Sumstats file contain Indels? These don't 
 #' exist in our reference file so they will be excluded from checks if this 
 #' value is TRUE. Default is TRUE.
+#' @param dbSNP version of dbSNP to be used for imputation (144 or 155).
 #' @param sort_coordinates Whether to sort by coordinates of resulting sumstats
 #' @param nThread Number of threads to use for parallel processes.
 #' @param save_path File path to save formatted data. Defaults to
@@ -149,9 +150,10 @@
 #' FALSE.
 #' @param return_format If return_data is TRUE. Object type to be returned
 #' ("data.table","vranges","granges").
-#' @param ldsc_format Binary Ensure that output format meets all requirements
-#' to be fed directly into LDSC without the need for additional munging. Default
-#' is FALSE
+#' @param ldsc_format DEPRECATED, do not use. Use save_format="LDSC" instead.
+#' @param save_format Ouput format of sumstats. Options are NULL - standardised 
+#' output format from MungeSumstats, LDSC - output format compatible with LDSC 
+#' and openGWAS - output compatible with openGWAS VCFs. Default is NULL.
 #' @param log_folder_ind Binary Should log files be stored containing all
 #' filtered out SNPs (separate file per filter). The data is outputted in the
 #' same format specified for the resulting sumstats file. The only exception to
@@ -217,6 +219,7 @@ format_sumstats <- function(path,
                             remove_multi_rs_snp = FALSE,
                             frq_is_maf = TRUE,
                             indels = TRUE,
+                            dbSNP = 155,
                             sort_coordinates = TRUE,
                             nThread = 1,
                             save_path = tempfile(fileext = ".tsv.gz"),
@@ -225,6 +228,7 @@ format_sumstats <- function(path,
                             return_data = FALSE,
                             return_format = "data.table",
                             ldsc_format = FALSE,
+                            save_format = NULL,
                             log_folder_ind = FALSE,
                             log_mungesumstats_msgs = FALSE,
                             log_folder = tempdir(),
@@ -294,9 +298,11 @@ format_sumstats <- function(path,
             remove_multi_rs_snp = remove_multi_rs_snp,
             frq_is_maf = frq_is_maf,
             indels = indels,
+            dbSNP = dbSNP,
             write_vcf = write_vcf,
             return_format = return_format,
             ldsc_format = ldsc_format,
+            save_format = save_format,
             imputation_ind = imputation_ind,
             log_folder_ind = log_folder_ind,
             log_mungesumstats_msgs = log_mungesumstats_msgs,
@@ -346,6 +352,10 @@ format_sumstats <- function(path,
         # so it makes more sense to just make a
         # temporary file <tmp>, and return the address of the temp
         
+        #Ensure dbSNP is a integer (make using it later easier)
+        #already validated in validate param function
+        dbSNP <- as.integer(dbSNP)
+        
         ####  Check 2: Check input format and import ####
         sumstats_return <- list()
         # if data.frame/data.table read it in directly, otherwise read from path
@@ -368,10 +378,10 @@ format_sumstats <- function(path,
                 mapping_file = mapping_file
             )
         
-        #### If ldsc_format=TRUE, make sure all arguments comply with with.
+        #### If save_format=LDSC, make sure all arguments comply with with.
         check_ldsc <- check_ldsc_format(
             sumstats_dt = sumstats_return$sumstats_dt,
-            ldsc_format = ldsc_format,
+            save_format = save_format,
             convert_n_int = convert_n_int,
             allele_flip_check = allele_flip_check,
             compute_z = compute_z,
@@ -418,7 +428,8 @@ format_sumstats <- function(path,
                 sumstats = sumstats_return$sumstats_dt,
                 standardise_headers = FALSE, ## done prev
                 sampled_snps = 10000,
-                mapping_file = mapping_file
+                mapping_file = mapping_file,
+                dbSNP=dbSNP
             )
         }
         
@@ -436,7 +447,8 @@ format_sumstats <- function(path,
                 check_save_out = check_save_out,
                 tabix_index = tabix_index,
                 nThread = nThread,
-                log_files = log_files
+                log_files = log_files,
+                dbSNP = dbSNP
             )
         # update values
         log_files <- sumstats_return$log_files
@@ -502,7 +514,8 @@ format_sumstats <- function(path,
                 check_save_out = check_save_out,
                 tabix_index = tabix_index,
                 nThread = nThread,
-                log_files = log_files
+                log_files = log_files,
+                dbSNP = dbSNP
             )
         # update values
         log_files <- sumstats_return$log_files
@@ -520,7 +533,8 @@ format_sumstats <- function(path,
             check_save_out = check_save_out,
             tabix_index = tabix_index,
             nThread = nThread,
-            log_files = log_files
+            log_files = log_files,
+            dbSNP = dbSNP
         )
         # update values
         log_files <- sumstats_return$log_files
@@ -539,7 +553,8 @@ format_sumstats <- function(path,
             check_save_out = check_save_out,
             tabix_index = tabix_index,
             nThread = nThread,
-            log_files = log_files
+            log_files = log_files,
+            dbSNP = dbSNP
         )
         # update values
         log_files <- sumstats_return$log_files
@@ -558,7 +573,8 @@ format_sumstats <- function(path,
                 tabix_index = tabix_index,
                 nThread = nThread,
                 log_files = log_files,
-                bi_allelic_filter = bi_allelic_filter
+                bi_allelic_filter = bi_allelic_filter,
+                dbSNP = dbSNP
             )
         # update values
         log_files <- sumstats_return$log_files
@@ -607,7 +623,8 @@ format_sumstats <- function(path,
                 tabix_index = tabix_index,
                 nThread = nThread,
                 log_files = log_files,
-                mapping_file = mapping_file
+                mapping_file = mapping_file,
+                dbSNP = dbSNP
             )
         # update values
         log_files <- sumstats_return$log_files
@@ -838,7 +855,8 @@ format_sumstats <- function(path,
             check_save_out = check_save_out,
             tabix_index = tabix_index,
             nThread = nThread,
-            log_files = log_files
+            log_files = log_files,
+            dbSNP = dbSNP
         )
         # update values
         log_files <- sumstats_return$log_files
@@ -879,6 +897,9 @@ format_sumstats <- function(path,
             ref_genome = ref_genome,
             imputation_ind = imputation_ind
         )
+        #update ref genome of data
+        if(!is.null(convert_ref_genome))
+          ref_genome <- convert_ref_genome
         
         #### Check 29: Sort rows by genomic coordinates ####
         sumstats_return$sumstats_dt <- sort_coords(
@@ -888,13 +909,14 @@ format_sumstats <- function(path,
                 sort_coordinates
         )
         
-        
         #### WRITE data.table TO PATH ####
         check_save_out$save_path <- write_sumstats(
             sumstats_dt = sumstats_return$sumstats_dt,
             save_path = check_save_out$save_path,
+            ref_genome = ref_genome,
             sep = check_save_out$sep,
             write_vcf = write_vcf,
+            save_format = save_format,
             tabix_index = tabix_index,
             nThread = nThread,
             return_path = TRUE

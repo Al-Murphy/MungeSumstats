@@ -37,6 +37,7 @@ format_sumstats(
   remove_multi_rs_snp = FALSE,
   frq_is_maf = TRUE,
   indels = TRUE,
+  dbSNP = 155,
   sort_coordinates = TRUE,
   nThread = 1,
   save_path = tempfile(fileext = ".tsv.gz"),
@@ -45,6 +46,7 @@ format_sumstats(
   return_data = FALSE,
   return_format = "data.table",
   ldsc_format = FALSE,
+  save_format = NULL,
   log_folder_ind = FALSE,
   log_mungesumstats_msgs = FALSE,
   log_folder = tempdir(),
@@ -195,6 +197,8 @@ occur i.e. is TRUE.}
 exist in our reference file so they will be excluded from checks if this
 value is TRUE. Default is TRUE.}
 
+\item{dbSNP}{version of dbSNP to be used for imputation (144 or 155).}
+
 \item{sort_coordinates}{Whether to sort by coordinates of resulting sumstats}
 
 \item{nThread}{Number of threads to use for parallel processes.}
@@ -214,9 +218,11 @@ FALSE.}
 \item{return_format}{If return_data is TRUE. Object type to be returned
 ("data.table","vranges","granges").}
 
-\item{ldsc_format}{Binary Ensure that output format meets all requirements
-to be fed directly into LDSC without the need for additional munging. Default
-is FALSE}
+\item{ldsc_format}{DEPRECATED, do not use. Use save_format="LDSC" instead.}
+
+\item{save_format}{Ouput format of sumstats. Options are NULL - standardised
+output format from MungeSumstats, LDSC - output format compatible with LDSC
+and openGWAS - output compatible with openGWAS VCFs. Default is NULL.}
 
 \item{log_folder_ind}{Binary Should log files be stored containing all
 filtered out SNPs (separate file per filter). The data is outputted in the

@@ -133,6 +133,7 @@ Tests run by *MungeSumstats* include:
 -   Check for z-score (Z) and impute if missing
 -   Check for N and impute if missing
 -   Check output format is LDSC ready
+-   Chek output format is IEU OpenGWAS ready
 -   Check and perform liftover to desired reference genome if necessary
 
 Users can specify which checks to run on their data. A **note** on the
@@ -259,6 +260,14 @@ reformatted <-
                                  ref_genome="GRCh37")
 ```
 
+Here we know the summary statistics are based on the reference genome GRCh37, 
+GRCh38 can also be inputted. Moreover, if you are unsure of the genome build, 
+leave it as `NULL` and Mungesumstats will infer it from the data.
+
+Also note that the default dbSNP version used along with the reference genome is
+the latest version available on Bioconductor (currently dbSNP 155) but older 
+versions are also availble. Use the `dbSNP` input parameter to control this.
+
 The arguments `format_sumstats` in that control the level of QC
 conducted by *MungeSumstats* are:
 
@@ -369,6 +378,8 @@ conducted by *MungeSumstats* are:
 -   **indels** Binary does your Sumstats file contain Indels? These
     don't exist in our reference file so they will be excluded from
     checks if this value is TRUE. Default is TRUE.
+-   **dbSNP** The dbSNP version to use as a reference - defaults to the most 
+    recent version available (155).
 -   **sort_coordinates** Whether to sort by coordinates of resulting
     sumstats.\
 -   **nThread** Number of threads to use for parallel processes.
@@ -381,9 +392,9 @@ conducted by *MungeSumstats* are:
     FALSE.
 -   **return_format** If return_data is TRUE. Object type to be returned
     ("data.table","vranges","granges").
--   **ldsc_format** Ensure that output format meets all requirements to
-    be passed directly into LDSC without the need for additional
-    munging.
+-   **save_format** Ensure that output format meets all requirements to
+    be passed directly into LDSC ("ldsc") without the need for additional
+    munging or for IEU OpenGWAS format ("opengwas") before saving as a VCF
 -   **log_folder_ind** Should log files be stored containing all
     filtered out SNPs (separate file per filter). The data is outputted
     in the same format specified for the resulting sumstats file.
@@ -462,6 +473,11 @@ reformatted_vcf_2 <-
                                  allele_flip_check = FALSE)
 ```
 
+
+Note you can also control the dbSNP version used as a reference dataset by 
+MungeSumstats using the `dbSNP` parameter. By default this will be set to the 
+most recent dbSNP version available (155).
+
 Note that using `log_folder_ind` returns a list from `format_sumstats`
 which includes the file locations of the differing classes of removed
 SNPs. Using `log_mungesumstats_msgs` saves the messages to the console
@@ -534,6 +550,20 @@ reformatted_vcf_2 <-
                                  imputation_ind=TRUE,
                                  log_mungesumstats_msgs=TRUE,
                                  return_format="GRanges")
+```
+
+
+Also you can now output a VCF compatible with [IEU OpenGWAS](https://gwas.mrcieu.ac.uk/)
+format (Note that currently all IEU OpenGWAS sumstats are GRCh37, MungeSumstats 
+will throw a warning if your data isn't GRCh37 when saving):
+
+```{r, message=FALSE,eval=FALSE}
+#set
+reformatted_vcf_2 <- 
+  MungeSumstats::format_sumstats(path=ALSvcfPth,
+                                 ref_genome="GRCh37", 
+                                 write_vcf=TRUE,
+                                 save_format ="openGWAS")
 ```
 
 See our publication for further discussion of these checks and options:

@@ -16,7 +16,8 @@ check_no_allele(
   tabix_index,
   nThread,
   log_files,
-  bi_allelic_filter
+  bi_allelic_filter,
+  dbSNP
 )
 }
 \arguments{
@@ -54,6 +55,8 @@ FALSE.}
 
 \item{bi_allelic_filter}{Binary Should non-biallelic SNPs be removed. Default
 is TRUE.}
+
+\item{dbSNP}{version of dbSNP to be used for imputation (144 or 155).}
 }
 \value{
 A list containing two data tables:

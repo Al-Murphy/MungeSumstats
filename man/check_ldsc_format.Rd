@@ -9,7 +9,7 @@
 \usage{
 check_ldsc_format(
   sumstats_dt,
-  ldsc_format,
+  save_format,
   convert_n_int,
   allele_flip_check,
   compute_z,
@@ -20,9 +20,9 @@ check_ldsc_format(
 \item{sumstats_dt}{data table obj of the summary statistics file for the
 GWAS.}
 
-\item{ldsc_format}{Binary Ensure that output format meets all requirements
-to be fed directly into LDSC without the need for additional munging. Default
-is FALSE}
+\item{save_format}{Ouput format of sumstats. Options are NULL - standardised
+output format from MungeSumstats, LDSC - output format compatible with LDSC
+and openGWAS - output compatible with openGWAS VCFs. Default is NULL.}
 
 \item{convert_n_int}{Binary, if N (the number of samples) is not an integer,
 should this be rounded? Default is TRUE.}

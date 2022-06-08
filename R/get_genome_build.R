@@ -16,6 +16,7 @@
 #' give is incorrect you can supply your own mapping file. Must be a 2 column
 #' dataframe with column names "Uncorrected" and "Corrected". See
 #' \code{data(sumstatsColHeaders)} for default mapping and necessary format.
+#' @param dbSNP version of dbSNP to be used (144 or 155).
 #' @param header_only Instead of reading in the entire \code{sumstats} file,
 #' only read in the first N rows where N=\code{sampled_snps}.
 #' This should help speed up cases where you have to read in \code{sumstats}
@@ -29,6 +30,7 @@ get_genome_build <- function(sumstats,
                              sampled_snps = 10000,
                              standardise_headers = TRUE,
                              mapping_file = sumstatsColHeaders,
+                             dbSNP=c(144,155),
                              header_only = FALSE) {
     ### Add this to avoid confusing BiocCheck
     seqnames <- CHR <- SNP <- BP <- NULL 
@@ -122,11 +124,13 @@ get_genome_build <- function(sumstats,
     # otherwise SNP, CHR, BP were all found and can infer
     snp_loc_data_37 <- load_ref_genome_data(
         snps = snps,
-        ref_genome = "GRCH37"
+        ref_genome = "GRCH37",
+        dbSNP = dbSNP
     )
     snp_loc_data_38 <- load_ref_genome_data(
         snps = snps,
-        ref_genome = "GRCH38"
+        ref_genome = "GRCH38",
+        dbSNP = dbSNP
     )
     # convert CHR filed in ref genomes to character not factor
     snp_loc_data_37[, seqnames := as.character(seqnames)]

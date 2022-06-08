@@ -29,9 +29,11 @@ validate_parameters <- function(path,
                                 remove_multi_rs_snp,
                                 frq_is_maf,
                                 indels,
+                                dbSNP,
                                 write_vcf,
                                 return_format,
                                 ldsc_format,
+                                save_format,
                                 imputation_ind,
                                 log_folder_ind,
                                 log_mungesumstats_msgs,
@@ -59,82 +61,129 @@ validate_parameters <- function(path,
         c("GRCH37", "GRCH38"))) {
         stop(gen_msg)
     }
-
     gen_msg2 <- paste0(
         "The chosen genome build to convert to must be one of ",
         "GRCh37 or GRCh38 ",
         "or left as null so the genome build will be inferred ",
         "from the data."
     )
-
     if (!is.null(convert_ref_genome) && !(toupper(convert_ref_genome) %in%
         c("GRCH37", "GRCH38"))) {
         stop(gen_msg2)
     }
-
+    #check dbSNP version
+    avail_dbSNP <- c(144,155)
+    dbSNP_msg <- paste0(
+      "The chosen dbSNP version must be one of: ",
+      paste(avail_dbSNP,collapse=", ")
+    )
+    if(!as.integer(dbSNP) %in% avail_dbSNP){
+      stop(dbSNP_msg)
+    }
     # checks for installed packages
     GRCH37_msg1 <- paste0(
         "Install 'SNPlocs.Hsapiens.dbSNP144.GRCh37' to use ",
-        "'GRCh37' as 'ref_genome'"
+        "'GRCh37' as 'ref_genome' and 144 as dbSNP version"
     )
     GRCH37_msg2 <- paste0(
         "Install 'BSgenome.Hsapiens.1000genomes.hs37d5' to ",
         "use 'GRCh37' as 'ref_genome'"
     )
-    if (any(toupper(ref_genome) == "GRCH37") &&
+    GRCH37_msg3 <- paste0(
+      "Install 'SNPlocs.Hsapiens.dbSNP155.GRCh37' to ",
+      "use 'GRCh37' as 'ref_genome' and 155 as dbSNP version"
+    )
+    #dbsnp 144 grch37
+    if (any(toupper(ref_genome) == "GRCH37") && as.integer(dbSNP)==144 &&
         !requireNamespace("SNPlocs.Hsapiens.dbSNP144.GRCh37",
             quietly = TRUE
         )) {
         stop(GRCH37_msg1)
     }
+    #dbsnp 155 grch37
+    if (any(toupper(ref_genome) == "GRCH37") && as.integer(dbSNP)==155 &&
+        !requireNamespace("SNPlocs.Hsapiens.dbSNP155.GRCh37",
+                          quietly = TRUE
+        )) {
+      stop(GRCH37_msg3)
+    }
+    #grch37 ref genome
     if (any(toupper(ref_genome) == "GRCH37") &&
         !requireNamespace("BSgenome.Hsapiens.1000genomes.hs37d5",
             quietly = TRUE
         )) {
         stop(GRCH37_msg2)
     }
-
     GRCH38_msg1 <- paste0(
         "Install 'SNPlocs.Hsapiens.dbSNP144.GRCh38' to use ",
-        "'GRCh38' as 'ref_genome'"
+        "'GRCh38' as 'ref_genome' and 144 as dbSNP version"
     )
     GRCH38_msg2 <- paste0(
         "Install 'BSgenome.Hsapiens.NCBI.GRCh38' to ",
         "use 'GRCh38' as 'ref_genome'"
     )
-    if (any(toupper(ref_genome) == "GRCH38") &&
+    GRCH38_msg3 <- paste0(
+      "Install 'SNPlocs.Hsapiens.dbSNP155.GRCh38' to ",
+      "use 'GRCh38' as 'ref_genome' and 155 as dbSNP version"
+    )
+    #grch38 and dbsnp 144
+    if (any(toupper(ref_genome) == "GRCH38") && as.integer(dbSNP)==144 &&
         !requireNamespace("SNPlocs.Hsapiens.dbSNP144.GRCh38",
             quietly = TRUE
         )) {
         stop(GRCH38_msg1)
     }
+    #grch38 and dbsnp 155
+    if (any(toupper(ref_genome) == "GRCH38") && as.integer(dbSNP)==155 &&
+        !requireNamespace("SNPlocs.Hsapiens.dbSNP155.GRCh38",
+                          quietly = TRUE
+        )) {
+      stop(GRCH38_msg3)
+    }
+    #ref genome
     if (any(toupper(ref_genome) == "GRCH38") &&
         !requireNamespace("BSgenome.Hsapiens.NCBI.GRCh38",
             quietly = TRUE
         )) {
         stop(GRCH38_msg2)
     }
-
+    #if ref genome not specified, have to install both
     if (is.null(ref_genome)) {
-        if (!requireNamespace("SNPlocs.Hsapiens.dbSNP144.GRCh37",
+        #ref genomes
+        if (!requireNamespace("BSgenome.Hsapiens.1000genomes.hs37d5",
+                            quietly = TRUE
+        )) {
+          stop(GRCH37_msg2)
+        }
+        if (!requireNamespace("BSgenome.Hsapiens.NCBI.GRCh38",
+                            quietly = TRUE
+        )) {
+          stop(GRCH38_msg2)
+        }
+        #dbSNP
+        if (as.integer(dbSNP)==144 && 
+            !requireNamespace("SNPlocs.Hsapiens.dbSNP144.GRCh37",
             quietly = TRUE
         )) {
             stop(GRCH37_msg1)
         }
-        if (!requireNamespace("BSgenome.Hsapiens.1000genomes.hs37d5",
-            quietly = TRUE
+        if (as.integer(dbSNP)==155 && 
+            !requireNamespace("SNPlocs.Hsapiens.dbSNP144.GRCh37",
+                            quietly = TRUE
         )) {
-            stop(GRCH37_msg2)
+            stop(GRCH37_msg3)
         }
-        if (!requireNamespace("SNPlocs.Hsapiens.dbSNP144.GRCh38",
+        if (as.integer(dbSNP)==144 &&
+            !requireNamespace("SNPlocs.Hsapiens.dbSNP144.GRCh38",
             quietly = TRUE
-        )) {
+            )) {
             stop(GRCH38_msg1)
         }
-        if (!requireNamespace("BSgenome.Hsapiens.NCBI.GRCh38",
-            quietly = TRUE
-        )) {
-            stop(GRCH38_msg2)
+        if (as.integer(dbSNP)==155 &&
+            !requireNamespace("SNPlocs.Hsapiens.dbSNP144.GRCh38",
+                            quietly = TRUE
+            )) {
+            stop(GRCH38_msg3)
         }
     }
 
@@ -188,9 +237,21 @@ validate_parameters <- function(path,
     if (!is.logical(write_vcf)) {
         stop("write_vcf must be either TRUE or FALSE")
     }
-    if (!is.logical(ldsc_format)) {
-        stop("ldsc_format must be either TRUE or FALSE")
+    #LDSC format has been deprecated - use save_format
+    if (!isFALSE(ldsc_format)) {
+        stop("`ldsc_format` has been deprecated. Use `save_format='LDSC'`.")
     }
+    #save_format
+    if(!is.null(save_format) && 
+       !tolower(save_format) %in% c("ldsc","opengwas")){
+      stop("save_format must be NULL or one of LDSC or openGWAS")
+    }
+    opengws_err <- paste0("IEU OpenGWAS format only available when saving as ",
+                          "VCF. Set `write_vcf=True` and rerun ",
+                          "`format_sumstats()`")
+    if(!is.null(save_format) && 
+        tolower(save_format)=="opengwas" & isFALSE(write_vcf))
+      stop(opengws_err)
     if (!is.logical(pos_se)) {
         stop("pos_se must be either TRUE or FALSE")
     }

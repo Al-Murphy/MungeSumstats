@@ -29,7 +29,8 @@ check_on_ref_genome <-function(sumstats_dt,
                                check_save_out, 
                                tabix_index, 
                                nThread, 
-                               log_files) {
+                               log_files,
+                               dbSNP) {
         CHR <- SNP <- IMPUTATION_SNP <- miss_rs_chr_bp <- A1 <- A2 <- NULL
         # If CHR present and user specified chromosome to have SNPs removed
         col_headers <- names(sumstats_dt)
@@ -38,7 +39,8 @@ check_on_ref_genome <-function(sumstats_dt,
             if (is.null(rsids)) {
                 rsids <- load_ref_genome_data(
                     snps = data.table::copy(sumstats_dt$SNP),
-                    ref_genome = ref_genome
+                    ref_genome = ref_genome,
+                    dbSNP = dbSNP
                 )
             }
             # ensure rsids is up-to-date with filtered sumstats_dt
@@ -157,7 +159,8 @@ check_on_ref_genome <-function(sumstats_dt,
                 #update rsid again since new SNP IDs
                 rsids <- load_ref_genome_data(
                         snps = data.table::copy(sumstats_dt$SNP),
-                        ref_genome = ref_genome
+                        ref_genome = ref_genome,
+                        dbSNP=dbSNP
                 )
             }
             #join back indels

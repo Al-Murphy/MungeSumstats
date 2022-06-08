@@ -34,7 +34,8 @@ check_no_allele <- function(sumstats_dt,
                             tabix_index, 
                             nThread, 
                             log_files,
-                            bi_allelic_filter) {
+                            bi_allelic_filter,
+                            dbSNP) {
     SNP <- i.seqnames <- CHR <- BP <- i.pos <- LP <- P <- A1 <- A2 <-
         i.ref_allele <- i.alt_alleles <- alt_alleles <- ss_A <-
         alleles_as_ambig <- IMPUTATION_A2 <- IMPUTATION_A1 <- NULL
@@ -58,8 +59,9 @@ check_no_allele <- function(sumstats_dt,
         if (is.null(rsids)) {
             rsids <- load_ref_genome_data(
                 data.table::copy(sumstats_dt$SNP),
-                ref_genome,
-                "A1 or A2 allele information"
+                ref_genome = ref_genome,
+                dbSNP = dbSNP,
+                msg = "A1 or A2 allele information"
             )
         } else {
             print_msg <- paste0(

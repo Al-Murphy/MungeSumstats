@@ -11,6 +11,7 @@ get_genome_build(
   sampled_snps = 10000,
   standardise_headers = TRUE,
   mapping_file = sumstatsColHeaders,
+  dbSNP = c(144, 155),
   header_only = FALSE
 )
 }
@@ -33,6 +34,8 @@ However, if a column header that is in your file is missing of the mapping we
 give is incorrect you can supply your own mapping file. Must be a 2 column
 dataframe with column names "Uncorrected" and "Corrected". See
 \code{data(sumstatsColHeaders)} for default mapping and necessary format.}
+
+\item{dbSNP}{version of dbSNP to be used (144 or 155).}
 
 \item{header_only}{Instead of reading in the entire \code{sumstats} file,
 only read in the first N rows where N=\code{sampled_snps}.

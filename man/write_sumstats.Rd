@@ -12,8 +12,10 @@ file renaming behavior}
 write_sumstats(
   sumstats_dt,
   save_path,
+  ref_genome,
   sep = "\\t",
   write_vcf = FALSE,
+  save_format = NULL,
   tabix_index = FALSE,
   nThread = 1,
   return_path = FALSE,
@@ -27,9 +29,17 @@ file for the GWAS.}
 \item{save_path}{File path to save formatted data. Defaults to
 \code{tempfile(fileext=".tsv.gz")}.}
 
+\item{ref_genome}{name of the reference genome used for the GWAS ("GRCh37" or
+"GRCh38"). Argument is case-insensitive. Default is NULL which infers the
+reference genome from the data.}
+
 \item{sep}{ The separator between columns. Defaults to the character in the set \code{[,\\t |;:]} that separates the sample of rows into the most number of lines with the same number of fields. Use \code{NULL} or \code{""} to specify no separator; i.e. each line a single character column like \code{base::readLines} does.}
 
 \item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
+
+\item{save_format}{Ouput format of sumstats. Options are NULL - standardised
+output format from MungeSumstats, LDSC - output format compatible with LDSC
+and openGWAS - output compatible with openGWAS VCFs. Default is NULL.}
 
 \item{tabix_index}{Index the formatted summary statistics with
 \href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}

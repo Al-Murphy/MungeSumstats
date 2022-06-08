@@ -32,8 +32,10 @@
 #' )
 write_sumstats <- function(sumstats_dt,
                            save_path,
+                           ref_genome,
                            sep = "\t",
                            write_vcf = FALSE,
+                           save_format=NULL,
                            tabix_index = FALSE,
                            nThread = 1,
                            return_path = FALSE,
@@ -48,22 +50,95 @@ write_sumstats <- function(sumstats_dt,
                                  verbose = TRUE)
         save_path <- check$save_path
     } 
-    #### Sort again just to be sure when tabix-indexing ####
-    if(isTRUE(tabix_index) | isTRUE(write_vcf)) {
-        sumstats_dt <- sort_coords(sumstats_dt = sumstats_dt)
-    }
     #### Select write format ####
     if (isTRUE(write_vcf)) { 
         tmp_save_path <- gsub("\\.bgz|\\.gz","",save_path)
-        #### Convert to VRanges and save ####
-        vr <- to_vranges(sumstats_dt = sumstats_dt) 
-        messager("Writing in VCF format ==> ", save_path)
-        VariantAnnotation::writeVcf(
-            obj = vr,
+        #convert to IEU OpenGWAS VCF format (column naming and RSID position)
+        if(tolower(save_format)=="opengwas"){
+          #first check genome build - all of openGWAS is GRCh37 currently so 
+          #warn user if their data isn't
+          gen_build_err <- paste0("Your sumstats has been built on the ",
+                                  ref_genome, " reference genome. However, ",
+                                  "OpenGWAS is all\n",
+                                  "currently built on GRCh37. Use the ",
+                                  "convert_ref_genome parameter to liftover to",
+                                  " GRCh37 by rerunning format_sumstats.")
+          if(toupper(ref_genome)!="GRCH37")
+            warning(gen_build_err)
+          #necessary cols (https://github.com/MRCIEU/gwas-vcf-specification):
+          #NS:NC:ES:SE:LP:AF:AC
+          #p-val needs to be -log10 p
+          #SNP -> RSID in INFO col
+          if("SNP" %in% colnames(sumstats_dt)){
+            setnames(sumstats_dt,"SNP","RSID")
+          }else{
+            stop("SNP/RSID is required for IEU OpenGWAS format VCFs")
+          }
+          #remove any extra columns
+          opengwas_cols <- c("RSID","CHR","BP","A1","A2","P",
+                              "FRQ","BETA","SE","N","N_CAS")
+          if(any(!(colnames(sumstats_dt) %in% opengwas_cols)))
+            sumstats_dt[,colnames(sumstats_dt)[!(colnames(sumstats_dt) %in% 
+                                                    opengwas_cols)]:=NULL]
+          #### Convert to VRanges and save ####
+          vr <- to_vranges(sumstats_dt = sumstats_dt) 
+          
+          if("P" %in% names(mcols(vr))){
+            #P -> LP
+            vr$LP <- -log(vr$P,base=10)
+            vr$P <- NULL
+          }else{
+            stop("P-value is required for IEU OpenGWAS format VCFs")
+          }
+          #FRQ -> AF
+          if("FRQ" %in% names(mcols(vr))){
+            vr$AF <- vr$FRQ
+            vr$FRQ <- NULL
+          }
+          #BETA -> ES
+          if("BETA" %in% names(mcols(vr))){
+            vr$ES <- vr$BETA
+            vr$BETA <- NULL
+          }else{
+            stop("BETA (Effect Size) is required for IEU OpenGWAS format VCFs")
+          }
+          #SE -> SE
+          if(!"SE" %in% names(mcols(vr))){
+            se_msg <- paste0("Standard Error (of effect size) is required for",
+                              " IEU OpenGWAS format VCFs")
+            stop(se_msg)
+          }
+          #N -> NS
+          if("N" %in% names(mcols(vr))){
+            vr$NS <- vr$N
+            vr$N <- NULL
+          }
+          #N_CAS -> NC
+          if("N_CAS" %in% names(mcols(vr))){
+            vr$NC <- vr$N_CAS
+            vr$N_CAS <- NULL
+          }
+          #reorder cols and drop any unnecessary
+          all_poss_cols <- c("RSID","NS","NC","ES","SE","LP","AF","AC")
+          vr <- vr[,all_poss_cols[all_poss_cols %in% names(mcols(vr))]]
+          
+          messager("Writing in IEU OpenGWAS VCF format ==> ", save_path)
+          VariantAnnotation::writeVcf(
+            obj = VariantAnnotation::asVCF(vr,info='RSID'),
             ### Must supply filename without compression suffix
             filename = tmp_save_path,
             index = tabix_index
-        )
+          )
+          
+        }else{
+          messager("Writing in VCF format ==> ", save_path)
+          VariantAnnotation::writeVcf(
+              obj = vr,
+              ### Must supply filename without compression suffix
+              filename = tmp_save_path,
+              index = tabix_index
+          )
+        }
         #### Compress ####
         ## only compress if this was not already handled by writeVcf(index=T)
         if(isFALSE(tabix_index)){

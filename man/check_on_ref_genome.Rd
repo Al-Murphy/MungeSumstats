@@ -16,7 +16,8 @@ check_on_ref_genome(
   check_save_out,
   tabix_index,
   nThread,
-  log_files
+  log_files,
+  dbSNP
 )
 }
 \arguments{
@@ -55,6 +56,8 @@ FALSE.}
 \item{nThread}{Number of threads to use for parallel processes.}
 
 \item{log_files}{list of log file locations}
+
+\item{dbSNP}{version of dbSNP to be used for imputation (144 or 155).}
 }
 \value{
 A list containing two data tables:

@@ -31,9 +31,11 @@ validate_parameters(
   remove_multi_rs_snp,
   frq_is_maf,
   indels,
+  dbSNP,
   write_vcf,
   return_format,
   ldsc_format,
+  save_format,
   imputation_ind,
   log_folder_ind,
   log_mungesumstats_msgs,
@@ -148,14 +150,18 @@ occur i.e. is TRUE.}
 exist in our reference file so they will be excluded from checks if this
 value is TRUE. Default is TRUE.}
 
+\item{dbSNP}{version of dbSNP to be used for imputation (144 or 155).}
+
 \item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
 
 \item{return_format}{If return_data is TRUE. Object type to be returned
 ("data.table","vranges","granges").}
 
-\item{ldsc_format}{Binary Ensure that output format meets all requirements
-to be fed directly into LDSC without the need for additional munging. Default
-is FALSE}
+\item{ldsc_format}{DEPRECATED, do not use. Use save_format="LDSC" instead.}
+
+\item{save_format}{Ouput format of sumstats. Options are NULL - standardised
+output format from MungeSumstats, LDSC - output format compatible with LDSC
+and openGWAS - output compatible with openGWAS VCFs. Default is NULL.}
 
 \item{imputation_ind}{Binary Should a column be added for each imputation
 step to show what SNPs have imputed values for differing fields. This

@@ -58,6 +58,7 @@ Roxygen: list(markdown = TRUE)
 Suggests: 
     SNPlocs.Hsapiens.dbSNP144.GRCh37,
     SNPlocs.Hsapiens.dbSNP144.GRCh38,
+    SNPlocs.Hsapiens.dbSNP155.GRCh38,
     BSgenome.Hsapiens.1000genomes.hs37d5,
     BSgenome.Hsapiens.NCBI.GRCh38, 
     BiocGenerics, 
