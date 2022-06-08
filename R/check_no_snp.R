@@ -72,9 +72,13 @@ check_no_snp <- function(sumstats_dt, path, ref_genome, indels, imputation_ind,
         }
         data.table::setnames(rsids, "seqnames", "CHR")
         data.table::setnames(rsids, "pos", "BP")
-        # in case there is CHR8 and chr8
+        # in case there is CHR8 and chr8 - but keep sex chr as upper
         rsids[, CHR := tolower(as.character(CHR))]
+        rsids[, CHR := gsub("x|23", "X", CHR)]
+        rsids[, CHR := gsub("y", "Y", CHR)]
         sumstats_dt[, CHR := tolower(as.character(CHR))]
+        sumstats_dt[, CHR := gsub("x|23", "X", CHR)]
+        sumstats_dt[, CHR := gsub("y", "Y", CHR)]
         # ensure bp is numeric
         sumstats_dt[, BP := as.numeric(BP)]
         # join on SCHR BP to sumstats

@@ -1,3 +1,9 @@
+## CHANGES IN VERSION 1.4.5
+
+### Bug fixes
+
+* Chse where sex chromosomes were made lower case removed to match UCSC
+
 ## CHANGES IN VERSION 1.4.4
 
 ### New features
