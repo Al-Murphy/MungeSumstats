@@ -9,6 +9,7 @@ get_genome_builds(
   header_only = TRUE,
   sampled_snps = 10000,
   names_from_paths = FALSE,
+  dbSNP = 155,
   nThread = 1
 )
 }
@@ -27,6 +28,8 @@ build to save time.}
 \item{names_from_paths}{Infer the name of each item in \code{sumstats_list}
 from its respective file path.
 Only works if \code{sumstats_list} is a list of paths.}
+
+\item{dbSNP}{version of dbSNP to be used (144 or 155). Default is 155.}
 
 \item{nThread}{Number of threads to use for parallel processes.}
 }
@@ -58,6 +61,7 @@ if (!is_32bit_windows) {
     #ref_genomes <- get_genome_builds(sumstats_list = sumstats_list)
     #just passing first here for speed
     sumstats_list_quick <- list(ss1 = eduAttainOkbayPth)
-    ref_genomes <- get_genome_builds(sumstats_list = sumstats_list_quick)
+    ref_genomes <- get_genome_builds(sumstats_list = sumstats_list_quick,
+                                     dbSNP=144)
 }
 }

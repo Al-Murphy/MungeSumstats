@@ -13,13 +13,16 @@
 #'
 #' ## Call uses reference genome as default with more than 2GB of memory,
 #' ## which is more than what 32-bit Windows can handle so remove certain checks
+#' ## Using dbSNP = 144 for speed as it's smaller but you should use 155 unless
+#' ## you know what you are doing and need 144
 #'
 #' is_32bit_windows <-
 #'     .Platform$OS.type == "windows" && .Platform$r_arch == "i386"
 #' if (!is_32bit_windows) {
 #'     reformatted <- format_sumstats(
 #'         path = eduAttainOkbayPth,
-#'         ref_genome = "GRCh37"
+#'         ref_genome = "GRCh37",
+#'         dbSNP = 144
 #'     )
 #' } else {
 #'     reformatted <- format_sumstats(
@@ -28,7 +31,8 @@
 #'         on_ref_genome = FALSE,
 #'         strand_ambig_filter = FALSE,
 #'         bi_allelic_filter = FALSE,
-#'         allele_flip_check = FALSE
+#'         allele_flip_check = FALSE,
+#'         dbSNP=144
 #'     )
 #' }
 #' # returned location has the updated summary statistics file
@@ -151,7 +155,7 @@
 #' @param return_format If return_data is TRUE. Object type to be returned
 #' ("data.table","vranges","granges").
 #' @param ldsc_format DEPRECATED, do not use. Use save_format="LDSC" instead.
-#' @param save_format Ouput format of sumstats. Options are NULL - standardised 
+#' @param save_format Output format of sumstats. Options are NULL - standardised 
 #' output format from MungeSumstats, LDSC - output format compatible with LDSC 
 #' and openGWAS - output compatible with openGWAS VCFs. Default is NULL.
 #' @param log_folder_ind Binary Should log files be stored containing all

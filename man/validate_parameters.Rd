@@ -159,7 +159,7 @@ value is TRUE. Default is TRUE.}
 
 \item{ldsc_format}{DEPRECATED, do not use. Use save_format="LDSC" instead.}
 
-\item{save_format}{Ouput format of sumstats. Options are NULL - standardised
+\item{save_format}{Output format of sumstats. Options are NULL - standardised
 output format from MungeSumstats, LDSC - output format compatible with LDSC
 and openGWAS - output compatible with openGWAS VCFs. Default is NULL.}
 

@@ -30,7 +30,8 @@ test_that("Can correctly separate CHR:BP:A2:A1, two columns", {
             on_ref_genome = FALSE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
-            allele_flip_check = FALSE
+            allele_flip_check = FALSE,
+            dbSNP=144
         )
         res_dt <- data.table::fread(reformatted)
         # Should give same result as separated
@@ -40,7 +41,8 @@ test_that("Can correctly separate CHR:BP:A2:A1, two columns", {
             on_ref_genome = FALSE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
-            allele_flip_check = FALSE
+            allele_flip_check = FALSE,
+            dbSNP=144
         )
         org_dt <- data.table::fread(org)
         expect_equal(all.equal(org_dt, res_dt, ignore.row.order = TRUE), TRUE)

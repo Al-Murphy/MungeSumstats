@@ -379,7 +379,8 @@ conducted by *MungeSumstats* are:
     don't exist in our reference file so they will be excluded from
     checks if this value is TRUE. Default is TRUE.
 -   **dbSNP** The dbSNP version to use as a reference - defaults to the most 
-    recent version available (155).
+    recent version available (155). Note that with the 9x more SNPs in dbSNP 
+    155 vs 144, run times will increase.
 -   **sort_coordinates** Whether to sort by coordinates of resulting
     sumstats.\
 -   **nThread** Number of threads to use for parallel processes.

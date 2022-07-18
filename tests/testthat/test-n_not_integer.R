@@ -22,7 +22,8 @@ test_that("Handle n when it isn't an integer", {
             on_ref_genome = FALSE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
-            allele_flip_check = FALSE
+            allele_flip_check = FALSE,
+            dbSNP=144
         )
         # In results if N = N_fixed it worked
         res_dt <- data.table::fread(reformatted)

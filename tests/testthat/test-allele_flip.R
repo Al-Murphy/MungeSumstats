@@ -27,7 +27,8 @@ test_that("Test that allele columns and effect columns flipped correctly", {
             on_ref_genome = FALSE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = TRUE,
-            allele_flip_check = TRUE
+            allele_flip_check = TRUE,
+            dbSNP=144
         )
         reformatted_lines <- readLines(reformatted)
         # Should equal org since the effect should be corrected
@@ -37,7 +38,8 @@ test_that("Test that allele columns and effect columns flipped correctly", {
             on_ref_genome = TRUE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = TRUE,
-            allele_flip_check = TRUE
+            allele_flip_check = TRUE,
+            dbSNP=144
         )
         org_lines <- readLines(org)
         # reordering in function

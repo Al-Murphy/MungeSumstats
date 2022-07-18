@@ -22,7 +22,8 @@ test_that("VCF is correctly formatted", {
             on_ref_genome = FALSE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
-            allele_flip_check = FALSE
+            allele_flip_check = FALSE,
+            dbSNP=144
         )  
         reformatted_lines <- readLines(reformatted)
         # check manually against first five SNPs
@@ -59,7 +60,8 @@ test_that("VCF is correctly formatted", {
                 bi_allelic_filter = TRUE,
                 allele_flip_check = TRUE,
                 allele_flip_drop = FALSE,
-                INFO_filter = 0.01
+                INFO_filter = 0.01,
+                dbSNP=144
             )
         reformatted_lines_af <- readLines(reformatted_allelic_flip)
         testthat::expect_equal(sort(reformatted_lines), 
@@ -76,7 +78,8 @@ test_that("VCF is correctly formatted", {
             allele_flip_drop = FALSE,
             INFO_filter = 0.01,
             return_data = TRUE,
-            return_format = "data.table"
+            return_format = "data.table",
+            dbSNP=144
         )
         rtrn_grng <- MungeSumstats::format_sumstats(
             path = pth,
@@ -88,7 +91,8 @@ test_that("VCF is correctly formatted", {
             allele_flip_drop = FALSE,
             INFO_filter = 0.01,
             return_data = TRUE,
-            return_format = "GRanges"
+            return_format = "GRanges",
+            dbSNP=144
         )
         rtrn_vrng <- MungeSumstats::format_sumstats(
             path = pth,
@@ -100,7 +104,8 @@ test_that("VCF is correctly formatted", {
             allele_flip_drop = FALSE,
             INFO_filter = 0.01,
             return_data = TRUE,
-            return_format = "VRanges"
+            return_format = "VRanges",
+            dbSNP=144
         )
         testthat::expect_true(is(rtrn_grng,"GRanges"))
         testthat::expect_true(is(rtrn_vrng,"VRanges"))
@@ -131,8 +136,9 @@ test_that("VCF is correctly formatted", {
             allele_flip_check = FALSE,
             allele_flip_drop = FALSE,
             INFO_filter = 0.01,
-            ldsc_format = TRUE,
-            compute_n = 1001
+            save_format='LDSC',
+            compute_n = 1001,
+            dbSNP=144
         )
         res <- data.table::fread(rtrn_ldsc, nThread = 1)
         # check for necessary columns - 

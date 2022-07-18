@@ -30,7 +30,8 @@ test_that("Imputation of A1/A2 correctly", {
             bi_allelic_filter = FALSE,
             allele_flip_check = FALSE,
             imputation_ind = TRUE,
-            log_folder_ind = TRUE
+            log_folder_ind = TRUE,
+            dbSNP=144
         )
         res_dt <- data.table::fread(reformatted$sumstats, 
                                     nThread = 1)
@@ -62,7 +63,8 @@ test_that("Imputation of A1/A2 correctly", {
             allele_flip_check = FALSE,
             imputation_ind = TRUE,
             log_folder_ind = TRUE,
-            allele_flip_frq = FALSE
+            allele_flip_frq = FALSE,
+            dbSNP=144
         )
         res_dt2 <- data.table::fread(reformatted2$sumstats,
                                      nThread = 1)
@@ -94,7 +96,8 @@ test_that("Imputation of A1/A2 correctly", {
             allele_flip_check = FALSE,
             allele_flip_drop = FALSE,
             imputation_ind = TRUE,
-            log_folder_ind = TRUE
+            log_folder_ind = TRUE,
+            dbSNP=144
         )
         res_dt3 <- data.table::fread(reformatted3$sumstats,
                                      nThread = 1)
@@ -145,7 +148,8 @@ test_that("Imputation of A1/A2 correctly", {
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
             allele_flip_check = TRUE,
-            allele_flip_frq = FALSE
+            allele_flip_frq = FALSE,
+            dbSNP=144
         )
         res_org <- data.table::fread(org_rtrn, nThread = 1)
         data.table::setkey(res_org, SNP)

@@ -24,7 +24,8 @@ test_that("Multi-trait GWAS handled correctly", {
             bi_allelic_filter = FALSE,
             allele_flip_check = FALSE,
             sort_coordinates = FALSE,
-            rmv_chrPrefix = FALSE
+            rmv_chrPrefix = FALSE,
+            dbSNP=144
         )
         reformatted_res <- readLines(reformatted)
         # check manually

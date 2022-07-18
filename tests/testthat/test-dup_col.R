@@ -31,7 +31,8 @@ test_that("Handle dup cols", {
             allele_flip_check = FALSE,
             log_folder_ind = TRUE,
             imputation_ind = TRUE,
-            log_mungesumstats_msgs = TRUE
+            log_mungesumstats_msgs = TRUE,
+            dbSNP=144
         )
     
         # first check log file
@@ -54,7 +55,8 @@ test_that("Handle dup cols", {
             bi_allelic_filter = FALSE,
             allele_flip_check = FALSE,
             log_folder_ind = TRUE,
-            imputation_ind = TRUE
+            imputation_ind = TRUE,
+            dbSNP=144
         )
         org_dt <- data.table::fread(org_before_dup$sumstats)
         expect_equal(all.equal(org_dt, res_dt), TRUE)

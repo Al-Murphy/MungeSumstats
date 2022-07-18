@@ -19,7 +19,8 @@ test_that("Can handle comma delimited files", {
             on_ref_genome = FALSE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
-            allele_flip_check = FALSE
+            allele_flip_check = FALSE,
+            dbSNP=144
         )
         res_dt <- data.table::fread(reformatted)
         # check against results of normal run should be the exact same
@@ -31,7 +32,8 @@ test_that("Can handle comma delimited files", {
             on_ref_genome = FALSE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
-            allele_flip_check = FALSE
+            allele_flip_check = FALSE,
+            dbSNP=144
         )
         org_dt <- data.table::fread(org)
         expect_equal(res_dt, org_dt)

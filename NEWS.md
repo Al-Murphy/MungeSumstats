@@ -1,3 +1,19 @@
+## CHANGES IN VERSION 1.5.5
+
+### New features
+
+* save_format parameter created for format_sumstats. This will replace
+ldsc_format which is now deprecated. Use save_format="LDSC" instead. Other 
+options for save_format are generic standardised (NULL) and IEU Open GWAS VCF
+format ("openGWAS").
+* dbSNP version 155 has now been added. Users can now control the version of 
+dbSNP to be used for imputation (144 or 155). Note that with the 9x more SNPs
+in dbSNP 155 vs 144, run times will increase.
+
+### Bug fixes
+
+* Change where sex chromosomes were made lower case removed to match UCSC
+
 ## CHANGES IN VERSION 1.5.4
 
 ### New features

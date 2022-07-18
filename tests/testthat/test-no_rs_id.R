@@ -20,7 +20,8 @@ test_that("Handle rs ID in row", {
             on_ref_genome = FALSE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
-            allele_flip_check = FALSE
+            allele_flip_check = FALSE,
+            dbSNP=144
         )
         reformatted_lines <- readLines(reformatted)
         # Should equal org apart from this one line
@@ -30,7 +31,8 @@ test_that("Handle rs ID in row", {
             on_ref_genome = FALSE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
-            allele_flip_check = FALSE
+            allele_flip_check = FALSE,
+            dbSNP=144
         )
         org_lines <- readLines(org)
 

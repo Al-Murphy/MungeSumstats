@@ -50,11 +50,15 @@ write_sumstats <- function(sumstats_dt,
                                  verbose = TRUE)
         save_path <- check$save_path
     } 
+    #### Sort again just to be sure when tabix-indexing ####
+    if(isTRUE(tabix_index) | isTRUE(write_vcf)) {
+      sumstats_dt <- sort_coords(sumstats_dt = sumstats_dt)
+    }
     #### Select write format ####
     if (isTRUE(write_vcf)) { 
         tmp_save_path <- gsub("\\.bgz|\\.gz","",save_path)
         #convert to IEU OpenGWAS VCF format (column naming and RSID position)
-        if(tolower(save_format)=="opengwas"){
+        if(!is.null(save_format) && tolower(save_format)=="opengwas"){
           #first check genome build - all of openGWAS is GRCh37 currently so 
           #warn user if their data isn't
           gen_build_err <- paste0("Your sumstats has been built on the ",
@@ -82,7 +86,6 @@ write_sumstats <- function(sumstats_dt,
                                                     opengwas_cols)]:=NULL]
           #### Convert to VRanges and save ####
           vr <- to_vranges(sumstats_dt = sumstats_dt) 
-          
           if("P" %in% names(mcols(vr))){
             #P -> LP
             vr$LP <- -log(vr$P,base=10)
@@ -131,6 +134,8 @@ write_sumstats <- function(sumstats_dt,
           )
           
         }else{
+          #### Convert to VRanges and save ####
+          vr <- to_vranges(sumstats_dt = sumstats_dt)
           messager("Writing in VCF format ==> ", save_path)
           VariantAnnotation::writeVcf(
               obj = vr,

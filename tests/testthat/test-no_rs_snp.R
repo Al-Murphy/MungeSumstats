@@ -36,7 +36,8 @@ test_that("Check SNP ID formatting", {
         
         # try third with check_row_snp and snp_ids_are_rs_ids=TRUE
         sumstats_dt_missing3 <- data.table::copy(sumstats_dt)
-        sumstats_dt_missing3[, MarkerName := substr(MarkerName, 3, nchar(MarkerName))]
+        sumstats_dt_missing3[, MarkerName := substr(MarkerName, 3, 
+                                                    nchar(MarkerName))]
         
         data.table::fwrite(x = sumstats_dt_missing, file = file, sep = "\t")
         file2 <- tempfile()
@@ -49,7 +50,8 @@ test_that("Check SNP ID formatting", {
             on_ref_genome = FALSE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
-            allele_flip_check = FALSE
+            allele_flip_check = FALSE,
+            dbSNP=144
         )
         res_dt <- data.table::fread(reformatted)
 
@@ -58,7 +60,8 @@ test_that("Check SNP ID formatting", {
             on_ref_genome = FALSE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
-            allele_flip_check = FALSE
+            allele_flip_check = FALSE,
+            dbSNP=144
         )
         res_dt2 <- data.table::fread(reformatted2)
 
@@ -70,7 +73,8 @@ test_that("Check SNP ID formatting", {
                 on_ref_genome = FALSE,
                 strand_ambig_filter = FALSE,
                 bi_allelic_filter = FALSE,
-                allele_flip_check = FALSE
+                allele_flip_check = FALSE,
+                dbSNP=144
             ),
             error = function(e) e,
             warning = function(w) w
@@ -83,7 +87,8 @@ test_that("Check SNP ID formatting", {
             on_ref_genome = FALSE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
-            allele_flip_check = FALSE
+            allele_flip_check = FALSE,
+            dbSNP=144
         )
         org_dt <- data.table::fread(org)
         data.table::setkey(org_dt, SNP)

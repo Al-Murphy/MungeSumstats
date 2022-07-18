@@ -23,7 +23,8 @@ test_that("non-biallelic SNPs are removed", {
                                            return_data=TRUE,
                                            nThread=2,
                                            on_ref_genome = TRUE,
-                                           indels = TRUE)
+                                           indels = TRUE,
+                                           dbSNP=144)
         #SNP ID is an indel so won't exist in our SNP reference dataset
         testthat::expect_equal("rs34589910" %in% reformatted_ss_ad$SNP,TRUE)
         
@@ -46,7 +47,8 @@ test_that("non-biallelic SNPs are removed", {
                                            return_data=TRUE,
                                            nThread=2,
                                            on_ref_genome = TRUE,
-                                           indels = TRUE)
+                                           indels = TRUE,
+                                           dbSNP=144)
         #make sure it was removed
         testthat::expect_equal(nrow(reformatted_ss_ad2)==2,TRUE)
     } else {

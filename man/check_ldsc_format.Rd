@@ -20,7 +20,7 @@ check_ldsc_format(
 \item{sumstats_dt}{data table obj of the summary statistics file for the
 GWAS.}
 
-\item{save_format}{Ouput format of sumstats. Options are NULL - standardised
+\item{save_format}{Output format of sumstats. Options are NULL - standardised
 output format from MungeSumstats, LDSC - output format compatible with LDSC
 and openGWAS - output compatible with openGWAS VCFs. Default is NULL.}
 

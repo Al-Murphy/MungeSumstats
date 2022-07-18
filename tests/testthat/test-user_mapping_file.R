@@ -43,7 +43,8 @@ test_that("Test that user inputted mapping file is appropriate", {
             allele_flip_check = FALSE,
             mapping_file = user_map2,
             return_data = TRUE,
-            return_format = "GRanges"
+            return_format = "GRanges",
+            dbSNP=144
         )
     
     

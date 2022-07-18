@@ -22,7 +22,8 @@ test_that("SNPs not on reference genome are removed", {
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
             allele_flip_check = FALSE,
-            log_folder_ind = TRUE
+            log_folder_ind = TRUE,
+            dbSNP=144
         )
         reformatted_lines <- readLines(reformatted$sumstats)
         # Should equal org apart from this one line
@@ -32,7 +33,8 @@ test_that("SNPs not on reference genome are removed", {
             on_ref_genome = TRUE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
-            allele_flip_check = FALSE
+            allele_flip_check = FALSE,
+            dbSNP=144
         )
         org_lines <- readLines(org)
         # reordering in function, line 3 rs9320913 is now 58
@@ -46,7 +48,8 @@ test_that("SNPs not on reference genome are removed", {
         sumstats_list <- list(ss1 = eduAttainOkbayPth)
         ref_genomes <- get_genome_builds(
             sumstats_list = sumstats_list,
-            sampled_snps = 50
+            sampled_snps = 50,
+            dbSNP = 144
         )
         expect_equal(all.equal(ref_genomes, list("ss1" = "GRCH37")), TRUE)
     } else {

@@ -22,9 +22,10 @@ test_that("Check that imputation columns added correctly", {
             ref_genome = "GRCh37",
             compute_z = TRUE,
             compute_n = 1001,
-            ldsc_format = TRUE,
+            save_format='LDSC',
             imputation_ind = TRUE,
-            allele_flip_check = TRUE
+            allele_flip_check = TRUE,
+            dbSNP=144
         )
         res <- data.table::fread(reformatted)
         col_headers <- names(res)
@@ -55,7 +56,12 @@ test_that("Check that imputation columns added correctly", {
         methods <- c("ldsc", "sum", "giant", "metal")
         reformatted <- MungeSumstats::format_sumstats(file,
             ref_genome = "GRCh37",
-            compute_n = methods
+            compute_n = methods,
+            on_ref_genome = FALSE,
+            strand_ambig_filter = FALSE,
+            bi_allelic_filter = FALSE,
+            allele_flip_check = FALSE,
+            dbSNP=144
         )
         res <- data.table::fread(reformatted)
         expect_equal(all(paste0("Neff_", c("ldsc", "giant", "metal")) %in%

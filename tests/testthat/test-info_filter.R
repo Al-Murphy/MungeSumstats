@@ -27,7 +27,8 @@ test_that("Filter SNPs where INFO<0.9", {
             bi_allelic_filter = FALSE,
             allele_flip_check = FALSE,
             log_folder_ind = TRUE,
-            imputation_ind = TRUE
+            imputation_ind = TRUE,
+            dbSNP=144
         )
         res_dt <- data.table::fread(reformatted$sumstats, nThread = 1)
         testthat::expect_equal(all(!rmv_snps %in% res_dt$SNP), TRUE)

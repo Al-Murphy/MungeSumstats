@@ -103,6 +103,7 @@ check_on_ref_genome <-function(sumstats_dt,
                             tabix_index = tabix_index,
                             nThread = nThread, 
                             log_files = log_files,
+                            dbSNP = dbSNP,
                             verbose = FALSE
                         )
                     log_files <- corrected_snp$log_files

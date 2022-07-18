@@ -57,7 +57,8 @@ test_that("Test connection to IEU GWAS - metadata, download", {
                     strand_ambig_filter = FALSE,
                     bi_allelic_filter = FALSE,
                     allele_flip_check = FALSE, 
-                    force_new = TRUE)
+                    force_new = TRUE,
+                    dbSNP=144)
             },
             error = function(e) e 
             )
@@ -73,7 +74,8 @@ test_that("Test connection to IEU GWAS - metadata, download", {
                 allele_flip_check = FALSE,
                 force_new = TRUE,
                 nThread = 1,
-                download_method = "axel"
+                download_method = "axel",
+                dbSNP=144
             ),
             error = function(e) e, 
             warning = function(w) w

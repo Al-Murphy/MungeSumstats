@@ -26,7 +26,8 @@ test_that("Filter SNPs SE<=0", {
             on_ref_genome = FALSE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
-            allele_flip_check = FALSE
+            allele_flip_check = FALSE,
+            dbSNP=144
         )
         res_dt <- data.table::fread(reformatted, nThread = 1)
         testthat::expect_equal(all(!rmv_snps %in% res_dt$SNP), TRUE)

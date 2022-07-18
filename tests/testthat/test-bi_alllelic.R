@@ -24,7 +24,8 @@ test_that("non-biallelic SNPs are removed", {
             strand_ambig_filter = FALSE,
             bi_allelic_filter = TRUE,
             allele_flip_check = FALSE,
-            log_folder_ind = TRUE
+            log_folder_ind = TRUE,
+            dbSNP=144
         )
         reformatted_lines <- readLines(reformatted$sumstats)
         # Should equal org apart from this one line
@@ -34,7 +35,8 @@ test_that("non-biallelic SNPs are removed", {
             on_ref_genome = FALSE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = TRUE,
-            allele_flip_check = FALSE
+            allele_flip_check = FALSE,
+            dbSNP=144
         )
         org_lines <- readLines(org)
 

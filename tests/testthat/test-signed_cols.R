@@ -22,7 +22,8 @@ test_that("will fail without a signed column", {
                 on_ref_genome = FALSE,
                 strand_ambig_filter = FALSE,
                 bi_allelic_filter = FALSE,
-                allele_flip_check = FALSE
+                allele_flip_check = FALSE,
+                dbSNP=144
             ),
             error = function(e) e,
             warning = function(w) w

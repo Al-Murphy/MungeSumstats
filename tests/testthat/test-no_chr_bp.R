@@ -24,7 +24,8 @@ test_that("Imputation of CHR and BP correctly", {
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
             allele_flip_check = FALSE,
-            log_folder_ind = TRUE
+            log_folder_ind = TRUE,
+            dbSNP=144
         )
         res_dt <- data.table::fread(reformatted$sumstats)
         # correct names of MungeSumstats::eduAttainOkbay

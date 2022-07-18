@@ -32,7 +32,8 @@ test_that("Handle n when its 5 std dev > mean", {
         strand_ambig_filter = FALSE,
         bi_allelic_filter = FALSE,
         allele_flip_check = FALSE,
-        log_folder_ind = TRUE
+        log_folder_ind = TRUE,
+        dbSNP=144
     )
     res_dt <- data.table::fread(reformatted$sumstats)
     expect_equal(!(rmv_snp %in% res_dt$SNP), TRUE)
@@ -48,7 +49,8 @@ test_that("Handle n when its 5 std dev > mean", {
         bi_allelic_filter = FALSE,
         allele_flip_check = FALSE,
         log_folder_ind = TRUE,
-        N_dropNA = TRUE
+        N_dropNA = TRUE,
+        dbSNP=144
     )
     res_dt <- data.table::fread(reformatted$sumstats)
 
@@ -61,7 +63,8 @@ test_that("Handle n when its 5 std dev > mean", {
         bi_allelic_filter = FALSE,
         allele_flip_check = FALSE,
         log_folder_ind = TRUE,
-        N_dropNA = FALSE
+        N_dropNA = FALSE,
+        dbSNP=144
     )
     res_dt2 <- data.table::fread(reformatted2$sumstats)
     expect_equal(!(rmv_snp %in% res_dt$SNP), TRUE)

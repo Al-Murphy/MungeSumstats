@@ -49,7 +49,8 @@ test_that("Handle more than 1 rs IDs in one row", {
                                            bi_allelic_filter = FALSE,
                                            allele_flip_check = FALSE,
                                            imputation_ind = TRUE,
-                                           remove_multi_rs_snp = FALSE
+                                           remove_multi_rs_snp = FALSE,
+                                           dbSNP=144
             )
         reformatted_lines <- data.table::fread(reformatted)
         # Should equal org apart from this one line
@@ -61,7 +62,8 @@ test_that("Handle more than 1 rs IDs in one row", {
                                               bi_allelic_filter = FALSE,
                                               allele_flip_check = FALSE,
                                               imputation_ind = TRUE,
-                                              remove_multi_rs_snp = FALSE
+                                              remove_multi_rs_snp = FALSE,
+                                              dbSNP=144
         )
         org_lines <- data.table::fread(org)
         
@@ -81,7 +83,8 @@ test_that("Handle more than 1 rs IDs in one row", {
                                            allele_flip_check = TRUE,
                                            imputation_ind = TRUE,
                                            remove_multi_rs_snp = TRUE,
-                                           log_folder_ind = TRUE
+                                           log_folder_ind = TRUE,
+                                           dbSNP=144
             )
         
         # expect 8 log files

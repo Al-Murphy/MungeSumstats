@@ -16,7 +16,7 @@
 #' give is incorrect you can supply your own mapping file. Must be a 2 column
 #' dataframe with column names "Uncorrected" and "Corrected". See
 #' \code{data(sumstatsColHeaders)} for default mapping and necessary format.
-#' @param dbSNP version of dbSNP to be used (144 or 155).
+#' @param dbSNP version of dbSNP to be used (144 or 155). Default is 155.
 #' @param header_only Instead of reading in the entire \code{sumstats} file,
 #' only read in the first N rows where N=\code{sampled_snps}.
 #' This should help speed up cases where you have to read in \code{sumstats}
@@ -30,7 +30,7 @@ get_genome_build <- function(sumstats,
                              sampled_snps = 10000,
                              standardise_headers = TRUE,
                              mapping_file = sumstatsColHeaders,
-                             dbSNP=c(144,155),
+                             dbSNP=155,
                              header_only = FALSE) {
     ### Add this to avoid confusing BiocCheck
     seqnames <- CHR <- SNP <- BP <- NULL 

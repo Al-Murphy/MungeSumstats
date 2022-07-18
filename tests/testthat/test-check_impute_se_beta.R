@@ -24,7 +24,8 @@ test_that("Check that imputation columns added correctly", {
                                                   allele_flip_check = FALSE,
                                                   imputation_ind = TRUE,
                                                   log_folder_ind = TRUE,
-                                                  INFO_filter = 0
+                                                  INFO_filter = 0,
+                                                  dbSNP=144
         )
         control_dt <- data.table::fread(control$sumstats)
         #now impute SE
@@ -41,7 +42,8 @@ test_that("Check that imputation columns added correctly", {
                                                       allele_flip_check = FALSE,
                                                       imputation_ind = TRUE,
                                                       log_folder_ind = TRUE,
-                                                      INFO_filter = 0
+                                                      INFO_filter = 0,
+                                                      dbSNP=144
         )
         #first check it was imputed
         imp_se_dt <- data.table::fread(reformatted$sumstats)
@@ -156,13 +158,15 @@ test_that("Check that imputation columns added correctly", {
                                                       bi_allelic_filter = FALSE,
                                                       allele_flip_check = FALSE,
                                                       imputation_ind = TRUE,
-                                                      log_folder_ind = TRUE
+                                                      log_folder_ind = TRUE,
+                                                      dbSNP=144
         )
         imp_beta_dt <- data.table::fread(reformatted$sumstats)
         #first check it was imputed
         testthat::expect_equal("BETA" %in% colnames(imp_beta_dt), TRUE)
         #check imputation column created
-        testthat::expect_equal("IMPUTATION_BETA" %in% colnames(imp_beta_dt), TRUE)
+        testthat::expect_equal("IMPUTATION_BETA" %in% colnames(imp_beta_dt), 
+                               TRUE)
         #check how close it is to actual
         setkey(imp_beta_dt,SNP)
         setkey(sumstats_dt_org,SNP)
@@ -170,7 +174,8 @@ test_that("Check that imputation columns added correctly", {
         #check diff as percentage of value
         sumstats_dt_org[,diff_beta:=abs((BETA-imp_beta)/BETA)]
         #expect a mean difference below 0.1%
-        testthat::expect_equal(mean(sumstats_dt_org$diff_beta,na.rm = TRUE)<0.001, TRUE)
+        testthat::expect_equal(mean(sumstats_dt_org$diff_beta,na.rm = TRUE)<0.001, 
+                               TRUE)
     } else {
         expect_equal(is_32bit_windows, TRUE)
         expect_equal(is_32bit_windows, TRUE)

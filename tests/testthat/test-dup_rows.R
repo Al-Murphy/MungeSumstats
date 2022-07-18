@@ -23,7 +23,8 @@ test_that("Handle duplicate rows based on rs ID", {
             on_ref_genome = FALSE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
-            allele_flip_check = FALSE
+            allele_flip_check = FALSE,
+            dbSNP=144
         )
         reformatted_lines <- readLines(reformatted)
         # Should equal org
@@ -33,7 +34,8 @@ test_that("Handle duplicate rows based on rs ID", {
             on_ref_genome = FALSE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
-            allele_flip_check = FALSE
+            allele_flip_check = FALSE,
+            dbSNP=144
         )
         org_lines <- readLines(org)
         # check equal regardless of order
@@ -57,7 +59,8 @@ test_that("Handle duplicate rows based on rs ID", {
             on_ref_genome = FALSE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = TRUE,
-            allele_flip_check = FALSE
+            allele_flip_check = FALSE,
+            dbSNP=144
         )
         reformatted_lines <- readLines(reformatted)
         # check equal regardless of order

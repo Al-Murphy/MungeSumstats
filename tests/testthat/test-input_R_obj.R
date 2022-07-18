@@ -18,14 +18,16 @@ test_that("Can pass in R objects of summary statistics", {
             on_ref_genome = FALSE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
-            allele_flip_check = FALSE
+            allele_flip_check = FALSE,
+            dbSNP=144
         )
         dt_return <- MungeSumstats::format_sumstats(sumstats_dt,
             ref_genome = "GRCh37",
             on_ref_genome = FALSE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
-            allele_flip_check = FALSE
+            allele_flip_check = FALSE,
+            dbSNP=144
         )
         sumstats_rtrn_path <- data.table::fread(path_return, nThread = 1)
         sumstats_rtrn_dt <- data.table::fread(dt_return, nThread = 1)

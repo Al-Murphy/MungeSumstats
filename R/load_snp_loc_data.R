@@ -27,7 +27,6 @@ load_snp_loc_data <- function(ref_genome,dbSNP=c(144,155),
           snp_loc_data <-
               SNPlocs.Hsapiens.dbSNP144.GRCh37::SNPlocs.Hsapiens.dbSNP144.GRCh37
         }else{ #155
-          stop("dbSNP 155 for GRCh37 not implemented......")
           snp_loc_data <-
             SNPlocs.Hsapiens.dbSNP155.GRCh37::SNPlocs.Hsapiens.dbSNP155.GRCh37
         }

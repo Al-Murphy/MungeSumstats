@@ -21,7 +21,8 @@ test_that("validate parameters", {
                 on_ref_genome = FALSE,
                 strand_ambig_filter = FALSE,
                 bi_allelic_filter = FALSE,
-                allele_flip_check = FALSE
+                allele_flip_check = FALSE,
+                dbSNP=144
             ),
             error = function(e) e,
             warning = function(w) w
@@ -33,7 +34,8 @@ test_that("validate parameters", {
                 on_ref_genome = FALSE,
                 strand_ambig_filter = FALSE,
                 bi_allelic_filter = FALSE,
-                allele_flip_check = FALSE
+                allele_flip_check = FALSE,
+                dbSNP=144
             ),
             error = function(e) e,
             warning = function(w) w
@@ -46,7 +48,8 @@ test_that("validate parameters", {
                 on_ref_genome = FALSE,
                 strand_ambig_filter = FALSE,
                 bi_allelic_filter = FALSE,
-                allele_flip_check = FALSE
+                allele_flip_check = FALSE,
+                dbSNP=144
             ),
             error = function(e) e,
             warning = function(w) w
@@ -59,7 +62,8 @@ test_that("validate parameters", {
                 on_ref_genome = FALSE,
                 strand_ambig_filter = FALSE,
                 bi_allelic_filter = FALSE,
-                allele_flip_check = FALSE
+                allele_flip_check = FALSE,
+                dbSNP=144
             ),
             error = function(e) e,
             warning = function(w) w
@@ -72,7 +76,8 @@ test_that("validate parameters", {
                 on_ref_genome = "YES",
                 strand_ambig_filter = FALSE,
                 bi_allelic_filter = FALSE,
-                allele_flip_check = FALSE
+                allele_flip_check = FALSE,
+                dbSNP=144
             ),
             error = function(e) e,
             warning = function(w) w
@@ -85,7 +90,8 @@ test_that("validate parameters", {
                 on_ref_genome = FALSE,
                 strand_ambig_filter = "YES",
                 bi_allelic_filter = FALSE,
-                allele_flip_check = FALSE
+                allele_flip_check = FALSE,
+                dbSNP=144
             ),
             error = function(e) e,
             warning = function(w) w
@@ -99,7 +105,8 @@ test_that("validate parameters", {
                 on_ref_genome = FALSE,
                 strand_ambig_filter = FALSE,
                 bi_allelic_filter = FALSE,
-                allele_flip_check = FALSE
+                allele_flip_check = FALSE,
+                dbSNP=144
             ),
             error = function(e) e,
             warning = function(w) w
@@ -113,7 +120,8 @@ test_that("validate parameters", {
                 on_ref_genome = FALSE,
                 strand_ambig_filter = FALSE,
                 bi_allelic_filter = FALSE,
-                allele_flip_check = FALSE
+                allele_flip_check = FALSE,
+                dbSNP=144
             ),
             error = function(e) e,
             warning = function(w) w
@@ -127,7 +135,8 @@ test_that("validate parameters", {
                 on_ref_genome = FALSE,
                 strand_ambig_filter = FALSE,
                 bi_allelic_filter = FALSE,
-                allele_flip_check = FALSE
+                allele_flip_check = FALSE,
+                dbSNP=144
             ),
             error = function(e) e,
             warning = function(w) w
@@ -140,7 +149,8 @@ test_that("validate parameters", {
                 on_ref_genome = FALSE,
                 strand_ambig_filter = FALSE,
                 bi_allelic_filter = "FAKE",
-                allele_flip_check = FALSE
+                allele_flip_check = FALSE,
+                dbSNP=144
             ),
             error = function(e) e,
             warning = function(w) w
@@ -152,7 +162,8 @@ test_that("validate parameters", {
                 ref_genome = "GRCh37",
                 on_ref_genome = FALSE,
                 strand_ambig_filter = FALSE,
-                allele_flip_check = "FAKE"
+                allele_flip_check = "FAKE",
+                dbSNP=144
             ),
             error = function(e) e,
             warning = function(w) w

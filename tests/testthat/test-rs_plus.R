@@ -26,7 +26,8 @@ test_that("Handle extra info in rs id column", {
             allele_flip_check = FALSE,
             log_folder_ind = TRUE,
             imputation_ind = TRUE,
-            return_data = TRUE
+            return_data = TRUE,
+            dbSNP=144
         )
     
         # Should equal separated version
@@ -48,7 +49,8 @@ test_that("Handle extra info in rs id column", {
             allele_flip_check = FALSE,
             log_folder_ind = TRUE,
             imputation_ind = TRUE,
-            return_data = TRUE
+            return_data = TRUE,
+            dbSNP=144
         )
         # should be the same
         expect_equal(setequal(reformatted$sumstats, reformatted2$sumstats), TRUE)

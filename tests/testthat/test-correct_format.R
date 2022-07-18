@@ -16,7 +16,8 @@ test_that("Input has correct format", {
             on_ref_genome = FALSE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
-            allele_flip_check = FALSE
+            allele_flip_check = FALSE,
+            dbSNP=144
         )
         reformatted_lines <- readLines(reformatted)
         # Only issue with eduAttainOkbay is the SNP ID name so update before check

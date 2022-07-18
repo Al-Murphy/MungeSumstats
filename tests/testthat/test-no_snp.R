@@ -22,7 +22,8 @@ test_that("Imputation of SNP correctly", {
             on_ref_genome = FALSE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
-            allele_flip_check = FALSE
+            allele_flip_check = FALSE,
+            dbSNP=144
         )
         res_dt <- data.table::fread(reformatted)
         # correct names of MungeSumstats::eduAttainOkbay

@@ -16,6 +16,7 @@
 #' @param names_from_paths Infer the name of each item in \code{sumstats_list}
 #' from its respective file path.
 #' Only works if \code{sumstats_list} is a list of paths.
+#' @param dbSNP version of dbSNP to be used (144 or 155). Default is 155.
 #' @param nThread Number of threads to use for parallel processes.
 #'
 #' @return ref_genome the genome build of the data
@@ -38,7 +39,8 @@
 #'     #ref_genomes <- get_genome_builds(sumstats_list = sumstats_list)
 #'     #just passing first here for speed
 #'     sumstats_list_quick <- list(ss1 = eduAttainOkbayPth)
-#'     ref_genomes <- get_genome_builds(sumstats_list = sumstats_list_quick)
+#'     ref_genomes <- get_genome_builds(sumstats_list = sumstats_list_quick,
+#'                                      dbSNP=144)
 #' }
 #' @export
 #' @importFrom parallel mclapply
@@ -49,6 +51,7 @@ get_genome_builds <- function(sumstats_list,
                               header_only = TRUE,
                               sampled_snps = 10000,
                               names_from_paths = FALSE,
+                              dbSNP=155,
                               nThread = 1) {
     start <- Sys.time()
     #### Convert to list if it isn't already ####
@@ -82,11 +85,13 @@ get_genome_builds <- function(sumstats_list,
     builds <- parallel::mclapply(names(sumstats_list),
         function(x,
                  .sampled_snps = sampled_snps,
+                 .dbSNP=dbSNP,
                  .header_only = header_only) {
             message_parallel(x)
             get_genome_build(
                 sumstats = sumstats_list[[x]],
                 sampled_snps = .sampled_snps,
+                dbSNP = .dbSNP, 
                 header_only = .header_only,
                 nThread = 1
             )

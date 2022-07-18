@@ -63,6 +63,7 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                         tabix_index = tabix_index,
                         nThread = nThread, 
                         log_files = log_files, 
+                        dbSNP = dbSNP,
                         verbose = FALSE
                     )
                 log_files <- corrected_snp$log_files
@@ -295,6 +296,7 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                             tabix_index = tabix_index,
                             nThread = nThread, 
                             log_files = log_files,
+                            dbSNP=dbSNP,
                             verbose = FALSE
                         )
                     log_files <- corrected_snp$log_files

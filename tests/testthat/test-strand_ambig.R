@@ -28,7 +28,8 @@ test_that("strand-ambiguous SNPs are removed", {
             on_ref_genome = FALSE,
             strand_ambig_filter = TRUE,
             bi_allelic_filter = FALSE,
-            allele_flip_check = FALSE
+            allele_flip_check = FALSE,
+            dbSNP=144
         )
         reformatted_lines <- readLines(reformatted)
         # Should equal org as strand ambig can be removed
@@ -38,7 +39,8 @@ test_that("strand-ambiguous SNPs are removed", {
             on_ref_genome = FALSE,
             strand_ambig_filter = TRUE,
             bi_allelic_filter = FALSE,
-            allele_flip_check = FALSE
+            allele_flip_check = FALSE,
+            dbSNP=144
         )
         org_lines <- readLines(org)
         # reordering in function, line 3 rs9320913 is now 58

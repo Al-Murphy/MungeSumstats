@@ -86,7 +86,8 @@ test_that("liftover works", {
             bi_allelic_filter = FALSE,
             allele_flip_check = FALSE,
             log_folder_ind = TRUE,
-            imputation_ind = TRUE
+            imputation_ind = TRUE,
+            dbSNP=144
         )
         # now rerun and convert back, should then equal original
         reformatted2 <- MungeSumstats::format_sumstats(
@@ -98,7 +99,8 @@ test_that("liftover works", {
             bi_allelic_filter = FALSE,
             allele_flip_check = FALSE,
             log_folder_ind = TRUE,
-            imputation_ind = TRUE
+            imputation_ind = TRUE,
+            dbSNP=144
         )
 
         # run org through
@@ -110,7 +112,8 @@ test_that("liftover works", {
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
             allele_flip_check = FALSE,
-            log_folder_ind = TRUE
+            log_folder_ind = TRUE,
+            dbSNP=144
         )
 
         ref_37_org <- data.table::fread(reformatted3$sumstats, nThread = 1)

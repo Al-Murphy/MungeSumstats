@@ -27,7 +27,8 @@ test_that("SNPs on X,Y,MT chromosome are removed", {
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
             allele_flip_check = FALSE,
-            log_folder_ind = TRUE
+            log_folder_ind = TRUE,
+            dbSNP=144
         )
         reformatted_lines <- readLines(reformatted$sumstats)
         # Should equal org apart from this one line
@@ -37,7 +38,8 @@ test_that("SNPs on X,Y,MT chromosome are removed", {
             on_ref_genome = FALSE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = FALSE,
-            allele_flip_check = FALSE
+            allele_flip_check = FALSE,
+            dbSNP=144
         )
         org_lines <- readLines(org)
         rsid_index <- grep(paste(problem_snp, collapse = "|"), org_lines,

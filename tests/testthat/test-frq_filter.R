@@ -27,7 +27,8 @@ test_that("Filter SNPs based on FRQ", {
             bi_allelic_filter = FALSE,
             allele_flip_check = FALSE,
             log_folder_ind = TRUE,
-            imputation_ind = TRUE
+            imputation_ind = TRUE,
+            dbSNP=144
         )
         res_dt <- data.table::fread(reformatted$sumstats, nThread = 1)
         testthat::expect_equal(all(!rmv_snps %in% res_dt$SNP), TRUE)
@@ -42,7 +43,8 @@ test_that("Filter SNPs based on FRQ", {
             allele_flip_check = FALSE,
             frq_is_maf = FALSE,
             log_folder_ind = TRUE,
-            imputation_ind = TRUE
+            imputation_ind = TRUE,
+            dbSNP=144
         )
         # should be the same as above if column renamed
         res_dt2 <- data.table::fread(reformatted2$sumstats, nThread = 1)
