@@ -44,7 +44,8 @@
 #' @inheritParams format_sumstats
 #' 
 #' @export
-#' @importFrom dplyr %>% arrange desc mutate
+#' @importFrom dplyr %>% arrange desc mutate rowwise
+#' @importFrom data.table setorderv
 #' @examples
 #' # Only run the examples if user has internet access:
 #' if(try(is.character(getURL("www.google.com")))==TRUE){
@@ -83,7 +84,7 @@ find_sumstats <- function(ids = NULL,
                           access_token = check_access_token()) {
     
     ## Set up fake empty variables to avoid confusing BiocCheck
-    sample_size <- ncase <- ncontrol <- nsnp <- NULL
+    sample_size <- ncase <- ncontrol <- nsnp <- NULL;
     
     message("Collecting metadata from Open GWAS.")
     if (!is.null(ids)) {
@@ -210,12 +211,14 @@ find_sumstats <- function(ids = NULL,
             }
         }
     }
-    #### Add N col ####
-    metagwas <- metagwas %>%
+    #### Add N col #### 
+    metagwas <- metagwas |>
+        dplyr::rowwise() |>
         dplyr::mutate(N = ifelse(is.na(sample_size),
                                  sum(ncase, ncontrol, na.rm = TRUE),
                                  sample_size
-        ))
+        )) |>
+        data.table::data.table()
     #### Ensure data.table format ####
     metagwas <- data.table::data.table(metagwas)
     #### Add query col to keep track of groups ####
@@ -253,6 +256,6 @@ find_sumstats <- function(ids = NULL,
         "\n   - ", formatC(length(unique(metagwas$build)),
                            big.mark = ","
         ), " genome build(s)"
-    )
+    ) 
     return(metagwas)
 }

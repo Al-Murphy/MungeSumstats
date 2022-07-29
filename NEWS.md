@@ -1,3 +1,8 @@
+## CHANGES IN VERSION 1.5.6
+
+* `find_sumstats()`: 
+    - Fix N column in metadata.
+
 ## CHANGES IN VERSION 1.5.5
 
 ### New features
