@@ -219,6 +219,7 @@ find_sumstats <- function(ids = NULL,
                                  sample_size
         )) |>
         data.table::data.table()
+    metagwas[N %in% c(NA,0,"","NA",NULL),]$N <- NA
     #### Ensure data.table format ####
     metagwas <- data.table::data.table(metagwas)
     #### Add query col to keep track of groups ####
