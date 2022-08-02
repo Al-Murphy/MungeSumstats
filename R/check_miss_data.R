@@ -13,10 +13,12 @@ check_miss_data <- function(sumstats_dt, path, log_folder_ind, check_save_out,
     # use data table for speed
     # check for rows missing data to be excluded
     # don't check imputation columns
+    #also don't check cols MSS creates - SNP_INFO
     ignore_cols <- c(
         col_headers[grepl("^IMPUTATION_", col_headers)],
         "flipped"["flipped" %in% col_headers],
-        col_headers[grepl("^convert_", col_headers)]
+        col_headers[grepl("^convert_", col_headers)],
+        "SNP_INFO"["SNP_INFO"%in% col_headers]
     )
     incl_cols <- names(sumstats_dt)[!names(sumstats_dt) %in% ignore_cols]
     if (nrow(sumstats_dt[!complete.cases(sumstats_dt[, incl_cols,
@@ -27,6 +29,9 @@ check_miss_data <- function(sumstats_dt, path, log_folder_ind, check_save_out,
                 sumstats_dt[, incl_cols, with = FALSE]
             ), ]
         )
+        print(sumstats_dt[!complete.cases(
+          sumstats_dt[, incl_cols, with = FALSE]
+        ), ])
         msg <- paste0(
             "WARNING: ",
             formatC(n_missing, big.mark = ","),

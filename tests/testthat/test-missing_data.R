@@ -41,8 +41,28 @@ test_that("Handle missing data", {
         rsid_index <- grep(problem_snp, org_lines, ignore.case = TRUE)
         # reordering in function, line 3 is now 58
         expect_equal(reformatted_lines, org_lines[-rsid_index])
+        # test imputing CHR BP from SNP when they are na but cols exist
+        miss <- fread(system.file("extdata", "eduAttainOkbay.txt",
+                                  package = "MungeSumstats"
+        ))
+        #add NA's
+        miss[MarkerName=='rs9320913',CHR:=NA]
+        miss[MarkerName=='rs9320913',POS:=NA]
+        # Run MungeSumstats code
+        reformatted <- MungeSumstats::format_sumstats(miss,
+                                            ref_genome = "GRCh37",
+                                            on_ref_genome = FALSE,
+                                            strand_ambig_filter = FALSE,
+                                            bi_allelic_filter = FALSE,
+                                            allele_flip_check = FALSE,
+                                            sort_coordinates = FALSE,
+                                            dbSNP=144
+        )
+        reformatted_lines <- readLines(reformatted)
+        expect_equal(reformatted_lines, org_lines)
     }    
     else{
+        expect_equal(is_32bit_windows, TRUE)
         expect_equal(is_32bit_windows, TRUE)
     }
 })

@@ -456,14 +456,12 @@ format_sumstats <- function(path,
             )
         # update values
         log_files <- sumstats_return$log_files
-        
         #### Check 6: Check for combined allele column (A1 and A2) ####
         sumstats_return <-
             check_allele_merge(
                 sumstats_dt = sumstats_return$sumstats_dt,
                 path = path
             )
-        
         col_headers <- names(sumstats_return$sumstats_dt)
         
         #Ensure A1 and A2 are upper case

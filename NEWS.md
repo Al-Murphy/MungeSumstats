@@ -1,5 +1,18 @@
 ## CHANGES IN VERSION 1.5.6
 
+### Bug fixes
+
+* MSS can now impute CHR, BP at a SNP level. For cases where CHR and/or BP are 
+NA but the RS ID is present, these will now be imputed fromt he reference 
+genome. Note previously, this imputation was done when the chr and/or bp column 
+was missing.
+* Print statement from liftover silenced when no liftover required
+* check missing data function will no longer remove cases with NA's in SNP_INFO 
+column. The SNP_INFO column is created by MSS for cases with RS ID and some 
+other information in the same SNP column (like rs1234:.....). Rather than throw
+out this info, it is stored in a new column - SNP_INFO. However, the remove 
+missing data function was also looking in this column to remove SNPs. This has 
+been corrected.
 * `find_sumstats()`: 
     - Fix N column in metadata.
 

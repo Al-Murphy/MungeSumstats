@@ -109,9 +109,40 @@ check_no_chr_bp <- function(sumstats_dt,
         return(list("sumstats_dt" = sumstats_dt,
                     "rsids" = rsids, 
                     "log_files" = log_files))
-    } else {
-        return(list("sumstats_dt" = sumstats_dt, 
-                    "rsids" = rsids,
-                    "log_files" = log_files))
     }
+    #also check if bp and chr are present but values are na
+    if(sum("SNP" %in% col_headers) == 1){
+      na_chr_bp <- 
+        sumstats_dt[grep("^rs", SNP),][is.na(CHR) & is.na(BP),]
+      if (nrow(na_chr_bp)>0 && 
+          sum(c("CHR", "BP","SNP") %in% col_headers) == 3){
+        #impute the chr,bp data
+        # if dataset has one of CHR or BP remove it and take from re dataset
+        if (sum(c("CHR", "BP") %in% col_headers) >= 1) {
+          colsToDelete <- c("CHR", "BP")[c("CHR", "BP") %in% col_headers]
+          na_chr_bp[, (colsToDelete) := NULL]
+        }
+        #pass the dataset without chr bp to be imputed
+        #keep old rsids to update
+        old_rsids <- na_chr_bp$SNP
+        na_chr_bp <-
+          check_no_chr_bp(sumstats_dt=na_chr_bp,path=path,ref_genome=ref_genome,
+                          rsids=rsids,imputation_ind=imputation_ind,
+                          log_folder_ind=log_folder_ind,
+                          check_save_out=check_save_out,
+                          tabix_index=tabix_index,nThread=nThread,
+                          log_files=log_files,dbSNP=dbSNP) 
+        #join back on the sumstats
+        sumstats_dt <- sumstats_dt[!SNP %in% na_chr_bp$sumstats_dt$SNP,]
+        sumstats_dt <- rbindlist(list(sumstats_dt,na_chr_bp$sumstats_dt))
+        #join on the log files
+        log_files <- c(log_files,na_chr_bp$log_files)
+        #update rsids
+        old_rsids_drop <- old_rsids[!old_rsids %in% na_chr_bp$sumstats_dt]
+        rsids <- rsids[!rsids %in% old_rsids_drop]
+      }
+    }
+    return(list("sumstats_dt" = sumstats_dt, 
+                "rsids" = rsids,
+                "log_files" = log_files))
 }
