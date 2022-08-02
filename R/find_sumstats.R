@@ -84,7 +84,7 @@ find_sumstats <- function(ids = NULL,
                           access_token = check_access_token()) {
     
     ## Set up fake empty variables to avoid confusing BiocCheck
-    sample_size <- ncase <- ncontrol <- nsnp <- NULL;
+    sample_size <- ncase <- ncontrol <- nsnp <- N <- NULL;
     
     message("Collecting metadata from Open GWAS.")
     if (!is.null(ids)) {
