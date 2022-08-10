@@ -1,3 +1,9 @@
+## CHANGES IN VERSION 1.5.9
+
+### Bug fixes
+
+* validate_parameters checks for incorrect version of dbSNP package, corrected.
+
 ## CHANGES IN VERSION 1.5.6
 
 ### Bug fixes

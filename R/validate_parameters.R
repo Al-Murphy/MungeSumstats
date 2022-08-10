@@ -168,7 +168,7 @@ validate_parameters <- function(path,
             stop(GRCH37_msg1)
         }
         if (as.integer(dbSNP)==155 && 
-            !requireNamespace("SNPlocs.Hsapiens.dbSNP144.GRCh37",
+            !requireNamespace("SNPlocs.Hsapiens.dbSNP155.GRCh37",
                             quietly = TRUE
         )) {
             stop(GRCH37_msg3)
@@ -180,7 +180,7 @@ validate_parameters <- function(path,
             stop(GRCH38_msg1)
         }
         if (as.integer(dbSNP)==155 &&
-            !requireNamespace("SNPlocs.Hsapiens.dbSNP144.GRCh38",
+            !requireNamespace("SNPlocs.Hsapiens.dbSNP155.GRCh38",
                             quietly = TRUE
             )) {
             stop(GRCH38_msg3)
