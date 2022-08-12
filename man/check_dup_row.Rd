@@ -6,6 +6,7 @@
 \usage{
 check_dup_row(
   sumstats_dt,
+  check_dups,
   path,
   log_folder_ind,
   check_save_out,
@@ -15,6 +16,9 @@ check_dup_row(
 )
 }
 \arguments{
+\item{check_dups}{whether to check for duplicates - if formatting QTL
+datasets this should be set to FALSE otherwise keep as TRUE. Default is TRUE.}
+
 \item{path}{Filepath for the summary statistics file to be formatted. A
 dataframe or datatable of the summary statistics file can also be passed
 directly to MungeSumstats using the path parameter.}

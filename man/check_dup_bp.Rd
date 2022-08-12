@@ -7,6 +7,7 @@
 check_dup_bp(
   sumstats_dt,
   bi_allelic_filter,
+  check_dups,
   indels,
   path,
   log_folder_ind,
@@ -19,6 +20,9 @@ check_dup_bp(
 \arguments{
 \item{bi_allelic_filter}{Binary Should non-biallelic SNPs be removed. Default
 is TRUE.}
+
+\item{check_dups}{whether to check for duplicates - if formatting QTL
+datasets this should be set to FALSE otherwise keep as TRUE. Default is TRUE.}
 
 \item{indels}{Binary does your Sumstats file contain Indels? These don't
 exist in our reference file so they will be excluded from checks if this

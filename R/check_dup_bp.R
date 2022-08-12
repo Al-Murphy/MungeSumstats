@@ -9,6 +9,7 @@
 #' @importFrom data.table setkey
 check_dup_bp <- function(sumstats_dt,
                          bi_allelic_filter,
+                         check_dups,
                          indels,
                          path,
                          log_folder_ind,
@@ -43,6 +44,7 @@ check_dup_bp <- function(sumstats_dt,
                 #run generic dup check on indels
                 indel_dt_rtn <- check_dup_row(
                     sumstats_dt = indel_dt,
+                    check_dups = check_dups,
                     path = path,
                     log_folder_ind = log_folder_ind,
                     check_save_out = check_save_out,
@@ -113,6 +115,7 @@ check_dup_bp <- function(sumstats_dt,
         #run generic dup check
         sumstats_return <- check_dup_row(
             sumstats_dt = sumstats_dt,
+            check_dups = check_dups,
             path = path,
             log_folder_ind = log_folder_ind,
             check_save_out = check_save_out,

@@ -142,6 +142,8 @@
 #' exist in our reference file so they will be excluded from checks if this 
 #' value is TRUE. Default is TRUE.
 #' @param dbSNP version of dbSNP to be used for imputation (144 or 155).
+#' @param check_dups whether to check for duplicates - if formatting QTL 
+#' datasets this should be set to FALSE otherwise keep as TRUE. Default is TRUE.
 #' @param sort_coordinates Whether to sort by coordinates of resulting sumstats
 #' @param nThread Number of threads to use for parallel processes.
 #' @param save_path File path to save formatted data. Defaults to
@@ -224,6 +226,7 @@ format_sumstats <- function(path,
                             frq_is_maf = TRUE,
                             indels = TRUE,
                             dbSNP = 155,
+                            check_dups = TRUE,
                             sort_coordinates = TRUE,
                             nThread = 1,
                             save_path = tempfile(fileext = ".tsv.gz"),
@@ -303,6 +306,7 @@ format_sumstats <- function(path,
             frq_is_maf = frq_is_maf,
             indels = indels,
             dbSNP = dbSNP,
+            check_dups = check_dups,
             write_vcf = write_vcf,
             return_format = return_format,
             ldsc_format = ldsc_format,
@@ -726,6 +730,7 @@ format_sumstats <- function(path,
         sumstats_return <- check_dup_bp(
             sumstats_dt = sumstats_return$sumstats_dt,
             bi_allelic_filter=bi_allelic_filter,
+            check_dups = check_dups,
             indels=indels,
             path = path,
             log_folder_ind = log_folder_ind,

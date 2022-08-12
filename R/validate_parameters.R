@@ -29,6 +29,7 @@ validate_parameters <- function(path,
                                 remove_multi_rs_snp,
                                 frq_is_maf,
                                 indels,
+                                check_dups,
                                 dbSNP,
                                 write_vcf,
                                 return_format,
@@ -233,6 +234,9 @@ validate_parameters <- function(path,
     }
     if (!is.logical(indels)) {
         stop("indels must be either TRUE or FALSE")
+    }
+    if (!is.logical(check_dups)) {
+      stop("check_dups must be either TRUE or FALSE")
     }
     if (!is.logical(write_vcf)) {
         stop("write_vcf must be either TRUE or FALSE")

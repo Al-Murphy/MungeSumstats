@@ -8,12 +8,13 @@
 #' @importFrom data.table key
 #' @importFrom data.table setkey
 check_dup_row <- function(sumstats_dt,
-                         path,
-                         log_folder_ind,
-                         check_save_out,
-                         tabix_index,
-                         nThread,
-                         log_files) {
+                          check_dups,
+                          path,
+                          log_folder_ind,
+                          check_save_out,
+                          tabix_index,
+                          nThread,
+                          log_files) {
   BP <- CHR <- A1 <- A2 <- SNP <- NULL
   col_headers <- names(sumstats_dt)
   #just check for duplicates across all columns or those would need to be 
@@ -26,7 +27,7 @@ check_dup_row <- function(sumstats_dt,
   # Try to remove duplicated Positions
   data.table::setkeyv(sumstats_dt, dup_cols)
   dups <- duplicated(sumstats_dt, by = data.table::key(sumstats_dt))
-  if (sum(dups) > 0) {
+  if (sum(dups) > 0 & check_dups) {
     msg <- paste0(
       formatC(sum(dups), big.mark = ","),
       " sumstat rows are",

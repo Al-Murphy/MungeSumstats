@@ -31,6 +31,7 @@ validate_parameters(
   remove_multi_rs_snp,
   frq_is_maf,
   indels,
+  check_dups,
   dbSNP,
   write_vcf,
   return_format,
@@ -149,6 +150,9 @@ occur i.e. is TRUE.}
 \item{indels}{Binary does your Sumstats file contain Indels? These don't
 exist in our reference file so they will be excluded from checks if this
 value is TRUE. Default is TRUE.}
+
+\item{check_dups}{whether to check for duplicates - if formatting QTL
+datasets this should be set to FALSE otherwise keep as TRUE. Default is TRUE.}
 
 \item{dbSNP}{version of dbSNP to be used for imputation (144 or 155).}
 

@@ -38,6 +38,7 @@ format_sumstats(
   frq_is_maf = TRUE,
   indels = TRUE,
   dbSNP = 155,
+  check_dups = TRUE,
   sort_coordinates = TRUE,
   nThread = 1,
   save_path = tempfile(fileext = ".tsv.gz"),
@@ -198,6 +199,9 @@ exist in our reference file so they will be excluded from checks if this
 value is TRUE. Default is TRUE.}
 
 \item{dbSNP}{version of dbSNP to be used for imputation (144 or 155).}
+
+\item{check_dups}{whether to check for duplicates - if formatting QTL
+datasets this should be set to FALSE otherwise keep as TRUE. Default is TRUE.}
 
 \item{sort_coordinates}{Whether to sort by coordinates of resulting sumstats}
 

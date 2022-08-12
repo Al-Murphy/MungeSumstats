@@ -1,5 +1,12 @@
 ## CHANGES IN VERSION 1.5.9
 
+### New features
+
+* check_dups parameter added so duplicates won't be removed if formatting QTL 
+datasets
+
+## CHANGES IN VERSION 1.5.9
+
 ### Bug fixes
 
 * validate_parameters checks for incorrect version of dbSNP package, corrected.
