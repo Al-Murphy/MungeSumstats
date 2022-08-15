@@ -20,7 +20,8 @@ check_dup_bp <- function(sumstats_dt,
     BP <- CHR <- A1 <- A2 <- SNP <- NULL
     col_headers <- names(sumstats_dt)
     #non-bi-allelic SNPs can share same BP position so don't check if selected
-    if (sum(c("BP", "CHR") %in% col_headers) == 2 & bi_allelic_filter) {
+    if (sum(c("BP", "CHR") %in% col_headers) == 2 && 
+        bi_allelic_filter && check_dups) {
         message("Checking for SNPs with duplicated base-pair positions.")
         # Try to remove duplicated Positions
         data.table::setkey(sumstats_dt, BP, CHR)

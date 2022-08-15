@@ -1,4 +1,11 @@
-## CHANGES IN VERSION 1.5.9
+## CHANGES IN VERSION 1.5.11
+
+### Bug fixes
+
+* Had to pass check_dups to other checks so they also wouldn't be run. Now 
+independent of non-biallelic check.
+
+## CHANGES IN VERSION 1.5.10
 
 ### New features
 

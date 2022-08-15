@@ -12,7 +12,8 @@ check_dup_snp(
   tabix_index,
   nThread,
   log_files,
-  bi_allelic_filter
+  bi_allelic_filter,
+  check_dups
 )
 }
 \arguments{
@@ -35,6 +36,9 @@ FALSE.}
 
 \item{bi_allelic_filter}{Binary Should non-biallelic SNPs be removed. Default
 is TRUE.}
+
+\item{check_dups}{whether to check for duplicates - if formatting QTL
+datasets this should be set to FALSE otherwise keep as TRUE. Default is TRUE.}
 }
 \value{
 list containing sumstats_dt, the modified summary statistics data

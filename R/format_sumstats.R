@@ -720,7 +720,8 @@ format_sumstats <- function(path,
             tabix_index = tabix_index,
             nThread = nThread,
             log_files = log_files,
-            bi_allelic_filter = bi_allelic_filter
+            bi_allelic_filter = bi_allelic_filter,
+            check_dups = check_dups
         )
         # update values
         log_files <- sumstats_return$log_files
