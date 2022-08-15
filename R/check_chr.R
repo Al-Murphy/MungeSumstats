@@ -31,9 +31,10 @@ check_chr <- function(sumstats_dt,
         }
         #### Make all CHR uppercase ####
         if (make_uppercase) {
-            message("Making X/Y CHR uppercase.")
+            message("Making X/Y/MT CHR uppercase.")
             sumstats_dt[, CHR := gsub("x|23", "X", CHR)]
             sumstats_dt[, CHR := gsub("y", "Y", CHR)]
+            sumstats_dt[, CHR := gsub("mt", "MT", CHR)]
         }
 
         # check for chromosomes to be removed
@@ -76,7 +77,6 @@ check_chr <- function(sumstats_dt,
             # remove rows on these chromosomes
             sumstats_dt <- sumstats_dt[!CHR %in% (rmv_chr), ]
         }
-
         return(list("sumstats_dt" = sumstats_dt, "log_files" = log_files))
     } else {
         return(list("sumstats_dt" = sumstats_dt, "log_files" = log_files))

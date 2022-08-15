@@ -1,3 +1,10 @@
+## CHANGES IN VERSION 1.5.12
+
+### Bug fixes
+
+* Mitchondrial (MT) SNPs' chromosome value were being forced to NA by 
+sort_coords function. This has been fixed.
+
 ## CHANGES IN VERSION 1.5.11
 
 ### Bug fixes

@@ -15,10 +15,11 @@ sort_coords <- function(sumstats_dt,
 
     if (sort_coordinates) {
         message("Sorting coordinates.")
-        chr_order <- c(seq_len(22), "X", "Y")
+        chr_order <- c(seq_len(22), "X", "Y","MT")
         ### Double check that X and Y are uppercase
         sumstats_dt[, CHR := gsub("x|23", "X", CHR)]
         sumstats_dt[, CHR := gsub("y", "Y", CHR)]
+        sumstats_dt[, CHR := gsub("mt", "MT", CHR)]
         ### Turn CHR into an ordered factor to account for X and Y chroms
         sumstats_dt[, CHR := factor(CHR, levels = chr_order, ordered = TRUE)]
         ### setorderv is much more efficient than dplyr::arrange
