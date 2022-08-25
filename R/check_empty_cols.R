@@ -28,6 +28,8 @@ check_empty_cols <- function(sumstats_dt,
         },
         FUN.VALUE = logical(1)
     )
+    #sometimes NA values appear, they aren't empty so change these to false
+    empty_cols <- ifelse(is.na(empty_cols),FALSE,empty_cols)
     empty_cols <- empty_cols[empty_cols]
     messager(length(empty_cols), "empty column(s) detected.",
              v=verbose)

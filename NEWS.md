@@ -1,3 +1,9 @@
+## CHANGES IN VERSION 1.5.13
+
+### Bug fixes
+
+* Special characters causing issues with find empty columns function. Now fixed.
+
 ## CHANGES IN VERSION 1.5.12
 
 ### Bug fixes
