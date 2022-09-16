@@ -1,3 +1,21 @@
+## CHANGES IN VERSION 1.5.14
+
+### New features
+
+* `read_header`: 
+    - Can now read entire files by setting `n=NULL`.
+    - Improved reading in of VCF files (can read *.vcf.bgz* now). 
+    - Now exported.
+    - Added unit tests. 
+* Remove `seqminer` from all code (too buggy). 
+* Automatically remove residual .tsv files after tabix indexing. 
+* `import_sumstats`:
+    - Use `@inheritDotParams format_sumstats` for better documentation. 
+
+### Bug fixes
+
+* `index_tabular`: Fixed by replacing `seqminer` with `Rsamtools`. 
+
 ## CHANGES IN VERSION 1.5.13
 
 ### Bug fixes

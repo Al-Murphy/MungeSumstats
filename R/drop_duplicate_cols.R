@@ -7,7 +7,7 @@
 drop_duplicate_cols <- function(dt){
     dups <- which(duplicated(names(dt)))
     if(length(dups)>0){
-        messager("Dropping",length(dups),"duplicate columns.")
+        messager("Dropping",length(dups),"duplicate column(s).")
         dt[,  which(duplicated(names(dt))):= NULL] 
     } 
 }

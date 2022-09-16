@@ -19,6 +19,7 @@
 #' @param ... Additional arguments passed to 
 #' \link[MungeSumstats]{format_sumstats}.
 #' @inheritParams format_sumstats
+#' @inheritDotParams format_sumstats
 #' @inheritParams downloader
 #'
 #' @return Either a named list of data objects or paths,

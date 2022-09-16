@@ -5,36 +5,30 @@ test_that("index_tabular works", {
     #### Don't run on Windows at all for now, since tabix-
     is_32bit_windows <-
       .Platform$OS.type == "windows"## && .Platform$r_arch == "i386"
-    if (!is_32bit_windows) {
-      eduAttainOkbayPth <- system.file("extdata", "eduAttainOkbay.txt",
-                                       package = "MungeSumstats")
-      sumstats_dt <- data.table::fread(eduAttainOkbayPth, nThread = 1)
-      sumstats_dt <-
-      MungeSumstats:::standardise_sumstats_column_headers_crossplatform(
-          sumstats_dt = sumstats_dt)$sumstats_dt
-      sumstats_dt <- MungeSumstats:::sort_coords(sumstats_dt = sumstats_dt)
+    if (!is_32bit_windows) { 
+        
+      sumstats_dt <- MungeSumstats::formatted_example() 
       path <- tempfile(fileext = ".tsv")
       MungeSumstats::write_sumstats(sumstats_dt = sumstats_dt,
                                     save_path = path)
       #### Index file ####
-      indexed_file <- MungeSumstats::index_tabular(path = path) 
+      tbx_file <- MungeSumstats::index_tabular(path = path) 
       
       #### Test that file exists ####
-      testthat::expect_true(endsWith(indexed_file,".bgz"))
-      testthat::expect_true(file.exists(indexed_file))
+      testthat::expect_true(endsWith(tbx_file,".bgz")) 
+      testthat::expect_true(file.exists(tbx_file)) 
       
       #### Test that header exists ###
-      header <- seqminer::tabix.read.header(tabixFile = indexed_file)$header
-      header <- colnames(data.table::fread(text = rep(header,2)))
-      testthat::expect_length(header, 9)
+      header <- MungeSumstats::read_header(path = tbx_file)
+      testthat::expect_equal(ncol(header), 9)
       #### Test that all chr1 SNPs are present ####
       tabixRange <- paste0(1,":",
                            min(sumstats_dt$BP),"-",
                            max(sumstats_dt$BP))
-      query <- seqminer::tabix.read.table(tabixFile = indexed_file,
-                                          tabixRange = tabixRange) 
-      # query <- data.table::data.table(query)
-      testthat::expect_equal(query$SNP, subset(sumstats_dt,CHR==1)$SNP) 
+      query <-  MungeSumstats::read_header(path = tbx_file, 
+                                           n = NULL)
+      query[,CHR:=as.character(CHR)]
+      testthat::expect_equal(query,sumstats_dt)
     }    
     else{
       expect_equal(is_32bit_windows, TRUE)

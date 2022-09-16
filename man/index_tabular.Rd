@@ -14,6 +14,8 @@ index_tabular(
   chrom_col = "CHR",
   start_col = "BP",
   end_col = start_col,
+  overwrite = TRUE,
+  remove_tmp = TRUE,
   verbose = TRUE
 )
 }
@@ -31,6 +33,12 @@ column in \code{sumstats_dt} (e.g. "POS","end").
 Can be the same as \code{start_col} when \code{sumstats_dt}
 only contains SNPs that span 1 base pair (bp) each.}
 
+\item{overwrite}{A logical(1) indicating whether \code{dest} should
+    be over-written, if it already exists.}
+
+\item{remove_tmp}{Remove the temporary uncompressed version of the file
+(\emph{.tsv}).}
+
 \item{verbose}{Print messages.}
 }
 \value{
@@ -40,11 +48,9 @@ Path to tabix-indexed tabular file
 Convert summary stats file to tabix format.
 }
 \examples{
-sumstats_dt <- MungeSumstats::formatted_example()
-sumstats_dt <- MungeSumstats:::sort_coords(sumstats_dt = sumstats_dt)
+sumstats_dt <- MungeSumstats::formatted_example() 
 path <- tempfile(fileext = ".tsv")
 MungeSumstats::write_sumstats(sumstats_dt = sumstats_dt, save_path = path)
-
 indexed_file <- MungeSumstats::index_tabular(path = path)
 }
 \seealso{

@@ -5,43 +5,49 @@
 #' @inheritParams format_sumstats
 #' @param n integer. The (maximal) number of lines to read. Negative values
 #' indicate that one should read up to the end of input on the connection.
-#' @param skip_vcf_metadata logical, should VCF metadata be ignored
-# @inheritParams readLines
+#' @param skip_vcf_metadata logical, should VCF metadata be ignored 
+#' @inheritParams format_sumstats
+#' 
 #' @importFrom VariantAnnotation scanVcfHeader
-#' @keywords internal
+#' @export
+#' @examples
+#' path <- system.file("extdata", "eduAttainOkbay.txt", 
+#'                     package = "MungeSumstats") 
+#' header <- read_header(path = path)                    
 read_header <- function(path,
-                        n = 2,
-                        skip_vcf_metadata = FALSE) {
-    message("Reading header.")
+                        n = 2L,
+                        skip_vcf_metadata = FALSE,
+                        nThread = 1) {
+    if(is.null(n)) {
+        message("Reading entire file.")
+        n <- -2L
+    } else {
+        message("Reading header.")
+    } 
     vcf_suffixes <- supported_suffixes(tabular = FALSE,
                                        tabular_compressed = FALSE)
     if (startsWith(path, "https://gwas.mrcieu.ac.uk") | 
         any(endsWith(path, vcf_suffixes))) {
         #### Read VCFs ####
-        if (skip_vcf_metadata) {
-            # gr <- GenomicRanges::GRanges(seqnames = 1, ranges = 1:10000)
-            # param <- VariantAnnotation::ScanVcfParam(save_path, which=gr)
-            # preview <- VariantAnnotation::readVcf(save_path, param = param)
-            # preview <- VariantAnnotation::scanVcf(save_path, param=param) 
-            # header <- read_vcf(path = path, which = gr)
-            header <- readLines(path, n = 1000)
-            if(length(header)==0) stop("header has length zero.")
-            i <- which(startsWith(header, "#CHR"))
-            if(length(i)==0) stop("Cannot find row in VCF starting with #CHR.")
-            header <- data.table::fread(text = header[seq(i, i + n)],
-                                        nThread = 1)
+        if (isTRUE(skip_vcf_metadata)) {  
+            if(endsWith(path,".bgz")){
+                header <- data.table::fread(text = readLines(path,
+                                                              n = n+1000),
+                                            nrows = n,
+                                            skip = "#CHR",
+                                            nThread = nThread)
+            } else {
+                header <- data.table::fread(input = path,
+                                            nrows = n,
+                                            skip = "#CHR",
+                                            nThread = nThread)
+            } 
         } else {
             #### Attempt to read in VCF header as well
             header <- readLines(path, n = 1000)
         }
     } else if (endsWith(path,".bgz")){
-        #### Read tabix-indexed tabular #### 
-        # data.table::fread currently can't handle bgzipped files by default
-        # 
-        # header <- seqminer::tabix.read.header(tabixFile = path)$header 
-        # header <- Rsamtools::headerTabix(file = path)$header
-        # header <- rep(header,n)
-        # header <- colnames(data.table::fread(text = header))  
+        #### Read tabix-indexed tabular ####  
         header <- data.table::fread(text=readLines(con = path,
                                                    n = n+1L)) 
     } else if(any(startsWith(path, c("https:","http:")))){

@@ -53,8 +53,158 @@ with the same path name.}
 and \code{nThread>1},
 then each ID in \code{ids} will be processed in parallel.}
 
-\item{...}{Additional arguments passed to
-\link[MungeSumstats]{format_sumstats}.}
+\item{...}{
+  Arguments passed on to \code{\link[=format_sumstats]{format_sumstats}}
+  \describe{
+    \item{\code{path}}{Filepath for the summary statistics file to be formatted. A
+dataframe or datatable of the summary statistics file can also be passed
+directly to MungeSumstats using the path parameter.}
+    \item{\code{ref_genome}}{name of the reference genome used for the GWAS ("GRCh37" or
+"GRCh38"). Argument is case-insensitive. Default is NULL which infers the
+reference genome from the data.}
+    \item{\code{convert_ref_genome}}{name of the reference genome to convert to
+("GRCh37" or "GRCh38"). This will only occur if the current genome build does
+not match. Default is not to convert the genome build (NULL).}
+    \item{\code{convert_small_p}}{Binary, should non-negative
+p-values <= 5e-324 be converted to 0?
+Small p-values pass the R limit and can cause errors with LDSC/MAGMA and
+should be converted. Default is TRUE.}
+    \item{\code{convert_large_p}}{Binary, should p-values >1 be converted to 1?
+P-values >1 should not be possible and can cause errors with LDSC/MAGMA and
+should be converted. Default is TRUE.}
+    \item{\code{convert_neg_p}}{Binary, should p-values <0 be converted to 0?
+Negative p-values should not be possible and can cause errors
+with LDSC/MAGMA and should be converted. Default is TRUE.}
+    \item{\code{compute_z}}{Whether to compute Z-score column from P. Default is FALSE.
+\strong{Note} that imputing the Z-score for every SNP will not correct be
+perfectly correct and may result in a loss of power. This should only be done
+as a last resort.}
+    \item{\code{force_new_z}}{When a "Z" column already exists, it will be used by
+default. To override and compute a new Z-score column from P set
+\code{force_new_z=TRUE}.}
+    \item{\code{compute_n}}{Whether to impute N. Default of 0 won't impute, any other
+integer will be imputed as the N (sample size) for every SNP in the dataset.
+\strong{Note} that imputing the sample size for every SNP is not correct and
+should only be done as a last resort. N can also be inputted with "ldsc",
+"sum", "giant" or "metal" by passing one of these for this field or a vector
+of multiple. Sum and an integer value creates an N column in the output
+whereas giant, metal or ldsc create an Neff or effective sample size. If
+multiples are passed, the formula used to derive it will be indicated.}
+    \item{\code{convert_n_int}}{Binary, if N (the number of samples) is not an integer,
+should this be rounded? Default is TRUE.}
+    \item{\code{impute_beta}}{Binary, whether BETA should be imputed using other effect
+data if it isn't present in the sumstats. Note that this imputation is an
+approximation so could have an effect on downstream analysis. Use with
+caution. The different methods MungeSumstats will try and impute beta (in
+this order or priority) are:
+\enumerate{
+\item log(OR)  2. Z x SE
+Default value is FALSE.
+}}
+    \item{\code{impute_se}}{Binary, whether the standard error should be imputed using
+other effect data if it isn't present in the sumstats. Note that this
+imputation is an approximation so could have an effect on downstream
+analysis. Use with caution. The different methods MungeSumstats will try and
+impute se (in this order or priority) are:
+\enumerate{
+\item BETA / Z  2. abs(BETA/ qnorm(P/2))
+Default is FALSE.
+}}
+    \item{\code{analysis_trait}}{If multiple traits were studied, name of the trait for
+analysis from the GWAS. Default is NULL.}
+    \item{\code{INFO_filter}}{numeric The minimum value permissible of the imputation
+information score (if present in sumstats file). Default 0.9.}
+    \item{\code{FRQ_filter}}{numeric The minimum value permissible of the frequency(FRQ)
+of the SNP (i.e. Allele Frequency (AF)) (if present in sumstats file). By
+default no filtering is done, i.e. value of 0.}
+    \item{\code{pos_se}}{Binary Should the standard Error (SE) column be checked to
+ensure it is greater than 0? Those that are, are removed (if present in
+sumstats file). Default TRUE.}
+    \item{\code{effect_columns_nonzero}}{Binary should the effect columns in the data
+BETA,OR (odds ratio),LOG_ODDS,SIGNED_SUMSTAT be checked to ensure no SNP=0.
+Those that do are removed(if present in sumstats file). Default FALSE.}
+    \item{\code{N_std}}{numeric The number of standard deviations above the mean a SNP's
+N is needed to be removed. Default is 5.}
+    \item{\code{N_dropNA}}{Drop rows where N is missing.Default is TRUE.}
+    \item{\code{rmv_chr}}{vector or character The chromosomes on which the SNPs should
+be removed. Use NULL if no filtering necessary. Default is X, Y and
+mitochondrial.}
+    \item{\code{rmv_chrPrefix}}{Remove "chr" or "CHR" from chromosome names. Default is
+TRUE.}
+    \item{\code{on_ref_genome}}{Binary Should a check take place that all SNPs are on
+the reference genome by SNP ID. Default is TRUE.}
+    \item{\code{strand_ambig_filter}}{Binary Should SNPs with strand-ambiguous alleles
+be removed. Default is FALSE.}
+    \item{\code{allele_flip_check}}{Binary Should the allele columns be checked against
+reference genome to infer if flipping is necessary. Default is TRUE.}
+    \item{\code{allele_flip_drop}}{Binary Should the SNPs for which neither their A1 or
+A2 base pair values match a reference genome be dropped. Default is TRUE.}
+    \item{\code{allele_flip_z}}{Binary should the Z-score be flipped along with effect
+and FRQ columns like Beta? It is assumed to be calculated off the effect size
+not the P-value and so will be flipped i.e. default TRUE.}
+    \item{\code{allele_flip_frq}}{Binary should the frequency (FRQ) column be flipped
+along with effect and z-score columns like Beta? Default TRUE.}
+    \item{\code{bi_allelic_filter}}{Binary Should non-biallelic SNPs be removed. Default
+is TRUE.}
+    \item{\code{snp_ids_are_rs_ids}}{Binary Should the supplied SNP ID's be assumed to
+be RSIDs. If not, imputation using the SNP ID for other columns like
+base-pair position or chromosome will not be possible. If set to FALSE, the
+SNP RS ID will be imputed from the reference genome if possible. Default is
+TRUE.}
+    \item{\code{remove_multi_rs_snp}}{Binary Sometimes summary statistics can have
+multiple RSIDs on one row (i.e. related to one SNP), for example
+"rs5772025_rs397784053". This can cause an error so by default, the first
+RS ID will be kept and the rest removed e.g."rs5772025". If you want to just
+remove these SNPs entirely, set it to TRUE. Default is FALSE.}
+    \item{\code{frq_is_maf}}{Conventionally the FRQ column is intended to show the
+minor/effect allele frequency (MAF) but sometimes the major allele frequency
+can be inferred as the FRQ column. This logical variable indicates that the
+FRQ column should be renamed to MAJOR_ALLELE_FRQ if the frequency values
+appear to relate to the major allele i.e. >0.5. By default this mapping won't
+occur i.e. is TRUE.}
+    \item{\code{indels}}{Binary does your Sumstats file contain Indels? These don't
+exist in our reference file so they will be excluded from checks if this
+value is TRUE. Default is TRUE.}
+    \item{\code{dbSNP}}{version of dbSNP to be used for imputation (144 or 155).}
+    \item{\code{check_dups}}{whether to check for duplicates - if formatting QTL
+datasets this should be set to FALSE otherwise keep as TRUE. Default is TRUE.}
+    \item{\code{sort_coordinates}}{Whether to sort by coordinates of resulting sumstats}
+    \item{\code{save_path}}{File path to save formatted data. Defaults to
+\code{tempfile(fileext=".tsv.gz")}.}
+    \item{\code{tabix_index}}{Index the formatted summary statistics with
+\href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
+    \item{\code{return_data}}{Return \code{data.table}, \code{GRanges} or \code{VRanges}
+directly to user. Otherwise, return the path to the save data. Default is
+FALSE.}
+    \item{\code{return_format}}{If return_data is TRUE. Object type to be returned
+("data.table","vranges","granges").}
+    \item{\code{ldsc_format}}{DEPRECATED, do not use. Use save_format="LDSC" instead.}
+    \item{\code{save_format}}{Output format of sumstats. Options are NULL - standardised
+output format from MungeSumstats, LDSC - output format compatible with LDSC
+and openGWAS - output compatible with openGWAS VCFs. Default is NULL.}
+    \item{\code{log_folder_ind}}{Binary Should log files be stored containing all
+filtered out SNPs (separate file per filter). The data is outputted in the
+same format specified for the resulting sumstats file. The only exception to
+this rule is if output is vcf, then log file saved as .tsv.gz. Default is
+FALSE.}
+    \item{\code{log_mungesumstats_msgs}}{Binary Should a log be stored containing all
+messages and errors printed by MungeSumstats in a run. Default is FALSE}
+    \item{\code{log_folder}}{Filepath to the directory for the log files and the log of
+MungeSumstats messages to be stored. Default is a temporary directory.}
+    \item{\code{imputation_ind}}{Binary Should a column be added for each imputation
+step to show what SNPs have imputed values for differing fields. This
+includes a field denoting SNP allele flipping (flipped). On the flipped
+value, this denoted whether the alelles where switched based on
+MungeSumstats initial choice of A1, A2 from the input column headers and thus
+may not align with what the creator intended.\strong{Note} these columns will be
+in the formatted summary statistics returned. Default is FALSE.}
+    \item{\code{mapping_file}}{MungeSumstats has a pre-defined column-name mapping file
+which should cover the most common column headers and their interpretations.
+However, if a column header that is in youf file is missing of the mapping we
+give is incorrect you can supply your own mapping file. Must be a 2 column
+dataframe with column names "Uncorrected" and "Corrected". See
+data(sumstatsColHeaders) for default mapping and necessary format.}
+  }}
 }
 \value{
 Either a named list of data objects or paths,

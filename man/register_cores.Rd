@@ -9,9 +9,12 @@ register_cores(workers = 1, progressbar = TRUE)
 \arguments{
 \item{workers}{
 
-    \code{integer(1)} Number of workers. Defaults to all cores available as
-    determined by \code{detectCores}. For a \code{SOCK} cluster \code{workers}
-    can be a \code{character()} vector of host names.
+    \code{integer(1)} Number of workers. Defaults to the maximum of 1 or
+    the number of cores determined by \code{detectCores} minus 2 unless
+    environment variables \code{R_PARALLELLY_AVAILABLECORES_FALLBACK} or
+    \code{BIOCPARALLEL_WORKER_NUMBER} are set otherwise. For a
+    \code{SOCK} cluster, \code{workers} can be a \code{character()}
+    vector of host names.
 
   }
 

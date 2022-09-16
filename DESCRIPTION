@@ -52,7 +52,7 @@ Imports:
 biocViews: 
     SNP, WholeGenome, Genetics, ComparativeGenomics, 
     GenomeWideAssociation, GenomicVariation, Preprocessing 
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.1.9000
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Suggests: 
@@ -70,8 +70,7 @@ Suggests:
     testthat (>= 3.0.0),
     UpSetR,
     BiocStyle,
-    covr,
-    seqminer,
+    covr, 
     Rsamtools,
     MatrixGenerics,
     badger,

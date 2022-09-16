@@ -4,7 +4,7 @@
 \alias{read_header}
 \title{Read in file header}
 \usage{
-read_header(path, n = 2, skip_vcf_metadata = FALSE)
+read_header(path, n = 2L, skip_vcf_metadata = FALSE, nThread = 1)
 }
 \arguments{
 \item{path}{Filepath for the summary statistics file to be formatted. A
@@ -15,6 +15,8 @@ directly to MungeSumstats using the path parameter.}
 indicate that one should read up to the end of input on the connection.}
 
 \item{skip_vcf_metadata}{logical, should VCF metadata be ignored}
+
+\item{nThread}{Number of threads to use for parallel processes.}
 }
 \value{
 First \code{n} lines of the VCF header
@@ -22,4 +24,8 @@ First \code{n} lines of the VCF header
 \description{
 Read in file header
 }
-\keyword{internal}
+\examples{
+path <- system.file("extdata", "eduAttainOkbay.txt", 
+                    package = "MungeSumstats") 
+header <- read_header(path = path)                    
+}
