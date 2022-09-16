@@ -11,13 +11,12 @@
 #' @param verbose Print messages.
 #' 
 #' @returns \link[data.table]{data.table} of parsed log data.
-#' 
+#'  
+#' @export
+#' @importFrom data.table data.table rbindlist
 #' @examples 
 #' save_dir <- system.file("extdata",package = "MungeSumstats")
 #' log_data <- MungeSumstats::parse_logs(save_dir = save_dir)
-#' 
-#' @export
-#' @importFrom data.table data.table rbindlist
 parse_logs <- function(save_dir = getwd(),
                        pattern = "MungeSumstats_log_msg.txt$",
                        verbose = TRUE){
@@ -36,6 +35,7 @@ parse_logs <- function(save_dir = getwd(),
             #### Infer ID from directory names ####
             id = basename(dirname(dirname(f))),
             id_standard = parse_idStandard(l = l),
+            time = parse_time(l = l),
             #### Get metrics before munging ####
             rows_start = parse_report(l = l, entry = 1, line = 1),
             snps_start = parse_report(l = l, entry = 1, line = 2),
@@ -50,12 +50,16 @@ parse_logs <- function(save_dir = getwd(),
             build_inferred = parse_genome_build(l = l),
             #### Flipped ####
             snps_flipped = parse_flipped(l = l),
+            snps_notFormatted = parse_snps_not_formatted(l = l),
+            snps_frq05 = parse_snps_freq_05(l = l),
+            snps_frq05Percent = parse_snps_freq_05(l = l, percent = TRUE),
             #### Dropped ####
             snps_dropped_INFO = parse_dropped_INFO(l = l),
             snps_dropped_nonRef = parse_dropped_nonRef(l = l),
             snps_dropped_nonA1A2 = parse_dropped_nonA1A2(l = l),
             snps_dropped_duplicates = parse_dropped_duplicates(l = l),
             snps_dropped_chrom = parse_dropped_chrom(l = l),
+            snps_dropped_nonBiallelic = parse_dropped_nonBiallelic(l = l),
             #### Problematic p-values ####
             snps_pval_small = parse_pval_small(l = l),
             snps_pval_large = parse_pval_large(l = l),

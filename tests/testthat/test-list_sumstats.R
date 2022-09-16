@@ -36,4 +36,5 @@ test_that("list_sumstats and parse_logs work", {
     log_data <- MungeSumstats::parse_logs(save_dir = save_dir)
     testthat::expect_true(methods::is(log_data,"data.frame"))
     testthat::expect_equal(nrow(log_data), n_files)
+    testthat::expect_gte(ncol(log_data), 26)
 })

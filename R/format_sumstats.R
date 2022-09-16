@@ -248,6 +248,7 @@ format_sumstats <- function(path,
     rsids <- NULL
     orig_dims <- NULL
     log_files <- vector(mode = "list")
+    t1 <- Sys.time()
     
     #### Check 1: Ensure save_path is correct.   ####
     check_save_out <- check_save_path(
@@ -937,8 +938,12 @@ format_sumstats <- function(path,
             orig_dims = orig_dims
         )
     }
-    
-    
+    #### Record time taken ####
+    t2 <- Sys.time()
+    message(
+        "Done munging in ",
+        round(difftime(t2, t1, units = "mins"), 3), " minutes."
+    ) 
     
     #### Preview sumstats ####
     preview_sumstats(

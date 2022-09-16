@@ -11,6 +11,10 @@
 * Automatically remove residual .tsv files after tabix indexing. 
 * `import_sumstats`:
     - Use `@inheritDotParams format_sumstats` for better documentation. 
+* `parse_logs`: Added new fields. 
+* `format_sumstats`: Added time report at the end (minutes taken total). 
+    Since this is a message, will be included in the logs, 
+    and is now parsed by `parse_logs` and put into the column "time".
 
 ### Bug fixes
 
