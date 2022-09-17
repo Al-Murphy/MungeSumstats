@@ -10,5 +10,5 @@ parse_snps_not_formatted <- function(l){
     line <- grep("SNP IDs are not correctly formatted.",l,
                  value = TRUE)[1]
     if(is.na(line)) return(NA)
-    as.integer(trimws(gsub("There are|,","",strsplit(line," SNPs")[[1]][1])))
+    as.integer(gsub(",","",strsplit(line," ")[[1]][1]))
 }
