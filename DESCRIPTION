@@ -1,7 +1,7 @@
 Package: MungeSumstats
 Type: Package
 Title: Standardise summary statistics from GWAS
-Version: 1.5.13
+Version: 1.5.14
 Authors@R:
     c(person(given = "Alan",
            family = "Murphy",
@@ -52,7 +52,7 @@ Imports:
 biocViews: 
     SNP, WholeGenome, Genetics, ComparativeGenomics, 
     GenomeWideAssociation, GenomicVariation, Preprocessing 
-RoxygenNote: 7.2.1.9000
+RoxygenNote: 7.2.1
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Suggests: 

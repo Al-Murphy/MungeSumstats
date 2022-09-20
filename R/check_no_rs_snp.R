@@ -14,6 +14,7 @@
 #' @importFrom data.table rbindlist
 #' @importFrom BSgenome snpsByOverlaps
 #' @importFrom GenomicRanges makeGRangesFromDataFrame
+#' @importFrom stringr str_sub
 check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                             indels,imputation_ind, log_folder_ind, 
                             check_save_out,tabix_index, nThread, log_files,
@@ -24,6 +25,30 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
     # so RSIDs can be inferred
     if ((!snp_ids_are_rs_ids) & sum("SNP" %in% names(sumstats_dt)) == 1) {
         data.table::setnames(sumstats_dt, "SNP", "ID")
+    }
+    #also check if user didn't set the param snp_ids_are_rs_ids but it's clear
+    if("SNP" %in% names(sumstats_dt)){
+      #If SNP present, make sure it isn't a proxy for CHR:bp
+      #RS ID should be all numeric or should start with rs and then be numeric
+      snps <- sumstats_dt$SNP
+      snp_check <- suppressMessages(as.numeric(
+        stringr::str_sub(string = snps, start = 3, end = -1L) 
+      ))
+      #this won't catch chr:bp when chr is just number i.e. 1:123456789
+      #so second check needed
+      snp_check2 <- unique(c(grep(":", snps),
+                             grep("-", snps),
+                             grep("_", snps)))
+      #however if they start with rs they stay i.e. rs140052487:C:A
+      snp_check3 <- grep("^rs", snps)
+      #remove these from those that passed first check
+      if(length(snp_check2)!=0)
+        snp_check <- snp_check[-snp_check2]
+      num_rsids <- length(snps[!is.na(snp_check)])
+      #if num_rsids==0 then they clearly meant SNP col to not represent 
+      #RSIDs so rename to avoid errors later
+      if(num_rsids==0 && length(snp_check3)==0)
+        setnames(sumstats_dt,"SNP","ID")
     }
     # If SNP column doesn't start with rs
     col_headers <- names(sumstats_dt)

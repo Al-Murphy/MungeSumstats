@@ -282,6 +282,14 @@ validate_parameters <- function(path,
     if (!is.numeric(N_std)) {
         stop("N_std must be numeric")
     }
+    #SNP level compute_n value - not allowed
+    if(length(compute_n)>1 && is.numeric(compute_n)){
+      compute_n_msg <- paste0("Multiple integer values for compute_n not ",
+                              "supported.\nAdd SNP specific N values before ",
+                              "passing to MungeSumstats.")
+      stop(compute_n_msg)
+    }
+    
     if (!is.numeric(compute_n) || compute_n < 0) {
         if (is.character(compute_n)) {
             methods <- c("ldsc", "giant", "metal", "sum")
@@ -297,7 +305,6 @@ validate_parameters <- function(path,
             stop("compute_n must be 0 or an integer value")
         }
     }
-
     # Check rmv_chr choices all valid chromosomes
     chrs <- c(as.character(seq_len(22)), "X", "Y", "MT")
     chr_msg <-

@@ -5,6 +5,22 @@ test_that("compute_nsize works", {
     if (!is_32bit_windows) {
         file <- tempfile()
         sumstats_dt <- MungeSumstats::formatted_example(formatted = FALSE)
+        ## pass mulitple N's - SNP level N not supported
+        n_err <- 
+          tryCatch(MungeSumstats::format_sumstats(sumstats_dt,
+                                         ref_genome = "GRCh37",
+                                         on_ref_genome = FALSE,
+                                         strand_ambig_filter = FALSE,
+                                         bi_allelic_filter = FALSE,
+                                         allele_flip_check = FALSE,
+                                         dbSNP=144,
+                                         compute_n = c(5,5,7,8,10,12,12)
+                                         ),
+                   error = function(e) e,
+                   warning = function(w) w
+          )
+        expect_true(is(n_err, "error"))
+        
         #### Add N: numeric mode####
         sumstats_dt2 <- MungeSumstats::compute_nsize(sumstats_dt=sumstats_dt,
                                                      standardise_headers = TRUE, 
@@ -41,6 +57,10 @@ test_that("compute_nsize works", {
         } 
     }    
     else{
+        expect_equal(is_32bit_windows, TRUE)
+        expect_equal(is_32bit_windows, TRUE)
+        expect_equal(is_32bit_windows, TRUE)
+        expect_equal(is_32bit_windows, TRUE)
         expect_equal(is_32bit_windows, TRUE)
     }
 })

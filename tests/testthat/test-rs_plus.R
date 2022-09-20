@@ -25,7 +25,7 @@ test_that("Handle extra info in rs id column", {
             bi_allelic_filter = FALSE,
             allele_flip_check = FALSE,
             log_folder_ind = TRUE,
-            imputation_ind = TRUE,
+            imputation_ind = FALSE,
             return_data = TRUE,
             dbSNP=144
         )

@@ -19,6 +19,10 @@
 ### Bug fixes
 
 * `index_tabular`: Fixed by replacing `seqminer` with `Rsamtools`. 
+* When SNP ID's passed with format `1:123456789`, it will now be dealt with 
+appropriately.
+* `compute_n` can't handle SNP level N values for imputation only population 
+level. An explanatory error message has now been added.
 
 ## CHANGES IN VERSION 1.5.13
 
