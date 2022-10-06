@@ -149,6 +149,8 @@ read_vcf <- function(path,
             file = save_path, 
             sep = "\t",
             nThread = nThread,
+            na = "NA",
+            quote = FALSE
         )
     } 
     return(vcf_dt)

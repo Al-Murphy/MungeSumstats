@@ -158,21 +158,36 @@ write_sumstats <- function(sumstats_dt,
             }
         }
     } else { 
-        messager("Writing in tabular format ==>", save_path)
-        if(isTRUE(tabix_index)){
-            tmp_save_path <- gsub(".bgz|.gz","",save_path)
+        if (isTRUE(tabix_index)) {
+            tmp_save_path <- gsub(".bgz|.gz", "", save_path)
+            messager("Writing in tabular format ==>", tmp_save_path)
+            if (tmp_save_path != save_path) {
+              messager("Writing uncomressed instead of gzipped to enable index")
+            }
         } else {
             tmp_save_path <- save_path
+            messager("Writing in tabular format ==>", save_path)
+
         }
         #### Write to disk #### 
+        if (sep == "\t") {
+          quotation <- FALSE
+          narep <- "NA"
+        } else {
+          quotation <- "auto"
+          narep <- ""
+        }
+
         data.table::fwrite(
             x = sumstats_dt, 
             ### Must be uncompressed so #### 
             file = tmp_save_path,
             sep = sep,
-            nThread = nThread
+            nThread = nThread,
+            na = narep,
+            quote = quotation
         )
-        if(isTRUE(tabix_index)){
+
             save_path <- index_tabular(path = tmp_save_path,
                                        chrom_col = "CHR", 
                                        start_col = "BP", 
