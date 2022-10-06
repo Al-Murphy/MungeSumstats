@@ -51,7 +51,7 @@ write_sumstats <- function(sumstats_dt,
         save_path <- check$save_path
     } 
     #### Sort again just to be sure when tabix-indexing ####
-    if(isTRUE(tabix_index) |
+    if (isTRUE(tabix_index) ||
        isTRUE(write_vcf)) {
       sumstats_dt <- sort_coords(sumstats_dt = sumstats_dt)
     }
