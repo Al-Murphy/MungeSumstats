@@ -1,3 +1,13 @@
+## CHANGES IN VERSION 1.5.15
+
+### Bug fixes
+
+* Fix NA representation for tabular outputs - By default, `data.table::fread()` 
+leaves NAs blank instead of including a literal NA. That's fine for CSVs and if 
+the output is read in by fread, but it breaks other tools for TSVs and is hard 
+to read. Updated that and added a message when the table is switched to 
+uncompressed for indexing.
+
 ## CHANGES IN VERSION 1.5.14
 
 ### New features
