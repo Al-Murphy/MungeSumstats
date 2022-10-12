@@ -30,10 +30,13 @@ should this be rounded? Default is TRUE.}
 \item{allele_flip_check}{Binary Should the allele columns be checked against
 reference genome to infer if flipping is necessary. Default is TRUE.}
 
-\item{compute_z}{Whether to compute Z-score column from P. Default is FALSE.
-\strong{Note} that imputing the Z-score for every SNP will not correct be
+\item{compute_z}{Whether to compute Z-score column. Default is FALSE. This
+can be computed from Beta and SE with (Beta/SE) or P
+(Z:=sign(BETA)*sqrt(stats::qchisq(P,1,lower=FALSE))).
+\strong{Note} that imputing the Z-score from P for every SNP will not be
 perfectly correct and may result in a loss of power. This should only be done
-as a last resort.}
+as a last resort. Use 'BETA' to impute by BETA/SE and 'P' to impute by SNP
+p-value.}
 
 \item{compute_n}{Whether to impute N. Default of 0 won't impute, any other
 integer will be imputed as the N (sample size) for every SNP in the dataset.

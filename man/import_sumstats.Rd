@@ -75,10 +75,13 @@ should be converted. Default is TRUE.}
     \item{\code{convert_neg_p}}{Binary, should p-values <0 be converted to 0?
 Negative p-values should not be possible and can cause errors
 with LDSC/MAGMA and should be converted. Default is TRUE.}
-    \item{\code{compute_z}}{Whether to compute Z-score column from P. Default is FALSE.
-\strong{Note} that imputing the Z-score for every SNP will not correct be
+    \item{\code{compute_z}}{Whether to compute Z-score column. Default is FALSE. This
+can be computed from Beta and SE with (Beta/SE) or P
+(Z:=sign(BETA)*sqrt(stats::qchisq(P,1,lower=FALSE))).
+\strong{Note} that imputing the Z-score from P for every SNP will not be
 perfectly correct and may result in a loss of power. This should only be done
-as a last resort.}
+as a last resort. Use 'BETA' to impute by BETA/SE and 'P' to impute by SNP
+p-value.}
     \item{\code{force_new_z}}{When a "Z" column already exists, it will be used by
 default. To override and compute a new Z-score column from P set
 \code{force_new_z=TRUE}.}

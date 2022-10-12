@@ -24,10 +24,13 @@
 #' includes a field denoting SNP allele flipping (flipped). **Note**
 #' these columns will be in the formatted summary statistics returned. Default
 #' is FALSE.
-#' @param compute_z Whether to compute Z-score column from P. Default is FALSE.
-#' **Note** that imputing the Z-score for every SNP will not correct be
+#' @param compute_z Whether to compute Z-score column. Default is FALSE. This 
+#' can be computed from Beta and SE with (Beta/SE) or P 
+#' (Z:=sign(BETA)*sqrt(stats::qchisq(P,1,lower=FALSE))).
+#' **Note** that imputing the Z-score from P for every SNP will not be
 #' perfectly correct and may result in a loss of power. This should only be done
-#' as a last resort.
+#' as a last resort. Use 'BETA' to impute by BETA/SE and 'P' to impute by SNP
+#' p-value.
 #' @param force_new_z When a "Z" column already exists, it will be used by
 #' default. To override and compute a new Z-score column from P set
 #' \code{force_new_z=TRUE}.
@@ -44,13 +47,14 @@
 #' @importFrom stats qchisq
 check_zscore <- function(sumstats_dt,
                          imputation_ind,
-                         compute_z = TRUE,
+                         compute_z = 'BETA',
                          force_new_z = FALSE,
                          standardise_headers = FALSE,
                          mapping_file) {
     ## Set variables to be used in in place data.table functions to NULL
     ## to avoid confusing BiocCheck.
-    Z <- BETA <- P <- IMPUTATION_z_score <- NULL
+    Z <- BETA <- SE <- P <- IMPUTATION_z_score_beta_se <- 
+      IMPUTATION_z_score_p <- NULL
 
     if (standardise_headers) {
         sumstats_dt <-
@@ -60,12 +64,34 @@ check_zscore <- function(sumstats_dt,
             )[["sumstats_dt"]]
     }
 
-    if (compute_z) {
+    if (!isFALSE(compute_z)) {
         # message("Checking Z-score.")
         col_headers <- names(sumstats_dt)
         if ("Z" %in% col_headers && (!force_new_z)) {
             message("Keeping existing Z-score column.")
-        } else {
+        } else if(toupper(compute_z)=='BETA'){
+            if ("BETA" %in% col_headers && "SE" %in% col_headers){
+              message(
+                "Computing Z-score from BETA ans SE using formula:",
+                " `BETA/SE`"
+              )
+              # ensure BETA, P are numeric
+              sumstats_dt[, BETA := as.numeric(BETA)]
+              sumstats_dt[, SE := as.numeric(SE)]
+              sumstats_dt[, Z := BETA/SE]
+              # if user wants information, give SNPs where Z-score calculated
+              if (imputation_ind) {
+                sumstats_dt[, IMPUTATION_z_score_beta_se := TRUE]
+              }
+            }
+            else{
+              msg <- paste0("Can't compute Z-score from BETA and SE as both ",
+                            "aren't in the sumstats.\nPlease choose another ",
+                            "option for `compute_z`")
+              stop(msg)
+            }
+          
+        } else{ #P-value
             message(
                 "Computing Z-score from P using formula:",
                 " `sign(BETA)*sqrt(stats::qchisq(P,1,lower=FALSE)`"
@@ -77,7 +103,7 @@ check_zscore <- function(sumstats_dt,
                 sqrt(stats::qchisq(P, 1, lower = FALSE))]
             # if user wants information, give SNPs where Z-score calculated
             if (imputation_ind) {
-                sumstats_dt[, IMPUTATION_z_score := TRUE]
+                sumstats_dt[, IMPUTATION_z_score_p := TRUE]
             }
         }
     }

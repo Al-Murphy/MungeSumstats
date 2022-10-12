@@ -1,3 +1,11 @@
+## CHANGES IN VERSION 1.5.16
+
+### New features
+* A new method for computing the Z-score of a sumstats (`compute_z` input) has 
+been added: BETA/SE. To use it set `compute_z = 'BETA'` to continue to use the
+P-value calculation use `compute_z = 'P'`. Note the default is stil 
+`compute_z = FALSE`.
+
 ## CHANGES IN VERSION 1.5.15
 
 ### Bug fixes

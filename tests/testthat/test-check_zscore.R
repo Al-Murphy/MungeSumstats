@@ -6,17 +6,29 @@ test_that("Check that Z-scores get computed correctly", {
     if (!is_32bit_windows) {
         path <- system.file("extdata", "eduAttainOkbay.txt", package = "MungeSumstats")
         sumstats_dt <- MungeSumstats::read_sumstats(path = path)
-        sumstats_dt <- check_zscore(
+        sumstats_dt <- MungeSumstats:::check_zscore(
             sumstats_dt = sumstats_dt, imputation_ind = FALSE,
-            force_new_z = TRUE,
+            compute_z = 'P',force_new_z = TRUE,
             standardise_headers = TRUE,
             mapping_file = sumstatsColHeaders
         )[["sumstats_dt"]]
-        sumstats_dt[, newZ := sign(BETA) * sqrt(stats::qchisq(P, 1, lower = FALSE))]
+        sumstats_dt[, newZ := sign(BETA) * sqrt(stats::qchisq(P, 1, 
+                                                              lower = FALSE))]
+        all_z_equal <- all(sumstats_dt$Z == sumstats_dt$newZ)
+        expect_equal(all_z_equal, TRUE)
+        #also test BETA/SE
+        sumstats_dt <- MungeSumstats:::check_zscore(
+          sumstats_dt = sumstats_dt, imputation_ind = FALSE,
+          compute_z = 'BETA',force_new_z = TRUE,
+          standardise_headers = TRUE,
+          mapping_file = sumstatsColHeaders
+        )[["sumstats_dt"]]
+        sumstats_dt[, newZ := BETA/SE]
         all_z_equal <- all(sumstats_dt$Z == sumstats_dt$newZ)
         expect_equal(all_z_equal, TRUE)
     }    
     else{
+        expect_equal(is_32bit_windows, TRUE)
         expect_equal(is_32bit_windows, TRUE)
     }
 })

@@ -197,7 +197,8 @@ validate_parameters <- function(path,
         stop("convert_small_p must be either TRUE or FALSE")
     }
     if (!is.logical(compute_z)) {
-        stop("compute_z must be either TRUE or FALSE")
+        if(!toupper(compute_z) %in% c('P','BETA'))
+          stop("compute_z must be either TRUE or FALSE")
     }
     if (!is.logical(convert_n_int)) {
         stop("convert_n_int must be either TRUE or FALSE")

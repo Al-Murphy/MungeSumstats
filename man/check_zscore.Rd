@@ -7,7 +7,7 @@
 check_zscore(
   sumstats_dt,
   imputation_ind,
-  compute_z = TRUE,
+  compute_z = "BETA",
   force_new_z = FALSE,
   standardise_headers = FALSE,
   mapping_file
@@ -23,10 +23,13 @@ includes a field denoting SNP allele flipping (flipped). \strong{Note}
 these columns will be in the formatted summary statistics returned. Default
 is FALSE.}
 
-\item{compute_z}{Whether to compute Z-score column from P. Default is FALSE.
-\strong{Note} that imputing the Z-score for every SNP will not correct be
+\item{compute_z}{Whether to compute Z-score column. Default is FALSE. This
+can be computed from Beta and SE with (Beta/SE) or P
+(Z:=sign(BETA)*sqrt(stats::qchisq(P,1,lower=FALSE))).
+\strong{Note} that imputing the Z-score from P for every SNP will not be
 perfectly correct and may result in a loss of power. This should only be done
-as a last resort.}
+as a last resort. Use 'BETA' to impute by BETA/SE and 'P' to impute by SNP
+p-value.}
 
 \item{force_new_z}{When a "Z" column already exists, it will be used by
 default. To override and compute a new Z-score column from P set
