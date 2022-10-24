@@ -6,6 +6,9 @@ been added: BETA/SE. To use it set `compute_z = 'BETA'` to continue to use the
 P-value calculation use `compute_z = 'P'`. Note the default is stil 
 `compute_z = FALSE`.
 
+### Bug fix
+* Remove erroneous print statement. 
+
 ## CHANGES IN VERSION 1.5.15
 
 ### Bug fixes

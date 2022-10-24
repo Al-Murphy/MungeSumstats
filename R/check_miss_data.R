@@ -29,9 +29,6 @@ check_miss_data <- function(sumstats_dt, path, log_folder_ind, check_save_out,
                 sumstats_dt[, incl_cols, with = FALSE]
             ), ]
         )
-        print(sumstats_dt[!complete.cases(
-          sumstats_dt[, incl_cols, with = FALSE]
-        ), ])
         msg <- paste0(
             "WARNING: ",
             formatC(n_missing, big.mark = ","),
