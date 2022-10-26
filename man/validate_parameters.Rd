@@ -9,6 +9,7 @@ validate_parameters(
   ref_genome,
   convert_ref_genome,
   convert_small_p,
+  es_is_beta,
   compute_z,
   compute_n,
   convert_n_int,
@@ -61,6 +62,10 @@ not match. Default is not to convert the genome build (NULL).}
 p-values <= 5e-324 be converted to 0?
 Small p-values pass the R limit and can cause errors with LDSC/MAGMA and
 should be converted. Default is TRUE.}
+
+\item{es_is_beta}{Binary, whether to map ES to BETA. We take BETA to be any
+BETA-like value (including Effect Size). If this is not the case for your
+sumstats, change this to FALSE. Default is TRUE.}
 
 \item{compute_z}{Whether to compute Z-score column. Default is FALSE. This
 can be computed from Beta and SE with (Beta/SE) or P

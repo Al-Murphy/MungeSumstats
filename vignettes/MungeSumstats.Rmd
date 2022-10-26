@@ -306,6 +306,9 @@ conducted by *MungeSumstats* are:
     analysis. Use with caution. The different methods MungeSumstats will
     try and impute beta (in this order or priority) are: 1. log(OR) 2. Z
     x SE. Default value is FALSE.
+-   **es_is_beta** Binary, whether to map ES to BETA. We take BETA to be any
+    BETA-like value (including Effect Size). If this is not the case for your 
+    sumstats, change this to FALSE. Default is TRUE.
 -   **impute_se** Binary, whether the standard error should be imputed
     using other effect data if it isn't present in the sumstats. Note
     that this imputation is an approximation so could have an effect on
@@ -686,6 +689,13 @@ files with A0/A1. The mapping in `MungeSumstats::sumstatsColHeaders`
 converts A0 to A\*, this is a special case so that the code knows to map
 A0/A1 to A1/A2 (ref/alt). The special case is needed since ordinarily A1
 refers to the reference not the alternative allele.
+
+A note on `MungeSumstats::sumstatsColHeaders` for summary statistic
+files with Effect Size (ES). By default, MSS takes BETA to be any BETA-like 
+value (including ES). This is coded into the mapping file - 
+`MungeSumstats::sumstatsColHeaders`. If this isn't the case for your sumstats, 
+you can set the `es_is_beta` parameter in `MungeSumstats::format_sumstats()` to 
+FALSE to avoid this. Note this is done to try and capture most use cases of MSS.
 
 # Further functionality
 

@@ -28,6 +28,25 @@ test_that("Check that imputation columns added correctly", {
                                                   dbSNP=144
         )
         control_dt <- data.table::fread(control$sumstats)
+        #rerun control through with ES not equal to beta
+        a<- data.table::fread(file)
+        a[,Beta:=ES]
+        control_es <- MungeSumstats::format_sumstats(a,
+                                                  ref_genome = "GRCh37",
+                                                  on_ref_genome = FALSE,
+                                                  strand_ambig_filter = FALSE,
+                                                  bi_allelic_filter = FALSE,
+                                                  allele_flip_check = FALSE,
+                                                  imputation_ind = TRUE,
+                                                  log_folder_ind = TRUE,
+                                                  INFO_filter = 0,
+                                                  dbSNP=144,
+                                                  es_is_beta = FALSE
+        )
+        control_dt_es <- data.table::fread(control_es$sumstats)
+        control_dt_es[,ES:=NULL]
+        testthat::expect_equal(all.equal(control_dt,control_dt_es,
+                                         ignore.col.order = TRUE),TRUE)
         #now impute SE
         sumstats_dt_org <- copy(sumstats_dt)
         sumstats_dt[,SE:=NULL]
@@ -177,6 +196,7 @@ test_that("Check that imputation columns added correctly", {
         testthat::expect_equal(mean(sumstats_dt_org$diff_beta,na.rm = TRUE)<0.001, 
                                TRUE)
     } else {
+        expect_equal(is_32bit_windows, TRUE)
         expect_equal(is_32bit_windows, TRUE)
         expect_equal(is_32bit_windows, TRUE)
         expect_equal(is_32bit_windows, TRUE)

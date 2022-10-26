@@ -16,6 +16,7 @@ format_sumstats(
   compute_n = 0L,
   convert_n_int = TRUE,
   impute_beta = FALSE,
+  es_is_beta = TRUE,
   impute_se = FALSE,
   analysis_trait = NULL,
   INFO_filter = 0.9,
@@ -108,13 +109,17 @@ should this be rounded? Default is TRUE.}
 
 \item{impute_beta}{Binary, whether BETA should be imputed using other effect
 data if it isn't present in the sumstats. Note that this imputation is an
-approximation so could have an effect on downstream analysis. Use with
-caution. The different methods MungeSumstats will try and impute beta (in
-this order or priority) are:
+approximation (for Z & SE approach) so could have an effect on downstream
+analysis. Use with caution. The different methods MungeSumstats will try and
+impute beta (in this order or priority) are:
 \enumerate{
 \item log(OR)  2. Z x SE
 Default value is FALSE.
 }}
+
+\item{es_is_beta}{Binary, whether to map ES to BETA. We take BETA to be any
+BETA-like value (including Effect Size). If this is not the case for your
+sumstats, change this to FALSE. Default is TRUE.}
 
 \item{impute_se}{Binary, whether the standard error should be imputed using
 other effect data if it isn't present in the sumstats. Note that this

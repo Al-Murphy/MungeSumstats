@@ -77,11 +77,14 @@
 #' should this be rounded? Default is TRUE.
 #' @param impute_beta Binary, whether BETA should be imputed using other effect
 #' data if it isn't present in the sumstats. Note that this imputation is an 
-#' approximation so could have an effect on downstream analysis. Use with 
-#' caution. The different methods MungeSumstats will try and impute beta (in 
-#' this order or priority) are: 
+#' approximation (for Z & SE approach) so could have an effect on downstream 
+#' analysis. Use with caution. The different methods MungeSumstats will try and 
+#' impute beta (in this order or priority) are: 
 #' 1. log(OR)  2. Z x SE
 #' Default value is FALSE.
+#' @param es_is_beta Binary, whether to map ES to BETA. We take BETA to be any
+#' BETA-like value (including Effect Size). If this is not the case for your
+#' sumstats, change this to FALSE. Default is TRUE.
 #' @param impute_se Binary, whether the standard error should be imputed using 
 #' other effect data if it isn't present in the sumstats. Note that this 
 #' imputation is an approximation so could have an effect on downstream 
@@ -207,6 +210,7 @@ format_sumstats <- function(path,
                             compute_n = 0L,
                             convert_n_int = TRUE,
                             impute_beta = FALSE, 
+                            es_is_beta = TRUE,
                             impute_se = FALSE,
                             analysis_trait = NULL,
                             INFO_filter = 0.9,
@@ -287,6 +291,7 @@ format_sumstats <- function(path,
             ref_genome = ref_genome,
             convert_ref_genome = convert_ref_genome,
             convert_small_p = convert_small_p,
+            es_is_beta = es_is_beta,
             compute_z = compute_z,
             compute_n = compute_n,
             convert_n_int = convert_n_int,
@@ -381,6 +386,26 @@ format_sumstats <- function(path,
                 samples = if(is.null(analysis_trait)) 1 else analysis_trait,
                 nThread = nThread
             )
+        }
+        
+        #If es_is_beta remove from mapping file if present
+        if (!es_is_beta & nrow(mapping_file[mapping_file$Uncorrected=="ES" & 
+                                           mapping_file$Corrected=="BETA",])>=1)
+          {
+          print("aaaa")
+          mapping_file <- mapping_file[!(mapping_file$Uncorrected=="ES" & 
+                                         mapping_file$Corrected=="BETA"),]
+          #Add ES mapping
+          es_cols <- data.frame("Uncorrected"=c("ES","EFFECT_SIZE",
+                                                "EFFECT.SIZE","EFFECT-SIZE",
+                                                "EFFECT SIZE",
+                                                "EFFECT_SIZE_ESTIMATE",
+                                                "EFFECT SIZE ESTIMATE",
+                                                "EFFECT.SIZE.ESTIMATE",
+                                                "ES.A1","ES.A2","ES-A1","ES-A2",
+                                                "ES_A1","ES_A2"),
+                                "Corrected"=rep("ES",14))
+          mapping_file <- rbind(mapping_file,es_cols)
         }
         
         #### Check 3:Standardise headers for all OS ####

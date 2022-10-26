@@ -11,7 +11,8 @@
 check_signed_col <-
     function(sumstats_dt,impute_beta, log_folder_ind, rsids, imputation_ind,
              check_save_out, tabix_index, log_files, nThread) {
-        BETA <- P <- Z <- N <- FRQ <- SE <- OR <- IMPUTATION_BETA <- NULL
+        BETA <- P <- Z <- N <- FRQ <- SE <- OR <- IMPUTATION_BETA <- 
+          LOG_ODDS <- NULL
         col_headers <- names(sumstats_dt)
         signed_stat_column_names <- c("Z", "OR", "BETA",
                                       "LOG_ODDS", "SIGNED_SUMSTAT")
@@ -51,21 +52,30 @@ check_signed_col <-
             #    }  
             #https://huwenboshi.github.io/data%20management/2017/11/23/tips-for-formatting-gwas-summary-stats.html
             #} else if ("Z" %in% col_headers & "SE" %in% col_headers) {
-            if ("Z" %in% col_headers & "SE" %in% col_headers) {
-                imp_cols <- "Z & SE"
-                if(impute_beta){
-                    messager(paste0(msg,"Deriving BETA from Z and SE"))
-                    sumstats_dt[,BETA := Z * SE]
-                    beta_imputed <- TRUE
-                }  
-            } else if ("OR" %in% col_headers) {
-                #if ("OR" %in% col_headers) {
+            if ("OR" %in% col_headers || "LOG_ODDS" %in% col_headers) {
+              if ("OR" %in% col_headers) {
                 imp_cols <- "OR"
                 if(impute_beta){
-                    messager(paste0(msg,"Deriving BETA from OR"))
-                    sumstats_dt[,BETA := log(OR)]
-                    beta_imputed <- TRUE
-                }
+                  messager(paste0(msg,"Deriving BETA from OR"))
+                  sumstats_dt[,BETA := log(OR)]
+                  beta_imputed <- TRUE
+                } 
+              }  
+              else{ #only log odds not OR
+                imp_cols <- "LOG_ODDS"
+                if(impute_beta){
+                  messager(paste0(msg,"Deriving BETA from LOG ODDS"))
+                  sumstats_dt[,BETA := LOG_ODDS]
+                  beta_imputed <- TRUE
+                } 
+              }
+            } else if ("Z" %in% col_headers & "SE" %in% col_headers) {
+              imp_cols <- "Z & SE"
+              if(impute_beta){
+                messager(paste0(msg,"Deriving BETA from Z and SE"))
+                sumstats_dt[,BETA := Z * SE]
+                beta_imputed <- TRUE
+              }    
             } else if (sum(signed_stat_column_names %in% col_headers) < 1) {
                 stop(stp_msg)
             }

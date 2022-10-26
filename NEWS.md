@@ -1,3 +1,11 @@
+## CHANGES IN VERSION 1.5.17
+
+### New features
+* By default ES taken as BETA new parameter added so users can specify if this 
+isn't the case (`es_is_beta`). If set to FALSE, mapping removed.
+* Imputing BETA ordering has been changed so log(OR) will be sued before 
+calculating from Z, SE.
+
 ## CHANGES IN VERSION 1.5.16
 
 ### New features

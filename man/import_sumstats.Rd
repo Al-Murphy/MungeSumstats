@@ -97,13 +97,16 @@ multiples are passed, the formula used to derive it will be indicated.}
 should this be rounded? Default is TRUE.}
     \item{\code{impute_beta}}{Binary, whether BETA should be imputed using other effect
 data if it isn't present in the sumstats. Note that this imputation is an
-approximation so could have an effect on downstream analysis. Use with
-caution. The different methods MungeSumstats will try and impute beta (in
-this order or priority) are:
+approximation (for Z & SE approach) so could have an effect on downstream
+analysis. Use with caution. The different methods MungeSumstats will try and
+impute beta (in this order or priority) are:
 \enumerate{
 \item log(OR)  2. Z x SE
 Default value is FALSE.
 }}
+    \item{\code{es_is_beta}}{Binary, whether to map ES to BETA. We take BETA to be any
+BETA-like value (including Effect Size). If this is not the case for your
+sumstats, change this to FALSE. Default is TRUE.}
     \item{\code{impute_se}}{Binary, whether the standard error should be imputed using
 other effect data if it isn't present in the sumstats. Note that this
 imputation is an approximation so could have an effect on downstream

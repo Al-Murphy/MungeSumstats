@@ -7,6 +7,7 @@ validate_parameters <- function(path,
                                 ref_genome,
                                 convert_ref_genome,
                                 convert_small_p,
+                                es_is_beta,
                                 compute_z,
                                 compute_n,
                                 convert_n_int,
@@ -195,6 +196,9 @@ validate_parameters <- function(path,
     }
     if (!is.logical(convert_small_p)) {
         stop("convert_small_p must be either TRUE or FALSE")
+    }
+    if (!is.logical(es_is_beta)){
+      stop("es_is_beta must be either TRUE or FALSE")
     }
     if (!is.logical(compute_z)) {
         if(!toupper(compute_z) %in% c('P','BETA'))
