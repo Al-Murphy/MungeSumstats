@@ -246,7 +246,10 @@ FALSE.}
 messages and errors printed by MungeSumstats in a run. Default is FALSE}
 
 \item{log_folder}{Filepath to the directory for the log files and the log of
-MungeSumstats messages to be stored. Default is a temporary directory.}
+MungeSumstats messages to be stored. Default is a temporary directory. Note
+the name of the log files (log messages and log outputs) are now the same as
+the name of the file specified in the save path parameter with the extension
+'_log_msg.txt' and '_log_output.txt' respectively.}
 
 \item{imputation_ind}{Binary Should a column be added for each imputation
 step to show what SNPs have imputed values for differing fields. This

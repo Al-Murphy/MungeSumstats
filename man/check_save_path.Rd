@@ -18,7 +18,10 @@ check_save_path(
 \code{tempfile(fileext=".tsv.gz")}.}
 
 \item{log_folder}{Filepath to the directory for the log files and the log of
-MungeSumstats messages to be stored. Default is a temporary directory.}
+MungeSumstats messages to be stored. Default is a temporary directory. Note
+the name of the log files (log messages and log outputs) are now the same as
+the name of the file specified in the save path parameter with the extension
+'_log_msg.txt' and '_log_output.txt' respectively.}
 
 \item{log_folder_ind}{Binary Should log files be stored containing all
 filtered out SNPs (separate file per filter). The data is outputted in the

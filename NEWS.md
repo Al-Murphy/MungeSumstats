@@ -1,3 +1,13 @@
+## CHANGES IN VERSION 1.7.1
+
+### New features
+* The use of the `log_folder` parameter in `format_sumstats()` has been updated. 
+It is still used to point to the directory for the log files and the log of 
+MungeSumstats messages to be stored. And the default is still a temporary 
+directory. However, now the name of the log files (log messages and log outputs)
+are the same as the name of the file specified in the `save_path` parameter with
+the extension '_log_msg.txt' and '_log_output.txt' respectively.
+
 ## CHANGES IN VERSION 1.5.18
 
 ### Bug fix

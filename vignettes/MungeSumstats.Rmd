@@ -477,6 +477,10 @@ reformatted_vcf_2 <-
                                  allele_flip_check = FALSE)
 ```
 
+Check the file `snp_bi_allelic.tsv.gz` in the `log_folder` directory you supply 
+(by default a temp directory), for a list of SNPs removed as they are 
+non-bi-allelic. The text files containing the console output and messages are 
+also stored in the same directory.
 
 Note you can also control the dbSNP version used as a reference dataset by 
 MungeSumstats using the `dbSNP` parameter. By default this will be set to the 
@@ -543,7 +547,8 @@ below:
     console created during MungeSumstats run.
 
 Note to export to another type such as R native objects including
-data.table, GRanges, VRanges or save as a VCF file, set `return_format`:
+data.table, GRanges, VRanges or save as a VCF file, set `return_data=TRUE` and
+choose your `return_format`:
 
 ```{r, message=FALSE,eval=FALSE}
 #set
@@ -553,6 +558,7 @@ reformatted_vcf_2 <-
                                  log_folder_ind=TRUE,
                                  imputation_ind=TRUE,
                                  log_mungesumstats_msgs=TRUE,
+                                 return_data=TRUE,
                                  return_format="GRanges")
 ```
 
@@ -589,7 +595,8 @@ the genome build:
 # Pass path to Educational Attainment Okbay sumstat file to a temp directory
 eduAttainOkbayPth <- system.file("extdata", "eduAttainOkbay.txt",
                                   package = "MungeSumstats")
-sumstats_list <- list(ss1 = eduAttainOkbayPth, ss2 = eduAttainOkbayPth)
+ALSvcfPth <- system.file("extdata","ALSvcf.vcf", package="MungeSumstats")
+sumstats_list <- list(ss1 = eduAttainOkbayPth, ss2 = ALSvcfPth)
 
 ref_genomes <- MungeSumstats::get_genome_builds(sumstats_list = sumstats_list)
 

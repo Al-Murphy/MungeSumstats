@@ -174,7 +174,10 @@
 #' @param log_mungesumstats_msgs Binary Should a log be stored containing all
 #' messages and errors printed by MungeSumstats in a run. Default is FALSE
 #' @param log_folder Filepath to the directory for the log files and the log of
-#' MungeSumstats messages to be stored. Default is a temporary directory.
+#' MungeSumstats messages to be stored. Default is a temporary directory. Note 
+#' the name of the log files (log messages and log outputs) are now the same as 
+#' the name of the file specified in the save path parameter with the extension 
+#' '_log_msg.txt' and '_log_output.txt' respectively.  
 #' @param imputation_ind Binary Should a column be added for each imputation
 #' step to show what SNPs have imputed values for differing fields. This
 #' includes a field denoting SNP allele flipping (flipped). On the flipped
@@ -329,25 +332,27 @@ format_sumstats <- function(path,
         
         # save messages to file if user specified
         if (log_mungesumstats_msgs) {
+            #get name of file from save_path
+            nme <- strsplit(basename(check_save_out$save_path),
+                            split="[.]")[[1]][1]
             msg <- paste0("Saving output messages to:\n",
-                          paste0(check_save_out$log_folder,
-                                 "/MungeSumstats_log_msg.txt"),"\n",
+                          paste0(check_save_out$log_folder,"/",
+                                 nme,"_log_msg.txt"),"\n",
                           "Any runtime errors will be saved to:\n",
-                          paste0(check_save_out$log_folder,
-                                 "/MungeSumstats_log_output.txt"),"\n",
+                          paste0(check_save_out$log_folder,"/",
+                                 nme,"_log_output.txt"),"\n",
                           "Messages will not be printed to terminal.")
             message(msg)
             msgcon <-
                 file(paste0(
-                    check_save_out$log_folder,
-                    "/MungeSumstats_log_msg.txt"
-                ),
+                  check_save_out$log_folder,"/",
+                  nme,"_log_msg.txt"),
                 open = "a"
                 )
             sink(
                 file = paste0(
-                    check_save_out$log_folder,
-                    "/MungeSumstats_log_output.txt"
+                  check_save_out$log_folder,"/",
+                  nme,"_log_output.txt"
                 ),
                 split = TRUE, append = TRUE
             )
@@ -355,13 +360,13 @@ format_sumstats <- function(path,
             # add name to log_file list
             log_files[["MungeSumstats_log_msg"]] <-
                 paste0(
-                    check_save_out$log_folder,
-                    "/MungeSumstats_log_msg.txt"
+                  check_save_out$log_folder,"/",
+                  nme,"_log_msg.txt"
                 )
             log_files[["MungeSumstats_log_output"]] <-
                 paste0(
-                    check_save_out$log_folder,
-                    "/MungeSumstats_log_output.txt"
+                  check_save_out$log_folder,"/",
+                  nme,"_log_output.txt"
                 )
         }
         # This almost surely modifies the file (since most sumstats
@@ -392,7 +397,6 @@ format_sumstats <- function(path,
         if (!es_is_beta & nrow(mapping_file[mapping_file$Uncorrected=="ES" & 
                                            mapping_file$Corrected=="BETA",])>=1)
           {
-          print("aaaa")
           mapping_file <- mapping_file[!(mapping_file$Uncorrected=="ES" & 
                                          mapping_file$Corrected=="BETA"),]
           #Add ES mapping
