@@ -2,8 +2,11 @@
 #'
 #' @source \href{https://hgdownload.cse.ucsc.edu/goldenpath/hg19/liftOver/}{
 #' UCSC chain files}
-#' @param build_conversion converting from what build to what? hg38ToHg19 or
-#' hg19ToHg38 
+#' @source \href{https://ftp.ensembl.org/pub/assembly_mapping/homo_sapiens/}{
+#' Ensembl chain files}
+#' @param from genome build converted from ("hg38", "hg19")
+#' @param to genome build converted to ("hg19", "hg38")
+#' @param chain_source chain file source used ("ucsc" as default, or "ensembl")
 #' @param save_dir where is the chain file saved? Default is a temp directory
 #' @param verbose extra messages printed? Default is TRUE
 #' @return loaded chain file for liftover
@@ -76,8 +79,9 @@ get_chain_file <- function(from = c("hg38", "hg19"),
         local_path <- R.utils::gunzip(local_path, overwrite=TRUE)
     }
     #### Import ####
-    #ensembl format is slightly different, rtracklayer can't handle the spaces rather than tabs
-    # solution here as per RoelKluin, https://github.com/lawremi/rtracklayer/issues/23
+    # Ensembl format is slightly different to UCSC, rtracklayer can't handle 
+    # the spaces rather than tabs. Solution here as per RoelKluin
+    # https://github.com/lawremi/rtracklayer/issues/23
     if(chain_source == "ensembl"){
         new_path = gsub(".chain", "_tabs.chain", local_path_gunzip, fixed=TRUE)
         if(!file.exists(new_path)){

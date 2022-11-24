@@ -45,6 +45,9 @@
 #' @param convert_ref_genome name of the reference genome to convert to
 #' ("GRCh37" or "GRCh38"). This will only occur if the current genome build does
 #' not match. Default is not to convert the genome build (NULL).
+#' @param chain_source name of chain file source to use in liftover, if converting
+#' genome build ("ucsc" or "ensembl"). Note that the UCSC chain files require a
+#' license for commercial use and the UCSC chain is used by default.
 #' @param convert_small_p Binary, should non-negative 
 #' p-values <= 5e-324 be converted to 0?
 #' Small p-values pass the R limit and can cause errors with LDSC/MAGMA and

@@ -5,9 +5,12 @@
 #' @source \href{https://doi.org/doi:10.18129/B9.bioc.liftOver}{liftOver}
 #' @source \href{https://hgdownload.cse.ucsc.edu/goldenpath/hg19/liftOver/}{
 #' UCSC chain files}
+#' @source \href{https://ftp.ensembl.org/pub/assembly_mapping/homo_sapiens/}{
+#' Ensembl chain files}
 #'
 #' @param sumstats_dt data table obj of the summary statistics
 #'  file for the GWAS.
+#' @param chain_source chain file source used ("ucsc" as default, or "ensembl")
 #' @param chrom_col Name of the chromosome column in 
 #' \code{sumstats_dt} (e.g. "CHR").
 #' @param start_col Name of the starting genomic position
@@ -85,7 +88,8 @@ liftover <- function(sumstats_dt,
           #### Check that liftover is available ####
           ## If one or more builds are NULL, this won't be evaluated bc
           ## the builds will be inferred instead.
-          if(any(!c(query_ucsc, target_ucsc) %in% c("hg38", "hg19")) || query_ucsc == target_ucsc) {
+          if(any(!c(query_ucsc, target_ucsc) %in% c("hg38", "hg19")) ||
+                 query_ucsc == target_ucsc) {
               stop("Can only perform liftover between hg19 <---> hg38")
           } 
           #### Convert to GRanges #### 

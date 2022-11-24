@@ -8,12 +8,16 @@
 
 \href{https://hgdownload.cse.ucsc.edu/goldenpath/hg19/liftOver/}{
 UCSC chain files}
+
+\href{https://ftp.ensembl.org/pub/assembly_mapping/homo_sapiens/}{
+Ensembl chain files}
 }
 \usage{
 liftover(
   sumstats_dt,
   convert_ref_genome,
   ref_genome,
+  chain_source = c("ucsc", "ensembl"),
   imputation_ind = TRUE,
   chrom_col = "CHR",
   start_col = "BP",
@@ -34,6 +38,8 @@ not match. Default is not to convert the genome build (NULL).}
 \item{ref_genome}{name of the reference genome used for the GWAS ("GRCh37" or
 "GRCh38"). Argument is case-insensitive. Default is NULL which infers the
 reference genome from the data.}
+
+\item{chain_source}{chain file source used ("ucsc" as default, or "ensembl")}
 
 \item{imputation_ind}{Binary Should a column be added for each imputation
 step to show what SNPs have imputed values for differing fields. This
