@@ -205,6 +205,7 @@
 format_sumstats <- function(path,
                             ref_genome = NULL,
                             convert_ref_genome = NULL,
+                            chain_source = c("ucsc", "ensembl"),
                             convert_small_p = TRUE,
                             convert_large_p = TRUE,
                             convert_neg_p = TRUE,
@@ -259,6 +260,8 @@ format_sumstats <- function(path,
     orig_dims <- NULL
     log_files <- vector(mode = "list")
     t1 <- Sys.time()
+    #### Setup multiple-option args ####
+    chain_source = match.arg(chain_source)
     
     #### Check 1: Ensure save_path is correct.   ####
     check_save_out <- check_save_path(
@@ -936,7 +939,8 @@ format_sumstats <- function(path,
                 sumstats_return$sumstats_dt,
             convert_ref_genome = convert_ref_genome,
             ref_genome = ref_genome,
-            imputation_ind = imputation_ind
+            imputation_ind = imputation_ind,
+            chain_source = chain_source
         )
         #update ref genome of data
         if(!is.null(convert_ref_genome))

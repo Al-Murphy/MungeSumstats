@@ -39,7 +39,8 @@
 #'                              convert_ref_genome="hg38")
 liftover <- function(sumstats_dt, 
                      convert_ref_genome, 
-                     ref_genome, 
+                     ref_genome,
+                     chain_source = c("ucsc", "ensembl"),
                      imputation_ind = TRUE,
                      chrom_col = "CHR",
                      start_col = "BP",
@@ -49,7 +50,7 @@ liftover <- function(sumstats_dt,
                      verbose = TRUE) {
     
     IMPUTATION_gen_build <- width <- strand <- end <- seqnames <- NULL;
-    
+    chain_source <- match.arg(chain_source)
     #Only continue with checks if user specifies a genome to convert to
     if (!is.null(convert_ref_genome)){
       #### Map genome build synonyms ####
@@ -84,11 +85,7 @@ liftover <- function(sumstats_dt,
           #### Check that liftover is available ####
           ## If one or more builds are NULL, this won't be evaluated bc
           ## the builds will be inferred instead.
-          if(query_ucsc=="hg38" && target_ucsc=="hg19") {
-              build_conversion <- "hg38ToHg19"
-          } else if (query_ucsc=="hg19" && target_ucsc=="hg38"){
-              build_conversion <- "hg19ToHg38"
-          } else {
+          if(any(!c(query_ucsc, target_ucsc) %in% c("hg38", "hg19")) || query_ucsc == target_ucsc) {
               stop("Can only perform liftover between hg19 <---> hg38")
           } 
           #### Convert to GRanges #### 
@@ -101,7 +98,9 @@ liftover <- function(sumstats_dt,
           )
           #### Specify chain file ####
           chain <- get_chain_file(
-              build_conversion = build_conversion,
+              from = query_ucsc,
+              to = target_ucsc,
+              chain_source = chain_source,
               verbose = verbose
           )
           #### Liftover ####
