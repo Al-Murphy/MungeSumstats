@@ -71,9 +71,9 @@ reference genome from the data.}
 ("GRCh37" or "GRCh38"). This will only occur if the current genome build does
 not match. Default is not to convert the genome build (NULL).}
 
-\item{chain_source}{name of chain file source to use in liftover, if converting
+\item{chain_source}{source of the chain file to use in liftover, if converting
 genome build ("ucsc" or "ensembl"). Note that the UCSC chain files require a
-license for commercial use and the UCSC chain is used by default.}
+license for commercial use, and the UCSC chain is used by default.}
 
 \item{convert_small_p}{Binary, should non-negative
 p-values <= 5e-324 be converted to 0?
