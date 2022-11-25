@@ -50,9 +50,9 @@ test_that("liftover works", {
         #use stashed versions of chain files to speed up test
         #move them to temp dir so found and avoid download
         save_dir <- tempdir()
-        build_conversion <- c("hg38ToHg19", "hg19ToHg38")
-        chain_file <- paste0(build_conversion[1],".over.chain.gz")
-        chain_file2 <- paste0(build_conversion[2],".over.chain.gz")
+        build_conversion <- c("GRCh38_to_GRCh37", "GRCh37_to_GRCh38")
+        chain_file <- paste0(build_conversion[1],".chain.gz")
+        chain_file2 <- paste0(build_conversion[2],".chain.gz")
         
         
         local_path <- paste0(save_dir,"/",chain_file)

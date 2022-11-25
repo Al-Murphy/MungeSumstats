@@ -42,7 +42,8 @@ validate_parameters(
   log_folder_ind,
   log_mungesumstats_msgs,
   mapping_file,
-  tabix_index
+  tabix_index,
+  chain_source
 )
 }
 \arguments{
@@ -201,6 +202,10 @@ data(sumstatsColHeaders) for default mapping and necessary format.}
 
 \item{tabix_index}{Index the formatted summary statistics with
 \href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
+
+\item{chain_source}{source of the chain file to use in liftover, if converting
+genome build ("ucsc" or "ensembl"). Note that the UCSC chain files require a
+license for commercial use. The Ensembl chain is used by default ("ensembl").}
 }
 \value{
 No return

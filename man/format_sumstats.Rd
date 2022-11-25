@@ -8,7 +8,7 @@ format_sumstats(
   path,
   ref_genome = NULL,
   convert_ref_genome = NULL,
-  chain_source = c("ucsc", "ensembl"),
+  chain_source = "ensembl",
   convert_small_p = TRUE,
   convert_large_p = TRUE,
   convert_neg_p = TRUE,
@@ -73,7 +73,7 @@ not match. Default is not to convert the genome build (NULL).}
 
 \item{chain_source}{source of the chain file to use in liftover, if converting
 genome build ("ucsc" or "ensembl"). Note that the UCSC chain files require a
-license for commercial use, and the UCSC chain is used by default.}
+license for commercial use. The Ensembl chain is used by default ("ensembl").}
 
 \item{convert_small_p}{Binary, should non-negative
 p-values <= 5e-324 be converted to 0?

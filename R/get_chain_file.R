@@ -42,12 +42,15 @@ get_chain_file <- function(from = c("hg38", "hg19"),
     ### Download chain file ####
     if(file.exists(local_path_gunzip)){
         if(verbose)
-            messager(sprintf("Using existing chain file from %s.", chain_source),v=verbose)
+            messager(sprintf("Using existing chain file from %s.", 
+                             chain_source),v=verbose)
     }
     else{
-        source_readable = ifelse(chain_source == "ensembl", "Ensembl", "UCSC Genome Browser")
+        source_readable = ifelse(chain_source == "ensembl", "Ensembl", 
+                                 "UCSC Genome Browser")
         if(verbose)
-            messager(sprintf("Downloading chain file from %s.", source_readable),
+            messager(sprintf("Downloading chain file from %s.", 
+                             source_readable),
                      v=verbose)
         error_dwnld <-
             tryCatch(utils::download.file(remote_path, local_path),
@@ -58,21 +61,32 @@ get_chain_file <- function(from = c("hg38", "hg19"),
         if(is(error_dwnld,"warning")||is(error_dwnld,"error")||
                 ("message" %in% names(error_dwnld) &&
                 (grepl("Couldn't connect to server",error_dwnld$message)||
-                    grepl("Couldn't resolve host name",error_dwnld$message)))
+                    grepl("Couldn't resolve host name",error_dwnld$message)||
+                    grepl("cannot open URL",error_dwnld$message)))
             ){
-            chain_file <- basename(.get_ucsc_chain_remote(from, to))
+            if(chain_source != "ensembl")
+              chain_file <- basename(.get_ucsc_chain_remote(from, to))
+            else
+              chain_file <- basename(.get_ensembl_chain_remote(from, to))
             #download.file will create an empty file even if download fails
             if(file.exists(local_path)){
                 rmvd <- file.remove(local_path)
-                copied <- R.utils::copyFile(
-                    srcPathname = system.file("extdata",chain_file,
-                                              package="MungeSumstats"),
-                    save_dir)
                 msg <- paste0(
-                    sprintf("Download of chain file from %s ", source_readable),
-                    "failed, using UCSC package snapshot from 2021-10-07 ",
-                    "instead.")
-                message(msg)
+                  sprintf("Download of chain file from %s ", source_readable),
+                  "failed, use ensembl chain file (chain_source='ensembl') ",
+                  "\nfor an offline solution.")
+                if(chain_source!='ensembl')
+                  stop(msg)
+                copied <- R.utils::copyFile(
+                  srcPathname = system.file("extdata",chain_file,
+                                            package="MungeSumstats"),
+                      save_dir)
+                msg2 <- paste0(
+                  sprintf("Download of chain file from %s ", source_readable),
+                  "failed, using ensembl chain file downloaded on 2022-11-25 ",
+                  "instead.")
+                if(chain_source=='ensembl')
+                  messager(msg2)
             } 
         }
         messager(local_path,v=verbose)
@@ -90,7 +104,7 @@ get_chain_file <- function(from = c("hg38", "hg19"),
                 local_path_gunzip, new_path)
             )
         }
-        local_path_gunzip = new_path
+        local_path_gunzip <- new_path
     }
     chain <- rtracklayer::import.chain(local_path_gunzip)
     return(chain)

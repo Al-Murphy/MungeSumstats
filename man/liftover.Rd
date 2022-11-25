@@ -17,7 +17,7 @@ liftover(
   sumstats_dt,
   convert_ref_genome,
   ref_genome,
-  chain_source = c("ucsc", "ensembl"),
+  chain_source = "ensembl",
   imputation_ind = TRUE,
   chrom_col = "CHR",
   start_col = "BP",

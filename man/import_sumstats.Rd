@@ -67,7 +67,7 @@ reference genome from the data.}
 not match. Default is not to convert the genome build (NULL).}
     \item{\code{chain_source}}{source of the chain file to use in liftover, if converting
 genome build ("ucsc" or "ensembl"). Note that the UCSC chain files require a
-license for commercial use, and the UCSC chain is used by default.}
+license for commercial use. The Ensembl chain is used by default ("ensembl").}
     \item{\code{convert_small_p}}{Binary, should non-negative
 p-values <= 5e-324 be converted to 0?
 Small p-values pass the R limit and can cause errors with LDSC/MAGMA and

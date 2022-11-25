@@ -47,7 +47,7 @@
 #' not match. Default is not to convert the genome build (NULL).
 #' @param chain_source source of the chain file to use in liftover, if converting
 #' genome build ("ucsc" or "ensembl"). Note that the UCSC chain files require a
-#' license for commercial use, and the UCSC chain is used by default.
+#' license for commercial use. The Ensembl chain is used by default ("ensembl").
 #' @param convert_small_p Binary, should non-negative 
 #' p-values <= 5e-324 be converted to 0?
 #' Small p-values pass the R limit and can cause errors with LDSC/MAGMA and
@@ -208,7 +208,7 @@
 format_sumstats <- function(path,
                             ref_genome = NULL,
                             convert_ref_genome = NULL,
-                            chain_source = c("ucsc", "ensembl"),
+                            chain_source = "ensembl",
                             convert_small_p = TRUE,
                             convert_large_p = TRUE,
                             convert_neg_p = TRUE,
@@ -263,8 +263,6 @@ format_sumstats <- function(path,
     orig_dims <- NULL
     log_files <- vector(mode = "list")
     t1 <- Sys.time()
-    #### Setup multiple-option args ####
-    chain_source = match.arg(chain_source)
     
     #### Check 1: Ensure save_path is correct.   ####
     check_save_out <- check_save_path(
@@ -333,7 +331,8 @@ format_sumstats <- function(path,
             log_folder_ind = log_folder_ind,
             log_mungesumstats_msgs = log_mungesumstats_msgs,
             mapping_file = mapping_file,
-            tabix_index = tabix_index
+            tabix_index = tabix_index,
+            chain_source = chain_source
         )
         
         # save messages to file if user specified

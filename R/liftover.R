@@ -43,7 +43,7 @@
 liftover <- function(sumstats_dt, 
                      convert_ref_genome, 
                      ref_genome,
-                     chain_source = c("ucsc", "ensembl"),
+                     chain_source = "ensembl",
                      imputation_ind = TRUE,
                      chrom_col = "CHR",
                      start_col = "BP",
@@ -53,7 +53,16 @@ liftover <- function(sumstats_dt,
                      verbose = TRUE) {
     
     IMPUTATION_gen_build <- width <- strand <- end <- seqnames <- NULL;
-    chain_source <- match.arg(chain_source)
+    chain_source <- tolower(chain_source)
+    #check chain file source
+    chain_msg <- paste0(
+      "The chosen chain file source to convert to must be one of ",
+      "Ensembl or UCSC ('ensembl','ucsc')"
+    )
+    if(length(chain_source)>1 || !tolower(chain_source) %in% c("ucsc", 
+                                                               "ensembl")){
+      stop(chain_msg)
+    }
     #Only continue with checks if user specifies a genome to convert to
     if (!is.null(convert_ref_genome)){
       #### Map genome build synonyms ####

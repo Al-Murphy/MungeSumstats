@@ -40,7 +40,8 @@ validate_parameters <- function(path,
                                 log_folder_ind,
                                 log_mungesumstats_msgs,
                                 mapping_file,
-                                tabix_index) {
+                                tabix_index,
+                                chain_source) {
     # Checking if the file exists should happen first - 
     # can pass dt/df of sumstats
     pth_msg <- paste0(
@@ -72,6 +73,15 @@ validate_parameters <- function(path,
     if (!is.null(convert_ref_genome) && !(toupper(convert_ref_genome) %in%
         c("GRCH37", "GRCH38"))) {
         stop(gen_msg2)
+    }
+    #check chain file source
+    chain_msg <- paste0(
+      "The chosen chain file source to convert to must be one of ",
+      "Ensembl or UCSC ('ensembl','ucsc')"
+    )
+    if(length(chain_source)>1 || !tolower(chain_source) %in% c("ucsc", 
+                                                               "ensembl")){
+      stop(chain_msg)
     }
     #check dbSNP version
     avail_dbSNP <- c(144,155)

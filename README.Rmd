@@ -137,5 +137,6 @@ development:
  * [Nathan Skene](https://github.com/NathanSkene)
  * [Brian Schilder](https://github.com/bschilder)
  * [Shea Andrews](https://github.com/sjfandrews)
+ * [Jonathan Griffiths](https://github.com/jonathangriffiths)
  
 # References

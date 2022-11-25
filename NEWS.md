@@ -1,3 +1,13 @@
+## CHANGES IN VERSION 1.7.2
+
+### New features
+* New chain files used for lifting over the genome build from Ensembl have now 
+been added. These will now be set as the default chain file instead of UCSC due
+to [licensing issues](https://github.com/neurogenomics/MungeSumstats/issues/128).
+The choice to use UCSC files will still be there but the files will not be 
+stored in the package themselves, they will instead be downloaded for use on the
+fly.
+
 ## CHANGES IN VERSION 1.7.1
 
 ### New features
