@@ -6,17 +6,25 @@
 \source{
 \href{https://hgdownload.cse.ucsc.edu/goldenpath/hg19/liftOver/}{
 UCSC chain files}
+
+\href{https://ftp.ensembl.org/pub/assembly_mapping/homo_sapiens/}{
+Ensembl chain files}
 }
 \usage{
 get_chain_file(
-  build_conversion = c("hg38ToHg19", "hg19ToHg38"),
+  from = c("hg38", "hg19"),
+  to = c("hg19", "hg38"),
+  chain_source = c("ucsc", "ensembl"),
   save_dir = tempdir(),
   verbose = TRUE
 )
 }
 \arguments{
-\item{build_conversion}{converting from what build to what? hg38ToHg19 or
-hg19ToHg38}
+\item{from}{genome build converted from ("hg38", "hg19")}
+
+\item{to}{genome build converted to ("hg19", "hg38")}
+
+\item{chain_source}{chain file source used ("ucsc" as default, or "ensembl")}
 
 \item{save_dir}{where is the chain file saved? Default is a temp directory}
 

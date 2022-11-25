@@ -8,6 +8,7 @@ format_sumstats(
   path,
   ref_genome = NULL,
   convert_ref_genome = NULL,
+  chain_source = c("ucsc", "ensembl"),
   convert_small_p = TRUE,
   convert_large_p = TRUE,
   convert_neg_p = TRUE,
@@ -69,6 +70,10 @@ reference genome from the data.}
 \item{convert_ref_genome}{name of the reference genome to convert to
 ("GRCh37" or "GRCh38"). This will only occur if the current genome build does
 not match. Default is not to convert the genome build (NULL).}
+
+\item{chain_source}{source of the chain file to use in liftover, if converting
+genome build ("ucsc" or "ensembl"). Note that the UCSC chain files require a
+license for commercial use, and the UCSC chain is used by default.}
 
 \item{convert_small_p}{Binary, should non-negative
 p-values <= 5e-324 be converted to 0?

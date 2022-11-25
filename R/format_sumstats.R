@@ -45,6 +45,9 @@
 #' @param convert_ref_genome name of the reference genome to convert to
 #' ("GRCh37" or "GRCh38"). This will only occur if the current genome build does
 #' not match. Default is not to convert the genome build (NULL).
+#' @param chain_source source of the chain file to use in liftover, if converting
+#' genome build ("ucsc" or "ensembl"). Note that the UCSC chain files require a
+#' license for commercial use, and the UCSC chain is used by default.
 #' @param convert_small_p Binary, should non-negative 
 #' p-values <= 5e-324 be converted to 0?
 #' Small p-values pass the R limit and can cause errors with LDSC/MAGMA and
@@ -205,6 +208,7 @@
 format_sumstats <- function(path,
                             ref_genome = NULL,
                             convert_ref_genome = NULL,
+                            chain_source = c("ucsc", "ensembl"),
                             convert_small_p = TRUE,
                             convert_large_p = TRUE,
                             convert_neg_p = TRUE,
@@ -259,6 +263,8 @@ format_sumstats <- function(path,
     orig_dims <- NULL
     log_files <- vector(mode = "list")
     t1 <- Sys.time()
+    #### Setup multiple-option args ####
+    chain_source = match.arg(chain_source)
     
     #### Check 1: Ensure save_path is correct.   ####
     check_save_out <- check_save_path(
@@ -936,7 +942,8 @@ format_sumstats <- function(path,
                 sumstats_return$sumstats_dt,
             convert_ref_genome = convert_ref_genome,
             ref_genome = ref_genome,
-            imputation_ind = imputation_ind
+            imputation_ind = imputation_ind,
+            chain_source = chain_source
         )
         #update ref genome of data
         if(!is.null(convert_ref_genome))
