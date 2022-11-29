@@ -1,3 +1,8 @@
+## CHANGES IN VERSION 1.7.3
+
+### Bug fix
+* fix for offline runs and accessing chain files from 1.7.2.
+
 ## CHANGES IN VERSION 1.7.2
 
 ### New features

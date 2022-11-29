@@ -54,8 +54,8 @@ get_chain_file <- function(from = c("hg38", "hg19"),
                      v=verbose)
         error_dwnld <-
             tryCatch(utils::download.file(remote_path, local_path),
-            error = function(e){message(e);e},
-            warning = function(w){message(w);w}
+            error = function(e){e},
+            warning = function(w){w}
             )
         #if download failed use file in package
         if(is(error_dwnld,"warning")||is(error_dwnld,"error")||
@@ -85,12 +85,15 @@ get_chain_file <- function(from = c("hg38", "hg19"),
                   sprintf("Download of chain file from %s ", source_readable),
                   "failed, using ensembl chain file downloaded on 2022-11-25 ",
                   "instead.")
-                if(chain_source=='ensembl')
+                if(chain_source=='ensembl'){
                   messager(msg2)
+                  #local_path = 
+                }  
             } 
         }
         messager(local_path,v=verbose)
         local_path <- R.utils::gunzip(local_path, overwrite=TRUE)
+        local_path_gunzip <- local_path
     }
     #### Import ####
     # Ensembl format is slightly different to UCSC, rtracklayer can't handle 
