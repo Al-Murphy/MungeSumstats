@@ -74,15 +74,6 @@ jobs:
       ## Can save variable as GitHub Secret, or manually enter DockerHub
       ## organization name (or simply username) here (e.g. "neurogenomicslab").
       DOCKER_ORG: "neurogenomicslab"
-
-    steps:
-      ##Increase disk space
-      - name: Maximize build space
-        uses: easimon/maximize-build-space@master
-        with:
-          root-reserve-mb: 512
-          swap-size-mb: 1024
-          remove-dotnet: 'true'
       
       ## Set the R library to the directory matching the
       ## R packages cache step further below when running on Docker (Linux).
