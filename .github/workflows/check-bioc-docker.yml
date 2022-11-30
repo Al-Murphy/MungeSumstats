@@ -74,7 +74,8 @@ jobs:
       ## Can save variable as GitHub Secret, or manually enter DockerHub
       ## organization name (or simply username) here (e.g. "neurogenomicslab").
       DOCKER_ORG: "neurogenomicslab"
-      
+    
+    steps:
       ## Set the R library to the directory matching the
       ## R packages cache step further below when running on Docker (Linux).
       - name: Set R Library home on Linux
