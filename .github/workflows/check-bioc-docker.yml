@@ -83,11 +83,7 @@ jobs:
           root-reserve-mb: 512
           swap-size-mb: 1024
           remove-dotnet: 'true'
-      #check free space
-      - name: Build
-        run: |
-          echo "Free space:"
-          df -h    
+      
       ## Set the R library to the directory matching the
       ## R packages cache step further below when running on Docker (Linux).
       - name: Set R Library home on Linux
