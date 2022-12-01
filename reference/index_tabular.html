@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -69,13 +69,15 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">index_tabular</span><span class="op">(</span>
-  <span class="va">path</span>,
-  chrom_col <span class="op">=</span> <span class="st">"CHR"</span>,
-  start_col <span class="op">=</span> <span class="st">"BP"</span>,
-  end_col <span class="op">=</span> <span class="va">start_col</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">index_tabular</span><span class="op">(</span></span>
+<span>  <span class="va">path</span>,</span>
+<span>  chrom_col <span class="op">=</span> <span class="st">"CHR"</span>,</span>
+<span>  start_col <span class="op">=</span> <span class="st">"BP"</span>,</span>
+<span>  end_col <span class="op">=</span> <span class="va">start_col</span>,</span>
+<span>  overwrite <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  remove_tmp <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="source">
@@ -88,23 +90,44 @@ echotabix</a>.</p>
     <h2>Arguments</h2>
     <dl><dt>path</dt>
 <dd><p>Path to GWAS summary statistics file.</p></dd>
+
+
 <dt>chrom_col</dt>
 <dd><p>Name of the chromosome column in
 <code>sumstats_dt</code> (e.g. "CHR").</p></dd>
+
+
 <dt>start_col</dt>
 <dd><p>Name of the starting genomic position
 column in <code>sumstats_dt</code> (e.g. "POS","start").</p></dd>
+
+
 <dt>end_col</dt>
 <dd><p>Name of the ending genomic position
 column in <code>sumstats_dt</code> (e.g. "POS","end").
 Can be the same as <code>start_col</code> when <code>sumstats_dt</code>
 only contains SNPs that span 1 base pair (bp) each.</p></dd>
+
+
+<dt>overwrite</dt>
+<dd><p>A logical(1) indicating whether <code>dest</code> should
+    be over-written, if it already exists.</p></dd>
+
+
+<dt>remove_tmp</dt>
+<dd><p>Remove the temporary uncompressed version of the file
+(<em>.tsv</em>).</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Print messages.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Path to tabix-indexed tabular file</p>
+    
+
+<p>Path to tabix-indexed tabular file</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -114,22 +137,20 @@ only contains SNPs that span 1 base pair (bp) each.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">sumstats_dt</span> <span class="op">&lt;-</span> <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="formatted_example.html">formatted_example</a></span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">sumstats_dt</span> <span class="op">&lt;-</span> <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="formatted_example.html">formatted_example</a></span><span class="op">(</span><span class="op">)</span> </span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Standardising column headers.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> First line of summary statistics file: </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> MarkerName	CHR	POS	A1	A2	EAF	Beta	SE	Pval	</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Sorting coordinates.</span>
-<span class="r-in"><span class="va">sumstats_dt</span> <span class="op">&lt;-</span> <span class="fu">MungeSumstats</span><span class="fu">:::</span><span class="fu"><a href="sort_coords.html">sort_coords</a></span><span class="op">(</span>sumstats_dt <span class="op">=</span> <span class="va">sumstats_dt</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Sorting coordinates.</span>
-<span class="r-in"><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".tsv"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="write_sumstats.html">write_sumstats</a></span><span class="op">(</span>sumstats_dt <span class="op">=</span> <span class="va">sumstats_dt</span>, save_path <span class="op">=</span> <span class="va">path</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing in tabular format ==&gt; /tmp/RtmpDQK5Xe/filea2e18b5d3c6.tsv</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">indexed_file</span> <span class="op">&lt;-</span> <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu">index_tabular</span><span class="op">(</span>path <span class="op">=</span> <span class="va">path</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".tsv"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu"><a href="write_sumstats.html">write_sumstats</a></span><span class="op">(</span>sumstats_dt <span class="op">=</span> <span class="va">sumstats_dt</span>, save_path <span class="op">=</span> <span class="va">path</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing in tabular format ==&gt; /tmp/RtmpzARcFJ/file12c142b0b808.tsv</span>
+<span class="r-in"><span><span class="va">indexed_file</span> <span class="op">&lt;-</span> <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu">index_tabular</span><span class="op">(</span>path <span class="op">=</span> <span class="va">path</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Converting full summary stats file to tabix format for fast querying...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading header.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Ensuring file is bgzipped.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Tabix-indexing file.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Removing temproary .tsv file.</span>
 </code></pre></div>
     </div>
   </div>
@@ -144,7 +165,7 @@ only contains SNPs that span 1 base pair (bp) each.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

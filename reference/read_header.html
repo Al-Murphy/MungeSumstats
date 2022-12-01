@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -69,7 +69,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">read_header</span><span class="op">(</span><span class="va">path</span>, n <span class="op">=</span> <span class="fl">2</span>, skip_vcf_metadata <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">read_header</span><span class="op">(</span><span class="va">path</span>, n <span class="op">=</span> <span class="fl">2L</span>, skip_vcf_metadata <span class="op">=</span> <span class="cn">FALSE</span>, nThread <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -78,17 +78,36 @@
 <dd><p>Filepath for the summary statistics file to be formatted. A
 dataframe or datatable of the summary statistics file can also be passed
 directly to MungeSumstats using the path parameter.</p></dd>
+
+
 <dt>n</dt>
 <dd><p>integer. The (maximal) number of lines to read. Negative values
 indicate that one should read up to the end of input on the connection.</p></dd>
+
+
 <dt>skip_vcf_metadata</dt>
 <dd><p>logical, should VCF metadata be ignored</p></dd>
+
+
+<dt>nThread</dt>
+<dd><p>Number of threads to use for parallel processes.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>First <code>n</code> lines of the VCF header</p>
+    
+
+<p>First <code>n</code> lines of the VCF header</p>
     </div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"eduAttainOkbay.txt"</span>, </span></span>
+<span class="r-in"><span>                    package <span class="op">=</span> <span class="st">"MungeSumstats"</span><span class="op">)</span> </span></span>
+<span class="r-in"><span><span class="va">header</span> <span class="op">&lt;-</span> <span class="fu">read_header</span><span class="op">(</span>path <span class="op">=</span> <span class="va">path</span><span class="op">)</span>                    </span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Reading header.</span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
@@ -101,7 +120,7 @@ indicate that one should read up to the end of input on the connection.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

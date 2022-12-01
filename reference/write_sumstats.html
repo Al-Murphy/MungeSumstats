@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -69,16 +69,18 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">write_sumstats</span><span class="op">(</span>
-  <span class="va">sumstats_dt</span>,
-  <span class="va">save_path</span>,
-  sep <span class="op">=</span> <span class="st">"\t"</span>,
-  write_vcf <span class="op">=</span> <span class="cn">FALSE</span>,
-  tabix_index <span class="op">=</span> <span class="cn">FALSE</span>,
-  nThread <span class="op">=</span> <span class="fl">1</span>,
-  return_path <span class="op">=</span> <span class="cn">FALSE</span>,
-  save_path_check <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">write_sumstats</span><span class="op">(</span></span>
+<span>  <span class="va">sumstats_dt</span>,</span>
+<span>  <span class="va">save_path</span>,</span>
+<span>  <span class="va">ref_genome</span>,</span>
+<span>  sep <span class="op">=</span> <span class="st">"\t"</span>,</span>
+<span>  write_vcf <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  save_format <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tabix_index <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  nThread <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  return_path <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  save_path_check <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="source">
@@ -92,46 +94,75 @@ file renaming behavior</a></p>
     <dl><dt>sumstats_dt</dt>
 <dd><p>data table obj of the summary statistics
 file for the GWAS.</p></dd>
+
+
 <dt>save_path</dt>
 <dd><p>File path to save formatted data. Defaults to
 <code>tempfile(fileext=".tsv.gz")</code>.</p></dd>
+
+
+<dt>ref_genome</dt>
+<dd><p>name of the reference genome used for the GWAS ("GRCh37" or
+"GRCh38"). Argument is case-insensitive. Default is NULL which infers the
+reference genome from the data.</p></dd>
+
+
 <dt>sep</dt>
 <dd><p>The separator between columns. Defaults to the character in the set <code>[,\t |;:]</code> that separates the sample of rows into the most number of lines with the same number of fields. Use <code>NULL</code> or <code>""</code> to specify no separator; i.e. each line a single character column like <code><a href="https://rdrr.io/r/base/readLines.html" class="external-link">base::readLines</a></code> does.</p></dd>
+
+
 <dt>write_vcf</dt>
 <dd><p>Whether to write as VCF (TRUE) or tabular file (FALSE).</p></dd>
+
+
+<dt>save_format</dt>
+<dd><p>Output format of sumstats. Options are NULL - standardised
+output format from MungeSumstats, LDSC - output format compatible with LDSC
+and openGWAS - output compatible with openGWAS VCFs. Default is NULL.</p></dd>
+
+
 <dt>tabix_index</dt>
 <dd><p>Index the formatted summary statistics with
 <a href="http://www.htslib.org/doc/tabix.html" class="external-link">tabix</a> for fast querying.</p></dd>
+
+
 <dt>nThread</dt>
 <dd><p>The number of threads to use. Experiment to see what works best for your data on your hardware.</p></dd>
+
+
 <dt>return_path</dt>
 <dd><p>Return <code>save_path</code>.
 This will have been modified in some cases
 (e.g. after compressing and tabix-indexing a
 previously un-compressed file).</p></dd>
+
+
 <dt>save_path_check</dt>
 <dd><p>Ensure path name is valid (given the other arguments)
 before writing (default: FALSE).</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>If <code>return_path=TRUE</code>, returns <code>save_path</code>.
+    
+
+<p>If <code>return_path=TRUE</code>, returns <code>save_path</code>.
 Else returns <code>NULL</code>.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"eduAttainOkbay.txt"</span>,</span>
-<span class="r-in">    package <span class="op">=</span> <span class="st">"MungeSumstats"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">eduAttainOkbay</span> <span class="op">&lt;-</span> <span class="fu"><a href="read_sumstats.html">read_sumstats</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">path</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"eduAttainOkbay.txt"</span>,</span></span>
+<span class="r-in"><span>    package <span class="op">=</span> <span class="st">"MungeSumstats"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">eduAttainOkbay</span> <span class="op">&lt;-</span> <span class="fu"><a href="read_sumstats.html">read_sumstats</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">path</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Importing tabular file: /__w/_temp/Library/MungeSumstats/extdata/eduAttainOkbay.txt</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Checking for empty columns.</span>
-<span class="r-in"><span class="fu">write_sumstats</span><span class="op">(</span></span>
-<span class="r-in">    sumstats_dt <span class="op">=</span> <span class="va">eduAttainOkbay</span>,</span>
-<span class="r-in">    save_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".tsv.gz"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing in tabular format ==&gt; /tmp/RtmpDQK5Xe/filea2e76ff3d69.tsv.gz</span>
+<span class="r-in"><span><span class="fu">write_sumstats</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    sumstats_dt <span class="op">=</span> <span class="va">eduAttainOkbay</span>,</span></span>
+<span class="r-in"><span>    save_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".tsv.gz"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing in tabular format ==&gt; /tmp/RtmpzARcFJ/file12c1a734bee.tsv.gz</span>
 </code></pre></div>
     </div>
   </div>
@@ -146,7 +177,7 @@ Else returns <code>NULL</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

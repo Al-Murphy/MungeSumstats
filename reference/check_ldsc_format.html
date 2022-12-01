@@ -19,7 +19,7 @@ to use their munge_sumstats.py script first."><!-- mathjax --><script src="https
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -73,14 +73,14 @@ to use their <code>munge_sumstats.py</code> script first.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">check_ldsc_format</span><span class="op">(</span>
-  <span class="va">sumstats_dt</span>,
-  <span class="va">ldsc_format</span>,
-  <span class="va">convert_n_int</span>,
-  <span class="va">allele_flip_check</span>,
-  <span class="va">compute_z</span>,
-  <span class="va">compute_n</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">check_ldsc_format</span><span class="op">(</span></span>
+<span>  <span class="va">sumstats_dt</span>,</span>
+<span>  <span class="va">save_format</span>,</span>
+<span>  <span class="va">convert_n_int</span>,</span>
+<span>  <span class="va">allele_flip_check</span>,</span>
+<span>  <span class="va">compute_z</span>,</span>
+<span>  <span class="va">compute_n</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="source">
@@ -92,21 +92,34 @@ to use their <code>munge_sumstats.py</code> script first.</p>
     <dl><dt>sumstats_dt</dt>
 <dd><p>data table obj of the summary statistics file for the
 GWAS.</p></dd>
-<dt>ldsc_format</dt>
-<dd><p>Binary Ensure that output format meets all requirements
-to be fed directly into LDSC without the need for additional munging. Default
-is FALSE</p></dd>
+
+
+<dt>save_format</dt>
+<dd><p>Output format of sumstats. Options are NULL - standardised
+output format from MungeSumstats, LDSC - output format compatible with LDSC
+and openGWAS - output compatible with openGWAS VCFs. Default is NULL.</p></dd>
+
+
 <dt>convert_n_int</dt>
 <dd><p>Binary, if N (the number of samples) is not an integer,
 should this be rounded? Default is TRUE.</p></dd>
+
+
 <dt>allele_flip_check</dt>
 <dd><p>Binary Should the allele columns be checked against
 reference genome to infer if flipping is necessary. Default is TRUE.</p></dd>
+
+
 <dt>compute_z</dt>
-<dd><p>Whether to compute Z-score column from P. Default is FALSE.
-<strong>Note</strong> that imputing the Z-score for every SNP will not correct be
+<dd><p>Whether to compute Z-score column. Default is FALSE. This
+can be computed from Beta and SE with (Beta/SE) or P
+(Z:=sign(BETA)*sqrt(stats::qchisq(P,1,lower=FALSE))).
+<strong>Note</strong> that imputing the Z-score from P for every SNP will not be
 perfectly correct and may result in a loss of power. This should only be done
-as a last resort.</p></dd>
+as a last resort. Use 'BETA' to impute by BETA/SE and 'P' to impute by SNP
+p-value.</p></dd>
+
+
 <dt>compute_n</dt>
 <dd><p>Whether to impute N. Default of 0 won't impute, any other
 integer will be imputed as the N (sample size) for every SNP in the dataset.
@@ -116,10 +129,13 @@ should only be done as a last resort. N can also be inputted with "ldsc",
 of multiple. Sum and an integer value creates an N column in the output
 whereas giant, metal or ldsc create an Neff or effective sample size. If
 multiples are passed, the formula used to derive it will be indicated.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Formatted summary statistics</p>
+    
+
+<p>Formatted summary statistics</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -139,7 +155,7 @@ LDSC documentation</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

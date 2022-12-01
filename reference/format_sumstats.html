@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -69,54 +69,59 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">format_sumstats</span><span class="op">(</span>
-  <span class="va">path</span>,
-  ref_genome <span class="op">=</span> <span class="cn">NULL</span>,
-  convert_ref_genome <span class="op">=</span> <span class="cn">NULL</span>,
-  convert_small_p <span class="op">=</span> <span class="cn">TRUE</span>,
-  convert_large_p <span class="op">=</span> <span class="cn">TRUE</span>,
-  convert_neg_p <span class="op">=</span> <span class="cn">TRUE</span>,
-  compute_z <span class="op">=</span> <span class="cn">FALSE</span>,
-  force_new_z <span class="op">=</span> <span class="cn">FALSE</span>,
-  compute_n <span class="op">=</span> <span class="fl">0L</span>,
-  convert_n_int <span class="op">=</span> <span class="cn">TRUE</span>,
-  impute_beta <span class="op">=</span> <span class="cn">FALSE</span>,
-  impute_se <span class="op">=</span> <span class="cn">FALSE</span>,
-  analysis_trait <span class="op">=</span> <span class="cn">NULL</span>,
-  INFO_filter <span class="op">=</span> <span class="fl">0.9</span>,
-  FRQ_filter <span class="op">=</span> <span class="fl">0</span>,
-  pos_se <span class="op">=</span> <span class="cn">TRUE</span>,
-  effect_columns_nonzero <span class="op">=</span> <span class="cn">FALSE</span>,
-  N_std <span class="op">=</span> <span class="fl">5</span>,
-  N_dropNA <span class="op">=</span> <span class="cn">TRUE</span>,
-  rmv_chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"X"</span>, <span class="st">"Y"</span>, <span class="st">"MT"</span><span class="op">)</span>,
-  rmv_chrPrefix <span class="op">=</span> <span class="cn">TRUE</span>,
-  on_ref_genome <span class="op">=</span> <span class="cn">TRUE</span>,
-  strand_ambig_filter <span class="op">=</span> <span class="cn">FALSE</span>,
-  allele_flip_check <span class="op">=</span> <span class="cn">TRUE</span>,
-  allele_flip_drop <span class="op">=</span> <span class="cn">TRUE</span>,
-  allele_flip_z <span class="op">=</span> <span class="cn">TRUE</span>,
-  allele_flip_frq <span class="op">=</span> <span class="cn">TRUE</span>,
-  bi_allelic_filter <span class="op">=</span> <span class="cn">TRUE</span>,
-  snp_ids_are_rs_ids <span class="op">=</span> <span class="cn">TRUE</span>,
-  remove_multi_rs_snp <span class="op">=</span> <span class="cn">FALSE</span>,
-  frq_is_maf <span class="op">=</span> <span class="cn">TRUE</span>,
-  indels <span class="op">=</span> <span class="cn">TRUE</span>,
-  sort_coordinates <span class="op">=</span> <span class="cn">TRUE</span>,
-  nThread <span class="op">=</span> <span class="fl">1</span>,
-  save_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".tsv.gz"</span><span class="op">)</span>,
-  write_vcf <span class="op">=</span> <span class="cn">FALSE</span>,
-  tabix_index <span class="op">=</span> <span class="cn">FALSE</span>,
-  return_data <span class="op">=</span> <span class="cn">FALSE</span>,
-  return_format <span class="op">=</span> <span class="st">"data.table"</span>,
-  ldsc_format <span class="op">=</span> <span class="cn">FALSE</span>,
-  log_folder_ind <span class="op">=</span> <span class="cn">FALSE</span>,
-  log_mungesumstats_msgs <span class="op">=</span> <span class="cn">FALSE</span>,
-  log_folder <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,
-  imputation_ind <span class="op">=</span> <span class="cn">FALSE</span>,
-  force_new <span class="op">=</span> <span class="cn">FALSE</span>,
-  mapping_file <span class="op">=</span> <span class="va">sumstatsColHeaders</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">format_sumstats</span><span class="op">(</span></span>
+<span>  <span class="va">path</span>,</span>
+<span>  ref_genome <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  convert_ref_genome <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  chain_source <span class="op">=</span> <span class="st">"ensembl"</span>,</span>
+<span>  convert_small_p <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  convert_large_p <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  convert_neg_p <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  compute_z <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  force_new_z <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  compute_n <span class="op">=</span> <span class="fl">0L</span>,</span>
+<span>  convert_n_int <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  impute_beta <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  es_is_beta <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  impute_se <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  analysis_trait <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  INFO_filter <span class="op">=</span> <span class="fl">0.9</span>,</span>
+<span>  FRQ_filter <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  pos_se <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  effect_columns_nonzero <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  N_std <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  N_dropNA <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  rmv_chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"X"</span>, <span class="st">"Y"</span>, <span class="st">"MT"</span><span class="op">)</span>,</span>
+<span>  rmv_chrPrefix <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  on_ref_genome <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  strand_ambig_filter <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  allele_flip_check <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  allele_flip_drop <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  allele_flip_z <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  allele_flip_frq <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  bi_allelic_filter <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  snp_ids_are_rs_ids <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  remove_multi_rs_snp <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  frq_is_maf <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  indels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  dbSNP <span class="op">=</span> <span class="fl">155</span>,</span>
+<span>  check_dups <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  sort_coordinates <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  nThread <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  save_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".tsv.gz"</span><span class="op">)</span>,</span>
+<span>  write_vcf <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  tabix_index <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  return_data <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  return_format <span class="op">=</span> <span class="st">"data.table"</span>,</span>
+<span>  ldsc_format <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  save_format <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  log_folder_ind <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  log_mungesumstats_msgs <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  log_folder <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  imputation_ind <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  force_new <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  mapping_file <span class="op">=</span> <span class="va">sumstatsColHeaders</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -125,36 +130,61 @@
 <dd><p>Filepath for the summary statistics file to be formatted. A
 dataframe or datatable of the summary statistics file can also be passed
 directly to MungeSumstats using the path parameter.</p></dd>
+
+
 <dt>ref_genome</dt>
 <dd><p>name of the reference genome used for the GWAS ("GRCh37" or
 "GRCh38"). Argument is case-insensitive. Default is NULL which infers the
 reference genome from the data.</p></dd>
+
+
 <dt>convert_ref_genome</dt>
 <dd><p>name of the reference genome to convert to
 ("GRCh37" or "GRCh38"). This will only occur if the current genome build does
 not match. Default is not to convert the genome build (NULL).</p></dd>
+
+
+<dt>chain_source</dt>
+<dd><p>source of the chain file to use in liftover, if converting
+genome build ("ucsc" or "ensembl"). Note that the UCSC chain files require a
+license for commercial use. The Ensembl chain is used by default ("ensembl").</p></dd>
+
+
 <dt>convert_small_p</dt>
 <dd><p>Binary, should non-negative
 p-values &lt;= 5e-324 be converted to 0?
 Small p-values pass the R limit and can cause errors with LDSC/MAGMA and
 should be converted. Default is TRUE.</p></dd>
+
+
 <dt>convert_large_p</dt>
 <dd><p>Binary, should p-values &gt;1 be converted to 1?
 P-values &gt;1 should not be possible and can cause errors with LDSC/MAGMA and
 should be converted. Default is TRUE.</p></dd>
+
+
 <dt>convert_neg_p</dt>
 <dd><p>Binary, should p-values &lt;0 be converted to 0?
 Negative p-values should not be possible and can cause errors
 with LDSC/MAGMA and should be converted. Default is TRUE.</p></dd>
+
+
 <dt>compute_z</dt>
-<dd><p>Whether to compute Z-score column from P. Default is FALSE.
-<strong>Note</strong> that imputing the Z-score for every SNP will not correct be
+<dd><p>Whether to compute Z-score column. Default is FALSE. This
+can be computed from Beta and SE with (Beta/SE) or P
+(Z:=sign(BETA)*sqrt(stats::qchisq(P,1,lower=FALSE))).
+<strong>Note</strong> that imputing the Z-score from P for every SNP will not be
 perfectly correct and may result in a loss of power. This should only be done
-as a last resort.</p></dd>
+as a last resort. Use 'BETA' to impute by BETA/SE and 'P' to impute by SNP
+p-value.</p></dd>
+
+
 <dt>force_new_z</dt>
 <dd><p>When a "Z" column already exists, it will be used by
 default. To override and compute a new Z-score column from P set
 <code>force_new_z=TRUE</code>.</p></dd>
+
+
 <dt>compute_n</dt>
 <dd><p>Whether to impute N. Default of 0 won't impute, any other
 integer will be imputed as the N (sample size) for every SNP in the dataset.
@@ -164,17 +194,29 @@ should only be done as a last resort. N can also be inputted with "ldsc",
 of multiple. Sum and an integer value creates an N column in the output
 whereas giant, metal or ldsc create an Neff or effective sample size. If
 multiples are passed, the formula used to derive it will be indicated.</p></dd>
+
+
 <dt>convert_n_int</dt>
 <dd><p>Binary, if N (the number of samples) is not an integer,
 should this be rounded? Default is TRUE.</p></dd>
+
+
 <dt>impute_beta</dt>
 <dd><p>Binary, whether BETA should be imputed using other effect
 data if it isn't present in the sumstats. Note that this imputation is an
-approximation so could have an effect on downstream analysis. Use with
-caution. The different methods MungeSumstats will try and impute beta (in
-this order or priority) are:</p><ol><li><p>log(OR)  2. Z x SE
+approximation (for Z &amp; SE approach) so could have an effect on downstream
+analysis. Use with caution. The different methods MungeSumstats will try and
+impute beta (in this order or priority) are:</p><ol><li><p>log(OR)  2. Z x SE
 Default value is FALSE.</p></li>
 </ol></dd>
+
+
+<dt>es_is_beta</dt>
+<dd><p>Binary, whether to map ES to BETA. We take BETA to be any
+BETA-like value (including Effect Size). If this is not the case for your
+sumstats, change this to FALSE. Default is TRUE.</p></dd>
+
+
 <dt>impute_se</dt>
 <dd><p>Binary, whether the standard error should be imputed using
 other effect data if it isn't present in the sumstats. Note that this
@@ -183,70 +225,108 @@ analysis. Use with caution. The different methods MungeSumstats will try and
 impute se (in this order or priority) are:</p><ol><li><p>BETA / Z  2. abs(BETA/ qnorm(P/2))
 Default is FALSE.</p></li>
 </ol></dd>
+
+
 <dt>analysis_trait</dt>
 <dd><p>If multiple traits were studied, name of the trait for
 analysis from the GWAS. Default is NULL.</p></dd>
+
+
 <dt>INFO_filter</dt>
 <dd><p>numeric The minimum value permissible of the imputation
 information score (if present in sumstats file). Default 0.9.</p></dd>
+
+
 <dt>FRQ_filter</dt>
 <dd><p>numeric The minimum value permissible of the frequency(FRQ)
 of the SNP (i.e. Allele Frequency (AF)) (if present in sumstats file). By
 default no filtering is done, i.e. value of 0.</p></dd>
+
+
 <dt>pos_se</dt>
 <dd><p>Binary Should the standard Error (SE) column be checked to
 ensure it is greater than 0? Those that are, are removed (if present in
 sumstats file). Default TRUE.</p></dd>
+
+
 <dt>effect_columns_nonzero</dt>
 <dd><p>Binary should the effect columns in the data
 BETA,OR (odds ratio),LOG_ODDS,SIGNED_SUMSTAT be checked to ensure no SNP=0.
 Those that do are removed(if present in sumstats file). Default FALSE.</p></dd>
+
+
 <dt>N_std</dt>
 <dd><p>numeric The number of standard deviations above the mean a SNP's
 N is needed to be removed. Default is 5.</p></dd>
+
+
 <dt>N_dropNA</dt>
 <dd><p>Drop rows where N is missing.Default is TRUE.</p></dd>
+
+
 <dt>rmv_chr</dt>
 <dd><p>vector or character The chromosomes on which the SNPs should
 be removed. Use NULL if no filtering necessary. Default is X, Y and
 mitochondrial.</p></dd>
+
+
 <dt>rmv_chrPrefix</dt>
 <dd><p>Remove "chr" or "CHR" from chromosome names. Default is
 TRUE.</p></dd>
+
+
 <dt>on_ref_genome</dt>
 <dd><p>Binary Should a check take place that all SNPs are on
 the reference genome by SNP ID. Default is TRUE.</p></dd>
+
+
 <dt>strand_ambig_filter</dt>
 <dd><p>Binary Should SNPs with strand-ambiguous alleles
 be removed. Default is FALSE.</p></dd>
+
+
 <dt>allele_flip_check</dt>
 <dd><p>Binary Should the allele columns be checked against
 reference genome to infer if flipping is necessary. Default is TRUE.</p></dd>
+
+
 <dt>allele_flip_drop</dt>
 <dd><p>Binary Should the SNPs for which neither their A1 or
 A2 base pair values match a reference genome be dropped. Default is TRUE.</p></dd>
+
+
 <dt>allele_flip_z</dt>
 <dd><p>Binary should the Z-score be flipped along with effect
 and FRQ columns like Beta? It is assumed to be calculated off the effect size
 not the P-value and so will be flipped i.e. default TRUE.</p></dd>
+
+
 <dt>allele_flip_frq</dt>
 <dd><p>Binary should the frequency (FRQ) column be flipped
 along with effect and z-score columns like Beta? Default TRUE.</p></dd>
+
+
 <dt>bi_allelic_filter</dt>
 <dd><p>Binary Should non-biallelic SNPs be removed. Default
 is TRUE.</p></dd>
+
+
 <dt>snp_ids_are_rs_ids</dt>
 <dd><p>Binary Should the supplied SNP ID's be assumed to
 be RSIDs. If not, imputation using the SNP ID for other columns like
 base-pair position or chromosome will not be possible. If set to FALSE, the
 SNP RS ID will be imputed from the reference genome if possible. Default is
 TRUE.</p></dd>
+
+
 <dt>remove_multi_rs_snp</dt>
 <dd><p>Binary Sometimes summary statistics can have
 multiple RSIDs on one row (i.e. related to one SNP), for example
 "rs5772025_rs397784053". This can cause an error so by default, the first
 RS ID will be kept and the rest removed e.g."rs5772025". If you want to just
 remove these SNPs entirely, set it to TRUE. Default is FALSE.</p></dd>
+
+
 <dt>frq_is_maf</dt>
 <dd><p>Conventionally the FRQ column is intended to show the
 minor/effect allele frequency (MAF) but sometimes the major allele frequency
@@ -254,45 +334,87 @@ can be inferred as the FRQ column. This logical variable indicates that the
 FRQ column should be renamed to MAJOR_ALLELE_FRQ if the frequency values
 appear to relate to the major allele i.e. &gt;0.5. By default this mapping won't
 occur i.e. is TRUE.</p></dd>
+
+
 <dt>indels</dt>
 <dd><p>Binary does your Sumstats file contain Indels? These don't
 exist in our reference file so they will be excluded from checks if this
 value is TRUE. Default is TRUE.</p></dd>
+
+
+<dt>dbSNP</dt>
+<dd><p>version of dbSNP to be used for imputation (144 or 155).</p></dd>
+
+
+<dt>check_dups</dt>
+<dd><p>whether to check for duplicates - if formatting QTL
+datasets this should be set to FALSE otherwise keep as TRUE. Default is TRUE.</p></dd>
+
+
 <dt>sort_coordinates</dt>
 <dd><p>Whether to sort by coordinates of resulting sumstats</p></dd>
+
+
 <dt>nThread</dt>
 <dd><p>Number of threads to use for parallel processes.</p></dd>
+
+
 <dt>save_path</dt>
 <dd><p>File path to save formatted data. Defaults to
 <code>tempfile(fileext=".tsv.gz")</code>.</p></dd>
+
+
 <dt>write_vcf</dt>
 <dd><p>Whether to write as VCF (TRUE) or tabular file (FALSE).</p></dd>
+
+
 <dt>tabix_index</dt>
 <dd><p>Index the formatted summary statistics with
 <a href="http://www.htslib.org/doc/tabix.html" class="external-link">tabix</a> for fast querying.</p></dd>
+
+
 <dt>return_data</dt>
 <dd><p>Return <code>data.table</code>, <code>GRanges</code> or <code>VRanges</code>
 directly to user. Otherwise, return the path to the save data. Default is
 FALSE.</p></dd>
+
+
 <dt>return_format</dt>
 <dd><p>If return_data is TRUE. Object type to be returned
 ("data.table","vranges","granges").</p></dd>
+
+
 <dt>ldsc_format</dt>
-<dd><p>Binary Ensure that output format meets all requirements
-to be fed directly into LDSC without the need for additional munging. Default
-is FALSE</p></dd>
+<dd><p>DEPRECATED, do not use. Use save_format="LDSC" instead.</p></dd>
+
+
+<dt>save_format</dt>
+<dd><p>Output format of sumstats. Options are NULL - standardised
+output format from MungeSumstats, LDSC - output format compatible with LDSC
+and openGWAS - output compatible with openGWAS VCFs. Default is NULL.</p></dd>
+
+
 <dt>log_folder_ind</dt>
 <dd><p>Binary Should log files be stored containing all
 filtered out SNPs (separate file per filter). The data is outputted in the
 same format specified for the resulting sumstats file. The only exception to
 this rule is if output is vcf, then log file saved as .tsv.gz. Default is
 FALSE.</p></dd>
+
+
 <dt>log_mungesumstats_msgs</dt>
 <dd><p>Binary Should a log be stored containing all
 messages and errors printed by MungeSumstats in a run. Default is FALSE</p></dd>
+
+
 <dt>log_folder</dt>
 <dd><p>Filepath to the directory for the log files and the log of
-MungeSumstats messages to be stored. Default is a temporary directory.</p></dd>
+MungeSumstats messages to be stored. Default is a temporary directory. Note
+the name of the log files (log messages and log outputs) are now the same as
+the name of the file specified in the save path parameter with the extension
+'_log_msg.txt' and '_log_output.txt' respectively.</p></dd>
+
+
 <dt>imputation_ind</dt>
 <dd><p>Binary Should a column be added for each imputation
 step to show what SNPs have imputed values for differing fields. This
@@ -301,10 +423,14 @@ value, this denoted whether the alelles where switched based on
 MungeSumstats initial choice of A1, A2 from the input column headers and thus
 may not align with what the creator intended.<strong>Note</strong> these columns will be
 in the formatted summary statistics returned. Default is FALSE.</p></dd>
+
+
 <dt>force_new</dt>
 <dd><p>If a formatted file of the same names as <code>save_path</code>
 exists, formatting will be skipped and this file will be imported instead
 (default). Set <code>force_new=TRUE</code> to override this.</p></dd>
+
+
 <dt>mapping_file</dt>
 <dd><p>MungeSumstats has a pre-defined column-name mapping file
 which should cover the most common column headers and their interpretations.
@@ -312,42 +438,49 @@ However, if a column header that is in youf file is missing of the mapping we
 give is incorrect you can supply your own mapping file. Must be a 2 column
 dataframe with column names "Uncorrected" and "Corrected". See
 data(sumstatsColHeaders) for default mapping and necessary format.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The address for the modified sumstats file or the actual data
+    
+
+<p>The address for the modified sumstats file or the actual data
 dependent on user choice. Also, if log files wanted by the user, the return
 in both above instances are a list.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Pass path to Educational Attainment Okbay sumstat file to a temp directory</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">eduAttainOkbayPth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"eduAttainOkbay.txt"</span>,</span>
-<span class="r-in">    package <span class="op">=</span> <span class="st">"MungeSumstats"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Call uses reference genome as default with more than 2GB of memory,</span></span>
-<span class="r-in"><span class="co">## which is more than what 32-bit Windows can handle so remove certain checks</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">is_32bit_windows</span> <span class="op">&lt;-</span></span>
-<span class="r-in">    <span class="va">.Platform</span><span class="op">$</span><span class="va">OS.type</span> <span class="op">==</span> <span class="st">"windows"</span> <span class="op">&amp;&amp;</span> <span class="va">.Platform</span><span class="op">$</span><span class="va">r_arch</span> <span class="op">==</span> <span class="st">"i386"</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="va">is_32bit_windows</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="va">reformatted</span> <span class="op">&lt;-</span> <span class="fu">format_sumstats</span><span class="op">(</span></span>
-<span class="r-in">        path <span class="op">=</span> <span class="va">eduAttainOkbayPth</span>,</span>
-<span class="r-in">        ref_genome <span class="op">=</span> <span class="st">"GRCh37"</span></span>
-<span class="r-in">    <span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="va">reformatted</span> <span class="op">&lt;-</span> <span class="fu">format_sumstats</span><span class="op">(</span></span>
-<span class="r-in">        path <span class="op">=</span> <span class="va">eduAttainOkbayPth</span>,</span>
-<span class="r-in">        ref_genome <span class="op">=</span> <span class="st">"GRCh37"</span>,</span>
-<span class="r-in">        on_ref_genome <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span class="r-in">        strand_ambig_filter <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span class="r-in">        bi_allelic_filter <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span class="r-in">        allele_flip_check <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span class="r-in">    <span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Pass path to Educational Attainment Okbay sumstat file to a temp directory</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">eduAttainOkbayPth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"eduAttainOkbay.txt"</span>,</span></span>
+<span class="r-in"><span>    package <span class="op">=</span> <span class="st">"MungeSumstats"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Call uses reference genome as default with more than 2GB of memory,</span></span></span>
+<span class="r-in"><span><span class="co">## which is more than what 32-bit Windows can handle so remove certain checks</span></span></span>
+<span class="r-in"><span><span class="co">## Using dbSNP = 144 for speed as it's smaller but you should use 155 unless</span></span></span>
+<span class="r-in"><span><span class="co">## you know what you are doing and need 144</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">is_32bit_windows</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>    <span class="va">.Platform</span><span class="op">$</span><span class="va">OS.type</span> <span class="op">==</span> <span class="st">"windows"</span> <span class="op">&amp;&amp;</span> <span class="va">.Platform</span><span class="op">$</span><span class="va">r_arch</span> <span class="op">==</span> <span class="st">"i386"</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="va">is_32bit_windows</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="va">reformatted</span> <span class="op">&lt;-</span> <span class="fu">format_sumstats</span><span class="op">(</span></span></span>
+<span class="r-in"><span>        path <span class="op">=</span> <span class="va">eduAttainOkbayPth</span>,</span></span>
+<span class="r-in"><span>        ref_genome <span class="op">=</span> <span class="st">"GRCh37"</span>,</span></span>
+<span class="r-in"><span>        dbSNP <span class="op">=</span> <span class="fl">144</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="va">reformatted</span> <span class="op">&lt;-</span> <span class="fu">format_sumstats</span><span class="op">(</span></span></span>
+<span class="r-in"><span>        path <span class="op">=</span> <span class="va">eduAttainOkbayPth</span>,</span></span>
+<span class="r-in"><span>        ref_genome <span class="op">=</span> <span class="st">"GRCh37"</span>,</span></span>
+<span class="r-in"><span>        on_ref_genome <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>        strand_ambig_filter <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>        bi_allelic_filter <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>        allele_flip_check <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>        dbSNP<span class="op">=</span><span class="fl">144</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ******::NOTE::******</span>
@@ -355,7 +488,7 @@ in both above instances are a list.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  - This means all formatted summary stats will be deleted upon ending the R session.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  - To keep formatted summary stats, change `save_path`  ( e.g. `save_path=file.path('./formatted',basename(path))` ),   or make sure to copy files elsewhere after processing  ( e.g. `file.copy(save_path, './formatted/' )`.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  ******************** </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Formatted summary statistics will be saved to ==&gt;  /tmp/RtmpDQK5Xe/filea2e18d11b36.tsv.gz</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Formatted summary statistics will be saved to ==&gt;  /tmp/RtmpzARcFJ/file12c15ff6f51.tsv.gz</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Importing tabular file: /__w/_temp/Library/MungeSumstats/extdata/eduAttainOkbay.txt</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Checking for empty columns.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Standardising column headers.</span>
@@ -377,7 +510,28 @@ in both above instances are a list.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading reference genome data.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Preprocessing RSIDs.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Validating RSIDs of 93 SNPs using BSgenome::snpsById...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> BSgenome::snpsById done in 25 seconds.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: BiocGenerics</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘BiocGenerics’</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:stats’:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     IQR, mad, sd, var, xtabs</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:base’:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     Filter, Find, Map, Position, Reduce, anyDuplicated, aperm, append,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     as.data.frame, basename, cbind, colnames, dirname, do.call,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     duplicated, eval, evalq, get, grep, grepl, intersect, is.unsorted,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     lapply, mapply, match, mget, order, paste, pmax, pmax.int, pmin,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     pmin.int, rank, rbind, rownames, sapply, setdiff, sort, table,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     tapply, union, unique, unsplit, which.max, which.min</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: S4Vectors</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: stats4</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘S4Vectors’</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:base’:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     I, expand.grid, unname</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> BSgenome::snpsById done in 17 seconds.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Checking for correct direction of A1 (reference) and A2 (alternative allele).</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> There are 46 SNPs where A1 doesn't match the reference genome.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> These will be flipped with their effect columns.</span>
@@ -389,24 +543,22 @@ in both above instances are a list.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Filtering SNPs, ensuring SE&gt;0.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Ensuring all SNPs have N&lt;5 std dev above mean.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Removing 'chr' prefix from CHR.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Making X/Y CHR uppercase.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Making X/Y/MT CHR uppercase.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Checking for bi-allelic SNPs.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Warning: When method is an integer, must be &gt;0.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 67 SNPs (72%) have FRQ values &gt; 0.5. Conventionally the FRQ column is intended to show the minor/effect allele frequency.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The FRQ column was mapped from one of the following from the inputted  summary statistics file:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> FRQ, EAF, FREQUENCY, FRQ_U, F_U, MAF, FREQ, FREQ_TESTED_ALLELE, FRQ_TESTED_ALLELE, FREQ_EFFECT_ALLELE, FRQ_EFFECT_ALLELE, EFFECT_ALLELE_FREQUENCY, EFFECT_ALLELE_FREQ, EFFECT_ALLELE_FRQ, A1FREQ, A1FRQ, A2FREQ, A2FRQ, ALLELE_FREQUENCY, ALLELE_FREQ, ALLELE_FRQ, AF, MINOR_AF, EFFECT_AF, A2_AF, EFF_AF, ALT_AF, ALTERNATIVE_AF, INC_AF, A_2_AF, TESTED_AF, AF1, ALLELEFREQ, ALT_FREQ, EAF_HRC, EFFECTALLELEFREQ, FREQ.A1.1000G.EUR, FREQ.A1.ESP.EUR, FREQ.ALLELE1.HAPMAPCEU, FREQ.B, FREQ1, FREQ1.HAPMAP, FREQ_EUROPEAN_1000GENOMES, FREQ_HAPMAP, FREQ_TESTED_ALLELE_IN_HRS, FRQ_A1, FRQ_U_113154, FRQ_U_31358, FRQ_U_344901, FRQ_U_43456, POOLED_ALT_AF</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> FRQ, EAF, FREQUENCY, FRQ_U, F_U, MAF, FREQ, FREQ_TESTED_ALLELE, FRQ_TESTED_ALLELE, FREQ_EFFECT_ALLELE, FRQ_EFFECT_ALLELE, EFFECT_ALLELE_FREQUENCY, EFFECT_ALLELE_FREQ, EFFECT_ALLELE_FRQ, A1FREQ, A1FRQ, A2FREQ, A2FRQ, ALLELE_FREQUENCY, ALLELE_FREQ, ALLELE_FRQ, AF, MINOR_AF, EFFECT_AF, A2_AF, EFF_AF, ALT_AF, ALTERNATIVE_AF, INC_AF, A_2_AF, TESTED_AF, AF1, ALLELEFREQ, ALT_FREQ, EAF_HRC, EFFECTALLELEFREQ, FREQ.A1.1000G.EUR, FREQ.A1.ESP.EUR, FREQ.ALLELE1.HAPMAPCEU, FREQ.B, FREQ1, FREQ1.HAPMAP, FREQ_EUROPEAN_1000GENOMES, FREQ_HAPMAP, FREQ_TESTED_ALLELE_IN_HRS, FRQ_A1, FRQ_U_113154, FRQ_U_31358, FRQ_U_344901, FRQ_U_43456, POOLED_ALT_AF, AF_ALT, AF.ALT, AF-ALT, ALT.AF, ALT-AF, A2.AF, A2-AF, AF.EFF, AF_EFF, AF_EFF</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> As frq_is_maf=TRUE, the FRQ column will not be renamed. If the FRQ values were intended to represent major allele frequency,</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> set frq_is_maf=FALSE to rename the column as MAJOR_ALLELE_FRQ and differentiate it from minor/effect allele frequency.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Could not recognize genome build of:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>  - target_genome</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> These will be inferred from the data.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Sorting coordinates.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing in tabular format ==&gt; /tmp/RtmpDQK5Xe/filea2e18d11b36.tsv.gz</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing in tabular format ==&gt; /tmp/RtmpzARcFJ/file12c15ff6f51.tsv.gz</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Summary statistics report:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>    - 93 rows (100% of original 93 rows)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>    - 93 unique variants</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>    - 70 genome-wide significant variants (P&lt;5e-8)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>    - 20 chromosomes</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Done munging in 0.301 minutes.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Successfully finished preparing sumstats file, preview:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading header.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>           SNP CHR       BP A1 A2     FRQ   BETA    SE         P</span>
@@ -415,7 +567,7 @@ in both above instances are a list.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 3: rs34305371   1 72733610  G  A 0.91231 -0.035 0.005 3.762e-14</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 4:  rs2568955   1 72762169  T  C 0.23690 -0.017 0.003 1.797e-08</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Returning path to saved data.</span>
-<span class="r-in"><span class="co"># returned location has the updated summary statistics file</span></span>
+<span class="r-in"><span><span class="co"># returned location has the updated summary statistics file</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -430,7 +582,7 @@ in both above instances are a list.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

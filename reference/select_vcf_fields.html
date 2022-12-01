@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -69,43 +69,56 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">select_vcf_fields</span><span class="op">(</span>
-  <span class="va">path</span>,
-  sampled_rows <span class="op">=</span> <span class="fl">10000L</span>,
-  which <span class="op">=</span> <span class="cn">NULL</span>,
-  samples <span class="op">=</span> <span class="cn">NULL</span>,
-  nThread <span class="op">=</span> <span class="fl">1</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">select_vcf_fields</span><span class="op">(</span></span>
+<span>  <span class="va">path</span>,</span>
+<span>  sampled_rows <span class="op">=</span> <span class="fl">10000L</span>,</span>
+<span>  which <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  samples <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  nThread <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>path</dt>
 <dd><p>Path to local or remote VCF file.</p></dd>
+
+
 <dt>sampled_rows</dt>
 <dd><p>First N rows to sample.
 Set <code>NULL</code> to use full <code>sumstats_file</code>.
 when determining whether cols are empty.</p></dd>
+
+
 <dt>which</dt>
 <dd><p>A <code>GRanges</code> describing the sequences and
     ranges to be queried. Variants whose <code>POS</code> lies in the interval(s)
     <code>[start, end]</code> are returned. If <code>which</code> is not specified all
     ranges are returned.</p></dd>
+
+
 <dt>samples</dt>
 <dd><p>Which samples to use:</p><ul><li><p>1 : Only the first sample will be used (<em>DEFAULT</em>).</p></li>
 <li><p>NULL : All samples will be used.</p></li>
 <li><p>c("&lt;sample_id1&gt;","&lt;sample_id2&gt;",...) : 
 Only user-selected samples will be used (case-insensitive).</p></li>
 </ul></dd>
+
+
 <dt>nThread</dt>
 <dd><p>Number of threads to use for parallel processes.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Print messages.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>ScanVcfParam</code> object.</p>
+    
+
+<p><code>ScanVcfParam</code> object.</p>
     </div>
 
   </div>
@@ -120,7 +133,7 @@ Only user-selected samples will be used (case-insensitive).</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

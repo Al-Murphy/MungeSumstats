@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -69,18 +69,24 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">check_multi_gwas</span><span class="op">(</span><span class="va">sumstats_dt</span>, <span class="va">path</span>, <span class="va">analysis_trait</span>, <span class="va">mapping_file</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">check_multi_gwas</span><span class="op">(</span><span class="va">sumstats_dt</span>, <span class="va">path</span>, <span class="va">analysis_trait</span>, <span class="va">mapping_file</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>sumstats_dt</dt>
 <dd><p>data table obj of the summary statistics file for the GWAS</p></dd>
+
+
 <dt>path</dt>
 <dd><p>Filepath for the summary statistics file to be formatted</p></dd>
+
+
 <dt>analysis_trait</dt>
 <dd><p>If multiple traits were studied, name of the trait for
 analysis from the GWAS. Default is NULL</p></dd>
+
+
 <dt>mapping_file</dt>
 <dd><p>MungeSumstats has a pre-defined column-name mapping file
 which should cover the most common column headers and their interpretations.
@@ -88,10 +94,13 @@ However, if a column header that is in youf file is missing of the mapping we
 give is incorrect you can supply your own mapping file. Must be a 2 column
 dataframe with column names "Uncorrected" and "Corrected". See
 data(sumstatsColHeaders) for default mapping and necessary format.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>list containing sumstats_dt, the modified summary statistics data
+    
+
+<p>list containing sumstats_dt, the modified summary statistics data
 table object</p>
     </div>
 
@@ -107,7 +116,7 @@ table object</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

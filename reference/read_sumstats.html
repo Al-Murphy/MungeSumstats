@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -69,15 +69,15 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">read_sumstats</span><span class="op">(</span>
-  <span class="va">path</span>,
-  nrows <span class="op">=</span> <span class="cn">Inf</span>,
-  standardise_headers <span class="op">=</span> <span class="cn">FALSE</span>,
-  samples <span class="op">=</span> <span class="fl">1</span>,
-  sampled_rows <span class="op">=</span> <span class="fl">10000L</span>,
-  nThread <span class="op">=</span> <span class="fl">1</span>,
-  mapping_file <span class="op">=</span> <span class="va">sumstatsColHeaders</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">read_sumstats</span><span class="op">(</span></span>
+<span>  <span class="va">path</span>,</span>
+<span>  nrows <span class="op">=</span> <span class="cn">Inf</span>,</span>
+<span>  standardise_headers <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  samples <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  sampled_rows <span class="op">=</span> <span class="fl">10000L</span>,</span>
+<span>  nThread <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  mapping_file <span class="op">=</span> <span class="va">sumstatsColHeaders</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -86,23 +86,35 @@
 <dd><p>Filepath for the summary statistics file to be formatted. A
 dataframe or datatable of the summary statistics file can also be passed
 directly to MungeSumstats using the path parameter.</p></dd>
+
+
 <dt>nrows</dt>
 <dd><p>integer. The (maximal) number of lines to read.
 If <code>Inf</code>, will read in all rows.</p></dd>
+
+
 <dt>standardise_headers</dt>
 <dd><p>Standardise headers first.</p></dd>
+
+
 <dt>samples</dt>
 <dd><p>Which samples to use:</p><ul><li><p>1 : Only the first sample will be used (<em>DEFAULT</em>).</p></li>
 <li><p>NULL : All samples will be used.</p></li>
 <li><p>c("&lt;sample_id1&gt;","&lt;sample_id2&gt;",...) : 
 Only user-selected samples will be used (case-insensitive).</p></li>
 </ul></dd>
+
+
 <dt>sampled_rows</dt>
 <dd><p>First N rows to sample.
 Set <code>NULL</code> to use full <code>sumstats_file</code>.
 when determining whether cols are empty.</p></dd>
+
+
 <dt>nThread</dt>
 <dd><p>Number of threads to use for parallel processes.</p></dd>
+
+
 <dt>mapping_file</dt>
 <dd><p>MungeSumstats has a pre-defined column-name mapping file
 which should cover the most common column headers and their interpretations.
@@ -110,18 +122,21 @@ However, if a column header that is in youf file is missing of the mapping we
 give is incorrect you can supply your own mapping file. Must be a 2 column
 dataframe with column names "Uncorrected" and "Corrected". See
 data(sumstatsColHeaders) for default mapping and necessary format.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>data.table</code> of formatted summary statistics</p>
+    
+
+<p><code>data.table</code> of formatted summary statistics</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"eduAttainOkbay.txt"</span>,</span>
-<span class="r-in">    package <span class="op">=</span> <span class="st">"MungeSumstats"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">eduAttainOkbay</span> <span class="op">&lt;-</span> <span class="fu">read_sumstats</span><span class="op">(</span>path <span class="op">=</span> <span class="va">path</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"eduAttainOkbay.txt"</span>,</span></span>
+<span class="r-in"><span>    package <span class="op">=</span> <span class="st">"MungeSumstats"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">eduAttainOkbay</span> <span class="op">&lt;-</span> <span class="fu">read_sumstats</span><span class="op">(</span>path <span class="op">=</span> <span class="va">path</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Importing tabular file: /__w/_temp/Library/MungeSumstats/extdata/eduAttainOkbay.txt</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Checking for empty columns.</span>
 </code></pre></div>
@@ -138,7 +153,7 @@ data(sumstatsColHeaders) for default mapping and necessary format.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

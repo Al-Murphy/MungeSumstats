@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -69,15 +69,15 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">check_info_score</span><span class="op">(</span>
-  <span class="va">sumstats_dt</span>,
-  <span class="va">INFO_filter</span>,
-  <span class="va">log_folder_ind</span>,
-  <span class="va">check_save_out</span>,
-  <span class="va">tabix_index</span>,
-  <span class="va">nThread</span>,
-  <span class="va">log_files</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">check_info_score</span><span class="op">(</span></span>
+<span>  <span class="va">sumstats_dt</span>,</span>
+<span>  <span class="va">INFO_filter</span>,</span>
+<span>  <span class="va">log_folder_ind</span>,</span>
+<span>  <span class="va">check_save_out</span>,</span>
+<span>  <span class="va">tabix_index</span>,</span>
+<span>  <span class="va">nThread</span>,</span>
+<span>  <span class="va">log_files</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -85,23 +85,34 @@
     <dl><dt>INFO_filter</dt>
 <dd><p>numeric The minimum value permissible of the imputation
 information score (if present in sumstats file). Default 0.9.</p></dd>
+
+
 <dt>log_folder_ind</dt>
 <dd><p>Binary Should log files be stored containing all
 filtered out SNPs (separate file per filter). The data is outputted in the
 same format specified for the resulting sumstats file. The only exception to
 this rule is if output is vcf, then log file saved as .tsv.gz. Default is
 FALSE.</p></dd>
+
+
 <dt>tabix_index</dt>
 <dd><p>Index the formatted summary statistics with
 <a href="http://www.htslib.org/doc/tabix.html" class="external-link">tabix</a> for fast querying.</p></dd>
+
+
 <dt>nThread</dt>
 <dd><p>Number of threads to use for parallel processes.</p></dd>
+
+
 <dt>log_files</dt>
 <dd><p>list of log file locations.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>list containing sumstats_dt, the modified summary statistics data
+    
+
+<p>list containing sumstats_dt, the modified summary statistics data
 table object and the log file list</p>
     </div>
 
@@ -117,7 +128,7 @@ table object and the log file list</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

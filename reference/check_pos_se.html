@@ -20,7 +20,7 @@ Also impute se if missing"><!-- mathjax --><script src="https://cdnjs.cloudflare
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -74,18 +74,18 @@ Also impute se if missing</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">check_pos_se</span><span class="op">(</span>
-  <span class="va">sumstats_dt</span>,
-  <span class="va">path</span>,
-  <span class="va">pos_se</span>,
-  <span class="va">log_folder_ind</span>,
-  <span class="va">imputation_ind</span>,
-  <span class="va">check_save_out</span>,
-  <span class="va">tabix_index</span>,
-  <span class="va">nThread</span>,
-  <span class="va">log_files</span>,
-  <span class="va">impute_se</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">check_pos_se</span><span class="op">(</span></span>
+<span>  <span class="va">sumstats_dt</span>,</span>
+<span>  <span class="va">path</span>,</span>
+<span>  <span class="va">pos_se</span>,</span>
+<span>  <span class="va">log_folder_ind</span>,</span>
+<span>  <span class="va">imputation_ind</span>,</span>
+<span>  <span class="va">check_save_out</span>,</span>
+<span>  <span class="va">tabix_index</span>,</span>
+<span>  <span class="va">nThread</span>,</span>
+<span>  <span class="va">log_files</span>,</span>
+<span>  <span class="va">impute_se</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -94,16 +94,22 @@ Also impute se if missing</p>
 <dd><p>Filepath for the summary statistics file to be formatted. A
 dataframe or datatable of the summary statistics file can also be passed
 directly to MungeSumstats using the path parameter.</p></dd>
+
+
 <dt>pos_se</dt>
 <dd><p>Binary Should the standard Error (SE) column be checked to
 ensure it is greater than 0? Those that are, are removed (if present in
 sumstats file). Default TRUE.</p></dd>
+
+
 <dt>log_folder_ind</dt>
 <dd><p>Binary Should log files be stored containing all
 filtered out SNPs (separate file per filter). The data is outputted in the
 same format specified for the resulting sumstats file. The only exception to
 this rule is if output is vcf, then log file saved as .tsv.gz. Default is
 FALSE.</p></dd>
+
+
 <dt>imputation_ind</dt>
 <dd><p>Binary Should a column be added for each imputation
 step to show what SNPs have imputed values for differing fields. This
@@ -112,13 +118,21 @@ value, this denoted whether the alelles where switched based on
 MungeSumstats initial choice of A1, A2 from the input column headers and thus
 may not align with what the creator intended.<strong>Note</strong> these columns will be
 in the formatted summary statistics returned. Default is FALSE.</p></dd>
+
+
 <dt>tabix_index</dt>
 <dd><p>Index the formatted summary statistics with
 <a href="http://www.htslib.org/doc/tabix.html" class="external-link">tabix</a> for fast querying.</p></dd>
+
+
 <dt>nThread</dt>
 <dd><p>Number of threads to use for parallel processes.</p></dd>
+
+
 <dt>log_files</dt>
 <dd><p>list of log file locations</p></dd>
+
+
 <dt>impute_se</dt>
 <dd><p>Binary, whether the standard error should be imputed using
 other effect data if it isn't present in the sumstats. Note that this
@@ -127,10 +141,13 @@ analysis. Use with caution. The different methods MungeSumstats will try and
 impute se (in this order or priority) are:</p><ol><li><p>BETA / Z  2. abs(BETA/ qnorm(P/2))
 Default is FALSE.</p></li>
 </ol></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>list containing sumstats_dt, the modified summary statistics data
+    
+
+<p>list containing sumstats_dt, the modified summary statistics data
 table object and the log file list</p>
     </div>
 
@@ -146,7 +163,7 @@ table object and the log file list</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

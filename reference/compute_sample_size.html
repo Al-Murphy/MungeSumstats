@@ -21,7 +21,7 @@ overestimate your statistical power.'><!-- mathjax --><script src="https://cdnjs
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -77,18 +77,20 @@ overestimate your statistical power.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">compute_sample_size</span><span class="op">(</span>
-  <span class="va">sumstats_dt</span>,
-  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ldsc"</span>, <span class="st">"giant"</span>, <span class="st">"metal"</span>, <span class="st">"sum"</span><span class="op">)</span>,
-  force_new <span class="op">=</span> <span class="cn">FALSE</span>,
-  append_method_name <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">compute_sample_size</span><span class="op">(</span></span>
+<span>  <span class="va">sumstats_dt</span>,</span>
+<span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ldsc"</span>, <span class="st">"giant"</span>, <span class="st">"metal"</span>, <span class="st">"sum"</span><span class="op">)</span>,</span>
+<span>  force_new <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  append_method_name <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>sumstats_dt</dt>
 <dd><p>Summary statistics data.table.</p></dd>
+
+
 <dt>method</dt>
 <dd><p>Method for computing (effective) sample size.</p>
 <ul><li><p>"ldsc" : <br>
@@ -111,16 +113,23 @@ that does not account for class imbalance.</p></li>
 If method is a positive integer, it will be used as N
 for every row.</p></li>
 </ul></dd>
+
+
 <dt>force_new</dt>
 <dd><p>If "Neff" (or "N") already exists in <code>sumstats_dt</code>,
 replace it with the recomputed version.</p></dd>
+
+
 <dt>append_method_name</dt>
 <dd><p>should Neff column have an indicator to explain the
 method that makes it., Default is FALSE unless multiple methods are passed</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A data.table with a new column "Neff" or "N"</p>
+    
+
+<p>A data.table with a new column "Neff" or "N"</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -142,7 +151,7 @@ is 2:1 (as in GIANT) or 4:1 (as in METAL).</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

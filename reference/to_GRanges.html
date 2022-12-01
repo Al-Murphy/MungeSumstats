@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -69,13 +69,13 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">to_granges</span><span class="op">(</span>
-  <span class="va">sumstats_dt</span>,
-  seqnames.field <span class="op">=</span> <span class="st">"CHR"</span>,
-  start.field <span class="op">=</span> <span class="st">"BP"</span>,
-  end.field <span class="op">=</span> <span class="st">"BP"</span>,
-  style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NCBI"</span>, <span class="st">"UCSC"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">to_granges</span><span class="op">(</span></span>
+<span>  <span class="va">sumstats_dt</span>,</span>
+<span>  seqnames.field <span class="op">=</span> <span class="st">"CHR"</span>,</span>
+<span>  start.field <span class="op">=</span> <span class="st">"BP"</span>,</span>
+<span>  end.field <span class="op">=</span> <span class="st">"BP"</span>,</span>
+<span>  style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NCBI"</span>, <span class="st">"UCSC"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -83,6 +83,8 @@
     <dl><dt>sumstats_dt</dt>
 <dd><p>data table obj of the summary statistics file
 for the GWAS.</p></dd>
+
+
 <dt>seqnames.field</dt>
 <dd><p>A character vector of recognized names for the column in <code>df</code>
     that contains the chromosome name (a.k.a. sequence name) associated
@@ -90,24 +92,33 @@ for the GWAS.</p></dd>
     Only the first name in <code>seqnames.field</code> that is found
     in <code>colnames(df)</code> is used.
     If no one is found, then an error is raised.</p></dd>
+
+
 <dt>start.field</dt>
 <dd><p>A character vector of recognized names for the column in <code>df</code>
     that contains the start positions of the genomic ranges.
     Only the first name in <code>start.field</code> that is found
     in <code>colnames(df)</code> is used.
     If no one is found, then an error is raised.</p></dd>
+
+
 <dt>end.field</dt>
 <dd><p>A character vector of recognized names for the column in <code>df</code>
     that contains the end positions of the genomic ranges.
     Only the first name in <code>start.field</code> that is found
     in <code>colnames(df)</code> is used.
     If no one is found, then an error is raised.</p></dd>
+
+
 <dt>style</dt>
 <dd><p><code>GRanges</code> style to convert to, "NCBI" or "UCSC".</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>GRanges</code> object</p>
+    
+
+<p><code>GRanges</code> object</p>
     </div>
 
   </div>
@@ -122,7 +133,7 @@ for the GWAS.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

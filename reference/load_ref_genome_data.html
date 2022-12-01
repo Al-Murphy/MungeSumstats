@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -69,7 +69,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">load_ref_genome_data</span><span class="op">(</span><span class="va">snps</span>, <span class="va">ref_genome</span>, msg <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">load_ref_genome_data</span><span class="op">(</span><span class="va">snps</span>, <span class="va">ref_genome</span>, dbSNP <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">144</span>, <span class="fl">155</span><span class="op">)</span>, msg <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="source">
@@ -77,23 +77,35 @@
     <p><code>
 sumstats_dt &lt;- formatted_example()
 rsids &lt;- MungeSumstats:::load_ref_genome_data(snps = sumstats_dt$SNP,
-                                              ref_genome = "GRCH37")
+                                              ref_genome = "GRCH37",
+                                              dbSNP=144)
 </code></p>
     </div>
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>snps</dt>
 <dd><p>Character vector SNPs by rs_id from sumstats file of interest.</p></dd>
+
+
 <dt>ref_genome</dt>
 <dd><p>Name of the reference genome used for the GWAS
 (GRCh37 or GRCh38)</p></dd>
+
+
+<dt>dbSNP</dt>
+<dd><p>version of dbSNP to be used (144 or 155)</p></dd>
+
+
 <dt>msg</dt>
 <dd><p>Optional name of the column missing from the dataset in question.
 Default is NULL</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>data table of snpsById, filtered to SNPs of interest.</p>
+    
+
+<p>data table of snpsById, filtered to SNPs of interest.</p>
     </div>
 
   </div>
@@ -108,7 +120,7 @@ Default is NULL</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

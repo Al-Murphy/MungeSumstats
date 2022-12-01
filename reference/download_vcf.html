@@ -19,7 +19,7 @@ so we can't include it as a dep."><!-- mathjax --><script src="https://cdnjs.clo
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -73,56 +73,73 @@ so we can't include it as a dep.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">download_vcf</span><span class="op">(</span>
-  <span class="va">vcf_url</span>,
-  vcf_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,
-  vcf_download <span class="op">=</span> <span class="cn">TRUE</span>,
-  download_method <span class="op">=</span> <span class="st">"download.file"</span>,
-  force_new <span class="op">=</span> <span class="cn">FALSE</span>,
-  quiet <span class="op">=</span> <span class="cn">FALSE</span>,
-  timeout <span class="op">=</span> <span class="fl">10</span> <span class="op">*</span> <span class="fl">60</span>,
-  nThread <span class="op">=</span> <span class="fl">1</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">download_vcf</span><span class="op">(</span></span>
+<span>  <span class="va">vcf_url</span>,</span>
+<span>  vcf_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  vcf_download <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  download_method <span class="op">=</span> <span class="st">"download.file"</span>,</span>
+<span>  force_new <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  quiet <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  timeout <span class="op">=</span> <span class="fl">10</span> <span class="op">*</span> <span class="fl">60</span>,</span>
+<span>  nThread <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>vcf_url</dt>
 <dd><p>Remote URL to VCF file.</p></dd>
+
+
 <dt>vcf_dir</dt>
 <dd><p>Where to download the original VCF from Open GWAS.
 <em>WARNING:</em> This is set to <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> by default.
 This means the raw (pre-formatted) VCFs be deleted upon ending the R session.
 Change this to keep the raw VCF file on disk
 (e.g. <code>vcf_dir="./raw_vcf"</code>).</p></dd>
+
+
 <dt>vcf_download</dt>
 <dd><p>Download the original VCF from Open GWAS.</p></dd>
+
+
 <dt>download_method</dt>
 <dd><p><code>"axel"</code> (multi-threaded) or
 <code>"download.file"</code> (single-threaded) .</p></dd>
+
+
 <dt>force_new</dt>
 <dd><p>Overwrite a previously downloaded VCF
 with the same path name.</p></dd>
+
+
 <dt>quiet</dt>
 <dd><p>Run quietly.</p></dd>
+
+
 <dt>timeout</dt>
 <dd><p>How many seconds before giving up on download.
 Passed to <code>download.file</code>. Default: <code>10*60</code> (10min).</p></dd>
+
+
 <dt>nThread</dt>
 <dd><p>Number of threads to parallelize over.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>List containing the paths to the downloaded VCF and its index file.</p>
+    
+
+<p>List containing the paths to the downloaded VCF and its index file.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">#only run the examples if user has internet access:</span></span>
-<span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">is.character</a></span><span class="op">(</span><span class="fu">getURL</span><span class="op">(</span><span class="st">"www.google.com"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">==</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">{</span></span>
-<span class="r-in"><span class="va">vcf_url</span> <span class="op">&lt;-</span> <span class="st">"https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz"</span></span>
-<span class="r-in"><span class="va">out_paths</span> <span class="op">&lt;-</span> <span class="fu">download_vcf</span><span class="op">(</span>vcf_url <span class="op">=</span> <span class="va">vcf_url</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">#only run the examples if user has internet access:</span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">is.character</a></span><span class="op">(</span><span class="fu">getURL</span><span class="op">(</span><span class="st">"www.google.com"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">==</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">vcf_url</span> <span class="op">&lt;-</span> <span class="st">"https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz"</span></span></span>
+<span class="r-in"><span><span class="va">out_paths</span> <span class="op">&lt;-</span> <span class="fu">download_vcf</span><span class="op">(</span>vcf_url <span class="op">=</span> <span class="va">vcf_url</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in getURL("www.google.com") : could not find function "getURL"</span>
 </code></pre></div>
     </div>
@@ -138,7 +155,7 @@ Passed to <code>download.file</code>. Default: <code>10*60</code> (10min).</p></
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

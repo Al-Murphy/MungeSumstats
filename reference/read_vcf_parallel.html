@@ -25,7 +25,7 @@ here."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathj
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -85,24 +85,24 @@ and
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">read_vcf_parallel</span><span class="op">(</span>
-  <span class="va">path</span>,
-  samples <span class="op">=</span> <span class="fl">1</span>,
-  which <span class="op">=</span> <span class="cn">NULL</span>,
-  use_params <span class="op">=</span> <span class="cn">TRUE</span>,
-  as_datatable <span class="op">=</span> <span class="cn">TRUE</span>,
-  sampled_rows <span class="op">=</span> <span class="fl">10000L</span>,
-  include_xy <span class="op">=</span> <span class="cn">FALSE</span>,
-  download <span class="op">=</span> <span class="cn">TRUE</span>,
-  vcf_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,
-  download_method <span class="op">=</span> <span class="st">"download.file"</span>,
-  force_new <span class="op">=</span> <span class="cn">FALSE</span>,
-  tilewidth <span class="op">=</span> <span class="cn">NULL</span>,
-  mt_thresh <span class="op">=</span> <span class="fl">100000L</span>,
-  nThread <span class="op">=</span> <span class="fl">1</span>,
-  ntile <span class="op">=</span> <span class="va">nThread</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">read_vcf_parallel</span><span class="op">(</span></span>
+<span>  <span class="va">path</span>,</span>
+<span>  samples <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  which <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  use_params <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  as_datatable <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  sampled_rows <span class="op">=</span> <span class="fl">10000L</span>,</span>
+<span>  include_xy <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  download <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  vcf_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  download_method <span class="op">=</span> <span class="st">"download.file"</span>,</span>
+<span>  force_new <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  tilewidth <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  mt_thresh <span class="op">=</span> <span class="fl">100000L</span>,</span>
+<span>  nThread <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  ntile <span class="op">=</span> <span class="va">nThread</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="source">
@@ -118,66 +118,97 @@ vcf2 &lt;- MungeSumstats:::read_vcf_parallel(path = path, nThread=11)
     <h2>Arguments</h2>
     <dl><dt>path</dt>
 <dd><p>Path to local or remote VCF file.</p></dd>
+
+
 <dt>samples</dt>
 <dd><p>Which samples to use:</p><ul><li><p>1 : Only the first sample will be used (<em>DEFAULT</em>).</p></li>
 <li><p>NULL : All samples will be used.</p></li>
 <li><p>c("&lt;sample_id1&gt;","&lt;sample_id2&gt;",...) : 
 Only user-selected samples will be used (case-insensitive).</p></li>
 </ul></dd>
+
+
 <dt>which</dt>
 <dd><p>A <code>GRanges</code> describing the sequences and
     ranges to be queried. Variants whose <code>POS</code> lies in the interval(s)
     <code>[start, end]</code> are returned. If <code>which</code> is not specified all
     ranges are returned.</p></dd>
+
+
 <dt>use_params</dt>
 <dd><p>When <code>TRUE</code> (default), increases the speed of reading in the VCF by
 omitting columns that are empty based on the head of the VCF (NAs only).
 NOTE that that this requires the VCF to be sorted, bgzip-compressed,
 tabix-indexed, which <a href="read_vcf.html">read_vcf</a> will attempt to do.</p></dd>
+
+
 <dt>as_datatable</dt>
 <dd><p>Return the data as a
 <a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a> (default: <code>TRUE</code>)
 or a <a href="https://rdrr.io/pkg/VariantAnnotation/man/VCF-class.html" class="external-link">VCF</a> (<code>FALSE</code>).</p></dd>
+
+
 <dt>sampled_rows</dt>
 <dd><p>First N rows to sample.
 Set <code>NULL</code> to use full <code>sumstats_file</code>.
 when determining whether cols are empty.</p></dd>
+
+
 <dt>download</dt>
 <dd><p>Download the VCF (and its index file)
 to a temp folder before reading it into R.
 This is important to keep <code>TRUE</code> when <code>nThread&gt;1</code> to avoid
 making too many queries to remote file.</p></dd>
+
+
 <dt>vcf_dir</dt>
 <dd><p>Where to download the original VCF from Open GWAS.
 <em>WARNING:</em> This is set to <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> by default.
 This means the raw (pre-formatted) VCFs be deleted upon ending the R session.
 Change this to keep the raw VCF file on disk
 (e.g. <code>vcf_dir="./raw_vcf"</code>).</p></dd>
+
+
 <dt>download_method</dt>
 <dd><p><code>"axel"</code> (multi-threaded) or
 <code>"download.file"</code> (single-threaded) .</p></dd>
+
+
 <dt>force_new</dt>
 <dd><p>If a formatted file of the same names as <code>save_path</code>
 exists, formatting will be skipped and this file will be imported instead
 (default). Set <code>force_new=TRUE</code> to override this.</p></dd>
+
+
 <dt>tilewidth</dt>
 <dd><p>The desired tile width. The effective tile width might be slightly
     different but is guaranteed to never be more than the desired width.</p></dd>
+
+
 <dt>mt_thresh</dt>
 <dd><p>When the number of rows (variants) in the VCF is
 <code>&lt; mt_thresh</code>, only use single-threading for reading in the VCF.
 This is because the overhead of parallelisation outweighs the speed benefits
 when VCFs are small.</p></dd>
+
+
 <dt>nThread</dt>
 <dd><p>Number of threads to use for parallel processes.</p></dd>
+
+
 <dt>ntile</dt>
 <dd><p>The number of tiles to generate.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Print messages.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>VCF file.</p>
+    
+
+<p>VCF file.</p>
     </div>
 
   </div>
@@ -192,7 +223,7 @@ when VCFs are small.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

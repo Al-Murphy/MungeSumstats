@@ -19,7 +19,7 @@ standardise_header."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/a
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -73,32 +73,41 @@ already standardised with
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">formatted_example</span><span class="op">(</span>
-  path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"eduAttainOkbay.txt"</span>, package <span class="op">=</span> <span class="st">"MungeSumstats"</span><span class="op">)</span>,
-  formatted <span class="op">=</span> <span class="cn">TRUE</span>,
-  sorted <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">formatted_example</span><span class="op">(</span></span>
+<span>  path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"eduAttainOkbay.txt"</span>, package <span class="op">=</span> <span class="st">"MungeSumstats"</span><span class="op">)</span>,</span>
+<span>  formatted <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  sorted <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>path</dt>
 <dd><p>Path to raw example file. Default to built-in dataset.</p></dd>
+
+
 <dt>formatted</dt>
 <dd><p>Whether the column names should be formatted
 (default:<code>TRUE</code>).</p></dd>
+
+
 <dt>sorted</dt>
 <dd><p>Whether the rows should be sorted by genomic coordinates
 (default:<code>TRUE</code>).</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>sumstats_dt</code></p>
+    
+
+<p><code>sumstats_dt</code></p>
+
+
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">sumstats_dt</span> <span class="op">&lt;-</span> <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu">formatted_example</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">sumstats_dt</span> <span class="op">&lt;-</span> <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu">formatted_example</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Standardising column headers.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> First line of summary statistics file: </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> MarkerName	CHR	POS	A1	A2	EAF	Beta	SE	Pval	</span>
@@ -117,7 +126,7 @@ already standardised with
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

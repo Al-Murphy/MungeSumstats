@@ -18,7 +18,7 @@ from the data. Uses SNP (RSID) &amp;amp; CHR &amp;amp; BP to get genome build.">
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -71,13 +71,14 @@ from the data. Uses SNP (RSID) &amp; CHR &amp; BP to get genome build.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_genome_builds</span><span class="op">(</span>
-  <span class="va">sumstats_list</span>,
-  header_only <span class="op">=</span> <span class="cn">TRUE</span>,
-  sampled_snps <span class="op">=</span> <span class="fl">10000</span>,
-  names_from_paths <span class="op">=</span> <span class="cn">FALSE</span>,
-  nThread <span class="op">=</span> <span class="fl">1</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_genome_builds</span><span class="op">(</span></span>
+<span>  <span class="va">sumstats_list</span>,</span>
+<span>  header_only <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  sampled_snps <span class="op">=</span> <span class="fl">10000</span>,</span>
+<span>  names_from_paths <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  dbSNP <span class="op">=</span> <span class="fl">155</span>,</span>
+<span>  nThread <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -85,24 +86,39 @@ from the data. Uses SNP (RSID) &amp; CHR &amp; BP to get genome build.</p>
     <dl><dt>sumstats_list</dt>
 <dd><p>A named list of paths to summary statistics,
 or a named list of <code>data.table</code> objects.</p></dd>
+
+
 <dt>header_only</dt>
 <dd><p>Instead of reading in the entire <code>sumstats</code> file,
 only read in the first N rows where N=<code>sampled_snps</code>.
 This should help speed up cases where you have to read in <code>sumstats</code>
 from disk each time.</p></dd>
+
+
 <dt>sampled_snps</dt>
 <dd><p>Downsample the number of SNPs used when inferring genome
 build to save time.</p></dd>
+
+
 <dt>names_from_paths</dt>
 <dd><p>Infer the name of each item in <code>sumstats_list</code>
 from its respective file path.
 Only works if <code>sumstats_list</code> is a list of paths.</p></dd>
+
+
+<dt>dbSNP</dt>
+<dd><p>version of dbSNP to be used (144 or 155). Default is 155.</p></dd>
+
+
 <dt>nThread</dt>
 <dd><p>Number of threads to use for parallel processes.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>ref_genome the genome build of the data</p>
+    
+
+<p>ref_genome the genome build of the data</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -111,25 +127,26 @@ Only works if <code>sumstats_list</code> is a list of paths.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Pass path to Educational Attainment Okbay sumstat file to a temp directory</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">eduAttainOkbayPth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"eduAttainOkbay.txt"</span>,</span>
-<span class="r-in">    package <span class="op">=</span> <span class="st">"MungeSumstats"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">sumstats_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ss1 <span class="op">=</span> <span class="va">eduAttainOkbayPth</span>, ss2 <span class="op">=</span> <span class="va">eduAttainOkbayPth</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Call uses reference genome as default with more than 2GB of memory,</span></span>
-<span class="r-in"><span class="co">## which is more than what 32-bit Windows can handle so remove certain checks</span></span>
-<span class="r-in"><span class="va">is_32bit_windows</span> <span class="op">&lt;-</span></span>
-<span class="r-in">    <span class="va">.Platform</span><span class="op">$</span><span class="va">OS.type</span> <span class="op">==</span> <span class="st">"windows"</span> <span class="op">&amp;&amp;</span> <span class="va">.Platform</span><span class="op">$</span><span class="va">r_arch</span> <span class="op">==</span> <span class="st">"i386"</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="va">is_32bit_windows</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    </span>
-<span class="r-in">    <span class="co">#multiple sumstats can be passed at once to get all their genome builds:</span></span>
-<span class="r-in">    <span class="co">#ref_genomes &lt;- get_genome_builds(sumstats_list = sumstats_list)</span></span>
-<span class="r-in">    <span class="co">#just passing first here for speed</span></span>
-<span class="r-in">    <span class="va">sumstats_list_quick</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ss1 <span class="op">=</span> <span class="va">eduAttainOkbayPth</span><span class="op">)</span></span>
-<span class="r-in">    <span class="va">ref_genomes</span> <span class="op">&lt;-</span> <span class="fu">get_genome_builds</span><span class="op">(</span>sumstats_list <span class="op">=</span> <span class="va">sumstats_list_quick</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Pass path to Educational Attainment Okbay sumstat file to a temp directory</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">eduAttainOkbayPth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"eduAttainOkbay.txt"</span>,</span></span>
+<span class="r-in"><span>    package <span class="op">=</span> <span class="st">"MungeSumstats"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sumstats_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ss1 <span class="op">=</span> <span class="va">eduAttainOkbayPth</span>, ss2 <span class="op">=</span> <span class="va">eduAttainOkbayPth</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Call uses reference genome as default with more than 2GB of memory,</span></span></span>
+<span class="r-in"><span><span class="co">## which is more than what 32-bit Windows can handle so remove certain checks</span></span></span>
+<span class="r-in"><span><span class="va">is_32bit_windows</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>    <span class="va">.Platform</span><span class="op">$</span><span class="va">OS.type</span> <span class="op">==</span> <span class="st">"windows"</span> <span class="op">&amp;&amp;</span> <span class="va">.Platform</span><span class="op">$</span><span class="va">r_arch</span> <span class="op">==</span> <span class="st">"i386"</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="va">is_32bit_windows</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    </span></span>
+<span class="r-in"><span>    <span class="co">#multiple sumstats can be passed at once to get all their genome builds:</span></span></span>
+<span class="r-in"><span>    <span class="co">#ref_genomes &lt;- get_genome_builds(sumstats_list = sumstats_list)</span></span></span>
+<span class="r-in"><span>    <span class="co">#just passing first here for speed</span></span></span>
+<span class="r-in"><span>    <span class="va">sumstats_list_quick</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ss1 <span class="op">=</span> <span class="va">eduAttainOkbayPth</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="va">ref_genomes</span> <span class="op">&lt;-</span> <span class="fu">get_genome_builds</span><span class="op">(</span>sumstats_list <span class="op">=</span> <span class="va">sumstats_list_quick</span>,</span></span>
+<span class="r-in"><span>                                     dbSNP<span class="op">=</span><span class="fl">144</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Inferring genome build of 1 sumstats file(s).</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Inferring genome build.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading in only the first 10000 rows of sumstats.</span>
@@ -142,14 +159,14 @@ Only works if <code>sumstats_list</code> is a list of paths.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading reference genome data.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Preprocessing RSIDs.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Validating RSIDs of 93 SNPs using BSgenome::snpsById...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> BSgenome::snpsById done in 11 seconds.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> BSgenome::snpsById done in 7 seconds.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading SNPlocs data.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading reference genome data.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Preprocessing RSIDs.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Validating RSIDs of 93 SNPs using BSgenome::snpsById...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> BSgenome::snpsById done in 39 seconds.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> BSgenome::snpsById done in 31 seconds.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Inferred genome build: GRCH37</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Time difference of 51.43443 secs</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Time difference of 39.48119 secs</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> GRCH37: 1 file(s)</span>
 </code></pre></div>
     </div>
@@ -165,7 +182,7 @@ Only works if <code>sumstats_list</code> is a list of paths.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

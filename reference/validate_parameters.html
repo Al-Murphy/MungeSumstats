@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -69,42 +69,47 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">validate_parameters</span><span class="op">(</span>
-  <span class="va">path</span>,
-  <span class="va">ref_genome</span>,
-  <span class="va">convert_ref_genome</span>,
-  <span class="va">convert_small_p</span>,
-  <span class="va">compute_z</span>,
-  <span class="va">compute_n</span>,
-  <span class="va">convert_n_int</span>,
-  <span class="va">analysis_trait</span>,
-  <span class="va">INFO_filter</span>,
-  <span class="va">FRQ_filter</span>,
-  <span class="va">pos_se</span>,
-  <span class="va">effect_columns_nonzero</span>,
-  <span class="va">N_std</span>,
-  <span class="va">N_dropNA</span>,
-  <span class="va">rmv_chr</span>,
-  <span class="va">on_ref_genome</span>,
-  <span class="va">strand_ambig_filter</span>,
-  <span class="va">allele_flip_check</span>,
-  <span class="va">allele_flip_drop</span>,
-  <span class="va">allele_flip_z</span>,
-  <span class="va">allele_flip_frq</span>,
-  <span class="va">bi_allelic_filter</span>,
-  <span class="va">snp_ids_are_rs_ids</span>,
-  <span class="va">remove_multi_rs_snp</span>,
-  <span class="va">frq_is_maf</span>,
-  <span class="va">indels</span>,
-  <span class="va">write_vcf</span>,
-  <span class="va">return_format</span>,
-  <span class="va">ldsc_format</span>,
-  <span class="va">imputation_ind</span>,
-  <span class="va">log_folder_ind</span>,
-  <span class="va">log_mungesumstats_msgs</span>,
-  <span class="va">mapping_file</span>,
-  <span class="va">tabix_index</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">validate_parameters</span><span class="op">(</span></span>
+<span>  <span class="va">path</span>,</span>
+<span>  <span class="va">ref_genome</span>,</span>
+<span>  <span class="va">convert_ref_genome</span>,</span>
+<span>  <span class="va">convert_small_p</span>,</span>
+<span>  <span class="va">es_is_beta</span>,</span>
+<span>  <span class="va">compute_z</span>,</span>
+<span>  <span class="va">compute_n</span>,</span>
+<span>  <span class="va">convert_n_int</span>,</span>
+<span>  <span class="va">analysis_trait</span>,</span>
+<span>  <span class="va">INFO_filter</span>,</span>
+<span>  <span class="va">FRQ_filter</span>,</span>
+<span>  <span class="va">pos_se</span>,</span>
+<span>  <span class="va">effect_columns_nonzero</span>,</span>
+<span>  <span class="va">N_std</span>,</span>
+<span>  <span class="va">N_dropNA</span>,</span>
+<span>  <span class="va">rmv_chr</span>,</span>
+<span>  <span class="va">on_ref_genome</span>,</span>
+<span>  <span class="va">strand_ambig_filter</span>,</span>
+<span>  <span class="va">allele_flip_check</span>,</span>
+<span>  <span class="va">allele_flip_drop</span>,</span>
+<span>  <span class="va">allele_flip_z</span>,</span>
+<span>  <span class="va">allele_flip_frq</span>,</span>
+<span>  <span class="va">bi_allelic_filter</span>,</span>
+<span>  <span class="va">snp_ids_are_rs_ids</span>,</span>
+<span>  <span class="va">remove_multi_rs_snp</span>,</span>
+<span>  <span class="va">frq_is_maf</span>,</span>
+<span>  <span class="va">indels</span>,</span>
+<span>  <span class="va">check_dups</span>,</span>
+<span>  <span class="va">dbSNP</span>,</span>
+<span>  <span class="va">write_vcf</span>,</span>
+<span>  <span class="va">return_format</span>,</span>
+<span>  <span class="va">ldsc_format</span>,</span>
+<span>  <span class="va">save_format</span>,</span>
+<span>  <span class="va">imputation_ind</span>,</span>
+<span>  <span class="va">log_folder_ind</span>,</span>
+<span>  <span class="va">log_mungesumstats_msgs</span>,</span>
+<span>  <span class="va">mapping_file</span>,</span>
+<span>  <span class="va">tabix_index</span>,</span>
+<span>  <span class="va">chain_source</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -113,24 +118,43 @@
 <dd><p>Filepath for the summary statistics file to be formatted. A
 dataframe or datatable of the summary statistics file can also be passed
 directly to MungeSumstats using the path parameter.</p></dd>
+
+
 <dt>ref_genome</dt>
 <dd><p>name of the reference genome used for the GWAS ("GRCh37" or
 "GRCh38"). Argument is case-insensitive. Default is NULL which infers the
 reference genome from the data.</p></dd>
+
+
 <dt>convert_ref_genome</dt>
 <dd><p>name of the reference genome to convert to
 ("GRCh37" or "GRCh38"). This will only occur if the current genome build does
 not match. Default is not to convert the genome build (NULL).</p></dd>
+
+
 <dt>convert_small_p</dt>
 <dd><p>Binary, should non-negative
 p-values &lt;= 5e-324 be converted to 0?
 Small p-values pass the R limit and can cause errors with LDSC/MAGMA and
 should be converted. Default is TRUE.</p></dd>
+
+
+<dt>es_is_beta</dt>
+<dd><p>Binary, whether to map ES to BETA. We take BETA to be any
+BETA-like value (including Effect Size). If this is not the case for your
+sumstats, change this to FALSE. Default is TRUE.</p></dd>
+
+
 <dt>compute_z</dt>
-<dd><p>Whether to compute Z-score column from P. Default is FALSE.
-<strong>Note</strong> that imputing the Z-score for every SNP will not correct be
+<dd><p>Whether to compute Z-score column. Default is FALSE. This
+can be computed from Beta and SE with (Beta/SE) or P
+(Z:=sign(BETA)*sqrt(stats::qchisq(P,1,lower=FALSE))).
+<strong>Note</strong> that imputing the Z-score from P for every SNP will not be
 perfectly correct and may result in a loss of power. This should only be done
-as a last resort.</p></dd>
+as a last resort. Use 'BETA' to impute by BETA/SE and 'P' to impute by SNP
+p-value.</p></dd>
+
+
 <dt>compute_n</dt>
 <dd><p>Whether to impute N. Default of 0 won't impute, any other
 integer will be imputed as the N (sample size) for every SNP in the dataset.
@@ -140,70 +164,108 @@ should only be done as a last resort. N can also be inputted with "ldsc",
 of multiple. Sum and an integer value creates an N column in the output
 whereas giant, metal or ldsc create an Neff or effective sample size. If
 multiples are passed, the formula used to derive it will be indicated.</p></dd>
+
+
 <dt>convert_n_int</dt>
 <dd><p>Binary, if N (the number of samples) is not an integer,
 should this be rounded? Default is TRUE.</p></dd>
+
+
 <dt>analysis_trait</dt>
 <dd><p>If multiple traits were studied, name of the trait for
 analysis from the GWAS. Default is NULL.</p></dd>
+
+
 <dt>INFO_filter</dt>
 <dd><p>numeric The minimum value permissible of the imputation
 information score (if present in sumstats file). Default 0.9.</p></dd>
+
+
 <dt>FRQ_filter</dt>
 <dd><p>numeric The minimum value permissible of the frequency(FRQ)
 of the SNP (i.e. Allele Frequency (AF)) (if present in sumstats file). By
 default no filtering is done, i.e. value of 0.</p></dd>
+
+
 <dt>pos_se</dt>
 <dd><p>Binary Should the standard Error (SE) column be checked to
 ensure it is greater than 0? Those that are, are removed (if present in
 sumstats file). Default TRUE.</p></dd>
+
+
 <dt>effect_columns_nonzero</dt>
 <dd><p>Binary should the effect columns in the data
 BETA,OR (odds ratio),LOG_ODDS,SIGNED_SUMSTAT be checked to ensure no SNP=0.
 Those that do are removed(if present in sumstats file). Default FALSE.</p></dd>
+
+
 <dt>N_std</dt>
 <dd><p>numeric The number of standard deviations above the mean a SNP's
 N is needed to be removed. Default is 5.</p></dd>
+
+
 <dt>N_dropNA</dt>
 <dd><p>Drop rows where N is missing.Default is TRUE.</p></dd>
+
+
 <dt>rmv_chr</dt>
 <dd><p>vector or character The chromosomes on which the SNPs should
 be removed. Use NULL if no filtering necessary. Default is X, Y and
 mitochondrial.</p></dd>
+
+
 <dt>on_ref_genome</dt>
 <dd><p>Binary Should a check take place that all SNPs are on
 the reference genome by SNP ID. Default is TRUE.</p></dd>
+
+
 <dt>strand_ambig_filter</dt>
 <dd><p>Binary Should SNPs with strand-ambiguous alleles
 be removed. Default is FALSE.</p></dd>
+
+
 <dt>allele_flip_check</dt>
 <dd><p>Binary Should the allele columns be checked against
 reference genome to infer if flipping is necessary. Default is TRUE.</p></dd>
+
+
 <dt>allele_flip_drop</dt>
 <dd><p>Binary Should the SNPs for which neither their A1 or
 A2 base pair values match a reference genome be dropped. Default is TRUE.</p></dd>
+
+
 <dt>allele_flip_z</dt>
 <dd><p>Binary should the Z-score be flipped along with effect
 and FRQ columns like Beta? It is assumed to be calculated off the effect size
 not the P-value and so will be flipped i.e. default TRUE.</p></dd>
+
+
 <dt>allele_flip_frq</dt>
 <dd><p>Binary should the frequency (FRQ) column be flipped
 along with effect and z-score columns like Beta? Default TRUE.</p></dd>
+
+
 <dt>bi_allelic_filter</dt>
 <dd><p>Binary Should non-biallelic SNPs be removed. Default
 is TRUE.</p></dd>
+
+
 <dt>snp_ids_are_rs_ids</dt>
 <dd><p>Binary Should the supplied SNP ID's be assumed to
 be RSIDs. If not, imputation using the SNP ID for other columns like
 base-pair position or chromosome will not be possible. If set to FALSE, the
 SNP RS ID will be imputed from the reference genome if possible. Default is
 TRUE.</p></dd>
+
+
 <dt>remove_multi_rs_snp</dt>
 <dd><p>Binary Sometimes summary statistics can have
 multiple RSIDs on one row (i.e. related to one SNP), for example
 "rs5772025_rs397784053". This can cause an error so by default, the first
 RS ID will be kept and the rest removed e.g."rs5772025". If you want to just
 remove these SNPs entirely, set it to TRUE. Default is FALSE.</p></dd>
+
+
 <dt>frq_is_maf</dt>
 <dd><p>Conventionally the FRQ column is intended to show the
 minor/effect allele frequency (MAF) but sometimes the major allele frequency
@@ -211,19 +273,42 @@ can be inferred as the FRQ column. This logical variable indicates that the
 FRQ column should be renamed to MAJOR_ALLELE_FRQ if the frequency values
 appear to relate to the major allele i.e. &gt;0.5. By default this mapping won't
 occur i.e. is TRUE.</p></dd>
+
+
 <dt>indels</dt>
 <dd><p>Binary does your Sumstats file contain Indels? These don't
 exist in our reference file so they will be excluded from checks if this
 value is TRUE. Default is TRUE.</p></dd>
+
+
+<dt>check_dups</dt>
+<dd><p>whether to check for duplicates - if formatting QTL
+datasets this should be set to FALSE otherwise keep as TRUE. Default is TRUE.</p></dd>
+
+
+<dt>dbSNP</dt>
+<dd><p>version of dbSNP to be used for imputation (144 or 155).</p></dd>
+
+
 <dt>write_vcf</dt>
 <dd><p>Whether to write as VCF (TRUE) or tabular file (FALSE).</p></dd>
+
+
 <dt>return_format</dt>
 <dd><p>If return_data is TRUE. Object type to be returned
 ("data.table","vranges","granges").</p></dd>
+
+
 <dt>ldsc_format</dt>
-<dd><p>Binary Ensure that output format meets all requirements
-to be fed directly into LDSC without the need for additional munging. Default
-is FALSE</p></dd>
+<dd><p>DEPRECATED, do not use. Use save_format="LDSC" instead.</p></dd>
+
+
+<dt>save_format</dt>
+<dd><p>Output format of sumstats. Options are NULL - standardised
+output format from MungeSumstats, LDSC - output format compatible with LDSC
+and openGWAS - output compatible with openGWAS VCFs. Default is NULL.</p></dd>
+
+
 <dt>imputation_ind</dt>
 <dd><p>Binary Should a column be added for each imputation
 step to show what SNPs have imputed values for differing fields. This
@@ -232,15 +317,21 @@ value, this denoted whether the alelles where switched based on
 MungeSumstats initial choice of A1, A2 from the input column headers and thus
 may not align with what the creator intended.<strong>Note</strong> these columns will be
 in the formatted summary statistics returned. Default is FALSE.</p></dd>
+
+
 <dt>log_folder_ind</dt>
 <dd><p>Binary Should log files be stored containing all
 filtered out SNPs (separate file per filter). The data is outputted in the
 same format specified for the resulting sumstats file. The only exception to
 this rule is if output is vcf, then log file saved as .tsv.gz. Default is
 FALSE.</p></dd>
+
+
 <dt>log_mungesumstats_msgs</dt>
 <dd><p>Binary Should a log be stored containing all
 messages and errors printed by MungeSumstats in a run. Default is FALSE</p></dd>
+
+
 <dt>mapping_file</dt>
 <dd><p>MungeSumstats has a pre-defined column-name mapping file
 which should cover the most common column headers and their interpretations.
@@ -248,13 +339,24 @@ However, if a column header that is in youf file is missing of the mapping we
 give is incorrect you can supply your own mapping file. Must be a 2 column
 dataframe with column names "Uncorrected" and "Corrected". See
 data(sumstatsColHeaders) for default mapping and necessary format.</p></dd>
+
+
 <dt>tabix_index</dt>
 <dd><p>Index the formatted summary statistics with
 <a href="http://www.htslib.org/doc/tabix.html" class="external-link">tabix</a> for fast querying.</p></dd>
+
+
+<dt>chain_source</dt>
+<dd><p>source of the chain file to use in liftover, if converting
+genome build ("ucsc" or "ensembl"). Note that the UCSC chain files require a
+license for commercial use. The Ensembl chain is used by default ("ensembl").</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>No return</p>
+    
+
+<p>No return</p>
     </div>
 
   </div>
@@ -269,7 +371,7 @@ data(sumstatsColHeaders) for default mapping and necessary format.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

@@ -26,7 +26,7 @@ as what's on the reference genome (this may not always be the case)."><!-- mathj
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -84,25 +84,26 @@ as what's on the reference genome (this may not always be the case).</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">check_allele_flip</span><span class="op">(</span>
-  <span class="va">sumstats_dt</span>,
-  <span class="va">path</span>,
-  <span class="va">ref_genome</span>,
-  <span class="va">rsids</span>,
-  <span class="va">allele_flip_check</span>,
-  <span class="va">allele_flip_drop</span>,
-  <span class="va">allele_flip_z</span>,
-  <span class="va">allele_flip_frq</span>,
-  <span class="va">bi_allelic_filter</span>,
-  <span class="va">imputation_ind</span>,
-  <span class="va">log_folder_ind</span>,
-  <span class="va">check_save_out</span>,
-  <span class="va">tabix_index</span>,
-  <span class="va">nThread</span>,
-  <span class="va">log_files</span>,
-  standardise_headers <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">mapping_file</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">check_allele_flip</span><span class="op">(</span></span>
+<span>  <span class="va">sumstats_dt</span>,</span>
+<span>  <span class="va">path</span>,</span>
+<span>  <span class="va">ref_genome</span>,</span>
+<span>  <span class="va">rsids</span>,</span>
+<span>  <span class="va">allele_flip_check</span>,</span>
+<span>  <span class="va">allele_flip_drop</span>,</span>
+<span>  <span class="va">allele_flip_z</span>,</span>
+<span>  <span class="va">allele_flip_frq</span>,</span>
+<span>  <span class="va">bi_allelic_filter</span>,</span>
+<span>  <span class="va">imputation_ind</span>,</span>
+<span>  <span class="va">log_folder_ind</span>,</span>
+<span>  <span class="va">check_save_out</span>,</span>
+<span>  <span class="va">tabix_index</span>,</span>
+<span>  <span class="va">nThread</span>,</span>
+<span>  <span class="va">log_files</span>,</span>
+<span>  standardise_headers <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">mapping_file</span>,</span>
+<span>  <span class="va">dbSNP</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -111,26 +112,40 @@ as what's on the reference genome (this may not always be the case).</p>
 <dd><p>Filepath for the summary statistics file to be formatted. A
 dataframe or datatable of the summary statistics file can also be passed
 directly to MungeSumstats using the path parameter.</p></dd>
+
+
 <dt>ref_genome</dt>
 <dd><p>name of the reference genome used for the GWAS ("GRCh37" or
 "GRCh38"). Argument is case-insensitive. Default is NULL which infers the
 reference genome from the data.</p></dd>
+
+
 <dt>allele_flip_check</dt>
 <dd><p>Binary Should the allele columns be checked against
 reference genome to infer if flipping is necessary. Default is TRUE.</p></dd>
+
+
 <dt>allele_flip_drop</dt>
 <dd><p>Binary Should the SNPs for which neither their A1 or
 A2 base pair values match a reference genome be dropped. Default is TRUE.</p></dd>
+
+
 <dt>allele_flip_z</dt>
 <dd><p>Binary should the Z-score be flipped along with effect
 and FRQ columns like Beta? It is assumed to be calculated off the effect size
 not the P-value and so will be flipped i.e. default TRUE.</p></dd>
+
+
 <dt>allele_flip_frq</dt>
 <dd><p>Binary should the frequency (FRQ) column be flipped
 along with effect and z-score columns like Beta? Default TRUE.</p></dd>
+
+
 <dt>bi_allelic_filter</dt>
 <dd><p>Binary Should non-biallelic SNPs be removed. Default
 is TRUE.</p></dd>
+
+
 <dt>imputation_ind</dt>
 <dd><p>Binary Should a column be added for each imputation
 step to show what SNPs have imputed values for differing fields. This
@@ -139,22 +154,34 @@ value, this denoted whether the alelles where switched based on
 MungeSumstats initial choice of A1, A2 from the input column headers and thus
 may not align with what the creator intended.<strong>Note</strong> these columns will be
 in the formatted summary statistics returned. Default is FALSE.</p></dd>
+
+
 <dt>log_folder_ind</dt>
 <dd><p>Binary Should log files be stored containing all
 filtered out SNPs (separate file per filter). The data is outputted in the
 same format specified for the resulting sumstats file. The only exception to
 this rule is if output is vcf, then log file saved as .tsv.gz. Default is
 FALSE.</p></dd>
+
+
 <dt>tabix_index</dt>
 <dd><p>Index the formatted summary statistics with
 <a href="http://www.htslib.org/doc/tabix.html" class="external-link">tabix</a> for fast querying.</p></dd>
+
+
 <dt>nThread</dt>
 <dd><p>Number of threads to use for parallel processes.</p></dd>
+
+
 <dt>log_files</dt>
 <dd><p>list of log file locations</p></dd>
+
+
 <dt>standardise_headers</dt>
 <dd><p>Run
 <code>standardise_sumstats_column_headers_crossplatform</code> first.</p></dd>
+
+
 <dt>mapping_file</dt>
 <dd><p>MungeSumstats has a pre-defined column-name mapping file
 which should cover the most common column headers and their interpretations.
@@ -162,10 +189,17 @@ However, if a column header that is in youf file is missing of the mapping we
 give is incorrect you can supply your own mapping file. Must be a 2 column
 dataframe with column names "Uncorrected" and "Corrected". See
 data(sumstatsColHeaders) for default mapping and necessary format.</p></dd>
+
+
+<dt>dbSNP</dt>
+<dd><p>version of dbSNP to be used for imputation (144 or 155).</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list containing two data tables:</p><ul><li><p><code>sumstats_dt</code>: the modified summary statistics
+    
+
+<p>A list containing two data tables:</p><ul><li><p><code>sumstats_dt</code>: the modified summary statistics
 <code>data.table</code> object.</p></li>
 <li><p><code>rsids</code>: snpsById, filtered to SNPs of interest if
 loaded already. Or else NULL.</p></li>
@@ -184,7 +218,7 @@ loaded already. Or else NULL.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

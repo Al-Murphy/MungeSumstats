@@ -21,7 +21,7 @@ download functions."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/a
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -77,20 +77,20 @@ download functions.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">downloader</span><span class="op">(</span>
-  <span class="va">input_url</span>,
-  <span class="va">output_path</span>,
-  download_method <span class="op">=</span> <span class="st">"axel"</span>,
-  background <span class="op">=</span> <span class="cn">FALSE</span>,
-  force_overwrite <span class="op">=</span> <span class="cn">FALSE</span>,
-  quiet <span class="op">=</span> <span class="cn">TRUE</span>,
-  show_progress <span class="op">=</span> <span class="cn">TRUE</span>,
-  continue <span class="op">=</span> <span class="cn">TRUE</span>,
-  nThread <span class="op">=</span> <span class="fl">1</span>,
-  alternate <span class="op">=</span> <span class="cn">TRUE</span>,
-  check_certificates <span class="op">=</span> <span class="cn">TRUE</span>,
-  timeout <span class="op">=</span> <span class="fl">10</span> <span class="op">*</span> <span class="fl">60</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">downloader</span><span class="op">(</span></span>
+<span>  <span class="va">input_url</span>,</span>
+<span>  <span class="va">output_path</span>,</span>
+<span>  download_method <span class="op">=</span> <span class="st">"axel"</span>,</span>
+<span>  background <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  force_overwrite <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  quiet <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_progress <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  continue <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  nThread <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  alternate <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  check_certificates <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  timeout <span class="op">=</span> <span class="fl">10</span> <span class="op">*</span> <span class="fl">60</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="source">
@@ -102,34 +102,59 @@ Suggestion to avoid 'proc$get_built_file() : Build process failed'</a></p>
     <h2>Arguments</h2>
     <dl><dt>input_url</dt>
 <dd><p>input_url.</p></dd>
+
+
 <dt>output_path</dt>
 <dd><p>output_path.</p></dd>
+
+
 <dt>download_method</dt>
 <dd><p><code>"axel"</code> (multi-threaded) or
 <code>"download.file"</code> (single-threaded) .</p></dd>
+
+
 <dt>background</dt>
 <dd><p>Run in background</p></dd>
+
+
 <dt>force_overwrite</dt>
 <dd><p>Overwrite existing file.</p></dd>
+
+
 <dt>quiet</dt>
 <dd><p>Run quietly.</p></dd>
+
+
 <dt>show_progress</dt>
 <dd><p>show_progress.</p></dd>
+
+
 <dt>continue</dt>
 <dd><p>continue.</p></dd>
+
+
 <dt>nThread</dt>
 <dd><p>Number of threads to parallelize over.</p></dd>
+
+
 <dt>alternate</dt>
 <dd><p>alternate,</p></dd>
+
+
 <dt>check_certificates</dt>
 <dd><p>check_certificates</p></dd>
+
+
 <dt>timeout</dt>
 <dd><p>How many seconds before giving up on download.
 Passed to <code>download.file</code>. Default: <code>10*60</code> (10min).</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Local path to downloaded file.</p>
+    
+
+<p>Local path to downloaded file.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -149,7 +174,7 @@ Passed to <code>download.file</code>. Default: <code>10*60</code> (10min).</p></
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

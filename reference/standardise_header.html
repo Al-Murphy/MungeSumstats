@@ -21,7 +21,7 @@ directly back into the file"><!-- mathjax --><script src="https://cdnjs.cloudfla
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -77,12 +77,12 @@ directly back into the file</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">standardise_header</span><span class="op">(</span>
-  <span class="va">sumstats_dt</span>,
-  mapping_file <span class="op">=</span> <span class="va">sumstatsColHeaders</span>,
-  uppercase_unmapped <span class="op">=</span> <span class="cn">TRUE</span>,
-  return_list <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">standardise_header</span><span class="op">(</span></span>
+<span>  <span class="va">sumstats_dt</span>,</span>
+<span>  mapping_file <span class="op">=</span> <span class="va">sumstatsColHeaders</span>,</span>
+<span>  uppercase_unmapped <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  return_list <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -90,6 +90,8 @@ directly back into the file</p>
     <dl><dt>sumstats_dt</dt>
 <dd><p>data table obj of the summary statistics file for the
 GWAS.</p></dd>
+
+
 <dt>mapping_file</dt>
 <dd><p>MungeSumstats has a pre-defined column-name mapping file
 which should cover the most common column headers and their interpretations.
@@ -97,25 +99,32 @@ However, if a column header that is in youf file is missing of the mapping we
 give is incorrect you can supply your own mapping file. Must be a 2 column
 dataframe with column names "Uncorrected" and "Corrected". See
 data(sumstatsColHeaders) for default mapping and necessary format.</p></dd>
+
+
 <dt>uppercase_unmapped</dt>
 <dd><p>For columns that could not be identified in
 the <code>mapping_file</code>, return them in the same format they were input as
 (without forcing them to uppercase).</p></dd>
+
+
 <dt>return_list</dt>
 <dd><p>Return the <code>sumstats_dt</code> within a named list
 (default: <code>TRUE</code>).</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>list containing sumstats_dt, the modified summary statistics data
+    
+
+<p>list containing sumstats_dt, the modified summary statistics data
 table object</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">sumstats_dt</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"eduAttainOkbay.txt"</span>,</span>
-<span class="r-in">                                             package <span class="op">=</span> <span class="st">"MungeSumstats"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">sumstats_dt2</span> <span class="op">&lt;-</span> <span class="fu">standardise_header</span><span class="op">(</span>sumstats_dt<span class="op">=</span><span class="va">sumstats_dt</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">sumstats_dt</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"eduAttainOkbay.txt"</span>,</span></span>
+<span class="r-in"><span>                                             package <span class="op">=</span> <span class="st">"MungeSumstats"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sumstats_dt2</span> <span class="op">&lt;-</span> <span class="fu">standardise_header</span><span class="op">(</span>sumstats_dt<span class="op">=</span><span class="va">sumstats_dt</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Standardising column headers.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> First line of summary statistics file: </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> MarkerName	CHR	POS	A1	A2	EAF	Beta	SE	Pval	</span>
@@ -133,7 +142,7 @@ table object</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

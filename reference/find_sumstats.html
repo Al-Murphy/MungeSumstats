@@ -20,7 +20,7 @@ list/vector of character strings."><!-- mathjax --><script src="https://cdnjs.cl
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -75,24 +75,24 @@ list/vector of character strings.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">find_sumstats</span><span class="op">(</span>
-  ids <span class="op">=</span> <span class="cn">NULL</span>,
-  traits <span class="op">=</span> <span class="cn">NULL</span>,
-  years <span class="op">=</span> <span class="cn">NULL</span>,
-  consortia <span class="op">=</span> <span class="cn">NULL</span>,
-  authors <span class="op">=</span> <span class="cn">NULL</span>,
-  populations <span class="op">=</span> <span class="cn">NULL</span>,
-  categories <span class="op">=</span> <span class="cn">NULL</span>,
-  subcategories <span class="op">=</span> <span class="cn">NULL</span>,
-  builds <span class="op">=</span> <span class="cn">NULL</span>,
-  pmids <span class="op">=</span> <span class="cn">NULL</span>,
-  min_sample_size <span class="op">=</span> <span class="cn">NULL</span>,
-  min_ncase <span class="op">=</span> <span class="cn">NULL</span>,
-  min_ncontrol <span class="op">=</span> <span class="cn">NULL</span>,
-  min_nsnp <span class="op">=</span> <span class="cn">NULL</span>,
-  include_NAs <span class="op">=</span> <span class="cn">FALSE</span>,
-  access_token <span class="op">=</span> <span class="fu"><a href="check_access_token.html">check_access_token</a></span><span class="op">(</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">find_sumstats</span><span class="op">(</span></span>
+<span>  ids <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  traits <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  years <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  consortia <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  authors <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  populations <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  categories <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  subcategories <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  builds <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pmids <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  min_sample_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  min_ncase <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  min_ncontrol <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  min_nsnp <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  include_NAs <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  access_token <span class="op">=</span> <span class="fu"><a href="check_access_token.html">check_access_token</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -100,55 +100,88 @@ list/vector of character strings.</p>
     <dl><dt>ids</dt>
 <dd><p>List of Open GWAS study IDs
 (e.g. <code>c("prot-a-664", "ieu-b-4760")</code>).</p></dd>
+
+
 <dt>traits</dt>
 <dd><p>List of traits
 (e.g. <code>c("parkinson", "Alzheimer")</code>).</p></dd>
+
+
 <dt>years</dt>
 <dd><p>List of years
 (e.g. <code>seq(2015,2021)</code> or <code>c(2010, 2012, 2021)</code>).</p></dd>
+
+
 <dt>consortia</dt>
 <dd><p>List of consortia
 (e.g. <code>c("MRC-IEU","Neale Lab")</code>.</p></dd>
+
+
 <dt>authors</dt>
 <dd><p>List of authors
 (e.g. <code>c("Elsworth","Kunkle","Neale")</code>).</p></dd>
+
+
 <dt>populations</dt>
 <dd><p>List of populations
 (e.g. <code>c("European","Asian")</code>).</p></dd>
+
+
 <dt>categories</dt>
 <dd><p>List of categories
 (e.g. <code>c("Binary","Continuous","Disease","Risk factor"))</code>).</p></dd>
+
+
 <dt>subcategories</dt>
 <dd><p>List of categories
 (e.g. <code>c("neurological","Immune","cardio"))</code>).</p></dd>
+
+
 <dt>builds</dt>
 <dd><p>List of genome builds
 (e.g. <code>c("hg19","grch37")</code>).</p></dd>
+
+
 <dt>pmids</dt>
 <dd><p>List of PubMed ID (exact matches only)
 (e.g. <code>c(29875488, 30305740, 28240269)</code>).</p></dd>
+
+
 <dt>min_sample_size</dt>
 <dd><p>Minimum total number of study participants
 (e.g. <code>5000</code>).</p></dd>
+
+
 <dt>min_ncase</dt>
 <dd><p>Minimum number of case participants
 (e.g. <code>1000</code>).</p></dd>
+
+
 <dt>min_ncontrol</dt>
 <dd><p>Minimum number of control participants
 (e.g. <code>1000</code>).</p></dd>
+
+
 <dt>min_nsnp</dt>
 <dd><p>Minimum number of SNPs
 (e.g. <code>200000</code>).</p></dd>
+
+
 <dt>include_NAs</dt>
 <dd><p>Include datasets with missing metadata for size criteria
 (i.e. <code>min_sample_size</code>, <code>min_ncase</code>, or <code>min_ncontrol</code>).</p></dd>
+
+
 <dt>access_token</dt>
 <dd><p>Google OAuth2 access token.
 Used to authenticate level of access to data</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>(Filtered) GWAS metadata table.</p>
+    
+
+<p>(Filtered) GWAS metadata table.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -157,25 +190,25 @@ Used to authenticate level of access to data</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Only run the examples if user has internet access:</span></span>
-<span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">is.character</a></span><span class="op">(</span><span class="fu">getURL</span><span class="op">(</span><span class="st">"www.google.com"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">==</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">{</span></span>
-<span class="r-in"><span class="co">### By ID</span></span>
-<span class="r-in"><span class="va">metagwas</span> <span class="op">&lt;-</span> <span class="fu">find_sumstats</span><span class="op">(</span>ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="st">"ieu-b-4760"</span>,</span>
-<span class="r-in">    <span class="st">"prot-a-1725"</span>,</span>
-<span class="r-in">    <span class="st">"prot-a-664"</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="co">### By ID amd sample size</span></span>
-<span class="r-in"><span class="va">metagwas</span> <span class="op">&lt;-</span> <span class="fu">find_sumstats</span><span class="op">(</span></span>
-<span class="r-in">    ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ieu-b-4760"</span>, <span class="st">"prot-a-1725"</span>, <span class="st">"prot-a-664"</span><span class="op">)</span>,</span>
-<span class="r-in">    min_sample_size <span class="op">=</span> <span class="fl">5000</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="co">### By criteria</span></span>
-<span class="r-in"><span class="va">metagwas</span> <span class="op">&lt;-</span> <span class="fu">find_sumstats</span><span class="op">(</span></span>
-<span class="r-in">    traits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"alzheimer"</span>, <span class="st">"parkinson"</span><span class="op">)</span>,</span>
-<span class="r-in">    years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">2015</span>, <span class="fl">2021</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Only run the examples if user has internet access:</span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">is.character</a></span><span class="op">(</span><span class="fu">getURL</span><span class="op">(</span><span class="st">"www.google.com"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">==</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co">### By ID</span></span></span>
+<span class="r-in"><span><span class="va">metagwas</span> <span class="op">&lt;-</span> <span class="fu">find_sumstats</span><span class="op">(</span>ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"ieu-b-4760"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"prot-a-1725"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"prot-a-664"</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">### By ID amd sample size</span></span></span>
+<span class="r-in"><span><span class="va">metagwas</span> <span class="op">&lt;-</span> <span class="fu">find_sumstats</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ieu-b-4760"</span>, <span class="st">"prot-a-1725"</span>, <span class="st">"prot-a-664"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    min_sample_size <span class="op">=</span> <span class="fl">5000</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">### By criteria</span></span></span>
+<span class="r-in"><span><span class="va">metagwas</span> <span class="op">&lt;-</span> <span class="fu">find_sumstats</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    traits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"alzheimer"</span>, <span class="st">"parkinson"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">2015</span>, <span class="fl">2021</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in getURL("www.google.com") : could not find function "getURL"</span>
 </code></pre></div>
     </div>
@@ -191,7 +224,7 @@ Used to authenticate level of access to data</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

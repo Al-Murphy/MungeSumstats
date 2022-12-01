@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -69,18 +69,20 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">compute_sample_size_neff</span><span class="op">(</span>
-  <span class="va">sumstats_dt</span>,
-  <span class="va">method</span>,
-  force_new <span class="op">=</span> <span class="cn">FALSE</span>,
-  append_method_name <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">compute_sample_size_neff</span><span class="op">(</span></span>
+<span>  <span class="va">sumstats_dt</span>,</span>
+<span>  <span class="va">method</span>,</span>
+<span>  force_new <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  append_method_name <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>sumstats_dt</dt>
 <dd><p>Summary statistics data.table.</p></dd>
+
+
 <dt>method</dt>
 <dd><p>Method for computing (effective) sample size.</p>
 <ul><li><p>"ldsc" : <br>
@@ -103,16 +105,23 @@ that does not account for class imbalance.</p></li>
 If method is a positive integer, it will be used as N
 for every row.</p></li>
 </ul></dd>
+
+
 <dt>force_new</dt>
 <dd><p>If "Neff" (or "N") already exists in <code>sumstats_dt</code>,
 replace it with the recomputed version.</p></dd>
+
+
 <dt>append_method_name</dt>
 <dd><p>should Neff column have an indicator to explain the
 method that makes it., Default is FALSE unless multiple methods are passed</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>No return</p>
+    
+
+<p>No return</p>
     </div>
 
   </div>
@@ -127,7 +136,7 @@ method that makes it., Default is FALSE unless multiple methods are passed</p></
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

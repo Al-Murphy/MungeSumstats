@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -69,20 +69,20 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">import_sumstats</span><span class="op">(</span>
-  <span class="va">ids</span>,
-  vcf_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,
-  vcf_download <span class="op">=</span> <span class="cn">TRUE</span>,
-  save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,
-  write_vcf <span class="op">=</span> <span class="cn">FALSE</span>,
-  download_method <span class="op">=</span> <span class="st">"download.file"</span>,
-  quiet <span class="op">=</span> <span class="cn">TRUE</span>,
-  force_new <span class="op">=</span> <span class="cn">FALSE</span>,
-  force_new_vcf <span class="op">=</span> <span class="cn">FALSE</span>,
-  nThread <span class="op">=</span> <span class="fl">1</span>,
-  parallel_across_ids <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">import_sumstats</span><span class="op">(</span></span>
+<span>  <span class="va">ids</span>,</span>
+<span>  vcf_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  vcf_download <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  write_vcf <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  download_method <span class="op">=</span> <span class="st">"download.file"</span>,</span>
+<span>  quiet <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  force_new <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  force_new_vcf <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  nThread <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  parallel_across_ids <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -90,68 +90,345 @@
     <dl><dt>ids</dt>
 <dd><p>List of Open GWAS study IDs
 (e.g. <code>c("prot-a-664", "ieu-b-4760")</code>).</p></dd>
+
+
 <dt>vcf_dir</dt>
 <dd><p>Where to download the original VCF from Open GWAS.
 <em>WARNING:</em> This is set to <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> by default.
 This means the raw (pre-formatted) VCFs be deleted upon ending the R session.
 Change this to keep the raw VCF file on disk
 (e.g. <code>vcf_dir="./raw_vcf"</code>).</p></dd>
+
+
 <dt>vcf_download</dt>
 <dd><p>Download the original VCF from Open GWAS.</p></dd>
+
+
 <dt>save_dir</dt>
 <dd><p>Directory to save formatted summary statistics in.</p></dd>
+
+
 <dt>write_vcf</dt>
 <dd><p>Whether to write as VCF (TRUE) or tabular file (FALSE).</p></dd>
+
+
 <dt>download_method</dt>
 <dd><p><code>"axel"</code> (multi-threaded) or
 <code>"download.file"</code> (single-threaded) .</p></dd>
+
+
 <dt>quiet</dt>
 <dd><p>Run quietly.</p></dd>
+
+
 <dt>force_new</dt>
 <dd><p>If a formatted file of the same names as <code>save_path</code>
 exists, formatting will be skipped and this file will be imported instead
 (default). Set <code>force_new=TRUE</code> to override this.</p></dd>
+
+
 <dt>force_new_vcf</dt>
 <dd><p>Overwrite a previously downloaded VCF
 with the same path name.</p></dd>
+
+
 <dt>nThread</dt>
 <dd><p>Number of threads to use for parallel processes.</p></dd>
+
+
 <dt>parallel_across_ids</dt>
 <dd><p>If <code>parallel_across_ids=TRUE</code>
 and <code>nThread&gt;1</code>,
 then each ID in <code>ids</code> will be processed in parallel.</p></dd>
+
+
 <dt>...</dt>
-<dd><p>Additional arguments passed to
-<a href="format_sumstats.html">format_sumstats</a>.</p></dd>
+<dd><p>Arguments passed on to <code><a href="format_sumstats.html">format_sumstats</a></code></p><dl><dt><code>path</code></dt>
+<dd><p>Filepath for the summary statistics file to be formatted. A
+dataframe or datatable of the summary statistics file can also be passed
+directly to MungeSumstats using the path parameter.</p></dd>
+
+    <dt><code>ref_genome</code></dt>
+<dd><p>name of the reference genome used for the GWAS ("GRCh37" or
+"GRCh38"). Argument is case-insensitive. Default is NULL which infers the
+reference genome from the data.</p></dd>
+
+    <dt><code>convert_ref_genome</code></dt>
+<dd><p>name of the reference genome to convert to
+("GRCh37" or "GRCh38"). This will only occur if the current genome build does
+not match. Default is not to convert the genome build (NULL).</p></dd>
+
+    <dt><code>chain_source</code></dt>
+<dd><p>source of the chain file to use in liftover, if converting
+genome build ("ucsc" or "ensembl"). Note that the UCSC chain files require a
+license for commercial use. The Ensembl chain is used by default ("ensembl").</p></dd>
+
+    <dt><code>convert_small_p</code></dt>
+<dd><p>Binary, should non-negative
+p-values &lt;= 5e-324 be converted to 0?
+Small p-values pass the R limit and can cause errors with LDSC/MAGMA and
+should be converted. Default is TRUE.</p></dd>
+
+    <dt><code>convert_large_p</code></dt>
+<dd><p>Binary, should p-values &gt;1 be converted to 1?
+P-values &gt;1 should not be possible and can cause errors with LDSC/MAGMA and
+should be converted. Default is TRUE.</p></dd>
+
+    <dt><code>convert_neg_p</code></dt>
+<dd><p>Binary, should p-values &lt;0 be converted to 0?
+Negative p-values should not be possible and can cause errors
+with LDSC/MAGMA and should be converted. Default is TRUE.</p></dd>
+
+    <dt><code>compute_z</code></dt>
+<dd><p>Whether to compute Z-score column. Default is FALSE. This
+can be computed from Beta and SE with (Beta/SE) or P
+(Z:=sign(BETA)*sqrt(stats::qchisq(P,1,lower=FALSE))).
+<strong>Note</strong> that imputing the Z-score from P for every SNP will not be
+perfectly correct and may result in a loss of power. This should only be done
+as a last resort. Use 'BETA' to impute by BETA/SE and 'P' to impute by SNP
+p-value.</p></dd>
+
+    <dt><code>force_new_z</code></dt>
+<dd><p>When a "Z" column already exists, it will be used by
+default. To override and compute a new Z-score column from P set
+<code>force_new_z=TRUE</code>.</p></dd>
+
+    <dt><code>compute_n</code></dt>
+<dd><p>Whether to impute N. Default of 0 won't impute, any other
+integer will be imputed as the N (sample size) for every SNP in the dataset.
+<strong>Note</strong> that imputing the sample size for every SNP is not correct and
+should only be done as a last resort. N can also be inputted with "ldsc",
+"sum", "giant" or "metal" by passing one of these for this field or a vector
+of multiple. Sum and an integer value creates an N column in the output
+whereas giant, metal or ldsc create an Neff or effective sample size. If
+multiples are passed, the formula used to derive it will be indicated.</p></dd>
+
+    <dt><code>convert_n_int</code></dt>
+<dd><p>Binary, if N (the number of samples) is not an integer,
+should this be rounded? Default is TRUE.</p></dd>
+
+    <dt><code>impute_beta</code></dt>
+<dd><p>Binary, whether BETA should be imputed using other effect
+data if it isn't present in the sumstats. Note that this imputation is an
+approximation (for Z &amp; SE approach) so could have an effect on downstream
+analysis. Use with caution. The different methods MungeSumstats will try and
+impute beta (in this order or priority) are:</p><ol><li><p>log(OR)  2. Z x SE
+Default value is FALSE.</p></li>
+</ol></dd>
+
+    <dt><code>es_is_beta</code></dt>
+<dd><p>Binary, whether to map ES to BETA. We take BETA to be any
+BETA-like value (including Effect Size). If this is not the case for your
+sumstats, change this to FALSE. Default is TRUE.</p></dd>
+
+    <dt><code>impute_se</code></dt>
+<dd><p>Binary, whether the standard error should be imputed using
+other effect data if it isn't present in the sumstats. Note that this
+imputation is an approximation so could have an effect on downstream
+analysis. Use with caution. The different methods MungeSumstats will try and
+impute se (in this order or priority) are:</p><ol><li><p>BETA / Z  2. abs(BETA/ qnorm(P/2))
+Default is FALSE.</p></li>
+</ol></dd>
+
+    <dt><code>analysis_trait</code></dt>
+<dd><p>If multiple traits were studied, name of the trait for
+analysis from the GWAS. Default is NULL.</p></dd>
+
+    <dt><code>INFO_filter</code></dt>
+<dd><p>numeric The minimum value permissible of the imputation
+information score (if present in sumstats file). Default 0.9.</p></dd>
+
+    <dt><code>FRQ_filter</code></dt>
+<dd><p>numeric The minimum value permissible of the frequency(FRQ)
+of the SNP (i.e. Allele Frequency (AF)) (if present in sumstats file). By
+default no filtering is done, i.e. value of 0.</p></dd>
+
+    <dt><code>pos_se</code></dt>
+<dd><p>Binary Should the standard Error (SE) column be checked to
+ensure it is greater than 0? Those that are, are removed (if present in
+sumstats file). Default TRUE.</p></dd>
+
+    <dt><code>effect_columns_nonzero</code></dt>
+<dd><p>Binary should the effect columns in the data
+BETA,OR (odds ratio),LOG_ODDS,SIGNED_SUMSTAT be checked to ensure no SNP=0.
+Those that do are removed(if present in sumstats file). Default FALSE.</p></dd>
+
+    <dt><code>N_std</code></dt>
+<dd><p>numeric The number of standard deviations above the mean a SNP's
+N is needed to be removed. Default is 5.</p></dd>
+
+    <dt><code>N_dropNA</code></dt>
+<dd><p>Drop rows where N is missing.Default is TRUE.</p></dd>
+
+    <dt><code>rmv_chr</code></dt>
+<dd><p>vector or character The chromosomes on which the SNPs should
+be removed. Use NULL if no filtering necessary. Default is X, Y and
+mitochondrial.</p></dd>
+
+    <dt><code>rmv_chrPrefix</code></dt>
+<dd><p>Remove "chr" or "CHR" from chromosome names. Default is
+TRUE.</p></dd>
+
+    <dt><code>on_ref_genome</code></dt>
+<dd><p>Binary Should a check take place that all SNPs are on
+the reference genome by SNP ID. Default is TRUE.</p></dd>
+
+    <dt><code>strand_ambig_filter</code></dt>
+<dd><p>Binary Should SNPs with strand-ambiguous alleles
+be removed. Default is FALSE.</p></dd>
+
+    <dt><code>allele_flip_check</code></dt>
+<dd><p>Binary Should the allele columns be checked against
+reference genome to infer if flipping is necessary. Default is TRUE.</p></dd>
+
+    <dt><code>allele_flip_drop</code></dt>
+<dd><p>Binary Should the SNPs for which neither their A1 or
+A2 base pair values match a reference genome be dropped. Default is TRUE.</p></dd>
+
+    <dt><code>allele_flip_z</code></dt>
+<dd><p>Binary should the Z-score be flipped along with effect
+and FRQ columns like Beta? It is assumed to be calculated off the effect size
+not the P-value and so will be flipped i.e. default TRUE.</p></dd>
+
+    <dt><code>allele_flip_frq</code></dt>
+<dd><p>Binary should the frequency (FRQ) column be flipped
+along with effect and z-score columns like Beta? Default TRUE.</p></dd>
+
+    <dt><code>bi_allelic_filter</code></dt>
+<dd><p>Binary Should non-biallelic SNPs be removed. Default
+is TRUE.</p></dd>
+
+    <dt><code>snp_ids_are_rs_ids</code></dt>
+<dd><p>Binary Should the supplied SNP ID's be assumed to
+be RSIDs. If not, imputation using the SNP ID for other columns like
+base-pair position or chromosome will not be possible. If set to FALSE, the
+SNP RS ID will be imputed from the reference genome if possible. Default is
+TRUE.</p></dd>
+
+    <dt><code>remove_multi_rs_snp</code></dt>
+<dd><p>Binary Sometimes summary statistics can have
+multiple RSIDs on one row (i.e. related to one SNP), for example
+"rs5772025_rs397784053". This can cause an error so by default, the first
+RS ID will be kept and the rest removed e.g."rs5772025". If you want to just
+remove these SNPs entirely, set it to TRUE. Default is FALSE.</p></dd>
+
+    <dt><code>frq_is_maf</code></dt>
+<dd><p>Conventionally the FRQ column is intended to show the
+minor/effect allele frequency (MAF) but sometimes the major allele frequency
+can be inferred as the FRQ column. This logical variable indicates that the
+FRQ column should be renamed to MAJOR_ALLELE_FRQ if the frequency values
+appear to relate to the major allele i.e. &gt;0.5. By default this mapping won't
+occur i.e. is TRUE.</p></dd>
+
+    <dt><code>indels</code></dt>
+<dd><p>Binary does your Sumstats file contain Indels? These don't
+exist in our reference file so they will be excluded from checks if this
+value is TRUE. Default is TRUE.</p></dd>
+
+    <dt><code>dbSNP</code></dt>
+<dd><p>version of dbSNP to be used for imputation (144 or 155).</p></dd>
+
+    <dt><code>check_dups</code></dt>
+<dd><p>whether to check for duplicates - if formatting QTL
+datasets this should be set to FALSE otherwise keep as TRUE. Default is TRUE.</p></dd>
+
+    <dt><code>sort_coordinates</code></dt>
+<dd><p>Whether to sort by coordinates of resulting sumstats</p></dd>
+
+    <dt><code>save_path</code></dt>
+<dd><p>File path to save formatted data. Defaults to
+<code>tempfile(fileext=".tsv.gz")</code>.</p></dd>
+
+    <dt><code>tabix_index</code></dt>
+<dd><p>Index the formatted summary statistics with
+<a href="http://www.htslib.org/doc/tabix.html" class="external-link">tabix</a> for fast querying.</p></dd>
+
+    <dt><code>return_data</code></dt>
+<dd><p>Return <code>data.table</code>, <code>GRanges</code> or <code>VRanges</code>
+directly to user. Otherwise, return the path to the save data. Default is
+FALSE.</p></dd>
+
+    <dt><code>return_format</code></dt>
+<dd><p>If return_data is TRUE. Object type to be returned
+("data.table","vranges","granges").</p></dd>
+
+    <dt><code>ldsc_format</code></dt>
+<dd><p>DEPRECATED, do not use. Use save_format="LDSC" instead.</p></dd>
+
+    <dt><code>save_format</code></dt>
+<dd><p>Output format of sumstats. Options are NULL - standardised
+output format from MungeSumstats, LDSC - output format compatible with LDSC
+and openGWAS - output compatible with openGWAS VCFs. Default is NULL.</p></dd>
+
+    <dt><code>log_folder_ind</code></dt>
+<dd><p>Binary Should log files be stored containing all
+filtered out SNPs (separate file per filter). The data is outputted in the
+same format specified for the resulting sumstats file. The only exception to
+this rule is if output is vcf, then log file saved as .tsv.gz. Default is
+FALSE.</p></dd>
+
+    <dt><code>log_mungesumstats_msgs</code></dt>
+<dd><p>Binary Should a log be stored containing all
+messages and errors printed by MungeSumstats in a run. Default is FALSE</p></dd>
+
+    <dt><code>log_folder</code></dt>
+<dd><p>Filepath to the directory for the log files and the log of
+MungeSumstats messages to be stored. Default is a temporary directory. Note
+the name of the log files (log messages and log outputs) are now the same as
+the name of the file specified in the save path parameter with the extension
+'_log_msg.txt' and '_log_output.txt' respectively.</p></dd>
+
+    <dt><code>imputation_ind</code></dt>
+<dd><p>Binary Should a column be added for each imputation
+step to show what SNPs have imputed values for differing fields. This
+includes a field denoting SNP allele flipping (flipped). On the flipped
+value, this denoted whether the alelles where switched based on
+MungeSumstats initial choice of A1, A2 from the input column headers and thus
+may not align with what the creator intended.<strong>Note</strong> these columns will be
+in the formatted summary statistics returned. Default is FALSE.</p></dd>
+
+    <dt><code>mapping_file</code></dt>
+<dd><p>MungeSumstats has a pre-defined column-name mapping file
+which should cover the most common column headers and their interpretations.
+However, if a column header that is in youf file is missing of the mapping we
+give is incorrect you can supply your own mapping file. Must be a 2 column
+dataframe with column names "Uncorrected" and "Corrected". See
+data(sumstatsColHeaders) for default mapping and necessary format.</p></dd>
+
+  
+</dl></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Either a named list of data objects or paths,
+    
+
+<p>Either a named list of data objects or paths,
 depending on the arguments passed to <code>format_sumstats</code>.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">#only run the examples if user has internet access:</span></span>
-<span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">is.character</a></span><span class="op">(</span><span class="fu">getURL</span><span class="op">(</span><span class="st">"www.google.com"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">==</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">{</span></span>
-<span class="r-in"><span class="co">### Search by criteria</span></span>
-<span class="r-in"><span class="va">metagwas</span> <span class="op">&lt;-</span> <span class="fu"><a href="find_sumstats.html">find_sumstats</a></span><span class="op">(</span></span>
-<span class="r-in">    traits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"parkinson"</span>, <span class="st">"alzheimer"</span><span class="op">)</span>,</span>
-<span class="r-in">    min_sample_size <span class="op">=</span> <span class="fl">5000</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="co">### Only use a subset for testing purposes</span></span>
-<span class="r-in"><span class="va">ids</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">metagwas</span>, <span class="va">nsnp</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">id</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">### Default usage</span></span>
-<span class="r-in"><span class="co">## You can supply \code{import_sumstats()}</span></span>
-<span class="r-in"><span class="co">## with a list of as many OpenGWAS IDs as you want,</span></span>
-<span class="r-in"><span class="co">## but we'll just give one to save time.</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Call uses reference genome as default with more than 2GB of memory,</span></span>
-<span class="r-in"><span class="co">## which is more than what 32-bit Windows can handle so remove certain checks</span></span>
-<span class="r-in"><span class="co">## commented out down to runtime</span></span>
-<span class="r-in"><span class="co"># datasets &lt;- import_sumstats(ids = ids[1])</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">#only run the examples if user has internet access:</span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">is.character</a></span><span class="op">(</span><span class="fu">getURL</span><span class="op">(</span><span class="st">"www.google.com"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">==</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co">### Search by criteria</span></span></span>
+<span class="r-in"><span><span class="va">metagwas</span> <span class="op">&lt;-</span> <span class="fu"><a href="find_sumstats.html">find_sumstats</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    traits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"parkinson"</span>, <span class="st">"alzheimer"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    min_sample_size <span class="op">=</span> <span class="fl">5000</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">### Only use a subset for testing purposes</span></span></span>
+<span class="r-in"><span><span class="va">ids</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">metagwas</span>, <span class="va">nsnp</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">id</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">### Default usage</span></span></span>
+<span class="r-in"><span><span class="co">## You can supply \code{import_sumstats()}</span></span></span>
+<span class="r-in"><span><span class="co">## with a list of as many OpenGWAS IDs as you want,</span></span></span>
+<span class="r-in"><span><span class="co">## but we'll just give one to save time.</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Call uses reference genome as default with more than 2GB of memory,</span></span></span>
+<span class="r-in"><span><span class="co">## which is more than what 32-bit Windows can handle so remove certain checks</span></span></span>
+<span class="r-in"><span><span class="co">## commented out down to runtime</span></span></span>
+<span class="r-in"><span><span class="co"># datasets &lt;- import_sumstats(ids = ids[1])</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in getURL("www.google.com") : could not find function "getURL"</span>
 </code></pre></div>
     </div>
@@ -167,7 +444,7 @@ depending on the arguments passed to <code>format_sumstats</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

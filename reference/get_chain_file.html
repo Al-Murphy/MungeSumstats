@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -69,31 +69,49 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_chain_file</span><span class="op">(</span>
-  build_conversion <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hg38ToHg19"</span>, <span class="st">"hg19ToHg38"</span><span class="op">)</span>,
-  save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_chain_file</span><span class="op">(</span></span>
+<span>  from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hg38"</span>, <span class="st">"hg19"</span><span class="op">)</span>,</span>
+<span>  to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hg19"</span>, <span class="st">"hg38"</span><span class="op">)</span>,</span>
+<span>  chain_source <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ucsc"</span>, <span class="st">"ensembl"</span><span class="op">)</span>,</span>
+<span>  save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="source">
     <h2>Source</h2>
     <p><a href="https://hgdownload.cse.ucsc.edu/goldenpath/hg19/liftOver/" class="external-link">
 UCSC chain files</a></p>
+<p><a href="https://ftp.ensembl.org/pub/assembly_mapping/homo_sapiens/" class="external-link">
+Ensembl chain files</a></p>
     </div>
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>build_conversion</dt>
-<dd><p>converting from what build to what? hg38ToHg19 or
-hg19ToHg38</p></dd>
+    <dl><dt>from</dt>
+<dd><p>genome build converted from ("hg38", "hg19")</p></dd>
+
+
+<dt>to</dt>
+<dd><p>genome build converted to ("hg19", "hg38")</p></dd>
+
+
+<dt>chain_source</dt>
+<dd><p>chain file source used ("ucsc" as default, or "ensembl")</p></dd>
+
+
 <dt>save_dir</dt>
 <dd><p>where is the chain file saved? Default is a temp directory</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>extra messages printed? Default is TRUE</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>loaded chain file for liftover</p>
+    
+
+<p>loaded chain file for liftover</p>
     </div>
 
   </div>
@@ -108,7 +126,7 @@ hg19ToHg38</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

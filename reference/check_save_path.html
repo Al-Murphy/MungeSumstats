@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -69,14 +69,14 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">check_save_path</span><span class="op">(</span>
-  <span class="va">save_path</span>,
-  <span class="va">log_folder</span>,
-  <span class="va">log_folder_ind</span>,
-  <span class="va">tabix_index</span>,
-  write_vcf <span class="op">=</span> <span class="cn">FALSE</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">check_save_path</span><span class="op">(</span></span>
+<span>  <span class="va">save_path</span>,</span>
+<span>  <span class="va">log_folder</span>,</span>
+<span>  <span class="va">log_folder_ind</span>,</span>
+<span>  <span class="va">tabix_index</span>,</span>
+<span>  write_vcf <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -84,26 +84,42 @@
     <dl><dt>save_path</dt>
 <dd><p>File path to save formatted data. Defaults to
 <code>tempfile(fileext=".tsv.gz")</code>.</p></dd>
+
+
 <dt>log_folder</dt>
 <dd><p>Filepath to the directory for the log files and the log of
-MungeSumstats messages to be stored. Default is a temporary directory.</p></dd>
+MungeSumstats messages to be stored. Default is a temporary directory. Note
+the name of the log files (log messages and log outputs) are now the same as
+the name of the file specified in the save path parameter with the extension
+'_log_msg.txt' and '_log_output.txt' respectively.</p></dd>
+
+
 <dt>log_folder_ind</dt>
 <dd><p>Binary Should log files be stored containing all
 filtered out SNPs (separate file per filter). The data is outputted in the
 same format specified for the resulting sumstats file. The only exception to
 this rule is if output is vcf, then log file saved as .tsv.gz. Default is
 FALSE.</p></dd>
+
+
 <dt>tabix_index</dt>
 <dd><p>Index the formatted summary statistics with
 <a href="http://www.htslib.org/doc/tabix.html" class="external-link">tabix</a> for fast querying.</p></dd>
+
+
 <dt>write_vcf</dt>
 <dd><p>Whether to write as VCF (TRUE) or tabular file (FALSE).</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Print messages.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Corrected <code>save_path</code>, the file type, the separator, corrected
+    
+
+<p>Corrected <code>save_path</code>, the file type, the separator, corrected
 <code>log_folder</code>,the log file extension.</p>
     </div>
 
@@ -119,7 +135,7 @@ FALSE.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

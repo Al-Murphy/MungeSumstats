@@ -20,7 +20,7 @@ from the data. Uses SNP (RSID) &amp;amp; CHR &amp;amp; BP to get genome build.">
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -74,14 +74,15 @@ from the data. Uses SNP (RSID) &amp; CHR &amp; BP to get genome build.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_genome_build</span><span class="op">(</span>
-  <span class="va">sumstats</span>,
-  nThread <span class="op">=</span> <span class="fl">1</span>,
-  sampled_snps <span class="op">=</span> <span class="fl">10000</span>,
-  standardise_headers <span class="op">=</span> <span class="cn">TRUE</span>,
-  mapping_file <span class="op">=</span> <span class="va">sumstatsColHeaders</span>,
-  header_only <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_genome_build</span><span class="op">(</span></span>
+<span>  <span class="va">sumstats</span>,</span>
+<span>  nThread <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  sampled_snps <span class="op">=</span> <span class="fl">10000</span>,</span>
+<span>  standardise_headers <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  mapping_file <span class="op">=</span> <span class="va">sumstatsColHeaders</span>,</span>
+<span>  dbSNP <span class="op">=</span> <span class="fl">155</span>,</span>
+<span>  header_only <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -89,14 +90,22 @@ from the data. Uses SNP (RSID) &amp; CHR &amp; BP to get genome build.</p>
     <dl><dt>sumstats</dt>
 <dd><p>data table/data frame obj of the summary statistics file for
 the GWAS ,or file path to summary statistics file.</p></dd>
+
+
 <dt>nThread</dt>
 <dd><p>Number of threads to use for parallel processes.</p></dd>
+
+
 <dt>sampled_snps</dt>
 <dd><p>Downsample the number of SNPs used when inferring genome
 build to save time.</p></dd>
+
+
 <dt>standardise_headers</dt>
 <dd><p>Run
 <code>standardise_sumstats_column_headers_crossplatform</code>.</p></dd>
+
+
 <dt>mapping_file</dt>
 <dd><p><span class="pkg">MungeSumstats</span> has a pre-defined
 column-name mapping file
@@ -105,15 +114,24 @@ However, if a column header that is in your file is missing of the mapping we
 give is incorrect you can supply your own mapping file. Must be a 2 column
 dataframe with column names "Uncorrected" and "Corrected". See
 <code>data(sumstatsColHeaders)</code> for default mapping and necessary format.</p></dd>
+
+
+<dt>dbSNP</dt>
+<dd><p>version of dbSNP to be used (144 or 155). Default is 155.</p></dd>
+
+
 <dt>header_only</dt>
 <dd><p>Instead of reading in the entire <code>sumstats</code> file,
 only read in the first N rows where N=<code>sampled_snps</code>.
 This should help speed up cases where you have to read in <code>sumstats</code>
 from disk each time.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>ref_genome the genome build of the data</p>
+    
+
+<p>ref_genome the genome build of the data</p>
     </div>
 
   </div>
@@ -128,7 +146,7 @@ from disk each time.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

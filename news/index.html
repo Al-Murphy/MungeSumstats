@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -63,6 +63,151 @@
       <small>Source: <a href="https://github.com/neurogenomics/MungeSumstats/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.7.3" id="changes-in-version-173">CHANGES IN VERSION 1.7.3<a class="anchor" aria-label="anchor" href="#changes-in-version-173"></a></h2>
+<div class="section level3">
+<h3 id="bug-fix-1-7-3">Bug fix<a class="anchor" aria-label="anchor" href="#bug-fix-1-7-3"></a></h3>
+<ul><li>fix for offline runs and accessing chain files from 1.7.2.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.7.2" id="changes-in-version-172">CHANGES IN VERSION 1.7.2<a class="anchor" aria-label="anchor" href="#changes-in-version-172"></a></h2>
+<div class="section level3">
+<h3 id="new-features-1-7-2">New features<a class="anchor" aria-label="anchor" href="#new-features-1-7-2"></a></h3>
+<ul><li>New chain files used for lifting over the genome build from Ensembl have now been added. These will now be set as the default chain file instead of UCSC due to <a href="https://github.com/neurogenomics/MungeSumstats/issues/128" class="external-link">licensing issues</a>. The choice to use UCSC files will still be there but the files will not be stored in the package themselves, they will instead be downloaded for use on the fly.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.7.1" id="changes-in-version-171">CHANGES IN VERSION 1.7.1<a class="anchor" aria-label="anchor" href="#changes-in-version-171"></a></h2>
+<div class="section level3">
+<h3 id="new-features-1-7-1">New features<a class="anchor" aria-label="anchor" href="#new-features-1-7-1"></a></h3>
+<ul><li>The use of the <code>log_folder</code> parameter in <code><a href="../reference/format_sumstats.html">format_sumstats()</a></code> has been updated. It is still used to point to the directory for the log files and the log of MungeSumstats messages to be stored. And the default is still a temporary directory. However, now the name of the log files (log messages and log outputs) are the same as the name of the file specified in the <code>save_path</code> parameter with the extension ’_log_msg.txt’ and ’_log_output.txt’ respectively.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.5.18" id="changes-in-version-1518">CHANGES IN VERSION 1.5.18<a class="anchor" aria-label="anchor" href="#changes-in-version-1518"></a></h2>
+<div class="section level3">
+<h3 id="bug-fix-1-5-18">Bug fix<a class="anchor" aria-label="anchor" href="#bug-fix-1-5-18"></a></h3>
+<ul><li>GHA fix.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.5.17" id="changes-in-version-1517">CHANGES IN VERSION 1.5.17<a class="anchor" aria-label="anchor" href="#changes-in-version-1517"></a></h2>
+<div class="section level3">
+<h3 id="new-features-1-5-17">New features<a class="anchor" aria-label="anchor" href="#new-features-1-5-17"></a></h3>
+<ul><li>By default ES taken as BETA new parameter added so users can specify if this isn’t the case (<code>es_is_beta</code>). If set to FALSE, mapping removed.</li>
+<li>Imputing BETA ordering has been changed so log(OR) will be sued before calculating from Z, SE.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.5.16" id="changes-in-version-1516">CHANGES IN VERSION 1.5.16<a class="anchor" aria-label="anchor" href="#changes-in-version-1516"></a></h2>
+<div class="section level3">
+<h3 id="new-features-1-5-16">New features<a class="anchor" aria-label="anchor" href="#new-features-1-5-16"></a></h3>
+<ul><li>A new method for computing the Z-score of a sumstats (<code>compute_z</code> input) has been added: BETA/SE. To use it set <code>compute_z = 'BETA'</code> to continue to use the P-value calculation use <code>compute_z = 'P'</code>. Note the default is stil <code>compute_z = FALSE</code>.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fix-1-5-16">Bug fix<a class="anchor" aria-label="anchor" href="#bug-fix-1-5-16"></a></h3>
+<ul><li>Remove erroneous print statement.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.5.15" id="changes-in-version-1515">CHANGES IN VERSION 1.5.15<a class="anchor" aria-label="anchor" href="#changes-in-version-1515"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-1-5-15">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-5-15"></a></h3>
+<ul><li>Fix NA representation for tabular outputs - By default, <code><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">data.table::fread()</a></code> leaves NAs blank instead of including a literal NA. That’s fine for CSVs and if the output is read in by fread, but it breaks other tools for TSVs and is hard to read. Updated that and added a message when the table is switched to uncompressed for indexing.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.5.14" id="changes-in-version-1514">CHANGES IN VERSION 1.5.14<a class="anchor" aria-label="anchor" href="#changes-in-version-1514"></a></h2>
+<div class="section level3">
+<h3 id="new-features-1-5-14">New features<a class="anchor" aria-label="anchor" href="#new-features-1-5-14"></a></h3>
+<ul><li>
+<code>read_header</code>:
+<ul><li>Can now read entire files by setting <code>n=NULL</code>.</li>
+<li>Improved reading in of VCF files (can read <em>.vcf.bgz</em> now).</li>
+<li>Now exported.</li>
+<li>Added unit tests.</li>
+</ul></li>
+<li>Remove <code>seqminer</code> from all code (too buggy).</li>
+<li>Automatically remove residual .tsv files after tabix indexing.</li>
+<li>
+<code>import_sumstats</code>:
+<ul><li>Use <code>@inheritDotParams format_sumstats</code> for better documentation.</li>
+</ul></li>
+<li>
+<code>parse_logs</code>: Added new fields.</li>
+<li>
+<code>format_sumstats</code>: Added time report at the end (minutes taken total). Since this is a message, will be included in the logs, and is now parsed by <code>parse_logs</code> and put into the column “time”.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-1-5-14">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-5-14"></a></h3>
+<ul><li>
+<code>index_tabular</code>: Fixed by replacing <code>seqminer</code> with <code>Rsamtools</code>.</li>
+<li>When SNP ID’s passed with format <code>1:123456789</code>, it will now be dealt with appropriately.</li>
+<li>
+<code>compute_n</code> can’t handle SNP level N values for imputation only population level. An explanatory error message has now been added.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.5.13" id="changes-in-version-1513">CHANGES IN VERSION 1.5.13<a class="anchor" aria-label="anchor" href="#changes-in-version-1513"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-1-5-13">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-5-13"></a></h3>
+<ul><li>Special characters causing issues with find empty columns function. Now fixed.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.5.12" id="changes-in-version-1512">CHANGES IN VERSION 1.5.12<a class="anchor" aria-label="anchor" href="#changes-in-version-1512"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-1-5-12">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-5-12"></a></h3>
+<ul><li>Mitchondrial (MT) SNPs’ chromosome value were being forced to NA by sort_coords function. This has been fixed.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.5.11" id="changes-in-version-1511">CHANGES IN VERSION 1.5.11<a class="anchor" aria-label="anchor" href="#changes-in-version-1511"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-1-5-11">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-5-11"></a></h3>
+<ul><li>Had to pass check_dups to other checks so they also wouldn’t be run. Now independent of non-biallelic check.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.5.10" id="changes-in-version-1510">CHANGES IN VERSION 1.5.10<a class="anchor" aria-label="anchor" href="#changes-in-version-1510"></a></h2>
+<div class="section level3">
+<h3 id="new-features-1-5-10">New features<a class="anchor" aria-label="anchor" href="#new-features-1-5-10"></a></h3>
+<ul><li>check_dups parameter added so duplicates won’t be removed if formatting QTL datasets</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.5.9" id="changes-in-version-159">CHANGES IN VERSION 1.5.9<a class="anchor" aria-label="anchor" href="#changes-in-version-159"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-1-5-9">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-5-9"></a></h3>
+<ul><li>validate_parameters checks for incorrect version of dbSNP package, corrected.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.5.6" id="changes-in-version-156">CHANGES IN VERSION 1.5.6<a class="anchor" aria-label="anchor" href="#changes-in-version-156"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-1-5-6">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-5-6"></a></h3>
+<ul><li>MSS can now impute CHR, BP at a SNP level. For cases where CHR and/or BP are NA but the RS ID is present, these will now be imputed fromt he reference genome. Note previously, this imputation was done when the chr and/or bp column was missing.</li>
+<li>Print statement from liftover silenced when no liftover required</li>
+<li>check missing data function will no longer remove cases with NA’s in SNP_INFO column. The SNP_INFO column is created by MSS for cases with RS ID and some other information in the same SNP column (like rs1234:…..). Rather than throw out this info, it is stored in a new column - SNP_INFO. However, the remove missing data function was also looking in this column to remove SNPs. This has been corrected.</li>
+<li>
+<code><a href="../reference/find_sumstats.html">find_sumstats()</a></code>:
+<ul><li>Fix N column in metadata.</li>
+</ul></li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.5.5" id="changes-in-version-155">CHANGES IN VERSION 1.5.5<a class="anchor" aria-label="anchor" href="#changes-in-version-155"></a></h2>
+<div class="section level3">
+<h3 id="new-features-1-5-5">New features<a class="anchor" aria-label="anchor" href="#new-features-1-5-5"></a></h3>
+<ul><li>save_format parameter created for format_sumstats. This will replace ldsc_format which is now deprecated. Use save_format=“LDSC” instead. Other options for save_format are generic standardised (NULL) and IEU Open GWAS VCF format (“openGWAS”).</li>
+<li>dbSNP version 155 has now been added. Users can now control the version of dbSNP to be used for imputation (144 or 155). Note that with the 9x more SNPs in dbSNP 155 vs 144, run times will increase.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-1-5-5">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-5-5"></a></h3>
+<ul><li>Change where sex chromosomes were made lower case removed to match UCSC</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.5.4" id="changes-in-version-154">CHANGES IN VERSION 1.5.4<a class="anchor" aria-label="anchor" href="#changes-in-version-154"></a></h2>
 <div class="section level3">
@@ -584,7 +729,7 @@ By default, only uses first sample (if multiple are present in file).<br></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

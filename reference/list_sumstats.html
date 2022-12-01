@@ -19,7 +19,7 @@ import_sumstats."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -73,12 +73,12 @@ import_sumstats."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">list_sumstats</span><span class="op">(</span>
-  save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,
-  pattern <span class="op">=</span> <span class="st">"*.tsv.gz$"</span>,
-  ids_from_file <span class="op">=</span> <span class="cn">TRUE</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">list_sumstats</span><span class="op">(</span></span>
+<span>  save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  pattern <span class="op">=</span> <span class="st">"*.tsv.gz$"</span>,</span>
+<span>  ids_from_file <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -86,25 +86,34 @@ import_sumstats."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
     <dl><dt>save_dir</dt>
 <dd><p>Top-level directory to recursively search
 for summary statistics files within.</p></dd>
+
+
 <dt>pattern</dt>
 <dd><p>Regex pattern to search for files with.</p></dd>
+
+
 <dt>ids_from_file</dt>
 <dd><p>Try to extract dataset IDs from file names.
 If <code>FALSE</code>, will infer IDs from the directory names instead.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Print messages.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Named vector of summary stats paths.</p>
+    
+
+<p>Named vector of summary stats paths.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">save_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,package <span class="op">=</span> <span class="st">"MungeSumstats"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">munged_files</span> <span class="op">&lt;-</span> <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu">list_sumstats</span><span class="op">(</span>save_dir <span class="op">=</span> <span class="va">save_dir</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">save_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,package <span class="op">=</span> <span class="st">"MungeSumstats"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">munged_files</span> <span class="op">&lt;-</span> <span class="fu">MungeSumstats</span><span class="fu">::</span><span class="fu">list_sumstats</span><span class="op">(</span>save_dir <span class="op">=</span> <span class="va">save_dir</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1 file(s) found.</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -119,7 +128,7 @@ If <code>FALSE</code>, will infer IDs from the directory names instead.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

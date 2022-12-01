@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.7</span>
       </span>
     </div>
 
@@ -94,11 +94,11 @@
 <code>MungeSumstats</code>: Standardise the format of GWAS summary statistics<a class="anchor" aria-label="anchor" href="#mungesumstats-standardise-the-format-of-gwas-summary-statistics"></a>
 </h1></div>
 <h5 id="mungesumstats-standardise-the-format-of-gwas-summary-statistics-1">
-<i>Authors</i>: Alan Murphy, Brian Schilder and Nathan Skene
+¶ <i>Authors</i>: Alan Murphy, Brian Schilder and Nathan Skene ¶
 <a class="anchor" aria-label="anchor" href="#mungesumstats-standardise-the-format-of-gwas-summary-statistics-1"></a>
 </h5>
 <h5 id="mungesumstats-standardise-the-format-of-gwas-summary-statistics-2">
-<i>Updated</i>: May-19-2022
+¶ <i>Updated</i>: Dec-01-2022 ¶
 <a class="anchor" aria-label="anchor" href="#mungesumstats-standardise-the-format-of-gwas-summary-statistics-2"></a>
 </h5>
 <!-- Readme.md is generated from Readme.Rmd. Please edit that file -->
@@ -130,20 +130,20 @@
 </h1>
 <p><code>MungeSumstats</code> is available on <a href="https://bioconductor.org/packages/MungeSumstats" class="external-link">Bioconductor</a> (≥v3.13). To install <code>MungeSumstats</code> on Bioconductor run:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
-
-<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"MungeSumstats"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"MungeSumstats"</span><span class="op">)</span></span></code></pre></div>
 <p>You can then load the package and data package:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/neurogenomics/MungeSumstats" class="external-link">MungeSumstats</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/neurogenomics/MungeSumstats" class="external-link">MungeSumstats</a></span><span class="op">)</span></span></code></pre></div>
 <p>Note that for a number of the checks implored by <code>MungeSumstats</code> a reference genome is used. If your GWAS summary statistics file of interest relates to <em>GRCh38</em>, you will need to install <code>SNPlocs.Hsapiens.dbSNP144.GRCh38</code> and <code>BSgenome.Hsapiens.NCBI.GRCh38</code> from Bioconductor as follows:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"SNPlocs.Hsapiens.dbSNP144.GRCh38"</span><span class="op">)</span>
-<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"BSgenome.Hsapiens.NCBI.GRCh38"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"SNPlocs.Hsapiens.dbSNP144.GRCh38"</span><span class="op">)</span></span>
+<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"BSgenome.Hsapiens.NCBI.GRCh38"</span><span class="op">)</span></span></code></pre></div>
 <p>If your GWAS summary statistics file of interest relates to <em>GRCh37</em>, you will need to install <code>SNPlocs.Hsapiens.dbSNP144.GRCh37</code> and <code>BSgenome.Hsapiens.1000genomes.hs37d5</code> from Bioconductor as follows:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"SNPlocs.Hsapiens.dbSNP144.GRCh37"</span><span class="op">)</span>
-<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"BSgenome.Hsapiens.1000genomes.hs37d5"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"SNPlocs.Hsapiens.dbSNP144.GRCh37"</span><span class="op">)</span></span>
+<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"BSgenome.Hsapiens.1000genomes.hs37d5"</span><span class="op">)</span></span></code></pre></div>
 <p>These may take some time to install and are not included in the package as some users may only need one of <em>GRCh37</em>/<em>GRCh38</em>. If you are unsure of the genome build, MungeSumstats can also infer this information from your data.</p>
 </div>
 <div class="section level1">
@@ -171,6 +171,7 @@
 <li><a href="https://github.com/NathanSkene" class="external-link">Nathan Skene</a></li>
 <li><a href="https://github.com/bschilder" class="external-link">Brian Schilder</a></li>
 <li><a href="https://github.com/sjfandrews" class="external-link">Shea Andrews</a></li>
+<li><a href="https://github.com/jonathangriffiths" class="external-link">Jonathan Griffiths</a></li>
 </ul>
 </div>
 <div class="section level1">
@@ -223,13 +224,13 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.bioconductor.org/packages/MungeSumstats" class="external-link"><img src="https://img.shields.io/badge/release%20version-1.5.3-black.svg"></a></li>
-<li><a href="https://github.com/neurogenomics/MungeSumstats" class="external-link"><img src="https://img.shields.io/badge/devel%20version-1.5.4-black.svg"></a></li>
+<li><a href="https://www.bioconductor.org/packages/MungeSumstats" class="external-link"><img src="https://img.shields.io/badge/release%20version-1.7.2-black.svg"></a></li>
+<li><a href="https://github.com/neurogenomics/MungeSumstats" class="external-link"><img src="https://img.shields.io/badge/devel%20version-1.7.7-black.svg"></a></li>
 <li><a href="https://github.com/neurogenomics/MungeSumstats/actions" class="external-link"><img src="https://github.com/neurogenomics/MungeSumstats/workflows/DockerHub/badge.svg" alt="R build status"></a></li>
 <li><a href="https://github.com/neurogenomics/MungeSumstats/actions" class="external-link"><img src="https://github.com/neurogenomics/MungeSumstats/workflows/R-CMD-check-bioc/badge.svg" alt="R build status"></a></li>
 <li><a href="https://github.com/neurogenomics/MungeSumstats/commits/master" class="external-link"><img src="https://img.shields.io/github/last-commit/neurogenomics/MungeSumstats.svg"></a></li>
 <li><a href="https://app.codecov.io/gh/neurogenomics/MungeSumstats" class="external-link"><img src="https://app.codecov.io/gh/neurogenomics/MungeSumstats/branch/master/graph/badge.svg"></a></li>
-<li><a href="https://bioconductor.org/packages/stats/bioc/MungeSumstats" class="external-link"><img src="https://img.shields.io/badge/download-1046/total-blue.svg"></a></li>
+<li><a href="https://bioconductor.org/packages/stats/bioc/MungeSumstats" class="external-link"><img src="https://img.shields.io/badge/download-2162/total-blue.svg"></a></li>
 <li><a href="https://cran.r-project.org/web/licenses/Artistic-2.0" class="external-link"><img src="https://img.shields.io/badge/license-Artistic--2.0-blue.svg" alt="License: Artistic-2.0"></a></li>
 <li><a href="https://doi.org/https://doi.org/10.1093/bioinformatics/btab665" class="external-link"><img src="https://img.shields.io/badge/doi-https://doi.org/10.1093/bioinformatics/btab665-blue.svg"></a></li>
 </ul>
@@ -246,7 +247,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer>
