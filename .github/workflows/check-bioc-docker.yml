@@ -56,7 +56,8 @@ jobs:
         config:
           - { os: ubuntu-latest, r: 'devel', bioc: 'devel', cont: "bioconductor/bioconductor_docker:devel", rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/release"}
           - { os: macOS-latest, r: 'latest', bioc: 'release'}
-          - { os: windows-latest, r: 'latest', bioc: 'release'}
+          #runs out of space on windows so don't run it
+          #- { os: windows-latest, r: 'latest', bioc: 'release'}
           ## Check https://github.com/r-lib/actions/tree/master/examples
           ## for examples using the http-user-agent
     env:
