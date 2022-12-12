@@ -27,7 +27,6 @@
 #' @source 
 #' \code{
 #' path <- "https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz"
-#' 
 #' #### Single-threaded ####
 #' vcf <- MungeSumstats:::read_vcf_parallel(path = path)
 #' #### Parallel ####
