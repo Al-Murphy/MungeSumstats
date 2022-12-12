@@ -1,3 +1,8 @@
+## CHANGES IN VERSION 1.7.10
+
+### Bug fix
+* further fix for Latex issues when rendering PDF of examples.
+
 ## CHANGES IN VERSION 1.7.9
 
 ### Bug fix

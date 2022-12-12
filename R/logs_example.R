@@ -15,7 +15,6 @@
 #' ss_path <- tempfile()
 #' data.table::fwrite(sumstats_dt, ss_path)
 #' log_folder <- tempdir()
-#' 
 #' reformatted <- MungeSumstats::format_sumstats(
 #'     path = ss_path,
 #'     ref_genome = "GRCh37",
@@ -23,7 +22,6 @@
 #'     log_mungesumstats_msgs = TRUE,
 #'     log_folder_ind = TRUE,
 #' )
-#'
 #' file.copy(reformatted$log_files$MungeSumstats_log_msg,
 #'           "inst/extdata",overwrite = TRUE)
 #' }
