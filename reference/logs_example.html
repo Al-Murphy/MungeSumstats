@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MungeSumstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.10</span>
       </span>
     </div>
 
@@ -84,13 +84,15 @@ sumstats_dt$Pval[20:22] &lt;- -5
 sumstats_dt$Pval[23:25] &lt;- "5e-324"
 ss_path &lt;- tempfile()
 data.table::fwrite(sumstats_dt, ss_path)
-log_folder &lt;- tempdir()reformatted &lt;- MungeSumstats::format_sumstats(
+log_folder &lt;- tempdir()
+reformatted &lt;- MungeSumstats::format_sumstats(
     path = ss_path,
     ref_genome = "GRCh37",
     log_folder = log_folder,
     log_mungesumstats_msgs = TRUE,
     log_folder_ind = TRUE,
-)file.copy(reformatted$log_files$MungeSumstats_log_msg,
+)
+file.copy(reformatted$log_files$MungeSumstats_log_msg,
           "inst/extdata",overwrite = TRUE)
 </code></p>
     </div>
