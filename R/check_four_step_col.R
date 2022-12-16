@@ -8,6 +8,7 @@
 #' @importFrom data.table tstrsplit
 #' @importFrom data.table :=
 check_four_step_col <- function(sumstats_dt, path) {
+    A2 <- A1 <- NULL
     # get col headers
     col_headers <- names(sumstats_dt)
     # Obtain a row of the actual data
@@ -40,8 +41,77 @@ check_four_step_col <- function(sumstats_dt, path) {
         if (length(format) != 4) { # check : and underscore in name
             format <- strsplit(keep_col, "_")[[1]]
         }
-        if (length(format) != 4) { # If neither found assign name
-            format <- c("CHR", "BP", "A2", "A1")
+        if (length(format) != 4) { # If neither found
+            # first check if allele col exists and assign based on that
+            fourStepCol_val <- row_of_data[fourStepCol]
+            if (sum("A2" %in% col_headers) == 1 && 
+                sum("A1" %in% col_headers) == 1){
+              A2_val <- sumstats_dt[1,A2]
+              A1_val <- sumstats_dt[1,A1]
+              split_fourStepCol <- strsplit(fourStepCol_val,split=":")[[1]]
+              A1_fnd <- any(split_fourStepCol==A1_val)
+              A2_fnd <- any(split_fourStepCol==A2_val)
+              A1_ind <- which(split_fourStepCol==A1_val)
+              A2_ind <- which(split_fourStepCol==A2_val)
+            }
+            #make sure you got a hit for A1 and A2 vals
+            if(sum("A2" %in% col_headers) == 1 && 
+               sum("A1" %in% col_headers) == 1 && 
+               A1_fnd && A2_fnd){
+              #bought A1 and A2 are present and we know their position
+              format <- vector(mode="character", length=4)
+              othrs <- c('CHR','BP')
+              j <- 1
+              for (i in seq_len(4)){
+                if (i == A1_ind){
+                  format[[i]] <- 'A1'
+                } else if (i == A2_ind){
+                  format[[i]] <- 'A2'
+                } else{
+                  format[[i]] <- othrs[[j]]
+                  j = j+1
+                }
+              }
+            } else if(sum("A2" %in% col_headers) == 1){
+              A2_val <- sumstats_dt[1,A2]
+              split_fourStepCol <- strsplit(fourStepCol_val,split=":")[[1]]
+              A2_fnd <- any(split_fourStepCol==A2_val)
+              A2_ind <- which(split_fourStepCol==A2_val)
+              if (A2_ind == 4){
+                format <- c("CHR", "BP", "A1", "A2")
+              } else if(A2_ind == 3){
+                format <- c("CHR", "BP", "A2", "A1")
+              } else if(A2_ind == 2){
+                format <- c("CHR", "A2","BP", "A1")
+              } else if(A2_ind == 1){
+                format <- c("A2", "CHR","BP", "A1")
+              } else{
+                #not found....
+                format <- c("CHR", "BP", "A2", "A1")
+              }
+            } else if(sum("A1" %in% col_headers) == 1){
+              A1_val <- sumstats_dt[1,A1]
+              split_fourStepCol <- strsplit(fourStepCol_val,split=":")[[1]]
+              A1_fnd <- any(split_fourStepCol==A1_val)
+              A1_ind <- which(split_fourStepCol==A1_val)
+              if (A1_ind == 4){
+                format <- c("CHR", "BP", "A2", "A1")
+              } else if(A1_ind == 3){
+                format <- c("CHR", "BP", "A1", "A2")
+              } else if(A1_ind == 2){
+                format <- c("CHR", "A1","BP", "A2")
+              } else if(A1_ind == 1){
+                format <- c("A1", "CHR","BP", "A2")
+              } else{
+                #not found....
+                format <- c("CHR", "BP", "A2", "A1")
+              }
+            }
+            else{
+              #otherwise, just use this as default order
+              format <- c("CHR", "BP", "A2", "A1")
+            }
+            
         }
         sumstats_dt[, (format) := data.table::tstrsplit(get(keep_col),
             split = ":", fixed = TRUE,

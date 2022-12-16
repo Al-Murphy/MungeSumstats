@@ -1,3 +1,9 @@
+## CHANGES IN VERSION 1.7.11
+
+### New features
+* Update to where SNP column is given by the four CHR, BP, A1, A2. Now, if A1 or
+A2 is also a separate column, these will be used to infer the order.
+
 ## CHANGES IN VERSION 1.7.10
 
 ### Bug fix
