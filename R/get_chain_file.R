@@ -103,7 +103,7 @@ get_chain_file <- function(from = c("hg38", "hg19"),
         new_path = gsub(".chain", "_tabs.chain", local_path_gunzip, fixed=TRUE)
         if(!file.exists(new_path)){
             system(sprintf(
-                "sed -r 's/^([0-9]+) ([0-9]+) ([0-9]+)$/\\1\\t\\2\\t\\3/' %s > %s",
+                "sed -E 's/^([0-9]+) ([0-9]+) ([0-9]+)$/\\1\\t\\2\\t\\3/' %s > %s",
                 local_path_gunzip, new_path)
             )
         }

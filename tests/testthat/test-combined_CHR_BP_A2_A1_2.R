@@ -16,9 +16,6 @@ test_that("Can correctly separate CHR:BP:A2:A1, two columns", {
         sumstats_dt_missing <- data.table::copy(sumstats_dt)
         sumstats_dt_missing[, CHR_BP_A2_A1 := paste0(CHR, ":", POS, ":", 
                                                         A2, ":", A1)]
-        # And second column
-        sumstats_dt_missing[, CHR_BP_A2_A1_2 := paste0(CHR, ":", POS, ":", 
-                                                        A2, ":", A1)]
         sumstats_dt_missing[, CHR := NULL]
         sumstats_dt_missing[, POS := NULL]
         sumstats_dt_missing[, A1 := NULL]
@@ -45,7 +42,8 @@ test_that("Can correctly separate CHR:BP:A2:A1, two columns", {
             dbSNP=144
         )
         org_dt <- data.table::fread(org)
-        expect_equal(all.equal(org_dt, res_dt, ignore.row.order = TRUE), TRUE)
+        expect_equal(all.equal(org_dt, res_dt, ignore.row.order = TRUE,
+                               ignore.col.order = TRUE), TRUE)
     }    
     else{
         expect_equal(is_32bit_windows, TRUE)

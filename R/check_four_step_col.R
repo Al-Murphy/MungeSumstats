@@ -109,7 +109,7 @@ check_four_step_col <- function(sumstats_dt, path) {
             }
             else{
               #otherwise, just use this as default order
-              format <- c("CHR", "BP", "A2", "A1")
+              format <- c("CHR", "BP", "A1", "A2")
             }
             
         }
@@ -121,7 +121,9 @@ check_four_step_col <- function(sumstats_dt, path) {
         sumstats_dt[, (keep_col) := NULL]
         msg <- paste0(
             "Column ", keep_col, " has been separated into the columns ",
-            paste(format, collapse = ", ")
+            paste(format, collapse = ", "),"\nIf this is the incorrect ",
+            "format for the column, update the column name to the correct ",
+            "format e.g.`CHR:BP:A2:A1` and format_sumstats()."
         )
         message(msg)
 

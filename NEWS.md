@@ -1,3 +1,16 @@
+## CHANGES IN VERSION 1.7.12
+
+### Bug fix
+* For downloading files use `sed -E` rather than `sed -r` as its compatible with 
+mac which has issues with `sed -r`
+
+### New features
+* For instances where a single column contains CHR, BP, A1 and A2. The default 
+order has been updated to CHR:BP:A1:A2 to align with  
+[SPDI format](https://www.ncbi.nlm.nih.gov/variation/notation/). If your format 
+differs and MSS doesn't pick up on it, update the column name to the true format
+e.g. CHR:BP:A2:A1
+
 ## CHANGES IN VERSION 1.7.11
 
 ### New features
