@@ -6,6 +6,9 @@ test_that("write_sumstats works", {
     if (!is_32bit_windows) {
         sumstats_dt <- MungeSumstats::formatted_example()
         
+        # res <- MungeSumstats::format_sumstats(path = "~/Downloads/AD_sumstats_Jansenetal_2019sept.txt.gz",
+        #                                ref_genome = "GRCH37",
+        #                                tabix_index=F)
         run_tests <- function(sumstats_dt,
                               fileext,
                               tabix_index=FALSE,
@@ -26,7 +29,7 @@ test_that("write_sumstats works", {
             testthat::expect_true(file.exists(path_out)) 
             
             message("\n=== read tests ===")
-            dat <- MungeSumstats:: read_sumstats(
+            dat <- MungeSumstats::read_sumstats(
                 path = path_out, 
                 standardise_headers = standardise_headers)
             testthat::expect_equal(nrow(dat), nrow(sumstats_dt)) 

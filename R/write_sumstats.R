@@ -162,7 +162,8 @@ write_sumstats <- function(sumstats_dt,
             tmp_save_path <- gsub(".bgz|.gz", "", save_path)
             messager("Writing in tabular format ==>", tmp_save_path)
             if (tmp_save_path != save_path) {
-              messager("Writing uncomressed instead of gzipped to enable index")
+              messager("Writing uncompressed instead of gzipped",
+                       "to enable tabix indexing.")
             }
         } else {
             tmp_save_path <- save_path

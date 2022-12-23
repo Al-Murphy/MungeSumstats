@@ -1,3 +1,10 @@
+## CHANGES IN VERSION 1.7.13
+
+### New features
+
+* Implement `rworkflows`. 
+    - Removed old Dockerfile (not needed anymore) and workflow yaml.
+
 ## CHANGES IN VERSION 1.7.12
 
 ### Bug fix
