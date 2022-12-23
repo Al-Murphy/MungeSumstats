@@ -1,24 +1,21 @@
 `MungeSumstats`: Standardise the format of GWAS summary statistics
 ================
-<h5>
-<i>Authors</i>: Alan Murphy, Brian Schilder and Nathan Skene
+<h5> ¶ <i>Authors</i>: Alan Murphy, Brian Schilder and Nathan Skene ¶
 </h5>
-<h5>
-<i>Updated</i>: Apr-14-2022
-</h5>
+<h5> ¶ <i>Updated</i>: Dec-22-2022 ¶ </h5>
 
 <!-- Readme.md is generated from Readme.Rmd. Please edit that file -->
 <!-- badges: start -->
 
-[![](https://img.shields.io/badge/release%20version-1.2.4-black.svg)](https://www.bioconductor.org/packages/MungeSumstats)
-[![](https://img.shields.io/badge/devel%20version-1.3.18-black.svg)](https://github.com/neurogenomics/MungeSumstats)
+[![](https://img.shields.io/badge/release%20version-1.6.0-black.svg)](https://www.bioconductor.org/packages/MungeSumstats)
+[![](https://img.shields.io/badge/devel%20version-1.7.12-black.svg)](https://github.com/neurogenomics/MungeSumstats)
 [![R build
 status](https://github.com/neurogenomics/MungeSumstats/workflows/DockerHub/badge.svg)](https://github.com/neurogenomics/MungeSumstats/actions)
 [![R build
-status](https://github.com/neurogenomics/MungeSumstats/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/neurogenomics/MungeSumstats/actions)
+status](https://github.com/neurogenomics/MungeSumstats/workflows/rworkflows/badge.svg)](https://github.com/neurogenomics/MungeSumstats/actions)
 [![](https://img.shields.io/github/last-commit/neurogenomics/MungeSumstats.svg)](https://github.com/neurogenomics/MungeSumstats/commits/master)
 [![](https://app.codecov.io/gh/neurogenomics/MungeSumstats/branch/master/graph/badge.svg)](https://app.codecov.io/gh/neurogenomics/MungeSumstats)
-[![](https://img.shields.io/badge/download-891/total-blue.svg)](https://bioconductor.org/packages/stats/bioc/MungeSumstats)
+[![](https://img.shields.io/badge/download-2535/total-blue.svg)](https://bioconductor.org/packages/stats/bioc/MungeSumstats)
 [![License:
 Artistic-2.0](https://img.shields.io/badge/license-Artistic--2.0-blue.svg)](https://cran.r-project.org/web/licenses/Artistic-2.0)
 [![](https://img.shields.io/badge/doi-https://doi.org/10.1093/bioinformatics/btab665-blue.svg)](https://doi.org/https://doi.org/10.1093/bioinformatics/btab665)
@@ -28,14 +25,14 @@ Artistic-2.0](https://img.shields.io/badge/license-Artistic--2.0-blue.svg)](http
 
 The `MungeSumstats` package is designed to facilitate the
 standardisation of GWAS summary statistics as utilised in our Nature
-Genetics paper.<sup>1</sup>
+Genetics paper<sup>1</sup>.
 
 ## Overview
 
 The package is designed to handle the lack of standardisation of output
 files by the GWAS community. The [MRC IEU Open
 GWAS](https://gwas.mrcieu.ac.uk/) team have provided full summary
-statistics for &gt;10k GWAS, which are API-accessible via the
+statistics for \>10k GWAS, which are API-accessible via the
 [`ieugwasr`](https://mrcieu.github.io/ieugwasr/) and
 [`gwasvcf`](https://github.com/MRCIEU/gwasvcf) packages. But these GWAS
 are only standardised in the sense that they are VCF format, and can be
@@ -142,10 +139,11 @@ and we will incorporate this change into the package.
 We would like to acknowledge all those who have contributed to
 `MungeSumstats` development:
 
--   [Alan Murphy](https://github.com/Al-Murphy)
--   [Nathan Skene](https://github.com/NathanSkene)
--   [Brian Schilder](https://github.com/bschilder)
--   [Shea Andrews](https://github.com/sjfandrews)
+- [Alan Murphy](https://github.com/Al-Murphy)
+- [Nathan Skene](https://github.com/NathanSkene)
+- [Brian Schilder](https://github.com/bschilder)
+- [Shea Andrews](https://github.com/sjfandrews)
+- [Jonathan Griffiths](https://github.com/jonathangriffiths)
 
 # References
 
