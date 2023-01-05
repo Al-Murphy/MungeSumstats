@@ -20,6 +20,13 @@
     - Turn on `run_biocheck`
 * *to_GRanges.R* / *to_VRanges.R*:
     - Rename files to match current function names.
+* Remove extra extdata files (I think these were created by accident):
+   - ALSvcf.vcf.bgz
+   - ALSvcf.vcf.bgz.bgz
+   - ALSvcf.vcf.bgz.bgz.tbi
+   - ALSvcf.vcf.bgz.tbi
+   - ALSvcf.vcf.gz
+* Remove *.DS_Store* files throughout.
 
 ### New features
 
