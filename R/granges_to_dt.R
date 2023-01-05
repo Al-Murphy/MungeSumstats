@@ -28,5 +28,6 @@ granges_to_dt  <- function(gr) {
             start=GenomicRanges::start(gr),
             end=GenomicRanges::end(gr))
     }
+    DT <- check_numeric(DT)
     return(DT)
 }

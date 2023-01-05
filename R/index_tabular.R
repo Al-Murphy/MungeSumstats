@@ -69,7 +69,7 @@ index_tabular <- function(path,
                                       comment = names(cdict)[1]) 
     if(isTRUE(remove_tmp) && 
        file.exists(path)){
-        messager("Removing temproary .tsv file.",v=verbose)  
+        messager("Removing temporary .tsv file.",v=verbose)  
         out <- file.remove(path)
     }
     return(bgz_file)

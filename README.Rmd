@@ -22,7 +22,6 @@ knitr::opts_chunk$set(tidy = FALSE,
 <!-- badges: start -->
 `r badger::badge_bioc_release(color = "black")`
 `r badger::badge_github_version(color = "black")`
-`r badger::badge_github_actions(action = "DockerHub")`
 `r badger::badge_github_actions(action = "rworkflows")`
 `r badger::badge_last_commit(branch = "master")`
 `r badger::badge_codecov(branch = "master")`

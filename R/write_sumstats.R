@@ -32,7 +32,7 @@
 #' )
 write_sumstats <- function(sumstats_dt,
                            save_path,
-                           ref_genome,
+                           ref_genome=NULL,
                            sep = "\t",
                            write_vcf = FALSE,
                            save_format = NULL,
@@ -49,18 +49,24 @@ write_sumstats <- function(sumstats_dt,
                                  write_vcf = write_vcf,
                                  verbose = TRUE)
         save_path <- check$save_path
-    }
+    } 
     #### Sort again just to be sure when tabix-indexing ####
     if (isTRUE(tabix_index) ||
         isTRUE(write_vcf)) {
       sumstats_dt <- sort_coords(sumstats_dt = sumstats_dt)
     }
     #### Select write format ####
-    if (isTRUE(write_vcf)) {
+    if (isTRUE(write_vcf)) { 
         tmp_save_path <- gsub("\\.bgz|\\.gz", "", save_path)
         #convert to IEU OpenGWAS VCF format (column naming and RSID position)
         if (!is.null(save_format) &&
             tolower(save_format) == "opengwas") {
+            #### Check ref genome ####
+            if(missing(ref_genome) || 
+               is.null(ref_genome)){
+                stp <- "ref_genome must be provided when write_vcf=TRUE."
+                stop(stp)
+            }
           #first check genome build - all of openGWAS is GRCh37 currently so
           #warn user if their data isn't
           gen_build_err <- paste0("Your sumstats has been built on the ",

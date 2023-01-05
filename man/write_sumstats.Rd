@@ -12,7 +12,7 @@ file renaming behavior}
 write_sumstats(
   sumstats_dt,
   save_path,
-  ref_genome,
+  ref_genome = NULL,
   sep = "\\t",
   write_vcf = FALSE,
   save_format = NULL,

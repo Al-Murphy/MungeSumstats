@@ -63,5 +63,6 @@ read_header <- function(path,
         if(length(header)<2) header <- rep(header,2)
         header <- data.table::fread(text = header)
     }
+    header <- check_numeric(header)
     return(header)
 }

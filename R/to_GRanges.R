@@ -15,7 +15,7 @@ to_granges <- function(sumstats_dt,
                        start.field = "BP",
                        end.field = "BP",
                        style = c("NCBI", "UCSC")) {
-    message("Converting summary statistics to Genomic Ranges.")
+    message("Converting summary statistics to GenomicRanges.")
     gr <- GenomicRanges::makeGRangesFromDataFrame(
         df = sumstats_dt,
         keep.extra.columns = TRUE,

@@ -27,8 +27,32 @@ test_that("index_tabular works", {
                            max(sumstats_dt$BP))
       query <-  MungeSumstats::read_header(path = tbx_file, 
                                            n = NULL)
-      query[,CHR:=as.character(CHR)]
-      testthat::expect_equal(query,sumstats_dt)
+      query[,CHR:=as.character(CHR)] 
+      testthat::expect_equal(query,sumstats_dt) 
+      
+      #### --- Test sorting --- ####
+      #### GenomicRanges ####
+      query_unsorted <- data.table::copy(query)
+      data.table::setorderv(x = query_unsorted, 
+                            cols = c("BETA"))
+      query_resorted <- MungeSumstats:::sort_coords(
+          sumstats_dt = data.table::copy(query_unsorted), 
+          sort_method = "GenomicRanges")
+      testthat::expect_equal(query,query_resorted)
+      testthat::expect_failure(
+          testthat::expect_equal(query$SNP,query_unsorted$SNP)
+      )
+      #### data.table ####
+      query_unsorted <- data.table::copy(query)
+      data.table::setorderv(x = query_unsorted, 
+                            cols = c("BETA"))
+      query_resorted <- MungeSumstats:::sort_coords(
+          sumstats_dt = data.table::copy(query_unsorted), 
+          sort_method = "data.table")
+      testthat::expect_equal(query,query_resorted)
+      testthat::expect_failure(
+          testthat::expect_equal(query$SNP,query_unsorted$SNP)
+      )
     }    
     else{
       expect_equal(is_32bit_windows, TRUE)

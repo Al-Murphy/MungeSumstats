@@ -1,5 +1,26 @@
 ## CHANGES IN VERSION 1.7.13
 
+### Bug fix
+
+* `write_sumstats`:
+    - Fix indexing issues due to incomplete genome coordinates sorting: 
+        https://github.com/neurogenomics/MungeSumstats/issues/117
+    - Add default `NULL` to `ref_genome`. 
+    - Check `ref_genome` (only in conditions where its used). 
+* `sort_coord`:
+    - Renamed .R file from *sort_coordinates* to match current function name.
+    - Add multiple `sort_methods`, 
+        including improved/more robust `data.table`-native method.
+    - Added dedicated unit tests within `test-index_tabular.R`.
+* New helper function: `check_numeric`:
+    - Ensures relevant sumstats cols are numeric.
+    - Added internally to: `sort_coord`, `read_header`
+* *rworkflows.yml*:
+    - Omit Windows runner.
+    - Turn on `run_biocheck`
+* *to_GRanges.R* / *to_VRanges.R*:
+    - Rename files to match current function names.
+
 ### New features
 
 * Implement `rworkflows`. 
