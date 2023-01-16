@@ -150,6 +150,10 @@
 #' @param indels Binary does your Sumstats file contain Indels? These don't 
 #' exist in our reference file so they will be excluded from checks if this 
 #' value is TRUE. Default is TRUE.
+#' @param drop_indels Binary, should any indels found in the sumstats be 
+#' dropped? These can not be checked against a reference dataset and will have 
+#' the same RS ID and position as SNPs which can affect downstream analysis. 
+#' Default is False.
 #' @param dbSNP version of dbSNP to be used for imputation (144 or 155).
 #' @param check_dups whether to check for duplicates - if formatting QTL 
 #' datasets this should be set to FALSE otherwise keep as TRUE. Default is TRUE.
@@ -239,6 +243,7 @@ format_sumstats <- function(path,
                             remove_multi_rs_snp = FALSE,
                             frq_is_maf = TRUE,
                             indels = TRUE,
+                            drop_indels  = FALSE,
                             dbSNP = 155,
                             check_dups = TRUE,
                             sort_coordinates = TRUE,
@@ -321,6 +326,7 @@ format_sumstats <- function(path,
             remove_multi_rs_snp = remove_multi_rs_snp,
             frq_is_maf = frq_is_maf,
             indels = indels,
+            drop_indels = drop_indels,
             dbSNP = dbSNP,
             check_dups = check_dups,
             write_vcf = write_vcf,
@@ -748,10 +754,25 @@ format_sumstats <- function(path,
         # update values
         log_files <- sumstats_return$log_files
         
+        ### Check 37: Drop Indels ###
+        sumstats_return <- check_drop_indels(
+          sumstats_dt = sumstats_return$sumstats_dt,
+          drop_indels=drop_indels,
+          path = path,
+          log_folder_ind = log_folder_ind,
+          check_save_out = check_save_out,
+          tabix_index = tabix_index,
+          nThread = nThread,
+          log_files = log_files)
+        
+        # update values
+        log_files <- sumstats_return$log_files
+        
         #### Check 20: check all rows for duplicated SNPs,
         # remove any that are ####
         sumstats_return <- check_dup_snp(
             sumstats_dt = sumstats_return$sumstats_dt,
+            indels=indels,
             path = path,
             log_folder_ind = log_folder_ind,
             check_save_out = check_save_out,
@@ -763,7 +784,7 @@ format_sumstats <- function(path,
         )
         # update values
         log_files <- sumstats_return$log_files
-        
+
         #### Check 21: check all rows for duplicated BPs,
         # remove any that are ####
         sumstats_return <- check_dup_bp(

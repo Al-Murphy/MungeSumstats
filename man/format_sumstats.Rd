@@ -39,6 +39,7 @@ format_sumstats(
   remove_multi_rs_snp = FALSE,
   frq_is_maf = TRUE,
   indels = TRUE,
+  drop_indels = FALSE,
   dbSNP = 155,
   check_dups = TRUE,
   sort_coordinates = TRUE,
@@ -210,6 +211,11 @@ occur i.e. is TRUE.}
 \item{indels}{Binary does your Sumstats file contain Indels? These don't
 exist in our reference file so they will be excluded from checks if this
 value is TRUE. Default is TRUE.}
+
+\item{drop_indels}{Binary, should any indels found in the sumstats be
+dropped? These can not be checked against a reference dataset and will have
+the same RS ID and position as SNPs which can affect downstream analysis.
+Default is False.}
 
 \item{dbSNP}{version of dbSNP to be used for imputation (144 or 155).}
 

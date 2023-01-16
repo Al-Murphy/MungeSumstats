@@ -32,6 +32,7 @@ validate_parameters(
   remove_multi_rs_snp,
   frq_is_maf,
   indels,
+  drop_indels,
   check_dups,
   dbSNP,
   write_vcf,
@@ -159,6 +160,11 @@ occur i.e. is TRUE.}
 \item{indels}{Binary does your Sumstats file contain Indels? These don't
 exist in our reference file so they will be excluded from checks if this
 value is TRUE. Default is TRUE.}
+
+\item{drop_indels}{Binary, should any indels found in the sumstats be
+dropped? These can not be checked against a reference dataset and will have
+the same RS ID and position as SNPs which can affect downstream analysis.
+Default is False.}
 
 \item{check_dups}{whether to check for duplicates - if formatting QTL
 datasets this should be set to FALSE otherwise keep as TRUE. Default is TRUE.}

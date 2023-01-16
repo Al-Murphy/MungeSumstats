@@ -137,5 +137,6 @@ development:
  * [Brian Schilder](https://github.com/bschilder)
  * [Shea Andrews](https://github.com/sjfandrews)
  * [Jonathan Griffiths](https://github.com/jonathangriffiths)
+ * [Kitty Murphy](https://github.com/KittyMurphy)
  
 # References

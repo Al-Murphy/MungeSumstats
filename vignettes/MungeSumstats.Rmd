@@ -133,8 +133,9 @@ Tests run by *MungeSumstats* include:
 -   Check for z-score (Z) and impute if missing
 -   Check for N and impute if missing
 -   Check output format is LDSC ready
--   Chek output format is IEU OpenGWAS ready
+-   Check output format is IEU OpenGWAS ready
 -   Check and perform liftover to desired reference genome if necessary
+-   Check for indels in the sumstats and drop them if found (not run by default)
 
 Users can specify which checks to run on their data. A **note** on the
 allele flipping check: **MungeSumstats** infers the effect allele will
@@ -380,7 +381,18 @@ conducted by *MungeSumstats* are:
     TRUE.
 -   **indels** Binary does your Sumstats file contain Indels? These
     don't exist in our reference file so they will be excluded from
-    checks if this value is TRUE. Default is TRUE.
+    checks if this value is TRUE. Further information -the reference 
+    dataset we use in MSS (dbSNP) does not include indels so any 
+    checks like is the SNP on the reference genome, attempts to impute 
+    any missing data for indels or check the direction of the effect 
+    columns can not be done for indels. Indels will be kept in the 
+    dataset if possible but certain situations (like if there is missing
+    data) can cause an indel to be removed. See the printed information by
+    MSS during your run to know if this affects you. Default is TRUE.
+-   **drop_indels** Binary should any indels found in the sumstats be 
+    dropped? These can not be checked against a reference dataset and will have 
+    the same RS ID and position as SNPs which can affect downstream analysis. 
+    Default is False.    
 -   **dbSNP** The dbSNP version to use as a reference - defaults to the most 
     recent version available (155). Note that with the 9x more SNPs in dbSNP 
     155 vs 144, run times will increase.
