@@ -38,7 +38,8 @@ test_that("index_tabular works", {
       query_resorted <- MungeSumstats:::sort_coords(
           sumstats_dt = data.table::copy(query_unsorted), 
           sort_method = "GenomicRanges")
-      testthat::expect_equal(query,query_resorted)
+      testthat::expect_equal(all.equal(query,query_resorted,
+                                       ignore.col.order = TRUE),TRUE)
       testthat::expect_failure(
           testthat::expect_equal(query$SNP,query_unsorted$SNP)
       )

@@ -27,11 +27,14 @@
    - ALSvcf.vcf.bgz.tbi
    - ALSvcf.vcf.gz
 * Remove *.DS_Store* files throughout.
+* Don't check for duplicates based on RS ID with Indels, remove these first.
 
 ### New features
 
 * Implement `rworkflows`. 
     - Removed old Dockerfile (not needed anymore) and workflow yaml.
+* Add `drop_indels` parameter so a user can decide to remove indels from 
+sumstats.    
 
 ## CHANGES IN VERSION 1.7.12
 

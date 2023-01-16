@@ -17,7 +17,7 @@ check_dup_snp <- function(sumstats_dt,
                           log_files,
                           bi_allelic_filter,
                           check_dups) {
-    SNP <- NULL
+    SNP <- A1 <- A2 <- NULL
     col_headers <- names(sumstats_dt)
     #only remove dups if bi-allelic filter selected, RS IDs are not unique for
     #non bi-allelic SNPs

@@ -20,7 +20,11 @@ test_that("read_header works", {
         testthat::expect_equal(dim(header4),c(2,10))
         
         #### vcf.gz ####
-        path_gz <- R.utils::gzip(path, remove=FALSE)
+        if(file.exists(paste0(path,".gz"))){
+          path_gz <- paste0(path,".gz")
+        }else{
+          path_gz <- R.utils::gzip(path, remove=FALSE) 
+        }
         header5 <- read_header(path = path_gz)
         testthat::expect_length(header5, 528)
         
