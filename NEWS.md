@@ -1,3 +1,9 @@
+## CHANGES IN VERSION 1.7.14
+
+### Bug fix
+
+* Fix ensembl chain file retrieval so works on all environments
+
 ## CHANGES IN VERSION 1.7.13
 
 ### Bug fix
