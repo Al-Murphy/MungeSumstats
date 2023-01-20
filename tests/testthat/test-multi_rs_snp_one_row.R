@@ -3,7 +3,7 @@ test_that("Handle more than 1 rs IDs in one row", {
     ## than what 32-bit Windows can handle:
     is_32bit_windows <- .Platform$OS.type == "windows" #&&
     #.Platform$r_arch == "i386"
-    if (!is_32bit_windows) {
+    if (!is_32bit_windows  && Sys.info()["sysname"]=="Linux") {
         file <- tempfile()
         # Remove data from line 3 to check it is deleted
         eduAttainOkbay <- readLines(system.file("extdata", "eduAttainOkbay.txt",

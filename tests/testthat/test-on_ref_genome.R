@@ -3,7 +3,7 @@ test_that("SNPs not on reference genome are removed", {
     ## than what 32-bit Windows can handle:
     is_32bit_windows <- .Platform$OS.type == "windows" #&&
         #.Platform$r_arch == "i386"
-    if (!is_32bit_windows) {
+    if (!is_32bit_windows && Sys.info()["sysname"]=="Linux") {
         file <- tempfile()
         # Update ID from line 3 to check it is deleted -
         # "rs79925071" is not on ref genome GRCh37

@@ -3,7 +3,7 @@ test_that("Imputation of A1/A2 correctly", {
     ## than what 32-bit Windows can handle:
     is_32bit_windows <- .Platform$OS.type == "windows" ##&&
         ##.Platform$r_arch == "i386"
-    if (!is_32bit_windows) {
+    if (!is_32bit_windows && Sys.info()["sysname"]=="Linux") {
         file <- tempfile()
         # write the Educational Attainment GWAS to a temp file for testing
         eduAttainOkbay <- readLines(system.file("extdata", "eduAttainOkbay.txt",

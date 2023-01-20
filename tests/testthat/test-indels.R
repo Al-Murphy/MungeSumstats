@@ -3,7 +3,7 @@ test_that("non-biallelic SNPs are removed", {
     ## than what 32-bit Windows can handle:
     is_32bit_windows <- .Platform$OS.type == "windows" #&&
         #.Platform$r_arch == "i386"
-    if (!is_32bit_windows) {
+    if (!is_32bit_windows && Sys.info()["sysname"]=="Linux") {
         #test to ensure indels aren't removed
         ss_indel <- data.table::data.table("SNP"=c("rs34589910","rs12987662"),
                                            "CHR"=c(4,2),

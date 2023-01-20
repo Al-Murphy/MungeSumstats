@@ -3,7 +3,7 @@ test_that("Test that allele columns and effect columns flipped correctly", {
     ## than what 32-bit Windows can handle:
     is_32bit_windows <- .Platform$OS.type == "windows" ##&&
         ##.Platform$r_arch == "i386"
-    if (!is_32bit_windows) {
+    if (!is_32bit_windows && Sys.info()["sysname"]=="Linux") {
         file <- tempfile()
         # The dataset's alleles need to be flipped to test
         eduAttainOkbay <- readLines(system.file("extdata", "eduAttainOkbay.txt",

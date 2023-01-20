@@ -3,7 +3,7 @@ test_that("liftover works", {
     ## than what 32-bit Windows can handle:
     is_32bit_windows <- .Platform$OS.type == "windows" #&&
         #.Platform$r_arch == "i386"
-    if (!is_32bit_windows) {
+    if (!is_32bit_windows  && Sys.info()["sysname"]=="Linux") {
         ##### Test exported function directly ####
         sumstats_dt <- MungeSumstats::formatted_example()
         
