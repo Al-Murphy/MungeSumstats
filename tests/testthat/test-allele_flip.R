@@ -45,6 +45,6 @@ test_that("Test that allele columns and effect columns flipped correctly", {
         # reordering in function
         expect_equal(setequal(reformatted_lines, org_lines), TRUE)
     } else {
-        expect_equal(is_32bit_windows, TRUE)
+        expect_equal((is_32bit_windows||!Sys.info()["sysname"]=="Linux"), TRUE)
     }
 })

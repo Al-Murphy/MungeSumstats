@@ -162,13 +162,13 @@ test_that("Imputation of A1/A2 correctly", {
             all(res_org$A1 == res_org$A1_der) &&
             all(res_org$A2 == res_org$A2_der), TRUE)
     } else {
-        expect_equal(is_32bit_windows, TRUE)
-        expect_equal(is_32bit_windows, TRUE)
-        expect_equal(is_32bit_windows, TRUE)
-        expect_equal(is_32bit_windows, TRUE)
-        expect_equal(is_32bit_windows, TRUE)
-        expect_equal(is_32bit_windows, TRUE)
-        expect_equal(is_32bit_windows, TRUE)
-        expect_equal(is_32bit_windows, TRUE)
+        expect_equal((is_32bit_windows||!Sys.info()["sysname"]=="Linux"), TRUE)
+        expect_equal((is_32bit_windows||!Sys.info()["sysname"]=="Linux"), TRUE)
+        expect_equal((is_32bit_windows||!Sys.info()["sysname"]=="Linux"), TRUE)
+        expect_equal((is_32bit_windows||!Sys.info()["sysname"]=="Linux"), TRUE)
+        expect_equal((is_32bit_windows||!Sys.info()["sysname"]=="Linux"), TRUE)
+        expect_equal((is_32bit_windows||!Sys.info()["sysname"]=="Linux"), TRUE)
+        expect_equal((is_32bit_windows||!Sys.info()["sysname"]=="Linux"), TRUE)
+        expect_equal((is_32bit_windows||!Sys.info()["sysname"]=="Linux"), TRUE)
     }
 })

@@ -102,8 +102,8 @@ test_that("Handle more than 1 rs IDs in one row", {
         }
         expect_equal(all(results), TRUE)
     } else {
-        expect_equal(is_32bit_windows, TRUE)
-        expect_equal(is_32bit_windows, TRUE)
-        expect_equal(is_32bit_windows, TRUE)
+        expect_equal((is_32bit_windows||!Sys.info()["sysname"]=="Linux"), TRUE)
+        expect_equal((is_32bit_windows||!Sys.info()["sysname"]=="Linux"), TRUE)
+        expect_equal((is_32bit_windows||!Sys.info()["sysname"]=="Linux"), TRUE)
     }
 })

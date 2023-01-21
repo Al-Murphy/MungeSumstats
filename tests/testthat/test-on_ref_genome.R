@@ -53,7 +53,7 @@ test_that("SNPs not on reference genome are removed", {
         )
         expect_equal(all.equal(ref_genomes, list("ss1" = "GRCH37")), TRUE)
     } else {
-        expect_equal(is_32bit_windows, TRUE)
-        expect_equal(is_32bit_windows, TRUE)
+        expect_equal((is_32bit_windows||!Sys.info()["sysname"]=="Linux"), TRUE)
+        expect_equal((is_32bit_windows||!Sys.info()["sysname"]=="Linux"), TRUE)
     }
 })

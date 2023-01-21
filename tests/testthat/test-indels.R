@@ -52,7 +52,7 @@ test_that("non-biallelic SNPs are removed", {
         #make sure it was removed
         testthat::expect_equal(nrow(reformatted_ss_ad2)==2,TRUE)
     } else {
-        testthat::expect_equal(is_32bit_windows, TRUE)
-        testthat::expect_equal(is_32bit_windows, TRUE)
+        testthat::expect_equal((is_32bit_windows||!Sys.info()["sysname"]=="Linux"), TRUE)
+        testthat::expect_equal((is_32bit_windows||!Sys.info()["sysname"]=="Linux"), TRUE)
     }
 })

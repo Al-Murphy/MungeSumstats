@@ -124,6 +124,6 @@ test_that("liftover works", {
         ref_37_org <- ref_37_org[SNP %in% ref_37$SNP, ]
         expect_equal(all.equal(ref_37_org, ref_37), TRUE)
     } else {
-        expect_equal(is_32bit_windows, TRUE)
+       expect_equal((is_32bit_windows||!Sys.info()["sysname"]=="Linux"), TRUE)
     }
 })

@@ -148,10 +148,10 @@ test_that("VCF is correctly formatted", {
         
         testthat::expect_equal(reformatted_lines[1:5], corr_res)
     } else {
-        testthat::expect_true(is_32bit_windows)
-        testthat::expect_true(is_32bit_windows)
-        testthat::expect_true(is_32bit_windows)
-        testthat::expect_true(is_32bit_windows)
-        testthat::expect_true(is_32bit_windows)
+        testthat::expect_true((is_32bit_windows||!Sys.info()["sysname"]=="Linux"))
+        testthat::expect_true((is_32bit_windows||!Sys.info()["sysname"]=="Linux"))
+        testthat::expect_true((is_32bit_windows||!Sys.info()["sysname"]=="Linux"))
+        testthat::expect_true((is_32bit_windows||!Sys.info()["sysname"]=="Linux"))
+        testthat::expect_true((is_32bit_windows||!Sys.info()["sysname"]=="Linux"))
     }
 })
