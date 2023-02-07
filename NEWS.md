@@ -1,3 +1,8 @@
+## CHANGES IN VERSION 1.7.17
+
+### New features
+* extra mapping for base-pair position (BP) column added
+
 ## CHANGES IN VERSION 1.7.14
 
 ### Bug fix
