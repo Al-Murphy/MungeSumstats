@@ -552,6 +552,21 @@ format_sumstats <- function(path,
                 )
         }
         
+        #### Check 38: validate BP
+        sumstats_return <- check_bp_range(
+          sumstats_dt = sumstats_return$sumstats_dt,
+          path = path,
+          ref_genome = ref_genome,
+          imputation_ind = imputation_ind,
+          log_folder_ind = log_folder_ind,
+          check_save_out = check_save_out,
+          tabix_index = tabix_index,
+          nThread = nThread,
+          log_files = log_files
+        )
+        # update values
+        log_files <- sumstats_return$log_files
+        
         #### Check 8: check if CHR and BP are missing but SNP is present ####
         sumstats_return <-
             check_no_chr_bp(
@@ -571,7 +586,7 @@ format_sumstats <- function(path,
         log_files <- sumstats_return$log_files
         rsids <- sumstats_return$rsids # update rsids
         sumstats_return$rsids <- NULL
-        
+
         #### Check 9: check if CHR and BP are present but SNP is missing ####
         sumstats_return <- check_no_snp(
             sumstats_dt = sumstats_return$sumstats_dt,

@@ -1,3 +1,9 @@
+## CHANGES IN VERSION 1.7.18
+
+### New features
+* Check added, ensure BP is between 1 - length of chromosome using reference
+chromosome.
+
 ## CHANGES IN VERSION 1.7.17
 
 ### New features
