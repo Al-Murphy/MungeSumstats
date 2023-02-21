@@ -20,11 +20,7 @@ select_vcf_fields(
 Set \code{NULL} to use full \code{sumstats_file}.
 when determining whether cols are empty.}
 
-\item{which}{A \code{\linkS4class{GRanges}} describing the sequences and
-    ranges to be queried. Variants whose \code{POS} lies in the interval(s)
-    \code{[start, end]} are returned. If \code{which} is not specified all
-    ranges are returned. 
-  }
+\item{which}{Genomic ranges to be added if supplied. Default is NULL.}
 
 \item{samples}{Which samples to use:
 \itemize{

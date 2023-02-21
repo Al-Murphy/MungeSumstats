@@ -10,9 +10,10 @@
 check_bp_range <- function(sumstats_dt, path, ref_genome,log_folder_ind, 
                          imputation_ind,check_save_out, tabix_index, nThread, 
                          log_files) {
-    chr_max<- CHR <- seqlengths <- .SD <- NULL
+    BP<- chr_max<- CHR <- seqlengths <- .SD <- NULL
     col_headers <- names(sumstats_dt)
-    if ("BP" %in% col_headers) {
+    #need CHR to get chrom lengths
+    if ("BP" %in% col_headers && "CHR" %in% col_headers) {
         message("Checking for incorrect base-pair positions")
         #load chromosome lengths
         if (toupper(ref_genome) == "GRCH37") {

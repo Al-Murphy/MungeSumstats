@@ -43,11 +43,7 @@ read_vcf_parallel(
 Only user-selected samples will be used (case-insensitive).}
 }}
 
-\item{which}{A \code{\linkS4class{GRanges}} describing the sequences and
-    ranges to be queried. Variants whose \code{POS} lies in the interval(s)
-    \code{[start, end]} are returned. If \code{which} is not specified all
-    ranges are returned. 
-  }
+\item{which}{Genomic ranges to be added if supplied. Default is NULL.}
 
 \item{use_params}{When \code{TRUE} (default), increases the speed of reading in the VCF by
 omitting columns that are empty based on the head of the VCF (NAs only).

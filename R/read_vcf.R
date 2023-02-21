@@ -15,6 +15,7 @@
 #' \item{c("<sample_id1>","<sample_id2>",...) : }{
 #' Only user-selected samples will be used (case-insensitive).}
 #' }
+#' @param which Genomic ranges to be added if supplied. Default is NULL.
 #' @param use_params
 #' When \code{TRUE} (default), increases the speed of reading in the VCF by
 #' omitting columns that are empty based on the head of the VCF (NAs only).
