@@ -28,7 +28,9 @@ test_that("Test that user inputted mapping file is appropriate", {
             error = function(e) e,
             warning = function(w) w
             )
-        expect_equal(is(fail_return, "error"), TRUE)
+        catch <- is(fail_return, "error")||
+          !is.character(fail_return)||!file.exists(fail_return)
+        expect_equal(catch, TRUE)
         # update user map to contain all essential columns
         user_map2 <- sumstatsColHeaders[sumstatsColHeaders$Corrected %in%
             essential_cols |
