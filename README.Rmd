@@ -72,6 +72,9 @@ You can then load the package and data package:
 library(MungeSumstats)
 ```
 
+Note that there is also a 
+[docker image for MungeSumstats](https://hub.docker.com/r/neurogenomicslab/mungesumstats).
+
 Note that for a number of the checks implored by `MungeSumstats` a reference 
 genome is used. If your GWAS summary statistics file of interest relates to
 *GRCh38*, you will need to install `SNPlocs.Hsapiens.dbSNP144.GRCh38` and 

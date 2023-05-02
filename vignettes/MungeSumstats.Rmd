@@ -208,20 +208,22 @@ data.table, VRanges or GRanges object.
 Note that for a number of the checks implored by *MungeSumstats* a
 reference genome is used. If your GWAS summary statistics file of
 interest relates to *GRCh38*, you will need to install
-`SNPlocs.Hsapiens.dbSNP144.GRCh38` and `BSgenome.Hsapiens.NCBI.GRCh38`
+`SNPlocs.Hsapiens.dbSNP155.GRCh38` and `BSgenome.Hsapiens.NCBI.GRCh38`
 from Bioconductor as follows:
 
 ```
-BiocManager::install("SNPlocs.Hsapiens.dbSNP144.GRCh38")
+#increase permissible time to download data, in case of slow internet access
+options(timeout=2000)
+BiocManager::install("SNPlocs.Hsapiens.dbSNP155.GRCh38")
 BiocManager::install("BSgenome.Hsapiens.NCBI.GRCh38")
 ```
 
 If your GWAS summary statistics file of interest relates to *GRCh37*,
-you will need to install `SNPlocs.Hsapiens.dbSNP144.GRCh37` and
+you will need to install `SNPlocs.Hsapiens.dbSNP155.GRCh37` and
 `BSgenome.Hsapiens.1000genomes.hs37d5` from Bioconductor as follows:
 
 ```
-BiocManager::install("SNPlocs.Hsapiens.dbSNP144.GRCh37")
+BiocManager::install("SNPlocs.Hsapiens.dbSNP155.GRCh37")
 BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")
 ```
 
