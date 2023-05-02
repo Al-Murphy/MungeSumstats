@@ -1,4 +1,0 @@
-session.info()
-sessionInfo()
-setwd("~/Documents/ICL/R_packages/MungeSumstats/")
-devtools::document()
