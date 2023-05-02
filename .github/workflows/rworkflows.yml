@@ -48,5 +48,5 @@ jobs:
         docker_org: neurogenomicslab
         DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
         runner_os: ${{ runner.os }}
-	timeout: ${{ 2000 }}
+        timeout: ${{ 2000 }}
         cache_version: cache-v1
