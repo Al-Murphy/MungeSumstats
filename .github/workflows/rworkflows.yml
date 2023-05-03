@@ -20,8 +20,8 @@ jobs:
       matrix:
         config:
         - os: ubuntu-latest
-          r: devel
-          bioc: devel
+          r: latest
+          bioc: release
           cont: bioconductor/bioconductor_docker:devel
           rspm: https://packagemanager.rstudio.com/cran/__linux__/focal/release
         - os: macOS-latest
