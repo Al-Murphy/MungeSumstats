@@ -121,6 +121,9 @@ Default is FALSE.
 }}
     \item{\code{analysis_trait}}{If multiple traits were studied, name of the trait for
 analysis from the GWAS. Default is NULL.}
+    \item{\code{ignore_multi_trait}}{If you have multiple traits (p-values) in the study
+but you want to ignorwe these and instead use a standard named p-value, set
+to TRUE. By default is FALSE which will check for multi-traits.}
     \item{\code{INFO_filter}}{numeric The minimum value permissible of the imputation
 information score (if present in sumstats file). Default 0.9.}
     \item{\code{FRQ_filter}}{numeric The minimum value permissible of the frequency(FRQ)

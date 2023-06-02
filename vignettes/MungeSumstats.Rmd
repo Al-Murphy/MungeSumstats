@@ -513,11 +513,10 @@ names(reformatted_vcf_2)
 
 A user can load a file to view the excluded SNPs.
 
-In this case, no SNPs were filtered based on INFO criterion, so an NA is
-returned for this value (instead of a path to a table of filtered SNPs).
+In this case, SNPs were filtered based on non-bi-allelic criterion:
 
 ```{r, message=TRUE}
-print(reformatted_vcf_2$log_files$info_filter)
+print(reformatted_vcf_2$log_files$snp_bi_allelic)
 ```
 
 The different types of exclusion which lead to the names are explained

@@ -97,6 +97,9 @@
 #' Default is FALSE.
 #' @param analysis_trait If multiple traits were studied, name of the trait for
 #' analysis from the GWAS. Default is NULL.
+#' @param ignore_multi_trait If you have multiple traits (p-values) in the study
+#' but you want to ignorwe these and instead use a standard named p-value, set
+#' to TRUE. By default is FALSE which will check for multi-traits.
 #' @param INFO_filter numeric The minimum value permissible of the imputation
 #' information score (if present in sumstats file). Default 0.9.
 #' @param FRQ_filter numeric The minimum value permissible of the frequency(FRQ)
@@ -224,6 +227,7 @@ format_sumstats <- function(path,
                             es_is_beta = TRUE,
                             impute_se = FALSE,
                             analysis_trait = NULL,
+                            ignore_multi_trait = FALSE,
                             INFO_filter = 0.9,
                             FRQ_filter = 0,
                             pos_se = TRUE,
@@ -455,6 +459,7 @@ format_sumstats <- function(path,
                 sumstats_dt = sumstats_return$sumstats_dt,
                 path = path,
                 analysis_trait = analysis_trait,
+                ignore_multi_trait = ignore_multi_trait,
                 mapping_file = mapping_file
             )
         

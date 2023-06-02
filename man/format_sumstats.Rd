@@ -20,6 +20,7 @@ format_sumstats(
   es_is_beta = TRUE,
   impute_se = FALSE,
   analysis_trait = NULL,
+  ignore_multi_trait = FALSE,
   INFO_filter = 0.9,
   FRQ_filter = 0,
   pos_se = TRUE,
@@ -139,6 +140,10 @@ Default is FALSE.
 
 \item{analysis_trait}{If multiple traits were studied, name of the trait for
 analysis from the GWAS. Default is NULL.}
+
+\item{ignore_multi_trait}{If you have multiple traits (p-values) in the study
+but you want to ignorwe these and instead use a standard named p-value, set
+to TRUE. By default is FALSE which will check for multi-traits.}
 
 \item{INFO_filter}{numeric The minimum value permissible of the imputation
 information score (if present in sumstats file). Default 0.9.}

@@ -1,3 +1,10 @@
+## CHANGES IN VERSION 1.9.7
+
+### New features
+* `ignore_multi_trait` parameter added which will ignore any multi-trait 
+p-values if set to TRUE. By default it is false to maintain the current default
+running conditions for MSS.
+
 ## CHANGES IN VERSION 1.7.18
 
 ### New features

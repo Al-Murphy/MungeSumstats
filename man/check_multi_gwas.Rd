@@ -4,7 +4,13 @@
 \alias{check_multi_gwas}
 \title{Ensure that only one model in GWAS sumstats or only one trait tested}
 \usage{
-check_multi_gwas(sumstats_dt, path, analysis_trait, mapping_file)
+check_multi_gwas(
+  sumstats_dt,
+  path,
+  analysis_trait,
+  ignore_multi_trait,
+  mapping_file
+)
 }
 \arguments{
 \item{sumstats_dt}{data table obj of the summary statistics file for the GWAS}
