@@ -134,7 +134,8 @@ check_no_chr_bp <- function(sumstats_dt,
                           log_files=log_files,dbSNP=dbSNP) 
         #join back on the sumstats
         sumstats_dt <- sumstats_dt[!SNP %in% na_chr_bp$sumstats_dt$SNP,]
-        sumstats_dt <- rbindlist(list(sumstats_dt,na_chr_bp$sumstats_dt))
+        sumstats_dt <- rbindlist(list(sumstats_dt,na_chr_bp$sumstats_dt),
+                                 fill=TRUE)
         #join on the log files
         log_files <- c(log_files,na_chr_bp$log_files)
         #update rsids

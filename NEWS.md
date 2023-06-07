@@ -1,3 +1,8 @@
+## CHANGES IN VERSION 1.9.8
+
+### Bug fix
+* Bug fix when using imputation_ind with NA in chr column.
+
 ## CHANGES IN VERSION 1.9.7
 
 ### New features
