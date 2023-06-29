@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_bp_range.R
 \name{check_bp_range}
 \alias{check_bp_range}
-\title{Ensure that the BAse-apir column values are all within the rnage for the
+\title{Ensure that the Base-pair column values are all within the range for the
 chromosome}
 \usage{
 check_bp_range(
@@ -52,7 +52,7 @@ list containing sumstats_dt, the modified summary statistics data
 table object and the log file list
 }
 \description{
-Ensure that the BAse-apir column values are all within the rnage for the
+Ensure that the Base-pair column values are all within the range for the
 chromosome
 }
 \keyword{internal}

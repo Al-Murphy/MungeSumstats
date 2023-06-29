@@ -1,3 +1,11 @@
+## CHANGES IN VERSION 1.9.9
+
+### Bug fix
+* Check ref genome change - if not match found for either genome build, an error
+will now be thrown.
+* Checks has been added so that if chrom col has chr as a prefix, this will be 
+removed before testing genome build.
+
 ## CHANGES IN VERSION 1.9.8
 
 ### Bug fix

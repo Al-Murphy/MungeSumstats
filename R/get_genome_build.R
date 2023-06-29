@@ -101,6 +101,9 @@ get_genome_build <- function(sumstats,
     # also remove common incorrect formatting of SNP
     sumstats <- sumstats[grepl("^rs", SNP), ]
     sumstats <- sumstats[SNP != ".", ]
+    #also deal with common misformatting of CHR
+    # if chromosome col has chr prefix remove it
+    sumstats[, CHR := gsub("chr", "", CHR)]
     # if removing erroneous cases leads to <min(10k,50% org dataset) will fail -
     # NOT ENOUGH DATA TO INFER
     nrow_clean <- nrow(sumstats)
@@ -148,6 +151,13 @@ get_genome_build <- function(sumstats,
             on = c("SNP" = "SNP", "pos" = "BP", "seqnames" = "CHR"),
             nomatch = FALSE
         ])
+    #if no matches throw error
+    if(num_37==0 && num_38==0){
+      msg_err <- paste0("No matches found in either reference genome for your ",
+                        "SNPs.\nPlease check their formatting (SNP, CHR and BP",
+                        " columns) or supply the genome build.")
+      stop(msg_err)
+    }
     if (num_37 > num_38) {
         ref_gen_num <- num_37
         ref_genome <- "GRCH37"

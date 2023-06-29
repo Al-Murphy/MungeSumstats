@@ -479,6 +479,9 @@ format_sumstats <- function(path,
         # update values
         log_files <- sumstats_return$log_files
         
+        #before running inference of genome build, do any formatting
+        #not using the reference sets
+        
         #### Infer reference genome if necessary ####
         if (is.null(ref_genome)) {
             ref_genome <- get_genome_build(
@@ -525,7 +528,7 @@ format_sumstats <- function(path,
         log_files <- sumstats_return$log_files
         
         # Series of checks if CHR or BP columns aren't present
-        if (sum(c("CHR", "BP") %in% col_headers) != 2) {
+        if (sum(c("CHR", "BP") %in% col_headers) != 2) { 
             msg <-
                 paste0(
                     "Summary statistics file does not have",
@@ -761,7 +764,7 @@ format_sumstats <- function(path,
             )
         
         #### Check 19: check all rows have SNPs starting with SNP or rs, ####
-        #### drop those that don't ####
+        #### drop those that don't ####.
         sumstats_return <- check_row_snp(
             sumstats_dt = sumstats_return$sumstats_dt,
             path = path,

@@ -1,4 +1,4 @@
-#' Ensure that the BAse-apir column values are all within the rnage for the 
+#' Ensure that the Base-pair column values are all within the range for the 
 #' chromosome
 #'
 #' @inheritParams format_sumstats
