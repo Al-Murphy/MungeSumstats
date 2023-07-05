@@ -35,7 +35,8 @@ read_sumstats <- function(path,
     } else {
         vcf_suffixes <- supported_suffixes(tabular = FALSE, 
                                            tabular_compressed = FALSE)
-        is_vcf <- grepl(paste(vcf_suffixes,collapse = "|"), path) 
+        vcf_suffix_regexes <- gsub("\\.", "\\.",  paste0(vcf_suffixes, "$"))
+        is_vcf <- grepl(paste(vcf_suffix_regexes, collapse = "|"), path)
         if (isTRUE(is_vcf)) {
             sumstats_file <- read_vcf(path = path,
                                       use_params = TRUE,
@@ -47,7 +48,8 @@ read_sumstats <- function(path,
             #### Check if tabular 1: infer from file name ####
             tab_suffixes <- supported_suffixes(vcf = FALSE, 
                                                vcf_compressed = FALSE)
-            is_tabular <- grepl(paste(tab_suffixes,collapse = "|"), path) 
+            tab_suffix_regexes <- gsub("\\.", "\\.",  paste0(tab_suffixes, "$"))
+            is_tabular <- grepl(paste(tab_suffix_regexes, collapse = "|"), path) 
             #### Check if tabular 2: infer from data ####
             if(isFALSE(is_tabular)){
                 header <- read_header(path = path)
