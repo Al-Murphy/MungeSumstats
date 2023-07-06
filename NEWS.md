@@ -1,3 +1,8 @@
+## CHANGES IN VERSION 1.9.10
+
+### Bug fix
+* Better method to detect vcf files - looks for vcf in extension not in name.
+
 ## CHANGES IN VERSION 1.9.9
 
 ### Bug fix
