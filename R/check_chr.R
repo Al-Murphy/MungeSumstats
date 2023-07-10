@@ -20,8 +20,11 @@ check_chr <- function(sumstats_dt,
                       tabix_index,
                       log_folder_ind) {
   CHR <- NULL
+  
+  # The CHR column needs to be a character vector for gsub substitution to work
+  sumstats_dt[, CHR := as.character(CHR)]
 
-  ### Sometimes X is labeled as 23
+  ### Rename "23" to "X"
   sumstats_dt[, CHR := gsub("23", "X", CHR)]
 
   ### Make X/Y/MT uppercase
