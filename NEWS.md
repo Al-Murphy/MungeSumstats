@@ -1,3 +1,13 @@
+## CHANGES IN VERSION 1.9.11
+
+### New features
+* `check_chr()` now automatically removes all SNPs with nonstandard CHR entries
+(anything other than 1-22, X, Y, and MT)
+* `check_chr()` now ensures that the "chr" prefix is lowercase if kept
+
+### Bug fix
+* The `rmv_chrPrefix` parameter is no longer ignored when `rmv_chr` is NULL
+
 ## CHANGES IN VERSION 1.9.10
 
 ### Bug fix

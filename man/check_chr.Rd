@@ -2,51 +2,51 @@
 % Please edit documentation in R/check_chr.R
 \name{check_chr}
 \alias{check_chr}
-\title{Ensure all SNPs on specified chromosomes are removed}
+\title{Standardize the CHR column}
 \usage{
 check_chr(
   sumstats_dt,
-  path,
-  rmv_chr,
-  log_folder_ind,
-  check_save_out,
-  tabix_index,
-  nThread,
   log_files,
-  make_uppercase = TRUE,
-  rmv_chrPrefix = TRUE
+  check_save_out,
+  rmv_chr,
+  rmv_chrPrefix,
+  nThread,
+  tabix_index,
+  log_folder_ind
 )
 }
 \arguments{
-\item{path}{Filepath for the summary statistics file to be formatted. A
-dataframe or datatable of the summary statistics file can also be passed
-directly to MungeSumstats using the path parameter.}
+\item{sumstats_dt}{data.table with summary statistics}
+
+\item{log_files}{list of locations for all log files}
+
+\item{check_save_out}{list of parameters for saved files}
 
 \item{rmv_chr}{vector or character The chromosomes on which the SNPs should
 be removed. Use NULL if no filtering necessary. Default is X, Y and
 mitochondrial.}
+
+\item{rmv_chrPrefix}{Remove "chr" or "CHR" from chromosome names. Default is
+TRUE.}
+
+\item{nThread}{Number of threads to use for parallel processes.}
+
+\item{tabix_index}{Index the formatted summary statistics with
+\href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
 
 \item{log_folder_ind}{Binary Should log files be stored containing all
 filtered out SNPs (separate file per filter). The data is outputted in the
 same format specified for the resulting sumstats file. The only exception to
 this rule is if output is vcf, then log file saved as .tsv.gz. Default is
 FALSE.}
-
-\item{tabix_index}{Index the formatted summary statistics with
-\href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
-
-\item{nThread}{Number of threads to use for parallel processes.}
-
-\item{log_files}{list of log file locations}
-
-\item{rmv_chrPrefix}{Remove "chr" or "CHR" from chromosome names. Default is
-TRUE.}
 }
 \value{
-list containing sumstats_dt, the modified summary statistics data
-table object and the log file list
+list containing the updated summary statistics data.table and the
+updated log file locations list
 }
 \description{
-Ensure all SNPs on specified chromosomes are removed
+Renames "23" to "X", makes X/Y/MT uppercase and the "chr" prefix lowercase,
+and removes SNPs with nonstandard CHR entries. Optionally, also removes the
+"chr" prefix and SNPs on user-specified chromosomes.
 }
 \keyword{internal}
