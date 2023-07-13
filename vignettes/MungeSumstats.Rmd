@@ -129,7 +129,8 @@ Tests run by *MungeSumstats* include:
 -   Check for strand-ambiguous SNPs
 -   Check for non-biallelic SNPs (infer from reference genome)
 -   Check for allele flipping
--   Check for SNPs on chromosome X, Y, and mitochondrial SNPs (MT)
+-   Check for SNPs with nonstandard chromosome names
+-   Check for SNPs on excluded chromosomes (removes non-autosomal SNPs by default)
 -   Check for z-score (Z) and impute if missing
 -   Check for N and impute if missing
 -   Check output format is LDSC ready
@@ -339,12 +340,14 @@ conducted by *MungeSumstats* are:
     controls whether the SNPs with a missing N value are dropped or not
     (Default is TRUE).
 -   **N_dropNA** Drop rows where N is missing.Default is TRUE.
--   **rmv_chr** vector or character The chromosomes on which the SNPs
-    should be removed. Use NULL if no filtering necessary. Default is X,
-    Y and mitochondrial.**rmv_chrPrefix** controls whether "chr"/"CHR"
-    is removed from chromosome names (Default is TRUE).
--   **rmv_chrPrefix** Remove "chr" or "CHR" from chromosome names.
-    Default is TRUE.
+-   **chr_style** Chromosome naming style to use in the formatted summary
+    statistics file ("NCBI", "UCSC", "dbSNP", or "Ensembl"). The NCBI and
+    Ensembl styles both code chromosomes as `1-22, X, Y, MT`; the UCSC
+    style is `chr1-chr22, chrX, chrY, chrM`; and the dbSNP style is
+    `ch1-ch22, chX, chY, chMT`. Default is Ensembl.
+-   **rmv_chr** Chromosomes to exclude from the formatted summary
+    statistics file. Use NULL if no filtering is necessary. Default is
+    `c("X", "Y", "MT")` which removes all non-autosomal SNPs.
 -   **on_ref_genome** Binary, should a check take place that all SNPs
     are on the reference genome by SNP ID. Any SNPs not on the reference
     genome, will be corrected from the reference genome (if possible)
@@ -551,7 +554,8 @@ below:
     BETA=0.
 -   **n_large** - SNPs N is N standard deviations greater than the mean.
 -   **n_null** - SNPs N is null.
--   **chr_excl** - SNP is on a chromosome specified to be excluded.
+-   **chr_excl** - SNP has an unrecognized chromosome name or is on a
+    chromosome that was specified to be excluded.
 -   **snp_strand_ambiguous** - SNP is strand ambiguous.
 -   **snp_bi_allelic** - SNP is not bi-allelic.
 -   **MungeSumstats_log_msg** - Text file of all messages to the console

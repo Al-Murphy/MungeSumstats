@@ -2,18 +2,18 @@
 ================
 <h5> ¶ <i>Authors</i>: Alan Murphy, Brian Schilder and Nathan Skene ¶
 </h5>
-<h5> ¶ <i>Updated</i>: Jan-17-2023 ¶ </h5>
+<h5> ¶ <i>Updated</i>: Jul-13-2023 ¶ </h5>
 
 <!-- Readme.md is generated from Readme.Rmd. Please edit that file -->
 <!-- badges: start -->
 
-[![](https://img.shields.io/badge/release%20version-1.6.0-black.svg)](https://www.bioconductor.org/packages/MungeSumstats)
-[![](https://img.shields.io/badge/devel%20version-1.7.14-black.svg)](https://github.com/neurogenomics/MungeSumstats)
+[![](https://img.shields.io/badge/release%20version-1.8.0-black.svg)](https://www.bioconductor.org/packages/MungeSumstats)
+[![](https://img.shields.io/badge/devel%20version-1.9.11-black.svg)](https://github.com/neurogenomics/MungeSumstats)
 [![R build
 status](https://github.com/neurogenomics/MungeSumstats/workflows/rworkflows/badge.svg)](https://github.com/neurogenomics/MungeSumstats/actions)
 [![](https://img.shields.io/github/last-commit/neurogenomics/MungeSumstats.svg)](https://github.com/neurogenomics/MungeSumstats/commits/master)
-[![](https://app.codecov.io/gh/neurogenomics/MungeSumstats/branch/master/graph/badge.svg)](https://app.codecov.io/gh/neurogenomics/MungeSumstats)
-[![](https://img.shields.io/badge/download-2645/total-blue.svg)](https://bioconductor.org/packages/stats/bioc/MungeSumstats)
+[![](https://codecov.io/gh/neurogenomics/MungeSumstats/branch/master/graph/badge.svg)](https://codecov.io/gh/neurogenomics/MungeSumstats)
+[![](https://img.shields.io/badge/download-5460/total-blue.svg)](https://bioconductor.org/packages/stats/bioc/MungeSumstats)
 [![License:
 Artistic-2.0](https://img.shields.io/badge/license-Artistic--2.0-blue.svg)](https://cran.r-project.org/web/licenses/Artistic-2.0)
 [![](https://img.shields.io/badge/doi-https://doi.org/10.1093/bioinformatics/btab665-blue.svg)](https://doi.org/https://doi.org/10.1093/bioinformatics/btab665)
@@ -70,23 +70,26 @@ You can then load the package and data package:
 library(MungeSumstats)
 ```
 
+Note that there is also a [docker image for
+MungeSumstats](https://hub.docker.com/r/neurogenomicslab/mungesumstats).
+
 Note that for a number of the checks implored by `MungeSumstats` a
 reference genome is used. If your GWAS summary statistics file of
 interest relates to *GRCh38*, you will need to install
-`SNPlocs.Hsapiens.dbSNP144.GRCh38` and `BSgenome.Hsapiens.NCBI.GRCh38`
+`SNPlocs.Hsapiens.dbSNP155.GRCh38` and `BSgenome.Hsapiens.NCBI.GRCh38`
 from Bioconductor as follows:
 
 ``` r
-BiocManager::install("SNPlocs.Hsapiens.dbSNP144.GRCh38")
+BiocManager::install("SNPlocs.Hsapiens.dbSNP155.GRCh38")
 BiocManager::install("BSgenome.Hsapiens.NCBI.GRCh38")
 ```
 
 If your GWAS summary statistics file of interest relates to *GRCh37*,
-you will need to install `SNPlocs.Hsapiens.dbSNP144.GRCh37` and
+you will need to install `SNPlocs.Hsapiens.dbSNP155.GRCh37` and
 `BSgenome.Hsapiens.1000genomes.hs37d5` from Bioconductor as follows:
 
 ``` r
-BiocManager::install("SNPlocs.Hsapiens.dbSNP144.GRCh37")
+BiocManager::install("SNPlocs.Hsapiens.dbSNP155.GRCh37")
 BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")
 ```
 
@@ -143,6 +146,7 @@ We would like to acknowledge all those who have contributed to
 - [Shea Andrews](https://github.com/sjfandrews)
 - [Jonathan Griffiths](https://github.com/jonathangriffiths)
 - [Kitty Murphy](https://github.com/KittyMurphy)
+- [Mykhaylo Malakhov](https://github.com/MykMal)
 
 # References
 

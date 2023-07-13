@@ -24,7 +24,7 @@ test_that("Multi-trait GWAS handled correctly", {
             bi_allelic_filter = FALSE,
             allele_flip_check = FALSE,
             sort_coordinates = FALSE,
-            rmv_chrPrefix = FALSE,
+            chr_style = "UCSC",
             dbSNP=144
         )
         reformatted_res <- readLines(reformatted)
@@ -37,7 +37,7 @@ test_that("Multi-trait GWAS handled correctly", {
             "rs1000075\tchr1\t94939420\tC\tT\t94939420\t0.3583\t38959\t-0.0013\t0.0082\t0.8687\t147567\t-0.0043\t0.0044\t0.3259"
         )
         expect_equal(setequal(multi_trait_res_smk, reformatted_res), TRUE)
-    }    
+    }
     else{
         expect_equal(is_32bit_windows, TRUE)
     }

@@ -1,84 +1,90 @@
-#' Ensure all SNPs on specified chromosomes are removed
+#' Standardize the CHR column
 #'
+#' Maps chromosome names to the default Ensembl/NCBI naming style and removes
+#' SNPs with nonstandard CHR entries. Optionally, also removes SNPs on
+#' user-specified chromosomes.
+#'
+#' @param sumstats_dt data.table with summary statistics
+#' @param log_files list of locations for all log files
+#' @param check_save_out list of parameters for saved files
 #' @inheritParams format_sumstats
-#' @param log_files list of log file locations
-#' @return list containing sumstats_dt, the modified summary statistics data
-#' table object and the log file list
+#' @return list containing the updated summary statistics data.table and the
+#'   updated log file locations list
 #' @keywords internal
 check_chr <- function(sumstats_dt,
-                      path,
-                      rmv_chr,
-                      log_folder_ind,
-                      check_save_out,
-                      tabix_index,
-                      nThread,
                       log_files,
-                      make_uppercase = TRUE,
-                      rmv_chrPrefix = TRUE) {
-    CHR <- NULL
-    # If CHR present and user specified chromosome to have SNPs removed
-    col_headers <- names(sumstats_dt)
-    if ("CHR" %in% col_headers && !is.null(rmv_chr)) {
+                      check_save_out,
+                      rmv_chr,
+                      nThread,
+                      tabix_index,
+                      log_folder_ind) {
+  CHR <- NULL
 
-        ### Sometimes X is labeled as 23
-        sumstats_dt[, CHR := gsub("23", "X", CHR)]
+  # The CHR column needs to be a character vector for gsub substitution to work
+  sumstats_dt[, CHR := as.character(CHR)]
 
-        #### Remove chr prefix uppercase ####
-        if (rmv_chrPrefix) {
-            message("Removing 'chr' prefix from CHR.")
-            sumstats_dt[, CHR := gsub("chr", "", CHR, ignore.case = TRUE)]
-            rmv_chr <- gsub("chr", "", rmv_chr, ignore.case = TRUE)
-        }
-        #### Make all CHR uppercase ####
-        if (make_uppercase) {
-            message("Making X/Y/MT CHR uppercase.")
-            sumstats_dt[, CHR := gsub("x|23", "X", CHR)]
-            sumstats_dt[, CHR := gsub("y", "Y", CHR)]
-            sumstats_dt[, CHR := gsub("mt", "MT", CHR)]
-        }
+  ### Reformat chromosome names according to the default style (Ensembl/NCBI)
+  # Remove the "chr" prefix
+  sumstats_dt[, CHR := gsub("chr", "", CHR, ignore.case = TRUE)]
+  # Remove the "ch" prefix
+  sumstats_dt[, CHR := gsub("ch", "", CHR, ignore.case = TRUE)]
+  # Rename "23" to "X"
+  sumstats_dt[, CHR := gsub("23", "X", CHR)]
+  # Rename "M" to "MT"
+  sumstats_dt[, CHR := gsub("M", "MT", CHR, ignore.case = TRUE)]
+  # Make all chromosome names uppercase
+  sumstats_dt[, CHR := toupper(CHR)]
 
-        # check for chromosomes to be removed
-        ### Standardise chromosomes specified
-        rmv_chr <- toupper(rmv_chr)
-        if (any(rmv_chr %in% unique(sumstats_dt$CHR))) {
-            num_bad_ids <- nrow(sumstats_dt[CHR %in% rmv_chr, ])
-            msg <- paste0(
-                formatC(num_bad_ids, big.mark = ","),
-                " SNPs are on chromosomes ",
-                paste(rmv_chr, collapse = ", "),
-                " and will be removed"
-            )
-            message(msg)
-            # If user wants log, save it to there
-            if (log_folder_ind) {
-                name <- "chr_excl"
-                name <- get_unique_name_log_file(
-                    name = name,
-                    log_files = log_files
-                )
-                write_sumstats(
-                    sumstats_dt = sumstats_dt[CHR %in% (rmv_chr), ],
-                    save_path =
-                        paste0(
-                            check_save_out$log_folder,
-                            "/", name,
-                            check_save_out$extension
-                        ),
-                    sep = check_save_out$sep,
-                    tabix_index = tabix_index,
-                    nThread = nThread
-                )
-                log_files[[name]] <-
-                    paste0(
-                        check_save_out$log_folder, "/", name,
-                        check_save_out$extension
-                    )
-            }
-            # remove rows on these chromosomes
-            sumstats_dt <- sumstats_dt[!CHR %in% (rmv_chr), ]
-        }
-        return(list("sumstats_dt" = sumstats_dt, "log_files" = log_files))
-    } else {
-        return(list("sumstats_dt" = sumstats_dt, "log_files" = log_files))
+  ### Remove rows with nonstandard CHR entries
+  standard_chrs <- c(1:22, "X", "Y", "MT")
+  nonstandard_rows <- which(!(sumstats_dt$CHR %in% standard_chrs))
+  if (length(nonstandard_rows) > 0L) {
+    message("Removing ",
+            formatC(length(nonstandard_rows), big.mark = ","),
+            " SNPs with nonstandard CHR entries.")
+  }
+
+  ### Remove SNPs on user-specified chromosomes, if requested
+  rmv_chr_rows <- c()
+  if (!is.null(rmv_chr)) {
+    # Check for chromosomes to be removed
+    rmv_chr_rows <- which(sumstats_dt$CHR %in% rmv_chr)
+
+    if (length(rmv_chr_rows) > 0L) {
+      message(
+        formatC(length(rmv_chr_rows), big.mark = ","),
+        " SNPs are on chromosomes ",
+        paste(rmv_chr, collapse = ", "),
+        " and will be removed."
+      )
     }
+  }
+
+  # Vector of row numbers for all removed SNPs
+  all_removed_rows <- sort(unique(c(nonstandard_rows, rmv_chr_rows)))
+
+  ### Save a log of removed SNPs if the user wants it
+  if (log_folder_ind && (length(all_removed_rows) > 0L)) {
+    name <- "chr_excl"
+    name <- get_unique_name_log_file(name = name,
+                                     log_files = log_files)
+    save_path <- paste0(check_save_out$log_folder,
+                        "/",
+                        name,
+                        check_save_out$extension)
+
+    write_sumstats(
+      sumstats_dt = sumstats_dt[all_removed_rows],
+      save_path = save_path,
+      sep = check_save_out$sep,
+      tabix_index = tabix_index,
+      nThread = nThread
+    )
+    log_files[[name]] <- save_path
+  }
+
+  # Remove the SNPs identified above, if any
+  sumstats_dt <- sumstats_dt[!all_removed_rows]
+
+  return(list(sumstats_dt = sumstats_dt, log_files = log_files))
 }

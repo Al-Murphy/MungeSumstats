@@ -1,3 +1,13 @@
+## CHANGES IN VERSION 1.9.11
+
+### New features
+* The `rmv_chrPrefix` parameter in `format_sumstats()` has been replaced with
+the new `chr_style` parameter, which allows users to specify their desired
+chromosome name style. The supported chromosome styles are "NCBI", "UCSC", "dbSNP",
+and "Ensembl" with "Ensembl" being the default.
+* `check_chr()` now automatically removes all SNPs with nonstandard CHR entries
+(anything other than 1-22, X, Y, and MT in the Ensembl naming style).
+
 ## CHANGES IN VERSION 1.9.10
 
 ### Bug fix

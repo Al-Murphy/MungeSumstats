@@ -20,6 +20,7 @@ validate_parameters(
   effect_columns_nonzero,
   N_std,
   N_dropNA,
+  chr_style,
   rmv_chr,
   on_ref_genome,
   strand_ambig_filter,
@@ -112,9 +113,15 @@ N is needed to be removed. Default is 5.}
 
 \item{N_dropNA}{Drop rows where N is missing.Default is TRUE.}
 
-\item{rmv_chr}{vector or character The chromosomes on which the SNPs should
-be removed. Use NULL if no filtering necessary. Default is X, Y and
-mitochondrial.}
+\item{chr_style}{Chromosome naming style to use in the formatted summary
+statistics file ("NCBI", "UCSC", "dbSNP", or "Ensembl"). The NCBI and
+Ensembl styles both code chromosomes as \verb{1-22, X, Y, MT}; the UCSC style is
+\verb{chr1-chr22, chrX, chrY, chrM}; and the dbSNP style is
+\verb{ch1-ch22, chX, chY, chMT}. Default is Ensembl.}
+
+\item{rmv_chr}{Chromosomes to exclude from the formatted summary statistics
+file. Use NULL if no filtering is necessary. Default is \code{c("X", "Y", "MT")}
+which removes all non-autosomal SNPs.}
 
 \item{on_ref_genome}{Binary Should a check take place that all SNPs are on
 the reference genome by SNP ID. Default is TRUE.}
