@@ -77,20 +77,20 @@ Note that there is also a
 
 Note that for a number of the checks implored by `MungeSumstats` a reference 
 genome is used. If your GWAS summary statistics file of interest relates to
-*GRCh38*, you will need to install `SNPlocs.Hsapiens.dbSNP144.GRCh38` and 
+*GRCh38*, you will need to install `SNPlocs.Hsapiens.dbSNP155.GRCh38` and 
 `BSgenome.Hsapiens.NCBI.GRCh38` from Bioconductor as follows:
 
 ```R
-BiocManager::install("SNPlocs.Hsapiens.dbSNP144.GRCh38")
+BiocManager::install("SNPlocs.Hsapiens.dbSNP155.GRCh38")
 BiocManager::install("BSgenome.Hsapiens.NCBI.GRCh38")
 ```
 
 If your GWAS summary statistics file of interest relates to *GRCh37*, you will 
-need to install `SNPlocs.Hsapiens.dbSNP144.GRCh37` and 
+need to install `SNPlocs.Hsapiens.dbSNP155.GRCh37` and 
 `BSgenome.Hsapiens.1000genomes.hs37d5` from Bioconductor as follows:
 
 ```R
-BiocManager::install("SNPlocs.Hsapiens.dbSNP144.GRCh37")
+BiocManager::install("SNPlocs.Hsapiens.dbSNP155.GRCh37")
 BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")
 ```
 
@@ -141,5 +141,6 @@ development:
  * [Shea Andrews](https://github.com/sjfandrews)
  * [Jonathan Griffiths](https://github.com/jonathangriffiths)
  * [Kitty Murphy](https://github.com/KittyMurphy)
+ * [Mykhaylo Malakhov](https://github.com/MykMal)
  
 # References

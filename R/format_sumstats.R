@@ -48,7 +48,7 @@
 #' @param chain_source source of the chain file to use in liftover, if converting
 #' genome build ("ucsc" or "ensembl"). Note that the UCSC chain files require a
 #' license for commercial use. The Ensembl chain is used by default ("ensembl").
-#' @param convert_small_p Binary, should non-negative 
+#' @param convert_small_p Binary, should non-negative
 #' p-values <= 5e-324 be converted to 0?
 #' Small p-values pass the R limit and can cause errors with LDSC/MAGMA and
 #' should be converted. Default is TRUE.
@@ -56,10 +56,10 @@
 #' P-values >1 should not be possible and can cause errors with LDSC/MAGMA and
 #' should be converted. Default is TRUE.
 #' @param convert_neg_p Binary, should p-values <0 be converted to 0?
-#' Negative p-values should not be possible and can cause errors 
+#' Negative p-values should not be possible and can cause errors
 #' with LDSC/MAGMA and should be converted. Default is TRUE.
-#' @param compute_z Whether to compute Z-score column. Default is FALSE. This 
-#' can be computed from Beta and SE with (Beta/SE) or P 
+#' @param compute_z Whether to compute Z-score column. Default is FALSE. This
+#' can be computed from Beta and SE with (Beta/SE) or P
 #' (Z:=sign(BETA)*sqrt(stats::qchisq(P,1,lower=FALSE))).
 #' **Note** that imputing the Z-score from P for every SNP will not be
 #' perfectly correct and may result in a loss of power. This should only be done
@@ -79,20 +79,20 @@
 #' @param convert_n_int Binary, if N (the number of samples) is not an integer,
 #' should this be rounded? Default is TRUE.
 #' @param impute_beta Binary, whether BETA should be imputed using other effect
-#' data if it isn't present in the sumstats. Note that this imputation is an 
-#' approximation (for Z & SE approach) so could have an effect on downstream 
-#' analysis. Use with caution. The different methods MungeSumstats will try and 
-#' impute beta (in this order or priority) are: 
+#' data if it isn't present in the sumstats. Note that this imputation is an
+#' approximation (for Z & SE approach) so could have an effect on downstream
+#' analysis. Use with caution. The different methods MungeSumstats will try and
+#' impute beta (in this order or priority) are:
 #' 1. log(OR)  2. Z x SE
 #' Default value is FALSE.
 #' @param es_is_beta Binary, whether to map ES to BETA. We take BETA to be any
 #' BETA-like value (including Effect Size). If this is not the case for your
 #' sumstats, change this to FALSE. Default is TRUE.
-#' @param impute_se Binary, whether the standard error should be imputed using 
-#' other effect data if it isn't present in the sumstats. Note that this 
-#' imputation is an approximation so could have an effect on downstream 
+#' @param impute_se Binary, whether the standard error should be imputed using
+#' other effect data if it isn't present in the sumstats. Note that this
+#' imputation is an approximation so could have an effect on downstream
 #' analysis. Use with caution. The different methods MungeSumstats will try and
-#' impute se (in this order or priority) are: 
+#' impute se (in this order or priority) are:
 #' 1. BETA / Z  2. abs(BETA/ qnorm(P/2))
 #' Default is FALSE.
 #' @param analysis_trait If multiple traits were studied, name of the trait for
@@ -114,11 +114,14 @@
 #' @param N_std numeric The number of standard deviations above the mean a SNP's
 #' N is needed to be removed. Default is 5.
 #' @param N_dropNA Drop rows where N is missing.Default is TRUE.
-#' @param rmv_chr vector or character The chromosomes on which the SNPs should
-#' be removed. Use NULL if no filtering necessary. Default is X, Y and
-#' mitochondrial.
-#' @param rmv_chrPrefix Remove "chr" or "CHR" from chromosome names. Default is
-#' TRUE.
+#' @param chr_style Chromosome naming style to use in the formatted summary
+#'   statistics file ("NCBI", "UCSC", "dbSNP", or "Ensembl"). The NCBI and
+#'   Ensembl styles both code chromosomes as `1-22, X, Y, MT`; the UCSC style is
+#'   `chr1-chr22, chrX, chrY, chrM`; and the dbSNP style is
+#'   `ch1-ch22, chX, chY, chMT`. Default is Ensembl.
+#' @param rmv_chr Chromosomes to exclude from the formatted summary statistics
+#'   file. Use NULL if no filtering is necessary. Default is `c("X", "Y", "MT")`
+#'   which removes all non-autosomal SNPs.
 #' @param on_ref_genome Binary Should a check take place that all SNPs are on
 #' the reference genome by SNP ID. Default is TRUE.
 #' @param strand_ambig_filter Binary Should SNPs with strand-ambiguous alleles
@@ -150,15 +153,15 @@
 #' FRQ column should be renamed to MAJOR_ALLELE_FRQ if the frequency values
 #' appear to relate to the major allele i.e. >0.5. By default this mapping won't
 #' occur i.e. is TRUE.
-#' @param indels Binary does your Sumstats file contain Indels? These don't 
-#' exist in our reference file so they will be excluded from checks if this 
+#' @param indels Binary does your Sumstats file contain Indels? These don't
+#' exist in our reference file so they will be excluded from checks if this
 #' value is TRUE. Default is TRUE.
-#' @param drop_indels Binary, should any indels found in the sumstats be 
-#' dropped? These can not be checked against a reference dataset and will have 
-#' the same RS ID and position as SNPs which can affect downstream analysis. 
+#' @param drop_indels Binary, should any indels found in the sumstats be
+#' dropped? These can not be checked against a reference dataset and will have
+#' the same RS ID and position as SNPs which can affect downstream analysis.
 #' Default is False.
 #' @param dbSNP version of dbSNP to be used for imputation (144 or 155).
-#' @param check_dups whether to check for duplicates - if formatting QTL 
+#' @param check_dups whether to check for duplicates - if formatting QTL
 #' datasets this should be set to FALSE otherwise keep as TRUE. Default is TRUE.
 #' @param sort_coordinates Whether to sort by coordinates of resulting sumstats
 #' @param nThread Number of threads to use for parallel processes.
@@ -173,8 +176,8 @@
 #' @param return_format If return_data is TRUE. Object type to be returned
 #' ("data.table","vranges","granges").
 #' @param ldsc_format DEPRECATED, do not use. Use save_format="LDSC" instead.
-#' @param save_format Output format of sumstats. Options are NULL - standardised 
-#' output format from MungeSumstats, LDSC - output format compatible with LDSC 
+#' @param save_format Output format of sumstats. Options are NULL - standardised
+#' output format from MungeSumstats, LDSC - output format compatible with LDSC
 #' and openGWAS - output compatible with openGWAS VCFs. Default is NULL.
 #' @param log_folder_ind Binary Should log files be stored containing all
 #' filtered out SNPs (separate file per filter). The data is outputted in the
@@ -184,10 +187,10 @@
 #' @param log_mungesumstats_msgs Binary Should a log be stored containing all
 #' messages and errors printed by MungeSumstats in a run. Default is FALSE
 #' @param log_folder Filepath to the directory for the log files and the log of
-#' MungeSumstats messages to be stored. Default is a temporary directory. Note 
-#' the name of the log files (log messages and log outputs) are now the same as 
-#' the name of the file specified in the save path parameter with the extension 
-#' '_log_msg.txt' and '_log_output.txt' respectively.  
+#' MungeSumstats messages to be stored. Default is a temporary directory. Note
+#' the name of the log files (log messages and log outputs) are now the same as
+#' the name of the file specified in the save path parameter with the extension
+#' '_log_msg.txt' and '_log_output.txt' respectively.
 #' @param imputation_ind Binary Should a column be added for each imputation
 #' step to show what SNPs have imputed values for differing fields. This
 #' includes a field denoting SNP allele flipping (flipped). On the flipped
@@ -223,7 +226,7 @@ format_sumstats <- function(path,
                             force_new_z = FALSE,
                             compute_n = 0L,
                             convert_n_int = TRUE,
-                            impute_beta = FALSE, 
+                            impute_beta = FALSE,
                             es_is_beta = TRUE,
                             impute_se = FALSE,
                             analysis_trait = NULL,
@@ -234,8 +237,8 @@ format_sumstats <- function(path,
                             effect_columns_nonzero = FALSE,
                             N_std = 5,
                             N_dropNA = TRUE,
+                            chr_style = "Ensembl",
                             rmv_chr = c("X", "Y", "MT"),
-                            rmv_chrPrefix = TRUE,
                             on_ref_genome = TRUE,
                             strand_ambig_filter = FALSE,
                             allele_flip_check = TRUE,
@@ -272,7 +275,7 @@ format_sumstats <- function(path,
     orig_dims <- NULL
     log_files <- vector(mode = "list")
     t1 <- Sys.time()
-    
+
     #### Check 1: Ensure save_path is correct.   ####
     check_save_out <- check_save_path(
         save_path = save_path,
@@ -288,7 +291,7 @@ format_sumstats <- function(path,
         )
         sort_coordinates <- TRUE
     }
-    
+
     #### Recognize previously formatted files ####
     if (file.exists(check_save_out$save_path) && (force_new == FALSE)) {
         message(
@@ -300,7 +303,7 @@ format_sumstats <- function(path,
         # Avoid reloading ref genome every time,
         # save it to this parent environment
         # after being made once - speed up code
-        
+
         # Check input parameters
         validate_parameters(
             path = path,
@@ -318,6 +321,7 @@ format_sumstats <- function(path,
             effect_columns_nonzero = effect_columns_nonzero,
             N_std = N_std,
             N_dropNA = N_dropNA,
+            chr_style = chr_style,
             rmv_chr = rmv_chr,
             on_ref_genome = on_ref_genome,
             strand_ambig_filter = strand_ambig_filter,
@@ -344,7 +348,7 @@ format_sumstats <- function(path,
             tabix_index = tabix_index,
             chain_source = chain_source
         )
-        
+
         # save messages to file if user specified
         if (log_mungesumstats_msgs) {
             #get name of file from save_path
@@ -388,11 +392,11 @@ format_sumstats <- function(path,
         # from different studies are differently formatted),
         # so it makes more sense to just make a
         # temporary file <tmp>, and return the address of the temp
-        
+
         #Ensure dbSNP is a integer (make using it later easier)
         #already validated in validate param function
         dbSNP <- as.integer(dbSNP)
-        
+
         ####  Check 2: Check input format and import ####
         sumstats_return <- list()
         # if data.frame/data.table read it in directly, otherwise read from path
@@ -407,12 +411,12 @@ format_sumstats <- function(path,
                 nThread = nThread
             )
         }
-        
+
         #If es_is_beta remove from mapping file if present
-        if (!es_is_beta & nrow(mapping_file[mapping_file$Uncorrected=="ES" & 
+        if (!es_is_beta & nrow(mapping_file[mapping_file$Uncorrected=="ES" &
                                            mapping_file$Corrected=="BETA",])>=1)
           {
-          mapping_file <- mapping_file[!(mapping_file$Uncorrected=="ES" & 
+          mapping_file <- mapping_file[!(mapping_file$Uncorrected=="ES" &
                                          mapping_file$Corrected=="BETA"),]
           #Add ES mapping
           es_cols <- data.frame("Uncorrected"=c("ES","EFFECT_SIZE",
@@ -426,14 +430,14 @@ format_sumstats <- function(path,
                                 "Corrected"=rep("ES",14))
           mapping_file <- rbind(mapping_file,es_cols)
         }
-        
+
         #### Check 3:Standardise headers for all OS ####
         sumstats_return <-
             standardise_sumstats_column_headers_crossplatform(
                 sumstats_dt = sumstats_return$sumstats_dt,
                 mapping_file = mapping_file
             )
-        
+
         #### If save_format=LDSC, make sure all arguments comply with with.
         check_ldsc <- check_ldsc_format(
             sumstats_dt = sumstats_return$sumstats_dt,
@@ -446,12 +450,12 @@ format_sumstats <- function(path,
         convert_n_int <- check_ldsc$convert_n_int
         allele_flip_check <- check_ldsc$allele_flip_check
         compute_z <- check_ldsc$compute_z
-        
+
         ### Report the number of SNP/CHR/etc. before any filtering
         ### (but after header formatting)
         report_summary(sumstats_dt = sumstats_return$sumstats_dt)
         orig_dims <- dim(sumstats_return$sumstats_dt)
-        
+
         #### Check 4: Check if multi models used
         # or multi traits tested in GWAS ####
         sumstats_return <-
@@ -462,7 +466,7 @@ format_sumstats <- function(path,
                 ignore_multi_trait = ignore_multi_trait,
                 mapping_file = mapping_file
             )
-        
+
         #### Check 33: Check if multi RS ID SNPs in one line ####
         sumstats_return <-
             check_multi_rs_snp(
@@ -478,10 +482,10 @@ format_sumstats <- function(path,
             )
         # update values
         log_files <- sumstats_return$log_files
-        
+
         #before running inference of genome build, do any formatting
         #not using the reference sets
-        
+
         #### Infer reference genome if necessary ####
         if (is.null(ref_genome)) {
             ref_genome <- get_genome_build(
@@ -492,7 +496,7 @@ format_sumstats <- function(path,
                 dbSNP=dbSNP
             )
         }
-        
+
         #### Check 5: Check for uniformity in SNP col - ####
         #### no mix of rs/missing rs/chr:bp ####
         sumstats_return <-
@@ -519,16 +523,16 @@ format_sumstats <- function(path,
                 path = path
             )
         col_headers <- names(sumstats_return$sumstats_dt)
-        
+
         #Ensure A1 and A2 are upper case
         sumstats_return <-
             make_allele_upper(sumstats_dt = sumstats_return$sumstats_dt,
                               log_files = log_files)
         # update values
         log_files <- sumstats_return$log_files
-        
+
         # Series of checks if CHR or BP columns aren't present
-        if (sum(c("CHR", "BP") %in% col_headers) != 2) { 
+        if (sum(c("CHR", "BP") %in% col_headers) != 2) {
             msg <-
                 paste0(
                     "Summary statistics file does not have",
@@ -536,14 +540,14 @@ format_sumstats <- function(path,
                     "Checking to see if they are joined in another column."
                 )
             message(msg)
-            
+
             #### Check 6: check if CHR:BP:A2:A1 merged to 1 column
             sumstats_return <- check_four_step_col(
                 sumstats_dt =
                     sumstats_return$sumstats_dt,
                 path = path
             )
-            
+
             #### Check 7: check if there is a column of
             # data with CHR:BP format ####
             sumstats_return <- check_two_step_col(
@@ -559,7 +563,7 @@ format_sumstats <- function(path,
                     mapping_file = mapping_file
                 )
         }
-        
+
         #### Check 38: validate BP
         sumstats_return <- check_bp_range(
           sumstats_dt = sumstats_return$sumstats_dt,
@@ -574,7 +578,7 @@ format_sumstats <- function(path,
         )
         # update values
         log_files <- sumstats_return$log_files
-        
+
         #### Check 8: check if CHR and BP are missing but SNP is present ####
         sumstats_return <-
             check_no_chr_bp(
@@ -611,7 +615,7 @@ format_sumstats <- function(path,
         )
         # update values
         log_files <- sumstats_return$log_files
-        
+
         #### Check 25: check that all snps are present on reference genome ####
         sumstats_return <- check_on_ref_genome(
             sumstats_dt =
@@ -633,7 +637,7 @@ format_sumstats <- function(path,
         log_files <- sumstats_return$log_files
         rsids <- sumstats_return$rsids # update rsids
         sumstats_return$rsids <- NULL
-        
+
         #### Check 10: check if SNP is present but A1 and/or A2 is missing ####
         sumstats_return <-
             check_no_allele(
@@ -656,17 +660,17 @@ format_sumstats <- function(path,
         sumstats_return$rsids <- NULL
         # get updated flip
         allele_flip_check <- sumstats_return$allele_flip_check
-        
+
         #### Check 11: check that all the vital columns are present ###
         check_vital_col(sumstats_dt = sumstats_return$sumstats_dt)
-        
+
         #### Check 12: check there is at least one signed sumstats column ###
-        sumstats_return <- 
+        sumstats_return <-
             check_signed_col(
-                sumstats_dt = sumstats_return$sumstats_dt, 
+                sumstats_dt = sumstats_return$sumstats_dt,
                 impute_beta = impute_beta,
                 log_folder_ind = log_folder_ind,
-                rsids = rsids, 
+                rsids = rsids,
                 imputation_ind = imputation_ind,
                 check_save_out = check_save_out,
                 tabix_index = tabix_index,
@@ -677,7 +681,7 @@ format_sumstats <- function(path,
         log_files <- sumstats_return$log_files
         rsids <- sumstats_return$rsids # update rsids
         sumstats_return$rsids <- NULL
-        
+
         #### Check 13: check for allele flipping ####
         sumstats_return <-
             check_allele_flip(
@@ -703,7 +707,7 @@ format_sumstats <- function(path,
         log_files <- sumstats_return$log_files
         rsids <- sumstats_return$rsids # update rsids
         sumstats_return$rsids <- NULL
-        
+
         #### Check 14: check first three column headers are SNP, CHR, BP ###
         ### (in that order) and also check A1 and A2 are fourth and fifth####
         sumstats_return <-
@@ -711,7 +715,7 @@ format_sumstats <- function(path,
                 sumstats_dt = sumstats_return$sumstats_dt,
                 path = path
             )
-        
+
         #### Check 15: Keep only rows which have the number
         # of columns expected ####
         sumstats_return <-
@@ -726,7 +730,7 @@ format_sumstats <- function(path,
             )
         # update values
         log_files <- sumstats_return$log_files
-        
+
         #### Check 16: check for duplicated columns ####
         # The formatting process can (rarely) result in duplicated columns,
         # i.e. CHR, if CHR:BP is expanded and
@@ -735,7 +739,7 @@ format_sumstats <- function(path,
             sumstats_dt = sumstats_return$sumstats_dt,
             path = path
         )
-        
+
         #### Check 17: check for small P-values (<=5e-324) ####
         sumstats_return <-
             check_small_p_val(
@@ -743,16 +747,16 @@ format_sumstats <- function(path,
                 convert_small_p = convert_small_p,
                 imputation_ind = imputation_ind
             )
-        
+
         #### Check 17.5: check for large (>1) and neg (<0)  p-values ####
         sumstats_return <-
             check_range_p_val(
                 sumstats_dt = sumstats_return$sumstats_dt,
-                convert_large_p = convert_large_p, 
+                convert_large_p = convert_large_p,
                 convert_neg_p = convert_neg_p,
                 imputation_ind = imputation_ind
             )
-        
+
         #### Check 18: check is N column not all integers,
         # if so round it up ####
         sumstats_return <-
@@ -762,7 +766,7 @@ format_sumstats <- function(path,
                 convert_n_int = convert_n_int,
                 imputation_ind = imputation_ind
             )
-        
+
         #### Check 19: check all rows have SNPs starting with SNP or rs, ####
         #### drop those that don't ####.
         sumstats_return <- check_row_snp(
@@ -776,7 +780,7 @@ format_sumstats <- function(path,
         )
         # update values
         log_files <- sumstats_return$log_files
-        
+
         ### Check 37: Drop Indels ###
         sumstats_return <- check_drop_indels(
           sumstats_dt = sumstats_return$sumstats_dt,
@@ -787,10 +791,10 @@ format_sumstats <- function(path,
           tabix_index = tabix_index,
           nThread = nThread,
           log_files = log_files)
-        
+
         # update values
         log_files <- sumstats_return$log_files
-        
+
         #### Check 20: check all rows for duplicated SNPs,
         # remove any that are ####
         sumstats_return <- check_dup_snp(
@@ -824,11 +828,11 @@ format_sumstats <- function(path,
         )
         # update values
         log_files <- sumstats_return$log_files
-        
+
         #### Check 22: check for low INFO scores ####
         sumstats_return <-
             check_info_score(
-                sumstats_dt = sumstats_return$sumstats_dt, 
+                sumstats_dt = sumstats_return$sumstats_dt,
                 INFO_filter = INFO_filter,
                 log_folder_ind = log_folder_ind,
                 check_save_out = check_save_out,
@@ -838,7 +842,7 @@ format_sumstats <- function(path,
             )
         # update values
         log_files <- sumstats_return$log_files
-        
+
         #### Check 35: check for low FRQ scores ####
         sumstats_return <-
             check_frq(
@@ -853,7 +857,7 @@ format_sumstats <- function(path,
             )
         # update values
         log_files <- sumstats_return$log_files
-        
+
         #### Check 30: check standard error is positive ####
         sumstats_return <-
             check_pos_se(
@@ -870,7 +874,7 @@ format_sumstats <- function(path,
             )
         # update values
         log_files <- sumstats_return$log_files
-        
+
         #### Check 31: check effect columns are not 0 ####
         sumstats_return <-
             check_effect_columns_nonzero(
@@ -885,7 +889,7 @@ format_sumstats <- function(path,
             )
         # update values
         log_files <- sumstats_return$log_files
-        
+
         #### Check 23: check for N > X std dev above mean ####
         sumstats_return <- check_n_num(
             sumstats_dt = sumstats_return$sumstats_dt,
@@ -900,22 +904,20 @@ format_sumstats <- function(path,
         )
         # update values
         log_files <- sumstats_return$log_files
-        
-        #### Check 24: check that no snps are on specific chromosomes ####
+
+        #### Check 24: standardize the CHR column ####
         sumstats_return <- check_chr(
-            sumstats_dt = sumstats_return$sumstats_dt,
-            path = path,
-            rmv_chr = rmv_chr,
-            rmv_chrPrefix = rmv_chrPrefix,
-            log_folder_ind = log_folder_ind,
-            check_save_out = check_save_out,
-            tabix_index = tabix_index,
-            nThread = nThread,
-            log_files = log_files
+          sumstats_dt = sumstats_return$sumstats_dt,
+          log_files = log_files,
+          check_save_out = check_save_out,
+          rmv_chr = rmv_chr,
+          nThread = nThread,
+          tabix_index = tabix_index,
+          log_folder_ind = log_folder_ind
         )
         # update values
         log_files <- sumstats_return$log_files
-        
+
         #### Check 26: check that all snps are not strand ambiguous ####
         sumstats_return <- check_strand_ambiguous(
             sumstats_dt =
@@ -932,7 +934,7 @@ format_sumstats <- function(path,
         )
         # update values
         log_files <- sumstats_return$log_files
-        
+
         #### Check 27: check for non-biallelic SNPS ####
         sumstats_return <- check_bi_allelic(
             sumstats_dt =
@@ -952,7 +954,7 @@ format_sumstats <- function(path,
         log_files <- sumstats_return$log_files
         rsids <- sumstats_return$rsids # update rsids
         sumstats_return$rsids <- NULL
-        
+
         #### Check 28: Compute Z-score ####
         sumstats_return <- check_zscore(
             sumstats_dt =
@@ -962,7 +964,7 @@ format_sumstats <- function(path,
             imputation_ind = imputation_ind,
             mapping_file = mapping_file
         )
-        
+
         #### Check 32: Compute N ####
         sumstats_return <- compute_nsize(
             sumstats_dt =
@@ -970,15 +972,15 @@ format_sumstats <- function(path,
             compute_n = compute_n,
             imputation_ind = imputation_ind
         )
-        
+
         #### Check 36: Ensure FRQ is MAF ####
         sumstats_return$sumstats_dt <- check_frq_maf(
             sumstats_dt =
                 sumstats_return$sumstats_dt,
             frq_is_maf = frq_is_maf
         )
-        
-        
+
+
         #### Check 34: Perform liftover ####
         sumstats_return$sumstats_dt <- liftover(
             sumstats_dt =
@@ -991,7 +993,7 @@ format_sumstats <- function(path,
         #update ref genome of data
         if(!is.null(convert_ref_genome))
           ref_genome <- convert_ref_genome
-        
+
         #### Check 29: Sort rows by genomic coordinates ####
         sumstats_return$sumstats_dt <- sort_coords(
             sumstats_dt =
@@ -999,7 +1001,11 @@ format_sumstats <- function(path,
             sort_coordinates =
                 sort_coordinates
         )
-        
+
+        ### Check 39: Ensure CHR follows the requested style ###
+        CHR <- NULL
+        sumstats_return$sumstats_dt[, CHR := GenomeInfoDb::mapSeqlevels(CHR, style = chr_style)]
+
         #### WRITE data.table TO PATH ####
         check_save_out$save_path <- write_sumstats(
             sumstats_dt = sumstats_return$sumstats_dt,
@@ -1013,7 +1019,7 @@ format_sumstats <- function(path,
             return_path = TRUE
         )
         rm(rsids) # free up memory
-        
+
         #### Report summary ####
         report_summary(
             sumstats_dt = sumstats_return$sumstats_dt,
@@ -1025,20 +1031,20 @@ format_sumstats <- function(path,
     message(
         "Done munging in ",
         round(difftime(t2, t1, units = "mins"), 3), " minutes."
-    ) 
-    
+    )
+
     #### Preview sumstats ####
     preview_sumstats(
         save_path = check_save_out$save_path,
         nrows = 5L
     )
-    
+
     # if user wanted log of messages remember to unsink at end
     if (log_mungesumstats_msgs) {
         sink(NULL, type = "message")
         sink(NULL, type = "output")
     }
-    
+
     if (return_data) {
         message("Returning data directly.")
         #### Load data into memory when a pre-existing file is being used
@@ -1056,7 +1062,7 @@ format_sumstats <- function(path,
         )
         # if user wants log files return a list
         if (log_folder_ind || log_mungesumstats_msgs) {
-            return(list("sumstats" = out, 
+            return(list("sumstats" = out,
                         "log_files" = log_files))
         }
         return(out)

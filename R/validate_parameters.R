@@ -18,6 +18,7 @@ validate_parameters <- function(path,
                                 effect_columns_nonzero,
                                 N_std,
                                 N_dropNA,
+                                chr_style,
                                 rmv_chr,
                                 on_ref_genome,
                                 strand_ambig_filter,
@@ -43,7 +44,7 @@ validate_parameters <- function(path,
                                 mapping_file,
                                 tabix_index,
                                 chain_source) {
-    # Checking if the file exists should happen first - 
+    # Checking if the file exists should happen first -
     # can pass dt/df of sumstats
     pth_msg <- paste0(
         "Path to GWAS sumstats is not valid, pass a file path or a ",
@@ -80,7 +81,7 @@ validate_parameters <- function(path,
       "The chosen chain file source to convert to must be one of ",
       "Ensembl or UCSC ('ensembl','ucsc')"
     )
-    if(length(chain_source)>1 || !tolower(chain_source) %in% c("ucsc", 
+    if(length(chain_source)>1 || !tolower(chain_source) %in% c("ucsc",
                                                                "ensembl")){
       stop(chain_msg)
     }
@@ -174,13 +175,13 @@ validate_parameters <- function(path,
           stop(GRCH38_msg2)
         }
         #dbSNP
-        if (as.integer(dbSNP)==144 && 
+        if (as.integer(dbSNP)==144 &&
             !requireNamespace("SNPlocs.Hsapiens.dbSNP144.GRCh37",
             quietly = TRUE
         )) {
             stop(GRCH37_msg1)
         }
-        if (as.integer(dbSNP)==155 && 
+        if (as.integer(dbSNP)==155 &&
             !requireNamespace("SNPlocs.Hsapiens.dbSNP155.GRCh37",
                             quietly = TRUE
         )) {
@@ -265,14 +266,14 @@ validate_parameters <- function(path,
         stop("`ldsc_format` has been deprecated. Use `save_format='LDSC'`.")
     }
     #save_format
-    if(!is.null(save_format) && 
+    if(!is.null(save_format) &&
        !tolower(save_format) %in% c("ldsc","opengwas")){
       stop("save_format must be NULL or one of LDSC or openGWAS")
     }
     opengws_err <- paste0("IEU OpenGWAS format only available when saving as ",
                           "VCF. Set `write_vcf=True` and rerun ",
                           "`format_sumstats()`")
-    if(!is.null(save_format) && 
+    if(!is.null(save_format) &&
         tolower(save_format)=="opengwas" & isFALSE(write_vcf))
       stop(opengws_err)
     if (!is.logical(pos_se)) {
@@ -281,7 +282,7 @@ validate_parameters <- function(path,
     if (!is.logical(effect_columns_nonzero)) {
         stop("effect_columns_nonzero must be either TRUE or FALSE")
     }
-    if (!is.logical(effect_columns_nonzero)) {
+    if (!is.logical(imputation_ind)) {
         stop("imputation_ind must be either TRUE or FALSE")
     }
     if (!is.logical(log_folder_ind)) {
@@ -308,7 +309,7 @@ validate_parameters <- function(path,
                               "passing to MungeSumstats.")
       stop(compute_n_msg)
     }
-    
+
     if (!is.numeric(compute_n) || compute_n < 0) {
         if (is.character(compute_n)) {
             methods <- c("ldsc", "giant", "metal", "sum")
@@ -324,17 +325,20 @@ validate_parameters <- function(path,
             stop("compute_n must be 0 or an integer value")
         }
     }
-    # Check rmv_chr choices all valid chromosomes
+
+    # Check that chr_style is a valid choice
+    styles <- c("NCBI", "UCSC", "dbSNP", "Ensembl")
+    if (!(chr_style %in% styles)) {
+      stop("chr_style must be one of ", paste(styles, collapse = ", "))
+    }
+    # Check that rmv_chr choices are all valid chromosomes
+    # according to the Ensembl/NCBI naming style
     chrs <- c(as.character(seq_len(22)), "X", "Y", "MT")
-    chr_msg <-
-        paste0(
-            "rmv_chr choices must be one/or more of: \n",
-            paste(chrs, collapse = ", ")
-        )
     if (!is.null(rmv_chr)) {
-        if (!all(rmv_chr %in% chrs)) {
-            stop(chr_msg)
-        }
+      if (!all(rmv_chr %in% chrs)) {
+        stop("rmv_chr choices must be one or more of: \n",
+             paste(chrs, collapse = ", "))
+      }
     }
     # check return_format
     rf_msg <- paste0(
@@ -379,9 +383,9 @@ validate_parameters <- function(path,
             mapping_file[, toupper(colnames(mapping_file)) == "CORRECTED"])) {
         stop(mapping_file_msg)
     }
-    
-    if(tabix_index && 
-       any(!requireNamespace("Rsamtools", quietly = TRUE), 
+
+    if(tabix_index &&
+       any(!requireNamespace("Rsamtools", quietly = TRUE),
            !requireNamespace("MatrixGenerics", quietly = TRUE)) ){
         pkgs <- c("Rsamtools","MatrixGenerics")
         missing_pkgs <- pkgs[!pkgs %in% rownames(utils::installed.packages())]
