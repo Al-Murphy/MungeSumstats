@@ -119,6 +119,9 @@
 #'   Ensembl styles both code chromosomes as `1-22, X, Y, MT`; the UCSC style is
 #'   `chr1-chr22, chrX, chrY, chrM`; and the dbSNP style is
 #'   `ch1-ch22, chX, chY, chMT`. Default is Ensembl.
+#' @param rmv_chrPrefix Is now deprecated, do. not use. Use chr_style instead -
+#' chr_style = 'Ensembl' will give the same result as rmv_chrPrefix=TRUE used to
+#' give.
 #' @param rmv_chr Chromosomes to exclude from the formatted summary statistics
 #'   file. Use NULL if no filtering is necessary. Default is `c("X", "Y", "MT")`
 #'   which removes all non-autosomal SNPs.
@@ -267,7 +270,10 @@ format_sumstats <- function(path,
                             log_folder = tempdir(),
                             imputation_ind = FALSE,
                             force_new = FALSE,
-                            mapping_file = sumstatsColHeaders) {
+                            mapping_file = sumstatsColHeaders,
+                            #deprecated parameters
+                            rmv_chrPrefix = NULL
+                            ) {
     #### Setup multi-threading ####
     data.table::setDTthreads(threads = nThread)
     #### Setup empty variables ####
@@ -346,7 +352,9 @@ format_sumstats <- function(path,
             log_mungesumstats_msgs = log_mungesumstats_msgs,
             mapping_file = mapping_file,
             tabix_index = tabix_index,
-            chain_source = chain_source
+            chain_source = chain_source,
+            #deprecated parameters
+            rmv_chrPrefix = rmv_chrPrefix
         )
 
         # save messages to file if user specified

@@ -143,6 +143,9 @@ statistics file ("NCBI", "UCSC", "dbSNP", or "Ensembl"). The NCBI and
 Ensembl styles both code chromosomes as \verb{1-22, X, Y, MT}; the UCSC style is
 \verb{chr1-chr22, chrX, chrY, chrM}; and the dbSNP style is
 \verb{ch1-ch22, chX, chY, chMT}. Default is Ensembl.}
+    \item{\code{rmv_chrPrefix}}{Is now deprecated, do. not use. Use chr_style instead -
+chr_style = 'Ensembl' will give the same result as rmv_chrPrefix=TRUE used to
+give.}
     \item{\code{rmv_chr}}{Chromosomes to exclude from the formatted summary statistics
 file. Use NULL if no filtering is necessary. Default is \code{c("X", "Y", "MT")}
 which removes all non-autosomal SNPs.}

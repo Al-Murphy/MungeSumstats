@@ -43,7 +43,9 @@ validate_parameters <- function(path,
                                 log_mungesumstats_msgs,
                                 mapping_file,
                                 tabix_index,
-                                chain_source) {
+                                chain_source,
+                                #deprecated parameters
+                                rmv_chrPrefix) {
     # Checking if the file exists should happen first -
     # can pass dt/df of sumstats
     pth_msg <- paste0(
@@ -395,4 +397,15 @@ validate_parameters <- function(path,
                   collapse = "\n"))
         stop(tbx_msg)
     }
+    
+    #deprecated parameters
+    if (!is.null(rmv_chrPrefix)) { 
+      dep_msg <- paste0(
+        "The parameter rmv_chrPrefix is now deprecated, please use chr_style ",
+        "instead.\nThe default of rmv_chrPrefix = True will give the same ",
+        "result as using chr_style = 'Ensembl'."
+        )
+      stop(dep_msg)
+    }
+    rmv_chrPrefix = rmv_chrPrefix
 }

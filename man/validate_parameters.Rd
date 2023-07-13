@@ -45,7 +45,8 @@ validate_parameters(
   log_mungesumstats_msgs,
   mapping_file,
   tabix_index,
-  chain_source
+  chain_source,
+  rmv_chrPrefix
 )
 }
 \arguments{
@@ -219,6 +220,10 @@ data(sumstatsColHeaders) for default mapping and necessary format.}
 \item{chain_source}{source of the chain file to use in liftover, if converting
 genome build ("ucsc" or "ensembl"). Note that the UCSC chain files require a
 license for commercial use. The Ensembl chain is used by default ("ensembl").}
+
+\item{rmv_chrPrefix}{Is now deprecated, do. not use. Use chr_style instead -
+chr_style = 'Ensembl' will give the same result as rmv_chrPrefix=TRUE used to
+give.}
 }
 \value{
 No return

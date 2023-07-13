@@ -57,7 +57,8 @@ format_sumstats(
   log_folder = tempdir(),
   imputation_ind = FALSE,
   force_new = FALSE,
-  mapping_file = sumstatsColHeaders
+  mapping_file = sumstatsColHeaders,
+  rmv_chrPrefix = NULL
 )
 }
 \arguments{
@@ -288,6 +289,10 @@ However, if a column header that is in youf file is missing of the mapping we
 give is incorrect you can supply your own mapping file. Must be a 2 column
 dataframe with column names "Uncorrected" and "Corrected". See
 data(sumstatsColHeaders) for default mapping and necessary format.}
+
+\item{rmv_chrPrefix}{Is now deprecated, do. not use. Use chr_style instead -
+chr_style = 'Ensembl' will give the same result as rmv_chrPrefix=TRUE used to
+give.}
 }
 \value{
 The address for the modified sumstats file or the actual data
