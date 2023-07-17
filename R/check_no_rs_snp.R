@@ -264,14 +264,14 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                     miss_rs_chr_bp[, "SNP"]), ]
                 # remove temp columns
                 miss_rs_chr_bp[, (format) := NULL]
-                # get columns in same order as rest of data table
-                data.table::setcolorder(miss_rs_chr_bp, col_headers)
                 # join with full dataset
                 # If IMPUTATION column added add it to other DT
                 if (imputation_ind &&
                     !"IMPUTATION_SNP" %in% names(miss_rs_chr_bp)) {
                     miss_rs_chr_bp[, IMPUTATION_SNP := NA]
                 }
+                # get columns in same order as rest of data table
+                data.table::setcolorder(miss_rs_chr_bp, col_headers)
                 sumstats_dt <- data.table::rbindlist(
                     list(sumstats_dt, miss_rs_chr_bp))
             }    

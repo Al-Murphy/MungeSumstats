@@ -1,3 +1,10 @@
+## CHANGES IN VERSION 1.9.12
+
+### Bug fix
+* In `check_no_rs_snp` the order of operations had to be reversed to ensure all 
+values were present before sorting column headers when `imputation_ind=TRUE` and
+imputing rsIDs.
+
 ## CHANGES IN VERSION 1.9.11
 
 ### New features
