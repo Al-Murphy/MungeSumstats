@@ -1,3 +1,8 @@
+## CHANGES IN VERSION 1.9.13
+
+### Bug fix
+* In `check_bp_range` ensure that the BP column is numeric.
+
 ## CHANGES IN VERSION 1.9.12
 
 ### Bug fix

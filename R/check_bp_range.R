@@ -27,10 +27,15 @@ check_bp_range <- function(sumstats_dt, path, ref_genome,log_folder_ind,
         genome_info <-
           cbind(data.table::data.table("CHR"=seqnames(genome_info)),
                 data.table::as.data.table(genome_info))
-        #convwert CHR to char in sumstats (if it is an int)
+        #convert CHR to char in sumstats (if it is an int)
         sumstats_dt[,CHR:=as.character(CHR)]
         #add chr len to sumstats
         sumstats_dt[genome_info,chr_max:=seqlengths,on="CHR"]
+        #ensure BP numeric
+        if(!is.integer(sumstats_dt$BP)){
+          message("Coercing BP column to numeric.")
+          sumstats_dt[,BP:=as.numeric(BP)]
+        }  
         #now check if BP value is too large/less than 0
         #s.na(chr_max) in case chr formatting not found
         bad_bp <- sumstats_dt[!is.na(chr_max) & (is.na(BP)|BP<=0 |BP>chr_max),]
