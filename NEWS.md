@@ -1,3 +1,8 @@
+## CHANGES IN VERSION 1.9.14
+
+### Bug fix
+* Fix reporting of genome-wide sign variants before formatting.
+
 ## CHANGES IN VERSION 1.9.13
 
 ### Bug fix

@@ -34,6 +34,9 @@ report_summary <- function(sumstats_dt,
         NULL
     }
     P_msg <- if ("P" %in% colnames(sumstats_dt)) {
+        if (!is.numeric(sumstats_dt$P)){
+          sumstats_dt[,P:=as.numeric(P)]
+        }
         paste0("\n   - ", 
                formatC(nrow(subset(sumstats_dt, P < 5e-8)),
                        big.mark = ",", format = "fg"),
