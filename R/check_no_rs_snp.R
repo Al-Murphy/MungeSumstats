@@ -266,7 +266,8 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                 miss_rs_chr_bp[, (format) := NULL]
                 # join with full dataset
                 # If IMPUTATION column added add it to other DT
-                if (imputation_ind &&
+                if (imputation_ind && 
+                    "IMPUTATION_SNP" %in% names(sumstats_dt) &&
                     !"IMPUTATION_SNP" %in% names(miss_rs_chr_bp)) {
                     miss_rs_chr_bp[, IMPUTATION_SNP := NA]
                 }

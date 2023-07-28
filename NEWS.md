@@ -1,3 +1,11 @@
+## CHANGES IN VERSION 1.9.15
+
+### Bug fix
+* Fix for imputation column when imputing RS ID from CHR:BP. Avoids crash and 
+ensures correct identification of imputed SNPs.
+* Avoid running compute_nsize function when no imputation is wanted by user - 
+also avoids message output in this situation.
+
 ## CHANGES IN VERSION 1.9.14
 
 ### Bug fix
