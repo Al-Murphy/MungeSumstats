@@ -369,6 +369,10 @@ conducted by *MungeSumstats* are:
     Z-score columns (e.g. Beta). Default is TRUE.
 -   **bi_allelic_filter** Binary, should non-biallelic SNPs be removed.
     Default is TRUE
+-   **flip_frq_as_biallelic** Binary, Should non-bi-allelic SNPs frequency 
+    values be flipped as 1-p despite there being other alternative alleles? 
+    Default is FALSE but if set to TRUE, this allows non-bi-allelic SNPs to be 
+    kept despite needing flipping.    
 -   **snp_ids_are_rs_ids** Binary, should the SNP IDs inputted be
     inferred as RS IDs or some arbitrary ID. Default is TRUE.\
 -   **remove_multi_rs_snp** Binary Sometimes summary statistics can have

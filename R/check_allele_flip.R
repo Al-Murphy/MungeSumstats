@@ -31,6 +31,7 @@ check_allele_flip <- function(sumstats_dt, path,
                               allele_flip_z,
                               allele_flip_frq,
                               bi_allelic_filter,
+                              flip_frq_as_biallelic,
                               imputation_ind,
                               log_folder_ind,
                               check_save_out,
@@ -158,7 +159,7 @@ check_allele_flip <- function(sumstats_dt, path,
             sumstats_dt[match_type == FALSE, A1 := tmp]
             sumstats_dt[, tmp := NULL]
 
-            # flip effect column(s) - BETA, OR, z, log_odds, SIGNED_SUMSTAT, FRQ
+            # flip effect column(s) - BETA, OR, Z, log_odds, SIGNED_SUMSTAT, FRQ
             effect_columns <- c("BETA", "OR", "LOG_ODDS", "SIGNED_SUMSTAT")
             if (allele_flip_z) {
                 effect_columns <- c(effect_columns, "Z")
@@ -178,12 +179,32 @@ check_allele_flip <- function(sumstats_dt, path,
                 "bi_allelic_filter to TRUE so\nnon-bi-allelic SNPs are",
                 " removed. Otherwise, set allele_flip_frq to FALSE to ",
                 "not flip the FRQ column but note\nthis could lead to ",
-                "incorrect FRQ values."
+                "incorrect FRQ values.\nA new option added is to flip ",
+                "non-bi-allelic SNPs as if they were bi-allelic (1-FRQ), ",
+                "to do this set\nflip_frq_as_biallelic to TRUE but note ",
+                "these values will not be exact down to the missing ",
+                "frequencies of the other\nalternative allele(s)."
             )
             if (nrow(sumstats_dt[match_type == FALSE, ]) > 0 &&
                 "FRQ" %in% effect_columns &&
-                !bi_allelic_filter) {
+                !bi_allelic_filter && !flip_frq_as_biallelic) {
                 stop(stp_msg)
+            }
+            #if set flip_frq_as_biallelic = TRUE, let them know
+            if (nrow(sumstats_dt[match_type == FALSE, ]) > 0 &&
+                "FRQ" %in% effect_columns &&
+                !bi_allelic_filter && flip_frq_as_biallelic) {
+              print_msg <- paste0(
+                "Note: You have set flip_frq_as_biallelic to TRUE meaning of ",
+                "the ",
+                formatC(nrow(sumstats_dt[match_type == FALSE, ]),
+                        big.mark = ","),
+                " SNPs to be flipped, ",
+                "any non-bi-allelic SNPs\nwill have their frequencies flipped ",
+                "as (1-FRQ) essentially ignoring the frequencies of any other ",
+                "alternative alleles."
+              )
+              message(print_msg)
             }
             for (eff_i in effect_columns) { # set updates quicker for DT
                 # conversion done in case, VCF beta column may not be numeric

@@ -29,6 +29,7 @@ validate_parameters(
   allele_flip_z,
   allele_flip_frq,
   bi_allelic_filter,
+  flip_frq_as_biallelic,
   snp_ids_are_rs_ids,
   remove_multi_rs_snp,
   frq_is_maf,
@@ -145,6 +146,11 @@ along with effect and z-score columns like Beta? Default TRUE.}
 
 \item{bi_allelic_filter}{Binary Should non-biallelic SNPs be removed. Default
 is TRUE.}
+
+\item{flip_frq_as_biallelic}{Binary Should non-bi-allelic SNPs frequency
+values be flipped as 1-p despite there being other alternative alleles?
+Default is FALSE but if set to TRUE, this allows non-bi-allelic SNPs to be
+kept despite needing flipping.}
 
 \item{snp_ids_are_rs_ids}{Binary Should the supplied SNP ID's be assumed to
 be RSIDs. If not, imputation using the SNP ID for other columns like

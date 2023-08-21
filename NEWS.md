@@ -1,3 +1,12 @@
+## CHANGES IN VERSION 1.9.16
+
+### New features
+* flip_frq_as_biallelic parameter added enabling frequencies of non-bi-allelic
+SNPs to be flipped as if they were bi-allelic (1 - frequency) i.e. ignoring the
+frequencies of other alternative alleles (assuming these will be negligible). 
+Note this will not be done as default as it is not fully correct but may be 
+useful for some users.
+
 ## CHANGES IN VERSION 1.9.15
 
 ### Bug fix

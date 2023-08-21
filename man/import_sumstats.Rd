@@ -164,6 +164,10 @@ not the P-value and so will be flipped i.e. default TRUE.}
 along with effect and z-score columns like Beta? Default TRUE.}
     \item{\code{bi_allelic_filter}}{Binary Should non-biallelic SNPs be removed. Default
 is TRUE.}
+    \item{\code{flip_frq_as_biallelic}}{Binary Should non-bi-allelic SNPs frequency
+values be flipped as 1-p despite there being other alternative alleles?
+Default is FALSE but if set to TRUE, this allows non-bi-allelic SNPs to be
+kept despite needing flipping.}
     \item{\code{snp_ids_are_rs_ids}}{Binary Should the supplied SNP ID's be assumed to
 be RSIDs. If not, imputation using the SNP ID for other columns like
 base-pair position or chromosome will not be possible. If set to FALSE, the

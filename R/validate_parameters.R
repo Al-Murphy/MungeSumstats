@@ -27,6 +27,7 @@ validate_parameters <- function(path,
                                 allele_flip_z,
                                 allele_flip_frq,
                                 bi_allelic_filter,
+                                flip_frq_as_biallelic,
                                 snp_ids_are_rs_ids,
                                 remove_multi_rs_snp,
                                 frq_is_maf,
@@ -241,6 +242,9 @@ validate_parameters <- function(path,
     }
     if (!is.logical(bi_allelic_filter)) {
         stop("bi_allelic_filter must be either TRUE or FALSE")
+    }
+    if (!is.logical(flip_frq_as_biallelic)) {
+      stop("flip_frq_as_biallelic must be either TRUE or FALSE")
     }
     if (!is.logical(snp_ids_are_rs_ids)) {
         stop("snp_ids_are_rs_ids must be either TRUE or FALSE")
