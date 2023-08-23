@@ -1,3 +1,9 @@
+## CHANGES IN VERSION 1.9.17
+
+### Bug fix
+* Cases checking ref genome where there are no indels would sometimes cause an 
+error when joining. This resolved this issue.
+
 ## CHANGES IN VERSION 1.9.16
 
 ### New features
