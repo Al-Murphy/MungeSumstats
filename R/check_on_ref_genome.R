@@ -51,26 +51,26 @@ check_on_ref_genome <-function(sumstats_dt,
             #if indels in dataset, don't check they are present on the ref 
             # genome as they won't be there
             if(indels){
-                    data.table::setkey(sumstats_dt, SNP)
-                    #make copy, check if not pres in ref first
-                    indel_dt <-
-                            data.table::copy(sumstats_dt[!unique(rsids$SNP),])
-                    #also check >1 character in A1 A2, use this to define indel
-                    indel_dt <- indel_dt[(nchar(A1)>1 | nchar(A2)>1),]
-                    if(nrow(indel_dt)>0){
-                            #remove indels from sumstats for now
-                            sumstats_dt <- sumstats_dt[!indel_dt$SNP, ]
-                            msg <- paste0("Found ",
-                                          formatC(nrow(indel_dt),big.mark = ","),
-                                          " Indels. These won't",
-                                          " be checked against the reference ",
-                                          "genome as it does not contain ",
-                                          "Indels.\nWARNING If your sumstat ",
-                                          "doesn't contain Indels, set the ",
-                                          "indel param to FALSE & rerun ",
-                                          "MungeSumstats::format_sumstats()")
-                            message(msg)
-                    }
+                data.table::setkey(sumstats_dt, SNP)
+                #make copy, check if not pres in ref first
+                indel_dt <-
+                        data.table::copy(sumstats_dt[!unique(rsids$SNP),])
+                #also check >1 character in A1 A2, use this to define indel
+                indel_dt <- indel_dt[(nchar(A1)>1 | nchar(A2)>1),]
+                if(nrow(indel_dt)>0){
+                        #remove indels from sumstats for now
+                        sumstats_dt <- sumstats_dt[!indel_dt$SNP, ]
+                        msg <- paste0("Found ",
+                                        formatC(nrow(indel_dt),big.mark = ","),
+                                        " Indels. These won't",
+                                        " be checked against the reference ",
+                                        "genome as it does not contain ",
+                                        "Indels.\nWARNING If your sumstat ",
+                                        "doesn't contain Indels, set the ",
+                                        "indel param to FALSE & rerun ",
+                                        "MungeSumstats::format_sumstats()")
+                        message(msg)
+                }
             }else{
                     # join using SNP
                     data.table::setkey(sumstats_dt, SNP)
@@ -115,8 +115,10 @@ check_on_ref_genome <-function(sumstats_dt,
                     if (imputation_ind && 
                         !"IMPUTATION_SNP" %in% names(sumstats_dt)) {
                         sumstats_dt[, IMPUTATION_SNP := NA]
-                        #update for indels so can rbind later
-                        indel_dt[, IMPUTATION_SNP := NA]
+                        # update for indels so can rbind later
+                        if(indels){
+                            indel_dt[, IMPUTATION_SNP := NA]
+                        }
                     }
                     sumstats_dt <-
                         data.table::rbindlist(
