@@ -14,7 +14,7 @@
 #' @return list containing sumstats_dt, the modified summary statistics data
 #' table object
 #' @export
-#' @importFrom data.table setnames
+#' @importFrom data.table setnames rbindlist
 #' @examples
 #' sumstats_dt <- data.table::fread(system.file("extdata", "eduAttainOkbay.txt",
 #'                                              package = "MungeSumstats"))
@@ -41,6 +41,10 @@ standardise_header <- standardise_sumstats_column_headers_crossplatform <-
         # Go through each and get correct spelling
         # allow for differing cases column names
         colnames(mapping_file) <- toupper(colnames(mapping_file))
+        #get names for allele mared eff/frq columns
+        eff_frq_allele_matches <- get_eff_frq_allele_combns()
+        mapping_file <- rbind(mapping_file,
+                              as.data.frame(eff_frq_allele_matches))
         for (headerI in seq_len(nrow(mapping_file))) {
             un <- mapping_file[headerI, "UNCORRECTED"]
             cr <- mapping_file[headerI, "CORRECTED"]

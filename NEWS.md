@@ -1,3 +1,44 @@
+## CHANGES IN VERSION 1.9.18
+
+### Bug fix
+* Fixed column header mappings
+  * Made all uncorrected header names uppercase and removed duplicates
+  * "TOTALSAMPLESIZE" now maps to "N" instead of "NSTUDY"
+  * "MAJORALLELE", "MAJOR_ALLELE", "MAJOR-ALLELE", and "MAJOR ALLELE" now map to 
+    "A1" instead of "A2"
+  * Removed the mappings for "OR-A1", "OR.A1", "OR_A1", and "BETA1" because MSS 
+    assumes that A2 is the effect allele
+  * Removed mappings for "A1FREQ", "A1FRQ", "AF1", "FREQ.A1.1000G.EUR", 
+    "FREQ.A1.ESP.EUR", "FREQ.ALLELE1.HAPMAPCEU", "FREQ1", "FREQ1.HAPMAP", and 
+    "FRQ_A1" because MSS defines "FRQ" to be the allele frequency of A2
+  * Removed mappings for "CHR36", "BASE_GRCH36", "POSITION36", "POSGRCH36", 
+    "BASEGRCH36", "POS36", "POS GRCH36", "POS.GRCH36", "POS-GRCH36", and 
+    "POS_GRCH36" 
+    because MSS does not support the GRCh36 genome build
+  * Removed the ambiguous mapping "NMISS" -> "N" because "NMISS" can refer to 
+    the number of samples with missing data
+  * Removed the ambiguous mapping "WEIGHT" -> "N" because "WEIGHT" can refer to 
+    coefficient weights
+* Fixed inference of allele where ambiguous (A1, A2) naming used (see 
+  infer_effect_column.R for code) but in short:
+  * Three checks now made to infer which allele the effect/frequency information
+    relates to. See infer_effect_column.R for further details.
+  * See get_eff_frq_allele_combns.R for how effect/frequency columns that infer 
+    the allele are captured in the mapping file
+
+### New features
+* New column header mappings:
+  * "VARIANT_ID" and "RSIDS" --> "SNP"
+  * "P_BOLT_LMM" --> "P"
+  * "NCASES" --> "N_CAS"
+  * "N_EFFECTIVE", "N_INFORMATIVE", and "TOTAL_N" --> "N"
+  * "HET_P" --> "HETPVAL"
+  * "HET_ISQ" --> "HETISQT"
+  * "ALL_AF" --> "FRQ"
+  * "DIRECT" --> "DIRECTION"
+  * "ALT_EFFSIZE" --> "BETA"
+  * "INFORMATIVE_ALT_AC" --> "AC"
+
 ## CHANGES IN VERSION 1.9.17
 
 ### Bug fix

@@ -12,7 +12,9 @@ get_genome_build(
   standardise_headers = TRUE,
   mapping_file = sumstatsColHeaders,
   dbSNP = 155,
-  header_only = FALSE
+  header_only = FALSE,
+  allele_match_ref = FALSE,
+  ref_genome = NULL
 )
 }
 \arguments{
@@ -41,6 +43,13 @@ dataframe with column names "Uncorrected" and "Corrected". See
 only read in the first N rows where N=\code{sampled_snps}.
 This should help speed up cases where you have to read in \code{sumstats}
 from disk each time.}
+
+\item{allele_match_ref}{Instead of returning the genome_build this will
+return the propotion of matches to each genome build for each allele (A1,A2).}
+
+\item{ref_genome}{name of the reference genome used for the GWAS ("GRCh37" or
+"GRCh38"). Argument is case-insensitive. Default is NULL which infers the
+reference genome from the data.}
 }
 \value{
 ref_genome the genome build of the data

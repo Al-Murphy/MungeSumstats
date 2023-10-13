@@ -445,6 +445,17 @@ format_sumstats <- function(path,
           mapping_file <- rbind(mapping_file,es_cols)
         }
 
+        #### Check 2:Check for effect direction ####
+        sumstats_return <-
+          infer_effect_column(
+            sumstats_dt = sumstats_return$sumstats_dt,
+            mapping_file = mapping_file,
+            dbSNP = dbSNP,
+            nThread = nThread,
+            ref_genome = ref_genome,
+            on_ref_genome = on_ref_genome
+          )
+        
         #### Check 3:Standardise headers for all OS ####
         sumstats_return <-
             standardise_sumstats_column_headers_crossplatform(
