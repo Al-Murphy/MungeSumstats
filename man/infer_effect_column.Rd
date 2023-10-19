@@ -12,6 +12,7 @@ infer_effect_column(
   nThread = nThread,
   ref_genome = NULL,
   on_ref_genome = TRUE,
+  infer_eff_direction = TRUE,
   return_list = TRUE
 )
 }
@@ -39,6 +40,9 @@ reference genome from the data.}
 
 \item{on_ref_genome}{Binary Should a check take place that all SNPs are on
 the reference genome by SNP ID. Default is TRUE.}
+
+\item{infer_eff_direction}{Binary Should a check take place to ensure the
+alleles match the effect direction? Default is TRUE.}
 
 \item{return_list}{Return the \code{sumstats_dt} within a named list
 (default: \code{TRUE}).}

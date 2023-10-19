@@ -127,6 +127,8 @@
 #'   which removes all non-autosomal SNPs.
 #' @param on_ref_genome Binary Should a check take place that all SNPs are on
 #' the reference genome by SNP ID. Default is TRUE.
+#' @param infer_eff_direction Binary Should a check take place to ensure the 
+#' alleles match the effect direction? Default is TRUE.
 #' @param strand_ambig_filter Binary Should SNPs with strand-ambiguous alleles
 #' be removed. Default is FALSE.
 #' @param allele_flip_check Binary Should the allele columns be checked against
@@ -247,6 +249,7 @@ format_sumstats <- function(path,
                             chr_style = "Ensembl",
                             rmv_chr = c("X", "Y", "MT"),
                             on_ref_genome = TRUE,
+                            infer_eff_direction = TRUE,
                             strand_ambig_filter = FALSE,
                             allele_flip_check = TRUE,
                             allele_flip_drop = TRUE,
@@ -335,6 +338,7 @@ format_sumstats <- function(path,
             chr_style = chr_style,
             rmv_chr = rmv_chr,
             on_ref_genome = on_ref_genome,
+            infer_eff_direction = infer_eff_direction,
             strand_ambig_filter = strand_ambig_filter,
             allele_flip_check = allele_flip_check,
             allele_flip_drop = allele_flip_drop,
@@ -453,7 +457,8 @@ format_sumstats <- function(path,
             dbSNP = dbSNP,
             nThread = nThread,
             ref_genome = ref_genome,
-            on_ref_genome = on_ref_genome
+            on_ref_genome = on_ref_genome,
+            infer_eff_direction = infer_eff_direction
           )
         
         #### Check 3:Standardise headers for all OS ####

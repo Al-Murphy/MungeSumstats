@@ -1,3 +1,12 @@
+## CHANGES IN VERSION 1.9.19
+
+### New features
+* `infer_eff_direction` parameter added so user can decide whether to run the check
+
+### Bug fix
+* Typo in unit test for infer effect direction.
+* IEU GWAS unit tests updated to account for server outages.
+
 ## CHANGES IN VERSION 1.9.18
 
 ### Bug fix

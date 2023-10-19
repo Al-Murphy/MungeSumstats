@@ -36,6 +36,7 @@ test_that("Test that allele columns and effect columns flipped correctly", {
         org <- MungeSumstats::format_sumstats(file,
             ref_genome = "GRCh37",
             on_ref_genome = TRUE,
+            infer_eff_direction = FALSE,
             strand_ambig_filter = FALSE,
             bi_allelic_filter = TRUE,
             allele_flip_check = TRUE,
@@ -48,3 +49,7 @@ test_that("Test that allele columns and effect columns flipped correctly", {
         expect_equal((is_32bit_windows||!Sys.info()["sysname"]=="Linux"), TRUE)
     }
 })
+
+
+
+

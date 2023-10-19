@@ -21,6 +21,7 @@ validate_parameters <- function(path,
                                 chr_style,
                                 rmv_chr,
                                 on_ref_genome,
+                                infer_eff_direction,
                                 strand_ambig_filter,
                                 allele_flip_check,
                                 allele_flip_drop,
@@ -224,6 +225,9 @@ validate_parameters <- function(path,
     }
     if (!is.logical(on_ref_genome)) {
         stop("on_ref_genome must be either TRUE or FALSE")
+    }
+    if(!is.logical(infer_eff_direction)){
+      stop("infer_eff_direction must be either TRUE or FALSE")
     }
     if (!is.logical(strand_ambig_filter)) {
         stop("strand_ambig_filter must be either TRUE or FALSE")

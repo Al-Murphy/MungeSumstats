@@ -151,6 +151,8 @@ file. Use NULL if no filtering is necessary. Default is \code{c("X", "Y", "MT")}
 which removes all non-autosomal SNPs.}
     \item{\code{on_ref_genome}}{Binary Should a check take place that all SNPs are on
 the reference genome by SNP ID. Default is TRUE.}
+    \item{\code{infer_eff_direction}}{Binary Should a check take place to ensure the
+alleles match the effect direction? Default is TRUE.}
     \item{\code{strand_ambig_filter}}{Binary Should SNPs with strand-ambiguous alleles
 be removed. Default is FALSE.}
     \item{\code{allele_flip_check}}{Binary Should the allele columns be checked against

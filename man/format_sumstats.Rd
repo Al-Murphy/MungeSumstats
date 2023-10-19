@@ -30,6 +30,7 @@ format_sumstats(
   chr_style = "Ensembl",
   rmv_chr = c("X", "Y", "MT"),
   on_ref_genome = TRUE,
+  infer_eff_direction = TRUE,
   strand_ambig_filter = FALSE,
   allele_flip_check = TRUE,
   allele_flip_drop = TRUE,
@@ -179,6 +180,9 @@ which removes all non-autosomal SNPs.}
 
 \item{on_ref_genome}{Binary Should a check take place that all SNPs are on
 the reference genome by SNP ID. Default is TRUE.}
+
+\item{infer_eff_direction}{Binary Should a check take place to ensure the
+alleles match the effect direction? Default is TRUE.}
 
 \item{strand_ambig_filter}{Binary Should SNPs with strand-ambiguous alleles
 be removed. Default is FALSE.}

@@ -43,7 +43,7 @@ test_that("Test infer effect column function works", {
                                             dbSNP=144)
     
     # what if FRQ gives the direction
-    c_for <- MungeSumstats::format_sumstats(b, return_data = TRUE, 
+    c_for <- MungeSumstats::format_sumstats(c, return_data = TRUE, 
                                             #all just make MSS run faster
                                             ref_genome = 'GRCh37',
                                             on_ref_genome = FALSE,

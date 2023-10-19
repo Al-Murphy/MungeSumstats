@@ -23,6 +23,7 @@ validate_parameters(
   chr_style,
   rmv_chr,
   on_ref_genome,
+  infer_eff_direction,
   strand_ambig_filter,
   allele_flip_check,
   allele_flip_drop,
@@ -127,6 +128,9 @@ which removes all non-autosomal SNPs.}
 
 \item{on_ref_genome}{Binary Should a check take place that all SNPs are on
 the reference genome by SNP ID. Default is TRUE.}
+
+\item{infer_eff_direction}{Binary Should a check take place to ensure the
+alleles match the effect direction? Default is TRUE.}
 
 \item{strand_ambig_filter}{Binary Should SNPs with strand-ambiguous alleles
 be removed. Default is FALSE.}
