@@ -1,3 +1,8 @@
+## CHANGES IN VERSION 1.11.1
+
+### Bug fix
+* Speed up unit test timing for bioc checks (predominately for linux tests)
+
 ## CHANGES IN VERSION 1.9.19
 
 ### New features
