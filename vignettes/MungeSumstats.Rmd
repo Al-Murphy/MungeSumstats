@@ -659,7 +659,7 @@ To do this, simply run the following:
 ```{r}
 eduAttainOkbayPth <- system.file("extdata", "eduAttainOkbay.txt",
                                   package = "MungeSumstats")
-formatted_path <- tempfile(fileext = "eduAttainOkbay_standardised.tsv.gz")
+formatted_path <- tempfile(fileext = "_eduAttainOkbay_standardised.tsv.gz")
 
 
 #### 1. Read in the data and standardise header names ####

@@ -4,14 +4,17 @@ name: rworkflows
     branches:
     - master
     - main
+    - devel
     - RELEASE_**
   pull_request:
     branches:
     - master
     - main
+    - devel
     - RELEASE_**
 jobs:
   rworkflows:
+    permissions: write-all
     runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
     container: ${{ matrix.config.cont }}
@@ -31,7 +34,7 @@ jobs:
         #   r: latest
         #   bioc: release
     steps:
-    - uses: neurogenomics/rworkflows@master
+    - uses: neurogenomics/rworkflows@dev
       with:
         run_bioccheck: ${{ true }}
         run_rcmdcheck: ${{ true }}
@@ -42,7 +45,7 @@ jobs:
         run_pkgdown: ${{ true }}
         has_runit: ${{ false }}
         has_latex: ${{ false }}
-        GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run_docker: ${{ true }}
         docker_user: almurphy
         docker_org: neurogenomicslab
