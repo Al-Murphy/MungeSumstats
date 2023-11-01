@@ -34,7 +34,7 @@ jobs:
         #   r: latest
         #   bioc: release
     steps:
-    - uses: neurogenomics/rworkflows@dev
+    - uses: neurogenomics/rworkflows@
       with:
         run_bioccheck: ${{ true }}
         run_rcmdcheck: ${{ true }}
@@ -53,3 +53,4 @@ jobs:
         runner_os: ${{ runner.os }}
         timeout: ${{ 2000 }}
         cache_version: cache-v1
+        free_disk_space: ${{ true }}
