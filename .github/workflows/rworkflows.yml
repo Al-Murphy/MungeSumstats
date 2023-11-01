@@ -26,7 +26,6 @@ jobs:
           r: devel
           bioc: devel
           cont: bioconductor/bioconductor_docker:devel
-          rspm: https://packagemanager.rstudio.com/cran/__linux__/focal/release
         - os: macOS-latest
           r: latest
           bioc: release
@@ -34,7 +33,7 @@ jobs:
         #   r: latest
         #   bioc: release
     steps:
-    - uses: neurogenomics/rworkflows@
+    - uses: neurogenomics/rworkflows
       with:
         run_bioccheck: ${{ true }}
         run_rcmdcheck: ${{ true }}
