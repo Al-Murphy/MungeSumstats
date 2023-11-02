@@ -1,37 +1,49 @@
 ---
-title: "Docker/Singularity Containers" 
-author: "<h4>Authors: <i>`r auths <- eval(parse(text = gsub('person','c',read.dcf('../DESCRIPTION', fields = 'Authors@R'))));paste(auths[names(auths)=='given'],auths[names(auths)=='family'], collapse = ', ')`</i></h4>" 
-date: "<h4>Vignette updated: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
+title: Docker/Singularity Containers
+author: '<h4>Authors: <i>`r auths <- eval(parse(text = gsub("person","c",read.dcf("../DESCRIPTION",
+  fields = "Authors@R"))));paste(auths[names(auths)=="given"],auths[names(auths)=="family"],
+  collapse = ", ")`</i></h4>'
+date: '<h4>Vignette updated: <i>`r format( Sys.Date(), "%b-%d-%Y")`</i></h4>'
 output:
   BiocStyle::html_document:
-    md_extensions: [ 
-      "-autolink_bare_uris" 
-    ]
-vignette: >
-    %\VignetteIndexEntry{docker} 
-    %\usepackage[utf8]{inputenc}
-    %\VignetteEngine{knitr::rmarkdown}
+    md_extensions: -autolink_bare_uris
+params:
+  cont:
+    value: ghcr.io/neurogenomics/MungeSumstats
+  docker_registry:
+    value: ghcr.io
+  docker_org:
+    value: neurogenomics
+vignette: |
+  %\VignetteIndexEntry{docker}
+  %\usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 
 ```{r setup, include=FALSE}
 #### Package name ####
-pkg <- read.dcf("../DESCRIPTION", fields = "Package")[1]
-library(pkg, character.only = TRUE)
+PKG <- read.dcf("../DESCRIPTION", fields = "Package")[1]
+library(PKG, character.only = TRUE)
 ## Docker containers must be lowercase
-pkg <- tolower(pkg)
+pkg <- tolower(PKG)
 #### Username of DockerHub account ####
-docker_user <- "neurogenomicslab"
+docker_org <- params$docker_org
+docker_registry <- params$docker_registry 
+cont <- params$cont 
+docker_url <- if(grepl("ghcr.io",docker_registry)){
+  paste("https://ghcr.io",cont,sep="/")
+} else {
+  paste("https://hub.docker.com/repository/docker",docker_org,pkg,sep="/")
+}
+
 ```
 
-# DockerHub 
+# Installation 
 
-`r pkg` is now available via 
-[DockerHub](https://hub.docker.com/repository/docker/`r docker_user`/`r pkg`) 
+`r PKG` is now available via [`r docker_registry`](`r docker_url`) 
 as a containerised environment with Rstudio and 
 all necessary dependencies pre-installed.
-
-## Installation 
 
 ## Method 1: via Docker
 
@@ -42,7 +54,7 @@ Create an image of the [Docker](https://www.docker.com/) container
 in command line:  
 
 ```
-docker pull `r docker_user`/`r pkg`
+docker pull `r cont`
 ```
 
 Once the image has been created, you can launch it with:  
@@ -54,8 +66,8 @@ docker run \
   -e PASSWORD="<your_password>" \
   -v ~/Desktop:/Desktop \
   -v /Volumes:/Volumes \
-  -p 8787:8787 \
-  `r docker_user`/`r pkg`
+  -p 8900:8787 \
+  `r cont`
 ```  
 
 ### NOTES
@@ -65,25 +77,26 @@ docker run \
 * The `-d` ensures the container will run in "detached" mode,
 which means it will persist even after you've closed your command line session.  
 * The username will be *"rstudio"* by default.  
-* Optionally, you can also install the [Docker Desktop](https://www.docker.com/products/docker-desktop) 
+* Optionally, you can also install the [Docker Desktop](https://www.docker.com/products/docker-desktop/) 
 to easily manage your containers.  
 
 ## Method 2: via Singularity
 
 If you are using a system that does not allow Docker 
 (as is the case for many institutional computing clusters), 
-you can instead [install Docker images via Singularity](https://sylabs.io/guides/2.6/user-guide/singularity_and_docker.html).  
+you can instead [install Docker images via Singularity](https://docs.sylabs.io/guides/2.6/user-guide/singularity_and_docker.html).  
 
 ```
-singularity pull docker://`r docker_user`/`r pkg`
+singularity pull docker://`r cont`
 ```
 
+For troubleshooting, see the [Singularity documentation](https://docs.sylabs.io/guides/latest/user-guide/singularity_and_docker.html#github-container-registry).
 
-## Usage 
+# Usage 
 
 Finally, launch the containerised Rstudio by entering the 
 following URL in any web browser:
-*http://localhost:8787/*
+*http://localhost:8900/*
 
 Login using the credentials set during the Installation steps.  
 
