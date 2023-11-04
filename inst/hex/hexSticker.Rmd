@@ -1,0 +1,89 @@
+---
+title: "hexSticker"
+date: "<h4>Updated: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
+output:
+  BiocStyle::html_document
+vignette: >
+  %\VignetteIndexEntry{hexSticker}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, echo=FALSE, include=TRUE}
+pkg <- read.dcf(here::here("DESCRIPTION"), fields = "Package")[1]
+description <- read.dcf(here::here("DESCRIPTION"), fields = "Description")[1]
+
+# If you're using R<4.1.1, need this version of rvcheck
+# devtools::install_version('rvcheck',version='0.1.8') 
+library(hexSticker)
+library(dplyr)
+library(ggplot2)
+library(ggimage)
+# library(ggpattern)# remotes::install_github("coolbutuseless/ggpattern")
+```
+
+You can make awesome hex stickers for your R packages using:
+
+- [hexSticker](https://github.com/GuangchuangYu/hexSticker)  
+- [ggimage](https://github.com/GuangchuangYu/ggimage) 
+lets you render images as data points.  
+- [ggpattern](https://coolbutuseless.github.io/package/ggpattern/)
+lets you fill objects with patterns or images.
+- [magick](https://cran.r-project.org/web/packages/magick/vignettes/intro.html) 
+modify PNGs.
+
+# `r pkg`
+
+## File path
+
+Create file path to save hex sticker to.
+
+```{r}
+filename <- here::here("inst/hex/hex.png")
+dir.create(dirname(filename), showWarnings = FALSE, recursive = TRUE)
+```
+
+## Subplot
+
+```{r}
+# URL <- "https://github.com/NathanSkene/EWCE/releases/download/v1.1/DALL.E.2023-03-10.01.14.58.-.cell.type.specific.gene.enrichment.png"
+# tmp <- tempfile(fileext = ".png")
+# utils::download.file(URL, tmp)
+
+tmp <- here::here("inst/hex/6MGSw0KSM8oqk8c6AsK8WocW2.jpg")
+```
+
+
+
+## hexSticker 
+
+```{r}    
+# pkg <- paste("E xpression","W eighted","C elltype","E nrichment", sep = "<br>")
+
+s_size = .35
+stick <- hexSticker::sticker( 
+  subplot = tmp,
+  #### Package name ####
+  package = paste0(strsplit(pkg, " ")[[1]],collapse = " "),
+  p_size=15, p_y = 1.5,  p_color = ggplot2::alpha("white",.95),
+  #### Subplot #####
+  s_x=1, s_y=.8,  s_height = s_size, s_width = s_size*2.4,
+  #### Fill & border ####
+  h_fill = "#9ca9b6", h_color =ggplot2::alpha("white",.5),h_size = 3,
+  #### Spotlight ####
+  spotlight = TRUE, l_alpha = .2, l_width = 5, l_x = .5,
+  #### File output ####
+  white_around_sticker = TRUE,
+  filename = filename, dpi = 300)
+print(stick)
+```
+
+# Session Info 
+
+<details> 
+
+```{r Session Info}
+utils::sessionInfo()
+```
+
+</details>  
