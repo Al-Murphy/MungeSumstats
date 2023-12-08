@@ -1,3 +1,9 @@
+## CHANGES IN VERSION 1.11.2
+
+### Bug fix
+* Remove unused argument `make_ordered` from `sort_coords()`
+* Issue fixed with check ldsc format wehn compute_n type chosen 
+
 ## CHANGES IN VERSION 1.11.1
 
 ### Bug fix

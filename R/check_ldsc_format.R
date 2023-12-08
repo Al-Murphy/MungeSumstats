@@ -34,20 +34,30 @@ check_ldsc_format <- function(sumstats_dt, save_format, convert_n_int,
             message()
             allele_flip_check <- TRUE
         }
-        if (!compute_z && !z_present) {
-            message("Setting `compute_z=TRUE` to comply with LDSC format.")
-            compute_z <- TRUE
-        }
         n_msg <- paste0(
-            "LDSC requires an N column but your dataset doesn't ",
-            "appear to have one. You can impute an N value for ",
-            "all your SNPs\nby setting `compute_n` to this value but",
-            " note this is may not be correct and may lead to ",
-            "different results from LDSC\nthan if the true N per SNP",
-            " was known."
+          "LDSC requires an N column but your dataset doesn't ",
+          "appear to have one. You can impute an N value for ",
+          "all your SNPs\nby setting `compute_n` to this value but",
+          " note this is may not be correct and may lead to ",
+          "different results from LDSC\nthan if the true N per SNP",
+          " was known."
         )
+        if (!z_present && isFALSE(compute_z)) {
+          beta_se_present <- ("BETA" %in% names(sumstats_dt) && 
+                                "SE" %in% names(sumstats_dt))
+          p_present <- "P" %in% names(sumstats_dt)
+          if(beta_se_present){
+            message("Setting `compute_z=BETA` to comply with LDSC format.")
+            compute_z <- "BETA"
+          }else if(p_present){
+            message("Setting `compute_z=P` to comply with LDSC format.")
+            compute_z <- "P"
+          } else{
+            stop(n_msg)  
+          } 
+        }
         if (compute_n == 0L && !n_present) {
-            stop(n_msg)
+          stop(n_msg)
         }
     }
     return(list(
