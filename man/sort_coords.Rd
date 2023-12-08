@@ -25,9 +25,6 @@ but much slower than the "data.table" method.}
 }}
 
 \item{sort_coords}{Whether to sort by coordinates.}
-
-\item{make_ordered}{Make CHR into an ordered factor to ensure
-they go from 1-22, X, Y.}
 }
 \value{
 Sorted sumstats_dt
