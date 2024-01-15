@@ -165,7 +165,11 @@ flexibility to export the reformatted file as tab-delimited, VCF or R
 native objects such as data.table, GRanges or VRanges objects. The
 output can also be outputted in an **LDSC ready** format which means the
 file can be fed directly into LDSC without the need for additional
-munging.
+munging. **NOTE** - If LDSC format is used, the naming convention of A1 as the 
+reference (genome build) allele and A2 as the effect allele will be reversed
+to match LDSC (A1 will now be the effect allele). See more info on this 
+[here](https://groups.google.com/g/ldsc_users/c/S7FZK743w68). Note that any 
+effect columns (e.g. Z) will be inrelation to A1 now instead of A2.
 
 # Data
 
@@ -419,7 +423,12 @@ conducted by *MungeSumstats* are:
     ("data.table","vranges","granges").
 -   **save_format** Ensure that output format meets all requirements to
     be passed directly into LDSC ("ldsc") without the need for additional
-    munging or for IEU OpenGWAS format ("opengwas") before saving as a VCF
+    munging or for IEU OpenGWAS format ("opengwas") before saving as a VCF.
+    **NOTE** - If LDSC format is used, the naming convention of A1 as the 
+    reference (genome build) allele and A2 as the effect allele will be reversed
+    to match LDSC (A1 will now be the effect allele). See more info on this 
+    [here](https://groups.google.com/g/ldsc_users/c/S7FZK743w68). Note that any 
+    effect columns (e.g. Z) will be inrelation to A1 now instead of A2.
 -   **log_folder_ind** Should log files be stored containing all
     filtered out SNPs (separate file per filter). The data is outputted
     in the same format specified for the resulting sumstats file.

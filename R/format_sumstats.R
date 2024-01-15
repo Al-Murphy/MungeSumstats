@@ -187,7 +187,12 @@
 #' @param ldsc_format DEPRECATED, do not use. Use save_format="LDSC" instead.
 #' @param save_format Output format of sumstats. Options are NULL - standardised
 #' output format from MungeSumstats, LDSC - output format compatible with LDSC
-#' and openGWAS - output compatible with openGWAS VCFs. Default is NULL.
+#' and openGWAS - output compatible with openGWAS VCFs. Default is NULL. 
+#' **NOTE** - If LDSC format is used, the naming convention of A1 as the 
+#' reference (genome build) allele and A2 as the effect allele will be reversed
+#' to match LDSC (A1 will now be the effect allele). See more info on this 
+#' [here](https://groups.google.com/g/ldsc_users/c/S7FZK743w68). Note that any 
+#' effect columns (e.g. Z) will be inrelation to A1 now instead of A2.
 #' @param log_folder_ind Binary Should log files be stored containing all
 #' filtered out SNPs (separate file per filter). The data is outputted in the
 #' same format specified for the resulting sumstats file. The only exception to
@@ -285,8 +290,7 @@ format_sumstats <- function(path,
     #### Setup multi-threading ####
     data.table::setDTthreads(threads = nThread)
     #### Setup empty variables ####
-    rsids <- NULL
-    orig_dims <- NULL
+    rsids <- orig_dims <- A1_n <- A2 <- A1 <- NULL
     log_files <- vector(mode = "list")
     t1 <- Sys.time()
 
@@ -1036,6 +1040,21 @@ format_sumstats <- function(path,
         ### Check 39: Ensure CHR follows the requested style ###
         CHR <- NULL
         sumstats_return$sumstats_dt[, CHR := GenomeInfoDb::mapSeqlevels(CHR, style = chr_style)]
+        
+        ### IF LDSC, rename A1 and A2, effect columns are fine
+        if (!is.null(save_format) && 
+            tolower(save_format)=="ldsc") {
+          message("Renaming A1,A2 to match LDSC format.")
+          #For LDSC format, rename A1 and A2 as LDSC expects A1 to be the effect 
+          #column rather than A2 (the opposite to MSS's default) - see more 
+          #[here](https://groups.google.com/g/ldsc_users/c/S7FZK743w68).Although, 
+          #this didn't seem to make any difference to results in tests, see more
+          #https://github.com/neurogenomics/MungeSumstats/issues/160#issuecomment-1891899253
+          sumstats_return$sumstats_dt[,A1_n:=A2]
+          sumstats_return$sumstats_dt[,A2:=A1]
+          sumstats_return$sumstats_dt[,A1:=A1_n]
+          sumstats_return$sumstats_dt[,A1_n:=NULL]
+        }
 
         #### WRITE data.table TO PATH ####
         check_save_out$save_path <- write_sumstats(

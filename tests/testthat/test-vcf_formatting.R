@@ -146,8 +146,22 @@ test_that("VCF is correctly formatted", {
         ldsc_cols <- c("SNP", "N", "A1", "A2", "Z")
         testthat::expect_true(all(ldsc_cols %in% names(res)))
         
+        #also ensure A1 and A2 have been renamed
+        #For LDSC format, rename A1 and A2 as LDSC expects A1 to be the effect 
+        #column rather than A2 (the opposite to MSS's default) - see more 
+        #[here](https://groups.google.com/g/ldsc_users/c/S7FZK743w68).Although, 
+        #this didn't seem to make any difference to results in tests, see more
+        #[here](https://github.com/neurogenomics/MungeSumstats/issues/160#issuecomment-1891899253).
+        data.table::setnames(res,c("A1","A2"),c("A2","A1"))
+        res[,CHR:=as.character(CHR)]
+        testthat::expect_true(all.equal(res[,c("SNP","CHR","BP","A1","A2","END",
+                                               "FILTER","FRQ","BETA","LP","SE",
+                                               "P")],rtrn_dt))
+        
+                              
         testthat::expect_equal(reformatted_lines[1:5], corr_res)
     } else {
+        testthat::expect_true((is_32bit_windows||!Sys.info()["sysname"]=="Linux"))
         testthat::expect_true((is_32bit_windows||!Sys.info()["sysname"]=="Linux"))
         testthat::expect_true((is_32bit_windows||!Sys.info()["sysname"]=="Linux"))
         testthat::expect_true((is_32bit_windows||!Sys.info()["sysname"]=="Linux"))

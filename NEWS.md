@@ -1,3 +1,11 @@
+## CHANGES IN VERSION 1.11.3
+
+### Bug fix
+* For LDSC format, rename A1 and A2 as LDSC expects A1 to be the effect column 
+rather than A2 (the opposite to MSS's default) - see more [here](https://groups.google.com/g/ldsc_users/c/S7FZK743w68).
+Although, this didn't seem to make any difference to results in tests, see more
+[here](https://github.com/neurogenomics/MungeSumstats/issues/160#issuecomment-1891899253).
+
 ## CHANGES IN VERSION 1.11.2
 
 ### Bug fix

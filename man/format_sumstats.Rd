@@ -264,7 +264,12 @@ FALSE.}
 
 \item{save_format}{Output format of sumstats. Options are NULL - standardised
 output format from MungeSumstats, LDSC - output format compatible with LDSC
-and openGWAS - output compatible with openGWAS VCFs. Default is NULL.}
+and openGWAS - output compatible with openGWAS VCFs. Default is NULL.
+\strong{NOTE} - If LDSC format is used, the naming convention of A1 as the
+reference (genome build) allele and A2 as the effect allele will be reversed
+to match LDSC (A1 will now be the effect allele). See more info on this
+\href{https://groups.google.com/g/ldsc_users/c/S7FZK743w68}{here}. Note that any
+effect columns (e.g. Z) will be inrelation to A1 now instead of A2.}
 
 \item{log_folder_ind}{Binary Should log files be stored containing all
 filtered out SNPs (separate file per filter). The data is outputted in the
