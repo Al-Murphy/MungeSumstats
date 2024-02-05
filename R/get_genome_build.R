@@ -122,7 +122,6 @@ get_genome_build <- function(sumstats,
     #for internal testing - filter to specified chromosomes
     if(!is.null(chr_filt)){
       sumstats <- sumstats[CHR %in% chr_filt]
-      print(nrow(sumstats))
     }
     
     # if removing erroneous cases leads to <min(10k,50% org dataset) will fail -
@@ -131,7 +130,7 @@ get_genome_build <- function(sumstats,
     size_okay <- FALSE
     if (nrow_clean > sampled_snps || (nrow_clean != 0 && 
                                       (nrow_clean / nrow_org) > .5)) {
-        print("size_okay")
+        size_okay<- TRUE
     }
     if (!size_okay) {
       #want it returned rather than throwing an error
