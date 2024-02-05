@@ -10,7 +10,8 @@ get_genome_builds(
   sampled_snps = 10000,
   names_from_paths = FALSE,
   dbSNP = 155,
-  nThread = 1
+  nThread = 1,
+  chr_filt = NULL
 )
 }
 \arguments{
@@ -32,6 +33,10 @@ Only works if \code{sumstats_list} is a list of paths.}
 \item{dbSNP}{version of dbSNP to be used (144 or 155). Default is 155.}
 
 \item{nThread}{Number of threads to use for parallel processes.}
+
+\item{chr_filt}{Internal for testing - filter reference genomes and sumstats
+to specific chromosomes for testing. Pass a list of chroms in format:
+c("1","2"). Default is NULL i.e. no filtering}
 }
 \value{
 ref_genome the genome build of the data

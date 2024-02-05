@@ -12,7 +12,13 @@ rsids <- MungeSumstats:::load_ref_genome_data(snps = sumstats_dt$SNP,
 }
 }
 \usage{
-load_ref_genome_data(snps, ref_genome, dbSNP = c(144, 155), msg = NULL)
+load_ref_genome_data(
+  snps,
+  ref_genome,
+  dbSNP = c(144, 155),
+  msg = NULL,
+  chr_filt = NULL
+)
 }
 \arguments{
 \item{snps}{Character vector SNPs by rs_id from sumstats file of interest.}
@@ -24,6 +30,10 @@ load_ref_genome_data(snps, ref_genome, dbSNP = c(144, 155), msg = NULL)
 
 \item{msg}{Optional name of the column missing from the dataset in question.
 Default is NULL}
+
+\item{chr_filt}{Internal for testing - filter reference genomes and sumstats
+to specific chromosomes for testing. Pass a list of chroms in format:
+c("1","2"). Default is NULL i.e. no filtering.}
 }
 \value{
 data table of snpsById, filtered to SNPs of interest.

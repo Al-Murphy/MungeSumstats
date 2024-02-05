@@ -1,3 +1,9 @@
+## CHANGES IN VERSION 1.11.4
+
+### Bug fix
+* Minor fix to `get_genome_builds()` to help with RAM & CPU usage during unit 
+tests. No change in functionality for end user.
+
 ## CHANGES IN VERSION 1.11.3
 
 ### Bug fix

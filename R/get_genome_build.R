@@ -23,7 +23,8 @@
 #' from disk each time.
 #' @param allele_match_ref Instead of returning the genome_build this will 
 #' return the propotion of matches to each genome build for each allele (A1,A2).
-#' @inheritParams format_sumstats 
+#' @inheritParams format_sumstats
+#' @inheritParams get_genome_builds 
 #' 
 #' @return ref_genome the genome build of the data
 #' @importFrom data.table setDT :=
@@ -36,7 +37,8 @@ get_genome_build <- function(sumstats,
                              dbSNP=155,
                              header_only = FALSE,
                              allele_match_ref = FALSE,
-                             ref_genome = NULL) {
+                             ref_genome = NULL,
+                             chr_filt = NULL) {
     ### Add this to avoid confusing BiocCheck
     seqnames <- CHR <- SNP <- BP <- alt_alleles <- NULL 
     if(isFALSE(allele_match_ref)){
@@ -116,13 +118,20 @@ get_genome_build <- function(sumstats,
     #also deal with common misformatting of CHR
     # if chromosome col has chr prefix remove it
     sumstats[, CHR := gsub("chr", "", CHR)]
+    
+    #for internal testing - filter to specified chromosomes
+    if(!is.null(chr_filt)){
+      sumstats <- sumstats[CHR %in% chr_filt]
+      print(nrow(sumstats))
+    }
+    
     # if removing erroneous cases leads to <min(10k,50% org dataset) will fail -
     # NOT ENOUGH DATA TO INFER
     nrow_clean <- nrow(sumstats)
     size_okay <- FALSE
-    if (nrow_clean > sampled_snps || (nrow(sumstats) != 0 && 
-                                      nrow_clean / nrow_org > .5)) {
-        size_okay <- TRUE
+    if (nrow_clean > sampled_snps || (nrow_clean != 0 && 
+                                      (nrow_clean / nrow_org) > .5)) {
+        print("size_okay")
     }
     if (!size_okay) {
       #want it returned rather than throwing an error
@@ -230,12 +239,14 @@ get_genome_build <- function(sumstats,
       snp_loc_data_37 <- load_ref_genome_data(
         snps = snps,
         ref_genome = "GRCH37",
-        dbSNP = dbSNP
+        dbSNP = dbSNP,
+        chr_filt = chr_filt
       )
       snp_loc_data_38 <- load_ref_genome_data(
         snps = snps,
         ref_genome = "GRCH38",
-        dbSNP = dbSNP
+        dbSNP = dbSNP,
+        chr_filt = chr_filt
       )
       # convert CHR filed in ref genomes to character not factor
       snp_loc_data_37[, seqnames := as.character(seqnames)]

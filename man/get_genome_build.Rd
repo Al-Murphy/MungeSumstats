@@ -14,7 +14,8 @@ get_genome_build(
   dbSNP = 155,
   header_only = FALSE,
   allele_match_ref = FALSE,
-  ref_genome = NULL
+  ref_genome = NULL,
+  chr_filt = NULL
 )
 }
 \arguments{
@@ -50,6 +51,10 @@ return the propotion of matches to each genome build for each allele (A1,A2).}
 \item{ref_genome}{name of the reference genome used for the GWAS ("GRCh37" or
 "GRCh38"). Argument is case-insensitive. Default is NULL which infers the
 reference genome from the data.}
+
+\item{chr_filt}{Internal for testing - filter reference genomes and sumstats
+to specific chromosomes for testing. Pass a list of chroms in format:
+c("1","2"). Default is NULL i.e. no filtering}
 }
 \value{
 ref_genome the genome build of the data

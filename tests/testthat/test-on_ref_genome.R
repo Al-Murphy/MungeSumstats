@@ -48,8 +48,9 @@ test_that("SNPs not on reference genome are removed", {
     sumstats_list <- list(ss1 = eduAttainOkbayPth)
     ref_genomes <- get_genome_builds(
       sumstats_list = sumstats_list,
-      sampled_snps = 50,
-      dbSNP = 144
+      sampled_snps = 19,
+      dbSNP = 144,
+      chr_filt = c("1","2","3","4") #filtering to reduce computational burden
     )
     expect_equal(all.equal(ref_genomes, list("ss1" = "GRCH37")), TRUE)
   } else {

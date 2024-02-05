@@ -18,6 +18,9 @@
 #' Only works if \code{sumstats_list} is a list of paths.
 #' @param dbSNP version of dbSNP to be used (144 or 155). Default is 155.
 #' @param nThread Number of threads to use for parallel processes.
+#' @param chr_filt Internal for testing - filter reference genomes and sumstats
+#' to specific chromosomes for testing. Pass a list of chroms in format: 
+#' c("1","2"). Default is NULL i.e. no filtering
 #'
 #' @return ref_genome the genome build of the data
 #'
@@ -52,7 +55,8 @@ get_genome_builds <- function(sumstats_list,
                               sampled_snps = 10000,
                               names_from_paths = FALSE,
                               dbSNP=155,
-                              nThread = 1) {
+                              nThread = 1,
+                              chr_filt = NULL) {
     start <- Sys.time()
     #### Convert to list if it isn't already ####
     if (!methods::is(sumstats_list, "list")) {
@@ -82,24 +86,37 @@ get_genome_builds <- function(sumstats_list,
         names(sumstats_list) <- paste0("ss", seq(1, length(sumstats_list)))
     }
     #### Infer builds ####
-    builds <- parallel::mclapply(names(sumstats_list),
-        function(x,
-                 .sampled_snps = sampled_snps,
-                 .dbSNP=dbSNP,
-                 .header_only = header_only) {
-            message_parallel(x)
-            get_genome_build(
-                sumstats = sumstats_list[[x]],
-                sampled_snps = .sampled_snps,
-                dbSNP = .dbSNP, 
-                header_only = .header_only,
-                nThread = 1
-            )
-        },
-        mc.cores = nThread
-    ) %>%
-        `names<-`(names(sumstats_list))
-
+    #Weirdly more efficient to not use parallel::mcapply() if only one
+    if(length(names(sumstats_list))==1){
+      build_ <- get_genome_build(
+        sumstats = sumstats_list[[1]],
+        sampled_snps = sampled_snps,
+        dbSNP = dbSNP, 
+        header_only = header_only,
+        nThread = nThread,
+        chr_filt = chr_filt
+      )
+      builds <- list(build_)
+      names(builds) <- c(names(sumstats_list))
+    }else{
+      builds <- parallel::mclapply(names(sumstats_list),
+                                   function(x,
+                                            .sampled_snps = sampled_snps,
+                                            .dbSNP=dbSNP,
+                                            .header_only = header_only) {
+                                     message_parallel(x)
+                                     get_genome_build(
+                                       sumstats = sumstats_list[[x]],
+                                       sampled_snps = .sampled_snps,
+                                       dbSNP = .dbSNP, 
+                                       header_only = .header_only,
+                                       nThread = 1,
+                                       chr_filt = chr_filt
+                                     )
+                                   },
+                                   mc.cores = nThread) %>%
+        `names<-`(names(sumstats_list)) 
+    }
     #### Report time ####
     message(utils::capture.output(difftime(Sys.time(), start)))
     #### Report build counts ####

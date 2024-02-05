@@ -6,6 +6,9 @@
 #' @param dbSNP version of dbSNP to be used (144 or 155)
 #' @param msg Optional name of the column missing from the dataset in question.
 #'  Default is NULL
+#' @param chr_filt Internal for testing - filter reference genomes and sumstats
+#' to specific chromosomes for testing. Pass a list of chroms in format: 
+#' c("1","2"). Default is NULL i.e. no filtering.
 #' @return data table of snpsById, filtered to SNPs of interest.
 #' @importFrom data.table setDT setkey := setnames setorder
 #' @importFrom BSgenome snpsById
@@ -20,7 +23,8 @@
 load_ref_genome_data <- function(snps, 
                                  ref_genome,
                                  dbSNP=c(144,155),
-                                 msg = NULL) {
+                                 msg = NULL,
+                                 chr_filt = NULL) {
     
     SNP <- NULL
     SNP_LOC_DATA <- load_snp_loc_data(ref_genome, dbSNP, msg = msg)
@@ -47,6 +51,22 @@ load_ref_genome_data <- function(snps,
     
     messager("Validating RSIDs of",formatC(length(snps),big.mark = ","),
              "SNPs using BSgenome::snpsById...")
+    #this is memory intensive
+    #if user specifies for testing, filt to a specific chr 
+    #chr should be in format "1", "2" etc
+    if(!is.null(chr_filt)){
+      #from here: https://support.bioconductor.org/p/83588/
+      keepBSgenomeSequences <- function(genome, seqnames)
+      {
+        stopifnot(all(seqnames %in% seqnames(genome)))
+        genome@user_seqnames <- setNames(seqnames, seqnames)
+        genome@seqinfo <- genome@seqinfo[seqnames]
+        genome
+      }
+      genome <- keepBSgenomeSequences(genome, chr_filt)
+      #can't find a method to filter ODLT_SNPlocs object ....
+      #SNP_LOC_DATA <- SNP_LOC_DATA[[chr_filt]]
+    }
     tm <- system.time({
         gr_rsids <- BSgenome::snpsById(
             x = SNP_LOC_DATA,
