@@ -14,7 +14,7 @@
 #' @return list containing sumstats_dt, the modified summary statistics data
 #' table object
 #' @export
-#' @importFrom data.table setnames rbindlist
+#' @importFrom data.table setnames rbindlist is.data.table
 #' @examples
 #' sumstats_dt <- data.table::fread(system.file("extdata", "eduAttainOkbay.txt",
 #'                                              package = "MungeSumstats"))
@@ -25,6 +25,10 @@ standardise_header <- standardise_sumstats_column_headers_crossplatform <-
              uppercase_unmapped=TRUE,
              return_list=TRUE) {
           
+        stopifnot(
+            "Mapping file must be a data.frame!" =
+            !is.data.table(sumstatsColHeaders)
+        )
         message("Standardising column headers.")
         message("First line of summary statistics file: ")
         msg <- paste0(names(sumstats_dt), split = "\t")
