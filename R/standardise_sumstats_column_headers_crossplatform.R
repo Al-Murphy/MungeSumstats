@@ -36,7 +36,7 @@ standardise_header <- standardise_sumstats_column_headers_crossplatform <-
         #### Store original colnames #####
         ## In case we want to use the original casing 
         ## IMPORTANT! Must use copy() function or else this vector will get 
-        ## changed when the data.table it comes from gets cmy_sumstatsColHeadershanged.
+        ## changed when the data.table it comes from gets changed.
         names_og <- data.table::copy(names(sumstats_dt))
         #### first make all column headers upper case ####
         data.table::setnames(sumstats_dt, toupper(names(sumstats_dt))) 
