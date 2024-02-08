@@ -27,7 +27,7 @@ standardise_header <- standardise_sumstats_column_headers_crossplatform <-
           
         stopifnot(
             "Mapping file must be a data.frame!" =
-            !is.data.table(mapping_file)
+            !data.table::is.data.table(mapping_file)
         )
         message("Standardising column headers.")
         message("First line of summary statistics file: ")
