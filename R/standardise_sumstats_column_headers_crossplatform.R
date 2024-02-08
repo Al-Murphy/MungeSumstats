@@ -48,7 +48,7 @@ standardise_header <- standardise_sumstats_column_headers_crossplatform <-
         for (headerI in seq_len(nrow(mapping_file))) {
             un <- mapping_file[headerI, "UNCORRECTED"]
             cr <- mapping_file[headerI, "CORRECTED"]
-            if (un %in% column_headers & (!cr %in% column_headers)) {
+            if (un %in% column_headers & !(cr %in% column_headers)) {
                 data.table::setnames(sumstats_dt, un, cr)
             }
         }
