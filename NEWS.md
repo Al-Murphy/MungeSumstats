@@ -1,3 +1,9 @@
+## CHANGES IN VERSION 1.11.6
+
+### Bug fix
+* Catch for overflow when NA's in SNP col for `check_no_rs_snp()` check with 
+`imputation_ind=TRUE`.
+
 ## CHANGES IN VERSION 1.11.4
 
 ### Bug fix

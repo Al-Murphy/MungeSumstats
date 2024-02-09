@@ -24,17 +24,6 @@ standardise_header <- standardise_sumstats_column_headers_crossplatform <-
              mapping_file = sumstatsColHeaders,
              uppercase_unmapped=TRUE,
              return_list=TRUE) {
-        
-        data.table::setDF(mapping_file)
-        if(!all.equal(
-            mapping_file, 
-            sumstatsColHeaders
-        )) {
-            message(
-                "Non-standard mapping file detected.",
-                "Making sure all entries in `Uncorrected` are in upper case.")
-            mapping_file$Uncorrected <- toupper(mapping_file$Uncorrected)
-        }
         message("Standardising column headers.")
         message("First line of summary statistics file: ")
         msg <- paste0(names(sumstats_dt), split = "\t")

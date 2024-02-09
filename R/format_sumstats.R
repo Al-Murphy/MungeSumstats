@@ -433,7 +433,19 @@ format_sumstats <- function(path,
                 nThread = nThread
             )
         }
-
+        
+        #If user inputted mapping file, validate
+        if(!identical(mapping_file, sumstatsColHeaders)) {
+            message("Non-standard mapping file detected.",
+                    "Making sure all entries in `Uncorrected`",
+                    " are in upper case.")
+            data.table::setDF(mapping_file)
+            #check again
+            if(!identical(mapping_file, sumstatsColHeaders)) {
+              mapping_file$Uncorrected <- toupper(mapping_file$Uncorrected)
+            }  
+        }
+        
         #If es_is_beta remove from mapping file if present
         if (!es_is_beta & nrow(mapping_file[mapping_file$Uncorrected=="ES" &
                                            mapping_file$Corrected=="BETA",])>=1)

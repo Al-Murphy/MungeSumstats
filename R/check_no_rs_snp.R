@@ -20,7 +20,7 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                             check_save_out,tabix_index, nThread, log_files,
                             dbSNP) {
     SNP <- CHR <- CHR1 <- BP1 <- i.RefSNP_id <- IMPUTATION_SNP <-
-        SNP_old_temp <- SNP_INFO <- A1 <- A2 <- NULL
+        SNP_old_temp <- SNP_INFO <- A1 <- A2 <- .I <- NULL
     # if snp ids aren't rs ids rename the column to ID's 
     # so RSIDs can be inferred
     if ((!snp_ids_are_rs_ids) & sum("SNP" %in% names(sumstats_dt)) == 1) {
@@ -56,6 +56,10 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
         message("Checking SNP RSIDs.")
         # needed for later to join and match SNPs
         if (imputation_ind) {
+            # if any are NA, we need to give them a unique ID
+            # need to be able to identify to revert back so picked up 
+            #by other, NA for RS ID check
+            sumstats_dt[is.na(SNP)|SNP=="", SNP := paste0("NA_",.I)]
             sumstats_dt[, SNP_old_temp := SNP]
         }
         miss_rs <- sumstats_dt[!grep("^rs", SNP), ]
@@ -174,8 +178,8 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                 format <- c("BP1", "CHR1")
             }
             miss_rs_chr_bp[, (format) := data.table::tstrsplit(SNP,
-                                                               split = ":", fixed = TRUE
-            )]#[c(1,2)]]
+                                                               split = ":", 
+                                                               fixed = TRUE)]
             # if BP col has other info after, drop it
             if (sum(grepl("[[:punct:]].*", miss_rs_chr_bp$BP1)) > 0) {
                 miss_rs_chr_bp[, BP1 := gsub("([[:punct:]]).*", "", BP1)]
@@ -278,7 +282,8 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
             }    
         }
         if (nrow(miss_rs) != nrow(sumstats_dt) && nrow(miss_rs) != 0) {
-            if (nrow(miss_rs_chr_bp) == 0) {
+            #Prev if (nrow(miss_rs_chr_bp) == 0) {
+            if (nrow(miss_rs_chr_bp) < nrow(miss_rs)) {
                 # don't filter twice if hit prev condition
                 # check if impute of correct SNP ID possible
                 if (sum(c("CHR", "BP") %in% col_headers) == 2 &&
@@ -346,11 +351,18 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                 # If user wants log, save it to there
                 if (log_folder_ind &&
                     nrow(sumstats_dt[!grep("^rs", SNP), ]) > 0) {
+                    #if imputation ind on, NA's will be replaced with NA_i
+                    #change back here
+                    tmp_rmv <- sumstats_dt[!grepl("^rs", SNP), ]
+                    if(imputation_ind){
+                      tmp_rmv[, SNP_old_temp := NULL]
+                      tmp_rmv[grepl("^NA_",SNP), SNP := NA]
+                    }
                     name <- "snp_missing_rs"
                     name <- get_unique_name_log_file(name = name,
                                                      log_files = log_files)
                     write_sumstats(
-                        sumstats_dt = sumstats_dt[!grepl("^rs", SNP), ],
+                        sumstats_dt = tmp_rmv,
                         save_path =
                             paste0(
                                 check_save_out$log_folder,
@@ -420,7 +432,7 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                 setkey(sumstats_dt, SNP_old_temp)
                 sumstats_dt[miss_rs, IMPUTATION_SNP := TRUE]
             }
-            # remove temp column either way
+            # remove temp columns either way
             sumstats_dt[, SNP_old_temp := NULL]
         }
         return(list("sumstats_dt" = sumstats_dt, "log_files" = log_files))
