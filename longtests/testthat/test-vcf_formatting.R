@@ -4,7 +4,7 @@ test_that("VCF is correctly formatted", {
     ## than what 32-bit Windows can handle:
     is_32bit_windows <- .Platform$OS.type == "windows" ##&&
     ##.Platform$r_arch == "i386"
-    if (!is_32bit_windows && Sys.info()["sysname"]=="Linux") {
+    if (!is_32bit_windows) {
         ## IMPORTANT: Must have .vcf file extension, 
         # or else MungeSumstats won't know it's a VCF.
         file <- tempfile(fileext = ".vcf")

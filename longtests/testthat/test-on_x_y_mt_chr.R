@@ -1,0 +1,57 @@
+test_that("SNPs on X,Y,MT chromosome are removed", {
+    ## Call uses reference genome as default with more than 2GB of memory,
+    ## which is more than what 32-bit Windows can handle so remove tests
+    is_32bit_windows <-
+        .Platform$OS.type == "windows" && .Platform$r_arch == "i386"
+    if (!is_32bit_windows) {
+        file <- tempfile()
+        # Update CHR from line 3,4,5 to X,Y,MT to check it is deleted -
+        eduAttainOkbay <- readLines(system.file("extdata", "eduAttainOkbay.txt",
+            package = "MungeSumstats"
+        ))
+        eduAttainOkbay_missing <- eduAttainOkbay
+        eduAttainOkbay_missing[3] <-
+            "rs9320913\tX\t98584733\tA\tC\t0.5019\t0.024\t0.003\t2.457e-19"
+        eduAttainOkbay_missing[4] <-
+            "rs11712056\tY\t49914397\tT\tC\t0.5504\t0.024\t0.003\t3.304e-19"
+        eduAttainOkbay_missing[5] <-
+            "rs148734725\tMT\t49406708\tA\tG\t0.3078\t0.025\t0.003\t1.363e-18"
+    
+        problem_snp <- c("rs9320913", "rs11712056", "rs148734725")
+        # write the Educational Attainment GWAS to a temp file for testing
+        writeLines(eduAttainOkbay_missing, con = file)
+        # Run MungeSumstats code
+        reformatted <- MungeSumstats::format_sumstats(file,
+            ref_genome = "GRCh37",
+            on_ref_genome = FALSE,
+            strand_ambig_filter = FALSE,
+            bi_allelic_filter = FALSE,
+            allele_flip_check = FALSE,
+            log_folder_ind = TRUE,
+            dbSNP=144
+        )
+        reformatted_lines <- readLines(reformatted$sumstats)
+        # Should equal org apart from this one line
+        writeLines(eduAttainOkbay, con = file)
+        org <- MungeSumstats::format_sumstats(file,
+            ref_genome = "GRCh37",
+            on_ref_genome = FALSE,
+            strand_ambig_filter = FALSE,
+            bi_allelic_filter = FALSE,
+            allele_flip_check = FALSE,
+            dbSNP=144
+        )
+        org_lines <- readLines(org)
+        rsid_index <- grep(paste(problem_snp, collapse = "|"), org_lines,
+            ignore.case = TRUE
+        )
+        # reordering in function, line 3,4,5 is now 28,58
+        expect_equal(setequal(
+            reformatted_lines,
+            org_lines[-rsid_index]
+        ), TRUE)
+    }    
+    else{
+        expect_equal(is_32bit_windows, TRUE)
+    }
+})

@@ -22,7 +22,6 @@ sort_coords <- function(sumstats_dt,
                         sort_method=c("data.table","GenomicRanges")) {
   ### Add this to avoid confusing BiocCheck
   CHR <- NULL
-  
   if (isTRUE(sort_coordinates)) {
     #### Report ####
     sort_method <- sort_method[1]

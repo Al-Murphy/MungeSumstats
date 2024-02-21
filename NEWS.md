@@ -1,3 +1,11 @@
+## CHANGES IN VERSION 1.11.7
+
+### Bug fix
+* Force no tab indexing when writing removed rows of SNPs. This avoids any 
+issues where missing data causes sort errors.
+* Issue fixed when sorting CHR column based on a format when CHR column is a 
+factor.
+
 ## CHANGES IN VERSION 1.11.6
 
 ### Bug fix

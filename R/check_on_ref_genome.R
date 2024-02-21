@@ -146,7 +146,8 @@ check_on_ref_genome <-function(sumstats_dt,
                                     check_save_out$extension
                                 ),
                             sep = check_save_out$sep,
-                            tabix_index = tabix_index,
+                            #don't tab indx as could be miss values & cause err
+                            #tabix_index = tabix_index,
                             nThread = nThread
                         )
                         log_files[[name]] <-

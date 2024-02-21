@@ -102,7 +102,8 @@ check_no_snp <- function(sumstats_dt, path, ref_genome, indels, imputation_ind,
                         check_save_out$extension
                     ),
                 sep = check_save_out$sep,
-                tabix_index = tabix_index,
+                #don't tab index these as could be missing values and cause err
+                #tabix_index = tabix_index,
                 nThread = nThread
             )
             log_files[[name]] <-
