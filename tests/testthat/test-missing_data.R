@@ -60,6 +60,38 @@ test_that("Handle missing data", {
         )
         reformatted_lines <- readLines(reformatted)
         expect_equal(reformatted_lines, org_lines)
+        
+        # set `drop_na_cols` to `NULL`
+        miss_extra_col <- miss
+        miss_extra_col$extra <- NA
+        
+        expect_error(MungeSumstats::format_sumstats(
+          miss_extra_col,
+          ref_genome = "GRCh37",
+          on_ref_genome = FALSE,
+          strand_ambig_filter = FALSE,
+          bi_allelic_filter = FALSE,
+          allele_flip_check = FALSE,
+          sort_coordinates = FALSE,
+          dbSNP = 144, 
+          drop_na_cols = NULL
+        ), 
+        regexp = "All SNPs have been filtered out of  your summary statistics dataset")
+          
+        reformatted_extra_col <- MungeSumstats::format_sumstats(
+          miss_extra_col,
+          ref_genome = "GRCh37",
+          on_ref_genome = FALSE,
+          strand_ambig_filter = FALSE,
+          bi_allelic_filter = FALSE,
+          allele_flip_check = FALSE,
+          sort_coordinates = FALSE,
+          dbSNP = 144, 
+          drop_na_cols = c("CHR", "POS")
+        )
+        
+        reformatted_extra_col_lines <- readLines(reformatted_extra_col)
+        expect_equal(length(reformatted_extra_col_lines), length(org_lines))
     }    
     else{
         expect_equal(is_32bit_windows, TRUE)

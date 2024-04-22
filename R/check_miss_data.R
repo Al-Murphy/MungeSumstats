@@ -7,7 +7,8 @@
 #' @keywords internal
 #' @importFrom stats complete.cases
 check_miss_data <- function(sumstats_dt, path, log_folder_ind, check_save_out,
-                            tabix_index, nThread, log_files) {
+                            tabix_index, nThread, log_files,
+                            drop_na_cols) {
     message("Checking for missing data.")
     col_headers <- names(sumstats_dt)
     # use data table for speed
@@ -20,7 +21,16 @@ check_miss_data <- function(sumstats_dt, path, log_folder_ind, check_save_out,
         col_headers[grepl("^convert_", col_headers)],
         "SNP_INFO"["SNP_INFO"%in% col_headers]
     )
-    incl_cols <- names(sumstats_dt)[!names(sumstats_dt) %in% ignore_cols]
+    
+    if (!is.null(drop_na_cols)) {
+      drop_na_cols_in_sumstats <-
+        c(drop_na_cols)[drop_na_cols %in% names(sumstats_dt)]
+      incl_cols <-
+        c(drop_na_cols_in_sumstats)[!drop_na_cols_in_sumstats %in% ignore_cols]
+    } else {
+      incl_cols <- names(sumstats_dt)[!names(sumstats_dt) %in% ignore_cols]  
+    }
+    
     if (nrow(sumstats_dt[!complete.cases(sumstats_dt[, incl_cols,
         with = FALSE
     ]), ]) > 0) {

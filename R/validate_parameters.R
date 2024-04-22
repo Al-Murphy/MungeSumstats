@@ -46,6 +46,7 @@ validate_parameters <- function(path,
                                 mapping_file,
                                 tabix_index,
                                 chain_source,
+                                drop_na_cols,
                                 #deprecated parameters
                                 rmv_chrPrefix) {
     # Checking if the file exists should happen first -
@@ -405,6 +406,15 @@ validate_parameters <- function(path,
                   collapse = "\n"))
         stop(tbx_msg)
     }
+    
+    # validate drop_na_cols
+    if (!is.character(drop_na_cols)) {
+      if (!is.null(drop_na_cols)) {
+        stop(
+          "Parameter `drop_na_cols` should be either a character vector of column names, or `NULL`"
+        )
+      }
+    } 
     
     #deprecated parameters
     if (!is.null(rmv_chrPrefix)) { 
