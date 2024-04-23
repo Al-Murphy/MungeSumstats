@@ -19,11 +19,8 @@ Authors@R:
            email = "nathan.skene@gmail.com",
            comment = c(ORCID = "0000-0002-6807-3180"))) 
 Description: 
-  The *MungeSumstats* package is designed to facilitate the standardisation of 
-  GWAS summary statistics. It reformats inputted summary statisitics to include 
-  SNP, CHR, BP and can look up these values if any are missing. It also pefrorms 
-  dozens of QC and filtering steps to ensure high data quality and
-  minimise inter-study differences. 
+  The * MungeSumstatsModified * package is a modified package for * MungeSumstatsModified *. This update introduces a local chain option to the 'leftover' function, eliminating the need to download the chain file repeatedly. No other modifications have been made.
+
 URL: https://github.com/neurogenomics/MungeSumstats
 BugReports: https://github.com/neurogenomics/MungeSumstats/issues
 License: Artistic-2.0
