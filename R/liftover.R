@@ -40,6 +40,8 @@
 #' sumstats_dt_hg38 <- liftover(sumstats_dt=sumstats_dt, 
 #'                              ref_genome = "hg19",
 #'                              convert_ref_genome="hg38")
+# roxygen2::roxygenise()
+
 liftover <- function(sumstats_dt, 
                      convert_ref_genome, 
                      ref_genome,

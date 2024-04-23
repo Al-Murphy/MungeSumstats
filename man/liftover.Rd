@@ -24,6 +24,7 @@ liftover(
   end_col = start_col,
   as_granges = FALSE,
   style = "NCBI",
+  local_chain = NULL,
   verbose = TRUE
 )
 }
