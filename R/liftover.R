@@ -50,6 +50,7 @@ liftover <- function(sumstats_dt,
                      end_col = start_col, 
                      as_granges = FALSE,
                      style = "NCBI",
+                     local_chain = NULL, # modified this param
                      verbose = TRUE) {
     
     IMPUTATION_gen_build <- width <- strand <- end <- seqnames <- NULL;
@@ -110,12 +111,19 @@ liftover <- function(sumstats_dt,
               end.field = end_col
           )
           #### Specify chain file ####
-          chain <- get_chain_file(
-              from = query_ucsc,
-              to = target_ucsc,
-              chain_source = chain_source,
-              verbose = verbose
-          )
+          if (is.null(local_chain)) {
+           if (verbose) {message("Downloading chain file...")}
+           chain <- get_chain_file(
+            from = query_ucsc,
+            to = target_ucsc,
+            chain_source = chain_source,
+            verbose = verbose
+           )
+          }
+           else {
+            if (verbose) {message("Using local chain file...")}
+            chain <- rtracklayer::import.chain(local_chain)
+          }
           #### Liftover ####
           gr_lifted <- unlist(rtracklayer::liftOver(
               x = gr,
