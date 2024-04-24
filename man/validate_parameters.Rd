@@ -48,6 +48,7 @@ validate_parameters(
   mapping_file,
   tabix_index,
   chain_source,
+  drop_na_cols,
   rmv_chrPrefix
 )
 }
@@ -235,6 +236,13 @@ data(sumstatsColHeaders) for default mapping and necessary format.}
 \item{chain_source}{source of the chain file to use in liftover, if converting
 genome build ("ucsc" or "ensembl"). Note that the UCSC chain files require a
 license for commercial use. The Ensembl chain is used by default ("ensembl").}
+
+\item{drop_na_cols}{A character vector of column names to be checked for
+missing values. Rows with missing values in any of these columns (if present
+in the dataset) will be dropped. If \code{NULL}, all columns will be checked for
+missing values. Default columns are SNP, chromosome, position, allele 1,
+allele2, effect columns (frequency, beta, Z-score, standard error, log odds,
+signed sumstats, odds ratio), p value and N columns.}
 
 \item{rmv_chrPrefix}{Is now deprecated, do. not use. Use chr_style instead -
 chr_style = 'Ensembl' will give the same result as rmv_chrPrefix=TRUE used to

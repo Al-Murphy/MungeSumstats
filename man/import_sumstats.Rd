@@ -193,6 +193,12 @@ value is TRUE. Default is TRUE.}
 dropped? These can not be checked against a reference dataset and will have
 the same RS ID and position as SNPs which can affect downstream analysis.
 Default is False.}
+    \item{\code{drop_na_cols}}{A character vector of column names to be checked for
+missing values. Rows with missing values in any of these columns (if present
+in the dataset) will be dropped. If \code{NULL}, all columns will be checked for
+missing values. Default columns are SNP, chromosome, position, allele 1,
+allele2, effect columns (frequency, beta, Z-score, standard error, log odds,
+signed sumstats, odds ratio), p value and N columns.}
     \item{\code{dbSNP}}{version of dbSNP to be used for imputation (144 or 155).}
     \item{\code{check_dups}}{whether to check for duplicates - if formatting QTL
 datasets this should be set to FALSE otherwise keep as TRUE. Default is TRUE.}

@@ -1,3 +1,10 @@
+## CHANGES IN VERSION 1.11.9
+
+### New features
+* Can now control what columns are checked for missing data (`drop_na_cols` in
+`format_sumstats()`). By default, SNP, effect columns and P/N columns are 
+checked. Set to Null to check all columns or choose specific columns.
+
 ## CHANGES IN VERSION 1.11.7
 
 ### Bug fix

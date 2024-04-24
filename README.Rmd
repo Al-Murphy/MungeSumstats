@@ -142,5 +142,6 @@ development:
  * [Jonathan Griffiths](https://github.com/jonathangriffiths)
  * [Kitty Murphy](https://github.com/KittyMurphy)
  * [Mykhaylo Malakhov](https://github.com/MykMal)
+ * [Alasdair Warwick](https://github.com/rmgpanw)
  
 # References

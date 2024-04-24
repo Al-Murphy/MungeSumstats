@@ -59,13 +59,13 @@ test_that("Handle missing data", {
                                             dbSNP=144
         )
         reformatted_lines <- readLines(reformatted)
-        expect_equal(reformatted_lines, org_lines)
+        testthat::expect_equal(reformatted_lines, org_lines)
         
         # set `drop_na_cols` to `NULL`
         miss_extra_col <- miss
         miss_extra_col$extra <- NA
         
-        expect_error(MungeSumstats::format_sumstats(
+        testthat::expect_error(MungeSumstats::format_sumstats(
           miss_extra_col,
           ref_genome = "GRCh37",
           on_ref_genome = FALSE,
@@ -87,7 +87,7 @@ test_that("Handle missing data", {
           allele_flip_check = FALSE,
           sort_coordinates = FALSE,
           dbSNP = 144, 
-          drop_na_cols = c("CHR", "POS")
+          drop_na_cols = c("CHRA", "APOS")
         )
         
         reformatted_extra_col_lines <- readLines(reformatted_extra_col)

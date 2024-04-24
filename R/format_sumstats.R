@@ -169,6 +169,12 @@
 #' dropped? These can not be checked against a reference dataset and will have
 #' the same RS ID and position as SNPs which can affect downstream analysis.
 #' Default is False.
+#' @param drop_na_cols A character vector of column names to be checked for 
+#' missing values. Rows with missing values in any of these columns (if present 
+#' in the dataset) will be dropped. If `NULL`, all columns will be checked for 
+#' missing values. Default columns are SNP, chromosome, position, allele 1, 
+#' allele2, effect columns (frequency, beta, Z-score, standard error, log odds,
+#' signed sumstats, odds ratio), p value and N columns. 
 #' @param dbSNP version of dbSNP to be used for imputation (144 or 155).
 #' @param check_dups whether to check for duplicates - if formatting QTL
 #' datasets this should be set to FALSE otherwise keep as TRUE. Default is TRUE.
@@ -221,11 +227,6 @@
 #' give is incorrect you can supply your own mapping file. Must be a 2 column
 #' dataframe with column names "Uncorrected" and "Corrected". See
 #' data(sumstatsColHeaders) for default mapping and necessary format.
-#' @param drop_na_cols A character vector of column names to be checked for missing values. 
-#' Rows with missing values in any of these columns (if present in the dataset) will be dropped. If `NULL`, 
-#' all columns will be checked for missing values. Default columns are SNP, 
-#' chromosome, position, allele 1, allele2, frequency, beta, standard error, p 
-#' value and N columns.
 #'
 #' @importFrom data.table fread
 #' @importFrom data.table fwrite
@@ -272,6 +273,10 @@ format_sumstats <- function(path,
                             frq_is_maf = TRUE,
                             indels = TRUE,
                             drop_indels  = FALSE,
+                            drop_na_cols = c("SNP", "CHR", "BP", "A1", "A2", 
+                                             "FRQ", "BETA", "Z", "OR", 
+                                             "LOG_ODDS", "SIGNED_SUMSTAT", "SE", 
+                                             "P", "N"),
                             dbSNP = 155,
                             check_dups = TRUE,
                             sort_coordinates = TRUE,
@@ -289,7 +294,6 @@ format_sumstats <- function(path,
                             imputation_ind = FALSE,
                             force_new = FALSE,
                             mapping_file = sumstatsColHeaders,
-                            drop_na_cols = c("SNP", "CHR", "BP", "A1", "A2", "FRQ", "BETA", "SE", "P", "N"),
                             #deprecated parameters
                             rmv_chrPrefix = NULL
                             ) {

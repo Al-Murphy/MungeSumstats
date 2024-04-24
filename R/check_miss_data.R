@@ -27,6 +27,17 @@ check_miss_data <- function(sumstats_dt, path, log_folder_ind, check_save_out,
         c(drop_na_cols)[drop_na_cols %in% names(sumstats_dt)]
       incl_cols <-
         c(drop_na_cols_in_sumstats)[!drop_na_cols_in_sumstats %in% ignore_cols]
+      if(length(incl_cols)<1){
+        msg <- paste0(
+          "WARNING: None of the inputted columns:\n",
+          paste(drop_na_cols,collapse=" "),"\n",
+          "To be checked for missing data were found in the sumstats. Sumstats",
+          " columns:\n",
+          paste(names(sumstats_dt),collapse=" "),"\n",
+          "This check will not be run."
+        )
+        message(msg)
+      }
     } else {
       incl_cols <- names(sumstats_dt)[!names(sumstats_dt) %in% ignore_cols]  
     }

@@ -11,7 +11,8 @@ check_miss_data(
   check_save_out,
   tabix_index,
   nThread,
-  log_files
+  log_files,
+  drop_na_cols
 )
 }
 \arguments{
@@ -31,6 +32,13 @@ FALSE.}
 \item{nThread}{Number of threads to use for parallel processes.}
 
 \item{log_files}{list of log file locations}
+
+\item{drop_na_cols}{A character vector of column names to be checked for
+missing values. Rows with missing values in any of these columns (if present
+in the dataset) will be dropped. If \code{NULL}, all columns will be checked for
+missing values. Default columns are SNP, chromosome, position, allele 1,
+allele2, effect columns (frequency, beta, Z-score, standard error, log odds,
+signed sumstats, odds ratio), p value and N columns.}
 }
 \value{
 list containing sumstats_dt, the modified summary statistics data
