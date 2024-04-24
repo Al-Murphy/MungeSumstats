@@ -24,6 +24,7 @@ liftover(
   end_col = start_col,
   as_granges = FALSE,
   style = "NCBI",
+  local_chain = NULL,
   verbose = TRUE
 )
 }
@@ -65,6 +66,12 @@ instead of a \link[data.table]{data.table} (default: \code{FALSE}).}
 
 \item{style}{Style to return \link[GenomicRanges]{GRanges} object in
 (e.g.  "NCBI" = 4; "UCSC" = "chr4";) (default: \code{"NCBI"}).}
+
+\item{local_chain}{Path to local chain file to use instead of downlaoding.
+Default of NULL i.e. no local file to use. NOTE if passing a local chain file
+make sure to specify the path to convert from and to the correct build like
+GRCh37 to GRCh38. We can not sense check this for local files. The chain file
+can be submitted as a gz file (as downloaed from source) or unzipped.}
 
 \item{verbose}{Print messages.}
 }

@@ -46,6 +46,7 @@ validate_parameters <- function(path,
                                 mapping_file,
                                 tabix_index,
                                 chain_source,
+                                local_chain,
                                 drop_na_cols,
                                 #deprecated parameters
                                 rmv_chrPrefix) {
@@ -89,6 +90,14 @@ validate_parameters <- function(path,
     if(length(chain_source)>1 || !tolower(chain_source) %in% c("ucsc",
                                                                "ensembl")){
       stop(chain_msg)
+    }
+    #check local chain file
+    if (!is.null(local_chain) && !file.exists(local_chain)){
+      lcl_chain_msg <- paste0(
+        "The local_chain parameter is invalid, please chose a valid path to a ",
+        "local chain file or leave as NULL to download a chain file."
+      )
+      stop(lcl_chain_msg)
     }
     #check dbSNP version
     avail_dbSNP <- c(144,155)

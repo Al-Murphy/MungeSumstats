@@ -48,6 +48,7 @@ validate_parameters(
   mapping_file,
   tabix_index,
   chain_source,
+  local_chain,
   drop_na_cols,
   rmv_chrPrefix
 )
@@ -236,6 +237,12 @@ data(sumstatsColHeaders) for default mapping and necessary format.}
 \item{chain_source}{source of the chain file to use in liftover, if converting
 genome build ("ucsc" or "ensembl"). Note that the UCSC chain files require a
 license for commercial use. The Ensembl chain is used by default ("ensembl").}
+
+\item{local_chain}{Path to local chain file to use instead of downlaoding.
+Default of NULL i.e. no local file to use. NOTE if passing a local chain file
+make sure to specify the path to convert from and to the correct build like
+GRCh37 to GRCh38. We can not sense check this for local files. The chain file
+can be submitted as a gz file (as downloaed from source) or unzipped.}
 
 \item{drop_na_cols}{A character vector of column names to be checked for
 missing values. Rows with missing values in any of these columns (if present

@@ -1,3 +1,9 @@
+## CHANGES IN VERSION 1.11.10
+
+### New features
+* Can now pass local chain files for liftover (`local_chain` in
+`format_sumstats()` and `liftover()`).
+
 ## CHANGES IN VERSION 1.11.9
 
 ### New features

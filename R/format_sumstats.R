@@ -48,6 +48,11 @@
 #' @param chain_source source of the chain file to use in liftover, if converting
 #' genome build ("ucsc" or "ensembl"). Note that the UCSC chain files require a
 #' license for commercial use. The Ensembl chain is used by default ("ensembl").
+#' @param local_chain Path to local chain file to use instead of downlaoding.
+#' Default of NULL i.e. no local file to use. NOTE if passing a local chain file
+#' make sure to specify the path to convert from and to the correct build like 
+#' GRCh37 to GRCh38. We can not sense check this for local files. The chain file
+#' can be submitted as a gz file (as downloaed from source) or unzipped.
 #' @param convert_small_p Binary, should non-negative
 #' p-values <= 5e-324 be converted to 0?
 #' Small p-values pass the R limit and can cause errors with LDSC/MAGMA and
@@ -239,6 +244,7 @@ format_sumstats <- function(path,
                             ref_genome = NULL,
                             convert_ref_genome = NULL,
                             chain_source = "ensembl",
+                            local_chain = NULL,
                             convert_small_p = TRUE,
                             convert_large_p = TRUE,
                             convert_neg_p = TRUE,
@@ -377,6 +383,7 @@ format_sumstats <- function(path,
             mapping_file = mapping_file,
             tabix_index = tabix_index,
             chain_source = chain_source,
+            local_chain = local_chain,
             drop_na_cols = drop_na_cols,
             #deprecated parameters
             rmv_chrPrefix = rmv_chrPrefix
@@ -1047,7 +1054,8 @@ format_sumstats <- function(path,
             convert_ref_genome = convert_ref_genome,
             ref_genome = ref_genome,
             imputation_ind = imputation_ind,
-            chain_source = chain_source
+            chain_source = chain_source,
+            local_chain = local_chain
         )
         #update ref genome of data
         if(!is.null(convert_ref_genome))

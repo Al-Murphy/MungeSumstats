@@ -123,6 +123,33 @@ test_that("liftover works", {
         # drop 1 row from org not in chain files
         ref_37_org <- ref_37_org[SNP %in% ref_37$SNP, ]
         expect_equal(all.equal(ref_37_org, ref_37), TRUE)
+        
+        #test local chain file
+        save_dir <- tempdir()
+        lcl_chain <- system.file("extdata",'GRCh37_to_GRCh38.chain.gz',
+                                 package="MungeSumstats")
+        copied <- R.utils::copyFile(
+          srcPathname = lcl_chain,
+          overwrite=TRUE,
+          save_dir)
+        reformatted4 <- MungeSumstats::format_sumstats(
+          path = file,
+          ref_genome = "GRCh37",
+          on_ref_genome = TRUE,
+          convert_ref_genome = "GRCh38",
+          strand_ambig_filter = FALSE,
+          bi_allelic_filter = FALSE,
+          allele_flip_check = FALSE,
+          log_folder_ind = TRUE,
+          imputation_ind = TRUE,
+          dbSNP=144,
+          local_chain = paste0(save_dir,'/GRCh37_to_GRCh38.chain.gz')
+        )
+        lcl_ss <- data.table::fread(reformatted$sumstats)
+        remote_ss <- data.table::fread(reformatted4$sumstats)
+        expect_equal(all.equal(lcl_ss,remote_ss))
+        
+        
     } else {
        expect_equal((is_32bit_windows||!Sys.info()["sysname"]=="Linux"), TRUE)
     }

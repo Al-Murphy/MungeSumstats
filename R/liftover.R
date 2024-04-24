@@ -50,6 +50,7 @@ liftover <- function(sumstats_dt,
                      end_col = start_col, 
                      as_granges = FALSE,
                      style = "NCBI",
+                     local_chain = NULL,
                      verbose = TRUE) {
     
     IMPUTATION_gen_build <- width <- strand <- end <- seqnames <- NULL;
@@ -62,6 +63,14 @@ liftover <- function(sumstats_dt,
     if(length(chain_source)>1 || !tolower(chain_source) %in% c("ucsc", 
                                                                "ensembl")){
       stop(chain_msg)
+    }
+    #check local chain file
+    if (!is.null(local_chain) && !file.exists(local_chain)){
+      lcl_chain_msg <- paste0(
+        "The local_chain parameter is invalid, please chose a valid path to a ",
+        "local chain file or leave as NULL to download a chain file."
+      )
+      stop(lcl_chain_msg)
     }
     #Only continue with checks if user specifies a genome to convert to
     if (!is.null(convert_ref_genome)){
@@ -110,12 +119,24 @@ liftover <- function(sumstats_dt,
               end.field = end_col
           )
           #### Specify chain file ####
-          chain <- get_chain_file(
+          if (is.null(local_chain)) {
+            if (verbose) {message("Downloading chain file...")}
+            chain <- get_chain_file(
               from = query_ucsc,
               to = target_ucsc,
               chain_source = chain_source,
               verbose = verbose
-          )
+            )
+          }
+          else {
+            if (verbose) {message("Using local chain file...")}
+            #unzip if necessary
+            filetype = summary(file(local_chain))$class
+            if(filetype=='gzfile'){
+              local_chain <- R.utils::gunzip(local_chain, overwrite=TRUE)
+            }
+            chain <- rtracklayer::import.chain(local_chain)
+          }
           #### Liftover ####
           gr_lifted <- unlist(rtracklayer::liftOver(
               x = gr,

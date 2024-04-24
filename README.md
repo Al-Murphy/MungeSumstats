@@ -11,7 +11,7 @@
 <!-- badges: start -->
 
 [![](https://img.shields.io/badge/release%20version-1.10.1-black.svg)](https://www.bioconductor.org/packages/MungeSumstats)
-[![](https://img.shields.io/badge/devel%20version-1.11.9-black.svg)](https://github.com/neurogenomics/MungeSumstats)
+[![](https://img.shields.io/badge/devel%20version-1.11.10-black.svg)](https://github.com/neurogenomics/MungeSumstats)
 [![R build
 status](https://github.com/neurogenomics/MungeSumstats/workflows/rworkflows/badge.svg)](https://github.com/neurogenomics/MungeSumstats/actions)
 [![](https://img.shields.io/github/last-commit/neurogenomics/MungeSumstats.svg)](https://github.com/neurogenomics/MungeSumstats/commits/master)
@@ -151,6 +151,7 @@ We would like to acknowledge all those who have contributed to
 - [Kitty Murphy](https://github.com/KittyMurphy)
 - [Mykhaylo Malakhov](https://github.com/MykMal)
 - [Alasdair Warwick](https://github.com/rmgpanw)
+- [Ao Lu](https://github.com/leoarrow1)
 
 # References
 
