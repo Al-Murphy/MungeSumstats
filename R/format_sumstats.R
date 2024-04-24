@@ -221,6 +221,11 @@
 #' give is incorrect you can supply your own mapping file. Must be a 2 column
 #' dataframe with column names "Uncorrected" and "Corrected". See
 #' data(sumstatsColHeaders) for default mapping and necessary format.
+#' @param drop_na_cols A character vector of column names to be checked for missing values. 
+#' Rows with missing values in any of these columns (if present in the dataset) will be dropped. If `NULL`, 
+#' all columns will be checked for missing values. Default columns are SNP, 
+#' chromosome, position, allele 1, allele2, frequency, beta, standard error, p 
+#' value and N columns.
 #'
 #' @importFrom data.table fread
 #' @importFrom data.table fwrite
@@ -284,6 +289,7 @@ format_sumstats <- function(path,
                             imputation_ind = FALSE,
                             force_new = FALSE,
                             mapping_file = sumstatsColHeaders,
+                            drop_na_cols = c("SNP", "CHR", "BP", "A1", "A2", "FRQ", "BETA", "SE", "P", "N"),
                             #deprecated parameters
                             rmv_chrPrefix = NULL
                             ) {
@@ -367,6 +373,7 @@ format_sumstats <- function(path,
             mapping_file = mapping_file,
             tabix_index = tabix_index,
             chain_source = chain_source,
+            drop_na_cols = drop_na_cols,
             #deprecated parameters
             rmv_chrPrefix = rmv_chrPrefix
         )
@@ -773,7 +780,8 @@ format_sumstats <- function(path,
                 check_save_out = check_save_out,
                 tabix_index = tabix_index,
                 nThread = nThread,
-                log_files = log_files
+                log_files = log_files,
+                drop_na_cols = drop_na_cols
             )
         # update values
         log_files <- sumstats_return$log_files
