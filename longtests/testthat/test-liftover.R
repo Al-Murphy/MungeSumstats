@@ -147,7 +147,7 @@ test_that("liftover works", {
         )
         lcl_ss <- data.table::fread(reformatted$sumstats)
         remote_ss <- data.table::fread(reformatted4$sumstats)
-        expect_equal(all.equal(lcl_ss,remote_ss))
+        expect_equal(all.equal(lcl_ss,remote_ss),TRUE)
         
         
     } else {
