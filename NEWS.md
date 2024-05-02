@@ -1,3 +1,8 @@
+## CHANGES IN VERSION 1.13.1
+
+### New features
+* Mapping for OA (other Alllele) added to A1.
+
 ## CHANGES IN VERSION 1.11.10
 
 ### New features
