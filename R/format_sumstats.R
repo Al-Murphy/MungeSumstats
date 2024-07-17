@@ -482,6 +482,10 @@ format_sumstats <- function(path,
                                 "Corrected"=rep("ES",14))
           mapping_file <- rbind(mapping_file,es_cols)
         }
+        
+        #### Check 40:Check for log10 p instead of p ####
+        sumstats_return <-
+          read_log_pval(sumstats_dt = sumstats_return$sumstats_dt)
 
         #### Check 2:Check for effect direction ####
         sumstats_return <-

@@ -1,3 +1,8 @@
+## CHANGES IN VERSION 1.13.2
+
+### New features
+* Handling of -log10 p-values (outside of VCFs) added.
+
 ## CHANGES IN VERSION 1.13.1
 
 ### New features

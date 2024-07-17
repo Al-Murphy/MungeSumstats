@@ -136,7 +136,8 @@ read_vcf <- function(path,
     #### Prepare SNP column ####
     read_vcf_markername(sumstats_dt = vcf_dt)
     #### Prepare/un-log P col ####
-    read_vcf_pval(sumstats_dt = vcf_dt)
+    sumstats_dt <- read_log_pval(sumstats_dt = vcf_dt,
+                                 return_list=FALSE)
     #### Prepare INFO col ####
     read_vcf_info(sumstats_dt = vcf_dt)
     #### Rename start col #####
