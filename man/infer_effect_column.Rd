@@ -64,7 +64,7 @@ tested (unambiguous so fine for MSS to handle as is).
 mentioned, if found then  we know the direction and should update A1/A2
 naming so A2 is the effect column. We can look for such columns by getting
 every combination of A1/A2 naming and effect/frq naming.
-\item If note found in 2, a final check should be against the reference genome,
+\item If not found in 2, a final check should be against the reference genome,
 whichever of A1 and A2 has more of a match with the reference genome should
 be taken as \strong{not} the effect allele. There is an assumption in this but is
 still better than guessing the ambiguous allele naming.

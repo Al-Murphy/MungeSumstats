@@ -1,3 +1,11 @@
+## CHANGES IN VERSION 1.12.1
+
+### Bug fix
+* Bug fix for check 3 in infer effect column - previously A1 & A2 were swapped 
+when there were more matches for the ref genome in A1 rather than A2 which was 
+incorrect. Corrected now so it will only be flipped when A2 has more matches 
+to the reference genome.
+
 ## CHANGES IN VERSION 1.11.10
 
 ### New features

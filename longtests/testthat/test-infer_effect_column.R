@@ -71,7 +71,7 @@ test_that("Test infer effect column function works", {
               "rs11689269","rs11690172")
     d <- copy(b)
     data.table::setnames(d,"BETA1","BETA")
-    d_for <- MungeSumstats::format_sumstats(d[SNP %in% snps,], return_data = TRUE, 
+    d_for <- MungeSumstats::format_sumstats(d[!SNP %in% snps,], return_data = TRUE, 
                                             on_ref_genome = TRUE,
                                             #all just make MSS run faster
                                             ref_genome = 'GRCh37',
@@ -82,7 +82,7 @@ test_that("Test infer effect column function works", {
     data.table::setkey(b_renamed_for,"SNP")
     data.table::setkey(d_for,"SNP")
     testthat::expect_equal(
-      all.equal(b_renamed_for[SNP %in% snps], d_for,
+      all.equal(b_renamed_for[!SNP %in% snps], d_for,
                 ignore.col.order = TRUE),
       TRUE
     )

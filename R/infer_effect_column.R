@@ -11,7 +11,7 @@
 #' mentioned, if found then  we know the direction and should update A1/A2 
 #' naming so A2 is the effect column. We can look for such columns by getting 
 #' every combination of A1/A2 naming and effect/frq naming.
-#' 3. If note found in 2, a final check should be against the reference genome, 
+#' 3. If not found in 2, a final check should be against the reference genome, 
 #' whichever of A1 and A2 has more of a match with the reference genome should 
 #' be taken as **not** the effect allele. There is an assumption in this but is 
 #' still better than guessing the ambiguous allele naming.
@@ -49,13 +49,14 @@ infer_effect_column <-
       # vs those that are interpretable
       colnames(mapping_file) <- toupper(colnames(mapping_file))
       allele_mapping <- mapping_file[mapping_file$CORRECTED %in% c('A1','A2'),]
-      ambig_allele_map <- allele_mapping[grepl('1',allele_mapping$UNCORRECTED)|
-                                           grepl('2',allele_mapping$UNCORRECTED),]
+      ambig_allele_map <- 
+        allele_mapping[grepl('1',allele_mapping$UNCORRECTED)|
+                         grepl('2',allele_mapping$UNCORRECTED),]
       unambig_allele_map <- 
         allele_mapping[!(grepl('1',allele_mapping$UNCORRECTED)|
                            grepl('2',allele_mapping$UNCORRECTED)),]
-      #as long as the sumstats contains 1 unambiguous allele column MSS will work
-      #as expected
+      #as long as the sumstats contains 1 unambiguous allele column MSS will
+      #work as expected
       unambig_cols <- intersect(unambig_allele_map$UNCORRECTED,
                                 toupper(column_headers))
       ambig_cols <- intersect(ambig_allele_map$UNCORRECTED,
@@ -68,11 +69,11 @@ infer_effect_column <-
         #get corrected name for unambig 
         unambig_corrcted <- 
           unique(allele_mapping[allele_mapping$UNCORRECTED %in% unambig_cols,
-                                ]$CORRECTED)
+          ]$CORRECTED)
         #check if any ambig are to the same allele
         ambig_corrcted <- 
           unique(allele_mapping[allele_mapping$UNCORRECTED %in% ambig_cols,
-                                ]$CORRECTED)
+          ]$CORRECTED)
         #overlap?
         ambig_corrcted_rnme <- 
           ambig_corrcted[ambig_corrcted %in% unambig_corrcted]
@@ -81,13 +82,14 @@ infer_effect_column <-
           message("Renaming ambiguous allele columns so they won't be used")
           #get the related ambig naming and change there name so won't be used
           ambig_uncorrcted_rnme <- 
-            ambig_allele_map[ambig_allele_map$CORRECTED %in% ambig_corrcted_rnme,
-                             ]$UNCORRECTED
+            ambig_allele_map[ambig_allele_map$CORRECTED %in% 
+                               ambig_corrcted_rnme,]$UNCORRECTED
           #now rename any matches in sumstats
           chng_nmes <- column_headers[toupper(column_headers) %in% 
-                                       ambig_uncorrcted_rnme]
+                                        ambig_uncorrcted_rnme]
           for(chng_i in chng_nmes){
-            data.table::setnames(sumstats_dt, chng_i, paste0(chng_i,"_INPUTTED"))
+            data.table::setnames(sumstats_dt, chng_i, 
+                                 paste0(chng_i,"_INPUTTED"))
           }
         }
       } else if (length(unambig_cols)==0 && length(ambig_cols)>=2){
@@ -95,7 +97,7 @@ infer_effect_column <-
         #less than 2 in total means allele info is missing which MSS can try fill
         #in later
         message("Allele columns are ambiguous, attempting to infer direction")
-        #get names for allele mared eff/frq columns
+        #get names for allele marked eff/frq columns
         eff_frq_allele_matches <- get_eff_frq_allele_combns()
         #now look for matches in sumstats
         fnd_allele_indicator <- 
@@ -107,10 +109,10 @@ infer_effect_column <-
           a1_mtch <- sum(grepl("A1",fnd_allele_indicator))
           a2_mtch <- sum(grepl("A2",fnd_allele_indicator))
           if(a2_mtch>=a1_mtch){
-            message("Effect/frq column(s) relate to A2 in the inputted sumstats")
+            message("Effect/frq column(s) relate to A2 in the sumstats")
             #this is what MSS expects so no action required
           }else{#a2_mtch<a1_mtch
-            message("Effect/frq column(s) relate to A1 in the inputted sumstats")
+            message("Effect/frq column(s) relate to A1 in the sumstats")
             #this is the opposite to what MSS expects so switch A1/A2 naming
             #first get corrected names for allele columns then switch
             for (headerI in seq_len(nrow(mapping_file))) {
@@ -146,9 +148,9 @@ infer_effect_column <-
               ref_genome = ref_genome
             )
             if(is.logical(switch_req)){
-              message(paste0("Found direction from matchine reference genome - N",
-                             "OTE this assumes non-effect allele will macth the ",
-                             "reference genome"))
+              message(paste0("Found direction from matching reference genome -",
+                             " NOTE this assumes non-effect allele will match ",
+                             "the reference genome"))
               if(isTRUE(switch_req)){
                 #swap A1 and A2
                 #this is the opposite to what MSS expects so switch A1/A2 naming
