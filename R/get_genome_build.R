@@ -181,6 +181,7 @@ get_genome_build <- function(sumstats,
                                on = c("SNP"="SNP","pos"="BP","seqnames"="CHR"),
                                nomatch = FALSE
           ])
+        
         if (num_37 > num_38) {
           ref_gen_num <- num_37
           ref_genome <- "GRCH37"
@@ -221,11 +222,12 @@ get_genome_build <- function(sumstats,
                                  "ref_allele"="A2","alt_alleles"="A1"),
                           nomatch = FALSE
         ])
-      if(num_a2>=num_a1){
+
+      if(num_a1>=num_a2){
         message("Effect/frq column(s) relate to A2 in the inputted sumstats")
         #this is what MSS expects so no action required
         switch_req <- FALSE
-      }else{#num_a2<num_a1
+      }else{#num_a1<num_a2
         message("Effect/frq column(s) relate to A1 in the inputted sumstats")
         switch_req <- TRUE
       }

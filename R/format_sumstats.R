@@ -486,7 +486,7 @@ format_sumstats <- function(path,
         #### Check 40:Check for log10 p instead of p ####
         sumstats_return <-
           read_log_pval(sumstats_dt = sumstats_return$sumstats_dt)
-
+ 
         #### Check 2:Check for effect direction ####
         sumstats_return <-
           infer_effect_column(
