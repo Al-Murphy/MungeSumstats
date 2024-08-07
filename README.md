@@ -4,29 +4,27 @@
 <i>Authors</i>: Alan Murphy, Brian Schilder and Nathan Skene  
 </h5>
 <h5>  
-<i>Updated</i>: Apr-24-2024  
+<i>Updated</i>: Aug-07-2024  
 </h5>
 
 <!-- Readme.md is generated from Readme.Rmd. Please edit that file -->
 <!-- badges: start -->
 
 [![](https://img.shields.io/badge/release%20version-1.10.1-black.svg)](https://www.bioconductor.org/packages/MungeSumstats)
-[![](https://img.shields.io/badge/devel%20version-1.11.10-black.svg)](https://github.com/neurogenomics/MungeSumstats)
-[![R build
-status](https://github.com/neurogenomics/MungeSumstats/workflows/rworkflows/badge.svg)](https://github.com/neurogenomics/MungeSumstats/actions)
+[![](https://img.shields.io/badge/devel%20version-1.13.4-black.svg)](https://github.com/neurogenomics/MungeSumstats)
 [![](https://img.shields.io/github/last-commit/neurogenomics/MungeSumstats.svg)](https://github.com/neurogenomics/MungeSumstats/commits/master)
-[![](https://codecov.io/gh/neurogenomics/MungeSumstats/branch/master/graph/badge.svg)](https://codecov.io/gh/neurogenomics/MungeSumstats)
-[![](https://img.shields.io/badge/download-15314/total-blue.svg)](https://bioconductor.org/packages/stats/bioc/MungeSumstats)
+[![](https://img.shields.io/badge/download-19161/total-blue.svg)](https://bioconductor.org/packages/stats/bioc/MungeSumstats)
 [![License:
 Artistic-2.0](https://img.shields.io/badge/license-Artistic--2.0-blue.svg)](https://cran.r-project.org/web/licenses/Artistic-2.0)
 [![](https://img.shields.io/badge/doi-https://doi.org/10.1093/bioinformatics/btab665-blue.svg)](https://doi.org/https://doi.org/10.1093/bioinformatics/btab665)
 <!-- badges: end -->
+<!--[![R build status](https://github.com/neurogenomics/MungeSumstats/workflows/rworkflows/badge.svg)](https://github.com/neurogenomics/MungeSumstats/actions)-->
+<!--`[![](https://codecov.io/gh/neurogenomics/MungeSumstats/branch/master/graph/badge.svg)](https://codecov.io/gh/neurogenomics/MungeSumstats) -->
 
 # Introduction
 
 The `MungeSumstats` package is designed to facilitate the
-standardisation of GWAS summary statistics as utilised in our Nature
-Genetics paper<sup>1</sup>.
+standardisation of GWAS summary statistics.
 
 ## Overview
 
@@ -58,8 +56,8 @@ as well as:
 # Installing `MungeSumstats`
 
 `MungeSumstats` is available on
-[Bioconductor](https://bioconductor.org/packages/MungeSumstats)
-(≥v3.13). To install `MungeSumstats` on Bioconductor run:
+[Bioconductor](https://bioconductor.org/packages/MungeSumstats). To
+install `MungeSumstats` on Bioconductor run:
 
 ``` r
 if (!require("BiocManager")) install.packages("BiocManager")
@@ -104,17 +102,17 @@ your data.
 # Getting started
 
 See the [Getting started vignette
-website](https://neurogenomics.github.io/MungeSumstats/articles/MungeSumstats.html)
+website](https://al-murphy.github.io/MungeSumstats/articles/MungeSumstats.html)
 for up-to-date instructions on usage.
 
 See the [OpenGWAS vignette
-website](https://neurogenomics.github.io/MungeSumstats/articles/OpenGWAS.html)
+website](https://al-murphy.github.io/MungeSumstats/articles/OpenGWAS.html)
 for information on how to use MungeSumstats to access, standardise and
 perform quality control on GWAS Summary Statistics from the MRC IEU
 [Open GWAS Project](https://gwas.mrcieu.ac.uk/).
 
 If you have any problems please do file an
-[Issue](https://github.com/neurogenomics/MungeSumstats/issues) here on
+[Issue](https://github.com/al-murphy/MungeSumstats/issues) here on
 GitHub.
 
 # Future Enhancements
@@ -122,7 +120,7 @@ GitHub.
 The `MungeSumstats` package aims to be able to handle the most common
 summary statistic file formats including VCF. If your file can not be
 formatted by `MungeSumstats` feel free to report the
-[Issue](https://github.com/neurogenomics/MungeSumstats/issues) on GitHub
+[Issue](https://github.com/al-murphy/MungeSumstats/issues) on GitHub
 along with your summary statistics file header.
 
 We also encourage people to edit the code to resolve their particular
@@ -135,8 +133,8 @@ github. If your summary statistic file headers are not recognised by
 
 Feel free to update the `data("sumstatsColHeaders")` following the
 approach in the *data.R* file and add your mapping. Then use a [Pull
-Request](https://github.com/neurogenomics/MungeSumstats/pulls) on GitHub
-and we will incorporate this change into the package.
+Request](https://github.com/al-murphy/MungeSumstats/pulls) on GitHub and
+we will incorporate this change into the package.
 
 # Contributors
 
@@ -152,19 +150,3 @@ We would like to acknowledge all those who have contributed to
 - [Mykhaylo Malakhov](https://github.com/MykMal)
 - [Alasdair Warwick](https://github.com/rmgpanw)
 - [Ao Lu](https://github.com/leoarrow1)
-
-# References
-
-<div id="refs" class="references csl-bib-body" line-spacing="2">
-
-<div id="ref-Skene2018" class="csl-entry">
-
-<span class="csl-left-margin">1.
-</span><span class="csl-right-inline">Nathan G. Skene, T. E. B., Julien
-Bryois. Genetic identification of brain cell types underlying
-schizophrenia. *Nature Genetics* (2018).
-doi:[10.1038/s41588-018-0129-5](https://doi.org/10.1038/s41588-018-0129-5)</span>
-
-</div>
-
-</div>
