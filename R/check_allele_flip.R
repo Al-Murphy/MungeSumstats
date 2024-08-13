@@ -96,7 +96,6 @@ check_allele_flip <- function(sumstats_dt, path,
         sumstats_dt[is.na(ref_gen_allele), match_type := TRUE]
         sumstats_dt[A1 == ref_gen_allele, match_type := TRUE]
         sumstats_dt[A2 == ref_gen_allele, match_type := FALSE]
-        print(sumstats_dt)
         # drop cases that don't match either
         if (allele_flip_drop &&
             nrow(sumstats_dt[A1 != ref_gen_allele &
