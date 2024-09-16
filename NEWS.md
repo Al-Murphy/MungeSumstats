@@ -1,3 +1,8 @@
+## CHANGES IN VERSION 1.13.6
+
+### New features
+* Mappings added to mapping file for risk and non risk allele.
+
 ## CHANGES IN VERSION 1.13.3
 
 ### Bug fix
