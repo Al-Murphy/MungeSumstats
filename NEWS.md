@@ -1,3 +1,16 @@
+## CHANGES IN VERSION 1.13.7
+
+### Bug fix
+* `infer_eff_direction` now includes A0 as an ambiguous case as well as A1/A2.
+
+### New features
+* `eff_on_minor_alleles` parameter added (off by default) - controls whether 
+MungeSumstats should assume that the effects are majoritively measured on the 
+minor alleles. Default is FALSE as this is an assumption that won't be 
+appropriate in all cases. However, the benefit is that if we know the majority 
+of SNPs have their effects based on the minor alleles, we can catch cases where 
+the allele columns have been mislabelled. 
+
 ## CHANGES IN VERSION 1.13.6
 
 ### New features

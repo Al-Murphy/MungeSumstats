@@ -22,7 +22,8 @@
 #' This should help speed up cases where you have to read in \code{sumstats}
 #' from disk each time.
 #' @param allele_match_ref Instead of returning the genome_build this will 
-#' return the propotion of matches to each genome build for each allele (A1,A2).
+#' return the proportion of matches to each genome build for each allele 
+#' (A1,A2).
 #' @inheritParams format_sumstats
 #' @inheritParams get_genome_builds 
 #' 

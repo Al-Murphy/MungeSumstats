@@ -19,7 +19,7 @@ get_eff_frq_allele_combns <-
       mapping_file[mapping_file$CORRECTED %in% eff_frq_cols,]$UNCORRECTED
     #join with all allele cols
     allele_uncorrc <- 
-      mapping_file[mapping_file$CORRECTED %in% c('A1','A2'),]$UNCORRECTED
+      mapping_file[mapping_file$CORRECTED %in% c('A1','A2','A*'),]$UNCORRECTED
     #get combinations
     eff_frq_allele_dt <- 
       data.table::as.data.table(expand.grid(eff_frq_cols_uncorrc, 
@@ -51,25 +51,35 @@ get_eff_frq_allele_combns <-
     eff_frq_allele_matches <- data.table::rbindlist(all_combns)
     #finally add some custom ones 
     custom_adds <- data.table::data.table("UNCORRECTED" = 
-                                            c("BETA1", "BETA2","AF1","AF2",
+                                            c("BETA1", "BETA2","BETA0",
+                                              "AF1","AF2","AF0",
                                               "FREQ.A1.1000G.EUR",
                                               "FREQ.A2.1000G.EUR",
+                                              "FREQ.A0.1000G.EUR",
                                               "FREQ.A1.ESP.EUR",
                                               "FREQ.A2.ESP.EUR",
+                                              "FREQ.A0.ESP.EUR",
                                               "FREQ.ALLELE1.HAPMAPCEU",
                                               "FREQ.ALLELE2.HAPMAPCEU",
-                                              "FREQ1","FREQ2", 
-                                              "FREQ1.HAPMAP","FREQ2.HAPMAP"),
+                                              "FREQ.ALLELE0.HAPMAPCEU",
+                                              "FREQ1","FREQ2","FREQ0", 
+                                              "FREQ1.HAPMAP","FREQ2.HAPMAP",
+                                              "FREQ0.HAPMAP"),
                                           "CORRECTED" = 
-                                            c("BETA", "BETA","FRQ","FRQ",
+                                            c("BETA", "BETA","BETA",
+                                              "FRQ","FRQ","FRQ",
                                               "FRQ",
                                               "FRQ",
                                               "FRQ",
                                               "FRQ",
                                               "FRQ",
                                               "FRQ",
+                                              "FRQ",
+                                              "FRQ",
+                                              "FRQ",
+                                              "FRQ","FRQ","FRQ",
                                               "FRQ","FRQ",
-                                              "FRQ","FRQ"))
+                                              "FRQ"))
     eff_frq_allele_matches <- data.table::rbindlist(list(
       eff_frq_allele_matches,custom_adds))
     

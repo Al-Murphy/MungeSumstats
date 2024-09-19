@@ -22,6 +22,7 @@ validate_parameters <- function(path,
                                 rmv_chr,
                                 on_ref_genome,
                                 infer_eff_direction,
+                                eff_on_minor_alleles,
                                 strand_ambig_filter,
                                 allele_flip_check,
                                 allele_flip_drop,
@@ -238,6 +239,9 @@ validate_parameters <- function(path,
     }
     if(!is.logical(infer_eff_direction)){
       stop("infer_eff_direction must be either TRUE or FALSE")
+    }
+    if(!is.logical(eff_on_minor_alleles)){
+      stop("eff_on_minor_alleles must be either TRUE or FALSE")
     }
     if (!is.logical(strand_ambig_filter)) {
         stop("strand_ambig_filter must be either TRUE or FALSE")

@@ -9,6 +9,9 @@
 #' @param uppercase_unmapped For columns that could not be identified in 
 #' the \code{mapping_file}, return them in the same format they were input as
 #'  (without forcing them to uppercase). 
+#' @param convert_A0 Whether to convert A* (representing A0) to A1/A2. This 
+#' should be done unless checking if A0 was present in the input as if you do 
+#' it you can't infer this. Default is TRUE   
 #' @inheritParams format_sumstats 
 #' @inheritParams compute_nsize
 #' @return list containing sumstats_dt, the modified summary statistics data
@@ -23,6 +26,7 @@ standardise_header <- standardise_sumstats_column_headers_crossplatform <-
     function(sumstats_dt,
              mapping_file = sumstatsColHeaders,
              uppercase_unmapped=TRUE,
+             convert_A0 = TRUE,
              return_list=TRUE) {
         message("Standardising column headers.")
         message("First line of summary statistics file: ")
@@ -56,12 +60,12 @@ standardise_header <- standardise_sumstats_column_headers_crossplatform <-
         # but usually A1/A2 -> ref/alt so if A* found,
         # swap A1 to A2 and make A* -> A1
         new_headers <- colnames(sumstats_dt)
-        if ("A*" %in% new_headers) {
+        if ("A*" %in% new_headers && isTRUE(convert_A0)) {
             # if A1 and A2 also present need to rename A2
             if ("A1" %in% new_headers && "A2" %in% new_headers) {
                 data.table::setnames(sumstats_dt, "A2", "A2_from_input")
             }
-            # if A1 present change to A2, doesn't have to be, can be inputted
+            # if A1 present change to A2, doesn't have to be, can be imputted
             data.table::setnames(sumstats_dt, "A1", "A2", skip_absent = TRUE)
             data.table::setnames(sumstats_dt, "A*", "A1")
         }

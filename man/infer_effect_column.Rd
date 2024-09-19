@@ -13,6 +13,7 @@ infer_effect_column(
   ref_genome = NULL,
   on_ref_genome = TRUE,
   infer_eff_direction = TRUE,
+  eff_on_minor_alleles = FALSE,
   return_list = TRUE
 )
 }
@@ -44,6 +45,13 @@ the reference genome by SNP ID. Default is TRUE.}
 \item{infer_eff_direction}{Binary Should a check take place to ensure the
 alleles match the effect direction? Default is TRUE.}
 
+\item{eff_on_minor_alleles}{Binary Should MungeSumstats assume that the
+effects are majoritively measured on the minor alleles? Default is FALSE as
+this is an assumption that won't be appropriate in all cases. However, the
+benefit is that if we know the majority of SNPs have their effects based on
+the minor alleles, we can catch cases where the allele columns have been
+mislabelled.}
+
 \item{return_list}{Return the \code{sumstats_dt} within a named list
 (default: \code{TRUE}).}
 }
@@ -53,22 +61,31 @@ table object
 }
 \description{
 Three checks are made to infer which allele the effect/frequency information
-relates to if they are ambiguous (named A1 and A2 or equivalent):
+relates to if they are ambiguous (named A0, A1 and A2 or equivalent):
 \enumerate{
-\item Check if ambiguous naming conventions are used (i.e. allele 1 and 2 or
+\item Check if ambiguous naming conventions are used (i.e. allele 0, 1 and 2 or
 equivalent). If not exit, otherwise continue to next checks. This can be
 checked by using the mapping file and splitting A1/A2 mappings by those that
-contain 1 or 2 (ambiguous) or doesn't contain 1 or 2 e.g. effect,
+contain 0, 1 or 2 (ambiguous) or doesn't contain 0, 1 or 2 e.g. effect,
 tested (unambiguous so fine for MSS to handle as is).
-\item Look for effect column/frequency column where the A1/A2 explicitly
-mentioned, if found then  we know the direction and should update A1/A2
+\item Look for effect column/frequency column where the A0/A1/A2 explicitly
+mentioned, if found then  we know the direction and should update A0/A1/A2
 naming so A2 is the effect column. We can look for such columns by getting
-every combination of A1/A2 naming and effect/frq naming.
+every combination of A0/A1/A2 naming and effect/frq naming.
 \item If not found in 2, a final check should be against the reference genome,
-whichever of A1 and A2 has more of a match with the reference genome should
-be taken as \strong{not} the effect allele. There is an assumption in this but is
-still better than guessing the ambiguous allele naming.
+whichever of A0, A1 and A2 has more of a match with the reference genome
+should be taken as \strong{not} the effect allele. There is an assumption in this
+but is still better than guessing the ambiguous allele naming.
 }
+}
+\details{
+Also, if eff_on_minor_alleles=TRUE, check 3 will be used in all cases.
+However, This assumes that the effects are majoritively measured on the
+minor alleles and should be used with caution as this is an assumption that
+won't be appropriate in all cases. However, the benefit is that if we know
+the majority of SNPs have their effects based on the minor alleles, we can
+catch cases where the allele columns have been mislabelled. IF
+eff_on_minor_alleles=TRUE, checks 1 and 2 will be skipped.
 }
 \examples{
 sumstats <- MungeSumstats::formatted_example()

@@ -24,6 +24,7 @@ validate_parameters(
   rmv_chr,
   on_ref_genome,
   infer_eff_direction,
+  eff_on_minor_alleles,
   strand_ambig_filter,
   allele_flip_check,
   allele_flip_drop,
@@ -133,6 +134,13 @@ the reference genome by SNP ID. Default is TRUE.}
 
 \item{infer_eff_direction}{Binary Should a check take place to ensure the
 alleles match the effect direction? Default is TRUE.}
+
+\item{eff_on_minor_alleles}{Binary Should MungeSumstats assume that the
+effects are majoritively measured on the minor alleles? Default is FALSE as
+this is an assumption that won't be appropriate in all cases. However, the
+benefit is that if we know the majority of SNPs have their effects based on
+the minor alleles, we can catch cases where the allele columns have been
+mislabelled.}
 
 \item{strand_ambig_filter}{Binary Should SNPs with strand-ambiguous alleles
 be removed. Default is FALSE.}

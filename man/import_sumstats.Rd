@@ -158,6 +158,12 @@ which removes all non-autosomal SNPs.}
 the reference genome by SNP ID. Default is TRUE.}
     \item{\code{infer_eff_direction}}{Binary Should a check take place to ensure the
 alleles match the effect direction? Default is TRUE.}
+    \item{\code{eff_on_minor_alleles}}{Binary Should MungeSumstats assume that the
+effects are majoritively measured on the minor alleles? Default is FALSE as
+this is an assumption that won't be appropriate in all cases. However, the
+benefit is that if we know the majority of SNPs have their effects based on
+the minor alleles, we can catch cases where the allele columns have been
+mislabelled.}
     \item{\code{strand_ambig_filter}}{Binary Should SNPs with strand-ambiguous alleles
 be removed. Default is FALSE.}
     \item{\code{allele_flip_check}}{Binary Should the allele columns be checked against

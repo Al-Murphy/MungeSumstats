@@ -134,6 +134,12 @@
 #' the reference genome by SNP ID. Default is TRUE.
 #' @param infer_eff_direction Binary Should a check take place to ensure the 
 #' alleles match the effect direction? Default is TRUE.
+#' @param eff_on_minor_alleles Binary Should MungeSumstats assume that the 
+#' effects are majoritively measured on the minor alleles? Default is FALSE as
+#' this is an assumption that won't be appropriate in all cases. However, the 
+#' benefit is that if we know the majority of SNPs have their effects based on 
+#' the minor alleles, we can catch cases where the allele columns have been 
+#' mislabelled.
 #' @param strand_ambig_filter Binary Should SNPs with strand-ambiguous alleles
 #' be removed. Default is FALSE.
 #' @param allele_flip_check Binary Should the allele columns be checked against
@@ -267,6 +273,7 @@ format_sumstats <- function(path,
                             rmv_chr = c("X", "Y", "MT"),
                             on_ref_genome = TRUE,
                             infer_eff_direction = TRUE,
+                            eff_on_minor_alleles = FALSE,
                             strand_ambig_filter = FALSE,
                             allele_flip_check = TRUE,
                             allele_flip_drop = TRUE,
@@ -359,6 +366,7 @@ format_sumstats <- function(path,
             rmv_chr = rmv_chr,
             on_ref_genome = on_ref_genome,
             infer_eff_direction = infer_eff_direction,
+            eff_on_minor_alleles = eff_on_minor_alleles,
             strand_ambig_filter = strand_ambig_filter,
             allele_flip_check = allele_flip_check,
             allele_flip_drop = allele_flip_drop,
@@ -496,7 +504,8 @@ format_sumstats <- function(path,
             nThread = nThread,
             ref_genome = ref_genome,
             on_ref_genome = on_ref_genome,
-            infer_eff_direction = infer_eff_direction
+            infer_eff_direction = infer_eff_direction,
+            eff_on_minor_alleles = eff_on_minor_alleles
           )
         
         #### Check 3:Standardise headers for all OS ####

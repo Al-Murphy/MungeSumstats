@@ -9,6 +9,7 @@ standardise_header(
   sumstats_dt,
   mapping_file = sumstatsColHeaders,
   uppercase_unmapped = TRUE,
+  convert_A0 = TRUE,
   return_list = TRUE
 )
 }
@@ -26,6 +27,10 @@ data(sumstatsColHeaders) for default mapping and necessary format.}
 \item{uppercase_unmapped}{For columns that could not be identified in
 the \code{mapping_file}, return them in the same format they were input as
 (without forcing them to uppercase).}
+
+\item{convert_A0}{Whether to convert A* (representing A0) to A1/A2. This
+should be done unless checking if A0 was present in the input as if you do
+it you can't infer this. Default is TRUE}
 
 \item{return_list}{Return the \code{sumstats_dt} within a named list
 (default: \code{TRUE}).}

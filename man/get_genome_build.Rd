@@ -46,7 +46,8 @@ This should help speed up cases where you have to read in \code{sumstats}
 from disk each time.}
 
 \item{allele_match_ref}{Instead of returning the genome_build this will
-return the propotion of matches to each genome build for each allele (A1,A2).}
+return the proportion of matches to each genome build for each allele
+(A1,A2).}
 
 \item{ref_genome}{name of the reference genome used for the GWAS ("GRCh37" or
 "GRCh38"). Argument is case-insensitive. Default is NULL which infers the
