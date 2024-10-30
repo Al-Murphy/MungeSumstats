@@ -217,8 +217,8 @@ not the P-value and so will be flipped i.e. default TRUE.}
 \item{allele_flip_frq}{Binary should the frequency (FRQ) column be flipped
 along with effect and z-score columns like Beta? Default TRUE.}
 
-\item{bi_allelic_filter}{Binary Should non-biallelic SNPs be removed. Default
-is TRUE.}
+\item{bi_allelic_filter}{Binary Should non-bi-allelic SNPs be removed.
+Default is TRUE.}
 
 \item{flip_frq_as_biallelic}{Binary Should non-bi-allelic SNPs frequency
 values be flipped as 1-p despite there being other alternative alleles?

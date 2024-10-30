@@ -4,22 +4,22 @@
 <i>Authors</i>: Alan Murphy, Brian Schilder and Nathan Skene  
 </h5>
 <h5>  
-<i>Updated</i>: Aug-07-2024  
+<i>Updated</i>: Oct-30-2024  
 </h5>
 
 <!-- Readme.md is generated from Readme.Rmd. Please edit that file -->
 <!-- badges: start -->
 
 [![](https://img.shields.io/badge/release%20version-1.10.1-black.svg)](https://www.bioconductor.org/packages/MungeSumstats)
-[![](https://img.shields.io/badge/devel%20version-1.13.4-black.svg)](https://github.com/neurogenomics/MungeSumstats)
+[![](https://img.shields.io/badge/devel%20version-1.15.1-black.svg)](https://github.com/neurogenomics/MungeSumstats)
 [![](https://img.shields.io/github/last-commit/neurogenomics/MungeSumstats.svg)](https://github.com/neurogenomics/MungeSumstats/commits/master)
-[![](https://img.shields.io/badge/download-19161/total-blue.svg)](https://bioconductor.org/packages/stats/bioc/MungeSumstats)
+[![](https://img.shields.io/badge/download-21632/total-blue.svg)](https://bioconductor.org/packages/stats/bioc/MungeSumstats)
 [![License:
 Artistic-2.0](https://img.shields.io/badge/license-Artistic--2.0-blue.svg)](https://cran.r-project.org/web/licenses/Artistic-2.0)
 [![](https://img.shields.io/badge/doi-https://doi.org/10.1093/bioinformatics/btab665-blue.svg)](https://doi.org/https://doi.org/10.1093/bioinformatics/btab665)
 <!-- badges: end -->
 <!--[![R build status](https://github.com/neurogenomics/MungeSumstats/workflows/rworkflows/badge.svg)](https://github.com/neurogenomics/MungeSumstats/actions)-->
-<!--`[![](https://codecov.io/gh/neurogenomics/MungeSumstats/branch/master/graph/badge.svg)](https://codecov.io/gh/neurogenomics/MungeSumstats) -->
+<!--`[![](https://codecov.io/gh/neurogenomics/MungeSumstats/branch/master/graph/badge.svg)](https://app.codecov.io/gh/neurogenomics/MungeSumstats) -->
 
 # Introduction
 
@@ -111,7 +111,10 @@ for information on how to use MungeSumstats to access, standardise and
 perform quality control on GWAS Summary Statistics from the MRC IEU
 [Open GWAS Project](https://gwas.mrcieu.ac.uk/).
 
-If you have any problems please do file an
+Please read carefully through the [FAQ
+website](https://github.com/Al-Murphy/MungeSumstats/wiki/FAQ) for an
+queries about running MungeSumstats. If you have any outside of this
+problems please do file an
 [Issue](https://github.com/al-murphy/MungeSumstats/issues) here on
 GitHub.
 

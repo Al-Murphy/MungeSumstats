@@ -53,8 +53,8 @@ FALSE.}
 
 \item{log_files}{list of log file locations}
 
-\item{bi_allelic_filter}{Binary Should non-biallelic SNPs be removed. Default
-is TRUE.}
+\item{bi_allelic_filter}{Binary Should non-bi-allelic SNPs be removed.
+Default is TRUE.}
 
 \item{dbSNP}{version of dbSNP to be used for imputation (144 or 155).}
 }

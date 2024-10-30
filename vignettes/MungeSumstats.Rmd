@@ -171,6 +171,9 @@ to match LDSC (A1 will now be the effect allele). See more info on this
 [here](https://groups.google.com/g/ldsc_users/c/S7FZK743w68). Note that any 
 effect columns (e.g. Z) will be inrelation to A1 now instead of A2.
 
+Please read carefully through our [FAQ Website](https://github.com/Al-Murphy/MungeSumstats/wiki/FAQ)
+to gain insight on how best to run MungeSumstats on your data.
+
 # Data
 
 The *MungeSumstats* package contains small subsets of GWAS summary

@@ -18,8 +18,8 @@ check_dup_bp(
 )
 }
 \arguments{
-\item{bi_allelic_filter}{Binary Should non-biallelic SNPs be removed. Default
-is TRUE.}
+\item{bi_allelic_filter}{Binary Should non-bi-allelic SNPs be removed.
+Default is TRUE.}
 
 \item{check_dups}{whether to check for duplicates - if formatting QTL
 datasets this should be set to FALSE otherwise keep as TRUE. Default is TRUE.}

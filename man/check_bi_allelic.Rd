@@ -27,8 +27,8 @@ directly to MungeSumstats using the path parameter.}
 "GRCh38"). Argument is case-insensitive. Default is NULL which infers the
 reference genome from the data.}
 
-\item{bi_allelic_filter}{Binary Should non-biallelic SNPs be removed. Default
-is TRUE.}
+\item{bi_allelic_filter}{Binary Should non-bi-allelic SNPs be removed.
+Default is TRUE.}
 
 \item{log_folder_ind}{Binary Should log files be stored containing all
 filtered out SNPs (separate file per filter). The data is outputted in the
