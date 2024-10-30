@@ -2,9 +2,6 @@
 
 ### New features
 *[FAQ Website](https://github.com/Al-Murphy/MungeSumstats/wiki/FAQ) added.
-* Non-bi-allelic filter switched to FALSE by default in `format_sumstats()`. 
-Given the ever increasing number of non-bi-allelic SNPs in dbSNP, it no longer 
-makes sense to simply remove these.
 
 ## CHANGES IN VERSION 1.13.7
 
