@@ -1,3 +1,8 @@
+## CHANGES IN VERSION 1.14.1
+
+### New features
+* Add [FAQ website](https://github.com/Al-Murphy/MungeSumstats/wiki/FAQ)
+
 ## CHANGES IN VERSION 1.13.7
 
 ### Bug fix

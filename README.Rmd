@@ -107,7 +107,10 @@ See the [OpenGWAS vignette website](https://al-murphy.github.io/MungeSumstats/ar
 for information on how to use MungeSumstats to access, standardise and perform
 quality control on GWAS Summary Statistics from the MRC IEU [Open GWAS Project](https://gwas.mrcieu.ac.uk/).
 
-If you have any problems please do file an [Issue](https://github.com/al-murphy/MungeSumstats/issues) here on GitHub.
+Please read carefully through the [FAQ website](https://github.com/Al-Murphy/MungeSumstats/wiki/FAQ) 
+for an queries about running MungeSumstats. If you have any problems please do 
+file an [Issue](https://github.com/al-murphy/MungeSumstats/issues) here on 
+GitHub.
 
 # Future Enhancements
 
