@@ -1,7 +1,7 @@
 Package: MungeSumstats
 Type: Package
 Title: Standardise summary statistics from GWAS
-Version: 1.15.4
+Version: 1.15.5
 Authors@R:
     c(person(given = "Alan",
            family = "Murphy",

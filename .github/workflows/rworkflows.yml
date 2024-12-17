@@ -27,8 +27,6 @@ jobs:
         #  bioc: devel
           cont: bioconductor/bioconductor_docker:devel
         - os: macOS-latest
-          #r: latest
-          #bioc: release
           r: devel
           bioc: devel
           cont: bioconductor/bioconductor_docker:devel
