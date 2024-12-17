@@ -22,13 +22,16 @@ jobs:
       fail-fast: ${{ false }}
       matrix:
         config:
-        - os: ubuntu-latest
+        #- os: ubuntu-latest
+        #  r: devel
+        #  bioc: devel
+          cont: bioconductor/bioconductor_docker:devel
+        - os: macOS-latest
+          #r: latest
+          #bioc: release
           r: devel
           bioc: devel
           cont: bioconductor/bioconductor_docker:devel
-        - os: macOS-latest
-          r: latest
-          bioc: release
         # - os: windows-latest
         #   r: latest
         #   bioc: release
