@@ -19,8 +19,7 @@ find_sumstats(
   min_ncase = NULL,
   min_ncontrol = NULL,
   min_nsnp = NULL,
-  include_NAs = FALSE,
-  access_token = check_access_token()
+  include_NAs = FALSE
 )
 }
 \arguments{
@@ -68,9 +67,6 @@ find_sumstats(
 
 \item{include_NAs}{Include datasets with missing metadata for size criteria
 (i.e. \code{min_sample_size}, \code{min_ncase}, or \code{min_ncontrol}).}
-
-\item{access_token}{Google OAuth2 access token.
-Used to authenticate level of access to data}
 }
 \value{
 (Filtered) GWAS metadata table.
@@ -85,15 +81,16 @@ list/vector of character strings.
 By default, returns metadata for all studies currently in Open GWAS database.
 }
 \examples{
-# Only run the examples if user has internet access:
-if(try(is.character(getURL("www.google.com")))==TRUE){
+# Only run the examples if user has internet access
+# and if access token has been added
+if(try(is.character(getURL("www.google.com")))==TRUE && ieugwasr::get_opengwas_jwt()!=""){
 ### By ID
 metagwas <- find_sumstats(ids = c(
     "ieu-b-4760",
     "prot-a-1725",
     "prot-a-664"
 ))
-### By ID amd sample size
+### By ID and sample size
 metagwas <- find_sumstats(
     ids = c("ieu-b-4760", "prot-a-1725", "prot-a-664"),
     min_sample_size = 5000

@@ -23,8 +23,39 @@ library(MungeSumstats)
 MungeSumstats now offers high throughput query and import functionality to data 
 from the MRC IEU [Open GWAS Project](https://gwas.mrcieu.ac.uk/).
 
+This is made possible by the use the 
+[IEU OpwnGWAS R package](https://github.com/MRCIEU/ieugwasr): `ieugwasr`.
+
+Before you can use this functionality however, please complete the following steps:
+
+# Authenticate Access IEU OpenGWAS API
+
+To authenticate, you need to generate a token from the OpenGWAS website. The 
+token behaves like a password, and it will be used to authorise the requests 
+you make to the OpenGWAS API. Here are the steps to generate the token and then 
+have `ieugwasr` automatically use it for your queries:
+  
+1. Login to https://api.opengwas.io/profile/
+2. Generate a new token
+3. Add `OPENGWAS_JWT=<token>` to your .Renviron file, thi can be edited in R by 
+running `usethis::edit_r_environ()`
+4. Restart your R session
+5. To check that your token is being recognised, run 
+`ieugwasr::get_opengwas_jwt()`. If it returns a long random string then you are 
+authenticated.
+6. To check that your token is working, run `ieugwasr::user()`. It will make a 
+request to the API for your user information using your token. It should return 
+a list with your user information. If it returns an error, then your token is 
+not working.
+7. Make sure you have submitted user information to increasse you API limit at
+https://api.opengwas.io/profile/.
+
+
+
 
 # Find GWAS datasets 
+
+We can search by terms and with other filters like sample size:
 
 ```{r,eval=FALSE}
 #### Search for datasets ####
@@ -80,6 +111,17 @@ metagwas2 <-
         N=c(74046,63926,54162)
     )
 print(head(metagwas2,3))
+```
+
+
+You can also search by ID:
+
+```{r,eval=FALSE}
+### By ID and sample size
+metagwas <- find_sumstats(
+  ids = c("ieu-b-4760", "prot-a-1725", "prot-a-664"),
+  min_sample_size = 5000
+)
 ```
 
 # Import full results

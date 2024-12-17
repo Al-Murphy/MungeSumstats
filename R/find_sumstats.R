@@ -39,23 +39,22 @@
 #' (e.g. \code{200000}).
 #' @param include_NAs Include datasets with missing metadata for size criteria
 #' (i.e. \code{min_sample_size}, \code{min_ncase}, or \code{min_ncontrol}).
-#' @inheritParams check_access_token
-#' @inheritParams gwasinfo 
-#' @inheritParams format_sumstats
 #' 
 #' @export
 #' @importFrom dplyr %>% arrange desc mutate rowwise
 #' @importFrom data.table setorderv
+#' @importFrom ieugwasr gwasinfo
 #' @examples
-#' # Only run the examples if user has internet access:
-#' if(try(is.character(getURL("www.google.com")))==TRUE){
+#' # Only run the examples if user has internet access
+#' # and if access token has been added
+#' if(try(is.character(getURL("www.google.com")))==TRUE && ieugwasr::get_opengwas_jwt()!=""){
 #' ### By ID
 #' metagwas <- find_sumstats(ids = c(
 #'     "ieu-b-4760",
 #'     "prot-a-1725",
 #'     "prot-a-664"
 #' ))
-#' ### By ID amd sample size
+#' ### By ID and sample size
 #' metagwas <- find_sumstats(
 #'     ids = c("ieu-b-4760", "prot-a-1725", "prot-a-664"),
 #'     min_sample_size = 5000
@@ -80,17 +79,16 @@ find_sumstats <- function(ids = NULL,
                           min_ncase = NULL,
                           min_ncontrol = NULL,
                           min_nsnp = NULL,
-                          include_NAs = FALSE,
-                          access_token = check_access_token()) {
+                          include_NAs = FALSE
+                          ) {
     
     ## Set up fake empty variables to avoid confusing BiocCheck
     sample_size <- ncase <- ncontrol <- nsnp <- N <- NULL;
     
     message("Collecting metadata from Open GWAS.")
     if (!is.null(ids)) {
-        metagwas <- gwasinfo(
-            id = ids,
-            access_token = access_token
+        metagwas <- ieugwasr::gwasinfo(
+            id = ids
         )
         ## gwasinfo() doesn't always return all columns for some reason
         missing_cols <- c("ncase", "ncontrol")
@@ -101,7 +99,7 @@ find_sumstats <- function(ids = NULL,
             }
         }
     } else {
-        metagwas <- gwasinfo()
+        metagwas <- ieugwasr::gwasinfo()
     }
     message("Filtering metadata by substring criteria.")
     if (!is.null(traits)) {

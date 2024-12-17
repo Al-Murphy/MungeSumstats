@@ -1,3 +1,15 @@
+## CHANGES IN VERSION 1.15.3
+
+### Bug fix
+*Updated retrieval of IEU OpenGWAS to new approach requiring login. Also updated
+to use the [IEU OpwnGWAS R package](https://github.com/MRCIEU/ieugwasr) as a 
+dependency.
+
+## CHANGES IN VERSION 1.15.2
+
+### New features
+*[FAQ Website](https://github.com/Al-Murphy/MungeSumstats/wiki/FAQ) updated.
+
 ## CHANGES IN VERSION 1.15.1
 
 ### New features
