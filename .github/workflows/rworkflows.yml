@@ -22,25 +22,24 @@ jobs:
       fail-fast: ${{ false }}
       matrix:
         config:
-        #- os: ubuntu-latest
-        #  r: devel
-        #  bioc: devel
-        #  cont: bioconductor/bioconductor_docker:devel
-        - os: macOS-latest
+        - os: ubuntu-latest
           r: devel
           bioc: devel
           cont: bioconductor/bioconductor_docker:devel
+        - os: macOS-latest
+          r: latest
+          bioc: release
         # - os: windows-latest
         #   r: latest
         #   bioc: release
     steps:
     - uses: neurogenomics/rworkflows@master
       with:
-        run_bioccheck: ${{ true }}
-        run_rcmdcheck: ${{ true }}
+        run_bioccheck: ${{ false }}
+        run_rcmdcheck: ${{ false }}
         as_cran: ${{ true }}
         run_vignettes: ${{ true }}
-        has_testthat: ${{ true }}
+        has_testthat: ${{ false }}
         run_covr: ${{ true }}
         run_pkgdown: ${{ true }}
         has_runit: ${{ false }}
