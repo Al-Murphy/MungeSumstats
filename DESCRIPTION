@@ -1,7 +1,7 @@
 Package: MungeSumstats
 Type: Package
 Title: Standardise summary statistics from GWAS
-Version: 1.15.9
+Version: 1.15.10
 Authors@R:
     c(person(given = "Alan",
            family = "Murphy",
@@ -24,7 +24,7 @@ Description:
   SNP, CHR, BP and can look up these values if any are missing. It also pefrorms 
   dozens of QC and filtering steps to ensure high data quality and
   minimise inter-study differences. 
-URL: https://github.com/neurogenomics/MungeSumstats
+URL: https://github.com/neurogenomics/MungeSumstats, https://al-murphy.github.io/MungeSumstats/
 BugReports: https://github.com/neurogenomics/MungeSumstats/issues
 License: Artistic-2.0
 Depends: R(>= 4.1)
