@@ -4,16 +4,16 @@
 <i>Authors</i>: Alan Murphy, Brian Schilder and Nathan Skene  
 </h5>
 <h5>  
-<i>Updated</i>: Oct-30-2024  
+<i>Updated</i>: Dec-18-2024  
 </h5>
 
 <!-- Readme.md is generated from Readme.Rmd. Please edit that file -->
 <!-- badges: start -->
 
 [![](https://img.shields.io/badge/release%20version-1.10.1-black.svg)](https://www.bioconductor.org/packages/MungeSumstats)
-[![](https://img.shields.io/badge/devel%20version-1.15.1-black.svg)](https://github.com/neurogenomics/MungeSumstats)
+[![](https://img.shields.io/badge/devel%20version-1.15.12-black.svg)](https://github.com/neurogenomics/MungeSumstats)
 [![](https://img.shields.io/github/last-commit/neurogenomics/MungeSumstats.svg)](https://github.com/neurogenomics/MungeSumstats/commits/master)
-[![](https://img.shields.io/badge/download-21632/total-blue.svg)](https://bioconductor.org/packages/stats/bioc/MungeSumstats)
+[![](https://img.shields.io/badge/download-22669/total-blue.svg)](https://bioconductor.org/packages/stats/bioc/MungeSumstats)
 [![License:
 Artistic-2.0](https://img.shields.io/badge/license-Artistic--2.0-blue.svg)](https://cran.r-project.org/web/licenses/Artistic-2.0)
 [![](https://img.shields.io/badge/doi-https://doi.org/10.1093/bioinformatics/btab665-blue.svg)](https://doi.org/https://doi.org/10.1093/bioinformatics/btab665)
@@ -110,6 +110,26 @@ website](https://al-murphy.github.io/MungeSumstats/articles/OpenGWAS.html)
 for information on how to use MungeSumstats to access, standardise and
 perform quality control on GWAS Summary Statistics from the MRC IEU
 [Open GWAS Project](https://gwas.mrcieu.ac.uk/).
+
+**NOTE** to authenticate, you need to generate a token from the OpenGWAS
+website. The token behaves like a password, and it will be used to
+authorise the requests you make to the OpenGWAS API. Here are the steps
+to generate the token and then have `ieugwasr` automatically use it for
+your queries:
+
+1.  Login to <https://api.opengwas.io/profile/>
+2.  Generate a new token
+3.  Add `OPENGWAS_JWT=<token>` to your .Renviron file, thi can be edited
+    in R by running `usethis::edit_r_environ()`
+4.  Restart your R session
+5.  To check that your token is being recognised, run
+    `ieugwasr::get_opengwas_jwt()`. If it returns a long random string
+    then you are authenticated.
+6.  To check that your token is working, run `ieugwasr::user()`. It will
+    make a request to the API for your user information using your
+    token. It should return a list with your user information. If it
+    returns an error, then your token is not working.
+7.  Make sure you have submitted use
 
 Please read carefully through the [FAQ
 website](https://github.com/Al-Murphy/MungeSumstats/wiki/FAQ) for an
