@@ -4,6 +4,24 @@
 #' a case-insensitive substring search in the respective metadata column.
 #' Users can supply a single character string or a
 #' list/vector of character strings.
+#' 
+#' To authenticate, you need to generate a token from the OpenGWAS website. The 
+#' token behaves like a password, and it will be used to authorise the requests 
+#' you make to the OpenGWAS API. Here are the steps to generate the token and 
+#' then have `ieugwasr` automatically use it for your queries:
+#' 1. Login to https://api.opengwas.io/profile/
+#' 2. Generate a new token
+#' 3. Add `OPENGWAS_JWT=<token>` to your .Renviron file, thi can be edited in R
+#' by running `usethis::edit_r_environ()`
+#' 4. Restart your R session
+#' 5. To check that your token is being recognised, run 
+#' `ieugwasr::get_opengwas_jwt()`. If it returns a long random string then you 
+#' are authenticated.
+#' 6. To check that your token is working, run `ieugwasr::user()`. It will make a 
+#' a request to the API for your user information using your token. It should 
+#' return a list with your user information. If it returns an error, then your 
+#' token is not working.
+#' 7. Make sure you have submitted use
 #'
 #' By default, returns metadata for all studies currently in Open GWAS database.
 #'

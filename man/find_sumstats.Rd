@@ -78,6 +78,26 @@ Users can supply a single character string or a
 list/vector of character strings.
 }
 \details{
+To authenticate, you need to generate a token from the OpenGWAS website. The
+token behaves like a password, and it will be used to authorise the requests
+you make to the OpenGWAS API. Here are the steps to generate the token and
+then have \code{ieugwasr} automatically use it for your queries:
+\enumerate{
+\item Login to https://api.opengwas.io/profile/
+\item Generate a new token
+\item Add \verb{OPENGWAS_JWT=<token>} to your .Renviron file, thi can be edited in R
+by running \code{usethis::edit_r_environ()}
+\item Restart your R session
+\item To check that your token is being recognised, run
+\code{ieugwasr::get_opengwas_jwt()}. If it returns a long random string then you
+are authenticated.
+\item To check that your token is working, run \code{ieugwasr::user()}. It will make a
+a request to the API for your user information using your token. It should
+return a list with your user information. If it returns an error, then your
+token is not working.
+\item Make sure you have submitted use
+}
+
 By default, returns metadata for all studies currently in Open GWAS database.
 }
 \examples{
