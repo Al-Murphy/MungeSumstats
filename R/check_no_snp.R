@@ -13,9 +13,12 @@
 #' @importFrom data.table copy
 #' @importFrom BSgenome snpsByOverlaps
 #' @importFrom GenomicRanges makeGRangesFromDataFrame
-check_no_snp <- function(sumstats_dt, path, ref_genome, indels, imputation_ind,
-                         log_folder_ind, check_save_out, tabix_index, nThread,
-                         log_files, dbSNP, verbose = TRUE) {
+check_no_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids, indels,
+                                                   imputation_ind, log_folder_ind, check_save_out,
+                                                   tabix_index, nThread, log_files, dbSNP,
+                                                   dbSNP_tarball = NULL,
+                                                   msg = NULL,
+                                                   verbose = TRUE) {
     SNP <- CHR <- i.RefSNP_id <- IMPUTATION_SNP <- BP <- A1 <- A2 <- NULL
     # If CHR and BP are present BUT not SNP then need 
     # to find the relevant SNP ids
@@ -26,7 +29,12 @@ check_no_snp <- function(sumstats_dt, path, ref_genome, indels, imputation_ind,
         if (isFALSE(verbose)) {
             msg <- NULL
         }
-        SNP_LOC_DATA <- load_snp_loc_data(ref_genome,dbSNP, msg)
+        SNP_LOC_DATA <- load_snp_loc_data(
+          ref_genome    = ref_genome,
+          dbSNP   = dbSNP,
+          dbSNP_tarball = dbSNP_tarball,
+          msg           = NULL
+        )
         # if chromosome col has chr prefix remove it
         sumstats_dt[, CHR := gsub("chr", "", CHR)]
         # avoid SNPs with NA values in chr or bp
