@@ -15,10 +15,10 @@
 #' @importFrom BSgenome snpsByOverlaps
 #' @importFrom GenomicRanges makeGRangesFromDataFrame
 #' @importFrom stringr str_sub
-check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
-                            indels,imputation_ind, log_folder_ind, 
-                            check_save_out,tabix_index, nThread, log_files,
-                            dbSNP) {
+ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids, indels,
+                              imputation_ind, log_folder_ind, check_save_out,
+                              tabix_index, nThread, log_files, dbSNP,
+                              dbSNP_tarball = NUL) {
     SNP <- CHR <- CHR1 <- BP1 <- i.RefSNP_id <- IMPUTATION_SNP <-
         SNP_old_temp <- SNP_INFO <- A1 <- A2 <- .I <- NULL
     # if snp ids aren't rs ids rename the column to ID's 
@@ -170,7 +170,12 @@ check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids,
                 " reference genome"
             )
             message(msg)
-            SNP_LOC_DATA <- load_snp_loc_data(ref_genome,dbSNP, NULL)
+             SNP_LOC_DATA <- load_snp_loc_data(
+                 ref_genome    = ref_genome,
+                 dbSNP   = dbSNP,
+                 dbSNP_tarball = dbSNP_tarball,
+                 msg           = NULL
+               )
             # split out chr:bp - check if chr or bp first by longer of two
             splits <- strsplit(miss_rs_chr_bp[1, SNP],
                                split = ":", fixed = TRUE)[[1]]
