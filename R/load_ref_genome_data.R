@@ -23,11 +23,17 @@
 load_ref_genome_data <- function(snps, 
                                  ref_genome,
                                  dbSNP=c(144,155),
+                                 dbSNP_tarball = NULL,
                                  msg = NULL,
                                  chr_filt = NULL) {
     
     SNP <- NULL
-    SNP_LOC_DATA <- load_snp_loc_data(ref_genome, dbSNP, msg = msg)
+    SNP_LOC_DATA <- load_snp_loc_data(
+      ref_genome    = ref_genome,
+      dbSNP   = dbSNP,
+      dbSNP_tarball = dbSNP_tarball,
+      msg           = NULL
+    )
     # Get correct ref genome
     message("Loading reference genome data.")
     if (toupper(ref_genome) == "GRCH37") {

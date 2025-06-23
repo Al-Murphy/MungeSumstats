@@ -1,43 +1,54 @@
-#' Loads the SNP locations and alleles for Homo sapiens extracted from
-#' NCBI dbSNP Build 144. Reference genome version is dependent on user input.
+#' Loads the SNP locations and alleles for Homo sapiens from dbSNP builds
 #'
-#' @param ref_genome name of the reference genome used for the GWAS 
-#' (GRCh37 or GRCh38)
-#' @param dbSNP version of dbSNP to be used (144 or 155)
-#' @param msg Optional name of the column missing from the dataset in question
-#' @return SNP_LOC_DATA SNP positions and alleles for Homo sapiens extracted
-#' from NCBI dbSNP Build 144
-#'
-#' @examples
-#' SNP_LOC_DATA <- load_snp_loc_data("GRCH37",dbSNP=144)
+#' @param ref_genome   character, "GRCh37" or "GRCh38"
+#' @param dbSNP        integer, dbSNP build number (144, 155, or any installed SNPlocs package)
+#' @param dbSNP_tarball Optional path to a .tar.gz containing:
+#'   one or more .rds files (Bioc SNPlocs package layout).
+#' @param msg          optional character to message before loading
+#' @return A data.table or OnDiskLongTable of SNP locations
 #' @export
-load_snp_loc_data <- function(ref_genome,dbSNP=c(144,155),
+load_snp_loc_data <- function(ref_genome,
+                              dbSNP,
+                              dbSNP_tarball = NULL,
                               msg = NULL) {
-    ref_genome <- toupper(ref_genome)
-    message("Loading SNPlocs data.")
-    if (!is.null(msg)) {
-        print_msg <- paste0(
-            "There is no ", msg, " column found within the data. ",
-            "It must be inferred from other column information."
-        )
-        message(print_msg)
+  ## 1) Validate inputs
+  ref <- toupper(ref_genome)
+  if (!ref %in% c("GRCH37", "GRCH38")) {
+    stop("`ref_genome` must be 'GRCh37' or 'GRCh38'.", call. = FALSE)
+  }
+  if (!is.null(msg)) {
+    message(msg)
+  }
+  message("Loading SNPlocs data for build ", dbSNP, " on ", ref, ".")
+  
+  ## 2) Custom‐tarball branch
+  if (!is.null(dbSNP_tarball)) {
+    tmpdir <- tempfile("snp_loc_"); dir.create(tmpdir)
+    utils::untar(dbSNP_tarball, exdir = tmpdir)
+    
+    ## 2a) Flat TSV?
+    tsvs <- list.files(tmpdir, "\\.tsv$", full.names = TRUE, recursive = TRUE)
+    if (length(tsvs)) {
+      return(data.table::fread(tsvs[[1]]))
     }
-    if (ref_genome == "GRCH37") {
-        if(dbSNP==144){
-          snp_loc_data <-
-              SNPlocs.Hsapiens.dbSNP144.GRCh37::SNPlocs.Hsapiens.dbSNP144.GRCh37
-        }else{ #155
-          snp_loc_data <-
-            SNPlocs.Hsapiens.dbSNP155.GRCh37::SNPlocs.Hsapiens.dbSNP155.GRCh37
-        }
-    } else { # =="GRCH38"
-        if(dbSNP==144){
-          snp_loc_data <-
-              SNPlocs.Hsapiens.dbSNP144.GRCh38::SNPlocs.Hsapiens.dbSNP144.GRCh38
-        } else{ #155
-          snp_loc_data <-
-            SNPlocs.Hsapiens.dbSNP155.GRCh38::SNPlocs.Hsapiens.dbSNP155.GRCh38
-        }  
+    
+    ## 2b) RDS blocks?
+    rds_files <- list.files(tmpdir, "\\.rds$", full.names = TRUE, recursive = TRUE)
+    if (length(rds_files)) {
+      dt_list <- lapply(rds_files, readRDS)
+      return(data.table::rbindlist(dt_list, use.names = TRUE, fill = TRUE))
     }
-    return(snp_loc_data)
+    
+    stop("No .tsv or .rds found in tarball: ", dbSNP_tarball, call. = FALSE)
+  }
+  
+  ## 3) Fallback to installed SNPlocs pkg (144, 155, 156, 157, …)
+  pkg_name <- sprintf("SNPlocs.Hsapiens.dbSNP%d.GRCh%s",
+                      as.integer(dbSNP),
+                      ifelse(ref == "GRCH37", "37", "38"))
+  if (!requireNamespace(pkg_name, quietly = TRUE)) {
+    stop("Please install Bioconductor package '", pkg_name, "'.", call. = FALSE)
+  }
+  snp_loc_data <- getExportedValue(pkg_name, pkg_name)
+  return(snp_loc_data)
 }

@@ -37,6 +37,7 @@ validate_parameters <- function(path,
                                 drop_indels,
                                 check_dups,
                                 dbSNP,
+                                dbSNP_tarball = NULL,
                                 write_vcf,
                                 return_format,
                                 ldsc_format,
@@ -100,15 +101,23 @@ validate_parameters <- function(path,
       )
       stop(lcl_chain_msg)
     }
-    #check dbSNP version
-    avail_dbSNP <- c(144,155)
-    dbSNP_msg <- paste0(
-      "The chosen dbSNP version must be one of: ",
-      paste(avail_dbSNP,collapse=", ")
-    )
-    if(!as.integer(dbSNP) %in% avail_dbSNP){
-      stop(dbSNP_msg)
-    }
+    # if no tarball, we require that the matching SNPlocs pkg is installed
+      if (is.null(dbSNP_tarball)) {
+            if (!is.numeric(dbSNP) || dbSNP <= 0) {
+                  stop("`dbSNP` must be a positive integer (e.g. 144, 155, 156…) or provide `dbSNP_tarball`.", call. = FALSE)
+              }
+            pkg_name <- sprintf(
+                  "SNPlocs.Hsapiens.dbSNP%d.GRCh%s",
+                  as.integer(dbSNP),
+                  ifelse(toupper(ref_genome)=="GRCH37","37","38")
+              )
+            if (!requireNamespace(pkg_name, quietly=TRUE)) {
+                  stop("To use dbSNP=", dbSNP, 
+                                         " on ", ref_genome,
+                                         ", please install the Bioconductor package '", pkg_name, "'.",
+                                         call. = FALSE)
+              }
+        }
     # checks for installed packages
     GRCH37_msg1 <- paste0(
         "Install 'SNPlocs.Hsapiens.dbSNP144.GRCh37' to use ",
