@@ -55,6 +55,7 @@ get_genome_builds <- function(sumstats_list,
                               sampled_snps = 10000,
                               names_from_paths = FALSE,
                               dbSNP=155,
+                              dbSNP_tarball = NULL,
                               nThread = 1,
                               chr_filt = NULL) {
     start <- Sys.time()
@@ -91,7 +92,8 @@ get_genome_builds <- function(sumstats_list,
       build_ <- get_genome_build(
         sumstats = sumstats_list[[1]],
         sampled_snps = sampled_snps,
-        dbSNP = dbSNP, 
+        dbSNP = dbSNP,
+        dbSNP_tarball = dbSNP_tarball,
         header_only = header_only,
         nThread = nThread,
         chr_filt = chr_filt
@@ -103,12 +105,14 @@ get_genome_builds <- function(sumstats_list,
                                    function(x,
                                             .sampled_snps = sampled_snps,
                                             .dbSNP=dbSNP,
+                                            .dbSNP_tarball = dbSNP_tarball,
                                             .header_only = header_only) {
                                      message_parallel(x)
                                      get_genome_build(
                                        sumstats = sumstats_list[[x]],
                                        sampled_snps = .sampled_snps,
                                        dbSNP = .dbSNP, 
+                                       dbSNP_tarball = .dbSNP_tarball,
                                        header_only = .header_only,
                                        nThread = 1,
                                        chr_filt = chr_filt

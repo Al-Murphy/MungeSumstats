@@ -17,7 +17,8 @@ check_on_ref_genome(
   tabix_index,
   nThread,
   log_files,
-  dbSNP
+  dbSNP,
+  dbSNP_tarball = NULL
 )
 }
 \arguments{

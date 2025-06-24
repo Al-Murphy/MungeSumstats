@@ -8,6 +8,7 @@ check_no_snp(
   sumstats_dt,
   path,
   ref_genome,
+  snp_ids_are_rs_ids,
   indels,
   imputation_ind,
   log_folder_ind,
@@ -16,6 +17,8 @@ check_no_snp(
   nThread,
   log_files,
   dbSNP,
+  dbSNP_tarball = NULL,
+  msg = NULL,
   verbose = TRUE
 )
 }
@@ -27,6 +30,12 @@ directly to MungeSumstats using the path parameter.}
 \item{ref_genome}{name of the reference genome used for the GWAS ("GRCh37" or
 "GRCh38"). Argument is case-insensitive. Default is NULL which infers the
 reference genome from the data.}
+
+\item{snp_ids_are_rs_ids}{Binary Should the supplied SNP ID's be assumed to
+be RSIDs. If not, imputation using the SNP ID for other columns like
+base-pair position or chromosome will not be possible. If set to FALSE, the
+SNP RS ID will be imputed from the reference genome if possible. Default is
+TRUE.}
 
 \item{indels}{Binary does your Sumstats file contain Indels? These don't
 exist in our reference file so they will be excluded from checks if this

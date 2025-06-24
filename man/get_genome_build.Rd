@@ -12,6 +12,7 @@ get_genome_build(
   standardise_headers = TRUE,
   mapping_file = sumstatsColHeaders,
   dbSNP = 155,
+  dbSNP_tarball = NULL,
   header_only = FALSE,
   allele_match_ref = FALSE,
   ref_genome = NULL,

@@ -2,27 +2,26 @@
 % Please edit documentation in R/load_snp_loc_data.R
 \name{load_snp_loc_data}
 \alias{load_snp_loc_data}
-\title{Loads the SNP locations and alleles for Homo sapiens extracted from
-NCBI dbSNP Build 144. Reference genome version is dependent on user input.}
+\title{Load SNP location data for any dbSNP build}
 \usage{
-load_snp_loc_data(ref_genome, dbSNP = c(144, 155), msg = NULL)
+load_snp_loc_data(ref_genome, dbSNP, dbSNP_tarball = NULL, msg = NULL)
 }
 \arguments{
-\item{ref_genome}{name of the reference genome used for the GWAS
-(GRCh37 or GRCh38)}
+\item{ref_genome}{character, "GRCh37" or "GRCh38"}
 
-\item{dbSNP}{version of dbSNP to be used (144 or 155)}
+\item{dbSNP}{integer, dbSNP build number (e.g. 144,155,156,157,…)}
 
-\item{msg}{Optional name of the column missing from the dataset in question}
+\item{dbSNP_tarball}{optional path to a SNPlocs.Hsapiens.dbSNP\if{html}{\out{<build>}}.GRCh<37|38>_*.tar.gz}
+
+\item{msg}{optional startup message}
 }
 \value{
-SNP_LOC_DATA SNP positions and alleles for Homo sapiens extracted
-from NCBI dbSNP Build 144
+An OnDiskLongTable of SNP locations
 }
 \description{
-Loads the SNP locations and alleles for Homo sapiens extracted from
-NCBI dbSNP Build 144. Reference genome version is dependent on user input.
-}
-\examples{
-SNP_LOC_DATA <- load_snp_loc_data("GRCH37",dbSNP=144)
+Loads the SNP locations and alleles for Homo sapiens from dbSNP builds.
+For builds distributed as Bioconductor packages (e.g. 144, 155) it will
+load the installed SNPlocs.Hsapiens.dbSNP\if{html}{\out{<build>}}.GRCh<37|38> object.
+For newer builds provided as Bioc-style source bundles (tar.gz of a
+SNPlocs package), pass the path via \code{dbSNP_tarball} to load directly.
 }

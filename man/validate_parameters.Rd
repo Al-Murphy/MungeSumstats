@@ -39,6 +39,7 @@ validate_parameters(
   drop_indels,
   check_dups,
   dbSNP,
+  dbSNP_tarball = NULL,
   write_vcf,
   return_format,
   ldsc_format,

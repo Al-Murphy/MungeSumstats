@@ -48,6 +48,7 @@ format_sumstats(
   drop_na_cols = c("SNP", "CHR", "BP", "A1", "A2", "FRQ", "BETA", "Z", "OR", "LOG_ODDS",
     "SIGNED_SUMSTAT", "SE", "P", "N"),
   dbSNP = 155,
+  dbSNP_tarball = NULL,
   check_dups = TRUE,
   sort_coordinates = TRUE,
   nThread = 1,

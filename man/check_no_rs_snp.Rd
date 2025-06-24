@@ -16,7 +16,8 @@ check_no_rs_snp(
   tabix_index,
   nThread,
   log_files,
-  dbSNP
+  dbSNP,
+  dbSNP_tarball = NUL
 )
 }
 \arguments{

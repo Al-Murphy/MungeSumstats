@@ -49,6 +49,7 @@ check_no_chr_bp <- function(sumstats_dt,
                     data.table::copy(sumstats_dt$SNP), 
                     ref_genome = ref_genome,
                     dbSNP = dbSNP,
+                    dbSNP_tarball = dbSNP_tarball,
                     msg="Chromosome or Base Pair Position"
                 )
         } else {

@@ -16,6 +16,7 @@ load_ref_genome_data(
   snps,
   ref_genome,
   dbSNP = c(144, 155),
+  dbSNP_tarball = NULL,
   msg = NULL,
   chr_filt = NULL
 )

@@ -571,7 +571,8 @@ format_sumstats <- function(path,
                 standardise_headers = FALSE, ## done prev
                 sampled_snps = 10000,
                 mapping_file = mapping_file,
-                dbSNP=dbSNP
+                dbSNP=dbSNP,
+                dbSNP_tarball       = dbSNP_tarball
             )
         }
 
@@ -709,7 +710,8 @@ format_sumstats <- function(path,
             tabix_index = tabix_index,
             nThread = nThread,
             log_files = log_files,
-            dbSNP = dbSNP
+            dbSNP = dbSNP,
+            dbSNP_tarball  = dbSNP_tarball
         )
         # update values
         log_files <- sumstats_return$log_files
