@@ -37,7 +37,7 @@ validate_parameters <- function(path,
                                 drop_indels,
                                 check_dups,
                                 dbSNP,
-                                dbSNP_tarball = NULL,
+                                dbSNP_tarball,
                                 write_vcf,
                                 return_format,
                                 ldsc_format,
@@ -102,22 +102,33 @@ validate_parameters <- function(path,
       stop(lcl_chain_msg)
     }
     # if no tarball, we require that the matching SNPlocs pkg is installed
-      if (is.null(dbSNP_tarball)) {
-            if (!is.numeric(dbSNP) || dbSNP <= 0) {
-                  stop("`dbSNP` must be a positive integer (e.g. 144, 155, 156…) or provide `dbSNP_tarball`.", call. = FALSE)
-              }
-            pkg_name <- sprintf(
-                  "SNPlocs.Hsapiens.dbSNP%d.GRCh%s",
-                  as.integer(dbSNP),
-                  ifelse(toupper(ref_genome)=="GRCH37","37","38")
-              )
-            if (!requireNamespace(pkg_name, quietly=TRUE)) {
-                  stop("To use dbSNP=", dbSNP, 
-                                         " on ", ref_genome,
-                                         ", please install the Bioconductor package '", pkg_name, "'.",
-                                         call. = FALSE)
-              }
-        }
+    if (is.null(dbSNP_tarball)) {
+          if (!is.numeric(dbSNP) || dbSNP <= 0){
+            stp_msg <- paste0(
+              "`dbSNP` must be a positive integer (e.g. 144, 155...",
+              ") or provide `dbSNP_tarball`.")
+            stop(stp_msg)
+          }
+          pkg_name <- sprintf(
+                "SNPlocs.Hsapiens.dbSNP%d.GRCh%s",
+                as.integer(dbSNP),
+                ifelse(toupper(ref_genome)=="GRCH37","37","38")
+            )
+          if (!requireNamespace(pkg_name, quietly=TRUE)) {
+                stop("To use dbSNP=", dbSNP, " on ", ref_genome,
+                     ", please install the Bioconductor package '", 
+                     pkg_name, "'.", call. = FALSE)
+            }
+    } else{
+      if(!file.exists(dbSNP_tarball)){
+        tarball_msg <- paste0(
+          "The dbSNP_tarball parameter is invalid, please chose a valid path ",
+          "to a local dbSNP release in tarball format or leave as NULL to use ",
+          "the dbSNP parameter"
+        )
+        stop(tarball_msg)
+      }
+    }
     # checks for installed packages
     GRCH37_msg1 <- paste0(
         "Install 'SNPlocs.Hsapiens.dbSNP144.GRCh37' to use ",

@@ -40,7 +40,8 @@ check_allele_flip <- function(sumstats_dt, path,
                               log_files,
                               standardise_headers = FALSE,
                               mapping_file,
-                              dbSNP) {
+                              dbSNP,
+                              dbSNP_tarball) {
     # # GenomicSEM' allele flipping strategy:
     # file.path("https://github.com/GenomicSEM/GenomicSEM/blob",
     #           "fc8f17a817a8022d6900acf41824d27b3676f9c4/R/munge.R#L151")
@@ -81,7 +82,8 @@ check_allele_flip <- function(sumstats_dt, path,
                 load_ref_genome_data(
                     data.table::copy(sumstats_dt$SNP),
                     ref_genome = ref_genome, 
-                    dbSNP = dbSNP, msg=NULL
+                    dbSNP = dbSNP, dbSNP_tarball = dbSNP_tarball,
+                    msg=NULL
                 )
         }
         # ensure rsids is up-to-date with filtered sumstats_dt

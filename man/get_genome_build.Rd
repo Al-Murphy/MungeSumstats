@@ -12,6 +12,7 @@ get_genome_build(
   standardise_headers = TRUE,
   mapping_file = sumstatsColHeaders,
   dbSNP = 155,
+  dbSNP_tarball = NULL,
   header_only = FALSE,
   allele_match_ref = FALSE,
   ref_genome = NULL,
@@ -39,6 +40,12 @@ dataframe with column names "Uncorrected" and "Corrected". See
 \code{data(sumstatsColHeaders)} for default mapping and necessary format.}
 
 \item{dbSNP}{version of dbSNP to be used (144 or 155). Default is 155.}
+
+\item{dbSNP_tarball}{Pass local versions of dbSNP in tarball format. Default
+of NULL uses the dbSNP version passed in \code{dbSNP} parmeter. \code{dbSNP_tarball}
+was enabled to help with dbSNP versions >=156, after the decision to no
+longer provide dbSNP releases as bioconductor packages. dbSNP 156 tarball is
+available here: http://149.165.171.124/SNPlocs/.}
 
 \item{header_only}{Instead of reading in the entire \code{sumstats} file,
 only read in the first N rows where N=\code{sampled_snps}.

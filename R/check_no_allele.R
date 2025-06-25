@@ -35,7 +35,8 @@ check_no_allele <- function(sumstats_dt,
                             nThread, 
                             log_files,
                             bi_allelic_filter,
-                            dbSNP) {
+                            dbSNP,
+                            dbSNP_tarball) {
     SNP <- i.seqnames <- CHR <- BP <- i.pos <- LP <- P <- A1 <- A2 <-
         i.ref_allele <- i.alt_alleles <- alt_alleles <- ss_A <-
         alleles_as_ambig <- IMPUTATION_A2 <- IMPUTATION_A1 <- NULL
@@ -61,6 +62,7 @@ check_no_allele <- function(sumstats_dt,
                 data.table::copy(sumstats_dt$SNP),
                 ref_genome = ref_genome,
                 dbSNP = dbSNP,
+                dbSNP_tarball = dbSNP_tarball,
                 msg = "A1 or A2 allele information"
             )
         } else {

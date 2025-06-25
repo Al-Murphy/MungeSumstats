@@ -166,3 +166,4 @@ development:
  * [Mykhaylo Malakhov](https://github.com/MykMal)
  * [Alasdair Warwick](https://github.com/rmgpanw)
  * [Ao Lu](https://github.com/leoarrow1)
+ * [Sufyan Sualeman](https://github.com/sufyansuleman)

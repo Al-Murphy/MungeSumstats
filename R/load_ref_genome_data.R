@@ -4,6 +4,11 @@
 #' @param ref_genome Name of the reference genome used for the GWAS
 #'  (GRCh37 or GRCh38)
 #' @param dbSNP version of dbSNP to be used (144 or 155)
+#' @param dbSNP_tarball Pass local versions of dbSNP in tarball format. Default 
+#' of NULL uses the dbSNP version passed in `dbSNP` parmeter. `dbSNP_tarball` 
+#' was enabled to help with dbSNP versions >=156, after the decision to no 
+#' longer provide dbSNP releases as bioconductor packages. dbSNP 156 tarball is 
+#' available here: http://149.165.171.124/SNPlocs/.
 #' @param msg Optional name of the column missing from the dataset in question.
 #'  Default is NULL
 #' @param chr_filt Internal for testing - filter reference genomes and sumstats
@@ -29,10 +34,10 @@ load_ref_genome_data <- function(snps,
     
     SNP <- NULL
     SNP_LOC_DATA <- load_snp_loc_data(
-      ref_genome    = ref_genome,
-      dbSNP   = dbSNP,
+      ref_genome = ref_genome,
+      dbSNP = dbSNP,
       dbSNP_tarball = dbSNP_tarball,
-      msg           = NULL
+      msg = NULL
     )
     # Get correct ref genome
     message("Loading reference genome data.")

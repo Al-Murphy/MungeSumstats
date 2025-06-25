@@ -36,6 +36,7 @@ get_genome_build <- function(sumstats,
                              standardise_headers = TRUE,
                              mapping_file = sumstatsColHeaders,
                              dbSNP=155,
+                             dbSNP_tarball = NULL,
                              header_only = FALSE,
                              allele_match_ref = FALSE,
                              ref_genome = NULL,
@@ -159,12 +160,14 @@ get_genome_build <- function(sumstats,
         snp_loc_data_37 <- load_ref_genome_data(
           snps = snps,
           ref_genome = "GRCH37",
-          dbSNP = dbSNP
+          dbSNP = dbSNP,
+          dbSNP_tarball = dbSNP_tarball
         )
         snp_loc_data_38 <- load_ref_genome_data(
           snps = snps,
           ref_genome = "GRCH38",
-          dbSNP = dbSNP
+          dbSNP = dbSNP,
+          dbSNP_tarball = dbSNP_tarball
         )
         # convert CHR filed in ref genomes to character not factor
         snp_loc_data_37[, seqnames := as.character(seqnames)]
@@ -199,7 +202,8 @@ get_genome_build <- function(sumstats,
         snp_loc_data <- load_ref_genome_data(
           snps = snps,
           ref_genome = ref_genome,
-          dbSNP = dbSNP
+          dbSNP = dbSNP,
+          dbSNP_tarball = dbSNP_tarball
         )
         # convert CHR filed in ref genomes to character not factor
         snp_loc_data[, seqnames := as.character(seqnames)]
@@ -242,12 +246,14 @@ get_genome_build <- function(sumstats,
         snps = snps,
         ref_genome = "GRCH37",
         dbSNP = dbSNP,
+        dbSNP_tarball = dbSNP_tarball,
         chr_filt = chr_filt
       )
       snp_loc_data_38 <- load_ref_genome_data(
         snps = snps,
         ref_genome = "GRCH38",
         dbSNP = dbSNP,
+        dbSNP_tarball = dbSNP_tarball,
         chr_filt = chr_filt
       )
       # convert CHR filed in ref genomes to character not factor

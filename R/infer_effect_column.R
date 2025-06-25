@@ -38,6 +38,7 @@
 infer_effect_column <-
   function(sumstats_dt,
            dbSNP=155,
+           dbSNP_tarball = NULL,
            sampled_snps = 10000,
            mapping_file = sumstatsColHeaders,
            nThread = nThread,
@@ -209,6 +210,7 @@ infer_effect_column <-
               sampled_snps = sampled_snps,
               mapping_file = mapping_file,
               dbSNP=dbSNP,
+              dbSNP_tarball = dbSNP_tarball,
               nThread = nThread,
               allele_match_ref = TRUE,
               ref_genome = ref_genome

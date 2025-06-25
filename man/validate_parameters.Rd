@@ -39,6 +39,7 @@ validate_parameters(
   drop_indels,
   check_dups,
   dbSNP,
+  dbSNP_tarball,
   write_vcf,
   return_format,
   ldsc_format,
@@ -197,7 +198,14 @@ Default is False.}
 \item{check_dups}{whether to check for duplicates - if formatting QTL
 datasets this should be set to FALSE otherwise keep as TRUE. Default is TRUE.}
 
-\item{dbSNP}{version of dbSNP to be used for imputation (144 or 155).}
+\item{dbSNP}{version of dbSNP to be used for imputation (144 or 155). See
+\code{dbSNP_tarball} for different versions of dbSNP (including newer releases).}
+
+\item{dbSNP_tarball}{Pass local versions of dbSNP in tarball format. Default
+of NULL uses the dbSNP version passed in \code{dbSNP} parmeter. \code{dbSNP_tarball}
+was enabled to help with dbSNP versions >=156, after the decision to no
+longer provide dbSNP releases as bioconductor packages. dbSNP 156 tarball is
+available here: http://149.165.171.124/SNPlocs/.}
 
 \item{write_vcf}{Whether to write as VCF (TRUE) or tabular file (FALSE).}
 

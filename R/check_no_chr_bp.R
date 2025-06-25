@@ -30,7 +30,8 @@ check_no_chr_bp <- function(sumstats_dt,
                             tabix_index, 
                             nThread,
                             log_files,
-                            dbSNP) {
+                            dbSNP,
+                            dbSNP_tarball) {
     SNP <- i.seqnames <- CHR <- BP <- i.pos <- LP <- P <- IMPUTATION_CHR <-
         IMPUTATION_BP <- NULL
     # If SNP present but no CHR/BP then need to find them
@@ -49,6 +50,7 @@ check_no_chr_bp <- function(sumstats_dt,
                     data.table::copy(sumstats_dt$SNP), 
                     ref_genome = ref_genome,
                     dbSNP = dbSNP,
+                    dbSNP_tarball = dbSNP_tarball,
                     msg="Chromosome or Base Pair Position"
                 )
         } else {
@@ -132,7 +134,8 @@ check_no_chr_bp <- function(sumstats_dt,
                           log_folder_ind=log_folder_ind,
                           check_save_out=check_save_out,
                           tabix_index=tabix_index,nThread=nThread,
-                          log_files=log_files,dbSNP=dbSNP) 
+                          log_files=log_files,dbSNP=dbSNP,
+                          dbSNP_tarball=dbSNP_tarball) 
         #join back on the sumstats
         sumstats_dt <- sumstats_dt[!SNP %in% na_chr_bp$sumstats_dt$SNP,]
         sumstats_dt <- rbindlist(list(sumstats_dt,na_chr_bp$sumstats_dt),

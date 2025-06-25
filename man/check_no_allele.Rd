@@ -17,7 +17,8 @@ check_no_allele(
   nThread,
   log_files,
   bi_allelic_filter,
-  dbSNP
+  dbSNP,
+  dbSNP_tarball
 )
 }
 \arguments{
@@ -56,7 +57,14 @@ FALSE.}
 \item{bi_allelic_filter}{Binary Should non-bi-allelic SNPs be removed.
 Default is TRUE.}
 
-\item{dbSNP}{version of dbSNP to be used for imputation (144 or 155).}
+\item{dbSNP}{version of dbSNP to be used for imputation (144 or 155). See
+\code{dbSNP_tarball} for different versions of dbSNP (including newer releases).}
+
+\item{dbSNP_tarball}{Pass local versions of dbSNP in tarball format. Default
+of NULL uses the dbSNP version passed in \code{dbSNP} parmeter. \code{dbSNP_tarball}
+was enabled to help with dbSNP versions >=156, after the decision to no
+longer provide dbSNP releases as bioconductor packages. dbSNP 156 tarball is
+available here: http://149.165.171.124/SNPlocs/.}
 }
 \value{
 A list containing two data tables:

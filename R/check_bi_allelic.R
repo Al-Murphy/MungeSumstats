@@ -18,7 +18,7 @@
 check_bi_allelic <-
     function(sumstats_dt, path, ref_genome, bi_allelic_filter, rsids,
              log_folder_ind, check_save_out, tabix_index, nThread, log_files,
-             dbSNP) {
+             dbSNP,dbSNP_tarball) {
         CHR <- alleles_as_ambig <- SNP <- NULL
         # If SNP present and user specified to remove
         col_headers <- names(sumstats_dt)
@@ -28,7 +28,8 @@ check_bi_allelic <-
                 rsids <- load_ref_genome_data(
                     data.table::copy(sumstats_dt$SNP),
                     ref_genome,
-                    dbSNP = dbSNP
+                    dbSNP = dbSNP,
+                    dbSNP_tarball = dbSNP_tarball
                 )
             }
             # get chars for SNPs not bi/tri allelic

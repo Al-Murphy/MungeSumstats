@@ -1,3 +1,12 @@
+## CHANGES IN VERSION 1.17.1
+
+### New features
+* MungeSumstats can now handle local versions of dbSNP in tarball format 
+(using the `dbSNP_tarball` parameter in `format_sumstats`). This was enabled to
+help with dbSNP versions >=156, after the decision to no longer provide dbSNP 
+releases as bioconductor packages. dbSNP 156 tarball is available 
+here:http://149.165.171.124/SNPlocs/.
+
 ## CHANGES IN VERSION 1.15.3
 
 ### Bug fix

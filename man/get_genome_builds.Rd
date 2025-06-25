@@ -10,6 +10,7 @@ get_genome_builds(
   sampled_snps = 10000,
   names_from_paths = FALSE,
   dbSNP = 155,
+  dbSNP_tarball = NULL,
   nThread = 1,
   chr_filt = NULL
 )

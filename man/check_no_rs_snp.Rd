@@ -16,7 +16,8 @@ check_no_rs_snp(
   tabix_index,
   nThread,
   log_files,
-  dbSNP
+  dbSNP,
+  dbSNP_tarball
 )
 }
 \arguments{
@@ -59,7 +60,14 @@ FALSE.}
 
 \item{log_files}{list of log file locations}
 
-\item{dbSNP}{version of dbSNP to be used for imputation (144 or 155).}
+\item{dbSNP}{version of dbSNP to be used for imputation (144 or 155). See
+\code{dbSNP_tarball} for different versions of dbSNP (including newer releases).}
+
+\item{dbSNP_tarball}{Pass local versions of dbSNP in tarball format. Default
+of NULL uses the dbSNP version passed in \code{dbSNP} parmeter. \code{dbSNP_tarball}
+was enabled to help with dbSNP versions >=156, after the decision to no
+longer provide dbSNP releases as bioconductor packages. dbSNP 156 tarball is
+available here: http://149.165.171.124/SNPlocs/.}
 }
 \value{
 list containing sumstats_dt, the modified summary statistics data

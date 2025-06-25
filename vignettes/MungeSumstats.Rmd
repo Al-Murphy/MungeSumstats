@@ -277,7 +277,14 @@ leave it as `NULL` and Mungesumstats will infer it from the data.
 
 Also note that the default dbSNP version used along with the reference genome is
 the latest version available on Bioconductor (currently dbSNP 155) but older 
-versions are also availble. Use the `dbSNP` input parameter to control this.
+package versions are also available - Use the `dbSNP` input parameter to 
+control this.
+
+Moreover, newer/different versions can be sued by passing a local tarball 
+package. Use the `dbSNP_tarball` parameter for this. `dbSNP_tarball` was enabled
+to help with dbSNP versions >=156, after the decision to no longer provide dbSNP
+releases as bioconductor packages. dbSNP 156 tarball is available 
+[here](http://149.165.171.124/SNPlocs/).
 
 The arguments `format_sumstats` in that control the level of QC
 conducted by *MungeSumstats* are:
@@ -418,6 +425,11 @@ conducted by *MungeSumstats* are:
 -   **dbSNP** The dbSNP version to use as a reference - defaults to the most 
     recent version available (155). Note that with the 9x more SNPs in dbSNP 
     155 vs 144, run times will increase.
+-   **dbSNP_tarball** Pass local versions of dbSNP in tarball format. Default of 
+    NULL uses the dbSNP version passed in `dbSNP` parmeter. `dbSNP_tarball` was 
+    enabled to help with dbSNP versions >=156, after the decision to no 
+    longer provide dbSNP releases as bioconductor packages. dbSNP 156 tarball is 
+    available here: http://149.165.171.124/SNPlocs/. 
 -   **sort_coordinates** Whether to sort by coordinates of resulting
     sumstats.\
 -   **nThread** Number of threads to use for parallel processes.

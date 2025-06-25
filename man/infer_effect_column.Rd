@@ -7,6 +7,7 @@
 infer_effect_column(
   sumstats_dt,
   dbSNP = 155,
+  dbSNP_tarball = NULL,
   sampled_snps = 10000,
   mapping_file = sumstatsColHeaders,
   nThread = nThread,
@@ -21,7 +22,14 @@ infer_effect_column(
 \item{sumstats_dt}{data table obj of the summary statistics file for the
 GWAS.}
 
-\item{dbSNP}{version of dbSNP to be used for imputation (144 or 155).}
+\item{dbSNP}{version of dbSNP to be used for imputation (144 or 155). See
+\code{dbSNP_tarball} for different versions of dbSNP (including newer releases).}
+
+\item{dbSNP_tarball}{Pass local versions of dbSNP in tarball format. Default
+of NULL uses the dbSNP version passed in \code{dbSNP} parmeter. \code{dbSNP_tarball}
+was enabled to help with dbSNP versions >=156, after the decision to no
+longer provide dbSNP releases as bioconductor packages. dbSNP 156 tarball is
+available here: http://149.165.171.124/SNPlocs/.}
 
 \item{sampled_snps}{Downsample the number of SNPs used when inferring genome
 build to save time.}

@@ -48,6 +48,7 @@ format_sumstats(
   drop_na_cols = c("SNP", "CHR", "BP", "A1", "A2", "FRQ", "BETA", "Z", "OR", "LOG_ODDS",
     "SIGNED_SUMSTAT", "SE", "P", "N"),
   dbSNP = 155,
+  dbSNP_tarball = NULL,
   check_dups = TRUE,
   sort_coordinates = TRUE,
   nThread = 1,
@@ -260,7 +261,14 @@ missing values. Default columns are SNP, chromosome, position, allele 1,
 allele2, effect columns (frequency, beta, Z-score, standard error, log odds,
 signed sumstats, odds ratio), p value and N columns.}
 
-\item{dbSNP}{version of dbSNP to be used for imputation (144 or 155).}
+\item{dbSNP}{version of dbSNP to be used for imputation (144 or 155). See
+\code{dbSNP_tarball} for different versions of dbSNP (including newer releases).}
+
+\item{dbSNP_tarball}{Pass local versions of dbSNP in tarball format. Default
+of NULL uses the dbSNP version passed in \code{dbSNP} parmeter. \code{dbSNP_tarball}
+was enabled to help with dbSNP versions >=156, after the decision to no
+longer provide dbSNP releases as bioconductor packages. dbSNP 156 tarball is
+available here: http://149.165.171.124/SNPlocs/.}
 
 \item{check_dups}{whether to check for duplicates - if formatting QTL
 datasets this should be set to FALSE otherwise keep as TRUE. Default is TRUE.}

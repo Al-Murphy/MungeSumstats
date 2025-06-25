@@ -186,7 +186,13 @@
 #' missing values. Default columns are SNP, chromosome, position, allele 1, 
 #' allele2, effect columns (frequency, beta, Z-score, standard error, log odds,
 #' signed sumstats, odds ratio), p value and N columns. 
-#' @param dbSNP version of dbSNP to be used for imputation (144 or 155).
+#' @param dbSNP version of dbSNP to be used for imputation (144 or 155). See 
+#' `dbSNP_tarball` for different versions of dbSNP (including newer releases).
+#' @param dbSNP_tarball Pass local versions of dbSNP in tarball format. Default 
+#' of NULL uses the dbSNP version passed in `dbSNP` parmeter. `dbSNP_tarball` 
+#' was enabled to help with dbSNP versions >=156, after the decision to no 
+#' longer provide dbSNP releases as bioconductor packages. dbSNP 156 tarball is 
+#' available here: http://149.165.171.124/SNPlocs/.
 #' @param check_dups whether to check for duplicates - if formatting QTL
 #' datasets this should be set to FALSE otherwise keep as TRUE. Default is TRUE.
 #' @param sort_coordinates Whether to sort by coordinates of resulting sumstats
@@ -381,6 +387,7 @@ format_sumstats <- function(path,
             indels = indels,
             drop_indels = drop_indels,
             dbSNP = dbSNP,
+            dbSNP_tarball = dbSNP_tarball,
             check_dups = check_dups,
             write_vcf = write_vcf,
             return_format = return_format,
@@ -502,6 +509,7 @@ format_sumstats <- function(path,
             sumstats_dt = sumstats_return$sumstats_dt,
             mapping_file = mapping_file,
             dbSNP = dbSNP,
+            dbSNP_tarball = dbSNP_tarball,
             nThread = nThread,
             ref_genome = ref_genome,
             on_ref_genome = on_ref_genome,
@@ -590,7 +598,8 @@ format_sumstats <- function(path,
                 tabix_index = tabix_index,
                 nThread = nThread,
                 log_files = log_files,
-                dbSNP = dbSNP
+                dbSNP = dbSNP,
+                dbSNP_tarball = dbSNP_tarball
             )
         # update values
         log_files <- sumstats_return$log_files
@@ -670,7 +679,8 @@ format_sumstats <- function(path,
                 tabix_index = tabix_index,
                 nThread = nThread,
                 log_files = log_files,
-                dbSNP = dbSNP
+                dbSNP = dbSNP,
+                dbSNP_tarball=dbSNP_tarball
             )
         # update values
         log_files <- sumstats_return$log_files
@@ -689,7 +699,8 @@ format_sumstats <- function(path,
             tabix_index = tabix_index,
             nThread = nThread,
             log_files = log_files,
-            dbSNP = dbSNP
+            dbSNP = dbSNP,
+            dbSNP_tarball = dbSNP_tarball
         )
         # update values
         log_files <- sumstats_return$log_files
@@ -709,7 +720,8 @@ format_sumstats <- function(path,
             tabix_index = tabix_index,
             nThread = nThread,
             log_files = log_files,
-            dbSNP = dbSNP
+            dbSNP = dbSNP,
+            dbSNP_tarball = dbSNP_tarball
         )
         # update values
         log_files <- sumstats_return$log_files
@@ -729,7 +741,8 @@ format_sumstats <- function(path,
                 nThread = nThread,
                 log_files = log_files,
                 bi_allelic_filter = bi_allelic_filter,
-                dbSNP = dbSNP
+                dbSNP = dbSNP,
+                dbSNP_tarball = dbSNP_tarball
             )
         # update values
         log_files <- sumstats_return$log_files
@@ -780,7 +793,8 @@ format_sumstats <- function(path,
                 nThread = nThread,
                 log_files = log_files,
                 mapping_file = mapping_file,
-                dbSNP = dbSNP
+                dbSNP = dbSNP,
+                dbSNP_tarball = dbSNP_tarball
             )
         # update values
         log_files <- sumstats_return$log_files
@@ -1028,7 +1042,8 @@ format_sumstats <- function(path,
             tabix_index = tabix_index,
             nThread = nThread,
             log_files = log_files,
-            dbSNP = dbSNP
+            dbSNP = dbSNP,
+            dbSNP_tarball = dbSNP_tarball
         )
         # update values
         log_files <- sumstats_return$log_files
