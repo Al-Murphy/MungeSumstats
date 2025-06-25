@@ -161,13 +161,15 @@ get_genome_build <- function(sumstats,
           snps = snps,
           ref_genome = "GRCH37",
           dbSNP = dbSNP,
-          dbSNP_tarball = dbSNP_tarball 
+          dbSNP_tarball = dbSNP_tarball,
+          chr_filt      = chr_filt
         )
         snp_loc_data_38 <- load_ref_genome_data(
           snps = snps,
           ref_genome = "GRCH38",
           dbSNP = dbSNP,
-          dbSNP_tarball = dbSNP_tarball 
+          dbSNP_tarball = dbSNP_tarball,
+          chr_filt      = chr_filt
         )
         # convert CHR filed in ref genomes to character not factor
         snp_loc_data_37[, seqnames := as.character(seqnames)]

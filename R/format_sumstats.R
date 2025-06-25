@@ -313,6 +313,13 @@ format_sumstats <- function(path,
                             ) {
     #### Setup multi-threading ####
     data.table::setDTthreads(threads = nThread)
+  ## EARLY TARBALL CHECK 
+  ## if the user passed a tarball, make sure it actually exists on disk
+  if (!is.null(dbSNP_tarball) && !file.exists(dbSNP_tarball)) {
+    stop("Tarball not found: ", dbSNP_tarball, call.=FALSE)
+  }
+ 
+  
     #### Setup empty variables ####
     rsids <- orig_dims <- A1_n <- A2 <- A1 <- NULL
     log_files <- vector(mode = "list")
@@ -381,6 +388,7 @@ format_sumstats <- function(path,
             indels = indels,
             drop_indels = drop_indels,
             dbSNP = dbSNP,
+            dbSNP_tarball  = dbSNP_tarball,
             check_dups = check_dups,
             write_vcf = write_vcf,
             return_format = return_format,
@@ -591,7 +599,8 @@ format_sumstats <- function(path,
                 tabix_index = tabix_index,
                 nThread = nThread,
                 log_files = log_files,
-                dbSNP = dbSNP
+                dbSNP = dbSNP,
+                dbSNP_tarball = dbSNP_tarball
             )
         # update values
         log_files <- sumstats_return$log_files
@@ -671,7 +680,8 @@ format_sumstats <- function(path,
                 tabix_index = tabix_index,
                 nThread = nThread,
                 log_files = log_files,
-                dbSNP = dbSNP
+                dbSNP = dbSNP,
+                dbSNP_tarball  = dbSNP_tarball
             )
         # update values
         log_files <- sumstats_return$log_files
@@ -690,7 +700,8 @@ format_sumstats <- function(path,
             tabix_index = tabix_index,
             nThread = nThread,
             log_files = log_files,
-            dbSNP = dbSNP
+            dbSNP = dbSNP,
+            dbSNP_tarball  = dbSNP_tarball
         )
         # update values
         log_files <- sumstats_return$log_files
@@ -1030,7 +1041,8 @@ format_sumstats <- function(path,
             tabix_index = tabix_index,
             nThread = nThread,
             log_files = log_files,
-            dbSNP = dbSNP
+            dbSNP = dbSNP,
+            dbSNP_tarball  = dbSNP_tarball
         )
         # update values
         log_files <- sumstats_return$log_files

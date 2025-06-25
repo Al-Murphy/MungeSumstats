@@ -17,6 +17,7 @@
 #' from its respective file path.
 #' Only works if \code{sumstats_list} is a list of paths.
 #' @param dbSNP version of dbSNP to be used (144 or 155). Default is 155.
+#' @param dbSNP_tarball Optional path to a SNPlocs tarball to use instead
 #' @param nThread Number of threads to use for parallel processes.
 #' @param chr_filt Internal for testing - filter reference genomes and sumstats
 #' to specific chromosomes for testing. Pass a list of chroms in format: 

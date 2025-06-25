@@ -10,6 +10,7 @@ get_genome_builds(
   sampled_snps = 10000,
   names_from_paths = FALSE,
   dbSNP = 155,
+  dbSNP_tarball = NULL,
   nThread = 1,
   chr_filt = NULL
 )
@@ -31,6 +32,8 @@ from its respective file path.
 Only works if \code{sumstats_list} is a list of paths.}
 
 \item{dbSNP}{version of dbSNP to be used (144 or 155). Default is 155.}
+
+\item{dbSNP_tarball}{Optional path to a SNPlocs tarball to use instead}
 
 \item{nThread}{Number of threads to use for parallel processes.}
 

@@ -2,6 +2,8 @@
 #'
 #' @inheritParams format_sumstats
 #' @param log_files list of log file locations
+#' @param dbSNP_tarball Optional path to a SNPlocs.Hsapiens.dbSNP<build>.GRCh<37|38>_*.tar.gz;
+#' if provided we will unpack that instead of requiring the Bioc package.
 #' @return list containing sumstats_dt, the modified summary statistics data
 #' table object and the log file list.
 #' @keywords internal
@@ -18,7 +20,7 @@
  check_no_rs_snp <- function(sumstats_dt, path, ref_genome, snp_ids_are_rs_ids, indels,
                               imputation_ind, log_folder_ind, check_save_out,
                               tabix_index, nThread, log_files, dbSNP,
-                              dbSNP_tarball = NUL) {
+                              dbSNP_tarball = NULL) {
     SNP <- CHR <- CHR1 <- BP1 <- i.RefSNP_id <- IMPUTATION_SNP <-
         SNP_old_temp <- SNP_INFO <- A1 <- A2 <- .I <- NULL
     # if snp ids aren't rs ids rename the column to ID's 
@@ -173,8 +175,7 @@
              SNP_LOC_DATA <- load_snp_loc_data(
                  ref_genome    = ref_genome,
                  dbSNP   = dbSNP,
-                 dbSNP_tarball = dbSNP_tarball,
-                 msg           = NULL
+                 dbSNP_tarball = dbSNP_tarball
                )
             # split out chr:bp - check if chr or bp first by longer of two
             splits <- strsplit(miss_rs_chr_bp[1, SNP],

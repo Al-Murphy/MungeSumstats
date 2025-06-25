@@ -41,6 +41,8 @@ dataframe with column names "Uncorrected" and "Corrected". See
 
 \item{dbSNP}{version of dbSNP to be used (144 or 155). Default is 155.}
 
+\item{dbSNP_tarball}{Optional path to a SNPlocs tarball to use instead}
+
 \item{header_only}{Instead of reading in the entire \code{sumstats} file,
 only read in the first N rows where N=\code{sampled_snps}.
 This should help speed up cases where you have to read in \code{sumstats}

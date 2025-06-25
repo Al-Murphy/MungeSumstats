@@ -22,6 +22,6 @@ An OnDiskLongTable of SNP locations
 Loads the SNP locations and alleles for Homo sapiens from dbSNP builds.
 For builds distributed as Bioconductor packages (e.g. 144, 155) it will
 load the installed SNPlocs.Hsapiens.dbSNP\if{html}{\out{<build>}}.GRCh<37|38> object.
-For newer builds provided as Bioc-style source bundles (tar.gz of a
+For newer builds provided as Bioc‐style source bundles (tar.gz of a
 SNPlocs package), pass the path via \code{dbSNP_tarball} to load directly.
 }

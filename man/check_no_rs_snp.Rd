@@ -17,7 +17,7 @@ check_no_rs_snp(
   nThread,
   log_files,
   dbSNP,
-  dbSNP_tarball = NUL
+  dbSNP_tarball = NULL
 )
 }
 \arguments{
@@ -61,6 +61,9 @@ FALSE.}
 \item{log_files}{list of log file locations}
 
 \item{dbSNP}{version of dbSNP to be used for imputation (144 or 155).}
+
+\item{dbSNP_tarball}{Optional path to a SNPlocs.Hsapiens.dbSNP\if{html}{\out{<build>}}.GRCh<37|38>_*.tar.gz;
+if provided we will unpack that instead of requiring the Bioc package.}
 }
 \value{
 list containing sumstats_dt, the modified summary statistics data
