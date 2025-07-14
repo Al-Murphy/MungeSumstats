@@ -33,6 +33,12 @@ Only works if \code{sumstats_list} is a list of paths.}
 
 \item{dbSNP}{version of dbSNP to be used (144 or 155). Default is 155.}
 
+\item{dbSNP_tarball}{Pass local versions of dbSNP in tarball format. Default
+of NULL uses the dbSNP version passed in \code{dbSNP} parmeter. \code{dbSNP_tarball}
+was enabled to help with dbSNP versions >=156, after the decision to no
+longer provide dbSNP releases as bioconductor packages. dbSNP 156 tarball is
+available here: http://149.165.171.124/SNPlocs/.}
+
 \item{nThread}{Number of threads to use for parallel processes.}
 
 \item{chr_filt}{Internal for testing - filter reference genomes and sumstats

@@ -29,6 +29,12 @@ load_ref_genome_data(
 
 \item{dbSNP}{version of dbSNP to be used (144 or 155)}
 
+\item{dbSNP_tarball}{Pass local versions of dbSNP in tarball format. Default
+of NULL uses the dbSNP version passed in \code{dbSNP} parmeter. \code{dbSNP_tarball}
+was enabled to help with dbSNP versions >=156, after the decision to no
+longer provide dbSNP releases as bioconductor packages. dbSNP 156 tarball is
+available here: http://149.165.171.124/SNPlocs/.}
+
 \item{msg}{Optional name of the column missing from the dataset in question.
 Default is NULL}
 

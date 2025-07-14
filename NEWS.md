@@ -1,3 +1,8 @@
+## CHANGES IN VERSION 1.17.2
+
+### Bug fix
+* Bug in long tests utilising `ieugwasr` - swap to new token system
+
 ## CHANGES IN VERSION 1.17.1
 
 ### New features
