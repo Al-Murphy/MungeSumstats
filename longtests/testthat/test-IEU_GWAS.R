@@ -10,7 +10,7 @@ test_that("Test connection to IEU GWAS - metadata, download", {
      #catch server issues - fake id just check it connects
      #Server code: 502; Server is possibly experiencing traffic, trying again...
      is.data.frame(try(gwasinfo(id = c("fake-id"),
-                                opengwas_jwt = get_opengwas_jwt())))){
+                                opengwas_jwt = ieugwasr::get_opengwas_jwt())))){
     
     ### By ID and sample size
     metagwas <-

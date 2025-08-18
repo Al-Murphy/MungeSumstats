@@ -1,3 +1,8 @@
+## CHANGES IN VERSION 1.17.3
+
+### Bug fix
+* Graciously handle unsinking messages when run fails. 
+
 ## CHANGES IN VERSION 1.17.2
 
 ### Bug fix

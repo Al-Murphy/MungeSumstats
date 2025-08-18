@@ -432,6 +432,13 @@ format_sumstats <- function(path,
                 split = TRUE, append = TRUE
             )
             sink(msgcon, type = "message") # does not support split
+            on.exit(
+              {
+                sink(NULL, type = "message")
+                sink(NULL, type = "output")
+              },
+              add = TRUE
+            )
             # add name to log_file list
             log_files[["MungeSumstats_log_msg"]] <-
                 paste0(
