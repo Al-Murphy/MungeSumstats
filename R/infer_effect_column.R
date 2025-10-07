@@ -189,7 +189,7 @@ infer_effect_column <-
             #don't flip A1 as the next step of the mapping is to flip it anyway
             data.table::setnames(sumstats_dt,"A0_INPUTTED_OLD_","A2")
           }else{#unknown
-            print("ERROR: Unknown condition, not changing allele mapping.")
+            message("ERROR: Unknown condition, not changing allele mapping.")
           }
           
         }
@@ -223,6 +223,8 @@ infer_effect_column <-
                 #swap A1 and A2
                 #this is the opposite to what MSS expects so switch A1/A2 naming
                 #first get corrected names for allele columns then switch
+                #Make column headers uppercase
+                data.table::setnames(sumstats_dt, toupper(names(sumstats_dt)))
                 for (headerI in seq_len(nrow(mapping_file))) {
                   un <- mapping_file[headerI, "UNCORRECTED"]
                   cr <- mapping_file[headerI, "CORRECTED"]

@@ -205,6 +205,7 @@ get_genome_build <- function(sumstats,
           dbSNP = dbSNP,
           dbSNP_tarball = dbSNP_tarball
         )
+        
         # convert CHR filed in ref genomes to character not factor
         snp_loc_data[, seqnames := as.character(seqnames)]
         # convert CHR filed in data to character if not already
@@ -215,6 +216,12 @@ get_genome_build <- function(sumstats,
       # need to take first alt from list to do this
       snp_loc_data[,alt_alleles := unlist(lapply(alt_alleles, 
                                                  function(x) x[[1]]))]
+      #Need to ensure ref and alt are upper case for this check
+      sumstats_return <-
+        make_allele_upper(sumstats_dt = sumstats,
+                          log_files = NA)
+      sumstats <- sumstats_return$sumstats_dt
+      
       num_a1 <-
         nrow(snp_loc_data[sumstats, ,
                           on = c("SNP"="SNP","pos"="BP","seqnames"="CHR",
@@ -227,7 +234,7 @@ get_genome_build <- function(sumstats,
                                  "ref_allele"="A2","alt_alleles"="A1"),
                           nomatch = FALSE
         ])
-
+      
       if(num_a1>=num_a2){
         message("Effect/frq column(s) relate to A2 in the inputted sumstats")
         #this is what MSS expects so no action required

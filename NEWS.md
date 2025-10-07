@@ -1,3 +1,9 @@
+## CHANGES IN VERSION 1.17.5
+
+### Bug fix
+* Before inferring effect column ensure A1 and A2 are uppercase.
+
+
 ## CHANGES IN VERSION 1.17.3
 
 ### Bug fix
