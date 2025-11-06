@@ -17,10 +17,10 @@
 #' @examples
 #' #only run the examples if user has internet access:
 #' if(try(is.character(getURL("www.google.com")))==TRUE){
-#' vcf_url <- "https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz"
-#' out_paths <- download_vcf(vcf_url = vcf_url)
+#' vcf_urls <- ieugwasr::gwasinfo_files(id = "ieu-a-298")[[1]]
+#' out_paths <- download_vcf(vcf_urls = vcf_urls)
 #' }
-download_vcf <- function(vcf_url,
+download_vcf <- function(vcf_urls,
                          vcf_dir = tempdir(),
                          vcf_download = TRUE,
                          download_method = "download.file",
@@ -29,10 +29,12 @@ download_vcf <- function(vcf_url,
                          timeout = 10*60,
                          nThread = 1) {
     #### Create save_path ####
+    vcf_url <- vcf_urls[1]
     save_path <- file.path(vcf_dir, basename(vcf_url))
     index_path <- NULL
     
-    index_url <- paste0(vcf_url, ".tbi")
+    index_url <- vcf_urls[2]
+    # index_url <- paste0(vcf_url, ".tbi")
     #### If actually local ####
     if(file.exists(vcf_url)){
         message("Using local VCF.")
