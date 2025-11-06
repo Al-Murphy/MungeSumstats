@@ -97,12 +97,15 @@ import_sumstats <- function(ids,
                 "\n========== Processing dataset : ", id,
                 " ==========\n"
             )
-            vcf_url <-
-                paste(
-                    "https://gwas.mrcieu.ac.uk/files", id,
-                    paste0(id,".vcf.gz"),sep="/"
-                )
+            
+            vcf_urls <- ieugwasr::gwasinfo_files(id = id)[[1]] 
+            # vcf_url <-
+            #     paste(
+            #         "https://gwas.mrcieu.ac.uk/files", id,
+            #         paste0(id,".vcf.gz"),sep="/"
+            #     )
             #### Create path of the output file ####
+            vcf_url <- vcf_urls[1]
             id_dir <- file.path(save_dir, id)
             save_path <- file.path(id_dir, basename(vcf_url))
             if (!write_vcf) save_path <- gsub(".vcf.gz", ".tsv.gz", save_path)
@@ -115,7 +118,7 @@ import_sumstats <- function(ids,
             if((!file.exists(save_path)) || isTRUE(force_new)){  
                 #### Optional:: download VCF ####
                 vcf_paths <- download_vcf(
-                    vcf_url = vcf_url,
+                    vcf_urls = vcf_urls,
                     vcf_dir = vcf_dir,
                     vcf_download = vcf_download,
                     download_method = download_method,
