@@ -1,3 +1,8 @@
+## CHANGES IN VERSION 1.19.1
+
+### Bug fix
+* Update approach to download from ieugwasr.
+
 ## CHANGES IN VERSION 1.17.5
 
 ### Bug fix

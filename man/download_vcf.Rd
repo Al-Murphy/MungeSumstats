@@ -5,7 +5,7 @@
 \title{Download VCF file and its index file from Open GWAS}
 \usage{
 download_vcf(
-  vcf_url,
+  vcf_urls,
   vcf_dir = tempdir(),
   vcf_download = TRUE,
   download_method = "download.file",
@@ -16,7 +16,7 @@ download_vcf(
 )
 }
 \arguments{
-\item{vcf_url}{Remote URL to VCF file.}
+\item{vcf_urls}{Remote URL to VCF file.}
 
 \item{vcf_dir}{Where to download the original VCF from Open GWAS.
 \emph{WARNING:} This is set to \code{tempdir()} by default.
@@ -50,7 +50,7 @@ so we can't include it as a dep.
 \examples{
 #only run the examples if user has internet access:
 if(try(is.character(getURL("www.google.com")))==TRUE){
-vcf_url <- "https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz"
-out_paths <- download_vcf(vcf_url = vcf_url)
+vcf_urls <- ieugwasr::gwasinfo_files(id = "ieu-a-298")[[1]]
+out_paths <- download_vcf(vcf_urls = vcf_urls)
 }
 }

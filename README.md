@@ -4,16 +4,17 @@
 <i>Authors</i>: Alan Murphy, Brian Schilder and Nathan Skene  
 </h5>
 <h5>  
-<i>Updated</i>: Jun-25-2025  
+<i>Updated</i>: Nov-06-2025  
 </h5>
 
 <!-- Readme.md is generated from Readme.Rmd. Please edit that file -->
+
 <!-- badges: start -->
 
-[![](https://img.shields.io/badge/release%20version-1.10.1-black.svg)](https://www.bioconductor.org/packages/MungeSumstats)
-[![](https://img.shields.io/badge/devel%20version-1.17.1-black.svg)](https://github.com/neurogenomics/MungeSumstats)
+[![](https://img.shields.io/badge/release%20version-1.16.0-black.svg)](https://www.bioconductor.org/packages/MungeSumstats)
+[![](https://img.shields.io/badge/devel%20version-1.13.4-black.svg)](https://github.com/neurogenomics/MungeSumstats)
 [![](https://img.shields.io/github/last-commit/neurogenomics/MungeSumstats.svg)](https://github.com/neurogenomics/MungeSumstats/commits/master)
-[![](https://img.shields.io/badge/download-27535/total-blue.svg)](https://bioconductor.org/packages/stats/bioc/MungeSumstats)
+[![](https://img.shields.io/badge/download-31127/total-blue.svg)](https://bioconductor.org/packages/stats/bioc/MungeSumstats)
 [![License:
 Artistic-2.0](https://img.shields.io/badge/license-Artistic--2.0-blue.svg)](https://cran.r-project.org/web/licenses/Artistic-2.0)
 [![](https://img.shields.io/badge/doi-https://doi.org/10.1093/bioinformatics/btab665-blue.svg)](https://doi.org/https://doi.org/10.1093/bioinformatics/btab665)
@@ -174,3 +175,4 @@ We would like to acknowledge all those who have contributed to
 - [Alasdair Warwick](https://github.com/rmgpanw)
 - [Ao Lu](https://github.com/leoarrow1)
 - [Sufyan Sualeman](https://github.com/sufyansuleman)
+- [Toby Clark](https://github.com/toby-clark4)

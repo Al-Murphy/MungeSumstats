@@ -45,13 +45,10 @@ test_that("Test connection to IEU GWAS - metadata, download", {
     
     
     # test download
-    vcf_url <- "https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz"
-    out_paths <- MungeSumstats::download_vcf(
-      vcf_url = vcf_url,
-      force_new = TRUE
-    )
+    datasets <- MungeSumstats::import_sumstats(ids = "ieu-a-298",
+                                               ref_genome = "GRCH37")
     # test this worked
-    testthat::expect_true(file.exists(out_paths$save_path))
+    testthat::expect_true(file.exists(datasets$`ieu-a-298`))
     
     
     # issues should be caught
