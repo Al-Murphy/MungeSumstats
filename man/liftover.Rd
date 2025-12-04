@@ -25,6 +25,7 @@ liftover(
   as_granges = FALSE,
   style = "NCBI",
   local_chain = NULL,
+  rmv_chr = c(),
   verbose = TRUE
 )
 }
@@ -72,6 +73,10 @@ Default of NULL i.e. no local file to use. NOTE if passing a local chain file
 make sure to specify the path to convert from and to the correct build like
 GRCh37 to GRCh38. We can not sense check this for local files. The chain file
 can be submitted as a gz file (as downloaed from source) or unzipped.}
+
+\item{rmv_chr}{Chromosomes to exclude from the formatted summary statistics
+file. Use NULL if no filtering is necessary. Default is \code{c("X", "Y", "MT")}
+which removes all non-autosomal SNPs.}
 
 \item{verbose}{Print messages.}
 }

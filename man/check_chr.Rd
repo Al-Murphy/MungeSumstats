@@ -6,12 +6,11 @@
 \usage{
 check_chr(
   sumstats_dt,
-  log_files,
-  check_save_out,
-  rmv_chr,
-  nThread,
-  tabix_index,
-  log_folder_ind
+  log_files = c(),
+  check_save_out = FALSE,
+  rmv_chr = c(),
+  nThread = 1,
+  log_folder_ind = FALSE
 )
 }
 \arguments{
@@ -26,9 +25,6 @@ file. Use NULL if no filtering is necessary. Default is \code{c("X", "Y", "MT")}
 which removes all non-autosomal SNPs.}
 
 \item{nThread}{Number of threads to use for parallel processes.}
-
-\item{tabix_index}{Index the formatted summary statistics with
-\href{http://www.htslib.org/doc/tabix.html}{tabix} for fast querying.}
 
 \item{log_folder_ind}{Binary Should log files be stored containing all
 filtered out SNPs (separate file per filter). The data is outputted in the

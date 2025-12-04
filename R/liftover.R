@@ -23,6 +23,14 @@
 #' instead of a \link[data.table]{data.table} (default: \code{FALSE}).
 #' @param style Style to return \link[GenomicRanges]{GRanges} object in
 #' (e.g.  "NCBI" = 4; "UCSC" = "chr4";) (default: \code{"NCBI"}).
+#' @param local_chain Path to local chain file to use instead of downlaoding.
+#' Default of NULL i.e. no local file to use. NOTE if passing a local chain file
+#' make sure to specify the path to convert from and to the correct build like 
+#' GRCh37 to GRCh38. We can not sense check this for local files. The chain file
+#' can be submitted as a gz file (as downloaed from source) or unzipped.
+#' @param rmv_chr Chromosomes to exclude from the formatted summary statistics
+#'   file. Use NULL if no filtering is necessary. Default is `c("X", "Y", "MT")`
+#'   which removes all non-autosomal SNPs.
 #' @param verbose Print messages.
 #' @inheritParams format_sumstats
 #' 
@@ -51,6 +59,7 @@ liftover <- function(sumstats_dt,
                      as_granges = FALSE,
                      style = "NCBI",
                      local_chain = NULL,
+                     rmv_chr = c(),
                      verbose = TRUE) {
     
     IMPUTATION_gen_build <- width <- strand <- end <- seqnames <- NULL;
@@ -110,6 +119,19 @@ liftover <- function(sumstats_dt,
                  query_ucsc == target_ucsc) {
               stop("Can only perform liftover between hg19 <---> hg38")
           } 
+          
+          #FIRST ensure chr formatting is correct to avoid issues with chain 
+          #files
+          msg <- paste0(
+            "First - Checking CHR format to avoid liftover issues with chain ",
+            "file."
+          )
+          message(msg)
+          sumstats_return <- check_chr(
+            sumstats_dt = sumstats_dt,
+            rmv_chr = rmv_chr
+          )
+          
           #### Convert to GRanges #### 
           gr <- to_granges(
               sumstats_dt = sumstats_dt,

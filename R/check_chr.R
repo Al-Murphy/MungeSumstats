@@ -12,12 +12,11 @@
 #'   updated log file locations list
 #' @keywords internal
 check_chr <- function(sumstats_dt,
-                      log_files,
-                      check_save_out,
-                      rmv_chr,
-                      nThread,
-                      tabix_index,
-                      log_folder_ind) {
+                      log_files = c(),
+                      check_save_out=FALSE,
+                      rmv_chr = c(),
+                      nThread = 1,
+                      log_folder_ind=FALSE) {
   CHR <- NULL
 
   # The CHR column needs to be a character vector for gsub substitution to work
@@ -30,6 +29,8 @@ check_chr <- function(sumstats_dt,
   sumstats_dt[, CHR := gsub("ch", "", CHR, ignore.case = TRUE)]
   # Rename "23" to "X"
   sumstats_dt[, CHR := gsub("23", "X", CHR)]
+  # Rename "24" to "Y"
+  sumstats_dt[, CHR := gsub("24", "Y", CHR)]
   # Rename "M" to "MT"
   sumstats_dt[, CHR := gsub("M", "MT", CHR, ignore.case = TRUE)]
   # Make all chromosome names uppercase
@@ -77,8 +78,6 @@ check_chr <- function(sumstats_dt,
       sumstats_dt = sumstats_dt[all_removed_rows],
       save_path = save_path,
       sep = check_save_out$sep,
-      #don't tab indx as could be miss values & cause err
-      #tabix_index = tabix_index,
       nThread = nThread
     )
     log_files[[name]] <- save_path

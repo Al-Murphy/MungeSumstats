@@ -1,3 +1,10 @@
+## CHANGES IN VERSION 1.19.2
+
+### Bug fix
+* `liftover()` couldn't previously handle CHR outside of 1-22, added 
+functionality following the same logic as `format_sumstats()`
+
+
 ## CHANGES IN VERSION 1.19.1
 
 ### Bug fix

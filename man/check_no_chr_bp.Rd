@@ -60,13 +60,11 @@ available here: http://149.165.171.124/SNPlocs/.}
 }
 \value{
 A list containing two data tables:
-\itemize{
-\item \code{sumstats_dt}{
-  : the modified summary statistics data table object}
-\item \code{rsids}{
-  : snpsById, filtered to SNPs of interest if loaded already. Or else NULL}
-\item \code{log_files}{
-  : log file list}
+\describe{
+\item{\code{sumstats_dt}}{The modified summary statistics data table.}
+\item{\code{rsids}}{\code{snpsById}, filtered to SNPs of interest if loaded
+already, or else \code{NULL}.}
+\item{\code{log_files}}{List of log files.}
 }
 }
 \description{

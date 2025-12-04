@@ -3,13 +3,11 @@
 #' @inheritParams format_sumstats
 #' @param log_files list of log file locations
 #' @return A list containing two data tables:
-#' \itemize{
-#'   \item \code{sumstats_dt}{
-#'   : the modified summary statistics data table object}
-#'   \item \code{rsids}{
-#'   : snpsById, filtered to SNPs of interest if loaded already. Or else NULL}
-#'   \item \code{log_files}{
-#'   : log file list}
+#' \describe{
+#'   \item{\code{sumstats_dt}}{The modified summary statistics data table.}
+#'   \item{\code{rsids}}{`snpsById`, filtered to SNPs of interest if loaded 
+#'   already, or else `NULL`.}
+#'   \item{\code{log_files}}{List of log files.}
 #' }
 #' @keywords internal
 #' @importFrom data.table setDT

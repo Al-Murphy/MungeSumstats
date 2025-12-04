@@ -1013,7 +1013,6 @@ format_sumstats <- function(path,
           check_save_out = check_save_out,
           rmv_chr = rmv_chr,
           nThread = nThread,
-          tabix_index = tabix_index,
           log_folder_ind = log_folder_ind
         )
         # update values
