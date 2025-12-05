@@ -23,6 +23,8 @@ check_chr <- function(sumstats_dt,
   sumstats_dt[, CHR := as.character(CHR)]
 
   ### Reformat chromosome names according to the default style (Ensembl/NCBI)
+  message("Formatting CHR column (if necessary)- ",
+          "Removing chr prefix, converting 23/24 to X/Y and M to MT")
   # Remove the "chr" prefix
   sumstats_dt[, CHR := gsub("chr", "", CHR, ignore.case = TRUE)]
   # Remove the "ch" prefix

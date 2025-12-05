@@ -130,6 +130,7 @@ Tests run by *MungeSumstats* include:
 -   Check for non-biallelic SNPs (infer from reference genome)
 -   Check for allele flipping
 -   Check for SNPs with nonstandard chromosome names
+-   Check for CHR format of X/Y chromosome - converting 23/24 to X/Y and M to MT
 -   Check for SNPs on excluded chromosomes (removes non-autosomal SNPs by default)
 -   Check for z-score (Z) and impute if missing
 -   Check for N and impute if missing

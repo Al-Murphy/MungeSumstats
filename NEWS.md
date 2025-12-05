@@ -1,3 +1,8 @@
+## CHANGES IN VERSION 1.19.3
+
+### Bug fix
+* Add more documentation for chr checks
+
 ## CHANGES IN VERSION 1.19.2
 
 ### Bug fix
