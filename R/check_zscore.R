@@ -38,7 +38,7 @@
 #' \code{standardise_sumstats_column_headers_crossplatform} first.
 #' @param mapping_file MungeSumstats has a pre-defined column-name mapping file
 #' which should cover the most common column headers and their interpretations.
-#' However, if a column header that is in youf file is missing of the mapping we
+#' However, if a column header that is in your file is missing of the mapping we
 #' give is incorrect you can supply your own mapping file. Must be a 2 column
 #' dataframe with column names "Uncorrected" and "Corrected". See
 #' data(sumstatsColHeaders) for default mapping and necessary format.
@@ -72,9 +72,10 @@ check_zscore <- function(sumstats_dt,
         } else if(toupper(compute_z)=='BETA'){
             if ("BETA" %in% col_headers && "SE" %in% col_headers){
               message(
-                "Computing Z-score from BETA ans SE using formula:",
+                "Computing Z-score from BETA and SE using formula:",
                 " `BETA/SE`"
               )
+              message('Using SE')
               # ensure BETA, P are numeric
               sumstats_dt[, BETA := as.numeric(BETA)]
               sumstats_dt[, SE := as.numeric(SE)]
@@ -99,6 +100,16 @@ check_zscore <- function(sumstats_dt,
             # ensure BETA, P are numeric
             sumstats_dt[, BETA := as.numeric(BETA)]
             sumstats_dt[, P := as.numeric(P)]
+            
+            # check for P-values equal to 0
+            n_zero <- sumstats_dt[, sum(P == 0)]
+            if (n_zero > 0) {
+              message(paste0("Found ", n_zero, " p-values equal to 0. ",
+                              "These should not be present and indicate a rounding issue in your pipeline. ",
+                              "Replacing these with 1e-300."))
+              sumstats_dt[P == 0, P := 1e-300]
+            }
+            
             sumstats_dt[, Z := sign(BETA) *
                 sqrt(stats::qchisq(P, 1, lower = FALSE))]
             # if user wants information, give SNPs where Z-score calculated
