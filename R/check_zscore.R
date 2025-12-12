@@ -54,7 +54,7 @@ check_zscore <- function(sumstats_dt,
     ## Set variables to be used in in place data.table functions to NULL
     ## to avoid confusing BiocCheck.
     Z <- BETA <- SE <- P <- IMPUTATION_z_score_beta_se <- 
-      IMPUTATION_z_score_p <- NULL
+      IMPUTATION_z_score_p <- IMPUTATION_p_for_zero <- NULL
 
     if (standardise_headers) {
         sumstats_dt <-
@@ -75,7 +75,6 @@ check_zscore <- function(sumstats_dt,
                 "Computing Z-score from BETA and SE using formula:",
                 " `BETA/SE`"
               )
-              message('Using SE')
               # ensure BETA, P are numeric
               sumstats_dt[, BETA := as.numeric(BETA)]
               sumstats_dt[, SE := as.numeric(SE)]
@@ -105,8 +104,13 @@ check_zscore <- function(sumstats_dt,
             n_zero <- sumstats_dt[, sum(P == 0)]
             if (n_zero > 0) {
               message(paste0("Found ", n_zero, " p-values equal to 0. ",
-                              "These should not be present and indicate a rounding issue in your pipeline. ",
+                              "These should not be present and indicate a ",
+                              "rounding issue in your pipeline. ",
                               "Replacing these with 1e-300."))
+              # if user wants information, give SNPs where changed from 0
+              if (imputation_ind) {
+                sumstats_dt[P == 0, IMPUTATION_p_for_zero := TRUE]
+              }
               sumstats_dt[P == 0, P := 1e-300]
             }
             

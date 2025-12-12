@@ -40,7 +40,7 @@ default. To override and compute a new Z-score column from P set
 
 \item{mapping_file}{MungeSumstats has a pre-defined column-name mapping file
 which should cover the most common column headers and their interpretations.
-However, if a column header that is in youf file is missing of the mapping we
+However, if a column header that is in your file is missing of the mapping we
 give is incorrect you can supply your own mapping file. Must be a 2 column
 dataframe with column names "Uncorrected" and "Corrected". See
 data(sumstatsColHeaders) for default mapping and necessary format.}

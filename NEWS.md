@@ -1,3 +1,8 @@
+## CHANGES IN VERSION 1.19.4
+
+### Bug fix
+* convert p-values from 0 to 1e-300 when imputing z-score
+
 ## CHANGES IN VERSION 1.19.3
 
 ### Bug fix
