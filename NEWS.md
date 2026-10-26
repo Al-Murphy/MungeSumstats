@@ -1,3 +1,10 @@
+## CHANGES IN VERSION 1.21.2
+
+### Bug fix
+* pkgdown GitHub Action: skip the unused `SNPlocs.Hsapiens.dbSNP155.GRCh38` 
+Suggests, free runner disk space and disable the package cache, as installing 
+every reference genome Suggests ran the runner out of disk (#170).
+
 ## CHANGES IN VERSION 1.21.1
 
 ### Bug fix

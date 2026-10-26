@@ -23,6 +23,14 @@ jobs:
     permissions:
       contents: write
     steps:
+      # The SNPlocs/BSgenome Suggests need ~10 GB installed (and ~3x that while
+      # pak downloads, builds and installs them), so make room first
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc \
+            /opt/hostedtoolcache/CodeQL
+          df -h /
+
       - uses: actions/checkout@v4
 
       - uses: r-lib/actions/setup-pandoc@v2
@@ -31,10 +39,16 @@ jobs:
         with:
           use-public-rspm: true
 
+      # dbSNP155.GRCh38 (6.5 GB) isn't used by any example or vignette and
+      # installing it ran the runner out of disk. The library is still over
+      # the 10 GB Actions cache limit, so don't try to cache it.
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::pkgdown, local::.
+          extra-packages: >-
+            any::pkgdown, local::.,
+            SNPlocs.Hsapiens.dbSNP155.GRCh38=?ignore
           needs: website
+          cache: false
 
       - name: Build site
         run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
