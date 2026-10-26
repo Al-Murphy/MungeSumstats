@@ -35,8 +35,15 @@ read_sumstats <- function(path,
     } else {
         vcf_suffixes <- supported_suffixes(tabular = FALSE, 
                                            tabular_compressed = FALSE)
-        vcf_suffix_regexes <- gsub("\\.", "\\.",  paste0(vcf_suffixes, "$"))
-        is_vcf <- grepl(paste(vcf_suffix_regexes, collapse = "|"), path)
+        # literal suffix match (a regex would treat "." as a wildcard)
+        is_vcf <- any(endsWith(path, vcf_suffixes))
+        # *.vcf.tsv(.gz/.bgz) can be tab-delimited text with a VCF-like
+        # #CHROM header (e.g. PGC) so only read it as a VCF if it is one
+        if (is_vcf && grepl("\\.vcf\\.tsv(\\.gz|\\.bgz)?$", path) &&
+            file.exists(path)) {
+            is_vcf <- isTRUE(startsWith(readLines(path, n = 1L),
+                                        "##fileformat=VCF"))
+        }
         if (isTRUE(is_vcf)) {
             sumstats_file <- read_vcf(path = path,
                                       use_params = TRUE,
@@ -48,8 +55,7 @@ read_sumstats <- function(path,
             #### Check if tabular 1: infer from file name ####
             tab_suffixes <- supported_suffixes(vcf = FALSE, 
                                                vcf_compressed = FALSE)
-            tab_suffix_regexes <- gsub("\\.", "\\.",  paste0(tab_suffixes, "$"))
-            is_tabular <- grepl(paste(tab_suffix_regexes, collapse = "|"), path) 
+            is_tabular <- any(endsWith(path, tab_suffixes))
             #### Check if tabular 2: infer from data ####
             if(isFALSE(is_tabular)){
                 header <- read_header(path = path)
