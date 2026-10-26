@@ -60,8 +60,11 @@ check_on_ref_genome <-function(sumstats_dt,
                 #also check >1 character in A1 A2, use this to define indel
                 indel_dt <- indel_dt[(nchar(A1)>1 | nchar(A2)>1),]
                 if(nrow(indel_dt)>0){
-                        #remove indels from sumstats for now
-                        sumstats_dt <- sumstats_dt[!indel_dt$SNP, ]
+                        #remove indels from sumstats for now - by row not
+                        #by ID so SNVs sharing an ID with an indel are kept
+                        sumstats_dt <- sumstats_dt[
+                                !(!SNP %in% rsids$SNP &
+                                          (nchar(A1)>1 | nchar(A2)>1)), ]
                         msg <- paste0("Found ",
                                         formatC(nrow(indel_dt),big.mark = ","),
                                         " Indels. These won't",
@@ -78,8 +81,8 @@ check_on_ref_genome <-function(sumstats_dt,
                     data.table::setkey(sumstats_dt, SNP)
                     indel_dt <- data.table::data.table()
             }
-            num_bad_ids <- 
-                    length(sumstats_dt$SNP)-length(rsids$SNP)-nrow(indel_dt)
+            #indels already removed from sumstats_dt above
+            num_bad_ids <- length(sumstats_dt$SNP)-length(rsids$SNP)
             # check for SNPs not on ref genome
             if (num_bad_ids > 0) {
                 msg <- paste0(
