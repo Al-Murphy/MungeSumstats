@@ -39,11 +39,17 @@ test_that("Imputation of CHR and BP correctly", {
         # add CHR, BP to org
         sumstats_dt[res_dt, CHR_der := i.CHR]
         sumstats_dt[res_dt, BP_der := i.BP]
+        # #106: imputing CHR/BP must leave P untouched
+        sumstats_dt[res_dt, P_der := i.P]
         # remove any that weren't found in reference
         sumstats_dt <- sumstats_dt[complete.cases(sumstats_dt), ]
         expect_equal(sumstats_dt$BP, sumstats_dt$BP_der)
         expect_equal(sumstats_dt$CHR, sumstats_dt$CHR_der)
+        expect_true(is.numeric(res_dt$P))
+        expect_false(anyNA(res_dt$P))
+        expect_equal(sumstats_dt$P, sumstats_dt$P_der)
     } else {
+        expect_equal(is_32bit_windows, TRUE)
         expect_equal(is_32bit_windows, TRUE)
         expect_equal(is_32bit_windows, TRUE)
     }
