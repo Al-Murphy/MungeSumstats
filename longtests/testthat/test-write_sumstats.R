@@ -68,15 +68,13 @@ test_that("write_sumstats works", {
                          write_vcf = TRUE,
                          fileext = ".vcf.gz") 
         ## with indexing
-        # providing the correct suffix is important
-        testthat::expect_failure(
-            dat <- run_tests(sumstats_dt = sumstats_dt, 
-                             write_vcf = TRUE,
-                             tabix_index = TRUE,
-                             fileext = ".vcf", 
-                             save_path_check = FALSE) 
-        )
-        dat <- run_tests(sumstats_dt = sumstats_dt, 
+        # without the suffix check the indexed .vcf.bgz path is returned
+        dat <- run_tests(sumstats_dt = sumstats_dt,
+                         write_vcf = TRUE,
+                         tabix_index = TRUE,
+                         fileext = ".vcf",
+                         save_path_check = FALSE)
+        dat <- run_tests(sumstats_dt = sumstats_dt,
                          write_vcf = TRUE,
                          tabix_index = TRUE,
                          fileext = ".vcf", 
