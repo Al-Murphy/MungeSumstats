@@ -31,7 +31,7 @@ check_ldsc_format <- function(sumstats_dt, save_format, convert_n_int,
                 "Setting `allele_flip_check=TRUE`",
                 "to comply with LDSC format."
             )
-            message()
+            message(msg)
             allele_flip_check <- TRUE
         }
         n_msg <- paste0(
@@ -56,7 +56,8 @@ check_ldsc_format <- function(sumstats_dt, save_format, convert_n_int,
             stop(n_msg)  
           } 
         }
-        if (compute_n == 0L && !n_present) {
+        # compute_n can be a vector of method names
+        if (is.numeric(compute_n) && all(compute_n == 0L) && !n_present) {
           stop(n_msg)
         }
     }
