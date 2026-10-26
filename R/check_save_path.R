@@ -86,10 +86,15 @@ check_save_path <- function(save_path,
             }
         }
     }
+    # regex for a suffix at the end of the path only (not in directory names)
+    suffix_regex <- function(sfx) {
+        paste0("(", paste(gsub(".", "\\.", sfx, fixed = TRUE),
+                          collapse = "|"), ")$")
+    }
     #### Distinguish between VCF and tabular formats ####
     if (write_vcf) {
-        save_path <- gsub(paste(suffixes, collapse = "|"),
-                          ".vcf.bgz", save_path)
+        # only rewrite the file suffix, not matches in the directory names
+        save_path <- sub(suffix_regex(suffixes), ".vcf.bgz", save_path)
         sep <- "\t"
         file_type <- "vcf"
         # Don't have to worry about tabix_index bc if writing to VCF format, 
@@ -106,9 +111,7 @@ check_save_path <- function(save_path,
                 "Switching output to tabular format (.tsv.gz)."
             )
             messager(vcf_msg,v=verbose)
-            save_path <-
-                gsub(paste(suffixes.vcf, collapse = "|"),
-                     ".tsv.gz", save_path)
+            save_path <- sub(suffix_regex(suffixes.vcf), ".tsv.gz", save_path)
             sep <- "\t"
             file_type <- ".tsv"
             # get extension of save path for log files

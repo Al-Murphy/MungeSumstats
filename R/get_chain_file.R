@@ -38,7 +38,7 @@ get_chain_file <- function(from = c("hg38", "hg19"),
     "ucsc" = .get_ucsc_chain_remote(from, to)
   )
   local_path <- file.path(save_dir, basename(remote_path))
-  local_path_gunzip <- gsub(".gz", "", local_path)
+  local_path_gunzip <- sub("\\.gz$", "", local_path)
   ### Download chain file ####
   if(file.exists(local_path_gunzip)){
     if(verbose)
