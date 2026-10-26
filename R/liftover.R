@@ -29,8 +29,9 @@
 #' GRCh37 to GRCh38. We can not sense check this for local files. The chain file
 #' can be submitted as a gz file (as downloaed from source) or unzipped.
 #' @param rmv_chr Chromosomes to exclude from the formatted summary statistics
-#'   file. Use NULL if no filtering is necessary. Default is `c("X", "Y", "MT")`
-#'   which removes all non-autosomal SNPs.
+#'   file. Use NULL if no filtering is necessary. Default is `c()` so no
+#'   chromosomes are removed (SNPs on nonstandard chromosomes are always
+#'   removed). Use `c("X", "Y", "MT")` to remove all non-autosomal SNPs.
 #' @param verbose Print messages.
 #' @inheritParams format_sumstats
 #' 
@@ -127,10 +128,10 @@ liftover <- function(sumstats_dt,
             "file."
           )
           message(msg)
-          sumstats_return <- check_chr(
+          sumstats_dt <- check_chr(
             sumstats_dt = sumstats_dt,
             rmv_chr = rmv_chr
-          )
+          )$sumstats_dt
           
           #### Convert to GRanges #### 
           gr <- to_granges(
