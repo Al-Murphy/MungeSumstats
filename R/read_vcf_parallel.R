@@ -69,7 +69,7 @@ read_vcf_parallel <- function(path,
         download <- TRUE
     }
     if(isTRUE(download)){
-        vcf_paths <- download_vcf(vcf_url = path,
+        vcf_paths <- download_vcf(vcf_urls = path,
                                   vcf_dir = vcf_dir,
                                   download_method = download_method,
                                   force_new = force_new,
