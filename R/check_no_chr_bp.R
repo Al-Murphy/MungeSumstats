@@ -141,8 +141,9 @@ check_no_chr_bp <- function(sumstats_dt,
         #join on the log files
         log_files <- c(log_files,na_chr_bp$log_files)
         #update rsids
-        old_rsids_drop <- old_rsids[!old_rsids %in% na_chr_bp$sumstats_dt]
-        rsids <- rsids[!rsids %in% old_rsids_drop]
+        old_rsids_drop <-
+          old_rsids[!old_rsids %in% na_chr_bp$sumstats_dt$SNP]
+        if (!is.null(rsids)) rsids <- rsids[!SNP %in% old_rsids_drop]
       }
     }
     return(list("sumstats_dt" = sumstats_dt, 
