@@ -138,8 +138,9 @@ check_allele_flip <- function(sumstats_dt, path,
                         check_save_out$extension
                     )
             }
-            sumstats_dt <- sumstats_dt[!(A1 != ref_gen_allele &
-                A2 != ref_gen_allele), ]
+            # keep SNPs not on the reference (NA ref_gen_allele), as above
+            sumstats_dt <- sumstats_dt[is.na(ref_gen_allele) |
+                !(A1 != ref_gen_allele & A2 != ref_gen_allele), ]
         } else {
             sumstats_dt[
                 A1 != ref_gen_allele & A2 != ref_gen_allele,
