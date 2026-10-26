@@ -211,7 +211,7 @@
                 num_indels <- nrow(gr_snp[(nchar(A1)>1 | nchar(A2)>1),])
                 if(num_indels>0){
                     msg <- paste0("Found ",
-                                  formatC(nrow(num_indels),big.mark = ","),
+                                  formatC(num_indels,big.mark = ","),
                                   " Indels. These won't",
                                   " be checked against the reference ",
                                   "genome as it does not contain ",
@@ -312,7 +312,7 @@
                                                         nchar(A2)>1),])
                         if(num_indels>0){
                             msg <- paste0("Found ",
-                                          formatC(nrow(num_indels),
+                                          formatC(num_indels,
                                                   big.mark = ","),
                                           " Indels. These won't",
                                           " be checked against the referenc",
