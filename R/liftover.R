@@ -153,9 +153,16 @@ liftover <- function(sumstats_dt,
           else {
             if (verbose) {message("Using local chain file...")}
             #unzip if necessary
-            filetype = summary(file(local_chain))$class
+            chain_con <- file(local_chain)
+            filetype <- summary(chain_con)$class
+            close(chain_con)
             if(filetype=='gzfile'){
-              local_chain <- R.utils::gunzip(local_chain, overwrite=TRUE)
+              #unzip to a temp file so the user's file is kept
+              local_chain <- R.utils::gunzip(local_chain,
+                                             destname = tempfile(
+                                               fileext = ".chain"),
+                                             remove = FALSE,
+                                             overwrite = TRUE)
             }
             chain <- rtracklayer::import.chain(local_chain)
           }
