@@ -54,9 +54,11 @@ check_bi_allelic <-
                 message(msg)
                 # join using SNP
                 data.table::setkey(sumstats_dt, SNP)
-                keep_snps <- rsids[
-                    alleles_as_ambig %in% nonambig_IUPAC_CODE_MAP
-                ]$SNP
+                # remove only the non-biallelic SNPs - SNPs not on the
+                # reference (e.g. kept indels) aren't checked here
+                bad_snps <- unique(rsids[
+                    !alleles_as_ambig %in% nonambig_IUPAC_CODE_MAP
+                ]$SNP)
                 # remove rows not bi-allelic
                 # If user wants log, save it to there
                 if (log_folder_ind) {
@@ -66,7 +68,7 @@ check_bi_allelic <-
                         log_files = log_files
                     )
                     write_sumstats(
-                        sumstats_dt = sumstats_dt[!keep_snps, ],
+                        sumstats_dt = sumstats_dt[bad_snps, ],
                         save_path =
                             paste0(
                                 check_save_out$log_folder,
@@ -84,7 +86,7 @@ check_bi_allelic <-
                             check_save_out$extension
                         )
                 }
-                sumstats_dt <- sumstats_dt[keep_snps, ]
+                sumstats_dt <- sumstats_dt[!bad_snps, ]
             }
             return(list(
                 "sumstats_dt" = sumstats_dt, "rsids" = rsids,
