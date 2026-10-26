@@ -322,6 +322,8 @@ format_sumstats <- function(path,
     #### Setup empty variables ####
     rsids <- orig_dims <- A1_n <- A2 <- A1 <- NULL
     log_files <- vector(mode = "list")
+    # TRUE only while this call's message/output sinks are active
+    msgs_sunk <- FALSE
     t1 <- Sys.time()
 
     #### Check 1: Ensure save_path is correct.   ####
@@ -422,20 +424,32 @@ format_sumstats <- function(path,
                 file(paste0(
                   check_save_out$log_folder,"/",
                   nme,"_log_msg.txt"),
-                open = "a"
+                open = "w"
                 )
             sink(
                 file = paste0(
                   check_save_out$log_folder,"/",
                   nme,"_log_output.txt"
                 ),
-                split = TRUE, append = TRUE
+                split = TRUE, append = FALSE
             )
+            # message sinks don't stack so keep the caller's to restore it
+            prev_msg_sink <- sink.number(type = "message")
+            unsink_msgs <- function() {
+              if (prev_msg_sink == 2L) { # stderr
+                sink(NULL, type = "message")
+              } else {
+                sink(getConnection(prev_msg_sink), type = "message")
+              }
+              sink(NULL, type = "output")
+            }
             sink(msgcon, type = "message") # does not support split
+            msgs_sunk <- TRUE
             on.exit(
               {
-                sink(NULL, type = "message")
-                sink(NULL, type = "output")
+                # only unsink if not already done at the end of the run
+                if (msgs_sunk) unsink_msgs()
+                close(msgcon)
               },
               add = TRUE
             )
@@ -1159,9 +1173,9 @@ format_sumstats <- function(path,
     )
 
     # if user wanted log of messages remember to unsink at end
-    if (log_mungesumstats_msgs) {
-        sink(NULL, type = "message")
-        sink(NULL, type = "output")
+    if (log_mungesumstats_msgs && msgs_sunk) {
+        unsink_msgs()
+        msgs_sunk <- FALSE
     }
 
     if (return_data) {
