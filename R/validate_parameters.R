@@ -427,9 +427,11 @@ validate_parameters <- function(path,
             ) %in% c("UNCORRECTED", "CORRECTED")
         ) ||
         !all(essential_cols %in%
-            mapping_file[, toupper(colnames(mapping_file)) == "CORRECTED"]) ||
+            mapping_file[[which(toupper(colnames(mapping_file)) ==
+                                  "CORRECTED")]]) ||
         !any(signed_cols %in%
-            mapping_file[, toupper(colnames(mapping_file)) == "CORRECTED"])) {
+            mapping_file[[which(toupper(colnames(mapping_file)) ==
+                                  "CORRECTED")]])) {
         stop(mapping_file_msg)
     }
 
