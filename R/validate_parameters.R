@@ -109,16 +109,21 @@ validate_parameters <- function(path,
               ") or provide `dbSNP_tarball`.")
             stop(stp_msg)
           }
-          pkg_name <- sprintf(
-                "SNPlocs.Hsapiens.dbSNP%d.GRCh%s",
-                as.integer(dbSNP),
-                ifelse(toupper(ref_genome)=="GRCH37","37","38")
-            )
-          if (!requireNamespace(pkg_name, quietly=TRUE)) {
-                stop("To use dbSNP=", dbSNP, " on ", ref_genome,
-                     ", please install the Bioconductor package '", 
-                     pkg_name, "'.", call. = FALSE)
-            }
+          # if ref_genome not specified it is inferred, so need both builds
+          builds <- if (is.null(ref_genome)) c("37", "38") else
+            ifelse(toupper(ref_genome)=="GRCH37","37","38")
+          for (build in builds) {
+            pkg_name <- sprintf(
+                  "SNPlocs.Hsapiens.dbSNP%d.GRCh%s",
+                  as.integer(dbSNP),
+                  build
+              )
+            if (!requireNamespace(pkg_name, quietly=TRUE)) {
+                  stop("To use dbSNP=", dbSNP, " on GRCh", build,
+                       ", please install the Bioconductor package '",
+                       pkg_name, "'.", call. = FALSE)
+              }
+          }
     } else{
       if(!file.exists(dbSNP_tarball)){
         tarball_msg <- paste0(
