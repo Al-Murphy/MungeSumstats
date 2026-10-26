@@ -134,7 +134,7 @@ write_sumstats <- function(sumstats_dt,
           vr <- vr[, all_poss_cols[all_poss_cols %in% names(mcols(vr))]]
 
           messager("Writing in IEU OpenGWAS VCF format ==> ", save_path)
-          VariantAnnotation::writeVcf(
+          vcf_path <- VariantAnnotation::writeVcf(
             obj = VariantAnnotation::asVCF(vr, info = "RSID"),
             ### Must supply filename without compression suffix
             filename = tmp_save_path,
@@ -145,7 +145,7 @@ write_sumstats <- function(sumstats_dt,
           #### Convert to VRanges and save ####
           vr <- to_vranges(sumstats_dt = sumstats_dt)
           messager("Writing in VCF format ==> ", save_path)
-          VariantAnnotation::writeVcf(
+          vcf_path <- VariantAnnotation::writeVcf(
               obj = vr,
               ### Must supply filename without compression suffix
               filename = tmp_save_path,
@@ -155,15 +155,17 @@ write_sumstats <- function(sumstats_dt,
         #### Compress ####
         ## only compress if this was not already handled by writeVcf(index=T)
         if (isFALSE(tabix_index)) {
-            if (endsWith(save_path,".bgz")) {
-                save_path <- Rsamtools::bgzip(tmp_save_path, overwrite = TRUE)
-            } else if (endsWith(save_path,".gz")) {
-                #save_path <- R.utils::gzip(tmp_save_path, overwrite = TRUE)
+            if (endsWith(save_path,".bgz") || endsWith(save_path,".gz")) {
                 # IMPORTANT: use bgzip, not gzip, for VCF compatibility
-                save_path <- Rsamtools::bgzip(tmp_save_path, overwrite = TRUE)
+                save_path <- Rsamtools::bgzip(tmp_save_path, dest = save_path,
+                                              overwrite = TRUE)
+                unlink(tmp_save_path)
             } else {
                 save_path <- tmp_save_path
             }
+        } else {
+            # writeVcf(index=TRUE) writes (and returns) the .bgz file
+            save_path <- vcf_path
         }
     } else {
         if (isTRUE(tabix_index)) {
