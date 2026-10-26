@@ -1181,7 +1181,7 @@ format_sumstats <- function(path,
     if (return_data) {
         message("Returning data directly.")
         #### Load data into memory when a pre-existing file is being used
-        if (!exists("sumstats_return")) {
+        if (!exists("sumstats_return", inherits = FALSE)) {
             sumstats_return <- list()
             sumstats_return[["sumstats_dt"]] <-
                 read_sumstats(
