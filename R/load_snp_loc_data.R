@@ -39,15 +39,15 @@ load_snp_loc_data <- function(ref_genome,
     }
     message("Loading SNPlocs data from tarball ", basename(dbSNP_tarball), 
             " on ", ref, ".")
-    tmpdir <- tempfile("snp_loc_")
-    #check if one already created - this is called multiple times per run
-    tmpdirs <- list.dirs(dirname(tmpdir),recursive = FALSE)
-    tmpdirs <- tmpdirs[grepl("\\bsnp_loc_",tmpdirs)]
-    if(length(tmpdirs)==0){
+    #one extraction per tarball - this is called multiple times per run so
+    #reuse it, but never reuse one made from a different tarball
+    tmpdir <- file.path(tempdir(),
+                        paste0("snp_loc_",
+                               gsub("[^[:alnum:]._-]", "_",
+                                    basename(dbSNP_tarball))))
+    if(!dir.exists(tmpdir)){
       dir.create(tmpdir)
       utils::untar(dbSNP_tarball, exdir = tmpdir)
-    }else{ #found already
-      tmpdir <- tmpdirs[1] #can be multiple
     }
     # locate inst/extdata under the top‐level unpacked directory
     topdirs <- list.dirs(tmpdir, recursive = FALSE, full.names = TRUE)
