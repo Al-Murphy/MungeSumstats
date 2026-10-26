@@ -131,9 +131,14 @@ infer_effect_column <-
         if(length(fnd_allele_indicator)>0){
           message("Found direction from effect/frq column naming")
           #fnd_allele_indicator could be >1 so majority vote
-          a1_mtch <- sum(grepl("A1",fnd_allele_indicator))
-          a2_mtch <- sum(grepl("A2",fnd_allele_indicator))
-          a0_mtch <- sum(grepl("A0",fnd_allele_indicator))
+          #get the allele each refers to from the allele column name it was
+          #made from e.g. A1FREQ, Freq1, BETA_ALLELE2
+          fnd_alleles <- eff_frq_allele_matches$ALLELE[
+            match(toupper(fnd_allele_indicator),
+                  eff_frq_allele_matches$UNCORRECTED)]
+          a1_mtch <- sum(fnd_alleles == "A1")
+          a2_mtch <- sum(fnd_alleles == "A2")
+          a0_mtch <- sum(fnd_alleles == "A*")
           #need to also check if allele 0 & allele 1 found or more normal case
           #of allele 1 & allele 2, as this flips which is interp as the eff 
           #allele by MSS
@@ -157,6 +162,8 @@ infer_effect_column <-
             message("Effect/frq column(s) relate to A1 in the sumstat")
             #this is the opposite to what MSS expects so switch A1/A2 naming
             #first get corrected names for allele columns then switch
+            #Make column headers uppercase (mapping_file is uppercase)
+            data.table::setnames(sumstats_dt, toupper(names(sumstats_dt)))
             for (headerI in seq_len(nrow(mapping_file))) {
               un <- mapping_file[headerI, "UNCORRECTED"]
               cr <- mapping_file[headerI, "CORRECTED"]
@@ -176,6 +183,8 @@ infer_effect_column <-
             message("Effect/frq column(s) relate to A0 in the sumstat")
             #this is the opposite to what MSS expects so switch A1/A0 naming
             #first get corrected names for allele columns then switch
+            #Make column headers uppercase (mapping_file is uppercase)
+            data.table::setnames(sumstats_dt, toupper(names(sumstats_dt)))
             for (headerI in seq_len(nrow(mapping_file))) {
               un <- mapping_file[headerI, "UNCORRECTED"]
               cr <- mapping_file[headerI, "CORRECTED"]
