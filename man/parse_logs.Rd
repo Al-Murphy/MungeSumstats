@@ -6,7 +6,7 @@
 \usage{
 parse_logs(
   save_dir = getwd(),
-  pattern = "MungeSumstats_log_msg.txt$",
+  pattern = "_log_msg.txt$",
   verbose = TRUE
 )
 }
@@ -14,7 +14,9 @@ parse_logs(
 \item{save_dir}{Top-level directory to recursively search
 for log files within.}
 
-\item{pattern}{Regex pattern to search for files with.}
+\item{pattern}{Regex pattern to search for files with. Matches both the
+current \code{<save_path stem>_log_msg.txt} log names and the older
+\code{MungeSumstats_log_msg.txt} name.}
 
 \item{verbose}{Print messages.}
 }

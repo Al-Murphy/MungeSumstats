@@ -7,7 +7,9 @@
 #' 
 #' @param save_dir Top-level directory to recursively search 
 #' for log files within.
-#' @param pattern Regex pattern to search for files with.
+#' @param pattern Regex pattern to search for files with. Matches both the
+#' current \code{<save_path stem>_log_msg.txt} log names and the older
+#' \code{MungeSumstats_log_msg.txt} name.
 #' @param verbose Print messages.
 #' 
 #' @returns \link[data.table]{data.table} of parsed log data.
@@ -18,7 +20,7 @@
 #' save_dir <- system.file("extdata",package = "MungeSumstats")
 #' log_data <- MungeSumstats::parse_logs(save_dir = save_dir)
 parse_logs <- function(save_dir = getwd(),
-                       pattern = "MungeSumstats_log_msg.txt$",
+                       pattern = "_log_msg.txt$",
                        verbose = TRUE){
     log_files <- list.files(path = save_dir,
                             pattern = pattern,
