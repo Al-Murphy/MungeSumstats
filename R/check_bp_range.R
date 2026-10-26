@@ -27,6 +27,19 @@ check_bp_range <- function(sumstats_dt, path, ref_genome,log_folder_ind,
         genome_info <-
           cbind(data.table::data.table("CHR"=seqnames(genome_info)),
                 data.table::as.data.table(genome_info))
+        #CHR is only standardised later (check_chr) so also add the other
+        #styles (chr1, x, 23...) to this small lookup, not to the sumstats
+        std_info <- genome_info[CHR %in% c(seq_len(22), "X", "Y", "MT")]
+        std_info <- rbind(std_info,
+                          std_info[CHR == "X"][, CHR := "23"],
+                          std_info[CHR == "Y"][, CHR := "24"],
+                          std_info[CHR == "MT"][, CHR := "M"])
+        std_info <- rbind(std_info,
+                          data.table::copy(std_info)[, CHR := tolower(CHR)])
+        std_info <- data.table::rbindlist(lapply(
+          c("", "chr", "CHR", "Chr", "ch"),
+          function(pre) data.table::copy(std_info)[, CHR := paste0(pre, CHR)]))
+        genome_info <- unique(rbind(genome_info, std_info), by = "CHR")
         #convert CHR to char in sumstats (if it is an int)
         sumstats_dt[,CHR:=as.character(CHR)]
         #add chr len to sumstats
@@ -65,9 +78,10 @@ check_bp_range <- function(sumstats_dt, path, ref_genome,log_folder_ind,
                      name, check_save_out$extension)
           }
           
-          # update actual
-          sumstats_dt <- sumstats_dt[!is.na(BP) & BP>0 & 
-                                       (BP<=chr_max | is.na(chr_max)),]
+          # update actual - drop exactly the bad_bp rows (rows with unknown
+          # CHR are kept so check_no_chr_bp can impute them)
+          sumstats_dt <- sumstats_dt[is.na(chr_max) |
+                                       !(is.na(BP) | BP<=0 | BP>chr_max),]
         }
         #check is doen remove column
         sumstats_dt[,chr_max:=NULL]
