@@ -75,8 +75,9 @@ GRCh37 to GRCh38. We can not sense check this for local files. The chain file
 can be submitted as a gz file (as downloaed from source) or unzipped.}
 
 \item{rmv_chr}{Chromosomes to exclude from the formatted summary statistics
-file. Use NULL if no filtering is necessary. Default is \code{c("X", "Y", "MT")}
-which removes all non-autosomal SNPs.}
+file. Use NULL if no filtering is necessary. Default is \code{c()} so no
+chromosomes are removed (SNPs on nonstandard chromosomes are always
+removed). Use \code{c("X", "Y", "MT")} to remove all non-autosomal SNPs.}
 
 \item{verbose}{Print messages.}
 }
