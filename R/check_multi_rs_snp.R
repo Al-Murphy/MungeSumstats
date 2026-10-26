@@ -49,8 +49,11 @@ check_multi_rs_snp <- function(sumstats_dt, path, remove_multi_rs_snp,
                 SNP := gsub("([[:punct:]]) rs.*", "", SNP)
             ]
         } else { # remove rows
+            # count the same rows that are removed below
             msg <- paste0(
-                sum(grepl("_rs", sumstats_dt$SNP)), " SNPs found with",
+                formatC(sum(grepl("[[:punct:]]rs", sumstats_dt$SNP) |
+                                grepl("[[:punct:]] rs", sumstats_dt$SNP)),
+                        big.mark = ","), " SNPs found with",
                 " multiple RSIDs on one row, these will be ",
                 "removed. If you would rather take the first RS ID ",
                 "set\n`remove_multi_rs_snp`=FALSE"
