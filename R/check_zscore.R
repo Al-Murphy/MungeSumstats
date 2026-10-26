@@ -101,7 +101,7 @@ check_zscore <- function(sumstats_dt,
             sumstats_dt[, P := as.numeric(P)]
             
             # check for P-values equal to 0
-            n_zero <- sumstats_dt[, sum(P == 0)]
+            n_zero <- sumstats_dt[, sum(P == 0, na.rm = TRUE)]
             if (n_zero > 0) {
               message(paste0("Found ", n_zero, " p-values equal to 0. ",
                               "These should not be present and indicate a ",
