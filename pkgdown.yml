@@ -1,9 +1,11 @@
-pandoc: 2.19.2
-pkgdown: 2.0.6.9000
-pkgdown_sha: 03f912fc18522c6e41a66c0094acc68845b0147a
+pandoc: 3.8.3
+pkgdown: 2.2.1
+pkgdown_sha: ~
 articles:
+  docker: docker.html
   MungeSumstats: MungeSumstats.html
   OpenGWAS: OpenGWAS.html
-  docker: docker.html
-last_built: 2022-12-12T17:07Z
-
+last_built: 2026-10-26T21:37Z
+urls:
+  reference: https://al-murphy.github.io/MungeSumstats/reference
+  article: https://al-murphy.github.io/MungeSumstats/articles

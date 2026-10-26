@@ -1,0 +1,55 @@
+# Standardize the CHR column
+
+Maps chromosome names to the default Ensembl/NCBI naming style and
+removes SNPs with nonstandard CHR entries. Optionally, also removes SNPs
+on user-specified chromosomes.
+
+## Usage
+
+``` r
+check_chr(
+  sumstats_dt,
+  log_files = c(),
+  check_save_out = FALSE,
+  rmv_chr = c(),
+  nThread = 1,
+  log_folder_ind = FALSE
+)
+```
+
+## Arguments
+
+- sumstats_dt:
+
+  data.table with summary statistics
+
+- log_files:
+
+  list of locations for all log files
+
+- check_save_out:
+
+  list of parameters for saved files
+
+- rmv_chr:
+
+  Chromosomes to exclude from the formatted summary statistics file. Use
+  NULL if no filtering is necessary. Default is `c("X", "Y", "MT")`
+  which removes all non-autosomal SNPs.
+
+- nThread:
+
+  Number of threads to use for parallel processes.
+
+- log_folder_ind:
+
+  Binary Should log files be stored containing all filtered out SNPs
+  (separate file per filter). The data is outputted in the same format
+  specified for the resulting sumstats file. The only exception to this
+  rule is if output is vcf, then log file saved as .tsv.gz. Default is
+  FALSE.
+
+## Value
+
+list containing the updated summary statistics data.table and the
+updated log file locations list

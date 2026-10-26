@@ -1,0 +1,45 @@
+# Ensure that only one model in GWAS sumstats or only one trait tested
+
+Ensure that only one model in GWAS sumstats or only one trait tested
+
+## Usage
+
+``` r
+check_multi_gwas(
+  sumstats_dt,
+  path,
+  analysis_trait,
+  ignore_multi_trait,
+  mapping_file
+)
+```
+
+## Arguments
+
+- sumstats_dt:
+
+  data table obj of the summary statistics file for the GWAS
+
+- path:
+
+  Filepath for the summary statistics file to be formatted
+
+- analysis_trait:
+
+  If multiple traits were studied, name of the trait for analysis from
+  the GWAS. Default is NULL
+
+- mapping_file:
+
+  MungeSumstats has a pre-defined column-name mapping file which should
+  cover the most common column headers and their interpretations.
+  However, if a column header that is in youf file is missing of the
+  mapping we give is incorrect you can supply your own mapping file.
+  Must be a 2 column dataframe with column names "Uncorrected" and
+  "Corrected". See data(sumstatsColHeaders) for default mapping and
+  necessary format.
+
+## Value
+
+list containing sumstats_dt, the modified summary statistics data table
+object

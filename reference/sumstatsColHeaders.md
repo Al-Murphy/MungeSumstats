@@ -1,0 +1,23 @@
+# Summary Statistics Column Headers
+
+List of uncorrected column headers often found in GWAS Summary
+Statistics column headers. Note the effect allele will always be the A2
+allele, this is the approach done for
+VCF(https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7805039/). This is
+enforced with the column header corrections here and also the check
+allele flipping test.
+
+## Usage
+
+``` r
+data("sumstatsColHeaders")
+```
+
+## Format
+
+dataframe with 2 columns
+
+## Source
+
+The code to prepare the .Rda file file from the marker file is:
+` # Most the data in the below table comes from the LDSC github wiki data("sumstatsColHeaders") # Make additions to sumstatsColHeaders using github version of MungeSumstats- # Shown is an example of adding new A1 and A2 naming a1_name <- c("NON","RISK","ALLELE") a2_name <- c("RISK","ALLELE") all_delims <- c("_",".",""," ","-") all_uncorr_a1 <- vector(mode="list",length = length(all_delims)) all_corr_a1 <- vector(mode="list",length = length(all_delims)) all_uncorr_a2 <- vector(mode="list",length = length(all_delims)) all_corr_a2 <- vector(mode="list",length = length(all_delims)) for(i in seq_along(all_delims)){ delim <- all_delims[i] a1 <- unlist(paste(a1_name,collapse=delim)) a2 <- unlist(paste(a2_name,collapse=delim)) all_uncorr_a1[[i]] <- a1 all_uncorr_a2[[i]] <- a2 all_corr_a1[[i]] <- "A1" all_corr_a2[[i]] <- "A2" } se_cols <- data.frame("Uncorrected"=c(unlist(all_uncorr_a1),unlist(all_uncorr_a2)), "Corrected"=c(unlist(all_corr_a1),unlist(all_corr_a2))) # Or another example ..... # shown is an example of adding columns for Standard Error (SE) se_cols <- data.frame("Uncorrected"=c("SE","se","STANDARD.ERROR", "STANDARD_ERROR","STANDARD-ERROR"), "Corrected"=rep("SE",5)) sumstatsColHeaders <- rbind(sumstatsColHeaders,se_cols) #Once additions are made, order & save the new mapping dataset #now sort ordering -important for logic that # uncorrected=corrected comes first sumstatsColHeaders$ordering <- sumstatsColHeaders$Uncorrected==sumstatsColHeaders$Corrected sumstatsColHeaders <- sumstatsColHeaders[order(sumstatsColHeaders$Corrected, sumstatsColHeaders$ordering,decreasing = TRUE),] rownames(sumstatsColHeaders)<-1:nrow(sumstatsColHeaders) sumstatsColHeaders$ordering <- NULL #manually move FREQUENCY to above MAR - github issue 95 frequency <- sumstatsColHeaders[sumstatsColHeaders$Uncorrected=="FREQUENCY",] maf <- sumstatsColHeaders[sumstatsColHeaders$Uncorrected=="MAF",] if(as.integer(rownames(frequency))>as.integer(rownames(maf))){ sumstatsColHeaders[as.integer(rownames(frequency)),] <- maf sumstatsColHeaders[as.integer(rownames(maf)),] <- frequency } usethis::use_data(sumstatsColHeaders,overwrite = TRUE, internal=TRUE) save(sumstatsColHeaders, file="data/sumstatsColHeaders.rda") # You will need to restart your r session for effects to take account `

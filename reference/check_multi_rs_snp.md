@@ -1,0 +1,71 @@
+# Ensure that SNP ids don't have multiple rs ids on one line
+
+Ensure that SNP ids don't have multiple rs ids on one line
+
+## Usage
+
+``` r
+check_multi_rs_snp(
+  sumstats_dt,
+  path,
+  remove_multi_rs_snp,
+  imputation_ind,
+  log_folder_ind,
+  check_save_out,
+  tabix_index,
+  nThread,
+  log_files
+)
+```
+
+## Arguments
+
+- path:
+
+  Filepath for the summary statistics file to be formatted. A dataframe
+  or datatable of the summary statistics file can also be passed
+  directly to MungeSumstats using the path parameter.
+
+- remove_multi_rs_snp:
+
+  Binary Sometimes summary statistics can have multiple RSIDs on one row
+  (i.e. related to one SNP), for example "rs5772025_rs397784053". This
+  can cause an error so by default, the first RS ID will be kept and the
+  rest removed e.g."rs5772025". If you want to just remove these SNPs
+  entirely, set it to TRUE. Default is FALSE.
+
+- imputation_ind:
+
+  Binary Should a column be added for each imputation step to show what
+  SNPs have imputed values for differing fields. This includes a field
+  denoting SNP allele flipping (flipped). On the flipped value, this
+  denoted whether the alelles where switched based on MungeSumstats
+  initial choice of A1, A2 from the input column headers and thus may
+  not align with what the creator intended.**Note** these columns will
+  be in the formatted summary statistics returned. Default is FALSE.
+
+- log_folder_ind:
+
+  Binary Should log files be stored containing all filtered out SNPs
+  (separate file per filter). The data is outputted in the same format
+  specified for the resulting sumstats file. The only exception to this
+  rule is if output is vcf, then log file saved as .tsv.gz. Default is
+  FALSE.
+
+- tabix_index:
+
+  Index the formatted summary statistics with
+  [tabix](http://www.htslib.org/doc/tabix.md) for fast querying.
+
+- nThread:
+
+  Number of threads to use for parallel processes.
+
+- log_files:
+
+  list of log file locations
+
+## Value
+
+list containing sumstats_dt, the modified summary statistics data table
+object and the log file list.

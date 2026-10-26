@@ -1,0 +1,168 @@
+# `MungeSumstats`: Standardise the format of GWAS summary statistics
+
+##### *Authors*: Alan Murphy, Brian Schilder and Nathan Skene
+
+##### *Updated*: Nov-06-2025
+
+# Introduction
+
+The `MungeSumstats` package is designed to facilitate the
+standardisation of GWAS summary statistics.
+
+## Overview
+
+The package is designed to handle the lack of standardisation of output
+files by the GWAS community. The [MRC IEU Open
+GWAS](https://gwas.mrcieu.ac.uk/) team have provided full summary
+statistics for \>10k GWAS, which are API-accessible via the
+[`ieugwasr`](https://mrcieu.github.io/ieugwasr/) and
+[`gwasvcf`](https://github.com/MRCIEU/gwasvcf) packages. But these GWAS
+are only standardised in the sense that they are VCF format, and can be
+fully standardised with `MungeSumstats`.
+
+`MungeSumstats` provides a framework to standardise the format for any
+GWAS summary statistics, including those in VCF format, enabling
+downstream integration and analysis. It addresses the most common
+discrepancies across summary statistic files, and offers a range of
+adjustable Quality Control (QC) steps.
+
+## Citation
+
+If you use `MungeSumstats`, please cite the original authors of the GWAS
+as well as:
+
+> Alan E Murphy, Brian M Schilder, Nathan G Skene (2021) MungeSumstats:
+> A Bioconductor package for the standardisation and quality control of
+> many GWAS summary statistics. *Bioinformatics*, btab665,
+> <https://doi.org/10.1093/bioinformatics/btab665>
+
+# Installing `MungeSumstats`
+
+`MungeSumstats` is available on
+[Bioconductor](https://bioconductor.org/packages/MungeSumstats). To
+install `MungeSumstats` on Bioconductor run:
+
+``` r
+
+if (!require("BiocManager")) install.packages("BiocManager")
+
+BiocManager::install("MungeSumstats")
+```
+
+You can then load the package and data package:
+
+``` r
+
+library(MungeSumstats)
+```
+
+Note that there is also a [docker image for
+MungeSumstats](https://hub.docker.com/r/neurogenomicslab/mungesumstats).
+
+Note that for a number of the checks implored by `MungeSumstats` a
+reference genome is used. If your GWAS summary statistics file of
+interest relates to *GRCh38*, you will need to install
+`SNPlocs.Hsapiens.dbSNP155.GRCh38` and `BSgenome.Hsapiens.NCBI.GRCh38`
+from Bioconductor as follows:
+
+``` r
+
+BiocManager::install("SNPlocs.Hsapiens.dbSNP155.GRCh38")
+BiocManager::install("BSgenome.Hsapiens.NCBI.GRCh38")
+```
+
+If your GWAS summary statistics file of interest relates to *GRCh37*,
+you will need to install `SNPlocs.Hsapiens.dbSNP155.GRCh37` and
+`BSgenome.Hsapiens.1000genomes.hs37d5` from Bioconductor as follows:
+
+``` r
+
+BiocManager::install("SNPlocs.Hsapiens.dbSNP155.GRCh37")
+BiocManager::install("BSgenome.Hsapiens.1000genomes.hs37d5")
+```
+
+These may take some time to install and are not included in the package
+as some users may only need one of *GRCh37*/*GRCh38*. If you are unsure
+of the genome build, MungeSumstats can also infer this information from
+your data.
+
+# Getting started
+
+See the [Getting started vignette
+website](https://al-murphy.github.io/MungeSumstats/articles/MungeSumstats.html)
+for up-to-date instructions on usage.
+
+See the [OpenGWAS vignette
+website](https://al-murphy.github.io/MungeSumstats/articles/OpenGWAS.html)
+for information on how to use MungeSumstats to access, standardise and
+perform quality control on GWAS Summary Statistics from the MRC IEU
+[Open GWAS Project](https://gwas.mrcieu.ac.uk/).
+
+**NOTE** to authenticate, you need to generate a token from the OpenGWAS
+website. The token behaves like a password, and it will be used to
+authorise the requests you make to the OpenGWAS API. Here are the steps
+to generate the token and then have `ieugwasr` automatically use it for
+your queries:
+
+1.  Login to <https://api.opengwas.io/profile/>
+2.  Generate a new token
+3.  Add `OPENGWAS_JWT=<token>` to your .Renviron file, thi can be edited
+    in R by running
+    [`usethis::edit_r_environ()`](https://usethis.r-lib.org/reference/edit.html)
+4.  Restart your R session
+5.  To check that your token is being recognised, run
+    [`ieugwasr::get_opengwas_jwt()`](https://mrcieu.github.io/ieugwasr/reference/get_opengwas_jwt.html).
+    If it returns a long random string then you are authenticated.
+6.  To check that your token is working, run
+    [`ieugwasr::user()`](https://mrcieu.github.io/ieugwasr/reference/user.html).
+    It will make a request to the API for your user information using
+    your token. It should return a list with your user information. If
+    it returns an error, then your token is not working.
+7.  Make sure you have submitted use
+
+Please read carefully through the [FAQ
+website](https://github.com/Al-Murphy/MungeSumstats/wiki/FAQ) for an
+queries about running MungeSumstats. If you have any outside of this
+problems please do file an
+[Issue](https://github.com/al-murphy/MungeSumstats/issues) here on
+GitHub.
+
+# Future Enhancements
+
+The `MungeSumstats` package aims to be able to handle the most common
+summary statistic file formats including VCF. If your file can not be
+formatted by `MungeSumstats` feel free to report the
+[Issue](https://github.com/al-murphy/MungeSumstats/issues) on GitHub
+along with your summary statistics file header.
+
+We also encourage people to edit the code to resolve their particular
+issues too and are happy to incorporate these through pull requests on
+github. If your summary statistic file headers are not recognised by
+`MungeSumstats` but correspond to one of
+
+``` R
+SNP, BP, CHR, A1, A2, P, Z, OR, BETA, LOG_ODDS, SIGNED_SUMSTAT, N, N_CAS, N_CON, 
+NSTUDY, INFO or FRQ, 
+```
+
+Feel free to update the `data("sumstatsColHeaders")` following the
+approach in the *data.R* file and add your mapping. Then use a [Pull
+Request](https://github.com/al-murphy/MungeSumstats/pulls) on GitHub and
+we will incorporate this change into the package.
+
+# Contributors
+
+We would like to acknowledge all those who have contributed to
+`MungeSumstats` development:
+
+- [Alan Murphy](https://github.com/Al-Murphy)
+- [Nathan Skene](https://github.com/NathanSkene)
+- [Brian Schilder](https://github.com/bschilder)
+- [Shea Andrews](https://github.com/sjfandrews)
+- [Jonathan Griffiths](https://github.com/jonathangriffiths)
+- [Kitty Murphy](https://github.com/KittyMurphy)
+- [Mykhaylo Malakhov](https://github.com/MykMal)
+- [Alasdair Warwick](https://github.com/rmgpanw)
+- [Ao Lu](https://github.com/leoarrow1)
+- [Sufyan Sualeman](https://github.com/sufyansuleman)
+- [Toby Clark](https://github.com/toby-clark4)
