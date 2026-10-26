@@ -68,6 +68,8 @@ compute_nsize <- function(sumstats_dt,
                 append_method_name <- TRUE
             }
       }
+      # record before N is added by reference below
+      n_present <- "N" %in% names(sumstats_dt)
       for (method in compute_n) {
           compute_sample_size(
               sumstats_dt = sumstats_dt,
@@ -81,7 +83,7 @@ compute_nsize <- function(sumstats_dt,
       ## compute_sample_size()
       if (imputation_ind &&
           is.numeric(compute_n) && compute_n != 0L &&
-          (!"N" %in% names(sumstats_dt))) {
+          (!n_present || force_new)) {
           sumstats_dt[, IMPUTATION_n := TRUE]
       }
       if (imputation_ind &&
