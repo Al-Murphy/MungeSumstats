@@ -11,7 +11,7 @@ get_eff_frq_allele_combns <-
            eff_frq_cols = c("BETA", "OR", "LOG_ODDS", "SIGNED_SUMSTAT","Z",
                             "FRQ")) {
     ### Add this to avoid confusing BiocCheck
-    CORRECTED <- UNCORRECTED <- Var1 <- Var2 <- NULL 
+    CORRECTED <- UNCORRECTED <- Var1 <- Var2 <- ALLELE <- i.CORRECTED <- NULL 
     colnames(mapping_file) <- toupper(colnames(mapping_file))
     #get allele associated effect/FRQ columns
     #get all combinations with allele columns
@@ -29,6 +29,9 @@ get_eff_frq_allele_combns <-
     data.table::setkey(eff_frq_allele_dt,"Var1")
     #add corrected
     eff_frq_allele_dt[mapping_file,CORRECTED:=CORRECTED,]
+    #add the allele (A1, A2 or A* i.e. A0) each combination refers to
+    eff_frq_allele_dt[mapping_file_dt, ALLELE := i.CORRECTED,
+                      on = c(Var2 = "UNCORRECTED")]
     #now loop through every joining character and join with eff both before
     #and after
     joining_char <- c("","_",".","-"," ")
@@ -38,13 +41,13 @@ get_eff_frq_allele_combns <-
       eff_frq_allele_dt_i <- copy(eff_frq_allele_dt)  
       eff_frq_allele_dt_i[,UNCORRECTED:=paste0(Var1,join_i,Var2)]
       all_combns[[counter]] <- 
-        eff_frq_allele_dt_i[,c("UNCORRECTED","CORRECTED")]
+        eff_frq_allele_dt_i[,c("UNCORRECTED","CORRECTED","ALLELE")]
       counter <- counter+1
       #same for Var 2 in front
       eff_frq_allele_dt_i <- copy(eff_frq_allele_dt)  
       eff_frq_allele_dt_i[,UNCORRECTED:=paste0(Var2,join_i,Var1)]
       all_combns[[counter]] <- 
-        eff_frq_allele_dt_i[,c("UNCORRECTED","CORRECTED")]
+        eff_frq_allele_dt_i[,c("UNCORRECTED","CORRECTED","ALLELE")]
       counter <- counter+1
     }
     #join all together
@@ -79,7 +82,9 @@ get_eff_frq_allele_combns <-
                                               "FRQ",
                                               "FRQ","FRQ","FRQ",
                                               "FRQ","FRQ",
-                                              "FRQ"))
+                                              "FRQ"),
+                                          "ALLELE" = 
+                                            rep(c("A1","A2","A*"), 7))
     eff_frq_allele_matches <- data.table::rbindlist(list(
       eff_frq_allele_matches,custom_adds))
     
