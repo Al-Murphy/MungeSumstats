@@ -1,3 +1,73 @@
+## CHANGES IN VERSION 1.20.1
+
+### Bug fix
+* `format_sumstats()` with the default `ref_genome=NULL` (genome build 
+inference) errored in `validate_parameters()` since dbSNP tarball support was 
+added (#49, #114).
+* `check_chr()` converted `MT`/`chrMT` to `MTT`, removing mitochondrial SNPs 
+when they were kept with `rmv_chr` (#116, #130, #158).
+* `check_on_ref_genome()`: SNPs not on the reference genome were not corrected 
+or removed when indels were present, SNPs sharing an ID with an indel were 
+silently dropped and the indel removal could exceed data.table's 2^31 join 
+limit (#164).
+* `check_bp_range()` now checks BP for `chr`-prefixed, `23`/`24` and lower case 
+CHR names (#144) and no longer silently drops rows with an unknown CHR (#150).
+* `check_zscore()` no longer errors when some p-values are NA (#212).
+* `infer_effect_column()` no longer errors when swapping mixed case allele 
+column headers (#208).
+* `liftover()` no longer deletes a gzipped `local_chain` file (#183) and now 
+applies `rmv_chr` (#211). Its documented `rmv_chr` default is corrected.
+* `load_snp_loc_data()` no longer reuses a dbSNP tarball extraction made from 
+a different tarball (#204).
+* `write_sumstats()`: `.vcf.gz` output is written to the given path with no 
+leftover `.vcf`, tabix-indexed VCFs return the indexed file path (#216), and 
+only the end of `save_path` is treated as a suffix, here and in 
+`check_save_path()` (#34).
+* Logging (`log_mungesumstats_msgs=TRUE`) no longer warns "no sink to remove", 
+closes its log connection and leaves a caller's own sink in place 
+(#207, #80).
+* `parse_logs()` default `pattern` now matches the current 
+`<save_path>_log_msg.txt` log names (#68).
+* `read_sumstats()` matches file suffixes literally so e.g. `gwas_vcf.tsv` is 
+read as a tabular file (#155).
+* `read_vcf()` with `nThread>1` works for VCFs without a `##SAMPLE` line or 
+with header contigs that have no records (#21).
+* `compute_nsize()` sets `IMPUTATION_n` again (#43). `check_n_int()` handles a 
+character N column with `imputation_ind=TRUE` (#26).
+* A data.table `mapping_file` is accepted by `format_sumstats()` (#174).
+* `check_ldsc_format()` prints its `allele_flip_check` message and accepts a 
+vector `compute_n` (#3).
+* `get_chain_file()` finds cached chain files in any `save_dir` (#84).
+* The number of SNPs reported by `check_multi_rs_snp()` with 
+`remove_multi_rs_snp=TRUE` now matches the number removed (#48).
+* Messages report the number of indels found (#139).
+* Reusing a previously formatted file with `return_data=TRUE` no longer 
+picks up a global `sumstats_return` object (#24).
+* `N_dropNA` now works as documented (`TRUE` drops rows with a missing N) and 
+a missing N no longer turns off the `N_std` filter (#29).
+* `*.vcf.tsv(.gz)` files that are tab-delimited text rather than VCFs (e.g. 
+PGC sumstats) are now read as tabular files (#91, #154).
+* The bi-allelic and allele flip checks no longer drop SNPs that are not on 
+the reference genome (e.g. indels) when other SNPs are removed (#139, #140).
+* Minor allele frequency columns (`MAF`, `MINOR_AF`) are only used as FRQ when 
+no allele frequency column (e.g. REGENIE's `A1FREQ`) is present (#142).
+* `standardise_header()` accepts a data.table or lower case `mapping_file` 
+(#174).
+* Rerunning with `log_mungesumstats_msgs=TRUE` overwrites the previous log 
+files instead of appending to them (#80) and a caller's message sink is 
+restored afterwards (#207).
+* `infer_effect_column()` identifies which allele an effect/frequency column 
+refers to from its allele naming in any case (e.g. METAL's `Freq1`, 
+`FREQ.ALLELE1.HAPMAPCEU`) (#208).
+* `check_no_chr_bp()` works when passed pre-loaded reference data (#150).
+
+### New features
+* Regression tests for past GitHub issues added (`test-issues_*.R` in 
+`tests/` and `longtests/`), each named after the issue it covers.
+* Long tests: `test-write_sumstats.R` and `test-missing_data.R` synced with 
+the unit test versions (fixes the failing long tests build).
+* `testthat (>= 3.1.7)` is now required to run the tests (for mocking).
+
 ## CHANGES IN VERSION 1.19.4
 
 ### Bug fix
