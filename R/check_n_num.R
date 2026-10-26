@@ -22,8 +22,9 @@ check_n_num <- function(sumstats_dt,
     N <- NULL
     col_headers <- names(sumstats_dt)
     if ("N" %in% col_headers && N_std > 0) {
-        mean_N <- mean(sumstats_dt$N)
-        sd_N <- stats::sd(sumstats_dt$N)
+        # na.rm so a missing N doesn't switch off this filter
+        mean_N <- mean(sumstats_dt$N, na.rm = TRUE)
+        sd_N <- stats::sd(sumstats_dt$N, na.rm = TRUE)
         num_bad_ids <- nrow(sumstats_dt[N > ((N_std * sd_N) + mean_N), ])
         if (num_bad_ids > 0) {
             msg <- paste0(
@@ -56,9 +57,11 @@ check_n_num <- function(sumstats_dt,
                         check_save_out$extension
                     )
             }
-            sumstats_dt <- sumstats_dt[N <= ((N_std * sd_N) + mean_N), ]
+            # keep NA N here, N_dropNA decides on those below
+            sumstats_dt <- sumstats_dt[is.na(N) |
+                                           N <= ((N_std * sd_N) + mean_N), ]
         }
-        if (!N_dropNA) {
+        if (N_dropNA) {
             message("Removing rows where is.na(N)")
             n_NAs <- sum(is.na(sumstats_dt$N))
             message(
