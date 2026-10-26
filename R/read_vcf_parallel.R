@@ -114,7 +114,9 @@ read_vcf_parallel <- function(path,
                  )
     }  
     #### Make sure multi-threading makes sense given VCF size ####
-    if((as.integer(n_variants)<mt_thresh) && (nThread>1)){
+    # n_variants is NULL when the VCF has no ##SAMPLE line
+    if(!is.null(n_variants) &&
+       (as.integer(n_variants)<mt_thresh) && (nThread>1)){
         messager("Processing will be more efficient in single-threaded mode",
                  paste0("when nrows<",mt_thresh,"."),
                  "Temporarily setting nThread=1.",
@@ -146,7 +148,9 @@ read_vcf_parallel <- function(path,
             c(as.character(seq_len(22)),xy),
             paste0("chr",c(as.character(seq_len(22)),xy))
         )
-        used_chr <- possible_chr[possible_chr %in% header@reference]
+        # use contigs with records in the index - the header can list more
+        used_chr <- possible_chr[possible_chr %in%
+                                     Rsamtools::seqnamesTabix(vcf_file)]
         ## Tile ranges across the genome 
         # tilewidth = 1e7L
         tiles <-
