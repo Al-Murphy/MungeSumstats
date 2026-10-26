@@ -31,12 +31,13 @@ check_n_int <- function(sumstats_dt,
                 message("Ensuring that the N column is all integers.")
                 msg2 <- paste0(msg, " These will be converted to integers.")
                 message(msg2)
+                # convert character N first so the checks below work
+                if (is(sumstats_dt$N, "character")) {
+                    suppressWarnings(sumstats_dt[, N := as.numeric(N)])
+                }
                 # if user wants information, give SNPs without integer N
                 if (imputation_ind) {
                     sumstats_dt[N %% 1 != 0, convert_n_integer := TRUE]
-                }
-                if (is(sumstats_dt$N, "character")) {
-                    suppressWarnings(sumstats_dt[, N := as.integer(N)])
                 }
                 sumstats_dt[, N := round(N, 0)]
                 return(list("sumstats_dt" = sumstats_dt))
