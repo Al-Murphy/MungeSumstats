@@ -57,7 +57,7 @@ write_sumstats <- function(sumstats_dt,
     }
     #### Select write format ####
     if (isTRUE(write_vcf)) { 
-        tmp_save_path <- gsub("\\.bgz|\\.gz", "", save_path)
+        tmp_save_path <- sub("\\.(bgz|gz)$", "", save_path)
         #convert to IEU OpenGWAS VCF format (column naming and RSID position)
         if (!is.null(save_format) &&
             tolower(save_format) == "opengwas") {
@@ -169,7 +169,7 @@ write_sumstats <- function(sumstats_dt,
         }
     } else {
         if (isTRUE(tabix_index)) {
-            tmp_save_path <- gsub(".bgz|.gz", "", save_path)
+            tmp_save_path <- sub("\\.(bgz|gz)$", "", save_path)
             messager("Writing in tabular format ==>", tmp_save_path)
             if (tmp_save_path != save_path) {
               messager("Writing uncompressed instead of gzipped",
