@@ -1,3 +1,14 @@
+## CHANGES IN VERSION 1.20.2
+
+### Bug fix
+* `get_chain_file()` (used by `liftover()`) now falls back to the bundled 
+Ensembl chain file whenever the download fails. Previously it only did so if 
+the failed download left an empty file behind, so a failure that left no file 
+stopped `liftover()` with a "No such file" error (seen building the vignette 
+on the Bioconductor nebbiolo2 builder). A failed UCSC download now gives a 
+clear error.
+* Chain files are now downloaded over https rather than ftp.
+
 ## CHANGES IN VERSION 1.20.1
 
 ### Bug fix

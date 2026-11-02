@@ -91,16 +91,57 @@ test_that("#128/#133: Ensembl is the default chain source; no UCSC shipped", {
                                "GRCh38_to_GRCh37.chain.gz"))
     expect_equal(
         MungeSumstats:::.get_ensembl_chain_remote("hg19", "hg38"),
-        paste0("ftp://ftp.ensembl.org/pub/assembly_mapping/homo_sapiens/",
+        paste0("https://ftp.ensembl.org/pub/assembly_mapping/homo_sapiens/",
                "GRCh37_to_GRCh38.chain.gz")
     )
     expect_equal(
         MungeSumstats:::.get_ucsc_chain_remote("hg38", "hg19"),
-        paste0("ftp://hgdownload.cse.ucsc.edu/goldenPath/hg38/liftOver/",
+        paste0("https://hgdownload.soe.ucsc.edu/goldenPath/hg38/liftOver/",
                "hg38ToHg19.over.chain.gz")
     )
     expect_error(MungeSumstats:::get_chain_file(from = "hg19", to = "hg19"),
                  "Cannot get a chain file from one reference to the same")
+})
+
+test_that("get_chain_file uses the bundled chain when a download fails", {
+    # A failed download can leave no file behind (Bioc nebbiolo2 vignette
+    # build, 2026-10-29); the bundled Ensembl chain must still be used.
+    # A missing file:// path makes the download fail without the network.
+    real_ens <- MungeSumstats:::.get_ensembl_chain_remote
+    real_ucsc <- MungeSumstats:::.get_ucsc_chain_remote
+    missing_url <- function(remote) {
+        paste0("file://", tempfile("no_such_dir_"), "/", basename(remote))
+    }
+    local_mocked_bindings(
+        .get_ensembl_chain_remote = function(from, to)
+            missing_url(real_ens(from, to)),
+        .get_ucsc_chain_remote = function(from, to)
+            missing_url(real_ucsc(from, to))
+    )
+    # precondition: this failure leaves nothing to clean up or copy over
+    dest <- tempfile(fileext = ".chain.gz")
+    try(suppressWarnings(utils::download.file(
+        MungeSumstats:::.get_ensembl_chain_remote("hg19", "hg38"), dest,
+        quiet = TRUE)), silent = TRUE)
+    expect_false(file.exists(dest))
+    save_dir <- tempfile("chain_")
+    dir.create(save_dir)
+    msgs <- capture_messages(suppressWarnings(
+        ch <- MungeSumstats:::get_chain_file(from = "hg19", to = "hg38",
+                                             chain_source = "ensembl",
+                                             save_dir = save_dir)
+    ))
+    expect_true(any(grepl("failed, using ensembl chain file", msgs)))
+    expect_s4_class(ch, "Chain")
+    expect_gt(length(ch), 0)
+    expect_true(file.exists(file.path(save_dir, "GRCh37_to_GRCh38.chain")))
+    # UCSC has no bundled chain: a clear error, not a gunzip failure
+    expect_error(
+        suppressWarnings(suppressMessages(MungeSumstats:::get_chain_file(
+            from = "hg19", to = "hg38", chain_source = "ucsc",
+            save_dir = save_dir))),
+        "Download of chain file from UCSC Genome Browser failed"
+    )
 })
 
 test_that("#84/#128: get_chain_file uses an existing chain, no download", {
