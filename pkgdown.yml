@@ -5,7 +5,7 @@ articles:
   docker: docker.html
   MungeSumstats: MungeSumstats.html
   OpenGWAS: OpenGWAS.html
-last_built: 2026-10-26T21:37Z
+last_built: 2026-11-02T14:19Z
 urls:
   reference: https://al-murphy.github.io/MungeSumstats/reference
   article: https://al-murphy.github.io/MungeSumstats/articles

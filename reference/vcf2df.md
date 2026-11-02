@@ -96,6 +96,6 @@ vcf_df <- MungeSumstats:::vcf2df(vcf = vcf)
 #> Removing 2 empty columns.
 #> Unlisting 4 columns.
 #> Dropped 314 duplicate rows.
-#> Time difference of 0.1 secs
+#> Time difference of 0 secs
 #> VCF data.table contains: 101 rows x 12 columns.
 ```

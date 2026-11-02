@@ -74,7 +74,7 @@ sumstats_dt <- MungeSumstats::formatted_example()
 #> Sorting coordinates with 'data.table'.
 path <- tempfile(fileext = ".tsv")
 MungeSumstats::write_sumstats(sumstats_dt = sumstats_dt, save_path = path)
-#> Writing in tabular format ==> /tmp/Rtmpt871Bb/file3252740186a3.tsv
+#> Writing in tabular format ==> /tmp/RtmpS8HkgB/file2ff14279238c.tsv
 indexed_file <- MungeSumstats::index_tabular(path = path)
 #> Converting full summary stats file to tabix format for fast querying...
 #> Reading header.

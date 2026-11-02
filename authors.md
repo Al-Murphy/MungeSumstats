@@ -16,13 +16,13 @@ Source:
 [`DESCRIPTION`](https://github.com/neurogenomics/MungeSumstats/blob/master/DESCRIPTION)
 
 Murphy A, Schilder B, Skene N (2026). *MungeSumstats: Standardise
-summary statistics from GWAS*. R package version 1.21.2,
+summary statistics from GWAS*. R package version 1.21.3,
 <https://github.com/neurogenomics/MungeSumstats>.
 
     @Manual{,
       title = {MungeSumstats: Standardise summary statistics from GWAS},
       author = {Alan Murphy and Brian Schilder and Nathan Skene},
       year = {2026},
-      note = {R package version 1.21.2},
+      note = {R package version 1.21.3},
       url = {https://github.com/neurogenomics/MungeSumstats},
     }

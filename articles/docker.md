@@ -68,7 +68,7 @@ Login using the credentials set during the Installation steps.
 utils::sessionInfo()
 ```
 
-    ## R version 4.6.1 (2026-06-24)
+    ## R version 4.6.2 (2026-10-29)
     ## Platform: x86_64-pc-linux-gnu
     ## Running under: Ubuntu 24.04.5 LTS
     ## 
@@ -89,7 +89,7 @@ utils::sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] MungeSumstats_1.21.2 BiocStyle_2.40.0    
+    ## [1] MungeSumstats_1.21.3 BiocStyle_2.40.0    
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] tidyselect_1.2.1            dplyr_1.2.1                
@@ -100,8 +100,8 @@ utils::sessionInfo()
     ## [11] XML_3.99-0.25               digest_0.6.39              
     ## [13] lifecycle_1.0.5             KEGGREST_1.52.2            
     ## [15] RSQLite_3.53.3              magrittr_2.0.5             
-    ## [17] compiler_4.6.1              rlang_1.3.0                
-    ## [19] sass_0.4.10                 tools_4.6.1                
+    ## [17] compiler_4.6.2              rlang_1.3.0                
+    ## [19] sass_0.4.10                 tools_4.6.2                
     ## [21] yaml_2.3.12                 data.table_1.18.6.1        
     ## [23] rtracklayer_1.72.0          knitr_1.52                 
     ## [25] S4Arrays_1.12.1             bit_4.6.0                  
@@ -109,17 +109,17 @@ utils::sessionInfo()
     ## [29] ieugwasr_1.2.0              abind_1.4-8                
     ## [31] BiocParallel_1.46.0         BiocGenerics_0.58.1        
     ## [33] desc_1.4.3                  R.oo_1.27.1                
-    ## [35] grid_4.6.1                  stats4_4.6.1               
+    ## [35] grid_4.6.2                  stats4_4.6.2               
     ## [37] SummarizedExperiment_1.42.0 cli_3.6.6                  
     ## [39] rmarkdown_2.32              crayon_1.5.3               
     ## [41] ragg_1.5.2                  generics_0.1.4             
     ## [43] otel_0.2.0                  httr_1.4.9                 
     ## [45] rjson_0.2.23                DBI_1.3.0                  
     ## [47] cachem_1.1.0                stringr_1.6.0              
-    ## [49] parallel_4.6.1              AnnotationDbi_1.74.0       
+    ## [49] parallel_4.6.2              AnnotationDbi_1.74.0       
     ## [51] BiocManager_1.30.27         XVector_0.52.0             
     ## [53] restfulr_0.0.17             matrixStats_1.5.0          
-    ## [55] vctrs_0.7.3                 Matrix_1.7-5               
+    ## [55] vctrs_0.7.3                 Matrix_1.7-6               
     ## [57] jsonlite_2.0.0              bookdown_0.48              
     ## [59] IRanges_2.46.0              S4Vectors_0.50.3           
     ## [61] bit64_4.8.6                 systemfonts_1.3.2          
@@ -132,7 +132,7 @@ utils::sessionInfo()
     ## [75] htmltools_0.5.9             Seqinfo_1.2.0              
     ## [77] BSgenome_1.80.0             R6_2.6.1                   
     ## [79] textshaping_1.0.5           evaluate_1.0.5             
-    ## [81] lattice_0.22-9              Biobase_2.72.0             
+    ## [81] lattice_0.23-1              Biobase_2.72.0             
     ## [83] R.methodsS3_1.8.2           png_0.1-9                  
     ## [85] Rsamtools_2.28.0            cigarillo_1.2.1            
     ## [87] memoise_2.0.1               bslib_0.12.0               

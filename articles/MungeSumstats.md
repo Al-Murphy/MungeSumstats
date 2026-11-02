@@ -254,7 +254,7 @@ reformatted <-
     ##  - To keep formatted summary stats, change `save_path`  ( e.g. `save_path=file.path('./formatted',basename(path))` ),   or make sure to copy files elsewhere after processing  ( e.g. `file.copy(save_path, './formatted/' )`.
     ##  ********************
 
-    ## Formatted summary statistics will be saved to ==>  /tmp/Rtmpt6oeYw/file393568a0e909.tsv.gz
+    ## Formatted summary statistics will be saved to ==>  /tmp/RtmpqxCaaO/file369f238e4b46.tsv.gz
 
     ## Warning: replacing previous import 'utils::findMatches' by
     ## 'S4Vectors::findMatches' when loading 'SNPlocs.Hsapiens.dbSNP155.GRCh37'
@@ -322,7 +322,7 @@ reformatted <-
 
     ## Sorting coordinates with 'data.table'.
 
-    ## Writing in tabular format ==> /tmp/Rtmpt6oeYw/file393568a0e909.tsv.gz
+    ## Writing in tabular format ==> /tmp/RtmpqxCaaO/file369f238e4b46.tsv.gz
 
     ## Summary statistics report:
     ##    - 93 rows (100% of original 93 rows)
@@ -330,7 +330,7 @@ reformatted <-
     ##    - 70 genome-wide significant variants (P<5e-8)
     ##    - 20 chromosomes
 
-    ## Done munging in 0.047 minutes.
+    ## Done munging in 0.038 minutes.
 
     ## Successfully finished preparing sumstats file, preview:
 
@@ -773,7 +773,7 @@ sumstats_dt_hg38 <- MungeSumstats::liftover(sumstats_dt = sumstats_dt,
 
     ## Downloading chain file from Ensembl.
 
-    ## /tmp/Rtmpt6oeYw/GRCh37_to_GRCh38.chain.gz
+    ## /tmp/RtmpqxCaaO/GRCh37_to_GRCh38.chain.gz
 
     ## Reordering so first three column headers are SNP, CHR and BP in this order.
 
@@ -854,7 +854,7 @@ formatted_path <- MungeSumstats::write_sumstats(sumstats_dt = dat,
 
     ## Sorting coordinates with 'data.table'.
 
-    ## Writing in tabular format ==> /tmp/Rtmpt6oeYw/file393566488bf_eduAttainOkbay_standardised.tsv
+    ## Writing in tabular format ==> /tmp/RtmpqxCaaO/file369f519d01b1_eduAttainOkbay_standardised.tsv
 
     ## Writing uncompressed instead of gzipped to enable tabix indexing.
 
@@ -960,7 +960,7 @@ summary statistics files.
 
 ## Session Information
 
-    ## R version 4.6.1 (2026-06-24)
+    ## R version 4.6.2 (2026-10-29)
     ## Platform: x86_64-pc-linux-gnu
     ## Running under: Ubuntu 24.04.5 LTS
     ## 
@@ -981,7 +981,7 @@ summary statistics files.
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] MungeSumstats_1.21.2 BiocStyle_2.40.0    
+    ## [1] MungeSumstats_1.21.3 BiocStyle_2.40.0    
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] tidyselect_1.2.1                           
@@ -1000,10 +1000,10 @@ summary statistics files.
     ## [14] KEGGREST_1.52.2                            
     ## [15] RSQLite_3.53.3                             
     ## [16] magrittr_2.0.5                             
-    ## [17] compiler_4.6.1                             
+    ## [17] compiler_4.6.2                             
     ## [18] rlang_1.3.0                                
     ## [19] sass_0.4.10                                
-    ## [20] tools_4.6.1                                
+    ## [20] tools_4.6.2                                
     ## [21] yaml_2.3.12                                
     ## [22] data.table_1.18.6.1                        
     ## [23] rtracklayer_1.72.0                         
@@ -1018,8 +1018,8 @@ summary statistics files.
     ## [32] BiocGenerics_0.58.1                        
     ## [33] desc_1.4.3                                 
     ## [34] R.oo_1.27.1                                
-    ## [35] grid_4.6.1                                 
-    ## [36] stats4_4.6.1                               
+    ## [35] grid_4.6.2                                 
+    ## [36] stats4_4.6.2                               
     ## [37] SummarizedExperiment_1.42.0                
     ## [38] cli_3.6.6                                  
     ## [39] rmarkdown_2.32                             
@@ -1033,14 +1033,14 @@ summary statistics files.
     ## [47] DBI_1.3.0                                  
     ## [48] cachem_1.1.0                               
     ## [49] stringr_1.6.0                              
-    ## [50] parallel_4.6.1                             
+    ## [50] parallel_4.6.2                             
     ## [51] AnnotationDbi_1.74.0                       
     ## [52] BiocManager_1.30.27                        
     ## [53] XVector_0.52.0                             
     ## [54] restfulr_0.0.17                            
     ## [55] matrixStats_1.5.0                          
     ## [56] vctrs_0.7.3                                
-    ## [57] Matrix_1.7-5                               
+    ## [57] Matrix_1.7-6                               
     ## [58] jsonlite_2.0.0                             
     ## [59] bookdown_0.48                              
     ## [60] IRanges_2.46.0                             
@@ -1067,7 +1067,7 @@ summary statistics files.
     ## [81] R6_2.6.1                                   
     ## [82] textshaping_1.0.5                          
     ## [83] evaluate_1.0.5                             
-    ## [84] lattice_0.22-9                             
+    ## [84] lattice_0.23-1                             
     ## [85] Biobase_2.72.0                             
     ## [86] R.methodsS3_1.8.2                          
     ## [87] png_0.1-9                                  

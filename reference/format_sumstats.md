@@ -512,7 +512,7 @@ if (!is_32bit_windows) {
 #>  - This means all formatted summary stats will be deleted upon ending the R session.
 #>  - To keep formatted summary stats, change `save_path`  ( e.g. `save_path=file.path('./formatted',basename(path))` ),   or make sure to copy files elsewhere after processing  ( e.g. `file.copy(save_path, './formatted/' )`.
 #>  ******************** 
-#> Formatted summary statistics will be saved to ==>  /tmp/Rtmpt871Bb/file325244db313b.tsv.gz
+#> Formatted summary statistics will be saved to ==>  /tmp/RtmpS8HkgB/file2ff1577c611d.tsv.gz
 #> Warning: replacing previous import ‘utils::findMatches’ by ‘S4Vectors::findMatches’ when loading ‘SNPlocs.Hsapiens.dbSNP144.GRCh37’
 #> Importing tabular file: /home/runner/work/_temp/Library/MungeSumstats/extdata/eduAttainOkbay.txt
 #> Checking for empty columns.
@@ -527,7 +527,7 @@ if (!is_32bit_windows) {
 #> Loading reference genome data.
 #> Preprocessing RSIDs.
 #> Validating RSIDs of 93 SNPs using BSgenome::snpsById...
-#> BSgenome::snpsById done in 22 seconds.
+#> BSgenome::snpsById done in 31 seconds.
 #> Checking A1 is uppercase
 #> Checking A2 is uppercase
 #> Effect/frq column(s) relate to A2 in the inputted sumstats
@@ -571,13 +571,13 @@ if (!is_32bit_windows) {
 #> As frq_is_maf=TRUE, the FRQ column will not be renamed. If the FRQ values were intended to represent major allele frequency,
 #> set frq_is_maf=FALSE to rename the column as MAJOR_ALLELE_FRQ and differentiate it from minor/effect allele frequency.
 #> Sorting coordinates with 'data.table'.
-#> Writing in tabular format ==> /tmp/Rtmpt871Bb/file325244db313b.tsv.gz
+#> Writing in tabular format ==> /tmp/RtmpS8HkgB/file2ff1577c611d.tsv.gz
 #> Summary statistics report:
 #>    - 93 rows (100% of original 93 rows)
 #>    - 93 unique variants
 #>    - 70 genome-wide significant variants (P<5e-8)
 #>    - 20 chromosomes
-#> Done munging in 0.636 minutes.
+#> Done munging in 0.748 minutes.
 #> Successfully finished preparing sumstats file, preview:
 #> Reading header.
 #>           SNP   CHR       BP     A1     A2     FRQ   BETA    SE         P

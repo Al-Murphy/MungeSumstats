@@ -112,8 +112,8 @@ if (!is_32bit_windows) {
 #> Loading reference genome data.
 #> Preprocessing RSIDs.
 #> Validating RSIDs of 93 SNPs using BSgenome::snpsById...
-#> BSgenome::snpsById done in 29 seconds.
+#> BSgenome::snpsById done in 25 seconds.
 #> Inferred genome build: GRCH37
-#> Time difference of 42.72219 secs
+#> Time difference of 38.19594 secs
 #> GRCH37: 1 file(s)
 ```

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">MungeSumstats</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.21.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.21.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +38,15 @@
       <small>Source: <a href="https://github.com/neurogenomics/MungeSumstats/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.21.3" id="changes-in-version-1213">CHANGES IN VERSION 1.21.3<a class="anchor" aria-label="anchor" href="#changes-in-version-1213"></a></h2>
+<div class="section level3">
+<h3 id="bug-fix-1-21-3">Bug fix<a class="anchor" aria-label="anchor" href="#bug-fix-1-21-3"></a></h3>
+<ul><li>
+<code><a href="../reference/get_chain_file.html">get_chain_file()</a></code> (used by <code><a href="../reference/liftover.html">liftover()</a></code>) now falls back to the bundled Ensembl chain file whenever the download fails. Previously it only did so if the failed download left an empty file behind, so a failure that left no file stopped <code><a href="../reference/liftover.html">liftover()</a></code> with a “No such file” error (seen building the vignette on the Bioconductor nebbiolo2 builder). A failed UCSC download now gives a clear error.</li>
+<li>Chain files are now downloaded over https rather than ftp.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.21.2" id="changes-in-version-1212">CHANGES IN VERSION 1.21.2<a class="anchor" aria-label="anchor" href="#changes-in-version-1212"></a></h2>
 <div class="section level3">

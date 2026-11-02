@@ -138,7 +138,7 @@ sumstats_dt_hg38 <- liftover(sumstats_dt=sumstats_dt,
 #> Converting summary statistics to GenomicRanges.
 #> Downloading chain file...
 #> Downloading chain file from Ensembl.
-#> /tmp/Rtmpt871Bb/GRCh37_to_GRCh38.chain.gz
+#> /tmp/RtmpS8HkgB/GRCh37_to_GRCh38.chain.gz
 #> Reordering so first three column headers are SNP, CHR and BP in this order.
 #> Reordering so the fourth and fifth columns are A1 and A2.
 ```

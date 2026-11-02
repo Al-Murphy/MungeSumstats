@@ -1,5 +1,21 @@
 # Changelog
 
+## CHANGES IN VERSION 1.21.3
+
+### Bug fix
+
+- [`get_chain_file()`](https://al-murphy.github.io/MungeSumstats/reference/get_chain_file.md)
+  (used by
+  [`liftover()`](https://al-murphy.github.io/MungeSumstats/reference/liftover.md))
+  now falls back to the bundled Ensembl chain file whenever the download
+  fails. Previously it only did so if the failed download left an empty
+  file behind, so a failure that left no file stopped
+  [`liftover()`](https://al-murphy.github.io/MungeSumstats/reference/liftover.md)
+  with a “No such file” error (seen building the vignette on the
+  Bioconductor nebbiolo2 builder). A failed UCSC download now gives a
+  clear error.
+- Chain files are now downloaded over https rather than ftp.
+
 ## CHANGES IN VERSION 1.21.2
 
 ### Bug fix
