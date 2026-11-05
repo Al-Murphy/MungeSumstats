@@ -32,6 +32,13 @@ load_ref_genome_data <- function(snps,
                                  msg = NULL,
                                  chr_filt = NULL) {
     
+    loader <- .reference_cache$loader
+    if (is.null(loader)) loader <- load_ref_genome_data_uncached
+    loader(snps, ref_genome, dbSNP, msg, chr_filt)
+}
+
+load_ref_genome_data_uncached <- function(snps, ref_genome, dbSNP = c(144,155),
+                                           msg = NULL, chr_filt = NULL) {
     SNP <- NULL
     SNP_LOC_DATA <- load_snp_loc_data(
       ref_genome = ref_genome,

@@ -65,13 +65,19 @@ format_sumstats(
   imputation_ind = FALSE,
   force_new = FALSE,
   mapping_file = sumstatsColHeaders,
-  rmv_chrPrefix = NULL
+  rmv_chrPrefix = NULL,
+  cache_reference = FALSE
 )
 }
 \arguments{
 \item{path}{Filepath for the summary statistics file to be formatted. A
 dataframe or datatable of the summary statistics file can also be passed
 directly to MungeSumstats using the path parameter.}
+
+\item{cache_reference}{Reuse reference SNP lookups within this call.
+Default is FALSE. Enabling this can reduce repeated lookups but increases
+peak memory use. Cached data are released when the call returns or errors;
+they are not shared across studies.}
 
 \item{ref_genome}{name of the reference genome used for the GWAS ("GRCh37" or
 "GRCh38"). Argument is case-insensitive. Default is NULL which infers the

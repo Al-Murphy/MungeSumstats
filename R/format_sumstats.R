@@ -39,6 +39,10 @@
 #' @param path Filepath for the summary statistics file to be formatted. A
 #' dataframe or datatable of the summary statistics file can also be passed
 #' directly to MungeSumstats using the path parameter.
+#' @param cache_reference Reuse reference SNP lookups within this call.
+#' Default is FALSE. Enabling this can reduce repeated lookups but increases
+#' peak memory use. Cached data are released when the call returns or errors;
+#' they are not shared across studies.
 #' @param ref_genome name of the reference genome used for the GWAS ("GRCh37" or
 #' "GRCh38"). Argument is case-insensitive. Default is NULL which infers the
 #' reference genome from the data.
@@ -315,8 +319,16 @@ format_sumstats <- function(path,
                             force_new = FALSE,
                             mapping_file = sumstatsColHeaders,
                             #deprecated parameters
-                            rmv_chrPrefix = NULL
+                            rmv_chrPrefix = NULL,
+                            cache_reference = FALSE
                             ) {
+    if (!is.logical(cache_reference) || length(cache_reference) != 1L ||
+        is.na(cache_reference)) stop("cache_reference must be TRUE or FALSE")
+    previous_cache <- .reference_cache$loader
+    on.exit(.reference_cache$loader <- previous_cache, add = TRUE)
+    .reference_cache$loader <- if (cache_reference) {
+        make_reference_cache(load_ref_genome_data_uncached)
+    } else NULL
     #### Setup multi-threading ####
     data.table::setDTthreads(threads = nThread)
     #### Setup empty variables ####
