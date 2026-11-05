@@ -114,3 +114,16 @@ test_that("the lookup entry point dispatches to the active cache only", {
     scope$.reference_cache$loader <- NULL
     expect_identical(lookup("rs1", "GRCh37", 155), "uncached")
 })
+
+
+test_that("custom dbSNP tarballs bypass caching and preserve arguments", {
+    scope <- new.env(parent = environment(load_ref_genome_data))
+    scope$.reference_cache <- new.env(parent = emptyenv())
+    scope$.reference_cache$loader <- function(...) stop("must bypass cache")
+    scope$load_ref_genome_data_uncached <- function(...) list(...)
+    lookup <- load_ref_genome_data
+    environment(lookup) <- scope
+    args <- list(snps = "rs1", ref_genome = "GRCh37", dbSNP = 156,
+                 dbSNP_tarball = "custom.tar.gz", msg = "A1", chr_filt = "1")
+    expect_identical(do.call(lookup, args), args)
+})

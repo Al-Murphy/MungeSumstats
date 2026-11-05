@@ -77,7 +77,8 @@ directly to MungeSumstats using the path parameter.}
 \item{cache_reference}{Reuse reference SNP lookups within this call.
 Default is FALSE. Enabling this can reduce repeated lookups but increases
 peak memory use. Cached data are released when the call returns or errors;
-they are not shared across studies.}
+they are not shared across studies. Custom \code{dbSNP_tarball} inputs bypass
+the cache.}
 
 \item{ref_genome}{name of the reference genome used for the GWAS ("GRCh37" or
 "GRCh38"). Argument is case-insensitive. Default is NULL which infers the

@@ -33,12 +33,19 @@ load_ref_genome_data <- function(snps,
                                  chr_filt = NULL) {
     
     loader <- .reference_cache$loader
-    if (is.null(loader)) loader <- load_ref_genome_data_uncached
-    loader(snps, ref_genome, dbSNP, msg, chr_filt)
+    if (is.null(loader) || !is.null(dbSNP_tarball)) {
+        return(load_ref_genome_data_uncached(
+            snps = snps, ref_genome = ref_genome, dbSNP = dbSNP,
+            dbSNP_tarball = dbSNP_tarball, msg = msg, chr_filt = chr_filt
+        ))
+    }
+    loader(snps = snps, ref_genome = ref_genome, dbSNP = dbSNP,
+           msg = msg, chr_filt = chr_filt)
 }
 
 load_ref_genome_data_uncached <- function(snps, ref_genome, dbSNP = c(144,155),
-                                           msg = NULL, chr_filt = NULL) {
+                                         dbSNP_tarball = NULL,
+                                         msg = NULL, chr_filt = NULL) {
     SNP <- NULL
     SNP_LOC_DATA <- load_snp_loc_data(
       ref_genome = ref_genome,
