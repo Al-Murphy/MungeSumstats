@@ -53,15 +53,26 @@ read_log_pval <- function(sumstats_dt,mapping_file = sumstatsColHeaders,
         messager("sumstats has -log10 P-values; these will be",
                  "converted to unadjusted p-values in the 'P' column.")
         lp_col <- column_headers[[which(column_headers_upper %in% lp_col_up)]]
+        lp_vals <- suppressWarnings(as.numeric(sumstats_dt[[lp_col]]))
         #check if -log10 or log10
-        if(max(sumstats_dt[,get(lp_col)])<=0){
+        if(all(lp_vals <= 0, na.rm = TRUE)){
           #log10 - less likely so more lenient check
-          sumstats_dt[, P := 10^(as.numeric(get(lp_col)))]
+          sumstats_dt[, P := 10^lp_vals]
         }else{
           #-log10 - more likely
-          sumstats_dt[, P := 10^(-1 * as.numeric(get(lp_col)))]  
+          sumstats_dt[, P := 10^(-1 * lp_vals)]
         }
-        
+        # p-values below ~4.9e-324 (-log10 p above ~323.3) underflow to 0
+        underflow_n <- sum(sumstats_dt$P == 0 & is.finite(lp_vals) &
+                             lp_vals != 0, na.rm = TRUE)
+        if (underflow_n > 0) {
+          messager(formatC(underflow_n, big.mark = ","),
+                   "p-values are below ~4.9e-324 (-log10 p above ~323.3),",
+                   "the smallest number R can store, so they are set to 0.",
+                   "The exact values are kept in the",
+                   paste0("'", lp_col, "' column."))
+        }
+
     }
     #### Return format ####
     if(return_list){

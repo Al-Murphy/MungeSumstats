@@ -1,3 +1,18 @@
+## CHANGES IN VERSION 1.21.4
+
+### Bug fix
+* P-values below ~4.9e-324, the smallest number R can store, are set to 0. 
+This now gives a message rather than happening silently (#218):
+    * `read_log_pval()` counts the -log10 p-values above ~323.3 that become 
+    P=0 and notes that the exact values are kept in the -log10 column.
+    * `check_small_p_val()` counts text p-values (e.g. "1e-400", which 
+    `fread` keeps as character) that become 0 whatever `convert_small_p` is. 
+    It previously reported "0 p-values are <=5e-324" for these and only 
+    converted P to numeric in the next check.
+* `read_log_pval()` no longer errors when the -log10 p-value column contains 
+an `NA` ("missing value where TRUE/FALSE needed").
+* The `convert_small_p` documentation now explains this limit.
+
 ## CHANGES IN VERSION 1.21.3
 
 ### Bug fix

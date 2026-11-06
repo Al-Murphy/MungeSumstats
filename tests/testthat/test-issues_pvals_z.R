@@ -1,5 +1,5 @@
 # Regression tests for GitHub issues on P range, Z-score, multi-trait P and
-# BETA imputation checks. Issues: #76, #129, #135, #149, #212, #213.
+# BETA imputation checks. Issues: #76, #129, #135, #149, #212, #213, #218.
 
 test_that("#76: out-of-range p-values are set to 1/0 only when converting", {
     dt <- data.table::data.table(SNP = paste0("rs", 1:5),
@@ -53,6 +53,53 @@ test_that("#212/#213: P=0 gives a finite Z (P set to 1e-300) and is flagged", {
     expect_no_error(res <- suppressMessages(run_z(dt_na, "P")))
     expect_true(is.na(res$Z[2]))
     expect_true(is.finite(res$Z[1]))
+})
+
+test_that("#218: -log10 P beyond the double range gives P=0 with a message", {
+    dt <- data.table::data.table(SNP = paste0("rs", 1:4),
+                                 LOG10P = c(341.608, 323.3, NA, 8))
+    expect_message(
+        res <- MungeSumstats:::read_log_pval(data.table::copy(dt))$sumstats_dt,
+        "^1 p-values are below ~4.9e-324.*kept in the 'LOG10P' column"
+    )
+    expect_equal(res$P[1], 0)
+    expect_gt(res$P[2], 0) # ~4.9e-324 is still representable
+    expect_true(is.na(res$P[3])) # an NA no longer stops the log scale check
+    expect_equal(res$P[4], 1e-8)
+    expect_equal(res$LOG10P, dt$LOG10P) # exact values kept
+    # log10 (negative) values underflow the same way
+    dt_neg <- data.table::data.table(SNP = c("rs1", "rs2"),
+                                     LOG10P = c(-341.608, -8))
+    expect_message(res <- MungeSumstats:::read_log_pval(dt_neg)$sumstats_dt,
+                   "^1 p-values are below ~4.9e-324")
+    expect_equal(res$P, c(0, 1e-8))
+    expect_no_message(
+        MungeSumstats:::read_log_pval(
+            data.table::data.table(SNP = "rs1", LOG10P = 8)),
+        message = "below ~4.9e-324"
+    )
+})
+
+test_that("#218: text P below the double range is counted and set to 0", {
+    # fread keeps a P column containing e.g. "1e-400" as character
+    dt <- data.table::data.table(SNP = paste0("rs", 1:5),
+                                 P = c("1e-400", "5e-324", "0.01", "0", NA))
+    run_small <- function(convert) {
+        MungeSumstats:::check_small_p_val(
+            sumstats_dt = data.table::copy(dt), convert_small_p = convert,
+            imputation_ind = TRUE
+        )$sumstats_dt
+    }
+    msgs <- capture_messages(res <- run_small(TRUE))
+    expect_true(any(grepl("^1 p-values are below ~4.9e-324", msgs)))
+    expect_true(any(grepl("^1 p-values are <=5e-324.*converted to 0", msgs)))
+    expect_equal(res$P, c(0, 0, 0.01, 0, NA))
+    expect_equal(res$convert_small_p_0, c(TRUE, TRUE, NA, NA, NA))
+    # convert_small_p=FALSE keeps 5e-324 but cannot keep 1e-400
+    msgs <- capture_messages(res <- run_small(FALSE))
+    expect_true(any(grepl("These will NOT be converted", msgs)))
+    expect_equal(res$P, c(0, 5e-324, 0.01, 0, NA))
+    expect_equal(res$convert_small_p_0, c(TRUE, NA, NA, NA, NA))
 })
 
 test_that("#149: multi-trait P columns error unless ignore_multi_trait=TRUE", {

@@ -22,7 +22,10 @@ check_small_p_val(sumstats_dt, convert_small_p, imputation_ind)
 \item{convert_small_p}{Binary, should non-negative
 p-values <= 5e-324 be converted to 0?
 Small p-values pass the R limit and can cause errors with LDSC/MAGMA and
-should be converted. Default is TRUE.}
+should be converted. Default is TRUE. P-values below ~4.9e-324 (e.g.
+-log10 p-values above ~323.3) cannot be stored in R and are set to 0
+whatever this is set to; a -log10 p-value column is kept in the output
+with the exact values.}
 
 \item{imputation_ind}{Binary Should a column be added for each imputation
 step to show what SNPs have imputed values for differing fields. This

@@ -56,7 +56,10 @@
 #' @param convert_small_p Binary, should non-negative
 #' p-values <= 5e-324 be converted to 0?
 #' Small p-values pass the R limit and can cause errors with LDSC/MAGMA and
-#' should be converted. Default is TRUE.
+#' should be converted. Default is TRUE. P-values below ~4.9e-324 (e.g.
+#' -log10 p-values above ~323.3) cannot be stored in R and are set to 0
+#' whatever this is set to; a -log10 p-value column is kept in the output
+#' with the exact values.
 #' @param convert_large_p Binary, should p-values >1 be converted to 1?
 #' P-values >1 should not be possible and can cause errors with LDSC/MAGMA and
 #' should be converted. Default is TRUE.
