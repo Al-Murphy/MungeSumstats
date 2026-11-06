@@ -254,7 +254,7 @@ reformatted <-
     ##  - To keep formatted summary stats, change `save_path`  ( e.g. `save_path=file.path('./formatted',basename(path))` ),   or make sure to copy files elsewhere after processing  ( e.g. `file.copy(save_path, './formatted/' )`.
     ##  ********************
 
-    ## Formatted summary statistics will be saved to ==>  /tmp/RtmpqxCaaO/file369f238e4b46.tsv.gz
+    ## Formatted summary statistics will be saved to ==>  /tmp/RtmpQzijXk/file3a326b5b2d04.tsv.gz
 
     ## Warning: replacing previous import 'utils::findMatches' by
     ## 'S4Vectors::findMatches' when loading 'SNPlocs.Hsapiens.dbSNP155.GRCh37'
@@ -322,7 +322,7 @@ reformatted <-
 
     ## Sorting coordinates with 'data.table'.
 
-    ## Writing in tabular format ==> /tmp/RtmpqxCaaO/file369f238e4b46.tsv.gz
+    ## Writing in tabular format ==> /tmp/RtmpQzijXk/file3a326b5b2d04.tsv.gz
 
     ## Summary statistics report:
     ##    - 93 rows (100% of original 93 rows)
@@ -330,7 +330,7 @@ reformatted <-
     ##    - 70 genome-wide significant variants (P<5e-8)
     ##    - 20 chromosomes
 
-    ## Done munging in 0.038 minutes.
+    ## Done munging in 0.055 minutes.
 
     ## Successfully finished preparing sumstats file, preview:
 
@@ -592,9 +592,9 @@ reformatted_vcf_2 <-
                                  log_mungesumstats_msgs=TRUE)
 ```
 
-    ## Time difference of 0 secs
+    ## Time difference of 0.1 secs
 
-    ## Time difference of 0.2 secs
+    ## Time difference of 0.3 secs
 
 Check the file `snp_bi_allelic.tsv.gz` in the `log_folder` directory you
 supply (by default a temp directory), for a list of SNPs removed as they
@@ -773,7 +773,7 @@ sumstats_dt_hg38 <- MungeSumstats::liftover(sumstats_dt = sumstats_dt,
 
     ## Downloading chain file from Ensembl.
 
-    ## /tmp/RtmpqxCaaO/GRCh37_to_GRCh38.chain.gz
+    ## /tmp/RtmpQzijXk/GRCh37_to_GRCh38.chain.gz
 
     ## Reordering so first three column headers are SNP, CHR and BP in this order.
 
@@ -854,7 +854,7 @@ formatted_path <- MungeSumstats::write_sumstats(sumstats_dt = dat,
 
     ## Sorting coordinates with 'data.table'.
 
-    ## Writing in tabular format ==> /tmp/RtmpqxCaaO/file369f519d01b1_eduAttainOkbay_standardised.tsv
+    ## Writing in tabular format ==> /tmp/RtmpQzijXk/file3a3276feca6d_eduAttainOkbay_standardised.tsv
 
     ## Writing uncompressed instead of gzipped to enable tabix indexing.
 
@@ -981,7 +981,7 @@ summary statistics files.
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] MungeSumstats_1.21.3 BiocStyle_2.40.0    
+    ## [1] MungeSumstats_1.21.4 BiocStyle_2.40.0    
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] tidyselect_1.2.1                           

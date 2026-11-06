@@ -110,7 +110,10 @@ format_sumstats(
 
   Binary, should non-negative p-values \<= 5e-324 be converted to 0?
   Small p-values pass the R limit and can cause errors with LDSC/MAGMA
-  and should be converted. Default is TRUE.
+  and should be converted. Default is TRUE. P-values below ~4.9e-324
+  (e.g. -log10 p-values above ~323.3) cannot be stored in R and are set
+  to 0 whatever this is set to; a -log10 p-value column is kept in the
+  output with the exact values.
 
 - convert_large_p:
 
@@ -512,7 +515,7 @@ if (!is_32bit_windows) {
 #>  - This means all formatted summary stats will be deleted upon ending the R session.
 #>  - To keep formatted summary stats, change `save_path`  ( e.g. `save_path=file.path('./formatted',basename(path))` ),   or make sure to copy files elsewhere after processing  ( e.g. `file.copy(save_path, './formatted/' )`.
 #>  ******************** 
-#> Formatted summary statistics will be saved to ==>  /tmp/RtmpS8HkgB/file2ff1577c611d.tsv.gz
+#> Formatted summary statistics will be saved to ==>  /tmp/RtmpI7TjrI/file338faf2cbad.tsv.gz
 #> Warning: replacing previous import ‘utils::findMatches’ by ‘S4Vectors::findMatches’ when loading ‘SNPlocs.Hsapiens.dbSNP144.GRCh37’
 #> Importing tabular file: /home/runner/work/_temp/Library/MungeSumstats/extdata/eduAttainOkbay.txt
 #> Checking for empty columns.
@@ -527,7 +530,7 @@ if (!is_32bit_windows) {
 #> Loading reference genome data.
 #> Preprocessing RSIDs.
 #> Validating RSIDs of 93 SNPs using BSgenome::snpsById...
-#> BSgenome::snpsById done in 31 seconds.
+#> BSgenome::snpsById done in 26 seconds.
 #> Checking A1 is uppercase
 #> Checking A2 is uppercase
 #> Effect/frq column(s) relate to A2 in the inputted sumstats
@@ -552,7 +555,7 @@ if (!is_32bit_windows) {
 #> Loading reference genome data.
 #> Preprocessing RSIDs.
 #> Validating RSIDs of 93 SNPs using BSgenome::snpsById...
-#> BSgenome::snpsById done in 10 seconds.
+#> BSgenome::snpsById done in 13 seconds.
 #> Checking for correct direction of A1 (reference) and A2 (alternative allele).
 #> There are 46 SNPs where A1 doesn't match the reference genome.
 #> These will be flipped with their effect columns.
@@ -571,13 +574,13 @@ if (!is_32bit_windows) {
 #> As frq_is_maf=TRUE, the FRQ column will not be renamed. If the FRQ values were intended to represent major allele frequency,
 #> set frq_is_maf=FALSE to rename the column as MAJOR_ALLELE_FRQ and differentiate it from minor/effect allele frequency.
 #> Sorting coordinates with 'data.table'.
-#> Writing in tabular format ==> /tmp/RtmpS8HkgB/file2ff1577c611d.tsv.gz
+#> Writing in tabular format ==> /tmp/RtmpI7TjrI/file338faf2cbad.tsv.gz
 #> Summary statistics report:
 #>    - 93 rows (100% of original 93 rows)
 #>    - 93 unique variants
 #>    - 70 genome-wide significant variants (P<5e-8)
 #>    - 20 chromosomes
-#> Done munging in 0.748 minutes.
+#> Done munging in 0.743 minutes.
 #> Successfully finished preparing sumstats file, preview:
 #> Reading header.
 #>           SNP   CHR       BP     A1     A2     FRQ   BETA    SE         P

@@ -154,7 +154,7 @@ sumstats_dt <- read_vcf(path = path)
 #> Dropped 314 duplicate rows.
 #> Time difference of 0 secs
 #> VCF data.table contains: 101 rows x 11 columns.
-#> Time difference of 0.2 secs
+#> Time difference of 0.3 secs
 #> Renaming ID as SNP.
 #> sumstats has -log10 P-values; these will be converted to unadjusted p-values in the 'P' column.
 #> No INFO (SI) column detected.

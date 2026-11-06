@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">MungeSumstats</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.21.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.21.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,7 +64,7 @@
 </h5></h4>
             
             <h4 data-toc-skip class="date"><h5>
-<br><i>Updated</i>: Nov-02-2026<br>
+<br><i>Updated</i>: Nov-06-2026<br>
 </h5></h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/MungeSumstats/blob/master/vignettes/MungeSumstats.Rmd" class="external-link"><code>vignettes/MungeSumstats.Rmd</code></a></small>
@@ -307,7 +307,7 @@ e.g.<code>file.copy(save_path, './formatted/' )</code>.</p>
 <span><span class="co">##  - This means all formatted summary stats will be deleted upon ending the R session.</span></span>
 <span><span class="co">##  - To keep formatted summary stats, change `save_path`  ( e.g. `save_path=file.path('./formatted',basename(path))` ),   or make sure to copy files elsewhere after processing  ( e.g. `file.copy(save_path, './formatted/' )`.</span></span>
 <span><span class="co">##  ********************</span></span></code></pre>
-<pre><code><span><span class="co">## Formatted summary statistics will be saved to ==&gt;  /tmp/RtmpqxCaaO/file369f238e4b46.tsv.gz</span></span></code></pre>
+<pre><code><span><span class="co">## Formatted summary statistics will be saved to ==&gt;  /tmp/RtmpQzijXk/file3a326b5b2d04.tsv.gz</span></span></code></pre>
 <pre><code><span><span class="co">## Warning: replacing previous import 'utils::findMatches' by</span></span>
 <span><span class="co">## 'S4Vectors::findMatches' when loading 'SNPlocs.Hsapiens.dbSNP155.GRCh37'</span></span></code></pre>
 <pre><code><span><span class="co">## Importing tabular file: /home/runner/work/_temp/Library/MungeSumstats/extdata/eduAttainOkbay.txt</span></span></code></pre>
@@ -345,13 +345,13 @@ e.g.<code>file.copy(save_path, './formatted/' )</code>.</p>
 <pre><code><span><span class="co">## As frq_is_maf=TRUE, the FRQ column will not be renamed. If the FRQ values were intended to represent major allele frequency,</span></span>
 <span><span class="co">## set frq_is_maf=FALSE to rename the column as MAJOR_ALLELE_FRQ and differentiate it from minor/effect allele frequency.</span></span></code></pre>
 <pre><code><span><span class="co">## Sorting coordinates with 'data.table'.</span></span></code></pre>
-<pre><code><span><span class="co">## Writing in tabular format ==&gt; /tmp/RtmpqxCaaO/file369f238e4b46.tsv.gz</span></span></code></pre>
+<pre><code><span><span class="co">## Writing in tabular format ==&gt; /tmp/RtmpQzijXk/file3a326b5b2d04.tsv.gz</span></span></code></pre>
 <pre><code><span><span class="co">## Summary statistics report:</span></span>
 <span><span class="co">##    - 93 rows (100% of original 93 rows)</span></span>
 <span><span class="co">##    - 93 unique variants</span></span>
 <span><span class="co">##    - 70 genome-wide significant variants (P&lt;5e-8)</span></span>
 <span><span class="co">##    - 20 chromosomes</span></span></code></pre>
-<pre><code><span><span class="co">## Done munging in 0.038 minutes.</span></span></code></pre>
+<pre><code><span><span class="co">## Done munging in 0.055 minutes.</span></span></code></pre>
 <pre><code><span><span class="co">## Successfully finished preparing sumstats file, preview:</span></span></code></pre>
 <pre><code><span><span class="co">## Reading header.</span></span></code></pre>
 <pre><code><span><span class="co">##           SNP   CHR       BP     A1     A2     FRQ   BETA    SE         P</span></span>
@@ -661,8 +661,8 @@ respectively. For example:</p>
 <span>                                 log_folder_ind<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                                 imputation_ind<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                                 log_mungesumstats_msgs<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Time difference of 0 secs</span></span></code></pre>
-<pre><code><span><span class="co">## Time difference of 0.2 secs</span></span></code></pre>
+<pre><code><span><span class="co">## Time difference of 0.1 secs</span></span></code></pre>
+<pre><code><span><span class="co">## Time difference of 0.3 secs</span></span></code></pre>
 <p>Check the file <code>snp_bi_allelic.tsv.gz</code> in the
 <code>log_folder</code> directory you supply (by default a temp
 directory), for a list of SNPs removed as they are non-bi-allelic. The
@@ -831,7 +831,7 @@ format (e.g. “chr1” vs. 1) to return <code>GRanges</code> as.</p>
 <pre><code><span><span class="co">## Converting summary statistics to GenomicRanges.</span></span></code></pre>
 <pre><code><span><span class="co">## Downloading chain file...</span></span></code></pre>
 <pre><code><span><span class="co">## Downloading chain file from Ensembl.</span></span></code></pre>
-<pre><code><span><span class="co">## /tmp/RtmpqxCaaO/GRCh37_to_GRCh38.chain.gz</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/RtmpQzijXk/GRCh37_to_GRCh38.chain.gz</span></span></code></pre>
 <pre><code><span><span class="co">## Reordering so first three column headers are SNP, CHR and BP in this order.</span></span></code></pre>
 <pre><code><span><span class="co">## Reordering so the fourth and fifth columns are A1 and A2.</span></span></code></pre>
 <div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
@@ -1054,7 +1054,7 @@ pipeline, but can still be helpful.</p>
 <span>                                                write_vcf <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                                                return_path <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>   </span></code></pre></div>
 <pre><code><span><span class="co">## Sorting coordinates with 'data.table'.</span></span></code></pre>
-<pre><code><span><span class="co">## Writing in tabular format ==&gt; /tmp/RtmpqxCaaO/file369f519d01b1_eduAttainOkbay_standardised.tsv</span></span></code></pre>
+<pre><code><span><span class="co">## Writing in tabular format ==&gt; /tmp/RtmpQzijXk/file3a3276feca6d_eduAttainOkbay_standardised.tsv</span></span></code></pre>
 <pre><code><span><span class="co">## Writing uncompressed instead of gzipped to enable tabix indexing.</span></span></code></pre>
 <pre><code><span><span class="co">## Converting full summary stats file to tabix format for fast querying...</span></span></code></pre>
 <pre><code><span><span class="co">## Reading header.</span></span></code></pre>
@@ -1250,7 +1250,7 @@ handle lists of summary statistics files.</p>
 <span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">## [1] MungeSumstats_1.21.3 BiocStyle_2.40.0    </span></span>
+<span><span class="co">## [1] MungeSumstats_1.21.4 BiocStyle_2.40.0    </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
 <span><span class="co">##  [1] tidyselect_1.2.1                           </span></span>

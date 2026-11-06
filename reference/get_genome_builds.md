@@ -106,14 +106,14 @@ if (!is_32bit_windows) {
 #> Loading reference genome data.
 #> Preprocessing RSIDs.
 #> Validating RSIDs of 93 SNPs using BSgenome::snpsById...
-#> BSgenome::snpsById done in 10 seconds.
+#> BSgenome::snpsById done in 13 seconds.
 #> Loading SNPlocs data for build 144 on GRCH38.
 #> Warning: replacing previous import ‘utils::findMatches’ by ‘S4Vectors::findMatches’ when loading ‘SNPlocs.Hsapiens.dbSNP144.GRCh38’
 #> Loading reference genome data.
 #> Preprocessing RSIDs.
 #> Validating RSIDs of 93 SNPs using BSgenome::snpsById...
-#> BSgenome::snpsById done in 25 seconds.
+#> BSgenome::snpsById done in 34 seconds.
 #> Inferred genome build: GRCH37
-#> Time difference of 38.19594 secs
+#> Time difference of 50.15625 secs
 #> GRCH37: 1 file(s)
 ```

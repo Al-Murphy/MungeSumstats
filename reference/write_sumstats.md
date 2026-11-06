@@ -103,5 +103,5 @@ write_sumstats(
     sumstats_dt = eduAttainOkbay,
     save_path = tempfile(fileext = ".tsv.gz")
 )
-#> Writing in tabular format ==> /tmp/RtmpS8HkgB/file2ff13975fe86.tsv.gz
+#> Writing in tabular format ==> /tmp/RtmpI7TjrI/file338f2b6a2b58.tsv.gz
 ```
