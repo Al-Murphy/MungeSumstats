@@ -18,6 +18,8 @@ jobs:
           r-version: release
           use-public-rspm: true
       - name: Install standalone test dependencies
+        env:
+          USE_BUNDLED_LIBUV: '1'
         shell: Rscript {0}
         run: install.packages(c("Rcpp", "testthat"), repos = "https://cloud.r-project.org")
       - name: Compile and test native R interface without Bioconductor dependencies
