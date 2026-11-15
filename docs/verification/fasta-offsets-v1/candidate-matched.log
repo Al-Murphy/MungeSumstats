@@ -1,0 +1,23 @@
+Warning: stack imbalance in '::', 4 then 6
+Warning: stack imbalance in '<-', 2 then 4
+   user  system elapsed 
+ 21.184   8.438  29.872 
+       30.02 real        21.26 user         8.48 sys
+          1064894464  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               69772  page reclaims
+                  58  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                 650  voluntary context switches
+               15475  involuntary context switches
+        336280902856  instructions retired
+        115520702375  cycles elapsed
+           926189128  peak memory footprint
+{"command": ["/usr/bin/time", "-l", "Rscript", "--vanilla", "/private/tmp/gwas-harvest-stage2/results/reference-index-capacity-v1/build_sample_matched.R", "reference-index-candidate-matched"], "pid": 49208, "status": "success", "max_memory_bytes": 8589934592, "min_free_bytes": 171798691840, "exit_code": 0, "reason": null, "natural_oom": false, "elapsed_seconds": 30.272527291905135, "samples": 109, "peak_rss_bytes": 1066106880, "peak_physical_footprint_bytes": 927418168, "peak_guard_bytes": 1066189040, "minimum_free_bytes": 579461947392}

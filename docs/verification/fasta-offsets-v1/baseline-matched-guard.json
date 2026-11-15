@@ -1,0 +1,23 @@
+{
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "Rscript",
+    "--vanilla",
+    "/private/tmp/gwas-harvest-stage2/results/reference-index-capacity-v1/build_sample_matched.R",
+    "reference-index-baseline-matched"
+  ],
+  "pid": 47067,
+  "status": "success",
+  "max_memory_bytes": 8589934592,
+  "min_free_bytes": 171798691840,
+  "exit_code": 0,
+  "reason": null,
+  "natural_oom": false,
+  "elapsed_seconds": 140.70917174988426,
+  "samples": 503,
+  "peak_rss_bytes": 1050902528,
+  "peak_physical_footprint_bytes": 935577448,
+  "peak_guard_bytes": 1050984688,
+  "minimum_free_bytes": 579782885376
+}

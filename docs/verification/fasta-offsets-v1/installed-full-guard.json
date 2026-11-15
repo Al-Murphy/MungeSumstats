@@ -1,0 +1,22 @@
+{
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "Rscript",
+    "--vanilla",
+    "/private/tmp/gwas-harvest-stage2/results/reference-index-capacity-v1/full-suite.R"
+  ],
+  "pid": 51976,
+  "status": "success",
+  "max_memory_bytes": 8589934592,
+  "min_free_bytes": 171798691840,
+  "exit_code": 0,
+  "reason": null,
+  "natural_oom": false,
+  "elapsed_seconds": 141.39004158298485,
+  "samples": 506,
+  "peak_rss_bytes": 6389121024,
+  "peak_physical_footprint_bytes": 5803071080,
+  "peak_guard_bytes": 6390235376,
+  "minimum_free_bytes": 577002430464
+}

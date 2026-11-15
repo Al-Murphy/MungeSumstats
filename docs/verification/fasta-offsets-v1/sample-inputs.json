@@ -1,0 +1,16 @@
+{
+  "scope": "First 1,000,000 source sites only; incomplete, no history expansion; not a production reference or representative genome sample",
+  "rows": 1000000,
+  "source_preparation_plan": "/private/tmp/gwas-harvest-stage2/results/full-reference/GRCh38-source-plan-v4.json",
+  "source_preparation_complete": false,
+  "fasta": {
+    "path": "/private/tmp/gwas-harvest-stage2/results/reference-index-capacity-v1/reference.fa",
+    "sha256": "d88cc10556244b91b044294067ad166d9512bec6bbc104fb5c9f2d480af302fe",
+    "size_bytes": 3339671278
+  },
+  "variants": {
+    "path": "/private/tmp/gwas-harvest-stage2/results/reference-index-capacity-v1/prefix-sites.tsv",
+    "sha256": "3136a1b6bb0dd7e6bba90410bacf47ac2e10eaab0d07e190a38a1be8ed066372",
+    "size_bytes": 31408384
+  }
+}

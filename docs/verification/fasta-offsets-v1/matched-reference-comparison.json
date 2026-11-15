@@ -1,0 +1,83 @@
+{
+  "scope": "Matched whole MSS reference preparation; incomplete1Msiteprefix without full history, same completeFASTA, sharedhost/noOS-cacheisolation; not study harmonization or legacy API speedup",
+  "baseline": {
+    "command": [
+      "/usr/bin/time",
+      "-l",
+      "Rscript",
+      "--vanilla",
+      "/private/tmp/gwas-harvest-stage2/results/reference-index-capacity-v1/build_sample_matched.R",
+      "reference-index-baseline-matched"
+    ],
+    "pid": 47067,
+    "status": "success",
+    "max_memory_bytes": 8589934592,
+    "min_free_bytes": 171798691840,
+    "exit_code": 0,
+    "reason": null,
+    "natural_oom": false,
+    "elapsed_seconds": 140.70917174988426,
+    "samples": 503,
+    "peak_rss_bytes": 1050902528,
+    "peak_physical_footprint_bytes": 935577448,
+    "peak_guard_bytes": 1050984688,
+    "minimum_free_bytes": 579782885376
+  },
+  "candidate": {
+    "command": [
+      "/usr/bin/time",
+      "-l",
+      "Rscript",
+      "--vanilla",
+      "/private/tmp/gwas-harvest-stage2/results/reference-index-capacity-v1/build_sample_matched.R",
+      "reference-index-candidate-matched"
+    ],
+    "pid": 49208,
+    "status": "success",
+    "max_memory_bytes": 8589934592,
+    "min_free_bytes": 171798691840,
+    "exit_code": 0,
+    "reason": null,
+    "natural_oom": false,
+    "elapsed_seconds": 30.272527291905135,
+    "samples": 109,
+    "peak_rss_bytes": 1066106880,
+    "peak_physical_footprint_bytes": 927418168,
+    "peak_guard_bytes": 1066189040,
+    "minimum_free_bytes": 579461947392
+  },
+  "exact_payloads": {
+    "core-version": {
+      "size_bytes": 19,
+      "sha256": "c0ef21703c72cf14f2a71ef4674cd3aeaf4d6ed04174f40bbfa27f13cb3bc107"
+    },
+    "fasta.fai": {
+      "size_bytes": 25906,
+      "sha256": "ee6b4d53c7d2012564ced3c8631c9bd37a43eaa8380e9d14c377e2e3046a69f6"
+    },
+    "keys": {
+      "size_bytes": 75443222,
+      "sha256": "53ab9dafd6fac58c6401ddd824c25aa9e917f25b34801a52164e33ff7904f817"
+    },
+    "offsets": {
+      "size_bytes": 27874952,
+      "sha256": "f79a0928d2f0f1cb74c8395fbd1ae679715b80e55a1db031627ab1aba34c306f"
+    },
+    "records": {
+      "size_bytes": 98065492,
+      "sha256": "2f9811851ff0d68f678aeb64ebf533daaeaa7f3638cf811045131a84dd03b0c0"
+    },
+    "rejected.tsv": {
+      "size_bytes": 167,
+      "sha256": "6d19652c203f292282fb473ae2113d6352a6de9b209d1747a7e69163607adb92"
+    },
+    "source.tsv": {
+      "size_bytes": 31408384,
+      "sha256": "3136a1b6bb0dd7e6bba90410bacf47ac2e10eaab0d07e190a38a1be8ed066372"
+    }
+  },
+  "manifest_rds_compared": false,
+  "manifest_difference": "Operational paths and creation time; scientific payloads compared byte-for-byte",
+  "retained_index_payload_bytes": 232818142,
+  "observed_elapsed_ratio": 4.648081423565513
+}

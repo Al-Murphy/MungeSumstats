@@ -1,0 +1,63 @@
+{
+  "scope": "Standalone FASTA index scan only, same complete3.34GB FASTA; shared host, no OS-cache isolation; not whole harmonization speedup",
+  "files": {
+    "results/reference-index-capacity-v1/fasta-baseline.fai": {
+      "sha256": "ee6b4d53c7d2012564ced3c8631c9bd37a43eaa8380e9d14c377e2e3046a69f6",
+      "size_bytes": 25906
+    },
+    "results/reference-index-capacity-v1/fasta-candidate.fai": {
+      "sha256": "ee6b4d53c7d2012564ced3c8631c9bd37a43eaa8380e9d14c377e2e3046a69f6",
+      "size_bytes": 25906
+    },
+    "results/reference-index-capacity-v1/reference-index/fasta.fai": {
+      "sha256": "ee6b4d53c7d2012564ced3c8631c9bd37a43eaa8380e9d14c377e2e3046a69f6",
+      "size_bytes": 25906
+    }
+  },
+  "contigs": 705,
+  "baseline": {
+    "command": [
+      "/usr/bin/time",
+      "-l",
+      "/private/tmp/gwas-harvest-stage2/results/reference-index-capacity-v1/fasta-baseline",
+      "/private/tmp/gwas-harvest-stage2/results/reference-index-capacity-v1/reference.fa",
+      "/private/tmp/gwas-harvest-stage2/results/reference-index-capacity-v1/fasta-baseline.fai"
+    ],
+    "pid": 37534,
+    "status": "success",
+    "max_memory_bytes": 8589934592,
+    "min_free_bytes": 171798691840,
+    "exit_code": 0,
+    "reason": null,
+    "natural_oom": false,
+    "elapsed_seconds": 55.62964808288962,
+    "samples": 197,
+    "peak_rss_bytes": 3276800,
+    "peak_physical_footprint_bytes": 2785904,
+    "peak_guard_bytes": 3358960,
+    "minimum_free_bytes": 582157877248
+  },
+  "candidate": {
+    "command": [
+      "/usr/bin/time",
+      "-l",
+      "/private/tmp/gwas-harvest-stage2/results/reference-index-capacity-v1/fasta-candidate",
+      "/private/tmp/gwas-harvest-stage2/results/reference-index-capacity-v1/reference.fa",
+      "/private/tmp/gwas-harvest-stage2/results/reference-index-capacity-v1/fasta-candidate.fai"
+    ],
+    "pid": 40240,
+    "status": "success",
+    "max_memory_bytes": 8589934592,
+    "min_free_bytes": 171798691840,
+    "exit_code": 0,
+    "reason": null,
+    "natural_oom": false,
+    "elapsed_seconds": 2.525210625026375,
+    "samples": 9,
+    "peak_rss_bytes": 3293184,
+    "peak_physical_footprint_bytes": 2802288,
+    "peak_guard_bytes": 3375344,
+    "minimum_free_bytes": 582007214080
+  },
+  "observed_elapsed_ratio": 22.0297061684938
+}
