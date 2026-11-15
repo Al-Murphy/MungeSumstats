@@ -8,6 +8,7 @@
 #include <filesystem>
 #include <fstream>
 #include <limits>
+#include <list>
 #include <map>
 #include <queue>
 #include <set>
@@ -15,7 +16,48 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <unordered_map>
+#include <utility>
 namespace mss {
+// A fixed-size portable page cache bounds native reference memory independently
+// of genome/reference size and avoids an OS seek for every binary-search step.
+class BlockFile {
+  std::ifstream file;std::uint64_t length=0,reads=0;std::size_t width,capacity;
+  struct Page {std::string data;std::list<std::uint64_t>::iterator recent;};
+  std::unordered_map<std::uint64_t,Page> pages;std::list<std::uint64_t> recent;
+  const std::string& page(std::uint64_t number) {
+    auto found=pages.find(number);
+    if(found!=pages.end()){recent.splice(recent.begin(),recent,found->second.recent);return found->second.data;}
+    if(pages.size()==capacity){pages.erase(recent.back());recent.pop_back();}
+    std::string data(width,'\0');file.clear();file.seekg(number*width);file.read(&data[0],width);
+    data.resize(static_cast<std::size_t>(file.gcount()));++reads;
+    if(file.bad())throw std::runtime_error("Reference block read failed");
+    recent.push_front(number);return pages.emplace(number,Page{std::move(data),recent.begin()}).first->second.data;
+  }
+public:
+  explicit BlockFile(const std::string& path,std::size_t block_size=65536,std::size_t max_blocks=128):file(path,std::ios::binary),width(block_size),capacity(max_blocks) {
+    if(!file||!width||!capacity)throw std::runtime_error("Cannot open bounded reference file: "+path);
+    file.seekg(0,std::ios::end);auto end=file.tellg();if(end<0)throw std::runtime_error("Cannot measure reference file");length=static_cast<std::uint64_t>(end);
+  }
+  std::uint64_t size()const{return length;}
+  std::uint64_t disk_reads()const{return reads;}
+  std::size_t resident_bytes()const{std::size_t n=0;for(auto& p:pages)n+=p.second.data.size();return n;}
+  std::string bytes(std::uint64_t pos,std::size_t n) {
+    std::string out;
+    while(n&&pos<length){const auto& data=page(pos/width);auto start=pos%width;
+      if(start>=data.size())throw std::runtime_error("Truncated reference file");
+      auto take=std::min(n,data.size()-static_cast<std::size_t>(start));out.append(data,start,take);pos+=take;n-=take;}
+    return out;
+  }
+  std::string line(std::uint64_t pos) {
+    std::string out;
+    while(pos<length){const auto& data=page(pos/width);auto start=static_cast<std::size_t>(pos%width);
+      if(start>=data.size())throw std::runtime_error("Truncated reference file");
+      auto end=data.find('\n',start);auto take=(end==std::string::npos?data.size():end)-start;
+      out.append(data,start,take);if(end!=std::string::npos)break;pos+=take;}
+    return out;
+  }
+};
 inline std::vector<std::string> split(const std::string& s,char sep) {
   std::vector<std::string> out; std::string v; std::istringstream in(s);
   while(std::getline(in,v,sep)) out.push_back(v);
@@ -29,9 +71,9 @@ inline std::string complement(std::string s) {
 }
 struct Contig {std::uint64_t size=0,offset=0,bases=0,bytes=0;};
 class Fasta {
-  std::ifstream file; std::map<std::string,Contig> contigs;
+  std::ifstream file;BlockFile blocks; std::map<std::string,Contig> contigs;
 public:
-  explicit Fasta(const std::string& path,const std::string& fai=""):file(path,std::ios::binary) {
+  explicit Fasta(const std::string& path,const std::string& fai=""):file(path,std::ios::binary),blocks(path,65536,64) {
     if(!file) throw std::runtime_error("Cannot open plain FASTA: "+path);
     char magic[2]={0,0}; file.read(magic,2); file.clear(); file.seekg(0);
     if(static_cast<unsigned char>(magic[0])==31 && static_cast<unsigned char>(magic[1])==139) throw std::runtime_error("Compressed FASTA is unsupported; provide plain FASTA");
@@ -67,7 +109,7 @@ public:
     auto it=contigs.find(chr);if(it==contigs.end() || pos<1)return "";
     const auto& c=it->second; if(static_cast<std::uint64_t>(pos-1)+n>c.size)return "";
     std::string result; result.reserve(n); auto zero=static_cast<std::uint64_t>(pos-1);
-    while(n) {auto take=std::min<std::uint64_t>(n,c.bases-zero%c.bases);std::string part(take,' ');file.clear();file.seekg(c.offset+(zero/c.bases)*c.bytes+zero%c.bases);file.read(&part[0],take);if(!file)return "";result+=part;zero+=take;n-=take;} return upper(result);
+    while(n) {auto take=std::min<std::uint64_t>(n,c.bases-zero%c.bases);auto part=blocks.bytes(c.offset+(zero/c.bases)*c.bytes+zero%c.bases,take);if(part.size()!=take)return "";result+=part;zero+=take;n-=take;} return upper(result);
   }
 };
 struct Normalized {std::string status,chr,ref,alt;std::int64_t pos=0;};
@@ -115,8 +157,15 @@ public:
 };
 struct Candidate {
   std::string chr,ref,alt,id,original_ref,alleles;std::int64_t pos=0,original_pos=0;std::set<std::string> identifiers;
+  std::set<std::int64_t> original_positions;
   std::string key()const{return chr+":"+std::to_string(pos)+":"+ref+":"+alt;}
 };
+inline void merge_candidate_context(Candidate& existing,const Candidate& candidate,bool identifiers=true) {
+  existing.original_positions.insert(candidate.original_positions.begin(),candidate.original_positions.end());
+  if(identifiers){existing.identifiers.insert(candidate.identifiers.begin(),candidate.identifiers.end());existing.id=existing.identifiers.size()==1?*existing.identifiers.begin():"";}
+  std::set<std::string> alleles;for(auto& allele:split(existing.alleles,','))alleles.insert(allele);for(auto& allele:split(candidate.alleles,','))alleles.insert(allele);
+  existing.alleles="";for(auto& allele:alleles){if(!existing.alleles.empty())existing.alleles+=",";existing.alleles+=allele;}
+}
 inline void prepare(const std::string& fasta,const std::string& sites,const std::string& dir,std::size_t batch_size) {
   if(std::filesystem::exists(dir))throw std::runtime_error("Reference directory already exists; use a new immutable version path");
   std::filesystem::create_directories(dir);Fasta fa(fasta);fa.save(dir+"/fasta.fai");
@@ -144,58 +193,70 @@ inline void prepare(const std::string& fasta,const std::string& sites,const std:
   if(!data||!rejected)throw std::runtime_error("Reference data write failed");data.close();sorter.finish();
   std::ofstream meta(dir+"/core-version",std::ios::binary);meta<<"mss-preservation-2\n";
 }
-struct Input {std::string chr;std::int64_t pos;std::string id,other,effect_allele;double effect,eaf;std::string frequency_type;};
+struct Input {
+  std::string chr;std::int64_t pos;std::string id,other,effect_allele;double effect,eaf;std::string frequency_type;
+  std::string source_ref,source_alt,source_strand;bool source_contract=false;
+  Input(std::string chromosome,std::int64_t position,std::string identifier,std::string other_allele,
+        std::string measured_allele,double beta,double frequency,std::string frequency_kind):
+    chr(std::move(chromosome)),pos(position),id(std::move(identifier)),other(std::move(other_allele)),
+    effect_allele(std::move(measured_allele)),effect(beta),eaf(frequency),frequency_type(std::move(frequency_kind)){}
+};
 struct Result {std::string status="unmapped",chr,ref,alt,id;std::int64_t pos=0;double effect=std::numeric_limits<double>::quiet_NaN(),eaf=std::numeric_limits<double>::quiet_NaN();std::size_t candidate_count=0;bool swapped=false,complemented=false;};
 class Reference {
-  std::ifstream keys,offsets,records;std::uint64_t count;Fasta fa;
-  std::string entry(std::uint64_t i){offsets.clear();offsets.seekg(i*8);auto p=read64(offsets);keys.clear();keys.seekg(p);std::string s;std::getline(keys,s);return s;}
+  BlockFile keys,offsets,records;std::uint64_t count;Fasta fa;
+  std::string entry(std::uint64_t i){auto bytes=offsets.bytes(i*8,8);if(bytes.size()!=8)throw std::runtime_error("Truncated disk index");std::uint64_t p=0;for(int j=0;j<8;++j)p|=std::uint64_t(static_cast<unsigned char>(bytes[j]))<<(8*j);return keys.line(p);}
 public:
-  Reference(const std::string& dir,const std::string& fasta):keys(dir+"/keys",std::ios::binary),offsets(dir+"/offsets",std::ios::binary),records(dir+"/records",std::ios::binary),fa(fasta,dir+"/fasta.fai") {
-    std::ifstream meta(dir+"/core-version");std::string version;std::getline(meta,version);if(version!="mss-preservation-2"||!keys||!offsets||!records)throw std::runtime_error("Incomplete or unsupported reference index");offsets.seekg(0,std::ios::end);auto size=offsets.tellg();if(size<0||size%8)throw std::runtime_error("Invalid offsets file");count=static_cast<std::uint64_t>(size)/8;
+  Reference(const std::string& dir,const std::string& fasta):keys(dir+"/keys"),offsets(dir+"/offsets"),records(dir+"/records"),fa(fasta,dir+"/fasta.fai") {
+    std::ifstream meta(dir+"/core-version");std::string version;std::getline(meta,version);if(version!="mss-preservation-2")throw std::runtime_error("Incomplete or unsupported reference index");auto size=offsets.size();if(size%8)throw std::runtime_error("Invalid offsets file");count=size/8;
   }
   std::vector<Candidate> lookup(const std::string& key,std::size_t cap=10000) {
     std::uint64_t low=0,high=count;while(low<high){auto mid=low+(high-low)/2;auto s=entry(mid);if(s.substr(0,s.find('\t'))<key)low=mid+1;else high=mid;}
     std::vector<Candidate> out;std::map<std::string,std::size_t> seen;std::size_t examined=0;
-    for(auto i=low;i<count;++i){auto s=entry(i);auto tab=s.find('\t');if(s.substr(0,tab)!=key)break;if(++examined>cap)throw std::runtime_error("Reference candidate limit exceeded; no arbitrary candidate selected");auto offset=std::stoull(s.substr(tab+1));records.clear();records.seekg(offset);std::getline(records,s);auto v=split(s,'\t');if(v.size()!=8)throw std::runtime_error("Corrupt reference record");Candidate c{v[0],v[2],v[3],v[4],v[6],v[7],std::stoll(v[1]),std::stoll(v[5]),{}};
+    for(auto i=low;i<count;++i){auto s=entry(i);auto tab=s.find('\t');if(s.substr(0,tab)!=key)break;if(++examined>cap)throw std::runtime_error("Reference candidate limit exceeded; no arbitrary candidate selected");auto offset=std::stoull(s.substr(tab+1));s=records.line(offset);auto v=split(s,'\t');if(v.size()!=8)throw std::runtime_error("Corrupt reference record");Candidate c{v[0],v[2],v[3],v[4],v[6],v[7],std::stoll(v[1]),std::stoll(v[5]),{},{}};
+      c.original_positions.insert(c.original_pos);
       if(!missing(c.id))c.identifiers.insert(c.id);
       auto found=seen.find(c.key());
       if(found==seen.end()){seen[c.key()]=out.size();out.push_back(c);}
       else {
-        auto& existing=out[found->second];existing.identifiers.insert(c.identifiers.begin(),c.identifiers.end());
-        existing.id=existing.identifiers.size()==1?*existing.identifiers.begin():"";
-        std::set<std::string> alleles;for(auto& allele:split(existing.alleles,','))alleles.insert(allele);for(auto& allele:split(c.alleles,','))alleles.insert(allele);
-        existing.alleles="";for(auto& allele:alleles){if(!existing.alleles.empty())existing.alleles+=",";existing.alleles+=allele;}
+        merge_candidate_context(out[found->second],c);
       }
     }
     return out;
   }
   Result harmonise(const Input& input,std::size_t cap=10000) {
+    if(input.source_contract)return harmonise_declared(input,cap);
     Result result;std::vector<Candidate> coordinate,ids,candidates;
+    std::set<std::string> indel_events;
     if(!missing(input.chr)&&input.pos>0) {
-      std::set<std::string> positions={std::to_string(input.pos)},seen;
+      std::set<std::string> positions={std::to_string(input.pos)};std::map<std::string,std::size_t> seen;
       // Query representations can start at any equivalent repeat anchor, not
       // just the reference input anchor or its canonical anchor.
       auto other=upper(input.other),effect=upper(input.effect_allele);
       if(dna(other)&&dna(effect)&&other!=effect)for(int orientation=0;orientation<4;++orientation){
         auto a=orientation>=2?complement(other):other;auto b=orientation>=2?complement(effect):effect;
         if(orientation%2)std::swap(a,b);
-        auto n=normalize(fa,input.chr,input.pos,a,b);if(n.status=="ok")positions.insert(std::to_string(n.pos));
+        auto n=normalize(fa,input.chr,input.pos,a,b);if(n.status=="ok"){positions.insert(std::to_string(n.pos));if(other.size()!=effect.size())indel_events.insert(n.chr+":"+std::to_string(n.pos)+":"+n.ref+":"+n.alt);}
       }
-      for(auto& pos:positions)for(auto& candidate:lookup("C:"+input.chr+":"+pos,cap))
-        if(seen.insert(candidate.key()).second){if(coordinate.size()>=cap)throw std::runtime_error("Reference candidate limit exceeded; no arbitrary candidate selected");coordinate.push_back(candidate);}
+      for(auto& pos:positions)for(auto& candidate:lookup("C:"+input.chr+":"+pos,cap)) {
+        auto found=seen.find(candidate.key());
+        if(found==seen.end()){if(coordinate.size()>=cap)throw std::runtime_error("Reference candidate limit exceeded; no arbitrary candidate selected");seen[candidate.key()]=coordinate.size();coordinate.push_back(candidate);}
+        else merge_candidate_context(coordinate[found->second],candidate);
+      }
     }
     if(!missing(input.id))ids=lookup("I:"+input.id,cap);
-    if(!coordinate.empty()&&!ids.empty()) {std::set<std::string> wanted;for(auto& c:coordinate)wanted.insert(c.key());for(auto& c:ids)if(wanted.count(c.key()))candidates.push_back(c);if(candidates.empty()){result.status="coordinate_id_conflict";return result;}}
+    if(!coordinate.empty()&&!ids.empty()) {std::map<std::string,std::size_t> wanted;for(std::size_t i=0;i<coordinate.size();++i)wanted[coordinate[i].key()]=i;for(auto& c:ids){auto found=wanted.find(c.key());if(found!=wanted.end()){merge_candidate_context(c,coordinate[found->second],false);candidates.push_back(c);}}if(candidates.empty()){result.status="coordinate_id_conflict";return result;}}
     else if(!ids.empty()) {if(!missing(input.chr)&&input.pos>0){result.status="coordinate_id_conflict";return result;}candidates=ids;}
     else candidates=coordinate;
     result.candidate_count=candidates.size();if(candidates.empty())return result;
+    if(ids.empty()&&indel_events.size()>1){result.status="ambiguous";return result;}
     auto other=upper(input.other),effect=upper(input.effect_allele);
     if(!dna(other)||!dna(effect)||other==effect){result.status="unsupported_allele";return result;}
     struct Hit{Candidate candidate;bool swap,comp;};std::vector<Hit> hits;std::set<std::string> hitkeys;
     for(auto& c:candidates)for(int orientation=0;orientation<4;++orientation) {
       bool swap=orientation%2,comp=orientation>=2;auto a=comp?complement(other):other;auto b=comp?complement(effect):effect;if(swap)std::swap(a,b);
       auto chr=missing(input.chr)?c.chr:input.chr;
-      std::set<std::int64_t> anchors=input.pos>0?std::set<std::int64_t>{input.pos}:std::set<std::int64_t>{c.original_pos,c.pos};
+      std::set<std::int64_t> anchors=input.pos>0?std::set<std::int64_t>{input.pos}:c.original_positions;
+      if(input.pos<=0)anchors.insert(c.pos);
       for(auto pos:anchors){auto n=normalize(fa,chr,pos,a,b);
         if(n.status=="ok"&&n.chr==c.chr&&n.pos==c.pos&&n.ref==c.ref&&n.alt==c.alt){auto key=c.key()+":"+(swap?"1":"0")+":"+(comp?"1":"0");if(hitkeys.insert(key).second)hits.push_back({c,swap,comp});}}
 
@@ -205,8 +266,8 @@ public:
       for(auto& c:candidates){
         std::set<std::string> alleles;
         for(auto& allele:split(c.alleles,','))alleles.insert(allele);
-        for(auto& site:lookup("S:"+c.chr+":"+std::to_string(c.original_pos),cap))
-          if(site.original_pos==c.original_pos)for(auto& allele:split(site.alleles,','))alleles.insert(allele);
+        for(auto original_pos:c.original_positions)for(auto& site:lookup("S:"+c.chr+":"+std::to_string(original_pos),cap))
+          if(site.original_pos==original_pos)for(auto& allele:split(site.alleles,','))alleles.insert(allele);
         for(int orientation=0;orientation<2;++orientation){auto a=orientation?complement(other):other;auto b=orientation?complement(effect):effect;
           if(a!=c.original_ref&&b!=c.original_ref&&alleles.count(a)&&alleles.count(b)){result.status="alt_alt_contrast";return result;}}
       }
@@ -220,8 +281,52 @@ public:
         // not turn an effect-allele frequency into 1-p in the presence of a third allele.
         std::set<std::string> known;known.insert(c.original_ref);
         for(auto& allele:split(c.alleles,','))known.insert(allele);
-        for(auto& site:lookup("S:"+c.chr+":"+std::to_string(c.original_pos),cap))
-          if(site.original_pos==c.original_pos){known.insert(site.original_ref);for(auto& allele:split(site.alleles,','))known.insert(allele);}
+        for(auto original_pos:c.original_positions)for(auto& site:lookup("S:"+c.chr+":"+std::to_string(original_pos),cap))
+          if(site.original_pos==original_pos){known.insert(site.original_ref);for(auto& allele:split(site.alleles,','))known.insert(allele);}
+        if(known.size()==2)result.eaf=1-input.eaf;
+      }
+    }
+    return result;
+  }
+private:
+  Result harmonise_declared(const Input& input,std::size_t cap) {
+    Result result;
+    if(input.source_strand!="+"&&input.source_strand!="-"){result.status="source_strand_unknown";return result;}
+    if(missing(input.chr)||input.pos<1){result.status="source_coordinates_missing";return result;}
+    auto ref=upper(input.source_ref),alt=upper(input.source_alt);
+    if(missing(ref)||missing(alt)){result.status="source_reference_missing";return result;}
+    if(!dna(ref)||!dna(alt)||ref==alt){result.status="source_allele_unsupported";return result;}
+    auto other=upper(input.other),effect=upper(input.effect_allele);
+    bool swap=other==alt&&effect==ref;
+    if(!(other==ref&&effect==alt)&&!swap){result.status="source_allele_conflict";return result;}
+    bool comp=input.source_strand=="-";
+    if(comp){ref=complement(ref);alt=complement(alt);}
+    auto n=normalize(fa,input.chr,input.pos,ref,alt);
+    if(n.status!="ok"){result.status="source_reference_mismatch";return result;}
+    auto expected=n.chr+":"+std::to_string(n.pos)+":"+n.ref+":"+n.alt;
+    std::vector<Candidate> ids;
+    if(!missing(input.id))ids=lookup("I:"+input.id,cap);
+    if(!ids.empty()&&std::none_of(ids.begin(),ids.end(),[&](const Candidate& c){return c.key()==expected;})) {
+      result.status="source_id_conflict";return result;
+    }
+    std::vector<Candidate> matching;
+    for(auto pos:std::set<std::int64_t>{input.pos,n.pos})for(auto& c:lookup("C:"+n.chr+":"+std::to_string(pos),cap))
+      if(c.key()==expected)matching.push_back(c);
+    for(auto& c:ids)if(c.key()==expected)matching.push_back(c);
+    std::set<std::string> identifiers;
+    for(auto& c:matching)identifiers.insert(c.identifiers.begin(),c.identifiers.end());
+    result.status=matching.empty()?"sequence_only":(comp?(swap?"swapped_complement":"complement"):(swap?"swap":"match"));
+    result.chr=n.chr;result.pos=n.pos;result.ref=n.ref;result.alt=n.alt;
+    if(identifiers.size()==1)result.id=*identifiers.begin();
+    result.candidate_count=matching.empty()?0:1;result.swapped=swap;result.complemented=comp;
+    result.effect=swap?-input.effect:input.effect;
+    if(input.frequency_type=="EAF"&&std::isfinite(input.eaf)&&input.eaf>=0&&input.eaf<=1){
+      if(!swap)result.eaf=input.eaf;
+      else if(!matching.empty()) {
+        std::set<std::string> known,positions;
+        known.insert(ref);known.insert(alt);
+        for(auto& c:matching){known.insert(c.original_ref);for(auto& a:split(c.alleles,','))known.insert(a);for(auto original_pos:c.original_positions)positions.insert(std::to_string(original_pos));}
+        for(auto& pos:positions)for(auto& site:lookup("S:"+n.chr+":"+pos,cap)){known.insert(site.original_ref);for(auto& a:split(site.alleles,','))known.insert(a);}
         if(known.size()==2)result.eaf=1-input.eaf;
       }
     }

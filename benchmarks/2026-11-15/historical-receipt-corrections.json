@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "correction": "Frozen matrix-v1 supervisor labeled legacy bounded_page_cache_bytes as29360128. Legacy has no native page cache: the correct value is0 for every legacy case. Historical raw receipts remain unchanged; future harness code is corrected.",
+  "affected_glob": "matrix-v1/legacy-*/receipt.json",
+  "field": "bounded_page_cache_bytes",
+  "correct_value": 0,
+  "measurement_impact": "None: informational label only; external RSS and timing unchanged."
+}

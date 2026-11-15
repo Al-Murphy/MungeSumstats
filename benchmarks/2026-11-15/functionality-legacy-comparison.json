@@ -1,0 +1,123 @@
+{
+  "new_synthetic": {
+    "source_rows": 22,
+    "retained_rows": 22,
+    "effect_gold_eligible": 15,
+    "signed_effect_correct": 15,
+    "signed_effect_and_canonical_correct": 15,
+    "canonical_gold_eligible": 17,
+    "canonical_correct": 17,
+    "eaf_gold_eligible": 14,
+    "eaf_correct": 14,
+    "eaf_and_canonical_correct": 14,
+    "exact_source_preservation": true,
+    "underflow_source_token_retained": true
+  },
+  "legacy_synthetic": {
+    "source_rows": 22,
+    "retained_rows": 13,
+    "effect_gold_eligible": 15,
+    "signed_effect_correct": 7,
+    "signed_effect_and_canonical_correct": 5,
+    "canonical_gold_eligible": 17,
+    "canonical_correct": 6,
+    "eaf_gold_eligible": 14,
+    "eaf_correct": 7,
+    "eaf_and_canonical_correct": 5,
+    "underflow_source_token_retained": false
+  },
+  "new_real": {
+    "source_rows": 14428,
+    "retained_rows": 14428,
+    "canonical_calls": 12035,
+    "canonical_oracle_agree": 12026,
+    "signed_effect_calls": 10563,
+    "signed_effect_source_agree": 10554,
+    "eaf_calls": 10553,
+    "eaf_source_agree": 10551,
+    "statuses": {
+      "match": 12021,
+      "swap": 14,
+      "ambiguous": 2344,
+      "allele_mismatch": 35,
+      "unmapped": 12,
+      "alt_alt_contrast": 2
+    },
+    "discordant_cases": [
+      "5364",
+      "5365",
+      "5392",
+      "5691",
+      "7088",
+      "7539",
+      "7630",
+      "10672",
+      "14283"
+    ],
+    "exact_source_preservation": true,
+    "all_scientific_calls_oracle_agree": false
+  },
+  "new_real-comparable": {
+    "source_rows": 13419,
+    "retained_rows": 13419,
+    "canonical_calls": 11456,
+    "canonical_oracle_agree": 11456,
+    "signed_effect_calls": 10034,
+    "signed_effect_source_agree": 10034,
+    "eaf_calls": 10034,
+    "eaf_source_agree": 10034,
+    "statuses": {
+      "match": 11456,
+      "ambiguous": 1963
+    },
+    "discordant_cases": [],
+    "exact_source_preservation": true,
+    "all_scientific_calls_oracle_agree": true
+  },
+  "legacy_real-comparable": {
+    "source_rows": 13419,
+    "retained_rows": 8534,
+    "canonical_calls": 8534,
+    "canonical_oracle_agree": 8533,
+    "signed_effect_calls": 8534,
+    "signed_effect_source_agree": 8533,
+    "eaf_calls": 8534,
+    "eaf_source_agree": 8533,
+    "statuses": {},
+    "discordant_cases": [
+      "604"
+    ]
+  },
+  "new_real-merged": {
+    "source_rows": 3178,
+    "retained_rows": 3178,
+    "canonical_calls": 2732,
+    "canonical_oracle_agree": 2732,
+    "signed_effect_calls": 2726,
+    "signed_effect_source_agree": 2726,
+    "eaf_calls": 2726,
+    "eaf_source_agree": 2726,
+    "statuses": {
+      "match": 2732,
+      "ambiguous": 446
+    },
+    "discordant_cases": [],
+    "exact_source_preservation": true,
+    "all_scientific_calls_oracle_agree": true
+  },
+  "legacy_real-merged": {
+    "source_rows": 3178,
+    "retained_rows": 3171,
+    "canonical_calls": 3171,
+    "canonical_oracle_agree": 3171,
+    "signed_effect_calls": 3171,
+    "signed_effect_source_agree": 3171,
+    "eaf_calls": 3171,
+    "eaf_source_agree": 3171,
+    "statuses": {},
+    "discordant_cases": []
+  },
+  "bcftools_version": "bcftools 1.23.1",
+  "real_oracle_source_rows": 14428,
+  "real_denominator_note": "Full actual source14428; comparable subset13419unique reference-joined IDs, same derived input both paths; merged3178old IDs from historical dbSNP151 map, same association measurements."
+}

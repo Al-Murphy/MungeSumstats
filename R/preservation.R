@@ -113,7 +113,8 @@ prepare_reference <- function(fasta, variants, path, build, version,
 #' @return A live `mss_reference_handle` accepted by both harmonisation APIs.
 #' @details MD5 verification occurs once when opening; subsequent uses verify
 #'   sizes and modification times. The handle owns native disk file streams and
-#'   contig metadata, not a reference-variant or FASTA sequence cache. Keep the
+#'   contig metadata, plus at most 28 MiB of reference/FASTA byte pages (and
+#'   bounded page metadata), independently of total reference size. Keep the
 #'   reference files immutable while the handle is live. Handles are process-local
 #'   and must be reopened after serialization or in another R process.
 #' @export
@@ -140,7 +141,14 @@ open_reference <- function(reference) {
 #' @param reference An `mss_reference` or reference directory path.
 #' @param columns Named list mapping `chr,pos,id,other,effect_allele,effect,eaf`
 #'   to input column names. Defaults use `CHR,BP,SNP,A1,A2,BETA,FRQ`; `A2` is the
-#'   effect allele. Missing columns are allowed and remain unknown.
+#'   effect allele. Missing columns are allowed and remain unknown. Optional
+#'   `source_ref,source_alt` mappings declare trusted source reference/alternate
+#'   alleles, together with either a `source_strand` column or the static argument.
+#' @param source_strand Optional explicit file/table-level `"+"`, `"-"` or
+#'   `"unknown"` declaration for trusted source REF/ALT. Cannot be combined with
+#'   a `columns$source_strand` mapping. Coordinates always name the forward
+#'   reference's leftmost 1-based position. REF/ALT and measured allele strings
+#'   must share the declared strand. No declaration is inferred from A1/A2.
 #' @param build Explicit input build. Defaults to the declared reference build;
 #'   a different build is rejected. No liftover is performed.
 #' @param frequency_type `EAF`, `MAF`, or `unknown`. Only an explicit EAF can be
@@ -167,6 +175,12 @@ open_reference <- function(reference) {
 #'   missing even when native coordinates are GRCh38: projection was not attempted.
 #'   Symbolic alleles and unknown IDs are preserved in `source`. Input and output
 #'   tables remain resident in R; batching bounds native work, not total R memory.
+#'   With an explicit source REF/ALT/strand contract, source REF must validate
+#'   against FASTA before normalization. Unknown strand, allele/ID conflict or
+#'   source REF mismatch remains unresolved. Valid sequence absent from the
+#'   catalog is labeled `sequence_only`, without inventing an identifier.
+#'   Generic indels whose opposite event directions both validate against FASTA
+#'   require a resolving known identifier; otherwise they remain ambiguous.
 #' @export
 harmonise_sumstats <- function(sumstats, reference,
                               columns = list(chr = "CHR", pos = "BP", id = "SNP",
@@ -175,7 +189,7 @@ harmonise_sumstats <- function(sumstats, reference,
                               build = NULL, frequency_type = c("unknown", "EAF", "MAF"),
                               effect_type = c("beta", "log_odds", "none"),
                               batch_size = 100000L, candidate_limit = 10000L,
-                              verify = TRUE) {
+                              verify = TRUE, source_strand = NULL) {
     if (inherits(sumstats, "mss_harmonised")) sumstats <- sumstats$source
     if (!is.data.frame(sumstats)) stop("sumstats must be a data.frame or data.table")
     frequency_type <- match.arg(frequency_type)
@@ -187,10 +201,22 @@ harmonise_sumstats <- function(sumstats, reference,
     if (is.null(build)) build <- reference$build
     if (!identical(build, reference$build)) stop("Input build differs from reference build; projection is not implemented")
     .mss_verify_reference(reference, verify)
-    required <- c("chr", "pos", "id", "other", "effect_allele", "effect", "eaf")
+    required <- c("chr", "pos", "id", "other", "effect_allele", "effect", "eaf",
+                  "source_ref", "source_alt", "source_strand")
     if (!is.list(columns) || length(names(columns)) != length(columns) ||
         any(!nzchar(names(columns))) || any(!names(columns) %in% required) || anyDuplicated(names(columns)))
         stop("columns must be a named list using chr,pos,id,other,effect_allele,effect,eaf")
+    source_contract <- any(c("source_ref", "source_alt", "source_strand") %in% names(columns)) || !is.null(source_strand)
+    if (source_contract) {
+        if (!all(c("source_ref", "source_alt") %in% names(columns)) ||
+            (is.null(source_strand) && !"source_strand" %in% names(columns)))
+            stop("source_ref, source_alt and a source strand declaration must be supplied together")
+        if (!is.null(source_strand) && "source_strand" %in% names(columns))
+            stop("Choose either a source_strand column or a file-level source_strand declaration")
+        if (!is.null(source_strand) && (!is.character(source_strand) || length(source_strand) != 1L ||
+                                      is.na(source_strand) || !source_strand %in% c("+", "-", "unknown")))
+            stop("source_strand must be '+', '-' or 'unknown'")
+    }
     n <- nrow(sumstats)
     extract <- function(field, rows) {
         name <- columns[[field]]
@@ -216,7 +242,12 @@ harmonise_sumstats <- function(sumstats, reference,
                                   extract("other", rows), extract("effect_allele", rows),
                                   effect, parse_number(extract("eaf", rows)),
                                   frequency_type, candidate_limit,
-                                  if (inherits(reference, "mss_reference_handle")) reference$.native else NULL)
+                                  if (inherits(reference, "mss_reference_handle")) reference$.native else NULL,
+                                  if (source_contract) extract("source_ref", rows) else NULL,
+                                  if (source_contract) extract("source_alt", rows) else NULL,
+                                  if (source_contract) {
+                                      if (is.null(source_strand)) extract("source_strand", rows) else rep(source_strand, length(rows))
+                                  } else NULL)
         batch$normalized_build <- rep(build, length(rows))
         batch$source_row <- as.double(rows)
         batch$grch38_chr <- rep(NA_character_, length(rows))
@@ -228,12 +259,14 @@ harmonise_sumstats <- function(sumstats, reference,
     normalized <- do.call(rbind, batches)
     rownames(normalized) <- NULL
     provenance <- list(core_version = reference$core_version,
+                       implementation_version = "mss-preservation-3",
                        reference_version = reference$version, build = build,
                        reference_path = reference$path,
                        reference_checksums = reference$checksums,
                        frequency_type = frequency_type, effect_type = effect_type,
                        columns = columns, reference_verified = verify,
-                       projection = "not_attempted", schema_version = 1L)
+                       projection = "not_attempted", schema_version = 1L,
+                       source_strand = source_strand)
     structure(list(source = sumstats, normalized = normalized, provenance = provenance),
               class = "mss_harmonised")
 }
@@ -243,7 +276,7 @@ harmonise_sumstats <- function(sumstats, reference,
 #' @param input Plain or gzip-compressed tabular input file.
 #' @param reference An `mss_reference` or reference directory.
 #' @param path New immutable output directory.
-#' @param columns,build,frequency_type,effect_type,candidate_limit See
+#' @param columns,build,frequency_type,effect_type,candidate_limit,source_strand See
 #'   [harmonise_sumstats()].
 #' @param delimiter A single tab (default) or comma. Input is explicitly
 #'   unquoted, one record per line; quoted/multiline fields are rejected.
@@ -274,7 +307,7 @@ harmonise_file <- function(input, reference, path,
                            build = NULL, frequency_type = c("unknown", "EAF", "MAF"),
                            effect_type = c("beta", "log_odds", "none"),
                            delimiter = "\t", batch_size = 100000L,
-                           candidate_limit = 10000L) {
+                           candidate_limit = 10000L, source_strand = NULL) {
     batch_size <- .mss_positive_integer(batch_size, "batch_size")
     candidate_limit <- .mss_positive_integer(candidate_limit, "candidate_limit")
     frequency_type <- match.arg(frequency_type)
@@ -346,7 +379,7 @@ harmonise_file <- function(input, reference, path,
         result <- harmonise_sumstats(source_batch, reference, columns = columns, build = build,
                                      frequency_type = frequency_type, effect_type = effect_type,
                                      batch_size = batch_size, candidate_limit = candidate_limit,
-                                     verify = FALSE)$normalized
+                                     verify = FALSE, source_strand = source_strand)$normalized
         result$source_row <- result$source_row + total
         write_normalized(result)
         writeLines(lines, source_writer)
@@ -362,7 +395,8 @@ harmonise_file <- function(input, reference, path,
                                stringsAsFactors = FALSE, check.names = FALSE)
         write_normalized(harmonise_sumstats(empty, reference, columns = columns, build = build,
                                            frequency_type = frequency_type, effect_type = effect_type,
-                                           candidate_limit = candidate_limit, verify = FALSE)$normalized)
+                                           candidate_limit = candidate_limit, verify = FALSE,
+                                           source_strand = source_strand)$normalized)
     }
     flush(source_writer); flush(normalized_writer)
     if (sum(counts) != total) stop("Source/native audit row count mismatch")
@@ -370,13 +404,16 @@ harmonise_file <- function(input, reference, path,
     utils::write.table(audit, file.path(staging, "audit.tsv"), sep = "\t", quote = TRUE,
                        row.names = FALSE)
     metadata <- c(schema_version = "1", core_version = reference$core_version,
+                  implementation_version = "mss-preservation-3",
                   reference_build = build, reference_version = reference$version,
                   reference_path = reference$path, source_rows = sprintf("%.17g", total),
                   normalized_rows = sprintf("%.17g", total), input_checksum = before,
                   checksum_algorithm = "MD5", frequency_type = frequency_type,
                   effect_type = effect_type, projection = "not_attempted",
                   delimiter = if (delimiter == "\t") "tab" else "comma",
-                  source_file = source_name)
+                  source_file = source_name,
+                  source_strand = if (!is.null(source_strand)) source_strand else
+                      if ("source_strand" %in% names(columns)) paste0("column:", columns$source_strand) else "not_declared")
     utils::write.table(data.frame(key = names(metadata), value = unname(metadata)),
                        file.path(staging, "metadata.tsv"), sep = "\t", quote = TRUE,
                        row.names = FALSE, qmethod = "double")
@@ -396,12 +433,13 @@ harmonise_file <- function(input, reference, path,
                        file.path(staging, "checksums.tsv"), sep = "\t", quote = TRUE,
                        row.names = FALSE, qmethod = "double")
     manifest <- list(schema_version = 1L, core_version = reference$core_version,
+                     implementation_version = "mss-preservation-3",
                      reference_build = build, reference_version = reference$version,
                      reference_checksums = reference$checksums, reference_path = reference$path,
                      source_rows = total, normalized_rows = total,
                      status_counts = counts, input_checksum = before,
                      checksums = checksums, checksum_algorithm = "MD5",
-                     columns = columns, frequency_type = frequency_type,
+                     columns = columns, source_strand = source_strand, frequency_type = frequency_type,
                      effect_type = effect_type, projection = "not_attempted",
                      delimiter = delimiter,
                      created_utc = format(Sys.time(), tz = "UTC", usetz = TRUE))

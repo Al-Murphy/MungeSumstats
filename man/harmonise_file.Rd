@@ -7,13 +7,14 @@ harmonise_file(input, reference, path,
     effect_allele = "A2", effect = "BETA", eaf = "FRQ"),
   build = NULL, frequency_type = c("unknown", "EAF", "MAF"),
   effect_type = c("beta", "log_odds", "none"),
-  delimiter = "\t", batch_size = 100000L, candidate_limit = 10000L)
+  delimiter = "\t", batch_size = 100000L, candidate_limit = 10000L,
+  source_strand = NULL)
 }
 \arguments{
 \item{input}{Plain or gzip input table.}
 \item{reference}{An \code{mss_reference} or reference directory.}
 \item{path}{New immutable output directory.}
-\item{columns,build,frequency_type,effect_type,candidate_limit}{See \code{\link{harmonise_sumstats}}.}
+\item{columns,build,frequency_type,effect_type,candidate_limit,source_strand}{See \code{\link{harmonise_sumstats}}. A static strand declaration is recorded in receipts and does not add or modify source columns.}
 \item{delimiter}{A single tab or comma. Unquoted one-record-per-line tables only.}
 \item{batch_size}{Maximum source lines resident in a batch.}
 }

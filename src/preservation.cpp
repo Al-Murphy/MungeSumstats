@@ -18,10 +18,20 @@ DataFrame mss_harmonise_cpp(std::string path, std::string fasta,
                           CharacterVector chr, NumericVector pos, CharacterVector id,
                           CharacterVector other, CharacterVector effect_allele,
                           NumericVector effect, NumericVector eaf,
-                          std::string frequency_type, int candidate_limit, SEXP reference_handle = R_NilValue) {
+                          std::string frequency_type, int candidate_limit, SEXP reference_handle = R_NilValue,
+                          Nullable<CharacterVector> source_ref = R_NilValue,
+                          Nullable<CharacterVector> source_alt = R_NilValue,
+                          Nullable<CharacterVector> source_strand = R_NilValue) {
   R_xlen_t n=chr.size();
   if(pos.size()!=n || id.size()!=n || other.size()!=n || effect_allele.size()!=n || effect.size()!=n || eaf.size()!=n)stop("Native input columns differ in length");
   if(candidate_limit<1)stop("candidate_limit must be positive");
+  bool contract=source_ref.isNotNull()||source_alt.isNotNull()||source_strand.isNotNull();
+  CharacterVector source_refs,source_alts,source_strands;
+  if(contract){
+    if(source_ref.isNull()||source_alt.isNull()||source_strand.isNull())stop("Source REF, ALT and strand are required together");
+    source_refs=source_ref.get();source_alts=source_alt.get();source_strands=source_strand.get();
+    if(source_refs.size()!=n||source_alts.size()!=n||source_strands.size()!=n)stop("Source contract columns differ in length");
+  }
   std::unique_ptr<mss::Reference> local;
   mss::Reference* reference;
   if(reference_handle==R_NilValue){local.reset(new mss::Reference(path,fasta));reference=local.get();}
@@ -35,6 +45,7 @@ DataFrame mss_harmonise_cpp(std::string path, std::string fasta,
     bool valid_pos=NumericVector::is_na(pos[i]) || (std::isfinite(pos[i]) && pos[i]>=1 && pos[i]<=9007199254740991.0 && std::floor(pos[i])==pos[i]);
     if(!valid_pos){status[i]="invalid_position";continue;}
     mss::Input input{str(chr,i),NumericVector::is_na(pos[i])?0:static_cast<std::int64_t>(pos[i]),str(id,i),str(other,i),str(effect_allele,i),effect[i],eaf[i],frequency_type};
+    if(contract){input.source_contract=true;input.source_ref=str(source_refs,i);input.source_alt=str(source_alts,i);input.source_strand=str(source_strands,i);}
     auto result=reference->harmonise(input,static_cast<std::size_t>(candidate_limit));
     status[i]=result.status;candidates[i]=result.candidate_count;
     if(result.pos>0){out_chr[i]=result.chr;out_pos[i]=result.pos;ref[i]=result.ref;alt[i]=result.alt;if(!mss::missing(result.id))out_id[i]=result.id;swapped[i]=result.swapped;complemented[i]=result.complemented;}

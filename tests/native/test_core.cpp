@@ -45,9 +45,9 @@ int main(int argc, char** argv) {
   auto noid=index.harmonise({"1",8,"","G","T",2.0,0.0,"EAF"});
   assert(noid.status=="match");
   auto indel=index.harmonise({"1",4,"","AA","A",2.0,0.2,"EAF"});
-  assert(indel.status=="match" && indel.pos==1 && indel.ref=="CA");
+  assert(indel.status=="ambiguous" && std::isnan(indel.effect));
   auto shifted=index.harmonise({"1",5,"","AA","A",2.0,0.2,"EAF"});
-  assert(shifted.status=="match" && shifted.pos==1 && shifted.ref=="CA");
+  assert(shifted.status=="ambiguous" && std::isnan(shifted.effect));
   auto id_canonical=index.harmonise({"",0,"rsDel","CA","C",2.0,0.2,"EAF"});
   assert(id_canonical.status=="match" && id_canonical.pos==1);
   auto zero_swap=index.harmonise({"1",4,"rsDel","A","AA",2.0,0.0,"EAF"});

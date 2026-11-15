@@ -1,0 +1,10 @@
+{
+  "test_blocks": 189,
+  "raw_csv_md5": "2d947b677f1a0444cafb69b532194589",
+  "raw_log": "/private/tmp/gwas-harvest-stage2/results/mss/candidate-installed-full.log",
+  "passed": 941,
+  "failed": 0,
+  "error": 0,
+  "warning": 2,
+  "skipped": 2
+}

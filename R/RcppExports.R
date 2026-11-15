@@ -9,6 +9,6 @@ mss_open_reference_cpp <- function(path, fasta) {
     .Call(`_MungeSumstats_mss_open_reference_cpp`, path, fasta)
 }
 
-mss_harmonise_cpp <- function(path, fasta, chr, pos, id, other, effect_allele, effect, eaf, frequency_type, candidate_limit, reference_handle = NULL) {
-    .Call(`_MungeSumstats_mss_harmonise_cpp`, path, fasta, chr, pos, id, other, effect_allele, effect, eaf, frequency_type, candidate_limit, reference_handle)
+mss_harmonise_cpp <- function(path, fasta, chr, pos, id, other, effect_allele, effect, eaf, frequency_type, candidate_limit, reference_handle = NULL, source_ref = NULL, source_alt = NULL, source_strand = NULL) {
+    .Call(`_MungeSumstats_mss_harmonise_cpp`, path, fasta, chr, pos, id, other, effect_allele, effect, eaf, frequency_type, candidate_limit, reference_handle, source_ref, source_alt, source_strand)
 }

@@ -1,0 +1,126 @@
+[
+  {
+    "name": "cache-v1",
+    "metrics": {
+      "mode": "new",
+      "cache": "cold",
+      "input": "/private/tmp/gwas-harvest-stage2/assets/mss/matched-1M.tsv",
+      "reference": "/private/tmp/gwas-harvest-stage2/assets/reference/matched-index",
+      "R_version": "R version 4.5.3 (2026-03-11)",
+      "threads": "1",
+      "package_version": "1.21.4",
+      "os_cache": "uncontrolled; reference-cold is application state, not flushed OS cache",
+      "legacy_commit": "b4a2d21",
+      "new_initial_commit": "d57c8f9",
+      "loaded_dll_md5": "f80736fe808ade152cf5d2361335dfc1",
+      "reference_open_elapsed": "0.202",
+      "reference_open_user.self": "0.182",
+      "reference_open_sys.self": "0.019",
+      "processing_elapsed": "22.386",
+      "processing_user.self": "16.301",
+      "processing_sys.self": "6.027",
+      "source_rows": "1e+06",
+      "retained_rows": "1e+06",
+      "status_counts": "match:562542;swap:437458",
+      "reference_version": "Ensembl104-chr22-bounded-prefix-unique-nonpal-SNPs",
+      "core_version": "mss-preservation-2",
+      "input_md5": "86fbafb66e89f7dd8ac211952dada625",
+      "created_utc": "2026-11-15 17:55:21 UTC"
+    },
+    "core_boundaries": [
+      {
+        "boundary": "mss_harmonise_cpp",
+        "user.self": "8.237",
+        "sys.self": "5.81",
+        "elapsed": "14.071"
+      }
+    ],
+    "external_peak_rss_bytes": 1787002880,
+    "external_wall_seconds": 26.82
+  },
+  {
+    "name": "candidate-v2",
+    "metrics": {
+      "mode": "new",
+      "cache": "cold",
+      "input": "/private/tmp/gwas-harvest-stage2/assets/mss/matched-1M.tsv",
+      "reference": "/private/tmp/gwas-harvest-stage2/assets/reference/matched-index",
+      "R_version": "R version 4.5.3 (2026-03-11)",
+      "threads": "1",
+      "package_version": "1.21.4",
+      "os_cache": "uncontrolled; reference-cold is application state, not flushed OS cache",
+      "legacy_commit": "b4a2d21",
+      "new_initial_commit": "d57c8f9",
+      "loaded_dll_md5": "ef293897ea8ae9a2039e316db6a037eb",
+      "reference_open_elapsed": "0.21",
+      "reference_open_user.self": "0.19",
+      "reference_open_sys.self": "0.02",
+      "processing_elapsed": "22.62",
+      "processing_user.self": "16.041",
+      "processing_sys.self": "6.517",
+      "source_rows": "1e+06",
+      "retained_rows": "1e+06",
+      "status_counts": "match:562542;swap:437458",
+      "reference_version": "Ensembl104-chr22-bounded-prefix-unique-nonpal-SNPs",
+      "core_version": "mss-preservation-2",
+      "input_md5": "86fbafb66e89f7dd8ac211952dada625",
+      "created_utc": "2026-11-15 17:55:51 UTC"
+    },
+    "core_boundaries": [
+      {
+        "boundary": "mss_harmonise_cpp",
+        "user.self": "8.015",
+        "sys.self": "6.297",
+        "elapsed": "14.336"
+      }
+    ],
+    "external_peak_rss_bytes": 1715470336,
+    "external_wall_seconds": 27.05
+  },
+  {
+    "name": "legacy",
+    "metrics": {
+      "mode": "legacy",
+      "cache": "cold",
+      "input": "/private/tmp/gwas-harvest-stage2/assets/mss/matched-1M.tsv",
+      "reference": "/private/tmp/gwas-harvest-stage2/assets/reference/matched-index",
+      "R_version": "R version 4.5.3 (2026-03-11)",
+      "threads": "1",
+      "package_version": "1.21.4",
+      "os_cache": "uncontrolled; reference-cold is application state, not flushed OS cache",
+      "legacy_commit": "b4a2d21",
+      "new_initial_commit": "d57c8f9",
+      "loaded_dll_md5": "legacy_has_no_native_DLL",
+      "reference_version": "Ensembl104-chr22-bounded-prefix-unique-nonpal-SNPs",
+      "reference_open_elapsed": "0.239",
+      "reference_open_user.self": "0.233",
+      "reference_open_sys.self": "0.00700000000000001",
+      "processing_elapsed": "17.851",
+      "processing_user.self": "17.379",
+      "processing_sys.self": "0.352",
+      "retained_rows": "1000000",
+      "source_rows": "1e+06",
+      "source_count_origin": "acquisition/generator receipt; full file MD5 recorded",
+      "status_counts": "legacy_has_no_row_statuses",
+      "adapter": "reference loader only; all legacy QC unchanged; on_ref_genome disabled for all-known matched SNPs; duplicates allowed",
+      "input_md5": "86fbafb66e89f7dd8ac211952dada625",
+      "created_utc": "2026-11-15 17:56:16 UTC"
+    },
+    "core_boundaries": [
+      {
+        "boundary": "check_allele_flip",
+        "user.self": "1.66",
+        "sys.self": "0.047",
+        "elapsed": "1.708"
+      },
+      {
+        "boundary": "check_bi_allelic",
+        "user.self": "0.223000000000001",
+        "sys.self": "0.00700000000000001",
+        "elapsed": "0.231"
+      }
+    ],
+    "external_peak_rss_bytes": 4441358336,
+    "external_wall_seconds": 21.94
+  }
+]

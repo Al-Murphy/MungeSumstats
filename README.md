@@ -204,6 +204,15 @@ result$source      # original values, including raw P-value tokens
 handle <- open_reference(reference)  # Verify once, reuse across files/batches.
 manifest <- harmonise_file("study.tsv.gz", handle, "editions/study-v1",
                            batch_size = 10000L)
+
+# When provider metadata explicitly declares forward-strand REF/ALT:
+# source bytes need no added STRAND column or rewritten allele values.
+manifest <- harmonise_file(
+  "provider-source.tsv", handle, "editions/provider-forward-v1",
+  columns = list(chr = "chr", pos = "pos", id = NULL,
+    other = "ref", effect_allele = "alt", effect = "beta", eaf = "af",
+    source_ref = "ref", source_alt = "alt"),
+  source_strand = "+", frequency_type = "EAF")
 ```
 
 `match`, `swap`, `complement` and `swapped_complement` are explicit. Palindromic
@@ -214,6 +223,17 @@ computed as `1-p` when a third allele is known, including across split reference
 rows. Frequency type defaults to unknown; only an explicit `frequency_type="EAF"`
 permits normalized frequencies. MAF/unknown frequencies are not treated as EAF. Liftover is not attempted,
 and GRCh38 projection fields remain null.
+
+Trusted source REF/ALT and strand are optional explicit declarations; generic
+other/effect-allele columns do not imply a reference direction. Either declare
+the strand once with `source_strand`, or map a per-row `source_strand` column;
+the two forms cannot be combined. Coordinates always identify the forward
+reference's leftmost 1-based position, and all supplied allele strings share
+the declared strand. Source REF must agree with FASTA. Unknown strand, source
+REF mismatch, or allele/ID conflict stays unresolved. Reference-valid variants
+absent from the catalog can receive `sequence_only` canonical coordinates and
+effects without an invented ID. Known source strand can resolve palindromes;
+generic opposite-event indels without a resolving known ID remain ambiguous.
 
 The file interface supports unquoted TSV/CSV with one record per line and a final
 newline. It stages the original artifact, raw source lines, normalized TSV with
@@ -226,15 +246,20 @@ syntactically valid partial acquisition without an external receipt.
 
 The reference sorter uses bounded chunks and merge fan-in of 32; lookups binary
 search disk offsets and cap candidates rather than loading reference variants in
-RAM. The table interface keeps its source and result in R; use `harmonise_file()`
+RAM. Portable reference byte-page caching has a fixed 28 MiB payload bound plus
+bounded metadata, independently of reference size. The table interface keeps
+its source and result in R; use `harmonise_file()`
 for a bounded-batch corpus path. FASTA must be plain and fixed-width (except final
 sequence lines); unanchored `I/D/-` alleles and compressed reference FASTA are not
 interpreted. Source FASTA remains an external immutable file identified by path
 and MD5. Hash verification reads the reference sequentially once when opening a live
 handle; subsequent calls check file sizes and modification times. Temporary disk requirements include the input snapshot and external sort
-runs. No million-row/reference-scale performance, 8-GiB RSS target, biological
-recovery rate or Windows execution has yet been validated. A three-platform CI
-workflow is supplied to run the standalone fixtures.
+runs. Matched measurement and full correctness workflows are documented in
+[scripts/benchmark-matched.md](scripts/benchmark-matched.md). These disclose
+replicated real-variant panels, adapted legacy reference loading, separate
+functionality challenges and uncontrolled OS caches. A three-platform CI
+workflow runs standalone fixtures; local measurements do not establish actual
+Windows execution or full-genome reference coverage.
 
 Standalone verification does not require the package's Bioconductor imports:
 

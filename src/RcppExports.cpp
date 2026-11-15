@@ -36,8 +36,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // mss_harmonise_cpp
-DataFrame mss_harmonise_cpp(std::string path, std::string fasta, CharacterVector chr, NumericVector pos, CharacterVector id, CharacterVector other, CharacterVector effect_allele, NumericVector effect, NumericVector eaf, std::string frequency_type, int candidate_limit, SEXP reference_handle);
-RcppExport SEXP _MungeSumstats_mss_harmonise_cpp(SEXP pathSEXP, SEXP fastaSEXP, SEXP chrSEXP, SEXP posSEXP, SEXP idSEXP, SEXP otherSEXP, SEXP effect_alleleSEXP, SEXP effectSEXP, SEXP eafSEXP, SEXP frequency_typeSEXP, SEXP candidate_limitSEXP, SEXP reference_handleSEXP) {
+DataFrame mss_harmonise_cpp(std::string path, std::string fasta, CharacterVector chr, NumericVector pos, CharacterVector id, CharacterVector other, CharacterVector effect_allele, NumericVector effect, NumericVector eaf, std::string frequency_type, int candidate_limit, SEXP reference_handle, Nullable<CharacterVector> source_ref, Nullable<CharacterVector> source_alt, Nullable<CharacterVector> source_strand);
+RcppExport SEXP _MungeSumstats_mss_harmonise_cpp(SEXP pathSEXP, SEXP fastaSEXP, SEXP chrSEXP, SEXP posSEXP, SEXP idSEXP, SEXP otherSEXP, SEXP effect_alleleSEXP, SEXP effectSEXP, SEXP eafSEXP, SEXP frequency_typeSEXP, SEXP candidate_limitSEXP, SEXP reference_handleSEXP, SEXP source_refSEXP, SEXP source_altSEXP, SEXP source_strandSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -53,7 +53,10 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< std::string >::type frequency_type(frequency_typeSEXP);
     Rcpp::traits::input_parameter< int >::type candidate_limit(candidate_limitSEXP);
     Rcpp::traits::input_parameter< SEXP >::type reference_handle(reference_handleSEXP);
-    rcpp_result_gen = Rcpp::wrap(mss_harmonise_cpp(path, fasta, chr, pos, id, other, effect_allele, effect, eaf, frequency_type, candidate_limit, reference_handle));
+    Rcpp::traits::input_parameter< Nullable<CharacterVector> >::type source_ref(source_refSEXP);
+    Rcpp::traits::input_parameter< Nullable<CharacterVector> >::type source_alt(source_altSEXP);
+    Rcpp::traits::input_parameter< Nullable<CharacterVector> >::type source_strand(source_strandSEXP);
+    rcpp_result_gen = Rcpp::wrap(mss_harmonise_cpp(path, fasta, chr, pos, id, other, effect_allele, effect, eaf, frequency_type, candidate_limit, reference_handle, source_ref, source_alt, source_strand));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -61,7 +64,7 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_MungeSumstats_mss_prepare_cpp", (DL_FUNC) &_MungeSumstats_mss_prepare_cpp, 4},
     {"_MungeSumstats_mss_open_reference_cpp", (DL_FUNC) &_MungeSumstats_mss_open_reference_cpp, 2},
-    {"_MungeSumstats_mss_harmonise_cpp", (DL_FUNC) &_MungeSumstats_mss_harmonise_cpp, 12},
+    {"_MungeSumstats_mss_harmonise_cpp", (DL_FUNC) &_MungeSumstats_mss_harmonise_cpp, 15},
     {NULL, NULL, 0}
 };
 

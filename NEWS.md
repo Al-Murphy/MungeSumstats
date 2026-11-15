@@ -1,5 +1,16 @@
 ## Development: preservation interface
 
+* Added fixed28MiB reference/FASTA byte-page caching. Matched unique-query and
+  replicated-panel timing/RSS scripts retain external OS measurements.
+* Added explicit source REF/ALT/strand declarations, including static file-level
+  strand metadata without modifying source bytes. Source-reference conflicts
+  remain unresolved; reference-valid variants absent from the catalog can be
+  sequence-normalized without inventing IDs. Generic opposite-event indels
+  without a resolving known ID remain ambiguous.
+* Normalizer receipts identify implementation version `mss-preservation-3`
+  separately from compatible reference index version `mss-preservation-2`.
+  Equivalent indel anchors retain all original site contexts before any EAF
+  complement, including split third-allele records at another equivalent anchor.
 * Added separate `prepare_reference()`, `harmonise_sumstats()` and streaming
   `harmonise_file()` APIs, without changing the legacy filtering pipeline.
 * Added a portable C++17 plain-FASTA normalizer and disk-backed one-to-many
