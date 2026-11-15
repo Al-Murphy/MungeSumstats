@@ -16,11 +16,10 @@ that exited1 after output is excluded; formal runs use immutable snapshots.
 | --- | --- | --- |
 | 1M | 24.71s / 1,805,795,328bytes | 23.24s / 4,614,045,696bytes |
 | 10M | 216.21s / 1,997,094,912bytes | 142.25s / 18,192,121,856bytes |
-| 40M | 826.56s / 2,327,248,896bytes | Pending in raw matrix |
+| 40M | 826.56s / 2,327,248,896bytes | Memory-censored; accounted private footprint106.5GB cold |
 
 New has lower RSS but is slower than adapted legacy at 1M/10M. The frozen
-cache-v1 40M result measured 2.17GiB RSS; strict identity revalidation is
-tracked separately. It is not automatically a candidate-v3 scale claim.
+cache-v1 40M result measured 2.17GiB RSS; all strict source identity checks passed. This is a frozen cache-v1 measurement, separately identified from final normalizer4.
 Warm runs prime the complete identical input using the same verified handle.
 External warm time/RSS includes priming; phase metrics separate it. OS caches
 are uncontrolled. Tests, profiling and late verification scans overlapped the
@@ -30,7 +29,7 @@ Candidate-v3 preserves reference index version2 and identifies implementation
 version3. It adds explicit trusted REF/ALT/strand and retains all equivalent
 indel contexts before complementing EAF. Its installed suite passes 190 test
 blocks/952 assertions, with zero failures/errors, two known warnings and two
-missing-reference validation skips. Windows execution remains unmeasured.
+missing-reference validation skips. Final Windows/macOS/Linux native CI now passes25blocks/254assertions each;40MWindows resource use remains unmeasured.
 
 For 14,428 actual PanUKB rows, trusted-forward candidate-v3 retains every row
 and source byte, correctly normalizes all 14,422 FASTA-valid variants, and gets
@@ -60,3 +59,5 @@ using max(RSS,physical footprint) is active. Small actual-allocation and complet
 supervisor64MiB proofs are retained. Post-event elapsed timings are contaminated;
 the new40M2.17GiB result remains explicitly a process-RSS observation, not a bound
 on all host memory or filesystem cache use.
+
+Final reviewed normalizer4 binary (source305cbcba, DLL09c3cdff04721856388de644ea716565dfe816df57d81146c81875a4bd4f13d5) completed1M and40M with every source identity and typed entity exact.40M:763.40s wall,756.419s processing,2,479,898,624bytesRSS (2.31GiB),1,390,103,168bytes accounted private footprint,9,413,639,547peak summed logical directory bytes. All37package-file hashes and every edition/source checksum match. Shared-host/post-pressure timing is not a speedup claim; this is native/parser mode, not40Mactive projection. `final-status.json` and settled receipts are authoritative; no benchmark job remains.

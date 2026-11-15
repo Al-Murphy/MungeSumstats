@@ -1,0 +1,14 @@
+[
+  {
+    "case": "new-1M-cold",
+    "final_logical_file_bytes": 233574694,
+    "final_allocated_file_bytes": 243322880,
+    "scope": "Post-validation case directory. Existing peak_output_and_temp_bytes is sampled summed logical bytes, not an APFS allocated-space peak."
+  },
+  {
+    "case": "new-40M-cold",
+    "final_logical_file_bytes": 9413643432,
+    "final_allocated_file_bytes": 9446649856,
+    "scope": "Post-validation case directory. Existing peak_output_and_temp_bytes is sampled summed logical bytes, not an APFS allocated-space peak."
+  }
+]

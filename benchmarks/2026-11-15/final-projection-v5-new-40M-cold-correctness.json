@@ -1,0 +1,21 @@
+{
+  "action": "verify",
+  "mode": "new",
+  "expected_rows": 40000000,
+  "counts": {
+    "rows": 40000000,
+    "alleles_correct": 40000000,
+    "effects_correct": 40000000,
+    "eaf_correct": 40000000,
+    "identity_correct": 40000000,
+    "fully_correct": 40000000,
+    "typed_entity_correct": 40000000
+  },
+  "statuses": {
+    "match": 20123068,
+    "swap": 19876932
+  },
+  "identity_scope": "Exact source_row key+canonical rsID+status for new; full canonical identity multiset for reordered legacy",
+  "typed_entity_columns_verified": true,
+  "passed": true
+}

@@ -1,0 +1,26 @@
+{
+  "status": "complete",
+  "timestamp_utc": "2026-11-15T19:37:19.118100+00:00",
+  "no_live_benchmark_jobs": true,
+  "original_matrix": "complete;12successful strict identity receipts,2censoredlegacy40M",
+  "final_matrix": "complete;1M+40Mstrictsourceidentityandtypedentitiespassed",
+  "launcher": {
+    "state": "complete",
+    "pid": 39019,
+    "timestamp_utc": "2026-11-15T19:31:43.651516+00:00",
+    "returncode": 0,
+    "library": "/private/tmp/gwas-harvest-stage2/Rlib/projection-v5",
+    "dll_sha256": "09c3cdff04721856388de644ea716565dfe816df57d81146c81875a4bd4f13d5"
+  },
+  "library": "Rlib/projection-v5",
+  "source_commit": "305cbcba0787e2040eae1cda593be6404396b682",
+  "normalizer": "mss-preservation-4",
+  "projection_supported": "mss-projection-2",
+  "dll_sha256": "09c3cdff04721856388de644ea716565dfe816df57d81146c81875a4bd4f13d5",
+  "all37installed_package_files_unchanged": true,
+  "exact_source_and_all_edition_checksums_passed": true,
+  "final_native_ci_run": "43751223708",
+  "final_native_ci_allplatforms": "25blocks254assertionseachPASS",
+  "timing_limits": "Sharedhost/post-pressureanduncontrolledOScaches;nospeedupclaim",
+  "scope": "Nativestreaming/parserordinaryTSV;no40Mactiveprojection;437458realSNPpanelrepeatedwithexactsyntheticmeasurements"
+}

@@ -1,0 +1,30 @@
+{
+  "completed_utc": "2026-11-15T19:34:42.898453+00:00",
+  "status": "pass",
+  "package_files_unchanged": 37,
+  "dll_sha256": "09c3cdff04721856388de644ea716565dfe816df57d81146c81875a4bd4f13d5",
+  "source_commit": "305cbcba0787e2040eae1cda593be6404396b682",
+  "cases": [
+    {
+      "case": "new-1M-cold",
+      "all_edition_checksums_passed": 7,
+      "source_artifact_and_decompressed_source_exact": true,
+      "input_md5": "86fbafb66e89f7dd8ac211952dada625",
+      "strict_rows": 1000000,
+      "typed_entities_exact": 1000000,
+      "normalizer": "mss-preservation-4",
+      "dll_md5": "d22bba2cdc3f33c994da05768b95f13e"
+    },
+    {
+      "case": "new-40M-cold",
+      "all_edition_checksums_passed": 7,
+      "source_artifact_and_decompressed_source_exact": true,
+      "input_md5": "091f1d6d92cc793fd36bec2d97d19413",
+      "strict_rows": 40000000,
+      "typed_entities_exact": 40000000,
+      "normalizer": "mss-preservation-4",
+      "dll_md5": "d22bba2cdc3f33c994da05768b95f13e"
+    }
+  ],
+  "no_projection_activated": true
+}
