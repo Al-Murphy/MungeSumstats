@@ -176,3 +176,74 @@ We would like to acknowledge all those who have contributed to
 - [Ao Lu](https://github.com/leoarrow1)
 - [Sufyan Sualeman](https://github.com/sufyansuleman)
 - [Toby Clark](https://github.com/toby-clark4)
+
+### Preservation-oriented portable interface
+
+The separate `prepare_reference()`, `harmonise_sumstats()` and `harmonise_file()`
+APIs preserve every source row, identifier and original measurement token. The
+existing `format_sumstats()` filtering behavior is unchanged. A C++17 core trims
+and left-aligns sequence-resolved SNP/indel contrasts against a declared plain
+FASTA, with disk-backed one-to-many coordinate/ID/merged-alias lookup. Runtime
+normalization requires no external bcftools or Rhtslib.
+
+Reference TSVs have exactly `chr`, `pos`, `ref`, `alt`, `id`, `aliases` columns in
+that order. Positions are 1-based, ALT can contain comma-separated alleles, and
+aliases are semicolon separated. Contig names must match the FASTA exactly.
+
+```r
+reference <- prepare_reference(
+  "GRCh38.fa", "reference-variants.tsv", "references/dbsnp-release-GRCh38",
+  build = "GRCh38", version = "declared-reference-release")
+
+# A1 = other allele, A2 = effect allele; source remains exactly as supplied.
+result <- harmonise_sumstats(sumstats, reference, frequency_type = "EAF")
+result$normalized  # nullable, row-aligned native coordinates/effects/status
+result$source      # original values, including raw P-value tokens
+
+# Bounded file-to-file path, including gzip input; output path must be new.
+handle <- open_reference(reference)  # Verify once, reuse across files/batches.
+manifest <- harmonise_file("study.tsv.gz", handle, "editions/study-v1",
+                           batch_size = 10000L)
+```
+
+`match`, `swap`, `complement` and `swapped_complement` are explicit. Palindromic
+or multiple compatible mappings remain ambiguous. ALT–ALT contrasts, missing
+rsIDs, unsupported/symbolic alleles and unknown optional fields are preserved;
+normalization may remain null. No first ALT is chosen. Swapped EAF is never
+computed as `1-p` when a third allele is known, including across split reference
+rows. Frequency type defaults to unknown; only an explicit `frequency_type="EAF"`
+permits normalized frequencies. MAF/unknown frequencies are not treated as EAF. Liftover is not attempted,
+and GRCh38 projection fields remain null.
+
+The file interface supports unquoted TSV/CSV with one record per line and a final
+newline. It stages the original artifact, raw source lines, normalized TSV with
+`source_row` and `normalized_build`, audit counts and manifest before publishing a new edition directory.
+Portable quoted TSV receipts (`metadata.tsv`, `columns.tsv`,
+`reference_checksums.tsv`, `checksums.tsv`) support non-R consumers; the checksum
+list covers the other artifacts and receipts, excluding itself and `manifest.rds`.
+Malformed/truncated reads fail without publication. No parser can identify a
+syntactically valid partial acquisition without an external receipt.
+
+The reference sorter uses bounded chunks and merge fan-in of 32; lookups binary
+search disk offsets and cap candidates rather than loading reference variants in
+RAM. The table interface keeps its source and result in R; use `harmonise_file()`
+for a bounded-batch corpus path. FASTA must be plain and fixed-width (except final
+sequence lines); unanchored `I/D/-` alleles and compressed reference FASTA are not
+interpreted. Source FASTA remains an external immutable file identified by path
+and MD5. Hash verification reads the reference sequentially once when opening a live
+handle; subsequent calls check file sizes and modification times. Temporary disk requirements include the input snapshot and external sort
+runs. No million-row/reference-scale performance, 8-GiB RSS target, biological
+recovery rate or Windows execution has yet been validated. A three-platform CI
+workflow is supplied to run the standalone fixtures.
+
+Standalone verification does not require the package's Bioconductor imports:
+
+```sh
+# Rcpp and testthat must be installed in the active R library.
+Rscript tests/standalone/preservation.R
+Rscript tests/standalone/registered.R
+./tests/native/run.sh
+```
+
+Optional independent normalization oracle: `python3 tests/native/oracle.py`
+(requires bcftools for testing only).

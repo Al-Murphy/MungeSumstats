@@ -29,6 +29,7 @@ BugReports: https://github.com/neurogenomics/MungeSumstats/issues
 License: Artistic-2.0
 Depends: R(>= 4.1)
 Imports:
+    Rcpp,
     data.table,
     utils,
     R.utils,
@@ -46,6 +47,9 @@ Imports:
     parallel,
     rtracklayer(>= 1.59.1),
     RCurl
+LinkingTo: Rcpp
+SystemRequirements: C++17
+NeedsCompilation: yes
 biocViews: 
     SNP, WholeGenome, Genetics, ComparativeGenomics, 
     GenomeWideAssociation, GenomicVariation, Preprocessing 

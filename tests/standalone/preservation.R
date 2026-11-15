@@ -1,0 +1,10 @@
+# Runs without loading MungeSumstats or its Bioconductor dependencies.
+args <- commandArgs(trailingOnly=TRUE)
+root <- if(length(args)) normalizePath(args[[1]]) else normalizePath('.')
+test_lib <- Sys.getenv("MSS_TEST_RLIB")
+if (nzchar(test_lib)) .libPaths(c(test_lib, .libPaths()))
+Rcpp::sourceCpp(file.path(root,'src/preservation.cpp'))
+source(file.path(root,'R/preservation.R'))
+library(testthat)
+source(file.path(root,'tests/testthat/test-preservation.R'))
+cat('standalone R preservation fixtures passed\n')

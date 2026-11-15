@@ -1,3 +1,14 @@
+## Development: preservation interface
+
+* Added separate `prepare_reference()`, `harmonise_sumstats()` and streaming
+  `harmonise_file()` APIs, without changing the legacy filtering pipeline.
+* Added a portable C++17 plain-FASTA normalizer and disk-backed one-to-many
+  coordinate/ID/alias indexes, with explicit orientation, ambiguity and
+  multiallelic frequency handling. Source rows/tokens remain recoverable and
+  unsupported normalization/projection stays nullable.
+* Added standalone native/R gold fixtures and a Windows/macOS/Linux CI workflow.
+  Reference-scale performance and native Windows execution remain unvalidated.
+
 ## CHANGES IN VERSION 1.21.4
 
 ### Bug fix
