@@ -46,16 +46,14 @@ Matrix receipts are settled-case snapshots. Historical legacy page-cache
 labeling is corrected separately to zero without changing frozen raw receipts.
 Strict verification binds new canonical key/ID/status to each source row and
 checks the full legacy identity multiset. Corruption tests reject reordered
-keys, wrong IDs and replacement by duplicated identities. Final pending outcomes
-are maintained in the external task report.
+keys, wrong IDs and replacement by duplicated identities. All outcomes are settled in final-status.json and the external task report.
 
 Operational correction: the original RSS-only safety monitor was inadequate on
 macOS. Legacy40M cold reached106,549,194,520bytes of compressed/private
 `phys_footprint` while external peak RSS was22,648,717,312bytes. It was manually
 censored, not a natural OOM or successful benchmark. Host swap was observed at
 49,377MiB; no pre-run swap baseline was captured, so that entire amount cannot
-be attributed to this case. Remaining legacy work is held until a tested guard
-using max(RSS,physical footprint) is active. Small actual-allocation and complete
+be attributed to this case. The monitor was replaced by a tested guard using max(RSS,physical footprint) before the one remaining legacy warm attempt; that attempt was safely censored and is also terminal. Small actual-allocation and complete
 supervisor64MiB proofs are retained. Post-event elapsed timings are contaminated;
 the new40M2.17GiB result remains explicitly a process-RSS observation, not a bound
 on all host memory or filesystem cache use.
