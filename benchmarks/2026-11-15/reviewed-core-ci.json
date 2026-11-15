@@ -1,0 +1,19 @@
+{
+  "source": "root verified GitHub Actions",
+  "reviewed_commit": "0c9dd61",
+  "run": "https://github.com/Al-Murphy/MungeSumstats/actions/runs/43748281259",
+  "Windows": {
+    "assertions": 109,
+    "status": "passed"
+  },
+  "macOS": {
+    "assertions": 109,
+    "status": "passed"
+  },
+  "Linux": {
+    "assertions": 109,
+    "status": "passed"
+  },
+  "final_parser_projection_binary": "separate final review/CI gate; this is reviewed-core evidence",
+  "scope": "Reviewed0c9dd61 core plusCI-only dependency fix; final normalizer4/projection2 CI tracked separately byroot"
+}

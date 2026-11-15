@@ -1,4 +1,5 @@
 .Rproj.user
+__pycache__/
 .Rhistory
 MungeSumstats.Rproj
 .RData

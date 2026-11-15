@@ -1,0 +1,219 @@
+{
+  "cases": {
+    "legacy-10M-cold": {
+      "action": "verify",
+      "mode": "legacy",
+      "expected_rows": 10000000,
+      "counts": {
+        "rows": 10000000,
+        "alleles_correct": 10000000,
+        "effects_correct": 10000000,
+        "eaf_correct": 10000000,
+        "identity_correct": 10000000,
+        "fully_correct": 10000000
+      },
+      "statuses": {},
+      "identity_scope": "Exact source_row key+canonical rsID+status for new; full canonical identity multiset for reordered legacy",
+      "passed": true
+    },
+    "legacy-10M-warm": {
+      "action": "verify",
+      "mode": "legacy",
+      "expected_rows": 10000000,
+      "counts": {
+        "rows": 10000000,
+        "alleles_correct": 10000000,
+        "effects_correct": 10000000,
+        "eaf_correct": 10000000,
+        "identity_correct": 10000000,
+        "fully_correct": 10000000
+      },
+      "statuses": {},
+      "identity_scope": "Exact source_row key+canonical rsID+status for new; full canonical identity multiset for reordered legacy",
+      "passed": true
+    },
+    "legacy-1M-cold": {
+      "action": "verify",
+      "mode": "legacy",
+      "expected_rows": 1000000,
+      "counts": {
+        "rows": 1000000,
+        "alleles_correct": 1000000,
+        "effects_correct": 1000000,
+        "eaf_correct": 1000000,
+        "identity_correct": 1000000,
+        "fully_correct": 1000000
+      },
+      "statuses": {},
+      "identity_scope": "Exact source_row key+canonical rsID+status for new; full canonical identity multiset for reordered legacy",
+      "passed": true
+    },
+    "legacy-1M-warm": {
+      "action": "verify",
+      "mode": "legacy",
+      "expected_rows": 1000000,
+      "counts": {
+        "rows": 1000000,
+        "alleles_correct": 1000000,
+        "effects_correct": 1000000,
+        "eaf_correct": 1000000,
+        "identity_correct": 1000000,
+        "fully_correct": 1000000
+      },
+      "statuses": {},
+      "identity_scope": "Exact source_row key+canonical rsID+status for new; full canonical identity multiset for reordered legacy",
+      "passed": true
+    },
+    "new-10M-cold": {
+      "action": "verify",
+      "mode": "new",
+      "expected_rows": 10000000,
+      "counts": {
+        "rows": 10000000,
+        "alleles_correct": 10000000,
+        "effects_correct": 10000000,
+        "eaf_correct": 10000000,
+        "identity_correct": 10000000,
+        "fully_correct": 10000000
+      },
+      "statuses": {
+        "match": 5187962,
+        "swap": 4812038
+      },
+      "identity_scope": "Exact source_row key+canonical rsID+status for new; full canonical identity multiset for reordered legacy",
+      "passed": true
+    },
+    "new-10M-warm": {
+      "action": "verify",
+      "mode": "new",
+      "expected_rows": 10000000,
+      "counts": {
+        "rows": 10000000,
+        "alleles_correct": 10000000,
+        "effects_correct": 10000000,
+        "eaf_correct": 10000000,
+        "identity_correct": 10000000,
+        "fully_correct": 10000000
+      },
+      "statuses": {
+        "match": 5187962,
+        "swap": 4812038
+      },
+      "identity_scope": "Exact source_row key+canonical rsID+status for new; full canonical identity multiset for reordered legacy",
+      "passed": true
+    },
+    "new-1M-cold": {
+      "action": "verify",
+      "mode": "new",
+      "expected_rows": 1000000,
+      "counts": {
+        "rows": 1000000,
+        "alleles_correct": 1000000,
+        "effects_correct": 1000000,
+        "eaf_correct": 1000000,
+        "identity_correct": 1000000,
+        "fully_correct": 1000000
+      },
+      "statuses": {
+        "match": 562542,
+        "swap": 437458
+      },
+      "identity_scope": "Exact source_row key+canonical rsID+status for new; full canonical identity multiset for reordered legacy",
+      "passed": true
+    },
+    "new-1M-warm": {
+      "action": "verify",
+      "mode": "new",
+      "expected_rows": 1000000,
+      "counts": {
+        "rows": 1000000,
+        "alleles_correct": 1000000,
+        "effects_correct": 1000000,
+        "eaf_correct": 1000000,
+        "identity_correct": 1000000,
+        "fully_correct": 1000000
+      },
+      "statuses": {
+        "match": 562542,
+        "swap": 437458
+      },
+      "identity_scope": "Exact source_row key+canonical rsID+status for new; full canonical identity multiset for reordered legacy",
+      "passed": true
+    },
+    "new-40M-cold": {
+      "action": "verify",
+      "mode": "new",
+      "expected_rows": 40000000,
+      "counts": {
+        "rows": 40000000,
+        "alleles_correct": 40000000,
+        "effects_correct": 40000000,
+        "eaf_correct": 40000000,
+        "identity_correct": 40000000,
+        "fully_correct": 40000000
+      },
+      "statuses": {
+        "match": 20123068,
+        "swap": 19876932
+      },
+      "identity_scope": "Exact source_row key+canonical rsID+status for new; full canonical identity multiset for reordered legacy",
+      "passed": true
+    },
+    "new-40M-warm": {
+      "action": "verify",
+      "mode": "new",
+      "expected_rows": 40000000,
+      "counts": {
+        "rows": 40000000,
+        "alleles_correct": 40000000,
+        "effects_correct": 40000000,
+        "eaf_correct": 40000000,
+        "identity_correct": 40000000,
+        "fully_correct": 40000000
+      },
+      "statuses": {
+        "match": 20123068,
+        "swap": 19876932
+      },
+      "identity_scope": "Exact source_row key+canonical rsID+status for new; full canonical identity multiset for reordered legacy",
+      "passed": true
+    },
+    "new-unique-cold": {
+      "action": "verify",
+      "mode": "new",
+      "expected_rows": 437458,
+      "counts": {
+        "rows": 437458,
+        "alleles_correct": 437458,
+        "effects_correct": 437458,
+        "eaf_correct": 437458,
+        "identity_correct": 437458,
+        "fully_correct": 437458
+      },
+      "statuses": {
+        "match": 437458
+      },
+      "identity_scope": "Exact source_row key+canonical rsID+status for new; full canonical identity multiset for reordered legacy",
+      "passed": true
+    },
+    "unoptimized-unique-cold": {
+      "action": "verify",
+      "mode": "new",
+      "expected_rows": 437458,
+      "counts": {
+        "rows": 437458,
+        "alleles_correct": 437458,
+        "effects_correct": 437458,
+        "eaf_correct": 437458,
+        "identity_correct": 437458,
+        "fully_correct": 437458
+      },
+      "statuses": {
+        "match": 437458
+      },
+      "identity_scope": "Exact source_row key+canonical rsID+status for new; full canonical identity multiset for reordered legacy",
+      "passed": true
+    }
+  },
+  "scope": "Only successful artifacts;12passed identity receipts, no censored legacy artifact counted"
+}

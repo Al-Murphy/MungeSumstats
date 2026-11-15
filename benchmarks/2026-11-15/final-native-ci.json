@@ -1,0 +1,38 @@
+{
+  "run": "43751223708",
+  "head_sha": "59c9ec3ad5db27e0b6b56bb1c3b40c17aae59bb8",
+  "status": "completed",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "job": "standalone (ubuntu-latest)",
+      "id": 132925387718,
+      "conclusion": "success",
+      "started": "2026-11-15T19:13:39Z",
+      "completed": "2026-11-15T19:16:40Z",
+      "reported_blocks": 25,
+      "reported_assertions": 254,
+      "url": "https://github.com/Al-Murphy/MungeSumstats/actions/runs/43751223708/job/132925387718"
+    },
+    {
+      "job": "standalone (windows-latest)",
+      "id": 132925387890,
+      "conclusion": "success",
+      "started": "2026-11-15T19:13:39Z",
+      "completed": "2026-11-15T19:14:39Z",
+      "reported_blocks": 25,
+      "reported_assertions": 254,
+      "url": "https://github.com/Al-Murphy/MungeSumstats/actions/runs/43751223708/job/132925387890"
+    },
+    {
+      "job": "standalone (macos-latest)",
+      "id": 132925387937,
+      "conclusion": "success",
+      "started": "2026-11-15T19:13:40Z",
+      "completed": "2026-11-15T19:14:50Z",
+      "reported_blocks": 25,
+      "reported_assertions": 254,
+      "url": "https://github.com/Al-Murphy/MungeSumstats/actions/runs/43751223708/job/132925387937"
+    }
+  ]
+}

@@ -91,6 +91,7 @@ for impl,size,cache in (case.split(':') for case in a.cases.split(',')):
                        completed_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()))
     logtext=(dest/'process.log').read_text()
     for pattern,name,conv in [(r'(\d+)\s+maximum resident set size','external_peak_rss_bytes',int),
+             (r'(\d+)\s+peak memory footprint','external_peak_physical_footprint_bytes',int),
              (r'([0-9.]+) real','external_wall_seconds',float),
              (r'([0-9.]+) user','external_user_seconds',float),
              (r'([0-9.]+) sys','external_system_seconds',float)]:

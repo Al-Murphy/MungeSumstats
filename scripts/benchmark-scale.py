@@ -53,7 +53,12 @@ else:
     source_rows=csv.DictReader(source_handle,delimiter='\t')
     output = a.output/'normalized.tsv' if a.mode=='new' else a.output
     with output.open() as f:
-        for r in csv.DictReader(f,delimiter='\t'):
+        reader=csv.DictReader(f,delimiter='\t')
+        typed=a.mode=='new' and 'entity_type' in reader.fieldnames
+        if typed:
+            if 'entity_id' not in reader.fieldnames:raise AssertionError('Incomplete typed entity output')
+            counts['typed_entity_correct']=0
+        for r in reader:
             counts['rows'] += 1
             if a.mode=='new':
                 key = (r['chr'],int(float(r['pos'])) if r['pos']!='NA' else -1,r['ref'],r['alt'])
@@ -76,10 +81,13 @@ else:
             ok = (key==expected_key, effect!='NA' and float(effect)==.125, eaf!='NA' and float(eaf)==.25)
             for name,value in zip(('alleles_correct','effects_correct','eaf_correct'),ok): counts[name]+=value
             counts['identity_correct']+=identity
-            counts['fully_correct'] += all(ok) and identity
+            typed_ok=not typed or (r['entity_type']=='small_variant' and r['entity_id']==expected_id)
+            if typed:counts['typed_entity_correct']+=typed_ok
+            counts['fully_correct'] += all(ok) and identity and typed_ok
     source_handle.close()
     result = dict(action=a.action,mode=a.mode,expected_rows=a.rows,counts=counts,statuses=statuses,
                   identity_scope='Exact source_row key+canonical rsID+status for new; full canonical identity multiset for reordered legacy',
+                  typed_entity_columns_verified=typed,
                   passed=all(value==a.rows for value in counts.values()) and all(n==0 for n in expected_counts.values()))
 a.receipt.write_text(json.dumps(result,indent=2)+'\n')
 print(json.dumps(result))

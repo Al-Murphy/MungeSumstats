@@ -1,0 +1,12 @@
+{
+  "source": "results/projection-v5/installed-full.csv",
+  "sha256": "0da3f2014532a016dedb40840e4a76bfa8f7fdf9110307785b4a24a5ea417cb0",
+  "blocks": 200,
+  "normalizer": "mss-preservation-4",
+  "projection": "mss-projection-2",
+  "passed": 1097,
+  "failed": 0,
+  "error": 0,
+  "warning": 2,
+  "skipped": 2
+}
