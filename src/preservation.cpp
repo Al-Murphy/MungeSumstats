@@ -54,3 +54,84 @@ DataFrame mss_harmonise_cpp(std::string path, std::string fasta,
   }
   return DataFrame::create(_["status"]=status,_["chr"]=out_chr,_["pos"]=out_pos,_["ref"]=ref,_["alt"]=alt,_["id"]=out_id,_["effect"]=out_effect,_["eaf"]=out_eaf,_["swapped"]=swapped,_["complemented"]=complemented,_["candidate_count"]=candidates);
 }
+// Streaming RFC4180-style decoder. Byte chunks need not end on record or UTF-8
+// boundaries. Original bytes are written separately; only CSV syntax is removed.
+class MssDelimitedParser {
+public:
+  char delimiter; std::size_t limit, bytes=0; int state=0;
+  bool cr=false, active=false, finished=false;
+  std::string field; std::vector<std::string> row;
+  MssDelimitedParser(char d,std::size_t l):delimiter(d),limit(l){}
+  List feed(RawVector input,bool eof) {
+    if(finished)stop("Parser already finished");
+    std::vector<std::vector<std::string>> output;
+    auto end_field=[&](){row.push_back(std::move(field));field.clear();state=0;};
+    auto end_row=[&](){end_field();output.push_back(std::move(row));row.clear();bytes=0;active=false;};
+    for(auto byte:input){
+      char c=static_cast<char>(byte);
+      if(cr){cr=false;if(c=='\n')continue;}
+      if(!c)stop("NUL byte in tabular input");
+      if(++bytes>limit)stop("Input record exceeds max_record_bytes");
+      active=true;
+      if(state==1){if(c=='\"')state=2;else field+=c;continue;}
+      if(state==2 && c=='\"'){field+='\"';state=1;continue;}
+      if(c==delimiter){end_field();continue;}
+      if(c=='\n'||c=='\r'){end_row();cr=c=='\r';continue;}
+      if(state==2)stop("Malformed quote: characters after closing quote");
+      if(c=='\"'){if(!field.empty())stop("Malformed quote in unquoted field");state=1;continue;}
+      field+=c;state=3;
+    }
+    if(eof){if(state==1)stop("Unterminated quoted field");if(active)end_row();finished=true;}
+    List result(output.size());for(std::size_t i=0;i<output.size();++i)result[i]=wrap(output[i]);return result;
+  }
+};
+// [[Rcpp::export]]
+SEXP mss_parser_open_cpp(std::string delimiter,int max_record_bytes) {
+  if(delimiter.size()!=1||max_record_bytes<1)stop("Invalid parser limits");
+  return XPtr<MssDelimitedParser>(new MssDelimitedParser(delimiter[0],max_record_bytes),true);
+}
+// [[Rcpp::export]]
+List mss_parser_feed_cpp(SEXP parser,RawVector input,bool eof=false) {
+  XPtr<MssDelimitedParser> p(parser);return p->feed(input,eof);
+}
+
+#include "projection.h"
+// [[Rcpp::export]]
+SEXP mss_projection_open_cpp(std::string chain,CharacterVector source_names,CharacterVector target_names,NumericVector source_sizes,NumericVector target_sizes) {
+  auto aliases=[](CharacterVector x){std::map<std::string,std::string> out;if(x.size()){CharacterVector names=x.names();for(R_xlen_t i=0;i<x.size();++i)out[as<std::string>(names[i])]=as<std::string>(x[i]);}return out;};
+  auto sizes=[](NumericVector x){std::map<std::string,std::int64_t> out;CharacterVector names=x.names();for(R_xlen_t i=0;i<x.size();++i)out[as<std::string>(names[i])]=static_cast<std::int64_t>(x[i]);return out;};
+  return XPtr<mss::Projection>(new mss::Projection(chain,aliases(source_names),aliases(target_names),sizes(source_sizes),sizes(target_sizes)),true);
+}
+// [[Rcpp::export]]
+DataFrame mss_project_cpp(SEXP projection,SEXP target_handle,CharacterVector chr,NumericVector pos,
+                         CharacterVector ref,CharacterVector alt,NumericVector effect,NumericVector eaf,
+                         int candidate_limit,LogicalVector source_swapped) {
+  XPtr<mss::Projection> p(projection);XPtr<mss::Reference> target(target_handle);
+  if(!p.get()||!target.get())stop("Projection handles are no longer live; reopen immutable inputs");
+  R_xlen_t n=chr.size();CharacterVector status(n,"native_unresolved"),oc(n,NA_STRING),orr(n,NA_STRING),oa(n,NA_STRING),id(n,NA_STRING),chain_id(n,NA_STRING),strand(n,NA_STRING);
+  NumericVector op(n,NA_REAL),oe(n,NA_REAL),of(n,NA_REAL);
+  for(R_xlen_t i=0;i<n;++i){
+    if(i%1000==0)checkUserInterrupt();
+    if(NumericVector::is_na(pos[i])||CharacterVector::is_na(ref[i])||CharacterVector::is_na(alt[i]))continue;
+    auto r=as<std::string>(ref[i]),a=as<std::string>(alt[i]);
+    auto m=p->map(as<std::string>(chr[i]),static_cast<std::int64_t>(pos[i]),r.size());status[i]=m.status;
+    if(m.status!="mapped")continue;
+    chain_id[i]=m.id;strand[i]=m.reverse?"-":"+";
+    if(m.reverse){r=mss::complement(r);a=mss::complement(a);}
+    mss::Input in{m.chr,m.pos,"",r,a,effect[i],eaf[i],"EAF"};
+    in.source_contract=true;in.source_ref=r;in.source_alt=a;in.source_strand="+";
+    auto result=target->harmonise(in,static_cast<std::size_t>(candidate_limit));
+    if(result.pos<1){status[i]=result.status=="source_reference_mismatch"?"target_ref_conflict":result.status;continue;}
+    status[i]="projected";oc[i]=result.chr;op[i]=result.pos;orr[i]=result.ref;oa[i]=result.alt;
+    if(!mss::missing(result.id))id[i]=result.id;
+    if(std::isfinite(result.effect))oe[i]=result.effect;
+    // A source REF-effect complement additionally requires target biallelic
+    // evidence. Unchanged ALT frequencies need no two-allele assumption.
+    if(source_swapped[i]==TRUE && std::isfinite(result.eaf)) {
+      auto guard=in;guard.other=a;guard.effect_allele=r;guard.eaf=0.5;
+      if(!std::isfinite(target->harmonise(guard,static_cast<std::size_t>(candidate_limit)).eaf))result.eaf=std::numeric_limits<double>::quiet_NaN();
+    }
+    if(std::isfinite(result.eaf))of[i]=result.eaf;
+  }
+  return DataFrame::create(_["projection_status"]=status,_["projected_chr"]=oc,_["projected_pos"]=op,_["projected_ref"]=orr,_["projected_alt"]=oa,_["projected_id"]=id,_["projected_effect"]=oe,_["projected_eaf"]=of,_["projection_chain_id"]=chain_id,_["projection_strand"]=strand);
+}

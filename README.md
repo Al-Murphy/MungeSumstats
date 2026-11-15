@@ -221,8 +221,8 @@ rsIDs, unsupported/symbolic alleles and unknown optional fields are preserved;
 normalization may remain null. No first ALT is chosen. Swapped EAF is never
 computed as `1-p` when a third allele is known, including across split reference
 rows. Frequency type defaults to unknown; only an explicit `frequency_type="EAF"`
-permits normalized frequencies. MAF/unknown frequencies are not treated as EAF. Liftover is not attempted,
-and GRCh38 projection fields remain null.
+permits normalized frequencies. MAF/unknown frequencies are not treated as EAF.
+Projection fields remain null unless an explicit projection is requested.
 
 Trusted source REF/ALT and strand are optional explicit declarations; generic
 other/effect-allele columns do not imply a reference direction. Either declare
@@ -235,14 +235,59 @@ absent from the catalog can receive `sequence_only` canonical coordinates and
 effects without an invented ID. Known source strand can resolve palindromes;
 generic opposite-event indels without a resolving known ID remain ambiguous.
 
-The file interface supports unquoted TSV/CSV with one record per line and a final
-newline. It stages the original artifact, raw source lines, normalized TSV with
+The file interface supports quoted TSV/CSV, doubled escaped quotes, embedded
+delimiters/newlines, CRLF, empty fields and valid final records without a newline.
+It stages the exact original artifact and decompressed source bytes, normalized TSV with
 `source_row` and `normalized_build`, audit counts and manifest before publishing a new edition directory.
 Portable quoted TSV receipts (`metadata.tsv`, `columns.tsv`,
 `reference_checksums.tsv`, `checksums.tsv`) support non-R consumers; the checksum
 list covers the other artifacts and receipts, excluding itself and `manifest.rds`.
 Malformed/truncated reads fail without publication. No parser can identify a
-syntactically valid partial acquisition without an external receipt.
+syntactically valid partial acquisition without an external receipt. Supply an
+`acquisition_receipt=list(rows=..., bytes=..., md5=...)` with any known fields to
+verify it before publication. Decoded tokens preserve spelling; only CSV quoting
+syntax is removed for processing. Float64 outputs use 17 significant digits.
+`batch_bytes` defaults to 8 MiB and adaptively bounds decoded batch payload;
+`batch_size` also caps row count. A single larger record is allowed up to
+`max_record_bytes` (64 MiB by default), after which publication fails without
+truncating data. R per-field object overhead, a 64 KiB parser chunk and native
+reference caches are additional memory.
+
+Explicit build projection uses a checksummed source/target reference pair and
+UCSC chain. Source is the chain's `t` side, target its `q` side; no build or contig
+name is guessed. Optional named `source_contigs`/`target_contigs` vectors declare
+chain-to-reference name mappings. The chain block index is resident in native
+memory; input variants remain batched.
+
+```r
+projection <- prepare_projection(
+  "GRCh37_to_GRCh38.chain.gz", source_reference, target_reference,
+  source_build = "GRCh37", target_build = "GRCh38")
+result <- harmonise_sumstats(sumstats, source_reference,
+                            projection = projection, frequency_type = "EAF")
+```
+
+`projected_chr/pos/ref/alt/id/effect/eaf/build`, `projection_status`,
+`projection_chain_id` and `projection_strand` are separate from native fields.
+The complete native normalized REF span must map within one ungapped block.
+Negative mappings reverse-complement alleles, validate target REF, then left
+normalize. Multiple mappings, gaps, unresolved source identities and target REF
+conflicts remain nullable. No target REF/ALT switch is inferred; native counted
+ALT direction stays fixed. A source REF-effect EAF complement additionally
+requires target biallelic catalog evidence. The GRCh38 coordinate aliases are
+populated only when the explicit target is GRCh38. File editions include
+`projection.tsv` and `projection_audit.tsv`. Normalization implementation
+`mss-preservation-3`, reference format `mss-preservation-2` and projection
+implementation `mss-projection-1` are recorded separately.
+
+For statistical entities requiring specialist algorithms, map `entity_type` and
+`entity_id` columns. Accepted types are `small_variant`, `symbolic_sv`, `breakend`,
+`hla`, `repeat` and `gene_burden`; only symbolic SV/breakend syntax is automatically
+recognized. Specialist identities and all original measurements remain available
+with `specialist_preserved` status, without invented small-variant coordinates or
+effects. This supplies typed preservation for querying; HLA alignment, repeat
+normalization, SV/BND graph reconciliation and burden-mask equivalence are future
+specialist transformations, not outputs of this API.
 
 The reference sorter uses bounded chunks and merge fan-in of 32; lookups binary
 search disk offsets and cap candidates rather than loading reference variants in
