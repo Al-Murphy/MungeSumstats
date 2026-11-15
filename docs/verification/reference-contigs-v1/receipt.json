@@ -18,7 +18,25 @@
     "peak_rss_bytes": 6543261696
   },
   "standalone_assertions": 279,
-  "native_windows_extension": "pending separate CI execution; earlier core4 CI does not cover this extension",
+  "native_windows_extension": {
+    "run_url": "https://github.com/Al-Murphy/MungeSumstats/actions/runs/43760413400",
+    "head_sha": "c627fd6e74b71941b71252adf84c8e749ad13875",
+    "conclusion": "success",
+    "platforms": {
+      "windows-latest": {
+        "blocks": 27,
+        "assertions": 279
+      },
+      "ubuntu-latest": {
+        "blocks": 27,
+        "assertions": 279
+      },
+      "macos-latest": {
+        "blocks": 27,
+        "assertions": 279
+      }
+    }
+  },
   "limitations": [
     "No full-genome reference has been built by this verification.",
     "No speed claim is made from unchanged native code.",
