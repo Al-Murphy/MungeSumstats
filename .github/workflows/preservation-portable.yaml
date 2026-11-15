@@ -2,7 +2,7 @@ name: Portable preservation core
 on:
   pull_request:
   push:
-    branches: [master, main]
+    branches: [master, main, gwas-harvest-preservation-20261115]
   workflow_dispatch:
 jobs:
   standalone:
