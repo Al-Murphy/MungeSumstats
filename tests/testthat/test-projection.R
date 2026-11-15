@@ -104,3 +104,50 @@ test_that('explicit aliases cannot collapse distinct chains into a false unique 
   expect_identical(y$projection_status,'multimap')
   expect_true(is.na(y$projected_pos))
 })
+
+test_that('reverse reanchored REF-effect indels retain EAF only with canonical two-allele site evidence', {
+  f <- projection_fixture()
+  writeLines(c('>1','CGTACGTACGTACGTTTTTG'),file.path(f$d,'reverse.fa'))
+  writeLines(c('chain 100 1 20 + 0 20 1 20 - 0 20 1','20'),file.path(f$d,'reverse.chain'))
+  columns <- list(chr='CHR',pos='BP',id='SNP',other='A1',effect_allele='A2',effect='BETA',eaf='FRQ',source_ref='REF',source_alt='ALT')
+  x <- data.frame(CHR='1',BP=4,SNP=NA_character_,REF='AA',ALT='A',A1='A',A2='AA',BETA=.25,FRQ=.2)
+  target_sites <- list(
+    canonical='1\t14\tGT\tG\tdelT\t.',
+    reanchored='1\t19\tTG\tG\tdelT\t.',
+    equivalent=c('1\t14\tGT\tG\tdelT\t.','1\t19\tTG\tG\tdelT\t.','1\t16\tTT\tT\tdelT\t.'),
+    third_at_reanchor=c('1\t14\tGT\tG\tdelT\t.','1\t19\tTG\tG\tdelT\t.','1\t19\tTG\tCG\tthird\t.'),
+    third_at_repeat=c('1\t14\tGT\tG\tdelT\t.','1\t16\tTT\tT\tdelT\t.','1\t16\tTT\tTC\tthird\t.'),
+    symbolic=c('1\t14\tGT\tG\tdelT\t.','1\t19\tTG\tG\tdelT\t.','1\t19\tTG\t<DEL>\tthird\t.'),
+    sequence_only=character())
+  for (name in names(target_sites)) {
+    sites <- file.path(f$d,paste0(name,'.tsv'))
+    writeLines(c('chr\tpos\tref\talt\tid\taliases',target_sites[[name]]),sites)
+    target <- prepare_reference(file.path(f$d,'reverse.fa'),sites,file.path(f$d,name),'GRCh38',name)
+    p <- prepare_projection(file.path(f$d,'reverse.chain'),f$source,target,'GRCh37','GRCh38')
+    y <- harmonise_sumstats(x,f$source,columns=columns,source_strand='+',frequency_type='EAF',projection=p)$normalized
+    expect_equal(y$eaf,.8,info=name)
+    expect_equal(y$effect,-.25,info=name)
+    expect_equal(y$projected_pos,14,info=name)
+    expect_identical(y$projected_ref,'GT',info=name)
+    expect_identical(y$projected_alt,'G',info=name)
+    expect_equal(y$projected_effect,-.25,info=name)
+    expected <- if (name %in% c('canonical','reanchored','equivalent')) .8 else NA_real_
+    expect_equal(y$projected_eaf,expected,info=name)
+    direct <- data.frame(CHR='1',BP=c(14,19,16),SNP='delT',REF=c('GT','TG','TT'),ALT=c('G','G','T'),A1=c('G','G','T'),A2=c('GT','TG','TT'),BETA=.25,FRQ=.2)
+    native <- harmonise_sumstats(direct,target,columns=columns,source_strand='+',frequency_type='EAF')$normalized
+    expect_equal(native$eaf,rep(expected,3),info=name)
+    expect_equal(native$effect,rep(-.25,3),info=name)
+    if (name!='sequence_only') {
+      generic <- harmonise_sumstats(direct,target,frequency_type='EAF')$normalized
+      expect_equal(generic$eaf,rep(expected,3),info=name)
+      expect_equal(generic$effect,rep(-.25,3),info=name)
+    }
+  }
+  # A target catalog cannot manufacture missing source-side frequency evidence.
+  empty <- file.path(f$d,'empty.tsv');writeLines('chr\tpos\tref\talt\tid\taliases',empty)
+  source <- prepare_reference(f$source$fasta,empty,file.path(f$d,'source-empty'),'GRCh37','empty')
+  p <- prepare_projection(file.path(f$d,'reverse.chain'),source,file.path(f$d,'canonical'),'GRCh37','GRCh38')
+  y <- harmonise_sumstats(x,source,columns=columns,source_strand='+',frequency_type='EAF',projection=p)$normalized
+  expect_true(is.na(y$eaf));expect_true(is.na(y$projected_eaf))
+  expect_equal(y$projected_effect,-.25)
+})
