@@ -5,6 +5,7 @@ macOS implementation: external time is authoritative for per-process peak RSS.
 The process-tree sampler is a host-protection guard, not the RSS estimator.
 """
 import argparse, csv, hashlib, json, os, pathlib, re, shutil, signal, subprocess, time
+from process_memory import process_memory
 
 p=argparse.ArgumentParser()
 p.add_argument('--base',type=pathlib.Path,default=pathlib.Path('/private/tmp/gwas-harvest-stage2'))
@@ -25,13 +26,24 @@ def digest(path):
     return h.hexdigest()
 def disk_bytes(path):
     return sum(f.stat().st_size for f in path.rglob('*') if f.is_file())
-def tree_rss(pid):
+def tree_memory(pid):
     text=subprocess.check_output(['ps','-axo','pid=,ppid=,rss='],text=True)
     rows=[tuple(map(int,line.split())) for line in text.splitlines() if line.strip()]
     descendants={pid}
     for _ in range(8):
         descendants.update(child for child,parent,rss in rows if parent in descendants)
-    return sum(rss*1024 for child,parent,rss in rows if child in descendants),descendants
+    resident=guard=footprint=0;errors=[]
+    for child,parent,rss in rows:
+        if child not in descendants:continue
+        try:usage=process_memory(child)
+        except OSError as error:
+            if error.errno in (2,3):continue
+            # Fail closed if a live process cannot be measured; never leave a
+            # memory-heavy child running with an ineffective monitor.
+            errors.append(str(error));guard+=2**63;continue
+        resident+=usage['resident_bytes'];guard+=usage['guard_bytes']
+        footprint+=usage['physical_footprint_bytes'] or 0
+    return resident,guard,footprint,descendants,errors
 for impl,size,cache in (case.split(':') for case in a.cases.split(',')):
     label=f'{impl}-{size}-{cache}'
     dest=root/label
@@ -49,6 +61,8 @@ for impl,size,cache in (case.split(':') for case in a.cases.split(',')):
     receipt=dict(label=label,command=cmd,expected_rows=expected,runner_md5=digest(runner),
                  started_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),
                  memory_guard_bytes=int(a.memory_cap_gib*1024**3),os_cache='uncontrolled, never flushed',
+                 memory_guard_scope='macOS max(RSS,physical_footprint including compressed/private); Linux RSS+VmSwap',
+                 memory_poll_interval_seconds=.1,
                  application_state=cache,source_scope='437458 real SNP records repeated with synthetic exact BETA/EAF',
                  bounded_page_cache_bytes=0 if impl in ('unoptimized','legacy') else 28*1024**2)
     with (dest/'process.log').open('w') as log:
@@ -56,21 +70,24 @@ for impl,size,cache in (case.split(':') for case in a.cases.split(',')):
         receipt['time_wrapper_pid']=proc.pid
         (root/'live.json').write_text(json.dumps(receipt,indent=2)+'\n')
         print('START',label,'PID',proc.pid,flush=True)
-        peak_disk=0;peak_sample=0;guard=False
+        peak_disk=0;peak_sample=0;peak_guard=0;peak_footprint=0;guard=False
         while proc.poll() is None:
-            used,children=tree_rss(proc.pid)
-            peak_sample=max(peak_sample,used);peak_disk=max(peak_disk,disk_bytes(dest))
-            if used>receipt['memory_guard_bytes']:
+            used,guard_used,footprint,children,errors=tree_memory(proc.pid)
+            if errors:receipt.setdefault('memory_guard_errors',[]).extend(errors)
+            peak_sample=max(peak_sample,used);peak_guard=max(peak_guard,guard_used);peak_footprint=max(peak_footprint,footprint)
+            peak_disk=max(peak_disk,disk_bytes(dest))
+            if guard_used>receipt['memory_guard_bytes']:
                 guard=True
                 # Child first lets time reap and print its resource receipt.
                 for child in children-{proc.pid}:
                     try:os.kill(child,signal.SIGKILL)
                     except ProcessLookupError:pass
-                print('MEMORY_GUARD',label,used,flush=True)
-            time.sleep(2)
+                print('MEMORY_GUARD',label,guard_used,'RSS',used,'footprint',footprint,flush=True)
+            time.sleep(.1)
         receipt.update(returncode=proc.returncode,supervisor_elapsed=time.monotonic()-begin,
                        peak_output_and_temp_bytes=max(peak_disk,disk_bytes(dest)),
                        sampled_peak_process_tree_rss_bytes=peak_sample,memory_guard_triggered=guard,
+                       sampled_peak_memory_guard_bytes=peak_guard,sampled_peak_physical_footprint_bytes=peak_footprint,
                        completed_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()))
     logtext=(dest/'process.log').read_text()
     for pattern,name,conv in [(r'(\d+)\s+maximum resident set size','external_peak_rss_bytes',int),

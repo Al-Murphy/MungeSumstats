@@ -1,0 +1,16 @@
+{
+  "control": {
+    "resident_bytes": 30457856,
+    "physical_footprint_bytes": 22725040,
+    "guard_bytes": 30457856,
+    "scope": "macOS max(RSS,phys_footprint including compressed/private accounting)"
+  },
+  "trigger": {
+    "resident_bytes": 131153920,
+    "physical_footprint_bytes": 123470328,
+    "guard_bytes": 131153920,
+    "scope": "macOS max(RSS,phys_footprint including compressed/private accounting)"
+  },
+  "limit_bytes": 67108864,
+  "exitcode": -9
+}

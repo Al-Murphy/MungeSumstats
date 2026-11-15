@@ -32,3 +32,10 @@ memory guard, and complete output correctness scans. A guard termination is
 reported as censored evidence and is never called a natural OOM. Warm process
 time/RSS includes priming; phase metrics separate priming from the timed pass.
 The verifier checks every retained row, normalized REF/ALT, signed BETA and EAF.
+
+On macOS the guard must use `max(RSS, phys_footprint)`, including compressed and
+private accounting; RSS alone is inadequate. On Linux it uses RSS plus VmSwap.
+The monitor polls at100ms and fails closed if a live process cannot be measured.
+An actual16MiB/112MiB child allocation test proves under/over64MiB behavior;
+the complete supervisor also has a64MiB startup-censorship receipt. These are
+sampled safety thresholds, not guarantees against allocation-granularity overshoot.

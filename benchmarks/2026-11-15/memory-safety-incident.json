@@ -1,0 +1,15 @@
+{
+  "status": "memory-guard-censored",
+  "action": "SIGKILL child R PID73283; time wrapper retained for external receipt",
+  "reason": "macOS compressed/private footprint exceeded32GiB while sampled RSS remained low; RSS-only guard missed compressed memory",
+  "observed_phys_footprint_bytes": 106549194520,
+  "memory_guard_bytes": 34359738368,
+  "observed_system_swap_used_MiB": 49377.31,
+  "natural_OOM": false,
+  "timestamp_utc": "2026-11-15T18:22:36.854522+00:00",
+  "external_wall_seconds": 874.22,
+  "external_peak_rss_bytes": 22648717312,
+  "external_peak_physical_footprint_bytes": 106549194520,
+  "pre_run_swap_baseline": "not captured; entire observed host swap cannot be attributed to this case",
+  "policy_failure": "RSS-only guard missed compressed/private accounting; corrected to max(RSS,phys_footprint), sampled100ms"
+}
