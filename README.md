@@ -247,3 +247,27 @@ Rscript tests/standalone/registered.R
 
 Optional independent normalization oracle: `python3 tests/native/oracle.py`
 (requires bcftools for testing only).
+
+For caller-supplied benchmark assets, run the file path with an explicit expected
+row count and retain the output edition plus metrics:
+
+```sh
+Rscript scripts/benchmark-preservation.R \
+  --input study.tsv.gz --reference references/dbsnp-release-GRCh38 \
+  --output benchmarks/study-batch10000 --metrics benchmarks/study-batch10000.tsv \
+  --rows 1000000 --batch-size 10000 --frequency-type EAF --effect-type beta \
+  --columns chr=CHR,pos=BP,id=SNP,other=A1,effect_allele=A2,effect=BETA,eaf=FRQ \
+  --cache-state unspecified-uncontrolled
+```
+
+The harness separately times reference opening/verification and file processing,
+checks source/output counts against `--rows`, and records provenance and hashes.
+`--source-root /path/to/MungeSumstats` supports standalone Rcpp compilation when
+full package dependencies are unavailable; compilation is outside the timed
+sections. Cache state is caller declared and never flushed or verified by this
+script. R allocations are not RSS: collect process memory externally with Linux
+`/usr/bin/time -v`, macOS `/usr/bin/time -l`, or a Windows process monitor, retaining
+the raw output. External process measurements with `--source-root` can include
+compilation; use an installed package for representative runtime measurements.
+The tiny `Rscript tests/standalone/benchmark.R` smoke test makes no performance
+inference. Reference-scale 1M/10M/40M runs require separately supplied assets.
