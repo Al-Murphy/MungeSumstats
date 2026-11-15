@@ -83,10 +83,14 @@ public:
       while(std::getline(in,line)) {auto v=split(line,'\t'); if(v.size()!=5)throw std::runtime_error("Invalid FASTA index"); contigs[v[0]]={std::stoull(v[1]),std::stoull(v[2]),std::stoull(v[3]),std::stoull(v[4])};}
       return;
     }
-    std::string line,name; std::uint64_t previous=0;
+    std::string line,name; std::uint64_t previous=0,offset=0;
     while(file) {
-      auto offset=file.tellg(); if(!std::getline(file,line))break;
-      auto end=file.tellg(); auto bytes=end<0 ? static_cast<std::uint64_t>(line.size()) : static_cast<std::uint64_t>(end-offset);
+      if(!std::getline(file,line))break;
+      // getline removes LF but retains CR. Count physical bytes before stripping
+      // CR; eof means the final line had no delimiter. Avoid two seeks per line.
+      const auto line_offset=offset;
+      const auto bytes=static_cast<std::uint64_t>(line.size())+(file.eof()?0:1);
+      offset+=bytes;
       if(!line.empty() && line.back()=='\r')line.pop_back();
       if(!line.empty() && line[0]=='>') {
         name=line.substr(1,line.find_first_of(" \t",1)-1);
@@ -96,7 +100,7 @@ public:
         if(name.empty() || line.empty())throw std::runtime_error("Invalid FASTA layout");
         auto& c=contigs[name];
         if(c.size && previous!=c.bases)throw std::runtime_error("FASTA must have fixed-width sequence lines except final line");
-        if(!c.size) {c.offset=static_cast<std::uint64_t>(offset);c.bases=line.size();c.bytes=bytes;}
+        if(!c.size) {c.offset=line_offset;c.bases=line.size();c.bytes=bytes;}
         if(line.size()>c.bases)throw std::runtime_error("FASTA line too long");
         c.size+=line.size(); previous=line.size();
       }

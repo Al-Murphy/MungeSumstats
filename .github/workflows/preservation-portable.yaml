@@ -2,7 +2,7 @@ name: Portable preservation core
 on:
   pull_request:
   push:
-    branches: [master, main, gwas-harvest-projection-20261115, gwas-harvest-contigs-20261115]
+    branches: [master, main, gwas-harvest-projection-20261115, gwas-harvest-contigs-20261115, gwas-harvest-fasta-offsets-20261115]
   workflow_dispatch:
 jobs:
   standalone:
