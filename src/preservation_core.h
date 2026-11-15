@@ -276,19 +276,47 @@ public:
     auto h=hits[0];auto c=h.candidate;result.status=h.comp?(h.swap?"swapped_complement":"complement"):(h.swap?"swap":"match");result.chr=c.chr;result.pos=c.pos;result.ref=c.ref;result.alt=c.alt;result.id=c.id;result.swapped=h.swap;result.complemented=h.comp;result.effect=h.swap?-input.effect:input.effect;
     if(input.frequency_type=="EAF"&&std::isfinite(input.eaf)&&input.eaf>=0&&input.eaf<=1){
       if(!h.swap)result.eaf=input.eaf;
-      else {
-        // Include other IDs at this site: split multiallelic reference rows must
-        // not turn an effect-allele frequency into 1-p in the presence of a third allele.
-        std::set<std::string> known;known.insert(c.original_ref);
-        for(auto& allele:split(c.alleles,','))known.insert(allele);
-        for(auto original_pos:c.original_positions)for(auto& site:lookup("S:"+c.chr+":"+std::to_string(original_pos),cap))
-          if(site.original_pos==original_pos){known.insert(site.original_ref);for(auto& allele:split(site.alleles,','))known.insert(allele);}
-        if(known.size()==2)result.eaf=1-input.eaf;
+      else if(biallelic_context(c.key(),c.chr,{c},input.pos,cap)) {
+        result.eaf=1-input.eaf;
       }
     }
     return result;
   }
 private:
+  // Count canonical alternate events, not raw allele strings. The same deletion
+  // can be spelled GT>G, TG>G or TT>T at different anchors. Keep each site's
+  // own REF/position when interpreting its ALT list; merged candidate strings
+  // no longer retain that pairing and must not be used as frequency evidence.
+  bool biallelic_context(const std::string& event,const std::string& chr,
+                         const std::vector<Candidate>& matching,
+                         std::int64_t input_pos,std::size_t cap) {
+    if(matching.empty())return false; // FASTA alone does not prove two alleles.
+    std::set<std::int64_t> positions;
+    if(input_pos>0)positions.insert(input_pos);
+    for(const auto& candidate:matching) {
+      if(candidate.key()!=event)return false;
+      positions.insert(candidate.pos);
+      positions.insert(candidate.original_positions.begin(),candidate.original_positions.end());
+    }
+    bool witnessed=false;
+    for(auto position:positions) {
+      // S records are grouped by original position and original REF. Their ALT
+      // lists therefore remain correctly paired even when lookup deduplicates.
+      for(const auto& site:lookup("S:"+chr+":"+std::to_string(position),cap)) {
+        const auto alleles=split(site.alleles,',');
+        if(alleles.empty())return false;
+        for(const auto& allele:alleles) {
+          auto normalized=normalize(fa,chr,site.original_pos,site.original_ref,allele);
+          if(normalized.status!="ok")return false; // Includes symbolic context.
+          auto key=normalized.chr+":"+std::to_string(normalized.pos)+":"+normalized.ref+":"+normalized.alt;
+          if(key!=event)return false; // A genuine additional alternate event.
+          witnessed=true;
+        }
+      }
+    }
+    return witnessed;
+  }
+
   Result harmonise_declared(const Input& input,std::size_t cap) {
     Result result;
     if(input.source_strand!="+"&&input.source_strand!="-"){result.status="source_strand_unknown";return result;}
@@ -322,12 +350,8 @@ private:
     result.effect=swap?-input.effect:input.effect;
     if(input.frequency_type=="EAF"&&std::isfinite(input.eaf)&&input.eaf>=0&&input.eaf<=1){
       if(!swap)result.eaf=input.eaf;
-      else if(!matching.empty()) {
-        std::set<std::string> known,positions;
-        known.insert(ref);known.insert(alt);
-        for(auto& c:matching){known.insert(c.original_ref);for(auto& a:split(c.alleles,','))known.insert(a);for(auto original_pos:c.original_positions)positions.insert(std::to_string(original_pos));}
-        for(auto& pos:positions)for(auto& site:lookup("S:"+n.chr+":"+pos,cap)){known.insert(site.original_ref);for(auto& a:split(site.alleles,','))known.insert(a);}
-        if(known.size()==2)result.eaf=1-input.eaf;
+      else if(biallelic_context(expected,n.chr,matching,input.pos,cap)) {
+        result.eaf=1-input.eaf;
       }
     }
     return result;

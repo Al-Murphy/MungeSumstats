@@ -277,8 +277,8 @@ ALT direction stays fixed. A source REF-effect EAF complement additionally
 requires target biallelic catalog evidence. The GRCh38 coordinate aliases are
 populated only when the explicit target is GRCh38. File editions include
 `projection.tsv` and `projection_audit.tsv`. Normalization implementation
-`mss-preservation-3`, reference format `mss-preservation-2` and projection
-implementation `mss-projection-1` are recorded separately.
+`mss-preservation-4`, reference format `mss-preservation-2` and projection
+implementation `mss-projection-2` are recorded separately.
 
 For statistical entities requiring specialist algorithms, map `entity_type` and
 `entity_id` columns. Accepted types are `small_variant`, `symbolic_sv`, `breakend`,
