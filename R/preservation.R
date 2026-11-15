@@ -15,6 +15,10 @@ NULL
 #' @param build Explicit coordinate build label, e.g. `GRCh38`.
 #' @param version Explicit reference release/version label.
 #' @param batch_size Maximum index sort buffer rows. Merge fan-in is 32.
+#' @param contig_aliases Optional named character vector from authoritative
+#'   source labels to exact FASTA contig names. Many aliases may name one contig.
+#'   Existing FASTA names cannot be redirected to another contig. Empty mapping
+#'   retains strict-name behavior; no aliases or build changes are inferred.
 #' @return An `mss_reference` containing build, version, paths and MD5 checksums.
 #' @details Each valid REF/ALT pair is independently trimmed and left aligned
 #'   against FASTA. Every rsID/alias can resolve to multiple candidates. Invalid or
@@ -26,12 +30,13 @@ NULL
 #'   single unusually large line can exceed the nominal row-buffer bound.
 #' @export
 prepare_reference <- function(fasta, variants, path, build, version,
-                              batch_size = 100000L) {
+                              batch_size = 100000L, contig_aliases = character()) {
     if (missing(build) || length(build) != 1L || is.na(build) || !nzchar(build))
         stop("An explicit build is required")
     if (missing(version) || length(version) != 1L || is.na(version) || !nzchar(version))
         stop("An explicit version is required")
     batch_size <- .mss_positive_integer(batch_size, "batch_size")
+    contig_aliases <- .mss_validate_contig_aliases(contig_aliases)
     fasta <- normalizePath(fasta, mustWork = TRUE)
     variants <- normalizePath(variants, mustWork = TRUE)
     if (length(path) != 1L || is.na(path) || !nzchar(path)) stop("Invalid path")
@@ -42,11 +47,21 @@ prepare_reference <- function(fasta, variants, path, build, version,
     on.exit(unlink(staging, recursive = TRUE), add = TRUE)
     input_hashes <- unname(tools::md5sum(c(fasta, variants)))
     mss_prepare_cpp(fasta, variants, staging, batch_size)
+    if (length(contig_aliases)) {
+        fai <- utils::read.delim(file.path(staging, "fasta.fai"), header = FALSE,
+                                colClasses = "character", comment.char = "")
+        .mss_validate_contig_aliases(contig_aliases, fai[[1L]])
+        utils::write.table(data.frame(alias = names(contig_aliases),
+                                      canonical_contig = unname(contig_aliases)),
+                           file.path(staging, "contig_aliases.tsv"), sep = "\t",
+                           quote = TRUE, row.names = FALSE, qmethod = "double")
+    }
     if (!file.copy(variants, file.path(staging, "source.tsv"))) stop("Cannot preserve reference TSV")
     if (!identical(input_hashes, unname(tools::md5sum(c(fasta, variants)))) ||
         !identical(input_hashes[[2L]], unname(tools::md5sum(file.path(staging, "source.tsv")))))
         stop("Reference input changed during indexing; no reference was published")
     filenames <- c("fasta.fai", "keys", "offsets", "records", "rejected.tsv", "source.tsv", "core-version")
+    if (length(contig_aliases)) filenames <- c(filenames, "contig_aliases.tsv")
     files <- c(fasta = fasta, stats::setNames(file.path(staging, filenames), filenames))
     checksums <- tools::md5sum(files)
     names(checksums) <- names(files)
@@ -67,6 +82,32 @@ prepare_reference <- function(fasta, variants, path, build, version,
     .mss_read_reference(path)
 }
 
+.mss_validate_contig_aliases <- function(x, contigs = NULL) {
+    if (!is.character(x) || anyNA(x) || any(!nzchar(x)) ||
+        (length(x) && (is.null(names(x)) || anyNA(names(x)) ||
+                       any(!nzchar(names(x))) || anyDuplicated(names(x)))))
+        stop("Contig aliases must be a uniquely named character vector")
+    if (!length(x)) return(character())
+    if (length(x) && any(toupper(names(x)) %in% c("NA", "N/A", "NAN", "NULL", ".", "-")))
+        stop("Contig aliases cannot map missing-value labels")
+    if (!is.null(contigs)) {
+        if (any(!x %in% contigs)) stop("Contig alias target is absent from FASTA")
+        canonical <- names(x) %in% contigs
+        if (any(names(x)[canonical] != x[canonical]))
+            stop("Contig aliases cannot redirect an existing FASTA name")
+    }
+    x[order(names(x))]
+}
+
+.mss_alias_contigs <- function(value, reference) {
+    aliases <- reference$contig_aliases
+    if (!length(aliases)) return(value)
+    matched <- match(value, names(aliases))
+    known <- !is.na(matched)
+    value[known] <- unname(aliases[matched[known]])
+    value
+}
+
 .mss_positive_integer <- function(x, name) {
     if (length(x) != 1L || is.na(x) || !is.numeric(x) || !is.finite(x) ||
         x < 1 || x > .Machine$integer.max || x != floor(x))
@@ -83,6 +124,16 @@ prepare_reference <- function(fasta, variants, path, build, version,
     if (!identical(manifest$schema_version, 1L) ||
         !identical(manifest$core_version, "mss-preservation-2")) stop("Unsupported reference schema")
     manifest$path <- path
+    manifest$contig_aliases <- character()
+    if ("contig_aliases.tsv" %in% manifest$files) {
+        aliases <- utils::read.delim(file.path(path, "contig_aliases.tsv"),
+                                    colClasses = "character", comment.char = "",
+                                    check.names = FALSE)
+        if (!identical(names(aliases), c("alias", "canonical_contig")))
+            stop("Invalid contig alias table")
+        manifest$contig_aliases <- .mss_validate_contig_aliases(
+            stats::setNames(aliases$canonical_contig, aliases$alias))
+    }
     class(manifest) <- "mss_reference"
     manifest
 }
@@ -258,7 +309,7 @@ harmonise_sumstats <- function(sumstats, reference,
         pos[invalid_pos] <- -1
         effect <- if (effect_type == "none") rep(NA_real_, length(rows)) else parse_number(native_extract("effect", rows))
         batch <- mss_harmonise_cpp(reference$path, reference$fasta,
-                                  native_extract("chr", rows), pos, native_extract("id", rows),
+                                  .mss_alias_contigs(native_extract("chr", rows), reference), pos, native_extract("id", rows),
                                   native_extract("other", rows), native_extract("effect_allele", rows),
                                   effect, parse_number(native_extract("eaf", rows)),
                                   frequency_type, candidate_limit,
@@ -291,6 +342,7 @@ harmonise_sumstats <- function(sumstats, reference,
                        reference_version = reference$version, build = build,
                        reference_path = reference$path,
                        reference_checksums = reference$checksums,
+                       contig_mapping_implementation = if (length(reference$contig_aliases)) "mss-contigs-1" else "not_applied",
                        frequency_type = frequency_type, effect_type = effect_type,
                        columns = columns, reference_verified = verify,
                        projection = if (is.null(projection)) "not_attempted" else projection$receipt, schema_version = 1L,
@@ -473,6 +525,7 @@ harmonise_file <- function(input, reference, path,
                        row.names = FALSE)
     metadata <- c(schema_version = "1", core_version = reference$core_version,
                   implementation_version = "mss-preservation-4",
+                  contig_mapping_implementation = if (length(reference$contig_aliases)) "mss-contigs-1" else "not_applied",
                   reference_build = build, reference_version = reference$version,
                   reference_path = reference$path, source_rows = sprintf("%.17g", total),
                   normalized_rows = sprintf("%.17g", total), input_checksum = before,
@@ -505,7 +558,13 @@ harmonise_file <- function(input, reference, path,
                            file.path(staging, "projection.tsv"), sep = "\t", quote = TRUE,
                            row.names = FALSE, qmethod = "double")
     }
-    filenames <- c(if (!is.null(projection)) c("projection.tsv", "projection_audit.tsv"), "source-artifact", source_name, "normalized.tsv", "audit.tsv",
+    if (length(reference$contig_aliases)) {
+        if (!file.copy(file.path(reference$path, "contig_aliases.tsv"),
+                       file.path(staging, "reference_contigs.tsv")))
+            stop("Cannot preserve reference contig mapping")
+    }
+    filenames <- c(if (length(reference$contig_aliases)) "reference_contigs.tsv",
+                   if (!is.null(projection)) c("projection.tsv", "projection_audit.tsv"), "source-artifact", source_name, "normalized.tsv", "audit.tsv",
                    "metadata.tsv", "columns.tsv", "reference_checksums.tsv")
     checksums <- tools::md5sum(file.path(staging, filenames))
     names(checksums) <- filenames
@@ -514,6 +573,7 @@ harmonise_file <- function(input, reference, path,
                        row.names = FALSE, qmethod = "double")
     manifest <- list(schema_version = 1L, core_version = reference$core_version,
                      implementation_version = "mss-preservation-4",
+                     contig_mapping_implementation = if (length(reference$contig_aliases)) "mss-contigs-1" else "not_applied",
                      reference_build = build, reference_version = reference$version,
                      reference_checksums = reference$checksums, reference_path = reference$path,
                      source_rows = total, normalized_rows = total,

@@ -14,3 +14,4 @@ cat('standalone R preservation fixtures passed\n')
 
 source(file.path(root,'tests/testthat/test-quoted-stream.R'))
 source(file.path(root,'tests/testthat/test-projection.R'))
+source(file.path(root,'tests/testthat/test-contig-aliases.R'))

@@ -302,9 +302,27 @@ handle; subsequent calls check file sizes and modification times. Temporary disk
 runs. Matched measurement and full correctness workflows are documented in
 [scripts/benchmark-matched.md](scripts/benchmark-matched.md). These disclose
 replicated real-variant panels, adapted legacy reference loading, separate
-functionality challenges and uncontrolled OS caches. A three-platform CI
-workflow runs standalone fixtures; local measurements do not establish actual
-Windows execution or full-genome reference coverage.
+functionality challenges and uncontrolled OS caches. The reviewed normalizer4
+passed actual native Windows/macOS/Linux CI (254 assertions per platform);
+[the run](https://github.com/Al-Murphy/MungeSumstats/actions/runs/43751223708)
+and benchmark receipts are recorded under `benchmarks/2026-11-15`. Full-genome
+reference performance and 40M active projection remain unmeasured.
+
+Authoritative contig aliases can be supplied when preparing a reference:
+
+```r
+contigs <- read.delim("prepared/contig_aliases.tsv", colClasses = "character")
+reference <- prepare_reference("prepared/reference.fa", "prepared/variants.tsv",
+  "reference-v1", build = "GRCh37", version = "pinned-source-release",
+  contig_aliases = setNames(contigs$canonical_contig, contigs$alias))
+```
+
+The reference TSV and FASTA use the same canonical labels. The optional mapping
+lets `1`, `chr1` and an explicitly listed accession resolve to that label while
+the original source `CHR` remains intact. Its table is checksummed with the
+reference and copied into portable editions with the `mss-contigs-1` receipt.
+Missing mappings keep exact-name behavior. Many aliases may share a target;
+unknown targets and redirecting an existing FASTA contig are rejected.
 
 Standalone verification does not require the package's Bioconductor imports:
 

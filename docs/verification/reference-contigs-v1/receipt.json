@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "base_commit": "d63e688",
+  "feature": "mss-contigs-1",
+  "implementation_version": "mss-preservation-4",
+  "reference_format": "mss-preservation-2",
+  "projection_version": "mss-projection-2",
+  "native_code_changed": false,
+  "source_r_sha256": "35a21472e5b069b5ef1d03d7cf497a53cd3035c3c9eda3c1f0d72dc2daf6aa83",
+  "installed_suite": {
+    "blocks": 202,
+    "assertions": 1122,
+    "failures": 0,
+    "errors": 0,
+    "skips": 2,
+    "warnings": 2,
+    "wall_seconds": 125.18,
+    "peak_rss_bytes": 6543261696
+  },
+  "standalone_assertions": 279,
+  "native_windows_extension": "pending separate CI execution; earlier core4 CI does not cover this extension",
+  "limitations": [
+    "No full-genome reference has been built by this verification.",
+    "No speed claim is made from unchanged native code.",
+    "Installed suite requires legacy reference packages; two unavailable packages cause explicit skips."
+  ]
+}
