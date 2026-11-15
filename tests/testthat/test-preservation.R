@@ -47,7 +47,7 @@ test_that('source rows and raw numeric tokens survive all outcomes', {
   expect_identical(nrow(y$normalized),nrow(x))
   expect_identical(y$source$P[[1]],'1e-1000')
   expect_true(all(is.na(y$normalized$grch38_pos)))
-  expect_identical(y$normalized$status,c('match','swap','complement','swapped_complement','alt_alt_contrast','ambiguous','ambiguous','swap','ambiguous','unmapped','invalid_position','match'))
+  expect_identical(y$normalized$status,c('match','swap','complement','swapped_complement','alt_alt_contrast','ambiguous','ambiguous','swap','ambiguous','specialist_preserved','invalid_position','match'))
 })
 test_that('effects, alleles and frequencies are conservative and per-allele', {
   expect_equal(y$normalized$effect[1:4],c(2,-2,2,-2))
@@ -138,8 +138,7 @@ test_that('malformed or truncated input cannot publish an edition', {
   expect_error(harmonise_file(bad,ref,file.path(d,'failed'),batch_size=1),'fields')
   expect_false(dir.exists(file.path(d,'failed')))
   con <- file(bad,'wb');writeChar('CHR\tBP\n1\t8',con,eos=NULL);close(con)
-  expect_error(harmonise_file(bad,ref,file.path(d,'truncated'),batch_size=1),'read|line')
-  expect_false(dir.exists(file.path(d,'truncated')))
+  expect_equal(harmonise_file(bad,ref,file.path(d,'valid-final-line'),batch_size=1)$source_rows,1)
   good_gz <- file.path(d,'complete.tsv.gz'); con <- gzfile(good_gz,'wt');writeLines(c('CHR\tBP','1\t8'),con);close(con)
   bytes <- readBin(good_gz,'raw',n=file.info(good_gz)$size)
   bad_gz <- file.path(d,'broken.tsv.gz');writeBin(bytes[seq_len(length(bytes)-8)],bad_gz)

@@ -60,11 +60,75 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// mss_parser_open_cpp
+SEXP mss_parser_open_cpp(std::string delimiter, int max_record_bytes);
+RcppExport SEXP _MungeSumstats_mss_parser_open_cpp(SEXP delimiterSEXP, SEXP max_record_bytesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type delimiter(delimiterSEXP);
+    Rcpp::traits::input_parameter< int >::type max_record_bytes(max_record_bytesSEXP);
+    rcpp_result_gen = Rcpp::wrap(mss_parser_open_cpp(delimiter, max_record_bytes));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mss_parser_feed_cpp
+List mss_parser_feed_cpp(SEXP parser, RawVector input, bool eof);
+RcppExport SEXP _MungeSumstats_mss_parser_feed_cpp(SEXP parserSEXP, SEXP inputSEXP, SEXP eofSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type parser(parserSEXP);
+    Rcpp::traits::input_parameter< RawVector >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< bool >::type eof(eofSEXP);
+    rcpp_result_gen = Rcpp::wrap(mss_parser_feed_cpp(parser, input, eof));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mss_projection_open_cpp
+SEXP mss_projection_open_cpp(std::string chain, CharacterVector source_names, CharacterVector target_names, NumericVector source_sizes, NumericVector target_sizes);
+RcppExport SEXP _MungeSumstats_mss_projection_open_cpp(SEXP chainSEXP, SEXP source_namesSEXP, SEXP target_namesSEXP, SEXP source_sizesSEXP, SEXP target_sizesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type chain(chainSEXP);
+    Rcpp::traits::input_parameter< CharacterVector >::type source_names(source_namesSEXP);
+    Rcpp::traits::input_parameter< CharacterVector >::type target_names(target_namesSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type source_sizes(source_sizesSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type target_sizes(target_sizesSEXP);
+    rcpp_result_gen = Rcpp::wrap(mss_projection_open_cpp(chain, source_names, target_names, source_sizes, target_sizes));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mss_project_cpp
+DataFrame mss_project_cpp(SEXP projection, SEXP target_handle, CharacterVector chr, NumericVector pos, CharacterVector ref, CharacterVector alt, NumericVector effect, NumericVector eaf, int candidate_limit, LogicalVector source_swapped);
+RcppExport SEXP _MungeSumstats_mss_project_cpp(SEXP projectionSEXP, SEXP target_handleSEXP, SEXP chrSEXP, SEXP posSEXP, SEXP refSEXP, SEXP altSEXP, SEXP effectSEXP, SEXP eafSEXP, SEXP candidate_limitSEXP, SEXP source_swappedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type projection(projectionSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type target_handle(target_handleSEXP);
+    Rcpp::traits::input_parameter< CharacterVector >::type chr(chrSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type pos(posSEXP);
+    Rcpp::traits::input_parameter< CharacterVector >::type ref(refSEXP);
+    Rcpp::traits::input_parameter< CharacterVector >::type alt(altSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type effect(effectSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type eaf(eafSEXP);
+    Rcpp::traits::input_parameter< int >::type candidate_limit(candidate_limitSEXP);
+    Rcpp::traits::input_parameter< LogicalVector >::type source_swapped(source_swappedSEXP);
+    rcpp_result_gen = Rcpp::wrap(mss_project_cpp(projection, target_handle, chr, pos, ref, alt, effect, eaf, candidate_limit, source_swapped));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_MungeSumstats_mss_prepare_cpp", (DL_FUNC) &_MungeSumstats_mss_prepare_cpp, 4},
     {"_MungeSumstats_mss_open_reference_cpp", (DL_FUNC) &_MungeSumstats_mss_open_reference_cpp, 2},
     {"_MungeSumstats_mss_harmonise_cpp", (DL_FUNC) &_MungeSumstats_mss_harmonise_cpp, 15},
+    {"_MungeSumstats_mss_parser_open_cpp", (DL_FUNC) &_MungeSumstats_mss_parser_open_cpp, 2},
+    {"_MungeSumstats_mss_parser_feed_cpp", (DL_FUNC) &_MungeSumstats_mss_parser_feed_cpp, 3},
+    {"_MungeSumstats_mss_projection_open_cpp", (DL_FUNC) &_MungeSumstats_mss_projection_open_cpp, 5},
+    {"_MungeSumstats_mss_project_cpp", (DL_FUNC) &_MungeSumstats_mss_project_cpp, 10},
     {NULL, NULL, 0}
 };
 

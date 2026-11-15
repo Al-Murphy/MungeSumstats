@@ -110,3 +110,5 @@ export(prepare_reference)
 export(harmonise_sumstats)
 export(harmonise_file)
 export(open_reference)
+
+export(prepare_projection)

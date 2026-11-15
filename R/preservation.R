@@ -140,7 +140,11 @@ open_reference <- function(reference) {
 #' @param sumstats A data.frame, data.table, or previous `mss_harmonised` result.
 #' @param reference An `mss_reference` or reference directory path.
 #' @param columns Named list mapping `chr,pos,id,other,effect_allele,effect,eaf`
-#'   to input column names. Defaults use `CHR,BP,SNP,A1,A2,BETA,FRQ`; `A2` is the
+#'   to input column names. Optional `entity_type,entity_id` preserve specialist
+#'   statistical entities. Types are `small_variant`, `symbolic_sv`, `breakend`,
+#'   `hla`, `repeat`, `gene_burden`; only SV/BND syntax is automatically typed.
+#'   Specialist rows retain identity and source tokens with status
+#'   `specialist_preserved`, without small-variant normalized effects. Defaults use `CHR,BP,SNP,A1,A2,BETA,FRQ`; `A2` is the
 #'   effect allele. Missing columns are allowed and remain unknown. Optional
 #'   `source_ref,source_alt` mappings declare trusted source reference/alternate
 #'   alleles, together with either a `source_strand` column or the static argument.
@@ -150,7 +154,7 @@ open_reference <- function(reference) {
 #'   reference's leftmost 1-based position. REF/ALT and measured allele strings
 #'   must share the declared strand. No declaration is inferred from A1/A2.
 #' @param build Explicit input build. Defaults to the declared reference build;
-#'   a different build is rejected. No liftover is performed.
+#'   a different build is rejected. Use `projection` for an explicit target build.
 #' @param frequency_type `EAF`, `MAF`, or `unknown`. Only an explicit EAF can be
 #'   transformed. A swapped EAF is complemented only at a known biallelic site.
 #' @param effect_type `beta`, `log_odds`, or `none`. Only signed additive effects
@@ -158,6 +162,7 @@ open_reference <- function(reference) {
 #' @param batch_size Maximum input rows sent to each native call.
 #' @param candidate_limit Maximum raw index candidates per disk lookup; overflow stops
 #'   processing rather than silently selecting a candidate.
+#' @param projection Optional handle from [prepare_projection()].
 #' @param verify Whether to verify all reference MD5 hashes (default `TRUE`).
 #'   `FALSE` checks sizes only and is appropriate only for already trusted,
 #'   immutable files; full verification reads the reference files sequentially.
@@ -172,7 +177,8 @@ open_reference <- function(reference) {
 #'   `coordinate_id_conflict`. Palindromic contrasts that admit both effect
 #'   directions remain ambiguous. ALT-ALT contrasts are retained without
 #'   inventing a reference-anchored effect. All GRCh38 projection fields remain
-#'   missing even when native coordinates are GRCh38: projection was not attempted.
+#'   missing unless an explicit `projection` is supplied. Projected coordinates,
+#'   alleles and effects have separate columns; native fields are never replaced.
 #'   Symbolic alleles and unknown IDs are preserved in `source`. Input and output
 #'   tables remain resident in R; batching bounds native work, not total R memory.
 #'   With an explicit source REF/ALT/strand contract, source REF must validate
@@ -189,7 +195,7 @@ harmonise_sumstats <- function(sumstats, reference,
                               build = NULL, frequency_type = c("unknown", "EAF", "MAF"),
                               effect_type = c("beta", "log_odds", "none"),
                               batch_size = 100000L, candidate_limit = 10000L,
-                              verify = TRUE, source_strand = NULL) {
+                              verify = TRUE, source_strand = NULL, projection = NULL) {
     if (inherits(sumstats, "mss_harmonised")) sumstats <- sumstats$source
     if (!is.data.frame(sumstats)) stop("sumstats must be a data.frame or data.table")
     frequency_type <- match.arg(frequency_type)
@@ -199,10 +205,10 @@ harmonise_sumstats <- function(sumstats, reference,
     if (!is.logical(verify) || length(verify) != 1L || is.na(verify)) stop("verify must be TRUE or FALSE")
     reference <- .mss_read_reference(reference)
     if (is.null(build)) build <- reference$build
-    if (!identical(build, reference$build)) stop("Input build differs from reference build; projection is not implemented")
+    if (!identical(build, reference$build)) stop("Input build differs from native reference build; supply projection separately")
     .mss_verify_reference(reference, verify)
     required <- c("chr", "pos", "id", "other", "effect_allele", "effect", "eaf",
-                  "source_ref", "source_alt", "source_strand")
+                  "source_ref", "source_alt", "source_strand", "entity_type", "entity_id")
     if (!is.list(columns) || length(names(columns)) != length(columns) ||
         any(!nzchar(names(columns))) || any(!names(columns) %in% required) || anyDuplicated(names(columns)))
         stop("columns must be a named list using chr,pos,id,other,effect_allele,effect,eaf")
@@ -231,23 +237,44 @@ harmonise_sumstats <- function(sumstats, reference,
     starts <- if (n) seq.int(1, n, by = batch_size) else 1L
     for (i in seq_along(starts)) {
         rows <- if (n) seq.int(starts[[i]], min(n, starts[[i]] + batch_size - 1)) else integer()
-        raw_pos <- extract("pos", rows)
+        # Explicit statistical entities never acquire a small-variant effect.
+        entity <- tolower(extract("entity_type", rows))
+        entity[is.na(entity) | entity %in% c("", ".", "na")] <- "small_variant"
+        alleles <- paste(extract("other", rows), extract("effect_allele", rows))
+        entity[entity == "small_variant" & grepl("<[^>]+>", alleles)] <- "symbolic_sv"
+        entity[entity == "small_variant" & grepl("[\\[\\]]", alleles, perl = TRUE)] <- "breakend"
+        supported <- c("small_variant", "symbolic_sv", "breakend", "hla", "repeat", "gene_burden")
+        if (any(!entity %in% supported)) stop("Unknown entity_type; use small_variant, symbolic_sv, breakend, hla, repeat or gene_burden")
+        specialist <- entity != "small_variant"
+        native_extract <- function(field, rows) {
+            value <- extract(field, rows)
+            value[specialist] <- NA_character_
+            value
+        }
+        raw_pos <- native_extract("pos", rows)
         pos <- parse_number(raw_pos)
         # Distinguish an unknown position from a malformed token.
         invalid_pos <- !is.na(raw_pos) & !raw_pos %in% c("", ".", "NA") & is.na(pos)
         pos[invalid_pos] <- -1
-        effect <- if (effect_type == "none") rep(NA_real_, length(rows)) else parse_number(extract("effect", rows))
+        effect <- if (effect_type == "none") rep(NA_real_, length(rows)) else parse_number(native_extract("effect", rows))
         batch <- mss_harmonise_cpp(reference$path, reference$fasta,
-                                  extract("chr", rows), pos, extract("id", rows),
-                                  extract("other", rows), extract("effect_allele", rows),
-                                  effect, parse_number(extract("eaf", rows)),
+                                  native_extract("chr", rows), pos, native_extract("id", rows),
+                                  native_extract("other", rows), native_extract("effect_allele", rows),
+                                  effect, parse_number(native_extract("eaf", rows)),
                                   frequency_type, candidate_limit,
                                   if (inherits(reference, "mss_reference_handle")) reference$.native else NULL,
-                                  if (source_contract) extract("source_ref", rows) else NULL,
-                                  if (source_contract) extract("source_alt", rows) else NULL,
+                                  if (source_contract) native_extract("source_ref", rows) else NULL,
+                                  if (source_contract) native_extract("source_alt", rows) else NULL,
                                   if (source_contract) {
-                                      if (is.null(source_strand)) extract("source_strand", rows) else rep(source_strand, length(rows))
+                                      if (is.null(source_strand)) native_extract("source_strand", rows) else rep(source_strand, length(rows))
                                   } else NULL)
+        batch$status[specialist] <- "specialist_preserved"
+        for (field in setdiff(names(batch), c("status", "candidate_count"))) batch[[field]][specialist] <- NA
+        batch$candidate_count[specialist] <- 0
+        batch$entity_type <- entity
+        batch$entity_id <- extract("entity_id", rows)
+        absent_id <- is.na(batch$entity_id)
+        batch$entity_id[absent_id] <- extract("id", rows)[absent_id]
         batch$normalized_build <- rep(build, length(rows))
         batch$source_row <- as.double(rows)
         batch$grch38_chr <- rep(NA_character_, length(rows))
@@ -258,6 +285,7 @@ harmonise_sumstats <- function(sumstats, reference,
     }
     normalized <- do.call(rbind, batches)
     rownames(normalized) <- NULL
+    if (!is.null(projection)) normalized <- .mss_project(normalized, reference, projection, candidate_limit)
     provenance <- list(core_version = reference$core_version,
                        implementation_version = "mss-preservation-3",
                        reference_version = reference$version, build = build,
@@ -265,7 +293,7 @@ harmonise_sumstats <- function(sumstats, reference,
                        reference_checksums = reference$checksums,
                        frequency_type = frequency_type, effect_type = effect_type,
                        columns = columns, reference_verified = verify,
-                       projection = "not_attempted", schema_version = 1L,
+                       projection = if (is.null(projection)) "not_attempted" else projection$receipt, schema_version = 1L,
                        source_strand = source_strand)
     structure(list(source = sumstats, normalized = normalized, provenance = provenance),
               class = "mss_harmonised")
@@ -278,9 +306,17 @@ harmonise_sumstats <- function(sumstats, reference,
 #' @param path New immutable output directory.
 #' @param columns,build,frequency_type,effect_type,candidate_limit,source_strand See
 #'   [harmonise_sumstats()].
-#' @param delimiter A single tab (default) or comma. Input is explicitly
-#'   unquoted, one record per line; quoted/multiline fields are rejected.
-#' @param batch_size Maximum source lines resident in each batch.
+#' @param delimiter A single tab (default) or comma. Double-quoted fields, doubled
+#'   escaped quotes, embedded delimiters/newlines, CRLF and final records without
+#'   newlines are supported. Quotes in unquoted fields are syntax errors.
+#' @param batch_size Maximum source records resident in each batch.
+#' @param batch_bytes Adaptive decoded-token byte budget (default 8 MiB). A
+#'   single larger record is allowed up to `max_record_bytes`.
+#' @param max_record_bytes Maximum encoded bytes per record (default 64 MiB).
+#'   Oversized records fail without publication; increase explicitly if needed.
+#' @param acquisition_receipt Optional named list of expected `rows`, original
+#'   compressed or plain `bytes`, and/or original file `md5`. Mismatch aborts.
+#' @param projection Optional handle from [prepare_projection()].
 #' @return A manifest with output path, source row count and status counts.
 #' @details The original input bytes are copied to `source-artifact`; decompressed
 #'   raw tokens are retained in `source.tsv` (or `source.csv`). `normalized.tsv`
@@ -292,11 +328,10 @@ harmonise_sumstats <- function(sumstats, reference,
 #'   and `checksums.tsv` (filename/md5). The checksum list excludes itself and
 #'   the RDS manifest. `normalized_build` explicitly labels native coordinates.
 #'   No complete input/output table is loaded in R. Memory scales with batch size,
-#'   individual line lengths and the native candidate cap; source lines are not
-#'   artificially truncated. Reference hashes are verified once before streaming.
+#'   byte/record limits and the native candidate cap. No record is truncated. Reference hashes are verified once before streaming.
 #'   A directory is published only after every batch and final audit succeeds.
-#'   Malformed field counts, quoted fields and read warnings (including missing
-#'   final newline or detected truncated gzip input) fail without publication.
+#'   Malformed quotes/field counts and read warnings (including detected truncated
+#'   gzip input) fail without publication. A missing final LF is valid syntax.
 #'   Syntactically valid but incomplete files cannot be distinguished from intended
 #'   smaller inputs without an externally supplied acquisition receipt.
 #' @export
@@ -307,12 +342,17 @@ harmonise_file <- function(input, reference, path,
                            build = NULL, frequency_type = c("unknown", "EAF", "MAF"),
                            effect_type = c("beta", "log_odds", "none"),
                            delimiter = "\t", batch_size = 100000L,
-                           candidate_limit = 10000L, source_strand = NULL) {
+                           candidate_limit = 10000L, source_strand = NULL,
+                           projection = NULL, batch_bytes = 8L * 1024L * 1024L,
+                           max_record_bytes = 64L * 1024L * 1024L,
+                           acquisition_receipt = NULL) {
     batch_size <- .mss_positive_integer(batch_size, "batch_size")
     candidate_limit <- .mss_positive_integer(candidate_limit, "candidate_limit")
     frequency_type <- match.arg(frequency_type)
     effect_type <- match.arg(effect_type)
     if (!identical(delimiter, "\t") && !identical(delimiter, ",")) stop("delimiter must be tab or comma")
+    batch_bytes <- .mss_positive_integer(batch_bytes, "batch_bytes")
+    max_record_bytes <- .mss_positive_integer(max_record_bytes, "max_record_bytes")
     input <- normalizePath(input, mustWork = TRUE)
     reference <- .mss_read_reference(reference)
     if (is.null(build)) build <- reference$build
@@ -330,28 +370,45 @@ harmonise_file <- function(input, reference, path,
     if (!file.copy(input, snapshot) ||
         !identical(before, unname(tools::md5sum(snapshot))) ||
         !identical(before, unname(tools::md5sum(input)))) stop("Input changed during snapshot")
-    reader <- gzfile(snapshot, open = "rt")
+    reader <- gzfile(snapshot, open = "rb")
     on.exit(close(reader), add = TRUE)
-    read_batch <- function(n) withCallingHandlers(readLines(reader, n = n, warn = TRUE),
-                                                 warning = function(w) stop("Input read/line failure: ", conditionMessage(w)))
-    header <- read_batch(1L)
-    if (length(header) != 1L || !nzchar(header)) stop("Missing input header")
-    split_line <- function(lines) {
-        # Appending a sentinel preserves empty trailing fields with strsplit.
-        lapply(strsplit(paste0(lines, delimiter, "__MSS_END__"), delimiter, fixed = TRUE),
-               function(fields) fields[-length(fields)])
-    }
-    if (grepl('"', header, fixed = TRUE)) stop("Quoted fields are unsupported")
-    header_names <- split_line(header)[[1L]]
-    if (any(!nzchar(header_names)) || anyDuplicated(header_names)) stop("Header names must be nonempty and unique")
     source_name <- if (delimiter == "\t") "source.tsv" else "source.csv"
-    source_writer <- file(file.path(staging, source_name), "wt")
+    source_writer <- file(file.path(staging, source_name), "wb")
     on.exit(close(source_writer), add = TRUE)
+    parser <- mss_parser_open_cpp(delimiter, max_record_bytes)
+    pending <- list(); ended <- FALSE
+    read_records <- function(n) {
+        result <- list(); used <- 0
+        repeat {
+            if (length(pending)) {
+                take <- min(n - length(result), length(pending))
+                sizes <- vapply(pending[seq_len(take)], function(x) sum(nchar(x, type = "bytes")) + length(x), numeric(1))
+                within <- which(cumsum(sizes) + used <= batch_bytes)
+                take <- if (length(within)) max(within) else if (!length(result)) 1L else 0L
+                if (!take) break
+                result <- c(result, pending[seq_len(take)])
+                used <- used + sum(sizes[seq_len(take)])
+                pending <<- pending[-seq_len(take)]
+                if (length(result) >= n || used >= batch_bytes) break
+            } else if (ended) break else {
+                bytes <- withCallingHandlers(readBin(reader, "raw", n = min(65536L, batch_bytes)),
+                         warning = function(w) stop("Input compressed read failure: ", conditionMessage(w)))
+                ended <<- !length(bytes)
+                if (length(bytes)) writeBin(bytes, source_writer)
+                pending <<- mss_parser_feed_cpp(parser, bytes, ended)
+            }
+        }
+        result
+    }
+    header <- read_records(1L)
+    if (length(header) != 1L) stop("Missing input header")
+    header_names <- header[[1L]]
+    if (any(!nzchar(header_names)) || anyDuplicated(header_names)) stop("Header names must be nonempty and unique")
     normalized_writer <- file(file.path(staging, "normalized.tsv"), "wt")
     on.exit(close(normalized_writer), add = TRUE)
-    writeLines(header, source_writer)
     total <- 0
     counts <- numeric()
+    projection_counts <- numeric()
     first <- TRUE
     write_normalized <- function(table) {
         # write.table's numeric conversion can round to 15 digits; serialize
@@ -369,26 +426,27 @@ harmonise_file <- function(input, reference, path,
         first <<- FALSE
     }
     repeat {
-        lines <- read_batch(batch_size)
-        if (!length(lines)) break
-        if (any(grepl('"', lines, fixed = TRUE))) stop("Quoted fields are unsupported")
-        fields <- split_line(lines)
+        fields <- read_records(batch_size)
+        if (!length(fields)) break
         if (any(lengths(fields) != length(header_names))) stop("Input row has an unexpected number of fields near source row ", total + 1)
         source_batch <- as.data.frame(do.call(rbind, fields), stringsAsFactors = FALSE, check.names = FALSE)
         names(source_batch) <- header_names
         result <- harmonise_sumstats(source_batch, reference, columns = columns, build = build,
                                      frequency_type = frequency_type, effect_type = effect_type,
                                      batch_size = batch_size, candidate_limit = candidate_limit,
-                                     verify = FALSE, source_strand = source_strand)$normalized
+                                     verify = FALSE, source_strand = source_strand, projection = projection)$normalized
         result$source_row <- result$source_row + total
         write_normalized(result)
-        writeLines(lines, source_writer)
         batch_counts <- table(result$status)
         for (status in names(batch_counts)) {
             if (!status %in% names(counts)) counts[[status]] <- 0
             counts[[status]] <- counts[[status]] + as.double(batch_counts[[status]])
         }
-        total <- total + length(lines)
+        if (!is.null(projection)) for (status in unique(result$projection_status)) {
+            if (!status %in% names(projection_counts)) projection_counts[[status]] <- 0
+            projection_counts[[status]] <- projection_counts[[status]] + sum(result$projection_status == status)
+        }
+        total <- total + length(fields)
     }
     if (first) {
         empty <- as.data.frame(stats::setNames(rep(list(character()), length(header_names)), header_names),
@@ -396,7 +454,17 @@ harmonise_file <- function(input, reference, path,
         write_normalized(harmonise_sumstats(empty, reference, columns = columns, build = build,
                                            frequency_type = frequency_type, effect_type = effect_type,
                                            candidate_limit = candidate_limit, verify = FALSE,
-                                           source_strand = source_strand)$normalized)
+                                           source_strand = source_strand, projection = projection)$normalized)
+    }
+    if (!is.null(acquisition_receipt)) {
+        if (!is.list(acquisition_receipt) || !length(acquisition_receipt) ||
+            is.null(names(acquisition_receipt)) || anyDuplicated(names(acquisition_receipt)) ||
+            any(!names(acquisition_receipt) %in% c("rows", "md5", "bytes"))) stop("Invalid acquisition receipt")
+        expected <- list(rows = total, md5 = before, bytes = file.info(snapshot)$size)
+        for (key in names(acquisition_receipt)) {
+            if (length(acquisition_receipt[[key]]) != 1L || is.na(acquisition_receipt[[key]]) ||
+                acquisition_receipt[[key]] != expected[[key]]) stop("Acquisition receipt mismatch: ", key)
+        }
     }
     flush(source_writer); flush(normalized_writer)
     if (sum(counts) != total) stop("Source/native audit row count mismatch")
@@ -409,9 +477,12 @@ harmonise_file <- function(input, reference, path,
                   reference_path = reference$path, source_rows = sprintf("%.17g", total),
                   normalized_rows = sprintf("%.17g", total), input_checksum = before,
                   checksum_algorithm = "MD5", frequency_type = frequency_type,
-                  effect_type = effect_type, projection = "not_attempted",
+                  effect_type = effect_type, projection = if (is.null(projection)) "not_attempted" else "attempted",
                   delimiter = if (delimiter == "\t") "tab" else "comma",
-                  source_file = source_name,
+                  source_file = source_name, parser_version = "mss-delimited-1",
+                  batch_bytes = as.character(batch_bytes), max_record_bytes = as.character(max_record_bytes),
+                  acquisition_receipt = if (is.null(acquisition_receipt)) "not_supplied" else "verified",
+                  projection_implementation = if (is.null(projection)) "not_attempted" else projection$receipt$implementation_version,
                   source_strand = if (!is.null(source_strand)) source_strand else
                       if ("source_strand" %in% names(columns)) paste0("column:", columns$source_strand) else "not_declared")
     utils::write.table(data.frame(key = names(metadata), value = unname(metadata)),
@@ -425,7 +496,16 @@ harmonise_file <- function(input, reference, path,
     utils::write.table(data.frame(name = names(reference$checksums), md5 = unname(reference$checksums)),
                        file.path(staging, "reference_checksums.tsv"), sep = "\t", quote = TRUE,
                        row.names = FALSE, qmethod = "double")
-    filenames <- c("source-artifact", source_name, "normalized.tsv", "audit.tsv",
+    if (!is.null(projection)) {
+        if (sum(projection_counts) != total) stop("Projection audit row count mismatch")
+        utils::write.table(data.frame(status = names(projection_counts), count = unname(projection_counts)),
+                           file.path(staging, "projection_audit.tsv"), sep = "\t", quote = TRUE, row.names = FALSE)
+        receipt <- unlist(projection$receipt)
+        utils::write.table(data.frame(key = names(receipt), value = unname(receipt)),
+                           file.path(staging, "projection.tsv"), sep = "\t", quote = TRUE,
+                           row.names = FALSE, qmethod = "double")
+    }
+    filenames <- c(if (!is.null(projection)) c("projection.tsv", "projection_audit.tsv"), "source-artifact", source_name, "normalized.tsv", "audit.tsv",
                    "metadata.tsv", "columns.tsv", "reference_checksums.tsv")
     checksums <- tools::md5sum(file.path(staging, filenames))
     names(checksums) <- filenames
@@ -437,10 +517,13 @@ harmonise_file <- function(input, reference, path,
                      reference_build = build, reference_version = reference$version,
                      reference_checksums = reference$checksums, reference_path = reference$path,
                      source_rows = total, normalized_rows = total,
-                     status_counts = counts, input_checksum = before,
+                     status_counts = counts, projection_status_counts = projection_counts, input_checksum = before,
                      checksums = checksums, checksum_algorithm = "MD5",
                      columns = columns, source_strand = source_strand, frequency_type = frequency_type,
-                     effect_type = effect_type, projection = "not_attempted",
+                     effect_type = effect_type, projection = if (is.null(projection)) "not_attempted" else "attempted",
+                     parser_version = "mss-delimited-1", batch_bytes = batch_bytes,
+                     max_record_bytes = max_record_bytes, acquisition_receipt = acquisition_receipt,
+                     projection_receipt = if (is.null(projection)) NULL else projection$receipt,
                      delimiter = delimiter,
                      created_utc = format(Sys.time(), tz = "UTC", usetz = TRUE))
     saveRDS(manifest, file.path(staging, "manifest.rds"), version = 2)

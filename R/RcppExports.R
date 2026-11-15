@@ -12,3 +12,19 @@ mss_open_reference_cpp <- function(path, fasta) {
 mss_harmonise_cpp <- function(path, fasta, chr, pos, id, other, effect_allele, effect, eaf, frequency_type, candidate_limit, reference_handle = NULL, source_ref = NULL, source_alt = NULL, source_strand = NULL) {
     .Call(`_MungeSumstats_mss_harmonise_cpp`, path, fasta, chr, pos, id, other, effect_allele, effect, eaf, frequency_type, candidate_limit, reference_handle, source_ref, source_alt, source_strand)
 }
+
+mss_parser_open_cpp <- function(delimiter, max_record_bytes) {
+    .Call(`_MungeSumstats_mss_parser_open_cpp`, delimiter, max_record_bytes)
+}
+
+mss_parser_feed_cpp <- function(parser, input, eof = FALSE) {
+    .Call(`_MungeSumstats_mss_parser_feed_cpp`, parser, input, eof)
+}
+
+mss_projection_open_cpp <- function(chain, source_names, target_names, source_sizes, target_sizes) {
+    .Call(`_MungeSumstats_mss_projection_open_cpp`, chain, source_names, target_names, source_sizes, target_sizes)
+}
+
+mss_project_cpp <- function(projection, target_handle, chr, pos, ref, alt, effect, eaf, candidate_limit, source_swapped) {
+    .Call(`_MungeSumstats_mss_project_cpp`, projection, target_handle, chr, pos, ref, alt, effect, eaf, candidate_limit, source_swapped)
+}
