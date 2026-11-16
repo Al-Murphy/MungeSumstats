@@ -1,0 +1,40 @@
+[
+  {
+    "fixture": "ids",
+    "cap": 2,
+    "output": "error\tReference context closure limit exceeded; no arbitrary context selected"
+  },
+  {
+    "fixture": "ids",
+    "cap": 100,
+    "output": "ok\tmatch\tc\t1\tA\tC\tr1\t0x1.4p-1\t0x1.189374bc6a7fp-3\t1\t0\t0"
+  },
+  {
+    "fixture": "events",
+    "cap": 2,
+    "output": "error\tReference context closure limit exceeded; no arbitrary context selected"
+  },
+  {
+    "fixture": "events",
+    "cap": 100,
+    "output": "ok\tmatch\tc\t1\tA\tC\tr1\t0x1.4p-1\t0x1.189374bc6a7fp-3\t1\t0\t0"
+  },
+  {
+    "fixture": "locations",
+    "cap": 2,
+    "output": "error\tReference context closure limit exceeded; no arbitrary context selected"
+  },
+  {
+    "fixture": "locations",
+    "cap": 100,
+    "output": "ok\tmatch\tc\t1\tA\tC\tr1\t0x1.4p-1\t0x1.189374bc6a7fp-3\t1\t0\t0"
+  },
+  {
+    "fixture": "foreign_chr_filtered_only_when_known",
+    "output": "ok\tmatch\tP\t2\tC\tT\tr\t0x1.4p-1\t0x1.189374bc6a7fp-3\t1\t0\t0\nok\tambiguous\t\t0\t\t\t\tnan\tnan\t3\t0\t0"
+  },
+  {
+    "fixture": "foreign_S_raw_cap_exclusion",
+    "output": "ok\tallele_mismatch\t\t0\t\t\t\tnan\tnan\t1\t0\t0\nerror\tReference candidate limit exceeded; no arbitrary candidate selected\nerror\tReference candidate limit exceeded; no arbitrary candidate selected"
+  }
+]

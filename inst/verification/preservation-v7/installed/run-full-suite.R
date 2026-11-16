@@ -1,0 +1,10 @@
+library(Rcpp)
+library(data.table)
+library(MungeSumstats)
+cat('Installed DLL:',getLoadedDLLs()[['MungeSumstats']][['path']],'\n')
+testthat::set_max_fails(10000)
+out <- testthat::test_local('.',load_package='installed',reporter='summary',stop_on_failure=FALSE)
+saveRDS(out,'/private/tmp/gwas-harvest-stage2/results/mss-preservation-v7/full-suite/installed-full.rds')
+df <- as.data.frame(out);df$result <- NULL
+write.csv(df,'/private/tmp/gwas-harvest-stage2/results/mss-preservation-v7/full-suite/installed-full.csv',row.names=FALSE)
+if(any(df$failed>0|df$error))quit(status=1)

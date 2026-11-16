@@ -1,0 +1,28 @@
+{
+  "source": "5e5e5bfd1a8ccb4bddfb9520e0e0997d4691708e",
+  "contexts": 120,
+  "counts": {
+    "necessary_pair_deferrals_verified": 2024,
+    "queries": 79904,
+    "status_source_allele_context_required": 2024,
+    "coordinate_deferrals_verified": 39752,
+    "status_source_coordinates_missing": 39752,
+    "status_alt_alt_contrast": 8192,
+    "independent_paired_shared_flank_witness": 17696,
+    "withheld_with_independent_ALTALT_witness": 17736,
+    "all_ALTALT_diagnostics_independently_witnessed": 8192,
+    "status_allele_mismatch": 15208,
+    "status_ambiguous": 544,
+    "all_ambiguity_outputs_independently_witnessed": 544,
+    "status_coordinate_id_conflict": 12080,
+    "independent_whole_chromosome_haplotype_witness": 40,
+    "status_match": 526,
+    "resolved_payload_independently_validated": 2104,
+    "status_swap": 526,
+    "status_complement": 526,
+    "status_swapped_complement": 526
+  },
+  "oracle": "Full alternate chromosome sequences compared after replacing one inferred source REF span; independently enumerated tiny ALT-pair common-flank trims including shared backgrounds absent from REF.",
+  "violations": [],
+  "all_violation_count": 0
+}

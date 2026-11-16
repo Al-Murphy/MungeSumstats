@@ -1,0 +1,39 @@
+{
+  "source_revision": "5e5e5bfd1a8ccb4bddfb9520e0e0997d4691708e",
+  "parent": "f2932c4abfeb9217cb2a620d38e1f602375085c3",
+  "implementation": "mss-preservation-7",
+  "files": {
+    "src/preservation_core.h": {
+      "bytes": 40986,
+      "sha256": "bbde5436366e686eeb35a48853117387b43b65618ca8308a87819e4382c86ceb"
+    },
+    "R/preservation.R": {
+      "bytes": 40564,
+      "sha256": "d7bd275af108b49a9c588387c2098289b03fe602062032f92aa998cdf9ef2190"
+    },
+    "R/projection.R": {
+      "bytes": 5613,
+      "sha256": "51287b65e40a33ce9b616fb19ad78fdc0bc478cd636f8522f6e2fee0edc516a5"
+    },
+    "src/preservation.cpp": {
+      "bytes": 9444,
+      "sha256": "8a1a633b868545199cfab706c396a0bc56c94a7e581f135d6c931b65a53ed9c6"
+    },
+    "inst/PRESERVATION_CONTRACT.md": {
+      "bytes": 10210,
+      "sha256": "2d262653b54d64acc4fb711220fa0c16323329353068f560b06d2a1d57d3fa26"
+    },
+    "tests/testthat/test-generic-coordinate-contract.R": {
+      "bytes": 12488,
+      "sha256": "8b61630c7a60858397fbd09c6ea77f169fd63c6ad0024af8ef7fcf5fdab0f167"
+    },
+    "tests/testthat/test-complex-contrast-boundary.R": {
+      "bytes": 5069,
+      "sha256": "8a4d4c6971785f60fa6cae93f9c0308baa2b117a9801525fde39e3fdb8c6c14f"
+    },
+    "tests/standalone/preservation.R": {
+      "bytes": 1384,
+      "sha256": "2aa4a8c9e9cc2ea1bb97d7f423841eaf3ca3b0bdb372511cf5dc6730c1005fe7"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "blocks": 65,
+  "assertions": 1170,
+  "failures": 0,
+  "scope": "Portable standalone new7candidate; isolated testthat contract/fallback files also run separately; no full installed or Windows claim"
+}

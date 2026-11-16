@@ -1,0 +1,10 @@
+{
+  "commit": "5e5e5bfd1a8ccb4bddfb9520e0e0997d4691708e",
+  "parent": "f2932c4abfeb9217cb2a620d38e1f602375085c3",
+  "sha256": {
+    "src/preservation_core.h": "bbde5436366e686eeb35a48853117387b43b65618ca8308a87819e4382c86ceb",
+    "R/preservation.R": "d7bd275af108b49a9c588387c2098289b03fe602062032f92aa998cdf9ef2190",
+    "R/projection.R": "51287b65e40a33ce9b616fb19ad78fdc0bc478cd636f8522f6e2fee0edc516a5",
+    "inst/PRESERVATION_CONTRACT.md": "2d262653b54d64acc4fb711220fa0c16323329353068f560b06d2a1d57d3fa26"
+  }
+}

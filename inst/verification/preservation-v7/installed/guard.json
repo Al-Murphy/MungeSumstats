@@ -1,0 +1,22 @@
+{
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "Rscript",
+    "--vanilla",
+    "/private/tmp/gwas-harvest-stage2/results/mss-preservation-v7/full-suite/run-full-suite.R"
+  ],
+  "pid": 654,
+  "status": "success",
+  "max_memory_bytes": 8589934592,
+  "min_free_bytes": 171798691840,
+  "exit_code": 0,
+  "reason": null,
+  "natural_oom": false,
+  "elapsed_seconds": 155.5901847910136,
+  "samples": 548,
+  "peak_rss_bytes": 6120751104,
+  "peak_physical_footprint_bytes": 5815523016,
+  "peak_guard_bytes": 6121881840,
+  "minimum_free_bytes": 509689393152
+}

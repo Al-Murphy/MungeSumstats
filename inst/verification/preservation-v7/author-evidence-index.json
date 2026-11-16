@@ -1,0 +1,73 @@
+{
+  "source_revision": "5e5e5bfd1a8ccb4bddfb9520e0e0997d4691708e",
+  "files": {
+    "source-pins.json": {
+      "bytes": 1384,
+      "sha256": "886c7aaed0cf96e53a50def9925f832b6a675df3b8959dd56d66e71a306f7c88"
+    },
+    "standalone-summary-final-candidate.json": {
+      "bytes": 205,
+      "sha256": "e260b53cfeac81b3275d8904fea44d71ca20e63f6d081f35cc4517238467a84a"
+    },
+    "standalone-with-fallback-v5.log": {
+      "bytes": 2338,
+      "sha256": "a213713a107ecf7e5569172cdd0e59176bbf2c574cd8a7df467c3a769f2fff31"
+    },
+    "native-gold-final.log": {
+      "bytes": 23,
+      "sha256": "f57be6490eba006c5b3a817594aefaaa9d3ba53d691abacc261dd94fa12144ed"
+    },
+    "snp-padding-oracle/final-summary.json": {
+      "bytes": 423,
+      "sha256": "47b6bc0838b264d7f70f6b087243ce10c4e166bacafafb8d02265a05ea85205d"
+    },
+    "mixed-matrix-summary-final.json": {
+      "bytes": 927,
+      "sha256": "c6f92ffa29c0d6f283a2f2be8df9812a6bff016d2d4b0ba9cbb762456933ac9e"
+    },
+    "writer-parity-final.json": {
+      "bytes": 3445,
+      "sha256": "6df6528ef6fc2782c4e7df272d6facc4dc1b2c36272ae4e719076f7be5723540"
+    },
+    "work-budget-proof.log": {
+      "bytes": 200,
+      "sha256": "847ea15c3d4a1cdb9095a5ba1ad7092eade14cbdab71e52060e9e1a214c80c6a"
+    },
+    "check-work-budget.R": {
+      "bytes": 1429,
+      "sha256": "04997cf2b6078a02ae9c0e5a0dd32e62e10eb68b77b9bd627ab9d681db189fbe"
+    },
+    "frozen4-5-integrity.json": {
+      "bytes": 59,
+      "sha256": "c6b57cc85356da2c52712238cbc92c41f2dd327c58cb0c8efa70c915ba62e987"
+    },
+    "run-tests.R": {
+      "bytes": 750,
+      "sha256": "6049eaf12d402347496e01daa764d527d0cbd2a013025d9b867f41b0f62f5c85"
+    },
+    "run-composition.R": {
+      "bytes": 748,
+      "sha256": "ceadd098b40bf641e19324929d2baeb7de56fff058f8eb9e5413da4058dbfc9c"
+    },
+    "classify-matrix.py": {
+      "bytes": 2429,
+      "sha256": "7c60ebf7807642388af6da57a46d12ebb35c20c3076d157b0cb2420025e45bb5"
+    },
+    "red-frozen6-expanded.log": {
+      "bytes": 6242,
+      "sha256": "426453ac861efaffff1ef2b8b9381352c30daed1a89ef1cddacafc6c74242164"
+    },
+    "red-composed-background-repeat.log": {
+      "bytes": 2348,
+      "sha256": "082a080fc32a462bee2692096334d6c9d8e9c62febe4d4e21e94525e0bfee09b"
+    },
+    "green-candidate7-expanded.log": {
+      "bytes": 558,
+      "sha256": "74b1851d4c0eaa603873df5b8c54a2a7a5e44122523eff1d01b64e1783e72ea7"
+    },
+    "green-context-fallback.log": {
+      "bytes": 294,
+      "sha256": "d6842c44e7e3a271a9a7355aabf2a2d7e5ae087611025364adadb1945331ecfd"
+    }
+  }
+}

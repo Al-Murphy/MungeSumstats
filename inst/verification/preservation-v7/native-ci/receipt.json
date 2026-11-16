@@ -1,0 +1,189 @@
+{
+  "schema": 1,
+  "workflow_run": 43823853491,
+  "url": "https://github.com/Al-Murphy/MungeSumstats/actions/runs/43823853491",
+  "workflow_head": "56d82ace5aee9e89a146aab04927590fdf6d0efe",
+  "scientific_revision": "5e5e5bfd1a8ccb4bddfb9520e0e0997d4691708e",
+  "core_sha256": "bbde5436366e686eeb35a48853117387b43b65618ca8308a87819e4382c86ceb",
+  "jobs": [
+    {
+      "job_id": 133152897442,
+      "name": "standalone (ubuntu-latest)",
+      "conclusion": "success",
+      "blocks": 65,
+      "passed_assertions": 1170,
+      "raw_log_sha256": "2515b98c5f94a7685a73cfb2274f6169e0065d49b4804db6e7b46230129b93b0",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run r-lib/actions/setup-r@v2",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install standalone test dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Compile and test native R interface without Bioconductor dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Compile standalone C++ gold fixtures",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        }
+      ]
+    },
+    {
+      "job_id": 133152897530,
+      "name": "standalone (macos-latest)",
+      "conclusion": "success",
+      "blocks": 65,
+      "passed_assertions": 1170,
+      "raw_log_sha256": "a3e428e6a8bba52ef846c05dbb57c63e157145837c99029f9a1fdf851443d5be",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run r-lib/actions/setup-r@v2",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install standalone test dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Compile and test native R interface without Bioconductor dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Compile standalone C++ gold fixtures",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        }
+      ]
+    },
+    {
+      "job_id": 133152897575,
+      "name": "standalone (windows-latest)",
+      "conclusion": "success",
+      "blocks": 65,
+      "passed_assertions": 1170,
+      "raw_log_sha256": "1b1d43f52e53e802151a175b3e9d708ce33f8a511f6eefa0c29c033be2548dec",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run r-lib/actions/setup-r@v2",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install standalone test dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Compile and test native R interface without Bioconductor dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Compile standalone C++ gold fixtures",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 6
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        }
+      ]
+    }
+  ],
+  "qualifications": [
+    "Windows compiles registered native R interface; extra standalone C++ executable step is skipped there.",
+    "Windows Rcpp emitted the known missing optional inst/include-path warning; Linux standalone compiler emitted indentation warnings. No failing check.",
+    "This does not certify complete production references, production throughput, or format3."
+  ]
+}

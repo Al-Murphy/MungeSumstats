@@ -1,0 +1,34 @@
+{
+  "source_revision": "5e5e5bfd1a8ccb4bddfb9520e0e0997d4691708e",
+  "blocks": 240,
+  "passed_assertions": 2013,
+  "failed_assertions": 0,
+  "errors": 0,
+  "warnings": 2,
+  "skipped_blocks": 2,
+  "installed_dll_sha256": "c1c0a8b29479c33d8b4cfa4646e46e39c4da436686f4ca2da12a402251003d50",
+  "core_source_sha256": "bbde5436366e686eeb35a48853117387b43b65618ca8308a87819e4382c86ceb",
+  "adoption_status": "Pending final independent scientific report and native CI; format3prototype separately unadopted",
+  "guard": {
+    "command": [
+      "/usr/bin/time",
+      "-l",
+      "Rscript",
+      "--vanilla",
+      "/private/tmp/gwas-harvest-stage2/results/mss-preservation-v7/full-suite/run-full-suite.R"
+    ],
+    "pid": 654,
+    "status": "success",
+    "max_memory_bytes": 8589934592,
+    "min_free_bytes": 171798691840,
+    "exit_code": 0,
+    "reason": null,
+    "natural_oom": false,
+    "elapsed_seconds": 155.5901847910136,
+    "samples": 548,
+    "peak_rss_bytes": 6120751104,
+    "peak_physical_footprint_bytes": 5815523016,
+    "peak_guard_bytes": 6121881840,
+    "minimum_free_bytes": 509689393152
+  }
+}

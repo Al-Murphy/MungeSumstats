@@ -1,0 +1,22 @@
+{
+  "source-pins.json": "61c009e8e984397243495f2dc460b1298ecf8c2ba3251cc2bd5b504be23f7a1a",
+  "driver.cpp": "ae815d4cd73326ec31121a9db19d1dab8f8a1962ada8df68f27afa359954588f",
+  "core": "fcdf8c8433b5ca75dddf056866cadc58d1046e4b6d76a5036d3d6524126a4534",
+  "oracle.py": "8e2205ff16a86d54d74af80dce56e7ba79cf26943680b501d6620ff876b9fa06",
+  "oracle-summary.json": "3b77d4d662c1a5c73c1db397b76c901e45f2680d3600cf31e7841490758db79b",
+  "oracle.log": "aaa939dcc3b36c05f1145e0026eb2fc1ad1e76511f4c5bae0fae1a233fc5a09f",
+  "contract-gold.py": "365614fd2262e9f3935ab8de80f8f2f2b44e806996ba3ca13589b25ff3a4575f",
+  "contract-gold-summary.json": "879cb74db89c45e781e4bdd2ec5c5b4f4c11223abd7f4a493155cd9cdb0b52d8",
+  "contract-gold.log": "efdb070bd6a66988a700d7da72d79bd2684cb9f661c321108d55f14fc4a22d00",
+  "haplotype-contract-oracle.py": "538b7b9516be3a902bbd6b97c54407db98069df0617bc389304d82f770bededf",
+  "haplotype-summary.json": "a01068344f2bb73e99cff0ecefc71c9f2ee9d0b65dcd8e3bd84134b8bcbf54ce",
+  "haplotype-contract.log": "b556b43f8f9446f53de49c75127fbc4fbfa28eee79f15eb8dfa6cf23fb040f89",
+  "public.R": "f2d7a024841a672bc178f571ff222d5b64c0f21de059ee65d7c51b61ba4dcfb4",
+  "public.log": "97455ed9f6a8255e7afba378276a5c4581f7344161b49b4ab3d724c2ec9383a0",
+  "public-R-results.tsv": "54252ae8116a52ec499461e6b8d6eb50dd033eeb3c9f701d1b8a253df4711622",
+  "standalone.log": "1676ce5014e57086026af586c056b3221cb7222af5d464233c6762584ac21200",
+  "integrity-summary.json": "dbafcc651af116d23f3c0c8e358fd8af765a640cccb19c2826e676b70176a9d8",
+  "closure-boundaries-summary.json": "262fd871be659c1d4f455a82da626712e79cf2f804f9e8a71ad0c9f78f5e93d9",
+  "work-order-qualification/summary.json": "938f57f9b9642af7e5d6df8280681ea38104076145b27204cc67f6a0b3a618ee",
+  "coordinator-installed-summary.json": "ce9bee94c4c8b98fff1be8e4268c65d725f549be34139f3960f0c130b24a5660"
+}

@@ -1,0 +1,40 @@
+{
+  "source": "5e5e5bfd1a8ccb4bddfb9520e0e0997d4691708e",
+  "queries_per_representation": 4032,
+  "representations": [
+    "plain",
+    "left",
+    "right",
+    "both"
+  ],
+  "total_queries": 16128,
+  "mathematical_oracle": "Enumerate forward and reverse-complement source pairs over one finite SNP allele set; unchanged under common REF/ALT prefix/suffix padding.",
+  "results": {
+    "plain": {
+      "correct_status": 4032,
+      "correct_resolved_payload": 1152,
+      "correct_empty_unresolved_payload": 2880
+    },
+    "left": {
+      "correct_status": 4032,
+      "correct_resolved_payload": 1152,
+      "correct_empty_unresolved_payload": 2880
+    },
+    "right": {
+      "correct_status": 4032,
+      "correct_resolved_payload": 1152,
+      "correct_empty_unresolved_payload": 2880
+    },
+    "both": {
+      "correct_status": 4032,
+      "correct_resolved_payload": 1152,
+      "correct_empty_unresolved_payload": 2880
+    }
+  },
+  "totals": {
+    "correct_status": 16128,
+    "correct_resolved_payload": 4608,
+    "correct_empty_unresolved_payload": 11520
+  },
+  "examples": []
+}

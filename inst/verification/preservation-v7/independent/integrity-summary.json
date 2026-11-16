@@ -1,0 +1,78 @@
+{
+  "writer_orders": 6,
+  "native_payloads_per_order": 6,
+  "all_bytes_exact_against_parent5": true,
+  "old_format2_indexes_opened_by7": 6,
+  "valid_aliases_per_stress_row": 300,
+  "sort_buffer": 7,
+  "note": "More than32 temporary sort runs are forced; exact native payload comparison includes multilevel merging.",
+  "malformed_refusals": {
+    "marker": {
+      "exit": 1,
+      "stdout": "",
+      "stderr": "Incomplete or unsupported reference index"
+    },
+    "offset": {
+      "exit": 1,
+      "stdout": "",
+      "stderr": "Invalid offsets file"
+    },
+    "queried_record": {
+      "exit": 0,
+      "stdout": "error\tCorrupt reference record",
+      "stderr": ""
+    }
+  },
+  "standalone_blocks": 65,
+  "standalone_assertions": 1170,
+  "hashes": [
+    {
+      "core-version": "c0ef21703c72cf14f2a71ef4674cd3aeaf4d6ed04174f40bbfa27f13cb3bc107",
+      "fasta.fai": "d11f03cc2013867fa19559d9d1dae1750ee1afff90c80633841cbcbae1094c10",
+      "records": "6a0e9c3bebe817641d309a1522a96fe00950ff8841785a152afbc2d5337bc8df",
+      "keys": "b4b7893e937909758c41d2f4e5be2803d71f972a6a609d2eb7503940b924fb27",
+      "offsets": "8b9344744b4431111fcad694e1864c66ad2b78baafe6bfe82d1a1e114939f604",
+      "rejected.tsv": "a0fd889e80558d09eefe3f9e5fb6adfe28c86f51820069cfedad00d981432baa"
+    },
+    {
+      "core-version": "c0ef21703c72cf14f2a71ef4674cd3aeaf4d6ed04174f40bbfa27f13cb3bc107",
+      "fasta.fai": "d11f03cc2013867fa19559d9d1dae1750ee1afff90c80633841cbcbae1094c10",
+      "records": "35563f7e9a91b0c446d789d3b8c9bce0cbc2cadbe74d4ef7e9df2120002b36fa",
+      "keys": "62910f12e8c4f9e3655edfc4d848b8692b9291614b7bc942009ca1a54d88cf88",
+      "offsets": "aaec8a54a5ea0bdc367dd713289827528da77b380fb94ff48280baf7e65b0ebd",
+      "rejected.tsv": "a0fd889e80558d09eefe3f9e5fb6adfe28c86f51820069cfedad00d981432baa"
+    },
+    {
+      "core-version": "c0ef21703c72cf14f2a71ef4674cd3aeaf4d6ed04174f40bbfa27f13cb3bc107",
+      "fasta.fai": "d11f03cc2013867fa19559d9d1dae1750ee1afff90c80633841cbcbae1094c10",
+      "records": "dfc2f49f910528f0494e28fdb88b45066dd632ef658f65300932226a5e325373",
+      "keys": "c5e40bd00d79e4ce1a1fba545bb07502a711ac73c3b8957e521105f1703fd511",
+      "offsets": "fb2395242af186297e0b02eee6ebae996e01d683699aebdc31817fcdd9dc4dc0",
+      "rejected.tsv": "a0fd889e80558d09eefe3f9e5fb6adfe28c86f51820069cfedad00d981432baa"
+    },
+    {
+      "core-version": "c0ef21703c72cf14f2a71ef4674cd3aeaf4d6ed04174f40bbfa27f13cb3bc107",
+      "fasta.fai": "d11f03cc2013867fa19559d9d1dae1750ee1afff90c80633841cbcbae1094c10",
+      "records": "a77a964a0e75dd4f3e65b86622cfcd770315bd708a7b8b7b88751d071adf3f74",
+      "keys": "54f674eacfb475432fa087e22f7cd69bb01d35e29ffae37a1b06b5bafcb795e2",
+      "offsets": "1456f44ef31cfb232deebe1e363349ded67814a03b488fcdf6776f9e9b39125c",
+      "rejected.tsv": "a0fd889e80558d09eefe3f9e5fb6adfe28c86f51820069cfedad00d981432baa"
+    },
+    {
+      "core-version": "c0ef21703c72cf14f2a71ef4674cd3aeaf4d6ed04174f40bbfa27f13cb3bc107",
+      "fasta.fai": "d11f03cc2013867fa19559d9d1dae1750ee1afff90c80633841cbcbae1094c10",
+      "records": "d6ce3dbd9ae2c00f09401c4059f2c10f9f5c35279bffbe06f4567b964561f364",
+      "keys": "e6de2afad0b446ef9d3d6b4f885d2e95b137ce28f215834f9d3507aa8ef3e094",
+      "offsets": "5e76e1750dc3235baf29c5467487de1d210609a8dcbe7189f7c823d8e5ba5c53",
+      "rejected.tsv": "a0fd889e80558d09eefe3f9e5fb6adfe28c86f51820069cfedad00d981432baa"
+    },
+    {
+      "core-version": "c0ef21703c72cf14f2a71ef4674cd3aeaf4d6ed04174f40bbfa27f13cb3bc107",
+      "fasta.fai": "d11f03cc2013867fa19559d9d1dae1750ee1afff90c80633841cbcbae1094c10",
+      "records": "5396735eaf2f32994513e424f22d031cf2e3340ef8994d5669dfe84787d82c30",
+      "keys": "cba65c6e4ba747ccf398dd2764cd937be25537ac0c338822f10721c68d084f82",
+      "offsets": "018523d193f887350928be929e2a7d83e2612ce97963acd8b02d49fa65a47f33",
+      "rejected.tsv": "a0fd889e80558d09eefe3f9e5fb6adfe28c86f51820069cfedad00d981432baa"
+    }
+  ]
+}

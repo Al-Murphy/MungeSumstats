@@ -1,0 +1,140 @@
+{
+  "source": "5e5e5bfd1a8ccb4bddfb9520e0e0997d4691708e",
+  "counts": {
+    "status_match": 81,
+    "verified_resolved_payloads": 156,
+    "status_source_coordinates_missing": 15,
+    "empty_uncertainty_payloads": 132,
+    "queries": 297,
+    "status_ambiguous": 63,
+    "status_swapped_complement": 27,
+    "status_source_allele_context_required": 36,
+    "status_coordinate_id_conflict": 18,
+    "status_swap": 24,
+    "status_complement": 24,
+    "fail_closed_resource_refusals": 9
+  },
+  "cases": [
+    {
+      "name": "counter-unknown",
+      "queries": 21
+    },
+    {
+      "name": "counter-sign-and-pool",
+      "queries": 21
+    },
+    {
+      "name": "counter-alternate-background-repeat",
+      "queries": 12
+    },
+    {
+      "name": "counter-singlebase-alternate-indel-background",
+      "queries": 12
+    },
+    {
+      "name": "closure-order-0",
+      "queries": 15
+    },
+    {
+      "name": "closure-order-1",
+      "queries": 15
+    },
+    {
+      "name": "closure-order-2",
+      "queries": 15
+    },
+    {
+      "name": "closure-order-3",
+      "queries": 15
+    },
+    {
+      "name": "closure-order-4",
+      "queries": 15
+    },
+    {
+      "name": "closure-order-5",
+      "queries": 15
+    },
+    {
+      "name": "unrelated-coordinate",
+      "queries": 3
+    },
+    {
+      "name": "pure-position-0-False",
+      "queries": 12
+    },
+    {
+      "name": "pure-position-0-True",
+      "queries": 12
+    },
+    {
+      "name": "pure-position-1-False",
+      "queries": 12
+    },
+    {
+      "name": "pure-position-1-True",
+      "queries": 12
+    },
+    {
+      "name": "pure-position-2-False",
+      "queries": 12
+    },
+    {
+      "name": "pure-position-2-True",
+      "queries": 12
+    },
+    {
+      "name": "pure-position-3-False",
+      "queries": 12
+    },
+    {
+      "name": "pure-position-3-True",
+      "queries": 12
+    },
+    {
+      "name": "biallelic-indel",
+      "queries": 3
+    },
+    {
+      "name": "noncompeting-lengths",
+      "queries": 3
+    },
+    {
+      "name": "duplicate-ALT",
+      "queries": 3
+    },
+    {
+      "name": "unknown-marker-0",
+      "queries": 3
+    },
+    {
+      "name": "unknown-marker-1",
+      "queries": 3
+    },
+    {
+      "name": "unknown-marker-2",
+      "queries": 3
+    },
+    {
+      "name": "single-unknown-separate-span",
+      "queries": 3
+    },
+    {
+      "name": "id-cycle",
+      "queries": 3
+    },
+    {
+      "name": "raw-token-work",
+      "queries": 6
+    },
+    {
+      "name": "signature-work",
+      "queries": 6
+    },
+    {
+      "name": "examined-context-cap",
+      "queries": 6
+    }
+  ],
+  "six_order_closed_hypotheses_full_fields_exact": true
+}
