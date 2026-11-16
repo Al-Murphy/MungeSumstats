@@ -1,0 +1,70 @@
+{
+  "profile_sha256": "6251cc132236435156b4dff4c3c934d7fe7505f263a04745def33d0f89983cd3",
+  "scientific_revision": "5e5e5bfd1a8ccb4bddfb9520e0e0997d4691708e",
+  "scientific_dll_sha256": "c1c0a8b29479c33d8b4cfa4646e46e39c4da436686f4ca2da12a402251003d50",
+  "baseline4_dll_sha256": "0a65467b2ef80c1c131bcc5f82a90fa0940b82e0eae0a2a33f71bf6591d981bd",
+  "reference_format": "mss-preservation-2",
+  "unique_reference_variants": 437458,
+  "measurement_rows": [
+    {
+      "stage": "1M",
+      "implementation": "mss4",
+      "rows": 1000000,
+      "processing_seconds": 20.341,
+      "external_wall_seconds": 24.96,
+      "external_rss_bytes": 1632043008,
+      "external_physical_bytes": 1404373368,
+      "sampled_case_peak_bytes": 233568967,
+      "guard_status": "success"
+    },
+    {
+      "stage": "1M",
+      "implementation": "mss7",
+      "rows": 1000000,
+      "processing_seconds": 24.192,
+      "external_wall_seconds": 28.89,
+      "external_rss_bytes": 1610055680,
+      "external_physical_bytes": 1343015192,
+      "sampled_case_peak_bytes": 233568965,
+      "guard_status": "success"
+    },
+    {
+      "stage": "10M",
+      "implementation": "mss7",
+      "rows": 10000000,
+      "processing_seconds": 256.408,
+      "external_wall_seconds": 261.07,
+      "external_rss_bytes": 1941585920,
+      "external_physical_bytes": 1449576944,
+      "sampled_case_peak_bytes": 2345089210,
+      "guard_status": "success"
+    },
+    {
+      "stage": "40M",
+      "implementation": "mss7",
+      "rows": 40000000,
+      "processing_seconds": 974.111,
+      "external_wall_seconds": 979.09,
+      "external_rss_bytes": 2288140288,
+      "external_physical_bytes": 1492863664,
+      "sampled_case_peak_bytes": 9413637648,
+      "guard_status": "success"
+    }
+  ],
+  "stages": {
+    "1M": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-format2-v2/1M/stage-summary.json",
+      "sha256": "17181b46dd28b950b097294de5d65e482699537d2dcccc7130bc64eefcaf7952"
+    },
+    "10M": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-format2-v2/10M/stage-summary.json",
+      "sha256": "2ff004dc096623b72022274187397b9822e134471e0acfc091f2925687be0c10"
+    },
+    "40M": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-format2-v2/40M/stage-summary.json",
+      "sha256": "be9c31b43800659609d89064f0d1b32e544e12f9ad7a9788c90776fb0ffe49a6"
+    }
+  },
+  "verified_normalized_rows_all_runs": 52000000,
+  "scope": "One repeated real chr22 biallelic nonpalindromic SNP panel with synthetic exact beta/EAF. Every source and normalized row/all19fields verified. One thread, fresh process/handle, uncontrolled OS cache/shared host. This is not40Muniquevariants or a real whole-study harmonization coverage estimate."
+}

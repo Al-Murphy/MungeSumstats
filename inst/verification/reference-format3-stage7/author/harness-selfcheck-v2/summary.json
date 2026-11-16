@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "small_source_DLL_harness_pins_verified": true,
+  "success_and_owned_process_censor_verified": true,
+  "no_full_FASTA_hash_or_large_input_execution": true
+}

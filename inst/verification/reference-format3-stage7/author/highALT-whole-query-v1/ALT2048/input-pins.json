@@ -1,0 +1,14 @@
+{
+  "reference.fa": {
+    "bytes": 36,
+    "sha256": "e45f4bfb06b59154ea2b48573da082aad5ac0dcda33fca016ef4e6e7efa6f574"
+  },
+  "sites.tsv": {
+    "bytes": 18495,
+    "sha256": "cdd11820e159637d9898f6abb9d075b0e7e9452a1f2c02eea42da2ddc4761e0c"
+  },
+  "query.tsv": {
+    "bytes": 106,
+    "sha256": "857b68f90ad58692318be9039308c74e5e2dc2342c9df42940e22f7576e900c5"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "scientific_base": "5e5e5bfd1a8ccb4bddfb9520e0e0997d4691708e",
+  "typed3_production_source": "ece4fcdfad4aa9c2ce85434f67694190872442dd",
+  "integrated_production_commit": "9b0cf2db9c58d350d64f3aa52b5aa95073a486db",
+  "latest_ci_head": "f1cd89cf5e0f24fa754bbe2f0e17c9d93c53d6a6",
+  "final_ci_run": 43838443806,
+  "final_ci_each_os": {
+    "blocks": 72,
+    "passed_assertions": 1235
+  },
+  "earlier_ci_coverage_gap_run": 43835846392,
+  "full_installed": {
+    "blocks": 247,
+    "passed_assertions": 2078,
+    "failed_assertions": 0,
+    "errors": 0,
+    "warnings": 2,
+    "skipped_blocks": 2
+  },
+  "full_installed_dll_sha256": "d4f43e62b77a2135f94084ac3fe15105cbc6809fed388d2f4e7bc4ee9bc926da",
+  "default_reference_format": "mss-preservation-2",
+  "opt_in_reference_format": "mss-preservation-3",
+  "full_production_reference_admission": false,
+  "scientific7_wholefile_scope": "Source5e5e5b/DLLc1 measured format2; does not relabel typed3/DLLd4f whole-file throughput."
+}

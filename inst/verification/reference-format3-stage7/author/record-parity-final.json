@@ -1,0 +1,42 @@
+[
+  {
+    "label": "actual-prefix-1M",
+    "counts": {
+      "S": 1000000,
+      "A": 1242071
+    },
+    "all_typed_fields_and_occurrence_order_exact": true,
+    "original_REF_and_full_ALT_pairing_exact": true,
+    "source_FAI_rejected_exact": true
+  },
+  {
+    "label": "ALT256",
+    "counts": {
+      "S": 1,
+      "A": 256
+    },
+    "all_typed_fields_and_occurrence_order_exact": true,
+    "original_REF_and_full_ALT_pairing_exact": true,
+    "source_FAI_rejected_exact": true
+  },
+  {
+    "label": "ALT2048",
+    "counts": {
+      "S": 1,
+      "A": 2048
+    },
+    "all_typed_fields_and_occurrence_order_exact": true,
+    "original_REF_and_full_ALT_pairing_exact": true,
+    "source_FAI_rejected_exact": true
+  },
+  {
+    "label": "ALT10000",
+    "counts": {
+      "S": 1,
+      "A": 10000
+    },
+    "all_typed_fields_and_occurrence_order_exact": true,
+    "original_REF_and_full_ALT_pairing_exact": true,
+    "source_FAI_rejected_exact": true
+  }
+]

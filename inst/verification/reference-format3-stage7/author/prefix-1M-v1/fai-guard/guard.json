@@ -1,0 +1,53 @@
+{
+  "label": "FAI-only-full-FASTA",
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "/private/tmp/gwas-harvest-stage2/results/mss-context-format3-stage7/fai",
+    "/private/tmp/gwas-harvest-stage2/results/reference-index-capacity-v1/reference.fa",
+    "/private/tmp/gwas-harvest-stage2/results/mss-context-format3-stage7/prefix-1M-v1/fai-only.fai"
+  ],
+  "pid": 80544,
+  "start_utc": "2026-11-16T08:09:03Z",
+  "max_memory_bytes": 8589934592,
+  "min_free_bytes": 171798691840,
+  "max_owned_growth_bytes": 4294967296,
+  "deadline_seconds": 180,
+  "owned": "/private/tmp/gwas-harvest-stage2/results/mss-context-format3-stage7/prefix-1M-v1",
+  "natural_oom": false,
+  "os_cache": "uncontrolled; shared host with concurrent reference preparations",
+  "sampling_seconds": 0.1,
+  "status": "success",
+  "exit_code": 0,
+  "reason": null,
+  "wall_seconds": 2.008945749839768,
+  "samples": 15,
+  "peak_sampled_tree_rss_bytes": 3260416,
+  "peak_sampled_tree_physical_bytes": 2769520,
+  "peak_sampled_tree_guard_bytes": 3342576,
+  "exact_single_command_maxrss_bytes": 2097152,
+  "peak_sampled_owned_logical_growth_bytes": 26683,
+  "peak_sampled_owned_allocated_growth_bytes": 32768,
+  "retained_owned": {
+    "logical_bytes": 27459,
+    "allocated_bytes": 36864,
+    "files": {
+      "fai-only.fai": {
+        "bytes": 25906,
+        "allocated_bytes": 28672
+      },
+      "inputs.json": {
+        "bytes": 776,
+        "allocated_bytes": 4096
+      },
+      "fai-guard/command.log": {
+        "bytes": 777,
+        "allocated_bytes": 4096
+      }
+    }
+  },
+  "peak_sampled_all_experiment_logical_bytes": 776,
+  "peak_sampled_all_experiment_allocated_bytes": 4096,
+  "minimum_free_bytes": 500563931136,
+  "peak_scope": "sampled process tree and physical footprint; time(1) exact command maxRSS on macOS; disk peaks sampled, not a complete filesystem event trace"
+}

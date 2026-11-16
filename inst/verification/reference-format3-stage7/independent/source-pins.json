@@ -1,0 +1,14 @@
+{
+  "commit": "ece4fcdfad4aa9c2ce85434f67694190872442dd",
+  "base": "5e5e5bfd1a8ccb4bddfb9520e0e0997d4691708e",
+  "sha256": {
+    "src/preservation_core.h": "9c06526ec9185940d36e3002ff5d9c06a395d34e6a29d1cddb4b7ea119480011",
+    "src/preservation.cpp": "6d7281661962b2db9f74ae53569841336d810315ab417878b51969d82f63a49e",
+    "src/RcppExports.cpp": "2b0a3d1bbf1809120dd60d1b1c802b4355f958f2547e545262909feb0db5a1d3",
+    "R/RcppExports.R": "895594e02ee6c638600abe6085e51d1b0243e706a8dbdccd0d353e9de3b568f2",
+    "R/preservation.R": "60e1936f2e5378b534ed387351412cb46eff01b58ed6f18efd950f2f83a4dde1",
+    "R/projection.R": "920962a89afab78315ed48506c4fae5f4ae33e5bbdc4d79d173838a770b89531",
+    "inst/PRESERVATION_CONTRACT.md": "c2a9eee134e567ebd5e5bcdd5dc02e7ddeacf67cb347bae8ba13ff451c9f56e8"
+  },
+  "scientific_suffix_sha256": "47c1a1261aaff1421293d41089df74fedba37f264ed71ae78e930a9030b90d47"
+}

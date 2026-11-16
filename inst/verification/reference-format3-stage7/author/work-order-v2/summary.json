@@ -1,0 +1,22 @@
+[
+  {
+    "order": 0,
+    "cap": 5,
+    "output": "ok\tambiguous\t\t0\t\t\t\tnan\tnan\t3\t0\t0"
+  },
+  {
+    "order": 0,
+    "cap": 200,
+    "output": "ok\tambiguous\t\t0\t\t\t\tnan\tnan\t3\t0\t0"
+  },
+  {
+    "order": 1,
+    "cap": 5,
+    "output": "ok\tambiguous\t\t0\t\t\t\tnan\tnan\t3\t0\t0"
+  },
+  {
+    "order": 1,
+    "cap": 200,
+    "output": "ok\tambiguous\t\t0\t\t\t\tnan\tnan\t3\t0\t0"
+  }
+]

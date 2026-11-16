@@ -1,0 +1,118 @@
+{
+  "label": "highALT10000-whole-public-generic-query-format2",
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "Rscript",
+    "/private/tmp/gwas-harvest-stage2/results/mss-context-format3-stage7/bench.R",
+    "query",
+    "mss-preservation-2",
+    "/private/tmp/gwas-harvest-stage2/results/mss-context-format3-stage7/highALT-whole-query-v1/ALT10000/reference.fa",
+    "/private/tmp/gwas-harvest-stage2/results/mss-context-format3-stage7/highALT-whole-query-v1/ALT10000/query.tsv",
+    "/private/tmp/gwas-harvest-stage2/results/mss-context-format3-stage7/highALT-whole-query-v1/ALT10000/format2/index",
+    "/private/tmp/gwas-harvest-stage2/results/mss-context-format3-stage7/highALT-whole-query-v1/ALT10000/format2/query.tsv"
+  ],
+  "pid": 84553,
+  "start_utc": "2026-11-16T08:12:23Z",
+  "max_memory_bytes": 8589934592,
+  "min_free_bytes": 171798691840,
+  "max_owned_growth_bytes": 4294967296,
+  "deadline_seconds": 900,
+  "owned": "/private/tmp/gwas-harvest-stage2/results/mss-context-format3-stage7/highALT-whole-query-v1/ALT10000/format2",
+  "natural_oom": false,
+  "os_cache": "uncontrolled; shared host with concurrent reference preparations",
+  "sampling_seconds": 0.1,
+  "status": "success",
+  "exit_code": 0,
+  "reason": null,
+  "wall_seconds": 24.06616120808758,
+  "samples": 177,
+  "peak_sampled_tree_rss_bytes": 3014868992,
+  "peak_sampled_tree_physical_bytes": 4568011696,
+  "peak_sampled_tree_guard_bytes": 4568011696,
+  "exact_single_command_maxrss_bytes": 3044147200,
+  "peak_sampled_owned_logical_growth_bytes": 4355,
+  "peak_sampled_owned_allocated_growth_bytes": 24576,
+  "retained_owned": {
+    "logical_bytes": 901804571,
+    "allocated_bytes": 906096640,
+    "files": {
+      "build.tsv": {
+        "bytes": 1015,
+        "allocated_bytes": 4096
+      },
+      "query.tsv.rds": {
+        "bytes": 810,
+        "allocated_bytes": 4096
+      },
+      "build.tsv.rds": {
+        "bytes": 720,
+        "allocated_bytes": 4096
+      },
+      "query.tsv.source.tsv": {
+        "bytes": 143,
+        "allocated_bytes": 4096
+      },
+      "query.tsv.result.rds": {
+        "bytes": 1124,
+        "allocated_bytes": 4096
+      },
+      "query.tsv": {
+        "bytes": 1179,
+        "allocated_bytes": 4096
+      },
+      "query.tsv.normalized.tsv": {
+        "bytes": 322,
+        "allocated_bytes": 4096
+      },
+      "query-execution/command.log": {
+        "bytes": 777,
+        "allocated_bytes": 4096
+      },
+      "build-execution/guard.json": {
+        "bytes": 3023,
+        "allocated_bytes": 4096
+      },
+      "build-execution/command.log": {
+        "bytes": 777,
+        "allocated_bytes": 4096
+      },
+      "index/fasta.fai": {
+        "bytes": 13,
+        "allocated_bytes": 4096
+      },
+      "index/records": {
+        "bytes": 900440027,
+        "allocated_bytes": 904683520
+      },
+      "index/rejected.tsv": {
+        "bytes": 11,
+        "allocated_bytes": 4096
+      },
+      "index/keys": {
+        "bytes": 863843,
+        "allocated_bytes": 864256
+      },
+      "index/offsets": {
+        "bytes": 400008,
+        "allocated_bytes": 401408
+      },
+      "index/source.tsv": {
+        "bytes": 90063,
+        "allocated_bytes": 90112
+      },
+      "index/manifest.rds": {
+        "bytes": 697,
+        "allocated_bytes": 4096
+      },
+      "index/core-version": {
+        "bytes": 19,
+        "allocated_bytes": 4096
+      }
+    }
+  },
+  "peak_sampled_all_experiment_logical_bytes": 1372457898,
+  "peak_sampled_all_experiment_allocated_bytes": 1380077568,
+  "minimum_free_bytes": 498869063680,
+  "peak_scope": "sampled process tree and physical footprint; time(1) exact command maxRSS on macOS; disk peaks sampled, not a complete filesystem event trace"
+}

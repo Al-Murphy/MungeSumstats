@@ -1,0 +1,24 @@
+{
+  "approved": true,
+  "status": "SCIENCE_GREEN",
+  "profile_sha256": "6251cc132236435156b4dff4c3c934d7fe7505f263a04745def33d0f89983cd3",
+  "candidate_core_sha256": "bbde5436366e686eeb35a48853117387b43b65618ca8308a87819e4382c86ceb",
+  "authorized_stages": [
+    "10M",
+    "40M"
+  ],
+  "scientific_review": {
+    "path": "/private/tmp/gwas-harvest-stage2/reports/mss-preservation-v7-independent-review-stage7.md",
+    "sha256": "1ace03b13ed5e725762672fc2805fae76be149f39a608502c5aa22535c1b5f7c"
+  },
+  "installed_suite": {
+    "path": "/private/tmp/gwas-harvest-stage2/results/mss-preservation-v7/full-suite/summary.json",
+    "sha256": "ce9bee94c4c8b98fff1be8e4268c65d725f549be34139f3960f0c130b24a5660"
+  },
+  "operator_scope": "Scientific7 format2 larger stages after exact matched1M passed; format3 heavy measurements finished. No production reference or default3 admission.",
+  "matched_1M_summary_sha256": "17181b46dd28b950b097294de5d65e482699537d2dcccc7130bc64eefcaf7952",
+  "harness_review": {
+    "path": "/private/tmp/gwas-harvest-stage2/reports/mss-final7-whole-file-harness-v2-review-stage7.md",
+    "sha256": "b746d37ab45e266eb8dc8351b29c854b6f3135c5a38c45e8924725ca91bd18d6"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "base": "/private/tmp/gwas-harvest-stage2",
+  "reference": "assets/reference/matched-index",
+  "baseline_library": "Rlib/fasta-offsets-v1",
+  "baseline_implementation": "mss-preservation-4",
+  "candidate_library_default": "Rlib/preservation-v7",
+  "candidate_source_default": "mss-orientation-v7",
+  "candidate_production_revision_default": "5e5e5bfd1a8ccb4bddfb9520e0e0997d4691708e",
+  "candidate_implementation": "mss-preservation-7",
+  "production_files": [
+    "src/preservation_core.h",
+    "R/preservation.R",
+    "R/projection.R",
+    "src/preservation.cpp"
+  ],
+  "batch_rows": 100000,
+  "threads": 1,
+  "max_tree_memory_bytes": 8589934592,
+  "min_filesystem_free_bytes": 171798691840,
+  "poll_seconds": 0.25,
+  "workload": "437458 real chr22 unique biallelic non-palindromic SNP panel records repeated with synthetic exact beta/EAF; 40M rows do not mean 40M unique variants; separate reviewed scientific matrices cover indels/multiallelic/ambiguity",
+  "cache": "Fresh R process and application reference handle per run; OS page cache uncontrolled and never flushed. Shared host may run full reference preparation and package tests.",
+  "stages": {
+    "1M": {
+      "input": "assets/mss/matched-1M.tsv",
+      "rows": 1000000,
+      "versions": [
+        "mss4",
+        "mss7"
+      ],
+      "deadline_seconds_each": 900,
+      "max_case_disk_bytes": 1073741824
+    },
+    "10M": {
+      "input": "assets/mss/matched-10M.tsv",
+      "rows": 10000000,
+      "versions": [
+        "mss7"
+      ],
+      "deadline_seconds_each": 3600,
+      "max_case_disk_bytes": 6442450944
+    },
+    "40M": {
+      "input": "assets/mss/matched-40M.tsv",
+      "rows": 40000000,
+      "versions": [
+        "mss7"
+      ],
+      "deadline_seconds_each": 10800,
+      "max_case_disk_bytes": 25769803776
+    }
+  },
+  "prior_receipts": [
+    "results/mss/input-1M.json",
+    "results/mss/input-10M.json",
+    "results/mss/input-40M.json",
+    "results/mss/final-projection-v5-matrix/new-1M-cold/receipt.json",
+    "results/mss/final-projection-v5-matrix/new-40M-cold/receipt.json",
+    "results/mss/matrix-v1/new-10M-cold/receipt.json"
+  ],
+  "adoption": "PREPARATION ONLY. No benchmark may run until root supplies an external SCIENCE_GREEN approval matching exact profile, production hashes, installed DLL and passing installed-suite receipt. 10M/40M also require a passing matched 1M pair and separate stage authorization.",
+  "expected_unique_panel_records": 437458,
+  "baseline_dll_sha256": "0a65467b2ef80c1c131bcc5f82a90fa0940b82e0eae0a2a33f71bf6591d981bd"
+}

@@ -1,0 +1,156 @@
+{
+  "passed": true,
+  "corruption_cases": [
+    {
+      "case": "wrong-A-tag",
+      "error": "Typed reference record has an unknown tag or field count"
+    },
+    {
+      "case": "wrong-A-pos",
+      "error": "Typed reference has a noncanonical signed integer"
+    },
+    {
+      "case": "A-ref-N",
+      "error": "Typed reference A record has invalid canonical fields"
+    },
+    {
+      "case": "A-same-allele",
+      "error": "Typed reference A record has invalid canonical fields"
+    },
+    {
+      "case": "A-invalidUTF8",
+      "error": "Typed reference field is not valid UTF-8/framing"
+    },
+    {
+      "case": "A-NUL",
+      "error": "Typed reference field is not valid UTF-8/framing"
+    },
+    {
+      "case": "S-wrong-tag",
+      "error": "Typed reference record has an unknown tag or field count"
+    },
+    {
+      "case": "S-wrong-position",
+      "error": "Typed reference S key disagrees with its record"
+    },
+    {
+      "case": "S-invalidUTF8",
+      "error": "Typed reference field is not valid UTF-8/framing"
+    },
+    {
+      "case": "marker-extra",
+      "error": "Typed reference marker is malformed"
+    },
+    {
+      "case": "offsets-truncated",
+      "error": "Invalid offsets file"
+    },
+    {
+      "case": "keyoffset-interior",
+      "error": "Typed reference offset is not a record boundary"
+    },
+    {
+      "case": "keyoffset-beyond",
+      "error": "Typed reference offset is not a record boundary"
+    },
+    {
+      "case": "badrecord-0",
+      "error": "Typed reference record has an unknown tag or field count"
+    },
+    {
+      "case": "badrecord-1",
+      "error": "Typed reference record has an unknown tag or field count"
+    },
+    {
+      "case": "badrecord-2",
+      "error": "Typed reference record is truncated"
+    },
+    {
+      "case": "badrecord-3",
+      "error": "Typed reference has an invalid unsigned integer"
+    },
+    {
+      "case": "badrecord-4",
+      "error": "Typed reference has an invalid unsigned integer"
+    },
+    {
+      "case": "badrecord-5",
+      "error": "Typed reference has an invalid unsigned integer"
+    },
+    {
+      "case": "badrecord-6",
+      "error": "Typed reference signed integer overflows"
+    },
+    {
+      "case": "badrecord-7",
+      "error": "Typed reference signed integer overflows"
+    },
+    {
+      "case": "badrecord-8",
+      "error": "Typed reference has a noncanonical signed integer"
+    },
+    {
+      "case": "badoffset-0",
+      "error": "Typed reference has an invalid unsigned integer"
+    },
+    {
+      "case": "badoffset-1",
+      "error": "Typed reference has an invalid unsigned integer"
+    },
+    {
+      "case": "badoffset-2",
+      "error": "Typed reference has an invalid unsigned integer"
+    },
+    {
+      "case": "badoffset-3",
+      "error": "Typed reference has an invalid unsigned integer"
+    },
+    {
+      "case": "badoffset-4",
+      "error": "Typed reference has an invalid unsigned integer"
+    },
+    {
+      "case": "badoffset-5",
+      "error": "Typed reference record offset is out of range"
+    },
+    {
+      "case": "badoffset-6",
+      "error": "Typed reference offset is not a record boundary"
+    },
+    {
+      "case": "badkey-0",
+      "error": "Typed reference key row must have two fields"
+    },
+    {
+      "case": "badkey-1",
+      "error": "Typed reference record is truncated"
+    },
+    {
+      "case": "badkey-2",
+      "error": "Typed reference has an empty identifier key"
+    },
+    {
+      "case": "badkey-3",
+      "error": "Typed reference has an unknown key type"
+    },
+    {
+      "case": "badkey-4",
+      "error": "Typed reference has an invalid lookup key"
+    },
+    {
+      "case": "badkey-5",
+      "error": "Typed reference has an invalid unsigned integer"
+    },
+    {
+      "case": "cross-page-invalidUTF8",
+      "error": "Typed reference field is not valid UTF-8/framing"
+    },
+    {
+      "case": "old-reader-rejects3",
+      "error": "Incomplete or unsupported reference index"
+    }
+  ],
+  "raw_S": 6,
+  "raw_A": 5,
+  "source_sha256": "2254419c0806b49824a20ca31e01b4030f7ad70d3badbc17d60294d81025ea20"
+}

@@ -1,0 +1,129 @@
+{
+  "prototype_commit": "ece4fcdfad4aa9c2ce85434f67694190872442dd",
+  "harness_sha256": "5097e8cdc95effd42f839cdf4aabed60ba09d9578cc5a0686584ded07fe3d84e",
+  "performance_scope": "single matched2\u21923 build/query pair per workload; shared host/uncontrolled OS cache; not general study-throughput",
+  "prefix": [
+    {
+      "format": 2,
+      "retained_bytes": 232818833,
+      "allocated_bytes": 235593728,
+      "native_fai_and_index_seconds": 11.487,
+      "public_prepare_seconds": 26.589,
+      "hash_copy_verification_R_seconds": 15.102,
+      "wall_seconds": 30.609847582876682,
+      "exact_process_RSS_bytes": 990478336,
+      "sampled_tree_physical_bytes": 877922152,
+      "sampled_peak_workdir_bytes": 289446572
+    },
+    {
+      "format": 3,
+      "retained_bytes": 198423556,
+      "allocated_bytes": 198664192,
+      "native_fai_and_index_seconds": 10.903,
+      "public_prepare_seconds": 25.996,
+      "hash_copy_verification_R_seconds": 15.093,
+      "wall_seconds": 29.894008999923244,
+      "exact_process_RSS_bytes": 1007173632,
+      "sampled_tree_physical_bytes": 888948512,
+      "sampled_peak_workdir_bytes": 257008054
+    }
+  ],
+  "highALT": [
+    {
+      "raw_ALT_occurrences": 256,
+      "rows": [
+        {
+          "format": 2,
+          "retained_bytes": 632668,
+          "proof_cap": 10000,
+          "processing_seconds": 0.00999999999999979,
+          "reference_verify_open_seconds": 0.00200000000000022,
+          "wall_seconds": 3.7748160001356155,
+          "exact_process_RSS_bytes": 997539840,
+          "sampled_tree_physical_bytes": 885016376,
+          "status": "source_allele_context_required",
+          "all19normalized_fields_and_source_exact": true
+        },
+        {
+          "format": 3,
+          "retained_bytes": 38755,
+          "proof_cap": 10000,
+          "processing_seconds": 0.004,
+          "reference_verify_open_seconds": 0.00100000000000033,
+          "wall_seconds": 3.7683500410057604,
+          "exact_process_RSS_bytes": 1003814912,
+          "sampled_tree_physical_bytes": 889063128,
+          "status": "source_allele_context_required",
+          "all19normalized_fields_and_source_exact": true
+        }
+      ]
+    },
+    {
+      "raw_ALT_occurrences": 2048,
+      "rows": [
+        {
+          "format": 2,
+          "retained_bytes": 38104972,
+          "proof_cap": 65536,
+          "processing_seconds": 0.65,
+          "reference_verify_open_seconds": 0.06,
+          "wall_seconds": 4.469306875020266,
+          "exact_process_RSS_bytes": 1166606336,
+          "sampled_tree_physical_bytes": 1010190328,
+          "status": "source_allele_context_required",
+          "all19normalized_fields_and_source_exact": true
+        },
+        {
+          "format": 3,
+          "retained_bytes": 314216,
+          "proof_cap": 65536,
+          "processing_seconds": 0.00999999999999979,
+          "reference_verify_open_seconds": 0.00099999999999989,
+          "wall_seconds": 3.7952466669958085,
+          "exact_process_RSS_bytes": 1022115840,
+          "sampled_tree_physical_bytes": 901826336,
+          "status": "source_allele_context_required",
+          "all19normalized_fields_and_source_exact": true
+        }
+      ]
+    },
+    {
+      "raw_ALT_occurrences": 10000,
+      "rows": [
+        {
+          "format": 2,
+          "retained_bytes": 901794681,
+          "proof_cap": 320000,
+          "processing_seconds": 18.734,
+          "reference_verify_open_seconds": 1.346,
+          "wall_seconds": 24.06616120808758,
+          "exact_process_RSS_bytes": 3044147200,
+          "sampled_tree_physical_bytes": 4568011696,
+          "status": "source_allele_context_required",
+          "all19normalized_fields_and_source_exact": true
+        },
+        {
+          "format": 3,
+          "retained_bytes": 1579087,
+          "proof_cap": 320000,
+          "processing_seconds": 0.0449999999999999,
+          "reference_verify_open_seconds": 0.00299999999999967,
+          "wall_seconds": 3.956366457976401,
+          "exact_process_RSS_bytes": 1004896256,
+          "sampled_tree_physical_bytes": 883918672,
+          "status": "source_allele_context_required",
+          "all19normalized_fields_and_source_exact": true
+        }
+      ]
+    }
+  ],
+  "guard_summary": {
+    "runs": 15,
+    "all_success": true,
+    "censored_heavy_runs": 0,
+    "max_sampled_tree_guard_bytes": 4568011696,
+    "max_sampled_aggregate_experiment_bytes": 1374061266,
+    "minimum_free_bytes": 498848583680
+  },
+  "metadata_qualification": "Original highALT row flag default10000_cap_tested=False means no separate default-cap experiment;256actual proofcap equals10000. Actual caps explicitly recorded and authoritative. Supplemental packed3native functional probe confirms cap10000==320000 fullresult;cap9999 rawrefusal at10000ALTs. Format2default10k not retimed."
+}

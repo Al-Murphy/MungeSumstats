@@ -1,0 +1,31 @@
+{
+  "files": {
+    "measure.py": "3175a021e10042b4abc65c8be43090241d28672a125921acd14082336643c700",
+    "bench.R": "888bbb6d9f5ad660ec3c940eff4cc04de70d9225c4b07e7a76a96b8a296bfa38",
+    "fai.cpp": "1789f1e81e51c98f9512bdb166259e7d18d3036b849301c041753dce9d491dec",
+    "fai": "b605ed6b21b990d82151eac2fe4ae0486e7d09b58c94c2f68356c26b7950b984",
+    "source-pins.json": "ce2402d2ef2a424835e1670640220e75e58f057c8610bb5c24a751d7b0aa4638",
+    "scientific-byte-parity.json": "1b78ba011ef14697be110763cd85ea2e70f484c6432d90de242f251af99fa321",
+    "check-harness-e2e.py": "03c08b918739fce7a08a14459165e192d3c97a1e8dc53572be115b2ca8163bb9"
+  },
+  "memory_helper": {
+    "path": "/private/tmp/gwas-harvest-stage2/mss/scripts/process_memory.py",
+    "sha256": "aea36f87d4dd12ea41961f2cdd11198e527ccf17be2946a4351153cb96c0a0a5"
+  },
+  "commands": [
+    "python3 results/mss-context-format3-stage7/measure.py selfcheck",
+    "python3 results/mss-context-format3-stage7/measure.py prefix",
+    "python3 results/mss-context-format3-stage7/measure.py highalt"
+  ],
+  "admission": {
+    "max_tree_RSS_and_physical_bytes": 8589934592,
+    "min_free_bytes": 171798691840,
+    "max_total_owned_experiment_logical_or_allocated_bytes": 4294967296,
+    "build_deadline_seconds": 600,
+    "highALT_query_deadline_seconds": 900,
+    "heavy_execution": "HOLD until coordinator GO",
+    "shared_host": true,
+    "OS_page_cache": "uncontrolled"
+  },
+  "selfcheck_environment": "unsandboxed process-tree metadata access required; initial sandboxed ps failedclosed without heavy work"
+}

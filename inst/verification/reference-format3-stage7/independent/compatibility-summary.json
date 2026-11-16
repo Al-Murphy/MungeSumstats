@@ -1,0 +1,311 @@
+{
+  "writer_matrix": [
+    {
+      "order": 0,
+      "batch": 1,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 0,
+      "batch": 2,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 0,
+      "batch": 3,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 0,
+      "batch": 7,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 0,
+      "batch": 31,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 0,
+      "batch": 100,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 1,
+      "batch": 1,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 1,
+      "batch": 2,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 1,
+      "batch": 3,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 1,
+      "batch": 7,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 1,
+      "batch": 31,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 1,
+      "batch": 100,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 2,
+      "batch": 1,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 2,
+      "batch": 2,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 2,
+      "batch": 3,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 2,
+      "batch": 7,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 2,
+      "batch": 31,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 2,
+      "batch": 100,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 3,
+      "batch": 1,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 3,
+      "batch": 2,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 3,
+      "batch": 3,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 3,
+      "batch": 7,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 3,
+      "batch": 31,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 3,
+      "batch": 100,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 4,
+      "batch": 1,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 4,
+      "batch": 2,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 4,
+      "batch": 3,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 4,
+      "batch": 7,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 4,
+      "batch": 31,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 4,
+      "batch": 100,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 5,
+      "batch": 1,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 5,
+      "batch": 2,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 5,
+      "batch": 3,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 5,
+      "batch": 7,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 5,
+      "batch": 31,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    },
+    {
+      "order": 5,
+      "batch": 100,
+      "default2_six_payloads_exact": true,
+      "typed3_raw_key_multiplicity_exact": true
+    }
+  ],
+  "work_order": [
+    {
+      "format": 2,
+      "order": 0,
+      "cap": 5,
+      "output": "ok\tambiguous\t\t0\t\t\t\tnan\tnan\t3\t0\t0"
+    },
+    {
+      "format": 2,
+      "order": 0,
+      "cap": 200,
+      "output": "ok\tambiguous\t\t0\t\t\t\tnan\tnan\t3\t0\t0"
+    },
+    {
+      "format": 2,
+      "order": 1,
+      "cap": 5,
+      "output": "error\tReference context closure limit exceeded; no arbitrary context selected"
+    },
+    {
+      "format": 2,
+      "order": 1,
+      "cap": 200,
+      "output": "ok\tambiguous\t\t0\t\t\t\tnan\tnan\t3\t0\t0"
+    },
+    {
+      "format": 3,
+      "order": 0,
+      "cap": 5,
+      "output": "ok\tambiguous\t\t0\t\t\t\tnan\tnan\t3\t0\t0"
+    },
+    {
+      "format": 3,
+      "order": 0,
+      "cap": 200,
+      "output": "ok\tambiguous\t\t0\t\t\t\tnan\tnan\t3\t0\t0"
+    },
+    {
+      "format": 3,
+      "order": 1,
+      "cap": 5,
+      "output": "ok\tambiguous\t\t0\t\t\t\tnan\tnan\t3\t0\t0"
+    },
+    {
+      "format": 3,
+      "order": 1,
+      "cap": 200,
+      "output": "ok\tambiguous\t\t0\t\t\t\tnan\tnan\t3\t0\t0"
+    }
+  ],
+  "independent_oracle_full_payload_parity": [
+    {
+      "name": "plain-oracle-output.tsv",
+      "rows": 4032,
+      "sha256": "8f32e3fb448a2eb7d97b071c22efdfe93cc5ed0ec760bb5fbbc7f4efe2f11b2a"
+    },
+    {
+      "name": "left-oracle-output.tsv",
+      "rows": 4032,
+      "sha256": "8f32e3fb448a2eb7d97b071c22efdfe93cc5ed0ec760bb5fbbc7f4efe2f11b2a"
+    },
+    {
+      "name": "right-oracle-output.tsv",
+      "rows": 4032,
+      "sha256": "8f32e3fb448a2eb7d97b071c22efdfe93cc5ed0ec760bb5fbbc7f4efe2f11b2a"
+    },
+    {
+      "name": "both-oracle-output.tsv",
+      "rows": 4032,
+      "sha256": "8f32e3fb448a2eb7d97b071c22efdfe93cc5ed0ec760bb5fbbc7f4efe2f11b2a"
+    },
+    {
+      "name": "haplotype-output.tsv",
+      "rows": 79904,
+      "sha256": "a0f5e84751f3214d6b695c4b9f6cc7d44715638b8c04177b046534a63fca28ac"
+    }
+  ],
+  "R_science_sections": {
+    "SCIENCE FORMAT 2": {
+      "blocks": 65,
+      "assertions": 1170
+    },
+    "SCIENCE FORMAT 3": {
+      "blocks": 65,
+      "assertions": 1170
+    },
+    "NEW API TESTS": {
+      "blocks": 7,
+      "assertions": 65
+    }
+  }
+}

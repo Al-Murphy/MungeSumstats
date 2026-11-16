@@ -1,0 +1,11 @@
+# Reviewed typed reference format3 and scientific7 scale evidence
+
+Opt-in3 factors one full original ALT context into each S record and keeps A records typed/compact. Default2 remains unchanged. The independent scientific/structural review is GREEN. The full installed package passed247 blocks /2,078 assertions, with two known warnings and two missing-reference skips, using the exact benchmark DLL. Native CI [43838443806](https://github.com/Al-Murphy/MungeSumstats/actions/runs/43838443806) passes72 blocks /1,235 assertions on each of Windows, macOS and Linux. An earlier successful CI run omitted the seven new R API blocks; its logs are retained as a coverage gap, and the corrected standalone runner is included in the final CI.
+
+Actual1M-site reference:14.77% smaller retained index, similar build time and no observed ordinary RAM improvement. Synthetic10,000-ALT query:901,794,681 to1,579,087 retained bytes and18.734 to0.045 processing seconds, with exact source/all19 normalized fields; the common proof cap was320,000. These stress-case gains are not universal throughput ratios. The sampled temp high-water is not a guaranteed sizing ceiling; see the conservative capacity report.
+
+The separate frozen scientific7/format2 whole-file suite verified52million normalized rows across4 runs, including40M processing in974.111seconds and2.131GiB peak RSS. Its source/DLL differs from the typed3 benchmark and is explicitly pinned; this archive does not claim typed3 whole-file throughput. Allinputs repeat437,458 unique real SNPs with synthetic exact beta/EAF.
+
+Full GRCh37/38 references, actual full1000 execution, full-source coverage and default3 adoption remain separate gates. Physical source/layout/runtime-order identities are distinct. Tight resource caps can yield a format2 refusal versus typed3 nullable outcome; canonical measurements do not become arbitrary.
+
+The archive map preserves raw SHA/byte counts for compressed logs/TSVs and explicitly lists generated binaries/RDS/archive omissions. Only small recipes/receipts are vendored; large reference/study/synthetic output files remain coordinator data. Original absolute paths in forensic recipes are retained. Recreate fresh plans from matching bytes instead of editing sealed profiles.

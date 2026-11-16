@@ -1,0 +1,452 @@
+{
+  "selected_record_cases": 73,
+  "accepted": 18,
+  "refused": 55,
+  "cases": [
+    {
+      "name": "good-A",
+      "expected": "accepted",
+      "exit": 0,
+      "outcome": "ok\t1\t78|1|41|43|72|1|||1,|72,"
+    },
+    {
+      "name": "good-opaque-alias",
+      "expected": "accepted",
+      "exit": 0,
+      "outcome": "ok\t1\t78|1|41|43|72|1|||1,|72,"
+    },
+    {
+      "name": "good-UTF8-id",
+      "expected": "accepted",
+      "exit": 0,
+      "outcome": "ok\t1\t78|1|41|43|7273e99baa|1|||1,|7273e99baa,"
+    },
+    {
+      "name": "good-S-unknown",
+      "expected": "accepted",
+      "exit": 0,
+      "outcome": "ok\t1\t78|1|41|||1|41|432c3c44454c3e2c2e2c4e|1,|"
+    },
+    {
+      "name": "good-S-empty-ALT",
+      "expected": "accepted",
+      "exit": 0,
+      "outcome": "ok\t1\t78|1|41|||1|41||1,|"
+    },
+    {
+      "name": "good-S-zero",
+      "expected": "accepted",
+      "exit": 0,
+      "outcome": "ok\t1\t78|0|41|||0|41|43|0,|"
+    },
+    {
+      "name": "good-S-negative",
+      "expected": "accepted",
+      "exit": 0,
+      "outcome": "ok\t1\t78|-1|41|||-1|41|43|-1,|"
+    },
+    {
+      "name": "good-S-minimum",
+      "expected": "accepted",
+      "exit": 0,
+      "outcome": "ok\t1\t78|-9223372036854775808|41|||-9223372036854775808|41|43|-9223372036854775808,|"
+    },
+    {
+      "name": "good-canonical-C-key",
+      "expected": "accepted",
+      "exit": 0,
+      "outcome": "ok\t1\t78|2|41|43|72|1|||1,|72,"
+    },
+    {
+      "name": "good-original-C-key",
+      "expected": "accepted",
+      "exit": 0,
+      "outcome": "ok\t1\t78|2|41|43|72|1|||1,|72,"
+    },
+    {
+      "name": "unknown-tag",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference record has an unknown tag or field count"
+    },
+    {
+      "name": "short-A",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference record has an unknown tag or field count"
+    },
+    {
+      "name": "extra-A-field",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference record has an unknown tag or field count"
+    },
+    {
+      "name": "wrong-key-type",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference S record has the wrong key type"
+    },
+    {
+      "name": "no-record-LF",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference record is truncated"
+    },
+    {
+      "name": "NUL-id",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference field is not valid UTF-8/framing"
+    },
+    {
+      "name": "empty-chr",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference A record has invalid canonical fields"
+    },
+    {
+      "name": "nonDNA-ref",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference A record has invalid canonical fields"
+    },
+    {
+      "name": "nonDNA-alt",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference A record has invalid canonical fields"
+    },
+    {
+      "name": "same-alleles",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference A record has invalid canonical fields"
+    },
+    {
+      "name": "lowercase-canonical",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference A record has invalid canonical fields"
+    },
+    {
+      "name": "original-zero",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference has a noncanonical signed integer"
+    },
+    {
+      "name": "original-negative",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference has a noncanonical signed integer"
+    },
+    {
+      "name": "canonical-zero",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference has a noncanonical signed integer"
+    },
+    {
+      "name": "canonical-negative",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference has a noncanonical signed integer"
+    },
+    {
+      "name": "canonical-plus",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference has an invalid unsigned integer"
+    },
+    {
+      "name": "canonical-leading-zero",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference has an invalid unsigned integer"
+    },
+    {
+      "name": "canonical-trailing-junk",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference has an invalid unsigned integer"
+    },
+    {
+      "name": "canonical-overflow",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference signed integer overflows"
+    },
+    {
+      "name": "original-overflow",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference signed integer overflows"
+    },
+    {
+      "name": "overlong",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference field is not valid UTF-8/framing"
+    },
+    {
+      "name": "surrogate",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference field is not valid UTF-8/framing"
+    },
+    {
+      "name": "above-Unicode",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference field is not valid UTF-8/framing"
+    },
+    {
+      "name": "truncated-UTF8",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference field is not valid UTF-8/framing"
+    },
+    {
+      "name": "continuation",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference field is not valid UTF-8/framing"
+    },
+    {
+      "name": "unknown-key-type",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference has an unknown key type"
+    },
+    {
+      "name": "empty-ID-key",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference has an empty identifier key"
+    },
+    {
+      "name": "empty-C-chr",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference has an invalid coordinate key"
+    },
+    {
+      "name": "C-zero",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference has a noncanonical signed integer"
+    },
+    {
+      "name": "C-plus",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference has an invalid unsigned integer"
+    },
+    {
+      "name": "C-leading-zero",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference has an invalid unsigned integer"
+    },
+    {
+      "name": "NUL-key",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference has an invalid lookup key"
+    },
+    {
+      "name": "invalid-UTF8-key",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference has an invalid lookup key"
+    },
+    {
+      "name": "C-record-chr-disagreement",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference A coordinate key disagrees with its record"
+    },
+    {
+      "name": "C-record-coordinate-disagreement",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference A coordinate key disagrees with its record"
+    },
+    {
+      "name": "S-record-coordinate-disagreement",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference S key disagrees with its record"
+    },
+    {
+      "name": "S-as-C",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference S record has the wrong key type"
+    },
+    {
+      "name": "A-as-S",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference A record has the wrong key type"
+    },
+    {
+      "name": "bad-record-offset-48",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference has an invalid unsigned integer"
+    },
+    {
+      "name": "bad-record-offset-49",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference has an invalid unsigned integer"
+    },
+    {
+      "name": "bad-record-offset-50",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference has an invalid unsigned integer"
+    },
+    {
+      "name": "bad-record-offset-51",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference has an invalid unsigned integer"
+    },
+    {
+      "name": "bad-record-offset-52",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference offset is not a record boundary"
+    },
+    {
+      "name": "bad-record-offset-53",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference record offset is out of range"
+    },
+    {
+      "name": "bad-record-offset-54",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference has an invalid unsigned integer"
+    },
+    {
+      "name": "key-no-LF",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference record is truncated"
+    },
+    {
+      "name": "key-no-separator",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference key row must have two fields"
+    },
+    {
+      "name": "key-extra-field",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference key row must have two fields"
+    },
+    {
+      "name": "key-offset-middle",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference offset is not a record boundary"
+    },
+    {
+      "name": "key-offset-out-of-range",
+      "expected": "refused",
+      "exit": 0,
+      "outcome": "error\tTyped reference offset is not a record boundary"
+    },
+    {
+      "name": "short-binary-offset-table",
+      "expected": "refused",
+      "exit": 1,
+      "outcome": "Invalid offsets file"
+    },
+    {
+      "name": "bad-marker-0",
+      "expected": "refused",
+      "exit": 1,
+      "outcome": "Incomplete or unsupported reference index"
+    },
+    {
+      "name": "bad-marker-1",
+      "expected": "refused",
+      "exit": 1,
+      "outcome": "Typed reference marker is malformed"
+    },
+    {
+      "name": "bad-marker-2",
+      "expected": "refused",
+      "exit": 1,
+      "outcome": "Typed reference marker is malformed"
+    },
+    {
+      "name": "bad-marker-3",
+      "expected": "refused",
+      "exit": 1,
+      "outcome": "Incomplete or unsupported reference index"
+    },
+    {
+      "name": "page-start-65535",
+      "expected": "accepted",
+      "exit": 0,
+      "outcome": "ok\t1\t78|1|41|43|72|1|||1,|72,"
+    },
+    {
+      "name": "key-page-start-65535",
+      "expected": "accepted",
+      "exit": 0,
+      "outcome": "ok\t1\t78|1|41|43|72|1|||1,|72,"
+    },
+    {
+      "name": "page-start-65536",
+      "expected": "accepted",
+      "exit": 0,
+      "outcome": "ok\t1\t78|1|41|43|72|1|||1,|72,"
+    },
+    {
+      "name": "key-page-start-65536",
+      "expected": "accepted",
+      "exit": 0,
+      "outcome": "ok\t1\t78|1|41|43|72|1|||1,|72,"
+    },
+    {
+      "name": "page-start-65537",
+      "expected": "accepted",
+      "exit": 0,
+      "outcome": "ok\t1\t78|1|41|43|72|1|||1,|72,"
+    },
+    {
+      "name": "key-page-start-65537",
+      "expected": "accepted",
+      "exit": 0,
+      "outcome": "ok\t1\t78|1|41|43|72|1|||1,|72,"
+    },
+    {
+      "name": "UTF8-spans-page",
+      "expected": "accepted",
+      "exit": 0,
+      "outcome": "ok\t1\t78|1|41|43|78787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878"
+    },
+    {
+      "name": "long-record-and-key",
+      "expected": "accepted",
+      "exit": 0,
+      "outcome": "ok\t1\t78|1|41|43|78787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878"
+    }
+  ],
+  "occurrence_payload_tags": {
+    "S": 6,
+    "A": 5
+  },
+  "raw_key_multiplicity_exact": true,
+  "unicode_aliases_distinct": true,
+  "raw_candidate_cap_boundaries_exact": true
+}

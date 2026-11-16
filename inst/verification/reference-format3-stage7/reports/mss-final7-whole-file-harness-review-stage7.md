@@ -1,0 +1,41 @@
+# Final MSS7 whole-file benchmark harness: version-1 review
+
+**Verdict: RED for the sealed version-1 harness until three small gate/oracle defects are corrected.** No 1M/10M/40M benchmark was started by this reviewer. The current pinned source, installed DLL and disclosed workload look appropriate; the defects concern failure to reject inconsistent approval evidence or malformed workload/output structure. The coordinator is preparing a separately sealed version 2; this report preserves version 1's scope.
+
+Reviewed directory: `results/mss-final7-whole-file-v1/`. Profile `profiles/scientific7-format2-v1.json` SHA256 **`09a524e0c02e5e6a91873bfc1c1a557ab54ed9265eda29d2bafa2d32184f4e03`**. Its harness seal SHA256 is **`db674332df48138e4afbdf6a95371869c98e727dc0ff21da218f435017faaa34`**. Static files and their checksums are recorded in that seal.
+
+## Required corrections
+
+1. **Scientific approval accepts an explicitly RED review and does not bind installed-suite source revision.** `bench.py:96` searches for the substring `GREEN` in the first 1,500 characters. A tiny review saying `Verdict: RED. This source is NOT GREEN.` plus the pinned core hash is accepted. The approval also ignores `installed_suite.source_revision` versus the profile's candidate production revision; a profile declaring an unreviewed R-only revision is accepted with the existing 5e5 scientific review and installed-suite receipt. This is not proof that the current installed code is wrong; it is a concrete failure of the claimed exact-source/GREEN gate.
+
+   Require the explicit current review's anchored GREEN verdict including the exact production revision, retain report SHA/core matching, and require suite source revision to equal the profile's production revision. The full source revision matters because R-only scientific changes need not alter the native DLL/core hash. Add literal RED/NOT-GREEN and stale-suite-revision rejection tests, with a legitimate current-GREEN positive control. No broad substring match should establish approval.
+
+2. **An extra undeclared normalized field is silently accepted.** The normalized header is checked against the 19-field schema, but `csv.DictReader` stores extra row values under a `None` key. `check_row` visits only declared fields. A valid two-row fixture with `UNDECLARED_EXTRA_FIELD` appended to the first data row returns `passed: true`.
+
+   Before comparing values, require the row's exact key sequence to equal `FIELDS` and require every field value to be a string. This rejects extra fields and missing-width rows while retaining the existing independent numeric/string comparisons. Add a data-row-width adversarial test, not only extra-row/header-order tests.
+
+3. **The asserted unique panel boundary does not reject duplicate identical reference rows.** `Gold` rejects multiallelic loci and IDs with multiple events, but a duplicated identical SNP row still passes: source/panel rows = 2, loci = 1, IDs = 2 in the tiny fixture (primary plus alias). It therefore cannot certify its claimed unique-reference denominator generally.
+
+   Require `len(loci) == source_rows` and the count of unique primary panel IDs to equal source rows, in addition to the existing nonpalindromic/single-event checks. Add duplicate-identical-row and same-locus duplicate-primary tests. The **actual current preflight inventory is unique**—437,458 source rows, loci, IDs and panel entries—so this finding does not assert a current denominator error. It corrects the boundary that is supposed to refuse one.
+
+Exact accepted counterexamples are retained in `review-mss-final7-whole-file-harness-stage7/adverse-results.json`, with their tiny source/output/profile/approval artifacts. The reviewer ran the existing small self-check only: **9 tests pass**, showing that these cases were absent from those tests. No frozen harness/profile/library/reference files were changed; Python bytecode writing into the sealed harness was disabled.
+
+## Findings that support the intended benchmark
+
+The profile binds source production files and all installed R/DLL payloads. Baseline is frozen preservation implementation 4 (`5cf1e23…`, DLL `0a65467b…`), **not** legacy `format_sumstats`. Candidate is scientific implementation 7 (`5e5e5bfd…`, core `bbde5436…`, installed DLL `c1c0a8b2…`). Later report/test checkout commits do not change the pinned production files. The supplied candidate profile agrees with the independently reviewed scientific source and the coordinator's installed/three-OS validation evidence.
+
+The actual reference inventory is a deliberately narrow biallelic nonpalindromic chr22 SNP panel. The oracle validates original REF against FASTA, independently derives match/swap/direction/frequency outputs, checks all source and normalized rows, confirms both original source copies by SHA256, enforces source-generation order/tokens, and counts correct nonmissing/missing effect/EAF denominators. Its bounded shape cache is sufficient for the two orientation blocks × panel records × two matched implementations. This is a whole-file streaming throughput workload, not a general indel/multiallelic scientific oracle.
+
+The input rows repeat 437,458 unique panel variants with exact synthetic beta/EAF and fixed SE/P. A 40M run is **40M rows, not 40M unique variants**. Only 1M is a fresh 4-versus-7 matched comparison; 10M/40M run candidate 7 and establish scaling/resource behavior. Historical receipts pin the same input bytes; they are not current larger-stage baseline measurements or a legacy 40M comparison.
+
+The runner separately records package setup, fresh reference verification/opening, complete `harmonise_file` processing and external process timing. Processing includes the API's preservation/hash/copy/output costs. The all-row Python verifier and total operator wall time are separate. Fresh processes/handles do not imply cold OS caches; fixed ordering and concurrent full-reference preparations/package work remain disclosed shared-host limitations. One timed case per version is a bounded measurement, not a precision speedup study.
+
+## Guard and execution review
+
+Both R cases and the verifier use owned subprocess groups with finite deadlines, 8 GiB process-tree RSS/footprint/conservative-memory targets, a 160 GiB filesystem free-space floor, and owned-output growth caps. macOS physical footprint includes compressed/private accounting; Linux memory includes swap. Only the launched group's PID is signaled on refusal. Output directories/logs/receipts are append-only and existing stages are refused; failed attempts remain visible. The R runner checks its loaded package/DLL and row/implementation identity. Successful results require the independent verifier and a post-run recheck of immutable pins. No unrelated preparation is stopped.
+
+Inspection supports these guards; this review did not deliberately allocate 8 GiB, exhaust disk, or execute a real benchmark. Polling is not proof that a sub-poll transient never occurred; that limitation is correctly disclosed. External R-process peaks are parsed and checked separately. The preflight/profile currently has no execution authorization, and larger stages require an external stage authorization plus a prior passing 1M stage.
+
+Two optional hardening points do not change the three required fixes above: fail explicitly if mandatory external-time peak fields cannot be parsed rather than treating missing fields as zero, and bind the larger-stage 1M prerequisite's stored profile hash/case set explicitly to the current profile. The present append-only named-profile workflow already prevents accidental normal-path reuse, but explicit checks make the intended gate easier to audit. An unexplained signal exit should remain an unexplained failure rather than a diagnosed natural OOM; current code never reports a failed process as a successful timed result.
+
+**Proceed only after focused version-2 recheck.** Version 1, its original self-check/preflight logs, seal and profile remain unchanged. The scientific implementation-7 GREEN is unaffected by these harness findings. No source benchmark execution, library installation, source modification, reference mutation, cloud operation or CI action was performed by this reviewer.

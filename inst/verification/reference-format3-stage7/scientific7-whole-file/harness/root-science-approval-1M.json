@@ -1,0 +1,18 @@
+{
+  "approved": true,
+  "status": "SCIENCE_GREEN",
+  "profile_sha256": "6251cc132236435156b4dff4c3c934d7fe7505f263a04745def33d0f89983cd3",
+  "candidate_core_sha256": "bbde5436366e686eeb35a48853117387b43b65618ca8308a87819e4382c86ceb",
+  "authorized_stages": [
+    "1M"
+  ],
+  "scientific_review": {
+    "path": "/private/tmp/gwas-harvest-stage2/reports/mss-preservation-v7-independent-review-stage7.md",
+    "sha256": "1ace03b13ed5e725762672fc2805fae76be149f39a608502c5aa22535c1b5f7c"
+  },
+  "installed_suite": {
+    "path": "/private/tmp/gwas-harvest-stage2/results/mss-preservation-v7/full-suite/summary.json",
+    "sha256": "ce9bee94c4c8b98fff1be8e4268c65d725f549be34139f3960f0c130b24a5660"
+  },
+  "operator_scope": "Matched1M only after harness-v2 independentGREEN; no production reference,format3,10M or40M admission"
+}

@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "public_build_query_2x2_complete": true,
+  "source_and_all_normalized_fields_exact": true,
+  "full_FASTA_or_highALT_not_executed": true
+}

@@ -1,0 +1,218 @@
+[
+  {
+    "order": 0,
+    "batch": 1,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 0,
+    "batch": 2,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 0,
+    "batch": 7,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 0,
+    "batch": 32,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 0,
+    "batch": 100,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 0,
+    "batch": 100000,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 1,
+    "batch": 1,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 1,
+    "batch": 2,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 1,
+    "batch": 7,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 1,
+    "batch": 32,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 1,
+    "batch": 100,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 1,
+    "batch": 100000,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 2,
+    "batch": 1,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 2,
+    "batch": 2,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 2,
+    "batch": 7,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 2,
+    "batch": 32,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 2,
+    "batch": 100,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 2,
+    "batch": 100000,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 3,
+    "batch": 1,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 3,
+    "batch": 2,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 3,
+    "batch": 7,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 3,
+    "batch": 32,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 3,
+    "batch": 100,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 3,
+    "batch": 100000,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 4,
+    "batch": 1,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 4,
+    "batch": 2,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 4,
+    "batch": 7,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 4,
+    "batch": 32,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 4,
+    "batch": 100,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 4,
+    "batch": 100000,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 5,
+    "batch": 1,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 5,
+    "batch": 2,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 5,
+    "batch": 7,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 5,
+    "batch": 32,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 5,
+    "batch": 100,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  },
+  {
+    "order": 5,
+    "batch": 100000,
+    "legacy_payload_exact": true,
+    "raw_key_cardinality_exact": true
+  }
+]

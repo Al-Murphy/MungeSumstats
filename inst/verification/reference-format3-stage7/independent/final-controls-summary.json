@@ -1,0 +1,85 @@
+{
+  "currentID_order_cases": [
+    {
+      "order": 0,
+      "rows": 4,
+      "all_fields_exact": true,
+      "shared_event_ambiguous_currentID_withheld": true
+    },
+    {
+      "order": 1,
+      "rows": 4,
+      "all_fields_exact": true,
+      "shared_event_ambiguous_currentID_withheld": true
+    },
+    {
+      "order": 2,
+      "rows": 4,
+      "all_fields_exact": true,
+      "shared_event_ambiguous_currentID_withheld": true
+    },
+    {
+      "order": 3,
+      "rows": 4,
+      "all_fields_exact": true,
+      "shared_event_ambiguous_currentID_withheld": true
+    },
+    {
+      "order": 4,
+      "rows": 4,
+      "all_fields_exact": true,
+      "shared_event_ambiguous_currentID_withheld": true
+    },
+    {
+      "order": 5,
+      "rows": 4,
+      "all_fields_exact": true,
+      "shared_event_ambiguous_currentID_withheld": true
+    }
+  ],
+  "old_reader_refuses3": true,
+  "author_harness_and_DLL_pins_exact": true,
+  "actual_prefix_index_bytes": [
+    232818833,
+    198423556
+  ],
+  "retained_reduction_percent": 14.77340838659732,
+  "author_highALT_public_outputs_rechecked": [
+    {
+      "raw_ALTs": 256,
+      "full19_public_fields_exact": true,
+      "all_canonical_fields_nullable": true,
+      "retained_file_sizes_match": true
+    },
+    {
+      "raw_ALTs": 2048,
+      "full19_public_fields_exact": true,
+      "all_canonical_fields_nullable": true,
+      "retained_file_sizes_match": true
+    },
+    {
+      "raw_ALTs": 10000,
+      "full19_public_fields_exact": true,
+      "all_canonical_fields_nullable": true,
+      "retained_file_sizes_match": true
+    }
+  ],
+  "author_guard_receipts_rechecked": [
+    "prefix-1M-v1/fai-guard/guard.json",
+    "prefix-1M-v1/format3/execution/guard.json",
+    "prefix-1M-v1/format2/execution/guard.json",
+    "highALT-whole-query-v1/ALT2048/format3/query-execution/guard.json",
+    "highALT-whole-query-v1/ALT2048/format3/build-execution/guard.json",
+    "highALT-whole-query-v1/ALT2048/format2/query-execution/guard.json",
+    "highALT-whole-query-v1/ALT2048/format2/build-execution/guard.json",
+    "highALT-whole-query-v1/ALT256/format3/query-execution/guard.json",
+    "highALT-whole-query-v1/ALT256/format3/build-execution/guard.json",
+    "highALT-whole-query-v1/ALT256/format2/query-execution/guard.json",
+    "highALT-whole-query-v1/ALT256/format2/build-execution/guard.json",
+    "highALT-whole-query-v1/ALT10000/format3/query-execution/guard.json",
+    "highALT-whole-query-v1/ALT10000/format3/build-execution/guard.json",
+    "highALT-whole-query-v1/ALT10000/format2/query-execution/guard.json",
+    "highALT-whole-query-v1/ALT10000/format2/build-execution/guard.json"
+  ],
+  "performance_runs_executed_by_this_review": 0
+}

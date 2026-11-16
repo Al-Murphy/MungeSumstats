@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "static_files": {
+    "config.json": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/config.json",
+      "bytes": 2573,
+      "mtime_ns": 1794815683832949702,
+      "sha256": "ce9638255d2b01ce870d51d7274ace8eb05cf1cdcc961b9a92d40e936abcbf42",
+      "md5": "2156c9d5a7dd7b432a058162d230b5e0",
+      "newline_count": 65
+    },
+    "process_memory.py": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/process_memory.py",
+      "bytes": 1989,
+      "mtime_ns": 1794815683833271915,
+      "sha256": "aea36f87d4dd12ea41961f2cdd11198e527ccf17be2946a4351153cb96c0a0a5",
+      "md5": "c0f8a565dedcafdceead2ecca1f69489",
+      "newline_count": 36
+    },
+    "common.py": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/common.py",
+      "bytes": 4574,
+      "mtime_ns": 1794815683834475264,
+      "sha256": "783c50523bf9a16a8cd5160a14f889029d7269a499845e2449ad19b33543d1d4",
+      "md5": "545394146a99c6be55740c47f4625116",
+      "newline_count": 80
+    },
+    "verify.py": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/verify.py",
+      "bytes": 11349,
+      "mtime_ns": 1794815704175851107,
+      "sha256": "d4bbe46a9037597203e779b9e0f830a293b15a476421973fc6a0b69b2dc45c95",
+      "md5": "9e5fce69db4b8759dc3c76a79c4cb714",
+      "newline_count": 181
+    },
+    "bench.py": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/bench.py",
+      "bytes": 13389,
+      "mtime_ns": 1794815704175529686,
+      "sha256": "e93b5a90a1db4c301f7721e49f7b2a723b21b47e2c9598f79431919165a7ca56",
+      "md5": "dba2e80de492723c0b34e567d943a11b",
+      "newline_count": 166
+    },
+    "runner.R": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runner.R",
+      "bytes": 2893,
+      "mtime_ns": 1794815683835350734,
+      "sha256": "b6c04b34fb8e936018edea5edc80d624203d964fa5a9e96ba100a12f73f9fe9a",
+      "md5": "32918b2a6dbd994aff61354b843e4074",
+      "newline_count": 46
+    },
+    "inspect-reference.R": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/inspect-reference.R",
+      "bytes": 682,
+      "mtime_ns": 1794815683835558945,
+      "sha256": "f4125289fdb8cfc53aea48d37c990ee2a4bdce09036dc27b27f11c54879af556",
+      "md5": "5ef37fc8a1f6fd5da1090feba6c82746",
+      "newline_count": 10
+    },
+    "selfcheck.py": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/selfcheck.py",
+      "bytes": 8545,
+      "mtime_ns": 1794815716075049010,
+      "sha256": "75e362144ce06f5f7e52191a81f31a4ae7df754e6f654fb69f8d3fbf753bbb1f",
+      "md5": "25a971034b9aeafab388608197254b8b",
+      "newline_count": 166
+    },
+    "README.md": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/README.md",
+      "bytes": 2430,
+      "mtime_ns": 1794815704176067235,
+      "sha256": "4475eb9bf479592432f93c1a933e70ff9a89e89cdd9a90472d6221090e0cedb0",
+      "md5": "5709fa089789efc7f5e807056f87acb5",
+      "newline_count": 13
+    },
+    "approval.example.json": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/approval.example.json",
+      "bytes": 581,
+      "mtime_ns": 1794815683837560596,
+      "sha256": "bce4c6c4e8b9cf157089e02cbc0ba9d72c0bf56822cd6698edb6c29efd68a60a",
+      "md5": "b59a4fcd299ec7112c97adef2f0ccd6f",
+      "newline_count": 15
+    }
+  }
+}

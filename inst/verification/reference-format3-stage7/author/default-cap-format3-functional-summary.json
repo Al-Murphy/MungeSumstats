@@ -1,0 +1,10 @@
+{
+  "raw_ALT_occurrences": 10000,
+  "raw_each_key_occurrences": 10000,
+  "cap9999": "raw_candidate_refusal",
+  "cap10000": "source_allele_context_required",
+  "cap320000": "source_allele_context_required",
+  "full_native_output_default_vs_adequate_exact": true,
+  "format2_default_not_retimed": true,
+  "scope": "tiny native functional probe of packed format only; timing not used; no additional heavy benchmark"
+}
