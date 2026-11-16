@@ -266,25 +266,15 @@ public:
 
     }
     if(hits.size()>1){result.status="ambiguous";return result;}
+    // A unique REF-ALT hit does not prove the source strand: the opposite
+    // strand may instead measure two alternate alleles at the same site.
+    // Neither a site identifier nor EAF selects between these explanations.
+    const bool alt_alt=alt_alt_context(input,candidates,other,effect,cap);
     if(hits.empty()) {
-      for(auto& c:candidates){
-        if(!missing(input.chr)&&input.chr!=c.chr)continue;
-        for(auto original_pos:c.original_positions) {
-          if(input.pos>0&&input.pos!=original_pos)continue;
-          for(auto& site:lookup("S:"+c.chr+":"+std::to_string(original_pos),cap)) {
-            // An ALT pair must share one original REF span. Merged candidate
-            // strings pool distinct sites and depend on incidental record order.
-            if(site.original_pos!=original_pos||site.chr!=c.chr||!dna(site.original_ref)||
-               fa.sequence(site.chr,site.original_pos,site.original_ref.size())!=site.original_ref)continue;
-            std::set<std::string> alleles;
-            for(auto& allele:split(site.alleles,','))alleles.insert(allele);
-            for(int orientation=0;orientation<2;++orientation){auto a=orientation?complement(other):other;auto b=orientation?complement(effect):effect;
-              if(a!=site.original_ref&&b!=site.original_ref&&alleles.count(a)&&alleles.count(b)){result.status="alt_alt_contrast";return result;}}
-          }
-        }
-      }
+      if(alt_alt){result.status="alt_alt_contrast";return result;}
       result.status="allele_mismatch";return result;
     }
+    if(alt_alt){result.status="ambiguous";return result;}
     auto h=hits[0];auto c=h.candidate;result.status=h.comp?(h.swap?"swapped_complement":"complement"):(h.swap?"swap":"match");result.chr=c.chr;result.pos=c.pos;result.ref=c.ref;result.alt=c.alt;result.id=c.id;result.swapped=h.swap;result.complemented=h.comp;result.effect=h.swap?-input.effect:input.effect;
     if(input.frequency_type=="EAF"&&std::isfinite(input.eaf)&&input.eaf>=0&&input.eaf<=1){
       if(!h.swap)result.eaf=input.eaf;
@@ -295,6 +285,33 @@ public:
     return result;
   }
 private:
+  bool alt_alt_context(const Input& input,const std::vector<Candidate>& candidates,
+                       const std::string& other,const std::string& effect,
+                       std::size_t cap) {
+    // Deduplicate lookups within this row only. A site key is bound to its
+    // chromosome and original position; lookup retains each original REF span.
+    std::set<std::pair<std::string,std::int64_t>> visited;
+    for(const auto& c:candidates) {
+      if(!missing(input.chr)&&input.chr!=c.chr)continue;
+      for(auto position:c.original_positions) {
+        if(input.pos>0&&input.pos!=position)continue;
+        if(!visited.emplace(c.chr,position).second)continue;
+        for(const auto& site:lookup("S:"+c.chr+":"+std::to_string(position),cap)) {
+          // Never pool alleles from different original REF spans or placements.
+          if(site.original_pos!=position||site.chr!=c.chr||!dna(site.original_ref)||
+             fa.sequence(site.chr,site.original_pos,site.original_ref.size())!=site.original_ref)continue;
+          std::set<std::string> alleles;
+          for(const auto& allele:split(site.alleles,','))alleles.insert(allele);
+          for(int orientation=0;orientation<2;++orientation) {
+            const auto a=orientation?complement(other):other,b=orientation?complement(effect):effect;
+            if(a!=site.original_ref&&b!=site.original_ref&&alleles.count(a)&&alleles.count(b))return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
   // Count canonical alternate events, not raw allele strings. The same deletion
   // can be spelled GT>G, TG>G or TT>T at different anchors. Keep each site's
   // own REF/position when interpreting its ALT list; merged candidate strings

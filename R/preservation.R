@@ -229,7 +229,9 @@ open_reference <- function(reference) {
 #'   directions remain ambiguous. ALT-ALT contrasts are retained without
 #'   inventing a reference-anchored effect. ALT-ALT diagnostics require both
 #'   alleles in one FASTA-valid original REF context, consistent with known input
-#'   chromosome and position. All GRCh38 projection fields remain
+#'   chromosome and position. A competing ALT-ALT explanation also keeps a
+#'   unique generic REF-ALT hit ambiguous; an identifier does not declare source
+#'   strand or reference-allele role. All GRCh38 projection fields remain
 #'   missing unless an explicit `projection` is supplied. Projected coordinates,
 #'   alleles and effects have separate columns; native fields are never replaced.
 #'   Symbolic alleles and unknown IDs are preserved in `source`. Input and output
@@ -340,7 +342,7 @@ harmonise_sumstats <- function(sumstats, reference,
     rownames(normalized) <- NULL
     if (!is.null(projection)) normalized <- .mss_project(normalized, reference, projection, candidate_limit)
     provenance <- list(core_version = reference$core_version,
-                       implementation_version = "mss-preservation-5",
+                       implementation_version = "mss-preservation-6",
                        reference_version = reference$version, build = build,
                        reference_path = reference$path,
                        reference_checksums = reference$checksums,
@@ -526,7 +528,7 @@ harmonise_file <- function(input, reference, path,
     utils::write.table(audit, file.path(staging, "audit.tsv"), sep = "\t", quote = TRUE,
                        row.names = FALSE)
     metadata <- c(schema_version = "1", core_version = reference$core_version,
-                  implementation_version = "mss-preservation-5",
+                  implementation_version = "mss-preservation-6",
                   contig_mapping_implementation = if (length(reference$contig_aliases)) "mss-contigs-1" else "not_applied",
                   reference_build = build, reference_version = reference$version,
                   reference_path = reference$path, source_rows = sprintf("%.17g", total),
@@ -574,7 +576,7 @@ harmonise_file <- function(input, reference, path,
                        file.path(staging, "checksums.tsv"), sep = "\t", quote = TRUE,
                        row.names = FALSE, qmethod = "double")
     manifest <- list(schema_version = 1L, core_version = reference$core_version,
-                     implementation_version = "mss-preservation-5",
+                     implementation_version = "mss-preservation-6",
                      contig_mapping_implementation = if (length(reference$contig_aliases)) "mss-contigs-1" else "not_applied",
                      reference_build = build, reference_version = reference$version,
                      reference_checksums = reference$checksums, reference_path = reference$path,
