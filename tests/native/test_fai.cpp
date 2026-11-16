@@ -35,6 +35,10 @@ int main(int,char** argv) {
     {"uint overflow","one\t18446744073709551616\t5\t4\t5\n"},
     {"extra field","one\t6\t5\t4\t5\t0\n"},
     {"inconsistent empty","empty\t0\t0\t1\t1\n"},
+    {"trailing whitespace","one\t6\t5\t4\t5 \n"},
+    {"hex suffix","one\t6\t0x5\t4\t5\n"},
+    {"empty offset beyond file","empty\t0\t999\t0\t0\n"},
+    {"NUL name",std::string("on")+std::string(1,'\0')+"e\t6\t5\t4\t5\n"},
   };
   std::size_t failures=0,refused=0;
   for(const auto& item:bad) {
@@ -55,8 +59,10 @@ int main(int,char** argv) {
   control(">one\nACGTAC","one\t6\t5\t6\t6\n","one","ACGTAC");
   control(">one\nACGTAC\n","one\t0006\t0005\t0006\t0007\n","one","ACGTAC");
   control(">雪\nAC\n","雪\t2\t5\t2\t3\n","雪","AC");
+  // Indexed reading is not restricted to LF/CRLF sequence terminators.
+  control(">one\nACGT\vAC\v","one\t6\t5\t4\t5\n","one","ACGTAC");
   write(fasta,">empty\n>one\nAC\n");mss::Fasta generated(fasta);generated.save(index);mss::Fasta reopened(fasta,index);
   if(reopened.sequence("empty",1,1)!=""||reopened.sequence("one",1,2)!="AC")throw std::runtime_error("Empty-contig writer compatibility changed");
-  std::cout<<refused<<" invalid indexes refused; 6 valid controls; range boundaries passed\n";
+  std::cout<<refused<<" invalid indexes refused; 7 valid controls; range boundaries passed\n";
   return failures?1:0;
 }

@@ -1,5 +1,18 @@
 # Preservation normalizer 7: scientific contract
 
+FAI readers additionally enforce checked decimal parsing and address bounds before
+native sequence arithmetic. FAI numeric fields allow leading zeros, but no signs,
+whitespace, suffix text or uint64 overflow. Names must be nonempty, unique and
+free of NUL/whitespace. Nonempty contigs require positive line bases, at least as
+many line bytes, and a last addressed base within the actual FASTA file; checks
+avoid overflow before multiplication. Empty contigs retain the native writer's
+zero-width representation. Requested ranges are checked by subtraction before
+allocation or line division. Consistent sequence terminators are not restricted
+to LF/CRLF. These are numeric/layout safety checks, not reconstruction or
+authentication of every FASTA byte when an operator deliberately rewrites a
+trusted manifest and FAI together. Valid scientific results and identities stay
+unchanged. FAI field meanings follow the [HTSlib faidx specification](https://www.htslib.org/doc/faidx.html).
+
 This recipe describes `harmonise_sumstats()` and `harmonise_file()` using
 `mss-preservation-7`, reference format `mss-preservation-2`, and the unchanged
 `mss-projection-2` and parser identities. The legacy `format_sumstats()` API is
