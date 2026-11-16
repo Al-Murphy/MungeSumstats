@@ -1,0 +1,241 @@
+"file","context","test","nb","failed","skipped","error","warning","user","system","real","passed"
+"test-a0_a1.R","a0_a1","Test that if a0/a1 passed, formatted correctly",2,0,FALSE,FALSE,1,2.134,0.111,2.293,1
+"test-allele_flip.R","allele_flip","Test that allele columns and effect columns flipped correctly",1,0,FALSE,FALSE,0,0.00399999999999956,0.001,0.00499999999999989,1
+"test-alt-alt-orientation.R","alt-alt-orientation","quad-allelic source contrasts remain ambiguous across all orientations",10,0,FALSE,FALSE,0,0.016,0.00800000000000001,0.0250000000000004,10
+"test-alt-alt-orientation.R","alt-alt-orientation","trusted source REF ALT and strand still resolve a quad-allelic event",11,0,FALSE,FALSE,0,0.0110000000000001,0.00599999999999995,0.0179999999999998,11
+"test-alt-alt-orientation.R","alt-alt-orientation","split biallelic source records retain coherent orientation ambiguity regardless of order",35,0,FALSE,FALSE,0,0.0439999999999996,0.025,0.0700000000000003,35
+"test-alt-alt-orientation.R","alt-alt-orientation","indel and multi-base ALT pairs can compete with a single canonical event",10,0,FALSE,FALSE,0,0.0110000000000001,0.00700000000000001,0.0190000000000001,10
+"test-alt-alt-orientation.R","alt-alt-orientation","biallelic and noncompeting triallelic directions retain resolved effects",18,0,FALSE,FALSE,0,0.0209999999999999,0.014,0.0339999999999998,18
+"test-alt-alt-orientation.R","alt-alt-orientation","incoherent or invalid ALT contexts cannot obscure a unique canonical hit",27,0,FALSE,FALSE,0,0.0279999999999996,0.019,0.048,27
+"test-alt-alt-orientation.R","alt-alt-orientation","a bounded site-context lookup cannot silently select a unique hit on overflow",1,0,FALSE,FALSE,0,0.00499999999999989,0.003,0.00699999999999967,1
+"test-alt-alt-orientation.R","alt-alt-orientation","streaming preserves original bytes and every ambiguous source row",25,0,FALSE,FALSE,0,0.0380000000000003,0.018,0.0570000000000004,25
+"test-alt-alt-reanchoring.R","alt-alt-reanchoring","common reference padding preserves unknown-strand contrast ambiguity",80,0,FALSE,FALSE,0,0.0800000000000001,0.039,0.119000000000001,80
+"test-alt-alt-reanchoring.R","alt-alt-reanchoring","jointly padded pure ALT contrasts retain their explicit uncertainty status",32,0,FALSE,FALSE,0,0.0410000000000004,0.022,0.0630000000000006,32
+"test-alt-alt-reanchoring.R","alt-alt-reanchoring","padded indel and MNV contexts retain all four orientation ambiguities",60,0,FALSE,FALSE,0,0.0590000000000002,0.033,0.093,60
+"test-alt-alt-reanchoring.R","alt-alt-reanchoring","shared alternate backgrounds remain part of the association contrast",16,0,FALSE,FALSE,0,0.0199999999999996,0.012,0.032,16
+"test-alt-alt-reanchoring.R","alt-alt-reanchoring","repeat-equivalent source anchors compare both ALT events in one REF span",5,0,FALSE,FALSE,0,0.00600000000000023,0.004,0.00999999999999979,5
+"test-bi_alllelic.R","bi_alllelic","non-biallelic SNPs are removed",1,0,FALSE,FALSE,0,14.84,1.726,18.095,1
+"test-check_drop_indels.R","check_drop_indels","check_range_p_val works",1,0,FALSE,FALSE,0,0.855,0.0549999999999997,0.920999999999999,1
+"test-check_impute_se_beta.R","check_impute_se_beta","Check that imputation columns added correctly",7,0,FALSE,FALSE,0,4.293,0.118,4.651,7
+"test-check_info_score.R","check_info_score","check_info_score works",8,0,FALSE,FALSE,0,0.847000000000001,0.0259999999999998,0.888999999999999,8
+"test-check_range_pval.R","check_range_pval","check_range_p_val works",4,0,FALSE,FALSE,0,0.856000000000002,0.0270000000000001,0.904999999999998,4
+"test-check_small_p_val.R","check_small_p_val","check_small_p_val works",2,0,FALSE,FALSE,0,0.871000000000002,0.0180000000000002,0.915999999999997,2
+"test-check_tabular.R","check_tabular","Check that a file is in tabular format",1,0,FALSE,FALSE,0,0.004999999999999,0.00199999999999978,0.0069999999999979,1
+"test-check_vcf.R","check_vcf","Checking whether a file is works",1,0,FALSE,FALSE,0,0.00199999999999889,0.00099999999999989,0.00300000000000011,1
+"test-check_zscore.R","check_zscore","Check that Z-scores get computed correctly",2,0,FALSE,FALSE,0,1.722,0.0350000000000001,1.783,2
+"test-combined_allele_columns.R","combined_allele_columns","Can correctly separate two A1/A2 columns",1,0,FALSE,FALSE,0,1.78,0.0449999999999999,1.851,1
+"test-combined_chr_bp_2.R","combined_chr_bp_2","Can correctly separate two CHR:BP columns",1,0,FALSE,FALSE,0,2.645,0.0670000000000002,2.747,1
+"test-combined_CHR_BP_A2_A1_2.R","combined_CHR_BP_A2_A1_2","Can correctly separate CHR:BP:A2:A1, two columns",1,0,FALSE,FALSE,0,2.632,0.0710000000000002,2.75,1
+"test-combined_CHR_BP_A2_A1.R","combined_CHR_BP_A2_A1","Can correctly separate CHR:BP:A2:A1",1,0,FALSE,FALSE,0,2.648,0.056,2.742,1
+"test-combined_chr_bp.R","combined_chr_bp","Can correctly separate CHR:BP",1,0,FALSE,FALSE,0,2.729,0.069,2.848,1
+"test-comma_delim.R","comma_delim","Can handle comma delimited files",1,0,FALSE,FALSE,0,1.831,0.0589999999999997,1.927,1
+"test-complex-contrast-boundary.R","complex-contrast-boundary","a shared alternate background remains coherent after a repeat shift",5,0,FALSE,FALSE,0,0.007000000000005,0.00500000000000034,0.0120000000000005,5
+"test-complex-contrast-boundary.R","complex-contrast-boundary","single-base contrasts defer when an inserted alternate background cannot be excluded",5,0,FALSE,FALSE,0,0.0069999999999979,0.004,0.0120000000000005,5
+"test-complex-contrast-boundary.R","complex-contrast-boundary","length and base-pair exclusions retain ordinary supported contrasts",3,0,FALSE,FALSE,0,0.00800000000000267,0.00800000000000001,0.0159999999999982,3
+"test-complex-contrast-boundary.R","complex-contrast-boundary","unknown alternate sequence defers generic effects and preserves explicit source contracts",23,0,FALSE,FALSE,0,0.0309999999999988,0.0190000000000001,0.0519999999999996,23
+"test-complex-contrast-boundary.R","complex-contrast-boundary","jointly padded pure SNP contexts have one exact source anchor",40,0,FALSE,FALSE,0,0.0589999999999975,0.0310000000000001,0.106999999999999,40
+"test-compute_nsize.R","compute_nsize","compute_nsize works",8,0,FALSE,FALSE,0,0.944000000000003,0.0369999999999999,1.037,8
+"test-contig-aliases.R","contig-aliases","explicit contig aliases preserve source labels and resolve reference labels",13,0,FALSE,FALSE,0,0.0230000000000032,0.012,0.0360000000000014,13
+"test-contig-aliases.R","contig-aliases","contig mappings cannot shadow canonical names or invent destinations",12,0,FALSE,FALSE,0,0.0240000000000009,0.0110000000000001,0.0380000000000038,12
+"test-correct_format.R","correct_format","Input has correct format",2,0,FALSE,FALSE,0,0.942,0.0260000000000002,0.991,2
+"test-dup_col.R","dup_col","Handle dup cols",3,0,FALSE,FALSE,0,1.898,0.0539999999999998,1.996,3
+"test-dup_rows.R","dup_rows","Handle duplicate rows based on rs ID",2,0,FALSE,FALSE,0,6.934,0.905,8.651,2
+"test-effect_columns_nonzero.R","effect_columns_nonzero","Filter effect columns so !=0",1,0,FALSE,FALSE,0,0.925000000000004,0.0629999999999997,0.996000000000002,1
+"test-equivalent-indel-context.R","equivalent-indel-context","equivalent indel anchors retain trusted EAF checks and defer uncertain generic context",7,0,FALSE,FALSE,0,0.00900000000000034,0.00499999999999989,0.0150000000000006,7
+"test-frq_filter.R","frq_filter","Filter SNPs based on FRQ",2,0,FALSE,FALSE,0,1.781,0.024,1.816,2
+"test-generic-coordinate-contract.R","generic-coordinate-contract","complex generic ID inference requires source position even for one canonical event",29,0,FALSE,FALSE,0,0.0279999999999987,0.0120000000000005,0.0390000000000015,29
+"test-generic-coordinate-contract.R","generic-coordinate-contract","known source positions preserve distinct identities and opposite valid effect signs",11,0,FALSE,FALSE,0,0.0120000000000005,0.00599999999999934,0.0180000000000007,11
+"test-generic-coordinate-contract.R","generic-coordinate-contract","paired ID contexts survive coordinate candidate intersection and reference order",56,0,FALSE,FALSE,0,0.0530000000000044,0.024,0.078000000000003,56
+"test-generic-coordinate-contract.R","generic-coordinate-contract","closure keeps chromosome and paired REF context boundaries and trusted contracts",10,0,FALSE,FALSE,0,0.0109999999999957,0.00800000000000001,0.0180000000000007,10
+"test-generic-coordinate-contract.R","generic-coordinate-contract","single-base ID inference and unsupported complex marker behavior remain explicit",11,0,FALSE,FALSE,0,0.00999999999999801,0.00600000000000023,0.0169999999999959,11
+"test-generic-coordinate-contract.R","generic-coordinate-contract","newly required ID context lookups retain raw candidate cap failures",1,0,FALSE,FALSE,0,0.00300000000000011,0.00300000000000011,0.00600000000000023,1
+"test-generic-coordinate-contract.R","generic-coordinate-contract","missing-position complex rows remain byte-preserved in streamed editions",8,0,FALSE,FALSE,0,0.0110000000000028,0.00800000000000001,0.0190000000000055,8
+"test-generic-coordinate-contract.R","generic-coordinate-contract","partial historical aliases and exact-event coordinate bridges close current IDs",9,0,FALSE,FALSE,0,0.00900000000000034,0.00699999999999967,0.0169999999999959,9
+"test-generic-coordinate-contract.R","generic-coordinate-contract","closed-universe REF ALT hypotheses reject without promoting proof-only mappings",157,0,FALSE,FALSE,0,0.149000000000001,0.0709999999999997,0.221000000000004,157
+"test-generic-coordinate-contract.R","generic-coordinate-contract","current ID cycles terminate and fanout obeys explicit global closure caps",6,0,FALSE,FALSE,0,0.00999999999999801,0.00800000000000001,0.0190000000000055,6
+"test-headers_correct.R","headers_correct","Input has correct headers",1,0,FALSE,FALSE,0,0.896000000000001,0.0120000000000005,0.911000000000001,1
+"test-indels.R","indels","non-biallelic SNPs are removed",2,0,FALSE,FALSE,0,0.00200000000000244,0,0.00199999999999534,2
+"test-index_tabular.R","index_tabular","index_tabular works",8,0,FALSE,FALSE,0,0.930999999999997,0.0150000000000006,0.959000000000003,8
+"test-info_filter.R","info_filter","Filter SNPs where INFO<0.9",1,0,FALSE,FALSE,0,0.908000000000001,0.0150000000000006,0.937000000000012,1
+"test-input_R_obj.R","input_R_obj","Can pass in R objects of summary statistics",1,0,FALSE,FALSE,0,2.136,0.0750000000000002,2.255,1
+"test-issues_alleles.R","issues_alleles","#111/#124: bi_allelic_filter drops >2 allele SNPs, FALSE keeps",5,0,FALSE,FALSE,0,0.00799999999999557,0.000999999999999446,0.00900000000000034,5
+"test-issues_alleles.R","issues_alleles","#137: allele flip contract and non-biallelic FRQ guard",14,0,FALSE,FALSE,0,0.0379999999999967,0.00400000000000045,0.0420000000000016,14
+"test-issues_chr.R","issues_chr","#103/#116/#130: check_chr standardises X, Y and MT names",5,0,FALSE,FALSE,0,0.0069999999999979,0.00100000000000033,0.00900000000000034,5
+"test-issues_chr.R","issues_chr","#116/#117: sort_coords keeps MT and sorts CHR naturally",3,0,FALSE,FALSE,0,0.00400000000000489,0.00100000000000033,0.00600000000000023,3
+"test-issues_chr.R","issues_chr","#8: sort_coords orders CHR naturally, sex chromosomes last",8,0,FALSE,FALSE,0,0.0390000000000015,0.00400000000000045,0.0420000000000016,8
+"test-issues_chr.R","issues_chr","#31/#37/#157/#158: check_chr prefixes, contigs and lowercase",4,0,FALSE,FALSE,0,0.00800000000000267,0.000999999999999446,0.00900000000000034,4
+"test-issues_chr.R","issues_chr","#144: check_bp_range drops BP outside 1..chromosome length",4,0,FALSE,FALSE,0,0.0179999999999936,0.00700000000000056,0.0300000000000011,4
+"test-issues_chr.R","issues_chr","#144: check_bp_range also checks 23/24/x/y/M/mt CHR names",2,0,FALSE,FALSE,0,0.00800000000000267,0.000999999999999446,0.00799999999999557,2
+"test-issues_chr.R","issues_chr","#144/#150: NA CHR and NA BP rows survive check_bp_range",2,0,FALSE,FALSE,0,0.00800000000000267,0.00100000000000033,0.00900000000000034,2
+"test-issues_chr.R","issues_chr","#161: character BP and P columns are compared numerically",4,0,FALSE,FALSE,0,0.0150000000000006,0.00199999999999978,0.019999999999996,4
+"test-issues_dups.R","issues_dups","#77/#81: RSID dedupe only with bi_allelic_filter and check_dups",5,0,FALSE,FALSE,0,0.00900000000000034,0.00199999999999978,0.0109999999999957,5
+"test-issues_dups.R","issues_dups","#77/#81/#89: BP dedupe skips indels and respects the switches",6,0,FALSE,FALSE,0,0.00900000000000034,0.000999999999999446,0.0109999999999957,6
+"test-issues_dups.R","issues_dups","#139: indels sharing an RSID are deduped on alleles, not RSID",8,0,FALSE,FALSE,0,0.0140000000000029,0.00200000000000067,0.0159999999999911,8
+"test-issues_effect_direction.R","issues_effect_direction","#168: check 2 infers the effect allele from column names",14,0,FALSE,FALSE,0,0.0579999999999998,0.00400000000000045,0.0619999999999976,14
+"test-issues_effect_direction.R","issues_effect_direction","#186: EA/OA allele headers are not treated as ambiguous",2,0,FALSE,FALSE,0,0.00200000000000244,0.000999999999999446,0.00300000000000011,2
+"test-issues_effect_direction.R","issues_effect_direction","#188/#208: check 3 makes the reference allele the non-effect A1",9,0,FALSE,FALSE,0,0.0620000000000047,0.00400000000000045,0.0660000000000025,9
+"test-issues_effect_direction.R","issues_effect_direction","#193: ALLELE0 headers are ambiguous; A1FREQ marks ALLELE1 effect",6,0,FALSE,FALSE,0,0.0400000000000063,0.00300000000000011,0.0439999999999969,6
+"test-issues_effect_direction.R","issues_effect_direction","#193: eff_on_minor_alleles infers from the reference only",4,0,FALSE,FALSE,0,0.039999999999992,0.00200000000000067,0.0420000000000016,4
+"test-issues_effect_direction.R","issues_effect_direction","#208: mixed-case allele headers are swapped by check 2",9,0,FALSE,FALSE,0,0.0619999999999976,0.00399999999999956,0.0690000000000026,9
+"test-issues_effect_direction.R","issues_effect_direction","#208: raw METAL headers (Freq1) mark Allele1 as the effect",3,0,FALSE,FALSE,0,0.0430000000000064,0.00399999999999956,0.0499999999999972,3
+"test-issues_flip.R","issues_flip","#44/#46/#88: flips invert OR, take 1-FRQ, negate signed stats",12,0,FALSE,FALSE,0,0.0259999999999962,0.00400000000000045,0.0300000000000011,12
+"test-issues_flip.R","issues_flip","#140: allele_flip_drop drops SNPs matching neither allele",12,0,FALSE,FALSE,0,0.027000000000001,0.00400000000000045,0.0300000000000011,12
+"test-issues_flip.R","issues_flip","#140: SNPs absent from the reference are kept unflipped",4,0,FALSE,FALSE,0,0.0190000000000055,0.00399999999999956,0.0229999999999961,4
+"test-issues_flip.R","issues_flip","#140: allele_flip_drop keeps SNPs absent from the reference",2,0,FALSE,FALSE,0,0.007000000000005,0.00100000000000033,0.00699999999999079,2
+"test-issues_flip.R","issues_flip","#165: FRQ guard names its remedies and only fires on a flip",7,0,FALSE,FALSE,0,0.027000000000001,0.00100000000000033,0.0280000000000058,7
+"test-issues_flip.R","issues_flip","#145: lower-case alleles are uppercased, then match reference",9,0,FALSE,FALSE,0,0.0160000000000053,0.00100000000000033,0.0170000000000101,9
+"test-issues_flip.R","issues_flip","#139: check_bi_allelic keeps off-reference SNPs (none filtered)",1,0,FALSE,FALSE,0,0.00199999999999534,0,0.00200000000000955,1
+"test-issues_flip.R","issues_flip","#139: check_bi_allelic keeps off-reference SNPs (some filtered)",2,0,FALSE,FALSE,0,0.00499999999999545,0.00100000000000033,0.00400000000000489,2
+"test-issues_headers.R","issues_headers","#12/#148: sumstatsColHeaders ships once, unique and upper-case",10,0,FALSE,FALSE,0,0.0799999999999983,0.00599999999999934,0.0870000000000033,10
+"test-issues_headers.R","issues_headers","#58/#91/#94/#96/#97/#99/#105/#138/#142/#148/#168/#186: single headers map to the agreed name",1,0,FALSE,FALSE,0,0.311999999999998,0.0170000000000003,0.331000000000003,1
+"test-issues_headers.R","issues_headers","#95/#105/#138: the first synonym in map order wins and names stay unique",8,0,FALSE,FALSE,0,0.0249999999999915,0.00399999999999956,0.0289999999999964,8
+"test-issues_headers.R","issues_headers","#45/#48: A0/ALLELE0 becomes A1 and its partner A1/ALLELE1 becomes A2",5,0,FALSE,FALSE,0,0.0210000000000008,0.00300000000000011,0.0240000000000009,5
+"test-issues_headers.R","issues_headers","#45/#142: a user-supplied mapping_file is applied",4,0,FALSE,FALSE,0,0.0180000000000007,0.00199999999999978,0.0189999999999912,4
+"test-issues_headers.R","issues_headers","#142: REGENIE header (GENPOS, ALLELE0/1, A1FREQ) maps fully",4,0,FALSE,FALSE,0,0.831000000000003,0.00999999999999979,0.847999999999999,4
+"test-issues_headers.R","issues_headers","#142: in a full REGENIE header A1FREQ, not MAF, becomes FRQ",2,0,FALSE,FALSE,0,0.00799999999999557,0.00100000000000033,0.00900000000000034,2
+"test-issues_headers.R","issues_headers","#168: allele-specific effect/FRQ names map only via the combinations",3,0,FALSE,FALSE,0,0.0309999999999917,0.00199999999999978,0.0319999999999965,3
+"test-issues_headers.R","issues_headers","#186: EA/OA map to A2/A1 so A1 is not imputed",3,0,FALSE,FALSE,0,0.00900000000000034,0.00100000000000033,0.0100000000000051,3
+"test-issues_headers.R","issues_headers","#192: risk / non-risk allele headers map to A2 / A1",21,0,FALSE,FALSE,0,0.0670000000000073,0.0109999999999992,0.0819999999999936,21
+"test-issues_headers.R","issues_headers","#99/#195: published header sets map to the exact expected names",5,0,FALSE,FALSE,0,0.0319999999999965,0.00300000000000011,0.0360000000000014,5
+"test-issues_headers.R","issues_headers","#174/#175: format_sumstats normalises a custom mapping_file",4,0,FALSE,FALSE,0,2.632,0.032,2.685,4
+"test-issues_headers.R","issues_headers","#174/#175: exported standardise_header normalises a custom mapping_file",2,0,FALSE,FALSE,0,0.0150000000000006,0.00100000000000033,0.0160000000000053,2
+"test-issues_ieu_mock.R","issues_ieu_mock","#52/#109: find_sumstats computes N per row",6,0,FALSE,FALSE,0,0.0180000000000007,0.00300000000000011,0.0229999999999961,6
+"test-issues_ieu_mock.R","issues_ieu_mock","#66/#74: import_sumstats reuses an existing formatted file",4,0,FALSE,FALSE,0,0.0100000000000051,0.00199999999999978,0.0159999999999911,4
+"test-issues_ieu_mock.R","issues_ieu_mock","#209/#210: download_vcf fetches the index from its own URL",9,0,FALSE,FALSE,0,0.0109999999999957,0.00299999999999923,0.0139999999999958,9
+"test-issues_ieu_mock.R","issues_ieu_mock","#204: each dbSNP tarball gets its own extraction",4,0,FALSE,FALSE,0,0.007000000000005,0.00500000000000078,0.0250000000000057,4
+"test-issues_liftover.R","issues_liftover","#104: a chrX SNP lifts to the right CHR and position",6,0,FALSE,FALSE,0,0.105000000000004,0.00600000000000023,0.11399999999999,6
+"test-issues_liftover.R","issues_liftover","#107/#118/#136: no conversion requested -> unchanged and silent",5,0,FALSE,FALSE,0,0.007000000000005,0.000999999999999446,0.00900000000000034,5
+"test-issues_liftover.R","issues_liftover","#128/#133: Ensembl is the default chain source; no UCSC shipped",6,0,FALSE,FALSE,0,0.007000000000005,0.00199999999999978,0.00900000000000034,6
+"test-issues_liftover.R","issues_liftover","get_chain_file uses the bundled chain when a download fails",6,0,FALSE,FALSE,0,0.0349999999999966,0.00400000000000045,0.039999999999992,6
+"test-issues_liftover.R","issues_liftover","#84/#128: get_chain_file uses an existing chain, no download",6,0,FALSE,FALSE,0,0.0310000000000059,0.00400000000000045,0.0360000000000014,6
+"test-issues_liftover.R","issues_liftover","#84: get_chain_file finds a cached chain in any save_dir",2,0,FALSE,FALSE,0,0.027000000000001,0.00499999999999989,0.0330000000000013,2
+"test-issues_liftover.R","issues_liftover","#183/#184/#197: local_chain .gz is kept, reusable; extra cols",11,0,FALSE,FALSE,0,0.417999999999992,0.0129999999999999,0.432000000000002,11
+"test-issues_liftover.R","issues_liftover","#211: CHR 23 is lifted as X and rmv_chr removes rows",7,0,FALSE,FALSE,0,0.406999999999996,0.0150000000000006,0.427999999999997,7
+"test-issues_logs.R","issues_logs","#68: parse_logs finds current '<id>_log_msg.txt' and old log names",8,0,FALSE,FALSE,0,0.0169999999999959,0.00400000000000045,0.0210000000000008,8
+"test-issues_logs.R","issues_logs","#4/#32: report_summary wording round-trips through parse_report",4,0,FALSE,FALSE,0,0.00499999999999545,0.00199999999999978,0.00500000000000966,4
+"test-issues_logs.R","issues_logs","#61/#131/#207/#80: message logs are named from save_path and sinks are restored",15,0,FALSE,FALSE,0,1.55500000000001,0.0170000000000003,1.581,15
+"test-issues_logs.R","issues_logs","#80: rerunning with force_new=TRUE does not append to old logs",1,0,FALSE,FALSE,0,1.751,0.0200000000000005,1.78400000000001,1
+"test-issues_logs.R","issues_logs","#207: a caller's message sink is restored after format_sumstats",1,0,FALSE,FALSE,0,0.00300000000000011,0.00199999999999978,0.00400000000000489,1
+"test-issues_n_frq.R","issues_n_frq","#26: character N is converted with or without imputation_ind",5,0,FALSE,FALSE,0,0.00600000000000023,0.00199999999999978,0.00699999999999079,5
+"test-issues_n_frq.R","issues_n_frq","#29: N_dropNA=TRUE drops NA N and NA N doesn't disable N_std",4,0,FALSE,FALSE,0,0.00499999999999545,0.00200000000000067,0.007000000000005,4
+"test-issues_n_frq.R","issues_n_frq","#43: compute_nsize formulas, Neff_<method> names, IMPUTATION_n",11,0,FALSE,FALSE,0,0.0180000000000007,0.00300000000000011,0.0210000000000008,11
+"test-issues_n_frq.R","issues_n_frq","#3/#151: check_ldsc_format forces the parameters LDSC needs",13,0,FALSE,FALSE,0,0.012999999999991,0.00300000000000011,0.0160000000000053,13
+"test-issues_n_frq.R","issues_n_frq","#3: LDSC output accepts several compute_n methods",1,0,FALSE,FALSE,0,0.00200000000000955,0,0.000999999999990564,1
+"test-issues_n_frq.R","issues_n_frq","#58/#189: check_frq_maf renames or warns, never converts FRQ",6,0,FALSE,FALSE,0,0.00699999999999079,0.000999999999999446,0.00900000000000034,6
+"test-issues_n_frq.R","issues_n_frq","#180/#181/#182/#197: default drop_na_cols ignores extra columns",5,0,FALSE,FALSE,0,0.007000000000005,0.00100000000000033,0.00900000000000034,5
+"test-issues_n_frq.R","issues_n_frq","#5/#100: an all-NA or absent INFO column drops no rows",5,0,FALSE,FALSE,0,0.00500000000000966,0.000999999999999446,0.007000000000005,5
+"test-issues_pvals_z.R","issues_pvals_z","#76: out-of-range p-values are set to 1/0 only when converting",5,0,FALSE,FALSE,0,0.007000000000005,0.000999999999999446,0.00900000000000034,5
+"test-issues_pvals_z.R","issues_pvals_z","#212/#213: P=0 gives a finite Z (P set to 1e-300) and is flagged",14,0,FALSE,FALSE,0,0.0169999999999959,0.00400000000000045,0.0210000000000008,14
+"test-issues_pvals_z.R","issues_pvals_z","#218: -log10 P beyond the double range gives P=0 with a message",9,0,FALSE,FALSE,0,0.00900000000000034,0.00199999999999978,0.0109999999999957,9
+"test-issues_pvals_z.R","issues_pvals_z","#218: text P below the double range is counted and set to 0",7,0,FALSE,FALSE,0,0.007000000000005,0.00300000000000011,0.00900000000000034,7
+"test-issues_pvals_z.R","issues_pvals_z","#149: multi-trait P columns error unless ignore_multi_trait=TRUE",5,0,FALSE,FALSE,0,0.00600000000000023,0.00100000000000033,0.007000000000005,5
+"test-issues_pvals_z.R","issues_pvals_z","#129/#135: impute_beta prefers log(OR) > LOG_ODDS > Z*SE, opt-in",10,0,FALSE,FALSE,0,0.0139999999999958,0.00199999999999978,0.0160000000000053,10
+"test-issues_read.R","issues_read","#21: a VCF without ##SAMPLE lines is read (nThread=1)",3,0,FALSE,FALSE,0,0.257000000000005,0.00399999999999956,0.263999999999996,3
+"test-issues_read.R","issues_read","#51: a ##SAMPLE ID that differs from the data column is ignored",3,0,FALSE,FALSE,0,0.248000000000005,0.00300000000000011,0.251999999999995,3
+"test-issues_read.R","issues_read","#100: a VCF INFO 'AF=' field stays AF and is not read as INFO",3,0,FALSE,FALSE,0,0.251999999999995,0.00399999999999956,0.256,3
+"test-issues_read.R","issues_read","#53: read_sumstats accepts an R object",7,0,FALSE,FALSE,0,0.878,0.0179999999999998,0.917000000000002,7
+"test-issues_read.R","issues_read","#91/#154: a PGC text file renamed to .tsv is read as tabular",3,0,FALSE,FALSE,0,0.00499999999999545,0.00100000000000033,0.00600000000000023,3
+"test-issues_read.R","issues_read","#91/#154: a PGC '.vcf.tsv' text file is read as tabular",2,0,FALSE,FALSE,0,0.846000000000004,0.0149999999999997,0.870999999999995,2
+"test-issues_read.R","issues_read","#155/#156: 'vcf' elsewhere in a tabular path does not route to read_vcf",6,0,FALSE,FALSE,0,0.0150000000000006,0.00199999999999978,0.0169999999999959,6
+"test-issues_read.R","issues_read","#110/#119: partly-NA columns are not flagged as empty",4,0,FALSE,FALSE,0,0.00400000000000489,0,0.00399999999999068,4
+"test-issues_ref_genome.R","issues_ref_genome","#164: many indels sharing one ID don't explode the not-join",4,0,FALSE,FALSE,0,0.0139999999999958,0.00200000000000067,0.0169999999999959,4
+"test-issues_ref_genome.R","issues_ref_genome","#166: off-reference SNP with imputation_ind=TRUE, indels T/F",10,0,FALSE,FALSE,0,0.097999999999999,0.00600000000000023,0.105000000000004,10
+"test-issues_ref_genome.R","issues_ref_genome","#164: off-reference SNVs are still corrected when indels exist",7,0,FALSE,FALSE,0,0.0799999999999983,0.00499999999999989,0.0859999999999985,7
+"test-issues_ref_genome.R","issues_ref_genome","#150: NA CHR/BP rows are imputed from the SNP ID",9,0,FALSE,FALSE,0,0.866,0.109999999999999,1.31400000000001,9
+"test-issues_ref_genome.R","issues_ref_genome","#150: check_no_chr_bp accepts a pre-loaded rsids table",2,0,FALSE,FALSE,0,0.00499999999999545,0,0.00500000000000966,2
+"test-issues_ref_genome.R","issues_ref_genome","#139: check_no_rs_snp reports how many indels it skips",3,0,FALSE,FALSE,0,0.034000000000006,0.00300000000000011,0.0369999999999919,3
+"test-issues_ref_genome.R","issues_ref_genome","#177: removed-row logs with NA CHR/BP aren't tabix-sorted",5,0,FALSE,FALSE,0,0.0170000000000101,0.00300000000000011,0.0219999999999914,5
+"test-issues_save_path.R","issues_save_path","#7: tabix_index=TRUE rewrites a .gz save_path to .bgz",3,0,FALSE,FALSE,0,0.00400000000000489,0.00100000000000033,0.00500000000000966,3
+"test-issues_save_path.R","issues_save_path","#10: user-specified nested and relative save_paths are honoured",6,0,FALSE,FALSE,0,0.00500000000000966,0.00300000000000011,0.00799999999999557,6
+"test-issues_save_path.R","issues_save_path","#33: saving to tempdir() prints NOTEs; other folders do not",3,0,FALSE,FALSE,0,0.00300000000000011,0,0.00300000000000011,3
+"test-issues_save_path.R","issues_save_path","#33: '~' in save_path is expanded to the home directory",3,0,FALSE,FALSE,0,0.00300000000000011,0.00100000000000033,0.00399999999999068,3
+"test-issues_save_path.R","issues_save_path","#34: the save_path suffix follows write_vcf",14,0,FALSE,FALSE,0,0.0149999999999864,0.00400000000000045,0.0180000000000007,14
+"test-issues_save_path.R","issues_save_path","#34: only the file suffix is rewritten, not directory names",2,0,FALSE,FALSE,0,0.00300000000000011,0.000999999999999446,0.00300000000000011,2
+"test-issues_save_path.R","issues_save_path","#49: output format is matched on the end of save_path",9,0,FALSE,FALSE,0,0.00900000000000034,0.00199999999999978,0.0120000000000005,9
+"test-issues_save_path.R","issues_save_path","#62: a save_path folder that cannot be created fails early",1,0,FALSE,FALSE,0,0.00300000000000011,0,0.00199999999999534,1
+"test-issues_save_path.R","issues_save_path","#24: a previously formatted save_path short-circuits format_sumstats",5,0,FALSE,FALSE,0,0.0230000000000103,0.00499999999999989,0.0279999999999916,5
+"test-issues_save_path.R","issues_save_path","#24: a global `sumstats_return` does not replace the cached data",2,0,FALSE,FALSE,0,0.0190000000000055,0.00400000000000045,0.0229999999999961,2
+"test-issues_snp_ids.R","issues_snp_ids","#120: mix of rs IDs and CHR:BP:A1:A2 IDs doesn't crash",2,0,FALSE,FALSE,0,0.00500000000000966,0.000999999999999446,0.0170000000000101,2
+"test-issues_snp_ids.R","issues_snp_ids","#123: all CHR:BP SNP IDs are moved to ID, not looked up",4,0,FALSE,FALSE,0,0.00400000000000489,0.00199999999999978,0.007000000000005,4
+"test-issues_snp_ids.R","issues_snp_ids","#138: combined CHR:BP:A?:A? column is split in the right order",11,0,FALSE,FALSE,0,0.012999999999991,0.00300000000000011,0.0169999999999959,11
+"test-issues_snp_ids.R","issues_snp_ids","#48: multi-rs IDs split on ',', '; ' and '_' separators",5,0,FALSE,FALSE,0,0.00600000000000023,0.00199999999999978,0.00799999999999557,5
+"test-issues_snp_ids.R","issues_snp_ids","#48: remove_multi_rs_snp=TRUE message counts all separators",1,0,FALSE,FALSE,0,0.00300000000000011,0,0.00300000000000011,1
+"test-issues_snp_ids.R","issues_snp_ids","#48: CHR:BP column with a 3-field CHR:BP:ID row keeps CHR, BP",4,0,FALSE,FALSE,0,0.00499999999999545,0.00199999999999978,0.00600000000000023,4
+"test-issues_snp_ids.R","issues_snp_ids","#57: VARIANT CHR:BP:A1:A2 column gives integer BP for joins",8,0,FALSE,FALSE,0,0.00699999999999079,0.00200000000000067,0.0110000000000099,8
+"test-issues_snp_ids.R","issues_snp_ids","#176: NA SNP IDs with imputation_ind=TRUE get unique join keys",6,0,FALSE,FALSE,0,0.0099999999999909,0.00100000000000033,0.0109999999999957,6
+"test-issues_snp_ids.R","issues_snp_ids","#159/#162: imputation_ind=TRUE with chr:bp and malformed IDs",13,0,FALSE,FALSE,0,0.126000000000005,0.00999999999999979,0.137,13
+"test-issues_validate.R","issues_validate","#49/#114: ref_genome=NULL validates; install check uses dbSNP",1,0,TRUE,FALSE,0,0.00199999999999534,0.00100000000000033,0.00200000000000955,0
+"test-issues_validate.R","issues_validate","#3: ldsc_format is deprecated in favour of save_format",2,0,FALSE,FALSE,0,0.00499999999999545,0.00100000000000033,0.00600000000000023,2
+"test-issues_validate.R","issues_validate","#37/#158: rmv_chrPrefix is deprecated; chr_style is validated",6,0,FALSE,FALSE,0,0.0100000000000051,0.000999999999999446,0.0120000000000005,6
+"test-issues_validate.R","issues_validate","#98/#200: dbSNP=155 validates; unknown or invalid versions error",1,0,TRUE,FALSE,0,0.00400000000000489,0.00100000000000033,0.00400000000000489,0
+"test-issues_validate.R","issues_validate","#99: a remote https path passes validation",2,0,FALSE,FALSE,0,0.00499999999999545,0.00100000000000033,0.00600000000000023,2
+"test-issues_validate.R","issues_validate","#125: several numeric compute_n values give a clear error",2,0,FALSE,FALSE,0,0.00500000000000966,0.000999999999999446,0.00600000000000023,2
+"test-issues_validate.R","issues_validate","#204: dbSNP_tarball validation and load_snp_loc_data errors",5,0,FALSE,FALSE,0,0.0100000000000051,0.00199999999999978,0.0109999999999957,5
+"test-issues_write.R","issues_write","#102: save_format='openGWAS' writes GWAS-VCF fields",11,0,FALSE,FALSE,0,0.338000000000008,0.04,0.38000000000001,11
+"test-issues_write.R","issues_write","#117/#121/#122: tabix output has integer BP, natural CHR order, no leftovers",8,0,FALSE,FALSE,0,0.0300000000000011,0.00400000000000045,0.0339999999999918,8
+"test-issues_write.R","issues_write","#126: NA is written as 'NA' in tsv and as an empty field in csv",3,0,FALSE,FALSE,0,0.00799999999999557,0.00199999999999978,0.0100000000000051,3
+"test-issues_write.R","issues_write","#19: convert_sumstats returns VRanges (ref=A1, alt=A2), GRanges or the data.table",9,0,FALSE,FALSE,0,0.0490000000000066,0.00399999999999956,0.0529999999999973,9
+"test-issues_write.R","issues_write","#216: .vcf.gz output is BGZF and readable by htslib",4,0,FALSE,FALSE,0,0.0809999999999889,0.00300000000000011,0.0840000000000032,4
+"test-issues_write.R","issues_write","#216: write_vcf returns an existing path for each VCF suffix and tabix_index",13,0,FALSE,FALSE,0,0.456000000000003,0.0249999999999995,0.486000000000004,13
+"test-issues_write.R","issues_write","#34: write_sumstats only strips the compression suffix of the file name",4,0,FALSE,FALSE,0,0.0769999999999982,0.00499999999999989,0.0829999999999984,4
+"test-list_sumstats.R","list_sumstats","list_sumstats and parse_logs work",5,0,FALSE,FALSE,0,0.0230000000000103,0.00699999999999967,0.0309999999999917,5
+"test-log10_p.R","log10_p","log10 p-value",2,0,FALSE,FALSE,0,1.761,0.032,1.806,2
+"test-missing_data.R","missing_data","Handle missing data",4,0,FALSE,FALSE,0,6.94200000000001,0.539,8.69000000000001,4
+"test-multi_rs_snp_one_row.R","multi_rs_snp_one_row","Handle more than 1 rs IDs in one row",3,0,FALSE,FALSE,0,0.00200000000000955,0.000999999999999446,0.00400000000000489,3
+"test-multi_traits.R","multi_traits","Multi-trait GWAS handled correctly",1,0,FALSE,FALSE,0,2.502,0.0630000000000006,2.58199999999999,1
+"test-n_not_integer.R","n_not_integer","Handle n when it isn't an integer",1,0,FALSE,FALSE,0,0.878,0.0229999999999997,0.908000000000001,1
+"test-n_num.R","n_num","Handle n when its 5 std dev > mean",3,0,FALSE,FALSE,0,2.626,0.0549999999999997,2.705,3
+"test-no_chr_bp.R","no_chr_bp","Imputation of CHR and BP correctly",5,0,FALSE,FALSE,0,6.042,0.697,7.205,5
+"test-no_chr.R","no_chr","Imputation of CHR correctly",1,0,FALSE,FALSE,0,5.79000000000001,0.487,6.634,1
+"test-no_rs_id.R","no_rs_id","Handle rs ID in row",1,0,FALSE,FALSE,0,1.77500000000001,0.0720000000000001,1.868,1
+"test-no_rs_snp.R","no_rs_snp","Check SNP ID formatting",3,0,FALSE,FALSE,0,8.621,0.479,9.42300000000002,3
+"test-no_snp.R","no_snp","Imputation of SNP correctly",1,0,FALSE,FALSE,0,1.63799999999999,0.113,1.76400000000001,1
+"test-on_x_y_mt_chr.R","on_x_y_mt_chr","SNPs on X,Y,MT chromosome are removed",1,0,FALSE,FALSE,0,1.72699999999999,0.0469999999999997,1.78900000000002,1
+"test-paired-site-contexts.R","paired-site-contexts","separate original sites cannot invent an ALT-ALT diagnostic through record order",18,0,FALSE,FALSE,0,0.019999999999996,0.016,0.0370000000000061,18
+"test-paired-site-contexts.R","paired-site-contexts","an ALT pair in one original REF span remains a genuine ALT-ALT diagnostic",4,0,FALSE,FALSE,0,0.00399999999999068,0.00400000000000045,0.00800000000000978,4
+"test-paired-site-contexts.R","paired-site-contexts","different REF spans at one position cannot pool ALT strings",2,0,FALSE,FALSE,0,0.00300000000000011,0.00399999999999956,0.007000000000005,2
+"test-paired-site-contexts.R","paired-site-contexts","an ALT pair at a different original position cannot classify the input site",2,0,FALSE,FALSE,0,0.00300000000000011,0.00300000000000011,0.00600000000000023,2
+"test-paired-site-contexts.R","paired-site-contexts","an ID-only lookup cannot borrow an ALT pair from a different known chromosome",2,0,FALSE,FALSE,0,0.00399999999999068,0.00499999999999989,0.007000000000005,2
+"test-paired-site-contexts.R","paired-site-contexts","an unsupported original REF is context rather than validated ALT-ALT evidence",2,0,FALSE,FALSE,0,0.00300000000000011,0.00300000000000011,0.007000000000005,2
+"test-paired-site-contexts.R","paired-site-contexts","symbolic context preserves real ALT pairs and defers unresolved allele context",4,0,FALSE,FALSE,0,0.00499999999999545,0.00399999999999956,0.0100000000000193,4
+"test-paired-site-contexts.R","paired-site-contexts","biallelic direction and frequency remain resolved across all four orientations",4,0,FALSE,FALSE,0,0.00399999999999068,0.00300000000000011,0.00800000000000978,4
+"test-preservation-fasta-layout.R","preservation-fasta-layout","reference FASTA indexes retain exact binary line offsets",144,0,FALSE,FALSE,0,0.164000000000001,0.0859999999999994,0.252999999999986,144
+"test-preservation-fasta-layout.R","preservation-fasta-layout","a single unterminated FASTA sequence line has no delimiter stride",2,0,FALSE,FALSE,0,0.00300000000000011,0.00400000000000045,0.00600000000000023,2
+"test-preservation.R","preservation","immutable reference preparation records identity and rejects conflicts",1,0,FALSE,FALSE,0,0.00300000000000011,0,0.00200000000000955,1
+"test-preservation.R","preservation","reference publication rejects input mutation during indexing",2,0,FALSE,FALSE,0,0.00300000000000011,0.00100000000000033,0.00399999999999068,2
+"test-preservation.R","preservation","reference has immutable identity and source validation",4,0,FALSE,FALSE,0,0.00399999999999068,0.000999999999999446,0.00499999999999545,4
+"test-preservation.R","preservation","source rows and raw numeric tokens survive all outcomes",5,0,FALSE,FALSE,0,0.00400000000000489,0.00100000000000033,0.00600000000000023,5
+"test-preservation.R","preservation","effects, alleles and frequencies are conservative and per-allele",9,0,FALSE,FALSE,0,0.00600000000000023,0.00300000000000011,0.00900000000001455,9
+"test-preservation.R","preservation","split ALT contrasts remain distinct and generic opposite indel events stay ambiguous",3,0,FALSE,FALSE,0,0.00499999999999545,0.00199999999999978,0.00699999999997658,3
+"test-preservation.R","preservation","duplicate and unsupported reference rows retain third-allele context",5,0,FALSE,FALSE,0,0.007000000000005,0.00400000000000045,0.0100000000000193,5
+"test-preservation.R","preservation","frequency declarations and effect scale are explicit",5,0,FALSE,FALSE,0,0.00799999999999557,0.00399999999999956,0.0109999999999957,5
+"test-preservation.R","preservation","batching, empty input and repeated harmonisation preserve alignment",6,0,FALSE,FALSE,0,0.00900000000000034,0.00400000000000045,0.0130000000000052,6
+"test-preservation.R","preservation","a verified native reference handle can be reused across calls",3,0,FALSE,FALSE,0,0.0100000000000051,0.00199999999999978,0.01400000000001,3
+"test-preservation.R","preservation","file streaming matches resident batches and preserves associations",15,0,FALSE,FALSE,0,0.0300000000000011,0.00999999999999979,0.0420000000000016,15
+"test-preservation.R","preservation","malformed or truncated input cannot publish an edition",5,0,FALSE,FALSE,0,0.0099999999999909,0.00499999999999989,0.0150000000000148,5
+"test-preservation.R","preservation","reference payload mutation fails verification",1,0,FALSE,FALSE,0,0.00199999999999534,0,0.0029999999999859,1
+"test-projection.R","projection","projection preserves native identity, signed effects and nullable outcomes",14,0,FALSE,FALSE,0,0.0169999999999959,0.00900000000000034,0.0260000000000105,14
+"test-projection.R","projection","negative indel spans left align and target third alleles suppress complemented EAF",9,0,FALSE,FALSE,0,0.0150000000000006,0.0129999999999999,0.0279999999999916,9
+"test-projection.R","projection","chain gaps, reference conflicts and malformed build assets stay explicit",5,0,FALSE,FALSE,0,0.0120000000000005,0.00899999999999945,0.0190000000000055,5
+"test-projection.R","projection","chain IDs may repeat on distinct source contigs in bundled Ensembl chains",1,0,FALSE,FALSE,0,0.00199999999999534,0.00400000000000045,0.007000000000005,1
+"test-projection.R","projection","explicit aliases cannot collapse distinct chains into a false unique indel mapping",2,0,FALSE,FALSE,0,0.00399999999999068,0.00499999999999989,0.0100000000000193,2
+"test-projection.R","projection","reverse reanchored REF-effect indels retain EAF only with canonical two-allele site evidence",81,0,FALSE,FALSE,0,0.0930000000000035,0.0549999999999997,0.152000000000015,81
+"test-quoted-stream.R","quoted-stream","quoted CSV preserves bytes and decoded token spelling across bounded chunks",17,0,FALSE,FALSE,0,0.0379999999999967,0.016,0.0549999999999784,17
+"test-quoted-stream.R","quoted-stream","typed statistical entities retain identity without small-variant effects",6,0,FALSE,FALSE,0,0.00600000000000023,0.00300000000000011,0.0099999999999909,6
+"test-quoted-stream.R","quoted-stream","specialist rows bypass small-variant candidate resolution",3,0,FALSE,FALSE,0,0.00399999999999068,0.00300000000000011,0.00900000000001455,3
+"test-quoted-stream.R","quoted-stream","quoted decoder preserves UTF-8 and all field boundaries at arbitrary byte splits",11,0,FALSE,FALSE,0,0.0100000000000051,0.00399999999999956,0.0130000000000052,11
+"test-read_header.R","read_header","read_header works",7,0,FALSE,FALSE,0,0.0100000000000051,0.00300000000000011,0.0150000000000148,7
+"test-read_sumstats.R","read_sumstats","Test that different kinds of files can be read in.",1,0,FALSE,FALSE,0,3.616,0.0750000000000011,3.75,1
+"test-read_vcf.R","read_vcf","Test that VCFs can be properly read in.",1,0,FALSE,FALSE,0,2.22300000000001,0.0489999999999995,2.31299999999999,1
+"test-rs_plus.R","rs_plus","Handle extra info in rs id column",2,0,FALSE,FALSE,1,1.76400000000001,0.0449999999999999,1.83500000000001,1
+"test-signed_cols.R","signed_cols","will fail without a signed column",1,0,FALSE,FALSE,0,0.897000000000006,0.0259999999999998,0.944000000000017,1
+"test-small_p_val.R","small_p_val","Handle small p-values",1,0,FALSE,FALSE,0,1.71700000000001,0.0309999999999988,1.76300000000001,1
+"test-source-reference-contract.R","source-reference-contract","declared source REF ALT strand prevents opposite indel event mapping",37,0,FALSE,FALSE,0,0.0500000000000114,0.0229999999999997,0.0730000000000075,37
+"test-space_delim.R","space_delim","Can handle space delimited files",1,0,FALSE,FALSE,0,1.75899999999999,0.0399999999999991,1.81399999999999,1
+"test-standard_error_positive.R","standard_error_positive","Filter SNPs SE<=0",1,0,FALSE,FALSE,0,0.865000000000009,0.016,0.892000000000024,1
+"test-standardise_sumstats_column_headers_crossplatform.R","standardise_sumstats_column_headers_crossplatform","standardise_sumstats_column_headers_crossplatform works",8,0,FALSE,FALSE,0,1.61000000000001,0.0149999999999988,1.62899999999999,8
+"test-strand_ambig.R","strand_ambig","strand-ambiguous SNPs are removed",1,0,FALSE,FALSE,0,1.67699999999999,0.0269999999999992,1.72499999999999,1
+"test-user_mapping_file.R","user_mapping_file","Test that user inputted mapping file is appropriate",2,0,FALSE,FALSE,0,0.890999999999991,0.0229999999999997,0.921999999999997,2
+"test-validate_parameters.R","validate_parameters","validate parameters",11,0,FALSE,FALSE,0,0.0149999999999864,0.00600000000000023,0.0219999999999914,11
+"test-vital_cols.R","vital_cols","will fail without a vital column",1,0,FALSE,FALSE,0,0.849999999999994,0.0170000000000012,0.87299999999999,1
+"test-write_sumstats.R","write_sumstats","write_sumstats works",28,0,FALSE,FALSE,0,2.715,0.112,2.92000000000002,28
