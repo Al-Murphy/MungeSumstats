@@ -19,6 +19,10 @@
     list(root=root,original=original,fasta=fasta,reference=ref,input=input,baseline=baseline,bundle=bundle)
 }
 .relocation_move <- function(fixture) {
+    # Streaming APIs can leave unreachable external pointers awaiting R's next
+    # collection. Release those native streams before an offline transfer;
+    # Windows correctly refuses moving a directory containing open files.
+    invisible(gc())
     target <- file.path(fixture$root,'collaborator é copy')
     stopifnot(file.rename(fixture$original,target))
     list(path=file.path(target,'index'),fasta=file.path(target,'reference.fa'))
