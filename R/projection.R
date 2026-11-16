@@ -54,12 +54,16 @@ prepare_projection <- function(chain, source_reference, target_reference,
     if (!identical(checksum, unname(tools::md5sum(chain))) ||
         !identical(signature, file.info(chain)[, c("size", "mtime")])) stop("Chain changed during preparation")
     receipt <- list(implementation_version = "mss-projection-2", normalization_implementation = "mss-preservation-7",
-                    reference_format = "mss-preservation-2", chain = chain, chain_md5 = checksum,
+                    reference_format = if (identical(source$core_version, target$core_version)) source$core_version else "mixed", chain = chain, chain_md5 = checksum,
                     source_build = source_build, target_build = target_build,
                     source_reference_version = source$version, target_reference_version = target$version,
                     source_checksums = source$checksums, target_checksums = target$checksums,
                     source_contigs = source_contigs, target_contigs = target_contigs,
                     algorithm = "single_ungapped_block_ref_span;target_trusted_ref;no_ref_alt_swap")
+    if (source$core_version == "mss-preservation-3" || target$core_version == "mss-preservation-3") {
+        receipt$source_reference_format <- source$core_version
+        receipt$target_reference_format <- target$core_version
+    }
     structure(list(.native = native, source = source, target = target, chain = chain,
                    .signature = signature, receipt = receipt), class = "mss_projection")
 }

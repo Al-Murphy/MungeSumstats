@@ -11,15 +11,16 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // mss_prepare_cpp
-void mss_prepare_cpp(std::string fasta, std::string sites, std::string path, int batch_size);
-RcppExport SEXP _MungeSumstats_mss_prepare_cpp(SEXP fastaSEXP, SEXP sitesSEXP, SEXP pathSEXP, SEXP batch_sizeSEXP) {
+void mss_prepare_cpp(std::string fasta, std::string sites, std::string path, int batch_size, int format_version);
+RcppExport SEXP _MungeSumstats_mss_prepare_cpp(SEXP fastaSEXP, SEXP sitesSEXP, SEXP pathSEXP, SEXP batch_sizeSEXP, SEXP format_versionSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< std::string >::type fasta(fastaSEXP);
     Rcpp::traits::input_parameter< std::string >::type sites(sitesSEXP);
     Rcpp::traits::input_parameter< std::string >::type path(pathSEXP);
     Rcpp::traits::input_parameter< int >::type batch_size(batch_sizeSEXP);
-    mss_prepare_cpp(fasta, sites, path, batch_size);
+    Rcpp::traits::input_parameter< int >::type format_version(format_versionSEXP);
+    mss_prepare_cpp(fasta, sites, path, batch_size, format_version);
     return R_NilValue;
 END_RCPP
 }
@@ -122,7 +123,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_MungeSumstats_mss_prepare_cpp", (DL_FUNC) &_MungeSumstats_mss_prepare_cpp, 4},
+    {"_MungeSumstats_mss_prepare_cpp", (DL_FUNC) &_MungeSumstats_mss_prepare_cpp, 5},
     {"_MungeSumstats_mss_open_reference_cpp", (DL_FUNC) &_MungeSumstats_mss_open_reference_cpp, 2},
     {"_MungeSumstats_mss_harmonise_cpp", (DL_FUNC) &_MungeSumstats_mss_harmonise_cpp, 15},
     {"_MungeSumstats_mss_parser_open_cpp", (DL_FUNC) &_MungeSumstats_mss_parser_open_cpp, 2},

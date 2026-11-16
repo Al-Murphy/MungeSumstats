@@ -19,6 +19,9 @@ NULL
 #'   source labels to exact FASTA contig names. Many aliases may name one contig.
 #'   Existing FASTA names cannot be redirected to another contig. Empty mapping
 #'   retains strict-name behavior; no aliases or build changes are inferred.
+#' @param reference_format On-disk format. The default `mss-preservation-2` is
+#'   compatible with earlier readers; opt-in `mss-preservation-3` factors original
+#'   site contexts into strict typed records and uses deterministic context order.
 #' @return An `mss_reference` containing build, version, paths and MD5 checksums.
 #' @details Each valid REF/ALT pair is independently trimmed and left aligned
 #'   against FASTA. Every rsID/alias can resolve to multiple candidates. Invalid or
@@ -30,11 +33,13 @@ NULL
 #'   single unusually large line can exceed the nominal row-buffer bound.
 #' @export
 prepare_reference <- function(fasta, variants, path, build, version,
-                              batch_size = 100000L, contig_aliases = character()) {
+                              batch_size = 100000L, contig_aliases = character(),
+                              reference_format = c("mss-preservation-2", "mss-preservation-3")) {
     if (missing(build) || length(build) != 1L || is.na(build) || !nzchar(build))
         stop("An explicit build is required")
     if (missing(version) || length(version) != 1L || is.na(version) || !nzchar(version))
         stop("An explicit version is required")
+    reference_format <- match.arg(reference_format)
     batch_size <- .mss_positive_integer(batch_size, "batch_size")
     contig_aliases <- .mss_validate_contig_aliases(contig_aliases)
     fasta <- normalizePath(fasta, mustWork = TRUE)
@@ -46,7 +51,9 @@ prepare_reference <- function(fasta, variants, path, build, version,
     staging <- tempfile(paste0(".", basename(path), "-pending-"), tmpdir = parent)
     on.exit(unlink(staging, recursive = TRUE), add = TRUE)
     input_hashes <- unname(tools::md5sum(c(fasta, variants)))
-    mss_prepare_cpp(fasta, variants, staging, batch_size)
+    if (reference_format == "mss-preservation-3")
+        mss_prepare_cpp(fasta, variants, staging, batch_size, 3L)
+    else mss_prepare_cpp(fasta, variants, staging, batch_size)
     if (length(contig_aliases)) {
         fai <- utils::read.delim(file.path(staging, "fasta.fai"), header = FALSE,
                                 colClasses = "character", comment.char = "")
@@ -70,13 +77,17 @@ prepare_reference <- function(fasta, variants, path, build, version,
         stop("Reference input changed while hashing; no reference was published")
     sizes <- file.info(files)$size
     names(sizes) <- names(files)
-    manifest <- list(schema_version = 1L, core_version = "mss-preservation-2",
+    manifest <- list(schema_version = 1L, core_version = reference_format,
                      build = build, version = version, fasta = fasta,
                      checksum_algorithm = "MD5", checksums = checksums,
                      sizes = sizes, files = filenames,
                      created_utc = format(Sys.time(), tz = "UTC", usetz = TRUE),
                      input_variants = variants,
                      projection = "not_attempted")
+    if (reference_format == "mss-preservation-3") {
+        manifest$record_layout <- "typed-A7-S5"
+        manifest$reference_context_order <- "semantic-s-context-v1"
+    }
     saveRDS(manifest, file.path(staging, "manifest.rds"), version = 2)
     if (file.exists(path) || !file.rename(staging, path)) stop("Cannot publish immutable reference path")
     .mss_read_reference(path)
@@ -122,7 +133,13 @@ prepare_reference <- function(fasta, variants, path, build, version,
     path <- normalizePath(path, mustWork = TRUE)
     manifest <- readRDS(file.path(path, "manifest.rds"))
     if (!identical(manifest$schema_version, 1L) ||
-        !identical(manifest$core_version, "mss-preservation-2")) stop("Unsupported reference schema")
+        !manifest$core_version %in% c("mss-preservation-2", "mss-preservation-3")) stop("Unsupported reference schema")
+    marker <- readLines(file.path(path, "core-version"), warn = FALSE)
+    if (!identical(marker, manifest$core_version)) stop("Reference format marker/manifest mismatch")
+    if (manifest$core_version == "mss-preservation-3" &&
+        (!identical(manifest$record_layout, "typed-A7-S5") ||
+         !identical(manifest$reference_context_order, "semantic-s-context-v1")))
+        stop("Unsupported typed reference schema/order")
     manifest$path <- path
     manifest$contig_aliases <- character()
     if ("contig_aliases.tsv" %in% manifest$files) {
@@ -371,6 +388,8 @@ harmonise_sumstats <- function(sumstats, reference,
                        columns = columns, reference_verified = verify,
                        projection = if (is.null(projection)) "not_attempted" else projection$receipt, schema_version = 1L,
                        source_strand = source_strand)
+    if (reference$core_version == "mss-preservation-3")
+        provenance$reference_context_order <- reference$reference_context_order
     structure(list(source = sumstats, normalized = normalized, provenance = provenance),
               class = "mss_harmonised")
 }
@@ -562,6 +581,8 @@ harmonise_file <- function(input, reference, path,
                   projection_implementation = if (is.null(projection)) "not_attempted" else projection$receipt$implementation_version,
                   source_strand = if (!is.null(source_strand)) source_strand else
                       if ("source_strand" %in% names(columns)) paste0("column:", columns$source_strand) else "not_declared")
+    if (reference$core_version == "mss-preservation-3")
+        metadata <- c(metadata, reference_context_order = reference$reference_context_order)
     utils::write.table(data.frame(key = names(metadata), value = unname(metadata)),
                        file.path(staging, "metadata.tsv"), sep = "\t", quote = TRUE,
                        row.names = FALSE, qmethod = "double")
@@ -610,6 +631,8 @@ harmonise_file <- function(input, reference, path,
                      projection_receipt = if (is.null(projection)) NULL else projection$receipt,
                      delimiter = delimiter,
                      created_utc = format(Sys.time(), tz = "UTC", usetz = TRUE))
+    if (reference$core_version == "mss-preservation-3")
+        manifest$reference_context_order <- reference$reference_context_order
     saveRDS(manifest, file.path(staging, "manifest.rds"), version = 2)
     # Close output connections before rename, which is required on Windows.
     close(normalized_writer);close(source_writer);close(reader)

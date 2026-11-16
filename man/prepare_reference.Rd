@@ -3,9 +3,11 @@
 \title{Prepare an immutable portable reference index}
 \usage{
 prepare_reference(fasta, variants, path, build, version, batch_size = 100000L,
-                  contig_aliases = character())
+                  contig_aliases = character(),
+  reference_format = c("mss-preservation-2", "mss-preservation-3"))
 }
 \arguments{
+\item{reference_format}{On-disk format; default mss-preservation-2, opt-in typed mss-preservation-3.}
 \item{fasta}{Plain FASTA with fixed-width sequence lines except final lines. Compressed FASTA is unsupported.}
 \item{variants}{TSV containing exactly \code{chr,pos,ref,alt,id,aliases}, in that order. Positions are 1-based. Comma-separated ALT alleles and semicolon-separated ID aliases are supported; missing values use a dot.}
 \item{path}{New version-specific reference directory; existing paths are refused.}

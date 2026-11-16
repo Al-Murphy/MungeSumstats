@@ -7,6 +7,7 @@
 #include <cctype>
 #include <filesystem>
 #include <fstream>
+#include <iterator>
 #include <limits>
 #include <list>
 #include <map>
@@ -59,6 +60,12 @@ public:
       out.append(data,start,take);if(end!=std::string::npos)break;pos+=take;}
     return out;
   }
+  std::string strict_line(std::uint64_t pos) {
+    if(pos>=length||(pos&&bytes(pos-1,1)!="\n"))throw std::runtime_error("Typed reference offset is not a record boundary");
+    auto out=line(pos);
+    if(out.size()>=length-pos||bytes(pos+out.size(),1)!="\n")throw std::runtime_error("Typed reference record is truncated");
+    return out;
+  }
 };
 inline std::vector<std::string> split(const std::string& s,char sep) {
   std::vector<std::string> out; std::string v; std::istringstream in(s);
@@ -68,6 +75,47 @@ inline std::vector<std::string> split(const std::string& s,char sep) {
 inline std::string upper(std::string s) { for(char& c:s) c=static_cast<char>(std::toupper(static_cast<unsigned char>(c))); return s; }
 inline bool dna(const std::string& s) { return !s.empty() && s.find_first_not_of("ACGT")==std::string::npos; }
 inline bool missing(const std::string& s) {return s.empty() || s=="." || s=="NA";}
+// Format 3 has complete typed records, never an unchecked skipped tail.
+inline bool typed_text(const std::string& text) {
+  for(std::size_t i=0;i<text.size();) {
+    const auto first=static_cast<unsigned char>(text[i]);
+    if(first<128){if(!first||first=='\t'||first=='\n')return false;++i;continue;}
+    std::size_t more;unsigned char low=128,high=191;
+    if(first>=194&&first<=223)more=1;
+    else if(first>=224&&first<=239){more=2;if(first==224)low=160;if(first==237)high=159;}
+    else if(first>=240&&first<=244){more=3;if(first==240)low=144;if(first==244)high=143;}
+    else return false;
+    if(more>=text.size()-i)return false;
+    const auto second=static_cast<unsigned char>(text[i+1]);if(second<low||second>high)return false;
+    for(std::size_t j=2;j<=more;++j){const auto byte=static_cast<unsigned char>(text[i+j]);if(byte<128||byte>191)return false;}
+    i+=more+1;
+  }
+  return true;
+}
+inline std::uint64_t typed_uint(const std::string& text) {
+  if(text.empty()||(text.size()>1&&text[0]=='0'))throw std::runtime_error("Typed reference has an invalid unsigned integer");
+  std::uint64_t value=0;
+  for(char c:text){if(c<'0'||c>'9'||value>(std::numeric_limits<std::uint64_t>::max()-static_cast<unsigned>(c-'0'))/10)throw std::runtime_error("Typed reference has an invalid unsigned integer");value=value*10+static_cast<unsigned>(c-'0');}
+  return value;
+}
+inline std::int64_t typed_int(const std::string& text,bool positive) {
+  if(text.empty())throw std::runtime_error("Typed reference has an invalid signed integer");
+  const bool negative=text[0]=='-';const auto start=negative?1U:0U;
+  if(start==text.size())throw std::runtime_error("Typed reference has an invalid signed integer");
+  const auto magnitude=typed_uint(text.substr(start));
+  const auto maximum=static_cast<std::uint64_t>(std::numeric_limits<std::int64_t>::max());
+  if(magnitude>maximum+(negative?1U:0U))throw std::runtime_error("Typed reference signed integer overflows");
+  const auto value=negative?(magnitude?-(static_cast<std::int64_t>(magnitude-1))-1:0):static_cast<std::int64_t>(magnitude);
+  if((positive&&value<1)||std::to_string(value)!=text)throw std::runtime_error("Typed reference has a noncanonical signed integer");
+  return value;
+}
+inline void typed_key(const std::string& key) {
+  if(key.size()<2||key[1]!=':'||!typed_text(key))throw std::runtime_error("Typed reference has an invalid lookup key");
+  if(key[0]=='I'){if(key.size()==2)throw std::runtime_error("Typed reference has an empty identifier key");return;}
+  if(key[0]!='C'&&key[0]!='S')throw std::runtime_error("Typed reference has an unknown key type");
+  const auto colon=key.rfind(':');if(colon<2||colon==key.size()-1||(key[0]=='C'&&colon==2))throw std::runtime_error("Typed reference has an invalid coordinate key");
+  typed_int(key.substr(colon+1),key[0]=='C');
+}
 inline std::string complement(std::string s) {
   std::reverse(s.begin(),s.end()); for(char& c:s) { if(c=='A')c='T'; else if(c=='T')c='A'; else if(c=='C')c='G'; else if(c=='G')c='C'; } return s;
 }
@@ -172,7 +220,8 @@ inline void merge_candidate_context(Candidate& existing,const Candidate& candida
   std::set<std::string> alleles;for(auto& allele:split(existing.alleles,','))alleles.insert(allele);for(auto& allele:split(candidate.alleles,','))alleles.insert(allele);
   existing.alleles="";for(auto& allele:alleles){if(!existing.alleles.empty())existing.alleles+=",";existing.alleles+=allele;}
 }
-inline void prepare(const std::string& fasta,const std::string& sites,const std::string& dir,std::size_t batch_size) {
+inline void prepare(const std::string& fasta,const std::string& sites,const std::string& dir,std::size_t batch_size,int format_version=2) {
+  if(format_version!=2&&format_version!=3)throw std::runtime_error("Unsupported reference writer format");
   if(std::filesystem::exists(dir))throw std::runtime_error("Reference directory already exists; use a new immutable version path");
   std::filesystem::create_directories(dir);Fasta fa(fasta);fa.save(dir+"/fasta.fai");
   std::ifstream in(sites);std::ofstream data(dir+"/records",std::ios::binary),rejected(dir+"/rejected.tsv");if(!in||!data||!rejected)throw std::runtime_error("Cannot open reference input/output");
@@ -180,24 +229,27 @@ inline void prepare(const std::string& fasta,const std::string& sites,const std:
   Sorter sorter(dir,batch_size);std::uint64_t row=1;rejected<<"row\tstatus\n";
   while(std::getline(in,line)) {
     ++row;if(!line.empty()&&line.back()=='\r')line.pop_back();auto v=split(line,'\t');if(v.size()!=6)throw std::runtime_error("Reference row must have six fields");std::int64_t pos;
+    if(format_version==3)for(const auto& field:v)if(!typed_text(field))throw std::runtime_error("Typed reference source text is not valid UTF-8/framing");
     try{std::size_t used;pos=std::stoll(v[1],&used);if(used!=v[1].size())throw std::invalid_argument("position");}catch(...){rejected<<row<<"\tinvalid_position\n";continue;}
     // Site context exists independently of sequence-resolved candidates. Even
     // symbolic-only source rows are evidence against a biallelic complement.
     auto context_offset=static_cast<std::uint64_t>(data.tellp());
-    data<<v[0]<<'\t'<<pos<<'\t'<<upper(v[2])<<"\t\t"<<v[4]<<'\t'<<pos<<'\t'<<upper(v[2])<<'\t'<<upper(v[3])<<'\n';
+    if(format_version==2)data<<v[0]<<'\t'<<pos<<'\t'<<upper(v[2])<<"\t\t"<<v[4]<<'\t'<<pos<<'\t'<<upper(v[2])<<'\t'<<upper(v[3])<<'\n';
+    else data<<"S\t"<<v[0]<<'\t'<<pos<<'\t'<<upper(v[2])<<'\t'<<upper(v[3])<<'\n';
     sorter.add("S:"+v[0]+":"+std::to_string(pos),context_offset);
     auto alleles=split(upper(v[3]),',');
     for(auto& alt:alleles) {
       auto n=normalize(fa,v[0],pos,v[2],alt);if(n.status!="ok"){rejected<<row<<'\t'<<n.status<<'\n';continue;}
       auto offset=static_cast<std::uint64_t>(data.tellp());
-      data<<v[0]<<'\t'<<n.pos<<'\t'<<n.ref<<'\t'<<n.alt<<'\t'<<v[4]<<'\t'<<pos<<'\t'<<upper(v[2])<<'\t'<<upper(v[3])<<'\n';
+      if(format_version==2)data<<v[0]<<'\t'<<n.pos<<'\t'<<n.ref<<'\t'<<n.alt<<'\t'<<v[4]<<'\t'<<pos<<'\t'<<upper(v[2])<<'\t'<<upper(v[3])<<'\n';
+      else data<<"A\t"<<v[0]<<'\t'<<n.pos<<'\t'<<n.ref<<'\t'<<n.alt<<'\t'<<v[4]<<'\t'<<pos<<'\n';
       sorter.add("C:"+v[0]+":"+std::to_string(pos),offset);sorter.add("C:"+v[0]+":"+std::to_string(n.pos),offset);
       if(!missing(v[4]))sorter.add("I:"+v[4],offset);
       for(auto& alias:split(v[5],';'))if(!missing(alias))sorter.add("I:"+alias,offset);
     }
   }
   if(!data||!rejected)throw std::runtime_error("Reference data write failed");data.close();sorter.finish();
-  std::ofstream meta(dir+"/core-version",std::ios::binary);meta<<"mss-preservation-2\n";
+  std::ofstream meta(dir+"/core-version",std::ios::binary);meta<<"mss-preservation-"<<format_version<<"\n";
 }
 struct Input {
   std::string chr;std::int64_t pos;std::string id,other,effect_allele;double effect,eaf;std::string frequency_type;
@@ -214,24 +266,62 @@ inline void consume_context_work(std::size_t* remaining) {
   --*remaining;
 }
 class Reference {
-  BlockFile keys,offsets,records;std::uint64_t count;Fasta fa;
-  std::string entry(std::uint64_t i){auto bytes=offsets.bytes(i*8,8);if(bytes.size()!=8)throw std::runtime_error("Truncated disk index");std::uint64_t p=0;for(int j=0;j<8;++j)p|=std::uint64_t(static_cast<unsigned char>(bytes[j]))<<(8*j);return keys.line(p);}
+  BlockFile keys,offsets,records;std::uint64_t count;Fasta fa;int data_format=2;
+  std::string entry(std::uint64_t i){auto bytes=offsets.bytes(i*8,8);if(bytes.size()!=8)throw std::runtime_error("Truncated disk index");std::uint64_t p=0;for(int j=0;j<8;++j)p|=std::uint64_t(static_cast<unsigned char>(bytes[j]))<<(8*j);
+    if(data_format==2)return keys.line(p);
+    auto line=keys.strict_line(p);const auto fields=split(line,'\t');
+    if(fields.size()!=2)throw std::runtime_error("Typed reference key row must have two fields");
+    typed_key(fields[0]);if(typed_uint(fields[1])>=records.size())throw std::runtime_error("Typed reference record offset is out of range");
+    return line;
+  }
+  Candidate typed_candidate(const std::string& key,std::uint64_t offset) {
+    const auto values=split(records.strict_line(offset),'\t');
+    for(const auto& value:values)if(!typed_text(value))throw std::runtime_error("Typed reference field is not valid UTF-8/framing");
+    Candidate out;
+    if(values.size()==7&&values[0]=="A") {
+      if(key[0]!='C'&&key[0]!='I')throw std::runtime_error("Typed reference A record has the wrong key type");
+      out.chr=values[1];out.pos=typed_int(values[2],true);out.ref=values[3];out.alt=values[4];out.id=values[5];out.original_pos=typed_int(values[6],true);
+      if(out.chr.empty()||!dna(out.ref)||!dna(out.alt)||out.ref==out.alt)throw std::runtime_error("Typed reference A record has invalid canonical fields");
+      if(key[0]=='C'&&key!="C:"+out.chr+":"+std::to_string(out.pos)&&key!="C:"+out.chr+":"+std::to_string(out.original_pos))throw std::runtime_error("Typed reference A coordinate key disagrees with its record");
+      if(!missing(out.id))out.identifiers.insert(out.id);
+    } else if(values.size()==5&&values[0]=="S") {
+      if(key[0]!='S')throw std::runtime_error("Typed reference S record has the wrong key type");
+      out.chr=values[1];out.pos=out.original_pos=typed_int(values[2],false);out.ref=out.original_ref=values[3];out.alleles=values[4];
+      if(key!="S:"+out.chr+":"+std::to_string(out.original_pos))throw std::runtime_error("Typed reference S key disagrees with its record");
+    } else throw std::runtime_error("Typed reference record has an unknown tag or field count");
+    out.original_positions.insert(out.original_pos);return out;
+  }
 public:
   Reference(const std::string& dir,const std::string& fasta):keys(dir+"/keys"),offsets(dir+"/offsets"),records(dir+"/records"),fa(fasta,dir+"/fasta.fai") {
-    std::ifstream meta(dir+"/core-version");std::string version;std::getline(meta,version);if(version!="mss-preservation-2")throw std::runtime_error("Incomplete or unsupported reference index");auto size=offsets.size();if(size%8)throw std::runtime_error("Invalid offsets file");count=size/8;
+    std::ifstream meta(dir+"/core-version");std::string version;std::getline(meta,version);
+    if(version!="mss-preservation-2"&&version!="mss-preservation-3")throw std::runtime_error("Incomplete or unsupported reference index");
+    if(version=="mss-preservation-3") {
+      std::ifstream exact(dir+"/core-version",std::ios::binary);const std::string marker((std::istreambuf_iterator<char>(exact)),std::istreambuf_iterator<char>());
+      if(marker!="mss-preservation-3\n")throw std::runtime_error("Typed reference marker is malformed");data_format=3;
+    }
+    auto size=offsets.size();if(size%8)throw std::runtime_error("Invalid offsets file");count=size/8;
   }
   std::vector<Candidate> lookup(const std::string& key,std::size_t cap=10000,std::size_t* context_work=nullptr) {
+    if(data_format==3)typed_key(key);
     std::uint64_t low=0,high=count;while(low<high){auto mid=low+(high-low)/2;auto s=entry(mid);if(s.substr(0,s.find('\t'))<key)low=mid+1;else high=mid;}
     std::vector<Candidate> out;std::map<std::string,std::size_t> seen;std::size_t examined=0;
-    for(auto i=low;i<count;++i){auto s=entry(i);auto tab=s.find('\t');if(s.substr(0,tab)!=key)break;if(++examined>cap)throw std::runtime_error("Reference candidate limit exceeded; no arbitrary candidate selected");consume_context_work(context_work);auto offset=std::stoull(s.substr(tab+1));s=records.line(offset);auto v=split(s,'\t');if(v.size()!=8)throw std::runtime_error("Corrupt reference record");Candidate c{v[0],v[2],v[3],v[4],v[6],v[7],std::stoll(v[1]),std::stoll(v[5]),{},{}};
-      c.original_positions.insert(c.original_pos);
-      if(!missing(c.id))c.identifiers.insert(c.id);
+    for(auto i=low;i<count;++i){auto s=entry(i);auto tab=s.find('\t');if(s.substr(0,tab)!=key)break;if(++examined>cap)throw std::runtime_error("Reference candidate limit exceeded; no arbitrary candidate selected");consume_context_work(context_work);auto offset=data_format==3?typed_uint(s.substr(tab+1)):std::stoull(s.substr(tab+1));Candidate c;
+      if(data_format==3)c=typed_candidate(key,offset);
+      else {s=records.line(offset);auto v=split(s,'\t');if(v.size()!=8)throw std::runtime_error("Corrupt reference record");c=Candidate{v[0],v[2],v[3],v[4],v[6],v[7],std::stoll(v[1]),std::stoll(v[5]),{},{}};
+        c.original_positions.insert(c.original_pos);if(!missing(c.id))c.identifiers.insert(c.id);
+      }
       auto found=seen.find(c.key());
       if(found==seen.end()){seen[c.key()]=out.size();out.push_back(c);}
       else {
         merge_candidate_context(out[found->second],c);
       }
     }
+    // S lookup has already merged identical (chr, original position, REF) spans.
+    // These leading fields uniquely order contexts; ALT token occurrence/order
+    // remains unchanged for the scientific work budget, including duplicates.
+    if(data_format==3&&key[0]=='S')std::sort(out.begin(),out.end(),[](const Candidate& a,const Candidate& b){
+      return std::tie(a.chr,a.original_pos,a.original_ref,a.alleles)<std::tie(b.chr,b.original_pos,b.original_ref,b.alleles);
+    });
     return out;
   }
   Result harmonise(const Input& input,std::size_t cap=10000) {

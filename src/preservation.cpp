@@ -4,9 +4,9 @@
 // [[Rcpp::plugins(cpp17)]]
 using namespace Rcpp;
 // [[Rcpp::export]]
-void mss_prepare_cpp(std::string fasta, std::string sites, std::string path, int batch_size) {
+void mss_prepare_cpp(std::string fasta, std::string sites, std::string path, int batch_size, int format_version=2) {
   if(batch_size<1)stop("batch_size must be positive");
-  mss::prepare(fasta,sites,path,static_cast<std::size_t>(batch_size));
+  mss::prepare(fasta,sites,path,static_cast<std::size_t>(batch_size),format_version);
 }
 // [[Rcpp::export]]
 SEXP mss_open_reference_cpp(std::string path, std::string fasta) {

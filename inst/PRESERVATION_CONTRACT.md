@@ -161,3 +161,70 @@ should additionally enforce process-tree memory, disk and time bounds.
 The required implementation remains portable CPU C++17/R. It does not require
 GPU processing, WSL, containers, an external bcftools installation or a new
 reference format.
+
+### Opt-in typed reference data format 3
+
+`prepare_reference(..., reference_format="mss-preservation-3")` is an opt-in
+storage prototype. The default remains `mss-preservation-2`. The normalizer is
+still `mss-preservation-7`, the delimited parser is `mss-delimited-1`, and the
+projection algorithm is `mss-projection-2`; data-format selection does not add
+scientific evidence or relax any nullable result contract.
+
+The same immutable directory files are used. `core-version` is exactly
+`mss-preservation-3` followed by LF. Each LF-terminated `records` row is either:
+
+```
+A <chr> <canonical_pos> <REF> <ALT> <current_id> <original_pos>
+S <chr> <original_pos> <original_REF> <complete_ALT_list>
+```
+
+Fields are separated by one TAB. A has seven fields and S has five, including
+the tag. Every parsed source-row occurrence has its own S offset, independently
+of whether any sequence ALT is supported. Every successfully normalized ALT
+occurrence has its own A offset. Identical physical row contents are not globally
+deduplicated. Sorting removes only duplicate `(lookup_key, same_offset)` entries,
+so candidate-limit checks still count raw lookup occurrences before semantic
+merging. Primary and alias I keys are unchanged; A stores the current primary ID,
+and aliases remain opaque UTF-8 keys. S never supplies identifiers to the
+scientific closure. The complete original six-column TSV remains byte-exact in
+`source.tsv`; record REF/ALT text retains the existing uppercase representation.
+Rejected/nonsequence/empty ALT contexts remain in S and source, and rejected ALT
+occurrences remain in `rejected.tsv`. Signed nonpositive original positions may
+occur in S, as in format 2; A positions must both be positive.
+
+C/I reads decode only A. The original source position locates S when paired site
+evidence is required. S reconstructs its own original chromosome, position and
+REF with an empty candidate ALT before semantic merging, preserving distinct REF
+spans. No first-A record doubles as S, and no C/I candidate eagerly owns or unions
+the complete site ALT list. Readers support formats 2 and 3; earlier format-2-only
+readers reject 3. Format 3 validates complete selected typed records and key rows:
+field/tag/key type and coordinate agreement, concrete distinct canonical A DNA,
+canonical integer spelling and range, UTF-8 without NUL/TAB/LF framing bytes,
+in-range offsets at physical row boundaries, and complete terminating LF,
+including lines across cache pages. It does not certify unread unrelated records
+or the global sort order through a query; immutable artifact checksums remain the
+whole-file integrity check. Lookup alias membership cannot be reconstructed from
+A alone; the checksummed key index and original source are authoritative.
+
+Format-3 manifests and output receipts carry `record_layout="typed-A7-S5"`
+(reference manifests) and `reference_context_order="semantic-s-context-v1"`.
+After raw lookup caps and same-span merging, S contexts are examined in semantic
+`(chromosome, original_position, original_REF, merged_ALT_list)` order. The first
+three fields uniquely identify a merged context; thus no physical offset, source
+row ID, omitted S identifier, or ALT-list tie selects context order. ALT token
+occurrence/order within an unmerged source context remains unchanged, including
+repeated raw tokens charged to the scientific work budget. This versioned resource
+order may produce a nullable uncertainty result where physical-offset format 2
+refused an exhausted proof budget, or a refusal where format 2 encountered an early
+witness. Such bounded resource outcomes are classified explicitly; exhausted proof
+never publishes an arbitrary canonical effect. Default format-2 reader behavior
+and writer payload bytes remain unchanged. Adequate-budget scientific rows must
+agree across both formats.
+
+Projection supports all four source/target format combinations. Existing 2-to-2
+receipts retain their fields; any combination containing 3 adds explicit
+`source_reference_format` and `target_reference_format`. `reference_format` is
+the common format when equal and `mixed` otherwise. Neither coordinate build nor
+normalization/projection algorithm is inferred from the data format. Format 3
+requires independent scientific/storage review, native Windows CI and complete
+reference capacity admission before default or full production adoption.
