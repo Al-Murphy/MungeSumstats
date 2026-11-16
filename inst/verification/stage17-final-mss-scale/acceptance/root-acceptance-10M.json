@@ -1,0 +1,50 @@
+{
+  "status": "ROOT_ACCEPTED",
+  "operator_tool_session": 81216,
+  "operator_exit_code": 0,
+  "stage": "10M",
+  "candidate_production_revision": "03d11e92b417add0183dea4fb77716f5502d5735",
+  "rows": 10000000,
+  "all19fields": true,
+  "source_copies": 2,
+  "processing_seconds": 224.5,
+  "R_external": {
+    "wall_seconds": 229.37,
+    "user_seconds": 180.91,
+    "system_seconds": 47.05,
+    "peak_rss_bytes": 1994604544,
+    "peak_physical_footprint_bytes": 1474366080
+  },
+  "peak_rss_GiB": 1.8576202392578125,
+  "pins": [
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/10M/stage-summary.json",
+      "bytes": 13445,
+      "sha256": "a9117970ed879ebe17719a7ee24463b233ab5b03809d2f8323f2b71c2bc39909"
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/10M/correctness.json",
+      "bytes": 1372,
+      "sha256": "188200363b74e67a7b5edbf26708ad6e8eb96084c2f38b223ca6ad5436177785"
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/10M/operator/completion.json",
+      "bytes": 4096,
+      "sha256": "9a69ba2b73e04d23bb2c24ecd5fab05c14b974f7ee997835a8fa1dc1233f9eac"
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/10M/operator/operator-result.json",
+      "bytes": 415,
+      "sha256": "5baeb958706bc7e209ec03e327771172e065adf19c302be9dc340a5dda6ba32d"
+    }
+  ],
+  "authority": {
+    "path": "/private/tmp/gwas-harvest-stage2/results/mss-final-source-scale-fix-stage15/ROOT-AUTHORITY-10M.json",
+    "bytes": 8453,
+    "sha256": "491ff754b1f2659839f3ee1d3ed1aca1bf8260204cfcefe749cab2d40e4af53e"
+  },
+  "postrun_small_pins_verified": 59,
+  "completion_rule": "exit0+acceptedcompletion+nofailedstage",
+  "40M_authorized": false,
+  "scope": "Repeated real chr22 unique biallelic non-palindromic SNP panel; every source and normalized row/all19fields verified; indels/multiallelic contexts are validated in separate scientific suites, not timed here"
+}

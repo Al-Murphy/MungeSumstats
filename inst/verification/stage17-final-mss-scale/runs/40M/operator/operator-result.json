@@ -1,0 +1,8 @@
+{
+  "stage": "40M",
+  "passed": true,
+  "authority_sha256": "ec5177aea43e35f461b3c9071700a103a4b9222ef3655e6ba5b5f36c3880593a",
+  "stage_summary_sha256": "6241a46993de8ab2ec300f9651506ac041043c5b3abcf71ae39063ed8eb99186",
+  "completion_receipt": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/40M/operator/completion.json",
+  "later_stages_authorized": false
+}

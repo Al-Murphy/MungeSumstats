@@ -1,0 +1,21 @@
+{
+  "source_and_docs_only": true,
+  "new_target_executions": 0,
+  "review_report_sha256": "f2d77bcc9c08bedb3c27a75a77faf28395d7a67693694dfe1ba058e9e2eb06ef",
+  "records": [
+    {
+      "checkout": "/private/tmp/gwas-harvest-stage2/harvest",
+      "old": "d3c09a1628bf08b89f79e6f55c022907221fe72b",
+      "new": "d997af5dd15fdaadd0ba573795e326e4a798abff",
+      "branch": "feat/scientific-source-contracts",
+      "clean": true
+    },
+    {
+      "checkout": "/private/tmp/gwas-harvest-stage2/mss-context-format3-release",
+      "old": "d7806f5670c819d8c74f68dad67650ddc48d2984",
+      "new": "df8870104868a0e3d946a889f6aff6beb6aac468",
+      "branch": "feat/typed-format3-reviewed",
+      "clean": true
+    }
+  ]
+}

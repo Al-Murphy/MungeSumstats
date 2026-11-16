@@ -1,0 +1,12 @@
+{
+  "phase": "pre",
+  "passed": true,
+  "approval": {
+    "path": "/private/tmp/gwas-harvest-stage2/results/mss-final-source-scale-fix-stage15/ROOT-AUTHORITY-10M.json",
+    "sha256": "491ff754b1f2659839f3ee1d3ed1aca1bf8260204cfcefe749cab2d40e4af53e",
+    "review_sha256": "a441b12ca1281f8b5079b01c394dce96a74eeb2c8513b192b88f8292db161429",
+    "suite_sha256": "d419dca4fb99ca6dbe209a268a05a9e7e6fdc5efdc6ca2bc4e489b78350a9aef"
+  },
+  "profile_sha256": "158a8a8650a5364e28dd0eaaf61cc808e4a0e86c91d6a8f0f49249ca68d809d1",
+  "finished_utc": "2026-11-16T19:37:06Z"
+}

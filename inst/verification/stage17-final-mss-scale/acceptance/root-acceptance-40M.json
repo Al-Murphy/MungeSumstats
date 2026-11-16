@@ -1,0 +1,62 @@
+{
+  "status": "ROOT_ACCEPTED",
+  "operator_tool_session": 25438,
+  "operator_exit_code": 0,
+  "stage": "40M",
+  "candidate_production_revision": "03d11e92b417add0183dea4fb77716f5502d5735",
+  "rows": 40000000,
+  "all19fields": true,
+  "source_copies": 2,
+  "processing_seconds": 811.171,
+  "R_external": {
+    "wall_seconds": 815.07,
+    "user_seconds": 661.8,
+    "system_seconds": 151.86,
+    "peak_rss_bytes": 2419916800,
+    "peak_physical_footprint_bytes": 1408060128
+  },
+  "peak_rss_GiB": 2.25372314453125,
+  "whole_operator_seconds_before_final_commit": 1075.8118736250326,
+  "pins": [
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/40M/stage-summary.json",
+      "bytes": 13495,
+      "sha256": "6241a46993de8ab2ec300f9651506ac041043c5b3abcf71ae39063ed8eb99186"
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/40M/correctness.json",
+      "bytes": 1374,
+      "sha256": "a74f4351e03e8ef5b7a4330ced17ed44a3ed4b8ae4208de15d42dcb674e51488"
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/40M/operator/completion.json",
+      "bytes": 4096,
+      "sha256": "4c96951103301e8a1b636964caad3ad175368a2cdc18b0d1f5ddccd8fed5f55c"
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/40M/operator/operator-result.json",
+      "bytes": 424,
+      "sha256": "c2cfdd2dbbe77900419f14ae5bc8dabb800143c7f666b963abd5114a3a0bceff"
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/40M/operator/pre-pin-result.json",
+      "bytes": 563,
+      "sha256": "3c195d959d17d880c3a61ab14a7ea82af646855e0be0d854155622bf90235082"
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/40M/operator/post-pin-result.json",
+      "bytes": 564,
+      "sha256": "fd92e63e34750ba18d4775a3b34f92be98a567524462f7f6461bfe10b9853fcf"
+    }
+  ],
+  "authority": {
+    "path": "/private/tmp/gwas-harvest-stage2/results/mss-final-source-scale-40M-stage16/ROOT-AUTHORITY-40M.json",
+    "bytes": 12201,
+    "sha256": "ec5177aea43e35f461b3c9071700a103a4b9222ef3655e6ba5b5f36c3880593a"
+  },
+  "postrun_small_pins_verified": 81,
+  "completion_rule": "exit0+acceptedcompletion+nofailedstage",
+  "later_stages_authorized": false,
+  "scope": "Repeated real chr22 unique biallelic non-palindromic SNP panel; every source and normalized row/all19fields verified; indels/multiallelic contexts are validated in separate scientific suites, not timed here",
+  "guard_limitations": "Sampled synchronous direct child/process-group monitoring; no hard instantaneous resource ceiling, no general orphan-aware supervisor or Task7 proof."
+}

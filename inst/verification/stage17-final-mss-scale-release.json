@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "bases": {
+    "harvest": "d997af5dd15fdaadd0ba573795e326e4a798abff",
+    "mss": "df8870104868a0e3d946a889f6aff6beb6aac468"
+  },
+  "archive_directory_files": 47,
+  "archive_directory_bytes": 139099,
+  "indexed_payload_files": 46,
+  "index_sha256": "53ead16a1621846eeea7e6187c25767441bafdd295cfef2e3fe1aa2990d38e16",
+  "report_sha256": "730b401ee6a798a32cc5c0f93245c584c315582dc53abf4afeb8e35a2bbbd831",
+  "archive_gzip_bytes": 27866,
+  "archive_gzip_sha256": "9293227d361c1477830d75d547747902d47fe8dbee4b50d151d4a6b380cf3339",
+  "raw_tar_bytes": 184320,
+  "raw_tar_sha256": "b0bb156f365570ebb28b0dcc035d9bad73760a0eb0bc9c9b2cea61a28d02c9ff",
+  "compressed_payload_bindings": 8,
+  "measured_production_revision": "03d11e92b417add0183dea4fb77716f5502d5735",
+  "measured_dll_sha256": "6f23605e06ac0b35fd40268b08190fd55e9a09e2fccded2f8cd7b629a3cd49eb",
+  "new_target_executions": 0,
+  "decision": "no_admission",
+  "full_reference_admitted": false,
+  "index_builds_executed": 0
+}

@@ -1,0 +1,232 @@
+{
+  "schema": 1,
+  "status": "SCIENCE_GREEN",
+  "approved": true,
+  "execution_authorized": true,
+  "authorized_stages": [
+    "40M"
+  ],
+  "proposed_stage": "40M",
+  "requires_fresh_independent_operator_review": true,
+  "admission_candidate_sha256": "08bed8d9a602d17ed60b9334b425321f899b45ce542a56eca9fc7e5ac80022ae",
+  "profile_path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/profiles/scientific7-fai-safety-format2-stage8.json",
+  "profile_sha256": "158a8a8650a5364e28dd0eaaf61cc808e4a0e86c91d6a8f0f49249ca68d809d1",
+  "candidate_production_revision": "03d11e92b417add0183dea4fb77716f5502d5735",
+  "observed_checkout_head": "5724713f7b937900764a611d697a22fa9c408bba",
+  "source_checkout": "/private/tmp/gwas-harvest-stage2/mss-fai-safety-stage8",
+  "production_commit_diff_empty_paths": [
+    "R",
+    "src",
+    "DESCRIPTION",
+    "NAMESPACE"
+  ],
+  "candidate_core_sha256": "4affcc7bdb761b1c86d22e2f72eb079434fbb2404d7f5c4d257fda2de52c6ddc",
+  "candidate_dll_sha256": "6f23605e06ac0b35fd40268b08190fd55e9a09e2fccded2f8cd7b629a3cd49eb",
+  "harness_seal_sha256": "b2d6dd7d7f945f072ff2572d9eb0d3f737a8caea08ddd1e4c564aa779fbe4493",
+  "driver_sha256": "8b61995f5cdf8295fa9e9e00c61f18f52dd185e68541e9527270704207e5e105",
+  "bench_script": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/bench.py",
+  "runner_script": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runner.R",
+  "verifier_script": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/verify.py",
+  "immutable_index_sha256": "d3ba38dfe4627fdb5d81376e5a4cbf3e7705ee10ba27b01079836fc420ca4191",
+  "source_ownership_metadata_sha256": "5db1a27c8d9b019efbdafafc80eae1492c0350dada3ac3ab3690b04a1eee4c83",
+  "resource_metadata_sha256": "5c47e806396012754aae72b892f121547f96a3e732fb33717358d1724ba96d58",
+  "scientific_review": {
+    "path": "/private/tmp/gwas-harvest-stage2/reports/mss-fai-safety-independent-review-stage8.md",
+    "sha256": "a441b12ca1281f8b5079b01c394dce96a74eeb2c8513b192b88f8292db161429"
+  },
+  "installed_suite": {
+    "path": "/private/tmp/gwas-harvest-stage2/results/verification-stage8/mss-fai-installed/source-bound-suite.json",
+    "sha256": "d419dca4fb99ca6dbe209a268a05a9e7e6fdc5efdc6ca2bc4e489b78350a9aef"
+  },
+  "prior_1M_binding": {
+    "profile_sha256": "158a8a8650a5364e28dd0eaaf61cc808e4a0e86c91d6a8f0f49249ca68d809d1",
+    "stage_summary": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/1M/stage-summary.json",
+      "bytes": 11941,
+      "sha256": "9623b37234e8e001855ee1c1d2e87e5f17a0544e218cc5655dca9f2e8bb2c411"
+    },
+    "correctness": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/1M/correctness.json",
+      "bytes": 1911,
+      "sha256": "9cce5f811ed20c61fd4bc894c908161e51a78846c7a3e7583f183b8cd2754fa8"
+    },
+    "cases": {
+      "mss4": {
+        "source_revision": "5cf1e23c907ad9c923141faf0728964951be7c66",
+        "dll_sha256": "0a65467b2ef80c1c131bcc5f82a90fa0940b82e0eae0a2a33f71bf6591d981bd",
+        "metrics": {
+          "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/1M/mss4/metrics.json",
+          "bytes": 1904,
+          "sha256": "d76716a3e800722348c24499bcdb26cbd836a9b2acd0432d8ada8fbd9643c82b"
+        },
+        "spec": {
+          "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/1M/mss4/spec.json",
+          "bytes": 1380,
+          "sha256": "02741c5aa96baf54246f78c1e5d9c9feb9959ff20e0f5afc99c88008d46592b3"
+        }
+      },
+      "mss7": {
+        "source_revision": "03d11e92b417add0183dea4fb77716f5502d5735",
+        "dll_sha256": "6f23605e06ac0b35fd40268b08190fd55e9a09e2fccded2f8cd7b629a3cd49eb",
+        "metrics": {
+          "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/1M/mss7/metrics.json",
+          "bytes": 1960,
+          "sha256": "597133a421ce43979b5a27fd2f82aa47b3a78ae49c9f1b8a158dbd45300af0e6"
+        },
+        "spec": {
+          "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/1M/mss7/spec.json",
+          "bytes": 1436,
+          "sha256": "dd52916c1c451fb4ce50551006f58c57ad794f7e29be4042e9c4be87cf50cd7a"
+        }
+      }
+    }
+  },
+  "limits": {
+    "whole_40M_seconds": 11250,
+    "combined_pre_post_pin_seconds": 450,
+    "shared_R_verifier_stage_seconds": 10800,
+    "memory_bytes": 8589934592,
+    "free_floor_bytes": 171798691840,
+    "profile_output_bytes": 34359738368,
+    "stage_output_bytes": 25769803776,
+    "poll_seconds": 0.25,
+    "bounded_parent_log_bytes": 4194304,
+    "bookkeeping_reserve_bytes": 1048576,
+    "failure_reserve_bytes": 65536,
+    "completion_marker_bytes": 4096,
+    "CPU": "one R/data.table thread; one sequential verifier; no hard CPU quota/time ceiling",
+    "containment": "sampled known synchronous direct child groups only; no hard orphan/whole-unit proof"
+  },
+  "owned_profile_output": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8",
+  "existing_profile_output_bytes": 2813315713,
+  "stage_output": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/40M",
+  "40M_authorized": true,
+  "root_authority_required_fields": [
+    "approved=true",
+    "status=SCIENCE_GREEN",
+    "authorized_stages=[40M]",
+    "admission_candidate_sha256=exact stage16 candidate SHA256",
+    "all exact bound fields copied unchanged including prior_1M_binding and prior_10M_binding",
+    "resource_snapshot_reviewed=true",
+    "whole_phase_scope_accepted=true",
+    "sampled_synchronous_scope_accepted=true",
+    "operator_review={status:GREEN,driver_sha256:exact stage16 driver SHA256,report_path:explicit fresh independent report,report_sha256:exact independent report SHA256}"
+  ],
+  "launch_command_candidate": [
+    "python3",
+    "-B",
+    "/private/tmp/gwas-harvest-stage2/results/mss-final-source-scale-40M-stage16/launch.py",
+    "--authority",
+    "/private/tmp/gwas-harvest-stage2/results/mss-final-source-scale-40M-stage16/ROOT-AUTHORITY-40M.json"
+  ],
+  "authority_file_written": true,
+  "payload_pins_revalidated": false,
+  "benchmark_runs_executed": 0,
+  "stage_operator_path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/40M/operator",
+  "completion_rule": "Only operator exit0 with accepted operator/completion.json and no failed-stage.json is admitted; rejected/provisional files are never success",
+  "base_GREEN_review": {
+    "status": "GREEN",
+    "driver_sha256": "4e89dbd1cc4f4903f030465df8d6b9c89cc642b23ae7b172c21531fbc18c0867",
+    "report_path": "/private/tmp/gwas-harvest-stage2/reports/mss-scale-launch-fix-independent-stage15.md",
+    "report_sha256": "4ceb57e4dee22f740db12316713876dde05c99d0ce15fedebd839c2228d4ab29"
+  },
+  "base_driver_sha256": "4e89dbd1cc4f4903f030465df8d6b9c89cc642b23ae7b172c21531fbc18c0867",
+  "full_driver_diff_sha256": "9f5e4174bf8a54d7d007c1c65b6cb7db4de680a5b4994db0915ff8aefda7ee88",
+  "prior_10M_binding": {
+    "root_acceptance": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final-source-scale-fix-stage15/root-acceptance-10M.json",
+      "bytes": 2194,
+      "sha256": "01da94b5ca04159dc15260bf0e7d0acda9eed829b545aa6173b390b5c3a824a6"
+    },
+    "stage_summary": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/10M/stage-summary.json",
+      "bytes": 13445,
+      "sha256": "a9117970ed879ebe17719a7ee24463b233ab5b03809d2f8323f2b71c2bc39909"
+    },
+    "correctness": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/10M/correctness.json",
+      "bytes": 1372,
+      "sha256": "188200363b74e67a7b5edbf26708ad6e8eb96084c2f38b223ca6ad5436177785"
+    },
+    "completion": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/10M/operator/completion.json",
+      "bytes": 4096,
+      "sha256": "9a69ba2b73e04d23bb2c24ecd5fab05c14b974f7ee997835a8fa1dc1233f9eac"
+    },
+    "operator_result": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/10M/operator/operator-result.json",
+      "bytes": 415,
+      "sha256": "5baeb958706bc7e209ec03e327771172e065adf19c302be9dc340a5dda6ba32d"
+    },
+    "accepted_receipt_pins": [
+      {
+        "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/10M/stage-summary.json",
+        "bytes": 13445,
+        "sha256": "a9117970ed879ebe17719a7ee24463b233ab5b03809d2f8323f2b71c2bc39909"
+      },
+      {
+        "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/10M/correctness.json",
+        "bytes": 1372,
+        "sha256": "188200363b74e67a7b5edbf26708ad6e8eb96084c2f38b223ca6ad5436177785"
+      },
+      {
+        "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/10M/operator/completion.json",
+        "bytes": 4096,
+        "sha256": "9a69ba2b73e04d23bb2c24ecd5fab05c14b974f7ee997835a8fa1dc1233f9eac"
+      },
+      {
+        "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/10M/operator/operator-result.json",
+        "bytes": 415,
+        "sha256": "5baeb958706bc7e209ec03e327771172e065adf19c302be9dc340a5dda6ba32d"
+      }
+    ],
+    "authority": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final-source-scale-fix-stage15/ROOT-AUTHORITY-10M.json",
+      "bytes": 8453,
+      "sha256": "491ff754b1f2659839f3ee1d3ed1aca1bf8260204cfcefe749cab2d40e4af53e"
+    },
+    "operator_tool_session": 81216,
+    "operator_exit_code": 0,
+    "postrun_small_pins_verified": 59,
+    "profile_sha256": "158a8a8650a5364e28dd0eaaf61cc808e4a0e86c91d6a8f0f49249ca68d809d1",
+    "input": {
+      "path": "/private/tmp/gwas-harvest-stage2/assets/mss/matched-10M.tsv",
+      "bytes": 461361405,
+      "mtime_ns": 1794763400123889919,
+      "sha256": "cecd6f1053fb9c02066be3aa78f0f4976cb8ab32e882357e016ec1ea259788e0",
+      "md5": "f6b7755f2972d57ce99701a2e9141adc",
+      "newline_count": 10000001
+    },
+    "failed_stage_path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/10M/failed-stage.json",
+    "status": "ROOT_ACCEPTED exact10M prerequisite; never40M authority"
+  },
+  "effective_40M_profile_cap_bytes": 28583119489,
+  "actual_40M_runs": 0,
+  "prior_1M_and10M_repeated": false,
+  "reference_or_input_generation": false,
+  "rows": 40000000,
+  "resource_snapshot_reviewed": true,
+  "whole_phase_scope_accepted": true,
+  "sampled_synchronous_scope_accepted": true,
+  "operator_review": {
+    "status": "GREEN",
+    "driver_sha256": "8b61995f5cdf8295fa9e9e00c61f18f52dd185e68541e9527270704207e5e105",
+    "report_path": "/private/tmp/gwas-harvest-stage2/reports/mss-scale-40M-independent-stage16.md",
+    "report_sha256": "2c7d20cf5a27fd84134c285f389f4ef4db250275815f115ae6fda14694c79e9b"
+  },
+  "root_current_resource_snapshot": {
+    "utc": "2026-11-16T20:37:00Z",
+    "free_bytes": 532480000000,
+    "load_average": [
+      2.34716796875,
+      3.015625,
+      3.4716796875
+    ],
+    "40M_stage_absent": true,
+    "Task6_focused_PG_complete_31_pass": true,
+    "new_test_batches_held": true,
+    "full_reference_final_guards_both_failed_no_restart": true,
+    "large_payloads_read_before_guard": false
+  },
+  "root_admission_note": "One final03 candidate-only40M plus exhaustive19-field/source-copy oracle;11250whole/450pins/10800stage,8GiBsampled/160GiBfloor,original24GiBnew/32GiBaggregate. No retry/full-reference/index/provider authority."
+}

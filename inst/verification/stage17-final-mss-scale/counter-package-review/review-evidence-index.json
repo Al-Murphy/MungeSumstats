@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "spec_verdict": "PASS",
+  "quality_verdict": "APPROVED",
+  "scope": "Independent static packaging verification only; explicit evidence paths, no checkout mutation or target execution",
+  "decision": "no_admission",
+  "full_reference_admitted": false,
+  "index_builds_executed": 0,
+  "entries": [
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/reports/reference-count-v2-package-independent-stage17.md",
+      "size_bytes": 6820,
+      "sha256": "f2d77bcc9c08bedb3c27a75a77faf28395d7a67693694dfe1ba058e9e2eb06ef"
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/reference-count-v2-package-independent-stage17/verify-packaging.py",
+      "size_bytes": 11521,
+      "sha256": "4f9f6435d500e678ef3c88dfe51faef5bc94c8e6f6793d074e10277ce4899dd4"
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/reference-count-v2-package-independent-stage17/static-checks.json",
+      "size_bytes": 241923,
+      "sha256": "243447a157914de2ba2d3b1c9d2018f2ac8001eeb3a92327940a8cef4dfffadd"
+    }
+  ]
+}

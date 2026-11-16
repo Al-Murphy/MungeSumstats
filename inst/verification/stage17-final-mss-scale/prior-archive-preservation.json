@@ -1,0 +1,26 @@
+{
+  "harvest": {
+    "base": "d997af5dd15fdaadd0ba573795e326e4a798abff",
+    "trees": {
+      "docs/verification/stage14-reference-count": "93bb0103470b7f8d35f95e4c8f8619b28e5083db",
+      "docs/verification/stage16-reference-count-v2": "039ff83a4bee4efb7fd248b7173d6800fc53f21e"
+    },
+    "file_git_blobs": {
+      "docs/verification/reference-count-v2-stage16.tar.gz": "64f023d9d1def8640638ebb68baf976b2ce6b029",
+      "docs/verification/stage16-reference-count-v2-release.json": "42ae9c7f257f6950828fe101a7a465bb74ebd3bb"
+    },
+    "preservation": "No tracked base path is edited. Old94 and counter40 tree IDs plus tar/release blobs are checked unchanged after commit."
+  },
+  "mss": {
+    "base": "df8870104868a0e3d946a889f6aff6beb6aac468",
+    "trees": {
+      "inst/verification/reference-count-coordinator-stage14": "93bb0103470b7f8d35f95e4c8f8619b28e5083db",
+      "inst/verification/reference-count-v2-stage16": "039ff83a4bee4efb7fd248b7173d6800fc53f21e"
+    },
+    "file_git_blobs": {
+      "inst/verification/reference-count-v2-stage16.tar.gz": "64f023d9d1def8640638ebb68baf976b2ce6b029",
+      "inst/verification/reference-count-v2-stage16-release.json": "42ae9c7f257f6950828fe101a7a465bb74ebd3bb"
+    },
+    "preservation": "No tracked base path is edited. Old94 and counter40 tree IDs plus tar/release blobs are checked unchanged after commit."
+  }
+}

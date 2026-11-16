@@ -1,0 +1,141 @@
+{
+  "scope": "Exact external anchors; no 59/81-entry scientific/library payload walk or source import. Recorded source/control bytes remain external unless explicitly copied.",
+  "anchors": [
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final-source-scale-fix-stage15/evidence-index.json",
+      "bytes": 39000,
+      "sha256": "af2c3780eaeac33869e4839145ce172a88420bceee253d815d139fe25faf4744",
+      "small_metadata_rehashed": true,
+      "vendored": false,
+      "external_payloads_reverified": false
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final-source-scale-fix-stage15/launch.py",
+      "bytes": 21496,
+      "sha256": "4e89dbd1cc4f4903f030465df8d6b9c89cc642b23ae7b172c21531fbc18c0867",
+      "small_metadata_rehashed": false,
+      "vendored": false,
+      "external_payloads_reverified": false
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final-source-scale-fix-stage15/immutable-index.json",
+      "bytes": 14307,
+      "sha256": "e0c641f09f22b403d4e7852403aeff9a2cf053258b3eb5983514120e6e6e81ca",
+      "small_metadata_rehashed": true,
+      "vendored": false,
+      "external_payloads_reverified": false
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final-source-scale-fix-stage15/source-ownership-metadata.json",
+      "bytes": 15178,
+      "sha256": "e8e62a787c366cf64fba6e41bf390506d5def3b96e952686aeea745265ad8139",
+      "small_metadata_rehashed": false,
+      "vendored": false,
+      "external_payloads_reverified": false
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/reports/mss-scale-launch-fix-independent-stage15.md",
+      "bytes": 8140,
+      "sha256": "4ceb57e4dee22f740db12316713876dde05c99d0ce15fedebd839c2228d4ab29",
+      "small_metadata_rehashed": true,
+      "vendored": false,
+      "external_payloads_reverified": false
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/profiles/scientific7-fai-safety-format2-stage8.json",
+      "bytes": 18850,
+      "sha256": "158a8a8650a5364e28dd0eaaf61cc808e4a0e86c91d6a8f0f49249ca68d809d1",
+      "small_metadata_rehashed": true,
+      "vendored": false,
+      "external_payloads_reverified": false
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/seal.json",
+      "bytes": 3491,
+      "sha256": "b2d6dd7d7f945f072ff2572d9eb0d3f737a8caea08ddd1e4c564aa779fbe4493",
+      "small_metadata_rehashed": true,
+      "vendored": false,
+      "external_payloads_reverified": false
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/bench.py",
+      "bytes": 13389,
+      "sha256": "e93b5a90a1db4c301f7721e49f7b2a723b21b47e2c9598f79431919165a7ca56",
+      "small_metadata_rehashed": false,
+      "vendored": false,
+      "external_payloads_reverified": false
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runner.R",
+      "bytes": 2893,
+      "sha256": "b6c04b34fb8e936018edea5edc80d624203d964fa5a9e96ba100a12f73f9fe9a",
+      "small_metadata_rehashed": false,
+      "vendored": false,
+      "external_payloads_reverified": false
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/verify.py",
+      "bytes": 11349,
+      "sha256": "d4bbe46a9037597203e779b9e0f830a293b15a476421973fc6a0b69b2dc45c95",
+      "small_metadata_rehashed": false,
+      "vendored": false,
+      "external_payloads_reverified": false
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final-source-scale-40M-stage16/evidence-index.json",
+      "bytes": 31731,
+      "sha256": "1af92f73b599c43b3685a1efa11af36e85646b24b62d6fd26a7951c0db7d35e4",
+      "small_metadata_rehashed": true,
+      "vendored": false,
+      "external_payloads_reverified": false
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final-source-scale-40M-stage16/launch.py",
+      "bytes": 26155,
+      "sha256": "8b61995f5cdf8295fa9e9e00c61f18f52dd185e68541e9527270704207e5e105",
+      "small_metadata_rehashed": false,
+      "vendored": false,
+      "external_payloads_reverified": false
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final-source-scale-40M-stage16/immutable-index.json",
+      "bytes": 19693,
+      "sha256": "d3ba38dfe4627fdb5d81376e5a4cbf3e7705ee10ba27b01079836fc420ca4191",
+      "small_metadata_rehashed": true,
+      "vendored": false,
+      "external_payloads_reverified": false
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final-source-scale-40M-stage16/source-ownership-metadata.json",
+      "bytes": 15152,
+      "sha256": "5db1a27c8d9b019efbdafafc80eae1492c0350dada3ac3ab3690b04a1eee4c83",
+      "small_metadata_rehashed": false,
+      "vendored": false,
+      "external_payloads_reverified": false
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/reports/mss-scale-40M-independent-stage16.md",
+      "bytes": 10144,
+      "sha256": "2c7d20cf5a27fd84134c285f389f4ef4db250275815f115ae6fda14694c79e9b",
+      "small_metadata_rehashed": true,
+      "vendored": false,
+      "external_payloads_reverified": false
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/reference-count-v2-package-independent-stage17/verify-packaging.py",
+      "bytes": 11521,
+      "sha256": "4f9f6435d500e678ef3c88dfe51faef5bc94c8e6f6793d074e10277ce4899dd4",
+      "vendored": false,
+      "small_metadata_rehashed": false,
+      "external_payloads_reverified": false
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/reference-count-v2-package-independent-stage17/static-checks.json",
+      "bytes": 241923,
+      "sha256": "243447a157914de2ba2d3b1c9d2018f2ac8001eeb3a92327940a8cef4dfffadd",
+      "vendored": false,
+      "small_metadata_rehashed": false,
+      "external_payloads_reverified": false
+    }
+  ]
+}

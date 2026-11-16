@@ -1,0 +1,98 @@
+[
+  {
+    "path": "runs/10M/mss7/process.log.gz",
+    "original": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/10M/mss7/process.log",
+      "bytes": 810,
+      "sha256": "28bf14614da7c13485dfa93ccda73d3a3f11567eab28bafdabaa78f6c9fec0e5"
+    },
+    "raw_bytes": 810,
+    "raw_sha256": "28bf14614da7c13485dfa93ccda73d3a3f11567eab28bafdabaa78f6c9fec0e5",
+    "gzip_mtime": 0,
+    "gzip_compression_level": 9
+  },
+  {
+    "path": "runs/10M/verification.log.gz",
+    "original": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/10M/verification.log",
+      "bytes": 1180,
+      "sha256": "97a2825e21cadeda9651a9da72672d1c7d9c063f0570f25efede9f00271b3fba"
+    },
+    "raw_bytes": 1180,
+    "raw_sha256": "97a2825e21cadeda9651a9da72672d1c7d9c063f0570f25efede9f00271b3fba",
+    "gzip_mtime": 0,
+    "gzip_compression_level": 9
+  },
+  {
+    "path": "runs/10M/operator/prepin.log.gz",
+    "original": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/10M/operator/prepin.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "raw_bytes": 0,
+    "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gzip_mtime": 0,
+    "gzip_compression_level": 9
+  },
+  {
+    "path": "runs/10M/operator/postpin.log.gz",
+    "original": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/10M/operator/postpin.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "raw_bytes": 0,
+    "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gzip_mtime": 0,
+    "gzip_compression_level": 9
+  },
+  {
+    "path": "runs/40M/mss7/process.log.gz",
+    "original": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/40M/mss7/process.log",
+      "bytes": 810,
+      "sha256": "59d1ec4aaada3319fd06da4c7be3a48374c7f347ebd5ee1aafdcf1b493458b89"
+    },
+    "raw_bytes": 810,
+    "raw_sha256": "59d1ec4aaada3319fd06da4c7be3a48374c7f347ebd5ee1aafdcf1b493458b89",
+    "gzip_mtime": 0,
+    "gzip_compression_level": 9
+  },
+  {
+    "path": "runs/40M/verification.log.gz",
+    "original": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/40M/verification.log",
+      "bytes": 1182,
+      "sha256": "7e1d124aa71d15d388f42dee40d716d761452705ccfd34efeac1f9e03be0b119"
+    },
+    "raw_bytes": 1182,
+    "raw_sha256": "7e1d124aa71d15d388f42dee40d716d761452705ccfd34efeac1f9e03be0b119",
+    "gzip_mtime": 0,
+    "gzip_compression_level": 9
+  },
+  {
+    "path": "runs/40M/operator/prepin.log.gz",
+    "original": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/40M/operator/prepin.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "raw_bytes": 0,
+    "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gzip_mtime": 0,
+    "gzip_compression_level": 9
+  },
+  {
+    "path": "runs/40M/operator/postpin.log.gz",
+    "original": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/40M/operator/postpin.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "raw_bytes": 0,
+    "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gzip_mtime": 0,
+    "gzip_compression_level": 9
+  }
+]

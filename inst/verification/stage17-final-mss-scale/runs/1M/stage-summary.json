@@ -1,0 +1,273 @@
+{
+  "schema": 1,
+  "stage": "1M",
+  "passed": true,
+  "profile_sha256": "158a8a8650a5364e28dd0eaaf61cc808e4a0e86c91d6a8f0f49249ca68d809d1",
+  "approval": {
+    "path": "/private/tmp/gwas-harvest-stage2/results/mss-fai-safety-stage8/root-science-approval-1M.json",
+    "sha256": "cfaaded7e7e208de665660a5fa7eab3cdb6ffaee785f82b980184050b82cfbad",
+    "review_sha256": "a441b12ca1281f8b5079b01c394dce96a74eeb2c8513b192b88f8292db161429",
+    "suite_sha256": "d419dca4fb99ca6dbe209a268a05a9e7e6fdc5efdc6ca2bc4e489b78350a9aef"
+  },
+  "cases": {
+    "mss4": {
+      "metrics": {
+        "schema": 1,
+        "version": "mss4",
+        "expected_implementation": "mss-preservation-4",
+        "source_production_revision": "5cf1e23c907ad9c923141faf0728964951be7c66",
+        "library": "/private/tmp/gwas-harvest-stage2/Rlib/fasta-offsets-v1",
+        "loaded_dll_path": "/private/tmp/gwas-harvest-stage2/Rlib/fasta-offsets-v1/MungeSumstats/libs/MungeSumstats.so",
+        "loaded_dll_md5": "d8276f7f60e88939c145fb35e39c223d",
+        "loaded_dll_sha256_from_verified_profile": "0a65467b2ef80c1c131bcc5f82a90fa0940b82e0eae0a2a33f71bf6591d981bd",
+        "input": "/private/tmp/gwas-harvest-stage2/assets/mss/matched-1M.tsv",
+        "reference": "/private/tmp/gwas-harvest-stage2/assets/reference/matched-index",
+        "package_version": "1.21.4",
+        "R_version": "R version 4.5.3 (2026-03-11)",
+        "threads": 1,
+        "batch_rows": 100000,
+        "projection": "not requested",
+        "workload": "437458 real chr22 unique biallelic non-palindromic SNP panel records repeated with synthetic exact beta/EAF; 40M rows do not mean 40M unique variants; separate reviewed scientific matrices cover indels/multiallelic/ambiguity",
+        "cache_caveat": "Fresh R process and application reference handle per run; OS page cache uncontrolled and never flushed. Shared host may run full reference preparation and package tests.",
+        "package_setup_elapsed": 3.716,
+        "package_setup_user.self": 3.365,
+        "package_setup_sys.self": 0.164,
+        "reference_verify_and_open_elapsed": 0.211,
+        "reference_verify_and_open_user.self": 0.189,
+        "reference_verify_and_open_sys.self": 0.021,
+        "processing_elapsed": 20.211,
+        "processing_user.self": 15.529,
+        "processing_sys.self": 4.46,
+        "source_rows": 1000000,
+        "normalized_rows": 1000000,
+        "status_counts": [
+          562542,
+          437458
+        ],
+        "implementation": "mss-preservation-4",
+        "reference_format": "mss-preservation-2",
+        "reference_version": "Ensembl104-chr22-bounded-prefix-unique-nonpal-SNPs",
+        "finished_utc": "2026-11-16 11:28:49 UTC"
+      },
+      "external_time": {
+        "wall_seconds": 24.9,
+        "user_seconds": 19.69,
+        "system_seconds": 4.71,
+        "peak_rss_bytes": 1617166336,
+        "peak_physical_footprint_bytes": 1471482184
+      },
+      "guard": {
+        "command": [
+          "/usr/bin/time",
+          "-l",
+          "Rscript",
+          "--vanilla",
+          "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runner.R",
+          "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/1M/mss4/spec.json"
+        ],
+        "pid": 10955,
+        "status": "success",
+        "exit_code": 0,
+        "reason": null,
+        "natural_oom": false,
+        "wall_seconds": 25.148200541967526,
+        "samples": 89,
+        "peak_process_tree": {
+          "rss_bytes": 1606189056,
+          "physical_footprint_bytes": 1471138336,
+          "conservative_guard_bytes": 1606271216,
+          "processes": 3
+        },
+        "min_free_bytes": 467168169984,
+        "peak_owned_case_bytes": 233572446,
+        "limits": {
+          "memory_bytes": 8589934592,
+          "minimum_free_bytes": 171798691840,
+          "case_disk_bytes": 1073741824
+        },
+        "scope": "Full owned process tree: RSS, macOS physical footprint and sum(max(RSS,footprint)); Linux guard includes swap. No other workload is signaled."
+      }
+    },
+    "mss7": {
+      "metrics": {
+        "schema": 1,
+        "version": "mss7",
+        "expected_implementation": "mss-preservation-7",
+        "source_production_revision": "03d11e92b417add0183dea4fb77716f5502d5735",
+        "library": "/private/tmp/gwas-harvest-stage2/results/verification-stage8/mss-fai-installed/lib",
+        "loaded_dll_path": "/private/tmp/gwas-harvest-stage2/results/verification-stage8/mss-fai-installed/lib/MungeSumstats/libs/MungeSumstats.so",
+        "loaded_dll_md5": "a316ef26223e2e009fef19802320a7a4",
+        "loaded_dll_sha256_from_verified_profile": "6f23605e06ac0b35fd40268b08190fd55e9a09e2fccded2f8cd7b629a3cd49eb",
+        "input": "/private/tmp/gwas-harvest-stage2/assets/mss/matched-1M.tsv",
+        "reference": "/private/tmp/gwas-harvest-stage2/assets/reference/matched-index",
+        "package_version": "1.21.4",
+        "R_version": "R version 4.5.3 (2026-03-11)",
+        "threads": 1,
+        "batch_rows": 100000,
+        "projection": "not requested",
+        "workload": "437458 real chr22 unique biallelic non-palindromic SNP panel records repeated with synthetic exact beta/EAF; 40M rows do not mean 40M unique variants; separate reviewed scientific matrices cover indels/multiallelic/ambiguity",
+        "cache_caveat": "Fresh R process and application reference handle per run; OS page cache uncontrolled and never flushed. Shared host may run full reference preparation and package tests.",
+        "package_setup_elapsed": 3.679,
+        "package_setup_user.self": 3.437,
+        "package_setup_sys.self": 0.153,
+        "reference_verify_and_open_elapsed": 0.21,
+        "reference_verify_and_open_user.self": 0.182,
+        "reference_verify_and_open_sys.self": 0.025,
+        "processing_elapsed": 24.444,
+        "processing_user.self": 19.124,
+        "processing_sys.self": 5.113,
+        "source_rows": 1000000,
+        "normalized_rows": 1000000,
+        "status_counts": [
+          562542,
+          437458
+        ],
+        "implementation": "mss-preservation-7",
+        "reference_format": "mss-preservation-2",
+        "reference_version": "Ensembl104-chr22-bounded-prefix-unique-nonpal-SNPs",
+        "finished_utc": "2026-11-16 11:29:19 UTC"
+      },
+      "external_time": {
+        "wall_seconds": 29.01,
+        "user_seconds": 23.34,
+        "system_seconds": 5.34,
+        "peak_rss_bytes": 1629683712,
+        "peak_physical_footprint_bytes": 1341557016
+      },
+      "guard": {
+        "command": [
+          "/usr/bin/time",
+          "-l",
+          "Rscript",
+          "--vanilla",
+          "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runner.R",
+          "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/1M/mss7/spec.json"
+        ],
+        "pid": 11390,
+        "status": "success",
+        "exit_code": 0,
+        "reason": null,
+        "natural_oom": false,
+        "wall_seconds": 29.199988125124946,
+        "samples": 103,
+        "peak_process_tree": {
+          "rss_bytes": 1628569600,
+          "physical_footprint_bytes": 1342556680,
+          "conservative_guard_bytes": 1628651760,
+          "processes": 2
+        },
+        "min_free_bytes": 466864726016,
+        "peak_owned_case_bytes": 233569053,
+        "limits": {
+          "memory_bytes": 8589934592,
+          "minimum_free_bytes": 171798691840,
+          "case_disk_bytes": 1073741824
+        },
+        "scope": "Full owned process tree: RSS, macOS physical footprint and sum(max(RSS,footprint)); Linux guard includes swap. No other workload is signaled."
+      }
+    }
+  },
+  "correctness": {
+    "schema": 1,
+    "stage": "1M",
+    "rows_expected": 1000000,
+    "passed": true,
+    "all_rows_examined": true,
+    "source_bytes_sha256": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2",
+    "source_copies_exact_each": 2,
+    "reference_inventory": {
+      "source_rows": 437458,
+      "loci": 437458,
+      "ids": 437458,
+      "eligible_panel_records": 437458,
+      "multiallelic_loci": 0,
+      "quadallelic_loci": 0,
+      "ids_with_multiple_events": 0,
+      "reference_scope": "All concrete SNP REF/ALT records included; no assumption of one ALT or one locus per ID"
+    },
+    "versions": {
+      "mss4": {
+        "counts": {
+          "source_rows": 1000000,
+          "normalized_rows": 1000000,
+          "all_19_fields_correct_rows": 1000000,
+          "expected_resolved_rows": 1000000,
+          "observed_resolved_rows": 1000000,
+          "effect_nonmissing_denominator": 1000000,
+          "eaf_nonmissing_denominator": 1000000,
+          "effect_missing_correct_rows": 0,
+          "eaf_missing_correct_rows": 0
+        },
+        "statuses": {
+          "match": 562542,
+          "swap": 437458
+        }
+      },
+      "mss7": {
+        "counts": {
+          "source_rows": 1000000,
+          "normalized_rows": 1000000,
+          "all_19_fields_correct_rows": 1000000,
+          "expected_resolved_rows": 1000000,
+          "observed_resolved_rows": 1000000,
+          "effect_nonmissing_denominator": 1000000,
+          "eaf_nonmissing_denominator": 1000000,
+          "effect_missing_correct_rows": 0,
+          "eaf_missing_correct_rows": 0
+        },
+        "statuses": {
+          "match": 562542,
+          "swap": 437458
+        }
+      }
+    },
+    "deltas": {
+      "all_19_fields_byte_exact_rows": 1000000
+    },
+    "unaccounted_deltas": 0,
+    "scope": "Repeated real chr22 unique biallelic non-palindromic SNP panel; every source and normalized row/all19fields verified; indels/multiallelic contexts are validated in separate scientific suites, not timed here"
+  },
+  "verification_guard": {
+    "command": [
+      "/opt/homebrew/opt/python@3.15/bin/python3.15",
+      "-B",
+      "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/verify.py",
+      "--profile",
+      "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/profiles/scientific7-fai-safety-format2-stage8.json",
+      "--stage",
+      "1M",
+      "--receipt",
+      "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/1M/correctness.json",
+      "--edition",
+      "mss4=/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/1M/mss4/edition",
+      "--edition",
+      "mss7=/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/1M/mss7/edition"
+    ],
+    "pid": 11985,
+    "status": "success",
+    "exit_code": 0,
+    "reason": null,
+    "natural_oom": false,
+    "wall_seconds": 22.13341070804745,
+    "samples": 78,
+    "peak_process_tree": {
+      "rss_bytes": 2030370816,
+      "physical_footprint_bytes": 2371733616,
+      "conservative_guard_bytes": 2371733616,
+      "processes": 1
+    },
+    "min_free_bytes": 466825166848,
+    "peak_owned_case_bytes": 467150417,
+    "limits": {
+      "memory_bytes": 8589934592,
+      "minimum_free_bytes": 171798691840,
+      "case_disk_bytes": 2147483648
+    },
+    "scope": "Full owned process tree: RSS, macOS physical footprint and sum(max(RSS,footprint)); Linux guard includes swap. No other workload is signaled."
+  },
+  "total_operator_wall_seconds": 76.743316416163,
+  "processing_reference_verify_package_setup_external_wall_are_separate": true,
+  "workload": "437458 real chr22 unique biallelic non-palindromic SNP panel records repeated with synthetic exact beta/EAF; 40M rows do not mean 40M unique variants; separate reviewed scientific matrices cover indels/multiallelic/ambiguity",
+  "cache_caveat": "Fresh R process and application reference handle per run; OS page cache uncontrolled and never flushed. Shared host may run full reference preparation and package tests.",
+  "not_unique_variant_count": true
+}

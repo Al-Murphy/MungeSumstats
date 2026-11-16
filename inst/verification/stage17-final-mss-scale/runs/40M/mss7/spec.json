@@ -1,0 +1,18 @@
+{
+  "version": "mss7",
+  "library": "/private/tmp/gwas-harvest-stage2/results/verification-stage8/mss-fai-installed/lib",
+  "dll_path": "/private/tmp/gwas-harvest-stage2/results/verification-stage8/mss-fai-installed/lib/MungeSumstats/libs/MungeSumstats.so",
+  "dll_md5": "a316ef26223e2e009fef19802320a7a4",
+  "dll_sha256": "6f23605e06ac0b35fd40268b08190fd55e9a09e2fccded2f8cd7b629a3cd49eb",
+  "implementation": "mss-preservation-7",
+  "production_revision": "03d11e92b417add0183dea4fb77716f5502d5735",
+  "input": "/private/tmp/gwas-harvest-stage2/assets/mss/matched-40M.tsv",
+  "reference": "/private/tmp/gwas-harvest-stage2/assets/reference/matched-index",
+  "output": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/40M/mss7/edition",
+  "metrics": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/40M/mss7/metrics.json",
+  "rows": 40000000,
+  "threads": 1,
+  "batch_rows": 100000,
+  "workload": "437458 real chr22 unique biallelic non-palindromic SNP panel records repeated with synthetic exact beta/EAF; 40M rows do not mean 40M unique variants; separate reviewed scientific matrices cover indels/multiallelic/ambiguity",
+  "cache_caveat": "Fresh R process and application reference handle per run; OS page cache uncontrolled and never flushed. Shared host may run full reference preparation and package tests."
+}

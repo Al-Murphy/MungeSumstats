@@ -1,0 +1,69 @@
+{
+  "scope": "No omitted scientific input/reference/edition/DLL body was opened, hashed or copied. Stored original descriptors below are copied only from the existing pinned profile metadata.",
+  "inputs": [
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/assets/mss/matched-1M.tsv",
+      "bytes": 46106766,
+      "mtime_ns": 1794763146991543581,
+      "sha256": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2",
+      "md5": "86fbafb66e89f7dd8ac211952dada625",
+      "newline_count": 1000001,
+      "stage": "1M",
+      "body_read_or_rehashed": false
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/assets/mss/matched-10M.tsv",
+      "bytes": 461361405,
+      "mtime_ns": 1794763400123889919,
+      "sha256": "cecd6f1053fb9c02066be3aa78f0f4976cb8ab32e882357e016ec1ea259788e0",
+      "md5": "f6b7755f2972d57ce99701a2e9141adc",
+      "newline_count": 10000001,
+      "stage": "10M",
+      "body_read_or_rehashed": false
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/assets/mss/matched-40M.tsv",
+      "bytes": 1846063408,
+      "mtime_ns": 1794763424260772267,
+      "sha256": "cbf644d415e34aa44ba9b51fdb25d1db3dd99596122ca392f0e41cd25cce3ad4",
+      "md5": "091f1d6d92cc793fd36bec2d97d19413",
+      "newline_count": 40000001,
+      "stage": "40M",
+      "body_read_or_rehashed": false
+    }
+  ],
+  "loaded_dll": {
+    "path": "/private/tmp/gwas-harvest-stage2/results/verification-stage8/mss-fai-installed/lib/MungeSumstats/libs/MungeSumstats.so",
+    "bytes": 460384,
+    "mtime_ns": 1794827749040458996,
+    "sha256": "6f23605e06ac0b35fd40268b08190fd55e9a09e2fccded2f8cd7b629a3cd49eb",
+    "md5": "a316ef26223e2e009fef19802320a7a4",
+    "newline_count": 1533,
+    "body_read_or_rehashed": false
+  },
+  "editions": [
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/1M/mss7/edition",
+      "reason": "Scientific edition tree omitted; per-file sizes/hashes not present in selected summary/spec. No traversal performed."
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/10M/mss7/edition",
+      "reason": "Scientific edition tree omitted; per-file sizes/hashes not present in selected summary/spec. No traversal performed."
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-fai-safety-format2-stage8/40M/mss7/edition",
+      "reason": "Scientific edition tree omitted; per-file sizes/hashes not present in selected summary/spec. No traversal performed."
+    }
+  ],
+  "omitted_scopes": [
+    "Raw reference/FASTA/VCF/TSV/SQLite/statistical/source-row payloads, all scientific fixture inventories and full 59/81 controls/library contents",
+    "Native DLLs/binaries/objects/environments, historical full raw benchmark logs, raw driver source/diff and independent review bodies (exact small external anchors instead)",
+    "Counter stage17 verifier transcript/script remain external via exact original review index; original counter40 archive/tar is untouched",
+    "Credential/account/authentication logs, private configuration, .remember and tool memory are excluded entirely"
+  ],
+  "missing_or_oversized_allowlisted_logs": [],
+  "new_target_executions": 0,
+  "full_reference_admitted": false,
+  "index_builds_executed": 0,
+  "decision": "no_admission"
+}
