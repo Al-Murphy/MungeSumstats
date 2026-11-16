@@ -1,0 +1,33 @@
+{
+  "command": [
+    "/private/tmp/gwas-harvest-stage2/harvest/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "/private/tmp/gwas-harvest-stage2/results/worker-relocation-independent-review-stage7/harvest/tests/test_mss_worker.py",
+    "/private/tmp/gwas-harvest-stage2/results/worker-relocation-independent-review-stage7/harvest/tests/test_mss_worker_relocation.py",
+    "/private/tmp/gwas-harvest-stage2/results/worker-relocation-independent-review-stage7/worker_probes.py",
+    "--junitxml=/private/tmp/gwas-harvest-stage2/results/worker-relocation-independent-review-stage7/unsupported/junit.xml"
+  ],
+  "pid": 51109,
+  "status": "success",
+  "exit_code": 0,
+  "reason": null,
+  "natural_oom": false,
+  "wall_seconds": 132.4522257919889,
+  "samples": 451,
+  "peak_process_tree": {
+    "rss_bytes": 1184677888,
+    "physical_footprint_bytes": 1033474176,
+    "conservative_guard_bytes": 1184677888,
+    "processes": 6
+  },
+  "min_free_bytes": 473435738112,
+  "peak_owned_case_bytes": 129437,
+  "limits": {
+    "memory_bytes": 4294967296,
+    "minimum_free_bytes": 171798691840,
+    "case_disk_bytes": 2147483648
+  },
+  "scope": "Full owned process tree: RSS, macOS physical footprint and sum(max(RSS,footprint)); Linux guard includes swap. No other workload is signaled."
+}

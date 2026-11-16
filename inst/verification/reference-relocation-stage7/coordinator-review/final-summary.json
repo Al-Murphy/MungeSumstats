@@ -1,0 +1,91 @@
+{
+  "verdict": "GREEN_BOTH_SCOPES",
+  "worker_profiles": {
+    "supported": {
+      "tests": "13",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "134.471",
+      "guard": {
+        "status": "success",
+        "wall_seconds": 134.96140287490562,
+        "peak_process_tree": {
+          "rss_bytes": 1198768128,
+          "physical_footprint_bytes": 1047973968,
+          "conservative_guard_bytes": 1198768128,
+          "processes": 6
+        },
+        "peak_owned_case_bytes": 160003
+      },
+      "dll": {
+        "library": "/private/tmp/gwas-harvest-stage2/results/verification-stage7/mss-relocation-install/lib",
+        "sha256": "b63e4e43a167ad5b4807bc6a36758e820eb7b0c70ae3e77124e6ab909d9e4841",
+        "rechecked": true
+      }
+    },
+    "unsupported": {
+      "tests": "13",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "132.258",
+      "guard": {
+        "status": "success",
+        "wall_seconds": 132.4522257919889,
+        "peak_process_tree": {
+          "rss_bytes": 1184677888,
+          "physical_footprint_bytes": 1033474176,
+          "conservative_guard_bytes": 1184677888,
+          "processes": 6
+        },
+        "peak_owned_case_bytes": 129437
+      },
+      "dll": {
+        "library": "/private/tmp/gwas-harvest-stage2/Rlib/preservation-v7",
+        "sha256": "c1c0a8b29479c33d8b4cfa4646e46e39c4da436686f4ca2da12a402251003d50",
+        "rechecked": true
+      }
+    }
+  },
+  "denied_timestamp_branch": {
+    "blocks": 8,
+    "passed_assertions": 192,
+    "failures": 0,
+    "errors": 0,
+    "warnings": 0
+  },
+  "mss_local": {
+    "mss-standalone": {
+      "blocks": 80,
+      "assertions": 1427,
+      "end_marker": "standalone R preservation and typed reference fixtures passed"
+    },
+    "mss-registered": {
+      "blocks": 40,
+      "assertions": 514,
+      "end_marker": "registered generated bindings fixtures passed"
+    }
+  },
+  "source_integrity": {
+    "harvest": {
+      "frozen_review_commit": "95c55d663eb05e0820668173bcf1890f7d606a19",
+      "current_author_worktree_head": "95c55d663eb05e0820668173bcf1890f7d606a19",
+      "source_files_rechecked": 918,
+      "mismatches": [],
+      "author_checkout_clean": true,
+      "diff_check_exit": 0,
+      "current_head_substantive_changes_from_reviewed_commit": []
+    },
+    "mss": {
+      "frozen_review_commit": "50912b79d93ac7ee14127cb3a83fb4c16a5060d5",
+      "current_author_worktree_head": "74c85cdb3a5959d1460103212e8db336c01769bc",
+      "source_files_rechecked": 768,
+      "mismatches": [],
+      "author_checkout_clean": true,
+      "diff_check_exit": 0,
+      "current_head_substantive_changes_from_reviewed_commit": []
+    },
+    "mss_production_vs_8334_changed_files": []
+  }
+}

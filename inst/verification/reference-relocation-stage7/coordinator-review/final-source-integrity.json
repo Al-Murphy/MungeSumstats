@@ -1,0 +1,21 @@
+{
+  "harvest": {
+    "frozen_review_commit": "95c55d663eb05e0820668173bcf1890f7d606a19",
+    "current_author_worktree_head": "95c55d663eb05e0820668173bcf1890f7d606a19",
+    "source_files_rechecked": 918,
+    "mismatches": [],
+    "author_checkout_clean": true,
+    "diff_check_exit": 0,
+    "current_head_substantive_changes_from_reviewed_commit": []
+  },
+  "mss": {
+    "frozen_review_commit": "50912b79d93ac7ee14127cb3a83fb4c16a5060d5",
+    "current_author_worktree_head": "74c85cdb3a5959d1460103212e8db336c01769bc",
+    "source_files_rechecked": 768,
+    "mismatches": [],
+    "author_checkout_clean": true,
+    "diff_check_exit": 0,
+    "current_head_substantive_changes_from_reviewed_commit": []
+  },
+  "mss_production_vs_8334_changed_files": []
+}

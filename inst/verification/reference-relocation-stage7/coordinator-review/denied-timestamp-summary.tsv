@@ -1,0 +1,9 @@
+"test"	"nb"	"failed"	"skipped"	"error"	"warning"	"passed"
+"default open retains its existing scientific and receipt behavior"	10	0	FALSE	FALSE	0	10
+"explicit FASTA binds transferred immutable references without the original path"	40	0	FALSE	FALSE	0	40
+"explicit FASTA never bypasses byte identity or path validation"	22	0	FALSE	FALSE	0	22
+"relocation verifies every unchanged index artifact including FAI and source"	24	0	FALSE	FALSE	0	24
+"explicit rebinding rereads the manifest and owns a fresh physical FASTA handle"	30	0	FALSE	FALSE	0	30
+"streamed editions record physical FASTA binding without changing scientific fields"	30	0	FALSE	FALSE	0	30
+"reference-version refusals remain consistent with and without relocation"	6	0	FALSE	FALSE	0	6
+"projection receipts retain both explicit physical bindings and unchanged scientific identities"	30	0	FALSE	FALSE	0	30

@@ -8,5 +8,40 @@
     "bytes": 1016806,
     "reason": "Generated testthat RDS; complete CSV, summary and log retained",
     "sha256": "7dfe7b04a5f10ffc6e5ca68cd1bd592c0e77332b8e7df6fb776e79e7fcde75b1"
+  },
+  "results/worker-relocation-independent-review-stage7/.remember/.gitignore": {
+    "bytes": 2,
+    "reason": "Unrelated hook-generated memory; not a verification artifact",
+    "sha256": "cdbcae15105d6b781e620813c79c7e868740d4e9cc53ce6f5fcbbc12387adf4b"
+  },
+  "results/worker-relocation-independent-review-stage7/.remember/.install-marker": {
+    "bytes": 115,
+    "reason": "Unrelated hook-generated memory; not a verification artifact",
+    "sha256": "f55a5d395f057eea0a409f92128ceeaba7a1bf175940e916cde73b851ca41fad"
+  },
+  "results/worker-relocation-independent-review-stage7/.remember/logs/autonomous/save-20261116-053306-50497.log": {
+    "bytes": 36,
+    "reason": "Unrelated hook-generated memory; not a verification artifact",
+    "sha256": "3b7ef1fc8f72fb4f98f3fa6d7460b966e7ecc594fc77d3d894373dd8e58ed24b"
+  },
+  "results/worker-relocation-independent-review-stage7/.remember/logs/autonomous/save-20261116-053306-50498.log": {
+    "bytes": 36,
+    "reason": "Unrelated hook-generated memory; not a verification artifact",
+    "sha256": "3b7ef1fc8f72fb4f98f3fa6d7460b966e7ecc594fc77d3d894373dd8e58ed24b"
+  },
+  "results/worker-relocation-independent-review-stage7/.remember/logs/autonomous/save-20261116-053506-56198.log": {
+    "bytes": 36,
+    "reason": "Unrelated hook-generated memory; not a verification artifact",
+    "sha256": "f3a5ebc6ace4da4c835f9896f30595048a9d85b486cec05ec828ae876ee00c52"
+  },
+  "results/worker-relocation-independent-review-stage7/.remember/logs/hook-errors.log": {
+    "bytes": 0,
+    "reason": "Unrelated hook-generated memory; not a verification artifact",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "results/worker-relocation-independent-review-stage7/.remember/logs/memory-2026-11-16.log": {
+    "bytes": 2047,
+    "reason": "Unrelated hook-generated memory; not a verification artifact",
+    "sha256": "73b6b4669ddadd5509da7e14037bc210bf55380201aadd4d81fbf06d7fd94325"
   }
 }

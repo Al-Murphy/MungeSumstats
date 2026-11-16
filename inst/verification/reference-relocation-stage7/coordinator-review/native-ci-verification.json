@@ -1,0 +1,44 @@
+{
+  "run_id": 43848950725,
+  "head_sha": "50912b79d93ac7ee14127cb3a83fb4c16a5060d5",
+  "jobs": [
+    {
+      "job_id": 133236219815,
+      "job_name": "standalone (windows-latest)",
+      "SourceCpp": {
+        "test_blocks": 80,
+        "assertions": 1427
+      },
+      "registered": {
+        "test_blocks": 40,
+        "assertions": 514
+      }
+    },
+    {
+      "job_id": 133236220130,
+      "job_name": "standalone (ubuntu-latest)",
+      "SourceCpp": {
+        "test_blocks": 80,
+        "assertions": 1427
+      },
+      "registered": {
+        "test_blocks": 40,
+        "assertions": 514
+      }
+    },
+    {
+      "job_id": 133236220179,
+      "job_name": "standalone (macos-latest)",
+      "SourceCpp": {
+        "test_blocks": 80,
+        "assertions": 1427
+      },
+      "registered": {
+        "test_blocks": 40,
+        "assertions": 514
+      }
+    }
+  ],
+  "all3_statuses": "success",
+  "url": "https://github.com/Al-Murphy/MungeSumstats/actions/runs/43848950725"
+}

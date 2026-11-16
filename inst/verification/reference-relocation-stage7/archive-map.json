@@ -13,6 +13,20 @@
     "raw_sha256": "df288b3882d426bd33db1054dcdc4643726ba04e58d6f7a4c480662ad9431c99",
     "sha256": "df288b3882d426bd33db1054dcdc4643726ba04e58d6f7a4c480662ad9431c99"
   },
+  "reports/worker-reference-relocation-stage7.md": {
+    "archive": "reports/worker-reference-relocation-stage7.md",
+    "bytes": 3058,
+    "raw_bytes": 3058,
+    "raw_sha256": "bb0a7851c994db44c610747f998f4bcb32f00a2124c95c573ce5a1c8f9887f32",
+    "sha256": "bb0a7851c994db44c610747f998f4bcb32f00a2124c95c573ce5a1c8f9887f32"
+  },
+  "reports/worker-relocation-independent-review-stage7.md": {
+    "archive": "reports/worker-relocation-independent-review-stage7.md",
+    "bytes": 9646,
+    "raw_bytes": 9646,
+    "raw_sha256": "88a9d0dfdc344412ac2edf8c02b4a9d8d46de12082ac9e7c3cd4f77db8c74cb1",
+    "sha256": "88a9d0dfdc344412ac2edf8c02b4a9d8d46de12082ac9e7c3cd4f77db8c74cb1"
+  },
   "results/mss-reference-relocation-independent-review-stage7/author-evidence-verification.json": {
     "archive": "mss-reference-relocation-independent-review-stage7/author-evidence-verification.json",
     "bytes": 214,
@@ -495,5 +509,166 @@
     "raw_bytes": 1391,
     "raw_sha256": "052e23bdae01606ea284175ee09fc83ef6930ed89bd637079fbb873f9514575d",
     "sha256": "052e23bdae01606ea284175ee09fc83ef6930ed89bd637079fbb873f9514575d"
+  },
+  "results/worker-relocation-independent-review-stage7/author-evidence-verification.json": {
+    "archive": "coordinator-review/author-evidence-verification.json",
+    "bytes": 194,
+    "raw_bytes": 194,
+    "raw_sha256": "c4e28d9b304c42985cd63ad0898a36ab04796fa6ae643c3f07ee0ee00fbd598e",
+    "sha256": "c4e28d9b304c42985cd63ad0898a36ab04796fa6ae643c3f07ee0ee00fbd598e"
+  },
+  "results/worker-relocation-independent-review-stage7/denied-timestamp-summary.tsv": {
+    "archive": "coordinator-review/denied-timestamp-summary.tsv",
+    "bytes": 863,
+    "raw_bytes": 863,
+    "raw_sha256": "d0c1ffca1f6d0a0638a680ec4d616eda2cbad460f45a8803647501459bd41267",
+    "sha256": "d0c1ffca1f6d0a0638a680ec4d616eda2cbad460f45a8803647501459bd41267"
+  },
+  "results/worker-relocation-independent-review-stage7/denied-timestamp.R": {
+    "archive": "coordinator-review/denied-timestamp.R",
+    "bytes": 1176,
+    "raw_bytes": 1176,
+    "raw_sha256": "286991c5c4e608db224b9c868046f80db9457dd58c2143f5bba4c446455deeb1",
+    "sha256": "286991c5c4e608db224b9c868046f80db9457dd58c2143f5bba4c446455deeb1"
+  },
+  "results/worker-relocation-independent-review-stage7/denied-timestamp.log": {
+    "archive": "coordinator-review/denied-timestamp.log.gz",
+    "bytes": 124,
+    "raw_bytes": 511,
+    "raw_sha256": "e4483f9f6dd4f20847872b4d910b51b1a9a13b0178de9e0e383eaa1fb75e2f8a",
+    "sha256": "9257cd4133ec3b59ea901efdc664047fa03298793c7b0c7ec098ababb0f97b39"
+  },
+  "results/worker-relocation-independent-review-stage7/evidence-index.json": {
+    "archive": "coordinator-review/evidence-index.json",
+    "bytes": 5858,
+    "raw_bytes": 5858,
+    "raw_sha256": "67ee0de2220abbe54c0f9694df3767d217ae74f38df878c4e45e34363aeb9e92",
+    "sha256": "67ee0de2220abbe54c0f9694df3767d217ae74f38df878c4e45e34363aeb9e92"
+  },
+  "results/worker-relocation-independent-review-stage7/final-source-integrity.json": {
+    "archive": "coordinator-review/final-source-integrity.json",
+    "bytes": 753,
+    "raw_bytes": 753,
+    "raw_sha256": "53b16e9b4f0e1916b5515fe2098f767f2887dd54982cd767c050bc53a1403e34",
+    "sha256": "53b16e9b4f0e1916b5515fe2098f767f2887dd54982cd767c050bc53a1403e34"
+  },
+  "results/worker-relocation-independent-review-stage7/final-summary.json": {
+    "archive": "coordinator-review/final-summary.json",
+    "bytes": 2758,
+    "raw_bytes": 2758,
+    "raw_sha256": "3f909a105dd6d51d133e56807e496f0277a1655be4bb4cc8d0baeb7ed8276aae",
+    "sha256": "3f909a105dd6d51d133e56807e496f0277a1655be4bb4cc8d0baeb7ed8276aae"
+  },
+  "results/worker-relocation-independent-review-stage7/full-installed-evidence-verification.json": {
+    "archive": "coordinator-review/full-installed-evidence-verification.json",
+    "bytes": 1106,
+    "raw_bytes": 1106,
+    "raw_sha256": "c48e0e37716fe4ea361d769c362c26cc261e15fde6320929a15aee6815563eef",
+    "sha256": "c48e0e37716fe4ea361d769c362c26cc261e15fde6320929a15aee6815563eef"
+  },
+  "results/worker-relocation-independent-review-stage7/initial-source-pins.json": {
+    "archive": "coordinator-review/initial-source-pins.json",
+    "bytes": 233993,
+    "raw_bytes": 233993,
+    "raw_sha256": "a485fff1805f44f5e66f6242bc8e5b4e503c28fa43ef105606da1cb7b8300d99",
+    "sha256": "a485fff1805f44f5e66f6242bc8e5b4e503c28fa43ef105606da1cb7b8300d99"
+  },
+  "results/worker-relocation-independent-review-stage7/local-mss-summary.json": {
+    "archive": "coordinator-review/local-mss-summary.json",
+    "bytes": 288,
+    "raw_bytes": 288,
+    "raw_sha256": "4e9e717baf678367556a0f4ca2df8c55bcec133f96ed1791e7163c18c780ffbe",
+    "sha256": "4e9e717baf678367556a0f4ca2df8c55bcec133f96ed1791e7163c18c780ffbe"
+  },
+  "results/worker-relocation-independent-review-stage7/mss-registered.log": {
+    "archive": "coordinator-review/mss-registered.log.gz",
+    "bytes": 625,
+    "raw_bytes": 2367,
+    "raw_sha256": "f59b663ed474d55f1dff17dbd617993f087a45f0c77245c64e7f45a1beb22ec0",
+    "sha256": "80e50d4e9847f5a9fceaf1ef68e83ddcc40682acd5b67d6781febef309800a93"
+  },
+  "results/worker-relocation-independent-review-stage7/mss-standalone.log": {
+    "archive": "coordinator-review/mss-standalone.log.gz",
+    "bytes": 368,
+    "raw_bytes": 2894,
+    "raw_sha256": "ca33bbe9069897fe849b32955336aa1992977830ae542f7a6374394d3f074171",
+    "sha256": "c717a3f0e93c77761485850a1a8066e993f94a87e1fd75de809d1f00b674adde"
+  },
+  "results/worker-relocation-independent-review-stage7/native-ci-verification.json": {
+    "archive": "coordinator-review/native-ci-verification.json",
+    "bytes": 986,
+    "raw_bytes": 986,
+    "raw_sha256": "e67aa63c081fde3f867d9f848dc257bd8c2ad6fdf417556f2fcdafff79f927c1",
+    "sha256": "e67aa63c081fde3f867d9f848dc257bd8c2ad6fdf417556f2fcdafff79f927c1"
+  },
+  "results/worker-relocation-independent-review-stage7/run-worker-review.py": {
+    "archive": "coordinator-review/run-worker-review.py",
+    "bytes": 1671,
+    "raw_bytes": 1671,
+    "raw_sha256": "48674ebca0ffaccd0e8eed8920a610f5ec867184b67bb3c061ac3f742d197fb0",
+    "sha256": "48674ebca0ffaccd0e8eed8920a610f5ec867184b67bb3c061ac3f742d197fb0"
+  },
+  "results/worker-relocation-independent-review-stage7/supported/dll-pin.json": {
+    "archive": "coordinator-review/supported/dll-pin.json",
+    "bytes": 208,
+    "raw_bytes": 208,
+    "raw_sha256": "c387b5dca8f98517882b225c83e12f89b922ce9946219ca11edd4d4b0d36c72a",
+    "sha256": "c387b5dca8f98517882b225c83e12f89b922ce9946219ca11edd4d4b0d36c72a"
+  },
+  "results/worker-relocation-independent-review-stage7/supported/guard.json": {
+    "archive": "coordinator-review/supported/guard.json",
+    "bytes": 1285,
+    "raw_bytes": 1285,
+    "raw_sha256": "ebcc29bb6ec3f1c48fc07288f3d6ebb8924430a029898c6cbc79ea7c65ff456d",
+    "sha256": "ebcc29bb6ec3f1c48fc07288f3d6ebb8924430a029898c6cbc79ea7c65ff456d"
+  },
+  "results/worker-relocation-independent-review-stage7/supported/junit.xml": {
+    "archive": "coordinator-review/supported/junit.xml",
+    "bytes": 1937,
+    "raw_bytes": 1937,
+    "raw_sha256": "ad697f7d9e9e09267a4b4b43bdff21a67449e0d8ded6d695c26af516ca1acc32",
+    "sha256": "ad697f7d9e9e09267a4b4b43bdff21a67449e0d8ded6d695c26af516ca1acc32"
+  },
+  "results/worker-relocation-independent-review-stage7/supported/run.log": {
+    "archive": "coordinator-review/supported/run.log.gz",
+    "bytes": 64,
+    "raw_bytes": 111,
+    "raw_sha256": "29bde8c2f265a343757432bb344b3e807394e18e969fe2c02d7f90295a1f8dcd",
+    "sha256": "07ce781db6aacf1bc843e515a8e8952e3671619a0e9e69daeafa9cd306e212a7"
+  },
+  "results/worker-relocation-independent-review-stage7/unsupported/dll-pin.json": {
+    "archive": "coordinator-review/unsupported/dll-pin.json",
+    "bytes": 174,
+    "raw_bytes": 174,
+    "raw_sha256": "722f09f60aab20f75f6d1ee44a09cc82890c4ca5d6051c24e0570f27db3dedef",
+    "sha256": "722f09f60aab20f75f6d1ee44a09cc82890c4ca5d6051c24e0570f27db3dedef"
+  },
+  "results/worker-relocation-independent-review-stage7/unsupported/guard.json": {
+    "archive": "coordinator-review/unsupported/guard.json",
+    "bytes": 1286,
+    "raw_bytes": 1286,
+    "raw_sha256": "d382d7c69cf6a22394f6afbfb19daecf7a95cd5d3c8c62721bd1eeb3d9c324f0",
+    "sha256": "d382d7c69cf6a22394f6afbfb19daecf7a95cd5d3c8c62721bd1eeb3d9c324f0"
+  },
+  "results/worker-relocation-independent-review-stage7/unsupported/junit.xml": {
+    "archive": "coordinator-review/unsupported/junit.xml",
+    "bytes": 1937,
+    "raw_bytes": 1937,
+    "raw_sha256": "191b47272b244ab4cc819a60caa9a6f96fa102d09fdcea327bef3b840a7c0741",
+    "sha256": "191b47272b244ab4cc819a60caa9a6f96fa102d09fdcea327bef3b840a7c0741"
+  },
+  "results/worker-relocation-independent-review-stage7/unsupported/run.log": {
+    "archive": "coordinator-review/unsupported/run.log.gz",
+    "bytes": 64,
+    "raw_bytes": 111,
+    "raw_sha256": "f70fdb16f3d96796f1d79597f8a2d9232a18b281360a32f3bcbcb723f5d0e71e",
+    "sha256": "9ae2ff89ac6f2505332eb4978b088d235bfd0bd662128f205b5cc57885e67508"
+  },
+  "results/worker-relocation-independent-review-stage7/worker_probes.py": {
+    "archive": "coordinator-review/worker_probes.py",
+    "bytes": 5165,
+    "raw_bytes": 5165,
+    "raw_sha256": "3de40662d45be5e1696b3a5e05b355702a442af0c95d51b02f5c7df884cfc4a2",
+    "sha256": "3de40662d45be5e1696b3a5e05b355702a442af0c95d51b02f5c7df884cfc4a2"
   }
 }

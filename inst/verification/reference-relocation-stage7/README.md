@@ -42,8 +42,12 @@ streams left by completed streaming calls before moving files. All source/normal
 parity, immutable-manifest and real-mutation controls remain exercised; no platform
 skip was added to hide these failures.
 
-Original independent review is GREEN; the subsequent coordinator fixture/worker
-review is recorded separately when delivered. One inherited native-parser follow-up
+Original independent review and the subsequent coordinator fixture/worker review
+are **GREEN**. The latter independently reran13actual worker cases with each library,
+both local native paths and an8block/192assertion forced timestamp-denial control;
+it independently verified the saved native CI and installed-suite/source pins.
+Harvest worker adoption and its combined integration are separate from the R change.
+One inherited native-parser follow-up
 remains: an operator-rewritten, newly trusted manifest can bind a syntactically
 five-column FAI with invalid zero line widths. Ordinary corruption against the
 unchanged manifest is refused. This is outside this R-only relocation change and
@@ -62,3 +66,5 @@ CSV/summary/log receipts; installed libraries and build binaries are not vendore
 Native receipts contain decoded API logs, not the original GitHub ZIP byte stream.
 Original evidence indexes keep their original absolute paths; resolve them through
 the archive map. No actual cloud credentials or private AWS inventories are included.
+Unrelated hook-generated memory entries present in a reviewer index are explicitly
+omitted without changing that original index; they are not verification artifacts.

@@ -1,0 +1,12 @@
+{
+  "mss-standalone": {
+    "blocks": 80,
+    "assertions": 1427,
+    "end_marker": "standalone R preservation and typed reference fixtures passed"
+  },
+  "mss-registered": {
+    "blocks": 40,
+    "assertions": 514,
+    "end_marker": "registered generated bindings fixtures passed"
+  }
+}

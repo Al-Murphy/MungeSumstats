@@ -1,0 +1,29 @@
+{
+  "coordinator_executed": true,
+  "independently_checked": true,
+  "summary": {
+    "blocks": 255,
+    "passed_assertions": 2270,
+    "failed_assertions": 0,
+    "errors": 0,
+    "warnings": 2,
+    "skipped_blocks": 2
+  },
+  "warning_tests": [
+    "Test that if a0/a1 passed, formatted correctly",
+    "Handle extra info in rs id column"
+  ],
+  "skipped_tests": [
+    "#49/#114: ref_genome=NULL validates; install check uses dbSNP",
+    "#98/#200: dbSNP=155 validates; unknown or invalid versions error"
+  ],
+  "source_pins_checked": 234,
+  "evidence_sha256": {
+    "summary.json": "727a6490a5d34345a64e2774e250e26ba28a49740909b160fcc5a20e1fd9a0a3",
+    "guard.json": "945d6862a7c85fba3880f3ceff4823f3d9c035256d7abafaf4dc5171c967f2c5",
+    "source-pins.json": "0762d2688f6a5e39fd497755ca539615634b6289de019b4c15516b8a8e665b5c",
+    "installed-full.csv": "7c2ca5182db7baad327fc66aabca31021317cbb4f1988cce789b38c852abb6d9",
+    "run.log": "8276741b207f9e1d31be137767a70866482b6291cbab731d1252b6a5a8186eee",
+    "installed-full.rds": "a33a381f1718d1da54171d6729e7d2efdb54abff2698e9e04687ce448b44e946"
+  }
+}

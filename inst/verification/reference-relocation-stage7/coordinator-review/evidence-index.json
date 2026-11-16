@@ -1,0 +1,152 @@
+{
+  "scope": "Independent review of Harvest95c55d6 and MSS50912b7 tests/CI",
+  "verdict": "GREEN_BOTH_SCOPES",
+  "report": {
+    "path": "/private/tmp/gwas-harvest-stage2/reports/worker-relocation-independent-review-stage7.md",
+    "sha256": "88a9d0dfdc344412ac2edf8c02b4a9d8d46de12082ac9e7c3cd4f77db8c74cb1"
+  },
+  "files": {
+    ".remember/.gitignore": {
+      "bytes": 2,
+      "sha256": "cdbcae15105d6b781e620813c79c7e868740d4e9cc53ce6f5fcbbc12387adf4b"
+    },
+    ".remember/.install-marker": {
+      "bytes": 115,
+      "sha256": "f55a5d395f057eea0a409f92128ceeaba7a1bf175940e916cde73b851ca41fad"
+    },
+    ".remember/logs/autonomous/save-20261116-053306-50497.log": {
+      "bytes": 36,
+      "sha256": "3b7ef1fc8f72fb4f98f3fa6d7460b966e7ecc594fc77d3d894373dd8e58ed24b"
+    },
+    ".remember/logs/autonomous/save-20261116-053306-50498.log": {
+      "bytes": 36,
+      "sha256": "3b7ef1fc8f72fb4f98f3fa6d7460b966e7ecc594fc77d3d894373dd8e58ed24b"
+    },
+    ".remember/logs/autonomous/save-20261116-053506-56198.log": {
+      "bytes": 36,
+      "sha256": "f3a5ebc6ace4da4c835f9896f30595048a9d85b486cec05ec828ae876ee00c52"
+    },
+    ".remember/logs/hook-errors.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".remember/logs/memory-2026-11-16.log": {
+      "bytes": 2047,
+      "sha256": "73b6b4669ddadd5509da7e14037bc210bf55380201aadd4d81fbf06d7fd94325"
+    },
+    "author-evidence-verification.json": {
+      "bytes": 194,
+      "sha256": "c4e28d9b304c42985cd63ad0898a36ab04796fa6ae643c3f07ee0ee00fbd598e"
+    },
+    "denied-timestamp-summary.tsv": {
+      "bytes": 863,
+      "sha256": "d0c1ffca1f6d0a0638a680ec4d616eda2cbad460f45a8803647501459bd41267"
+    },
+    "denied-timestamp.R": {
+      "bytes": 1176,
+      "sha256": "286991c5c4e608db224b9c868046f80db9457dd58c2143f5bba4c446455deeb1"
+    },
+    "denied-timestamp.log": {
+      "bytes": 511,
+      "sha256": "e4483f9f6dd4f20847872b4d910b51b1a9a13b0178de9e0e383eaa1fb75e2f8a"
+    },
+    "final-source-integrity.json": {
+      "bytes": 753,
+      "sha256": "53b16e9b4f0e1916b5515fe2098f767f2887dd54982cd767c050bc53a1403e34"
+    },
+    "final-summary.json": {
+      "bytes": 2758,
+      "sha256": "3f909a105dd6d51d133e56807e496f0277a1655be4bb4cc8d0baeb7ed8276aae"
+    },
+    "full-installed-evidence-verification.json": {
+      "bytes": 1106,
+      "sha256": "c48e0e37716fe4ea361d769c362c26cc261e15fde6320929a15aee6815563eef"
+    },
+    "initial-source-pins.json": {
+      "bytes": 233993,
+      "sha256": "a485fff1805f44f5e66f6242bc8e5b4e503c28fa43ef105606da1cb7b8300d99"
+    },
+    "local-mss-summary.json": {
+      "bytes": 288,
+      "sha256": "4e9e717baf678367556a0f4ca2df8c55bcec133f96ed1791e7163c18c780ffbe"
+    },
+    "mss-registered.log": {
+      "bytes": 2367,
+      "sha256": "f59b663ed474d55f1dff17dbd617993f087a45f0c77245c64e7f45a1beb22ec0"
+    },
+    "mss-standalone.log": {
+      "bytes": 2894,
+      "sha256": "ca33bbe9069897fe849b32955336aa1992977830ae542f7a6374394d3f074171"
+    },
+    "native-ci-verification.json": {
+      "bytes": 986,
+      "sha256": "e67aa63c081fde3f867d9f848dc257bd8c2ad6fdf417556f2fcdafff79f927c1"
+    },
+    "run-worker-review.py": {
+      "bytes": 1671,
+      "sha256": "48674ebca0ffaccd0e8eed8920a610f5ec867184b67bb3c061ac3f742d197fb0"
+    },
+    "supported/dll-pin.json": {
+      "bytes": 208,
+      "sha256": "c387b5dca8f98517882b225c83e12f89b922ce9946219ca11edd4d4b0d36c72a"
+    },
+    "supported/guard.json": {
+      "bytes": 1285,
+      "sha256": "ebcc29bb6ec3f1c48fc07288f3d6ebb8924430a029898c6cbc79ea7c65ff456d"
+    },
+    "supported/junit.xml": {
+      "bytes": 1937,
+      "sha256": "ad697f7d9e9e09267a4b4b43bdff21a67449e0d8ded6d695c26af516ca1acc32"
+    },
+    "supported/run.log": {
+      "bytes": 111,
+      "sha256": "29bde8c2f265a343757432bb344b3e807394e18e969fe2c02d7f90295a1f8dcd"
+    },
+    "unsupported/dll-pin.json": {
+      "bytes": 174,
+      "sha256": "722f09f60aab20f75f6d1ee44a09cc82890c4ca5d6051c24e0570f27db3dedef"
+    },
+    "unsupported/guard.json": {
+      "bytes": 1286,
+      "sha256": "d382d7c69cf6a22394f6afbfb19daecf7a95cd5d3c8c62721bd1eeb3d9c324f0"
+    },
+    "unsupported/junit.xml": {
+      "bytes": 1937,
+      "sha256": "191b47272b244ab4cc819a60caa9a6f96fa102d09fdcea327bef3b840a7c0741"
+    },
+    "unsupported/run.log": {
+      "bytes": 111,
+      "sha256": "f70fdb16f3d96796f1d79597f8a2d9232a18b281360a32f3bcbcb723f5d0e71e"
+    },
+    "worker_probes.py": {
+      "bytes": 5165,
+      "sha256": "3de40662d45be5e1696b3a5e05b355702a442af0c95d51b02f5c7df884cfc4a2"
+    }
+  },
+  "external_evidence_and_guard_inputs": {
+    "/private/tmp/gwas-harvest-stage2/results/verification-stage7/guard_common.py": {
+      "bytes": 4894,
+      "sha256": "1cf033bbbac586234310794fbd2bfd3a7f3bc4116a15b4296de870b052fe86be"
+    },
+    "/private/tmp/gwas-harvest-stage2/results/verification-stage7/process_memory.py": {
+      "bytes": 1989,
+      "sha256": "aea36f87d4dd12ea41961f2cdd11198e527ccf17be2946a4351153cb96c0a0a5"
+    },
+    "/private/tmp/gwas-harvest-stage2/results/mss-relocation-native-stage7/run-43848950725.json": {
+      "bytes": 310476,
+      "sha256": "0af469635d12f90d30ec3adcb9cf86c97ae1e020d2f14040de73dfe7d62d2dcc"
+    },
+    "/private/tmp/gwas-harvest-stage2/results/mss-relocation-native-stage7/run-metadata.json": {
+      "bytes": 2295,
+      "sha256": "5aec54ffa7f3ce068f8e9306cc6cde11fb145bbc4a4f8d205a705fe19ab5edec"
+    },
+    "/private/tmp/gwas-harvest-stage2/results/worker-reference-relocation-stage7/evidence-index.json": {
+      "bytes": 2058,
+      "sha256": "1c6706869551d328a3964ee0eca231a55175eb1d08106613bc9744b4e0d48c67"
+    }
+  },
+  "omitted_reproducible_fixtures": [
+    "fresh git archive trees (all original file hashes in initial-source-pins.json)",
+    "pytest temporary tiny fixtures and generated caches"
+  ]
+}
