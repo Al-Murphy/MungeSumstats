@@ -25,4 +25,5 @@ source(file.path(root,'tests/testthat/test-complex-contrast-boundary.R'))
 
 source(file.path(root,'tests/testthat/helper-reference-format3.R'))
 source(file.path(root,'tests/testthat/test-reference-format3.R'))
+source(file.path(root,'tests/testthat/test-reference-relocation.R'))
 cat('standalone R preservation and typed reference fixtures passed\n')

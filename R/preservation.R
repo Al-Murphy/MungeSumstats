@@ -178,6 +178,10 @@ prepare_reference <- function(fasta, variants, path, build, version,
 #' Open a verified reusable disk reference handle
 #'
 #' @param reference An `mss_reference` or its directory path.
+#' @param fasta Optional explicit runtime path to a byte-identical copy of the
+#'   manifest's FASTA, for a transferred reference. Original size/MD5 and every
+#'   reference artifact (including FAI) are fully verified. No path is guessed
+#'   and no manifest is changed. A fresh handle is opened even for handle input.
 #' @return A live `mss_reference_handle` accepted by both harmonisation APIs.
 #' @details MD5 verification occurs once when opening; subsequent uses verify
 #'   sizes and modification times. The handle owns native disk file streams and
@@ -186,17 +190,42 @@ prepare_reference <- function(fasta, variants, path, build, version,
 #'   reference files immutable while the handle is live. Handles are process-local
 #'   and must be reopened after serialization or in another R process.
 #' @export
-open_reference <- function(reference) {
+open_reference <- function(reference, fasta = NULL) {
+    relocated <- !is.null(fasta)
+    if (relocated) {
+        if (!is.character(fasta) || length(fasta) != 1L || is.na(fasta) || !nzchar(fasta))
+            stop("fasta must be one explicit existing FASTA file path")
+        fasta <- normalizePath(fasta, mustWork = TRUE)
+        if (isTRUE(file.info(fasta)$isdir)) stop("fasta must name a FASTA file, not a directory")
+        # Explicit rebinding must not inherit a previous native stream, runtime
+        # path, cached verification, or modified in-memory manifest fields.
+        if (inherits(reference, "mss_reference_handle")) reference <- reference$path
+    }
     reference <- .mss_read_reference(reference)
-    .mss_verify_reference(reference, TRUE)
-    if (inherits(reference, "mss_reference_handle")) return(reference)
+    if (relocated) {
+        recorded_fasta <- reference$fasta
+        reference$fasta <- fasta
+    }
     files <- c(fasta = reference$fasta,
                stats::setNames(file.path(reference$path, reference$files), reference$files))
-    signature <- file.info(files)[, c("size", "mtime")]
+    # Cover the complete explicit verification/open window. The default path
+    # keeps its existing verification and reusable-handle behavior.
+    signature <- if (relocated) file.info(files)[, c("size", "mtime")] else NULL
+    .mss_verify_reference(reference, TRUE)
+    if (inherits(reference, "mss_reference_handle")) return(reference)
+    if (is.null(signature)) signature <- file.info(files)[, c("size", "mtime")]
     reference$.native <- mss_open_reference_cpp(reference$path, reference$fasta)
     if (!identical(signature, file.info(files)[, c("size", "mtime")]))
         stop("Reference changed while opening its native handle")
     reference$.file_signature <- signature
+    if (relocated)
+        reference$fasta_binding <- list(implementation_version = "mss-fasta-binding-1",
+                                        recorded_path = recorded_fasta,
+                                        runtime_path = reference$fasta,
+                                        size_bytes = unname(reference$sizes[["fasta"]]),
+                                        md5 = reference$checksums[["fasta"]],
+                                        fai_md5 = reference$checksums[["fasta.fai"]],
+                                        verification = "full_reference_md5")
     class(reference) <- c("mss_reference_handle", "mss_reference")
     reference
 }
@@ -390,6 +419,8 @@ harmonise_sumstats <- function(sumstats, reference,
                        source_strand = source_strand)
     if (reference$core_version == "mss-preservation-3")
         provenance$reference_context_order <- reference$reference_context_order
+    if (!is.null(reference$fasta_binding))
+        provenance$reference_fasta_binding <- reference$fasta_binding
     structure(list(source = sumstats, normalized = normalized, provenance = provenance),
               class = "mss_harmonised")
 }
@@ -583,6 +614,11 @@ harmonise_file <- function(input, reference, path,
                       if ("source_strand" %in% names(columns)) paste0("column:", columns$source_strand) else "not_declared")
     if (reference$core_version == "mss-preservation-3")
         metadata <- c(metadata, reference_context_order = reference$reference_context_order)
+    if (!is.null(reference$fasta_binding)) {
+        binding <- vapply(reference$fasta_binding, as.character, character(1))
+        names(binding) <- paste0("reference_fasta_", names(binding))
+        metadata <- c(metadata, binding)
+    }
     utils::write.table(data.frame(key = names(metadata), value = unname(metadata)),
                        file.path(staging, "metadata.tsv"), sep = "\t", quote = TRUE,
                        row.names = FALSE, qmethod = "double")
@@ -633,6 +669,8 @@ harmonise_file <- function(input, reference, path,
                      created_utc = format(Sys.time(), tz = "UTC", usetz = TRUE))
     if (reference$core_version == "mss-preservation-3")
         manifest$reference_context_order <- reference$reference_context_order
+    if (!is.null(reference$fasta_binding))
+        manifest$reference_fasta_binding <- reference$fasta_binding
     saveRDS(manifest, file.path(staging, "manifest.rds"), version = 2)
     # Close output connections before rename, which is required on Windows.
     close(normalized_writer);close(source_writer);close(reader)

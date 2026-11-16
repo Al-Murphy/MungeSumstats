@@ -5,6 +5,37 @@ This recipe describes `harmonise_sumstats()` and `harmonise_file()` using
 `mss-projection-2` and parser identities. The legacy `format_sumstats()` API is
 separate. Exact source, reference and algorithm versions belong in every receipt.
 
+## Explicit verified FASTA relocation
+
+The reference manifest records an absolute external plain FASTA path. A transferred
+format-2 or typed-format-3 bundle can be opened with
+`open_reference("new/reference/path", fasta="new/reference.fa")`. This optional
+argument names a physical runtime location, not a new scientific reference.
+The original path need not exist. No basename/environment fallback is attempted.
+
+The replacement must match the original manifest's exact FASTA size and MD5.
+Every manifest-listed bundle artifact, including FAI, source and index, is fully
+verified, with unchanged file signatures across verification/native open. The
+package retains its existing MD5 identity contract; callers may additionally pin
+the transferred bundle with stronger digests. Neither manifest nor bundle bytes
+are rewritten. Normalizer 7, reference format, IDs, effects and frequency rules
+remain unchanged.
+
+An explicit override rereads the immutable manifest even for handle input and
+opens fresh native streams. The returned handle's `fasta` is the actual normalized
+path. Its `fasta_binding` receipt (`mss-fasta-binding-1`) distinguishes recorded
+and runtime paths and records the verified original FASTA size/MD5 and FAI MD5.
+It appears as `reference_fasta_binding` in table provenance and streamed manifests,
+and `reference_fasta_*` entries in portable streamed metadata. These fields are
+added only for explicit use; existing default receipts remain unchanged. Reusing
+a live handle still checks size/mtime and requires immutable files. Serialized
+handles need an explicit reopen, never restoration of the old native pointer.
+Projection receipts likewise add `source_fasta_binding` and/or
+`target_fasta_binding` only when an explicitly bound handle is used. These are
+operational provenance, separate from unchanged scientific reference checksums,
+chain MD5 and projection/normalizer versions. Transferring an existing output
+does not require rewriting its rows or historical receipts.
+
 Every source row, identifier and original measurement token is retained. A
 nullable normalized edition expresses what the supplied evidence supports;
 uncertain normalized identity, signed effect, EAF and direction flags remain

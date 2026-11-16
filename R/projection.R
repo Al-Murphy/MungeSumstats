@@ -64,6 +64,10 @@ prepare_projection <- function(chain, source_reference, target_reference,
         receipt$source_reference_format <- source$core_version
         receipt$target_reference_format <- target$core_version
     }
+    # Physical runtime provenance is optional and does not replace any existing
+    # scientific reference checksum, chain identity, or algorithm version.
+    if (!is.null(source$fasta_binding)) receipt$source_fasta_binding <- source$fasta_binding
+    if (!is.null(target$fasta_binding)) receipt$target_fasta_binding <- target$fasta_binding
     structure(list(.native = native, source = source, target = target, chain = chain,
                    .signature = signature, receipt = receipt), class = "mss_projection")
 }
