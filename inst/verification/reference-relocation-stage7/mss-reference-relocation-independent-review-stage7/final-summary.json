@@ -1,0 +1,29 @@
+{
+  "standalone": {
+    "test_blocks": 80,
+    "assertions": 1419,
+    "exit_code": 0,
+    "success_marker": "standalone R preservation and typed reference fixtures passed"
+  },
+  "registered": {
+    "test_blocks": 40,
+    "assertions": 506,
+    "exit_code": 0,
+    "success_marker": "registered generated bindings fixtures passed"
+  },
+  "independent_probes": {
+    "test_blocks": 8,
+    "assertions": 140,
+    "passed": 140,
+    "failed": 0,
+    "errors": 0,
+    "warnings": 0,
+    "exit_code": 0
+  },
+  "verdict": "GREEN_NARROW_RELOCATION_SCOPE",
+  "candidate_commit": "8334f1c9052ae266dc9df80a35bca07868af1423",
+  "remaining_gates": [
+    "full installed-package suite",
+    "actual native multi-OS CI"
+  ]
+}

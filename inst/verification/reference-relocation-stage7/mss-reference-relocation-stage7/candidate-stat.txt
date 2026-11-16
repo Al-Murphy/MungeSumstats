@@ -1,0 +1,8 @@
+ R/preservation.R                           |  46 ++++++-
+ R/projection.R                             |   4 +
+ inst/PRESERVATION_CONTRACT.md              |  31 +++++
+ man/open_reference.Rd                      |   9 +-
+ tests/standalone/preservation.R            |   1 +
+ tests/standalone/registered.R              |   3 +
+ tests/testthat/test-reference-relocation.R | 208 +++++++++++++++++++++++++++++
+ 7 files changed, 295 insertions(+), 7 deletions(-)

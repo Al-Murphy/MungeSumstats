@@ -1,0 +1,33 @@
+{
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "R",
+    "CMD",
+    "INSTALL",
+    "--preclean",
+    "--library=/private/tmp/gwas-harvest-stage2/results/verification-stage7/mss-relocation-install/lib",
+    "/private/tmp/gwas-harvest-stage2/mss-context-format3-release"
+  ],
+  "pid": 18592,
+  "status": "success",
+  "exit_code": 0,
+  "reason": null,
+  "natural_oom": false,
+  "wall_seconds": 18.28980145812966,
+  "samples": 64,
+  "peak_process_tree": {
+    "rss_bytes": 1399504896,
+    "physical_footprint_bytes": 1435832208,
+    "conservative_guard_bytes": 1456818096,
+    "processes": 7
+  },
+  "min_free_bytes": 475987677184,
+  "peak_owned_case_bytes": 4354713,
+  "limits": {
+    "memory_bytes": 8589934592,
+    "minimum_free_bytes": 171798691840,
+    "case_disk_bytes": 4294967296
+  },
+  "scope": "Full owned process tree: RSS, macOS physical footprint and sum(max(RSS,footprint)); Linux guard includes swap. No other workload is signaled."
+}

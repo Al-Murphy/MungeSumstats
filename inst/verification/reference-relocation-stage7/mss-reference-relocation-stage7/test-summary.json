@@ -1,0 +1,28 @@
+{
+  "standalone-v1": {
+    "blocks": 79,
+    "assertions": 1389,
+    "failures": 0,
+    "errors": 0
+  },
+  "registered-v1": {
+    "blocks": 39,
+    "assertions": 476,
+    "failures": 0,
+    "errors": 0
+  },
+  "TDD_RED": {
+    "blocks": 7,
+    "assertions": 28,
+    "failures": 12,
+    "errors": 0,
+    "existing_default_assertions_passed": 10
+  },
+  "focused_GREEN": {
+    "blocks": 7,
+    "assertions": 154,
+    "failures": 0,
+    "errors": 0
+  },
+  "native_and_registered_wrappers_unchanged": true
+}

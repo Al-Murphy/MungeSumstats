@@ -1,0 +1,14 @@
+{
+  "commit": "8334f1c9052ae266dc9df80a35bca07868af1423",
+  "base": "f1cd89cf5e0f24fa754bbe2f0e17c9d93c53d6a6",
+  "source": "fresh git archive",
+  "sha256": {
+    "R/preservation.R": "2e2ecf12870189ed0fdd539571eb6ade800ee21f6899a5023c28ac3978407017",
+    "R/projection.R": "bd367596159973209ef5737edcd1e3e032fb4962fb5869b334207dc5402bc8ca",
+    "src/preservation.cpp": "6d7281661962b2db9f74ae53569841336d810315ab417878b51969d82f63a49e",
+    "src/preservation_core.h": "9c06526ec9185940d36e3002ff5d9c06a395d34e6a29d1cddb4b7ea119480011",
+    "src/projection.h": "766fea8eb745d9f8e18ed49a7091aafd2ac5a935c4249f79e2e53408a8d86997",
+    "src/RcppExports.cpp": "2b0a3d1bbf1809120dd60d1b1c802b4355f958f2547e545262909feb0db5a1d3",
+    "R/RcppExports.R": "895594e02ee6c638600abe6085e51d1b0243e706a8dbdccd0d353e9de3b568f2"
+  }
+}

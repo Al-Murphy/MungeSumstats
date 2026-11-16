@@ -1,0 +1,20 @@
+{
+  "commit": "8334f1c9052ae266dc9df80a35bca07868af1423",
+  "base": "f1cd89cf5e0f24fa754bbe2f0e17c9d93c53d6a6",
+  "branch": "feat/verified-fasta-relocation",
+  "clean": true,
+  "sha256": {
+    "R/preservation.R": "2e2ecf12870189ed0fdd539571eb6ade800ee21f6899a5023c28ac3978407017",
+    "R/projection.R": "bd367596159973209ef5737edcd1e3e032fb4962fb5869b334207dc5402bc8ca",
+    "inst/PRESERVATION_CONTRACT.md": "1dbd69cdd9746119acfbc6e699752e248b000941db100db6df41a38a4b66ef1c",
+    "man/open_reference.Rd": "a73ce0488b370671121111bb09a558d29ecf6f9377b05b42e41a19b62809da95",
+    "tests/standalone/preservation.R": "1e5b2733c6307b6ae6c27fbb8d70914916e95b111e41e18272b5fee36508dce6",
+    "tests/standalone/registered.R": "31b36a26d8747881ad329ed894138cef6bbaf7c28f4e78e66e82c47305e7d33a",
+    "tests/testthat/test-reference-relocation.R": "eda1be518d38efecec0e54c73803164ae75ac7a8bef943d446968675a4bedac5",
+    "src/preservation_core.h": "9c06526ec9185940d36e3002ff5d9c06a395d34e6a29d1cddb4b7ea119480011",
+    "src/preservation.cpp": "6d7281661962b2db9f74ae53569841336d810315ab417878b51969d82f63a49e",
+    "src/projection.h": "766fea8eb745d9f8e18ed49a7091aafd2ac5a935c4249f79e2e53408a8d86997",
+    "src/RcppExports.cpp": "2b0a3d1bbf1809120dd60d1b1c802b4355f958f2547e545262909feb0db5a1d3",
+    "R/RcppExports.R": "895594e02ee6c638600abe6085e51d1b0243e706a8dbdccd0d353e9de3b568f2"
+  }
+}

@@ -1,0 +1,41 @@
+[
+  {
+    "job": "standalone (windows-latest)",
+    "counts": {
+      "sourceCpp": {
+        "blocks": 80,
+        "assertions": 1427
+      },
+      "registered": {
+        "blocks": 40,
+        "assertions": 514
+      }
+    }
+  },
+  {
+    "job": "standalone (ubuntu-latest)",
+    "counts": {
+      "sourceCpp": {
+        "blocks": 80,
+        "assertions": 1427
+      },
+      "registered": {
+        "blocks": 40,
+        "assertions": 514
+      }
+    }
+  },
+  {
+    "job": "standalone (macos-latest)",
+    "counts": {
+      "sourceCpp": {
+        "blocks": 80,
+        "assertions": 1427
+      },
+      "registered": {
+        "blocks": 40,
+        "assertions": 514
+      }
+    }
+  }
+]

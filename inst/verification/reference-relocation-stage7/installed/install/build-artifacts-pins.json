@@ -1,0 +1,14 @@
+{
+  "src/MungeSumstats.so": {
+    "bytes": 459120,
+    "sha256": "b63e4e43a167ad5b4807bc6a36758e820eb7b0c70ae3e77124e6ab909d9e4841"
+  },
+  "src/RcppExports.o": {
+    "bytes": 747848,
+    "sha256": "02f29bb09ad0531cbb68afc6c00bb4627d697eca6a275ca17ed84f8831bdbcda"
+  },
+  "src/preservation.o": {
+    "bytes": 4395088,
+    "sha256": "e22bb5314ac3c43b1db99557de6d38cc6530a0b7f2f0dd4db43c7509ff7dffd4"
+  }
+}

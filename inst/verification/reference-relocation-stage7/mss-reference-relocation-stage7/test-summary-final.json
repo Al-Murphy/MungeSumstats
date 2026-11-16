@@ -1,0 +1,38 @@
+{
+  "standalone-final": {
+    "blocks": 80,
+    "assertions": 1419,
+    "failures": 0,
+    "errors": 0,
+    "warnings": 0
+  },
+  "registered-final": {
+    "blocks": 40,
+    "assertions": 506,
+    "failures": 0,
+    "errors": 0,
+    "warnings": 0
+  },
+  "TDD_RED": {
+    "blocks": 7,
+    "assertions": 28,
+    "failures": 12,
+    "errors": 0,
+    "existing_default_assertions_passed": 10
+  },
+  "projection_TDD_RED": {
+    "blocks": 8,
+    "assertions": 184,
+    "failures": 8,
+    "errors": 0
+  },
+  "focused_GREEN_after_projection": {
+    "blocks": 8,
+    "assertions": 184,
+    "failures": 0,
+    "errors": 0
+  },
+  "native_and_generated_wrappers_unchanged": true,
+  "full_installed_suite_run": false,
+  "native_CI_run": false
+}

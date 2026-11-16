@@ -1,0 +1,12 @@
+{
+  "results/verification-stage7/mss-relocation-final/installed-full.rds": {
+    "bytes": 1020617,
+    "reason": "Generated testthat RDS; complete CSV, summary and log retained",
+    "sha256": "a33a381f1718d1da54171d6729e7d2efdb54abff2698e9e04687ce448b44e946"
+  },
+  "results/verification-stage7/mss-relocation/installed-full.rds": {
+    "bytes": 1016806,
+    "reason": "Generated testthat RDS; complete CSV, summary and log retained",
+    "sha256": "7dfe7b04a5f10ffc6e5ca68cd1bd592c0e77332b8e7df6fb776e79e7fcde75b1"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "base": "f1cd89cf5e0f24fa754bbe2f0e17c9d93c53d6a6",
+  "files": {
+    "R/preservation.R": "2e2ecf12870189ed0fdd539571eb6ade800ee21f6899a5023c28ac3978407017",
+    "inst/PRESERVATION_CONTRACT.md": "329126ee1e963651a28e57629a8d41c448689d1a7c250d5feaaa9fb881bd7506",
+    "man/open_reference.Rd": "a73ce0488b370671121111bb09a558d29ecf6f9377b05b42e41a19b62809da95",
+    "tests/standalone/preservation.R": "1e5b2733c6307b6ae6c27fbb8d70914916e95b111e41e18272b5fee36508dce6",
+    "tests/standalone/registered.R": "31b36a26d8747881ad329ed894138cef6bbaf7c28f4e78e66e82c47305e7d33a",
+    "tests/testthat/test-reference-relocation.R": "e7cad67df0c942f0ab8192b3f672a73e4aedfb539ceed76caab7f219541a8a17"
+  },
+  "unchanged_core_sha256": "9c06526ec9185940d36e3002ff5d9c06a395d34e6a29d1cddb4b7ea119480011"
+}

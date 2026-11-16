@@ -1,0 +1,406 @@
+diff --git a/R/preservation.R b/R/preservation.R
+index 9aebee9..2d076c2 100644
+--- a/R/preservation.R
++++ b/R/preservation.R
+@@ -178,6 +178,10 @@ prepare_reference <- function(fasta, variants, path, build, version,
+ #' Open a verified reusable disk reference handle
+ #'
+ #' @param reference An `mss_reference` or its directory path.
++#' @param fasta Optional explicit runtime path to a byte-identical copy of the
++#'   manifest's FASTA, for a transferred reference. Original size/MD5 and every
++#'   reference artifact (including FAI) are fully verified. No path is guessed
++#'   and no manifest is changed. A fresh handle is opened even for handle input.
+ #' @return A live `mss_reference_handle` accepted by both harmonisation APIs.
+ #' @details MD5 verification occurs once when opening; subsequent uses verify
+ #'   sizes and modification times. The handle owns native disk file streams and
+@@ -186,17 +190,42 @@ prepare_reference <- function(fasta, variants, path, build, version,
+ #'   reference files immutable while the handle is live. Handles are process-local
+ #'   and must be reopened after serialization or in another R process.
+ #' @export
+-open_reference <- function(reference) {
++open_reference <- function(reference, fasta = NULL) {
++    relocated <- !is.null(fasta)
++    if (relocated) {
++        if (!is.character(fasta) || length(fasta) != 1L || is.na(fasta) || !nzchar(fasta))
++            stop("fasta must be one explicit existing FASTA file path")
++        fasta <- normalizePath(fasta, mustWork = TRUE)
++        if (isTRUE(file.info(fasta)$isdir)) stop("fasta must name a FASTA file, not a directory")
++        # Explicit rebinding must not inherit a previous native stream, runtime
++        # path, cached verification, or modified in-memory manifest fields.
++        if (inherits(reference, "mss_reference_handle")) reference <- reference$path
++    }
+     reference <- .mss_read_reference(reference)
+-    .mss_verify_reference(reference, TRUE)
+-    if (inherits(reference, "mss_reference_handle")) return(reference)
++    if (relocated) {
++        recorded_fasta <- reference$fasta
++        reference$fasta <- fasta
++    }
+     files <- c(fasta = reference$fasta,
+                stats::setNames(file.path(reference$path, reference$files), reference$files))
+-    signature <- file.info(files)[, c("size", "mtime")]
++    # Cover the complete explicit verification/open window. The default path
++    # keeps its existing verification and reusable-handle behavior.
++    signature <- if (relocated) file.info(files)[, c("size", "mtime")] else NULL
++    .mss_verify_reference(reference, TRUE)
++    if (inherits(reference, "mss_reference_handle")) return(reference)
++    if (is.null(signature)) signature <- file.info(files)[, c("size", "mtime")]
+     reference$.native <- mss_open_reference_cpp(reference$path, reference$fasta)
+     if (!identical(signature, file.info(files)[, c("size", "mtime")]))
+         stop("Reference changed while opening its native handle")
+     reference$.file_signature <- signature
++    if (relocated)
++        reference$fasta_binding <- list(implementation_version = "mss-fasta-binding-1",
++                                        recorded_path = recorded_fasta,
++                                        runtime_path = reference$fasta,
++                                        size_bytes = unname(reference$sizes[["fasta"]]),
++                                        md5 = reference$checksums[["fasta"]],
++                                        fai_md5 = reference$checksums[["fasta.fai"]],
++                                        verification = "full_reference_md5")
+     class(reference) <- c("mss_reference_handle", "mss_reference")
+     reference
+ }
+@@ -390,6 +419,8 @@ harmonise_sumstats <- function(sumstats, reference,
+                        source_strand = source_strand)
+     if (reference$core_version == "mss-preservation-3")
+         provenance$reference_context_order <- reference$reference_context_order
++    if (!is.null(reference$fasta_binding))
++        provenance$reference_fasta_binding <- reference$fasta_binding
+     structure(list(source = sumstats, normalized = normalized, provenance = provenance),
+               class = "mss_harmonised")
+ }
+@@ -583,6 +614,11 @@ harmonise_file <- function(input, reference, path,
+                       if ("source_strand" %in% names(columns)) paste0("column:", columns$source_strand) else "not_declared")
+     if (reference$core_version == "mss-preservation-3")
+         metadata <- c(metadata, reference_context_order = reference$reference_context_order)
++    if (!is.null(reference$fasta_binding)) {
++        binding <- vapply(reference$fasta_binding, as.character, character(1))
++        names(binding) <- paste0("reference_fasta_", names(binding))
++        metadata <- c(metadata, binding)
++    }
+     utils::write.table(data.frame(key = names(metadata), value = unname(metadata)),
+                        file.path(staging, "metadata.tsv"), sep = "\t", quote = TRUE,
+                        row.names = FALSE, qmethod = "double")
+@@ -633,6 +669,8 @@ harmonise_file <- function(input, reference, path,
+                      created_utc = format(Sys.time(), tz = "UTC", usetz = TRUE))
+     if (reference$core_version == "mss-preservation-3")
+         manifest$reference_context_order <- reference$reference_context_order
++    if (!is.null(reference$fasta_binding))
++        manifest$reference_fasta_binding <- reference$fasta_binding
+     saveRDS(manifest, file.path(staging, "manifest.rds"), version = 2)
+     # Close output connections before rename, which is required on Windows.
+     close(normalized_writer);close(source_writer);close(reader)
+diff --git a/R/projection.R b/R/projection.R
+index c957e4a..dc582fd 100644
+--- a/R/projection.R
++++ b/R/projection.R
+@@ -64,6 +64,10 @@ prepare_projection <- function(chain, source_reference, target_reference,
+         receipt$source_reference_format <- source$core_version
+         receipt$target_reference_format <- target$core_version
+     }
++    # Physical runtime provenance is optional and does not replace any existing
++    # scientific reference checksum, chain identity, or algorithm version.
++    if (!is.null(source$fasta_binding)) receipt$source_fasta_binding <- source$fasta_binding
++    if (!is.null(target$fasta_binding)) receipt$target_fasta_binding <- target$fasta_binding
+     structure(list(.native = native, source = source, target = target, chain = chain,
+                    .signature = signature, receipt = receipt), class = "mss_projection")
+ }
+diff --git a/inst/PRESERVATION_CONTRACT.md b/inst/PRESERVATION_CONTRACT.md
+index e7336ad..abad1b8 100644
+--- a/inst/PRESERVATION_CONTRACT.md
++++ b/inst/PRESERVATION_CONTRACT.md
+@@ -5,6 +5,37 @@ This recipe describes `harmonise_sumstats()` and `harmonise_file()` using
+ `mss-projection-2` and parser identities. The legacy `format_sumstats()` API is
+ separate. Exact source, reference and algorithm versions belong in every receipt.
+ 
++## Explicit verified FASTA relocation
++
++The reference manifest records an absolute external plain FASTA path. A transferred
++format-2 or typed-format-3 bundle can be opened with
++`open_reference("new/reference/path", fasta="new/reference.fa")`. This optional
++argument names a physical runtime location, not a new scientific reference.
++The original path need not exist. No basename/environment fallback is attempted.
++
++The replacement must match the original manifest's exact FASTA size and MD5.
++Every manifest-listed bundle artifact, including FAI, source and index, is fully
++verified, with unchanged file signatures across verification/native open. The
++package retains its existing MD5 identity contract; callers may additionally pin
++the transferred bundle with stronger digests. Neither manifest nor bundle bytes
++are rewritten. Normalizer 7, reference format, IDs, effects and frequency rules
++remain unchanged.
++
++An explicit override rereads the immutable manifest even for handle input and
++opens fresh native streams. The returned handle's `fasta` is the actual normalized
++path. Its `fasta_binding` receipt (`mss-fasta-binding-1`) distinguishes recorded
++and runtime paths and records the verified original FASTA size/MD5 and FAI MD5.
++It appears as `reference_fasta_binding` in table provenance and streamed manifests,
++and `reference_fasta_*` entries in portable streamed metadata. These fields are
++added only for explicit use; existing default receipts remain unchanged. Reusing
++a live handle still checks size/mtime and requires immutable files. Serialized
++handles need an explicit reopen, never restoration of the old native pointer.
++Projection receipts likewise add `source_fasta_binding` and/or
++`target_fasta_binding` only when an explicitly bound handle is used. These are
++operational provenance, separate from unchanged scientific reference checksums,
++chain MD5 and projection/normalizer versions. Transferring an existing output
++does not require rewriting its rows or historical receipts.
++
+ Every source row, identifier and original measurement token is retained. A
+ nullable normalized edition expresses what the supplied evidence supports;
+ uncertain normalized identity, signed effect, EAF and direction flags remain
+diff --git a/man/open_reference.Rd b/man/open_reference.Rd
+index 1491a0e..70f9b29 100644
+--- a/man/open_reference.Rd
++++ b/man/open_reference.Rd
+@@ -1,9 +1,12 @@
+ \name{open_reference}
+ \alias{open_reference}
+ \title{Open a verified reusable disk reference handle}
+-\usage{open_reference(reference)}
+-\arguments{\item{reference}{An \code{mss_reference}, a reference directory path, or an already open reference handle.}}
++\usage{open_reference(reference, fasta = NULL)}
++\arguments{\item{reference}{An \code{mss_reference}, a reference directory path, or an already open reference handle.}
++\item{fasta}{Optional explicit runtime path to a byte-identical copy of the recorded FASTA. The original size/MD5 and all bundle artifacts, including FAI, are fully verified. No file is guessed or manifest rewritten.}}
+ \value{A process-local \code{mss_reference_handle} accepted by both harmonisation APIs.}
+ \description{Verifies reference MD5 checksums once and opens native file streams for reuse across batches and studies. Subsequent calls check file sizes and modification times.}
+-\details{The handle retains disk streams, contig metadata, and at most 28 MiB of reference/FASTA byte pages plus bounded page metadata, independently of total reference size. Keep the files immutable while it is live. Handles cannot be restored by serialization or reused in another R process; reopen the reference directory instead. Native streams are closed when the handle is garbage-collected.}
++\details{The handle retains disk streams, contig metadata, and at most 28 MiB of reference/FASTA byte pages plus bounded page metadata, independently of total reference size. Keep the files immutable while it is live. Handles cannot be restored by serialization or reused in another R process; reopen the reference directory instead. Native streams are closed when the handle is garbage-collected.
++
++For a transferred reference, use \code{open_reference("new/reference/path", fasta="new/reference.fa")}. The recorded original FASTA path need not exist. The returned handle's \code{fasta} is the actual normalized runtime path; its optional \code{fasta_binding} records both paths and the verified original size, FASTA MD5 and FAI MD5 under \code{mss-fasta-binding-1}. These physical binding details propagate to harmonisation provenance and streamed edition receipts only when explicitly used. Scientific checksums, source data, normalization versions and immutable reference-bundle bytes remain unchanged. Explicit rebinding always rereads the manifest and opens a fresh handle, including for a serialized or previously open handle input.}
+ \seealso{\code{\link{prepare_reference}}, \code{\link{harmonise_sumstats}}, \code{\link{harmonise_file}}}
+diff --git a/tests/standalone/preservation.R b/tests/standalone/preservation.R
+index 0489b17..aacd505 100644
+--- a/tests/standalone/preservation.R
++++ b/tests/standalone/preservation.R
+@@ -25,4 +25,5 @@ source(file.path(root,'tests/testthat/test-complex-contrast-boundary.R'))
+ 
+ source(file.path(root,'tests/testthat/helper-reference-format3.R'))
+ source(file.path(root,'tests/testthat/test-reference-format3.R'))
++source(file.path(root,'tests/testthat/test-reference-relocation.R'))
+ cat('standalone R preservation and typed reference fixtures passed\n')
+diff --git a/tests/standalone/registered.R b/tests/standalone/registered.R
+index ab351b0..74acd00 100644
+--- a/tests/standalone/registered.R
++++ b/tests/standalone/registered.R
+@@ -22,5 +22,8 @@ source(file.path(root,'tests/testthat/test-source-reference-contract.R'))
+ source(file.path(root,'tests/testthat/test-equivalent-indel-context.R'))
+ source(file.path(root,'tests/testthat/test-quoted-stream.R'))
+ source(file.path(root,'tests/testthat/test-projection.R'))
++source(file.path(root,'tests/testthat/helper-reference-format3.R'))
++source(file.path(root,'tests/testthat/test-reference-format3.R'))
++source(file.path(root,'tests/testthat/test-reference-relocation.R'))
+ setwd(old)
+ cat('registered generated bindings fixtures passed\n')
+diff --git a/tests/testthat/test-reference-relocation.R b/tests/testthat/test-reference-relocation.R
+new file mode 100644
+index 0000000..90e32f4
+--- /dev/null
++++ b/tests/testthat/test-reference-relocation.R
+@@ -0,0 +1,208 @@
++.relocation_fixture <- function(format = 2L, build = 'SYNTHETIC') {
++    root <- tempfile('mss-transfer-');dir.create(root)
++    original <- file.path(root, 'original reference');dir.create(original)
++    fasta <- file.path(original, 'reference.fa')
++    writeLines(c('>1', 'CAAAAACGTACGT'), fasta, useBytes=TRUE)
++    fasta <- normalizePath(fasta,mustWork=TRUE)
++    sites <- file.path(original, 'variants.tsv')
++    writeLines(c('chr\tpos\tref\talt\tid\taliases',
++                 '1\t8\tG\tA,T\trs雪\told;同義',
++                 '1\t4\tAA\tA\tdel\told_del'), sites, useBytes=TRUE)
++    ref <- prepare_reference(fasta,sites,file.path(original,'index'),build=build,version='transfer-fixture',
++                             reference_format=paste0('mss-preservation-',format),contig_aliases=c(chr1='1'))
++    input <- data.frame(CHR='chr1',BP=c('0008','8','4'),SNP=c('old','同義','old_del'),
++                        A1=c('G','T','AA'),A2=c('T','G','A'),BETA=c('.300','-.300','.125'),
++                        FRQ=c('.2','.8','.25'),untouched='raw:0001',stringsAsFactors=FALSE)
++    baseline <- harmonise_sumstats(input,ref,frequency_type='EAF')
++    files <- list.files(ref$path,full.names=TRUE)
++    bundle <- stats::setNames(unname(tools::md5sum(files)),basename(files))
++    list(root=root,original=original,fasta=fasta,reference=ref,input=input,baseline=baseline,bundle=bundle)
++}
++.relocation_move <- function(fixture) {
++    target <- file.path(fixture$root,'collaborator é copy')
++    stopifnot(file.rename(fixture$original,target))
++    list(path=file.path(target,'index'),fasta=file.path(target,'reference.fa'))
++}
++.relocation_bundle <- function(path) {
++    files <- list.files(path,full.names=TRUE)
++    stats::setNames(unname(tools::md5sum(files)),basename(files))
++}
++
++test_that('default open retains its existing scientific and receipt behavior', {
++    for(format in 2:3) {
++        f <- .relocation_fixture(format);on.exit(unlink(f$root,recursive=TRUE),add=TRUE)
++        handle <- open_reference(f$reference)
++        result <- harmonise_sumstats(f$input,handle,frequency_type='EAF')
++        expect_identical(result,f$baseline)
++        expect_null(handle$fasta_binding)
++        expect_null(result$provenance$reference_fasta_binding)
++        expect_identical(.relocation_bundle(f$reference$path),f$bundle)
++        expect_equal(result$normalized$effect,c(.3,.3,.125))
++        rm(handle);invisible(gc())
++    }
++})
++
++test_that('explicit FASTA binds transferred immutable references without the original path', {
++    for(format in 2:3) {
++        f <- .relocation_fixture(format);on.exit(unlink(f$root,recursive=TRUE),add=TRUE)
++        moved <- .relocation_move(f)
++        expect_false(file.exists(f$fasta))
++        expect_error(open_reference(moved$path),'checksum|size|exist')
++        handle <- tryCatch(open_reference(moved$path,fasta=moved$fasta),error=function(e)e)
++        expect_false(inherits(handle,'error'),info=if(inherits(handle,'error'))conditionMessage(handle) else '')
++        if(inherits(handle,'error'))next
++        expect_s3_class(handle,'mss_reference_handle')
++        expect_identical(handle$fasta,normalizePath(moved$fasta,mustWork=TRUE))
++        expect_identical(handle$fasta_binding$recorded_path,f$fasta)
++        expect_identical(handle$fasta_binding$runtime_path,handle$fasta)
++        expect_identical(handle$fasta_binding$implementation_version,'mss-fasta-binding-1')
++        expect_identical(handle$fasta_binding$md5,f$reference$checksums[['fasta']])
++        expect_identical(handle$fasta_binding$fai_md5,f$reference$checksums[['fasta.fai']])
++        expect_identical(handle$checksums,f$reference$checksums)
++        y <- harmonise_sumstats(f$input,handle,frequency_type='EAF')
++        expect_identical(y$source,f$input)
++        expect_identical(y$normalized,f$baseline$normalized)
++        expect_identical(ncol(y$normalized),19L)
++        expect_identical(y$provenance$implementation_version,'mss-preservation-7')
++        expect_identical(y$provenance$core_version,paste0('mss-preservation-',format))
++        expect_identical(y$provenance$reference_checksums,f$baseline$provenance$reference_checksums)
++        expect_identical(y$provenance$reference_fasta_binding,handle$fasta_binding)
++        expect_identical(.relocation_bundle(moved$path),f$bundle)
++        expect_identical(readRDS(file.path(moved$path,'manifest.rds'))$fasta,f$fasta)
++        rm(handle);invisible(gc())
++    }
++})
++
++test_that('explicit FASTA never bypasses byte identity or path validation', {
++    for(format in 2:3) {
++        f <- .relocation_fixture(format);on.exit(unlink(f$root,recursive=TRUE),add=TRUE)
++        expect_true('fasta' %in% names(formals(open_reference)))
++        if(!'fasta' %in% names(formals(open_reference)))next
++        wrong <- file.path(f$root,'same length wrong.fa')
++        writeLines(c('>1','TAAAAACGTACGT'),wrong)
++        expect_equal(file.info(wrong)$size,file.info(f$fasta)$size)
++        expect_error(open_reference(f$reference,fasta=wrong),'checksum')
++        for(path in list('',NA_character_,character(),c(f$fasta,f$fasta),file.path(f$root,'absent.fa'),f$root,1L))
++            expect_error(open_reference(f$reference,fasta=path),'FASTA|fasta|path|file|exist')
++        expect_identical(.relocation_bundle(f$reference$path),f$bundle)
++    }
++})
++
++test_that('relocation verifies every unchanged index artifact including FAI and source', {
++    for(format in 2:3) {
++        f <- .relocation_fixture(format);on.exit(unlink(f$root,recursive=TRUE),add=TRUE)
++        expect_true('fasta' %in% names(formals(open_reference)))
++        if(!'fasta' %in% names(formals(open_reference)))next
++        for(name in c('fasta.fai','records','source.tsv','keys','offsets')) {
++            path <- file.path(f$root,paste0('corrupt-',name));dir.create(path)
++            expect_true(all(file.copy(list.files(f$reference$path,full.names=TRUE),path)))
++            file <- file.path(path,name);bytes <- readBin(file,'raw',file.info(file)$size)
++            bytes[[1]] <- if(name=='fasta.fai') as.raw(10L) else as.raw(bitwXor(as.integer(bytes[[1]]),1L))
++            writeBin(bytes,file)
++            expect_error(open_reference(path,fasta=f$fasta),'checksum')
++        }
++        expect_identical(.relocation_bundle(f$reference$path),f$bundle)
++    }
++})
++
++test_that('explicit rebinding rereads the manifest and owns a fresh physical FASTA handle', {
++    for(format in 2:3) {
++        f <- .relocation_fixture(format);on.exit(unlink(f$root,recursive=TRUE),add=TRUE)
++        expect_true('fasta' %in% names(formals(open_reference)))
++        if(!'fasta' %in% names(formals(open_reference)))next
++        first <- open_reference(f$reference)
++        second_path <- file.path(f$root,'second é physical copy.fa')
++        expect_true(file.copy(f$fasta,second_path))
++        poisoned <- first;poisoned$fasta <- 'wrong.runtime';poisoned$checksums[['fasta']] <- 'wrong.identity'
++        second <- open_reference(poisoned,fasta=second_path)
++        expect_false(identical(first$.native,second$.native))
++        expect_identical(second$fasta,normalizePath(second_path,mustWork=TRUE))
++        expect_identical(second$checksums,f$reference$checksums)
++        expect_identical(harmonise_sumstats(f$input,second,frequency_type='EAF')$normalized,f$baseline$normalized)
++        serialized <- file.path(f$root,'handle.rds');saveRDS(second,serialized)
++        restored <- open_reference(readRDS(serialized),fasta=second_path)
++        expect_identical(harmonise_sumstats(f$input,restored,frequency_type='EAF')$normalized,f$baseline$normalized)
++        expect_false(identical(second$.native,restored$.native))
++        expect_identical(second$fasta_binding,restored$fasta_binding)
++        # A physical runtime mutation invalidates this binding, even with verify=FALSE.
++        Sys.setFileTime(second_path,Sys.time()+10)
++        expect_error(harmonise_sumstats(f$input,second,verify=FALSE),'checksum|stat')
++        expect_identical(.relocation_bundle(f$reference$path),f$bundle)
++        rm(first,second,restored,poisoned);invisible(gc())
++    }
++})
++
++test_that('streamed editions record physical FASTA binding without changing scientific fields', {
++    for(format in 2:3) {
++        f <- .relocation_fixture(format);on.exit(unlink(f$root,recursive=TRUE),add=TRUE)
++        expect_true('fasta' %in% names(formals(open_reference)))
++        if(!'fasta' %in% names(formals(open_reference)))next
++        input <- file.path(f$root,'input.tsv');write.table(f$input,input,sep='\t',quote=TRUE,row.names=FALSE)
++        base <- harmonise_file(input,f$reference,file.path(f$root,'before'),frequency_type='EAF')
++        moved <- .relocation_move(f);handle <- open_reference(moved$path,fasta=moved$fasta)
++        after <- harmonise_file(input,handle,file.path(f$root,'after'),frequency_type='EAF',batch_size=1L)
++        for(name in c('normalized.tsv','source.tsv','source-artifact','reference_checksums.tsv'))
++            expect_identical(unname(tools::md5sum(file.path(base$path,name))),unname(tools::md5sum(file.path(after$path,name))))
++        expect_null(base$reference_fasta_binding)
++        expect_identical(after$reference_fasta_binding,handle$fasta_binding)
++        expect_identical(after$implementation_version,base$implementation_version)
++        expect_identical(after$reference_checksums,base$reference_checksums)
++        metadata <- read.delim(file.path(after$path,'metadata.tsv'),colClasses='character')
++        value <- stats::setNames(metadata$value,metadata$key)
++        expect_identical(value[['reference_fasta_recorded_path']],f$fasta)
++        expect_identical(value[['reference_fasta_runtime_path']],handle$fasta)
++        expect_identical(value[['reference_fasta_implementation_version']],'mss-fasta-binding-1')
++        expect_identical(value[['reference_fasta_md5']],f$reference$checksums[['fasta']])
++        expect_identical(value[['reference_fasta_fai_md5']],f$reference$checksums[['fasta.fai']])
++        expect_identical(.relocation_bundle(moved$path),f$bundle)
++        rm(handle);invisible(gc())
++    }
++})
++
++test_that('reference-version refusals remain consistent with and without relocation', {
++    for(format in 2:3) {
++        f <- .relocation_fixture(format);on.exit(unlink(f$root,recursive=TRUE),add=TRUE)
++        manifest <- file.path(f$reference$path,'manifest.rds');value <- readRDS(manifest)
++        value$core_version <- 'mss-preservation-999';saveRDS(value,manifest)
++        expect_error(open_reference(f$reference),'Unsupported reference schema')
++        expect_true('fasta' %in% names(formals(open_reference)))
++        if('fasta' %in% names(formals(open_reference)))
++            expect_error(open_reference(f$reference,fasta=f$fasta),'Unsupported reference schema')
++    }
++})
++
++test_that('projection receipts retain both explicit physical bindings and unchanged scientific identities', {
++    for(format in 2:3) {
++        s <- .relocation_fixture(format,'GRCh37');t <- .relocation_fixture(5L-format,'GRCh38')
++        on.exit(unlink(s$root,recursive=TRUE),add=TRUE);on.exit(unlink(t$root,recursive=TRUE),add=TRUE)
++        chain <- file.path(s$root,'identity.chain')
++        writeLines(c('chain 100 1 13 + 0 13 1 13 + 0 13 1','13'),chain)
++        projection <- prepare_projection(chain,s$reference,t$reference,'GRCh37','GRCh38')
++        original_receipt <- projection$receipt
++        before <- harmonise_sumstats(s$input,s$reference,frequency_type='EAF',projection=projection)
++        input <- file.path(s$root,'input.tsv');write.table(s$input,input,sep='\t',quote=TRUE,row.names=FALSE)
++        base <- harmonise_file(input,s$reference,file.path(s$root,'projection-before'),frequency_type='EAF',projection=projection)
++        rm(projection);invisible(gc())
++        ms <- .relocation_move(s);mt <- .relocation_move(t)
++        hs <- open_reference(ms$path,fasta=ms$fasta);ht <- open_reference(mt$path,fasta=mt$fasta)
++        projection <- prepare_projection(chain,hs,ht,'GRCh37','GRCh38')
++        expect_identical(projection$source$fasta,normalizePath(ms$fasta,mustWork=TRUE))
++        expect_identical(projection$target$fasta,normalizePath(mt$fasta,mustWork=TRUE))
++        expect_identical(projection$receipt[names(original_receipt)],original_receipt)
++        expect_identical(projection$receipt$source_fasta_binding,hs$fasta_binding)
++        expect_identical(projection$receipt$target_fasta_binding,ht$fasta_binding)
++        after <- harmonise_sumstats(s$input,hs,frequency_type='EAF',projection=projection)
++        expect_identical(after$source,before$source)
++        expect_identical(after$normalized,before$normalized)
++        expect_identical(after$provenance$reference_checksums,before$provenance$reference_checksums)
++        edition <- harmonise_file(input,hs,file.path(s$root,'projection-after'),frequency_type='EAF',projection=projection)
++        for(name in c('normalized.tsv','source.tsv','source-artifact'))
++            expect_identical(unname(tools::md5sum(file.path(base$path,name))),unname(tools::md5sum(file.path(edition$path,name))))
++        receipt <- read.delim(file.path(edition$path,'projection.tsv'),colClasses='character')
++        expect_identical(receipt$value[receipt$key=='target_fasta_binding.runtime_path'],ht$fasta)
++        expect_identical(edition$projection_receipt$target_fasta_binding,ht$fasta_binding)
++        expect_identical(.relocation_bundle(ms$path),s$bundle)
++        expect_identical(.relocation_bundle(mt$path),t$bundle)
++        rm(projection,hs,ht);invisible(gc())
++    }
++})

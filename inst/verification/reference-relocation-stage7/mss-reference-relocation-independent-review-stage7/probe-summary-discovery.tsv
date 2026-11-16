@@ -1,0 +1,9 @@
+"test"	"nb"	"failed"	"skipped"	"error"	"warning"	"passed"
+"the original default API and all portable artifact fields remain exact"	12	0	FALSE	FALSE	0	12
+"new physical streams preserve all selector and measured allele rows"	28	0	FALSE	FALSE	0	28
+"explicit rebinding distrusts poisoned and serialized handles and stale metadata"	18	0	FALSE	FALSE	0	18
+"every binding refuses corrupt bytes including same-size alias and FASTA mutations"	24	0	FALSE	FALSE	2	22
+"malformed FAI is refused at the native parser even with fixture-consistent hashes"	2	2	FALSE	FALSE	0	0
+"runtime changes and both verification-open interval edges invalidate explicit bindings"	6	0	FALSE	FALSE	0	6
+"source-only and target-only projection bindings retain old scientific receipt fields"	38	0	FALSE	FALSE	0	38
+"empty-row streams retain explicit operational receipt and immutable scientific identity"	10	0	FALSE	FALSE	0	10
