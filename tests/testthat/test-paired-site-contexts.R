@@ -80,7 +80,7 @@ test_that("an unsupported original REF is context rather than validated ALT-ALT 
     expect_true(all(is.na(actual$normalized[c("pos", "effect", "eaf")])))
 })
 
-test_that("symbolic context preserves real ALT pairs and conservative resolved frequency", {
+test_that("symbolic context preserves real ALT pairs and defers unresolved allele context", {
     fixture <- .paired_site_reference("2\t3\tG\tA,T,<DEL>\tmulti\told_multi")
     on.exit(unlink(fixture$root, recursive = TRUE))
     contrast <- harmonise_sumstats(.paired_site_query("2", 3, "old_multi", "A", "T"),
@@ -88,8 +88,8 @@ test_that("symbolic context preserves real ALT pairs and conservative resolved f
     expect_identical(contrast$normalized$status, "alt_alt_contrast")
     swap <- harmonise_sumstats(.paired_site_query("2", 3, "old_multi", "A", "G"),
                               fixture$reference, frequency_type = "EAF")
-    expect_identical(swap$normalized$status, "swap")
-    expect_identical(swap$normalized$effect, -0.5)
+    expect_identical(swap$normalized$status, "source_allele_context_required")
+    expect_true(all(is.na(swap$normalized[c("chr","pos","ref","alt","id","effect")])))
     expect_true(is.na(swap$normalized$eaf))
 })
 

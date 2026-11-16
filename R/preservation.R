@@ -211,8 +211,10 @@ open_reference <- function(reference) {
 #' @param effect_type `beta`, `log_odds`, or `none`. Only signed additive effects
 #'   can be negated; odds ratios must first be explicitly converted by the caller.
 #' @param batch_size Maximum input rows sent to each native call.
-#' @param candidate_limit Maximum raw index candidates per disk lookup; overflow stops
-#'   processing rather than silently selecting a candidate.
+#' @param candidate_limit Maximum raw index candidates per disk lookup and unique
+#'   IDs, events and contexts in ambiguity-proof closure. Additional closure work
+#'   is bounded by 16 times this limit. Overflow stops processing rather than
+#'   silently selecting a candidate; see the installed preservation contract.
 #' @param projection Optional handle from [prepare_projection()].
 #' @param verify Whether to verify all reference MD5 hashes (default `TRUE`).
 #'   `FALSE` checks sizes only and is appropriate only for already trusted,
@@ -222,10 +224,13 @@ open_reference <- function(reference) {
 #' @return An `mss_harmonised` list: exact `source`, row-aligned `normalized`, and
 #'   `provenance`. No source measurements, identifiers, optional fields or raw
 #'   tokens are overwritten. Unresolved normalized measurements are `NA`.
+#'   `candidate_count` is the canonical lookup pool considered for mapping; it is
+#'   not the ambiguity-proof graph size or evidence of catalog-wide absence.
 #' @details Recognized outcomes include `match`, `swap`, `complement`,
 #'   `swapped_complement`, `alt_alt_contrast`, `ambiguous`, `unmapped`,
-#'   `allele_mismatch`, `unsupported_allele`, `invalid_position`, and
-#'   `coordinate_id_conflict`. Palindromic contrasts that admit both effect
+#'   `allele_mismatch`, `unsupported_allele`, `invalid_position`,
+#'   `coordinate_id_conflict`, `source_coordinates_missing`, and
+#'   `source_allele_context_required`. Palindromic contrasts that admit both effect
 #'   directions remain ambiguous. ALT-ALT contrasts are retained without
 #'   inventing a reference-anchored effect. ALT-ALT diagnostics require both
 #'   alleles in one FASTA-valid original REF context, consistent with known input
@@ -244,6 +249,19 @@ open_reference <- function(reference) {
 #'   catalog is labeled `sequence_only`, without inventing an identifier.
 #'   Generic indels whose opposite event directions both validate against FASTA
 #'   require a resolving known identifier; otherwise they remain ambiguous.
+#'   Generic complex alleles (anything beyond two distinct concrete single bases)
+#'   require the source position, even when an ID names one canonical event.
+#'   Missing-position complex rows return `source_coordinates_missing`.
+#'   Ambiguity proof closes current IDs and exact-event coordinate bridges from
+#'   both initial lookup pools. Proof-only REF-ALT or paired ALT-ALT explanations
+#'   can withhold a selected mapping, and never supply a replacement mapping.
+#'   Unlinked overlapping contexts are outside this eligible proof universe.
+#'   When a compatible ALT pair or unknown ALT sequence cannot be excluded by a
+#'   complete background proof, `source_allele_context_required` conservatively
+#'   defers the selected generic mapping. This is distinct from a proved
+#'   competing interpretation and does not label a necessary-only pair as real.
+#'   The complete recipe, scope and bounds are in the installed
+#'   `PRESERVATION_CONTRACT.md` file.
 #' @export
 harmonise_sumstats <- function(sumstats, reference,
                               columns = list(chr = "CHR", pos = "BP", id = "SNP",
@@ -344,7 +362,7 @@ harmonise_sumstats <- function(sumstats, reference,
     rownames(normalized) <- NULL
     if (!is.null(projection)) normalized <- .mss_project(normalized, reference, projection, candidate_limit)
     provenance <- list(core_version = reference$core_version,
-                       implementation_version = "mss-preservation-6",
+                       implementation_version = "mss-preservation-7",
                        reference_version = reference$version, build = build,
                        reference_path = reference$path,
                        reference_checksums = reference$checksums,
@@ -530,7 +548,7 @@ harmonise_file <- function(input, reference, path,
     utils::write.table(audit, file.path(staging, "audit.tsv"), sep = "\t", quote = TRUE,
                        row.names = FALSE)
     metadata <- c(schema_version = "1", core_version = reference$core_version,
-                  implementation_version = "mss-preservation-6",
+                  implementation_version = "mss-preservation-7",
                   contig_mapping_implementation = if (length(reference$contig_aliases)) "mss-contigs-1" else "not_applied",
                   reference_build = build, reference_version = reference$version,
                   reference_path = reference$path, source_rows = sprintf("%.17g", total),
@@ -578,7 +596,7 @@ harmonise_file <- function(input, reference, path,
                        file.path(staging, "checksums.tsv"), sep = "\t", quote = TRUE,
                        row.names = FALSE, qmethod = "double")
     manifest <- list(schema_version = 1L, core_version = reference$core_version,
-                     implementation_version = "mss-preservation-6",
+                     implementation_version = "mss-preservation-7",
                      contig_mapping_implementation = if (length(reference$contig_aliases)) "mss-contigs-1" else "not_applied",
                      reference_build = build, reference_version = reference$version,
                      reference_checksums = reference$checksums, reference_path = reference$path,

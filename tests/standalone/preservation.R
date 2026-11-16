@@ -20,3 +20,6 @@ source(file.path(root,'tests/testthat/test-paired-site-contexts.R'))
 source(file.path(root,'tests/testthat/helper-alt-alt-orientation.R'))
 source(file.path(root,'tests/testthat/test-alt-alt-orientation.R'))
 source(file.path(root,'tests/testthat/test-alt-alt-reanchoring.R'))
+
+source(file.path(root,'tests/testthat/test-generic-coordinate-contract.R'))
+source(file.path(root,'tests/testthat/test-complex-contrast-boundary.R'))

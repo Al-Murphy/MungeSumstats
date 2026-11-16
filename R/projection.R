@@ -53,7 +53,7 @@ prepare_projection <- function(chain, source_reference, target_reference,
                                       contig_sizes(source), contig_sizes(target))
     if (!identical(checksum, unname(tools::md5sum(chain))) ||
         !identical(signature, file.info(chain)[, c("size", "mtime")])) stop("Chain changed during preparation")
-    receipt <- list(implementation_version = "mss-projection-2", normalization_implementation = "mss-preservation-6",
+    receipt <- list(implementation_version = "mss-projection-2", normalization_implementation = "mss-preservation-7",
                     reference_format = "mss-preservation-2", chain = chain, chain_md5 = checksum,
                     source_build = source_build, target_build = target_build,
                     source_reference_version = source$version, target_reference_version = target$version,

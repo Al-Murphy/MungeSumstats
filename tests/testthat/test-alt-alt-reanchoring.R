@@ -52,12 +52,9 @@ test_that('padded indel and MNV contexts retain all four orientation ambiguities
             actual <- harmonise_sumstats(x,fixture$reference,frequency_type='EAF')
             expect_identical(actual$source,x)
             if(unknown) {
-                # Missing source position can also leave the canonical REF-ALT
-                # explanation undiscovered; both explicit uncertainty outcomes
-                # must withhold all identity and measurements.
-                expect_true(all(actual$normalized$status %in% c('ambiguous','alt_alt_contrast')))
-                empty <- actual$normalized;empty$status <- 'ambiguous'
-                .alt_orientation_expect_unresolved(empty)
+                # Generic complex alleles require source coordinates; a site ID
+                # alone cannot establish their measurement anchor or direction.
+                .alt_orientation_expect_unresolved(actual$normalized,'source_coordinates_missing')
             } else .alt_orientation_expect_unresolved(actual$normalized)
         }
     }

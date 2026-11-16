@@ -49,7 +49,7 @@ int main(int argc, char** argv) {
   auto shifted=index.harmonise({"1",5,"","AA","A",2.0,0.2,"EAF"});
   assert(shifted.status=="ambiguous" && std::isnan(shifted.effect));
   auto id_canonical=index.harmonise({"",0,"rsDel","CA","C",2.0,0.2,"EAF"});
-  assert(id_canonical.status=="match" && id_canonical.pos==1);
+  assert(id_canonical.status=="source_coordinates_missing" && id_canonical.pos==0 && std::isnan(id_canonical.effect));
   auto zero_swap=index.harmonise({"1",4,"rsDel","A","AA",2.0,0.0,"EAF"});
   assert(zero_swap.status=="swap" && zero_swap.eaf==1.0);
   auto bad_eaf=index.harmonise({"1",8,"rs8","G","T",2.0,1.1,"EAF"});

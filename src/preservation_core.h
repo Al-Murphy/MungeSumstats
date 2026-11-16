@@ -208,6 +208,11 @@ struct Input {
     effect_allele(std::move(measured_allele)),effect(beta),eaf(frequency),frequency_type(std::move(frequency_kind)){}
 };
 struct Result {std::string status="unmapped",chr,ref,alt,id;std::int64_t pos=0;double effect=std::numeric_limits<double>::quiet_NaN(),eaf=std::numeric_limits<double>::quiet_NaN();std::size_t candidate_count=0;bool swapped=false,complemented=false;};
+inline void consume_context_work(std::size_t* remaining) {
+  if(!remaining)return;
+  if(!*remaining)throw std::runtime_error("Reference context closure limit exceeded; no arbitrary context selected");
+  --*remaining;
+}
 class Reference {
   BlockFile keys,offsets,records;std::uint64_t count;Fasta fa;
   std::string entry(std::uint64_t i){auto bytes=offsets.bytes(i*8,8);if(bytes.size()!=8)throw std::runtime_error("Truncated disk index");std::uint64_t p=0;for(int j=0;j<8;++j)p|=std::uint64_t(static_cast<unsigned char>(bytes[j]))<<(8*j);return keys.line(p);}
@@ -215,10 +220,10 @@ public:
   Reference(const std::string& dir,const std::string& fasta):keys(dir+"/keys"),offsets(dir+"/offsets"),records(dir+"/records"),fa(fasta,dir+"/fasta.fai") {
     std::ifstream meta(dir+"/core-version");std::string version;std::getline(meta,version);if(version!="mss-preservation-2")throw std::runtime_error("Incomplete or unsupported reference index");auto size=offsets.size();if(size%8)throw std::runtime_error("Invalid offsets file");count=size/8;
   }
-  std::vector<Candidate> lookup(const std::string& key,std::size_t cap=10000) {
+  std::vector<Candidate> lookup(const std::string& key,std::size_t cap=10000,std::size_t* context_work=nullptr) {
     std::uint64_t low=0,high=count;while(low<high){auto mid=low+(high-low)/2;auto s=entry(mid);if(s.substr(0,s.find('\t'))<key)low=mid+1;else high=mid;}
     std::vector<Candidate> out;std::map<std::string,std::size_t> seen;std::size_t examined=0;
-    for(auto i=low;i<count;++i){auto s=entry(i);auto tab=s.find('\t');if(s.substr(0,tab)!=key)break;if(++examined>cap)throw std::runtime_error("Reference candidate limit exceeded; no arbitrary candidate selected");auto offset=std::stoull(s.substr(tab+1));s=records.line(offset);auto v=split(s,'\t');if(v.size()!=8)throw std::runtime_error("Corrupt reference record");Candidate c{v[0],v[2],v[3],v[4],v[6],v[7],std::stoll(v[1]),std::stoll(v[5]),{},{}};
+    for(auto i=low;i<count;++i){auto s=entry(i);auto tab=s.find('\t');if(s.substr(0,tab)!=key)break;if(++examined>cap)throw std::runtime_error("Reference candidate limit exceeded; no arbitrary candidate selected");consume_context_work(context_work);auto offset=std::stoull(s.substr(tab+1));s=records.line(offset);auto v=split(s,'\t');if(v.size()!=8)throw std::runtime_error("Corrupt reference record");Candidate c{v[0],v[2],v[3],v[4],v[6],v[7],std::stoll(v[1]),std::stoll(v[5]),{},{}};
       c.original_positions.insert(c.original_pos);
       if(!missing(c.id))c.identifiers.insert(c.id);
       auto found=seen.find(c.key());
@@ -232,6 +237,7 @@ public:
   Result harmonise(const Input& input,std::size_t cap=10000) {
     if(input.source_contract)return harmonise_declared(input,cap);
     Result result;std::vector<Candidate> coordinate,ids,candidates;
+    std::set<std::string> loaded_coordinates;
     std::set<std::string> indel_events;
     if(!missing(input.chr)&&input.pos>0) {
       std::set<std::string> positions={std::to_string(input.pos)};std::map<std::string,std::size_t> seen;
@@ -243,19 +249,29 @@ public:
         if(orientation%2)std::swap(a,b);
         auto n=normalize(fa,input.chr,input.pos,a,b);if(n.status=="ok"){positions.insert(std::to_string(n.pos));if(other.size()!=effect.size())indel_events.insert(n.chr+":"+std::to_string(n.pos)+":"+n.ref+":"+n.alt);}
       }
-      for(auto& pos:positions)for(auto& candidate:lookup("C:"+input.chr+":"+pos,cap)) {
-        auto found=seen.find(candidate.key());
-        if(found==seen.end()){if(coordinate.size()>=cap)throw std::runtime_error("Reference candidate limit exceeded; no arbitrary candidate selected");seen[candidate.key()]=coordinate.size();coordinate.push_back(candidate);}
-        else merge_candidate_context(coordinate[found->second],candidate);
+      for(auto& pos:positions) {
+        const auto key="C:"+input.chr+":"+pos;loaded_coordinates.insert(key);
+        for(auto& candidate:lookup(key,cap)) {
+          auto found=seen.find(candidate.key());
+          if(found==seen.end()){if(coordinate.size()>=cap)throw std::runtime_error("Reference candidate limit exceeded; no arbitrary candidate selected");seen[candidate.key()]=coordinate.size();coordinate.push_back(candidate);}
+          else merge_candidate_context(coordinate[found->second],candidate);
+        }
       }
     }
     if(!missing(input.id))ids=lookup("I:"+input.id,cap);
     if(!coordinate.empty()&&!ids.empty()) {std::map<std::string,std::size_t> wanted;for(std::size_t i=0;i<coordinate.size();++i)wanted[coordinate[i].key()]=i;for(auto& c:ids){auto found=wanted.find(c.key());if(found!=wanted.end()){merge_candidate_context(c,coordinate[found->second],false);candidates.push_back(c);}}if(candidates.empty()){result.status="coordinate_id_conflict";return result;}}
     else if(!ids.empty()) {if(!missing(input.chr)&&input.pos>0){result.status="coordinate_id_conflict";return result;}candidates=ids;}
     else candidates=coordinate;
-    result.candidate_count=candidates.size();if(candidates.empty())return result;
-    if(ids.empty()&&indel_events.size()>1){result.status="ambiguous";return result;}
+    result.candidate_count=candidates.size();
     auto other=upper(input.other),effect=upper(input.effect_allele);
+    // An identifier does not establish a source anchor for complex alleles.
+    // Even one canonical event may admit opposite valid effect directions.
+    if(input.pos<=0&&dna(other)&&dna(effect)&&other!=effect&&
+       (other.size()!=1||effect.size()!=1)) {
+      result.status="source_coordinates_missing";return result;
+    }
+    if(candidates.empty())return result;
+    if(ids.empty()&&indel_events.size()>1){result.status="ambiguous";return result;}
     if(!dna(other)||!dna(effect)||other==effect){result.status="unsupported_allele";return result;}
     struct Hit{Candidate candidate;bool swap,comp;std::int64_t anchor;};std::vector<Hit> hits;std::set<std::string> hitkeys;
     for(auto& c:candidates)for(int orientation=0;orientation<4;++orientation) {
@@ -273,12 +289,16 @@ public:
     // Neither a site identifier nor EAF selects between these explanations.
     std::set<std::int64_t> resolved_anchors;
     if(hits.size()==1){resolved_anchors.insert(hits[0].anchor);resolved_anchors.insert(hits[0].candidate.pos);}
-    const bool alt_alt=alt_alt_context(input,candidates,other,effect,cap,resolved_anchors);
+    const auto selected=hits.empty()?std::string():hits[0].candidate.key()+":"+(hits[0].swap?"1":"0")+":"+(hits[0].comp?"1":"0");
+    bool competing_ref_alt=false,context_required=false;
+    const bool alt_alt=alt_alt_context(input,coordinate,other,effect,cap,resolved_anchors,
+                                      &ids,&loaded_coordinates,selected,&competing_ref_alt,&context_required);
     if(hits.empty()) {
       if(alt_alt){result.status="alt_alt_contrast";return result;}
       result.status="allele_mismatch";return result;
     }
-    if(alt_alt){result.status="ambiguous";return result;}
+    if(alt_alt||competing_ref_alt){result.status="ambiguous";return result;}
+    if(context_required){result.status="source_allele_context_required";return result;}
     auto h=hits[0];auto c=h.candidate;result.status=h.comp?(h.swap?"swapped_complement":"complement"):(h.swap?"swap":"match");result.chr=c.chr;result.pos=c.pos;result.ref=c.ref;result.alt=c.alt;result.id=c.id;result.swapped=h.swap;result.complemented=h.comp;result.effect=h.swap?-input.effect:input.effect;
     if(input.frequency_type=="EAF"&&std::isfinite(input.eaf)&&input.eaf>=0&&input.eaf<=1){
       if(!h.swap)result.eaf=input.eaf;
@@ -289,24 +309,162 @@ public:
     return result;
   }
 private:
+  struct ProofEvent {std::string chr,ref,alt;std::int64_t pos;};
+  struct ContextClosure {
+    std::set<std::pair<std::string,std::int64_t>> locations;
+    std::map<std::string,ProofEvent> events;
+    std::size_t remaining_work;
+  };
+  ContextClosure context_closure(const Input& input,const std::vector<Candidate>& coordinate,
+                                 const std::vector<Candidate>* ids,std::size_t cap,
+                                 const std::set<std::string>* loaded_coordinates) {
+    if(cap>std::numeric_limits<std::size_t>::max()/16)
+      throw std::runtime_error("Reference context closure limit is not representable");
+    ContextClosure out;out.remaining_work=16*cap;
+    std::set<std::string> current_ids,pending_ids,expanded_ids,pending_events,bridged_events;
+    if(!missing(input.id))expanded_ids.insert(input.id); // Its I lookup is already complete.
+    auto limit=[&](std::size_t size){if(size>cap)throw std::runtime_error("Reference context closure limit exceeded; no arbitrary context selected");};
+    auto consider=[&](const Candidate& c) {
+      // Never expand unrelated chromosomes through a shared identifier.
+      if(!missing(input.chr)&&input.chr!=c.chr)return;
+      for(auto position:c.original_positions) {
+        out.locations.emplace(c.chr,position);limit(out.locations.size());
+      }
+      for(const auto& id:c.identifiers)if(current_ids.insert(id).second) {
+        limit(current_ids.size());pending_ids.insert(id);
+      }
+      const auto key=c.key();
+      if(out.events.emplace(key,ProofEvent{c.chr,c.ref,c.alt,c.pos}).second) {
+        limit(out.events.size());pending_events.insert(key);
+      }
+    };
+    for(const auto* pool:{&coordinate,ids})if(pool)for(const auto& c:*pool)consider(c);
+    if(loaded_coordinates)for(const auto& entry:out.events) {
+      const auto& event=entry.second;
+      if(loaded_coordinates->count("C:"+event.chr+":"+std::to_string(event.pos)))bridged_events.insert(entry.first);
+    }
+    // Fixed-point current-ID closure. Only exact canonical events bridge from
+    // C lookups; unrelated overlapping haplotypes are outside this universe.
+    while(!pending_ids.empty()||!pending_events.empty()) {
+      if(!pending_ids.empty()) {
+        const auto id=*pending_ids.begin();pending_ids.erase(pending_ids.begin());
+        if(!expanded_ids.insert(id).second)continue;
+        const auto batch=lookup("I:"+id,cap,&out.remaining_work);
+        for(const auto& c:batch)consider(c);
+      } else {
+        const auto key=*pending_events.begin();pending_events.erase(pending_events.begin());
+        if(bridged_events.count(key))continue;
+        const auto event=out.events.at(key);
+        const auto batch=lookup("C:"+event.chr+":"+std::to_string(event.pos),cap,&out.remaining_work);
+        for(const auto& c:batch) {
+          const auto found=out.events.find(c.key());
+          if(c.chr!=event.chr||c.pos!=event.pos||found==out.events.end())continue;
+          bridged_events.insert(found->first);consider(c);
+        }
+        if(!bridged_events.count(key))throw std::runtime_error("Reference context closure lacks its canonical event");
+      }
+    }
+    return out;
+  }
   bool alt_alt_context(const Input& input,const std::vector<Candidate>& candidates,
                        const std::string& other,const std::string& effect,
-                       std::size_t cap,const std::set<std::int64_t>& resolved_anchors) {
-    std::set<std::pair<std::string,std::int64_t>> visited;
-    for(const auto& c:candidates) {
-      if(!missing(input.chr)&&input.chr!=c.chr)continue;
-      for(auto position:c.original_positions) {
-        if(!visited.emplace(c.chr,position).second)continue;
-        for(const auto& site:lookup("S:"+c.chr+":"+std::to_string(position),cap)) {
-          if(site.original_pos!=position||site.chr!=c.chr||!dna(site.original_ref)||
+                       std::size_t cap,const std::set<std::int64_t>& resolved_anchors,
+                       const std::vector<Candidate>* ids=nullptr,
+                       const std::set<std::string>* loaded_coordinates=nullptr,
+                       const std::string& selected=std::string(),bool* competing_ref_alt=nullptr,
+                       bool* context_required=nullptr) {
+    auto closure=context_closure(input,candidates,ids,cap,loaded_coordinates);
+    // Proof-only mappings may reject a selected mapping, but never replace it.
+    // Complex missing-position rows have already been withheld. Single bases
+    // cannot trim or shift, so canonical positions exhaust their possible anchors.
+    if(!selected.empty()&&competing_ref_alt) {
+      std::set<std::pair<std::string,std::int64_t>> anchors;
+      for(const auto& entry:closure.events)anchors.emplace(entry.second.chr,input.pos>0?input.pos:entry.second.pos);
+      for(const auto& anchor:anchors)for(int orientation=0;orientation<4;++orientation) {
+        consume_context_work(&closure.remaining_work);
+        const bool swap=orientation%2,comp=orientation>=2;
+        auto a=comp?complement(other):other,b=comp?complement(effect):effect;if(swap)std::swap(a,b);
+        const auto normalized=normalize(fa,anchor.first,anchor.second,a,b);
+        if(normalized.status!="ok")continue;
+        const auto key=normalized.chr+":"+std::to_string(normalized.pos)+":"+normalized.ref+":"+normalized.alt;
+        if(closure.events.count(key)&&key+":"+(swap?"1":"0")+":"+(comp?"1":"0")!=selected) {
+          *competing_ref_alt=true;return false;
+        }
+      }
+    }
+    std::size_t contexts=0;
+    for(const auto& position:closure.locations) {
+      for(const auto& site:lookup("S:"+position.first+":"+std::to_string(position.second),cap,&closure.remaining_work)) {
+          if(++contexts>cap)throw std::runtime_error("Reference context closure limit exceeded; no arbitrary context selected");
+          if(site.original_pos!=position.second||site.chr!=position.first||!dna(site.original_ref)||
              fa.sequence(site.chr,site.original_pos,site.original_ref.size())!=site.original_ref)continue;
           // Own all strings until the row-scoped signature maps are destroyed.
           // Views avoid copying a long allele once for every possible trim.
           const auto alleles=split(site.alleles,',');
-          std::vector<std::size_t> valid;
-          for(std::size_t i=0;i<alleles.size();++i)
-            if(dna(alleles[i])&&alleles[i]!=site.original_ref)valid.push_back(i);
+          std::vector<std::size_t> valid;std::set<std::string_view> distinct;
+          bool unmodelled=false;
+          for(std::size_t i=0;i<alleles.size();++i) {
+            consume_context_work(&closure.remaining_work);
+            if(alleles[i]==site.original_ref||!distinct.insert(alleles[i]).second)continue;
+            if(dna(alleles[i]))valid.push_back(i);else unmodelled=true;
+          }
+          if(context_required&&!selected.empty()&&unmodelled&&distinct.size()>=2)*context_required=true;
           if(valid.size()<2)continue;
+          // A jointly padded pure SNP context has one proved genomic anchor.
+          // Every shared flank must agree with original REF, not just the ALTs.
+          if(other.size()==1&&effect.size()==1&&input.pos>0&&!unmodelled) {
+            const auto width=site.original_ref.size();std::size_t variable=width;bool pure=true;
+            for(auto i:valid) {
+              consume_context_work(&closure.remaining_work);
+              if(alleles[i].size()!=width){pure=false;break;}
+              for(std::size_t j=0;j<width;++j)if(alleles[i][j]!=site.original_ref[j]) {
+                if(variable==width)variable=j;else if(variable!=j){pure=false;break;}
+              }
+              if(!pure)break;
+            }
+            if(pure&&variable!=width&&input.pos!=site.original_pos+static_cast<std::int64_t>(variable))continue;
+          }
+          // Necessary conditions are not full haplotype proofs. Shared alternate
+          // backgrounds can change both coordinate offset and REF-span length.
+          // Defer compatible complex contrasts when complete context is absent.
+          if(context_required&&!selected.empty()&&(other.size()!=1||effect.size()!=1)) {
+            const auto delta=other.size()>effect.size()?other.size()-effect.size():effect.size()-other.size();
+            std::set<std::size_t> lengths;
+            for(auto i:valid) {
+              consume_context_work(&closure.remaining_work);const auto length=alleles[i].size();
+              if((length>=delta&&lengths.count(length-delta))||
+                 (length<=std::numeric_limits<std::size_t>::max()-delta&&lengths.count(length+delta))) {
+                *context_required=true;break;
+              }
+              lengths.insert(length);
+            }
+          }
+          // For single bases, a necessary ALT pair must differ at exactly one
+          // base with the observed pair (or its complement). Join shared flanks
+          // without inventing a genomic anchor or a positive inferred REF span.
+          if(context_required&&!selected.empty()&&other.size()==1&&effect.size()==1) {
+            for(int orientation=0;orientation<2&&!*context_required;++orientation) {
+              const std::string observed[2]={orientation?complement(other):other,
+                                             orientation?complement(effect):effect};
+              using Flanks=std::tuple<std::size_t,std::size_t,std::string_view,std::string_view>;
+              std::map<Flanks,unsigned> pairs;
+              for(auto i:valid) {
+                const auto& allele=alleles[i];const auto view=std::string_view(allele);
+                for(unsigned which=0;which<2;++which) {
+                  auto offset=allele.find(observed[which]);
+                  while(offset!=std::string::npos) {
+                    consume_context_work(&closure.remaining_work);
+                    auto& mask=pairs[{allele.size(),offset,view.substr(0,offset),view.substr(offset+1)}];
+                    mask|=1U<<which;
+                    if(mask==3){*context_required=true;break;}
+                    offset=allele.find(observed[which],offset+1);
+                  }
+                  if(*context_required)break;
+                }
+                if(*context_required)break;
+              }
+            }
+          }
           for(int orientation=0;orientation<2;++orientation) {
             const std::string observed[2]={orientation?complement(other):other,
                                            orientation?complement(effect):effect};
@@ -326,6 +484,7 @@ private:
                 offset=static_cast<std::size_t>(input.pos-site.original_pos);
               } else offset=allele.find(query);
               while(offset!=std::string::npos&&offset<=allele.size()-query.size()) {
+                consume_context_work(&closure.remaining_work);
                 if(allele.compare(offset,query.size(),query)==0) {
                   const auto anchor=site.original_pos+static_cast<std::int64_t>(offset);
                   const auto view=std::string_view(allele);
@@ -349,6 +508,7 @@ private:
               std::map<std::int64_t,std::pair<Normalized,Normalized>> query_events;
               for(auto i:valid) {
                 const auto& allele=alleles[i];
+                consume_context_work(&closure.remaining_work);
                 const auto event=normalize(fa,site.chr,site.original_pos,site.original_ref,allele);
                 if(event.status!="ok")continue;
                 for(unsigned which=0;which<2;++which) {
@@ -358,6 +518,7 @@ private:
                   auto found=query_events.find(length);
                   if(found==query_events.end()) {
                     const auto ref=fa.sequence(site.chr,anchor,static_cast<std::size_t>(length));
+                    consume_context_work(&closure.remaining_work);consume_context_work(&closure.remaining_work);
                     found=query_events.emplace(length,std::make_pair(
                       normalize(fa,site.chr,anchor,ref,observed[0]),
                       normalize(fa,site.chr,anchor,ref,observed[1]))).first;
@@ -371,7 +532,6 @@ private:
               }
             }
           }
-        }
       }
     }
     return false;

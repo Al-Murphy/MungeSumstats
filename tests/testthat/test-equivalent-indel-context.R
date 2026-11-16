@@ -1,4 +1,4 @@
-test_that('equivalent indel anchors retain every third-allele context before EAF complement', {
+test_that('equivalent indel anchors retain trusted EAF checks and defer uncertain generic context', {
   d <- tempfile('equivalent-context-');dir.create(d)
   on.exit(unlink(d,recursive=TRUE),add=TRUE)
   writeLines(c('>1','CAAAAAAACGT'),file.path(d,'reference.fa'))
@@ -9,8 +9,8 @@ test_that('equivalent indel anchors retain every third-allele context before EAF
                            build='SYNTHETIC',version='equivalent-context')
   x <- data.frame(CHR='1',BP=4,SNP='rsDel',A1='A',A2='AA',BETA=-.125,FRQ=.75,REF='AA',ALT='A')
   generic <- harmonise_sumstats(x,ref,frequency_type='EAF')$normalized
-  expect_identical(generic$status,'swap')
-  expect_equal(generic$effect,.125)
+  expect_identical(generic$status,'source_allele_context_required')
+  expect_true(all(is.na(generic[c('chr','pos','ref','alt','id','effect')])))
   expect_true(is.na(generic$eaf))
   columns <- list(chr='CHR',pos='BP',id='SNP',other='A1',effect_allele='A2',effect='BETA',eaf='FRQ',source_ref='REF',source_alt='ALT')
   trusted <- harmonise_sumstats(x,ref,columns=columns,source_strand='+',frequency_type='EAF')$normalized

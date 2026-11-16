@@ -77,8 +77,8 @@ test_that('duplicate and unsupported reference rows retain third-allele context'
   duplicated_ref <- prepare_reference(file.path(d,'tiny.fa'),duplicate_sites,file.path(d,'duplicate-ref'),build='GRCh38',version='duplicate-context')
   contrast <- data.frame(CHR='1',BP=8,SNP='multiallelic',A1='A',A2='G',BETA=.3,FRQ=.6)
   normalized <- harmonise_sumstats(contrast,duplicated_ref,frequency_type='EAF')$normalized
-  expect_identical(normalized$status,'swap')
-  expect_identical(normalized$id,'multiallelic')
+  expect_identical(normalized$status,'source_allele_context_required')
+  expect_true(all(is.na(normalized[c('chr','pos','ref','alt','id','effect')])))
   expect_true(is.na(normalized$eaf))
   contrast$SNP <- NA_character_
   expect_true(is.na(harmonise_sumstats(contrast,duplicated_ref,frequency_type='EAF')$normalized$id))

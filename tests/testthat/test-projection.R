@@ -140,7 +140,12 @@ test_that('reverse reanchored REF-effect indels retain EAF only with canonical t
     if (name!='sequence_only') {
       generic <- harmonise_sumstats(direct,target,frequency_type='EAF')$normalized
       expect_equal(generic$eaf,rep(expected,3),info=name)
-      expect_equal(generic$effect,rep(-.25,3),info=name)
+      if(name %in% c('canonical','reanchored','equivalent')) {
+        expect_equal(generic$effect,rep(-.25,3),info=name)
+      } else {
+        expect_identical(generic$status,rep('source_allele_context_required',3),info=name)
+        expect_true(all(is.na(generic[c('chr','pos','ref','alt','id','effect')])),info=name)
+      }
     }
   }
   # A target catalog cannot manufacture missing source-side frequency evidence.
