@@ -141,12 +141,15 @@ test_that('explicit rebinding rereads the manifest and owns a fresh physical FAS
         }
         # source.tsv is not held by a native stream. A real size mutation tests
         # the complete binding's stat guard on every OS, including Windows.
+        artifact_guard <- open_reference(f$reference,fasta=second_path)
+        expect_identical(harmonise_sumstats(f$input,artifact_guard,frequency_type='EAF',verify=FALSE)$normalized,
+                         f$baseline$normalized)
         artifact <- file.path(f$reference$path,'source.tsv')
         previous_size <- file.info(artifact)$size
         cat('\n',file=artifact,append=TRUE)
         expect_equal(file.info(artifact)$size,previous_size+1)
-        expect_error(harmonise_sumstats(f$input,second,verify=FALSE),'checksum|stat')
-        rm(first,second,restored,poisoned);invisible(gc())
+        expect_error(harmonise_sumstats(f$input,artifact_guard,verify=FALSE),'checksum|stat')
+        rm(first,second,restored,poisoned,artifact_guard);invisible(gc())
     }
 })
 
