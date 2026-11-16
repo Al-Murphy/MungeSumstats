@@ -146,7 +146,9 @@ test_that('explicit rebinding rereads the manifest and owns a fresh physical FAS
                          f$baseline$normalized)
         artifact <- file.path(f$reference$path,'source.tsv')
         previous_size <- file.info(artifact)$size
-        cat('\n',file=artifact,append=TRUE)
+        append_connection <- file(artifact,open='ab')
+        writeBin(as.raw(10L),append_connection)
+        close(append_connection)
         expect_equal(file.info(artifact)$size,previous_size+1)
         expect_error(harmonise_sumstats(f$input,artifact_guard,verify=FALSE),'checksum|stat')
         rm(first,second,restored,poisoned,artifact_guard);invisible(gc())
