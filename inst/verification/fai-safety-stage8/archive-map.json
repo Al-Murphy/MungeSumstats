@@ -266,11 +266,11 @@
     "sha256": "d037ca1b59659192f34bd0941d8511bf838dfa52fb8a28766a3da467d4a54465"
   },
   "results/mss-fai-safety-stage8/candidate.patch": {
-    "archive": "mss-fai-safety-stage8/candidate.patch",
-    "bytes": 18564,
+    "archive": "mss-fai-safety-stage8/candidate.patch.gz",
+    "bytes": 6049,
     "raw_bytes": 18564,
     "raw_sha256": "1d0cdf9a403fb57109be9d06cad348fd9b8164b1ec7fce4947254e9c579c39d4",
-    "sha256": "1d0cdf9a403fb57109be9d06cad348fd9b8164b1ec7fce4947254e9c579c39d4"
+    "sha256": "6cd16231b47f47a7ff4f5d5db30edc1a32c5379b3204ce0e5ec2123fc5710f01"
   },
   "results/mss-fai-safety-stage8/check-sanitizers.sh": {
     "archive": "mss-fai-safety-stage8/check-sanitizers.sh",

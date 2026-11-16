@@ -4,8 +4,8 @@
     "sha256": "fb937b700b75caf8ec7e64ffa9b2e0f2e4f23a08990385256a528881581b2407"
   },
   "archive-map.json": {
-    "bytes": 35094,
-    "sha256": "d797e9f09dfd7d6b8a1d98bfec1b13bdf9914764a980c6c5b8da2bee0d1b7a69"
+    "bytes": 35096,
+    "sha256": "0620836a06deee807bcb9e36e820115a955a94fac78697042784c011a444f76c"
   },
   "hardware.json": {
     "bytes": 371,
@@ -207,9 +207,9 @@
     "bytes": 543,
     "sha256": "d037ca1b59659192f34bd0941d8511bf838dfa52fb8a28766a3da467d4a54465"
   },
-  "mss-fai-safety-stage8/candidate.patch": {
-    "bytes": 18564,
-    "sha256": "1d0cdf9a403fb57109be9d06cad348fd9b8164b1ec7fce4947254e9c579c39d4"
+  "mss-fai-safety-stage8/candidate.patch.gz": {
+    "bytes": 6049,
+    "sha256": "6cd16231b47f47a7ff4f5d5db30edc1a32c5379b3204ce0e5ec2123fc5710f01"
   },
   "mss-fai-safety-stage8/check-sanitizers.sh": {
     "bytes": 343,
