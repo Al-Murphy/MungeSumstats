@@ -125,7 +125,14 @@ test_that('explicit rebinding rereads the manifest and owns a fresh physical FAS
         expect_false(identical(second$.native,restored$.native))
         expect_identical(second$fasta_binding,restored$fasta_binding)
         # A physical runtime mutation invalidates this binding, even with verify=FALSE.
-        Sys.setFileTime(second_path,Sys.time()+10)
+        before_stat <- file.info(second_path)[,c('size','mtime')]
+        changed_time <- Sys.setFileTime(second_path,Sys.time()+10)
+        after_stat <- file.info(second_path)[,c('size','mtime')]
+        cat('relocation time diagnostic: format=',format,
+            ' set_time=',changed_time,
+            ' before=',as.numeric(before_stat$mtime),
+            ' after=',as.numeric(after_stat$mtime),
+            ' signature_changed=',!identical(before_stat,after_stat),'\n',sep='')
         expect_error(harmonise_sumstats(f$input,second,verify=FALSE),'checksum|stat')
         expect_identical(.relocation_bundle(f$reference$path),f$bundle)
         rm(first,second,restored,poisoned);invisible(gc())
