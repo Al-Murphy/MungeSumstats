@@ -1,0 +1,14 @@
+{
+  "candidate": {
+    "commit": "03d11e92b417add0183dea4fb77716f5502d5735",
+    "files_rechecked": 868,
+    "mismatches": []
+  },
+  "baseline": {
+    "commit": "392d8266062fcc843c415cd0894914a79b147a33",
+    "files_rechecked": 132,
+    "mismatches": []
+  },
+  "author_checkout_clean": true,
+  "diff_check_exit": 0
+}

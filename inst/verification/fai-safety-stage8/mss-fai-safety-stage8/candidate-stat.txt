@@ -1,0 +1,9 @@
+ inst/PRESERVATION_CONTRACT.md               | 13 +++++
+ inst/verification/fai-safety-stage8/plan.md | 19 +++++++
+ src/preservation_core.h                     | 43 +++++++++++++--
+ tests/native/run.sh                         |  3 ++
+ tests/native/test_fai.cpp                   | 68 +++++++++++++++++++++++
+ tests/standalone/preservation.R             |  1 +
+ tests/standalone/registered.R               |  1 +
+ tests/testthat/test-fai-safety.R            | 83 +++++++++++++++++++++++++++++
+ 8 files changed, 228 insertions(+), 3 deletions(-)

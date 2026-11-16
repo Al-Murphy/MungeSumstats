@@ -1,0 +1,12 @@
+{
+  "standalone.log": {
+    "blocks": 82,
+    "assertions": 1727,
+    "last_line": "standalone R preservation and typed reference fixtures passed"
+  },
+  "registered.log": {
+    "blocks": 42,
+    "assertions": 814,
+    "last_line": "registered generated bindings fixtures passed"
+  }
+}

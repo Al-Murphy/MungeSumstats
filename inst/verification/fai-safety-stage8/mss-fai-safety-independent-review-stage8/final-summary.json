@@ -1,0 +1,42 @@
+{
+  "verdict": "GREEN_NATIVE_FAI_SCOPE",
+  "public_R": {
+    "blocks": 3,
+    "assertions": 86,
+    "failed": 0,
+    "errors": 0,
+    "warnings": 0
+  },
+  "portable": {
+    "standalone.log": {
+      "blocks": 82,
+      "assertions": 1727,
+      "last_line": "standalone R preservation and typed reference fixtures passed"
+    },
+    "registered.log": {
+      "blocks": 42,
+      "assertions": 814,
+      "last_line": "registered generated bindings fixtures passed"
+    }
+  },
+  "numeric_oracle": {
+    "cases": 11271,
+    "oracle_accept": 741,
+    "oracle_refuse": 10530,
+    "actual_fasta_bytes": 64,
+    "seed": 80171,
+    "oracle": "Python arbitrary-precision last-address formula and full ASCII uint64 syntax"
+  },
+  "numeric_sanitizer": {
+    "last_line": "total=11271 accepted=741 refused=10530 constructor_mismatches=0 range_queries=25935 query_errors=0",
+    "expected_exit_code": 0
+  },
+  "valid_layout_sanitizer": {
+    "last_line": "valid_controls=160 exact_range_queries=9600 mismatches=0",
+    "expected_exit_code": 0
+  },
+  "baseline_RED": {
+    "last_line": "total=11271 accepted=11244 refused=27 constructor_mismatches=10503 range_queries=25935 query_errors=769",
+    "expected_exit_code": 1
+  }
+}

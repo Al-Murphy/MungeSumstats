@@ -1,0 +1,18 @@
+args<-commandArgs(trailingOnly=TRUE)
+root<-normalizePath(args[[1]])
+.libPaths(c('/private/tmp/harvest-Rlib',.libPaths()))
+old<-new.env(parent=.GlobalEnv)
+Rcpp::sourceCpp(file.path(root,'baseline/src/preservation.cpp'),env=old)
+sys.source(file.path(root,'baseline/R/preservation.R'),old)
+sys.source(file.path(root,'baseline/R/projection.R'),old)
+Rcpp::sourceCpp(file.path(root,'candidate/src/preservation.cpp'))
+source(file.path(root,'candidate/R/preservation.R'))
+source(file.path(root,'candidate/R/projection.R'))
+library(testthat)
+results<-test_file(file.path(root,'public-probes.R'),reporter='summary',env=.GlobalEnv)
+frame<-as.data.frame(results)
+write.table(frame[,c('test','nb','failed','skipped','error','warning','passed')],
+ file.path(root,'public-probe-summary.tsv'),sep='\t',row.names=FALSE)
+cat('INDEPENDENT_PUBLIC blocks=',nrow(frame),' assertions=',sum(frame$nb),' passed=',sum(frame$passed),
+ ' failed=',sum(frame$failed),' errors=',sum(frame$error),' warnings=',sum(frame$warning),'\n',sep='')
+stopifnot(sum(frame$failed)==0,sum(frame$error)==0,sum(frame$warning)==0)

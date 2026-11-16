@@ -1,0 +1,15 @@
+{
+  "command": [
+    "sh",
+    "/private/tmp/gwas-harvest-stage2/results/mss-fai-safety-stage8/check-sanitizers.sh"
+  ],
+  "pid": 92092,
+  "status": "running",
+  "max_memory_bytes": 8589934592,
+  "min_free_bytes": 171798691840,
+  "elapsed_seconds": 0.02448270912282169,
+  "peak_rss_bytes": 2637824,
+  "peak_physical_footprint_bytes": 1769880,
+  "peak_guard_bytes": 2637824,
+  "minimum_free_bytes": 469384536064
+}

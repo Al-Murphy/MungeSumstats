@@ -1,0 +1,14 @@
+{
+  "blocks": 257,
+  "passed_assertions": 2570,
+  "failed_assertions": 0,
+  "errors": 0,
+  "warnings": 2,
+  "skipped_blocks": 2,
+  "source_revision": "03d11e92b417add0183dea4fb77716f5502d5735",
+  "installed_dll_sha256": "6f23605e06ac0b35fd40268b08190fd55e9a09e2fccded2f8cd7b629a3cd49eb",
+  "source_archive_sha256": "11e723cfa824ffe6f120fbdc2d56555f90ae85dad07154df7a5f76bd815a80f5",
+  "installed_pin_sha256": "d696f2b450200e7cd04e79caebc93ebd1accef8f121c43352ac67e68277f0df3",
+  "raw_summary_sha256": "3787d116adde58b7f347e6a05759e48ef9e8347664f54b614fce72b21497b8b7",
+  "guard_sha256": "ebd021093d9bce5675d2591f429b238f4063b65d957ae112901cfe501656c411"
+}

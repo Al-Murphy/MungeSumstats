@@ -1,0 +1,179 @@
+{
+  "candidate_commit": "03d11e92b417add0183dea4fb77716f5502d5735",
+  "baseline_commit": "392d8266062fcc843c415cd0894914a79b147a33",
+  "core_sha256": "4affcc7bdb761b1c86d22e2f72eb079434fbb2404d7f5c4d257fda2de52c6ddc",
+  "verdict": "GREEN_DOCUMENTED_SCIENTIFIC_CONTRACT",
+  "report": {
+    "path": "/private/tmp/gwas-harvest-stage2/reports/mss-fai-safety-independent-review-stage8.md",
+    "sha256": "a441b12ca1281f8b5079b01c394dce96a74eeb2c8513b192b88f8292db161429"
+  },
+  "files": {
+    "author-evidence-verification.json": {
+      "bytes": 220,
+      "sha256": "0924ea3dc93c9f840581840f0257a3f117ac1198e0b53be4dc0722aef7cd30f3"
+    },
+    "baseline-pins.json": {
+      "bytes": 12622,
+      "sha256": "68b2c8077d07ba0997aa96ebc4d82e592aea7b3a45fbc4a24727a015c1266cce"
+    },
+    "bounds-asan": {
+      "bytes": 306632,
+      "sha256": "9e9ae35307f0927355df6508ff99c5acbe842c490382604328c4d0fe9833acf8"
+    },
+    "bounds-asan-final.log": {
+      "bytes": 99,
+      "sha256": "7dffd33ee524275d885b5fb7291a72e587cbc356052b26d5e8299f29f2e587e1"
+    },
+    "bounds-asan-preexact.log": {
+      "bytes": 99,
+      "sha256": "7dffd33ee524275d885b5fb7291a72e587cbc356052b26d5e8299f29f2e587e1"
+    },
+    "bounds-asan-time-denied.log": {
+      "bytes": 205,
+      "sha256": "8e0541a0594af6cd5757963f82d2ed021784a50251dfbab5c0d66a31d8507e4b"
+    },
+    "bounds-asan.log": {
+      "bytes": 74,
+      "sha256": "f043dc16f1099a1d54b7c7a541002fb917dffbf75ee35bd2c5e06068440db04a"
+    },
+    "bounds-baseline": {
+      "bytes": 66304,
+      "sha256": "a6cc7a032481aab555d0e833226616b42edf91b52c132163f305b8c5584801f3"
+    },
+    "bounds-baseline-final.log": {
+      "bytes": 821,
+      "sha256": "3077dbba9850c9462c7dea599035774120b01ae468161a55d7e19da9bf61e54e"
+    },
+    "bounds-baseline-preexact.log": {
+      "bytes": 821,
+      "sha256": "3077dbba9850c9462c7dea599035774120b01ae468161a55d7e19da9bf61e54e"
+    },
+    "bounds-baseline.log": {
+      "bytes": 821,
+      "sha256": "3077dbba9850c9462c7dea599035774120b01ae468161a55d7e19da9bf61e54e"
+    },
+    "bounds-cases.tsv": {
+      "bytes": 773742,
+      "sha256": "5a551e436a2eb4623078e967b4163662b3e1e7d14376180be374ee436ec08f8b"
+    },
+    "bounds-input-summary.json": {
+      "bytes": 208,
+      "sha256": "b375bb11d2c05594ebf32f53db5a4b9f6e8af6b712b05390aec8925fc9d9a570"
+    },
+    "bounds.cpp": {
+      "bytes": 2512,
+      "sha256": "a18f911670089af4d842445c3a54b6654ae343958fae595b6e105b5aa29d7e77"
+    },
+    "candidate-pins.json": {
+      "bytes": 111585,
+      "sha256": "6c6d0b4f5cfb54094960e1be5b479f5c3875e8b35b5e7f075105a8ace868d798"
+    },
+    "compatibility-asan": {
+      "bytes": 288816,
+      "sha256": "2706fcc22f44c28e3c385521bee165ba8ef5f61f494e4767f8145bdb1fcc37a3"
+    },
+    "compatibility-asan-time-denied.log": {
+      "bytes": 163,
+      "sha256": "2883cbb35007a2db9de72701ab276772d11f63e2e91617b15f6114712577bd42"
+    },
+    "compatibility-asan.log": {
+      "bytes": 57,
+      "sha256": "402961170a355499fb042ca67b0587294e6a64f907e79c4316b52ee7a71c2fc5"
+    },
+    "compatibility.cpp": {
+      "bytes": 2492,
+      "sha256": "202364ece11f85826940f34806a4c91c248a028848d208ff2f7faa0b62f28171"
+    },
+    "final-source-integrity.json": {
+      "bytes": 317,
+      "sha256": "95ac097548cd8595d95fb8050ecf75cc81c9e9c0630dca59465cf2131ef447a6"
+    },
+    "final-summary.json": {
+      "bytes": 1214,
+      "sha256": "709cc9d68faa75006db0c210ed4bb7d83f8ca6232b15f30267eea6522d9cf8c2"
+    },
+    "full-installed-verification.json": {
+      "bytes": 1366,
+      "sha256": "bdabaf2cc112ce80544b88d1b1589f0b335408f9b4276fafce3b30ba7a81218b"
+    },
+    "make-bounds.py": {
+      "bytes": 3609,
+      "sha256": "e39171428fcfb1e3d58ddee95bc2db913a7e0bad5b35e191f05a593c7363d84a"
+    },
+    "native.log": {
+      "bytes": 261,
+      "sha256": "e63b3c5963377f5b399d457e2d39f0e0da3ebf8370c5d918dd1b5903e462a642"
+    },
+    "portable-summary.json": {
+      "bytes": 286,
+      "sha256": "de7e890b6140f7bd1fef72d68bb76db049d746da8304faa338c8192f007d14fd"
+    },
+    "public-probe-discovery-summary.tsv": {
+      "bytes": 370,
+      "sha256": "2c2eb6cd917a8d334109e7f60574f6f60a65c9731d4e32cd41725a0468036b3e"
+    },
+    "public-probe-summary.tsv": {
+      "bytes": 370,
+      "sha256": "e56f2fdbab7eb3bfd7d839e5c87425c7316b80d5919005b37baaca9ab060659d"
+    },
+    "public-probes-discovery.log": {
+      "bytes": 1635,
+      "sha256": "06eebb8d540950c55da2598ac39e95e0fd740c2ed406409cd9600366800d3b32"
+    },
+    "public-probes-final.log": {
+      "bytes": 413,
+      "sha256": "503000d8233095c99571093d7284680222860c8a4fffcaff8128ea2603daa3f3"
+    },
+    "public-probes.R": {
+      "bytes": 5540,
+      "sha256": "fd7a01247e0294d422f993d698287695d1b1d8d74f943783eb2bb693e6919302"
+    },
+    "public-probes.log": {
+      "bytes": 1635,
+      "sha256": "06eebb8d540950c55da2598ac39e95e0fd740c2ed406409cd9600366800d3b32"
+    },
+    "registered.log": {
+      "bytes": 2441,
+      "sha256": "05ef2b43f934a617cf2c25410af1cf34aa88c06f932ad85482786745515b0116"
+    },
+    "run-public-probes.R": {
+      "bytes": 1084,
+      "sha256": "14da624a7ea4ec5927a12f164f2cbc4ccff5457f2f3e05a2c2264ce328da7697"
+    },
+    "scientific-scope-verification.json": {
+      "bytes": 346,
+      "sha256": "9824efb2b1a33cf11f3f71c03e2064d257495497fe9df9d394f57be84c6720cb"
+    },
+    "standalone.log": {
+      "bytes": 2968,
+      "sha256": "3dc9924d5d2486b6564bf4d25d24dc42190d18f9644cca5aa7b7577644351257"
+    }
+  },
+  "external_evidence": {
+    "/private/tmp/gwas-harvest-stage2/results/mss-fai-safety-stage8/evidence-index.json": {
+      "bytes": 130127,
+      "sha256": "df7aa173f5db492ae6a37026701604c533371fab3113c8f4ac127a67ba758571"
+    },
+    "/private/tmp/gwas-harvest-stage2/results/verification-stage8/mss-fai-installed/installed-pin.json": {
+      "bytes": 111871,
+      "sha256": "d696f2b450200e7cd04e79caebc93ebd1accef8f121c43352ac67e68277f0df3"
+    },
+    "/private/tmp/gwas-harvest-stage2/results/verification-stage8/mss-fai-installed/suite/guard.json": {
+      "bytes": 1125,
+      "sha256": "ebd021093d9bce5675d2591f429b238f4063b65d957ae112901cfe501656c411"
+    },
+    "/private/tmp/gwas-harvest-stage2/results/verification-stage8/mss-fai-installed/suite/summary.json": {
+      "bytes": 130,
+      "sha256": "3787d116adde58b7f347e6a05759e48ef9e8347664f54b614fce72b21497b8b7"
+    },
+    "/private/tmp/gwas-harvest-stage2/results/verification-stage8/mss-fai-installed/suite/installed-full.csv": {
+      "bytes": 45463,
+      "sha256": "5c6aad16f100c6a467bf3b45b272b17ce9082c027c4cc4a28fcd868f81fec858"
+    }
+  },
+  "omitted_reproducible_trees": [
+    "candidate and baseline git archive exports (per-file hashes retained)",
+    "tiny mutable native fixture directories",
+    "generated sanitizer dSYM directories"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "changed_production_files": [
+    "src/preservation_core.h"
+  ],
+  "core_sha256": "4affcc7bdb761b1c86d22e2f72eb079434fbb2404d7f5c4d257fda2de52c6ddc",
+  "normalization_to_end_byte_exact": true,
+  "normalization_suffix_sha256": "59ab9d077a3d2fe3e7809bcdd566505ea7a30073120bd7c172c7338560020d67",
+  "R_API_wrappers_projection_unchanged": true
+}

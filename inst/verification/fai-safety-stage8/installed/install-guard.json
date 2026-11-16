@@ -1,0 +1,33 @@
+{
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "R",
+    "CMD",
+    "INSTALL",
+    "--preclean",
+    "--library=/private/tmp/gwas-harvest-stage2/results/verification-stage8/mss-fai-installed/lib",
+    "/private/tmp/gwas-harvest-stage2/results/verification-stage8/mss-fai-installed/source"
+  ],
+  "pid": 99273,
+  "status": "success",
+  "exit_code": 0,
+  "reason": null,
+  "natural_oom": false,
+  "wall_seconds": 18.128486374858767,
+  "samples": 62,
+  "peak_process_tree": {
+    "rss_bytes": 1438744576,
+    "physical_footprint_bytes": 1441074968,
+    "conservative_guard_bytes": 1456490416,
+    "processes": 6
+  },
+  "min_free_bytes": 468607234048,
+  "peak_owned_case_bytes": 17685724,
+  "limits": {
+    "memory_bytes": 8589934592,
+    "minimum_free_bytes": 171798691840,
+    "case_disk_bytes": 4294967296
+  },
+  "scope": "Full owned process tree: RSS, macOS physical footprint and sum(max(RSS,footprint)); Linux guard includes swap. No other workload is signaled."
+}

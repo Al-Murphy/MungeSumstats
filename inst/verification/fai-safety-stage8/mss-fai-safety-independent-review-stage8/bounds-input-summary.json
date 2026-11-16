@@ -1,0 +1,8 @@
+{
+  "cases": 11271,
+  "oracle_accept": 741,
+  "oracle_refuse": 10530,
+  "actual_fasta_bytes": 64,
+  "seed": 80171,
+  "oracle": "Python arbitrary-precision last-address formula and full ASCII uint64 syntax"
+}

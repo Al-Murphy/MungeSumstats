@@ -1,0 +1,435 @@
+{
+  "schema": 1,
+  "name": "scientific7-fai-safety-format2-stage8",
+  "created_utc": "2026-11-16T11:24:04Z",
+  "harness_seal_sha256": "b2d6dd7d7f945f072ff2572d9eb0d3f737a8caea08ddd1e4c564aa779fbe4493",
+  "preparation_only": true,
+  "execution_authorized": false,
+  "sources": {
+    "mss4": {
+      "path": "/private/tmp/gwas-harvest-stage2/mss-fasta-offsets",
+      "production_revision": "5cf1e23c907ad9c923141faf0728964951be7c66",
+      "observed_checkout_head": "5cf1e23c907ad9c923141faf0728964951be7c66",
+      "files": {
+        "src/preservation_core.h": {
+          "path": "/private/tmp/gwas-harvest-stage2/mss-fasta-offsets/src/preservation_core.h",
+          "bytes": 25965,
+          "mtime_ns": 1794785512304891076,
+          "sha256": "8a19e996660b27b0aec2e5f2ebd04cc9d435981461c25ee1dfe5b60c0fe09e64",
+          "md5": "62d655e3370a4e965fe144326dc64b0f",
+          "newline_count": 365
+        },
+        "R/preservation.R": {
+          "path": "/private/tmp/gwas-harvest-stage2/mss-fasta-offsets/R/preservation.R",
+          "bytes": 38726,
+          "mtime_ns": 1794785340923350123,
+          "sha256": "35a21472e5b069b5ef1d03d7cf497a53cd3035c3c9eda3c1f0d72dc2daf6aa83",
+          "md5": "d4ce6204b2e9084170c745c893caa4fb",
+          "newline_count": 599
+        },
+        "R/projection.R": {
+          "path": "/private/tmp/gwas-harvest-stage2/mss-fasta-offsets/R/projection.R",
+          "bytes": 5613,
+          "mtime_ns": 1794785340923628668,
+          "sha256": "36719b62b6c9d0849b1876ac13a7aeaee6acf7add0908dd5008ab95e672a6c41",
+          "md5": "9b5f5bba5e2a2048e93cac6a9e8f0a86",
+          "newline_count": 82
+        },
+        "src/preservation.cpp": {
+          "path": "/private/tmp/gwas-harvest-stage2/mss-fasta-offsets/src/preservation.cpp",
+          "bytes": 9444,
+          "mtime_ns": 1794785340954700054,
+          "sha256": "8a1a633b868545199cfab706c396a0bc56c94a7e581f135d6c931b65a53ed9c6",
+          "md5": "5901069b39e2a637ee27f3b730f74000",
+          "newline_count": 137
+        }
+      }
+    },
+    "mss7": {
+      "path": "/private/tmp/gwas-harvest-stage2/mss-fai-safety-stage8",
+      "production_revision": "03d11e92b417add0183dea4fb77716f5502d5735",
+      "observed_checkout_head": "03d11e92b417add0183dea4fb77716f5502d5735",
+      "files": {
+        "src/preservation_core.h": {
+          "path": "/private/tmp/gwas-harvest-stage2/mss-fai-safety-stage8/src/preservation_core.h",
+          "bytes": 49600,
+          "mtime_ns": 1794826361406073586,
+          "sha256": "4affcc7bdb761b1c86d22e2f72eb079434fbb2404d7f5c4d257fda2de52c6ddc",
+          "md5": "5d5d53e7cc2474173212a4df57c4c235",
+          "newline_count": 742
+        },
+        "R/preservation.R": {
+          "path": "/private/tmp/gwas-harvest-stage2/mss-fai-safety-stage8/R/preservation.R",
+          "bytes": 44461,
+          "mtime_ns": 1794826120922086904,
+          "sha256": "2e2ecf12870189ed0fdd539571eb6ade800ee21f6899a5023c28ac3978407017",
+          "md5": "973941d708b1794f02828fc06aed39b2",
+          "newline_count": 684
+        },
+        "R/projection.R": {
+          "path": "/private/tmp/gwas-harvest-stage2/mss-fai-safety-stage8/R/projection.R",
+          "bytes": 6257,
+          "mtime_ns": 1794826120922444659,
+          "sha256": "bd367596159973209ef5737edcd1e3e032fb4962fb5869b334207dc5402bc8ca",
+          "md5": "9c2ad28bc894b87c1964f9a559d67387",
+          "newline_count": 90
+        },
+        "src/preservation.cpp": {
+          "path": "/private/tmp/gwas-harvest-stage2/mss-fai-safety-stage8/src/preservation.cpp",
+          "bytes": 9481,
+          "mtime_ns": 1794826121058135504,
+          "sha256": "6d7281661962b2db9f74ae53569841336d810315ab417878b51969d82f63a49e",
+          "md5": "82764f00f796d5526d9c5ca51a8bc7de",
+          "newline_count": 137
+        }
+      }
+    }
+  },
+  "libraries": {
+    "mss4": {
+      "path": "/private/tmp/gwas-harvest-stage2/Rlib/fasta-offsets-v1",
+      "files": {
+        "DESCRIPTION": {
+          "path": "/private/tmp/gwas-harvest-stage2/Rlib/fasta-offsets-v1/MungeSumstats/DESCRIPTION",
+          "bytes": 2607,
+          "mtime_ns": 1794785650460383380,
+          "sha256": "743ff72c54dfef9a27cc40865b3086982da1e02cf665dc2c808f5e0b8313ed16",
+          "md5": "a5791b4ccac32317f6da39d668e4b445",
+          "newline_count": 60
+        },
+        "NAMESPACE": {
+          "path": "/private/tmp/gwas-harvest-stage2/Rlib/fasta-offsets-v1/MungeSumstats/NAMESPACE",
+          "bytes": 3381,
+          "mtime_ns": 1794785650447823749,
+          "sha256": "9a5cb8beb41897dfba0cafd972ff28b8432d9da47aae9cc9e197df42daa1419e",
+          "md5": "7af2262325ab47fe3af66b966e86e0f7",
+          "newline_count": 114
+        },
+        "R/MungeSumstats": {
+          "path": "/private/tmp/gwas-harvest-stage2/Rlib/fasta-offsets-v1/MungeSumstats/R/MungeSumstats",
+          "bytes": 1058,
+          "mtime_ns": 1794785659648324506,
+          "sha256": "570ca456b280cdeb201ef5ebdf22dc8f80092e2c0c68e33c7f73340e420f3759",
+          "md5": "d6c68f1fe41ced6e98a766a3757313da",
+          "newline_count": 27
+        },
+        "R/MungeSumstats.rdb": {
+          "path": "/private/tmp/gwas-harvest-stage2/Rlib/fasta-offsets-v1/MungeSumstats/R/MungeSumstats.rdb",
+          "bytes": 671793,
+          "mtime_ns": 1794785659646419146,
+          "sha256": "30921eda0c2ccd2675f5a455c4b827bf1bca38f1944b2061964961cadb282dbb",
+          "md5": "68567d57ef73903cdd383a342d571f27",
+          "newline_count": 2544
+        },
+        "R/MungeSumstats.rdx": {
+          "path": "/private/tmp/gwas-harvest-stage2/Rlib/fasta-offsets-v1/MungeSumstats/R/MungeSumstats.rdx",
+          "bytes": 3400,
+          "mtime_ns": 1794785659647245908,
+          "sha256": "349d22c591b157616ea69ea551712c9ffe28882f35557291e0c6e700d3e1b37c",
+          "md5": "4352be72b80b7f3dd85cdc8e5861310e",
+          "newline_count": 9
+        },
+        "libs/MungeSumstats.so": {
+          "path": "/private/tmp/gwas-harvest-stage2/Rlib/fasta-offsets-v1/MungeSumstats/libs/MungeSumstats.so",
+          "bytes": 375568,
+          "mtime_ns": 1794785654098459654,
+          "sha256": "0a65467b2ef80c1c131bcc5f82a90fa0940b82e0eae0a2a33f71bf6591d981bd",
+          "md5": "d8276f7f60e88939c145fb35e39c223d",
+          "newline_count": 1172
+        }
+      },
+      "dll": {
+        "path": "/private/tmp/gwas-harvest-stage2/Rlib/fasta-offsets-v1/MungeSumstats/libs/MungeSumstats.so",
+        "bytes": 375568,
+        "mtime_ns": 1794785654098459654,
+        "sha256": "0a65467b2ef80c1c131bcc5f82a90fa0940b82e0eae0a2a33f71bf6591d981bd",
+        "md5": "d8276f7f60e88939c145fb35e39c223d",
+        "newline_count": 1172
+      }
+    },
+    "mss7": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/verification-stage8/mss-fai-installed/lib",
+      "files": {
+        "DESCRIPTION": {
+          "path": "/private/tmp/gwas-harvest-stage2/results/verification-stage8/mss-fai-installed/lib/MungeSumstats/DESCRIPTION",
+          "bytes": 2607,
+          "mtime_ns": 1794827744572745778,
+          "sha256": "c3c5ad04244c7c48a0be1a904848d0f694304929126aae37ba4155117120732d",
+          "md5": "ffd8923f94faba8586cdbdbbb4d13fd8",
+          "newline_count": 60
+        },
+        "NAMESPACE": {
+          "path": "/private/tmp/gwas-harvest-stage2/results/verification-stage8/mss-fai-installed/lib/MungeSumstats/NAMESPACE",
+          "bytes": 3381,
+          "mtime_ns": 1794827744558955430,
+          "sha256": "9a5cb8beb41897dfba0cafd972ff28b8432d9da47aae9cc9e197df42daa1419e",
+          "md5": "7af2262325ab47fe3af66b966e86e0f7",
+          "newline_count": 114
+        },
+        "R/MungeSumstats": {
+          "path": "/private/tmp/gwas-harvest-stage2/results/verification-stage8/mss-fai-installed/lib/MungeSumstats/R/MungeSumstats",
+          "bytes": 1058,
+          "mtime_ns": 1794827754154581757,
+          "sha256": "570ca456b280cdeb201ef5ebdf22dc8f80092e2c0c68e33c7f73340e420f3759",
+          "md5": "d6c68f1fe41ced6e98a766a3757313da",
+          "newline_count": 27
+        },
+        "R/MungeSumstats.rdb": {
+          "path": "/private/tmp/gwas-harvest-stage2/results/verification-stage8/mss-fai-installed/lib/MungeSumstats/R/MungeSumstats.rdb",
+          "bytes": 350355,
+          "mtime_ns": 1794827754153489576,
+          "sha256": "bfe8ac1a61db868e1ee475b35bce3306d0d0b82319a02dff4281394483151d70",
+          "md5": "b27e8b648e5e94beca71cfc32268a6a2",
+          "newline_count": 1334
+        },
+        "R/MungeSumstats.rdx": {
+          "path": "/private/tmp/gwas-harvest-stage2/results/verification-stage8/mss-fai-installed/lib/MungeSumstats/R/MungeSumstats.rdx",
+          "bytes": 2370,
+          "mtime_ns": 1794827754153986625,
+          "sha256": "43edc2d76817cf672a5ac29696940716f811c849e8d3eb40fbb2ecdea7a810db",
+          "md5": "33eb04ca258ccfd1132050938c80160e",
+          "newline_count": 7
+        },
+        "libs/MungeSumstats.so": {
+          "path": "/private/tmp/gwas-harvest-stage2/results/verification-stage8/mss-fai-installed/lib/MungeSumstats/libs/MungeSumstats.so",
+          "bytes": 460384,
+          "mtime_ns": 1794827749040458996,
+          "sha256": "6f23605e06ac0b35fd40268b08190fd55e9a09e2fccded2f8cd7b629a3cd49eb",
+          "md5": "a316ef26223e2e009fef19802320a7a4",
+          "newline_count": 1533
+        }
+      },
+      "dll": {
+        "path": "/private/tmp/gwas-harvest-stage2/results/verification-stage8/mss-fai-installed/lib/MungeSumstats/libs/MungeSumstats.so",
+        "bytes": 460384,
+        "mtime_ns": 1794827749040458996,
+        "sha256": "6f23605e06ac0b35fd40268b08190fd55e9a09e2fccded2f8cd7b629a3cd49eb",
+        "md5": "a316ef26223e2e009fef19802320a7a4",
+        "newline_count": 1533
+      }
+    }
+  },
+  "reference": {
+    "directory": "/private/tmp/gwas-harvest-stage2/assets/reference/matched-index",
+    "build": "GRCh37",
+    "version": "Ensembl104-chr22-bounded-prefix-unique-nonpal-SNPs",
+    "format": "mss-preservation-2",
+    "files": {
+      "fasta": {
+        "path": "/private/tmp/gwas-harvest-stage2/assets/reference/GRCh37.ensembl104.chr22.fa",
+        "bytes": 52159647,
+        "mtime_ns": 1794762996423629991,
+        "sha256": "f2e991e0816c2d7a19f9252ba314ea2717ed1ca73563dcd6417d514fb6c85e53",
+        "md5": "936544855b253835442a0f253dd4b083",
+        "newline_count": 855078
+      },
+      "fasta.fai": {
+        "path": "/private/tmp/gwas-harvest-stage2/assets/reference/matched-index/fasta.fai",
+        "bytes": 20,
+        "mtime_ns": 1794763131190940406,
+        "sha256": "dc27e2b48d065ddb7f37c9334ce0965f662875c7ebdff244f4ad1adcece60957",
+        "md5": "3b9c342b594b7b5ce42ad8f47f6d97f9",
+        "newline_count": 1
+      },
+      "keys": {
+        "path": "/private/tmp/gwas-harvest-stage2/assets/reference/matched-index/keys",
+        "bytes": 30066969,
+        "mtime_ns": 1794763134839354754,
+        "sha256": "f0199f6d194d9d8f42785a96450988995187d60052cb36fe25ea5af0ba116c1b",
+        "md5": "1f57d68a18b385924af656142bfacbbd",
+        "newline_count": 1312374
+      },
+      "offsets": {
+        "path": "/private/tmp/gwas-harvest-stage2/assets/reference/matched-index/offsets",
+        "bytes": 10498992,
+        "mtime_ns": 1794763134839250920,
+        "sha256": "f5b3c7a37c535bdb33e48ea4a7afc873ee89ede71368adb00104ed164557c3fc",
+        "md5": "39bb9ee045e47fad1c2aa38827905603",
+        "newline_count": 16047
+      },
+      "records": {
+        "path": "/private/tmp/gwas-harvest-stage2/assets/reference/matched-index/records",
+        "bytes": 36006536,
+        "mtime_ns": 1794763134510982184,
+        "sha256": "eb5d1fc30a6bbba8c5ff40d52ce3582122658c7d80f5e04ae8c668023fcb1f61",
+        "md5": "e2f376ab22a877adcf284e5d0218ea25",
+        "newline_count": 874916
+      },
+      "rejected.tsv": {
+        "path": "/private/tmp/gwas-harvest-stage2/assets/reference/matched-index/rejected.tsv",
+        "bytes": 11,
+        "mtime_ns": 1794763134839632090,
+        "sha256": "a0fd889e80558d09eefe3f9e5fb6adfe28c86f51820069cfedad00d981432baa",
+        "md5": "45f36dbd4ae0c11dc6733aca3d43456d",
+        "newline_count": 1
+      },
+      "source.tsv": {
+        "path": "/private/tmp/gwas-harvest-stage2/assets/reference/matched-index/source.tsv",
+        "bytes": 12972528,
+        "mtime_ns": 1794763134841890360,
+        "sha256": "d6fae3acdc98e4d06f2e5eb01492360aeb874fe5b9f8763914cc39d9c40db9d1",
+        "md5": "ddd22bb347a722ef37ff8a2bb3320a19",
+        "newline_count": 437459
+      },
+      "core-version": {
+        "path": "/private/tmp/gwas-harvest-stage2/assets/reference/matched-index/core-version",
+        "bytes": 19,
+        "mtime_ns": 1794763134839580006,
+        "sha256": "c0ef21703c72cf14f2a71ef4674cd3aeaf4d6ed04174f40bbfa27f13cb3bc107",
+        "md5": "b72bccd1f245def3a23d42a814f3923c",
+        "newline_count": 1
+      }
+    },
+    "source": "/private/tmp/gwas-harvest-stage2/assets/reference/matched-index/source.tsv",
+    "fasta": "/private/tmp/gwas-harvest-stage2/assets/reference/GRCh37.ensembl104.chr22.fa",
+    "fai": "/private/tmp/gwas-harvest-stage2/assets/reference/matched-index/fasta.fai",
+    "manifest": {
+      "path": "/private/tmp/gwas-harvest-stage2/assets/reference/matched-index/manifest.rds",
+      "bytes": 684,
+      "mtime_ns": 1794763135170310556,
+      "sha256": "07ec7576ce3f0d9dfa66ed8544972d445bac28d2ea9f1eecd5cd5603550bc1f2",
+      "md5": "3f96dc342cf8ec236167433a0f4c1445",
+      "newline_count": 0
+    },
+    "inventory": {
+      "source_rows": 437458,
+      "loci": 437458,
+      "ids": 437458,
+      "eligible_panel_records": 437458,
+      "multiallelic_loci": 0,
+      "quadallelic_loci": 0,
+      "ids_with_multiple_events": 0,
+      "reference_scope": "All concrete SNP REF/ALT records included; no assumption of one ALT or one locus per ID"
+    }
+  },
+  "stages": {
+    "1M": {
+      "input": {
+        "path": "/private/tmp/gwas-harvest-stage2/assets/mss/matched-1M.tsv",
+        "bytes": 46106766,
+        "mtime_ns": 1794763146991543581,
+        "sha256": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2",
+        "md5": "86fbafb66e89f7dd8ac211952dada625",
+        "newline_count": 1000001
+      },
+      "rows": 1000000,
+      "versions": [
+        "mss4",
+        "mss7"
+      ],
+      "deadline_seconds_each": 900,
+      "max_case_disk_bytes": 1073741824,
+      "prior_matched_receipts": [
+        "results/mss/final-projection-v5-matrix/new-1M-cold/receipt.json"
+      ]
+    },
+    "10M": {
+      "input": {
+        "path": "/private/tmp/gwas-harvest-stage2/assets/mss/matched-10M.tsv",
+        "bytes": 461361405,
+        "mtime_ns": 1794763400123889919,
+        "sha256": "cecd6f1053fb9c02066be3aa78f0f4976cb8ab32e882357e016ec1ea259788e0",
+        "md5": "f6b7755f2972d57ce99701a2e9141adc",
+        "newline_count": 10000001
+      },
+      "rows": 10000000,
+      "versions": [
+        "mss7"
+      ],
+      "deadline_seconds_each": 3600,
+      "max_case_disk_bytes": 6442450944,
+      "prior_matched_receipts": [
+        "results/mss/matrix-v1/new-10M-cold/receipt.json"
+      ]
+    },
+    "40M": {
+      "input": {
+        "path": "/private/tmp/gwas-harvest-stage2/assets/mss/matched-40M.tsv",
+        "bytes": 1846063408,
+        "mtime_ns": 1794763424260772267,
+        "sha256": "cbf644d415e34aa44ba9b51fdb25d1db3dd99596122ca392f0e41cd25cce3ad4",
+        "md5": "091f1d6d92cc793fd36bec2d97d19413",
+        "newline_count": 40000001
+      },
+      "rows": 40000000,
+      "versions": [
+        "mss7"
+      ],
+      "deadline_seconds_each": 10800,
+      "max_case_disk_bytes": 25769803776,
+      "prior_matched_receipts": [
+        "results/mss/final-projection-v5-matrix/new-40M-cold/receipt.json"
+      ]
+    }
+  },
+  "prior_receipts": {
+    "results/mss/input-1M.json": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss/input-1M.json",
+      "bytes": 274,
+      "mtime_ns": 1794763146991863876,
+      "sha256": "922dee4c70317663a599ee0f41b3f71d54033a0963e826de97668ddc367216f2",
+      "md5": "3d8c4cef84ba151c08d791e614ddb611",
+      "newline_count": 8
+    },
+    "results/mss/input-10M.json": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss/input-10M.json",
+      "bytes": 275,
+      "mtime_ns": 1794763400124143880,
+      "sha256": "f9b930feaead5147126079baea642718dfaa675d1315b8cb4159be042df46969",
+      "md5": "61589821702793d0110a02428ccdc0a2",
+      "newline_count": 8
+    },
+    "results/mss/input-40M.json": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss/input-40M.json",
+      "bytes": 275,
+      "mtime_ns": 1794763424260940935,
+      "sha256": "8a1348928b0eb324100423cc7485e9297c6da5c41a93adf335b403a6f74704f0",
+      "md5": "d9a6a8a2e6cd26ed5a4f50222afac195",
+      "newline_count": 8
+    },
+    "results/mss/final-projection-v5-matrix/new-1M-cold/receipt.json": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss/final-projection-v5-matrix/new-1M-cold/receipt.json",
+      "bytes": 2804,
+      "mtime_ns": 1794770101645922184,
+      "sha256": "1695a7411b19b0e75908bb92eb8a153091ee8a76aab31f6ba42b8dcb4cb530ce",
+      "md5": "abc1776cf2dbeca683d9a91e13d1ee28",
+      "newline_count": 68
+    },
+    "results/mss/final-projection-v5-matrix/new-40M-cold/receipt.json": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss/final-projection-v5-matrix/new-40M-cold/receipt.json",
+      "bytes": 2823,
+      "mtime_ns": 1794771103637426958,
+      "sha256": "1fc2c0e8a258aa5873930b7b0354b080b9de4fe0b47ecae66e41fcdd8b8c937b",
+      "md5": "17bba49cbaaf011fe0b9b57b274d3393",
+      "newline_count": 68
+    },
+    "results/mss/matrix-v1/new-10M-cold/receipt.json": {
+      "path": "/private/tmp/gwas-harvest-stage2/results/mss/matrix-v1/new-10M-cold/receipt.json",
+      "bytes": 2409,
+      "mtime_ns": 1794764248560955744,
+      "sha256": "516449aa4ee878af085bb194fa7f594add71c3d857356b0a2ab973cd74035c0b",
+      "md5": "13b1765e77d942acacd9b0a1ac0b57be",
+      "newline_count": 62
+    }
+  },
+  "limits": {
+    "max_tree_memory_bytes": 8589934592,
+    "min_filesystem_free_bytes": 171798691840,
+    "poll_seconds": 0.25
+  },
+  "preflight": {
+    "elapsed_seconds": 6.841755208093673,
+    "operator_tree_measurement": {
+      "rss_bytes": 26296320,
+      "physical_footprint_bytes": 15909392,
+      "conservative_guard_bytes": 26296320,
+      "processes": 2
+    },
+    "free_bytes": 467854139392,
+    "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+    "python": "3.15.2",
+    "R": "Rscript (R) version 4.5.3 (2026-03-11)"
+  },
+  "scope": "437458 real chr22 unique biallelic non-palindromic SNP panel records repeated with synthetic exact beta/EAF; 40M rows do not mean 40M unique variants; separate reviewed scientific matrices cover indels/multiallelic/ambiguity",
+  "cache_caveat": "Fresh R process and application reference handle per run; OS page cache uncontrolled and never flushed. Shared host may run full reference preparation and package tests."
+}

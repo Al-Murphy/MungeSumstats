@@ -1,0 +1,16 @@
+{
+  "command": [
+    "python3",
+    "-B",
+    "/private/tmp/gwas-harvest-stage2/results/mss-fai-safety-stage8/qualify.py"
+  ],
+  "pid": 90561,
+  "status": "running",
+  "max_memory_bytes": 8589934592,
+  "min_free_bytes": 171798691840,
+  "elapsed_seconds": 20.25036129099317,
+  "peak_rss_bytes": 613384192,
+  "peak_physical_footprint_bytes": 370003664,
+  "peak_guard_bytes": 613384192,
+  "minimum_free_bytes": 469476462592
+}

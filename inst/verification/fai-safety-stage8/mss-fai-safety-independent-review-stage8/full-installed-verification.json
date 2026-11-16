@@ -1,0 +1,37 @@
+{
+  "coordinator_executed": true,
+  "independently_verified": true,
+  "source_files_checked": 868,
+  "summary": {
+    "blocks": 257,
+    "passed_assertions": 2570,
+    "failed_assertions": 0,
+    "errors": 0,
+    "warnings": 2,
+    "skipped_blocks": 2
+  },
+  "warnings": [
+    "Test that if a0/a1 passed, formatted correctly",
+    "Handle extra info in rs id column"
+  ],
+  "skips": [
+    "#49/#114: ref_genome=NULL validates; install check uses dbSNP",
+    "#98/#200: dbSNP=155 validates; unknown or invalid versions error"
+  ],
+  "installed_pin_keys": [
+    "revision",
+    "source_pins",
+    "dll_sha256",
+    "source_archive_sha256",
+    "library"
+  ],
+  "evidence_sha256": {
+    "installed-pin.json": "d696f2b450200e7cd04e79caebc93ebd1accef8f121c43352ac67e68277f0df3",
+    "install-guard.json": "08bab75039bc9cac229a6a5cb066534950bea5da4fd8aa98d666d86401feaae4",
+    "suite/guard.json": "ebd021093d9bce5675d2591f429b238f4063b65d957ae112901cfe501656c411",
+    "suite/summary.json": "3787d116adde58b7f347e6a05759e48ef9e8347664f54b614fce72b21497b8b7",
+    "suite/installed-full.csv": "5c6aad16f100c6a467bf3b45b272b17ce9082c027c4cc4a28fcd868f81fec858",
+    "suite/run.log": "fd8e3951f19029ba1e20441e118cf3874c80078c770b930afb092bc45b4fd7a5"
+  },
+  "installed_dll_sha256_independently_rechecked": "6f23605e06ac0b35fd40268b08190fd55e9a09e2fccded2f8cd7b629a3cd49eb"
+}

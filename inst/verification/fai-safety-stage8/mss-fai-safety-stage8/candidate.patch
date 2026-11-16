@@ -1,0 +1,304 @@
+diff --git a/inst/PRESERVATION_CONTRACT.md b/inst/PRESERVATION_CONTRACT.md
+index abad1b8..59b9b67 100644
+--- a/inst/PRESERVATION_CONTRACT.md
++++ b/inst/PRESERVATION_CONTRACT.md
+@@ -1,5 +1,18 @@
+ # Preservation normalizer 7: scientific contract
+ 
++FAI readers additionally enforce checked decimal parsing and address bounds before
++native sequence arithmetic. FAI numeric fields allow leading zeros, but no signs,
++whitespace, suffix text or uint64 overflow. Names must be nonempty, unique and
++free of NUL/whitespace. Nonempty contigs require positive line bases, at least as
++many line bytes, and a last addressed base within the actual FASTA file; checks
++avoid overflow before multiplication. Empty contigs retain the native writer's
++zero-width representation. Requested ranges are checked by subtraction before
++allocation or line division. Consistent sequence terminators are not restricted
++to LF/CRLF. These are numeric/layout safety checks, not reconstruction or
++authentication of every FASTA byte when an operator deliberately rewrites a
++trusted manifest and FAI together. Valid scientific results and identities stay
++unchanged. FAI field meanings follow the [HTSlib faidx specification](https://www.htslib.org/doc/faidx.html).
++
+ This recipe describes `harmonise_sumstats()` and `harmonise_file()` using
+ `mss-preservation-7`, reference format `mss-preservation-2`, and the unchanged
+ `mss-projection-2` and parser identities. The legacy `format_sumstats()` API is
+diff --git a/inst/verification/fai-safety-stage8/plan.md b/inst/verification/fai-safety-stage8/plan.md
+new file mode 100644
+index 0000000..2f71aba
+--- /dev/null
++++ b/inst/verification/fai-safety-stage8/plan.md
+@@ -0,0 +1,19 @@
++# Native FAI arithmetic safety
++
++Close the inherited numeric-validation follow-up from the relocation review.
++FAI field meanings follow https://www.htslib.org/doc/faidx.html . This is numeric
++and bounds validation, not a claim to independently reconstruct/authenticate an
++operator-rewritten FASTA/index bundle. All successful scientific outputs must stay
++unchanged; invalid indexes fail before native arithmetic.
++
++1. Add constructor-only negative native cases and valid LF/CRLF/no-final-newline,
++   Unicode, empty-contig and leading-zero decimal controls; preserve baseline RED.
++2. Parse decimal fields completely with checked uint64 overflow; reject empty or
++   duplicate names, malformed rows and impossible widths/file bounds. Preserve
++   the existing writer's zero-length contig representation without division.
++3. Check requested ranges without unsigned addition overflow. Do not restrict
++   terminators to LF/CRLF: the standard permits other consistent terminators.
++4. Add R tests with deliberately re-pinned malformed FAI in both formats, plus
++   exact valid output/receipt parity. Register new R tests in both portable paths.
++5. Independent review, native/installed/oracle checks and source-pinned evidence
++   before adoption. Existing throughput measurements keep their original pins.
+diff --git a/src/preservation_core.h b/src/preservation_core.h
+index c96d7d9..73df2e3 100644
+--- a/src/preservation_core.h
++++ b/src/preservation_core.h
+@@ -130,7 +130,43 @@ public:
+     if(!fai.empty()) {
+       std::ifstream in(fai); std::string line;
+       if(!in) throw std::runtime_error("Missing FASTA index");
+-      while(std::getline(in,line)) {auto v=split(line,'\t'); if(v.size()!=5)throw std::runtime_error("Invalid FASTA index"); contigs[v[0]]={std::stoull(v[1]),std::stoull(v[2]),std::stoull(v[3]),std::stoull(v[4])};}
++      file.seekg(0,std::ios::end);const auto end=file.tellg();
++      if(end<0)throw std::runtime_error("Cannot determine FASTA byte bounds");
++      const auto fasta_bytes=static_cast<std::uint64_t>(end);file.seekg(0);
++      auto number=[](const std::string& value) {
++        if(value.empty())throw std::runtime_error("Invalid FASTA index number");
++        std::uint64_t result=0;
++        for(unsigned char c:value) {
++          if(c<'0'||c>'9'||result>(std::numeric_limits<std::uint64_t>::max()-(c-'0'))/10)
++            throw std::runtime_error("Invalid FASTA index number");
++          result=result*10+(c-'0');
++        }
++        return result;
++      };
++      while(std::getline(in,line)) {
++        if(!line.empty()&&line.back()=='\r')line.pop_back();
++        auto v=split(line,'\t');
++        if(v.size()!=5||v[0].empty()||contigs.count(v[0])||
++           std::any_of(v[0].begin(),v[0].end(),[](unsigned char c){return c==0||std::isspace(c);}))
++          throw std::runtime_error("Invalid FASTA index name or row");
++        Contig c{number(v[1]),number(v[2]),number(v[3]),number(v[4])};
++        if(!c.size) {
++          // Preserve the native writer's empty-contig representation. No
++          // positive-length query can enter line arithmetic for this contig.
++          if(c.bases||c.bytes||c.offset>fasta_bytes)throw std::runtime_error("Invalid FASTA index empty contig");
++        } else {
++          if(!c.bases||c.bases>c.size||c.bytes<c.bases||c.offset>=fasta_bytes)
++            throw std::runtime_error("Invalid FASTA index layout");
++          const auto zero=c.size-1,rows=zero/c.bases,tail=zero%c.bases;
++          const auto available=fasta_bytes-1-c.offset;
++          // Division before multiplication prevents overflow even for malicious
++          // uint64 field values; the last addressed base must exist in this file.
++          if(rows>available/c.bytes||tail>available-rows*c.bytes)
++            throw std::runtime_error("Invalid FASTA index byte bounds");
++        }
++        contigs.emplace(v[0],c);
++      }
++      if(in.bad()||contigs.empty())throw std::runtime_error("Invalid FASTA index read or empty index");
+       return;
+     }
+     std::string line,name; std::uint64_t previous=0,offset=0;
+@@ -161,8 +197,9 @@ public:
+   void save(const std::string& path)const {std::ofstream out(path);for(const auto& p:contigs)out<<p.first<<'\t'<<p.second.size<<'\t'<<p.second.offset<<'\t'<<p.second.bases<<'\t'<<p.second.bytes<<'\n';if(!out)throw std::runtime_error("Cannot write FASTA index");}
+   std::string sequence(const std::string& chr,std::int64_t pos,std::size_t n) {
+     auto it=contigs.find(chr);if(it==contigs.end() || pos<1)return "";
+-    const auto& c=it->second; if(static_cast<std::uint64_t>(pos-1)+n>c.size)return "";
+-    std::string result; result.reserve(n); auto zero=static_cast<std::uint64_t>(pos-1);
++    const auto& c=it->second;auto zero=static_cast<std::uint64_t>(pos-1);
++    if(zero>c.size||n>c.size-zero)return "";
++    std::string result; result.reserve(n);
+     while(n) {auto take=std::min<std::uint64_t>(n,c.bases-zero%c.bases);auto part=blocks.bytes(c.offset+(zero/c.bases)*c.bytes+zero%c.bases,take);if(part.size()!=take)return "";result+=part;zero+=take;n-=take;} return upper(result);
+   }
+ };
+diff --git a/tests/native/run.sh b/tests/native/run.sh
+index b93266f..684ee43 100755
+--- a/tests/native/run.sh
++++ b/tests/native/run.sh
+@@ -12,3 +12,6 @@ trap 'rm -rf "$work"' EXIT HUP INT TERM
+ 
+ "${CXX:-c++}" -std=c++17 -Wall -Wextra -pedantic -O2 "$(dirname "$0")/test_format3.cpp" -o "$work/format3-test"
+ "$work/format3-test" "$work"
++
++"${CXX:-c++}" -std=c++17 -Wall -Wextra -pedantic -O2 "$(dirname "$0")/test_fai.cpp" -o "$work/fai-test"
++"$work/fai-test" "$work"
+diff --git a/tests/native/test_fai.cpp b/tests/native/test_fai.cpp
+new file mode 100644
+index 0000000..5e3866e
+--- /dev/null
++++ b/tests/native/test_fai.cpp
+@@ -0,0 +1,68 @@
++#include "../../src/preservation_core.h"
++#include <functional>
++#include <iostream>
++#include <limits>
++#include <vector>
++
++static void write(const std::string& path,const std::string& data) {
++  std::ofstream out(path,std::ios::binary);out<<data;
++  if(!out)throw std::runtime_error("Fixture write failed");
++}
++int main(int,char** argv) {
++  const std::string root=std::string(argv[1])+"/fai-safety";
++  std::filesystem::create_directories(root);
++  const auto fasta=root+"/reference.fa",index=root+"/reference.fai";
++  write(fasta,">one\nACGT\nAC\n>two\nT\n");
++  const std::string valid="one\t6\t5\t4\t5\ntwo\t1\t18\t1\t2\n";
++  std::vector<std::pair<std::string,std::string>> bad={
++    {"zero bases","one\t6\t5\t0\t5\n"},
++    {"zero bytes","one\t6\t5\t4\t0\n"},
++    {"narrow bytes","one\t6\t5\t4\t3\n"},
++    {"bases exceed size","one\t6\t5\t7\t8\n"},
++    {"offset beyond file","one\t6\t999\t4\t5\n"},
++    {"last base beyond file","one\t100\t5\t4\t5\n"},
++    {"offset overflow","one\t6\t18446744073709551615\t4\t5\n"},
++    {"multiplication overflow","one\t18446744073709551615\t5\t1\t18446744073709551615\n"},
++    {"duplicate name",valid+"one\t6\t5\t4\t5\n"},
++    {"empty name","\t6\t5\t4\t5\n"},
++    {"whitespace name","one bad\t6\t5\t4\t5\n"},
++    {"empty index",""},
++    {"empty numeric","one\t\t5\t4\t5\n"},
++    {"negative","one\t-1\t5\t4\t5\n"},
++    {"plus sign","one\t+6\t5\t4\t5\n"},
++    {"suffix junk","one\t6x\t5\t4\t5\n"},
++    {"leading whitespace","one\t 6\t5\t4\t5\n"},
++    {"uint overflow","one\t18446744073709551616\t5\t4\t5\n"},
++    {"extra field","one\t6\t5\t4\t5\t0\n"},
++    {"inconsistent empty","empty\t0\t0\t1\t1\n"},
++    {"trailing whitespace","one\t6\t5\t4\t5 \n"},
++    {"hex suffix","one\t6\t0x5\t4\t5\n"},
++    {"empty offset beyond file","empty\t0\t999\t0\t0\n"},
++    {"NUL name",std::string("on")+std::string(1,'\0')+"e\t6\t5\t4\t5\n"},
++  };
++  std::size_t failures=0,refused=0;
++  for(const auto& item:bad) {
++    write(index,item.second);bool rejected=false;
++    try{mss::Fasta f(fasta,index);}catch(const std::exception&){rejected=true;}
++    if(!rejected){++failures;std::cerr<<"UNSAFE_ACCEPTANCE "<<item.first<<'\n';}
++    else ++refused;
++  }
++  auto control=[&](const std::string& data,const std::string& fai,const std::string& chr,const std::string& expected) {
++    write(fasta,data);write(index,fai);mss::Fasta ref(fasta,index);
++    if(ref.sequence(chr,1,expected.size())!=expected)throw std::runtime_error("Valid indexed sequence changed");
++    if(ref.sequence(chr,1,std::numeric_limits<std::size_t>::max())!="")throw std::runtime_error("Oversized query accepted");
++    if(ref.sequence(chr,2,std::numeric_limits<std::size_t>::max())!="")throw std::runtime_error("Wrapped query accepted");
++    if(ref.sequence(chr,std::numeric_limits<std::int64_t>::max(),2)!="")throw std::runtime_error("Out-of-bounds query accepted");
++  };
++  control(">one\nACGT\nAC\n>two\nT\n",valid,"one","ACGTAC");
++  control(">one\r\nACGT\r\nAC\r\n>two\r\nT\r\n","one\t6\t6\t4\t6\r\ntwo\t1\t22\t1\t3\r\n","one","ACGTAC");
++  control(">one\nACGTAC","one\t6\t5\t6\t6\n","one","ACGTAC");
++  control(">one\nACGTAC\n","one\t0006\t0005\t0006\t0007\n","one","ACGTAC");
++  control(">雪\nAC\n","雪\t2\t5\t2\t3\n","雪","AC");
++  // Indexed reading is not restricted to LF/CRLF sequence terminators.
++  control(">one\nACGT\vAC\v","one\t6\t5\t4\t5\n","one","ACGTAC");
++  write(fasta,">empty\n>one\nAC\n");mss::Fasta generated(fasta);generated.save(index);mss::Fasta reopened(fasta,index);
++  if(reopened.sequence("empty",1,1)!=""||reopened.sequence("one",1,2)!="AC")throw std::runtime_error("Empty-contig writer compatibility changed");
++  std::cout<<refused<<" invalid indexes refused; 7 valid controls; range boundaries passed\n";
++  return failures?1:0;
++}
+diff --git a/tests/standalone/preservation.R b/tests/standalone/preservation.R
+index aacd505..ce59ce8 100644
+--- a/tests/standalone/preservation.R
++++ b/tests/standalone/preservation.R
+@@ -26,4 +26,5 @@ source(file.path(root,'tests/testthat/test-complex-contrast-boundary.R'))
+ source(file.path(root,'tests/testthat/helper-reference-format3.R'))
+ source(file.path(root,'tests/testthat/test-reference-format3.R'))
+ source(file.path(root,'tests/testthat/test-reference-relocation.R'))
++source(file.path(root,'tests/testthat/test-fai-safety.R'))
+ cat('standalone R preservation and typed reference fixtures passed\n')
+diff --git a/tests/standalone/registered.R b/tests/standalone/registered.R
+index 74acd00..c471def 100644
+--- a/tests/standalone/registered.R
++++ b/tests/standalone/registered.R
+@@ -25,5 +25,6 @@ source(file.path(root,'tests/testthat/test-projection.R'))
+ source(file.path(root,'tests/testthat/helper-reference-format3.R'))
+ source(file.path(root,'tests/testthat/test-reference-format3.R'))
+ source(file.path(root,'tests/testthat/test-reference-relocation.R'))
++source(file.path(root,'tests/testthat/test-fai-safety.R'))
+ setwd(old)
+ cat('registered generated bindings fixtures passed\n')
+diff --git a/tests/testthat/test-fai-safety.R b/tests/testthat/test-fai-safety.R
+new file mode 100644
+index 0000000..4d7fab9
+--- /dev/null
++++ b/tests/testthat/test-fai-safety.R
+@@ -0,0 +1,83 @@
++.fai_safety_fixture <- function(format, bytes=charToRaw('>one\nACGT\nAC\n>two\nT\n')) {
++    root <- tempfile('fai-numeric-');dir.create(root)
++    fasta <- file.path(root,'reference.fa');writeBin(bytes,fasta)
++    sites <- file.path(root,'sites.tsv');writeBin(charToRaw('chr\tpos\tref\talt\tid\taliases\n'),sites)
++    ref <- prepare_reference(fasta,sites,file.path(root,'reference'),build='SYNTHETIC',version='fai-safety',
++                             reference_format=paste0('mss-preservation-',format))
++    list(root=root,fasta=fasta,reference=ref)
++}
++.fai_safety_repin <- function(fixture,bytes,name) {
++    path <- file.path(fixture$root,name);dir.create(path)
++    stopifnot(all(file.copy(list.files(fixture$reference$path,full.names=TRUE),path)))
++    file <- file.path(path,'fasta.fai');writeBin(bytes,file)
++    manifest <- readRDS(file.path(path,'manifest.rds'))
++    manifest$checksums[['fasta.fai']] <- unname(tools::md5sum(file))
++    manifest$sizes[['fasta.fai']] <- unname(file.info(file)$size)
++    saveRDS(manifest,file.path(path,'manifest.rds'),version=2)
++    path
++}
++
++test_that('re-pinned malformed FAI rows are refused by the native gate in both formats', {
++    valid <- 'one\t6\t5\t4\t5\ntwo\t1\t18\t1\t2\n'
++    bad <- list(zero_bases='one\t6\t5\t0\t5\n',zero_bytes='one\t6\t5\t4\t0\n',
++                narrow_bytes='one\t6\t5\t4\t3\n',bases_exceed_size='one\t6\t5\t7\t8\n',
++                offset_beyond_file='one\t6\t999\t4\t5\n',last_base_beyond_file='one\t100\t5\t4\t5\n',
++                offset_overflow='one\t6\t18446744073709551615\t4\t5\n',
++                multiplication_overflow='one\t18446744073709551615\t5\t1\t18446744073709551615\n',
++                duplicate_name=paste0(valid,'one\t6\t5\t4\t5\n'),empty_name='\t6\t5\t4\t5\n',
++                whitespace_name='one bad\t6\t5\t4\t5\n',empty_index='',empty_numeric='one\t\t5\t4\t5\n',
++                negative='one\t-1\t5\t4\t5\n',plus='one\t+6\t5\t4\t5\n',suffix='one\t6x\t5\t4\t5\n',
++                leading_space='one\t 6\t5\t4\t5\n',uint_overflow='one\t18446744073709551616\t5\t4\t5\n',
++                extra_field='one\t6\t5\t4\t5\t0\n',inconsistent_empty='empty\t0\t0\t1\t1\n',
++                trailing_space='one\t6\t5\t4\t5 \n',hex_suffix='one\t6\t0x5\t4\t5\n',
++                empty_offset_beyond_file='empty\t0\t999\t0\t0\n',
++                NUL_name=c(charToRaw('on'),as.raw(0),charToRaw('e\t6\t5\t4\t5\n')))
++    for(format in 2:3) {
++        f <- .fai_safety_fixture(format);on.exit(unlink(f$root,recursive=TRUE),add=TRUE)
++        for(name in names(bad)) {
++            bytes <- bad[[name]];if(is.character(bytes))bytes <- charToRaw(bytes)
++            path <- .fai_safety_repin(f,bytes,name)
++            manifest <- readRDS(file.path(path,'manifest.rds'))
++            expect_identical(unname(tools::md5sum(file.path(path,'fasta.fai'))),manifest$checksums[['fasta.fai']],info=name)
++            handle <- tryCatch(open_reference(path),error=function(e)e)
++            expect_true(inherits(handle,'error'),info=paste(format,name,'must refuse before sequence arithmetic'))
++            if(inherits(handle,'error'))
++                expect_match(conditionMessage(handle),'FASTA index',info=paste(format,name,'native refusal, not checksum gate'))
++            rm(handle);invisible(gc())
++        }
++    }
++})
++
++test_that('valid indexed LF CRLF and unterminated FASTAs retain all public scientific fields', {
++    controls <- list(LF=charToRaw('>one\nACGT\nAC\n'),CRLF=charToRaw('>one\r\nACGT\r\nAC\r\n'),
++                     no_final_newline=charToRaw('>one\nACGT\nAC'),single_unterminated=charToRaw('>one\nACGTAC'),
++                     empty_contig=charToRaw('>empty\n>one\nACGT\nAC\n'),UTF8=charToRaw('>雪\nACGT\nAC\n'))
++    for(format in 2:3)for(name in names(controls)) {
++        f <- .fai_safety_fixture(format,controls[[name]]);on.exit(unlink(f$root,recursive=TRUE),add=TRUE)
++        chr <- if(name=='UTF8') '雪' else 'one'
++        ref <- c('A','C','G','T','A','C');alt <- c('C','A','A','C','C','A')
++        x <- data.frame(CHR=chr,BP=1:6,A1=ref,A2=alt,BETA=seq_len(6)/100,FRQ=.2,untouched='raw:0001')
++        columns <- list(chr='CHR',pos='BP',id='SNP',other='A1',effect_allele='A2',effect='BETA',eaf='FRQ',
++                        source_ref='A1',source_alt='A2')
++        handle <- open_reference(f$reference)
++        result <- harmonise_sumstats(x,handle,columns=columns,source_strand='+',frequency_type='EAF')
++        expect_identical(result$source,x)
++        expect_identical(ncol(result$normalized),19L)
++        expect_identical(result$normalized$status,rep('sequence_only',6))
++        expect_equal(result$normalized$pos,1:6)
++        expect_identical(result$normalized$ref,ref);expect_identical(result$normalized$alt,alt)
++        expect_equal(result$normalized$effect,x$BETA);expect_equal(result$normalized$eaf,x$FRQ)
++        expect_identical(result$provenance$implementation_version,'mss-preservation-7')
++        # Leading zeros and CRLF FAI text are accepted decimal representations.
++        fai <- readLines(file.path(f$reference$path,'fasta.fai'),warn=FALSE)
++        padded <- vapply(strsplit(fai,'\t',fixed=TRUE),function(v)paste(c(v[[1]],paste0('000',v[-1])),collapse='\t'),character(1))
++        path <- .fai_safety_repin(f,charToRaw(paste0(paste(padded,collapse='\r\n'),'\r\n')),'leading-zero-index')
++        leading <- open_reference(path,fasta=f$fasta)
++        output <- harmonise_sumstats(x,leading,columns=columns,source_strand='+',frequency_type='EAF')
++        expect_identical(output$source,result$source)
++        expect_identical(output$normalized,result$normalized)
++        expect_identical(output$provenance$implementation_version,result$provenance$implementation_version)
++        expect_identical(output$provenance$core_version,result$provenance$core_version)
++        rm(handle,leading);invisible(gc())
++    }
++})

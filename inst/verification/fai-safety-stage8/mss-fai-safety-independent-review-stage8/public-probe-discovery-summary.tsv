@@ -1,0 +1,4 @@
+"test"	"nb"	"failed"	"skipped"	"error"	"warning"	"passed"
+"valid retained handles preserve complete baseline results and scientific editions"	28	4	FALSE	FALSE	0	24
+"fresh and rebound public handles refuse repinned unsafe geometry after prior caching"	52	0	FALSE	FALSE	0	52
+"maximum unused stride and empty EOF offsets remain safe supported geometry"	6	0	FALSE	FALSE	0	6

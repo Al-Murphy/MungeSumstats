@@ -1,0 +1,6 @@
+{
+  "cpu_model": "Apple M5 Pro",
+  "verification_command": "/usr/sbin/sysctl -n machdep.cpu.brand_string",
+  "platform_scope": "Local macOS arm64 benchmark host; not the proposed Linux t3a.medium host",
+  "correction": "Earlier metadata benchmark notes called this M4 without verification. Their frozen measurements remain unchanged; the observed CPU model is M5 Pro."
+}
