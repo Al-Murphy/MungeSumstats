@@ -10,7 +10,6 @@ library(testthat)
 source(file.path(root,'tests/testthat/test-preservation.R'))
 source(file.path(root,'tests/testthat/test-source-reference-contract.R'))
 source(file.path(root,'tests/testthat/test-equivalent-indel-context.R'))
-cat('standalone R preservation fixtures passed\n')
 
 source(file.path(root,'tests/testthat/test-quoted-stream.R'))
 source(file.path(root,'tests/testthat/test-projection.R'))
@@ -23,3 +22,7 @@ source(file.path(root,'tests/testthat/test-alt-alt-reanchoring.R'))
 
 source(file.path(root,'tests/testthat/test-generic-coordinate-contract.R'))
 source(file.path(root,'tests/testthat/test-complex-contrast-boundary.R'))
+
+source(file.path(root,'tests/testthat/helper-reference-format3.R'))
+source(file.path(root,'tests/testthat/test-reference-format3.R'))
+cat('standalone R preservation and typed reference fixtures passed\n')
