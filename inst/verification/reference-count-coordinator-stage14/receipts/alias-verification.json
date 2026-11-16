@@ -1,0 +1,31 @@
+{
+  "source_commit": "08d93bf4b8d010b8ae73bf20663ec41c975d73c2",
+  "coordinator_sha256": "094ca45bc80e5576c303ad392f5836f3297a5e48234f69ec81aad99c8789de50",
+  "new_tests_red": {
+    "failed": 8,
+    "passed": 4
+  },
+  "new_tests_green": 12,
+  "final_subset_passed": 36,
+  "review_alias_content_opens_before": 2,
+  "review_alias_content_opens_after": 0,
+  "running_second_guard_opens": "Only GRCh37 then GRCh38 guard JSON; no plans, receipts or artifact content",
+  "hardlinked_counted_data_types_validated": [
+    "variants.tsv",
+    "reference.fa",
+    "contig_aliases.tsv"
+  ],
+  "actual_tiny_source_rows_per_build": 3,
+  "original_numeric_field_parity_per_build": 20,
+  "tiny_writer_oracles": 2,
+  "actual_guard_status": "success",
+  "process_signals_issued": 0,
+  "full_reference_counts_executed": 0,
+  "full_reference_admitted": false,
+  "full_production_index_builds": 0,
+  "count_process_index_outputs": 0,
+  "cpp_compilations": 0,
+  "sanitizer_runs": 0,
+  "broad105_suite_reruns": 0,
+  "performance_windows_full_qualifications": 0
+}

@@ -1,0 +1,160 @@
+{
+  "ordinary_positive": {
+    "status": "counted_planning_only",
+    "counts": [
+      {
+        "format_version": 3,
+        "source_rows": 1,
+        "source_bytes": 56,
+        "record_rows": 4,
+        "site_records": 1,
+        "allele_records": 3,
+        "invalid_positions": 0,
+        "raw_alt_tokens": 3,
+        "rejected_alts": 0,
+        "raw_key_rows": 19,
+        "raw_sort_bytes": 170,
+        "final_key_rows": 10,
+        "keys_bytes": 89,
+        "max_source_line_bytes": 28,
+        "max_key_row_bytes": 9,
+        "max_record_bytes": 17,
+        "max_raw_keys_per_record": 6,
+        "records_bytes": 64,
+        "rejected_bytes": 11,
+        "fai_upper_bytes": 86,
+        "offsets_bytes": 80
+      },
+      {
+        "format_version": 3,
+        "source_rows": 1,
+        "source_bytes": 56,
+        "record_rows": 4,
+        "site_records": 1,
+        "allele_records": 3,
+        "invalid_positions": 0,
+        "raw_alt_tokens": 3,
+        "rejected_alts": 0,
+        "raw_key_rows": 19,
+        "raw_sort_bytes": 170,
+        "final_key_rows": 10,
+        "keys_bytes": 89,
+        "max_source_line_bytes": 28,
+        "max_key_row_bytes": 9,
+        "max_record_bytes": 17,
+        "max_raw_keys_per_record": 6,
+        "records_bytes": 64,
+        "rejected_bytes": 11,
+        "fai_upper_bytes": 86,
+        "offsets_bytes": 80
+      }
+    ],
+    "full_reference_admitted": false
+  },
+  "impossible_native_counts_accepted": {
+    "status": "counted_planning_only",
+    "builds": [
+      {
+        "build": "GRCh37",
+        "counts": {
+          "format_version": 3,
+          "source_rows": 1,
+          "source_bytes": 56,
+          "record_rows": 4,
+          "site_records": 1,
+          "allele_records": 3,
+          "invalid_positions": 0,
+          "raw_alt_tokens": 0,
+          "rejected_alts": 0,
+          "raw_key_rows": 0,
+          "raw_sort_bytes": 0,
+          "final_key_rows": 0,
+          "keys_bytes": 0,
+          "max_source_line_bytes": 28,
+          "max_key_row_bytes": 9,
+          "max_record_bytes": 17,
+          "max_raw_keys_per_record": 6,
+          "records_bytes": 0,
+          "rejected_bytes": 0,
+          "fai_upper_bytes": 0,
+          "offsets_bytes": 0
+        },
+        "sizes": {
+          "small_files_upper_bytes": 1048635,
+          "retained_bytes": 1048691,
+          "phase_bytes": 1048691
+        },
+        "quoted_alias_upper_bytes": 40
+      },
+      {
+        "build": "GRCh38",
+        "counts": {
+          "format_version": 3,
+          "source_rows": 1,
+          "source_bytes": 56,
+          "record_rows": 4,
+          "site_records": 1,
+          "allele_records": 3,
+          "invalid_positions": 0,
+          "raw_alt_tokens": 0,
+          "rejected_alts": 0,
+          "raw_key_rows": 0,
+          "raw_sort_bytes": 0,
+          "final_key_rows": 0,
+          "keys_bytes": 0,
+          "max_source_line_bytes": 28,
+          "max_key_row_bytes": 9,
+          "max_record_bytes": 17,
+          "max_raw_keys_per_record": 6,
+          "records_bytes": 0,
+          "rejected_bytes": 0,
+          "fai_upper_bytes": 0,
+          "offsets_bytes": 0
+        },
+        "sizes": {
+          "small_files_upper_bytes": 1048635,
+          "retained_bytes": 1048691,
+          "phase_bytes": 1048691
+        },
+        "quoted_alias_upper_bytes": 40
+      }
+    ],
+    "worker_receipt_written": true
+  },
+  "case_inside_publication_accepted": {
+    "status": "counted_planning_only",
+    "publication_before": [
+      "contig_aliases.tsv",
+      "receipts.json",
+      "reference.fa",
+      "variants.tsv"
+    ],
+    "publication_after": [
+      "contig_aliases.tsv",
+      "new-count-evidence",
+      "receipts.json",
+      "reference.fa",
+      "variants.tsv"
+    ],
+    "case_files": [
+      "GRCh37.stderr",
+      "GRCh37.stdout",
+      "GRCh38.stderr",
+      "GRCh38.stdout",
+      "worker.json"
+    ]
+  },
+  "profile_inside_publication_accepted": {
+    "loaded_context": "tiny_fixture",
+    "profile": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-independent-stage11/profile-in-publication/GRCh37/operator-profile.json"
+  },
+  "gate_mutation_refused_without_input_open": {
+    "reason": "Source/artifact control inside a prepared publication",
+    "input_opens": []
+  },
+  "arithmetic": {
+    "random_pairs": 300,
+    "order_boundary_checks": 1200,
+    "status": "passed"
+  }
+}

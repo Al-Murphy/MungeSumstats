@@ -1,0 +1,584 @@
+{
+  "toolkit/sealed_count.py": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/sealed_count.py",
+    "source_sha256": "094ca45bc80e5576c303ad392f5836f3297a5e48234f69ec81aad99c8789de50",
+    "transform": "byte-identical"
+  },
+  "toolkit/count_reference.cpp": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/count_reference.cpp",
+    "source_sha256": "fb529bff15666905d39c5726d2f49638a15c8ee61d90880da1b13079a954a10b",
+    "transform": "byte-identical"
+  },
+  "toolkit/guard_common.py": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/verification-stage7/guard_common.py",
+    "source_sha256": "1cf033bbbac586234310794fbd2bfd3a7f3bc4116a15b4296de870b052fe86be",
+    "transform": "byte-identical"
+  },
+  "toolkit/process_memory.py": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/verification-stage7/process_memory.py",
+    "source_sha256": "aea36f87d4dd12ea41961f2cdd11198e527ccf17be2946a4351153cb96c0a0a5",
+    "transform": "byte-identical"
+  },
+  "toolkit/COORDINATOR.md": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/COORDINATOR.md",
+    "source_sha256": "b22147ff9b00ec136af5f5658039667932f84976db6c98d546f657fe0f1da7fe",
+    "transform": "byte-identical"
+  },
+  "toolkit/REVIEWED-README.md": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/README.md",
+    "source_sha256": "1c9a9f45a9497d5ff6bd00e1f58c01d1e0bda64ec5bb84cdeebd7f91f0123dc0",
+    "transform": "byte-identical"
+  },
+  "reports/reference-count-only-stage9.md": {
+    "index_anchor": "diagnostic_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/reports/reference-count-only-stage9.md",
+    "source_bytes": 5816,
+    "source_sha256": "b257748a176bacd654b8d7800e11ecdeb83af45c607cda5b1d5bdee1b0a3e00e",
+    "transform": "byte-identical"
+  },
+  "reports/reference-count-only-independent-review-stage9.md": {
+    "index_anchor": "diagnostic_review",
+    "external_source": "/private/tmp/gwas-harvest-stage2/reports/reference-count-only-independent-review-stage9.md",
+    "source_bytes": 5844,
+    "source_sha256": "4577b0fb67c72aaa19803eebbb5177eea4f77eb22258215ca806598978d5f26e",
+    "transform": "byte-identical"
+  },
+  "reports/reference-count-coordinator-stage11.md": {
+    "index_anchor": "original_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/reports/reference-count-coordinator-stage11.md",
+    "source_bytes": 10569,
+    "source_sha256": "0123409832fd8669b9878f18a7541e74d1d07d665326c85aa9d43beed30bba23",
+    "transform": "byte-identical"
+  },
+  "reports/reference-count-coordinator-independent-stage11.md": {
+    "index_anchor": "original_review",
+    "external_source": "/private/tmp/gwas-harvest-stage2/reports/reference-count-coordinator-independent-stage11.md",
+    "source_bytes": 9830,
+    "source_sha256": "034b2b1e80089cb934f7112c26b50d001424ae6856c6bd47a45e72fe8cad8313",
+    "transform": "byte-identical"
+  },
+  "reports/reference-count-coordinator-fixes-stage11.md": {
+    "index_anchor": "fix_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/reports/reference-count-coordinator-fixes-stage11.md",
+    "source_bytes": 10817,
+    "source_sha256": "e1cc4b01d83f86c2de1e8eb723b947daaee1d075b5fc29da1bcf3eeaa1325967",
+    "transform": "byte-identical"
+  },
+  "reports/reference-count-coordinator-fixes-independent-stage11.md": {
+    "index_anchor": "fix_review",
+    "external_source": "/private/tmp/gwas-harvest-stage2/reports/reference-count-coordinator-fixes-independent-stage11.md",
+    "source_bytes": 9122,
+    "source_sha256": "cda633dc61194719ca531a5dd2ed600b6e44b532f624868ff9579530f654d550",
+    "transform": "byte-identical"
+  },
+  "reports/reference-count-coordinator-alias-fix-stage11.md": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/reports/reference-count-coordinator-alias-fix-stage11.md",
+    "source_bytes": 7673,
+    "source_sha256": "a8a3e07047e8342b81d0e182fa56e8f7eef7cb126afe536a2867a75dcf3a8369",
+    "transform": "byte-identical"
+  },
+  "reports/reference-count-coordinator-alias-fix-independent-stage11.md": {
+    "index_anchor": "alias_review",
+    "external_source": "/private/tmp/gwas-harvest-stage2/reports/reference-count-coordinator-alias-fix-independent-stage11.md",
+    "source_bytes": 7563,
+    "source_sha256": "8cafeda36b50fc39665ffade0d97557a3a8f8a5e2477c3b338e47975a7607b4c",
+    "transform": "byte-identical"
+  },
+  "history/diagnostic-1bf/count_reference.cpp": {
+    "index_anchor": "diagnostic_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-only-stage9/count_reference.cpp",
+    "source_bytes": 7569,
+    "source_sha256": "1aafb2ec27413a8f41e61e100d90c9391ce5240a93c1a602c3edc286872b313d",
+    "transform": "byte-identical"
+  },
+  "history/diagnostic-1bf/PLAN.md": {
+    "index_anchor": "diagnostic_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-only-stage9/PLAN.md",
+    "source_bytes": 1530,
+    "source_sha256": "8780a34ebd0a5c8050676d008fe6f065a585d76864db70fda3e44ab7d574e4b9",
+    "transform": "byte-identical"
+  },
+  "receipts/diagnostic-1bf/sanitized-strict/summary.json": {
+    "index_anchor": "diagnostic_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-only-stage9/sanitized-strict/summary.json",
+    "source_bytes": 5675,
+    "source_sha256": "e3e8a44ca10af2f4b0d9a6cf926220ca7c7bbe2fff13cb5f951f9fe027e27c16",
+    "transform": "byte-identical"
+  },
+  "receipts/diagnostic-1bf/sanitized/summary.json": {
+    "index_anchor": "diagnostic_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-only-stage9/sanitized/summary.json",
+    "source_bytes": 1071,
+    "source_sha256": "e56de05b7662a5367f1db01cc9179078669921a241d5a5321ec0e27cc402e896",
+    "transform": "byte-identical"
+  },
+  "receipts/diagnostic-1bf/prefix-1M-v1/summary.json": {
+    "index_anchor": "diagnostic_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-only-stage9/prefix-1M-v1/summary.json",
+    "source_bytes": 1974,
+    "source_sha256": "a4d79b5b405b015483951c3d306f6c34d78aeee8420cf19b49885fc540d0f4a1",
+    "transform": "byte-identical"
+  },
+  "receipts/diagnostic-1bf/independent-verification.json": {
+    "index_anchor": "diagnostic_review",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-independent-stage9/verification.json",
+    "source_bytes": 2203,
+    "source_sha256": "a9ee97f632839f0891f329e7aa56ed0ec91bd1ae20861d25f5a7edebfa4dcfc2",
+    "transform": "byte-identical"
+  },
+  "logs/diagnostic-1bf-red.log.gz": {
+    "index_anchor": "diagnostic_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-only-stage9/baseline-red.log",
+    "raw_bytes": 18839,
+    "raw_sha256": "ae9af7c0ec5d0ca9107e9bcd3f9a4785adda81a4e0dbbbad0ce15bf0eee971ea",
+    "transform": "gzip mtime=0"
+  },
+  "logs/diagnostic-1bf-green.log.gz": {
+    "index_anchor": "diagnostic_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-only-stage9/focused-v2.log",
+    "raw_bytes": 99,
+    "raw_sha256": "7088e7f82384ae710f35ea1ab14d13bc71e414163e1cbc6f45116bb980ff832d",
+    "transform": "gzip mtime=0"
+  },
+  "history/fai/fai-slice-evidence.json": {
+    "index_anchor": "original_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-stage11/fai-slice-evidence.json",
+    "source_bytes": 2938,
+    "source_sha256": "48b949261c57f72d517457e38f48161bd6306f3b322354a9c308a2ee62e7e6de",
+    "transform": "byte-identical"
+  },
+  "history/fai/FAI-EVIDENCE-CORRECTION.md": {
+    "index_anchor": "original_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-stage11/FAI-EVIDENCE-CORRECTION.md",
+    "source_bytes": 1196,
+    "source_sha256": "25a9ceb97d9520ddcebb2dd32cc80df299d219f150e45e38eca7470dd3a552ad",
+    "transform": "byte-identical"
+  },
+  "logs/fai/fai-red.log.gz": {
+    "index_anchor": "original_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-stage11/fai-red.log",
+    "raw_bytes": 4697,
+    "raw_sha256": "eb2dd220ffd57679fb3609faa794988eeb76183fd235c841e008058e3d899bc1",
+    "transform": "gzip mtime=0"
+  },
+  "logs/fai/fai-green.log.gz": {
+    "index_anchor": "original_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-stage11/fai-green.log",
+    "raw_bytes": 99,
+    "raw_sha256": "639990e9e0b84b7a3053feb3ff212cbd4bc3ae955ca8d87939ee016d0e0a70b4",
+    "transform": "gzip mtime=0"
+  },
+  "logs/fai/fai-upper-red.log.gz": {
+    "index_anchor": "original_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-stage11/fai-upper-red.log",
+    "raw_bytes": 4681,
+    "raw_sha256": "20f2367df8045c1d5096c5b36ee91249d3f4046670e6c13f7bc7f5e9d1d33dd4",
+    "transform": "gzip mtime=0"
+  },
+  "logs/fai/fai-upper-green.log.gz": {
+    "index_anchor": "original_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-stage11/fai-upper-green.log",
+    "raw_bytes": 99,
+    "raw_sha256": "185fee9ff5fe0f86ce14ba73a8a6f0801271e441c85f8c36f5c8d80abd930bab",
+    "transform": "gzip mtime=0"
+  },
+  "logs/original/coordinator-red.log.gz": {
+    "index_anchor": "original_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-stage11/coordinator-red.log",
+    "raw_bytes": 39388,
+    "raw_sha256": "b2b2b3627673f1ce824226bc85b19380bc0089f2cbe9ef33a9257b92e57a2737",
+    "transform": "gzip mtime=0"
+  },
+  "logs/original/coordinator-green-initial.log.gz": {
+    "index_anchor": "original_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-stage11/coordinator-green-initial.log",
+    "raw_bytes": 99,
+    "raw_sha256": "0a44bd0fc82a49fb54127654e026629e24a0cc9ec56f598fa6c95a00f5e7a301",
+    "transform": "gzip mtime=0"
+  },
+  "logs/original/full-suite-v3.log.gz": {
+    "index_anchor": "original_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-stage11/coordinator-evidence/full-suite-v3.log",
+    "raw_bytes": 179,
+    "raw_sha256": "514b6367a005137cb23a0d6ea4223ecb72994c1756810ffb69a839a4f0d91f25",
+    "transform": "gzip mtime=0"
+  },
+  "receipts/fai-sanitizer-summary.json": {
+    "index_anchor": "original_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-stage11/coordinator-evidence/sanitizer-calls/summary.json",
+    "source_bytes": 10626,
+    "source_sha256": "12bc0c1cf6f634f0d7a011f2162a05120b3a6e44b2ea5ff917a9f954f142590c",
+    "transform": "byte-identical"
+  },
+  "evidence-source/verify_coordinator_sanitizers.py": {
+    "index_anchor": "original_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-stage11/verify_coordinator_sanitizers.py",
+    "source_bytes": 3386,
+    "source_sha256": "6fb06d54b520e2e7bbda0b7cd30c226d65a6bcc89d07f4d1954441f8a84d1820",
+    "transform": "byte-identical"
+  },
+  "evidence-source/test_fai_count.py": {
+    "index_anchor": "original_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-stage11/test_fai_count.py",
+    "source_bytes": 1704,
+    "source_sha256": "9257aef1c568008140a0c31e51e1278c588e623ade036f7e8c776f4e43fcaf50",
+    "transform": "byte-identical"
+  },
+  "evidence-source/writer_fixture.cpp": {
+    "index_anchor": "original_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-stage11/writer_fixture.cpp",
+    "source_bytes": 322,
+    "source_sha256": "750211af2f8125835372a45e220d281cd7fcab35c055f04d23b902d6a6ddbb64",
+    "transform": "byte-identical"
+  },
+  "evidence-source/arithmetic_fixture.cpp": {
+    "index_anchor": "original_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-stage11/arithmetic_fixture.cpp",
+    "source_bytes": 504,
+    "source_sha256": "a122feab39f3be5d06f92027f1233a9921fc0e666af2cebce97c39b9bcc41938",
+    "transform": "byte-identical"
+  },
+  "probes/original/probe_review.py": {
+    "index_anchor": "original_review",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-independent-stage11/probe_review.py",
+    "source_bytes": 5225,
+    "source_sha256": "dc3281056bce56720725a71aa51c1eb85f582b3047270ab892c9cf51f458a6aa",
+    "transform": "byte-identical"
+  },
+  "probes/original/probe_public_placement.py": {
+    "index_anchor": "original_review",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-independent-stage11/probe_public_placement.py",
+    "source_bytes": 2352,
+    "source_sha256": "8b5fa46138a08626e111471349d969b9c7aa8ad27222f4c90b9e2f94509160bc",
+    "transform": "byte-identical"
+  },
+  "probes/original/independent-probes.json": {
+    "index_anchor": "original_review",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-independent-stage11/independent-probes.json",
+    "source_bytes": 4400,
+    "source_sha256": "e1e2d52b9ea40411bdfe8faafff865eeccf270c838c2b641b02fb490fef52ac2",
+    "transform": "byte-identical"
+  },
+  "probes/original/public-placement-probes-process-metadata.json": {
+    "index_anchor": "original_review",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-independent-stage11/public-placement-probes-process-metadata.json",
+    "source_bytes": 1541,
+    "source_sha256": "08aac47997fd9b5801c8bca2fdecee1e507d00dc2c05e9e23945a113e10e0ee1",
+    "transform": "byte-identical"
+  },
+  "logs/fixes/correction-red.log.gz": {
+    "index_anchor": "fix_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-stage11/fix-evidence/correction-red.log",
+    "raw_bytes": 48298,
+    "raw_sha256": "ebcbe1399c0ce362d1592419a7063eace7d625d5ac1c83c000b2477bb7ddb066",
+    "transform": "gzip mtime=0"
+  },
+  "logs/fixes/correction-green.log.gz": {
+    "index_anchor": "fix_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-stage11/fix-evidence/correction-green.log",
+    "raw_bytes": 99,
+    "raw_sha256": "a4ea472d483381d5bcd765ddb3321da74ccd8dca87c6b7bc54c4c0fd2e379ccd",
+    "transform": "gzip mtime=0"
+  },
+  "logs/fixes/rehash-red.log.gz": {
+    "index_anchor": "fix_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-stage11/fix-evidence/rehash-red.log",
+    "raw_bytes": 5963,
+    "raw_sha256": "25c70198ef4d7d56af4f49d51c6be5296d4a02c29c553dc487f2af9eb4533685",
+    "transform": "gzip mtime=0"
+  },
+  "logs/fixes/rehash-green.log.gz": {
+    "index_anchor": "fix_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-stage11/fix-evidence/rehash-green.log",
+    "raw_bytes": 113,
+    "raw_sha256": "24294afc70f9dd0286f15b63b5b090703bfa0761c4b3925f0e0ba53bcd2ce662",
+    "transform": "gzip mtime=0"
+  },
+  "logs/fixes/neighbor-red.log.gz": {
+    "index_anchor": "fix_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-stage11/fix-evidence/neighbor-red.log",
+    "raw_bytes": 3641,
+    "raw_sha256": "a0c87b5d52d9711eb703e83decc874067dec27c5cbbc6ce94ef6046ae2652637",
+    "transform": "gzip mtime=0"
+  },
+  "logs/fixes/neighbor-green.log.gz": {
+    "index_anchor": "fix_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-stage11/fix-evidence/neighbor-green.log",
+    "raw_bytes": 113,
+    "raw_sha256": "b178b25630bb4c83a304b9fd87cab6b5bb7188838162b945b4de5f50f70132eb",
+    "transform": "gzip mtime=0"
+  },
+  "logs/fixes/frozen-focused.log.gz": {
+    "index_anchor": "fix_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-stage11/fix-evidence/frozen-focused.log",
+    "raw_bytes": 11005,
+    "raw_sha256": "4ae6415a8fef50b8fc70aa64e83afdb7084729188c96af34606e4900abed1cc8",
+    "transform": "gzip mtime=0"
+  },
+  "receipts/fix-verification.json": {
+    "index_anchor": "fix_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-stage11/fix-evidence/final-verification.json",
+    "source_bytes": 1860,
+    "source_sha256": "25296b486a360d6944f4efd889c9b635324d8c75c9edd661317b14ac089f17f5",
+    "transform": "byte-identical"
+  },
+  "proofs/original-large-json-bindings.json": {
+    "index_anchor": "fix_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-stage11/fix-evidence/proofs/large-json-proofs.json",
+    "source_bytes": 1257,
+    "source_sha256": "4a19fe1940b1e6009c9b1595b08b6a445f85375725b28fc44ebcf80be3c01acf",
+    "transform": "byte-identical"
+  },
+  "proofs/oversize-baseline.json.gz": {
+    "index_anchor": "fix_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-stage11/fix-evidence/proofs/oversize-baseline.json.gz",
+    "source_bytes": 16328,
+    "source_sha256": "14e60a454e2efe13f708e8f8d490243361f13fdc9db583a5b27917ce5672bb28",
+    "transform": "byte-identical"
+  },
+  "proofs/exact-cap-positive.json.gz": {
+    "index_anchor": "fix_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-stage11/fix-evidence/proofs/exact-cap-positive.json.gz",
+    "source_bytes": 16333,
+    "source_sha256": "652385274e8e97153f19dce79c547732f5e616262d856e42040e5ac2c5e9a481",
+    "transform": "byte-identical"
+  },
+  "evidence-source/test_coordinator_corrections.py": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/test_coordinator_corrections.py",
+    "source_bytes": 12700,
+    "source_sha256": "84233531969fcb417f4ec3e25bd8d124c26d190d4d22b183813e2e5e57af6f54",
+    "transform": "byte-identical"
+  },
+  "evidence-source/test_coordinator.py": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/test_coordinator.py",
+    "source_bytes": 15787,
+    "source_sha256": "d67d9101c8cd5668f58644b59cb1ee09e64c8c850ef8fd9136a0145f33e1599f",
+    "transform": "byte-identical"
+  },
+  "evidence-source/test_coordinator_integration.py": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/test_coordinator_integration.py",
+    "source_bytes": 7967,
+    "source_sha256": "3218a7aa4119bb9117fccab19beb4fea757b705b7e9a55e4beb1415a2cbab46c",
+    "transform": "byte-identical"
+  },
+  "evidence-source/test_control_alias_gate.py": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/test_control_alias_gate.py",
+    "source_bytes": 4197,
+    "source_sha256": "53262ce8aecf9714dc2cf86fb3f829fe7bfbc7e80edc8d7f647c547c6e5332d5",
+    "transform": "byte-identical"
+  },
+  "evidence-source/replay_alias_probes.py": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/replay_alias_probes.py",
+    "source_bytes": 1521,
+    "source_sha256": "193520629231b511809eea06bc2e3f107c356005a63e6da61e4fb4b6d60d7088",
+    "transform": "byte-identical"
+  },
+  "logs/alias/targeted-red.log.gz": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/targeted-red.log",
+    "raw_bytes": 17563,
+    "raw_sha256": "dd54703fc3b878c180d9757e263698651d8f7af28698ad6426cc83d163c55cfb",
+    "transform": "gzip mtime=0"
+  },
+  "logs/alias/targeted-green.log.gz": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/targeted-green.log",
+    "raw_bytes": 99,
+    "raw_sha256": "0becb50d8f51974359e92415eab80f734b323f7a5c7a502e83098703486c56a5",
+    "transform": "gzip mtime=0"
+  },
+  "logs/alias/final-focused.log.gz": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/final-focused.log",
+    "raw_bytes": 4397,
+    "raw_sha256": "3b7977291a71d1602b6f0f54445afc7f977a95d1c2f7b891e5c041a3394a4737",
+    "transform": "gzip mtime=0"
+  },
+  "probes/alias/red/alias/relocation.json": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/red/alias/relocation.json",
+    "source_bytes": 577,
+    "source_sha256": "a8d959a102c207c9e48cf1e225bd381812a92f635654f30a63039b325af25091",
+    "transform": "byte-identical"
+  },
+  "probes/alias/red/alias/hardlinked-plan-gate.json": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/red/alias/hardlinked-plan-gate.json",
+    "source_bytes": 631,
+    "source_sha256": "40274dc6c687e686165b494079335befe2ab4ad80f62600758642127acb26624",
+    "transform": "byte-identical"
+  },
+  "probes/alias/red/order/relocation.json": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/red/order/relocation.json",
+    "source_bytes": 577,
+    "source_sha256": "bcb6c01bcf47976bbe1d39f31e69b3d792900ec460d7f116d10efb676fbc566c",
+    "transform": "byte-identical"
+  },
+  "probes/alias/red/order/guard-order-and-data-link.json": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/red/order/guard-order-and-data-link.json",
+    "source_bytes": 686,
+    "source_sha256": "7e12c56a67d4ae25dfb9e6766d93cb22531b187d1ddb86a2b16bff1ef3a1c1c1",
+    "transform": "byte-identical"
+  },
+  "probes/alias/green/alias/relocation.json": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/green/alias/relocation.json",
+    "source_bytes": 581,
+    "source_sha256": "f7a470f7e0c767a587e9682f85c110ba1aafe4017ee19232e82379444305c605",
+    "transform": "byte-identical"
+  },
+  "probes/alias/green/alias/hardlinked-plan-gate.json": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/green/alias/hardlinked-plan-gate.json",
+    "source_bytes": 216,
+    "source_sha256": "cfd57dad21c6b62147fe2f090f18f5877c0baa9439fd9a9bf50f5897693bafdf",
+    "transform": "byte-identical"
+  },
+  "probes/alias/green/order/relocation.json": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/green/order/relocation.json",
+    "source_bytes": 581,
+    "source_sha256": "12a3ceac52aa7f2bdabe30dc0a8b4fd8c8624162f54c460b8dae68842c636996",
+    "transform": "byte-identical"
+  },
+  "probes/alias/green/order/guard-order-and-data-link.json": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/green/order/guard-order-and-data-link.json",
+    "source_bytes": 530,
+    "source_sha256": "db4ac2b96f02576ef3fd0c0e97eb868763ad9e6b03699521dd4a5b8008996325",
+    "transform": "byte-identical"
+  },
+  "probes/alias/probe_alias_gate.py": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/review-probes/probe_alias_gate.py",
+    "source_bytes": 1567,
+    "source_sha256": "be6a22dd6ff1efeab5b5f7f676271b3879a2d94302f1458786a074ab41ada7bf",
+    "transform": "byte-identical"
+  },
+  "probes/alias/probe_guard_order_and_data_link.py": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/review-probes/probe_guard_order_and_data_link.py",
+    "source_bytes": 2021,
+    "source_sha256": "0556c3d49dde853e7c991cb4cabe048aa85ff0ecbc4d422b2ef62883cc4b8756",
+    "transform": "byte-identical"
+  },
+  "receipts/alias-verification.json": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/verification.json",
+    "source_bytes": 1041,
+    "source_sha256": "f54281294e9c8f17f73f11b39262d2dd5b6ebe0108f1322e6ab2f048486ebf44",
+    "transform": "byte-identical"
+  },
+  "receipts/alias-verification-command.json": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/verification-command.json",
+    "source_bytes": 1976,
+    "source_sha256": "e0cb8194f5865eb095ec05bb229c450cd92babcec357b61e35b31b04819e4bf0",
+    "transform": "byte-identical"
+  },
+  "receipts/alias-preservation.json": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/preservation.json",
+    "source_bytes": 2010,
+    "source_sha256": "02668de522f38d67bc187fbd343131c300864a43da2ff208beef02670cb26d54",
+    "transform": "byte-identical"
+  },
+  "receipts/parity/GRCh37.original.stdout": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/final-focused/test_actual_producer_writer_an0/GRCh37.original.stdout",
+    "source_bytes": 405,
+    "source_sha256": "5ac3b69f50db12460558fcca1ba8943d2862bc174187b96b87f20290d7fd8e09",
+    "transform": "byte-identical"
+  },
+  "receipts/parity/GRCh37.current.stdout": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/final-focused/test_actual_producer_writer_an0/guarded-count/worker/GRCh37.stdout",
+    "source_bytes": 426,
+    "source_sha256": "0c7a6a5ff3fe0ed9b6785bb18734c4014f42e9ef69734ddc02e27f32dbca183d",
+    "transform": "byte-identical"
+  },
+  "receipts/parity/GRCh37.original.stderr": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/final-focused/test_actual_producer_writer_an0/GRCh37.original.stderr",
+    "source_bytes": 0,
+    "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "transform": "byte-identical"
+  },
+  "receipts/parity/GRCh37.current.stderr": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/final-focused/test_actual_producer_writer_an0/guarded-count/worker/GRCh37.stderr",
+    "source_bytes": 0,
+    "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "transform": "byte-identical"
+  },
+  "receipts/parity/GRCh38.original.stdout": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/final-focused/test_actual_producer_writer_an0/GRCh38.original.stdout",
+    "source_bytes": 405,
+    "source_sha256": "5ac3b69f50db12460558fcca1ba8943d2862bc174187b96b87f20290d7fd8e09",
+    "transform": "byte-identical"
+  },
+  "receipts/parity/GRCh38.current.stdout": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/final-focused/test_actual_producer_writer_an0/guarded-count/worker/GRCh38.stdout",
+    "source_bytes": 426,
+    "source_sha256": "0c7a6a5ff3fe0ed9b6785bb18734c4014f42e9ef69734ddc02e27f32dbca183d",
+    "transform": "byte-identical"
+  },
+  "receipts/parity/GRCh38.original.stderr": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/final-focused/test_actual_producer_writer_an0/GRCh38.original.stderr",
+    "source_bytes": 0,
+    "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "transform": "byte-identical"
+  },
+  "receipts/parity/GRCh38.current.stderr": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/final-focused/test_actual_producer_writer_an0/guarded-count/worker/GRCh38.stderr",
+    "source_bytes": 0,
+    "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "transform": "byte-identical"
+  },
+  "receipts/alias-tiny-guard.json": {
+    "index_anchor": "alias_author",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/final-focused/test_actual_producer_writer_an0/guarded-count/guard.json",
+    "source_bytes": 1743,
+    "source_sha256": "74a6c2d5e8e12672de45864de484f62eda2ea707774e145e3f49b8a548168ccb",
+    "transform": "byte-identical"
+  },
+  "receipts/final-green-verification.json": {
+    "index_anchor": "alias_review",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-independent-stage11/verification.json",
+    "source_bytes": 1968,
+    "source_sha256": "8b88eb2d06b20f659e093f27e1b775c4bbd4af2d8f4bacc442825c3a990df52c",
+    "transform": "byte-identical"
+  },
+  "receipts/final-green-preservation-verification.json": {
+    "index_anchor": "alias_review",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-independent-stage11/preservation-verification.json",
+    "source_bytes": 4010,
+    "source_sha256": "8bbe1d1b948091aba55646b05aa560c714d4a1cd48925963cb5a7da2a68d2e2f",
+    "transform": "byte-identical"
+  },
+  "evidence-source/independent-replay-scoped-probes.py": {
+    "index_anchor": "alias_review",
+    "external_source": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-independent-stage11/replay_scoped_probes.py",
+    "source_bytes": 1989,
+    "source_sha256": "0a20ee732aef3f92aec4acf1280e9de8cc2b64dbe5fdefb07f08f04197976fb3",
+    "transform": "byte-identical"
+  }
+}

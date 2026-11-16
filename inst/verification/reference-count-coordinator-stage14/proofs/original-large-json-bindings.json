@@ -1,0 +1,20 @@
+[
+  {
+    "source_path": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-stage11/fix-evidence/red-public/oversize-top-level-control-baseline/oversize.json",
+    "source_bytes": 16777217,
+    "source_sha256": "1003b1b5dc078189799a1216ce0f9fbcebb94e8b6b83c58c4b03345f07f94ced",
+    "compressed_path": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-stage11/fix-evidence/proofs/oversize-baseline.json.gz",
+    "compressed_bytes": 16328,
+    "compressed_sha256": "14e60a454e2efe13f708e8f8d490243361f13fdc9db583a5b27917ce5672bb28",
+    "lossless_roundtrip_verified": true
+  },
+  {
+    "source_path": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-stage11/fix-evidence/frozen-focused/test_exact_control_cap_is_posi0/exact-cap.json",
+    "source_bytes": 16777216,
+    "source_sha256": "28bd83447f77368cf399798854c9fee661c27e930bc42cbff93884c60accf5c6",
+    "compressed_path": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-stage11/fix-evidence/proofs/exact-cap-positive.json.gz",
+    "compressed_bytes": 16333,
+    "compressed_sha256": "652385274e8e97153f19dce79c547732f5e616262d856e42040e5ac2c5e9a481",
+    "lossless_roundtrip_verified": true
+  }
+]

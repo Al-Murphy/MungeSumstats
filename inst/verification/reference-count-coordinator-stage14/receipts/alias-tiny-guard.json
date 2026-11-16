@@ -1,0 +1,36 @@
+{
+  "command": [
+    "/private/tmp/gwas-harvest-stage2/harvest/.venv/bin/python",
+    "-c",
+    "import runpy,sys; n=runpy.run_path(sys.argv[1]); n['_worker_entry'](*sys.argv[2:])",
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/sealed_count.py",
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/final-focused/test_actual_producer_writer_an0/guarded-count-profile.json",
+    "6c08128d7a1bb94bdc88228bcb91ee76950ee82763bd0f97cc26e78a93835403",
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/final-focused/test_actual_producer_writer_an0/guarded-count/worker",
+    "",
+    "",
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/final-focused/test_actual_producer_writer_an0/GRCh37-published",
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/final-focused/test_actual_producer_writer_an0/GRCh38-published"
+  ],
+  "pid": 92485,
+  "status": "success",
+  "exit_code": 0,
+  "reason": null,
+  "natural_oom": false,
+  "wall_seconds": 0.0836627499666065,
+  "samples": 1,
+  "peak_process_tree": {
+    "rss_bytes": 24182784,
+    "physical_footprint_bytes": 13664712,
+    "conservative_guard_bytes": 24182784,
+    "processes": 1
+  },
+  "min_free_bytes": 485374210048,
+  "peak_owned_case_bytes": 0,
+  "limits": {
+    "memory_bytes": 8589934592,
+    "minimum_free_bytes": 171798691840,
+    "case_disk_bytes": 16777216
+  },
+  "scope": "Full owned process tree: RSS, macOS physical footprint and sum(max(RSS,footprint)); Linux guard includes swap. No other workload is signaled."
+}

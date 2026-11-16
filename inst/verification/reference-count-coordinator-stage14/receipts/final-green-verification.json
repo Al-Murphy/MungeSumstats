@@ -1,0 +1,39 @@
+{
+  "scoped_specification_verdict": "GREEN",
+  "scoped_quality_verdict": "GREEN",
+  "reviewed_head": "306aea51ea45eb8ae781b339029d2b1b93b5388f",
+  "behavioral_source": "08d93bf4b8d010b8ae73bf20663ec41c975d73c2",
+  "coordinator_sha256": "094ca45bc80e5576c303ad392f5836f3297a5e48234f69ec81aad99c8789de50",
+  "based_on": "2b80bbe72c01ff11edb74ba1fb2b3e4641f16bb4",
+  "dispositions": {
+    "source_plan_identity_alias": "addressed",
+    "producer_guard_identity_alias": "addressed",
+    "both_guards_before_plan_receipt_artifact_content": "addressed",
+    "scientific_hardlink_compatibility": "preserved"
+  },
+  "independent_scoped_tests_passed": 12,
+  "independent_actual_tiny_integration_passed": 1,
+  "original_alias_probe_counted_identity_opens": 0,
+  "original_alias_opens_before": 2,
+  "original_running_guard_trace": "GRCh37 producer_guard -> GRCh38 producer_guard only",
+  "independent_tiny_writer_oracles": 2,
+  "full_reference_admitted": false,
+  "full_reference_counts_executed": 0,
+  "full_production_index_builds": 0,
+  "count_process_index_outputs": 0,
+  "new_native_compilations": 0,
+  "new_sanitizer_runs": 0,
+  "source_fixes_applied": 0,
+  "repositories_clean_at_expected_heads": {
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-stage11": "547c7d46004c38f6a1f545748027af911ef28542",
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-stage11": "2b80bbe72c01ff11edb74ba1fb2b3e4641f16bb4",
+    "/private/tmp/gwas-harvest-stage2/review-reference-count-coordinator-alias-fix-stage11": "306aea51ea45eb8ae781b339029d2b1b93b5388f"
+  },
+  "limitations": [
+    "Scoped alias/order and introduced-breakage review only",
+    "No broad105/native-fuzz/sanitizer rerun",
+    "No active/full/prefix/scientific-input operation",
+    "GREEN permits only consideration of separately admitted future full-count profile; no execution/build authority",
+    "No timing/peak-memory/Windows/whole-file qualification"
+  ]
+}

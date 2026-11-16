@@ -1,0 +1,27 @@
+{
+  "mss_header_sha256": "4affcc7bdb761b1c86d22e2f72eb079434fbb2404d7f5c4d257fda2de52c6ddc",
+  "current_native_source_sha256": "fb529bff15666905d39c5726d2f49638a15c8ee61d90880da1b13079a954a10b",
+  "original_native_source_sha256": "1aafb2ec27413a8f41e61e100d90c9391ce5240a93c1a602c3edc286872b313d",
+  "historical_driver": "c++",
+  "ordinary_flags": [
+    "-std=c++17",
+    "-O2"
+  ],
+  "sanitizer_flags": [
+    "-std=c++17",
+    "-O1",
+    "-g",
+    "-fsanitize=address,undefined",
+    "-fno-omit-frame-pointer"
+  ],
+  "compiler_executable_sha256": null,
+  "compiler_version": null,
+  "limitation": "No exact compiler executable identity/version was recorded in the selected sealed historical receipts. No current compiler was queried or invoked; do not infer a historical identity from a present installation.",
+  "exact_original_build_commands_receipt": "receipts/diagnostic-1bf/independent-verification.json",
+  "current_fai_binary_binding_receipt": "history/fai/fai-slice-evidence.json",
+  "historical_platform": "macOS/Apple compiler evidence; no new native Windows claim",
+  "guard_sha256": "1cf033bbbac586234310794fbd2bfd3a7f3bc4116a15b4296de870b052fe86be",
+  "sampler_sha256": "aea36f87d4dd12ea41961f2cdd11198e527ccf17be2946a4351153cb96c0a0a5",
+  "new_compiler_invocations": 0,
+  "new_tests_or_counts": 0
+}

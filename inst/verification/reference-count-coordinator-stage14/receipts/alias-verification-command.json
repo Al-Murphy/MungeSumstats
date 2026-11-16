@@ -1,0 +1,33 @@
+{
+  "cwd": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11",
+  "command": [
+    "/private/tmp/gwas-harvest-stage2/harvest/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-vv",
+    "--basetemp=alias-evidence/final-focused",
+    "test_control_alias_gate.py",
+    "test_coordinator.py::test_both_seals_before_input_open",
+    "test_coordinator.py::test_unreviewed_digest_change_refused",
+    "test_coordinator.py::test_same_size_output_digest_change_refused",
+    "test_coordinator.py::test_misplaced_artifact_never_opens_input_before_both_seals",
+    "test_coordinator.py::test_hash_refuses_mutation_during_read",
+    "test_coordinator.py::test_actual_count_worker_readonly_exclusive",
+    "test_coordinator.py::test_entire_source_plan_policy_bound",
+    "test_coordinator_corrections.py::test_external_placement_refuses_before_any_control_open_or_mkdir",
+    "test_coordinator_corrections.py::test_control_expected_and_observed_bounds_precede_any_content_open",
+    "test_coordinator_corrections.py::test_exact_control_cap_is_positive",
+    "test_coordinator_corrections.py::test_repeated_control_hash_rechecks_observed_bound",
+    "test_coordinator_corrections.py::test_external_rehash_rechecks_observed_bound_before_hash",
+    "test_coordinator_corrections.py::test_parsed_roots_must_equal_independent_context_before_seal_open",
+    "test_coordinator_corrections.py::test_internal_worker_case_placement_before_controls",
+    "test_coordinator_integration.py::test_actual_producer_writer_and_guarded_count"
+  ],
+  "environment_override": {
+    "MSS_BASELINE_COUNTER": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/original-counter"
+  },
+  "other_environment": "Inherited, including HOME/home/CODEX_HOME",
+  "output_log": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/final-focused.log",
+  "exit_code": 0,
+  "passed": 36
+}

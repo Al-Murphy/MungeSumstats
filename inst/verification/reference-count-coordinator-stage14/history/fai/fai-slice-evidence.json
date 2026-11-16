@@ -1,0 +1,68 @@
+{
+  "scope": "Preliminary diagnostic-only FAI bound slice; coordinator and independent review incomplete",
+  "commit": "5121119d90b87ebc71f2dfaff88767b5a0367e50",
+  "baseline_counter_revision": "1bf1a08685488798496e9d7978b1792dbd290a9d",
+  "core_header": {
+    "path": "/private/tmp/gwas-harvest-stage2/mss-context-format3-release/src/preservation_core.h",
+    "sha256": "4affcc7bdb761b1c86d22e2f72eb079434fbb2404d7f5c4d257fda2de52c6ddc"
+  },
+  "artifacts": {
+    "fai-red.log": {
+      "bytes": 4697,
+      "sha256": "eb2dd220ffd57679fb3609faa794988eeb76183fd235c841e008058e3d899bc1"
+    },
+    "fai-green.log": {
+      "bytes": 99,
+      "sha256": "639990e9e0b84b7a3053feb3ff212cbd4bc3ae955ca8d87939ee016d0e0a70b4"
+    },
+    "fai-upper-red.log": {
+      "bytes": 4681,
+      "sha256": "20f2367df8045c1d5096c5b36ee91249d3f4046670e6c13f7bc7f5e9d1d33dd4"
+    },
+    "fai-upper-green.log": {
+      "bytes": 99,
+      "sha256": "185fee9ff5fe0f86ce14ba73a8a6f0801271e441c85f8c36f5c8d80abd930bab"
+    },
+    "test_fai_count.py": {
+      "bytes": 1704,
+      "sha256": "9257aef1c568008140a0c31e51e1278c588e623ade036f7e8c776f4e43fcaf50"
+    },
+    "count_reference.cpp": {
+      "bytes": 8595,
+      "sha256": "fb529bff15666905d39c5726d2f49638a15c8ee61d90880da1b13079a954a10b"
+    },
+    "count_reference": {
+      "bytes": 88816,
+      "sha256": "fa133e2c65bf9ed4ea0cb52791293b19b3a01fbead95f089ae13c0dff2b6c7fd"
+    },
+    "writer_fixture.cpp": {
+      "bytes": 322,
+      "sha256": "750211af2f8125835372a45e220d281cd7fcab35c055f04d23b902d6a6ddbb64"
+    },
+    "writer_fixture": {
+      "bytes": 108320,
+      "sha256": "9e5b86094120faf687cfadcf6436a03391fd7fe46cbc6a12c32cb7103575ee69"
+    },
+    "arithmetic_fixture.cpp": {
+      "bytes": 504,
+      "sha256": "a122feab39f3be5d06f92027f1233a9921fc0e666af2cebce97c39b9bcc41938"
+    },
+    "arithmetic_fixture": {
+      "bytes": 88928,
+      "sha256": "c734f88ea750bc34a9305612c8f7926aa92d7ab680a0238133e231596e763fad"
+    },
+    "fai-baseline/count_reference.cpp": {
+      "bytes": 7569,
+      "sha256": "1aafb2ec27413a8f41e61e100d90c9391ce5240a93c1a602c3edc286872b313d"
+    },
+    "fai-baseline/count_reference": {
+      "bytes": 88816,
+      "sha256": "fefe47feca68204d54915d302f5cd27daf21994b67d3dd4c965cc74ff778fe50"
+    }
+  },
+  "red_refinement": "Initial exact fai_bytes draft failed12 missing-field tests; private-member compile attempt was rejected. Ruling changed diagnostic to conservative fai_upper_bytes without production API/header changes. Final revised tests independently fail12 on exact baseline and pass12 on new binary. Full29 original+12 new suite41PASS before environment-selectable baseline test path addition; final12PASS confirms default path afterwards.",
+  "arithmetic_fixture_exit_code": 0,
+  "measurement": "Small correctness tests only; no new native memory/performance qualification, no Windows execution",
+  "full_inputs_opened": false,
+  "index_builds": 0
+}

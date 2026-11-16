@@ -1,0 +1,227 @@
+{
+  "diagnostic_author": {
+    "external_path": "/private/tmp/gwas-harvest-stage2/results/reference-count-only-stage9/evidence-index.json",
+    "bytes": 5889,
+    "sha256": "94b45796456938b95509fcb47cbf7a0fb6ec01ec626e5b71c0b81b7d6fdf84b4",
+    "declared_inventory": {
+      "artifacts": {
+        "entries": 15,
+        "declared_bytes": 40352
+      },
+      "files": {
+        "entries": 0,
+        "declared_bytes": 0
+      },
+      "source_files": {
+        "entries": 10,
+        "declared_bytes": 26101
+      },
+      "generated_binaries": {
+        "entries": 6,
+        "declared_bytes": 1501296
+      }
+    },
+    "outside_payloads_reverified": false,
+    "preservation": "Full original index remains external and unmodified; this digest binds its complete inventory"
+  },
+  "diagnostic_review": {
+    "external_path": "/private/tmp/gwas-harvest-stage2/results/reference-count-independent-stage9/evidence-index.json",
+    "bytes": 1921,
+    "sha256": "5d8ca345b3fd0ad5c8d0022a47a417f7ddf004ca4d1f1c5ac8ecfc19a80f63d9",
+    "declared_inventory": {
+      "artifacts": {
+        "entries": 0,
+        "declared_bytes": 0
+      },
+      "files": {
+        "entries": 8,
+        "declared_bytes": 22505
+      },
+      "source_files": {
+        "entries": 0,
+        "declared_bytes": 0
+      },
+      "generated_binaries": {
+        "entries": 0,
+        "declared_bytes": 0
+      }
+    },
+    "outside_payloads_reverified": false,
+    "preservation": "Full original index remains external and unmodified; this digest binds its complete inventory"
+  },
+  "diagnostic_existing_39_file_archive": {
+    "external_path": "/private/tmp/gwas-harvest-stage2/mss-context-format3-release/inst/verification/reference-count-only-stage9/evidence-index.json",
+    "bytes": 6009,
+    "sha256": "2a5f67085ae35307da4dd59220e3104c38609ff4b3db61828d3d2ea466ab3003",
+    "declared_inventory": {
+      "artifacts": {
+        "entries": 0,
+        "declared_bytes": 0
+      },
+      "files": {
+        "entries": 38,
+        "declared_bytes": 94731
+      },
+      "source_files": {
+        "entries": 0,
+        "declared_bytes": 0
+      },
+      "generated_binaries": {
+        "entries": 0,
+        "declared_bytes": 0
+      }
+    },
+    "outside_payloads_reverified": false,
+    "preservation": "Full original index remains external and unmodified; this digest binds its complete inventory"
+  },
+  "original_author": {
+    "external_path": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-stage11/coordinator-evidence-index.json",
+    "bytes": 398621,
+    "sha256": "0a7c3ed678d9536d20d5c1c48e19198b9b43062c87aeea5c6a2410f09f011d64",
+    "declared_inventory": {
+      "artifacts": {
+        "entries": 1188,
+        "declared_bytes": 5582186
+      },
+      "files": {
+        "entries": 0,
+        "declared_bytes": 0
+      },
+      "source_files": {
+        "entries": 0,
+        "declared_bytes": 0
+      },
+      "generated_binaries": {
+        "entries": 0,
+        "declared_bytes": 0
+      }
+    },
+    "outside_payloads_reverified": false,
+    "preservation": "Full original index remains external and unmodified; this digest binds its complete inventory"
+  },
+  "original_review": {
+    "external_path": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-independent-stage11/evidence-index.json",
+    "bytes": 174265,
+    "sha256": "7df58bbb6973abc31cb756b5aef9a1eada508cd0cd69c298f544c6e7e7e46ff2",
+    "declared_inventory": {
+      "artifacts": {
+        "entries": 555,
+        "declared_bytes": 35461520
+      },
+      "files": {
+        "entries": 0,
+        "declared_bytes": 0
+      },
+      "source_files": {
+        "entries": 0,
+        "declared_bytes": 0
+      },
+      "generated_binaries": {
+        "entries": 0,
+        "declared_bytes": 0
+      }
+    },
+    "outside_payloads_reverified": false,
+    "preservation": "Full original index remains external and unmodified; this digest binds its complete inventory"
+  },
+  "fix_author": {
+    "external_path": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-stage11/coordinator-fixes-evidence-index.json",
+    "bytes": 94586,
+    "sha256": "42ad13072e0a5ca1549d594ce9e474afb749009f0c67b7734c879600c51c869d",
+    "declared_inventory": {
+      "artifacts": {
+        "entries": 272,
+        "declared_bytes": 2347154
+      },
+      "files": {
+        "entries": 0,
+        "declared_bytes": 0
+      },
+      "source_files": {
+        "entries": 0,
+        "declared_bytes": 0
+      },
+      "generated_binaries": {
+        "entries": 0,
+        "declared_bytes": 0
+      }
+    },
+    "outside_payloads_reverified": false,
+    "preservation": "Full original index remains external and unmodified; this digest binds its complete inventory"
+  },
+  "fix_review": {
+    "external_path": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-independent-stage11/evidence-index.json",
+    "bytes": 248837,
+    "sha256": "046af9c7f33b708eae69d654a68c2578582306140f6459553e8a2597281e1fd9",
+    "declared_inventory": {
+      "artifacts": {
+        "entries": 750,
+        "declared_bytes": 68650056
+      },
+      "files": {
+        "entries": 0,
+        "declared_bytes": 0
+      },
+      "source_files": {
+        "entries": 0,
+        "declared_bytes": 0
+      },
+      "generated_binaries": {
+        "entries": 0,
+        "declared_bytes": 0
+      }
+    },
+    "outside_payloads_reverified": false,
+    "preservation": "Full original index remains external and unmodified; this digest binds its complete inventory"
+  },
+  "alias_author": {
+    "external_path": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/coordinator-alias-fix-evidence-index.json",
+    "bytes": 43285,
+    "sha256": "9f7d64939825ab0a5411ddeafc9731743475861b10deb2373d8bd064289ddcfe",
+    "declared_inventory": {
+      "artifacts": {
+        "entries": 130,
+        "declared_bytes": 820069
+      },
+      "files": {
+        "entries": 0,
+        "declared_bytes": 0
+      },
+      "source_files": {
+        "entries": 0,
+        "declared_bytes": 0
+      },
+      "generated_binaries": {
+        "entries": 0,
+        "declared_bytes": 0
+      }
+    },
+    "outside_payloads_reverified": false,
+    "preservation": "Full original index remains external and unmodified; this digest binds its complete inventory"
+  },
+  "alias_review": {
+    "external_path": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-independent-stage11/evidence-index.json",
+    "bytes": 58540,
+    "sha256": "0172bb0af4bec5b31bd9db2f6b927a94d988ffd3bc7fa2c320b28f188b6c9cb1",
+    "declared_inventory": {
+      "artifacts": {
+        "entries": 168,
+        "declared_bytes": 674829
+      },
+      "files": {
+        "entries": 0,
+        "declared_bytes": 0
+      },
+      "source_files": {
+        "entries": 0,
+        "declared_bytes": 0
+      },
+      "generated_binaries": {
+        "entries": 0,
+        "declared_bytes": 0
+      }
+    },
+    "outside_payloads_reverified": false,
+    "preservation": "Full original index remains external and unmodified; this digest binds its complete inventory"
+  }
+}

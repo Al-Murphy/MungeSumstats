@@ -1,0 +1,20 @@
+{
+  "running_second_guard_control_open_order": {
+    "order": [
+      "GRCh37 producer_guard",
+      "GRCh37 producer_guard",
+      "GRCh37 producer_guard",
+      "GRCh38 producer_guard",
+      "GRCh38 producer_guard",
+      "GRCh38 producer_guard"
+    ],
+    "refusal": "Producer/count guard not successful"
+  },
+  "hardlinked_counted_data_positive": {
+    "status": "counted_planning_only",
+    "data_nlink": 2,
+    "publication_files_unchanged": true,
+    "full_reference_admitted": false,
+    "index_builds_executed": 0
+  }
+}

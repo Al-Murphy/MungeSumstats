@@ -1,0 +1,7 @@
+{
+  "second_producer_status": "running",
+  "alias_is_counted_input": true,
+  "alias_nlink": 2,
+  "counted_input_content_opens": [],
+  "error": "Refusal: Hardlinked small source-plan/producer-guard control refused"
+}

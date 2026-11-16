@@ -1,0 +1,93 @@
+{
+  "author_artifacts_verified": 130,
+  "author_artifact_bytes": 820069,
+  "link_facts_verified": [
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/red/alias/hardlinked-plan-gate/GRCh37/variants.tsv",
+      "identity": {
+        "device": 16777234,
+        "inode": 398964404,
+        "nlink": 2
+      }
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/red/alias/hardlinked-plan-gate/outside-source-plan.json",
+      "identity": {
+        "device": 16777234,
+        "inode": 398964404,
+        "nlink": 2
+      }
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/red/order/hardlinked-data-positive/GRCh37/variants.tsv",
+      "identity": {
+        "device": 16777234,
+        "inode": 398964448,
+        "nlink": 2
+      }
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/red/order/hardlinked-data-positive/legitimate-data-copy-link.tsv",
+      "identity": {
+        "device": 16777234,
+        "inode": 398964448,
+        "nlink": 2
+      }
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/green/alias/hardlinked-plan-gate/GRCh37/variants.tsv",
+      "identity": {
+        "device": 16777234,
+        "inode": 398966650,
+        "nlink": 2
+      }
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/green/alias/hardlinked-plan-gate/outside-source-plan.json",
+      "identity": {
+        "device": 16777234,
+        "inode": 398966650,
+        "nlink": 2
+      }
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/green/order/hardlinked-data-positive/GRCh37/variants.tsv",
+      "identity": {
+        "device": 16777234,
+        "inode": 398966695,
+        "nlink": 2
+      }
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/green/order/hardlinked-data-positive/legitimate-data-copy-link.tsv",
+      "identity": {
+        "device": 16777234,
+        "inode": 398966695,
+        "nlink": 2
+      }
+    }
+  ],
+  "original_key_hashes_verified": {
+    "/private/tmp/gwas-harvest-stage2/reports/reference-count-coordinator-fixes-independent-stage11.md": "cda633dc61194719ca531a5dd2ed600b6e44b532f624868ff9579530f654d550",
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-independent-stage11/evidence-index.json": "046af9c7f33b708eae69d654a68c2578582306140f6459553e8a2597281e1fd9",
+    "/private/tmp/gwas-harvest-stage2/review-reference-count-coordinator-fixes-stage11/sealed_count.py": "6d152cbd926f8949821a055f709023cecb8f20329b7f5873630b43c3b6fc069c",
+    "/private/tmp/gwas-harvest-stage2/reports/reference-count-coordinator-independent-stage11.md": "034b2b1e80089cb934f7112c26b50d001424ae6856c6bd47a45e72fe8cad8313",
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-independent-stage11/evidence-index.json": "7df58bbb6973abc31cb756b5aef9a1eada508cd0cd69c298f544c6e7e7e46ff2",
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-stage11/sealed_count.py": "ec226e236a5f71c8c297fc4076404795b95d25845d7a18a0f8225fa389b2e0c5"
+  },
+  "baseline_snapshot_exact": true,
+  "probe_preservation": [
+    {
+      "name": "probe_alias_gate.py",
+      "sha256": "be6a22dd6ff1efeab5b5f7f676271b3879a2d94302f1458786a074ab41ada7bf",
+      "byte_identical": true,
+      "path_literal_count": 2
+    },
+    {
+      "name": "probe_guard_order_and_data_link.py",
+      "sha256": "0556c3d49dde853e7c991cb4cabe048aa85ff0ecbc4d422b2ef62883cc4b8756",
+      "byte_identical": true,
+      "path_literal_count": 2
+    }
+  ]
+}

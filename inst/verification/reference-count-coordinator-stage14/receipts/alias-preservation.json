@@ -1,0 +1,27 @@
+{
+  "old_repositories": [
+    {
+      "repo": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-stage11",
+      "head": "547c7d46004c38f6a1f545748027af911ef28542",
+      "clean": true,
+      "coordinator_sha256": "ec226e236a5f71c8c297fc4076404795b95d25845d7a18a0f8225fa389b2e0c5"
+    },
+    {
+      "repo": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-stage11",
+      "head": "2b80bbe72c01ff11edb74ba1fb2b3e4641f16bb4",
+      "clean": true,
+      "coordinator_sha256": "6d152cbd926f8949821a055f709023cecb8f20329b7f5873630b43c3b6fc069c"
+    }
+  ],
+  "prior_named_pins": {
+    "/private/tmp/gwas-harvest-stage2/reports/reference-count-coordinator-stage11.md": "0123409832fd8669b9878f18a7541e74d1d07d665326c85aa9d43beed30bba23",
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-stage11/coordinator-evidence-index.json": "0a7c3ed678d9536d20d5c1c48e19198b9b43062c87aeea5c6a2410f09f011d64",
+    "/private/tmp/gwas-harvest-stage2/reports/reference-count-coordinator-fixes-stage11.md": "e1cc4b01d83f86c2de1e8eb723b947daaee1d075b5fc29da1bcf3eeaa1325967",
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-stage11/coordinator-fixes-evidence-index.json": "42ad13072e0a5ca1549d594ce9e474afb749009f0c67b7734c879600c51c869d",
+    "/private/tmp/gwas-harvest-stage2/reports/reference-count-coordinator-fixes-independent-stage11.md": "cda633dc61194719ca531a5dd2ed600b6e44b532f624868ff9579530f654d550",
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-independent-stage11/evidence-index.json": "046af9c7f33b708eae69d654a68c2578582306140f6459553e8a2597281e1fd9"
+  },
+  "preliminary_fai_artifacts_rechecked_unchanged": 13,
+  "baseline_source_snapshot": "Byte-identical2b80bbe source, added after replays for auditing historical paths later edited in this clone",
+  "older_fixture_trees_and_archives": "Not copied/modified or broadly walked; no claim of a fresh full index-tree verification"
+}

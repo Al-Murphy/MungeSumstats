@@ -1,0 +1,20 @@
+{
+  "second_producer_status": "running",
+  "alias_is_counted_input": true,
+  "alias_nlink": 2,
+  "counted_input_content_opens": [
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/red/alias/hardlinked-plan-gate/outside-source-plan.json",
+      "mode": [
+        "rb"
+      ]
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/red/alias/hardlinked-plan-gate/outside-source-plan.json",
+      "mode": [
+        "rb"
+      ]
+    }
+  ],
+  "error": "Refusal: Invalid/truncated JSON"
+}

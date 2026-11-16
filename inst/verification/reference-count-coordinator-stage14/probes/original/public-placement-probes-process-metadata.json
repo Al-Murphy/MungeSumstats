@@ -1,0 +1,70 @@
+{
+  "public-positive": {
+    "status": "counted_planning_only",
+    "error": null,
+    "publication_before": [
+      "contig_aliases.tsv",
+      "receipts.json",
+      "reference.fa",
+      "variants.tsv"
+    ],
+    "publication_after": [
+      "contig_aliases.tsv",
+      "receipts.json",
+      "reference.fa",
+      "variants.tsv"
+    ],
+    "case_exists": true,
+    "summary_exists": true
+  },
+  "public-profile-in-publication": {
+    "status": "counted_planning_only",
+    "error": null,
+    "publication_before": [
+      "contig_aliases.tsv",
+      "operator-profile.json",
+      "receipts.json",
+      "reference.fa",
+      "variants.tsv"
+    ],
+    "publication_after": [
+      "contig_aliases.tsv",
+      "operator-profile.json",
+      "receipts.json",
+      "reference.fa",
+      "variants.tsv"
+    ],
+    "case_exists": true,
+    "summary_exists": true
+  },
+  "public-case-in-publication": {
+    "status": "counted_planning_only",
+    "error": null,
+    "publication_before": [
+      "contig_aliases.tsv",
+      "receipts.json",
+      "reference.fa",
+      "variants.tsv"
+    ],
+    "publication_after": [
+      "contig_aliases.tsv",
+      "count-case",
+      "receipts.json",
+      "reference.fa",
+      "variants.tsv"
+    ],
+    "case_exists": true,
+    "summary_exists": true
+  },
+  "oversize_control_hashed_before_size_refusal": {
+    "bytes": 16777217,
+    "opens_after_starting_load_profile": [
+      {
+        "args": [
+          "rb"
+        ]
+      }
+    ],
+    "error": "Refusal: Control JSON exceeds finite bound"
+  }
+}

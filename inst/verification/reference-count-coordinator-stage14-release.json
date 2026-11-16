@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "harvest_base": "2a14fba0a531232a37f80f0f1b74afc1927ab8ca",
+  "mss_base": "30b257db969417b5ad1522911aeb8884eaaf1fb6",
+  "source_commit": "306aea51ea45eb8ae781b339029d2b1b93b5388f",
+  "archive_directory_files": 94,
+  "archive_directory_bytes": 379210,
+  "indexed_payload_files": 93,
+  "index_sha256": "d83bdbc25c9de77b95bcc17ad86d342c51651b65cc8112b8dca23175cef03afd",
+  "report_sha256": "9a1d49aa7e4c60096bfd92f7e4a050de38a0e6e3372fd185b2e589032c1ad4c7",
+  "archive_gzip_bytes": 109071,
+  "archive_gzip_sha256": "6f3449b294b139b860a06e987ba19fa0662068aa459f305f01795fc0ddd691a7",
+  "raw_tar_bytes": 460800,
+  "raw_tar_sha256": "c504e4c795775fe0eb6e4dae083846085777dc6aafe2fe4090869b1e611cf1cc",
+  "raw_tar_binding_verified": true,
+  "compressed_payload_bindings_verified": 21,
+  "no_tests_queries_counts_builds_executed": true,
+  "operator_toolkit_file_pins": {
+    "sealed_count.py": {
+      "bytes": 33049,
+      "sha256": "094ca45bc80e5576c303ad392f5836f3297a5e48234f69ec81aad99c8789de50"
+    },
+    "count_reference.cpp": {
+      "bytes": 8595,
+      "sha256": "fb529bff15666905d39c5726d2f49638a15c8ee61d90880da1b13079a954a10b"
+    },
+    "guard_common.py": {
+      "bytes": 4894,
+      "sha256": "1cf033bbbac586234310794fbd2bfd3a7f3bc4116a15b4296de870b052fe86be"
+    },
+    "process_memory.py": {
+      "bytes": 1989,
+      "sha256": "aea36f87d4dd12ea41961f2cdd11198e527ccf17be2946a4351153cb96c0a0a5"
+    },
+    "COORDINATOR.md": {
+      "bytes": 9522,
+      "sha256": "b22147ff9b00ec136af5f5658039667932f84976db6c98d546f657fe0f1da7fe"
+    },
+    "REVIEWED-README.md": {
+      "bytes": 4182,
+      "sha256": "1c9a9f45a9497d5ff6bd00e1f58c01d1e0bda64ec5bb84cdeebd7f91f0123dc0"
+    },
+    "README.md": {
+      "bytes": 3011,
+      "sha256": "05e9b69f69fedd480c13cde884c25368cc9b28ad6c4dbf3d4f6aefa378fc8e51"
+    },
+    "dependencies.json": {
+      "bytes": 2172,
+      "sha256": "3be62e9c5a0a0fefcfa277288b6667692f676b4e47d75039a0b12dea90c800d1"
+    }
+  },
+  "operator_toolkit_locations": {
+    "harvest": "ops/reference-count",
+    "mss": "inst/verification/reference-count-coordinator-stage14/toolkit"
+  }
+}

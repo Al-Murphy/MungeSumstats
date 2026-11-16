@@ -1,0 +1,21 @@
+{
+  "compiled_payloads": "All native executables/libraries/objects/dSYM and compiler binaries omitted; their historical identities remain in source receipts/anchors.",
+  "production_sources": "MSS production header and bioDB producer source remain external pinned dependencies; no R/src/API/default/DDL/funding change.",
+  "scientific_data": "No FASTA/TSV/VCF/SQLite/archive input, growing staging, full/prefix data or runtime index data copied or read.",
+  "redundant_evidence": "No wholesale tiny fixture tree, every per-call sanitizer log, intermediate pytest tree or complete old index tree is vendored. Full original indices remain external SHA/size/inventory anchors.",
+  "runtime_launchers": "Fixed qualify_prefix.py and profile/admission samples are omitted from runtime; no full-count profile/admission generated.",
+  "qualification": "No new tests/queries/counts/builds/sanitizers/performance/Windows/orphan-aware supervisor qualification; historical proof only.",
+  "compiler_identity": "Historical exact compiler version/executable hash unavailable in selected receipts; exact recorded flags/commands/binary hashes preserved without inventing a pin.",
+  "memory": "No .remember/tool-memory or broad workspace walk.",
+  "historical_counts": {
+    "preliminary_fai_tiny_writer_oracles": 76,
+    "original_author_final_ordinary_oracles": 42,
+    "original_author_strict_sanitizer_oracles": 40,
+    "alias_author_final_oracles": 2,
+    "alias_independent_review_oracles": 2,
+    "new_packaging_oracles": 0,
+    "count_process_index_outputs": 0,
+    "full_production_index_outputs": 0
+  },
+  "timing": "Original2.864s incomplete-prefix count belongs to1bf1a086 and excludes pre/post hashes; it is not a new FAI/coordinator benchmark."
+}

@@ -1,0 +1,9 @@
+{
+  "probe_sha256": "be6a22dd6ff1efeab5b5f7f676271b3879a2d94302f1458786a074ab41ada7bf",
+  "path_only_literal_replacements": {
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-independent-stage11": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11/alias-evidence/red/alias",
+    "/private/tmp/gwas-harvest-stage2/review-reference-count-coordinator-fixes-stage11": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-alias-fix-stage11"
+  },
+  "probe_logic_changed": false,
+  "phase": "red"
+}

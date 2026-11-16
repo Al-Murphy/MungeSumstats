@@ -1,0 +1,132 @@
+[
+  {
+    "path": "logs/diagnostic-1bf-red.log.gz",
+    "raw_bytes": 18839,
+    "raw_sha256": "ae9af7c0ec5d0ca9107e9bcd3f9a4785adda81a4e0dbbbad0ce15bf0eee971ea",
+    "binding_source": "verified source pin in diagnostic_author"
+  },
+  {
+    "path": "logs/diagnostic-1bf-green.log.gz",
+    "raw_bytes": 99,
+    "raw_sha256": "7088e7f82384ae710f35ea1ab14d13bc71e414163e1cbc6f45116bb980ff832d",
+    "binding_source": "verified source pin in diagnostic_author"
+  },
+  {
+    "path": "logs/fai/fai-red.log.gz",
+    "raw_bytes": 4697,
+    "raw_sha256": "eb2dd220ffd57679fb3609faa794988eeb76183fd235c841e008058e3d899bc1",
+    "binding_source": "verified source pin in original_author"
+  },
+  {
+    "path": "logs/fai/fai-green.log.gz",
+    "raw_bytes": 99,
+    "raw_sha256": "639990e9e0b84b7a3053feb3ff212cbd4bc3ae955ca8d87939ee016d0e0a70b4",
+    "binding_source": "verified source pin in original_author"
+  },
+  {
+    "path": "logs/fai/fai-upper-red.log.gz",
+    "raw_bytes": 4681,
+    "raw_sha256": "20f2367df8045c1d5096c5b36ee91249d3f4046670e6c13f7bc7f5e9d1d33dd4",
+    "binding_source": "verified source pin in original_author"
+  },
+  {
+    "path": "logs/fai/fai-upper-green.log.gz",
+    "raw_bytes": 99,
+    "raw_sha256": "185fee9ff5fe0f86ce14ba73a8a6f0801271e441c85f8c36f5c8d80abd930bab",
+    "binding_source": "verified source pin in original_author"
+  },
+  {
+    "path": "logs/original/coordinator-red.log.gz",
+    "raw_bytes": 39388,
+    "raw_sha256": "b2b2b3627673f1ce824226bc85b19380bc0089f2cbe9ef33a9257b92e57a2737",
+    "binding_source": "verified source pin in original_author"
+  },
+  {
+    "path": "logs/original/coordinator-green-initial.log.gz",
+    "raw_bytes": 99,
+    "raw_sha256": "0a44bd0fc82a49fb54127654e026629e24a0cc9ec56f598fa6c95a00f5e7a301",
+    "binding_source": "verified source pin in original_author"
+  },
+  {
+    "path": "logs/original/full-suite-v3.log.gz",
+    "raw_bytes": 179,
+    "raw_sha256": "514b6367a005137cb23a0d6ea4223ecb72994c1756810ffb69a839a4f0d91f25",
+    "binding_source": "verified source pin in original_author"
+  },
+  {
+    "path": "logs/fixes/correction-red.log.gz",
+    "raw_bytes": 48298,
+    "raw_sha256": "ebcbe1399c0ce362d1592419a7063eace7d625d5ac1c83c000b2477bb7ddb066",
+    "binding_source": "verified source pin in fix_author"
+  },
+  {
+    "path": "logs/fixes/correction-green.log.gz",
+    "raw_bytes": 99,
+    "raw_sha256": "a4ea472d483381d5bcd765ddb3321da74ccd8dca87c6b7bc54c4c0fd2e379ccd",
+    "binding_source": "verified source pin in fix_author"
+  },
+  {
+    "path": "logs/fixes/rehash-red.log.gz",
+    "raw_bytes": 5963,
+    "raw_sha256": "25c70198ef4d7d56af4f49d51c6be5296d4a02c29c553dc487f2af9eb4533685",
+    "binding_source": "verified source pin in fix_author"
+  },
+  {
+    "path": "logs/fixes/rehash-green.log.gz",
+    "raw_bytes": 113,
+    "raw_sha256": "24294afc70f9dd0286f15b63b5b090703bfa0761c4b3925f0e0ba53bcd2ce662",
+    "binding_source": "verified source pin in fix_author"
+  },
+  {
+    "path": "logs/fixes/neighbor-red.log.gz",
+    "raw_bytes": 3641,
+    "raw_sha256": "a0c87b5d52d9711eb703e83decc874067dec27c5cbbc6ce94ef6046ae2652637",
+    "binding_source": "verified source pin in fix_author"
+  },
+  {
+    "path": "logs/fixes/neighbor-green.log.gz",
+    "raw_bytes": 113,
+    "raw_sha256": "b178b25630bb4c83a304b9fd87cab6b5bb7188838162b945b4de5f50f70132eb",
+    "binding_source": "verified source pin in fix_author"
+  },
+  {
+    "path": "logs/fixes/frozen-focused.log.gz",
+    "raw_bytes": 11005,
+    "raw_sha256": "4ae6415a8fef50b8fc70aa64e83afdb7084729188c96af34606e4900abed1cc8",
+    "binding_source": "verified source pin in fix_author"
+  },
+  {
+    "path": "proofs/oversize-baseline.json.gz",
+    "raw_bytes": 16777217,
+    "raw_sha256": "1003b1b5dc078189799a1216ce0f9fbcebb94e8b6b83c58c4b03345f07f94ced",
+    "binding_source": "exact archived fix_author large-json-proofs.json",
+    "external_raw_path": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-stage11/fix-evidence/red-public/oversize-top-level-control-baseline/oversize.json",
+    "external_raw_opened": false
+  },
+  {
+    "path": "proofs/exact-cap-positive.json.gz",
+    "raw_bytes": 16777216,
+    "raw_sha256": "28bd83447f77368cf399798854c9fee661c27e930bc42cbff93884c60accf5c6",
+    "binding_source": "exact archived fix_author large-json-proofs.json",
+    "external_raw_path": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-stage11/fix-evidence/frozen-focused/test_exact_control_cap_is_posi0/exact-cap.json",
+    "external_raw_opened": false
+  },
+  {
+    "path": "logs/alias/targeted-red.log.gz",
+    "raw_bytes": 17563,
+    "raw_sha256": "dd54703fc3b878c180d9757e263698651d8f7af28698ad6426cc83d163c55cfb",
+    "binding_source": "verified source pin in alias_author"
+  },
+  {
+    "path": "logs/alias/targeted-green.log.gz",
+    "raw_bytes": 99,
+    "raw_sha256": "0becb50d8f51974359e92415eab80f734b323f7a5c7a502e83098703486c56a5",
+    "binding_source": "verified source pin in alias_author"
+  },
+  {
+    "path": "logs/alias/final-focused.log.gz",
+    "raw_bytes": 4397,
+    "raw_sha256": "3b7977291a71d1602b6f0f54445afc7f977a95d1c2f7b891e5c041a3394a4737",
+    "binding_source": "verified source pin in alias_author"
+  }
+]

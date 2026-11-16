@@ -1,0 +1,508 @@
+{
+  "status": "success",
+  "sanitizers": [
+    "address",
+    "undefined"
+  ],
+  "halt_on_error": true,
+  "successful_empty_stderr_calls": 81,
+  "expected_refusal_calls": 1,
+  "tiny_writer_oracle_outputs": 40,
+  "differential_cases": 41,
+  "full_production_index_builds": 0,
+  "count_process_index_outputs": 0,
+  "calls": [
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "writer_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    },
+    {
+      "binary": "count_reference",
+      "exit_code": 1,
+      "stderr_bytes": 29,
+      "expected_success": false
+    },
+    {
+      "binary": "arithmetic_fixture",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "expected_success": true
+    }
+  ]
+}

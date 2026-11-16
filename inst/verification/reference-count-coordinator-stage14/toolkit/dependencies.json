@@ -1,0 +1,51 @@
+{
+  "reviewed_source_commit": "306aea51ea45eb8ae781b339029d2b1b93b5388f",
+  "behavioral_source_commit": "08d93bf4b8d010b8ae73bf20663ec41c975d73c2",
+  "runtime_sources": {
+    "sealed_count.py": {
+      "bytes": 33049,
+      "sha256": "094ca45bc80e5576c303ad392f5836f3297a5e48234f69ec81aad99c8789de50"
+    },
+    "count_reference.cpp": {
+      "bytes": 8595,
+      "sha256": "fb529bff15666905d39c5726d2f49638a15c8ee61d90880da1b13079a954a10b"
+    },
+    "guard_common.py": {
+      "bytes": 4894,
+      "sha256": "1cf033bbbac586234310794fbd2bfd3a7f3bc4116a15b4296de870b052fe86be"
+    },
+    "process_memory.py": {
+      "bytes": 1989,
+      "sha256": "aea36f87d4dd12ea41961f2cdd11198e527ccf17be2946a4351153cb96c0a0a5"
+    }
+  },
+  "external_required_identity_artifacts": {
+    "mss_header": {
+      "external_source": "/private/tmp/gwas-harvest-stage2/mss-context-format3-release/src/preservation_core.h",
+      "bytes": 49600,
+      "sha256": "4affcc7bdb761b1c86d22e2f72eb079434fbb2404d7f5c4d257fda2de52c6ddc",
+      "vendored": false
+    },
+    "producer_source": {
+      "external_source": "/private/tmp/gwas-harvest-stage2/biodb/src/biodb/gwas_reference_stream.py",
+      "bytes": 38909,
+      "sha256": "c6327b05066a8a00508c724cd90ac44a0df2ccaa86da43831b43d888dd2b9fb5",
+      "vendored": false,
+      "executed_by_coordinator": false
+    }
+  },
+  "native_binary": {
+    "vendored": false,
+    "historical_ordinary_binary_sha256": "fa133e2c65bf9ed4ea0cb52791293b19b3a01fbead95f089ae13c0dff2b6c7fd",
+    "qualification": "Historical macOS artifact identity only, not a universal portable binary pin; a future operator needs separately reviewed native provenance"
+  },
+  "python_dependencies": "Standard library plus co-located process_memory.py imported by guard_common.py; exercised interpreter provenance is in archived receipts",
+  "os_dependencies": [
+    "ps process metadata",
+    "macOS libproc or Linux /proc process-memory data"
+  ],
+  "supervision_scope": "Synchronous known worker/native-child lifetime only; not parent-exit/orphan-aware production supervision",
+  "full_reference_admitted": false,
+  "index_builds_executed": 0,
+  "decision": "no_admission"
+}

@@ -1,0 +1,48 @@
+{
+  "source_commit": "0674d09930be48541d5e5306a0e72ebcb1164fd8",
+  "source_sha256": "6d152cbd926f8949821a055f709023cecb8f20329b7f5873630b43c3b6fc069c",
+  "command": "existing-python -m pytest test_coordinator.py test_coordinator_corrections.py test_coordinator_integration.py -vv --basetemp=fix-evidence/frozen-focused",
+  "exit_code": 0,
+  "passed": 105,
+  "existing_coordinator_cases": 44,
+  "correction_cases": 58,
+  "tiny_guarded_integration_cases": 3,
+  "full_reference_admitted": false,
+  "full_reference_counts_executed": 0,
+  "full_production_index_builds": 0,
+  "count_process_index_outputs": 0,
+  "final_tiny_writer_oracles": 2,
+  "prior_intermediate_new_tiny_writer_oracles": 2,
+  "original20_field_parity": [
+    {
+      "build": "GRCh37",
+      "original_fields_equal": 20,
+      "source_rows": 3,
+      "original_stdout_sha256": "5ac3b69f50db12460558fcca1ba8943d2862bc174187b96b87f20290d7fd8e09"
+    },
+    {
+      "build": "GRCh38",
+      "original_fields_equal": 20,
+      "source_rows": 3,
+      "original_stdout_sha256": "5ac3b69f50db12460558fcca1ba8943d2862bc174187b96b87f20290d7fd8e09"
+    }
+  ],
+  "guard_status": "success",
+  "owned_censors": [
+    {
+      "case": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-stage11/fix-evidence/frozen-focused/test_actual_guard_censor_prese0/censored",
+      "status": "censored",
+      "reason": "Owned case deadline reached",
+      "natural_oom": false
+    },
+    {
+      "case": "/private/tmp/gwas-harvest-stage2/results/reference-count-coordinator-fixes-stage11/fix-evidence/frozen-focused/test_actual_guard_censor_prese1/censored",
+      "status": "censored",
+      "reason": "Owned case disk-growth cap reached",
+      "natural_oom": false
+    }
+  ],
+  "native_cpp_changed": false,
+  "sanitizers_rerun": false,
+  "new_performance_or_windows_qualification": false
+}
