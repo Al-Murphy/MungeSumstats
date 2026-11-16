@@ -1,0 +1,17 @@
+{
+  "status": "success",
+  "unchanged_differential_cases": 29,
+  "arithmetic_fixture": "passed",
+  "sanitizers": [
+    "address",
+    "undefined"
+  ],
+  "scope": "macOS/Apple compiler; no nativeWindows claim; no full/reference build",
+  "source_pins": {
+    "/private/tmp/gwas-harvest-stage2/mss-context-format3-release/src/preservation_core.h": "4affcc7bdb761b1c86d22e2f72eb079434fbb2404d7f5c4d257fda2de52c6ddc",
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-only-stage9/count_reference.cpp": "1aafb2ec27413a8f41e61e100d90c9391ce5240a93c1a602c3edc286872b313d",
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-only-stage9/writer_fixture.cpp": "750211af2f8125835372a45e220d281cd7fcab35c055f04d23b902d6a6ddbb64",
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-only-stage9/arithmetic_fixture.cpp": "a122feab39f3be5d06f92027f1233a9921fc0e666af2cebce97c39b9bcc41938",
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-only-stage9/test_count.py": "3fc51f1acbca3dff19b1f7a6c9566c2fff9cdd8ba5b7cffbbfca79e5211a3ad2"
+  }
+}

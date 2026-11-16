@@ -1,0 +1,297 @@
+{
+  "status": "success",
+  "unchanged_differential_cases": 29,
+  "native_calls": [
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "writer_fixture",
+      "stderr_hex": "",
+      "exit_code": 0
+    },
+    {
+      "binary": "count_reference",
+      "stderr_hex": "",
+      "exit_code": 0
+    }
+  ],
+  "arithmetic_fixture": {
+    "exit_code": 0,
+    "stderr_hex": ""
+  },
+  "sanitizers": [
+    "address",
+    "undefined"
+  ],
+  "halt_on_error": true,
+  "source_test_sha256": "3fc51f1acbca3dff19b1f7a6c9566c2fff9cdd8ba5b7cffbbfca79e5211a3ad2",
+  "earlier_run_limitation": "Earlier runner checked exit statuses but did not inspect successful subprocess stderr; this fresh strict run closes that harness gap"
+}

@@ -1,0 +1,57 @@
+{
+  "source_commit": "1bf1a08685488798496e9d7978b1792dbd290a9d",
+  "source_tree": "7cce0bd3043555319835c3d878b631ab8013f30a",
+  "tracked_files_verified": 10,
+  "source_clean_before_and_after": true,
+  "author_index_and_all_entries_verified": true,
+  "header_sha256": "4affcc7bdb761b1c86d22e2f72eb079434fbb2404d7f5c4d257fda2de52c6ddc",
+  "builds": [
+    {
+      "command": [
+        "c++",
+        "-std=c++17",
+        "-O2",
+        "-I",
+        "/private/tmp/gwas-harvest-stage2/mss-context-format3-release/src",
+        "/private/tmp/gwas-harvest-stage2/reference-count-independent-stage9/count_reference.cpp",
+        "-o",
+        "/private/tmp/gwas-harvest-stage2/reference-count-independent-stage9/count_reference"
+      ],
+      "returncode": 0,
+      "binary_sha256": "fefe47feca68204d54915d302f5cd27daf21994b67d3dd4c965cc74ff778fe50"
+    },
+    {
+      "command": [
+        "c++",
+        "-std=c++17",
+        "-O2",
+        "-I",
+        "/private/tmp/gwas-harvest-stage2/mss-context-format3-release/src",
+        "/private/tmp/gwas-harvest-stage2/reference-count-independent-stage9/writer_fixture.cpp",
+        "-o",
+        "/private/tmp/gwas-harvest-stage2/reference-count-independent-stage9/writer_fixture"
+      ],
+      "returncode": 0,
+      "binary_sha256": "666e13b25e81207494cb168994dcfe3eb296870ac88edd493beb03b811cc9f80"
+    },
+    {
+      "command": [
+        "c++",
+        "-std=c++17",
+        "-O2",
+        "-I",
+        "/private/tmp/gwas-harvest-stage2/mss-context-format3-release/src",
+        "/private/tmp/gwas-harvest-stage2/reference-count-independent-stage9/arithmetic_fixture.cpp",
+        "-o",
+        "/private/tmp/gwas-harvest-stage2/reference-count-independent-stage9/arithmetic_fixture"
+      ],
+      "returncode": 0,
+      "binary_sha256": "6f4009856f3a19a292ffb3f2dfd3c85b666fff1fcd56f7c9f7d12337facbb654"
+    }
+  ],
+  "author_cases": "29 passed",
+  "overflow_control": "passed with empty stderr",
+  "additional_small_cases": 22,
+  "decision": "no blocking finding for count-only diagnostic",
+  "limits": "No repeat prefix1M/full-input count, index admission, actual MSS benchmark, cloud/provider/credential operation or native Windows qualification."
+}

@@ -1,0 +1,29 @@
+{
+  "command": [
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-only-stage9/count_reference",
+    "/private/tmp/gwas-harvest-stage2/results/reference-index-capacity-v1/reference.fa",
+    "/private/tmp/gwas-harvest-stage2/results/reference-index-capacity-v1/prefix-sites.tsv",
+    "3"
+  ],
+  "pid": 99222,
+  "status": "success",
+  "exit_code": 0,
+  "reason": null,
+  "natural_oom": false,
+  "wall_seconds": 2.864373416872695,
+  "samples": 22,
+  "peak_process_tree": {
+    "rss_bytes": 6389760,
+    "physical_footprint_bytes": 5292416,
+    "conservative_guard_bytes": 6389760,
+    "processes": 1
+  },
+  "min_free_bytes": 457121832960,
+  "peak_owned_case_bytes": 3606,
+  "limits": {
+    "memory_bytes": 8589934592,
+    "minimum_free_bytes": 171798691840,
+    "case_disk_bytes": 16777216
+  },
+  "scope": "Full owned process tree: RSS, macOS physical footprint and sum(max(RSS,footprint)); Linux guard includes swap. No other workload is signaled."
+}

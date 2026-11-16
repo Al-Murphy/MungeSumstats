@@ -1,0 +1,51 @@
+[
+  {
+    "path": "/private/tmp/gwas-harvest-stage2/results/reference-index-capacity-v1/reference.fa",
+    "bytes": 3339671278,
+    "sha256": "d88cc10556244b91b044294067ad166d9512bec6bbc104fb5c9f2d480af302fe",
+    "inode": 393875385,
+    "mtime_ns": 1794784792519699351
+  },
+  {
+    "path": "/private/tmp/gwas-harvest-stage2/results/reference-index-capacity-v1/prefix-sites.tsv",
+    "bytes": 31408384,
+    "sha256": "3136a1b6bb0dd7e6bba90410bacf47ac2e10eaab0d07e190a38a1be8ed066372",
+    "inode": 393875383,
+    "mtime_ns": 1794784791580354724
+  },
+  {
+    "path": "/private/tmp/gwas-harvest-stage2/mss-context-format3-release/src/preservation_core.h",
+    "bytes": 49600,
+    "sha256": "4affcc7bdb761b1c86d22e2f72eb079434fbb2404d7f5c4d257fda2de52c6ddc",
+    "inode": 397367977,
+    "mtime_ns": 1794830774492852989
+  },
+  {
+    "path": "/private/tmp/gwas-harvest-stage2/results/reference-count-only-stage9/count_reference",
+    "bytes": 88816,
+    "sha256": "fefe47feca68204d54915d302f5cd27daf21994b67d3dd4c965cc74ff778fe50",
+    "inode": 397498626,
+    "mtime_ns": 1794834342596939992
+  },
+  {
+    "path": "/private/tmp/gwas-harvest-stage2/results/reference-count-only-stage9/count_reference.cpp",
+    "bytes": 7569,
+    "sha256": "1aafb2ec27413a8f41e61e100d90c9391ce5240a93c1a602c3edc286872b313d",
+    "inode": 397494106,
+    "mtime_ns": 1794834341425765462
+  },
+  {
+    "path": "/private/tmp/gwas-harvest-stage2/results/reference-count-only-stage9/test_count.py",
+    "bytes": 3482,
+    "sha256": "3fc51f1acbca3dff19b1f7a6c9566c2fff9cdd8ba5b7cffbbfca79e5211a3ad2",
+    "inode": 397494108,
+    "mtime_ns": 1794834315606434753
+  },
+  {
+    "path": "/private/tmp/gwas-harvest-stage2/results/reference-count-only-stage9/qualify_prefix.py",
+    "bytes": 5017,
+    "sha256": "08a941c3ea83e3601cab262536819d847ff8febf84d06756a0f3db2570c96b93",
+    "inode": 397503202,
+    "mtime_ns": 1794834412650146725
+  }
+]

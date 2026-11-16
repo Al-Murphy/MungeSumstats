@@ -1,0 +1,36 @@
+{
+  "external_inputs": "Frozen3.34GBFASTA/31MBprefix are pinned in profile; no binaries/indexes/active preparations are vendored",
+  "generated_binaries": {
+    "results/reference-count-only-stage9/arithmetic_fixture": {
+      "archive": "generated native binary; rebuild from frozen source/flags",
+      "bytes": 88928,
+      "sha256": "6f4009856f3a19a292ffb3f2dfd3c85b666fff1fcd56f7c9f7d12337facbb654"
+    },
+    "results/reference-count-only-stage9/count_reference": {
+      "archive": "generated native binary; rebuild from frozen source/flags",
+      "bytes": 88816,
+      "sha256": "fefe47feca68204d54915d302f5cd27daf21994b67d3dd4c965cc74ff778fe50"
+    },
+    "results/reference-count-only-stage9/sanitized/arithmetic_fixture": {
+      "archive": "generated native binary; rebuild from frozen source/flags",
+      "bytes": 373024,
+      "sha256": "97b2790aa63665f1602ec2987c55bc9255f029fe63c5e67ef5f0e7272f88cac7"
+    },
+    "results/reference-count-only-stage9/sanitized/count_reference": {
+      "archive": "generated native binary; rebuild from frozen source/flags",
+      "bytes": 372704,
+      "sha256": "5b5c8580b6ee7f8f53e398cb3f92fa14dd77c2a18bde910ad278911edfb2599b"
+    },
+    "results/reference-count-only-stage9/sanitized/writer_fixture": {
+      "archive": "generated native binary; rebuild from frozen source/flags",
+      "bytes": 469504,
+      "sha256": "216f51b8de5b811f93534d6d3a75c216b5fe5906e783e05ff511c98588180b52"
+    },
+    "results/reference-count-only-stage9/writer_fixture": {
+      "archive": "generated native binary; rebuild from frozen source/flags",
+      "bytes": 108320,
+      "sha256": "666e13b25e81207494cb168994dcfe3eb296870ac88edd493beb03b811cc9f80"
+    }
+  },
+  "private_account_data": "none copied"
+}

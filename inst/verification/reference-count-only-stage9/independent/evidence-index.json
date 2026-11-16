@@ -1,0 +1,39 @@
+{
+  "source_revision": "1bf1a08685488798496e9d7978b1792dbd290a9d",
+  "decision": "GREEN-count-only-diagnostic",
+  "findings": [],
+  "files": {
+    "/private/tmp/gwas-harvest-stage2/reports/reference-count-only-independent-review-stage9.md": {
+      "sha256": "4577b0fb67c72aaa19803eebbb5177eea4f77eb22258215ca806598978d5f26e",
+      "size_bytes": 5844
+    },
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-independent-stage9/arithmetic_fixture-build.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-independent-stage9/author-29-fresh.log": {
+      "sha256": "5a9efc81d2c070c94fbcd831896261d6cd37fe96300e8c06f6f51fc5295a4fed",
+      "size_bytes": 99
+    },
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-independent-stage9/count_reference-build.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-independent-stage9/independent-small-cases.json": {
+      "sha256": "623d5e2f4790ed93ab728a1b4687b9a5f1f8c64f9ac2b9cda3db4a1f933e042e",
+      "size_bytes": 9016
+    },
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-independent-stage9/run_review.py": {
+      "sha256": "aa43cd3ff9f73ba483aa11ffb47a378268e287f7406367c0d3fa1fa236ce95f8",
+      "size_bytes": 5343
+    },
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-independent-stage9/verification.json": {
+      "sha256": "a9ee97f632839f0891f329e7aa56ed0ec91bd1ae20861d25f5a7edebfa4dcfc2",
+      "size_bytes": 2203
+    },
+    "/private/tmp/gwas-harvest-stage2/results/reference-count-independent-stage9/writer_fixture-build.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "status": "success",
+  "counts": {
+    "format_version": 3,
+    "source_rows": 1000000,
+    "source_bytes": 31408384,
+    "record_rows": 2242071,
+    "site_records": 1000000,
+    "allele_records": 1242071,
+    "invalid_positions": 0,
+    "raw_alt_tokens": 1242077,
+    "rejected_alts": 6,
+    "raw_key_rows": 4726213,
+    "raw_sort_bytes": 100705522,
+    "final_key_rows": 3484369,
+    "keys_bytes": 75230231,
+    "max_source_line_bytes": 8663,
+    "max_key_row_bytes": 24,
+    "max_record_bytes": 8650,
+    "max_raw_keys_per_record": 3,
+    "records_bytes": 63883154,
+    "rejected_bytes": 167,
+    "offsets_bytes": 27874952
+  },
+  "retained_logical_upper_bytes": 199471389,
+  "phase_logical_upper_bytes": 268768527,
+  "not_an_admission": "Allocation/filesystem allowance, concurrent reservations and170GiB planning reserve remain separate; both full source preparations remain unsealed",
+  "guard": {
+    "command": [
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-only-stage9/count_reference",
+      "/private/tmp/gwas-harvest-stage2/results/reference-index-capacity-v1/reference.fa",
+      "/private/tmp/gwas-harvest-stage2/results/reference-index-capacity-v1/prefix-sites.tsv",
+      "3"
+    ],
+    "pid": 99222,
+    "status": "success",
+    "exit_code": 0,
+    "reason": null,
+    "natural_oom": false,
+    "wall_seconds": 2.864373416872695,
+    "samples": 22,
+    "peak_process_tree": {
+      "rss_bytes": 6389760,
+      "physical_footprint_bytes": 5292416,
+      "conservative_guard_bytes": 6389760,
+      "processes": 1
+    },
+    "min_free_bytes": 457121832960,
+    "peak_owned_case_bytes": 3606,
+    "limits": {
+      "memory_bytes": 8589934592,
+      "minimum_free_bytes": 171798691840,
+      "case_disk_bytes": 16777216
+    },
+    "scope": "Full owned process tree: RSS, macOS physical footprint and sum(max(RSS,footprint)); Linux guard includes swap. No other workload is signaled."
+  },
+  "all_input_source_binary_pins_unchanged": true
+}

@@ -1,0 +1,6 @@
+{
+  "test": "test_format_suffix_refused",
+  "pytest": "1 failed in0.03s; expectednonzero, observedcountbinaryexit0 andcountJSON",
+  "source_sha256": "9a5bbf8aaf95acb68032ffc3496271697a696b44ffe828723965b7716007e2ed",
+  "scope": "Diagnostic CLI version parser accepted3suffix; not an MSS product change"
+}

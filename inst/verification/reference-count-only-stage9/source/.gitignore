@@ -1,0 +1,11 @@
+/.remember/
+/.pytest_cache/
+/__pycache__/
+/count_reference
+/writer_fixture
+/arithmetic_fixture
+/sanitized/
+/sanitized-strict/
+/prefix-1M-v1/
+/*.log
+/*.json
