@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "scope": "Independent static packaging/erratum review only; no target execution or admission",
+  "spec_verdict": "PASS",
+  "quality_verdict": "PASS",
+  "timing_finding": "ADDRESSED",
+  "entries": [
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/reports/final-scale-package-independent-stage17.md",
+      "bytes": 5929,
+      "sha256": "e1a24e2846386bcc6c18a95d0ade476dda1106a802dd501a9afedce0d92ace95"
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/final-scale-package-independent-stage17/static-checks.json",
+      "bytes": 4782,
+      "sha256": "a1615505dfa7178b9649e965d5e11c1dddf8a052968312a882f8751d81b30ef4"
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/final-scale-package-stage17/evidence-index.json",
+      "bytes": 1417,
+      "sha256": "27de73a21ecfc67f0ac22b4cbd6ea21334a343b58f0c130b0490298edf6019a7"
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/final-scale-package-stage17/fix-round1-evidence-index.json",
+      "bytes": 1482,
+      "sha256": "23647854174287811a2c07d15d536860cdae6e2af4a1fb1ae749578692d3d9bf"
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/reports/final-scale-package-stage17-addendum.md",
+      "bytes": 3562,
+      "sha256": "34ff9e82b5b9ce933c1246a9ded1406bc24c457e507cb00a0b63ecb43bdfce84"
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/harvest/docs/verification/stage2/mss-bench.md",
+      "bytes": 14143,
+      "sha256": "5d66dc6297703ed7ab9ffb109b54c7c44500c9bbfafacad77a81ab8baa68a06a"
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/harvest-final-scale-package-stage17/docs/verification/stage17-final-mss-scale/index.json",
+      "bytes": 9268,
+      "sha256": "53ead16a1621846eeea7e6187c25767441bafdd295cfef2e3fe1aa2990d38e16"
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/harvest-final-scale-package-stage17/docs/verification/stage17-final-mss-scale-release.json",
+      "bytes": 1003,
+      "sha256": "6fc03192595f7e2cf7fb6d54761a22292555122cd696179a0e551f7414dbc097"
+    },
+    {
+      "path": "/private/tmp/gwas-harvest-stage2/results/harvest-final-scale-package-stage17/docs/verification/stage17-final-mss-scale.tar.gz",
+      "bytes": 27866,
+      "sha256": "9293227d361c1477830d75d547747902d47fe8dbee4b50d151d4a6b380cf3339"
+    }
+  ]
+}
