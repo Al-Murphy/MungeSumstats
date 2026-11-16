@@ -124,17 +124,28 @@ test_that('explicit rebinding rereads the manifest and owns a fresh physical FAS
         expect_identical(harmonise_sumstats(f$input,restored,frequency_type='EAF')$normalized,f$baseline$normalized)
         expect_false(identical(second$.native,restored$.native))
         expect_identical(second$fasta_binding,restored$fasta_binding)
-        # A physical runtime mutation invalidates this binding, even with verify=FALSE.
+        expect_identical(.relocation_bundle(f$reference$path),f$bundle)
+        # Windows can deny timestamp writes while a native stream is open.
+        # Assert the mutation outcome rather than treating a failed write as a
+        # changed file. A successful timestamp change must invalidate reuse.
         before_stat <- file.info(second_path)[,c('size','mtime')]
         changed_time <- Sys.setFileTime(second_path,Sys.time()+10)
         after_stat <- file.info(second_path)[,c('size','mtime')]
-        cat('relocation time diagnostic: format=',format,
-            ' set_time=',changed_time,
-            ' before=',as.numeric(before_stat$mtime),
-            ' after=',as.numeric(after_stat$mtime),
-            ' signature_changed=',!identical(before_stat,after_stat),'\n',sep='')
+        if (isTRUE(changed_time)) {
+            expect_false(identical(before_stat,after_stat))
+            expect_error(harmonise_sumstats(f$input,second,verify=FALSE),'checksum|stat')
+        } else {
+            expect_identical(after_stat,before_stat)
+            expect_identical(harmonise_sumstats(f$input,second,frequency_type='EAF',verify=FALSE)$normalized,
+                             f$baseline$normalized)
+        }
+        # source.tsv is not held by a native stream. A real size mutation tests
+        # the complete binding's stat guard on every OS, including Windows.
+        artifact <- file.path(f$reference$path,'source.tsv')
+        previous_size <- file.info(artifact)$size
+        cat('\n',file=artifact,append=TRUE)
+        expect_equal(file.info(artifact)$size,previous_size+1)
         expect_error(harmonise_sumstats(f$input,second,verify=FALSE),'checksum|stat')
-        expect_identical(.relocation_bundle(f$reference$path),f$bundle)
         rm(first,second,restored,poisoned);invisible(gc())
     }
 })
