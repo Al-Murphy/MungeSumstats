@@ -1,0 +1,233 @@
+{
+  "conclusion": "success",
+  "headSha": "a167b192137a31c684fbac1b4f82f6a4318c0670",
+  "jobs": [
+    {
+      "completedAt": "2026-11-15T23:51:05Z",
+      "conclusion": "success",
+      "databaseId": 133005209859,
+      "name": "standalone (windows-latest)",
+      "startedAt": "2026-11-15T23:50:06Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-11-15T23:50:09Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-11-15T23:50:07Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-15T23:50:14Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-11-15T23:50:09Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-15T23:50:36Z",
+          "conclusion": "success",
+          "name": "Run r-lib/actions/setup-r@v2",
+          "number": 3,
+          "startedAt": "2026-11-15T23:50:14Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-15T23:50:39Z",
+          "conclusion": "success",
+          "name": "Install standalone test dependencies",
+          "number": 4,
+          "startedAt": "2026-11-15T23:50:36Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-15T23:51:01Z",
+          "conclusion": "success",
+          "name": "Compile and test native R interface without Bioconductor dependencies",
+          "number": 5,
+          "startedAt": "2026-11-15T23:50:39Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-15T23:51:01Z",
+          "conclusion": "skipped",
+          "name": "Compile standalone C++ gold fixtures",
+          "number": 6,
+          "startedAt": "2026-11-15T23:51:01Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-15T23:51:03Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 12,
+          "startedAt": "2026-11-15T23:51:01Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-15T23:51:03Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 13,
+          "startedAt": "2026-11-15T23:51:03Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/Al-Murphy/MungeSumstats/actions/runs/43776925410/job/133005209859"
+    },
+    {
+      "completedAt": "2026-11-15T23:53:16Z",
+      "conclusion": "success",
+      "databaseId": 133005210193,
+      "name": "standalone (ubuntu-latest)",
+      "startedAt": "2026-11-15T23:50:05Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-11-15T23:50:07Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-11-15T23:50:06Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-15T23:50:08Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-11-15T23:50:07Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-15T23:50:40Z",
+          "conclusion": "success",
+          "name": "Run r-lib/actions/setup-r@v2",
+          "number": 3,
+          "startedAt": "2026-11-15T23:50:08Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-15T23:52:54Z",
+          "conclusion": "success",
+          "name": "Install standalone test dependencies",
+          "number": 4,
+          "startedAt": "2026-11-15T23:50:40Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-15T23:53:06Z",
+          "conclusion": "success",
+          "name": "Compile and test native R interface without Bioconductor dependencies",
+          "number": 5,
+          "startedAt": "2026-11-15T23:52:54Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-15T23:53:13Z",
+          "conclusion": "success",
+          "name": "Compile standalone C++ gold fixtures",
+          "number": 6,
+          "startedAt": "2026-11-15T23:53:06Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-15T23:53:14Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 12,
+          "startedAt": "2026-11-15T23:53:13Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-15T23:53:14Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 13,
+          "startedAt": "2026-11-15T23:53:14Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/Al-Murphy/MungeSumstats/actions/runs/43776925410/job/133005210193"
+    },
+    {
+      "completedAt": "2026-11-15T23:51:24Z",
+      "conclusion": "success",
+      "databaseId": 133005210385,
+      "name": "standalone (macos-latest)",
+      "startedAt": "2026-11-15T23:50:06Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-11-15T23:50:08Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-11-15T23:50:07Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-15T23:50:10Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-11-15T23:50:08Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-15T23:51:00Z",
+          "conclusion": "success",
+          "name": "Run r-lib/actions/setup-r@v2",
+          "number": 3,
+          "startedAt": "2026-11-15T23:50:10Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-15T23:51:04Z",
+          "conclusion": "success",
+          "name": "Install standalone test dependencies",
+          "number": 4,
+          "startedAt": "2026-11-15T23:51:00Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-15T23:51:15Z",
+          "conclusion": "success",
+          "name": "Compile and test native R interface without Bioconductor dependencies",
+          "number": 5,
+          "startedAt": "2026-11-15T23:51:04Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-15T23:51:20Z",
+          "conclusion": "success",
+          "name": "Compile standalone C++ gold fixtures",
+          "number": 6,
+          "startedAt": "2026-11-15T23:51:15Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-15T23:51:20Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 12,
+          "startedAt": "2026-11-15T23:51:20Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-15T23:51:21Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 13,
+          "startedAt": "2026-11-15T23:51:20Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/Al-Murphy/MungeSumstats/actions/runs/43776925410/job/133005210385"
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/Al-Murphy/MungeSumstats/actions/runs/43776925410"
+}

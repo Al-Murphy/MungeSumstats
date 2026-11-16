@@ -1,0 +1,14 @@
+{
+  "standalone (windows-latest)": {
+    "blocks": 29,
+    "assertions": 425
+  },
+  "standalone (ubuntu-latest)": {
+    "blocks": 29,
+    "assertions": 425
+  },
+  "standalone (macos-latest)": {
+    "blocks": 29,
+    "assertions": 425
+  }
+}

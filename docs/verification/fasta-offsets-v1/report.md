@@ -50,7 +50,7 @@ The index-size sample does not establish full-genome or complete-history costs.
   **173,355 sequence queries** against source-byte oracles. Twenty adversarial
   cases gave the same nine errors and eleven successes. The review is GREEN.
 * The standalone R harness includes the new tests. Native Windows/macOS/Linux CI
-  is a separate receipt to be added after the reviewed commit is pushed.
+  passed as recorded below.
 
 Preserved setup diagnostics include an initial CRLF-header assumption failure
 in the operator sample script, and a standalone invocation without the required
@@ -65,3 +65,13 @@ this pre-existing unsupported-layout limitation. Uniform LF/CRLF and different
 endings between contigs were verified. The production derived FASTA has uniform
 layout. No source/reference files were modified, and no full production MSS
 reference or 1,000-input pilot was certified by this sample.
+
+## Native CI receipt
+
+[Run 43776925410](https://github.com/Al-Murphy/MungeSumstats/actions/runs/43776925410)
+passed on native Windows, macOS and Ubuntu at source/docs commit
+`a167b192137a31c684fbac1b4f82f6a4318c0670`. Each platform passed 29 R test blocks
+and 425 assertions, including both new FASTA-layout blocks. The separate C++
+gold fixtures passed on macOS and Ubuntu; that shell step is intentionally
+not run on Windows, where the R interface itself compiled the portable C++ core.
+See `native-ci.json`, `native-ci.log` and `native-ci-counts.json`.
