@@ -1,0 +1,22 @@
+{
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "Rscript",
+    "--vanilla",
+    "/private/tmp/gwas-harvest-stage2/results/paired-site-context-v5/full-suite/run-full-suite.R"
+  ],
+  "pid": 93471,
+  "status": "success",
+  "max_memory_bytes": 8589934592,
+  "min_free_bytes": 171798691840,
+  "exit_code": 0,
+  "reason": null,
+  "natural_oom": false,
+  "elapsed_seconds": 164.26867404207587,
+  "samples": 574,
+  "peak_rss_bytes": 6085656576,
+  "peak_physical_footprint_bytes": 5852599792,
+  "peak_guard_bytes": 6086787312,
+  "minimum_free_bytes": 529460428800
+}

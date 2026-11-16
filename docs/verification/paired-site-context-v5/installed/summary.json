@@ -1,0 +1,21 @@
+{
+  "source_commit": "ba91c5598083c3511a91da81f3ce3b7bc66f7d54",
+  "library": "/private/tmp/gwas-harvest-stage2/Rlib/paired-site-context-v5",
+  "dll_sha256": "79258a07496cdfd2e0e687d53d940219920e87d4b0ddf5c97f061acc4cae50fc",
+  "blocks": 212,
+  "passed_assertions": 1306,
+  "failed_assertions": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "file": "test-issues_validate.R",
+      "test": "#49/#114: ref_genome=NULL validates; install check uses dbSNP"
+    },
+    {
+      "file": "test-issues_validate.R",
+      "test": "#98/#200: dbSNP=155 validates; unknown or invalid versions error"
+    }
+  ],
+  "warnings": 2,
+  "scope": "Installed legacy and preservation package suite; not a new performance matrix or full production reference claim"
+}
