@@ -1,0 +1,18 @@
+{
+  "harvest": {
+    "base_commit": "d3c09a1628bf08b89f79e6f55c022907221fe72b",
+    "directory": "docs/verification/stage14-reference-count",
+    "files_unchanged": 94,
+    "index_sha256": "d83bdbc25c9de77b95bcc17ad86d342c51651b65cc8112b8dca23175cef03afd",
+    "index_bytes": 19687,
+    "scope": "Every old payload/index equals its base Git blob; not copied into the new archive"
+  },
+  "mss": {
+    "base_commit": "d7806f5670c819d8c74f68dad67650ddc48d2984",
+    "directory": "inst/verification/reference-count-coordinator-stage14",
+    "files_unchanged": 94,
+    "index_sha256": "d83bdbc25c9de77b95bcc17ad86d342c51651b65cc8112b8dca23175cef03afd",
+    "index_bytes": 19687,
+    "scope": "Every old payload/index equals its base Git blob; not copied into the new archive"
+  }
+}

@@ -1,0 +1,889 @@
+"""Portable, bounded-memory preparation of the MSS preservation-2 interchange.
+
+No download, subprocess, sequence normalisation or build inference occurs here.
+The caller supplies immutable local sources and exact expected source receipts.
+"""
+
+from __future__ import annotations
+
+import bz2
+import csv
+import gzip
+import hashlib
+import json
+import re
+import shutil
+import sqlite3
+import tempfile
+from collections import OrderedDict
+from pathlib import Path
+
+COLUMNS = ("chr", "pos", "ref", "alt", "id", "aliases")
+RSID = re.compile(r"rs[1-9][0-9]*\Z")
+DNA = re.compile(r"[ACGT]+\Z")
+FASTA_DNA = b"ACGTRYSWKMBDHVNacgtryswkmbdhvn"
+MAX_LINE = 8 * 1024 * 1024
+REF_MISMATCH_POLICIES = frozenset(("strict_error", "quarantine_compatible_ambiguity"))
+IUPAC_BASES = {
+    code: frozenset(bases)
+    for code, bases in (
+        ("A", "A"),
+        ("C", "C"),
+        ("G", "G"),
+        ("T", "T"),
+        ("R", "AG"),
+        ("Y", "CT"),
+        ("S", "CG"),
+        ("W", "AT"),
+        ("K", "GT"),
+        ("M", "AC"),
+        ("B", "CGT"),
+        ("D", "AGT"),
+        ("H", "ACT"),
+        ("V", "ACG"),
+        ("N", "ACGT"),
+    )
+}
+
+
+def _text(path):
+    path = Path(path)
+    if path.suffix == ".gz":
+        return gzip.open(path, "rt", encoding="utf-8", newline="")
+    if path.suffix == ".bz2":
+        return bz2.open(path, "rt", encoding="utf-8", newline="")
+    return path.open(encoding="utf-8", newline="")
+
+
+def _lines(handle, limit=MAX_LINE):
+    while line := handle.readline(limit + 1):
+        if len(line) > limit:
+            raise ValueError("source line exceeds explicit line limit")
+        yield line.rstrip("\r\n")
+
+
+class IndexedFasta:
+    """Seek a plain fixed-width FASTA with a bounded LRU base-page cache.
+
+    Index construction scans once, retaining only contig metadata. CRLF and a
+    short final line are supported; ragged interior lines are rejected. No .fai
+    is trusted independently of the FASTA bytes.
+    """
+
+    def __init__(self, path, *, page_size=65536, cache_pages=8):
+        if page_size < 1 or cache_pages < 1:
+            raise ValueError("positive FASTA cache bounds required")
+        self.path = Path(path)
+        self.handle = self.path.open("rb")
+        self.page_size, self.cache_pages = page_size, cache_pages
+        self.cache, self.contigs = OrderedDict(), {}
+        try:
+            self._index()
+        except BaseException:
+            self.handle.close()
+            raise
+
+    def _index(self):
+        name, length, offset, width, span, short = None, 0, 0, 0, 0, False
+        while True:
+            start = self.handle.tell()
+            line = self.handle.readline(MAX_LINE + 1)
+            if len(line) > MAX_LINE:
+                raise ValueError("FASTA line exceeds explicit line limit")
+            if not line or line.startswith(b">"):
+                if name is not None:
+                    if not length:
+                        raise ValueError("empty FASTA contig")
+                    self.contigs[name] = (length, offset, width, span)
+                if not line:
+                    break
+                name = line[1:].split()[0].decode("ascii")
+                if name in self.contigs or not name:
+                    raise ValueError("duplicate or empty FASTA contig")
+                length, offset, width, span, short = 0, self.handle.tell(), 0, 0, False
+                continue
+            if name is None:
+                raise ValueError("FASTA sequence before header (compressed FASTA unsupported)")
+            bases = line.rstrip(b"\r\n")
+            if not bases or bases.translate(None, FASTA_DNA):
+                raise ValueError("invalid FASTA bases")
+            if not width:
+                width, span, offset = len(bases), len(line), start
+            elif (
+                short
+                or len(bases) > width
+                or (len(bases) == width and len(line) != span and line.endswith(b"\n"))
+            ):
+                raise ValueError("ragged FASTA interior line")
+            short = len(bases) < width or len(line) < span
+            length += len(bases)
+        if not self.contigs:
+            raise ValueError("empty FASTA")
+
+    def _read(self, chrom, start, count):
+        _, offset, width, span = self.contigs[chrom]
+        pieces = []
+        while count:
+            line, col = divmod(start, width)
+            size = min(count, width - col)
+            self.handle.seek(offset + line * span + col)
+            pieces.append(self.handle.read(size))
+            start, count = start + size, count - size
+        return b"".join(pieces).decode("ascii").upper()
+
+    def fetch(self, chrom, pos, length):
+        if (
+            chrom not in self.contigs
+            or pos < 1
+            or length < 1
+            or pos + length - 1 > self.contigs[chrom][0]
+        ):
+            raise ValueError(f"FASTA interval out of bounds: {chrom}:{pos}+{length}")
+        chunks, start, remaining = [], pos - 1, length
+        while remaining:
+            page, col = divmod(start, self.page_size)
+            key = chrom, page
+            if key not in self.cache:
+                base = page * self.page_size
+                self.cache[key] = self._read(
+                    chrom, base, min(self.page_size, self.contigs[chrom][0] - base)
+                )
+                if len(self.cache) > self.cache_pages:
+                    self.cache.popitem(last=False)
+            self.cache.move_to_end(key)
+            size = min(remaining, len(self.cache[key]) - col)
+            chunks.append(self.cache[key][col : col + size])
+            start, remaining = start + size, remaining - size
+        return "".join(chunks)
+
+    def close(self):
+        self.handle.close()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        self.close()
+
+
+def contig_map(report, fasta_contigs, *, assembly, build=None):
+    """Map only aliases explicitly listed together by the NCBI assembly report.
+
+    Assigned-Molecule is deliberately excluded: alternate loci share that
+    chromosome label without sharing its sequence. A FASTA must use one exact
+    report identifier per included sequence, with the report's sequence length.
+    """
+    mapping, found, assembly_name = {}, False, None
+    with _text(report) as fh:
+        for line in _lines(fh):
+            if line.startswith("#"):
+                if line.startswith("# Assembly name:"):
+                    assembly_name = line.split(":", 1)[1].strip()
+                if line.strip() == "# RefSeq assembly accession: " + assembly:
+                    found = True
+                continue
+            fields = line.split("\t")
+            if len(fields) != 10:
+                raise ValueError("NCBI assembly report must have ten fields")
+            aliases = {fields[i] for i in (0, 4, 6, 9)} - {"na", ""}
+            names = aliases.intersection(fasta_contigs)
+            if len(names) > 1:
+                raise ValueError("ambiguous FASTA aliases in assembly report")
+            if not names:
+                continue
+            name = next(iter(names))
+            if int(fields[8]) != fasta_contigs[name][0]:
+                raise ValueError("assembly report FASTA length mismatch")
+            for alias in aliases:
+                if alias in mapping and mapping[alias] != name:
+                    raise ValueError("ambiguous assembly report alias")
+                mapping[alias] = name
+    if not found:
+        raise ValueError("assembly accession mismatch or missing from report")
+    if build is not None and (
+        assembly_name is None
+        or not (assembly_name == build or assembly_name.startswith(build + "."))
+    ):
+        raise ValueError("assembly build label mismatch")
+    if set(fasta_contigs) - set(mapping):
+        raise ValueError("FASTA contig absent from assembly report")
+    return mapping
+
+
+CANONICAL_CONTIG_POLICY = "ncbi-report-primary-sequence-name-1"
+PRIMARY_CHROMOSOMES = {str(i) for i in range(1, 23)} | {"X", "Y", "MT"}
+REFSEQ_ACCESSION = re.compile(r"[A-Z]{2}_[0-9]+\.[0-9]+\Z")
+
+
+def canonical_contig_policy(report, fasta_contigs, *, assembly, build):
+    """Choose names using source report roles, never inferred sequence equivalence.
+
+    Primary assembled chromosomes use their exact report Sequence-Name. Every
+    other included sequence uses its versioned RefSeq accession. The complete
+    explicit report alias set maps to that chosen name; absent FASTA sequences
+    do not become reference contigs.
+    """
+    source_aliases = contig_map(report, fasta_contigs, assembly=assembly, build=build)
+    originals, records = {}, {}
+    with _text(report) as fh:
+        for line in _lines(fh):
+            if line.startswith("#"):
+                continue
+            fields = line.split("\t")
+            matches = {fields[i] for i in (0, 4, 6, 9)}.intersection(fasta_contigs)
+            if not matches:
+                continue
+            if fields[5] != "=":
+                raise ValueError(
+                    "assembly report does not establish sequence equivalence for all aliases"
+                )
+            original = next(iter(matches))
+            primary = fields[1] == "assembled-molecule" and fields[0] in PRIMARY_CHROMOSOMES
+            canonical = fields[0] if primary else fields[6]
+            if not primary and not REFSEQ_ACCESSION.fullmatch(canonical):
+                raise ValueError("nonprimary contig requires a versioned RefSeq accession")
+            if original in originals or canonical in records:
+                raise ValueError("ambiguous canonical contig policy")
+            originals[original] = canonical
+            records[canonical] = dict(
+                source_contig=original,
+                canonical_contig=canonical,
+                role=fields[1],
+                sequence_name=fields[0],
+                genbank_accession=fields[4],
+                refseq_accession=fields[6],
+                ucsc_name=fields[9],
+                length=int(fields[8]),
+            )
+    aliases = {alias: originals[original] for alias, original in source_aliases.items()}
+    for canonical in records:
+        if aliases.get(canonical) != canonical:
+            raise ValueError("ambiguous canonical alias mapping")
+    return originals, aliases, records
+
+
+def _sequence_digests(path):
+    """Hash each exact case-preserved base stream, excluding FASTA formatting."""
+    results, name, length, digest = {}, None, 0, None
+    with Path(path).open("rb") as fh:
+        for line in iter(lambda: fh.readline(MAX_LINE + 1), b""):
+            if len(line) > MAX_LINE:
+                raise ValueError("FASTA line exceeds explicit line limit")
+            if line.startswith(b">"):
+                if name is not None:
+                    results[name] = (length, digest.hexdigest())
+                name, length, digest = line[1:].split()[0].decode("ascii"), 0, hashlib.sha256()
+            else:
+                bases = line.rstrip(b"\r\n")
+                digest.update(bases)
+                length += len(bases)
+        if name is not None:
+            results[name] = (length, digest.hexdigest())
+    return results
+
+
+def derive_canonical_fasta(source, destination, original_to_canonical, records, audit):
+    """Stream header/line-ending changes and verify every sequence independently.
+
+    Base letters, order, coordinates and softmask case remain byte-identical.
+    Original FASTA bytes stay at the source path with their separate receipt.
+    """
+    with Path(source).open("rb") as inp, Path(destination).open("wb") as out:
+        for line in iter(lambda: inp.readline(MAX_LINE + 1), b""):
+            if len(line) > MAX_LINE:
+                raise ValueError("FASTA line exceeds explicit line limit")
+            if line.startswith(b">"):
+                original = line[1:].split()[0].decode("ascii")
+                out.write(b">" + original_to_canonical[original].encode("ascii") + b"\n")
+            else:
+                out.write(line.rstrip(b"\r\n") + b"\n")
+    source_digests = _sequence_digests(source)
+    derived_digests = _sequence_digests(destination)
+    if set(derived_digests) != set(records):
+        raise ValueError("derived FASTA contigs differ from declared policy")
+    with Path(audit).open("w", newline="") as fh:
+        columns = [
+            "source_contig",
+            "canonical_contig",
+            "role",
+            "sequence_name",
+            "genbank_accession",
+            "refseq_accession",
+            "ucsc_name",
+            "length",
+            "source_sequence_sha256",
+            "derived_sequence_sha256",
+        ]
+        writer = csv.DictWriter(fh, fieldnames=columns, delimiter="\t")
+        writer.writeheader()
+        for canonical, record in records.items():
+            before = source_digests[record["source_contig"]]
+            after = derived_digests[canonical]
+            if before != after or after[0] != record["length"]:
+                raise ValueError("derived FASTA sequence identity mismatch")
+            writer.writerow(
+                dict(record, source_sequence_sha256=before[1], derived_sequence_sha256=after[1])
+            )
+
+
+def iter_variant_sites(vcf, fasta, mapping, *, expected_headers=(), identifier_audit=None):
+    """Yield one exact complete ALT list per REF-validated VCF site.
+
+    Symbolic, spanning deletion, breakend, missing and third alleles remain in
+    ALT for MSS's independent site-context index. No rsIDs are manufactured.
+    """
+    for row, _validation in _iter_variant_sites_validated(
+        vcf, fasta, mapping, expected_headers=expected_headers, identifier_audit=identifier_audit
+    ):
+        yield row
+
+
+def _iter_variant_sites_validated(
+    vcf,
+    fasta,
+    mapping,
+    *,
+    expected_headers=(),
+    identifier_audit=None,
+    ref_mismatch_policy="strict_error",
+):
+    """Carry placement validation separately from the lossless six-column context.
+
+    IUPAC overlap is only a quarantine classification. It never validates an
+    allele, resolves an ambiguous base, or establishes a current-ID destination.
+    """
+    if not isinstance(ref_mismatch_policy, str) or ref_mismatch_policy not in REF_MISMATCH_POLICIES:
+        raise ValueError("unknown REF mismatch policy")
+    missing_headers = set(expected_headers)
+    seen_columns = False
+    site = 0
+    with _text(vcf) as fh:
+        for number, line in enumerate(_lines(fh), 1):
+            if line.startswith("#"):
+                missing_headers.discard(line)
+                if line.startswith("#CHROM\t"):
+                    seen_columns = True
+                continue
+            if not seen_columns or missing_headers:
+                raise ValueError("VCF required header mismatch or missing #CHROM")
+            fields = line.split("\t")
+            if len(fields) < 5:
+                raise ValueError(f"invalid VCF fields at line {number}")
+            chrom, position, identifiers, ref, alts = fields[:5]
+            if chrom not in mapping:
+                raise ValueError(f"unmapped contig {chrom} at line {number}")
+            source_chrom, source_ref = chrom, ref
+            chrom, pos, ref = mapping[chrom], int(position), ref.upper()
+            fasta_ref = fasta.fetch(chrom, pos, len(ref))
+            status = "exact"
+            if fasta_ref != ref:
+                compatible = all(
+                    IUPAC_BASES.get(left, frozenset()) & IUPAC_BASES.get(right, frozenset())
+                    for left, right in zip(ref, fasta_ref, strict=True)
+                )
+                if ref_mismatch_policy == "strict_error" or not compatible:
+                    raise ValueError(f"VCF REF mismatch at {chrom}:{pos}")
+                status = "quarantined_compatible_ambiguity"
+            site += 1
+            ids = list(dict.fromkeys(i for i in identifiers.split(";") if RSID.fullmatch(i)))
+            if identifier_audit is not None and any(
+                not RSID.fullmatch(i) for i in identifiers.split(";")
+            ):
+                identifier_audit(
+                    dict(
+                        line=number,
+                        chr=chrom,
+                        pos=pos,
+                        source_ids=identifiers,
+                        status="missing_source_id"
+                        if identifiers == "."
+                        else "non_rsid_preserved_in_audit",
+                    )
+                )
+            row = dict(
+                chr=chrom,
+                pos=pos,
+                ref=source_ref if status != "exact" else ref,
+                alt=alts,
+                id=ids[0] if ids else ".",
+                aliases=";".join(ids[1:]) or ".",
+            )
+            yield (
+                row,
+                dict(
+                    status=status,
+                    site=site,
+                    line=number,
+                    source_chr=source_chrom,
+                    chr=chrom,
+                    pos=pos,
+                    source_ids=identifiers,
+                    source_id=identifiers.split(";")[0],
+                    source_aliases=";".join(identifiers.split(";")[1:]) or ".",
+                    source_ref=source_ref,
+                    alt=alts,
+                    fasta_ref=fasta_ref,
+                    reason="compatible_iupac_ref_mismatch_unverified" if status != "exact" else ".",
+                    policy=ref_mismatch_policy,
+                    vcf_line=line,
+                ),
+            )
+    if not seen_columns or missing_headers:
+        raise ValueError("VCF required header mismatch")
+
+
+def _rs(value):
+    rs = str(value)
+    rs = rs if rs.startswith("rs") else "rs" + rs
+    if not RSID.fullmatch(rs):
+        raise ValueError("invalid RefSNP identifier")
+    return rs
+
+
+class AliasStore:
+    """Disk-backed one-pass source ingestion and graph propagation.
+
+    Kahn leaf-to-parent processing reads each edge once, propagating verified
+    terminal sets on disk. Unresolved cycles and ancestors never become aliases.
+    A branch to any unknown/withdrawn node poisons the entire alias. Route count
+    can grow with true fanout; it is disk use, not an in-memory ID collection.
+    """
+
+    def __init__(self, path):
+        self.connection = sqlite3.connect(path)
+        self.connection.executescript("""
+            PRAGMA cache_size=-8192; PRAGMA temp_store=FILE;
+            CREATE TABLE current (id TEXT PRIMARY KEY) WITHOUT ROWID;
+            CREATE TABLE withdrawn (id TEXT PRIMARY KEY) WITHOUT ROWID;
+            CREATE TABLE edges (old TEXT, dest TEXT, PRIMARY KEY(old,dest)) WITHOUT ROWID;
+            CREATE INDEX edges_dest ON edges(dest);
+        """)
+
+    def add_current(self, identifiers):
+        self.connection.executemany(
+            "INSERT OR IGNORE INTO current VALUES (?)", ((_rs(i),) for i in identifiers)
+        )
+
+    def ingest_json(self, path, *, kind):
+        if kind not in ("merged", "withdrawn"):
+            raise ValueError("history kind must be merged or withdrawn")
+        count = 0
+        with _text(path) as fh:
+            for line in _lines(fh):
+                record = json.loads(line)
+                old = _rs(record["refsnp_id"])
+                snapshot = record.get(kind + "_snapshot_data")
+                if not isinstance(snapshot, dict):
+                    raise ValueError("RefSNP snapshot kind mismatch")
+                if kind == "withdrawn":
+                    self.connection.execute("INSERT OR IGNORE INTO withdrawn VALUES (?)", (old,))
+                else:
+                    targets = snapshot.get("merged_into")
+                    if not isinstance(targets, list) or not targets:
+                        raise ValueError("merged_into must be a nonempty list")
+                    self.connection.executemany(
+                        "INSERT OR IGNORE INTO edges VALUES (?,?)", ((old, _rs(i)) for i in targets)
+                    )
+                count += 1
+                if count % 10000 == 0:
+                    self.connection.commit()
+        self.connection.commit()
+        return count
+
+    def resolve(self):
+        db = self.connection
+        db.executescript("""
+            CREATE TABLE nodes (id TEXT PRIMARY KEY, pending INTEGER DEFAULT 0,
+                bad INTEGER DEFAULT 0, done INTEGER DEFAULT 0, status TEXT) WITHOUT ROWID;
+            -- Only history-relevant nodes need graph state; current membership stays on disk.
+            INSERT OR IGNORE INTO nodes(id) SELECT id FROM withdrawn;
+            INSERT OR IGNORE INTO nodes(id) SELECT old FROM edges;
+            INSERT OR IGNORE INTO nodes(id) SELECT dest FROM edges;
+            UPDATE nodes SET pending=(SELECT count(*) FROM edges WHERE old=nodes.id)
+                WHERE id NOT IN (SELECT id FROM withdrawn);
+            CREATE TABLE routes (old TEXT, current_id TEXT, PRIMARY KEY(old,current_id)) WITHOUT ROWID;
+            CREATE INDEX ready_nodes ON nodes(done,pending);
+            CREATE INDEX routes_current ON routes(current_id);
+        """)
+        while True:
+            ready = db.execute(
+                "SELECT id,bad FROM nodes WHERE done=0 AND pending=0 LIMIT 512"
+            ).fetchall()
+            if not ready:
+                break
+            for identifier, bad in ready:
+                withdrawn = db.execute(
+                    "SELECT 1 FROM withdrawn WHERE id=?", (identifier,)
+                ).fetchone()
+                is_edge = db.execute(
+                    "SELECT 1 FROM edges WHERE old=? LIMIT 1", (identifier,)
+                ).fetchone()
+                if withdrawn:
+                    status, bad = "withdrawn", 1
+                elif not is_edge:
+                    valid = db.execute("SELECT 1 FROM current WHERE id=?", (identifier,)).fetchone()
+                    status, bad = ("current_verified", 0) if valid else ("unknown_destination", 1)
+                    if valid:
+                        db.execute(
+                            "INSERT OR IGNORE INTO routes VALUES (?,?)", (identifier, identifier)
+                        )
+                else:
+                    status = "unverified_path" if bad else "verified"
+                db.execute(
+                    "UPDATE nodes SET done=1,bad=?,status=? WHERE id=?", (bad, status, identifier)
+                )
+                # sqlite cursor streams parents; neither graph nor terminal sets enter Python RAM.
+                for (parent,) in db.execute("SELECT old FROM edges WHERE dest=?", (identifier,)):
+                    if not bad:
+                        db.execute(
+                            "INSERT OR IGNORE INTO routes SELECT ?,current_id FROM routes WHERE old=?",
+                            (parent, identifier),
+                        )
+                    db.execute(
+                        "UPDATE nodes SET pending=pending-1,bad=max(bad,?) WHERE id=? AND done=0 AND pending>0",
+                        (bad, parent),
+                    )
+            db.commit()
+        db.execute("UPDATE nodes SET status='cycle_or_reaches_cycle',bad=1 WHERE done=0")
+        db.commit()
+
+    def aliases(self):
+        return self.connection.execute(
+            "SELECT r.old,r.current_id FROM routes r JOIN nodes n ON r.old=n.id WHERE n.status='verified' ORDER BY r.old,r.current_id"
+        )
+
+    def audit(self):
+        return self.connection.execute("SELECT id,status FROM nodes ORDER BY id")
+
+    def aliases_for(self, identifier):
+        return self.connection.execute(
+            "SELECT r.old FROM routes r JOIN nodes n ON r.old=n.id WHERE r.current_id=? AND n.status='verified' ORDER BY r.old",
+            (identifier,),
+        )
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        self.connection.close()
+
+
+def checked_receipt(specification, *, build):
+    """Require exact expected local bytes and mandatory provenance before use."""
+    required = (
+        "path",
+        "source_url",
+        "build",
+        "release",
+        "scope",
+        "licence_url",
+        "size_bytes",
+        "sha256",
+        "md5",
+        "rights_receipt",
+        "rights_basis",
+    )
+    if any(key not in specification or specification[key] in ("", None) for key in required):
+        raise ValueError("incomplete source receipt including rights")
+    if specification["build"] != build:
+        raise ValueError("source build mismatch")
+    rights = specification["rights_receipt"]
+    if not isinstance(rights, dict) or any(
+        key not in rights for key in ("path", "source_url", "size_bytes", "sha256", "md5")
+    ):
+        raise ValueError("incomplete rights receipt")
+    terms_sha, terms_md5 = hashlib.sha256(), hashlib.md5()
+    with Path(rights["path"]).open("rb") as fh:
+        while chunk := fh.read(1024 * 1024):
+            terms_sha.update(chunk)
+            terms_md5.update(chunk)
+    if (Path(rights["path"]).stat().st_size, terms_sha.hexdigest(), terms_md5.hexdigest()) != (
+        rights["size_bytes"],
+        rights["sha256"],
+        rights["md5"],
+    ):
+        raise ValueError("rights checksum/digest mismatch")
+    path = Path(specification["path"])
+    sha, md5 = hashlib.sha256(), hashlib.md5()
+    with path.open("rb") as fh:
+        while chunk := fh.read(1024 * 1024):
+            sha.update(chunk)
+            md5.update(chunk)
+    actual = dict(size_bytes=path.stat().st_size, sha256=sha.hexdigest(), md5=md5.hexdigest())
+    if any(actual[key] != specification[key] for key in actual):
+        raise ValueError(f"checksum/digest mismatch for {path.name}")
+    return dict(specification, **actual)
+
+
+def prepare_reference(manifest, destination):
+    """Publish a checksummed complete-context TSV only after successful validation.
+
+    This prepares MSS input, not an MSS binary index. Existing outputs are
+    refused. All failures remove the staging directory, never publish a prefix.
+    """
+    destination = Path(destination)
+    if destination.exists():
+        raise ValueError("output directory already exists")
+    for key in ("build", "release", "scope", "assembly", "vcf_headers", "sources"):
+        if not manifest.get(key):
+            raise ValueError(f"missing manifest {key}")
+    ref_mismatch_policy = manifest.get("ref_mismatch_policy", "strict_error")
+    if not isinstance(ref_mismatch_policy, str) or ref_mismatch_policy not in REF_MISMATCH_POLICIES:
+        raise ValueError("unknown REF mismatch policy")
+    sources = manifest["sources"]
+    if not {"fasta", "vcf", "assembly_report"}.issubset(sources):
+        raise ValueError("FASTA, VCF and assembly report required")
+    if ("merged" in sources) != ("withdrawn" in sources):
+        raise ValueError("current merges and withdrawals must be supplied together")
+    if "merged" in sources and any(
+        sources[role].get("completeness") != "complete_source" for role in ("merged", "withdrawn")
+    ):
+        raise ValueError(
+            "complete history archives required; capped source probes are not valid alias history"
+        )
+    if "merged" in sources and not (
+        sources["merged"]["release"] == sources["withdrawn"]["release"] == sources["vcf"]["release"]
+    ):
+        raise ValueError("current alias history and VCF release mismatch")
+    if set(sources) - {"fasta", "vcf", "assembly_report", "merged", "withdrawn"}:
+        raise ValueError("unsupported source role (historical archives are not current history)")
+    receipts = {
+        role: checked_receipt(spec, build=manifest["build"]) for role, spec in sources.items()
+    }
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    staging = Path(
+        tempfile.mkdtemp(prefix="." + destination.name + "-pending-", dir=destination.parent)
+    )
+    counts = dict(
+        sites=0,
+        alts=0,
+        unsupported_alts=0,
+        missing_ids=0,
+        emitted_rows=0,
+        verified_alias_pairs=0,
+        reference_exact_sites=0,
+        reference_conflicted_sites=0,
+        compatible_ambiguity_conflicts=0,
+        reference_supported_sites=0,
+        reference_supported_alts=0,
+    )
+    try:
+        with IndexedFasta(sources["fasta"]["path"]) as source_fa:
+            originals, mapping, contig_records = canonical_contig_policy(
+                sources["assembly_report"]["path"],
+                source_fa.contigs,
+                assembly=manifest["assembly"],
+                build=manifest["build"],
+            )
+            derive_canonical_fasta(
+                sources["fasta"]["path"],
+                staging / "reference.fa",
+                originals,
+                contig_records,
+                staging / "fasta_derivation.tsv",
+            )
+        with (staging / "contig_aliases.tsv").open("w", newline="") as fh:
+            writer = csv.writer(fh, delimiter="\t")
+            writer.writerow(["alias", "canonical_contig"])
+            writer.writerows(sorted(mapping.items()))
+        with (
+            IndexedFasta(staging / "reference.fa") as fa,
+            AliasStore(staging / "alias-history.sqlite") as db,
+        ):
+            # Sparse placement status is disk-backed and keyed by source ordinal,
+            # never by rsID: an ID may have another independently valid placement.
+            db.connection.execute("CREATE TABLE quarantined_sites (site INTEGER PRIMARY KEY)")
+            with (staging / "contig_map.tsv").open("w", newline="") as fh:
+                writer = csv.writer(fh, delimiter="\t")
+                writer.writerow(["source_contig", "fasta_contig"])
+                writer.writerows(sorted(mapping.items()))
+            with (
+                (staging / "sites.tsv").open("w", newline="") as out,
+                (staging / "context_audit.tsv").open("w", newline="") as audit,
+                (staging / "identifier_audit.tsv").open("w", newline="") as id_audit,
+                (staging / "reference_conflicts.tsv").open("w", newline="") as conflicts,
+            ):
+                writer = csv.DictWriter(out, fieldnames=COLUMNS, delimiter="\t")
+                writer.writeheader()
+                id_log = csv.DictWriter(
+                    id_audit,
+                    fieldnames=["line", "chr", "pos", "source_ids", "status"],
+                    delimiter="\t",
+                )
+                id_log.writeheader()
+                conflict_log = csv.DictWriter(
+                    conflicts,
+                    fieldnames=[
+                        "site",
+                        "line",
+                        "source_chr",
+                        "chr",
+                        "pos",
+                        "source_ids",
+                        "source_id",
+                        "source_aliases",
+                        "source_ref",
+                        "alt",
+                        "fasta_ref",
+                        "reason",
+                        "policy",
+                        "vcf_line",
+                    ],
+                    delimiter="\t",
+                )
+                conflict_log.writeheader()
+                log = csv.writer(audit, delimiter="\t")
+                log.writerow(["site", "chr", "pos", "id", "alt", "status"])
+                for row, validation in _iter_variant_sites_validated(
+                    sources["vcf"]["path"],
+                    fa,
+                    mapping,
+                    expected_headers=manifest["vcf_headers"],
+                    identifier_audit=id_log.writerow,
+                    ref_mismatch_policy=ref_mismatch_policy,
+                ):
+                    writer.writerow(row)
+                    counts["sites"] += 1
+                    exact = validation["status"] == "exact"
+                    if exact:
+                        counts["reference_exact_sites"] += 1
+                    else:
+                        counts["reference_conflicted_sites"] += 1
+                        counts["compatible_ambiguity_conflicts"] += 1
+                        db.connection.execute(
+                            "INSERT INTO quarantined_sites VALUES (?)", (validation["site"],)
+                        )
+                        conflict_log.writerow({k: validation[k] for k in conflict_log.fieldnames})
+                    supported_alts = 0
+                    for alt in row["alt"].split(","):
+                        counts["alts"] += 1
+                        if (
+                            not DNA.fullmatch(alt.upper())
+                            or alt.upper() == row["ref"].upper()
+                            or not DNA.fullmatch(row["ref"].upper())
+                        ):
+                            counts["unsupported_alts"] += 1
+                            log.writerow(
+                                [
+                                    counts["sites"],
+                                    row["chr"],
+                                    row["pos"],
+                                    row["id"],
+                                    alt,
+                                    "unsupported_context_preserved",
+                                ]
+                            )
+                        else:
+                            supported_alts += 1
+                    if row["id"] == ".":
+                        counts["missing_ids"] += 1
+                    if exact and supported_alts:
+                        counts["reference_supported_sites"] += 1
+                        counts["reference_supported_alts"] += supported_alts
+                        db.add_current(
+                            i for i in [row["id"], *row["aliases"].split(";")] if i != "."
+                        )
+                    if counts["sites"] % 10000 == 0:
+                        db.connection.commit()
+            if "merged" in sources:
+                counts["merged_records"] = db.ingest_json(sources["merged"]["path"], kind="merged")
+                counts["withdrawn_records"] = db.ingest_json(
+                    sources["withdrawn"]["path"], kind="withdrawn"
+                )
+            db.resolve()
+            with (staging / "merged_aliases.tsv").open("w", newline="") as fh:
+                writer = csv.writer(fh, delimiter="\t")
+                writer.writerow(["old_id", "current_id"])
+                for pair in db.aliases():
+                    writer.writerow(pair)
+                    counts["verified_alias_pairs"] += 1
+            with (staging / "alias_audit.tsv").open("w", newline="") as fh:
+                writer = csv.writer(fh, delimiter="\t")
+                writer.writerow(["id", "status"])
+                writer.writerows(db.audit())
+            # A second pass over the small interchange, never the source archive.
+            # Bound every output row, including unusually high alias fanout.
+            with (
+                (staging / "sites.tsv").open(newline="") as inp,
+                (staging / "variants.tsv").open("w", newline="") as out,
+            ):
+                writer = csv.DictWriter(out, fieldnames=COLUMNS, delimiter="\t")
+                writer.writeheader()
+                next(inp)  # exact header was written by this preparation
+                quarantined = iter(
+                    db.connection.execute("SELECT site FROM quarantined_sites ORDER BY site")
+                )
+                next_quarantine = next(quarantined, (None,))[0]
+                for site, line in enumerate(_lines(inp), 1):
+                    row = dict(zip(COLUMNS, line.split("\t"), strict=True))
+                    ids = [i for i in [row["id"], *row["aliases"].split(";")] if i != "."]
+                    if site == next_quarantine:
+                        ids = []
+                        next_quarantine = next(quarantined, (None,))[0]
+                    # Current-ID tombstones are not canonical calls or aliases.
+                    valid = [
+                        i
+                        for i in ids
+                        if not db.connection.execute(
+                            "SELECT 1 FROM withdrawn WHERE id=? UNION ALL SELECT 1 FROM edges WHERE old=? LIMIT 1",
+                            (i, i),
+                        ).fetchone()
+                    ]
+                    row["id"], row["aliases"] = (
+                        (valid[0] if valid else "."),
+                        ";".join(valid[1:]) or ".",
+                    )
+                    writer.writerow(row)
+                    counts["emitted_rows"] += 1
+                    for identifier in valid:
+                        for (alias,) in db.aliases_for(identifier):
+                            # Duplicate complete site context is lossless and
+                            # keeps per-row memory independent of alias fanout.
+                            writer.writerow(dict(row, aliases=alias))
+                            counts["emitted_rows"] += 1
+        # Detect mutation during preparation, including metadata dependencies.
+        for spec in sources.values():
+            checked_receipt(spec, build=manifest["build"])
+        outputs = {}
+        for path in staging.iterdir():
+            if path.is_file():
+                sha, md5 = hashlib.sha256(), hashlib.md5()
+                with path.open("rb") as fh:
+                    while chunk := fh.read(1024 * 1024):
+                        sha.update(chunk)
+                        md5.update(chunk)
+                outputs[path.name] = dict(
+                    size_bytes=path.stat().st_size, sha256=sha.hexdigest(), md5=md5.hexdigest()
+                )
+        receipt = dict(
+            manifest,
+            sources=receipts,
+            reference_format="mss-preservation-2",
+            preparation_version="biodb-reference-stream-4",
+            ref_mismatch_policy=ref_mismatch_policy,
+            reference_fasta=str((destination / "reference.fa").resolve()),
+            contig_aliases=str((destination / "contig_aliases.tsv").resolve()),
+            contig_policy=CANONICAL_CONTIG_POLICY,
+            fasta_derivation=dict(
+                source_fasta_sha256=receipts["fasta"]["sha256"],
+                assembly_report_sha256=receipts["assembly_report"]["sha256"],
+                derived_fasta=outputs["reference.fa"],
+                identity_audit=outputs["fasta_derivation.tsv"],
+                alias_mapping=outputs["contig_aliases.tsv"],
+                transformation="headers and line endings only; base letters, case, order and coordinates unchanged",
+            ),
+            counts=counts,
+            outputs=outputs,
+            alias_history_status="complete_supplied_history"
+            if "merged" in sources
+            else "not_supplied",
+            alias_policy="all paths must end in a supported supplied-VCF rsID; withdrawals, unknown paths and cycles never become aliases",
+        )
+        (staging / "receipts.json").write_text(json.dumps(receipt, indent=2) + "\n")
+        if destination.exists():
+            raise ValueError("output directory appeared during preparation")
+        staging.rename(destination)
+        return counts
+    except BaseException:
+        shutil.rmtree(staging)
+        raise

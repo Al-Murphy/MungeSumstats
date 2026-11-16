@@ -1,0 +1,28 @@
+{
+  "author": {
+    "external_path": "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence-index.json",
+    "bytes": 73219,
+    "sha256": "a856f8db62ffbf571f4140ad2a48718a3d252a7b99124d323e88ca4b30afe65b",
+    "declared_entries": 238,
+    "declared_inventory_bytes": 1231686,
+    "outside_payloads_reverified": false,
+    "scope": "Complete original inventory retained externally; explicit small selections only, no fixture-tree walk"
+  },
+  "review": {
+    "external_path": "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-independent-stage15/review-evidence-index.json",
+    "bytes": 6595,
+    "sha256": "f0c7c69eefc5f120ad1efa42a639d3dbe0926ad31ffca8aa3ede08dab6f06d82",
+    "declared_entries": 24,
+    "declared_inventory_bytes": 463742,
+    "outside_payloads_reverified": false,
+    "scope": "Complete original inventory retained externally; explicit small selections only, no fixture-tree walk"
+  },
+  "selected_tiny_inventory": {
+    "external_path": "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/selected-tiny-evidence-pins.json",
+    "bytes": 62983,
+    "sha256": "add2fa96edafe3d348264ce2ec91bee175c23754dfe145e00d646c876fbb095b",
+    "declared_tiny_files": 206,
+    "inventory_body_or_payloads_read": false,
+    "scope": "Inventory anchor only; no selected206 tree is vendored"
+  }
+}

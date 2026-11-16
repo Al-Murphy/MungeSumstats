@@ -1,0 +1,548 @@
+[
+  {
+    "kind": "tiny_producer",
+    "phase": "actual-red-ps-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a0/tiny-producer.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/fixture_sources/producer_v4.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a0/GRCh37-sources/source-plan.json",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a0/GRCh37-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "tiny_producer",
+    "phase": "actual-red-ps-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a0/tiny-producer.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/fixture_sources/producer_v4.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a0/GRCh38-sources/source-plan.json",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a0/GRCh38-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "guarded_worker",
+    "phase": "actual-red-ps-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "-c",
+      "import runpy,sys; n=runpy.run_path(sys.argv[1]); n['_worker_entry'](*sys.argv[2:])",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/sealed_count.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a0/guarded-count-profile.json",
+      "c3700f4ea551fca601f5a9301bcf26b1f7ef66beb8d0bf41c3fa410a5864b625",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a0/guarded-count/worker",
+      "",
+      "",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a0/GRCh37-published",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a0/GRCh38-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "tiny_native_counter",
+    "phase": "actual-red-ps-fixtures",
+    "argv": [
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/count_reference",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a0/GRCh37-published/reference.fa",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a0/GRCh37-published/variants.tsv",
+      "3"
+    ],
+    "status": "success",
+    "provenance": "exact coordinator argv plus successful worker result"
+  },
+  {
+    "kind": "tiny_native_counter",
+    "phase": "actual-red-ps-fixtures",
+    "argv": [
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/count_reference",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a0/GRCh38-published/reference.fa",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a0/GRCh38-published/variants.tsv",
+      "3"
+    ],
+    "status": "success",
+    "provenance": "exact coordinator argv plus successful worker result"
+  },
+  {
+    "kind": "tiny_producer",
+    "phase": "actual-red-ps-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a1/tiny-producer.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/fixture_sources/producer_v5.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a1/GRCh37-sources/source-plan.json",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a1/GRCh37-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "tiny_producer",
+    "phase": "actual-red-ps-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a1/tiny-producer.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/fixture_sources/producer_v5.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a1/GRCh38-sources/source-plan.json",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a1/GRCh38-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "tiny_producer",
+    "phase": "actual-red-ps-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a2/tiny-producer.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/fixture_sources/producer_v4.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a2/GRCh37-sources/source-plan.json",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a2/GRCh37-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "tiny_producer",
+    "phase": "actual-red-ps-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a2/tiny-producer.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/fixture_sources/producer_v5.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a2/GRCh38-sources/source-plan.json",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-red-ps-fixtures/test_actual_frozen_preparers_a2/GRCh38-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "tiny_producer",
+    "phase": "actual-green-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a0/tiny-producer.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/fixture_sources/producer_v4.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a0/GRCh37-sources/source-plan.json",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a0/GRCh37-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "tiny_producer",
+    "phase": "actual-green-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a0/tiny-producer.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/fixture_sources/producer_v4.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a0/GRCh38-sources/source-plan.json",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a0/GRCh38-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "guarded_worker",
+    "phase": "actual-green-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "-c",
+      "import runpy,sys; n=runpy.run_path(sys.argv[1]); n['_worker_entry'](*sys.argv[2:])",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/sealed_count.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a0/guarded-count-profile.json",
+      "40306327bfa0da90edfad9672b1f89f2ea0c5576ed8b1c5cb161d0d4886d63db",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a0/guarded-count/worker",
+      "",
+      "",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a0/GRCh37-published",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a0/GRCh38-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "tiny_native_counter",
+    "phase": "actual-green-fixtures",
+    "argv": [
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/count_reference",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a0/GRCh37-published/reference.fa",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a0/GRCh37-published/variants.tsv",
+      "3"
+    ],
+    "status": "success",
+    "provenance": "exact coordinator argv plus successful worker result"
+  },
+  {
+    "kind": "tiny_native_counter",
+    "phase": "actual-green-fixtures",
+    "argv": [
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/count_reference",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a0/GRCh38-published/reference.fa",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a0/GRCh38-published/variants.tsv",
+      "3"
+    ],
+    "status": "success",
+    "provenance": "exact coordinator argv plus successful worker result"
+  },
+  {
+    "kind": "tiny_producer",
+    "phase": "actual-green-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a1/tiny-producer.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/fixture_sources/producer_v5.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a1/GRCh37-sources/source-plan.json",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a1/GRCh37-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "tiny_producer",
+    "phase": "actual-green-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a1/tiny-producer.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/fixture_sources/producer_v5.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a1/GRCh38-sources/source-plan.json",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a1/GRCh38-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "guarded_worker",
+    "phase": "actual-green-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "-c",
+      "import runpy,sys; n=runpy.run_path(sys.argv[1]); n['_worker_entry'](*sys.argv[2:])",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/sealed_count.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a1/guarded-count-profile.json",
+      "a73196a44bf8324738093d5546514d69f3b6882e68f05e5cc666d0ac19202e08",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a1/guarded-count/worker",
+      "",
+      "",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a1/GRCh37-published",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a1/GRCh38-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "tiny_native_counter",
+    "phase": "actual-green-fixtures",
+    "argv": [
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/count_reference",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a1/GRCh37-published/reference.fa",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a1/GRCh37-published/variants.tsv",
+      "3"
+    ],
+    "status": "success",
+    "provenance": "exact coordinator argv plus successful worker result"
+  },
+  {
+    "kind": "tiny_native_counter",
+    "phase": "actual-green-fixtures",
+    "argv": [
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/count_reference",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a1/GRCh38-published/reference.fa",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a1/GRCh38-published/variants.tsv",
+      "3"
+    ],
+    "status": "success",
+    "provenance": "exact coordinator argv plus successful worker result"
+  },
+  {
+    "kind": "tiny_producer",
+    "phase": "actual-green-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a2/tiny-producer.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/fixture_sources/producer_v4.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a2/GRCh37-sources/source-plan.json",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a2/GRCh37-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "tiny_producer",
+    "phase": "actual-green-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a2/tiny-producer.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/fixture_sources/producer_v5.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a2/GRCh38-sources/source-plan.json",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a2/GRCh38-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "guarded_worker",
+    "phase": "actual-green-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "-c",
+      "import runpy,sys; n=runpy.run_path(sys.argv[1]); n['_worker_entry'](*sys.argv[2:])",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/sealed_count.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a2/guarded-count-profile.json",
+      "8e1f0e93e17a9913b94530cc2418a8c2068447ab29d55d11419403eb17a12433",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a2/guarded-count/worker",
+      "",
+      "",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a2/GRCh37-published",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a2/GRCh38-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "tiny_native_counter",
+    "phase": "actual-green-fixtures",
+    "argv": [
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/count_reference",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a2/GRCh37-published/reference.fa",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a2/GRCh37-published/variants.tsv",
+      "3"
+    ],
+    "status": "success",
+    "provenance": "exact coordinator argv plus successful worker result"
+  },
+  {
+    "kind": "tiny_native_counter",
+    "phase": "actual-green-fixtures",
+    "argv": [
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/count_reference",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a2/GRCh38-published/reference.fa",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/actual-green-fixtures/test_actual_frozen_preparers_a2/GRCh38-published/variants.tsv",
+      "3"
+    ],
+    "status": "success",
+    "provenance": "exact coordinator argv plus successful worker result"
+  },
+  {
+    "kind": "tiny_producer",
+    "phase": "final-actual-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a0/tiny-producer.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/fixture_sources/producer_v4.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a0/GRCh37-sources/source-plan.json",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a0/GRCh37-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "tiny_producer",
+    "phase": "final-actual-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a0/tiny-producer.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/fixture_sources/producer_v4.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a0/GRCh38-sources/source-plan.json",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a0/GRCh38-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "guarded_worker",
+    "phase": "final-actual-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "-c",
+      "import runpy,sys; n=runpy.run_path(sys.argv[1]); n['_worker_entry'](*sys.argv[2:])",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/sealed_count.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a0/guarded-count-profile.json",
+      "89834e70b55a1e570963636a6d2d30046749fea475f1d8ba8619c747b05c2a90",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a0/guarded-count/worker",
+      "",
+      "",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a0/GRCh37-published",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a0/GRCh38-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "tiny_native_counter",
+    "phase": "final-actual-fixtures",
+    "argv": [
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/count_reference",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a0/GRCh37-published/reference.fa",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a0/GRCh37-published/variants.tsv",
+      "3"
+    ],
+    "status": "success",
+    "provenance": "exact coordinator argv plus successful worker result"
+  },
+  {
+    "kind": "tiny_native_counter",
+    "phase": "final-actual-fixtures",
+    "argv": [
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/count_reference",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a0/GRCh38-published/reference.fa",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a0/GRCh38-published/variants.tsv",
+      "3"
+    ],
+    "status": "success",
+    "provenance": "exact coordinator argv plus successful worker result"
+  },
+  {
+    "kind": "tiny_producer",
+    "phase": "final-actual-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a1/tiny-producer.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/fixture_sources/producer_v5.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a1/GRCh37-sources/source-plan.json",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a1/GRCh37-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "tiny_producer",
+    "phase": "final-actual-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a1/tiny-producer.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/fixture_sources/producer_v5.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a1/GRCh38-sources/source-plan.json",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a1/GRCh38-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "guarded_worker",
+    "phase": "final-actual-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "-c",
+      "import runpy,sys; n=runpy.run_path(sys.argv[1]); n['_worker_entry'](*sys.argv[2:])",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/sealed_count.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a1/guarded-count-profile.json",
+      "86820b5bb57691800c2f5f59c63c6a3c7114f5a3b7b7781f573b10d239a8d4c4",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a1/guarded-count/worker",
+      "",
+      "",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a1/GRCh37-published",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a1/GRCh38-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "tiny_native_counter",
+    "phase": "final-actual-fixtures",
+    "argv": [
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/count_reference",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a1/GRCh37-published/reference.fa",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a1/GRCh37-published/variants.tsv",
+      "3"
+    ],
+    "status": "success",
+    "provenance": "exact coordinator argv plus successful worker result"
+  },
+  {
+    "kind": "tiny_native_counter",
+    "phase": "final-actual-fixtures",
+    "argv": [
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/count_reference",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a1/GRCh38-published/reference.fa",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a1/GRCh38-published/variants.tsv",
+      "3"
+    ],
+    "status": "success",
+    "provenance": "exact coordinator argv plus successful worker result"
+  },
+  {
+    "kind": "tiny_producer",
+    "phase": "final-actual-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a2/tiny-producer.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/fixture_sources/producer_v4.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a2/GRCh37-sources/source-plan.json",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a2/GRCh37-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "tiny_producer",
+    "phase": "final-actual-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a2/tiny-producer.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/fixture_sources/producer_v5.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a2/GRCh38-sources/source-plan.json",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a2/GRCh38-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "guarded_worker",
+    "phase": "final-actual-fixtures",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "-c",
+      "import runpy,sys; n=runpy.run_path(sys.argv[1]); n['_worker_entry'](*sys.argv[2:])",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/sealed_count.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a2/guarded-count-profile.json",
+      "f34c6734c45a7766e5d59e0821a2740aa4c6c0f1856a50bde56a19c2bfef8a9b",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a2/guarded-count/worker",
+      "",
+      "",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a2/GRCh37-published",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a2/GRCh38-published"
+    ],
+    "status": "success"
+  },
+  {
+    "kind": "tiny_native_counter",
+    "phase": "final-actual-fixtures",
+    "argv": [
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/count_reference",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a2/GRCh37-published/reference.fa",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a2/GRCh37-published/variants.tsv",
+      "3"
+    ],
+    "status": "success",
+    "provenance": "exact coordinator argv plus successful worker result"
+  },
+  {
+    "kind": "tiny_native_counter",
+    "phase": "final-actual-fixtures",
+    "argv": [
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/count_reference",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a2/GRCh38-published/reference.fa",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_frozen_preparers_a2/GRCh38-published/variants.tsv",
+      "3"
+    ],
+    "status": "success",
+    "provenance": "exact coordinator argv plus successful worker result"
+  },
+  {
+    "kind": "synthetic_censored_worker",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "-c",
+      "import runpy,sys; n=runpy.run_path(sys.argv[1]); n['_worker_entry'](*sys.argv[2:])",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/sealed_count.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_guard_censor_prese0/censored-profile.json",
+      "1ce50c26271f9734482efdcdd6f4fd613d558d98d9d0ae9f17fa3ccf86b7929f",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_guard_censor_prese0/censored/worker",
+      "",
+      "",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_guard_censor_prese0/GRCh37",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_guard_censor_prese0/GRCh38"
+    ],
+    "status": "censored",
+    "reason": "Owned case deadline reached"
+  },
+  {
+    "kind": "synthetic_censored_worker",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "-c",
+      "import runpy,sys; n=runpy.run_path(sys.argv[1]); n['_worker_entry'](*sys.argv[2:])",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/sealed_count.py",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_guard_censor_prese1/censored-profile.json",
+      "c411c4450e707cb360ecba83db7e3d2d871c30025a03290358d3f6b44bf86c85",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_guard_censor_prese1/censored/worker",
+      "",
+      "",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_guard_censor_prese1/GRCh37",
+      "/private/tmp/gwas-harvest-stage2/results/reference-count-version5-stage15/version5-evidence/final-actual-fixtures/test_actual_guard_censor_prese1/GRCh38"
+    ],
+    "status": "censored",
+    "reason": "Owned case disk-growth cap reached"
+  }
+]

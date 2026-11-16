@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "harvest_base": "d3c09a1628bf08b89f79e6f55c022907221fe72b",
+  "mss_base": "d7806f5670c819d8c74f68dad67650ddc48d2984",
+  "reviewed_source_commit": "ca476ba84ebd0841d0409e06f08e69d7f912c2da",
+  "coordinator_sha256": "963308cb023b1b729e53f891390db717f86dd2132853d1122063b013c3013e70",
+  "archive_directory_files": 40,
+  "archive_directory_bytes": 293423,
+  "indexed_payload_files": 39,
+  "index_sha256": "1362feca6d1cfd5d5fdb1836733d38a2d54c83082e72df578e2a49dd7b069881",
+  "report_sha256": "c57c12ce6893989e3792e773da3a7de24b9d5091b7e9f2b24d861244be589162",
+  "archive_gzip_bytes": 94292,
+  "archive_gzip_sha256": "57f01df570337a50f8a2878673edbe7ca17ddf0f6b7caa6e535768523d41ff74",
+  "raw_tar_bytes": 327680,
+  "raw_tar_sha256": "4abdf01ca073c4b542b7fb2d9a5801c9135a824597cf3a6c1387a06b19eb5ea2",
+  "deterministic_raw_tar_binding_verified": true,
+  "compressed_payload_bindings_verified": 11,
+  "old_stage14_archives_unchanged_files_per_checkout": 94,
+  "new_tool_executions": 0,
+  "new_full_profile_or_admission": false,
+  "full_reference_admitted": false,
+  "index_builds_executed": 0,
+  "operator_toolkit_file_pins": {
+    "sealed_count.py": {
+      "bytes": 35628,
+      "sha256": "963308cb023b1b729e53f891390db717f86dd2132853d1122063b013c3013e70"
+    },
+    "count_reference.cpp": {
+      "bytes": 8595,
+      "sha256": "fb529bff15666905d39c5726d2f49638a15c8ee61d90880da1b13079a954a10b"
+    },
+    "guard_common.py": {
+      "bytes": 4894,
+      "sha256": "1cf033bbbac586234310794fbd2bfd3a7f3bc4116a15b4296de870b052fe86be"
+    },
+    "process_memory.py": {
+      "bytes": 1989,
+      "sha256": "aea36f87d4dd12ea41961f2cdd11198e527ccf17be2946a4351153cb96c0a0a5"
+    },
+    "COORDINATOR.md": {
+      "bytes": 11253,
+      "sha256": "bd670899b2fad7fb752230bc203191ac9b8114b07b89f1ab2c4238a6909c46b2"
+    },
+    "README.md": {
+      "bytes": 3320,
+      "sha256": "621f8b8a0ef899eb9e7e69d05d9fd5e98b583be4a01a4e21e6f91353cbb4cd86"
+    },
+    "REVIEWED-README.md": {
+      "bytes": 4182,
+      "sha256": "1c9a9f45a9497d5ff6bd00e1f58c01d1e0bda64ec5bb84cdeebd7f91f0123dc0"
+    },
+    "dependencies.json": {
+      "bytes": 4023,
+      "sha256": "357522f32b73871d6534fad31be586614cec32aed66099ab38a500d7c7b55f35"
+    }
+  },
+  "operator_toolkit_locations": {
+    "harvest": "ops/reference-count",
+    "mss": "inst/verification/reference-count-v2-stage16/toolkit"
+  }
+}

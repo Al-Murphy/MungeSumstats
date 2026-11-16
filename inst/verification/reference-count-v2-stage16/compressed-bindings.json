@@ -1,0 +1,76 @@
+[
+  {
+    "path": "logs/red.log.gz",
+    "raw_bytes": 16079,
+    "raw_sha256": "18e974e5458900243907a3d84edf7ee5bb91c4d04c17f1c6cabd364dacf43e54",
+    "source_index": "author"
+  },
+  {
+    "path": "logs/actual-red.log.gz",
+    "raw_bytes": 29226,
+    "raw_sha256": "20b851ad5bbb453a4f01211a6ca37a7726c57cc9324e737f49678b60254f32e2",
+    "source_index": "author"
+  },
+  {
+    "path": "logs/actual-red-ps.log.gz",
+    "raw_bytes": 4568,
+    "raw_sha256": "d429b7b82bff6e322317aa19855d56c18e03fb05c79ff9b53835eb34af56840c",
+    "source_index": "author"
+  },
+  {
+    "path": "logs/green.log.gz",
+    "raw_bytes": 99,
+    "raw_sha256": "3b0d10f4f9cc3b6d49e6578e0484e52c046aa9972968bff1216e3d4abd64ea7d",
+    "source_index": "author"
+  },
+  {
+    "path": "logs/actual-green.log.gz",
+    "raw_bytes": 98,
+    "raw_sha256": "aab38a08cfe5b2f9e5b0f811b2d71f2a45fb046dac9322174fe3334dc95cdb08",
+    "source_index": "author"
+  },
+  {
+    "path": "logs/final-regression.log.gz",
+    "raw_bytes": 260,
+    "raw_sha256": "2e5b3cdcd0f4e3126422418db075c6f183174900f0ddaac25184a86bb3e59406",
+    "source_index": "author"
+  },
+  {
+    "path": "logs/final-actual.log.gz",
+    "raw_bytes": 112,
+    "raw_sha256": "520e989c3cee45e57c9d754311125a4ad99433e76787fbdd9bb435112d0e762c",
+    "source_index": "author"
+  },
+  {
+    "path": "receipts/legacy-v4-summary.json.gz",
+    "raw_bytes": 25313,
+    "raw_sha256": "2f2023bb4e73cf569e78a92f23076d3cf3fe8311ed65b3e4206294eaf264f626",
+    "source_index": "author"
+  },
+  {
+    "path": "receipts/v5-summary.json.gz",
+    "raw_bytes": 27400,
+    "raw_sha256": "292ed92fe1aafb29dbed28426ad4daeb0820ff654c111e8f8b280e8bc91ffc27",
+    "source_index": "author"
+  },
+  {
+    "path": "receipts/mixed-v4-v5-summary.json.gz",
+    "raw_bytes": 27399,
+    "raw_sha256": "29f6781de5dfa73b6ed421093715c8565e613f8f526d2432208736e48841d337",
+    "source_index": "author"
+  },
+  {
+    "path": "source-diff/coordinator-docs.diff.gz",
+    "raw_bytes": 11460,
+    "raw_sha256": "73885f0fc83bb273cf9294184b26d077893cdc0418d22d5371821df216f95aa0",
+    "source_command": [
+      "git",
+      "diff",
+      "306aea51ea45eb8ae781b339029d2b1b93b5388f",
+      "ca476ba84ebd0841d0409e06f08e69d7f912c2da",
+      "--",
+      "sealed_count.py",
+      "COORDINATOR.md"
+    ]
+  }
+]

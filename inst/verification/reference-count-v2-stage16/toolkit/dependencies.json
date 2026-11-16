@@ -1,0 +1,96 @@
+{
+  "reviewed_source_commit": "ca476ba84ebd0841d0409e06f08e69d7f912c2da",
+  "coordinator_sha256": "963308cb023b1b729e53f891390db717f86dd2132853d1122063b013c3013e70",
+  "runtime_sources": {
+    "sealed_count.py": {
+      "bytes": 35628,
+      "sha256": "963308cb023b1b729e53f891390db717f86dd2132853d1122063b013c3013e70"
+    },
+    "count_reference.cpp": {
+      "bytes": 8595,
+      "sha256": "fb529bff15666905d39c5726d2f49638a15c8ee61d90880da1b13079a954a10b"
+    },
+    "guard_common.py": {
+      "bytes": 4894,
+      "sha256": "1cf033bbbac586234310794fbd2bfd3a7f3bc4116a15b4296de870b052fe86be"
+    },
+    "process_memory.py": {
+      "bytes": 1989,
+      "sha256": "aea36f87d4dd12ea41961f2cdd11198e527ccf17be2946a4351153cb96c0a0a5"
+    }
+  },
+  "profile_schemas": {
+    "1": {
+      "preparation_versions": [
+        "biodb-reference-stream-4"
+      ],
+      "artifact_roles": [
+        "coordinator",
+        "counter_source",
+        "native",
+        "header",
+        "guard",
+        "harness",
+        "producer"
+      ],
+      "binding": "Legacy global producer pin and v4-only behavior retained; not mixed-source provenance"
+    },
+    "2": {
+      "artifact_roles": [
+        "coordinator",
+        "counter_source",
+        "native",
+        "header",
+        "guard",
+        "harness"
+      ],
+      "per_build_required": [
+        "preparation_version",
+        "producer_source"
+      ],
+      "producer_source_exact_keys": [
+        "path",
+        "size_bytes",
+        "sha256"
+      ],
+      "reviewed_source_pairs": {
+        "biodb-reference-stream-4": {
+          "commit": "84199d3b37273ab56c838aac385ffcdea40197bc",
+          "size_bytes": 38909,
+          "sha256": "c6327b05066a8a00508c724cd90ac44a0df2ccaa86da43831b43d888dd2b9fb5"
+        },
+        "biodb-reference-stream-5": {
+          "commit": "6b30709918a8bf73f5ff51dd1be5483e96ddc39d",
+          "size_bytes": 43423,
+          "sha256": "7a7668c91235ddf8037563ae3141b04e8fd75604c1f24348198a858fb5186147"
+        }
+      },
+      "global_producer_fallback": false,
+      "redundant_global_producer_allowed": false,
+      "source_import_or_version_inference": false
+    }
+  },
+  "historical_import_context": "Trusted completed producer context must authenticate each source/command/receipt association; current file hashes alone cannot establish historical imports. Exact trusted argv may name an entrypoint without the imported module path.",
+  "source_identity_rules": "Both v2 sources join outside-publication/symlink/single-link metadata preflight, known size before every hash, complete-seal-before-content, and pre/post snapshots; shared references to one immutable file are allowed.",
+  "external_required_identity_artifacts": {
+    "mss_header": {
+      "external_source": "/private/tmp/gwas-harvest-stage2/mss-context-format3-release/src/preservation_core.h",
+      "bytes": 49600,
+      "sha256": "4affcc7bdb761b1c86d22e2f72eb079434fbb2404d7f5c4d257fda2de52c6ddc",
+      "vendored": false
+    }
+  },
+  "native_binary": {
+    "vendored": false,
+    "historical_ordinary_binary_sha256": "fa133e2c65bf9ed4ea0cb52791293b19b3a01fbead95f089ae13c0dff2b6c7fd",
+    "qualification": "Historical macOS artifact identity only, not a universal portable binary pin; a future operator needs separately reviewed native provenance"
+  },
+  "python_dependencies": "Standard library plus co-located process_memory.py imported by guard_common.py; no extra producer adapter or provider client installed",
+  "supervision_scope": "Synchronous known worker/native-child lifetime only; not parent-exit/orphan-aware production supervision",
+  "new_full_profile_and_source_commit_admission_required": true,
+  "profile_or_admission_provided": false,
+  "admission_note": "New coordinator bytes require a NEW independently reviewed full-profile digest and exact source-commit admission. No prior profile/source permission is relabeled or supplied by packaging.",
+  "full_reference_admitted": false,
+  "index_builds_executed": 0,
+  "decision": "no_admission"
+}

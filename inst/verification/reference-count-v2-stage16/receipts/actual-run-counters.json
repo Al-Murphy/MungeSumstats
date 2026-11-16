@@ -1,0 +1,14 @@
+{
+  "tiny_producer_executions": 18,
+  "actual_publication_native_counts": 14,
+  "guarded_actual_count_workers": 7,
+  "synthetic_censored_workers": 2,
+  "sandbox_ps_refused_tests_before_producer_spawn": 3,
+  "new_tiny_writer_executions": 0,
+  "new_compiler_executions": 0,
+  "full_reference_counts": 0,
+  "index_builds_executed": 0,
+  "decision": "no_admission",
+  "full_reference_admitted": false,
+  "unit_test_counter_activity": "Additional tiny ordinary-counter calls occur in focused unit regressions; these totals cover actual-publication integration runs only, not all unit counter subprocesses."
+}

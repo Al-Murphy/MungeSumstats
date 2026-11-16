@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "reviewed_source_commit": "ca476ba84ebd0841d0409e06f08e69d7f912c2da",
+  "packaging_only": true,
+  "new_tool_executions": 0,
+  "new_full_profile_or_admission": false,
+  "full_reference_admitted": false,
+  "index_builds_executed": 0,
+  "scope": "Explicit internal payloads only, self separately pinned; external238/206 inventories are not vendored",
+  "files": {
+    "toolkit/sealed_count.py": {
+      "bytes": 35628,
+      "sha256": "963308cb023b1b729e53f891390db717f86dd2132853d1122063b013c3013e70",
+      "category": "operator_toolkit"
+    },
+    "toolkit/count_reference.cpp": {
+      "bytes": 8595,
+      "sha256": "fb529bff15666905d39c5726d2f49638a15c8ee61d90880da1b13079a954a10b",
+      "category": "operator_toolkit"
+    },
+    "toolkit/guard_common.py": {
+      "bytes": 4894,
+      "sha256": "1cf033bbbac586234310794fbd2bfd3a7f3bc4116a15b4296de870b052fe86be",
+      "category": "operator_toolkit"
+    },
+    "toolkit/process_memory.py": {
+      "bytes": 1989,
+      "sha256": "aea36f87d4dd12ea41961f2cdd11198e527ccf17be2946a4351153cb96c0a0a5",
+      "category": "operator_toolkit"
+    },
+    "toolkit/COORDINATOR.md": {
+      "bytes": 11253,
+      "sha256": "bd670899b2fad7fb752230bc203191ac9b8114b07b89f1ab2c4238a6909c46b2",
+      "category": "operator_toolkit"
+    },
+    "toolkit/README.md": {
+      "bytes": 3320,
+      "sha256": "621f8b8a0ef899eb9e7e69d05d9fd5e98b583be4a01a4e21e6f91353cbb4cd86",
+      "category": "operator_toolkit"
+    },
+    "toolkit/REVIEWED-README.md": {
+      "bytes": 4182,
+      "sha256": "1c9a9f45a9497d5ff6bd00e1f58c01d1e0bda64ec5bb84cdeebd7f91f0123dc0",
+      "category": "operator_toolkit"
+    },
+    "toolkit/dependencies.json": {
+      "bytes": 4023,
+      "sha256": "357522f32b73871d6534fad31be586614cec32aed66099ab38a500d7c7b55f35",
+      "category": "operator_toolkit"
+    },
+    "reports/reference-count-version5-stage15.md": {
+      "bytes": 9865,
+      "sha256": "16865f064db77b14f2bca813464d2dda587f6af1dfc42e72899d8183cc93e548",
+      "category": "exact_reviewed_source_or_receipt"
+    },
+    "reports/reference-count-version5-independent-stage15.md": {
+      "bytes": 8358,
+      "sha256": "8803d14debba138cdccb3e51ea83f0fc139d896c8c9206806c79f872e758e369",
+      "category": "exact_reviewed_source_or_receipt"
+    },
+    "reports/reference-count-version5-preflight-stage15.md": {
+      "bytes": 8505,
+      "sha256": "bc938b400939ac04f561ab360b82c9dd51b39233c7f76e6eca7a43e4c89ac91e",
+      "category": "exact_reviewed_source_or_receipt"
+    },
+    "logs/red.log.gz": {
+      "bytes": 1713,
+      "sha256": "c58ef094ff10c84edce86e388ff7ff73a9b62f5c2e19292c69780112059cf6c0",
+      "category": "lossless_historical_text"
+    },
+    "logs/actual-red.log.gz": {
+      "bytes": 3176,
+      "sha256": "7bc34a7791c01fe654a868edd1855908e60253823fb1d3957aa18d9ea74ce297",
+      "category": "lossless_historical_text"
+    },
+    "logs/actual-red-ps.log.gz": {
+      "bytes": 908,
+      "sha256": "a8b03e26b7ed89ad521fb40a92b4233898fafaf4be412732394b28b7b1c29988",
+      "category": "lossless_historical_text"
+    },
+    "logs/green.log.gz": {
+      "bytes": 52,
+      "sha256": "ae63a20499b58e411faec3441c2b9e66ca7ba770b3bd679a2ab20aae2aed1510",
+      "category": "lossless_historical_text"
+    },
+    "logs/actual-green.log.gz": {
+      "bytes": 51,
+      "sha256": "5311a7177fcb17df7bc8fe6d6f6c920e73fb34ac4f6cc555df4c0353ae2ec899",
+      "category": "lossless_historical_text"
+    },
+    "logs/final-regression.log.gz": {
+      "bytes": 69,
+      "sha256": "7fb7e422d1abedca1ff13ec23766ff275cd7861f201c3759ed5853179dc8cf15",
+      "category": "lossless_historical_text"
+    },
+    "logs/final-actual.log.gz": {
+      "bytes": 65,
+      "sha256": "1cfffc2aa91fd599822c87656a8a43135b70e54666e8463d91a27417a0e9a866",
+      "category": "lossless_historical_text"
+    },
+    "receipts/source-pins.json": {
+      "bytes": 359,
+      "sha256": "c174bdb3162ef5070b4b645a94ffe45801fd511dc2b66f0e39598d1bc4fb59a0",
+      "category": "exact_reviewed_source_or_receipt"
+    },
+    "receipts/implementation-pins.json": {
+      "bytes": 2676,
+      "sha256": "7dd72480083be41756c251bdf03387c85f159f18613c01d7051b35e01aa40448",
+      "category": "exact_reviewed_source_or_receipt"
+    },
+    "receipts/executed-argv.json": {
+      "bytes": 34851,
+      "sha256": "9e14a1fa737c0dcaeb4c7fb7f5b0cd36b9620fc16c2ce48fb27eae33ee008f2b",
+      "category": "exact_reviewed_source_or_receipt"
+    },
+    "receipts/actual-run-counters.json": {
+      "bytes": 604,
+      "sha256": "776108e7cefee4ec371356e77a14829d26d2d5b2f681db0b9e0d0ce9682251b5",
+      "category": "exact_reviewed_source_or_receipt"
+    },
+    "receipts/completion-state.json": {
+      "bytes": 341,
+      "sha256": "21dc3e352327e2eb49961f693608ca7dbb5b0f56ebb4901f47a54f806e64024a",
+      "category": "exact_reviewed_source_or_receipt"
+    },
+    "evidence-source/test_producer_versions.py": {
+      "bytes": 11859,
+      "sha256": "b841b8830e7fcfe7a2e7582e1a8225cef1b2ba65ab6140c7900ba4514095ff47",
+      "category": "exact_reviewed_source_or_receipt"
+    },
+    "evidence-source/test_actual_versions.py": {
+      "bytes": 1932,
+      "sha256": "d7470bb7334f5361a7c6e6dd5814c893bd7458d0769705e62fdcc01a33c3dfd9",
+      "category": "exact_reviewed_source_or_receipt"
+    },
+    "evidence-source/test_coordinator_integration.py": {
+      "bytes": 8787,
+      "sha256": "ec5a6602c68cdf8fd732b4d42f5517b1bbc240c23fa23e034a32aec9dac92d3f",
+      "category": "exact_reviewed_source_or_receipt"
+    },
+    "frozen-producer-source/producer_v4.py.txt": {
+      "bytes": 38909,
+      "sha256": "c6327b05066a8a00508c724cd90ac44a0df2ccaa86da43831b43d888dd2b9fb5",
+      "category": "exact_reviewed_source_or_receipt"
+    },
+    "frozen-producer-source/producer_v5.py.txt": {
+      "bytes": 43423,
+      "sha256": "7a7668c91235ddf8037563ae3141b04e8fd75604c1f24348198a858fb5186147",
+      "category": "exact_reviewed_source_or_receipt"
+    },
+    "receipts/legacy-v4-summary.json.gz": {
+      "bytes": 3243,
+      "sha256": "91323a23a24e4756428afb3b3dd9a641bd8e6618ebf909b6cb32069a7071bfb0",
+      "category": "lossless_historical_text"
+    },
+    "receipts/v5-summary.json.gz": {
+      "bytes": 3336,
+      "sha256": "1e0029f442ae4c8f1cea303a6b69db2d2fbdc9bd3ae9a74879d60d2d49861735",
+      "category": "lossless_historical_text"
+    },
+    "receipts/mixed-v4-v5-summary.json.gz": {
+      "bytes": 3565,
+      "sha256": "e0023a1cc7579a762002d48440d4864d939a62bdc2b2db8a8b3ffe236c9a4008",
+      "category": "lossless_historical_text"
+    },
+    "source-diff/coordinator-docs.diff.gz": {
+      "bytes": 3922,
+      "sha256": "982062c20274057961703aaf45bc9b3ebb2b04bcb5b18f2e5414333d3309ce72",
+      "category": "deterministic_git_source_diff"
+    },
+    "external-anchors.json": {
+      "bytes": 1399,
+      "sha256": "4b9b944e9226baa9cabe17b959605821d3e78f3dc1ce9442473d27b29c063df4",
+      "category": "complete_external_index_inventory_anchors"
+    },
+    "prior-archive-preservation.json": {
+      "bytes": 777,
+      "sha256": "6365e1c0b77a15b36a4026e8da11568139424e2b048d5901303439578a0f7ba5",
+      "category": "prior94_file_archive_exact_git_bytes"
+    },
+    "selection.json": {
+      "bytes": 8119,
+      "sha256": "f9cc030baa83c69513b457b17cd9c83f44606c296edce24cac627f78f7b5bb50",
+      "category": "explicit_source_selection"
+    },
+    "compressed-bindings.json": {
+      "bytes": 2272,
+      "sha256": "3a4307626aba810b17aea609194554e156523d8add56c4c3ef4ff4271eb61971",
+      "category": "deterministic_raw_compressed_bindings"
+    },
+    "omissions.json": {
+      "bytes": 1539,
+      "sha256": "aeab50699e158ebca2e2c68abd86b06eacef28ff4e602912414a6890ee8b6646",
+      "category": "explicit_omissions_and_limits"
+    },
+    "README.md": {
+      "bytes": 2074,
+      "sha256": "9cc84ef7f2c63674d48e2240495baa96a63e137a0d96641f5820b142531fe4d7",
+      "category": "archive_scope"
+    },
+    "REPORT.md": {
+      "bytes": 4701,
+      "sha256": "c57c12ce6893989e3792e773da3a7de24b9d5091b7e9f2b24d861244be589162",
+      "category": "requested_packaging_report"
+    }
+  }
+}
