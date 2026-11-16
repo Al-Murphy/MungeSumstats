@@ -4,8 +4,8 @@
     "sha256": "7858c36784e454fce0dc623857ea1c523f105b6918a4cfbae7c3965712e774d4"
   },
   "archive-map.json": {
-    "bytes": 55718,
-    "sha256": "5c6d040e8ec9d323704c8b1809c1708d47e8c4a7793782181ae608ad73325fe8"
+    "bytes": 66590,
+    "sha256": "5bc3311f12e9599a98322d6f96b552b2f38c908d183e3708c1837d6473956757"
   },
   "author/check-native-v2.py": {
     "bytes": 5357,
@@ -431,10 +431,6 @@
     "bytes": 1016,
     "sha256": "4b38aa34fd5e207d919e9c82bbc1fa66d66c4642379ee4409b3194ffe717a450"
   },
-  "independent/evidence-index.json": {
-    "bytes": 436858,
-    "sha256": "3c5e8b422e1afc0b2cd17114b12a5c9e7bed6c601dc62146977cc14cf138a053"
-  },
   "independent/final-controls-summary.json": {
     "bytes": 2696,
     "sha256": "52c8edfe04057af8a47dc11c302aa5f3c73db1ede89d40eb332646801edc3269"
@@ -642,5 +638,117 @@
   "scientific7-whole-file/harness/verify.py": {
     "bytes": 11349,
     "sha256": "d4bbe46a9037597203e779b9e0f830a293b15a476421973fc6a0b69b2dc45c95"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/10M/correctness.json": {
+    "bytes": 1372,
+    "sha256": "188200363b74e67a7b5edbf26708ad6e8eb96084c2f38b223ca6ad5436177785"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/10M/mss7/metrics.json": {
+    "bytes": 1911,
+    "sha256": "cd77c38460a6ddf987923f8fe583f9151d4b32d3d2b729e7aca2567e9bafe936"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/10M/mss7/process-guard.json": {
+    "bytes": 961,
+    "sha256": "e2e971a86a93b782253f4a1308f3b4e9f4aa71361bffc8fe89152a61440f12bc"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/10M/mss7/process.log.gz": {
+    "bytes": 329,
+    "sha256": "bec1f86d8146bd6c5ca62fc1c2110fe05d1f418a57c059ac81401b48df092e44"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/10M/mss7/spec.json": {
+    "bytes": 1352,
+    "sha256": "5e8ee4818f2ae8e88a357d6e25f2a5026d7d5e41c9a98f6b7249b0a5b18433fd"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/10M/stage-summary.json": {
+    "bytes": 7553,
+    "sha256": "2ff004dc096623b72022274187397b9822e134471e0acfc091f2925687be0c10"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/10M/verification-guard.json": {
+    "bytes": 1273,
+    "sha256": "c5706dad2a6217749c25b6fcc666a23a9ef5cf80120258d02226fc96b97c76ad"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/10M/verification.log.gz": {
+    "bytes": 596,
+    "sha256": "6780d0a62bd4b2e53ad45e1c5882aba4a75a807bcbca35648f032a1c15c392ee"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/1M/correctness.json": {
+    "bytes": 1911,
+    "sha256": "9cce5f811ed20c61fd4bc894c908161e51a78846c7a3e7583f183b8cd2754fa8"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss4/metrics.json": {
+    "bytes": 1905,
+    "sha256": "d009a98d5be8033bf9f91f9059d457800c552db4778154b7c5bdea81d1f6ad1a"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss4/process-guard.json": {
+    "bytes": 959,
+    "sha256": "39bb655355157709f1f4e2a73bfc0a604f1e3b9dad1353f89164706476effc44"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss4/process.log.gz": {
+    "bytes": 326,
+    "sha256": "8bc9a0c50bf58ade31ed76c3d4aff2d79eab7280fa6506b9f8a1f10ec53d02e3"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss4/spec.json": {
+    "bytes": 1350,
+    "sha256": "7c1574dbb715d0b603b273be41e12c4ecf5ced42b3a81f583bc8ba0c66a80fd7"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss7/metrics.json": {
+    "bytes": 1901,
+    "sha256": "3ac889f414f300210519158bf083bc71c9865081f74ad6fd82e78aebb9f8464f"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss7/process-guard.json": {
+    "bytes": 959,
+    "sha256": "36d5ddd06d41cf85e8d8b4c41fb0015b9c170af030d6bdf2cb100014b9f76004"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss7/process.log.gz": {
+    "bytes": 322,
+    "sha256": "80a0c6be6feeb7f9b7bb4712d71c99fc21de8fddd5ad731af68b2c17bfe9edb6"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss7/spec.json": {
+    "bytes": 1348,
+    "sha256": "593f39dc07149e10cca7f000f9587f312f40c97783ba7b2a7e796040aaf5684c"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/1M/stage-summary.json": {
+    "bytes": 11799,
+    "sha256": "17181b46dd28b950b097294de5d65e482699537d2dcccc7130bc64eefcaf7952"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/1M/verification-guard.json": {
+    "bytes": 1408,
+    "sha256": "2c7c6d9e487e008b4af21d67de04c8e3798feeb1e84c3d594ef45b35cfa96c71"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/1M/verification.log.gz": {
+    "bytes": 616,
+    "sha256": "e864371bd429ab1f906a8a722734b9215daa8c51072ca7bd80b2f2525e91a07d"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/40M/correctness.json": {
+    "bytes": 1374,
+    "sha256": "a74f4351e03e8ef5b7a4330ced17ed44a3ed4b8ae4208de15d42dcb674e51488"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/40M/mss7/metrics.json": {
+    "bytes": 1914,
+    "sha256": "0c15b5e87b33a8f8123a8912b8a5b4453d4dadd69fdd8fe24d0198e505dba6e1"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/40M/mss7/process-guard.json": {
+    "bytes": 962,
+    "sha256": "8fb303616c912aa167ea9f1f0ad875821c3f52306dadda5a43f84f7bce20791c"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/40M/mss7/process.log.gz": {
+    "bytes": 330,
+    "sha256": "919b45b9e5f3ce4c390241a05cfedc2b132fc47deac0e91b36fe55c6dcfea1eb"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/40M/mss7/spec.json": {
+    "bytes": 1352,
+    "sha256": "f0a29de5a8d707b60ade1836a8aa5a4d274b4a621681d43289acaebce2e68706"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/40M/stage-summary.json": {
+    "bytes": 7563,
+    "sha256": "be9c31b43800659609d89064f0d1b32e544e12f9ad7a9788c90776fb0ffe49a6"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/40M/verification-guard.json": {
+    "bytes": 1275,
+    "sha256": "8dd31c32c99ebb023dd3195682f2e01f49e524a4659aca9e14826909fa8b8952"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/40M/verification.log.gz": {
+    "bytes": 597,
+    "sha256": "64cf99392db62be2b8fa8a2a8514a63a3ea9c8c67bbfcb0abd8c7f85d9349938"
   }
 }

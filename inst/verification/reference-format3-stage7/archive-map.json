@@ -947,6 +947,174 @@
       "raw_bytes": 460,
       "raw_sha256": "30f6d042620b0d71535e1820c921658e8ddb6f5da1f614d2c06123e4bf41b4df",
       "archived_sha256": "30f6d042620b0d71535e1820c921658e8ddb6f5da1f614d2c06123e4bf41b4df"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/10M/correctness.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/10M/correctness.json",
+      "raw_bytes": 1372,
+      "raw_sha256": "188200363b74e67a7b5edbf26708ad6e8eb96084c2f38b223ca6ad5436177785",
+      "archived_sha256": "188200363b74e67a7b5edbf26708ad6e8eb96084c2f38b223ca6ad5436177785"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/10M/mss7/metrics.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/10M/mss7/metrics.json",
+      "raw_bytes": 1911,
+      "raw_sha256": "cd77c38460a6ddf987923f8fe583f9151d4b32d3d2b729e7aca2567e9bafe936",
+      "archived_sha256": "cd77c38460a6ddf987923f8fe583f9151d4b32d3d2b729e7aca2567e9bafe936"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/10M/mss7/process-guard.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/10M/mss7/process-guard.json",
+      "raw_bytes": 961,
+      "raw_sha256": "e2e971a86a93b782253f4a1308f3b4e9f4aa71361bffc8fe89152a61440f12bc",
+      "archived_sha256": "e2e971a86a93b782253f4a1308f3b4e9f4aa71361bffc8fe89152a61440f12bc"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/10M/mss7/process.log": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/10M/mss7/process.log.gz",
+      "raw_bytes": 810,
+      "raw_sha256": "259829580b924e2f469135754a002b5c789108068e765026ef09d13d6c5fad04",
+      "archived_sha256": "bec1f86d8146bd6c5ca62fc1c2110fe05d1f418a57c059ac81401b48df092e44"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/10M/mss7/spec.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/10M/mss7/spec.json",
+      "raw_bytes": 1352,
+      "raw_sha256": "5e8ee4818f2ae8e88a357d6e25f2a5026d7d5e41c9a98f6b7249b0a5b18433fd",
+      "archived_sha256": "5e8ee4818f2ae8e88a357d6e25f2a5026d7d5e41c9a98f6b7249b0a5b18433fd"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/10M/stage-summary.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/10M/stage-summary.json",
+      "raw_bytes": 7553,
+      "raw_sha256": "2ff004dc096623b72022274187397b9822e134471e0acfc091f2925687be0c10",
+      "archived_sha256": "2ff004dc096623b72022274187397b9822e134471e0acfc091f2925687be0c10"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/10M/verification-guard.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/10M/verification-guard.json",
+      "raw_bytes": 1273,
+      "raw_sha256": "c5706dad2a6217749c25b6fcc666a23a9ef5cf80120258d02226fc96b97c76ad",
+      "archived_sha256": "c5706dad2a6217749c25b6fcc666a23a9ef5cf80120258d02226fc96b97c76ad"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/10M/verification.log": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/10M/verification.log.gz",
+      "raw_bytes": 1180,
+      "raw_sha256": "97a2825e21cadeda9651a9da72672d1c7d9c063f0570f25efede9f00271b3fba",
+      "archived_sha256": "6780d0a62bd4b2e53ad45e1c5882aba4a75a807bcbca35648f032a1c15c392ee"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/1M/correctness.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/1M/correctness.json",
+      "raw_bytes": 1911,
+      "raw_sha256": "9cce5f811ed20c61fd4bc894c908161e51a78846c7a3e7583f183b8cd2754fa8",
+      "archived_sha256": "9cce5f811ed20c61fd4bc894c908161e51a78846c7a3e7583f183b8cd2754fa8"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss4/metrics.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss4/metrics.json",
+      "raw_bytes": 1905,
+      "raw_sha256": "d009a98d5be8033bf9f91f9059d457800c552db4778154b7c5bdea81d1f6ad1a",
+      "archived_sha256": "d009a98d5be8033bf9f91f9059d457800c552db4778154b7c5bdea81d1f6ad1a"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss4/process-guard.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss4/process-guard.json",
+      "raw_bytes": 959,
+      "raw_sha256": "39bb655355157709f1f4e2a73bfc0a604f1e3b9dad1353f89164706476effc44",
+      "archived_sha256": "39bb655355157709f1f4e2a73bfc0a604f1e3b9dad1353f89164706476effc44"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss4/process.log": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss4/process.log.gz",
+      "raw_bytes": 810,
+      "raw_sha256": "38bec2f88469788e717e9b4480742e5045250aa76b53d382d5e5b35c62176026",
+      "archived_sha256": "8bc9a0c50bf58ade31ed76c3d4aff2d79eab7280fa6506b9f8a1f10ec53d02e3"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss4/spec.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss4/spec.json",
+      "raw_bytes": 1350,
+      "raw_sha256": "7c1574dbb715d0b603b273be41e12c4ecf5ced42b3a81f583bc8ba0c66a80fd7",
+      "archived_sha256": "7c1574dbb715d0b603b273be41e12c4ecf5ced42b3a81f583bc8ba0c66a80fd7"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss7/metrics.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss7/metrics.json",
+      "raw_bytes": 1901,
+      "raw_sha256": "3ac889f414f300210519158bf083bc71c9865081f74ad6fd82e78aebb9f8464f",
+      "archived_sha256": "3ac889f414f300210519158bf083bc71c9865081f74ad6fd82e78aebb9f8464f"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss7/process-guard.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss7/process-guard.json",
+      "raw_bytes": 959,
+      "raw_sha256": "36d5ddd06d41cf85e8d8b4c41fb0015b9c170af030d6bdf2cb100014b9f76004",
+      "archived_sha256": "36d5ddd06d41cf85e8d8b4c41fb0015b9c170af030d6bdf2cb100014b9f76004"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss7/process.log": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss7/process.log.gz",
+      "raw_bytes": 810,
+      "raw_sha256": "927237eba3625e4a3fa23bd22cbf7d20ada63f36e688cc225be3245fc0561d2f",
+      "archived_sha256": "80a0c6be6feeb7f9b7bb4712d71c99fc21de8fddd5ad731af68b2c17bfe9edb6"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss7/spec.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss7/spec.json",
+      "raw_bytes": 1348,
+      "raw_sha256": "593f39dc07149e10cca7f000f9587f312f40c97783ba7b2a7e796040aaf5684c",
+      "archived_sha256": "593f39dc07149e10cca7f000f9587f312f40c97783ba7b2a7e796040aaf5684c"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/1M/stage-summary.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/1M/stage-summary.json",
+      "raw_bytes": 11799,
+      "raw_sha256": "17181b46dd28b950b097294de5d65e482699537d2dcccc7130bc64eefcaf7952",
+      "archived_sha256": "17181b46dd28b950b097294de5d65e482699537d2dcccc7130bc64eefcaf7952"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/1M/verification-guard.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/1M/verification-guard.json",
+      "raw_bytes": 1408,
+      "raw_sha256": "2c7c6d9e487e008b4af21d67de04c8e3798feeb1e84c3d594ef45b35cfa96c71",
+      "archived_sha256": "2c7c6d9e487e008b4af21d67de04c8e3798feeb1e84c3d594ef45b35cfa96c71"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/1M/verification.log": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/1M/verification.log.gz",
+      "raw_bytes": 1585,
+      "raw_sha256": "83db44adf6b2b34ae128302fd5122bf231497f8323a5de06a7e3860b394ea79a",
+      "archived_sha256": "e864371bd429ab1f906a8a722734b9215daa8c51072ca7bd80b2f2525e91a07d"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/40M/correctness.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/40M/correctness.json",
+      "raw_bytes": 1374,
+      "raw_sha256": "a74f4351e03e8ef5b7a4330ced17ed44a3ed4b8ae4208de15d42dcb674e51488",
+      "archived_sha256": "a74f4351e03e8ef5b7a4330ced17ed44a3ed4b8ae4208de15d42dcb674e51488"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/40M/mss7/metrics.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/40M/mss7/metrics.json",
+      "raw_bytes": 1914,
+      "raw_sha256": "0c15b5e87b33a8f8123a8912b8a5b4453d4dadd69fdd8fe24d0198e505dba6e1",
+      "archived_sha256": "0c15b5e87b33a8f8123a8912b8a5b4453d4dadd69fdd8fe24d0198e505dba6e1"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/40M/mss7/process-guard.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/40M/mss7/process-guard.json",
+      "raw_bytes": 962,
+      "raw_sha256": "8fb303616c912aa167ea9f1f0ad875821c3f52306dadda5a43f84f7bce20791c",
+      "archived_sha256": "8fb303616c912aa167ea9f1f0ad875821c3f52306dadda5a43f84f7bce20791c"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/40M/mss7/process.log": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/40M/mss7/process.log.gz",
+      "raw_bytes": 810,
+      "raw_sha256": "efa93f3d53035f961a7c326c63e1f53d7ca7fdeee30e64b48b12532cf661e0c7",
+      "archived_sha256": "919b45b9e5f3ce4c390241a05cfedc2b132fc47deac0e91b36fe55c6dcfea1eb"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/40M/mss7/spec.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/40M/mss7/spec.json",
+      "raw_bytes": 1352,
+      "raw_sha256": "f0a29de5a8d707b60ade1836a8aa5a4d274b4a621681d43289acaebce2e68706",
+      "archived_sha256": "f0a29de5a8d707b60ade1836a8aa5a4d274b4a621681d43289acaebce2e68706"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/40M/stage-summary.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/40M/stage-summary.json",
+      "raw_bytes": 7563,
+      "raw_sha256": "be9c31b43800659609d89064f0d1b32e544e12f9ad7a9788c90776fb0ffe49a6",
+      "archived_sha256": "be9c31b43800659609d89064f0d1b32e544e12f9ad7a9788c90776fb0ffe49a6"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/40M/verification-guard.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/40M/verification-guard.json",
+      "raw_bytes": 1275,
+      "raw_sha256": "8dd31c32c99ebb023dd3195682f2e01f49e524a4659aca9e14826909fa8b8952",
+      "archived_sha256": "8dd31c32c99ebb023dd3195682f2e01f49e524a4659aca9e14826909fa8b8952"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/40M/verification.log": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/40M/verification.log.gz",
+      "raw_bytes": 1182,
+      "raw_sha256": "7e1d124aa71d15d388f42dee40d716d761452705ccfd34efeac1f9e03be0b119",
+      "archived_sha256": "64cf99392db62be2b8fa8a2a8514a63a3ea9c8c67bbfcb0abd8c7f85d9349938"
     }
   },
   "omitted": {

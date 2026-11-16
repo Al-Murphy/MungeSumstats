@@ -1,0 +1,18 @@
+{
+  "version": "mss7",
+  "library": "/private/tmp/gwas-harvest-stage2/Rlib/preservation-v7",
+  "dll_path": "/private/tmp/gwas-harvest-stage2/Rlib/preservation-v7/MungeSumstats/libs/MungeSumstats.so",
+  "dll_md5": "5f1126b8b7d145e2123c6da4720ada0e",
+  "dll_sha256": "c1c0a8b29479c33d8b4cfa4646e46e39c4da436686f4ca2da12a402251003d50",
+  "implementation": "mss-preservation-7",
+  "production_revision": "5e5e5bfd1a8ccb4bddfb9520e0e0997d4691708e",
+  "input": "/private/tmp/gwas-harvest-stage2/assets/mss/matched-40M.tsv",
+  "reference": "/private/tmp/gwas-harvest-stage2/assets/reference/matched-index",
+  "output": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-format2-v2/40M/mss7/edition",
+  "metrics": "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-format2-v2/40M/mss7/metrics.json",
+  "rows": 40000000,
+  "threads": 1,
+  "batch_rows": 100000,
+  "workload": "437458 real chr22 unique biallelic non-palindromic SNP panel records repeated with synthetic exact beta/EAF; 40M rows do not mean 40M unique variants; separate reviewed scientific matrices cover indels/multiallelic/ambiguity",
+  "cache_caveat": "Fresh R process and application reference handle per run; OS page cache uncontrolled and never flushed. Shared host may run full reference preparation and package tests."
+}

@@ -1,0 +1,38 @@
+{
+  "command": [
+    "/opt/homebrew/opt/python@3.15/bin/python3.15",
+    "-B",
+    "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/verify.py",
+    "--profile",
+    "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/profiles/scientific7-format2-v2.json",
+    "--stage",
+    "1M",
+    "--receipt",
+    "/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-format2-v2/1M/correctness.json",
+    "--edition",
+    "mss4=/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-format2-v2/1M/mss4/edition",
+    "--edition",
+    "mss7=/private/tmp/gwas-harvest-stage2/results/mss-final7-whole-file-v2/runs/scientific7-format2-v2/1M/mss7/edition"
+  ],
+  "pid": 79201,
+  "status": "success",
+  "exit_code": 0,
+  "reason": null,
+  "natural_oom": false,
+  "wall_seconds": 20.597219832940027,
+  "samples": 73,
+  "peak_process_tree": {
+    "rss_bytes": 2146959360,
+    "physical_footprint_bytes": 2371471448,
+    "conservative_guard_bytes": 2371471448,
+    "processes": 1
+  },
+  "min_free_bytes": 500665249792,
+  "peak_owned_case_bytes": 467150211,
+  "limits": {
+    "memory_bytes": 8589934592,
+    "minimum_free_bytes": 171798691840,
+    "case_disk_bytes": 2147483648
+  },
+  "scope": "Full owned process tree: RSS, macOS physical footprint and sum(max(RSS,footprint)); Linux guard includes swap. No other workload is signaled."
+}
