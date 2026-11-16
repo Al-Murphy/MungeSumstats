@@ -268,12 +268,20 @@ public:
     if(hits.size()>1){result.status="ambiguous";return result;}
     if(hits.empty()) {
       for(auto& c:candidates){
-        std::set<std::string> alleles;
-        for(auto& allele:split(c.alleles,','))alleles.insert(allele);
-        for(auto original_pos:c.original_positions)for(auto& site:lookup("S:"+c.chr+":"+std::to_string(original_pos),cap))
-          if(site.original_pos==original_pos)for(auto& allele:split(site.alleles,','))alleles.insert(allele);
-        for(int orientation=0;orientation<2;++orientation){auto a=orientation?complement(other):other;auto b=orientation?complement(effect):effect;
-          if(a!=c.original_ref&&b!=c.original_ref&&alleles.count(a)&&alleles.count(b)){result.status="alt_alt_contrast";return result;}}
+        if(!missing(input.chr)&&input.chr!=c.chr)continue;
+        for(auto original_pos:c.original_positions) {
+          if(input.pos>0&&input.pos!=original_pos)continue;
+          for(auto& site:lookup("S:"+c.chr+":"+std::to_string(original_pos),cap)) {
+            // An ALT pair must share one original REF span. Merged candidate
+            // strings pool distinct sites and depend on incidental record order.
+            if(site.original_pos!=original_pos||site.chr!=c.chr||!dna(site.original_ref)||
+               fa.sequence(site.chr,site.original_pos,site.original_ref.size())!=site.original_ref)continue;
+            std::set<std::string> alleles;
+            for(auto& allele:split(site.alleles,','))alleles.insert(allele);
+            for(int orientation=0;orientation<2;++orientation){auto a=orientation?complement(other):other;auto b=orientation?complement(effect):effect;
+              if(a!=site.original_ref&&b!=site.original_ref&&alleles.count(a)&&alleles.count(b)){result.status="alt_alt_contrast";return result;}}
+          }
+        }
       }
       result.status="allele_mismatch";return result;
     }

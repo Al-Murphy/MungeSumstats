@@ -15,7 +15,7 @@ test_that('declared source REF ALT strand prevents opposite indel event mapping'
   expect_true(is.na(generic$effect))
   declared <- harmonise_sumstats(x,ref,columns=columns,frequency_type='EAF')
   trusted <- declared$normalized
-  expect_identical(declared$provenance$implementation_version,'mss-preservation-4')
+  expect_identical(declared$provenance$implementation_version,'mss-preservation-5')
   expect_identical(declared$provenance$core_version,'mss-preservation-2')
   expect_identical(trusted$status,'sequence_only')
   expect_equal(trusted$pos,1)
@@ -67,10 +67,10 @@ test_that('declared source REF ALT strand prevents opposite indel event mapping'
   file_static <- harmonise_file(file.path(d,'input.tsv'),ref,file.path(d,'static-edition'),
                                 columns=static,source_strand='+',frequency_type='EAF')
   expect_identical(file_static$source_strand,'+')
-  expect_identical(file_static$implementation_version,'mss-preservation-4')
+  expect_identical(file_static$implementation_version,'mss-preservation-5')
   expect_identical(readLines(file.path(d,'input.tsv')),readLines(file.path(file_static$path,'source.tsv')))
   metadata <- read.delim(file.path(file_static$path,'metadata.tsv'))
   expect_identical(metadata$value[metadata$key=='source_strand'],'+')
-  expect_identical(metadata$value[metadata$key=='implementation_version'],'mss-preservation-4')
+  expect_identical(metadata$value[metadata$key=='implementation_version'],'mss-preservation-5')
   expect_error(harmonise_sumstats(x,ref,columns=columns,source_strand='+'),'either')
 })
