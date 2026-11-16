@@ -15,6 +15,8 @@
 #include <sstream>
 #include <stdexcept>
 #include <string>
+#include <string_view>
+#include <tuple>
 #include <vector>
 #include <unordered_map>
 #include <utility>
@@ -255,21 +257,23 @@ public:
     if(ids.empty()&&indel_events.size()>1){result.status="ambiguous";return result;}
     auto other=upper(input.other),effect=upper(input.effect_allele);
     if(!dna(other)||!dna(effect)||other==effect){result.status="unsupported_allele";return result;}
-    struct Hit{Candidate candidate;bool swap,comp;};std::vector<Hit> hits;std::set<std::string> hitkeys;
+    struct Hit{Candidate candidate;bool swap,comp;std::int64_t anchor;};std::vector<Hit> hits;std::set<std::string> hitkeys;
     for(auto& c:candidates)for(int orientation=0;orientation<4;++orientation) {
       bool swap=orientation%2,comp=orientation>=2;auto a=comp?complement(other):other;auto b=comp?complement(effect):effect;if(swap)std::swap(a,b);
       auto chr=missing(input.chr)?c.chr:input.chr;
       std::set<std::int64_t> anchors=input.pos>0?std::set<std::int64_t>{input.pos}:c.original_positions;
       if(input.pos<=0)anchors.insert(c.pos);
       for(auto pos:anchors){auto n=normalize(fa,chr,pos,a,b);
-        if(n.status=="ok"&&n.chr==c.chr&&n.pos==c.pos&&n.ref==c.ref&&n.alt==c.alt){auto key=c.key()+":"+(swap?"1":"0")+":"+(comp?"1":"0");if(hitkeys.insert(key).second)hits.push_back({c,swap,comp});}}
+        if(n.status=="ok"&&n.chr==c.chr&&n.pos==c.pos&&n.ref==c.ref&&n.alt==c.alt){auto key=c.key()+":"+(swap?"1":"0")+":"+(comp?"1":"0");if(hitkeys.insert(key).second)hits.push_back({c,swap,comp,pos});}}
 
     }
     if(hits.size()>1){result.status="ambiguous";return result;}
     // A unique REF-ALT hit does not prove the source strand: the opposite
     // strand may instead measure two alternate alleles at the same site.
     // Neither a site identifier nor EAF selects between these explanations.
-    const bool alt_alt=alt_alt_context(input,candidates,other,effect,cap);
+    std::set<std::int64_t> resolved_anchors;
+    if(hits.size()==1){resolved_anchors.insert(hits[0].anchor);resolved_anchors.insert(hits[0].candidate.pos);}
+    const bool alt_alt=alt_alt_context(input,candidates,other,effect,cap,resolved_anchors);
     if(hits.empty()) {
       if(alt_alt){result.status="alt_alt_contrast";return result;}
       result.status="allele_mismatch";return result;
@@ -287,24 +291,85 @@ public:
 private:
   bool alt_alt_context(const Input& input,const std::vector<Candidate>& candidates,
                        const std::string& other,const std::string& effect,
-                       std::size_t cap) {
-    // Deduplicate lookups within this row only. A site key is bound to its
-    // chromosome and original position; lookup retains each original REF span.
+                       std::size_t cap,const std::set<std::int64_t>& resolved_anchors) {
     std::set<std::pair<std::string,std::int64_t>> visited;
     for(const auto& c:candidates) {
       if(!missing(input.chr)&&input.chr!=c.chr)continue;
       for(auto position:c.original_positions) {
-        if(input.pos>0&&input.pos!=position)continue;
         if(!visited.emplace(c.chr,position).second)continue;
         for(const auto& site:lookup("S:"+c.chr+":"+std::to_string(position),cap)) {
-          // Never pool alleles from different original REF spans or placements.
           if(site.original_pos!=position||site.chr!=c.chr||!dna(site.original_ref)||
              fa.sequence(site.chr,site.original_pos,site.original_ref.size())!=site.original_ref)continue;
-          std::set<std::string> alleles;
-          for(const auto& allele:split(site.alleles,','))alleles.insert(allele);
+          // Own all strings until the row-scoped signature maps are destroyed.
+          // Views avoid copying a long allele once for every possible trim.
+          const auto alleles=split(site.alleles,',');
+          std::vector<std::size_t> valid;
+          for(std::size_t i=0;i<alleles.size();++i)
+            if(dna(alleles[i])&&alleles[i]!=site.original_ref)valid.push_back(i);
+          if(valid.size()<2)continue;
           for(int orientation=0;orientation<2;++orientation) {
-            const auto a=orientation?complement(other):other,b=orientation?complement(effect):effect;
-            if(a!=site.original_ref&&b!=site.original_ref&&alleles.count(a)&&alleles.count(b))return true;
+            const std::string observed[2]={orientation?complement(other):other,
+                                           orientation?complement(effect):effect};
+            // One linear scan of ALT strings joins compatible common flanks;
+            // no Cartesian product of ALT pairs is enumerated. A shared flank
+            // may itself differ from REF, so retain it as part of the contrast.
+            using Signature=std::tuple<std::int64_t,std::int64_t,std::string_view,std::string_view>;
+            std::map<Signature,unsigned> signatures;
+            for(auto i:valid)for(unsigned which=0;which<2;++which) {
+              const auto& allele=alleles[i];const auto& query=observed[which];
+              const auto length=static_cast<std::int64_t>(site.original_ref.size())+
+                                static_cast<std::int64_t>(query.size())-static_cast<std::int64_t>(allele.size());
+              if(length<1||query.size()>allele.size())continue;
+              std::size_t offset=0;
+              if(input.pos>0) {
+                if(input.pos<site.original_pos)continue;
+                offset=static_cast<std::size_t>(input.pos-site.original_pos);
+              } else offset=allele.find(query);
+              while(offset!=std::string::npos&&offset<=allele.size()-query.size()) {
+                if(allele.compare(offset,query.size(),query)==0) {
+                  const auto anchor=site.original_pos+static_cast<std::int64_t>(offset);
+                  const auto view=std::string_view(allele);
+                  auto& mask=signatures[{anchor,length,view.substr(0,offset),view.substr(offset+query.size())}];
+                  mask|=1U<<which;if(mask==3)return true;
+                }
+                if(input.pos>0)break;
+                offset=allele.find(query,offset+1);
+              }
+            }
+            // Reference-shared padding and repeat-equivalent indel anchors can
+            // also place the observed pair outside its original literal span.
+            // Both ALT events must match under ONE inferred source REF span.
+            // At most the original anchor and two actual single-hit anchors
+            // are examined for unknown input position, independently of ALT count.
+            std::set<std::int64_t> anchors=input.pos>0?std::set<std::int64_t>{input.pos}:resolved_anchors;
+            if(input.pos<=0)anchors.insert(site.original_pos);
+            for(auto anchor:anchors) {
+              if(anchor<1)continue;
+              std::map<std::int64_t,unsigned> matched;
+              std::map<std::int64_t,std::pair<Normalized,Normalized>> query_events;
+              for(auto i:valid) {
+                const auto& allele=alleles[i];
+                const auto event=normalize(fa,site.chr,site.original_pos,site.original_ref,allele);
+                if(event.status!="ok")continue;
+                for(unsigned which=0;which<2;++which) {
+                  const auto length=static_cast<std::int64_t>(site.original_ref.size())+
+                                    static_cast<std::int64_t>(observed[which].size())-static_cast<std::int64_t>(allele.size());
+                  if(length<1)continue;
+                  auto found=query_events.find(length);
+                  if(found==query_events.end()) {
+                    const auto ref=fa.sequence(site.chr,anchor,static_cast<std::size_t>(length));
+                    found=query_events.emplace(length,std::make_pair(
+                      normalize(fa,site.chr,anchor,ref,observed[0]),
+                      normalize(fa,site.chr,anchor,ref,observed[1]))).first;
+                  }
+                  const auto& query=which?found->second.second:found->second.first;
+                  if(query.status=="ok"&&query.chr==event.chr&&query.pos==event.pos&&
+                     query.ref==event.ref&&query.alt==event.alt) {
+                    auto& mask=matched[length];mask|=1U<<which;if(mask==3)return true;
+                  }
+                }
+              }
+            }
           }
         }
       }

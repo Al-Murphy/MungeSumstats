@@ -229,7 +229,9 @@ open_reference <- function(reference) {
 #'   directions remain ambiguous. ALT-ALT contrasts are retained without
 #'   inventing a reference-anchored effect. ALT-ALT diagnostics require both
 #'   alleles in one FASTA-valid original REF context, consistent with known input
-#'   chromosome and position. A competing ALT-ALT explanation also keeps a
+#'   chromosome and position after coherent joint trimming or equivalent indel
+#'   reanchoring. Shared alternate backgrounds remain part of the contrast even
+#'   when their strings differ from REF. A competing ALT-ALT explanation keeps a
 #'   unique generic REF-ALT hit ambiguous; an identifier does not declare source
 #'   strand or reference-allele role. All GRCh38 projection fields remain
 #'   missing unless an explicit `projection` is supplied. Projected coordinates,
