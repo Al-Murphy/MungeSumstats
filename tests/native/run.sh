@@ -12,3 +12,6 @@ trap 'rm -rf "$work"' EXIT HUP INT TERM
 
 "${CXX:-c++}" -std=c++17 -Wall -Wextra -pedantic -O2 "$(dirname "$0")/test_format3.cpp" -o "$work/format3-test"
 "$work/format3-test" "$work"
+
+"${CXX:-c++}" -std=c++17 -Wall -Wextra -pedantic -O2 "$(dirname "$0")/test_fai.cpp" -o "$work/fai-test"
+"$work/fai-test" "$work"

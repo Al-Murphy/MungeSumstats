@@ -47,6 +47,7 @@ int main(int,char** argv) {
     write(fasta,data);write(index,fai);mss::Fasta ref(fasta,index);
     if(ref.sequence(chr,1,expected.size())!=expected)throw std::runtime_error("Valid indexed sequence changed");
     if(ref.sequence(chr,1,std::numeric_limits<std::size_t>::max())!="")throw std::runtime_error("Oversized query accepted");
+    if(ref.sequence(chr,2,std::numeric_limits<std::size_t>::max())!="")throw std::runtime_error("Wrapped query accepted");
     if(ref.sequence(chr,std::numeric_limits<std::int64_t>::max(),2)!="")throw std::runtime_error("Out-of-bounds query accepted");
   };
   control(">one\nACGT\nAC\n>two\nT\n",valid,"one","ACGTAC");

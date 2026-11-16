@@ -130,7 +130,43 @@ public:
     if(!fai.empty()) {
       std::ifstream in(fai); std::string line;
       if(!in) throw std::runtime_error("Missing FASTA index");
-      while(std::getline(in,line)) {auto v=split(line,'\t'); if(v.size()!=5)throw std::runtime_error("Invalid FASTA index"); contigs[v[0]]={std::stoull(v[1]),std::stoull(v[2]),std::stoull(v[3]),std::stoull(v[4])};}
+      file.seekg(0,std::ios::end);const auto end=file.tellg();
+      if(end<0)throw std::runtime_error("Cannot determine FASTA byte bounds");
+      const auto fasta_bytes=static_cast<std::uint64_t>(end);file.seekg(0);
+      auto number=[](const std::string& value) {
+        if(value.empty())throw std::runtime_error("Invalid FASTA index number");
+        std::uint64_t result=0;
+        for(unsigned char c:value) {
+          if(c<'0'||c>'9'||result>(std::numeric_limits<std::uint64_t>::max()-(c-'0'))/10)
+            throw std::runtime_error("Invalid FASTA index number");
+          result=result*10+(c-'0');
+        }
+        return result;
+      };
+      while(std::getline(in,line)) {
+        if(!line.empty()&&line.back()=='\r')line.pop_back();
+        auto v=split(line,'\t');
+        if(v.size()!=5||v[0].empty()||contigs.count(v[0])||
+           std::any_of(v[0].begin(),v[0].end(),[](unsigned char c){return c==0||std::isspace(c);}))
+          throw std::runtime_error("Invalid FASTA index name or row");
+        Contig c{number(v[1]),number(v[2]),number(v[3]),number(v[4])};
+        if(!c.size) {
+          // Preserve the native writer's empty-contig representation. No
+          // positive-length query can enter line arithmetic for this contig.
+          if(c.bases||c.bytes||c.offset>fasta_bytes)throw std::runtime_error("Invalid FASTA index empty contig");
+        } else {
+          if(!c.bases||c.bases>c.size||c.bytes<c.bases||c.offset>=fasta_bytes)
+            throw std::runtime_error("Invalid FASTA index layout");
+          const auto zero=c.size-1,rows=zero/c.bases,tail=zero%c.bases;
+          const auto available=fasta_bytes-1-c.offset;
+          // Division before multiplication prevents overflow even for malicious
+          // uint64 field values; the last addressed base must exist in this file.
+          if(rows>available/c.bytes||tail>available-rows*c.bytes)
+            throw std::runtime_error("Invalid FASTA index byte bounds");
+        }
+        contigs.emplace(v[0],c);
+      }
+      if(in.bad()||contigs.empty())throw std::runtime_error("Invalid FASTA index read or empty index");
       return;
     }
     std::string line,name; std::uint64_t previous=0,offset=0;
@@ -161,8 +197,9 @@ public:
   void save(const std::string& path)const {std::ofstream out(path);for(const auto& p:contigs)out<<p.first<<'\t'<<p.second.size<<'\t'<<p.second.offset<<'\t'<<p.second.bases<<'\t'<<p.second.bytes<<'\n';if(!out)throw std::runtime_error("Cannot write FASTA index");}
   std::string sequence(const std::string& chr,std::int64_t pos,std::size_t n) {
     auto it=contigs.find(chr);if(it==contigs.end() || pos<1)return "";
-    const auto& c=it->second; if(static_cast<std::uint64_t>(pos-1)+n>c.size)return "";
-    std::string result; result.reserve(n); auto zero=static_cast<std::uint64_t>(pos-1);
+    const auto& c=it->second;auto zero=static_cast<std::uint64_t>(pos-1);
+    if(zero>c.size||n>c.size-zero)return "";
+    std::string result; result.reserve(n);
     while(n) {auto take=std::min<std::uint64_t>(n,c.bases-zero%c.bases);auto part=blocks.bytes(c.offset+(zero/c.bases)*c.bytes+zero%c.bases,take);if(part.size()!=take)return "";result+=part;zero+=take;n-=take;} return upper(result);
   }
 };
