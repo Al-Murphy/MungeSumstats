@@ -4,8 +4,8 @@
     "sha256": "7858c36784e454fce0dc623857ea1c523f105b6918a4cfbae7c3965712e774d4"
   },
   "archive-map.json": {
-    "bytes": 66590,
-    "sha256": "5bc3311f12e9599a98322d6f96b552b2f38c908d183e3708c1837d6473956757"
+    "bytes": 68250,
+    "sha256": "01d19b8315dfb7b85831e7e24bf369ec7df271cc70afa8701dc05544b07d2d8c"
   },
   "author/check-native-v2.py": {
     "bytes": 5357,
@@ -431,6 +431,10 @@
     "bytes": 1016,
     "sha256": "4b38aa34fd5e207d919e9c82bbc1fa66d66c4642379ee4409b3194ffe717a450"
   },
+  "independent/evidence-index.json": {
+    "bytes": 436858,
+    "sha256": "3c5e8b422e1afc0b2cd17114b12a5c9e7bed6c601dc62146977cc14cf138a053"
+  },
   "independent/final-controls-summary.json": {
     "bytes": 2696,
     "sha256": "52c8edfe04057af8a47dc11c302aa5f3c73db1ede89d40eb332646801edc3269"
@@ -643,6 +647,10 @@
     "bytes": 1372,
     "sha256": "188200363b74e67a7b5edbf26708ad6e8eb96084c2f38b223ca6ad5436177785"
   },
+  "scientific7-whole-file/runs/scientific7-format2-v2/10M/mss7/edition-file-checksums.json": {
+    "bytes": 261,
+    "sha256": "e317d9484147a4bb74b671faf7b8eff5467269eb48e1c7d239304733169e1f4a"
+  },
   "scientific7-whole-file/runs/scientific7-format2-v2/10M/mss7/metrics.json": {
     "bytes": 1911,
     "sha256": "cd77c38460a6ddf987923f8fe583f9151d4b32d3d2b729e7aca2567e9bafe936"
@@ -675,6 +683,10 @@
     "bytes": 1911,
     "sha256": "9cce5f811ed20c61fd4bc894c908161e51a78846c7a3e7583f183b8cd2754fa8"
   },
+  "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss4/edition-file-checksums.json": {
+    "bytes": 260,
+    "sha256": "347a7b34b3606c5ba1f9c2c663d507fc9c1652a8d79f48a491cf8e24ca3d7ad6"
+  },
   "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss4/metrics.json": {
     "bytes": 1905,
     "sha256": "d009a98d5be8033bf9f91f9059d457800c552db4778154b7c5bdea81d1f6ad1a"
@@ -690,6 +702,10 @@
   "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss4/spec.json": {
     "bytes": 1350,
     "sha256": "7c1574dbb715d0b603b273be41e12c4ecf5ced42b3a81f583bc8ba0c66a80fd7"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss7/edition-file-checksums.json": {
+    "bytes": 260,
+    "sha256": "397407ac55ea2670480ba1efb2678c3aa3406efd2c9453c82c996c87016afcf5"
   },
   "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss7/metrics.json": {
     "bytes": 1901,
@@ -722,6 +738,10 @@
   "scientific7-whole-file/runs/scientific7-format2-v2/40M/correctness.json": {
     "bytes": 1374,
     "sha256": "a74f4351e03e8ef5b7a4330ced17ed44a3ed4b8ae4208de15d42dcb674e51488"
+  },
+  "scientific7-whole-file/runs/scientific7-format2-v2/40M/mss7/edition-file-checksums.json": {
+    "bytes": 261,
+    "sha256": "47dbc7cbfa10afffa086ec294bd8059183c828126fc9463bae1bd6d83c8f4b4e"
   },
   "scientific7-whole-file/runs/scientific7-format2-v2/40M/mss7/metrics.json": {
     "bytes": 1914,

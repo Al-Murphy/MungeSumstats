@@ -1,0 +1,10 @@
+{
+  "normalized.tsv": {
+    "bytes": 5721508129,
+    "sha256": "1f0bdd7ed62a5996fa480bd9ec3fa98ecc7a10dbe6eed57992a64cc6a67e9e70"
+  },
+  "manifest.rds": {
+    "bytes": 1139,
+    "sha256": "487a5fbeda9c1cdcaa718d86e3724c4fcba65f1e735d26ed001d39ee0c8f9b4e"
+  }
+}

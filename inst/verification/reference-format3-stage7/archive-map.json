@@ -1115,6 +1115,30 @@
       "raw_bytes": 1182,
       "raw_sha256": "7e1d124aa71d15d388f42dee40d716d761452705ccfd34efeac1f9e03be0b119",
       "archived_sha256": "64cf99392db62be2b8fa8a2a8514a63a3ea9c8c67bbfcb0abd8c7f85d9349938"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/10M/mss7/edition-file-checksums.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/10M/mss7/edition-file-checksums.json",
+      "raw_bytes": 261,
+      "raw_sha256": "e317d9484147a4bb74b671faf7b8eff5467269eb48e1c7d239304733169e1f4a",
+      "archived_sha256": "e317d9484147a4bb74b671faf7b8eff5467269eb48e1c7d239304733169e1f4a"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss4/edition-file-checksums.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss4/edition-file-checksums.json",
+      "raw_bytes": 260,
+      "raw_sha256": "347a7b34b3606c5ba1f9c2c663d507fc9c1652a8d79f48a491cf8e24ca3d7ad6",
+      "archived_sha256": "347a7b34b3606c5ba1f9c2c663d507fc9c1652a8d79f48a491cf8e24ca3d7ad6"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss7/edition-file-checksums.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/1M/mss7/edition-file-checksums.json",
+      "raw_bytes": 260,
+      "raw_sha256": "397407ac55ea2670480ba1efb2678c3aa3406efd2c9453c82c996c87016afcf5",
+      "archived_sha256": "397407ac55ea2670480ba1efb2678c3aa3406efd2c9453c82c996c87016afcf5"
+    },
+    "scientific7-whole-file/runs/scientific7-format2-v2/40M/mss7/edition-file-checksums.json": {
+      "archive": "scientific7-whole-file/runs/scientific7-format2-v2/40M/mss7/edition-file-checksums.json",
+      "raw_bytes": 261,
+      "raw_sha256": "47dbc7cbfa10afffa086ec294bd8059183c828126fc9463bae1bd6d83c8f4b4e",
+      "archived_sha256": "47dbc7cbfa10afffa086ec294bd8059183c828126fc9463bae1bd6d83c8f4b4e"
     }
   },
   "omitted": {
