@@ -1,0 +1,25 @@
+{
+  "frozen_base_commit": "5cf1e23c907ad9c923141faf0728964951be7c66",
+  "candidate_source_commit": "ba91c5598083c3511a91da81f3ce3b7bc66f7d54",
+  "normalizer_implementation": "mss-preservation-5",
+  "reference_format": "mss-preservation-2",
+  "compact_format_implemented": false,
+  "independent_review": "pending",
+  "installed_full_suite": "pending_after_review",
+  "native_windows_ci": "pending_after_review",
+  "source_sha256": {
+    "src/preservation_core.h": "1409b4fa2b1b3a156f9abd1d7b8ba00c4076eccecabae2fa576e22e44659fd85",
+    "R/preservation.R": "14bf6e6df65640609baed03ea87c066abd1b84fd90439f73e3eb4eaf7d46d14d",
+    "R/projection.R": "ef0bd49102df563f6f9c2f8284a233b5a8af3014a6a493e48ba2185e57c5acad",
+    "tests/testthat/test-paired-site-contexts.R": "0b0ad9a9788e1987364285fef522130349ff016bc7b09677cdc00e51ba3429ee"
+  },
+  "verification_sha256": {
+    "classify_existing.py": "f371319be6cecda81adeff59c07b0fb3702c5ef60fcb5bdeefac180ec5fb1634",
+    "result.json": "66e77693d7ab57a320e9235e1ac25d9ccf0e616bafd2abba6e014cd20cea5cd2",
+    "red.log": "12782242338b6f64764f47581e32ac2d862ea46d06b0c6006a2f33b8f5259642",
+    "standalone-green.log": "1acc2dac80edcd2288a55a520d67b1bb24d5c9c5206359089d7fcc2a1388d2ae",
+    "format2-writer-parity.json": "02558b6691b5e77effd89f17847668c8d025f3f61215f29d2c4a8978d5353740",
+    "compare_driver.cpp": "56fbdb92cceeec020fc8a5d1d93a12ea63e080008fae4d2b4c3ac6f962563639",
+    "compare_resolved.py": "3d2ac4d066dcbf27bad7593ece5d2b9e58804767d914741cef31ee9950e489c3"
+  }
+}

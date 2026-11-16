@@ -1,0 +1,30 @@
+{
+  "scope": "Actual tiny defaultformat2 native writer parity, not whole-genome index proof",
+  "all_six_native_payloads_exact": true,
+  "payloads": {
+    "core-version": {
+      "size_bytes": 19,
+      "sha256": "c0ef21703c72cf14f2a71ef4674cd3aeaf4d6ed04174f40bbfa27f13cb3bc107"
+    },
+    "fasta.fai": {
+      "size_bytes": 46,
+      "sha256": "1439a7ec5c96b7f2b103ba2324177668c0506138976ff22df65214bf9724c287"
+    },
+    "keys": {
+      "size_bytes": 778,
+      "sha256": "e7c6cbd7a088b361ab36c1f045eec083e246abcfc2d9c940f83049494092a80f"
+    },
+    "offsets": {
+      "size_bytes": 544,
+      "sha256": "a432daa081ddc90f7702dad479920036475d6e70efcbf41267c27a8b4b4bb5ad"
+    },
+    "records": {
+      "size_bytes": 780,
+      "sha256": "57f56d0f5e3f443aa9346009d654fd2dbd2320850d2d31430989362683b176e0"
+    },
+    "rejected.tsv": {
+      "size_bytes": 77,
+      "sha256": "ee5ab76e7e74063eaecc22ae86edf2941c2a76599c7534e6d4733ff45fc5c1f0"
+    }
+  }
+}

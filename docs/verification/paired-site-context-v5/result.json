@@ -1,0 +1,175 @@
+{
+  "scope": "Bounded synthetic/legacy-fixture functional comparison, not performance or full-genome validation",
+  "source_frozen_commit": "5cf1e23c907ad9c923141faf0728964951be7c66",
+  "candidate_commit": "ba91c55",
+  "queries": 190392,
+  "query_classes": {
+    "generic": 175392,
+    "declared": 12000,
+    "bounded_cap": 3000
+  },
+  "resolved_scientific_rows_exact": 4548,
+  "complete_rows_exact": 190061,
+  "identical_errors": 815,
+  "status_transitions": {
+    "alt_alt_contrast -> allele_mismatch": 327
+  },
+  "error_transitions": {
+    "error -> ok": 4
+  },
+  "every_resolved_result_exact": true,
+  "all_successful_changed_rows_have_nonstatus_fields_exact": true,
+  "examples": [
+    {
+      "row": 4882,
+      "query": "1\t0\told_span\tT\tGG\t-0.25\t0.3\tEAF\tgeneric\t.\t.\tunknown\t10000",
+      "old": "alt_alt_contrast",
+      "new": "allele_mismatch"
+    },
+    {
+      "row": 4883,
+      "query": "1\t0\told_span\tT\tGG\t-0.25\t0.3\tMAF\tgeneric\t.\t.\tunknown\t10000",
+      "old": "alt_alt_contrast",
+      "new": "allele_mismatch"
+    },
+    {
+      "row": 4884,
+      "query": "1\t0\told_span\tT\tGG\t-0.25\t0.3\tunknown\tgeneric\t.\t.\tunknown\t10000",
+      "old": "alt_alt_contrast",
+      "new": "allele_mismatch"
+    },
+    {
+      "row": 5014,
+      "query": "1\t0\told_span\tGG\tT\t-0.25\t0.3\tEAF\tgeneric\t.\t.\tunknown\t10000",
+      "old": "alt_alt_contrast",
+      "new": "allele_mismatch"
+    },
+    {
+      "row": 5015,
+      "query": "1\t0\told_span\tGG\tT\t-0.25\t0.3\tMAF\tgeneric\t.\t.\tunknown\t10000",
+      "old": "alt_alt_contrast",
+      "new": "allele_mismatch"
+    },
+    {
+      "row": 5016,
+      "query": "1\t0\told_span\tGG\tT\t-0.25\t0.3\tunknown\tgeneric\t.\t.\tunknown\t10000",
+      "old": "alt_alt_contrast",
+      "new": "allele_mismatch"
+    },
+    {
+      "row": 5194,
+      "query": "1\t0\tsymbolic\tA\tT\t-0.25\t0.3\tEAF\tgeneric\t.\t.\tunknown\t10000",
+      "old": "alt_alt_contrast",
+      "new": "allele_mismatch"
+    },
+    {
+      "row": 5195,
+      "query": "1\t0\tsymbolic\tA\tT\t-0.25\t0.3\tMAF\tgeneric\t.\t.\tunknown\t10000",
+      "old": "alt_alt_contrast",
+      "new": "allele_mismatch"
+    },
+    {
+      "row": 5196,
+      "query": "1\t0\tsymbolic\tA\tT\t-0.25\t0.3\tunknown\tgeneric\t.\t.\tunknown\t10000",
+      "old": "alt_alt_contrast",
+      "new": "allele_mismatch"
+    },
+    {
+      "row": 5293,
+      "query": "1\t0\tsymbolic\tT\tA\t-0.25\t0.3\tEAF\tgeneric\t.\t.\tunknown\t10000",
+      "old": "alt_alt_contrast",
+      "new": "allele_mismatch"
+    },
+    {
+      "row": 5294,
+      "query": "1\t0\tsymbolic\tT\tA\t-0.25\t0.3\tMAF\tgeneric\t.\t.\tunknown\t10000",
+      "old": "alt_alt_contrast",
+      "new": "allele_mismatch"
+    },
+    {
+      "row": 5295,
+      "query": "1\t0\tsymbolic\tT\tA\t-0.25\t0.3\tunknown\tgeneric\t.\t.\tunknown\t10000",
+      "old": "alt_alt_contrast",
+      "new": "allele_mismatch"
+    },
+    {
+      "row": 5620,
+      "query": "1\t0\tvalid\tA\tC\t-0.25\t0.3\tEAF\tgeneric\t.\t.\tunknown\t10000",
+      "old": "alt_alt_contrast",
+      "new": "allele_mismatch"
+    },
+    {
+      "row": 5621,
+      "query": "1\t0\tvalid\tA\tC\t-0.25\t0.3\tMAF\tgeneric\t.\t.\tunknown\t10000",
+      "old": "alt_alt_contrast",
+      "new": "allele_mismatch"
+    },
+    {
+      "row": 5622,
+      "query": "1\t0\tvalid\tA\tC\t-0.25\t0.3\tunknown\tgeneric\t.\t.\tunknown\t10000",
+      "old": "alt_alt_contrast",
+      "new": "allele_mismatch"
+    },
+    {
+      "row": 5623,
+      "query": "1\t0\tvalid\tA\tG\t-0.25\t0.3\tEAF\tgeneric\t.\t.\tunknown\t10000",
+      "old": "alt_alt_contrast",
+      "new": "allele_mismatch"
+    },
+    {
+      "row": 5624,
+      "query": "1\t0\tvalid\tA\tG\t-0.25\t0.3\tMAF\tgeneric\t.\t.\tunknown\t10000",
+      "old": "alt_alt_contrast",
+      "new": "allele_mismatch"
+    },
+    {
+      "row": 5625,
+      "query": "1\t0\tvalid\tA\tG\t-0.25\t0.3\tunknown\tgeneric\t.\t.\tunknown\t10000",
+      "old": "alt_alt_contrast",
+      "new": "allele_mismatch"
+    },
+    {
+      "row": 5626,
+      "query": "1\t0\tvalid\tA\tT\t-0.25\t0.3\tEAF\tgeneric\t.\t.\tunknown\t10000",
+      "old": "alt_alt_contrast",
+      "new": "allele_mismatch"
+    },
+    {
+      "row": 5627,
+      "query": "1\t0\tvalid\tA\tT\t-0.25\t0.3\tMAF\tgeneric\t.\t.\tunknown\t10000",
+      "old": "alt_alt_contrast",
+      "new": "allele_mismatch"
+    },
+    {
+      "row": 187655,
+      "query": "1\t0\tvalid\tAAA\tGG\t0.5\t0.3\tEAF\tgeneric\t.\t.\tunknown\t1",
+      "old": "error\tReference candidate limit exceeded; no arbitrary candidate selected",
+      "new": "ok\tallele_mismatch\t\t0\t\t\t\tnan\tnan\t1\t0\t0"
+    },
+    {
+      "row": 187702,
+      "query": "2\t0\tvalid\tA\tAA\t0.5\t0.3\tEAF\tgeneric\t.\t.\tunknown\t1",
+      "old": "error\tReference candidate limit exceeded; no arbitrary candidate selected",
+      "new": "ok\tallele_mismatch\t\t0\t\t\t\tnan\tnan\t1\t0\t0"
+    },
+    {
+      "row": 187957,
+      "query": "C\t0\tvalid\tGG\tAC\t0.5\t0.3\tEAF\tgeneric\t.\t.\tunknown\t1",
+      "old": "error\tReference candidate limit exceeded; no arbitrary candidate selected",
+      "new": "ok\tallele_mismatch\t\t0\t\t\t\tnan\tnan\t1\t0\t0"
+    },
+    {
+      "row": 189660,
+      "query": "C\t0\tvalid\tAAA\tAA\t0.5\t0.3\tEAF\tgeneric\t.\t.\tunknown\t1",
+      "old": "error\tReference candidate limit exceeded; no arbitrary candidate selected",
+      "new": "ok\tallele_mismatch\t\t0\t\t\t\tnan\tnan\t1\t0\t0"
+    }
+  ],
+  "sha256": {
+    "reference.fa": "e5eab7b75e667cc7d1ed26d4418f6a1a3bcad29615814d87e50d2176586675a1",
+    "sites.tsv": "aeaf8807ecab8a450276c43d80c7e0568e8407137734eeeb62e0b12f002ea641",
+    "queries.tsv": "7ab81632f4e37009b9be54726c5460d60d797d9f110a152cf8c8114c39e8348d",
+    "baseline.tsv": "9f217eafdab2d87a2f2b268b7f4194d8247749562e827c7f79175969e886cd4e",
+    "candidate.tsv": "f4c9d561d5f8372ca18346a90e9074fcdf42aefb660190bab553c9158f85632a"
+  }
+}
