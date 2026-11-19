@@ -12,7 +12,26 @@ old <- setwd(build)
 status <- system2(file.path(R.home('bin'),'R'),c('CMD','SHLIB','preservation.cpp','RcppExports.cpp','-o',paste0('MungeSumstats',.Platform$dynlib.ext)))
 stopifnot(status==0)
 dll <- dyn.load(file.path(build,paste0('MungeSumstats',.Platform$dynlib.ext)))
-for (name in names(getDLLRegisteredRoutines(dll)$.Call)) {
+expected <- c(
+    '_MungeSumstats_mss_prepare_cpp' = 5L,
+    '_MungeSumstats_mss_open_reference_cpp' = 2L,
+    '_MungeSumstats_mss_harmonise_cpp' = 15L,
+    '_MungeSumstats_mss_parser_open_cpp' = 2L,
+    '_MungeSumstats_mss_parser_feed_cpp' = 3L,
+    '_MungeSumstats_mss_parser_batch_cpp' = 8L,
+    '_MungeSumstats_mss_write_normalized_cpp' = 5L,
+    '_MungeSumstats_mss_projection_open_cpp' = 5L,
+    '_MungeSumstats_mss_project_cpp' = 10L
+)
+registered <- getDLLRegisteredRoutines(dll)$.Call
+stopifnot(
+    'Unexpected registered .Call routine names' =
+        identical(sort(names(registered)), sort(names(expected))),
+    'Unexpected registered .Call routine arities' =
+        identical(vapply(registered[names(expected)], function(routine) routine$numParameters,
+                         integer(1)), expected)
+)
+for (name in names(registered)) {
     assign(name, getNativeSymbolInfo(name, dll))
 }
 source(file.path(root,'R','RcppExports.R'))

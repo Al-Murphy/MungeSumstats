@@ -1,5 +1,9 @@
 // Build against either header using -I <worktree>/src. Compare parity stdout
 // byte-for-byte between builds. The pressure mode exits 1 on allocation churn.
+#ifdef NDEBUG
+#error "lookup_parity requires assertions enabled"
+#endif
+
 #include <preservation_core.h>
 #include <cassert>
 #include <cstdlib>
@@ -75,13 +79,19 @@ void fields(const Candidate& c) {
   std::cout << '\n';
 }
 
-void query(Reference& ref, const std::string& key, std::size_t cap, std::size_t work) {
+void query(Reference& ref, const std::string& key, std::size_t cap, std::size_t work,
+           const char* expected_error = nullptr) {
   std::cout << "cap " << cap << " initial " << work;
   try {
     const auto result = ref.lookup(key, cap, &work);
+    assert(!expected_error);
     std::cout << " found " << result.size() << '\n';
     for (const auto& c : result) fields(c);
   } catch (const std::exception& e) {
+    if (expected_error) {
+      assert(std::strcmp(e.what(), expected_error) == 0);
+      assert(work == 0);
+    }
     std::cout << " error " << std::quoted(e.what()) << '\n';
   }
   std::cout << "left " << work << '\n';
@@ -174,6 +184,20 @@ void corruption(const fs::path& dir, const fs::path& fasta, int format) {
       Reference broken(malformed.string(),fasta.string());
       query(broken,"I:s",1,1); query(broken,"I:s",1,1);
     }
+
+    const auto tail = dir / "record-tail";
+    fs::create_directory(tail);
+    Fasta(fasta.string()).save((tail / "fasta.fai").string());
+    write(tail / "core-version", "mss-preservation-3\n");
+    // Seven A fields, a valid eighth field, and an invalid UTF-8 ninth field.
+    write(tail / "records", "A\t1\t1\tA\tC\tr\t1\textra\t\xff\n");
+    write(tail / "keys", "I:r\t0\n");
+    { std::ofstream o(tail / "offsets", std::ios::binary); write64(o, 0); }
+    Reference malformed_tail(tail.string(), fasta.string());
+    const char* error = "Typed reference field is not valid UTF-8/framing";
+    std::cout << "record tail invalid UTF-8 in field 9\n";
+    for (int attempt = 0; attempt < 2; ++attempt)
+      query(malformed_tail, "I:r", 1, 1, error);
   }
 }
 
