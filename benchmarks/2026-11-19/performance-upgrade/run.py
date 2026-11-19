@@ -17,7 +17,8 @@ import time
 
 from process_metrics import r_command, run_process
 from verify import (
-    compare_bytes, digest, read_json, tsv_pairs, verify_editions, write_json,
+    compare_bytes, digest, read_json, tsv_pairs, validate_hard_case_oracle, verify_editions,
+    write_json,
 )
 
 
@@ -35,7 +36,11 @@ SETTINGS = {
     "candidate_limit": 10000, "frequency_type": "unknown", "effect_type": "beta",
     "delimiter": "tab", "verify_acquisition_receipt": False,
 }
-RUNTIME_FIELDS = ("R_version", "R_platform", "R_home", "locale", "BLAS", "LAPACK", "threads")
+RUNTIME_LIBRARIES = {"r_shared": "R_shared", "blas": "BLAS_library", "lapack": "LAPACK_library"}
+RUNTIME_FIELDS = (
+    "R_version", "R_platform", "R_home", "R_bin", "R_engine", "R_shared", "R_shared_resolution",
+    "locale", "BLAS", "BLAS_library", "LAPACK", "LAPACK_library", "threads",
+)
 
 
 def utc_now():
@@ -93,9 +98,15 @@ def resolve_configuration(config, suite):
         return path
 
     register(config["r_executable"])
-    if not config["runtime_files"]:
-        raise ValueError("Pin the R engine and available runtime libraries")
+    register(config["r_engine"])
+    if not isinstance(config["runtime_files"], list):
+        raise ValueError("runtime_files must be an array of role-labelled runtime pins")
+    runtime_roles = set()
     for pin in config["runtime_files"]:
+        role = pin["role"]
+        if role not in RUNTIME_LIBRARIES or role in runtime_roles:
+            raise ValueError(f"Unknown or repeated runtime file role: {role}")
+        runtime_roles.add(role)
         register(pin)
     config["dependency_libraries"] = [str(directory(path)) for path in config["dependency_libraries"]]
     integer(config["minimum_free_bytes"], 0, 2**63 - 1, "minimum_free_bytes")
@@ -193,8 +204,10 @@ def resolve_configuration(config, suite):
         tags = set(case.get("tags", []))
         if not case.get("target"):
             by_format[reference["format"]].update(tags)
-        if "hard_cases" in tags and "oracle" not in case:
-            raise ValueError(f"Hard-case workload requires an independent complete-row oracle: {name}")
+        if "hard_cases" in tags:
+            if "oracle" not in case:
+                raise ValueError(f"Hard-case workload requires an independent complete-row oracle: {name}")
+            validate_hard_case_oracle(Path(case["oracle"]["path"]))
     if not ids:
         raise ValueError("At least one case is required")
     if suite == "matrix":
@@ -237,6 +250,27 @@ def read_provenance(config, packages, receipts, assets):
     return installed, builds["baseline"]["toolchain"]
 
 
+def verify_runtime(config, metrics, toolchain):
+    observed = {name: metrics[name] for name in RUNTIME_FIELDS}
+    if (observed["threads"] != "1" or observed["R_version"] != toolchain["R_version"] or
+            observed["R_platform"] != toolchain["R_platform"]):
+        raise ValueError("Observed runtime disagrees with build provenance")
+    engine = Path(observed["R_engine"]).resolve(strict=True)
+    r_home = directory(observed["R_home"])
+    r_bin = directory(observed["R_bin"])
+    if engine != Path(config["r_engine"]["path"]) or r_bin not in engine.parents or r_home not in r_bin.parents:
+        raise ValueError("Observed R engine disagrees with the engine pin or R installation")
+    if sys.platform == "win32" and engine != Path(config["r_executable"]["path"]):
+        raise ValueError("The observed Windows R engine must be the pinned Rterm launcher")
+    libraries = {pin["role"]: Path(pin["path"]) for pin in config["runtime_files"]}
+    for role, field in RUNTIME_LIBRARIES.items():
+        path = observed[field]
+        actual = None if path == "unavailable" else Path(path).resolve(strict=True)
+        if actual != libraries.get(role):
+            raise ValueError(f"Observed R runtime library disagrees with its role pin: {role}")
+    return observed
+
+
 def cardinality(case):
     receipt = read_json(Path(case["cardinality_receipt"]["path"]))
     if receipt["input_sha256"] != case["input"]["sha256"] or receipt["input_rows"] != case["rows"]:
@@ -244,6 +278,12 @@ def cardinality(case):
     integer(receipt["distinct_keys"], 1, case["rows"], "distinct_keys")
     if not receipt["key_definition"].strip() or not receipt["method"].strip():
         raise ValueError("Cardinality receipt must define the counted key and provenance")
+    if "distinct_shuffled" in case.get("tags", ()):
+        if receipt["distinct_keys"] != case["rows"]:
+            raise ValueError(f"Expected one distinct key per source row: {case['id']}")
+        derivation = receipt.get("shuffle_derivation")
+        if not isinstance(derivation, str) or not derivation.strip():
+            raise ValueError(f"Distinct workload requires shuffle derivation or seed: {case['id']}")
     return receipt
 
 
@@ -402,10 +442,7 @@ def benchmark(config, output, *, suite, profile, threshold, configuration_pin):
                 run_dir = work / f"pair-{repetition:02d}-{role}"
                 process, metrics = run_one(config, case, run_dir, role, suite=suite,
                                            profile=profile, threshold=threshold, assets=before)
-                relevant = {name: metrics[name] for name in RUNTIME_FIELDS}
-                if (relevant["threads"] != "1" or relevant["R_version"] != toolchain["R_version"] or
-                        relevant["R_platform"] != toolchain["R_platform"]):
-                    raise ValueError("Observed runtime disagrees with build provenance")
+                relevant = verify_runtime(config, metrics, toolchain)
                 state = dependency_state(run_dir, config, role)
                 if not runtime:
                     runtime = relevant
@@ -450,18 +487,30 @@ def benchmark(config, output, *, suite, profile, threshold, configuration_pin):
         }
     targets = [summary for summary in summaries.values() if summary["target"]]
     outcome = None
+    target_status = "not_applicable"
+    exit_code = 0
     if targets:
-        outcome = all((item["ratio_of_median_processing_seconds"] or 0) >= 2 and
-                      item["median_peak_rss_nonregression"] is True for item in targets)
+        checks = []
+        for item in targets:
+            speedup = item["ratio_of_median_processing_seconds"]
+            checks.extend((None if speedup is None else speedup >= 2,
+                           item["median_peak_rss_nonregression"]))
+        if False in checks:
+            target_status, outcome, exit_code = "miss", False, 2
+        elif None in checks:
+            target_status, exit_code = "indeterminate", 3
+        else:
+            target_status, outcome = "pass", True
     write_json(output / "summary.json", {
         "scope": ("Adapted legacy format_sumstats with historical matched-SNP reference loader"
                   if suite == "legacy" else "Complete installed public harmonise_file calls"),
-        "suite": suite, "profile": profile, "processing_speed_and_rss_target_met": outcome,
+        "suite": suite, "profile": profile, "target_status": target_status,
+        "processing_speed_and_rss_target_met": outcome,
         "fresh_processes": True, "verification_seconds": time.monotonic() - verified_at,
         "started_utc": started, "finished_utc": utc_now(), "cases": summaries,
         "target_rule": "Ratio of processing medians >= 2 and no increase in median OS peak RSS.",
     })
-    return 2 if outcome is False else 0
+    return exit_code
 
 
 def main():

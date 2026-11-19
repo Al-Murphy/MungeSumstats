@@ -1,6 +1,66 @@
 # Run by run.py in a fresh, explicitly selected installed package.
 args <- commandArgs(TRUE)
-if (length(args) < 2L) stop("Expected run CONFIG or manifests OUTPUT MANIFEST...")
+if (length(args) < 2L) stop("Expected run CONFIG, runtime OUTPUT or manifests OUTPUT MANIFEST...")
+
+platform_path <- function(path) normalizePath(path, winslash = "/", mustWork = TRUE)
+
+runtime_identity <- function() {
+    library_path <- function(path) {
+        if (length(path) != 1L || is.na(path) || !file.exists(path) || isTRUE(file.info(path)$isdir))
+            return("unavailable")
+        platform_path(path)
+    }
+    os <- Sys.info()[["sysname"]]
+    windows <- identical(.Platform$OS.type, "windows")
+    home <- platform_path(R.home())
+    bin <- platform_path(R.home("bin"))
+    # Linux exposes the running executable independently of the process argv.
+    engine <- platform_path(if (identical(os, "Linux")) Sys.readlink("/proc/self/exe")
+                            else commandArgs(FALSE)[[1L]])
+    shared <- "unavailable"
+    resolution <- "unavailable"
+    if (identical(os, "Linux")) {
+        maps <- readLines("/proc/self/maps", warn = FALSE)
+        mapped <- sub("^(\\S+\\s+){5}", "", maps, perl = TRUE)
+        libraries <- unique(mapped[startsWith(mapped, "/") &
+            grepl("^libR\\.so(\\.[0-9]+)*$", basename(mapped))])
+        if (length(libraries) > 1L) stop("Multiple libR paths in the running process")
+        shared <- library_path(libraries)
+        if (shared != "unavailable") resolution <- "mapped"
+    } else if (windows) {
+        shared <- library_path(file.path(dirname(engine), "R.dll"))
+        if (shared != "unavailable") resolution <- "Rterm directory"
+    } else if (identical(os, "Darwin")) {
+        shared <- library_path(file.path(home, "lib", "libR.dylib"))
+        if (shared != "unavailable") resolution <- "R home library directory"
+    }
+    blas <- unname(extSoftVersion()["BLAS"])
+    if (length(blas) != 1L || is.na(blas) || !nzchar(blas)) blas <- "unavailable"
+    blas_path <- library_path(blas)
+    get_lapack <- get0("La_library", envir = baseenv(), mode = "function", inherits = FALSE)
+    lapack_path <- library_path(if (!is.null(get_lapack)) get_lapack() else NULL)
+    if (windows && blas_path == "unavailable")
+        blas_path <- library_path(file.path(dirname(engine), "Rblas.dll"))
+    if (windows && lapack_path == "unavailable")
+        lapack_path <- library_path(file.path(dirname(engine), "Rlapack.dll"))
+    list(R_version = R.version.string, R_platform = R.version$platform,
+         R_home = home, R_bin = bin, R_engine = engine,
+         R_shared = shared, R_shared_resolution = resolution,
+         BLAS = blas, BLAS_library = blas_path, LAPACK = La_version(),
+         LAPACK_library = lapack_path, locale = Sys.getlocale())
+}
+
+write_metrics <- function(metrics, path) {
+    utils::write.table(data.frame(key = names(metrics), value = unlist(metrics, use.names = FALSE)),
+                       path, sep = "\t", quote = TRUE, qmethod = "double",
+                       row.names = FALSE, fileEncoding = "UTF-8")
+}
+
+if (identical(args[[1L]], "runtime")) {
+    if (length(args) != 2L || file.exists(args[[2L]])) stop("Expected runtime NEW_OUTPUT")
+    write_metrics(runtime_identity(), args[[2L]])
+    quit(save = "no")
+}
 
 stable_manifest <- function(manifest) {
     if (!is.list(manifest) || !"created_utc" %in% names(manifest) ||
@@ -32,7 +92,6 @@ write_tsv <- function(x, name) {
     utils::write.table(x, file.path(value$output, name), sep = "\t", quote = TRUE,
                        qmethod = "double", row.names = FALSE, fileEncoding = "UTF-8")
 }
-platform_path <- function(path) normalizePath(path, winslash = "/", mustWork = TRUE)
 metric <- function(phase, timing) {
     stats::setNames(as.list(as.numeric(timing)), paste(phase, names(timing), sep = "."))
 }
@@ -94,13 +153,16 @@ if (identical(value$mode, "legacy")) {
         frq_is_maf = FALSE, sort_coordinates = FALSE, nThread = 1,
         save_path = file.path(value$output, "legacy.tsv"), return_data = TRUE)
 } else {
+    fasta <- value[["fasta"]]
     start <- proc.time()
-    reference <- MungeSumstats::open_reference(value$reference, fasta = value$fasta)
+    reference <- MungeSumstats::open_reference(value[["reference"]], fasta = fasta)
     reference_open <- proc.time() - start
-    if (!identical(reference$core_version, value$core_version))
+    if (!identical(reference$core_version, value[["core_version"]]))
         stop("Unexpected reference format")
-    if (!identical(platform_path(reference$fasta), platform_path(value$fasta_pin_path)))
+    if (!identical(platform_path(reference$fasta), platform_path(value[["fasta_pin_path"]])))
         stop("Reference did not open the pinned FASTA")
+    if (is.null(reference[["fasta_binding"]]) != is.null(fasta))
+        stop("Reference FASTA receipt disagrees with the configured binding mode")
     call <- list(input = value$input, reference = reference, path = edition,
                  frequency_type = value$frequency_type, effect_type = value$effect_type,
                  delimiter = if (identical(value$delimiter, "tab")) "\t" else ",",
@@ -147,6 +209,8 @@ if (identical(value$mode, "legacy")) {
         !identical(stable_manifest(result), stable_manifest(disk)) ||
         !identical(platform_path(result$path), platform_path(edition)))
         stop("Returned manifest disagrees with published edition")
+    if (!identical(result[["reference_fasta_binding"]], reference[["fasta_binding"]]))
+        stop("Published FASTA receipt disagrees with the opened reference")
     expected <- as.double(value$rows)
     if (!identical(as.double(result$source_rows), expected) ||
         !identical(as.double(result$normalized_rows), expected))
@@ -168,16 +232,12 @@ write_tsv(data.frame(package = namespace_names,
                          as.character(utils::packageVersion(name, lib.loc = dirname(namespace_paths[[name]])))
                      }, character(1)),
                      path = namespace_paths), "namespaces.tsv")
-runtime <- list(R_version = R.version.string, R_platform = R.version$platform,
-                R_home = platform_path(R.home()), locale = Sys.getlocale(),
-                BLAS = unname(extSoftVersion()["BLAS"]), LAPACK = La_version(),
-                threads = data.table::getDTthreads())
-if (is.null(runtime$BLAS) || is.na(runtime$BLAS)) runtime$BLAS <- "unavailable"
+runtime <- c(runtime_identity(), list(threads = data.table::getDTthreads()))
 metadata <- c(runtime, metric("package_setup", package_setup),
               if (!is.null(reference_open)) metric("reference_open", reference_open),
               metric("processing", processing), rows,
               list(dll = platform_path(dll), dll_md5 = dll_md5))
-write_tsv(data.frame(key = names(metadata), value = unlist(metadata, use.names = FALSE)), "metrics.tsv")
+write_metrics(metadata, file.path(value$output, "metrics.tsv"))
 saveRDS(list(before = heap_before, after = heap_after), file.path(value$output, "r-heap.rds"))
 if (identical(value$profile, "cpu"))
     saveRDS(summaryRprof(file.path(value$output, "Rprof.out")),

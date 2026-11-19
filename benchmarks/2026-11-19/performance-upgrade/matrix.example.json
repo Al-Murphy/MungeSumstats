@@ -2,9 +2,11 @@
   "schema": 1,
   "contention_note": "REPLACE with the admitted CPU, memory and I/O condition and the operator log reference.",
   "r_executable": {"path": "/absolute/path/to/Rscript", "sha256": "REPLACE"},
+  "r_engine": {"path": "/absolute/path/to/R/bin/exec/R", "sha256": "REPLACE"},
   "runtime_files": [
-    {"path": "/absolute/path/to/R/bin/exec/R", "sha256": "REPLACE"},
-    {"path": "/absolute/path/to/libR", "sha256": "REPLACE"}
+    {"role": "r_shared", "path": "/absolute/path/to/libR", "sha256": "REPLACE"},
+    {"role": "blas", "path": "/absolute/path/to/observed/BLAS", "sha256": "REPLACE"},
+    {"role": "lapack", "path": "/absolute/path/to/observed/LAPACK", "sha256": "REPLACE"}
   ],
   "dependency_libraries": ["/absolute/path/to/common-R-library"],
   "minimum_free_bytes": 0,

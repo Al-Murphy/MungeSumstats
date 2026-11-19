@@ -97,7 +97,24 @@ def compare_bytes(paths):
     return result, mismatches
 
 
-def verify_normalized(path, rows_expected, oracle, *, encoding, max_record_bytes):
+def oracle_header(reader, *, require_all):
+    header = next(reader, None)
+    if (not header or header[0] != "source_row" or
+            len(header) != len(set(header)) or len(header) < 2 or
+            not set(header).issubset(NORMALIZED_COLUMNS)):
+        raise ValueError("Oracle must start with source_row and name unique normalized fields")
+    if require_all and len(header) != len(NORMALIZED_COLUMNS):
+        raise ValueError("Hard-case oracle must include all 19 normalized fields")
+    return header
+
+
+def validate_hard_case_oracle(path):
+    with path.open(encoding="utf-8", newline="") as handle:
+        oracle_header(csv.reader(handle, delimiter="\t", strict=True), require_all=True)
+
+
+def verify_normalized(path, rows_expected, oracle, *, encoding, max_record_bytes,
+                      require_full_oracle=False):
     # csv.field_size_limit is process-global. Each case may admit records above
     # the stdlib default, including long specialist identifiers and quoted text.
     csv.field_size_limit(max(131072, max_record_bytes))
@@ -113,11 +130,7 @@ def verify_normalized(path, rows_expected, oracle, *, encoding, max_record_bytes
         if oracle is not None:
             gold = stack.enter_context(oracle.open(encoding="utf-8", newline=""))
             gold_reader = csv.reader(gold, delimiter="\t", strict=True)
-            gold_header = next(gold_reader, None)
-            if (not gold_header or gold_header[0] != "source_row" or
-                    len(gold_header) != len(set(gold_header)) or len(gold_header) < 2 or
-                    not set(gold_header).issubset(header)):
-                raise ValueError("Oracle must start with source_row and name unique normalized fields")
+            gold_header = oracle_header(gold_reader, require_all=require_full_oracle)
             fields = [header.index(name) for name in gold_header]
         counts = Counter()
         row_number = 0
@@ -225,6 +238,7 @@ def verify_editions(case, reference, run_dirs, evidence_dir, assets, encoding):
         editions[0] / "normalized.tsv", case["rows"],
         Path(case["oracle"]["path"]) if "oracle" in case else None,
         encoding=encoding, max_record_bytes=case["settings"]["max_record_bytes"],
+        require_full_oracle="hard_cases" in case.get("tags", ()),
     )
     audit = tsv_pairs(editions[0] / "audit.tsv", ("status", "count"), encoding=encoding)
     if {name: Decimal(count) for name, count in audit.items()} != result["status_counts"]:
