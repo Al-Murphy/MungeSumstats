@@ -345,66 +345,98 @@ harmonise_sumstats <- function(sumstats, reference,
             stop("source_strand must be '+', '-' or 'unknown'")
     }
     n <- nrow(sumstats)
-    extract <- function(field, rows) {
-        name <- columns[[field]]
-        if (is.null(name)) return(rep(NA_character_, length(rows)))
-        if (!is.character(name) || length(name) != 1L || is.na(name)) stop("Column mappings must be single column names or NULL")
-        if (!name %in% names(sumstats)) return(rep(NA_character_, length(rows)))
-        if (anyDuplicated(names(sumstats)) && sum(names(sumstats) == name) > 1L) stop("Mapped column name is duplicated: ", name)
-        as.character(sumstats[[name]][rows])
-    }
-    parse_number <- function(value) suppressWarnings(as.numeric(value))
+    # Resolve the mapped names once. Different roles may use the same source.
+    used_columns <- columns
+    if (effect_type == "none") used_columns$effect <- NULL
+    mapped <- lapply(used_columns, function(name) {
+        if (is.null(name)) return(NULL)
+        if (!is.character(name) || length(name) != 1L || is.na(name))
+            stop("Column mappings must be single column names or NULL")
+        index <- which(names(sumstats) == name)
+        if (length(index) > 1L) stop("Mapped column name is duplicated: ", name)
+        if (length(index)) name else NULL
+    })
     batches <- vector("list", if (n) ceiling(n / batch_size) else 1L)
     starts <- if (n) seq.int(1, n, by = batch_size) else 1L
     for (i in seq_along(starts)) {
         rows <- if (n) seq.int(starts[[i]], min(n, starts[[i]] + batch_size - 1)) else integer()
-        # Explicit statistical entities never acquire a small-variant effect.
-        entity <- tolower(extract("entity_type", rows))
-        entity[is.na(entity) | entity %in% c("", ".", "na")] <- "small_variant"
-        alleles <- paste(extract("other", rows), extract("effect_allele", rows))
-        entity[entity == "small_variant" & grepl("<[^>]+>", alleles)] <- "symbolic_sv"
-        entity[entity == "small_variant" & grepl("[\\[\\]]", alleles, perl = TRUE)] <- "breakend"
+        size <- length(rows)
+        missing_text <- rep(NA_character_, size)
+        extract <- function(field) {
+            index <- mapped[[field]]
+            if (is.null(index)) return(missing_text)
+            value <- sumstats[[index]]
+            # Class-specific subsetting, names and coercion remain observable in
+            # the resident API. Parsed file columns are plain character vectors.
+            if (size == n && is.character(value) && is.null(attributes(value))) return(value)
+            as.character(value[rows])
+        }
+        other <- extract("other")
+        measured <- extract("effect_allele")
+        id <- extract("id")
+        if (is.null(mapped$entity_type)) {
+            entity <- rep("small_variant", size)
+        } else {
+            entity <- tolower(extract("entity_type"))
+            entity[is.na(entity) | entity %in% c("", ".", "na")] <- "small_variant"
+        }
+        bases <- c("A", "C", "G", "T", NA_character_)
+        if (!all(other %in% bases) || !all(measured %in% bases)) {
+            alleles <- paste(other, measured)
+            entity[entity == "small_variant" & grepl("<[^>]+>", alleles)] <- "symbolic_sv"
+            entity[entity == "small_variant" & grepl("[\\[\\]]", alleles, perl = TRUE)] <- "breakend"
+        }
         supported <- c("small_variant", "symbolic_sv", "breakend", "hla", "repeat", "gene_burden")
         if (any(!entity %in% supported)) stop("Unknown entity_type; use small_variant, symbolic_sv, breakend, hla, repeat or gene_burden")
-        specialist <- entity != "small_variant"
-        native_extract <- function(field, rows) {
-            value <- extract(field, rows)
-            value[specialist] <- NA_character_
+        specialist <- which(entity != "small_variant")
+        native <- function(value) {
+            if (length(specialist)) value[specialist] <- NA_character_
             value
         }
-        raw_pos <- native_extract("pos", rows)
+        parse_number <- function(value) suppressWarnings(as.numeric(value))
+        raw_pos <- native(extract("pos"))
         pos <- parse_number(raw_pos)
         # Distinguish an unknown position from a malformed token.
-        invalid_pos <- !is.na(raw_pos) & !raw_pos %in% c("", ".", "NA") & is.na(pos)
-        pos[invalid_pos] <- -1
-        effect <- if (effect_type == "none") rep(NA_real_, length(rows)) else parse_number(native_extract("effect", rows))
+        unknown_pos <- which(is.na(pos))
+        if (length(unknown_pos)) {
+            raw <- raw_pos[unknown_pos]
+            invalid <- !is.na(raw) & !raw %in% c("", ".", "NA")
+            pos[unknown_pos[invalid]] <- -1
+        }
+        effect <- if (effect_type == "none") rep(NA_real_, size) else parse_number(native(extract("effect")))
         batch <- mss_harmonise_cpp(reference$path, reference$fasta,
-                                  .mss_alias_contigs(native_extract("chr", rows), reference), pos, native_extract("id", rows),
-                                  native_extract("other", rows), native_extract("effect_allele", rows),
-                                  effect, parse_number(native_extract("eaf", rows)),
+                                  .mss_alias_contigs(native(extract("chr")), reference), pos, native(id),
+                                  native(other), native(measured), effect, parse_number(native(extract("eaf"))),
                                   frequency_type, candidate_limit,
                                   if (inherits(reference, "mss_reference_handle")) reference$.native else NULL,
-                                  if (source_contract) native_extract("source_ref", rows) else NULL,
-                                  if (source_contract) native_extract("source_alt", rows) else NULL,
+                                  if (source_contract) native(extract("source_ref")) else NULL,
+                                  if (source_contract) native(extract("source_alt")) else NULL,
                                   if (source_contract) {
-                                      if (is.null(source_strand)) native_extract("source_strand", rows) else rep(source_strand, length(rows))
+                                      if (is.null(source_strand)) native(extract("source_strand")) else rep(source_strand, size)
                                   } else NULL)
-        batch$status[specialist] <- "specialist_preserved"
-        for (field in setdiff(names(batch), c("status", "candidate_count"))) batch[[field]][specialist] <- NA
-        batch$candidate_count[specialist] <- 0
+        if (length(specialist)) {
+            batch$status[specialist] <- "specialist_preserved"
+            for (field in setdiff(names(batch), c("status", "candidate_count"))) batch[[field]][specialist] <- NA
+            batch$candidate_count[specialist] <- 0
+        }
         batch$entity_type <- entity
-        batch$entity_id <- extract("entity_id", rows)
-        absent_id <- is.na(batch$entity_id)
-        batch$entity_id[absent_id] <- extract("id", rows)[absent_id]
-        batch$normalized_build <- rep(build, length(rows))
+        if (is.null(mapped$entity_id)) {
+            batch$entity_id <- id
+        } else {
+            entity_id <- extract("entity_id")
+            absent_id <- which(is.na(entity_id))
+            if (length(absent_id)) entity_id[absent_id] <- id[absent_id]
+            batch$entity_id <- entity_id
+        }
+        batch$normalized_build <- rep(build, size)
         batch$source_row <- as.double(rows)
-        batch$grch38_chr <- rep(NA_character_, length(rows))
-        batch$grch38_pos <- rep(NA_real_, length(rows))
-        batch$grch38_ref <- rep(NA_character_, length(rows))
-        batch$grch38_alt <- rep(NA_character_, length(rows))
+        batch$grch38_chr <- missing_text
+        batch$grch38_pos <- rep(NA_real_, size)
+        batch$grch38_ref <- missing_text
+        batch$grch38_alt <- missing_text
         batches[[i]] <- batch
     }
-    normalized <- do.call(rbind, batches)
+    normalized <- if (length(batches) == 1L) batches[[1L]] else do.call(rbind, batches)
     rownames(normalized) <- NULL
     if (!is.null(projection)) normalized <- .mss_project(normalized, reference, projection, candidate_limit)
     provenance <- list(core_version = reference$core_version,
@@ -502,67 +534,54 @@ harmonise_file <- function(input, reference, path,
     source_writer <- file(file.path(staging, source_name), "wb")
     on.exit(close(source_writer), add = TRUE)
     parser <- mss_parser_open_cpp(delimiter, max_record_bytes)
-    pending <- list(); ended <- FALSE
-    read_records <- function(n) {
-        result <- list(); used <- 0
+    bytes <- raw()
+    offset <- 0L
+    ended <- FALSE
+    next_batch <- function(max_rows, width, keep) {
         repeat {
-            if (length(pending)) {
-                take <- min(n - length(result), length(pending))
-                sizes <- vapply(pending[seq_len(take)], function(x) sum(nchar(x, type = "bytes")) + length(x), numeric(1))
-                within <- which(cumsum(sizes) + used <= batch_bytes)
-                take <- if (length(within)) max(within) else if (!length(result)) 1L else 0L
-                if (!take) break
-                result <- c(result, pending[seq_len(take)])
-                used <- used + sum(sizes[seq_len(take)])
-                pending <<- pending[-seq_len(take)]
-                if (length(result) >= n || used >= batch_bytes) break
-            } else if (ended) break else {
-                bytes <- withCallingHandlers(readBin(reader, "raw", n = min(65536L, batch_bytes)),
-                         warning = function(w) stop("Input compressed read failure: ", conditionMessage(w)))
+            if (offset == length(bytes) && !ended) {
+                bytes <<- withCallingHandlers(readBin(reader, "raw", n = min(65536L, batch_bytes)),
+                    warning = function(w) stop("Input compressed read failure: ", conditionMessage(w)))
+                offset <<- 0L
                 ended <<- !length(bytes)
-                if (length(bytes)) writeBin(bytes, source_writer)
-                pending <<- mss_parser_feed_cpp(parser, bytes, ended)
+                if (!ended) writeBin(bytes, source_writer)
             }
+            batch <- mss_parser_batch_cpp(parser, bytes, offset, ended, max_rows,
+                                          batch_bytes, width, keep)
+            offset <<- batch$offset
+            if (batch$state != "need_input") return(batch)
         }
-        result
     }
-    header <- read_records(1L)
-    if (length(header) != 1L) stop("Missing input header")
-    header_names <- header[[1L]]
+    header <- next_batch(1L, 0L, integer())
+    if (header$state != "batch") stop("Missing input header")
+    header_names <- header$columns[[1L]]
     if (any(!nzchar(header_names)) || anyDuplicated(header_names)) stop("Header names must be nonempty and unique")
+    wanted <- if (is.list(columns)) vapply(columns, function(column) {
+        if (is.character(column) && length(column) == 1L) column else NA_character_
+    }, character(1)) else character()
+    keep <- which(header_names %in% wanted)
+    batch_names <- header_names[keep]
     normalized_writer <- file(file.path(staging, "normalized.tsv"), "wt")
     on.exit(close(normalized_writer), add = TRUE)
     total <- 0
     counts <- numeric()
     projection_counts <- numeric()
     first <- TRUE
-    write_normalized <- function(table) {
-        # write.table's numeric conversion can round to 15 digits; serialize
-        # float64 measurements explicitly before writing delimited text.
-        encoded <- lapply(table, function(value) {
-            if (is.numeric(value)) {
-                result <- sprintf("%.17g", value)
-                result[is.na(value)] <- NA_character_
-                result
-            } else as.character(value)
-        })
-        encoded <- as.data.frame(encoded, stringsAsFactors = FALSE, check.names = FALSE)
-        utils::write.table(encoded, normalized_writer, sep = "\t", quote = TRUE,
-                           row.names = FALSE, col.names = first, na = "NA", qmethod = "double")
-        first <<- FALSE
-    }
     repeat {
-        fields <- read_records(batch_size)
-        if (!length(fields)) break
-        if (any(lengths(fields) != length(header_names))) stop("Input row has an unexpected number of fields near source row ", total + 1)
-        source_batch <- as.data.frame(do.call(rbind, fields), stringsAsFactors = FALSE, check.names = FALSE)
-        names(source_batch) <- header_names
+        fields <- next_batch(batch_size, length(header_names), keep)
+        # Retain the established header-only normalized schema and validation.
+        if (fields$state == "done" && !first) break
+        retained <- if (fields$state == "done") rep(list(character()), length(keep)) else fields$columns
+        source_batch <- structure(retained, names = batch_names, class = "data.frame",
+                                  row.names = .set_row_names(fields$nrow))
         result <- harmonise_sumstats(source_batch, reference, columns = columns, build = build,
                                      frequency_type = frequency_type, effect_type = effect_type,
                                      batch_size = batch_size, candidate_limit = candidate_limit,
                                      verify = FALSE, source_strand = source_strand, projection = projection)$normalized
-        result$source_row <- result$source_row + total
-        write_normalized(result)
+        if (total) result$source_row <- result$source_row + total
+        mss_write_normalized_cpp(result, normalized_writer, first)
+        first <- FALSE
+        if (fields$state == "done") break
         batch_counts <- table(result$status)
         for (status in names(batch_counts)) {
             if (!status %in% names(counts)) counts[[status]] <- 0
@@ -572,15 +591,7 @@ harmonise_file <- function(input, reference, path,
             if (!status %in% names(projection_counts)) projection_counts[[status]] <- 0
             projection_counts[[status]] <- projection_counts[[status]] + sum(result$projection_status == status)
         }
-        total <- total + length(fields)
-    }
-    if (first) {
-        empty <- as.data.frame(stats::setNames(rep(list(character()), length(header_names)), header_names),
-                               stringsAsFactors = FALSE, check.names = FALSE)
-        write_normalized(harmonise_sumstats(empty, reference, columns = columns, build = build,
-                                           frequency_type = frequency_type, effect_type = effect_type,
-                                           candidate_limit = candidate_limit, verify = FALSE,
-                                           source_strand = source_strand, projection = projection)$normalized)
+        total <- total + fields$nrow
     }
     if (!is.null(acquisition_receipt)) {
         if (!is.list(acquisition_receipt) || !length(acquisition_receipt) ||

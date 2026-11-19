@@ -2,4 +2,4 @@ CXX_STD = CXX17
 
 all: $(SHLIB)
 
-preservation.o: preservation_core.h projection.h
+preservation.o: preservation_core.h preservation_stream.h projection.h

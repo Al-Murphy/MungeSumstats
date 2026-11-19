@@ -86,6 +86,37 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// mss_parser_batch_cpp
+List mss_parser_batch_cpp(SEXP parser, RawVector input, int offset, bool eof, int max_rows, int batch_bytes, int field_count, IntegerVector keep);
+RcppExport SEXP _MungeSumstats_mss_parser_batch_cpp(SEXP parserSEXP, SEXP inputSEXP, SEXP offsetSEXP, SEXP eofSEXP, SEXP max_rowsSEXP, SEXP batch_bytesSEXP, SEXP field_countSEXP, SEXP keepSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type parser(parserSEXP);
+    Rcpp::traits::input_parameter< RawVector >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< int >::type offset(offsetSEXP);
+    Rcpp::traits::input_parameter< bool >::type eof(eofSEXP);
+    Rcpp::traits::input_parameter< int >::type max_rows(max_rowsSEXP);
+    Rcpp::traits::input_parameter< int >::type batch_bytes(batch_bytesSEXP);
+    Rcpp::traits::input_parameter< int >::type field_count(field_countSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type keep(keepSEXP);
+    rcpp_result_gen = Rcpp::wrap(mss_parser_batch_cpp(parser, input, offset, eof, max_rows, batch_bytes, field_count, keep));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mss_write_normalized_cpp
+void mss_write_normalized_cpp(DataFrame table, SEXP connection, bool header, int block_bytes);
+RcppExport SEXP _MungeSumstats_mss_write_normalized_cpp(SEXP tableSEXP, SEXP connectionSEXP, SEXP headerSEXP, SEXP block_bytesSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< DataFrame >::type table(tableSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type connection(connectionSEXP);
+    Rcpp::traits::input_parameter< bool >::type header(headerSEXP);
+    Rcpp::traits::input_parameter< int >::type block_bytes(block_bytesSEXP);
+    mss_write_normalized_cpp(table, connection, header, block_bytes);
+    return R_NilValue;
+END_RCPP
+}
 // mss_projection_open_cpp
 SEXP mss_projection_open_cpp(std::string chain, CharacterVector source_names, CharacterVector target_names, NumericVector source_sizes, NumericVector target_sizes);
 RcppExport SEXP _MungeSumstats_mss_projection_open_cpp(SEXP chainSEXP, SEXP source_namesSEXP, SEXP target_namesSEXP, SEXP source_sizesSEXP, SEXP target_sizesSEXP) {
@@ -128,6 +159,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_MungeSumstats_mss_harmonise_cpp", (DL_FUNC) &_MungeSumstats_mss_harmonise_cpp, 15},
     {"_MungeSumstats_mss_parser_open_cpp", (DL_FUNC) &_MungeSumstats_mss_parser_open_cpp, 2},
     {"_MungeSumstats_mss_parser_feed_cpp", (DL_FUNC) &_MungeSumstats_mss_parser_feed_cpp, 3},
+    {"_MungeSumstats_mss_parser_batch_cpp", (DL_FUNC) &_MungeSumstats_mss_parser_batch_cpp, 8},
+    {"_MungeSumstats_mss_write_normalized_cpp", (DL_FUNC) &_MungeSumstats_mss_write_normalized_cpp, 4},
     {"_MungeSumstats_mss_projection_open_cpp", (DL_FUNC) &_MungeSumstats_mss_projection_open_cpp, 5},
     {"_MungeSumstats_mss_project_cpp", (DL_FUNC) &_MungeSumstats_mss_project_cpp, 10},
     {NULL, NULL, 0}

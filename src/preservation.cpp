@@ -54,37 +54,8 @@ DataFrame mss_harmonise_cpp(std::string path, std::string fasta,
   }
   return DataFrame::create(_["status"]=status,_["chr"]=out_chr,_["pos"]=out_pos,_["ref"]=ref,_["alt"]=alt,_["id"]=out_id,_["effect"]=out_effect,_["eaf"]=out_eaf,_["swapped"]=swapped,_["complemented"]=complemented,_["candidate_count"]=candidates);
 }
-// Streaming RFC4180-style decoder. Byte chunks need not end on record or UTF-8
-// boundaries. Original bytes are written separately; only CSV syntax is removed.
-class MssDelimitedParser {
-public:
-  char delimiter; std::size_t limit, bytes=0; int state=0;
-  bool cr=false, active=false, finished=false;
-  std::string field; std::vector<std::string> row;
-  MssDelimitedParser(char d,std::size_t l):delimiter(d),limit(l){}
-  List feed(RawVector input,bool eof) {
-    if(finished)stop("Parser already finished");
-    std::vector<std::vector<std::string>> output;
-    auto end_field=[&](){row.push_back(std::move(field));field.clear();state=0;};
-    auto end_row=[&](){end_field();output.push_back(std::move(row));row.clear();bytes=0;active=false;};
-    for(auto byte:input){
-      char c=static_cast<char>(byte);
-      if(cr){cr=false;if(c=='\n')continue;}
-      if(!c)stop("NUL byte in tabular input");
-      if(++bytes>limit)stop("Input record exceeds max_record_bytes");
-      active=true;
-      if(state==1){if(c=='\"')state=2;else field+=c;continue;}
-      if(state==2 && c=='\"'){field+='\"';state=1;continue;}
-      if(c==delimiter){end_field();continue;}
-      if(c=='\n'||c=='\r'){end_row();cr=c=='\r';continue;}
-      if(state==2)stop("Malformed quote: characters after closing quote");
-      if(c=='\"'){if(!field.empty())stop("Malformed quote in unquoted field");state=1;continue;}
-      field+=c;state=3;
-    }
-    if(eof){if(state==1)stop("Unterminated quoted field");if(active)end_row();finished=true;}
-    List result(output.size());for(std::size_t i=0;i<output.size();++i)result[i]=wrap(output[i]);return result;
-  }
-};
+#include "preservation_stream.h"
+
 // [[Rcpp::export]]
 SEXP mss_parser_open_cpp(std::string delimiter,int max_record_bytes) {
   if(delimiter.size()!=1||max_record_bytes<1)stop("Invalid parser limits");
@@ -93,6 +64,19 @@ SEXP mss_parser_open_cpp(std::string delimiter,int max_record_bytes) {
 // [[Rcpp::export]]
 List mss_parser_feed_cpp(SEXP parser,RawVector input,bool eof=false) {
   XPtr<MssDelimitedParser> p(parser);return p->feed(input,eof);
+}
+
+// [[Rcpp::export]]
+List mss_parser_batch_cpp(SEXP parser, RawVector input, int offset, bool eof,
+                          int max_rows, int batch_bytes, int field_count, IntegerVector keep) {
+    XPtr<MssDelimitedParser> p(parser);
+    return p->batch(input, offset, eof, max_rows, batch_bytes, field_count, keep);
+}
+
+// [[Rcpp::export]]
+void mss_write_normalized_cpp(DataFrame table, SEXP connection, bool header, int block_bytes = 262144) {
+    MssNormalizedWriter writer(connection, block_bytes);
+    writer.write(table, header);
 }
 
 #include "projection.h"
