@@ -11,6 +11,7 @@
 #include <limits>
 #include <list>
 #include <map>
+#include <memory>
 #include <queue>
 #include <set>
 #include <sstream>
@@ -28,14 +29,41 @@ class BlockFile {
   std::ifstream file;std::uint64_t length=0,reads=0;std::size_t width,capacity;
   struct Page {std::string data;std::list<std::uint64_t>::iterator recent;};
   std::unordered_map<std::uint64_t,Page> pages;std::list<std::uint64_t> recent;
+  const Page* last_page=nullptr;
+  std::uint64_t last_number=0;
+#ifdef MSS_LOOKUP_COUNTERS
+  std::uint64_t requests=0;
+#endif
   const std::string& page(std::uint64_t number) {
+#ifdef MSS_LOOKUP_COUNTERS
+    ++requests;
+#endif
+    if(last_page&&last_number==number)return last_page->data;
     auto found=pages.find(number);
-    if(found!=pages.end()){recent.splice(recent.begin(),recent,found->second.recent);return found->second.data;}
-    if(pages.size()==capacity){pages.erase(recent.back());recent.pop_back();}
-    std::string data(width,'\0');file.clear();file.seekg(number*width);file.read(&data[0],width);
-    data.resize(static_cast<std::size_t>(file.gcount()));++reads;
-    if(file.bad())throw std::runtime_error("Reference block read failed");
-    recent.push_front(number);return pages.emplace(number,Page{std::move(data),recent.begin()}).first->second.data;
+    if(found!=pages.end()) {
+      recent.splice(recent.begin(),recent,found->second.recent);
+    } else {
+      std::string data;
+      if(pages.size()==capacity) {
+        auto victim=pages.find(recent.back());
+        last_page=nullptr;
+        data=std::move(victim->second.data);
+        pages.erase(victim);
+        recent.pop_back();
+      }
+      data.resize(width);
+      file.clear();file.seekg(number*width);file.read(&data[0],width);
+      data.resize(static_cast<std::size_t>(file.gcount()));++reads;
+      if(file.bad())throw std::runtime_error("Reference block read failed");
+      recent.push_front(number);
+      try {
+        found=pages.emplace(number,Page{std::move(data),recent.begin()}).first;
+      } catch(...) {
+        recent.pop_front();throw;
+      }
+    }
+    last_number=number;last_page=&found->second;
+    return last_page->data;
   }
 public:
   explicit BlockFile(const std::string& path,std::size_t block_size=65536,std::size_t max_blocks=128):file(path,std::ios::binary),width(block_size),capacity(max_blocks) {
@@ -44,6 +72,9 @@ public:
   }
   std::uint64_t size()const{return length;}
   std::uint64_t disk_reads()const{return reads;}
+#ifdef MSS_LOOKUP_COUNTERS
+  std::uint64_t page_requests()const{return requests;}
+#endif
   std::size_t resident_bytes()const{std::size_t n=0;for(auto& p:pages)n+=p.second.data.size();return n;}
   std::string bytes(std::uint64_t pos,std::size_t n) {
     std::string out;
@@ -66,6 +97,43 @@ public:
     if(out.size()>=length-pos||bytes(pos+out.size(),1)!="\n")throw std::runtime_error("Typed reference record is truncated");
     return out;
   }
+  std::uint64_t little_endian_offset(std::uint64_t pos) {
+    if(pos>length||length-pos<8)throw std::runtime_error("Truncated disk index");
+    const auto& data=page(pos/width);
+    const auto start=static_cast<std::size_t>(pos%width);
+    std::string crossing;
+    const char* digits;
+    if(start<=data.size()&&data.size()-start>=8)digits=data.data()+start;
+    else {
+      crossing=bytes(pos,8);
+      if(crossing.size()!=8)throw std::runtime_error("Truncated disk index");
+      digits=crossing.data();
+    }
+    std::uint64_t value=0;
+    for(unsigned i=0;i<8;++i)value|=std::uint64_t(static_cast<unsigned char>(digits[i]))<<(8*i);
+    return value;
+  }
+  // A visitor must consume the view before it next reads this BlockFile.
+  template<class Visitor>
+  void visit_line(std::uint64_t pos,bool strict,const Visitor& visit) {
+    if(strict) {
+      if(pos>=length)throw std::runtime_error("Typed reference offset is not a record boundary");
+      if(pos) {
+        const auto& before=page((pos-1)/width);
+        const auto index=static_cast<std::size_t>((pos-1)%width);
+        if(index>=before.size())throw std::runtime_error("Truncated reference file");
+        if(before[index]!='\n')throw std::runtime_error("Typed reference offset is not a record boundary");
+      }
+    }
+    if(pos>=length){visit(std::string_view());return;}
+    const auto& data=page(pos/width);
+    const auto start=static_cast<std::size_t>(pos%width);
+    if(start>=data.size())throw std::runtime_error("Truncated reference file");
+    const auto end=data.find('\n',start);
+    if(end!=std::string::npos){visit(std::string_view(data).substr(start,end-start));return;}
+    const auto owned=strict?strict_line(pos):line(pos);
+    visit(std::string_view(owned));
+  }
 };
 inline std::vector<std::string> split(const std::string& s,char sep) {
   std::vector<std::string> out; std::string v; std::istringstream in(s);
@@ -76,7 +144,7 @@ inline std::string upper(std::string s) { for(char& c:s) c=static_cast<char>(std
 inline bool dna(const std::string& s) { return !s.empty() && s.find_first_not_of("ACGT")==std::string::npos; }
 inline bool missing(const std::string& s) {return s.empty() || s=="." || s=="NA";}
 // Format 3 has complete typed records, never an unchecked skipped tail.
-inline bool typed_text(const std::string& text) {
+inline bool typed_text(std::string_view text) {
   for(std::size_t i=0;i<text.size();) {
     const auto first=static_cast<unsigned char>(text[i]);
     if(first<128){if(!first||first=='\t'||first=='\n')return false;++i;continue;}
@@ -92,13 +160,13 @@ inline bool typed_text(const std::string& text) {
   }
   return true;
 }
-inline std::uint64_t typed_uint(const std::string& text) {
+inline std::uint64_t typed_uint(std::string_view text) {
   if(text.empty()||(text.size()>1&&text[0]=='0'))throw std::runtime_error("Typed reference has an invalid unsigned integer");
   std::uint64_t value=0;
   for(char c:text){if(c<'0'||c>'9'||value>(std::numeric_limits<std::uint64_t>::max()-static_cast<unsigned>(c-'0'))/10)throw std::runtime_error("Typed reference has an invalid unsigned integer");value=value*10+static_cast<unsigned>(c-'0');}
   return value;
 }
-inline std::int64_t typed_int(const std::string& text,bool positive) {
+inline std::int64_t typed_int(std::string_view text,bool positive) {
   if(text.empty())throw std::runtime_error("Typed reference has an invalid signed integer");
   const bool negative=text[0]=='-';const auto start=negative?1U:0U;
   if(start==text.size())throw std::runtime_error("Typed reference has an invalid signed integer");
@@ -106,10 +174,10 @@ inline std::int64_t typed_int(const std::string& text,bool positive) {
   const auto maximum=static_cast<std::uint64_t>(std::numeric_limits<std::int64_t>::max());
   if(magnitude>maximum+(negative?1U:0U))throw std::runtime_error("Typed reference signed integer overflows");
   const auto value=negative?(magnitude?-(static_cast<std::int64_t>(magnitude-1))-1:0):static_cast<std::int64_t>(magnitude);
-  if((positive&&value<1)||std::to_string(value)!=text)throw std::runtime_error("Typed reference has a noncanonical signed integer");
+  if((positive&&value<1)||(negative&&!magnitude))throw std::runtime_error("Typed reference has a noncanonical signed integer");
   return value;
 }
-inline void typed_key(const std::string& key) {
+inline void typed_key(std::string_view key) {
   if(key.size()<2||key[1]!=':'||!typed_text(key))throw std::runtime_error("Typed reference has an invalid lookup key");
   if(key[0]=='I'){if(key.size()==2)throw std::runtime_error("Typed reference has an empty identifier key");return;}
   if(key[0]!='C'&&key[0]!='S')throw std::runtime_error("Typed reference has an unknown key type");
@@ -304,24 +372,126 @@ inline void consume_context_work(std::size_t* remaining) {
 }
 class Reference {
   BlockFile keys,offsets,records;std::uint64_t count;Fasta fa;int data_format=2;
-  std::string entry(std::uint64_t i){auto bytes=offsets.bytes(i*8,8);if(bytes.size()!=8)throw std::runtime_error("Truncated disk index");std::uint64_t p=0;for(int j=0;j<8;++j)p|=std::uint64_t(static_cast<unsigned char>(bytes[j]))<<(8*j);
-    if(data_format==2)return keys.line(p);
-    auto line=keys.strict_line(p);const auto fields=split(line,'\t');
-    if(fields.size()!=2)throw std::runtime_error("Typed reference key row must have two fields");
-    typed_key(fields[0]);if(typed_uint(fields[1])>=records.size())throw std::runtime_error("Typed reference record offset is out of range");
-    return line;
+  // Node indices correspond to the actual midpoint tree of [0,count). Keep
+  // validated complete keys only; an oversized pivot always uses disk lookup.
+  struct Pivot {
+    char key[56];
+    unsigned char stored_size=0; // one plus length, including empty format-2 keys
+  };
+  struct Rank {
+    std::uint64_t rank_plus_one=0;
+    unsigned char size=0;
+    char key[224];
+  };
+  static_assert(sizeof(Pivot)<=64,"Fence directory slot exceeds its budget");
+  std::unique_ptr<Pivot[]> pivots;
+  std::unique_ptr<Rank[]> ranks;
+  std::size_t pivot_count=0,rank_count=0;
+  static_assert(sizeof(Rank)*4096+sizeof(ranks)+sizeof(rank_count)<1024*1024,"Rank cache exceeds one MiB");
+#ifdef MSS_LOOKUP_COUNTERS
+  std::uint64_t rank_hits=0,pivot_hits=0,probes=0;
+#endif
+  template<class Visitor>
+  void visit_entry(std::uint64_t i,const Visitor& visit) {
+    const auto pos=offsets.little_endian_offset(i*8);
+    keys.visit_line(pos,data_format==3,[&](std::string_view row) {
+      const auto tab=row.find('\t');
+      const auto key=row.substr(0,tab);
+      // Format 2 historically passes the complete row to stoull when tab is
+      // absent. Preserve conversion order and exceptions for that format.
+      const auto offset=row.substr(tab+1);
+      std::uint64_t parsed=0;
+      if(data_format==3) {
+        if(tab==std::string_view::npos||offset.find('\t')!=std::string_view::npos)
+          throw std::runtime_error("Typed reference key row must have two fields");
+        typed_key(key);
+        parsed=typed_uint(offset);
+        if(parsed>=records.size())throw std::runtime_error("Typed reference record offset is out of range");
+      }
+      visit(key,offset,parsed);
+    });
   }
-  Candidate typed_candidate(const std::string& key,std::uint64_t offset) {
-    const auto values=split(records.strict_line(offset),'\t');
-    for(const auto& value:values)if(!typed_text(value))throw std::runtime_error("Typed reference field is not valid UTF-8/framing");
+  std::uint64_t lower_bound_rank(const std::string& key) {
+    if(!count)return 0;
+    Rank* rank=nullptr;
+    if(key.size()<=sizeof(Rank::key)) {
+      rank=&ranks[std::hash<std::string>{}(key)%rank_count];
+      if(rank->rank_plus_one&&std::string_view(rank->key,rank->size)==std::string_view(key)) {
+#ifdef MSS_LOOKUP_COUNTERS
+        ++rank_hits;
+#endif
+        return rank->rank_plus_one-1;
+      }
+    }
+    std::size_t node=0;
+    std::uint64_t low=0,high=count;
+    while(low<high) {
+      const auto mid=low+(high-low)/2;
+      auto* pivot=node<pivot_count?&pivots[node]:nullptr;
+      bool less=false;
+      if(pivot&&pivot->stored_size) {
+        less=std::string_view(pivot->key,pivot->stored_size-1)<std::string_view(key);
+#ifdef MSS_LOOKUP_COUNTERS
+        ++pivot_hits;
+#endif
+      } else {
+#ifdef MSS_LOOKUP_COUNTERS
+        ++probes;
+#endif
+        visit_entry(mid,[&](std::string_view field,std::string_view,std::uint64_t) {
+          less=field < std::string_view(key);
+          if(pivot&&field.size()<=sizeof(pivot->key)) {
+            std::copy(field.begin(),field.end(),pivot->key);
+            pivot->stored_size=static_cast<unsigned char>(field.size()+1);
+          }
+        });
+      }
+      if(less)low=mid+1;else high=mid;
+      if(pivot)node=node*2+(less?2:1);
+    }
+    if(rank) {
+      std::copy(key.begin(),key.end(),rank->key);
+      rank->size=static_cast<unsigned char>(key.size());
+      rank->rank_plus_one=low+1;
+    }
+    return low;
+  }
+  // References have at most eight fields. Count and (for format 3) validate
+  // the entire row even when an extra tail will cause rejection.
+  struct RecordFields {
+    std::string_view values[8];
+    std::size_t size=0;
+    RecordFields(std::string_view row,bool typed) {
+      if(row.empty())return;
+      std::size_t start=0;
+      while(true) {
+        const auto end=row.find('\t',start);
+        const auto field=row.substr(start,end-start);
+        if(typed&&!typed_text(field))throw std::runtime_error("Typed reference field is not valid UTF-8/framing");
+        if(size<8)values[size]=field;
+        ++size;
+        if(end==std::string_view::npos)break;
+        start=end+1;
+      }
+    }
+  };
+  Candidate decode_candidate(const std::string& key,std::string_view row) {
+    const RecordFields fields(row,data_format==3);
+    const auto& values=fields.values;
     Candidate out;
-    if(values.size()==7&&values[0]=="A") {
+    if(data_format==2) {
+      if(fields.size!=8)throw std::runtime_error("Corrupt reference record");
+      out.chr=values[0];out.ref=values[2];out.alt=values[3];out.id=values[4];
+      out.original_ref=values[6];out.alleles=values[7];
+      out.pos=std::stoll(std::string(values[1]));out.original_pos=std::stoll(std::string(values[5]));
+      if(!missing(out.id))out.identifiers.insert(out.id);
+    } else if(fields.size==7&&values[0]=="A") {
       if(key[0]!='C'&&key[0]!='I')throw std::runtime_error("Typed reference A record has the wrong key type");
       out.chr=values[1];out.pos=typed_int(values[2],true);out.ref=values[3];out.alt=values[4];out.id=values[5];out.original_pos=typed_int(values[6],true);
       if(out.chr.empty()||!dna(out.ref)||!dna(out.alt)||out.ref==out.alt)throw std::runtime_error("Typed reference A record has invalid canonical fields");
       if(key[0]=='C'&&key!="C:"+out.chr+":"+std::to_string(out.pos)&&key!="C:"+out.chr+":"+std::to_string(out.original_pos))throw std::runtime_error("Typed reference A coordinate key disagrees with its record");
       if(!missing(out.id))out.identifiers.insert(out.id);
-    } else if(values.size()==5&&values[0]=="S") {
+    } else if(fields.size==5&&values[0]=="S") {
       if(key[0]!='S')throw std::runtime_error("Typed reference S record has the wrong key type");
       out.chr=values[1];out.pos=out.original_pos=typed_int(values[2],false);out.ref=out.original_ref=values[3];out.alleles=values[4];
       if(key!="S:"+out.chr+":"+std::to_string(out.original_pos))throw std::runtime_error("Typed reference S key disagrees with its record");
@@ -337,21 +507,44 @@ public:
       if(marker!="mss-preservation-3\n")throw std::runtime_error("Typed reference marker is malformed");data_format=3;
     }
     auto size=offsets.size();if(size%8)throw std::runtime_error("Invalid offsets file");count=size/8;
+    pivot_count=static_cast<std::size_t>(std::min<std::uint64_t>(8191,count));
+    rank_count=static_cast<std::size_t>(std::min<std::uint64_t>(4096,count));
+    if(count){pivots=std::make_unique<Pivot[]>(pivot_count);ranks=std::make_unique<Rank[]>(rank_count);}
   }
+#ifdef MSS_LOOKUP_COUNTERS
+  struct LookupCounters {
+    std::uint64_t rank_hits,pivot_hits,probe_entries,key_requests,offset_requests,key_reads,offset_reads;
+    std::size_t pivot_slots,rank_slots,rank_bytes;
+  };
+  LookupCounters lookup_counters()const {
+    return {rank_hits,pivot_hits,probes,keys.page_requests(),offsets.page_requests(),
+            keys.disk_reads(),offsets.disk_reads(),pivot_count,rank_count,
+            sizeof(ranks)+sizeof(rank_count)+rank_count*sizeof(Rank)};
+  }
+#endif
   std::vector<Candidate> lookup(const std::string& key,std::size_t cap=10000,std::size_t* context_work=nullptr) {
     if(data_format==3)typed_key(key);
-    std::uint64_t low=0,high=count;while(low<high){auto mid=low+(high-low)/2;auto s=entry(mid);if(s.substr(0,s.find('\t'))<key)low=mid+1;else high=mid;}
+    const auto low=lower_bound_rank(key);
     std::vector<Candidate> out;std::map<std::string,std::size_t> seen;std::size_t examined=0;
-    for(auto i=low;i<count;++i){auto s=entry(i);auto tab=s.find('\t');if(s.substr(0,tab)!=key)break;if(++examined>cap)throw std::runtime_error("Reference candidate limit exceeded; no arbitrary candidate selected");consume_context_work(context_work);auto offset=data_format==3?typed_uint(s.substr(tab+1)):std::stoull(s.substr(tab+1));Candidate c;
-      if(data_format==3)c=typed_candidate(key,offset);
-      else {s=records.line(offset);auto v=split(s,'\t');if(v.size()!=8)throw std::runtime_error("Corrupt reference record");c=Candidate{v[0],v[2],v[3],v[4],v[6],v[7],std::stoll(v[1]),std::stoll(v[5]),{},{}};
-        c.original_positions.insert(c.original_pos);if(!missing(c.id))c.identifiers.insert(c.id);
-      }
-      auto found=seen.find(c.key());
-      if(found==seen.end()){seen[c.key()]=out.size();out.push_back(c);}
-      else {
-        merge_candidate_context(out[found->second],c);
-      }
+    for(auto i=low;i<count;++i) {
+      bool matched=false;
+      std::uint64_t offset=0;
+      visit_entry(i,[&](std::string_view field,std::string_view offset_text,std::uint64_t parsed) {
+        if(field!=std::string_view(key))return;
+        matched=true;
+        if(++examined>cap)throw std::runtime_error("Reference candidate limit exceeded; no arbitrary candidate selected");
+        consume_context_work(context_work);
+        offset=data_format==3?parsed:std::stoull(std::string(offset_text));
+      });
+      if(!matched)break;
+      records.visit_line(offset,data_format==3,[&](std::string_view row) {
+        auto c=decode_candidate(key,row);
+        if(out.empty()){out.push_back(std::move(c));return;}
+        if(seen.empty())seen.emplace(out.front().key(),0);
+        const auto inserted=seen.emplace(c.key(),out.size());
+        if(inserted.second)out.push_back(std::move(c));
+        else merge_candidate_context(out[inserted.first->second],c);
+      });
     }
     // S lookup has already merged identical (chr, original position, REF) spans.
     // These leading fields uniquely order contexts; ALT token occurrence/order
