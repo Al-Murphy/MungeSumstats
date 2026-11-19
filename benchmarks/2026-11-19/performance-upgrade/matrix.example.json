@@ -1,0 +1,143 @@
+{
+  "schema": 1,
+  "contention_note": "REPLACE with the admitted CPU, memory and I/O condition and the operator log reference.",
+  "r_executable": {"path": "/absolute/path/to/Rscript", "sha256": "REPLACE"},
+  "runtime_files": [
+    {"path": "/absolute/path/to/R/bin/exec/R", "sha256": "REPLACE"},
+    {"path": "/absolute/path/to/libR", "sha256": "REPLACE"}
+  ],
+  "dependency_libraries": ["/absolute/path/to/common-R-library"],
+  "minimum_free_bytes": 0,
+  "estimated_output_bytes": 50000000000,
+  "edition_encoding": "utf-8",
+  "baseline": {
+    "commit": "a86e8c94d753630eff8c6a695ed2f240d1123d0d",
+    "library": "/absolute/path/to/baseline/library",
+    "dll": {"path": "/absolute/path/to/baseline/library/MungeSumstats/libs/MungeSumstats.so", "sha256": "REPLACE"},
+    "package_tree_sha256": "REPLACE",
+    "build_receipt": {"path": "/absolute/path/to/baseline/build.json", "sha256": "REPLACE"}
+  },
+  "candidate": {
+    "commit": "6abab72a2eb564bb30c6b1d2a98269a7de90a643",
+    "library": "/absolute/path/to/candidate/library",
+    "dll": {"path": "/absolute/path/to/candidate/library/MungeSumstats/libs/MungeSumstats.so", "sha256": "REPLACE"},
+    "package_tree_sha256": "REPLACE",
+    "build_receipt": {"path": "/absolute/path/to/candidate/build.json", "sha256": "REPLACE"}
+  },
+  "references": {
+    "matched_2": {
+      "format": 2,
+      "directory": "/absolute/path/to/matched-format-2",
+      "fasta": {"path": "/absolute/path/to/matched.fa", "sha256": "REPLACE"},
+      "bind_fasta": false,
+      "files": {
+        "manifest.rds": "REPLACE", "core-version": "REPLACE", "fasta.fai": "REPLACE",
+        "keys": "REPLACE", "offsets": "REPLACE", "records": "REPLACE",
+        "rejected.tsv": "REPLACE", "source.tsv": "REPLACE"
+      }
+    },
+    "matched_3": {
+      "format": 3,
+      "directory": "/absolute/path/to/matched-format-3",
+      "fasta": {"path": "/absolute/path/to/matched.fa", "sha256": "REPLACE"},
+      "bind_fasta": false,
+      "files": {
+        "manifest.rds": "REPLACE", "core-version": "REPLACE", "fasta.fai": "REPLACE",
+        "keys": "REPLACE", "offsets": "REPLACE", "records": "REPLACE",
+        "rejected.tsv": "REPLACE", "source.tsv": "REPLACE"
+      }
+    },
+    "scientific_2": {
+      "format": 2,
+      "directory": "/absolute/path/to/scientific-format-2",
+      "fasta": {"path": "/absolute/path/to/scientific.fa", "sha256": "REPLACE"},
+      "bind_fasta": false,
+      "files": {
+        "manifest.rds": "REPLACE", "core-version": "REPLACE", "fasta.fai": "REPLACE",
+        "keys": "REPLACE", "offsets": "REPLACE", "records": "REPLACE",
+        "rejected.tsv": "REPLACE", "source.tsv": "REPLACE"
+      }
+    },
+    "scientific_3": {
+      "format": 3,
+      "directory": "/absolute/path/to/scientific-format-3",
+      "fasta": {"path": "/absolute/path/to/scientific.fa", "sha256": "REPLACE"},
+      "bind_fasta": false,
+      "files": {
+        "manifest.rds": "REPLACE", "core-version": "REPLACE", "fasta.fai": "REPLACE",
+        "keys": "REPLACE", "offsets": "REPLACE", "records": "REPLACE",
+        "rejected.tsv": "REPLACE", "source.tsv": "REPLACE"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "matched-1M", "rows": 1000000, "pairs": 3, "target": true, "reference": "matched_2",
+      "input": {"path": "/absolute/path/to/matched-1M.tsv", "sha256": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2"},
+      "cardinality_receipt": {"path": "/absolute/path/to/matched-1M.keys.json", "sha256": "REPLACE"},
+      "settings": {"frequency_type": "EAF"}
+    },
+    {
+      "id": "matched-10M", "rows": 10000000, "pairs": 3, "target": true, "reference": "matched_2",
+      "input": {"path": "/absolute/path/to/matched-10M.tsv", "sha256": "cecd6f1053fb9c02066be3aa78f0f4976cb8ab32e882357e016ec1ea259788e0"},
+      "cardinality_receipt": {"path": "/absolute/path/to/matched-10M.keys.json", "sha256": "REPLACE"},
+      "settings": {"frequency_type": "EAF"}
+    },
+    {
+      "id": "matched-40M", "rows": 40000000, "pairs": 1, "target": true, "reference": "matched_2",
+      "input": {"path": "/absolute/path/to/matched-40M.tsv", "sha256": "cbf644d415e34aa44ba9b51fdb25d1db3dd99596122ca392f0e41cd25cce3ad4"},
+      "cardinality_receipt": {"path": "/absolute/path/to/matched-40M.keys.json", "sha256": "REPLACE"},
+      "settings": {"frequency_type": "EAF"}
+    },
+    {
+      "id": "distinct-shuffled", "rows": 437458, "pairs": 1, "tags": ["distinct_shuffled"],
+      "reference_formats": ["matched_2", "matched_3"],
+      "input": {"path": "/absolute/path/to/distinct-shuffled.tsv", "sha256": "REPLACE"},
+      "cardinality_receipt": {"path": "/absolute/path/to/distinct-shuffled.keys.json", "sha256": "REPLACE"},
+      "settings": {"frequency_type": "EAF"}
+    },
+    {
+      "id": "coordinate-only", "rows": 437458, "pairs": 1, "tags": ["coordinate_only"],
+      "reference_formats": ["matched_2", "matched_3"],
+      "input": {"path": "/absolute/path/to/coordinate-only.tsv", "sha256": "REPLACE"},
+      "cardinality_receipt": {"path": "/absolute/path/to/coordinate-only.keys.json", "sha256": "REPLACE"},
+      "settings": {"frequency_type": "EAF"}
+    },
+    {
+      "id": "id-only", "rows": 437458, "pairs": 1, "tags": ["id_only"],
+      "reference_formats": ["matched_2", "matched_3"],
+      "input": {"path": "/absolute/path/to/id-only.tsv", "sha256": "REPLACE"},
+      "cardinality_receipt": {"path": "/absolute/path/to/id-only.keys.json", "sha256": "REPLACE"},
+      "settings": {"frequency_type": "EAF"}
+    },
+    {
+      "id": "negative", "rows": 437458, "pairs": 1, "tags": ["negative"],
+      "reference_formats": ["matched_2", "matched_3"],
+      "input": {"path": "/absolute/path/to/negative.tsv", "sha256": "REPLACE"},
+      "cardinality_receipt": {"path": "/absolute/path/to/negative.keys.json", "sha256": "REPLACE"},
+      "settings": {"frequency_type": "EAF"}
+    },
+    {
+      "id": "dense", "rows": 10000, "pairs": 1, "tags": ["dense"],
+      "reference_formats": ["scientific_2", "scientific_3"],
+      "input": {"path": "/absolute/path/to/dense.tsv", "sha256": "REPLACE"},
+      "cardinality_receipt": {"path": "/absolute/path/to/dense.keys.json", "sha256": "REPLACE"},
+      "settings": {"frequency_type": "EAF"}
+    },
+    {
+      "id": "mixed", "rows": 100000, "pairs": 1, "tags": ["mixed"],
+      "reference_formats": ["scientific_2", "scientific_3"],
+      "input": {"path": "/absolute/path/to/mixed.tsv", "sha256": "REPLACE"},
+      "cardinality_receipt": {"path": "/absolute/path/to/mixed.keys.json", "sha256": "REPLACE"},
+      "settings": {"frequency_type": "EAF"}
+    },
+    {
+      "id": "hard-cases", "rows": 32, "pairs": 1, "tags": ["hard_cases"],
+      "reference_formats": ["scientific_2", "scientific_3"],
+      "input": {"path": "/absolute/path/to/hard-cases.tsv", "sha256": "REPLACE"},
+      "cardinality_receipt": {"path": "/absolute/path/to/hard-cases.keys.json", "sha256": "REPLACE"},
+      "oracle": {"path": "/absolute/path/to/independent-hard-case-gold.tsv", "sha256": "REPLACE"},
+      "settings": {"frequency_type": "EAF", "verify_acquisition_receipt": true}
+    }
+  ]
+}
