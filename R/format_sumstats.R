@@ -1123,9 +1123,7 @@ format_sumstats <- function(path,
 
         ### Check 39: Ensure CHR follows the requested style ###
         CHR <- NULL
-        sumstats_return$sumstats_dt[, 
-                                    CHR := GenomeInfoDb::mapSeqlevels(as.character(CHR), 
-                                                                      style = chr_style)]
+        sumstats_return$sumstats_dt[, CHR := map_chr_style(CHR, style = chr_style)]
         
         ### IF LDSC, rename A1 and A2, effect columns are fine
         if (!is.null(save_format) && 
