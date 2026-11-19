@@ -534,6 +534,8 @@ harmonise_file <- function(input, reference, path,
     source_writer <- file(file.path(staging, source_name), "wb")
     on.exit(close(source_writer), add = TRUE)
     parser <- mss_parser_open_cpp(delimiter, max_record_bytes)
+    # The file API reports ragged rows from this frame with the public call.
+    class(parser) <- "mss_file_parser"
     bytes <- raw()
     offset <- 0L
     ended <- FALSE
@@ -571,6 +573,8 @@ harmonise_file <- function(input, reference, path,
     first <- TRUE
     repeat {
         fields <- next_batch(batch_size, length(header_names), keep)
+        if (fields$state == "width_error")
+            stop("Input row has an unexpected number of fields near source row ", total + 1)
         # Retain the established header-only normalized schema and validation.
         if (fields$state == "done" && !first) break
         retained <- if (fields$state == "done") rep(list(character()), length(keep)) else fields$columns

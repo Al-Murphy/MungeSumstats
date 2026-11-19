@@ -70,7 +70,8 @@ List mss_parser_feed_cpp(SEXP parser,RawVector input,bool eof=false) {
 List mss_parser_batch_cpp(SEXP parser, RawVector input, int offset, bool eof,
                           int max_rows, int batch_bytes, int field_count, IntegerVector keep) {
     XPtr<MssDelimitedParser> p(parser);
-    return p->batch(input, offset, eof, max_rows, batch_bytes, field_count, keep);
+    return p->batch(input, offset, eof, max_rows, batch_bytes, field_count, keep,
+                    Rf_inherits(parser, "mss_file_parser"));
 }
 
 // [[Rcpp::export]]

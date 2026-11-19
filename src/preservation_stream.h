@@ -180,7 +180,8 @@ public:
     }
 
     Rcpp::List batch(const Rcpp::RawVector& input, int offset, bool eof, int max_rows,
-                     int budget, int width, const Rcpp::IntegerVector& keep) {
+                     int budget, int width, const Rcpp::IntegerVector& keep,
+                     bool report_width_to_caller) {
         select_mode(Mode::columns);
         if (offset < 0 || offset > input.size() || input.size() > INT_MAX ||
             width < 0 || max_rows < 1 || budget < 1)
@@ -201,8 +202,11 @@ public:
             }
             if (batch_rows_ && decoded_ > static_cast<std::size_t>(budget) - batch_size_)
                 return emit_batch(cursor); // This complete row starts the next batch.
-            if (fields_ != static_cast<std::size_t>(width))
+            if (fields_ != static_cast<std::size_t>(width)) {
+                if (report_width_to_caller)
+                    return result("width_error", cursor, 0, Rcpp::List(0));
                 Rcpp::stop("Input row has an unexpected number of fields near source row %.0f", emitted_rows_ + 1);
+            }
             for (std::size_t j = 0; j < columns_.size(); ++j)
                 columns_[j].push_back(std::move(row_[j]));
             ++batch_rows_;
