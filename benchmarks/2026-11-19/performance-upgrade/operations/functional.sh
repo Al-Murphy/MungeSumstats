@@ -18,9 +18,8 @@ for role in baseline candidate; do
         Rscript --vanilla "$source_dir/tests/standalone/$suite.R" "$source_dir" \
             >"$out/$role-$suite.log" 2>&1
     done
-    Rscript --vanilla -e \
-      'a<-commandArgs(TRUE);.libPaths(c(a[2],a[3]),include.site=FALSE);testthat::test_dir(file.path(a[1],"tests/testthat"),package="MungeSumstats",load_package="installed",reporter="summary",stop_on_failure=TRUE)' \
-      "$source_dir" "$lib" "$deps" >"$out/$role-testthat.log" 2>&1
+    Rscript --vanilla "$OPS/qualify.R" "$source_dir/tests/testthat" "$lib" "$deps" \
+        "$out/$role-testthat" >"$out/$role-testthat.log" 2>&1
     Rscript --vanilla "$OPS/failure_parity.R" "$lib" "$deps" "$science" "$out/$role-errors" \
         >"$out/$role-errors.log" 2>&1
     # One fixture source across both builds. Counters are candidate-only.

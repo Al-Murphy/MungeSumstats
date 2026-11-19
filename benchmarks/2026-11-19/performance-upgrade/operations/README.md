@@ -90,7 +90,7 @@ env -i PATH="$PATH" HOME="$s/empty-home" TMPDIR="$s/tmp" LANG=C.UTF-8 LC_ALL=C.U
 | Order | Contents of results | Gate |
 | --- | --- | --- |
 | 1 | `build/`, `small/`, `smoke/` | Tiny unprofiled pairs for generic/declared fixtures in both formats, known all-19-field gold, pinned runtime and allocated reference, full artifact comparisons |
-| 2 | `functional/` | Both revisions' complete installed testthat suites, standalone/registered APIs, native suites, error parity for corruption, parser limits, bad gzip, acquisition, fanout caps and malformed fields, and exact differential lookup output. Audit testthat warnings/skips and retain any outstanding platform/data cases. |
+| 2 | `functional/` | Both revisions' complete installed testthat suites, standalone/registered APIs, native suites, error parity for corruption, parser limits, bad gzip, acquisition, fanout caps and malformed fields, and exact differential lookup output. Each installed suite writes per-test counts, condition messages and its qualification decision. A skip, error, failed expectation or suite without passing assertions stops the sequence before full asset preparation and timing. Warnings remain in the per-role evidence. |
 | 3 | `assets/`, `matrix/` | Seven matched scale pairs; four chr22 supplemental inputs and four scientific inputs each in both formats. All paired editions and comparison receipts retained; cross-format normalized bytes checked separately. |
 | 4 | `snp-oracle-{1M,10M,40M}.json` | Tracked independent SNP verifier checks the full pinned input, complete FASTA-backed panel and all 19 fields for every row of one candidate edition per size. The runner checks byte identity across all other repetitions. |
 | 5 | `legacy/`, `alloc/`, `cpu/`, `lookup-pressure.log` | One separate paired adapted `format_sumstats` 1M comparison, two separately profiled paired 1M diagnostics, and native lookup pressure counters. Timed preservation targets use their original full matrix repetitions. |
@@ -100,15 +100,28 @@ The projected retained scale bytes are 39,927,958,508 before supplemental output
 `guard.py` samples free bytes and owned process-group RSS every second, issues TERM then KILL on failure, and stops at the absolute compute cutoff. It sets a 26 GB address-space ceiling per process, an observed 24 GB group RSS cap and an 8 GB free-space reserve. Sampling permits transient overshoot; the dedicated host's storage and memory limits provide the outer bounds. Use only foreground commands in this group. An out-of-band watcher must enforce the 18-hour limit if the host or in-container guard disappears. Once timed processes have stopped or completed, export the data, input/source pins, complete worker editions, all repetitions, manifests, logs and guards to the approved destination. Between timed phases incremental export is possible; avoid competing transfers during measured intervals. Generate an inventory of the final retained paths/SHA256 at source, then verify at destination. Keep both copies until verification or the hard deadline. The external supervisor tears down only the recorded owned allocation under its authorization and confirms provider state/billing. Container exit does not stop billing. If interrupted, report the exact completed phases, keep all partial evidence and use a fresh results path on any rerun.
 
 ```bash
-# On the stopped workload host, with all writers quiescent, private scratch only.
+# On the workload host after all writers have quiesced. Move any intentional
+# temp/home evidence into results before sealing; keep the manifest separate.
+set -euo pipefail
 cd /workspace/mss-task4
-find archives inputs results admission.txt guard.jsonl -type f -print0 | LC_ALL=C sort -z | xargs -0 -r sha256sum > FINAL-SHA256SUMS
-# Pull from the receiving machine into a fresh, capacious approved destination.
-rsync -a --partial "$HOST:/workspace/mss-task4/" "$EXPORT/task4/"
-rsync -a --partial "$HOST:/workspace/mss-harness/harness.tar" "$HOST:/workspace/mss-harness/harness.sha256" "$EXPORT/"
-(cd "$EXPORT/task4" && shasum -a 256 -c FINAL-SHA256SUMS > "$EXPORT/verified-task4.log")
-(cd "$EXPORT" && shasum -a 256 -c harness.sha256 > "$EXPORT/verified-harness.log")
+python3 -B "$ops/retained.py" seal . RETAINED.json
 ```
+
+```bash
+# Receiving machine, identical pinned operations helper, fresh approved export.
+set -euo pipefail
+mkdir "$EXPORT/task4"
+python3 -B "$ops/retained.py" roots > "$EXPORT/retained-roots.nul"
+rsync -a --partial "$HOST:/workspace/mss-task4/RETAINED.json" "$EXPORT/RETAINED.json"
+rsync -a --recursive --partial --from0 --files-from="$EXPORT/retained-roots.nul" \
+    "$HOST:/workspace/mss-task4/" "$EXPORT/task4/"
+rsync -a --partial "$HOST:/workspace/mss-harness/harness.tar" "$HOST:/workspace/mss-harness/harness.sha256" "$EXPORT/"
+python3 -B "$ops/retained.py" verify "$EXPORT/task4" "$EXPORT/RETAINED.json" > "$EXPORT/task4-verification.log"
+(cd "$EXPORT" && shasum -a 256 -c harness.sha256 > "$EXPORT/harness-verification.log")
+printf '%s\n' 'Verified retained paths, file contents and harness archive.' > "$EXPORT/VERIFIED"
+```
+
+The same five roots define the source inventory and the rsync selection. The receiver independently compares every relative path and object type, including empty directories, before checking file digests. Extra top-level or nested paths, missing paths, symlinks, special files, unreadable entries and changed content fail verification. `RETAINED.json` is written only after reading the entire retained source tree. An interrupted transfer can be retried against the sealed, quiescent source. Keep failed verification logs and the source evidence.
 
 ## Fixture derivations
 
