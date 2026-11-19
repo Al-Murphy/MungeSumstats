@@ -63,7 +63,7 @@
 
 **Worktree:** /private/tmp/mss-performance-20261119/stream
 
-**Files:** own R/preservation.R, src/preservation.cpp, any new local parser/serializer header, generated R/RcppExports.R and src/RcppExports.cpp, tests/standalone/registered.R and new tests/testthat/test-preservation-stream-performance.R. Do not edit src/preservation_core.h. Existing tests may be extended only where this track owns their behavior; keep new fixtures role-specific.
+**Files:** own R/preservation.R, src/preservation.cpp, any new local parser/serializer header, generated R/RcppExports.R and src/RcppExports.cpp, tests/standalone/registered.R and new tests/testthat/test-preservation-stream-performance.R. Also update only the new-header prerequisite in src/Makevars and src/Makevars.win so incremental Unix/Windows builds recompile preservation.o; no compiler-flag/default/toolchain changes. Do not edit src/preservation_core.h. Existing tests may be extended only where this track owns their behavior; keep new fixtures role-specific.
 
 **Interfaces:** preserve public harmonise_file/harmonise_batch and current low-level parser APIs. New parser/serializer symbols are internal, with exact signatures in docs/superpowers/specs/2026-11-19-mss-stream-interfaces.md. Reference::harmonise remains sufficient; integrate optional prefetch only after root accepts the lookup track's concrete contract.
 
