@@ -144,10 +144,10 @@ test_that("collectors reject mixed use and invalid source records even in discar
         na = "NA", qmethod = "double")
 }
 
-.stream_output <- function(writer, pieces, ...) {
+.stream_output <- function(writer, pieces, ..., encoding = getOption("encoding")) {
     path <- tempfile()
     on.exit(unlink(path), add = TRUE)
-    con <- file(path, open = "wt")
+    con <- file(path, open = "wt", encoding = encoding)
     tryCatch({
         for (i in seq_along(pieces)) writer(pieces[[i]], con, i == 1L, ...)
     }, finally = close(con))
@@ -166,15 +166,57 @@ test_that("bounded writer matches exact baseline bytes across block boundaries",
     # A single field larger than many output blocks, with escape and UTF-8 boundaries.
     tab$status[[2L]] <- strrep('雪"\t\r\n', 80L)
     for (pieces in list(list(tab[FALSE, ]), list(tab), list(tab[1:4, ], tab[5:17, ]))) {
-        expected <- .stream_output(.stream_baseline_write, pieces)
+        expected <- .stream_output(.stream_baseline_write, pieces, encoding = "native.enc")
         for (block in c(1L, 7L, 257L, 262144L)) {
-            expect_identical(.stream_output(encode, pieces, block_bytes = block), expected)
+            expect_identical(.stream_output(encode, pieces, block_bytes = block,
+                native_encoding = TRUE, encoding = "native.enc"), expected)
         }
     }
     opts <- options(encoding = "UTF-8")
     on.exit(options(opts), add = TRUE)
     expect_identical(.stream_output(encode, list(tab), block_bytes = 1L),
                      .stream_output(.stream_baseline_write, list(tab)))
+})
+
+test_that("unknown converting connections and marked strings use the compatible formatter", {
+    encode <- .stream_api("mss_write_normalized_cpp")
+    opts <- options(encoding = "native.enc")
+    on.exit(options(opts), add = TRUE)
+    snow <- list(data.frame(x = "\u96ea"))
+    expected <- .stream_output(.stream_baseline_write, snow, encoding = "UTF-16LE")
+    expect_no_warning(actual <- .stream_output(encode, snow, block_bytes = 1L, encoding = "UTF-16LE"))
+    expect_identical(actual, expected)
+
+    # The encoding marker remains attached even in a UTF-8 session. A long
+    # marked field can occur late, after a header and ordinary rows/columns.
+    latin <- rawToChar(rep(as.raw(0xe9), 512))
+    Encoding(latin) <- "latin1"
+    tab <- data.frame(x = c("ordinary", "another"), y = c("ascii", latin))
+    marked_header <- tab
+    names(marked_header)[2L] <- latin
+    for (piece in list(tab, marked_header)) {
+        expected <- .stream_output(.stream_baseline_write, list(piece), encoding = "native.enc")
+        expect_identical(.stream_output(encode, list(piece), block_bytes = 3L,
+            native_encoding = TRUE, encoding = "native.enc"), expected)
+    }
+})
+
+test_that("deferred character elements stay live across native block flushes", {
+    encode <- .stream_api("mss_write_normalized_cpp")
+    # as.character on a compact integer sequence uses R's deferred-string
+    # ALTREP. Build a fresh object for the candidate to avoid warming it.
+    deferred <- function() {
+        x <- data.frame(value = as.character(12001:12002), stringsAsFactors = FALSE)
+        names(x) <- as.character(70001L)
+        x
+    }
+    expected <- .stream_output(.stream_baseline_write, list(deferred()), encoding = "native.enc")
+    collect <- function(x, connection, header) {
+        old <- gctorture2(16L, 1L)
+        on.exit(gctorture2(old), add = TRUE)
+        encode(x, connection, header, block_bytes = 1L, native_encoding = TRUE)
+    }
+    expect_identical(.stream_output(collect, list(deferred()), encoding = "native.enc"), expected)
 })
 
 test_that("file and resident batches retain source contracts, classes and edition bytes", {

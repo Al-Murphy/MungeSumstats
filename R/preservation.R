@@ -561,7 +561,9 @@ harmonise_file <- function(input, reference, path,
     }, character(1)) else character()
     keep <- which(header_names %in% wanted)
     batch_names <- header_names[keep]
-    normalized_writer <- file(file.path(staging, "normalized.tsv"), "wt")
+    writer_encoding <- getOption("encoding")
+    normalized_writer <- file(file.path(staging, "normalized.tsv"), "wt", encoding = writer_encoding)
+    native_encoding <- identical(writer_encoding, "native.enc")
     on.exit(close(normalized_writer), add = TRUE)
     total <- 0
     counts <- numeric()
@@ -579,7 +581,7 @@ harmonise_file <- function(input, reference, path,
                                      batch_size = batch_size, candidate_limit = candidate_limit,
                                      verify = FALSE, source_strand = source_strand, projection = projection)$normalized
         if (total) result$source_row <- result$source_row + total
-        mss_write_normalized_cpp(result, normalized_writer, first)
+        mss_write_normalized_cpp(result, normalized_writer, first, native_encoding = native_encoding)
         first <- FALSE
         if (fields$state == "done") break
         batch_counts <- table(result$status)

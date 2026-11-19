@@ -74,9 +74,10 @@ List mss_parser_batch_cpp(SEXP parser, RawVector input, int offset, bool eof,
 }
 
 // [[Rcpp::export]]
-void mss_write_normalized_cpp(DataFrame table, SEXP connection, bool header, int block_bytes = 262144) {
+void mss_write_normalized_cpp(DataFrame table, SEXP connection, bool header, int block_bytes = 262144,
+                              bool native_encoding = false) {
     MssNormalizedWriter writer(connection, block_bytes);
-    writer.write(table, header);
+    writer.write(table, header, native_encoding);
 }
 
 #include "projection.h"

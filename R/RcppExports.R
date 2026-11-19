@@ -25,8 +25,8 @@ mss_parser_batch_cpp <- function(parser, input, offset, eof, max_rows, batch_byt
     .Call(`_MungeSumstats_mss_parser_batch_cpp`, parser, input, offset, eof, max_rows, batch_bytes, field_count, keep)
 }
 
-mss_write_normalized_cpp <- function(table, connection, header, block_bytes = 262144L) {
-    invisible(.Call(`_MungeSumstats_mss_write_normalized_cpp`, table, connection, header, block_bytes))
+mss_write_normalized_cpp <- function(table, connection, header, block_bytes = 262144L, native_encoding = FALSE) {
+    invisible(.Call(`_MungeSumstats_mss_write_normalized_cpp`, table, connection, header, block_bytes, native_encoding))
 }
 
 mss_projection_open_cpp <- function(chain, source_names, target_names, source_sizes, target_sizes) {

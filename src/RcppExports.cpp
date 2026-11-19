@@ -105,15 +105,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // mss_write_normalized_cpp
-void mss_write_normalized_cpp(DataFrame table, SEXP connection, bool header, int block_bytes);
-RcppExport SEXP _MungeSumstats_mss_write_normalized_cpp(SEXP tableSEXP, SEXP connectionSEXP, SEXP headerSEXP, SEXP block_bytesSEXP) {
+void mss_write_normalized_cpp(DataFrame table, SEXP connection, bool header, int block_bytes, bool native_encoding);
+RcppExport SEXP _MungeSumstats_mss_write_normalized_cpp(SEXP tableSEXP, SEXP connectionSEXP, SEXP headerSEXP, SEXP block_bytesSEXP, SEXP native_encodingSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< DataFrame >::type table(tableSEXP);
     Rcpp::traits::input_parameter< SEXP >::type connection(connectionSEXP);
     Rcpp::traits::input_parameter< bool >::type header(headerSEXP);
     Rcpp::traits::input_parameter< int >::type block_bytes(block_bytesSEXP);
-    mss_write_normalized_cpp(table, connection, header, block_bytes);
+    Rcpp::traits::input_parameter< bool >::type native_encoding(native_encodingSEXP);
+    mss_write_normalized_cpp(table, connection, header, block_bytes, native_encoding);
     return R_NilValue;
 END_RCPP
 }
@@ -160,7 +161,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_MungeSumstats_mss_parser_open_cpp", (DL_FUNC) &_MungeSumstats_mss_parser_open_cpp, 2},
     {"_MungeSumstats_mss_parser_feed_cpp", (DL_FUNC) &_MungeSumstats_mss_parser_feed_cpp, 3},
     {"_MungeSumstats_mss_parser_batch_cpp", (DL_FUNC) &_MungeSumstats_mss_parser_batch_cpp, 8},
-    {"_MungeSumstats_mss_write_normalized_cpp", (DL_FUNC) &_MungeSumstats_mss_write_normalized_cpp, 4},
+    {"_MungeSumstats_mss_write_normalized_cpp", (DL_FUNC) &_MungeSumstats_mss_write_normalized_cpp, 5},
     {"_MungeSumstats_mss_projection_open_cpp", (DL_FUNC) &_MungeSumstats_mss_projection_open_cpp, 5},
     {"_MungeSumstats_mss_project_cpp", (DL_FUNC) &_MungeSumstats_mss_project_cpp, 10},
     {NULL, NULL, 0}

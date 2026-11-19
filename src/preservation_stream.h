@@ -271,16 +271,10 @@ class MssNormalizedWriter {
             bytes("NA", 2);
             return;
         }
-        // Native bytes need no translation. For explicitly marked strings ask
-        // R for write.table's native-locale representation before escaping.
-        if (Rf_getCharCE(value) == CE_NATIVE) {
-            quoted(CHAR(value), LENGTH(value));
-        } else {
-            void* mark = vmaxget();
-            const char* data = Rf_translateChar(value);
-            quoted(data, std::strlen(data));
-            vmaxset(mark);
-        }
+        // An ALTREP accessor may return a CHARSXP that the column does not
+        // retain. Keep the bytes live across each allocating writeLines call.
+        Rcpp::Shield<SEXP> protected_value(value);
+        quoted(CHAR(protected_value), LENGTH(protected_value));
     }
 
     void number(double value) {
@@ -313,18 +307,38 @@ class MssNormalizedWriter {
     // Re-encoding text connections may need whole multibyte characters per
     // write. Delegate those connections, older locales and Windows runtimes to
     // the established platform formatter until there is platform byte evidence.
-    static bool use_base_writer() {
+    static bool native_locale() {
 #ifdef _WIN32
-        return true;
+        return false;
 #else
-        SEXP encoding = Rf_GetOption1(Rf_install("encoding"));
-        if (TYPEOF(encoding) != STRSXP || XLENGTH(encoding) != 1 ||
-            std::strcmp(CHAR(STRING_ELT(encoding, 0)), "native.enc") != 0 ||
-            std::strcmp(std::localeconv()->decimal_point, ".") != 0) return true;
+        if (std::strcmp(std::localeconv()->decimal_point, ".") != 0) return false;
         Rcpp::Function locale_info = Rcpp::Environment::base_env()["l10n_info"];
         Rcpp::List locale = locale_info();
-        return !Rcpp::as<bool>(locale["UTF-8"]);
+        return Rcpp::as<bool>(locale["UTF-8"]);
 #endif
+    }
+
+    static bool needs_translation(SEXP column) {
+        R_xlen_t size = XLENGTH(column);
+        for (R_xlen_t i = 0; i < size; ++i) {
+            SEXP element = STRING_ELT(column, i);
+            if (element == NA_STRING) continue;
+            cetype_t encoding = Rf_getCharCE(element);
+            if (encoding != CE_NATIVE && encoding != CE_UTF8) return true;
+        }
+        return false;
+    }
+
+    static bool can_write_native(const Rcpp::DataFrame& table, bool header, bool native_encoding) {
+        if (!native_encoding || !native_locale()) return false;
+        // Decide before the first output byte. For marked fields that need
+        // conversion, the baseline owns translation of the entire table.
+        if (header && needs_translation(table.names())) return false;
+        for (R_xlen_t j = 0; j < table.size(); ++j) {
+            SEXP value = table[j];
+            if (TYPEOF(value) == STRSXP && needs_translation(value)) return false;
+        }
+        return true;
     }
 
     void base_write(const Rcpp::DataFrame& table, bool header) {
@@ -361,8 +375,8 @@ public:
         buffer_.reserve(std::min<std::size_t>(capacity_, 262144));
     }
 
-    void write(const Rcpp::DataFrame& table, bool header) {
-        if (use_base_writer()) {
+    void write(const Rcpp::DataFrame& table, bool header, bool native_encoding) {
+        if (!can_write_native(table, header, native_encoding)) {
             base_write(table, header);
             return;
         }
