@@ -23,6 +23,7 @@ class MssDelimitedParser {
     std::size_t limit_, encoded_ = 0, decoded_ = 0, fields_ = 0, selected_ = 0;
     bool cr_ = false, active_ = false, ready_ = false, finished_ = false, eof_seen_ = false;
     bool all_ = true, capture_ = true;
+    bool suffix_checked_ = false, batch_width_error_ = false;
     int width_ = 0, header_width_ = 0, max_rows_ = 0, byte_budget_ = 0;
     int batch_rows_ = 0;
     double emitted_rows_ = 0;
@@ -119,7 +120,21 @@ class MssDelimitedParser {
                                   Rcpp::_["nrow"] = rows, Rcpp::_["columns"] = values);
     }
 
-    Rcpp::List emit_batch(R_xlen_t cursor) {
+    // The legacy file reader decoded the whole readBin block before R examined
+    // its header or rows. At a record boundary the only carry is a pending LF
+    // after CR. Validate the unread suffix once without capturing any fields.
+    void check_block_suffix(const Rcpp::RawVector& input, R_xlen_t cursor, bool file_parser) {
+        if (!file_parser || suffix_checked_ || cursor == input.size()) return;
+        MssDelimitedParser scan(delimiter_, limit_);
+        scan.cr_ = cr_;
+        scan.all_ = scan.capture_ = false;
+        while (scan.read_row(input, cursor, false)) scan.clear_row();
+        suffix_checked_ = true;
+    }
+
+    Rcpp::List emit_batch(const Rcpp::RawVector& input, R_xlen_t cursor, bool file_parser) {
+        check_block_suffix(input, cursor, file_parser);
+        if (batch_width_error_) return result("width_error", cursor, 0, Rcpp::List(0));
         Rcpp::List values(columns_.size());
         for (std::size_t j = 0; j < columns_.size(); ++j) {
             values[j] = Rcpp::wrap(columns_[j]);
@@ -181,7 +196,7 @@ public:
 
     Rcpp::List batch(const Rcpp::RawVector& input, int offset, bool eof, int max_rows,
                      int budget, int width, const Rcpp::IntegerVector& keep,
-                     bool report_width_to_caller) {
+                     bool file_parser) {
         select_mode(Mode::columns);
         if (offset < 0 || offset > input.size() || input.size() > INT_MAX ||
             width < 0 || max_rows < 1 || budget < 1)
@@ -194,6 +209,7 @@ public:
         configure(width, keep, max_rows, budget);
         while (read_row(input, cursor, eof)) {
             if (!width) {
+                check_block_suffix(input, cursor, file_parser);
                 if (fields_ > INT_MAX) Rcpp::stop("Too many input header fields");
                 Rcpp::List header = Rcpp::List::create(Rcpp::wrap(row_));
                 header_width_ = static_cast<int>(fields_);
@@ -201,22 +217,28 @@ public:
                 return result("batch", cursor, 1, header);
             }
             if (batch_rows_ && decoded_ > static_cast<std::size_t>(budget) - batch_size_)
-                return emit_batch(cursor); // This complete row starts the next batch.
+                return emit_batch(input, cursor, file_parser); // This complete row starts the next batch.
             if (fields_ != static_cast<std::size_t>(width)) {
-                if (report_width_to_caller)
-                    return result("width_error", cursor, 0, Rcpp::List(0));
-                Rcpp::stop("Input row has an unexpected number of fields near source row %.0f", emitted_rows_ + 1);
+                if (!file_parser)
+                    Rcpp::stop("Input row has an unexpected number of fields near source row %.0f", emitted_rows_ + 1);
+                // R checked widths after collecting the complete row/byte batch.
+                batch_width_error_ = true;
             }
-            for (std::size_t j = 0; j < columns_.size(); ++j)
-                columns_[j].push_back(std::move(row_[j]));
+            if (!batch_width_error_) {
+                for (std::size_t j = 0; j < columns_.size(); ++j)
+                    columns_[j].push_back(std::move(row_[j]));
+            }
             ++batch_rows_;
             batch_size_ += decoded_;
             clear_row();
             if (batch_rows_ == max_rows || batch_size_ >= static_cast<std::size_t>(budget))
-                return emit_batch(cursor);
+                return emit_batch(input, cursor, file_parser);
         }
-        if (!eof) return result("need_input", cursor, 0, Rcpp::List(0));
-        if (batch_rows_) return emit_batch(cursor);
+        if (!eof) {
+            suffix_checked_ = false;
+            return result("need_input", cursor, 0, Rcpp::List(0));
+        }
+        if (batch_rows_) return emit_batch(input, cursor, file_parser);
         finished_ = true;
         return result("done", cursor, 0, Rcpp::List(0));
     }

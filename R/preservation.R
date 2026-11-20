@@ -541,17 +541,16 @@ harmonise_file <- function(input, reference, path,
     ended <- FALSE
     next_batch <- function(max_rows, width, keep) {
         repeat {
-            if (offset == length(bytes) && !ended) {
-                bytes <<- withCallingHandlers(readBin(reader, "raw", n = min(65536L, batch_bytes)),
-                    warning = function(w) stop("Input compressed read failure: ", conditionMessage(w)))
-                offset <<- 0L
-                ended <<- !length(bytes)
-                if (!ended) writeBin(bytes, source_writer)
-            }
             batch <- mss_parser_batch_cpp(parser, bytes, offset, ended, max_rows,
                                           batch_bytes, width, keep)
             offset <<- batch$offset
             if (batch$state != "need_input") return(batch)
+            # A complete overflow row can still be pending at the block end.
+            bytes <<- withCallingHandlers(readBin(reader, "raw", n = min(65536L, batch_bytes)),
+                warning = function(w) stop("Input compressed read failure: ", conditionMessage(w)))
+            offset <<- 0L
+            ended <<- !length(bytes)
+            if (!ended) writeBin(bytes, source_writer)
         }
     }
     header <- next_batch(1L, 0L, integer())

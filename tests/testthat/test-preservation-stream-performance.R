@@ -1,5 +1,35 @@
 .stream_api <- function(name) get(name, envir = environment(harmonise_file))
 
+test_that("file errors respect raw block and deferred-row boundaries", {
+    d <- tempfile()
+    dir.create(d)
+    on.exit(unlink(d, recursive = TRUE), add = TRUE)
+    fasta <- file.path(d, "fasta")
+    sites <- file.path(d, "sites")
+    writeLines(c(">1", "ACGT"), fasta)
+    writeLines(c("chr\tpos\tref\talt\tid\taliases", "1\t2\tC\tA\tr\t."), sites)
+    ref <- prepare_reference(fasta, sites, file.path(d, "ref"), "synthetic", "toy")
+
+    input <- file.path(d, "in")
+    dest <- file.path(d, "edition")
+    # Eight-byte blocks: header + valid row, oversized-for-the-remainder
+    # ragged row, then a quote error. The deferred row fills its own batch.
+    writeBin(charToRaw('A\tB\n1\t2\na\tb\tccc\nq"\n'), input)
+    err <- tryCatch(harmonise_file(input, ref, dest, batch_bytes = 8L), error = identity)
+    expect_identical(class(err), c("simpleError", "error", "condition"))
+    expect_identical(conditionMessage(err), "Input row has an unexpected number of fields near source row 2")
+    expect_false(file.exists(dest))
+
+    # A body block starts after the eight-byte header. A one-row batch has
+    # enough data to reach mapping validation, but its block has a bad suffix.
+    writeBin(charToRaw('CHR\tPOS\n1\t2\nq"xx'), input)
+    err <- tryCatch(harmonise_file(input, ref, dest, columns = list(chr = 1L),
+                                   batch_size = 1L, batch_bytes = 8L), error = identity)
+    expect_identical(conditionMessage(err), "Malformed quote in unquoted field")
+    expect_true(inherits(err, "C++Error"))
+    expect_false(file.exists(dest))
+})
+
 test_that("file publication no longer materializes legacy row lists", {
     d <- tempfile(); dir.create(d); on.exit(unlink(d, recursive = TRUE), add = TRUE)
     fasta <- file.path(d, "fasta"); sites <- file.path(d, "sites")
@@ -111,6 +141,16 @@ test_that("collectors reject mixed use and invalid source records even in discar
     open <- .stream_api("mss_parser_open_cpp")
     feed <- .stream_api("mss_parser_feed_cpp")
     batch <- .stream_api("mss_parser_batch_cpp")
+    # The direct native collector returns the header immediately and rejects
+    # the first ragged row before looking at later bytes.
+    direct <- open(",", 100L)
+    mixed <- charToRaw('A,B\n1,x,y\nq"')
+    header <- batch(direct, mixed, 0L, FALSE, 1L, 64L, 0L, integer())
+    expect_identical(header$columns, list(c("A", "B")))
+    err <- tryCatch(batch(direct, mixed, header$offset, FALSE, 2L, 64L, 2L, 1L),
+                    error = identity)
+    expect_true(inherits(err, "C++Error"))
+    expect_identical(conditionMessage(err), "Input row has an unexpected number of fields near source row 1")
     parser <- open(",", 100L)
     feed(parser, charToRaw("A"), FALSE)
     expect_error(batch(parser, raw(), 0L, TRUE, 1L, 8L, 0L, integer()))
