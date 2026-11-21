@@ -1,0 +1,1090 @@
+{
+  "schema": "current-completed-scales-summary-v1",
+  "scope": "completed-1M-and-10M-only",
+  "original_full_matrix_complete": false,
+  "warm_eligible": false,
+  "independent_oracles_pending": [
+    "1M",
+    "10M"
+  ],
+  "original_failure": {
+    "path": "/private/tmp/mss-fullmatrix-20261121/cold-failure-observation.json",
+    "sha256": "39a96694ac60f09bfad5e662c24ec2759fc88823149b2e94d2e3bd1628ecf995"
+  },
+  "suite": "matrix",
+  "profile": "none",
+  "timing_source": "original serial fresh-worker receipts",
+  "target_rule": "Processing ratio of medians >= 2 and median peak RSS nonregression.",
+  "target_status": "pass",
+  "processing_speed_and_rss_target_met": true,
+  "candidate_8GiB_absolute": {
+    "peak_rss_bytes": 1506115584,
+    "rss_complete": true,
+    "observations": [
+      {
+        "peak_rss_bytes": 1282588672,
+        "complete": true
+      },
+      {
+        "peak_rss_bytes": 1296596992,
+        "complete": true
+      },
+      {
+        "peak_rss_bytes": 1250410496,
+        "complete": true
+      },
+      {
+        "peak_rss_bytes": 1424850944,
+        "complete": true
+      },
+      {
+        "peak_rss_bytes": 1437106176,
+        "complete": true
+      },
+      {
+        "peak_rss_bytes": 1506115584,
+        "complete": true
+      }
+    ],
+    "limit_status": "pass",
+    "limit_bytes": 8589934592
+  },
+  "cases": {
+    "matched-1M": {
+      "medians": {
+        "baseline": {
+          "package_setup": {
+            "elapsed": 3.753,
+            "user.self": 3.36,
+            "sys.self": 0.14,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "reference_open": {
+            "elapsed": 0.199,
+            "user.self": 0.182,
+            "sys.self": 0.016,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "processing": {
+            "elapsed": 22.498,
+            "user.self": 18.263,
+            "sys.self": 4.075,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "process_wall_median_seconds": 27.38980545802042,
+          "process_user_median_seconds": 22.49773,
+          "process_system_median_seconds": 4.273664,
+          "median_peak_rss_bytes": 1761607680,
+          "max_peak_rss_bytes": 1861419008,
+          "rss_complete": true
+        },
+        "candidate": {
+          "package_setup": {
+            "elapsed": 3.393,
+            "user.self": 3.285,
+            "sys.self": 0.101,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "reference_open": {
+            "elapsed": 0.199,
+            "user.self": 0.183,
+            "sys.self": 0.016,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "processing": {
+            "elapsed": 7.966,
+            "user.self": 7.104,
+            "sys.self": 0.832,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "process_wall_median_seconds": 12.394099166849628,
+          "process_user_median_seconds": 11.325245,
+          "process_system_median_seconds": 1.014428,
+          "median_peak_rss_bytes": 1282588672,
+          "max_peak_rss_bytes": 1296596992,
+          "rss_complete": true
+        }
+      },
+      "ratio_of_median_processing_seconds": 2.8242530755711774,
+      "baseline_over_candidate_by_pair": [
+        2.8457736662020023,
+        2.873094688221709,
+        2.8242530755711774
+      ],
+      "median_peak_rss_nonregression": true,
+      "target": true,
+      "target_status": "pass",
+      "rss_reduction": {
+        "median_peak_rss_bytes": {
+          "bytes": 479019008,
+          "fraction": 0.2719215029761905
+        },
+        "max_peak_rss_bytes": {
+          "bytes": 564822016,
+          "fraction": 0.30343625673344365
+        }
+      },
+      "candidate_8GiB_absolute": {
+        "peak_rss_bytes": 1296596992,
+        "rss_complete": true,
+        "observations": [
+          {
+            "peak_rss_bytes": 1282588672,
+            "complete": true
+          },
+          {
+            "peak_rss_bytes": 1296596992,
+            "complete": true
+          },
+          {
+            "peak_rss_bytes": 1250410496,
+            "complete": true
+          }
+        ],
+        "limit_status": "pass",
+        "limit_bytes": 8589934592
+      },
+      "rows": 1000000,
+      "cardinality": {
+        "input_sha256": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2",
+        "input_rows": 1000000,
+        "distinct_keys": 437458,
+        "key_definition": "Unique catalog (chromosome, position, REF, ALT, current ID); orient both input allele orders to the verified panel event",
+        "method": "Compared every raw input record with the independently reconstructed alternating panel from historically pinned source.tsv",
+        "reference_source": {
+          "path": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/matched-index/source.tsv",
+          "sha256": "d6fae3acdc98e4d06f2e5eb01492360aeb874fe5b9f8763914cc39d9c40db9d1"
+        }
+      },
+      "observations": [
+        {
+          "directory": "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-1M/pair-01-baseline",
+          "pair": 1,
+          "process": {
+            "user_seconds": 22.223295,
+            "system_seconds": 4.273664,
+            "peak_rss_bytes": 1761607680,
+            "rss_source": "wait4 ru_maxrss",
+            "rss_complete": true,
+            "pid": 2851,
+            "exit_code": 0,
+            "command": [
+              "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+              "--vanilla",
+              "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+              "run",
+              "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-1M/pair-01-baseline/settings.tsv"
+            ],
+            "wall_seconds": 27.38980545802042,
+            "started_utc": "2026-11-21T08:14:13.427517+00:00",
+            "finished_utc": "2026-11-21T08:14:40.817810+00:00",
+            "role": "baseline",
+            "case": "matched-1M"
+          },
+          "metrics": {
+            "R_version": "R version 4.5.3 (2026-03-11)",
+            "R_platform": "aarch64-apple-darwin20",
+            "R_home": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources",
+            "R_bin": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin",
+            "R_engine": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+            "R_shared": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+            "R_shared_resolution": "R home library directory",
+            "BLAS": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "BLAS_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "LAPACK": "3.12.1",
+            "LAPACK_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+            "locale": "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8",
+            "threads": "1",
+            "package_setup.user.self": "3.3",
+            "package_setup.sys.self": "0.14",
+            "package_setup.elapsed": "3.823",
+            "package_setup.user.child": "0",
+            "package_setup.sys.child": "0",
+            "reference_open.user.self": "0.18",
+            "reference_open.sys.self": "0.016",
+            "reference_open.elapsed": "0.197",
+            "reference_open.user.child": "0",
+            "reference_open.sys.child": "0",
+            "processing.user.self": "18.08",
+            "processing.sys.self": "4.062",
+            "processing.elapsed": "22.456",
+            "processing.user.child": "0",
+            "processing.sys.child": "0",
+            "source_rows": "1e+06",
+            "normalized_rows": "1e+06",
+            "implementation": "mss-preservation-7",
+            "dll": "/private/tmp/mss-fullfile-20261121/builds-01/baseline/library/MungeSumstats/libs/MungeSumstats.so",
+            "dll_md5": "57d013ac6d9248ea2cdb8443e8916faa"
+          }
+        },
+        {
+          "directory": "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-1M/pair-01-candidate",
+          "pair": 1,
+          "process": {
+            "user_seconds": 11.051716,
+            "system_seconds": 0.974997,
+            "peak_rss_bytes": 1282588672,
+            "rss_source": "wait4 ru_maxrss",
+            "rss_complete": true,
+            "pid": 2940,
+            "exit_code": 0,
+            "command": [
+              "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+              "--vanilla",
+              "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+              "run",
+              "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-1M/pair-01-candidate/settings.tsv"
+            ],
+            "wall_seconds": 12.183976625092328,
+            "started_utc": "2026-11-21T08:14:40.819493+00:00",
+            "finished_utc": "2026-11-21T08:14:53.003793+00:00",
+            "role": "candidate",
+            "case": "matched-1M"
+          },
+          "metrics": {
+            "R_version": "R version 4.5.3 (2026-03-11)",
+            "R_platform": "aarch64-apple-darwin20",
+            "R_home": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources",
+            "R_bin": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin",
+            "R_engine": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+            "R_shared": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+            "R_shared_resolution": "R home library directory",
+            "BLAS": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "BLAS_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "LAPACK": "3.12.1",
+            "LAPACK_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+            "locale": "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8",
+            "threads": "1",
+            "package_setup.user.self": "3.285",
+            "package_setup.sys.self": "0.101",
+            "package_setup.elapsed": "3.393",
+            "package_setup.user.child": "0",
+            "package_setup.sys.child": "0",
+            "reference_open.user.self": "0.183",
+            "reference_open.sys.self": "0.017",
+            "reference_open.elapsed": "0.199",
+            "reference_open.user.child": "0",
+            "reference_open.sys.child": "0",
+            "processing.user.self": "6.943",
+            "processing.sys.self": "0.819",
+            "processing.elapsed": "7.891",
+            "processing.user.child": "0",
+            "processing.sys.child": "0",
+            "source_rows": "1e+06",
+            "normalized_rows": "1e+06",
+            "implementation": "mss-preservation-7",
+            "dll": "/private/tmp/mss-fullfile-20261121/builds-01/candidate/library/MungeSumstats/libs/MungeSumstats.so",
+            "dll_md5": "07c780192431c65ea5ff629b59e3846c"
+          }
+        },
+        {
+          "directory": "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-1M/pair-02-candidate",
+          "pair": 2,
+          "process": {
+            "user_seconds": 11.626251,
+            "system_seconds": 1.169427,
+            "peak_rss_bytes": 1296596992,
+            "rss_source": "wait4 ru_maxrss",
+            "rss_complete": true,
+            "pid": 3011,
+            "exit_code": 0,
+            "command": [
+              "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+              "--vanilla",
+              "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+              "run",
+              "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-1M/pair-02-candidate/settings.tsv"
+            ],
+            "wall_seconds": 13.00701079214923,
+            "started_utc": "2026-11-21T08:14:53.005529+00:00",
+            "finished_utc": "2026-11-21T08:15:06.012859+00:00",
+            "role": "candidate",
+            "case": "matched-1M"
+          },
+          "metrics": {
+            "R_version": "R version 4.5.3 (2026-03-11)",
+            "R_platform": "aarch64-apple-darwin20",
+            "R_home": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources",
+            "R_bin": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin",
+            "R_engine": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+            "R_shared": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+            "R_shared_resolution": "R home library directory",
+            "BLAS": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "BLAS_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "LAPACK": "3.12.1",
+            "LAPACK_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+            "locale": "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8",
+            "threads": "1",
+            "package_setup.user.self": "3.269",
+            "package_setup.sys.self": "0.1",
+            "package_setup.elapsed": "3.371",
+            "package_setup.user.child": "0",
+            "package_setup.sys.child": "0",
+            "reference_open.user.self": "0.179",
+            "reference_open.sys.self": "0.016",
+            "reference_open.elapsed": "0.196",
+            "reference_open.user.child": "0",
+            "reference_open.sys.child": "0",
+            "processing.user.self": "7.48",
+            "processing.sys.self": "0.984",
+            "processing.elapsed": "8.66",
+            "processing.user.child": "0",
+            "processing.sys.child": "0",
+            "source_rows": "1e+06",
+            "normalized_rows": "1e+06",
+            "implementation": "mss-preservation-7",
+            "dll": "/private/tmp/mss-fullfile-20261121/builds-01/candidate/library/MungeSumstats/libs/MungeSumstats.so",
+            "dll_md5": "07c780192431c65ea5ff629b59e3846c"
+          }
+        },
+        {
+          "directory": "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-1M/pair-02-baseline",
+          "pair": 2,
+          "process": {
+            "user_seconds": 24.661708,
+            "system_seconds": 4.743455,
+            "peak_rss_bytes": 1861419008,
+            "rss_source": "wait4 ru_maxrss",
+            "rss_complete": true,
+            "pid": 3412,
+            "exit_code": 0,
+            "command": [
+              "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+              "--vanilla",
+              "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+              "run",
+              "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-1M/pair-02-baseline/settings.tsv"
+            ],
+            "wall_seconds": 29.59199291584082,
+            "started_utc": "2026-11-21T08:15:06.015006+00:00",
+            "finished_utc": "2026-11-21T08:15:35.607548+00:00",
+            "role": "baseline",
+            "case": "matched-1M"
+          },
+          "metrics": {
+            "R_version": "R version 4.5.3 (2026-03-11)",
+            "R_platform": "aarch64-apple-darwin20",
+            "R_home": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources",
+            "R_bin": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin",
+            "R_engine": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+            "R_shared": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+            "R_shared_resolution": "R home library directory",
+            "BLAS": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "BLAS_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "LAPACK": "3.12.1",
+            "LAPACK_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+            "locale": "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8",
+            "threads": "1",
+            "package_setup.user.self": "3.586",
+            "package_setup.sys.self": "0.15",
+            "package_setup.elapsed": "3.753",
+            "package_setup.user.child": "0",
+            "package_setup.sys.child": "0",
+            "reference_open.user.self": "0.182",
+            "reference_open.sys.self": "0.016",
+            "reference_open.elapsed": "0.199",
+            "reference_open.user.child": "0",
+            "reference_open.sys.child": "0",
+            "processing.user.self": "20.215",
+            "processing.sys.self": "4.52",
+            "processing.elapsed": "24.881",
+            "processing.user.child": "0",
+            "processing.sys.child": "0",
+            "source_rows": "1e+06",
+            "normalized_rows": "1e+06",
+            "implementation": "mss-preservation-7",
+            "dll": "/private/tmp/mss-fullfile-20261121/builds-01/baseline/library/MungeSumstats/libs/MungeSumstats.so",
+            "dll_md5": "57d013ac6d9248ea2cdb8443e8916faa"
+          }
+        },
+        {
+          "directory": "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-1M/pair-03-baseline",
+          "pair": 3,
+          "process": {
+            "user_seconds": 22.49773,
+            "system_seconds": 4.260332,
+            "peak_rss_bytes": 1753104384,
+            "rss_source": "wait4 ru_maxrss",
+            "rss_complete": true,
+            "pid": 3938,
+            "exit_code": 0,
+            "command": [
+              "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+              "--vanilla",
+              "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+              "run",
+              "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-1M/pair-03-baseline/settings.tsv"
+            ],
+            "wall_seconds": 26.94247437478043,
+            "started_utc": "2026-11-21T08:15:35.609654+00:00",
+            "finished_utc": "2026-11-21T08:16:02.552656+00:00",
+            "role": "baseline",
+            "case": "matched-1M"
+          },
+          "metrics": {
+            "R_version": "R version 4.5.3 (2026-03-11)",
+            "R_platform": "aarch64-apple-darwin20",
+            "R_home": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources",
+            "R_bin": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin",
+            "R_engine": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+            "R_shared": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+            "R_shared_resolution": "R home library directory",
+            "BLAS": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "BLAS_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "LAPACK": "3.12.1",
+            "LAPACK_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+            "locale": "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8",
+            "threads": "1",
+            "package_setup.user.self": "3.36",
+            "package_setup.sys.self": "0.12",
+            "package_setup.elapsed": "3.485",
+            "package_setup.user.child": "0",
+            "package_setup.sys.child": "0",
+            "reference_open.user.self": "0.188",
+            "reference_open.sys.self": "0.016",
+            "reference_open.elapsed": "0.204",
+            "reference_open.user.child": "0",
+            "reference_open.sys.child": "0",
+            "processing.user.self": "18.263",
+            "processing.sys.self": "4.075",
+            "processing.elapsed": "22.498",
+            "processing.user.child": "0",
+            "processing.sys.child": "0",
+            "source_rows": "1e+06",
+            "normalized_rows": "1e+06",
+            "implementation": "mss-preservation-7",
+            "dll": "/private/tmp/mss-fullfile-20261121/builds-01/baseline/library/MungeSumstats/libs/MungeSumstats.so",
+            "dll_md5": "57d013ac6d9248ea2cdb8443e8916faa"
+          }
+        },
+        {
+          "directory": "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-1M/pair-03-candidate",
+          "pair": 3,
+          "process": {
+            "user_seconds": 11.325245,
+            "system_seconds": 1.014428,
+            "peak_rss_bytes": 1250410496,
+            "rss_source": "wait4 ru_maxrss",
+            "rss_complete": true,
+            "pid": 4112,
+            "exit_code": 0,
+            "command": [
+              "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+              "--vanilla",
+              "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+              "run",
+              "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-1M/pair-03-candidate/settings.tsv"
+            ],
+            "wall_seconds": 12.394099166849628,
+            "started_utc": "2026-11-21T08:16:02.554532+00:00",
+            "finished_utc": "2026-11-21T08:16:14.948934+00:00",
+            "role": "candidate",
+            "case": "matched-1M"
+          },
+          "metrics": {
+            "R_version": "R version 4.5.3 (2026-03-11)",
+            "R_platform": "aarch64-apple-darwin20",
+            "R_home": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources",
+            "R_bin": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin",
+            "R_engine": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+            "R_shared": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+            "R_shared_resolution": "R home library directory",
+            "BLAS": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "BLAS_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "LAPACK": "3.12.1",
+            "LAPACK_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+            "locale": "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8",
+            "threads": "1",
+            "package_setup.user.self": "3.376",
+            "package_setup.sys.self": "0.125",
+            "package_setup.elapsed": "3.503",
+            "package_setup.user.child": "0",
+            "package_setup.sys.child": "0",
+            "reference_open.user.self": "0.186",
+            "reference_open.sys.self": "0.016",
+            "reference_open.elapsed": "0.203",
+            "reference_open.user.child": "0",
+            "reference_open.sys.child": "0",
+            "processing.user.self": "7.104",
+            "processing.sys.self": "0.832",
+            "processing.elapsed": "7.966",
+            "processing.user.child": "0",
+            "processing.sys.child": "0",
+            "source_rows": "1e+06",
+            "normalized_rows": "1e+06",
+            "implementation": "mss-preservation-7",
+            "dll": "/private/tmp/mss-fullfile-20261121/builds-01/candidate/library/MungeSumstats/libs/MungeSumstats.so",
+            "dll_md5": "07c780192431c65ea5ff629b59e3846c"
+          }
+        }
+      ],
+      "verification": {
+        "normalized_rows_checked": 1000000,
+        "status_counts": {
+          "match": 562542,
+          "swap": 437458
+        },
+        "oracle_fields": null,
+        "oracle_rows_checked": 0,
+        "stable_byte_equality": true,
+        "edition_count": 6,
+        "normalized_columns": [
+          "status",
+          "chr",
+          "pos",
+          "ref",
+          "alt",
+          "id",
+          "effect",
+          "eaf",
+          "swapped",
+          "complemented",
+          "candidate_count",
+          "entity_type",
+          "entity_id",
+          "normalized_build",
+          "source_row",
+          "grch38_chr",
+          "grch38_pos",
+          "grch38_ref",
+          "grch38_alt"
+        ],
+        "source_artifact": {
+          "bytes": 46106766,
+          "sha256": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2",
+          "md5": "86fbafb66e89f7dd8ac211952dada625"
+        },
+        "decoded_source": {
+          "bytes": 46106766,
+          "sha256": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2",
+          "md5": "86fbafb66e89f7dd8ac211952dada625"
+        },
+        "stable_rds_manifest_equality": true
+      }
+    },
+    "matched-10M": {
+      "medians": {
+        "baseline": {
+          "package_setup": {
+            "elapsed": 3.362,
+            "user.self": 3.139,
+            "sys.self": 0.11,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "reference_open": {
+            "elapsed": 0.205,
+            "user.self": 0.184,
+            "sys.self": 0.017,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "processing": {
+            "elapsed": 211.391,
+            "user.self": 171.36,
+            "sys.self": 39.643,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "process_wall_median_seconds": 215.46680216607638,
+          "process_user_median_seconds": 175.210494,
+          "process_system_median_seconds": 39.843741,
+          "median_peak_rss_bytes": 2339536896,
+          "max_peak_rss_bytes": 2392981504,
+          "rss_complete": true
+        },
+        "candidate": {
+          "package_setup": {
+            "elapsed": 3.496,
+            "user.self": 3.259,
+            "sys.self": 0.121,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "reference_open": {
+            "elapsed": 0.194,
+            "user.self": 0.176,
+            "sys.self": 0.016,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "processing": {
+            "elapsed": 74.394,
+            "user.self": 66.341,
+            "sys.self": 7.762,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "process_wall_median_seconds": 78.7675827499479,
+          "process_user_median_seconds": 70.393068,
+          "process_system_median_seconds": 7.95449,
+          "median_peak_rss_bytes": 1437106176,
+          "max_peak_rss_bytes": 1506115584,
+          "rss_complete": true
+        }
+      },
+      "ratio_of_median_processing_seconds": 2.841506035432965,
+      "baseline_over_candidate_by_pair": [
+        2.9468371105196653,
+        2.8935474156811214,
+        2.5428023310529553
+      ],
+      "median_peak_rss_nonregression": true,
+      "target": true,
+      "target_status": "pass",
+      "rss_reduction": {
+        "median_peak_rss_bytes": {
+          "bytes": 902430720,
+          "fraction": 0.385730492877852
+        },
+        "max_peak_rss_bytes": {
+          "bytes": 886865920,
+          "fraction": 0.37061127238867286
+        }
+      },
+      "candidate_8GiB_absolute": {
+        "peak_rss_bytes": 1506115584,
+        "rss_complete": true,
+        "observations": [
+          {
+            "peak_rss_bytes": 1424850944,
+            "complete": true
+          },
+          {
+            "peak_rss_bytes": 1437106176,
+            "complete": true
+          },
+          {
+            "peak_rss_bytes": 1506115584,
+            "complete": true
+          }
+        ],
+        "limit_status": "pass",
+        "limit_bytes": 8589934592
+      },
+      "rows": 10000000,
+      "cardinality": {
+        "input_sha256": "cecd6f1053fb9c02066be3aa78f0f4976cb8ab32e882357e016ec1ea259788e0",
+        "input_rows": 10000000,
+        "distinct_keys": 437458,
+        "key_definition": "Unique catalog (chromosome, position, REF, ALT, current ID); orient both input allele orders to the verified panel event",
+        "method": "Compared every raw input record with the independently reconstructed alternating panel from historically pinned source.tsv",
+        "reference_source": {
+          "path": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/matched-index/source.tsv",
+          "sha256": "d6fae3acdc98e4d06f2e5eb01492360aeb874fe5b9f8763914cc39d9c40db9d1"
+        }
+      },
+      "observations": [
+        {
+          "directory": "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-01-baseline",
+          "pair": 1,
+          "process": {
+            "user_seconds": 180.445456,
+            "system_seconds": 42.061989,
+            "peak_rss_bytes": 2392981504,
+            "rss_source": "wait4 ru_maxrss",
+            "rss_complete": true,
+            "pid": 4153,
+            "exit_code": 0,
+            "command": [
+              "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+              "--vanilla",
+              "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+              "run",
+              "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-01-baseline/settings.tsv"
+            ],
+            "wall_seconds": 223.6875440410804,
+            "started_utc": "2026-11-21T08:16:14.950735+00:00",
+            "finished_utc": "2026-11-21T08:19:58.641171+00:00",
+            "role": "baseline",
+            "case": "matched-10M"
+          },
+          "metrics": {
+            "R_version": "R version 4.5.3 (2026-03-11)",
+            "R_platform": "aarch64-apple-darwin20",
+            "R_home": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources",
+            "R_bin": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin",
+            "R_engine": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+            "R_shared": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+            "R_shared_resolution": "R home library directory",
+            "BLAS": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "BLAS_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "LAPACK": "3.12.1",
+            "LAPACK_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+            "locale": "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8",
+            "threads": "1",
+            "package_setup.user.self": "3.401",
+            "package_setup.sys.self": "0.11",
+            "package_setup.elapsed": "3.512",
+            "package_setup.user.child": "0",
+            "package_setup.sys.child": "0",
+            "reference_open.user.self": "0.188",
+            "reference_open.sys.self": "0.017",
+            "reference_open.elapsed": "0.205",
+            "reference_open.user.child": "0",
+            "reference_open.sys.child": "0",
+            "processing.user.self": "176.208",
+            "processing.sys.self": "41.866",
+            "processing.elapsed": "219.227",
+            "processing.user.child": "0",
+            "processing.sys.child": "0",
+            "source_rows": "1e+07",
+            "normalized_rows": "1e+07",
+            "implementation": "mss-preservation-7",
+            "dll": "/private/tmp/mss-fullfile-20261121/builds-01/baseline/library/MungeSumstats/libs/MungeSumstats.so",
+            "dll_md5": "57d013ac6d9248ea2cdb8443e8916faa"
+          }
+        },
+        {
+          "directory": "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-01-candidate",
+          "pair": 1,
+          "process": {
+            "user_seconds": 70.393068,
+            "system_seconds": 7.95449,
+            "peak_rss_bytes": 1424850944,
+            "rss_source": "wait4 ru_maxrss",
+            "rss_complete": true,
+            "pid": 6475,
+            "exit_code": 0,
+            "command": [
+              "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+              "--vanilla",
+              "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+              "run",
+              "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-01-candidate/settings.tsv"
+            ],
+            "wall_seconds": 78.7675827499479,
+            "started_utc": "2026-11-21T08:19:58.642995+00:00",
+            "finished_utc": "2026-11-21T08:21:17.412559+00:00",
+            "role": "candidate",
+            "case": "matched-10M"
+          },
+          "metrics": {
+            "R_version": "R version 4.5.3 (2026-03-11)",
+            "R_platform": "aarch64-apple-darwin20",
+            "R_home": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources",
+            "R_bin": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin",
+            "R_engine": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+            "R_shared": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+            "R_shared_resolution": "R home library directory",
+            "BLAS": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "BLAS_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "LAPACK": "3.12.1",
+            "LAPACK_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+            "locale": "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8",
+            "threads": "1",
+            "package_setup.user.self": "3.259",
+            "package_setup.sys.self": "0.137",
+            "package_setup.elapsed": "3.496",
+            "package_setup.user.child": "0",
+            "package_setup.sys.child": "0",
+            "reference_open.user.self": "0.176",
+            "reference_open.sys.self": "0.016",
+            "reference_open.elapsed": "0.194",
+            "reference_open.user.child": "0",
+            "reference_open.sys.child": "0",
+            "processing.user.self": "66.341",
+            "processing.sys.self": "7.762",
+            "processing.elapsed": "74.394",
+            "processing.user.child": "0",
+            "processing.sys.child": "0",
+            "source_rows": "1e+07",
+            "normalized_rows": "1e+07",
+            "implementation": "mss-preservation-7",
+            "dll": "/private/tmp/mss-fullfile-20261121/builds-01/candidate/library/MungeSumstats/libs/MungeSumstats.so",
+            "dll_md5": "07c780192431c65ea5ff629b59e3846c"
+          }
+        },
+        {
+          "directory": "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-02-candidate",
+          "pair": 2,
+          "process": {
+            "user_seconds": 68.860352,
+            "system_seconds": 7.8527759999999995,
+            "peak_rss_bytes": 1437106176,
+            "rss_source": "wait4 ru_maxrss",
+            "rss_complete": true,
+            "pid": 7494,
+            "exit_code": 0,
+            "command": [
+              "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+              "--vanilla",
+              "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+              "run",
+              "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-02-candidate/settings.tsv"
+            ],
+            "wall_seconds": 77.06725191604346,
+            "started_utc": "2026-11-21T08:21:17.414254+00:00",
+            "finished_utc": "2026-11-21T08:22:34.482637+00:00",
+            "role": "candidate",
+            "case": "matched-10M"
+          },
+          "metrics": {
+            "R_version": "R version 4.5.3 (2026-03-11)",
+            "R_platform": "aarch64-apple-darwin20",
+            "R_home": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources",
+            "R_bin": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin",
+            "R_engine": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+            "R_shared": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+            "R_shared_resolution": "R home library directory",
+            "BLAS": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "BLAS_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "LAPACK": "3.12.1",
+            "LAPACK_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+            "locale": "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8",
+            "threads": "1",
+            "package_setup.user.self": "3.071",
+            "package_setup.sys.self": "0.103",
+            "package_setup.elapsed": "3.176",
+            "package_setup.user.child": "0",
+            "package_setup.sys.child": "0",
+            "reference_open.user.self": "0.174",
+            "reference_open.sys.self": "0.016",
+            "reference_open.elapsed": "0.19",
+            "reference_open.user.child": "0",
+            "reference_open.sys.child": "0",
+            "processing.user.self": "65.028",
+            "processing.sys.self": "7.697",
+            "processing.elapsed": "73.056",
+            "processing.user.child": "0",
+            "processing.sys.child": "0",
+            "source_rows": "1e+07",
+            "normalized_rows": "1e+07",
+            "implementation": "mss-preservation-7",
+            "dll": "/private/tmp/mss-fullfile-20261121/builds-01/candidate/library/MungeSumstats/libs/MungeSumstats.so",
+            "dll_md5": "07c780192431c65ea5ff629b59e3846c"
+          }
+        },
+        {
+          "directory": "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-02-baseline",
+          "pair": 2,
+          "process": {
+            "user_seconds": 175.210494,
+            "system_seconds": 39.75094,
+            "peak_rss_bytes": 2339536896,
+            "rss_source": "wait4 ru_maxrss",
+            "rss_complete": true,
+            "pid": 7946,
+            "exit_code": 0,
+            "command": [
+              "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+              "--vanilla",
+              "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+              "run",
+              "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-02-baseline/settings.tsv"
+            ],
+            "wall_seconds": 215.46680216607638,
+            "started_utc": "2026-11-21T08:22:34.484242+00:00",
+            "finished_utc": "2026-11-21T08:26:09.953963+00:00",
+            "role": "baseline",
+            "case": "matched-10M"
+          },
+          "metrics": {
+            "R_version": "R version 4.5.3 (2026-03-11)",
+            "R_platform": "aarch64-apple-darwin20",
+            "R_home": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources",
+            "R_bin": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin",
+            "R_engine": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+            "R_shared": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+            "R_shared_resolution": "R home library directory",
+            "BLAS": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "BLAS_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "LAPACK": "3.12.1",
+            "LAPACK_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+            "locale": "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8",
+            "threads": "1",
+            "package_setup.user.self": "3.067",
+            "package_setup.sys.self": "0.099",
+            "package_setup.elapsed": "3.178",
+            "package_setup.user.child": "0",
+            "package_setup.sys.child": "0",
+            "reference_open.user.self": "0.166",
+            "reference_open.sys.self": "0.015",
+            "reference_open.elapsed": "0.182",
+            "reference_open.user.child": "0",
+            "reference_open.sys.child": "0",
+            "processing.user.self": "171.36",
+            "processing.sys.self": "39.566",
+            "processing.elapsed": "211.391",
+            "processing.user.child": "0",
+            "processing.sys.child": "0",
+            "source_rows": "1e+07",
+            "normalized_rows": "1e+07",
+            "implementation": "mss-preservation-7",
+            "dll": "/private/tmp/mss-fullfile-20261121/builds-01/baseline/library/MungeSumstats/libs/MungeSumstats.so",
+            "dll_md5": "57d013ac6d9248ea2cdb8443e8916faa"
+          }
+        },
+        {
+          "directory": "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-03-baseline",
+          "pair": 3,
+          "process": {
+            "user_seconds": 174.410703,
+            "system_seconds": 39.843741,
+            "peak_rss_bytes": 2209906688,
+            "rss_source": "wait4 ru_maxrss",
+            "rss_complete": true,
+            "pid": 8704,
+            "exit_code": 0,
+            "command": [
+              "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+              "--vanilla",
+              "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+              "run",
+              "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-03-baseline/settings.tsv"
+            ],
+            "wall_seconds": 215.0874144169502,
+            "started_utc": "2026-11-21T08:26:09.955980+00:00",
+            "finished_utc": "2026-11-21T08:29:45.046240+00:00",
+            "role": "baseline",
+            "case": "matched-10M"
+          },
+          "metrics": {
+            "R_version": "R version 4.5.3 (2026-03-11)",
+            "R_platform": "aarch64-apple-darwin20",
+            "R_home": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources",
+            "R_bin": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin",
+            "R_engine": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+            "R_shared": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+            "R_shared_resolution": "R home library directory",
+            "BLAS": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "BLAS_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "LAPACK": "3.12.1",
+            "LAPACK_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+            "locale": "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8",
+            "threads": "1",
+            "package_setup.user.self": "3.139",
+            "package_setup.sys.self": "0.132",
+            "package_setup.elapsed": "3.362",
+            "package_setup.user.child": "0",
+            "package_setup.sys.child": "0",
+            "reference_open.user.self": "0.184",
+            "reference_open.sys.self": "0.018",
+            "reference_open.elapsed": "0.206",
+            "reference_open.user.child": "0",
+            "reference_open.sys.child": "0",
+            "processing.user.self": "170.417",
+            "processing.sys.self": "39.643",
+            "processing.elapsed": "210.75",
+            "processing.user.child": "0",
+            "processing.sys.child": "0",
+            "source_rows": "1e+07",
+            "normalized_rows": "1e+07",
+            "implementation": "mss-preservation-7",
+            "dll": "/private/tmp/mss-fullfile-20261121/builds-01/baseline/library/MungeSumstats/libs/MungeSumstats.so",
+            "dll_md5": "57d013ac6d9248ea2cdb8443e8916faa"
+          }
+        },
+        {
+          "directory": "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-03-candidate",
+          "pair": 3,
+          "process": {
+            "user_seconds": 77.27276,
+            "system_seconds": 9.029985,
+            "peak_rss_bytes": 1506115584,
+            "rss_source": "wait4 ru_maxrss",
+            "rss_complete": true,
+            "pid": 10718,
+            "exit_code": 0,
+            "command": [
+              "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+              "--vanilla",
+              "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+              "run",
+              "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-03-candidate/settings.tsv"
+            ],
+            "wall_seconds": 87.32085587503389,
+            "started_utc": "2026-11-21T08:29:45.048024+00:00",
+            "finished_utc": "2026-11-21T08:31:12.370141+00:00",
+            "role": "candidate",
+            "case": "matched-10M"
+          },
+          "metrics": {
+            "R_version": "R version 4.5.3 (2026-03-11)",
+            "R_platform": "aarch64-apple-darwin20",
+            "R_home": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources",
+            "R_bin": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin",
+            "R_engine": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+            "R_shared": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+            "R_shared_resolution": "R home library directory",
+            "BLAS": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "BLAS_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "LAPACK": "3.12.1",
+            "LAPACK_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+            "locale": "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8",
+            "threads": "1",
+            "package_setup.user.self": "3.308",
+            "package_setup.sys.self": "0.121",
+            "package_setup.elapsed": "3.525",
+            "package_setup.user.child": "0",
+            "package_setup.sys.child": "0",
+            "reference_open.user.self": "0.183",
+            "reference_open.sys.self": "0.017",
+            "reference_open.elapsed": "0.199",
+            "reference_open.user.child": "0",
+            "reference_open.sys.child": "0",
+            "processing.user.self": "73.156",
+            "processing.sys.self": "8.843",
+            "processing.elapsed": "82.881",
+            "processing.user.child": "0",
+            "processing.sys.child": "0",
+            "source_rows": "1e+07",
+            "normalized_rows": "1e+07",
+            "implementation": "mss-preservation-7",
+            "dll": "/private/tmp/mss-fullfile-20261121/builds-01/candidate/library/MungeSumstats/libs/MungeSumstats.so",
+            "dll_md5": "07c780192431c65ea5ff629b59e3846c"
+          }
+        }
+      ],
+      "verification": {
+        "normalized_rows_checked": 10000000,
+        "status_counts": {
+          "match": 5187962,
+          "swap": 4812038
+        },
+        "oracle_fields": null,
+        "oracle_rows_checked": 0,
+        "stable_byte_equality": true,
+        "edition_count": 6,
+        "normalized_columns": [
+          "status",
+          "chr",
+          "pos",
+          "ref",
+          "alt",
+          "id",
+          "effect",
+          "eaf",
+          "swapped",
+          "complemented",
+          "candidate_count",
+          "entity_type",
+          "entity_id",
+          "normalized_build",
+          "source_row",
+          "grch38_chr",
+          "grch38_pos",
+          "grch38_ref",
+          "grch38_alt"
+        ],
+        "source_artifact": {
+          "bytes": 461361405,
+          "sha256": "cecd6f1053fb9c02066be3aa78f0f4976cb8ab32e882357e016ec1ea259788e0",
+          "md5": "f6b7755f2972d57ce99701a2e9141adc"
+        },
+        "decoded_source": {
+          "bytes": 461361405,
+          "sha256": "cecd6f1053fb9c02066be3aa78f0f4976cb8ab32e882357e016ec1ea259788e0",
+          "md5": "f6b7755f2972d57ce99701a2e9141adc"
+        },
+        "stable_rds_manifest_equality": true
+      }
+    }
+  }
+}

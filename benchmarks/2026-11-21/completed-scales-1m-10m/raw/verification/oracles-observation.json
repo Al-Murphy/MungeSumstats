@@ -1,0 +1,65 @@
+{
+  "schema": "completed-scales-oracles-root-observation-v1",
+  "observed_utc": "2026-11-21T09:14:24.740307+00:00",
+  "root": {
+    "path": "/private/tmp/mss-completed-scales-20261121/oracles-01",
+    "dev": 16777234,
+    "ino": 424646105
+  },
+  "admission": {
+    "path": "/private/tmp/mss-completed-scales-20261121/oracles-01/admission.json",
+    "sha256": "56262ab9cd5e3519d116d1810bafa5a805774173af8802e6c05732af3dec7303"
+  },
+  "result": {
+    "path": "/private/tmp/mss-completed-scales-20261121/oracles-01/RESULT.json",
+    "sha256": "e2793d466915d52eca1a09d4bb6769151dd75b261f050189cf1bc2738dee3584"
+  },
+  "tool_terminal_chunk": "8ca2cd",
+  "observed_supervisor_exit": 0,
+  "phases": {
+    "1M": {
+      "receipt": {
+        "path": "/private/tmp/mss-completed-scales-20261121/oracles-01/snp-oracle-1M.jsonl",
+        "sha256": "5b20799271451ba3b2cd30d7ac06278e8157159634f409a9652f138dd95a7570"
+      },
+      "oracle": {
+        "path": "/private/tmp/mss-completed-scales-20261121/oracles-01/snp-oracle-1M.json",
+        "sha256": "cefb1f6d1308ccdbc71f18d0dea872eba2d8b4a6298be32653668e5792415b50"
+      },
+      "binding": {
+        "path": "/private/tmp/mss-completed-scales-20261121/oracles-01/oracle-binding-1M.json",
+        "sha256": "ff3f644537522e995270a8b4a69e2a8d7ea56c60bd16d8bdd5d780e8d5f5f60a"
+      },
+      "observed_supervisor_exit": 0,
+      "observed_raw_exit": 0,
+      "pgid": 45971,
+      "sid": 45971,
+      "group_absent": true,
+      "session_absent": true
+    },
+    "10M": {
+      "receipt": {
+        "path": "/private/tmp/mss-completed-scales-20261121/oracles-01/snp-oracle-10M.jsonl",
+        "sha256": "dd6769faf5ceb7b2895ba37210d42658524af34370b2a13fa1c2d5f50c71af10"
+      },
+      "oracle": {
+        "path": "/private/tmp/mss-completed-scales-20261121/oracles-01/snp-oracle-10M.json",
+        "sha256": "188200363b74e67a7b5edbf26708ad6e8eb96084c2f38b223ca6ad5436177785"
+      },
+      "binding": {
+        "path": "/private/tmp/mss-completed-scales-20261121/oracles-01/oracle-binding-10M.json",
+        "sha256": "5af356e6c4e6f5e3c644d757fc82008d0ae3c2811b1605fef1fbcda30f9f6daa"
+      },
+      "observed_supervisor_exit": 0,
+      "observed_raw_exit": 0,
+      "pgid": 46014,
+      "sid": 46014,
+      "group_absent": true,
+      "session_absent": true
+    }
+  },
+  "matches": [],
+  "scope": "completed-1M-and-10M-only",
+  "original_full_matrix_complete": false,
+  "warm_eligible": false
+}

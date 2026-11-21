@@ -1,0 +1,66 @@
+{
+  "schema": "completed-scales-oracle-byte-window-v1",
+  "stage": "1M",
+  "phase": {
+    "path": "/private/tmp/mss-completed-scales-20261121/oracles-01/snp-oracle-1M.jsonl",
+    "sha256": "5b20799271451ba3b2cd30d7ac06278e8157159634f409a9652f138dd95a7570"
+  },
+  "window_plan": {
+    "path": "/private/tmp/mss-completed-scales-20261121/verify-01/oracle-window-plan.json",
+    "sha256": "4ebbaf3375fe28d2f6f5b6ca24676a5015882bc3e081a18d3298656659bfee23"
+  },
+  "oracle_source": {
+    "path": "/private/tmp/mss-performance-20261119/repo/inst/verification/fai-safety-stage8/whole-file/harness/verify.py",
+    "sha256": "d4bbe46a9037597203e779b9e0f830a293b15a476421973fc6a0b69b2dc45c95"
+  },
+  "profile": {
+    "path": "/private/tmp/mss-fullmatrix-20261121/prep-01/snp-oracle.json",
+    "sha256": "b387920dbab4d53af316a8b2b320d577be463abdad7ce80dbf8b9de411e303d0"
+  },
+  "edition": "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-1M/pair-01-candidate/edition",
+  "exclusive_retained_window": true,
+  "before": {
+    "/private/tmp/gwas-harvest-stage2/assets/mss/matched-1M.tsv": {
+      "bytes": 46106766,
+      "sha256": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2",
+      "md5": "86fbafb66e89f7dd8ac211952dada625"
+    },
+    "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-1M/pair-01-candidate/edition/source.tsv": {
+      "bytes": 46106766,
+      "sha256": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2",
+      "md5": "86fbafb66e89f7dd8ac211952dada625"
+    },
+    "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-1M/pair-01-candidate/edition/source-artifact": {
+      "bytes": 46106766,
+      "sha256": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2",
+      "md5": "86fbafb66e89f7dd8ac211952dada625"
+    },
+    "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-1M/pair-01-candidate/edition/normalized.tsv": {
+      "bytes": 141352740,
+      "sha256": "e127d0cc8e6bf449841a452aba5110adb37caf18895bf34767065ac660f4c6dc",
+      "md5": "2c48ea2a6e10e2626c736ae2beb87cdd"
+    }
+  },
+  "after": {
+    "/private/tmp/gwas-harvest-stage2/assets/mss/matched-1M.tsv": {
+      "bytes": 46106766,
+      "sha256": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2",
+      "md5": "86fbafb66e89f7dd8ac211952dada625"
+    },
+    "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-1M/pair-01-candidate/edition/source.tsv": {
+      "bytes": 46106766,
+      "sha256": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2",
+      "md5": "86fbafb66e89f7dd8ac211952dada625"
+    },
+    "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-1M/pair-01-candidate/edition/source-artifact": {
+      "bytes": 46106766,
+      "sha256": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2",
+      "md5": "86fbafb66e89f7dd8ac211952dada625"
+    },
+    "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-1M/pair-01-candidate/edition/normalized.tsv": {
+      "bytes": 141352740,
+      "sha256": "e127d0cc8e6bf449841a452aba5110adb37caf18895bf34767065ac660f4c6dc",
+      "md5": "2c48ea2a6e10e2626c736ae2beb87cdd"
+    }
+  }
+}

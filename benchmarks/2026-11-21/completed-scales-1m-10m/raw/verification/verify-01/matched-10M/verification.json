@@ -1,0 +1,43 @@
+{
+  "normalized_rows_checked": 10000000,
+  "status_counts": {
+    "match": 5187962,
+    "swap": 4812038
+  },
+  "oracle_fields": null,
+  "oracle_rows_checked": 0,
+  "stable_byte_equality": true,
+  "edition_count": 6,
+  "normalized_columns": [
+    "status",
+    "chr",
+    "pos",
+    "ref",
+    "alt",
+    "id",
+    "effect",
+    "eaf",
+    "swapped",
+    "complemented",
+    "candidate_count",
+    "entity_type",
+    "entity_id",
+    "normalized_build",
+    "source_row",
+    "grch38_chr",
+    "grch38_pos",
+    "grch38_ref",
+    "grch38_alt"
+  ],
+  "source_artifact": {
+    "bytes": 461361405,
+    "sha256": "cecd6f1053fb9c02066be3aa78f0f4976cb8ab32e882357e016ec1ea259788e0",
+    "md5": "f6b7755f2972d57ce99701a2e9141adc"
+  },
+  "decoded_source": {
+    "bytes": 461361405,
+    "sha256": "cecd6f1053fb9c02066be3aa78f0f4976cb8ab32e882357e016ec1ea259788e0",
+    "md5": "f6b7755f2972d57ce99701a2e9141adc"
+  },
+  "stable_rds_manifest_equality": true
+}

@@ -1,0 +1,23 @@
+{
+  "user_seconds": 0.059419,
+  "system_seconds": 0.024457,
+  "peak_rss_bytes": 78413824,
+  "rss_source": "wait4 ru_maxrss",
+  "rss_complete": true,
+  "pid": 45683,
+  "exit_code": 0,
+  "command": [
+    "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+    "--vanilla",
+    "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+    "manifests",
+    "/private/tmp/mss-completed-scales-20261121/verify-01/matched-10M/stable-manifests.txt",
+    "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-01-baseline/edition/manifest.rds",
+    "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-01-candidate/edition/manifest.rds",
+    "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-02-candidate/edition/manifest.rds",
+    "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-02-baseline/edition/manifest.rds",
+    "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-03-baseline/edition/manifest.rds",
+    "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-03-candidate/edition/manifest.rds"
+  ],
+  "wall_seconds": 0.11595683381892741
+}

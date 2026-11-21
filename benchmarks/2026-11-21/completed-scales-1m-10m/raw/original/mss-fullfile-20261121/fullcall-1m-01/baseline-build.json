@@ -1,0 +1,250 @@
+{
+  "source_commit": "a86e8c94d753630eff8c6a695ed2f240d1123d0d",
+  "source_tree": "e728d244e98190a4df9f410d7ad651276fc473e4",
+  "archive": {
+    "path": "/private/tmp/mss-fullfile-20261121/builds-01/baseline/MungeSumstats.tar",
+    "sha256": "c4917d6e4276afaf8863d91754e77c00640315d61bef2528fca68bcb1b17698a"
+  },
+  "dll_sha256": "4dc9b277a41f39cf136ea79db4873f1a3fbd495413ec7106efc2f6dfb16c31a7",
+  "package_tree_sha256": "40a3f8fead4de582968a108b34c134f88c8333cd794813980f2863190bdbfaa6",
+  "toolchain": {
+    "R_platform": "aarch64-apple-darwin20",
+    "R_version": "R version 4.5.3 (2026-03-11)",
+    "compiler": [
+      "Apple clang version 21.0.0 (clang-2100.4.1.1)",
+      "Target: arm64-apple-darwin27.2.0",
+      "Thread model: posix",
+      "InstalledDir: /Library/Developer/CommandLineTools/usr/bin"
+    ],
+    "compiler_flags": {
+      "CPPFLAGS": "-I/opt/R/arm64/include",
+      "CXX17": "clang++ -arch arm64",
+      "CXX17FLAGS": "-falign-functions=64 -Wall -g -O2",
+      "CXX17STD": "-std=gnu++17",
+      "LDFLAGS": "-L/opt/R/arm64/lib",
+      "SHLIB_CXX17LD": "clang++ -arch arm64 -std=gnu++17",
+      "SHLIB_CXX17LDFLAGS": "-dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup"
+    }
+  },
+  "compile_and_link_argv": [
+    [
+      "clang++",
+      "-arch",
+      "arm64",
+      "-std=gnu++17",
+      "-I/Library/Frameworks/R.framework/Resources/include",
+      "-DNDEBUG",
+      "-I/private/tmp/mss-fullfile-20261121/restored-01/common/Rcpp/include",
+      "-I/opt/R/arm64/include",
+      "-fPIC",
+      "-falign-functions=64",
+      "-Wall",
+      "-g",
+      "-O2",
+      "-c",
+      "RcppExports.cpp",
+      "-o",
+      "RcppExports.o"
+    ],
+    [
+      "clang++",
+      "-arch",
+      "arm64",
+      "-std=gnu++17",
+      "-I/Library/Frameworks/R.framework/Resources/include",
+      "-DNDEBUG",
+      "-I/private/tmp/mss-fullfile-20261121/restored-01/common/Rcpp/include",
+      "-I/opt/R/arm64/include",
+      "-fPIC",
+      "-falign-functions=64",
+      "-Wall",
+      "-g",
+      "-O2",
+      "-c",
+      "preservation.cpp",
+      "-o",
+      "preservation.o"
+    ],
+    [
+      "clang++",
+      "-arch",
+      "arm64",
+      "-std=gnu++17",
+      "-dynamiclib",
+      "-Wl,-headerpad_max_install_names",
+      "-undefined",
+      "dynamic_lookup",
+      "-L/Library/Frameworks/R.framework/Resources/lib",
+      "-L/opt/R/arm64/lib",
+      "-o",
+      "MungeSumstats.so",
+      "RcppExports.o",
+      "preservation.o",
+      "-F/Library/Frameworks/R.framework/..",
+      "-framework",
+      "R"
+    ]
+  ],
+  "install_transcripts": [
+    {
+      "path": "/private/tmp/mss-fullfile-20261121/builds-01/baseline/install.jsonl",
+      "sha256": "f89b63cf200ebb102ddce0454bbe3b6496b2c2753ef2e90654502cb28dd69896"
+    },
+    {
+      "path": "/private/tmp/mss-fullfile-20261121/builds-01/baseline/install.stdout",
+      "sha256": "5e32fcd450fc57e960cd14d6c9dd1c1f1403f4e36c3da37f25177d7e78bfcf44"
+    },
+    {
+      "path": "/private/tmp/mss-fullfile-20261121/builds-01/baseline/install.stderr",
+      "sha256": "fa6ba3714be32866f11617c07bfd5027dd156b4936b6e3a2ddfdd24173db08c0"
+    }
+  ],
+  "terminal": {
+    "cleanup_errors": [],
+    "closure": "confirmed",
+    "elapsed_seconds": 17.982493916992098,
+    "first_group": {
+      "completed_monotonic": 1838800.62034525,
+      "members": [
+        {
+          "euid": 501,
+          "pgid": 56488,
+          "pid": 56488,
+          "rss_bytes": 1212416,
+          "ruid": 501,
+          "sid": 56488,
+          "sid_source": "getsid",
+          "state": "Ss"
+        },
+        {
+          "euid": 501,
+          "pgid": 56488,
+          "pid": 56490,
+          "rss_bytes": 917504,
+          "ruid": 501,
+          "sid": 56488,
+          "sid_source": "getsid",
+          "state": "R"
+        }
+      ],
+      "monotonic": 1838800.616053583,
+      "rss_bytes": 2129920
+    },
+    "group_samples": 19,
+    "label": "normal-install-baseline",
+    "last_group": {
+      "completed_monotonic": 1838818.590048666,
+      "members": [
+        {
+          "euid": 501,
+          "pgid": 56488,
+          "pid": 56488,
+          "rss_bytes": 0,
+          "ruid": 501,
+          "sid": 56488,
+          "sid_source": "owned setsid plus waitable zombie",
+          "state": "Z"
+        }
+      ],
+      "monotonic": 1838818.587158458,
+      "rss_bytes": 0
+    },
+    "last_space": {
+      "allocated_bytes": 31854592,
+      "block_bytes": 4096,
+      "entries": 860,
+      "free_bytes": 304432214016,
+      "logical_bytes": 29937193
+    },
+    "leader_reaped": true,
+    "max_sample_gap_seconds": 1.0591870001517236,
+    "minimum_free_bytes": 304410001408,
+    "missed_samples": 0,
+    "peak_disk_allocated_bytes": 50585600,
+    "peak_disk_logical_bytes": 45163335,
+    "peak_group": {
+      "completed_monotonic": 1838810.959563416,
+      "members": [
+        {
+          "euid": 501,
+          "pgid": 56488,
+          "pid": 56488,
+          "rss_bytes": 1212416,
+          "ruid": 501,
+          "sid": 56488,
+          "sid_source": "getsid",
+          "state": "Ss"
+        },
+        {
+          "euid": 501,
+          "pgid": 56488,
+          "pid": 56490,
+          "rss_bytes": 2785280,
+          "ruid": 501,
+          "sid": 56488,
+          "sid_source": "getsid",
+          "state": "S"
+        },
+        {
+          "euid": 501,
+          "pgid": 56488,
+          "pid": 56493,
+          "rss_bytes": 113557504,
+          "ruid": 501,
+          "sid": 56488,
+          "sid_source": "getsid",
+          "state": "S"
+        },
+        {
+          "euid": 501,
+          "pgid": 56488,
+          "pid": 56517,
+          "rss_bytes": 2654208,
+          "ruid": 501,
+          "sid": 56488,
+          "sid_source": "getsid",
+          "state": "S"
+        },
+        {
+          "euid": 501,
+          "pgid": 56488,
+          "pid": 56518,
+          "rss_bytes": 1427587072,
+          "ruid": 501,
+          "sid": 56488,
+          "sid_source": "getsid",
+          "state": "R"
+        }
+      ],
+      "monotonic": 1838810.95643325,
+      "rss_bytes": 1547796480
+    },
+    "peak_sampled_group_rss_bytes": 1547796480,
+    "prelaunch_rss_bytes": 0,
+    "prelaunch_space": {
+      "allocated_bytes": 21749760,
+      "block_bytes": 4096,
+      "entries": 13,
+      "free_bytes": 304440676352,
+      "logical_bytes": 21741783
+    },
+    "primary": null,
+    "raw_exit": 0,
+    "signals": [],
+    "status": "completed",
+    "terminal_members": [
+      {
+        "euid": 501,
+        "pgid": 56488,
+        "pid": 56488,
+        "rss_bytes": 0,
+        "ruid": 501,
+        "sid": 56488,
+        "sid_source": "owned setsid plus waitable zombie",
+        "state": "Z"
+      }
+    ],
+    "trigger_sample": null,
+    "utc": "2026-11-21T07:10:39.286734+00:00"
+  }
+}

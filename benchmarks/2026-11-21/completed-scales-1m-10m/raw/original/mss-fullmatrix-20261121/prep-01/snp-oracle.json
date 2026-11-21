@@ -1,0 +1,31 @@
+{
+  "reference": {
+    "source": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/matched-index/source.tsv",
+    "fasta": "/private/tmp/mss-fullfile-20261121/asset-restore-01/GRCh37.ensembl104.chr22.fa",
+    "fai": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/matched-index/fasta.fai",
+    "build": "GRCh37"
+  },
+  "stages": {
+    "1M": {
+      "rows": 1000000,
+      "input": {
+        "path": "/private/tmp/gwas-harvest-stage2/assets/mss/matched-1M.tsv",
+        "sha256": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2"
+      }
+    },
+    "10M": {
+      "rows": 10000000,
+      "input": {
+        "path": "/private/tmp/mss-fullfile-20261121/asset-restore-01/matched-10M.tsv",
+        "sha256": "cecd6f1053fb9c02066be3aa78f0f4976cb8ab32e882357e016ec1ea259788e0"
+      }
+    },
+    "40M": {
+      "rows": 40000000,
+      "input": {
+        "path": "/private/tmp/mss-fullfile-20261121/asset-restore-01/scale40/matched-40M.tsv",
+        "sha256": "cbf644d415e34aa44ba9b51fdb25d1db3dd99596122ca392f0e41cd25cce3ad4"
+      }
+    }
+  }
+}

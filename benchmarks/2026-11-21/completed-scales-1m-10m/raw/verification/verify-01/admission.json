@@ -1,0 +1,26 @@
+{
+  "issued_utc": "2026-11-21T09:07:47.234837+00:00",
+  "available_bytes": 259271106560,
+  "root": {
+    "path": "/private/tmp/mss-completed-scales-20261121/verify-01",
+    "dev": 16777234,
+    "ino": 424645721
+  },
+  "supervisor_pid": 45529,
+  "guard_sha256": "58e0818aa20801c30194bdce26bd117112b4b4d5d10f74ea556360c0867b56a2",
+  "source_sha256": "fb61736c23dcde4bfe16fedfa450c72a67d8803273536022193d4d39004e2848",
+  "argv": [
+    "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/bin/python3.15",
+    "-I",
+    "-B",
+    "-S",
+    "/private/tmp/mss-fullfile-20261121/runtime/verify-completed-scales.py",
+    "--output",
+    "/private/tmp/mss-completed-scales-20261121/verify-01"
+  ],
+  "wall_seconds": 600,
+  "rss_bytes": 4294967296,
+  "disk_bytes": 16777216,
+  "floor_bytes": 199715979264,
+  "scope": "Independent small retained1M10M verification only; originalfullmatrixfailed andnewwarmnotadmitted; no timing reruns"
+}

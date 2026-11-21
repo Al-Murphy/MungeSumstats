@@ -1,0 +1,21 @@
+{
+  "user_seconds": 77.27276,
+  "system_seconds": 9.029985,
+  "peak_rss_bytes": 1506115584,
+  "rss_source": "wait4 ru_maxrss",
+  "rss_complete": true,
+  "pid": 10718,
+  "exit_code": 0,
+  "command": [
+    "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+    "--vanilla",
+    "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+    "run",
+    "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-03-candidate/settings.tsv"
+  ],
+  "wall_seconds": 87.32085587503389,
+  "started_utc": "2026-11-21T08:29:45.048024+00:00",
+  "finished_utc": "2026-11-21T08:31:12.370141+00:00",
+  "role": "candidate",
+  "case": "matched-10M"
+}

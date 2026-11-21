@@ -1,0 +1,30 @@
+{
+  "schema": "completed-scales-verifier-root-observation-v1",
+  "observed_utc": "2026-11-21T09:09:50.903562+00:00",
+  "root": {
+    "path": "/private/tmp/mss-completed-scales-20261121/verify-01",
+    "dev": 16777234,
+    "ino": 424645721
+  },
+  "admission": {
+    "path": "/private/tmp/mss-completed-scales-20261121/verify-01/admission.json",
+    "sha256": "0e16f8725e0cf434b456d061cd986311043e77654cadd7efd3aacfd0f090226b"
+  },
+  "receipt": {
+    "path": "/private/tmp/mss-completed-scales-20261121/verify-01/verify.jsonl",
+    "sha256": "f8bfe34985427be6bbd14ce5b3feb427a3a7efbddb115568f3a31f34e705854c"
+  },
+  "result": {
+    "path": "/private/tmp/mss-completed-scales-20261121/verify-01/RESULT.json",
+    "sha256": "c5926660776d81c77eeab4d4fc9ab74776a197871bb89bd806b892efe2f59789"
+  },
+  "tool_terminal_chunk": "ec4ef8",
+  "observed_supervisor_exit": 0,
+  "observed_raw_exit": 0,
+  "pgid": 45531,
+  "sid": 45531,
+  "group_absent": true,
+  "session_absent": true,
+  "matches": [],
+  "scope": "completed1M10Mverificationonly;independentoraclespending;fullmatrixincomplete"
+}

@@ -1,0 +1,46 @@
+{
+  "schema": "current-cold-failure-observation-v1",
+  "observed_utc": "2026-11-21T08:55:06.316056+00:00",
+  "root": {
+    "path": "/private/tmp/mss-fullmatrix-20261121/cold-01",
+    "dev": 16777234,
+    "ino": 423217147
+  },
+  "admission": {
+    "path": "/private/tmp/mss-fullmatrix-20261121/cold-01/admission.json",
+    "sha256": "d668e0ed1b02641e6e7a125dd6452948d8ad4cadd45982fbf0b014a615d70bab"
+  },
+  "receipt": {
+    "path": "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix.jsonl",
+    "sha256": "ab7b155b9f82bd57bac128ad3fce7169eea1796d5f86f8419c71ee8eab5d0bb9"
+  },
+  "receipt_records": 2,
+  "terminal_receipt_present": false,
+  "tool_session": 49062,
+  "tool_terminal_chunk": "b65cc4",
+  "observed_supervisor_exit": 1,
+  "returned_outcome": {
+    "status": "error",
+    "closure": "confirmed",
+    "raw_exit": -15,
+    "primary": {
+      "reason": "filesystem_floor",
+      "detail": "Available bytes 249685569536 fell below the floor"
+    },
+    "cleanup_errors": [],
+    "receipt_error": {
+      "reason": "receipt_reserve",
+      "detail": "Available bytes 249685536768 fell below the floor"
+    }
+  },
+  "independent_absence": {
+    "tool_chunk": "b11cb0",
+    "pgid": 2830,
+    "sid": 2830,
+    "matches": [],
+    "permission_errors": [],
+    "group_absent": true,
+    "session_absent": true
+  },
+  "scope": "Full matrix interrupted; 13 completed workers retained, candidate40M censored; not scientifically complete and not warm eligible"
+}

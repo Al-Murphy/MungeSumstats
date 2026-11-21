@@ -1,0 +1,29 @@
+{
+  "issued_utc": "2026-11-21T08:14:09.083028+00:00",
+  "available_bytes": 295389892608,
+  "cold_pool_bytes": 42000000000,
+  "warm_reserve_bytes": 50000000000,
+  "continuing_floor_bytes": 199715979264,
+  "guard_floor_bytes": 249715979264,
+  "rss_group_limit_bytes": 24000000000,
+  "candidate_evaluation_limit_bytes": 8589934592,
+  "wall_seconds": 9000,
+  "config_sha256": "156143e169744ead89eb7a01721ac433da0d0983be68924b417bcc72f00426c7",
+  "guard_sha256": "58e0818aa20801c30194bdce26bd117112b4b4d5d10f74ea556360c0867b56a2",
+  "argv": [
+    "/opt/homebrew/opt/python@3.15/bin/python3.15",
+    "-E",
+    "-s",
+    "-B",
+    "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/run.py",
+    "run",
+    "/private/tmp/mss-fullmatrix-20261121/prep-01/matrix.json",
+    "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix",
+    "--suite",
+    "matrix",
+    "--profile",
+    "none"
+  ],
+  "scope": "Full 19-case scientific cold matrix, 23 pairs, 46 fresh editions; legacy/profiles/oracles/warm and formal Stage185 completion remain separate",
+  "contention": "One thread, sequential workers on a shared desktop; OS page cache uncontrolled; no other heavy MSS work scheduled during timing; no paid compute"
+}

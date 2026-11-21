@@ -1,0 +1,13 @@
+diff --git a/private/tmp/mss-fullfile-20261121/runtime/verify-completed-scales.review0.py b/private/tmp/mss-fullfile-20261121/runtime/verify-completed-scales.py
+index 0cacb55..96ae2ee 100644
+--- a/private/tmp/mss-fullfile-20261121/runtime/verify-completed-scales.review0.py
++++ b/private/tmp/mss-fullfile-20261121/runtime/verify-completed-scales.py
+@@ -161,7 +161,7 @@ def collect_workers(warm, controls, config, cases, runs, current, opening, failu
+                 for stat_name in ('elapsed', 'user.self', 'sys.self', 'user.child', 'sys.child'):
+                     value = float(metrics[f'{phase}.{stat_name}'])
+                     require(math.isfinite(value) and value >= 0, f'Invalid retained timing: {dest}')
+-            for name in ('process.stdout.log', 'process.stderr.log'):
++            for name in warm.ROLE_LOGS:
+                 controls.pin(dest / name)
+             observations[size].append({'directory': str(dest), 'pair': pair, 'process': process, 'metrics': metrics})
+     return observations, shared_namespaces

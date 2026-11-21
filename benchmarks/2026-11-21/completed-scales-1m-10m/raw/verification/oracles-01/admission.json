@@ -1,0 +1,31 @@
+{
+  "issued_utc": "2026-11-21T09:10:42.208457+00:00",
+  "available_bytes": 259255267328,
+  "root": {
+    "path": "/private/tmp/mss-completed-scales-20261121/oracles-01",
+    "dev": 16777234,
+    "ino": 424646105
+  },
+  "supervisor_pid": 45970,
+  "guard": {
+    "path": "/private/tmp/mss-performance-20261119/tools/darwin-full-stage185/guard.py",
+    "sha256": "58e0818aa20801c30194bdce26bd117112b4b4d5d10f74ea556360c0867b56a2"
+  },
+  "oracle_source": {
+    "path": "/private/tmp/mss-performance-20261119/repo/inst/verification/fai-safety-stage8/whole-file/harness/verify.py",
+    "sha256": "d4bbe46a9037597203e779b9e0f830a293b15a476421973fc6a0b69b2dc45c95"
+  },
+  "profile": {
+    "path": "/private/tmp/mss-fullmatrix-20261121/prep-01/snp-oracle.json",
+    "sha256": "b387920dbab4d53af316a8b2b320d577be463abdad7ce80dbf8b9de411e303d0"
+  },
+  "window_plan": {
+    "path": "/private/tmp/mss-completed-scales-20261121/verify-01/oracle-window-plan.json",
+    "sha256": "4ebbaf3375fe28d2f6f5b6ca24676a5015882bc3e081a18d3298656659bfee23"
+  },
+  "wall_seconds": 600,
+  "rss_bytes": 4294967296,
+  "disk_bytes": 16777216,
+  "floor_bytes": 199715979264,
+  "scope": "Independent1M10Mall19fieldoraclesonly;originalfullmatrixfailed;noharmonizationtimingreruns"
+}

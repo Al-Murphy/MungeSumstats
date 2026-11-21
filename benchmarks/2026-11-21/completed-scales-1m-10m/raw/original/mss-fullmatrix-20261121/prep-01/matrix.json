@@ -1,0 +1,439 @@
+{
+  "schema": 1,
+  "contention_note": "Admitted local scientific data preparation only: new format-3 reference, complete scale censuses, four deterministic supplements and 19-case roster metadata. Wall 1200 s, sampled group RSS 4 GiB, owned disk 512 MiB, continuing filesystem floor 186 GiB. The future cold 42 GB and warm 50 GB pools are provisional and not admitted by this preparation. No paid resources have been created.\nObserved UTC: 2026-11-21T08:05:37Z\n 3:05  up 23 days,  8:45, 7 users, load averages: 4.54 4.89 5.42\nFilesystem   1024-blocks       Used Available Capacity  iused      ifree %iused  Mounted on\n/dev/disk3s5  1948404040 1591429708 287431948    85% 22494847 2874319480    1%   /System/Volumes/Data",
+  "r_executable": {
+    "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+    "sha256": "c34c20d9a73b75e7e55e4ddab73642c0cd85c4299ac17ae81009f9fc43cb2430"
+  },
+  "r_engine": {
+    "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+    "sha256": "5323eb12f0d7c1ab0110343bcd79ec20dd63da2ecd0dea854e92f652f067393b"
+  },
+  "runtime_files": [
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+      "role": "r_shared",
+      "sha256": "1fbe535490fc4ca0acf7c4aed116166c6e6a99640f7d33b290ef459e81ea7613"
+    },
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+      "role": "blas",
+      "sha256": "7e4e93e7eb90558fb53f68f2bba58d145be57cd8f9284e038d126dfe84245ed8"
+    },
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+      "role": "lapack",
+      "sha256": "f131fee2ec7afb9679ba742fe37a1f2c3d2806f7da2a88f817f8a68aad6271ab"
+    }
+  ],
+  "dependency_libraries": [
+    "/private/tmp/mss-fullfile-20261121/restored-01/common"
+  ],
+  "minimum_free_bytes": 249715979264,
+  "estimated_output_bytes": 42000000000,
+  "edition_encoding": "utf-8",
+  "baseline": {
+    "commit": "a86e8c94d753630eff8c6a695ed2f240d1123d0d",
+    "library": "/private/tmp/mss-fullfile-20261121/builds-01/baseline/library",
+    "dll": {
+      "path": "/private/tmp/mss-fullfile-20261121/builds-01/baseline/library/MungeSumstats/libs/MungeSumstats.so",
+      "sha256": "4dc9b277a41f39cf136ea79db4873f1a3fbd495413ec7106efc2f6dfb16c31a7"
+    },
+    "package_tree_sha256": "40a3f8fead4de582968a108b34c134f88c8333cd794813980f2863190bdbfaa6",
+    "build_receipt": {
+      "path": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/baseline-build.json",
+      "sha256": "1ee933956406ea8b36e4b6119fcc6ceed025b06e951c4f7bbd60561c4c2711f7"
+    }
+  },
+  "candidate": {
+    "commit": "bfa192c83bb1fe15043c781d3b330f0f71bafb70",
+    "library": "/private/tmp/mss-fullfile-20261121/builds-01/candidate/library",
+    "dll": {
+      "path": "/private/tmp/mss-fullfile-20261121/builds-01/candidate/library/MungeSumstats/libs/MungeSumstats.so",
+      "sha256": "e68cbaeaeac0dcdf63e267d5afdf617617bbdab1ec39b9af5d17adc7bd8b3c9f"
+    },
+    "package_tree_sha256": "20f1b68b0bb3fcc2f5eeebc1a437bfe273948c09670e99172e31f9cf822daeeb",
+    "build_receipt": {
+      "path": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/candidate-build.json",
+      "sha256": "9dea60efba73e39717ae67bad4a2cb41935144df94bee6dfedab7a5b94b63bba"
+    }
+  },
+  "references": {
+    "matched_2": {
+      "directory": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/matched-index",
+      "format": 2,
+      "fasta": {
+        "path": "/private/tmp/mss-fullfile-20261121/asset-restore-01/GRCh37.ensembl104.chr22.fa",
+        "sha256": "f2e991e0816c2d7a19f9252ba314ea2717ed1ca73563dcd6417d514fb6c85e53"
+      },
+      "bind_fasta": true,
+      "files": {
+        "core-version": "c0ef21703c72cf14f2a71ef4674cd3aeaf4d6ed04174f40bbfa27f13cb3bc107",
+        "fasta.fai": "dc27e2b48d065ddb7f37c9334ce0965f662875c7ebdff244f4ad1adcece60957",
+        "keys": "f0199f6d194d9d8f42785a96450988995187d60052cb36fe25ea5af0ba116c1b",
+        "manifest.rds": "d15ad358b438fef485ddf0980043556a43f3e4d6b72faca35f3429ce4919ab93",
+        "offsets": "f5b3c7a37c535bdb33e48ea4a7afc873ee89ede71368adb00104ed164557c3fc",
+        "records": "eb5d1fc30a6bbba8c5ff40d52ce3582122658c7d80f5e04ae8c668023fcb1f61",
+        "rejected.tsv": "a0fd889e80558d09eefe3f9e5fb6adfe28c86f51820069cfedad00d981432baa",
+        "source.tsv": "d6fae3acdc98e4d06f2e5eb01492360aeb874fe5b9f8763914cc39d9c40db9d1"
+      }
+    },
+    "matched_3": {
+      "directory": "/private/tmp/mss-fullmatrix-20261121/prep-01/assets/matched_3",
+      "format": 3,
+      "fasta": {
+        "path": "/private/tmp/mss-fullfile-20261121/asset-restore-01/GRCh37.ensembl104.chr22.fa",
+        "sha256": "f2e991e0816c2d7a19f9252ba314ea2717ed1ca73563dcd6417d514fb6c85e53"
+      },
+      "bind_fasta": false,
+      "files": {
+        "core-version": "df93bd6460e363a74e8708a407cb18a01e9b920173dd9022aa5fe4bd92916e3f",
+        "fasta.fai": "dc27e2b48d065ddb7f37c9334ce0965f662875c7ebdff244f4ad1adcece60957",
+        "keys": "c5fdbc61b42900dfc35150532349c80e6113d586a40e7af789ee9d6f3692f9ae",
+        "manifest.rds": "26cbb521a9fb44642ba9292500015d61b093a93aafd879de50eb429b85c24a3c",
+        "offsets": "41e90fa7f0d09a550c81c0db51e7b132afaa2ae98e015f65a9f23a2371446a83",
+        "records": "f4afd6e2f96838de4ca1b78e967ea5348e0fbd51ceb259be001b206507db5cf9",
+        "rejected.tsv": "a0fd889e80558d09eefe3f9e5fb6adfe28c86f51820069cfedad00d981432baa",
+        "source.tsv": "d6fae3acdc98e4d06f2e5eb01492360aeb874fe5b9f8763914cc39d9c40db9d1"
+      }
+    },
+    "scientific_2": {
+      "bind_fasta": false,
+      "directory": "/private/tmp/mss-performance-20261119/local-smoke-1/result/assets/scientific_2",
+      "fasta": {
+        "path": "/private/tmp/mss-performance-20261119/local-smoke-1/result/assets/scientific.fa",
+        "sha256": "d2d2ffbb4f8ea3d17605b0a7f3999257330742079a2a830091ac9cd3e738139a"
+      },
+      "files": {
+        "contig_aliases.tsv": "e3e43922ff786bb9ea64ca39ba38dcaeaf3d6890e43e83825bb0a94d5925e45e",
+        "core-version": "c0ef21703c72cf14f2a71ef4674cd3aeaf4d6ed04174f40bbfa27f13cb3bc107",
+        "fasta.fai": "0519033c4dc815d624a09e9a646bc3562794d1252568923c66d2455bc13557cc",
+        "keys": "d72251e7c688a39618c83e5808b79bf1395fd4b49a80967c0d98c1773c246518",
+        "manifest.rds": "59074d5e6949c09197310504b3ff4dd32a2825da71d1a28098ed7f9a577f0d4b",
+        "offsets": "71747d278b594454af3021f5084ccf8d5653a81349c55efdba5cd3edbce5b8a7",
+        "records": "03c6ea3ed977682fddd6ffe510c4e7c7f4a052a11975c5544b637926646bda42",
+        "rejected.tsv": "a0fd889e80558d09eefe3f9e5fb6adfe28c86f51820069cfedad00d981432baa",
+        "source.tsv": "31ead6e184c98acba20e797be8a3a225cca52423bb6a747a16c79532e6390889"
+      },
+      "format": 2
+    },
+    "scientific_3": {
+      "bind_fasta": false,
+      "directory": "/private/tmp/mss-performance-20261119/local-smoke-1/result/assets/scientific_3",
+      "fasta": {
+        "path": "/private/tmp/mss-performance-20261119/local-smoke-1/result/assets/scientific.fa",
+        "sha256": "d2d2ffbb4f8ea3d17605b0a7f3999257330742079a2a830091ac9cd3e738139a"
+      },
+      "files": {
+        "contig_aliases.tsv": "e3e43922ff786bb9ea64ca39ba38dcaeaf3d6890e43e83825bb0a94d5925e45e",
+        "core-version": "df93bd6460e363a74e8708a407cb18a01e9b920173dd9022aa5fe4bd92916e3f",
+        "fasta.fai": "0519033c4dc815d624a09e9a646bc3562794d1252568923c66d2455bc13557cc",
+        "keys": "9377df404c1aae338d40f45aee40645a54ceba6dc6e30768480a71e2069b0971",
+        "manifest.rds": "9286af6adf834da27510cbb8011d779cd9cfb1e2759ead9702ca74c5fafe2c4f",
+        "offsets": "236240d3a1fb2b00d9429e271ab00099c79b3163c700c337db53d914385d3886",
+        "records": "d857a0f48529cc3f391d3ec6a5bcd62352f95ce85232a60d8fe076523bd6e2aa",
+        "rejected.tsv": "a0fd889e80558d09eefe3f9e5fb6adfe28c86f51820069cfedad00d981432baa",
+        "source.tsv": "31ead6e184c98acba20e797be8a3a225cca52423bb6a747a16c79532e6390889"
+      },
+      "format": 3
+    }
+  },
+  "cases": [
+    {
+      "id": "matched-1M",
+      "rows": 1000000,
+      "pairs": 3,
+      "target": true,
+      "reference": "matched_2",
+      "input": {
+        "path": "/private/tmp/gwas-harvest-stage2/assets/mss/matched-1M.tsv",
+        "sha256": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2"
+      },
+      "cardinality_receipt": {
+        "path": "/private/tmp/mss-fullmatrix-20261121/prep-01/assets/matched-1M.keys.json",
+        "sha256": "4eab2210f1c47bb632473a8ddbfddc96065721e1eee8cbbcc74485d834cb3b85"
+      },
+      "settings": {
+        "frequency_type": "EAF"
+      }
+    },
+    {
+      "id": "matched-10M",
+      "rows": 10000000,
+      "pairs": 3,
+      "target": true,
+      "reference": "matched_2",
+      "input": {
+        "path": "/private/tmp/mss-fullfile-20261121/asset-restore-01/matched-10M.tsv",
+        "sha256": "cecd6f1053fb9c02066be3aa78f0f4976cb8ab32e882357e016ec1ea259788e0"
+      },
+      "cardinality_receipt": {
+        "path": "/private/tmp/mss-fullmatrix-20261121/prep-01/assets/matched-10M.keys.json",
+        "sha256": "3dc3750dc55db9f2d072a313401bb1cf1de9ee678018fccdfb983f57fce784e4"
+      },
+      "settings": {
+        "frequency_type": "EAF"
+      }
+    },
+    {
+      "id": "matched-40M",
+      "rows": 40000000,
+      "pairs": 1,
+      "target": true,
+      "reference": "matched_2",
+      "input": {
+        "path": "/private/tmp/mss-fullfile-20261121/asset-restore-01/scale40/matched-40M.tsv",
+        "sha256": "cbf644d415e34aa44ba9b51fdb25d1db3dd99596122ca392f0e41cd25cce3ad4"
+      },
+      "cardinality_receipt": {
+        "path": "/private/tmp/mss-fullmatrix-20261121/prep-01/assets/matched-40M.keys.json",
+        "sha256": "b3d3afede73037cfb296fa9cab0a8945556a5919c219d187e76ead124828e0ad"
+      },
+      "settings": {
+        "frequency_type": "EAF"
+      }
+    },
+    {
+      "id": "distinct-shuffled",
+      "rows": 437458,
+      "pairs": 1,
+      "tags": [
+        "distinct_shuffled"
+      ],
+      "reference_formats": [
+        "matched_2",
+        "matched_3"
+      ],
+      "input": {
+        "path": "/private/tmp/mss-fullmatrix-20261121/prep-01/assets/distinct-shuffled.tsv",
+        "sha256": "a0ae8c2f7d48fdaa2e154d2bc32e14e8b5692a35224bbddded770085c9c6ad15"
+      },
+      "cardinality_receipt": {
+        "path": "/private/tmp/mss-fullmatrix-20261121/prep-01/assets/distinct-shuffled.keys.json",
+        "sha256": "bca3bbc5d88007092d6304b9bfb609157f0af3091fb116bb5cf4c4da6a51d79a"
+      },
+      "settings": {
+        "frequency_type": "EAF"
+      }
+    },
+    {
+      "id": "coordinate-only",
+      "rows": 437458,
+      "pairs": 1,
+      "tags": [
+        "coordinate_only"
+      ],
+      "reference_formats": [
+        "matched_2",
+        "matched_3"
+      ],
+      "input": {
+        "path": "/private/tmp/mss-fullmatrix-20261121/prep-01/assets/coordinate-only.tsv",
+        "sha256": "fd7d7ba6d6d97909ee9df14958ad43bd870003490a25296b9c4e59159599fb35"
+      },
+      "cardinality_receipt": {
+        "path": "/private/tmp/mss-fullmatrix-20261121/prep-01/assets/coordinate-only.keys.json",
+        "sha256": "7e5416aeba48aec989b2a2bbaee8f533f442ca1279ae2036b5cf1ae610fbe9a0"
+      },
+      "settings": {
+        "frequency_type": "EAF"
+      }
+    },
+    {
+      "id": "id-only",
+      "rows": 437458,
+      "pairs": 1,
+      "tags": [
+        "id_only"
+      ],
+      "reference_formats": [
+        "matched_2",
+        "matched_3"
+      ],
+      "input": {
+        "path": "/private/tmp/mss-fullmatrix-20261121/prep-01/assets/id-only.tsv",
+        "sha256": "bc5268f8ddd7985008254394b481db36d9d8806d5e362520c36639221bc96cda"
+      },
+      "cardinality_receipt": {
+        "path": "/private/tmp/mss-fullmatrix-20261121/prep-01/assets/id-only.keys.json",
+        "sha256": "9f09668a4691fc43b09ff650586350078c011931e22ac9a099d66ba4ae910655"
+      },
+      "settings": {
+        "frequency_type": "EAF"
+      }
+    },
+    {
+      "id": "negative",
+      "rows": 437458,
+      "pairs": 1,
+      "tags": [
+        "negative"
+      ],
+      "reference_formats": [
+        "matched_2",
+        "matched_3"
+      ],
+      "input": {
+        "path": "/private/tmp/mss-fullmatrix-20261121/prep-01/assets/negative.tsv",
+        "sha256": "107750123a9b62146bea228dd3223c8b29ba65e9bec3484a50efda9ae88e1ee6"
+      },
+      "cardinality_receipt": {
+        "path": "/private/tmp/mss-fullmatrix-20261121/prep-01/assets/negative.keys.json",
+        "sha256": "692b84dfdbb1fa3cecf675ba10ce5f3df53b1a27de1f312901afd3c1da286cc9"
+      },
+      "settings": {
+        "frequency_type": "EAF"
+      }
+    },
+    {
+      "id": "dense",
+      "rows": 10000,
+      "pairs": 1,
+      "tags": [
+        "dense"
+      ],
+      "reference_formats": [
+        "scientific_2",
+        "scientific_3"
+      ],
+      "input": {
+        "path": "/private/tmp/mss-matrix-primary-stage177/assets/dense.tsv",
+        "sha256": "ebc1dfd110120445468f739494dbc75bf1006d3195c244dfb12aca9c3e2a94d5"
+      },
+      "cardinality_receipt": {
+        "path": "/private/tmp/mss-fullmatrix-20261121/prep-01/assets/dense.keys.json",
+        "sha256": "f4ea4e5b4acb3d32fdb64dde43978e8d1d0ee339acc8363917c3d294e9cde5e6"
+      },
+      "settings": {
+        "frequency_type": "EAF",
+        "columns": {
+          "chr": "CHR",
+          "pos": "BP",
+          "id": "SNP",
+          "other": "A1",
+          "effect_allele": "A2",
+          "effect": "BETA",
+          "eaf": "FRQ",
+          "entity_type": "TYPE"
+        }
+      }
+    },
+    {
+      "id": "mixed",
+      "rows": 100000,
+      "pairs": 1,
+      "tags": [
+        "mixed"
+      ],
+      "reference_formats": [
+        "scientific_2",
+        "scientific_3"
+      ],
+      "input": {
+        "path": "/private/tmp/mss-matrix-primary-stage177/assets/mixed.tsv",
+        "sha256": "4c5523c3549c1fbcc5b4a9bc43cb7ac51452f094a80bccc62cb1764888504249"
+      },
+      "cardinality_receipt": {
+        "path": "/private/tmp/mss-fullmatrix-20261121/prep-01/assets/mixed.keys.json",
+        "sha256": "ffea2de752b99f59260878173c228f8ea35faa100a5296969fe263c43b3a03b7"
+      },
+      "settings": {
+        "frequency_type": "EAF",
+        "columns": {
+          "chr": "CHR",
+          "pos": "BP",
+          "id": "SNP",
+          "other": "A1",
+          "effect_allele": "A2",
+          "effect": "BETA",
+          "eaf": "FRQ",
+          "entity_type": "TYPE"
+        }
+      }
+    },
+    {
+      "cardinality_receipt": {
+        "path": "/private/tmp/mss-performance-20261119/local-smoke-1/result/assets/hard-cases.keys.json",
+        "sha256": "0c41bd669b4f88c0ccf367d4cfe39f0656e2f726ba6d1d8c55398c3857f62986"
+      },
+      "id": "hard-cases",
+      "input": {
+        "path": "/private/tmp/mss-performance-20261119/local-smoke-1/result/assets/hard-cases.tsv.gz",
+        "sha256": "19eb0e6ae84c144a1aa05173a099e8d4b756c6bfb761ef2bcf0de2031336b4bd"
+      },
+      "oracle": {
+        "path": "/private/tmp/mss-performance-20261119/local-smoke-1/result/assets/hard-cases.gold.tsv",
+        "sha256": "ca4f4d2f59d70f6052a5eb149e4e72011fefc175bef074897f8f15578824a565"
+      },
+      "pairs": 1,
+      "reference_formats": [
+        "scientific_2",
+        "scientific_3"
+      ],
+      "rows": 32,
+      "settings": {
+        "columns": {
+          "chr": "CHR",
+          "eaf": "FRQ",
+          "effect": "BETA",
+          "effect_allele": "A2",
+          "entity_type": "TYPE",
+          "id": "SNP",
+          "other": "A1",
+          "pos": "BP"
+        },
+        "frequency_type": "EAF",
+        "verify_acquisition_receipt": true
+      },
+      "tags": [
+        "hard_cases"
+      ]
+    },
+    {
+      "cardinality_receipt": {
+        "path": "/private/tmp/mss-performance-20261119/local-smoke-1/result/assets/declared.keys.json",
+        "sha256": "7c9324a3bf4491b8ea00936c8cc4cc1533f8fb03d06ef5001a2e6ac681b17b26"
+      },
+      "id": "declared",
+      "input": {
+        "path": "/private/tmp/mss-performance-20261119/local-smoke-1/result/assets/declared.tsv",
+        "sha256": "f5313bbb67348759a9d30276b5a7fd88dea16b7ffaa9db330a8064648bf78c62"
+      },
+      "oracle": {
+        "path": "/private/tmp/mss-performance-20261119/local-smoke-1/result/assets/declared.gold.tsv",
+        "sha256": "36248164266feb550b628be89212864e80b3d9c0c3b07c71cf61aedbfcf3319e"
+      },
+      "pairs": 1,
+      "reference_formats": [
+        "scientific_2",
+        "scientific_3"
+      ],
+      "rows": 9,
+      "settings": {
+        "columns": {
+          "chr": "CHR",
+          "eaf": "FRQ",
+          "effect": "BETA",
+          "effect_allele": "A2",
+          "entity_type": "TYPE",
+          "id": "SNP",
+          "other": "A1",
+          "pos": "BP",
+          "source_alt": "ALT",
+          "source_ref": "REF",
+          "source_strand": "STRAND"
+        },
+        "frequency_type": "EAF",
+        "verify_acquisition_receipt": true
+      },
+      "source_evidence": "Literal synthetic REF/ALT/STRAND columns in scientific.py DECLARED; the fixture author supplies the strand.",
+      "tags": [
+        "hard_cases"
+      ]
+    }
+  ],
+  "dependency_inventory": {
+    "path": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/dependency-inventory.json",
+    "sha256": "293025cbce6ea392e6b6ecbda1787b90b904abd5a2f30958a9301505fcf46a31"
+  }
+}

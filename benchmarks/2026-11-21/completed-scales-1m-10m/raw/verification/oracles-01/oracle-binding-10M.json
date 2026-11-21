@@ -1,0 +1,66 @@
+{
+  "schema": "completed-scales-oracle-byte-window-v1",
+  "stage": "10M",
+  "phase": {
+    "path": "/private/tmp/mss-completed-scales-20261121/oracles-01/snp-oracle-10M.jsonl",
+    "sha256": "dd6769faf5ceb7b2895ba37210d42658524af34370b2a13fa1c2d5f50c71af10"
+  },
+  "window_plan": {
+    "path": "/private/tmp/mss-completed-scales-20261121/verify-01/oracle-window-plan.json",
+    "sha256": "4ebbaf3375fe28d2f6f5b6ca24676a5015882bc3e081a18d3298656659bfee23"
+  },
+  "oracle_source": {
+    "path": "/private/tmp/mss-performance-20261119/repo/inst/verification/fai-safety-stage8/whole-file/harness/verify.py",
+    "sha256": "d4bbe46a9037597203e779b9e0f830a293b15a476421973fc6a0b69b2dc45c95"
+  },
+  "profile": {
+    "path": "/private/tmp/mss-fullmatrix-20261121/prep-01/snp-oracle.json",
+    "sha256": "b387920dbab4d53af316a8b2b320d577be463abdad7ce80dbf8b9de411e303d0"
+  },
+  "edition": "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-01-candidate/edition",
+  "exclusive_retained_window": true,
+  "before": {
+    "/private/tmp/mss-fullfile-20261121/asset-restore-01/matched-10M.tsv": {
+      "bytes": 461361405,
+      "sha256": "cecd6f1053fb9c02066be3aa78f0f4976cb8ab32e882357e016ec1ea259788e0",
+      "md5": "f6b7755f2972d57ce99701a2e9141adc"
+    },
+    "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-01-candidate/edition/source.tsv": {
+      "bytes": 461361405,
+      "sha256": "cecd6f1053fb9c02066be3aa78f0f4976cb8ab32e882357e016ec1ea259788e0",
+      "md5": "f6b7755f2972d57ce99701a2e9141adc"
+    },
+    "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-01-candidate/edition/source-artifact": {
+      "bytes": 461361405,
+      "sha256": "cecd6f1053fb9c02066be3aa78f0f4976cb8ab32e882357e016ec1ea259788e0",
+      "md5": "f6b7755f2972d57ce99701a2e9141adc"
+    },
+    "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-01-candidate/edition/normalized.tsv": {
+      "bytes": 1422363699,
+      "sha256": "cc165d872ea931fc233df388fb7a0f152e0fd48b775745100ecc046d6f841bc9",
+      "md5": "3b3413e524ce810e49aa8853c2c01202"
+    }
+  },
+  "after": {
+    "/private/tmp/mss-fullfile-20261121/asset-restore-01/matched-10M.tsv": {
+      "bytes": 461361405,
+      "sha256": "cecd6f1053fb9c02066be3aa78f0f4976cb8ab32e882357e016ec1ea259788e0",
+      "md5": "f6b7755f2972d57ce99701a2e9141adc"
+    },
+    "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-01-candidate/edition/source.tsv": {
+      "bytes": 461361405,
+      "sha256": "cecd6f1053fb9c02066be3aa78f0f4976cb8ab32e882357e016ec1ea259788e0",
+      "md5": "f6b7755f2972d57ce99701a2e9141adc"
+    },
+    "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-01-candidate/edition/source-artifact": {
+      "bytes": 461361405,
+      "sha256": "cecd6f1053fb9c02066be3aa78f0f4976cb8ab32e882357e016ec1ea259788e0",
+      "md5": "f6b7755f2972d57ce99701a2e9141adc"
+    },
+    "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-01-candidate/edition/normalized.tsv": {
+      "bytes": 1422363699,
+      "sha256": "cc165d872ea931fc233df388fb7a0f152e0fd48b775745100ecc046d6f841bc9",
+      "md5": "3b3413e524ce810e49aa8853c2c01202"
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schema": "completed-scales-oracle-results-v1",
+  "scope": "completed-1M-and-10M-only",
+  "original_full_matrix_complete": false,
+  "warm_eligible": false,
+  "root_observer_pending": true,
+  "verifier_result": {
+    "path": "/private/tmp/mss-completed-scales-20261121/verify-01/RESULT.json",
+    "sha256": "c5926660776d81c77eeab4d4fc9ab74776a197871bb89bd806b892efe2f59789"
+  },
+  "window_plan": {
+    "path": "/private/tmp/mss-completed-scales-20261121/verify-01/oracle-window-plan.json",
+    "sha256": "4ebbaf3375fe28d2f6f5b6ca24676a5015882bc3e081a18d3298656659bfee23"
+  },
+  "scales": {
+    "1M": {
+      "oracle": {
+        "path": "/private/tmp/mss-completed-scales-20261121/oracles-01/snp-oracle-1M.json",
+        "sha256": "cefb1f6d1308ccdbc71f18d0dea872eba2d8b4a6298be32653668e5792415b50"
+      },
+      "binding": {
+        "path": "/private/tmp/mss-completed-scales-20261121/oracles-01/oracle-binding-1M.json",
+        "sha256": "ff3f644537522e995270a8b4a69e2a8d7ea56c60bd16d8bdd5d780e8d5f5f60a"
+      },
+      "phase": {
+        "path": "/private/tmp/mss-completed-scales-20261121/oracles-01/snp-oracle-1M.jsonl",
+        "sha256": "5b20799271451ba3b2cd30d7ac06278e8157159634f409a9652f138dd95a7570"
+      },
+      "outcome": {
+        "status": "completed",
+        "closure": "confirmed",
+        "raw_exit": 0,
+        "primary": null,
+        "cleanup_errors": [],
+        "receipt_error": null
+      }
+    },
+    "10M": {
+      "oracle": {
+        "path": "/private/tmp/mss-completed-scales-20261121/oracles-01/snp-oracle-10M.json",
+        "sha256": "188200363b74e67a7b5edbf26708ad6e8eb96084c2f38b223ca6ad5436177785"
+      },
+      "binding": {
+        "path": "/private/tmp/mss-completed-scales-20261121/oracles-01/oracle-binding-10M.json",
+        "sha256": "5af356e6c4e6f5e3c644d757fc82008d0ae3c2811b1605fef1fbcda30f9f6daa"
+      },
+      "phase": {
+        "path": "/private/tmp/mss-completed-scales-20261121/oracles-01/snp-oracle-10M.jsonl",
+        "sha256": "dd6769faf5ceb7b2895ba37210d42658524af34370b2a13fa1c2d5f50c71af10"
+      },
+      "outcome": {
+        "status": "completed",
+        "closure": "confirmed",
+        "raw_exit": 0,
+        "primary": null,
+        "cleanup_errors": [],
+        "receipt_error": null
+      }
+    }
+  }
+}

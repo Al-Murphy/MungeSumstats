@@ -1,0 +1,100 @@
+{
+  "schema": "current-completed-scales-oracle-window-plan-v1",
+  "scope": "completed-1M-and-10M-only",
+  "original_full_matrix_complete": false,
+  "warm_eligible": false,
+  "independent_oracles_pending": [
+    "1M",
+    "10M"
+  ],
+  "configuration": {
+    "path": "/private/tmp/mss-fullmatrix-20261121/prep-01/matrix.json",
+    "sha256": "156143e169744ead89eb7a01721ac433da0d0983be68924b417bcc72f00426c7"
+  },
+  "profile": {
+    "path": "/private/tmp/mss-fullmatrix-20261121/prep-01/snp-oracle.json",
+    "sha256": "b387920dbab4d53af316a8b2b320d577be463abdad7ce80dbf8b9de411e303d0"
+  },
+  "original_failure": {
+    "path": "/private/tmp/mss-fullmatrix-20261121/cold-failure-observation.json",
+    "sha256": "39a96694ac60f09bfad5e662c24ec2759fc88823149b2e94d2e3bd1628ecf995"
+  },
+  "oracle_source": {
+    "path": "/private/tmp/mss-performance-20261119/repo/inst/verification/fai-safety-stage8/whole-file/harness/verify.py",
+    "sha256": "d4bbe46a9037597203e779b9e0f830a293b15a476421973fc6a0b69b2dc45c95"
+  },
+  "windows": {
+    "1M": {
+      "stage": "1M",
+      "rows": 1000000,
+      "selector": "mss7=/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-1M/pair-01-candidate/edition",
+      "edition": "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-1M/pair-01-candidate/edition",
+      "edition_identity": {
+        "dev": 16777234,
+        "ino": 423222438
+      },
+      "artifact_digests": {
+        "path": "/private/tmp/mss-completed-scales-20261121/verify-01/matched-1M/artifact-digests.json",
+        "sha256": "65a48da39128df529520347d303015c80b04a23e07523dee5b0e37449e18db89"
+      },
+      "files": {
+        "/private/tmp/gwas-harvest-stage2/assets/mss/matched-1M.tsv": {
+          "bytes": 46106766,
+          "sha256": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2",
+          "md5": "86fbafb66e89f7dd8ac211952dada625"
+        },
+        "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-1M/pair-01-candidate/edition/source.tsv": {
+          "bytes": 46106766,
+          "sha256": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2",
+          "md5": "86fbafb66e89f7dd8ac211952dada625"
+        },
+        "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-1M/pair-01-candidate/edition/source-artifact": {
+          "bytes": 46106766,
+          "sha256": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2",
+          "md5": "86fbafb66e89f7dd8ac211952dada625"
+        },
+        "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-1M/pair-01-candidate/edition/normalized.tsv": {
+          "bytes": 141352740,
+          "sha256": "e127d0cc8e6bf449841a452aba5110adb37caf18895bf34767065ac660f4c6dc",
+          "md5": "2c48ea2a6e10e2626c736ae2beb87cdd"
+        }
+      }
+    },
+    "10M": {
+      "stage": "10M",
+      "rows": 10000000,
+      "selector": "mss7=/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-01-candidate/edition",
+      "edition": "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-01-candidate/edition",
+      "edition_identity": {
+        "dev": 16777234,
+        "ino": 423350531
+      },
+      "artifact_digests": {
+        "path": "/private/tmp/mss-completed-scales-20261121/verify-01/matched-10M/artifact-digests.json",
+        "sha256": "484b1d8cc38679e13ca31634d608d024fc482a0038f9f7e63277a57046898db8"
+      },
+      "files": {
+        "/private/tmp/mss-fullfile-20261121/asset-restore-01/matched-10M.tsv": {
+          "bytes": 461361405,
+          "sha256": "cecd6f1053fb9c02066be3aa78f0f4976cb8ab32e882357e016ec1ea259788e0",
+          "md5": "f6b7755f2972d57ce99701a2e9141adc"
+        },
+        "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-01-candidate/edition/source.tsv": {
+          "bytes": 461361405,
+          "sha256": "cecd6f1053fb9c02066be3aa78f0f4976cb8ab32e882357e016ec1ea259788e0",
+          "md5": "f6b7755f2972d57ce99701a2e9141adc"
+        },
+        "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-01-candidate/edition/source-artifact": {
+          "bytes": 461361405,
+          "sha256": "cecd6f1053fb9c02066be3aa78f0f4976cb8ab32e882357e016ec1ea259788e0",
+          "md5": "f6b7755f2972d57ce99701a2e9141adc"
+        },
+        "/private/tmp/mss-fullmatrix-20261121/cold-01/matrix/matched-10M/pair-01-candidate/edition/normalized.tsv": {
+          "bytes": 1422363699,
+          "sha256": "cc165d872ea931fc233df388fb7a0f152e0fd48b775745100ecc046d6f841bc9",
+          "md5": "3b3413e524ce810e49aa8853c2c01202"
+        }
+      }
+    }
+  }
+}
