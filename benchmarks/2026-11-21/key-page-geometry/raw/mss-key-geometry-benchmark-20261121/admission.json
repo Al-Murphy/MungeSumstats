@@ -1,0 +1,45 @@
+{
+  "argv": [
+    "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/bin/python3.15",
+    "-I",
+    "-B",
+    "-S",
+    "/private/tmp/mss-fullfile-20261121/runtime/key-geometry-bench.py",
+    "run",
+    "/private/tmp/mss-key-geometry-preparation-20261121/metadata/diagnostic.json",
+    "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic",
+    "--suite",
+    "diagnostic",
+    "--profile",
+    "none"
+  ],
+  "available_bytes": 236338630656,
+  "baseline_commit": "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b",
+  "build_observation": {
+    "path": "/private/tmp/mss-key-geometry-builds-observation-20261121.json",
+    "sha256": "ee38ae6c506f2a700e3159a0d6ce038d3785a32f634e00dee7de72b03ec39473"
+  },
+  "candidate_commit": "8b85aa5ffc45ad7632cfc5319e85dd5eb3089be6",
+  "competing_processes": [],
+  "configuration": {
+    "path": "/private/tmp/mss-key-geometry-preparation-20261121/metadata/diagnostic.json",
+    "sha256": "deaca2c419999a5964e1998a25bae24eadcf1dc18075debe48ef0d04b42fedb1"
+  },
+  "contention": "Serial one-thread workers on shared Darwinarm64; no competingR/compiler at admission, all otherMSSheavywork stopped; OS page cache uncontrolled and assets preread",
+  "disk_bytes": 3221225472,
+  "floor_bytes": 199715979264,
+  "guard_sha256": "58e0818aa20801c30194bdce26bd117112b4b4d5d10f74ea556360c0867b56a2",
+  "issued_utc": "2026-11-21T12:29:57.024882+00:00",
+  "preparation_binding": {
+    "path": "/private/tmp/mss-key-geometry-preparation-20261121/metadata/binding.json",
+    "sha256": "124bad97669b7a831643f9bf3589015cda725189953d996650e097d744cd00a8"
+  },
+  "preparation_observation": {
+    "path": "/private/tmp/mss-key-geometry-preparation-observation-20261121.json",
+    "sha256": "04d185cc80ac89f004c90ea2fc1afc8f809d21898e09a4044894c313b64fe491"
+  },
+  "rss_bytes": 8589934592,
+  "scope": "Five-case15-pair30-fresh-worker publicAPI key-page trial, formaldiagnostictargetsnotapplicable; fullC9/40M/warm/Windows/sourcepublication separate",
+  "wall_seconds": 1800,
+  "wrapper_sha256": "c2eb2af6b254a981272740eb05b6632b4dc0b55603f62c6cb9a1149a62dee976"
+}

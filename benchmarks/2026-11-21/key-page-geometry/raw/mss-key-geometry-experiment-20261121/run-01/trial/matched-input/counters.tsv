@@ -1,0 +1,14 @@
+metric	value
+selected_count	32768
+distinct_raw_count	32768
+distinct_canonical_count	32768
+rank_hits	0
+pivot_hits	1269761
+probe_entries	735785
+key_requests	934690
+offset_requests	932392
+key_reads	7032
+offset_reads	164
+pivot_slots	8191
+rank_slots	4096
+rank_bytes	983056

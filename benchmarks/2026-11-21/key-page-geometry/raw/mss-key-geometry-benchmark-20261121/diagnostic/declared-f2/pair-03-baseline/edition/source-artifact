@@ -1,0 +1,10 @@
+CHR	BP	SNP	A1	A2	BETA	FRQ	TYPE	REF	ALT	STRAND	P	COMMENT
+I	5	del	A	AA	-.125	.75	small_variant	AA	A	+	1e-1000	"雪	""quoted"""
+I	4	del	AA	A	.125	.25	small_variant	AA	A	+	1e-1000	"雪	""quoted"""
+Q	1	quad	A	G	.125	.25	small_variant	A	G	+	1e-1000	"雪	""quoted"""
+Q	1	quad	G	A	-.125	.75	small_variant	A	G	+	1e-1000	"雪	""quoted"""
+Q	1	quad	T	C	.125	.25	small_variant	T	C	-	1e-1000	"雪	""quoted"""
+Q	1	quad	C	T	-.125	.75	small_variant	T	C	-	1e-1000	"雪	""quoted"""
+Q	1	quad	A	G	.125	.25	small_variant	A	G	unknown	1e-1000	"雪	""quoted"""
+S	1	unknown	A	G	.125	.25	small_variant	A	G	+	1e-1000	"雪	""quoted"""
+S	1	r雪	A	G	.125	.25	small_variant	A	G	+	1e-1000	"雪	""quoted"""

@@ -1,0 +1,234 @@
+{
+  "absent_group_session": 78054,
+  "actual_exec_session": 12743,
+  "actual_exit_code": 0,
+  "actual_terminal_tool_chunk": "464baa",
+  "admission": {
+    "path": "/private/tmp/mss-key-geometry-installed-suite-20261121/admission.json",
+    "sha256": "a6d4c23ea255578aacb495268363a90a1f4251eacd576563a188a7b37ce52b7e"
+  },
+  "after": {
+    "path": "/private/tmp/mss-key-geometry-installed-suite-20261121/after.json",
+    "sha256": "33304938699806fc08c223599b62802f2a332c2cd6fca016024302dc9e770505"
+  },
+  "before": {
+    "path": "/private/tmp/mss-key-geometry-installed-suite-20261121/before.json",
+    "sha256": "33304938699806fc08c223599b62802f2a332c2cd6fca016024302dc9e770505"
+  },
+  "guard": {
+    "path": "/private/tmp/mss-key-geometry-installed-suite-20261121/candidate-unfiltered.jsonl",
+    "sha256": "9d1e2e5d9c0a185c5cfefc90ecc301fa7522bc01106fb2526033b9164e059892"
+  },
+  "inspection_errors": [],
+  "live_members": [],
+  "observed": {
+    "active_files": [
+      "test-a0_a1.R",
+      "test-allele_flip.R",
+      "test-alt-alt-orientation.R",
+      "test-alt-alt-reanchoring.R",
+      "test-bi_alllelic.R",
+      "test-check_drop_indels.R",
+      "test-check_impute_se_beta.R",
+      "test-check_info_score.R",
+      "test-check_range_pval.R",
+      "test-check_small_p_val.R",
+      "test-check_tabular.R",
+      "test-check_vcf.R",
+      "test-check_zscore.R",
+      "test-chromosome-mapping-performance.R",
+      "test-combined_CHR_BP_A2_A1.R",
+      "test-combined_CHR_BP_A2_A1_2.R",
+      "test-combined_allele_columns.R",
+      "test-combined_chr_bp.R",
+      "test-combined_chr_bp_2.R",
+      "test-comma_delim.R",
+      "test-complex-contrast-boundary.R",
+      "test-compute_nsize.R",
+      "test-contig-aliases.R",
+      "test-correct_format.R",
+      "test-dup_col.R",
+      "test-dup_rows.R",
+      "test-effect_columns_nonzero.R",
+      "test-equivalent-indel-context.R",
+      "test-fai-safety.R",
+      "test-frq_filter.R",
+      "test-generic-coordinate-contract.R",
+      "test-headers_correct.R",
+      "test-indels.R",
+      "test-index_tabular.R",
+      "test-info_filter.R",
+      "test-input_R_obj.R",
+      "test-issues_alleles.R",
+      "test-issues_chr.R",
+      "test-issues_dups.R",
+      "test-issues_effect_direction.R",
+      "test-issues_flip.R",
+      "test-issues_headers.R",
+      "test-issues_ieu_mock.R",
+      "test-issues_liftover.R",
+      "test-issues_logs.R",
+      "test-issues_n_frq.R",
+      "test-issues_pvals_z.R",
+      "test-issues_read.R",
+      "test-issues_ref_genome.R",
+      "test-issues_save_path.R",
+      "test-issues_snp_ids.R",
+      "test-issues_validate.R",
+      "test-issues_write.R",
+      "test-list_sumstats.R",
+      "test-log10_p.R",
+      "test-missing_data.R",
+      "test-multi_rs_snp_one_row.R",
+      "test-multi_traits.R",
+      "test-n_not_integer.R",
+      "test-n_num.R",
+      "test-no_chr.R",
+      "test-no_chr_bp.R",
+      "test-no_rs_id.R",
+      "test-no_rs_snp.R",
+      "test-no_snp.R",
+      "test-on_x_y_mt_chr.R",
+      "test-paired-site-contexts.R",
+      "test-preservation-fasta-layout.R",
+      "test-preservation-stream-performance.R",
+      "test-preservation.R",
+      "test-projection.R",
+      "test-quoted-stream.R",
+      "test-read_header.R",
+      "test-read_sumstats.R",
+      "test-read_vcf.R",
+      "test-reference-format3.R",
+      "test-reference-relocation.R",
+      "test-rs_plus.R",
+      "test-signed_cols.R",
+      "test-small_p_val.R",
+      "test-source-reference-contract.R",
+      "test-space_delim.R",
+      "test-standard_error_positive.R",
+      "test-standardise_sumstats_column_headers_crossplatform.R",
+      "test-strand_ambig.R",
+      "test-user_mapping_file.R",
+      "test-validate_parameters.R",
+      "test-vital_cols.R",
+      "test-write_sumstats.R"
+    ],
+    "errors": 0,
+    "failed": 0,
+    "passed": 3077,
+    "skipped": 0,
+    "suite_warnings": 0,
+    "test_warnings": 2,
+    "tests": 269
+  },
+  "observed_utc": "2026-11-21T13:03:08.076955+00:00",
+  "prior_receipts_byte_equal": {
+    "conditions.tsv": true,
+    "qualification.tsv": true,
+    "tests.tsv": true
+  },
+  "result": {
+    "path": "/private/tmp/mss-key-geometry-installed-suite-20261121/RESULT.json",
+    "sha256": "c1d6da57e60e552b3b17c6f07e88363989962ce8b5c074450f77498b58c7770c"
+  },
+  "scope": "Actual complete unfiltered installed testthat qualification of the key-page candidate on Darwin arm64; native Windows and performance remain separate.",
+  "source_commit": "8b85aa5ffc45ad7632cfc5319e85dd5eb3089be6",
+  "terminal": {
+    "cleanup_errors": [],
+    "closure": "confirmed",
+    "elapsed_seconds": 170.20790683315136,
+    "first_group": {
+      "completed_monotonic": 1859702.923728125,
+      "members": [
+        {
+          "euid": 501,
+          "pgid": 78054,
+          "pid": 78054,
+          "rss_bytes": 32768,
+          "ruid": 501,
+          "sid": 78054,
+          "sid_source": "getsid",
+          "state": "Ss"
+        }
+      ],
+      "monotonic": 1859702.913778833,
+      "rss_bytes": 32768
+    },
+    "group_samples": 166,
+    "label": "candidate-unfiltered",
+    "last_group": {
+      "completed_monotonic": 1859873.113405583,
+      "members": [
+        {
+          "euid": 501,
+          "pgid": 78054,
+          "pid": 78054,
+          "rss_bytes": 0,
+          "ruid": 501,
+          "sid": 78054,
+          "sid_source": "owned setsid plus waitable zombie",
+          "state": "Z"
+        }
+      ],
+      "monotonic": 1859873.110360416,
+      "rss_bytes": 0
+    },
+    "last_space": {
+      "allocated_bytes": 1196032,
+      "block_bytes": 4096,
+      "entries": 105,
+      "free_bytes": 235286781952,
+      "logical_bytes": 949463
+    },
+    "leader_reaped": true,
+    "max_sample_gap_seconds": 1.0598051249980927,
+    "minimum_free_bytes": 230245568512,
+    "missed_samples": 0,
+    "peak_disk_allocated_bytes": 19185664,
+    "peak_disk_logical_bytes": 13383435,
+    "peak_group": {
+      "completed_monotonic": 1859836.372220916,
+      "members": [
+        {
+          "euid": 501,
+          "pgid": 78054,
+          "pid": 78054,
+          "rss_bytes": 6612402176,
+          "ruid": 501,
+          "sid": 78054,
+          "sid_source": "getsid",
+          "state": "Rs"
+        }
+      ],
+      "monotonic": 1859836.368717541,
+      "rss_bytes": 6612402176
+    },
+    "peak_sampled_group_rss_bytes": 6612402176,
+    "prelaunch_rss_bytes": 0,
+    "prelaunch_space": {
+      "allocated_bytes": 815104,
+      "block_bytes": 4096,
+      "entries": 101,
+      "free_bytes": 230464196608,
+      "logical_bytes": 603166
+    },
+    "primary": null,
+    "raw_exit": 0,
+    "signals": [],
+    "status": "completed",
+    "terminal_members": [
+      {
+        "euid": 501,
+        "pgid": 78054,
+        "pid": 78054,
+        "rss_bytes": 0,
+        "ruid": 501,
+        "sid": 78054,
+        "sid_source": "owned setsid plus waitable zombie",
+        "state": "Z"
+      }
+    ],
+    "trigger_sample": null,
+    "utc": "2026-11-21T13:01:34.064241+00:00"
+  }
+}

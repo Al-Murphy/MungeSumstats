@@ -1,0 +1,11 @@
+--- a/src/preservation_core.h
++++ b/src/preservation_core.h
+@@ -499,7 +499,7 @@
+     out.original_positions.insert(out.original_pos);return out;
+   }
+ public:
+-  Reference(const std::string& dir,const std::string& fasta):keys(dir+"/keys"),offsets(dir+"/offsets"),records(dir+"/records"),fa(fasta,dir+"/fasta.fai") {
++  Reference(const std::string& dir,const std::string& fasta):keys(dir+"/keys",16384,512),offsets(dir+"/offsets"),records(dir+"/records"),fa(fasta,dir+"/fasta.fai") {
+     std::ifstream meta(dir+"/core-version");std::string version;std::getline(meta,version);
+     if(version!="mss-preservation-2"&&version!="mss-preservation-3")throw std::runtime_error("Incomplete or unsupported reference index");
+     if(version=="mss-preservation-3") {

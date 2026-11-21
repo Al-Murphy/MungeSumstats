@@ -1,0 +1,6 @@
+format 2
+warm negative allocations 0 for 1024 queries
+shuffled unique 3000 ordinary probes 35389 loaded 3546 fence hits 31843 key page requests 9560 reads 2 offset page requests 9546 reads 0 rank bytes 816736
+format 3
+warm negative allocations 0 for 1024 queries
+shuffled unique 3000 ordinary probes 35389 loaded 3546 fence hits 31843 key page requests 19112 reads 2 offset page requests 9546 reads 0 rank bytes 816736

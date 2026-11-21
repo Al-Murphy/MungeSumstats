@@ -1,0 +1,171 @@
+{
+  "all_float_bits_and_raw_tokens_equal": true,
+  "counters": {
+    "input": {
+      "baseline": {
+        "distinct_canonical_count": 32768,
+        "distinct_raw_count": 32768,
+        "key_page_width_bytes": 65536,
+        "key_reads": 4746,
+        "key_requests": 932966,
+        "offset_reads": 164,
+        "offset_requests": 932392,
+        "pivot_hits": 1269761,
+        "pivot_slots": 8191,
+        "probe_entries": 735785,
+        "rank_bytes": 983056,
+        "rank_hits": 0,
+        "rank_slots": 4096,
+        "requested_key_bytes": 311033856,
+        "selected_count": 32768
+      },
+      "trial": {
+        "distinct_canonical_count": 32768,
+        "distinct_raw_count": 32768,
+        "key_page_width_bytes": 16384,
+        "key_reads": 7032,
+        "key_requests": 934690,
+        "offset_reads": 164,
+        "offset_requests": 932392,
+        "pivot_hits": 1269761,
+        "pivot_slots": 8191,
+        "probe_entries": 735785,
+        "rank_bytes": 983056,
+        "rank_hits": 0,
+        "rank_slots": 4096,
+        "requested_key_bytes": 115212288,
+        "selected_count": 32768
+      }
+    },
+    "shuffled": {
+      "baseline": {
+        "distinct_canonical_count": 32768,
+        "distinct_raw_count": 32768,
+        "key_page_width_bytes": 65536,
+        "key_reads": 73336,
+        "key_requests": 932966,
+        "offset_reads": 20712,
+        "offset_requests": 932392,
+        "pivot_hits": 1269761,
+        "pivot_slots": 8191,
+        "probe_entries": 735785,
+        "rank_bytes": 983056,
+        "rank_hits": 0,
+        "rank_slots": 4096,
+        "requested_key_bytes": 4806148096,
+        "selected_count": 32768
+      },
+      "trial": {
+        "distinct_canonical_count": 32768,
+        "distinct_raw_count": 32768,
+        "key_page_width_bytes": 16384,
+        "key_reads": 78265,
+        "key_requests": 934690,
+        "offset_reads": 20712,
+        "offset_requests": 932392,
+        "pivot_hits": 1269761,
+        "pivot_slots": 8191,
+        "probe_entries": 735785,
+        "rank_bytes": 983056,
+        "rank_hits": 0,
+        "rank_slots": 4096,
+        "requested_key_bytes": 1282293760,
+        "selected_count": 32768
+      }
+    }
+  },
+  "legacy_parity_transcript_equal": true,
+  "native_scientific_parity": true,
+  "outcomes": {
+    "compile-baseline": {
+      "cleanup_errors": [],
+      "closure": "confirmed",
+      "primary": null,
+      "raw_exit": 0,
+      "receipt_error": null,
+      "status": "completed"
+    },
+    "compile-trial": {
+      "cleanup_errors": [],
+      "closure": "confirmed",
+      "primary": null,
+      "raw_exit": 0,
+      "receipt_error": null,
+      "status": "completed"
+    },
+    "compiler": {
+      "cleanup_errors": [],
+      "closure": "confirmed",
+      "primary": null,
+      "raw_exit": 0,
+      "receipt_error": null,
+      "status": "completed"
+    },
+    "matched-input-baseline": {
+      "cleanup_errors": [],
+      "closure": "confirmed",
+      "primary": null,
+      "raw_exit": 0,
+      "receipt_error": null,
+      "status": "completed"
+    },
+    "matched-input-trial": {
+      "cleanup_errors": [],
+      "closure": "confirmed",
+      "primary": null,
+      "raw_exit": 0,
+      "receipt_error": null,
+      "status": "completed"
+    },
+    "matched-shuffled-baseline": {
+      "cleanup_errors": [],
+      "closure": "confirmed",
+      "primary": null,
+      "raw_exit": 0,
+      "receipt_error": null,
+      "status": "completed"
+    },
+    "matched-shuffled-trial": {
+      "cleanup_errors": [],
+      "closure": "confirmed",
+      "primary": null,
+      "raw_exit": 0,
+      "receipt_error": null,
+      "status": "completed"
+    },
+    "parity-baseline": {
+      "cleanup_errors": [],
+      "closure": "confirmed",
+      "primary": null,
+      "raw_exit": 0,
+      "receipt_error": null,
+      "status": "completed"
+    },
+    "parity-trial": {
+      "cleanup_errors": [],
+      "closure": "confirmed",
+      "primary": null,
+      "raw_exit": 0,
+      "receipt_error": null,
+      "status": "completed"
+    },
+    "pressure-baseline": {
+      "cleanup_errors": [],
+      "closure": "confirmed",
+      "primary": null,
+      "raw_exit": 0,
+      "receipt_error": null,
+      "status": "completed"
+    },
+    "pressure-trial": {
+      "cleanup_errors": [],
+      "closure": "confirmed",
+      "primary": null,
+      "raw_exit": 0,
+      "receipt_error": null,
+      "status": "completed"
+    }
+  },
+  "scope": "Application page counts/requested bytes, not physical I/O or unprofiled API speedup",
+  "source_committed_product_unchanged": true
+}

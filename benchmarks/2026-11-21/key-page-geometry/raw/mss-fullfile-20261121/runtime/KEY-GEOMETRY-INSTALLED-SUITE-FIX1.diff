@@ -1,0 +1,201 @@
+--- a/key-geometry-installed-suite.py
++++ b/key-geometry-installed-suite.py
+@@ -112,11 +112,17 @@
+             "product_files": product, "archive_test_sources": archive_tests}
+ 
+ 
+-def installed_inventory(build):
++def installed_inventory(build, check_stop):
++    check_stop()
+     require(LIBRARY.resolve(strict=True) == LIBRARY and list(LIBRARY.iterdir()) == [PACKAGE]
+             and PACKAGE.resolve(strict=True) == PACKAGE, "Expected a one-package candidate library")
+     files, identity, total = {}, hashlib.sha256(), 0
+-    for path in sorted(PACKAGE.rglob("*")):
++    paths = []
++    for path in PACKAGE.rglob("*"):
++        check_stop()
++        paths.append(path)
++    for path in sorted(paths):
++        check_stop()
+         info = path.lstat()
+         if stat.S_ISDIR(info.st_mode):
+             continue
+@@ -126,6 +132,7 @@
+         name, digest = path.relative_to(PACKAGE).as_posix(), sha(data)
+         files[name] = {"bytes": len(data), "sha256": digest}
+         identity.update(name.encode("utf-8") + b"\0" + digest.encode("ascii") + b"\n")
++    check_stop()
+     require(identity.hexdigest() == build["package_tree_sha256"], "Installed candidate tree differs from build")
+     dll = "libs/MungeSumstats.so"
+     require(build["dll"]["path"] == str(PACKAGE / dll)
+@@ -134,19 +141,27 @@
+     return {"path": str(PACKAGE), "tree_sha256": identity.hexdigest(), "files": files}
+ 
+ 
+-def test_sources(directory, pins):
++def test_sources(directory, pins, check_stop):
++    check_stop()
+     require(directory.resolve(strict=True) == directory
+             and {path.name for path in directory.iterdir()} == pins.keys(), f"Test census differs in {directory}")
+-    return {name: read_file(directory / name, expected) for name, expected in sorted(pins.items())}
+-
+-
+-def verify_union(manifest):
++    sources = {}
++    for name, expected in sorted(pins.items()):
++        check_stop()
++        sources[name] = read_file(directory / name, expected)
++    check_stop()
++    return sources
++
++
++def verify_union(manifest, check_stop):
++    check_stop()
+     targets = manifest["physical_targets"]
+     require(manifest["overlay"] == str(UNION) and UNION.resolve(strict=True) == UNION
+             and len(targets) == manifest["entry_count"] == 102
+             and "MungeSumstats" not in targets and {path.name for path in UNION.iterdir()} == targets.keys(),
+             "Reference union census differs")
+     for name, target in targets.items():
++        check_stop()
+         entry = UNION / name
+         require(entry.is_symlink() and str(entry.resolve(strict=True)) == target
+                 and (entry / "DESCRIPTION").is_file(), f"Reference union target differs for {name}")
+@@ -168,18 +183,20 @@
+     return data
+ 
+ 
+-def table(data, names):
++def table(data, names, check_stop):
++    check_stop()
+     rows = csv.DictReader(io.StringIO(data.decode()), delimiter="\t", strict=True)
+     require(rows.fieldnames == names, f"Unexpected receipt header {rows.fieldnames}")
+-    parsed = list(rows)
+-    require(all(None not in row and None not in row.values() for row in parsed), "Malformed receipt row")
+-    return parsed
+-
+-
+-def suite_counts(data):
++    for row in rows:
++        check_stop()
++        require(None not in row and None not in row.values(), "Malformed receipt row")
++        yield row
++
++
++def suite_counts(data, check_stop):
+     columns = "file test nb passed skipped failed error warning".split()
+     cases, summary = Counter(), dict(tests=0, passed=0, skipped=0, failed=0, errors=0, test_warnings=0)
+-    for row in table(data, columns):
++    for row in table(data, columns, check_stop):
+         nb, passed, failed, warning = (int(row[key]) for key in ("nb", "passed", "failed", "warning"))
+         require(min(nb, passed, failed, warning) >= 0 and nb >= passed + failed + warning
+                 and row["skipped"] in ("TRUE", "FALSE") and row["error"] in ("TRUE", "FALSE"),
+@@ -195,18 +212,21 @@
+     return cases, summary
+ 
+ 
+-def collect_suite(directory):
++def collect_suite(directory, check_stop):
+     paths = {name: directory / f"{name}.tsv" for name in ("tests", "conditions", "qualification")}
+-    contents = {name: read_file(path) for name, path in paths.items()}
+-    cases, summary = suite_counts(contents["tests"])
+-    events = table(contents["conditions"], ["file", "test", "type", "message"])
+-    summary["suite_warnings"] = sum(row["type"] == "suite_warning" for row in events)
+-    summary["errors"] += sum(row["type"] == "suite_error" for row in events)
+-    warnings = sum(row["type"] == "expectation_warning" for row in events)
++    contents = {}
++    for name, path in paths.items():
++        check_stop()
++        contents[name] = read_file(path)
++    cases, summary = suite_counts(contents["tests"], check_stop)
++    events = table(contents["conditions"], ["file", "test", "type", "message"], check_stop)
++    condition_counts = Counter(row["type"] for row in events)
++    summary["suite_warnings"] = condition_counts["suite_warning"]
++    summary["errors"] += condition_counts["suite_error"]
+     columns = "qualified tests passed skipped failed errors test_warnings suite_warnings".split()
+-    qualified, = table(contents["qualification"], columns)
++    qualified, = table(contents["qualification"], columns, check_stop)
+     require(all(qualified[key] == str(summary[key]) for key in columns[1:])
+-            and warnings == summary["test_warnings"], "Qualification receipts disagree")
++            and condition_counts["expectation_warning"] == summary["test_warnings"], "Qualification receipts disagree")
+     pins = {name: {"path": str(path), "sha256": sha(contents[name])} for name, path in paths.items()}
+     return cases, summary, qualified["qualified"] == "TRUE", pins
+ 
+@@ -238,6 +258,7 @@
+     ROOT.mkdir(mode=0o700)
+     root_info = ROOT.lstat()
+     guard = native.Guard(native.GuardConfig(ROOT, start, **LIMITS))
++    check_stop = guard._stop_check
+     require(guard._root_id == (root_info.st_dev, root_info.st_ino), "Output root identity changed")
+     result = {"scope": "one unfiltered installed Darwin testthat suite", "status": "failed",
+               "scientific_completion": False, "performance_claim": False}
+@@ -250,7 +271,7 @@
+             prior_admission = json.loads(inputs[PRIOR / "admission.json"])
+             prior_result = json.loads(inputs[PRIOR / "RESULT.json"])
+             prior_records = [json.loads(line) for line in inputs[PRIOR / "deferred-unfiltered.jsonl"].splitlines()]
+-            prior_counts, previous = suite_counts(inputs[PRIOR / "receipts/deferred/tests.tsv"])
++            prior_counts, previous = suite_counts(inputs[PRIOR / "receipts/deferred/tests.tsv"], check_stop)
+             pins, census = prior_admission["test_sources"], prior_admission["test_census"]
+             require(len(pins) == 92 and len(census["test_files"]) == 90 and len(previous["active_files"]) == 89
+                     and previous["tests"] == 269 and previous["passed"] == 3077
+@@ -263,13 +284,13 @@
+                     and build["terminal"]["raw_exit"] == 0 and build["terminal"]["leader_reaped"],
+                     "Build identity or installation outcome differs")
+             manifest = json.loads(inputs[REFERENCE / "union-inventory.json"])
+-            verify_union(manifest)
++            verify_union(manifest, check_stop)
+             runner = RHOME / "bin/Rscript"
+             r_pins = {path: manifest["input_pins"][str(path)] for path in
+                       (runner, RHOME / "bin/exec/R", RHOME / "lib/libR.dylib")}
+             for path, expected in r_pins.items():
+                 read_file(path, expected, limit=16 * MIB)
+-            staged = test_sources(PRIOR / "tests", pins)
++            staged = test_sources(PRIOR / "tests", pins, check_stop)
+             for name in ("home", "tmp", "tests"):
+                 (ROOT / name).mkdir(mode=0o700)
+             guard._check_space(guard._space(walk=True), evidence_bytes=sum(map(len, staged.values())),
+@@ -280,8 +301,9 @@
+                     stream.write(data)
+ 
+             def integrity():
+-                tested = test_sources(ROOT / "tests", pins)
+-                return {"installed": installed_inventory(build), "tests": {name: sha(data) for name, data in tested.items()}}
++                tested = test_sources(ROOT / "tests", pins, check_stop)
++                return {"installed": installed_inventory(build, check_stop),
++                        "tests": {name: sha(data) for name, data in tested.items()}}
+ 
+             before = integrity()
+             result["before"] = write_json(ROOT / "before.json", before, guard)
+@@ -303,22 +325,28 @@
+             }, guard)
+             outcome = guard.run_phase(LABEL, argv, cwd=ROOT, env=env, allowed_exits=(0,), **paths)
+             result["outcome"] = asdict(outcome)
++            result["post_verification"] = "incomplete" if outcome.closure == "confirmed" else "not_started"
++            check_stop()
+             if paths["receipt"].is_file():
+                 receipt = read_file(paths["receipt"])
+                 result["guard_receipt"] = {"path": str(paths["receipt"]), "sha256": sha(receipt)}
+             # Preserve the post-run fence and any usable test reports after a closed failure.
+             if outcome.closure == "confirmed":
+                 after = integrity()
+-                result["after"] = write_json(ROOT / "after.json", after, guard, check_stop=False)
++                check_stop()
++                result["after"] = write_json(ROOT / "after.json", after, guard)
+                 require(before == after, "Candidate or staged tests changed during the suite")
+-                require(test_sources(PRIOR / "tests", pins) == staged, "Prior staged tests changed")
++                require(test_sources(PRIOR / "tests", pins, check_stop) == staged, "Prior staged tests changed")
+                 read_file(REFERENCE / "union-inventory.json", PINS[REFERENCE / "union-inventory.json"])
+-                verify_union(manifest)
++                verify_union(manifest, check_stop)
+                 for path in (CONTROL, QUALIFY, BUILD / "build.json", *r_pins):
++                    check_stop()
+                     read_file(path, (PINS | r_pins)[path], limit=16 * MIB)
+                 if suite.is_dir():
+-                    cases, summary, qualified, result["suite_receipts"] = collect_suite(suite)
++                    cases, summary, qualified, result["suite_receipts"] = collect_suite(suite, check_stop)
+                     result["observed"] = summary
++                check_stop()
++                result["post_verification"] = "complete"
+             require(outcome.status == "completed" and outcome.closure == "confirmed" and outcome.raw_exit == 0
+                     and outcome.primary is None and not outcome.cleanup_errors and outcome.receipt_error is None,
+                     f"Guard did not complete successfully: {outcome}")

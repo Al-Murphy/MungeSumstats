@@ -1,0 +1,172 @@
+{
+  "absent_groups_sessions": [
+    24813,
+    24816,
+    24836,
+    24876,
+    24880,
+    24883,
+    24886,
+    24889,
+    24892,
+    24914,
+    24921
+  ],
+  "actual_exec_session": 31893,
+  "actual_exit_code": 0,
+  "actual_terminal_tool_chunk": "2dbd6f",
+  "counter_changes": {
+    "input": {
+      "key_read_count_increase_pct": 48.16687737041718,
+      "key_reads_baseline": 4746,
+      "key_reads_trial": 7032,
+      "requested_key_bytes_baseline": 311033856,
+      "requested_key_bytes_reduction_pct": 62.958280657395704,
+      "requested_key_bytes_trial": 115212288
+    },
+    "shuffled": {
+      "key_read_count_increase_pct": 6.721119232027917,
+      "key_reads_baseline": 73336,
+      "key_reads_trial": 78265,
+      "requested_key_bytes_baseline": 4806148096,
+      "requested_key_bytes_reduction_pct": 73.31972019199301,
+      "requested_key_bytes_trial": 1282293760
+    }
+  },
+  "input_window": {
+    "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-01/input-window.json",
+    "sha256": "873e8d12793460bd351cf2521d1cfc17db7cf2b7d3738ea2f6646d0eb16ffae0"
+  },
+  "inspection_errors": [],
+  "live_members": [],
+  "nonempty_stderr": [],
+  "observed_utc": "2026-11-21T12:01:22.772735+00:00",
+  "phases": [
+    {
+      "closure": "confirmed",
+      "group_session": 24816,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-01/compile-baseline.jsonl",
+        "sha256": "343f9f53ddbe1da9a1b2556e86d78d1b6cadf334e9bf4cb781f17877805a5fce"
+      },
+      "label": "compile-baseline",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 24836,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-01/compile-trial.jsonl",
+        "sha256": "3a52b6ea27fb83b3761dd5fc7907b4290ee3007ab7f319344b8104f2b7b5eb8e"
+      },
+      "label": "compile-trial",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 24813,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-01/compiler.jsonl",
+        "sha256": "95aec59b18e947ade295bad19a7c871da097ad9b3b25657f42e3ef0e1e5ca9d8"
+      },
+      "label": "compiler",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 24889,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-01/matched-input-baseline.jsonl",
+        "sha256": "9f17c28ff82c7acdbea7f564a6ef8d09fa0ebafe5f85f634975a95170f97ba59"
+      },
+      "label": "matched-input-baseline",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 24892,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-01/matched-input-trial.jsonl",
+        "sha256": "badccf3d5067b4d43446ee10bf8dd6c7147eab81042efcc84918e9d2bca4eaa0"
+      },
+      "label": "matched-input-trial",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 24921,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-01/matched-shuffled-baseline.jsonl",
+        "sha256": "4687a011d6dcb4d22856e4a70fa4c378a4873c10df00609cedd5f74005166d07"
+      },
+      "label": "matched-shuffled-baseline",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 24914,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-01/matched-shuffled-trial.jsonl",
+        "sha256": "7b4522e8d599ce7fb36f621c0bcc101588ba96ac3d7eb257be4929ca586c0dec"
+      },
+      "label": "matched-shuffled-trial",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 24876,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-01/parity-baseline.jsonl",
+        "sha256": "c2946ff5f4eefb616dd5d3a0ae35c1f470b2bfa65513a8184552cfb129f6cd10"
+      },
+      "label": "parity-baseline",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 24880,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-01/parity-trial.jsonl",
+        "sha256": "f8d608e24804cbda81a671725d2acd4f4a68538d1925c92ee867bbf7fe0cb4aa"
+      },
+      "label": "parity-trial",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 24883,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-01/pressure-baseline.jsonl",
+        "sha256": "97f6f50090c048ebb59201de5a5d9c412d0b1b144e621724a484fc5016985abc"
+      },
+      "label": "pressure-baseline",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 24886,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-01/pressure-trial.jsonl",
+        "sha256": "30e91b09a52c48a21534f1e3487ea5edf39df061821909cfc4df417850cf3bb2"
+      },
+      "label": "pressure-trial",
+      "leader_reaped": true,
+      "raw_exit": 0
+    }
+  ],
+  "result": {
+    "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-01/result.json",
+    "sha256": "26150d11b7078b18f412ff8ff35ac05fbc9d3a64d10ad379d8e881ea6593e0bc"
+  },
+  "scope": "Application requested bytes from cache widths and reads; physical I/O and API runtime unmeasured; copied trial header only"
+}

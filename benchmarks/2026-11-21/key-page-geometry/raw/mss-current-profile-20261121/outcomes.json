@@ -1,0 +1,18 @@
+{
+  "alloc": {
+    "cleanup_errors": [],
+    "closure": "confirmed",
+    "primary": null,
+    "raw_exit": 0,
+    "receipt_error": null,
+    "status": "completed"
+  },
+  "cpu": {
+    "cleanup_errors": [],
+    "closure": "confirmed",
+    "primary": null,
+    "raw_exit": 0,
+    "receipt_error": null,
+    "status": "completed"
+  }
+}

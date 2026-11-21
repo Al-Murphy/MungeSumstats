@@ -8,7 +8,6 @@
 #' @param skip_vcf_metadata logical, should VCF metadata be ignored 
 #' @inheritParams format_sumstats
 #' 
-#' @importFrom VariantAnnotation scanVcfHeader
 #' @export
 #' @examples
 #' path <- system.file("extdata", "eduAttainOkbay.txt", 

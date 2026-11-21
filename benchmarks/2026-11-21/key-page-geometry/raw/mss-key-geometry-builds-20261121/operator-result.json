@@ -1,0 +1,2104 @@
+{
+  "admission": {
+    "path": "/private/tmp/mss-key-geometry-builds-20261121/admission.json",
+    "sha256": "2a4e2e61cbc94bc3cd1f64ff4620bebc8af1e6eca8c4edec37f70e55746c008d"
+  },
+  "argv": [
+    "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python",
+    "-I",
+    "-B",
+    "-S",
+    "/private/tmp/mss-fullfile-20261121/runtime/matched-builds.py",
+    "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b",
+    "8b85aa5ffc45ad7632cfc5319e85dd5eb3089be6",
+    "/private/tmp/mss-key-geometry-builds-20261121"
+  ],
+  "binding": {
+    "path": "/private/tmp/mss-fullfile-20261121/runtime/namespace-bench.py",
+    "sha256": "a61cbab2a7af12e0befd8d4fb6c0e9f81d786160db1ad391c95389717a002e94"
+  },
+  "commits": {
+    "baseline": "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b",
+    "candidate": "8b85aa5ffc45ad7632cfc5319e85dd5eb3089be6"
+  },
+  "finished_utc": "2026-11-21T12:24:53.582572+00:00",
+  "guard": {
+    "path": "/private/tmp/mss-performance-20261119/tools/darwin-full-stage185/guard.py",
+    "sha256": "58e0818aa20801c30194bdce26bd117112b4b4d5d10f74ea556360c0867b56a2"
+  },
+  "historical_dependency_inventory": {
+    "path": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/dependency-inventory.json",
+    "sha256": "293025cbce6ea392e6b6ecbda1787b90b904abd5a2f30958a9301505fcf46a31"
+  },
+  "matrix_configuration": {
+    "path": "/private/tmp/mss-fullmatrix-20261121/prep-01/matrix.json",
+    "sha256": "156143e169744ead89eb7a01721ac433da0d0983be68924b417bcc72f00426c7"
+  },
+  "phases": [
+    {
+      "allowed_exits": [
+        0
+      ],
+      "argv": [
+        "/Library/Developer/CommandLineTools/usr/bin/clang",
+        "--version"
+      ],
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/clang",
+        "--version"
+      ],
+      "cwd": "/private/tmp/mss-key-geometry-builds-20261121",
+      "effective_environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-key-geometry-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-key-geometry-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "label": "compiler",
+      "outcome": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "primary": null,
+        "raw_exit": 0,
+        "receipt_error": null,
+        "status": "completed"
+      },
+      "paths": {
+        "receipt": "/private/tmp/mss-key-geometry-builds-20261121/compiler.jsonl",
+        "stderr": "/private/tmp/mss-key-geometry-builds-20261121/compiler.stderr",
+        "stdout": "/private/tmp/mss-key-geometry-builds-20261121/compiler.stdout"
+      },
+      "receipt": {
+        "path": "/private/tmp/mss-key-geometry-builds-20261121/compiler.jsonl",
+        "sha256": "34c669b1084afbf28b3b05f07128ac138e43cc8fc7f556e1c5ee22d285c299ba"
+      },
+      "terminal": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "elapsed_seconds": 0.017872999887913465,
+        "first_group": {
+          "completed_monotonic": 1857637.474976416,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 53567,
+              "pid": 53567,
+              "rss_bytes": 0,
+              "ruid": 501,
+              "sid": 53567,
+              "sid_source": "owned setsid plus waitable zombie",
+              "state": "Z"
+            }
+          ],
+          "monotonic": 1857637.461278416,
+          "rss_bytes": 0
+        },
+        "group_samples": 1,
+        "label": "compiler",
+        "last_group": {
+          "completed_monotonic": 1857637.474976416,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 53567,
+              "pid": 53567,
+              "rss_bytes": 0,
+              "ruid": 501,
+              "sid": 53567,
+              "sid_source": "owned setsid plus waitable zombie",
+              "state": "Z"
+            }
+          ],
+          "monotonic": 1857637.461278416,
+          "rss_bytes": 0
+        },
+        "last_space": {
+          "allocated_bytes": 12288,
+          "block_bytes": 4096,
+          "entries": 7,
+          "free_bytes": 233067802624,
+          "logical_bytes": 3816
+        },
+        "leader_reaped": true,
+        "max_sample_gap_seconds": 0,
+        "minimum_free_bytes": 233067802624,
+        "missed_samples": 0,
+        "peak_disk_allocated_bytes": 12288,
+        "peak_disk_logical_bytes": 3816,
+        "peak_group": {
+          "completed_monotonic": 1857637.474976416,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 53567,
+              "pid": 53567,
+              "rss_bytes": 0,
+              "ruid": 501,
+              "sid": 53567,
+              "sid_source": "owned setsid plus waitable zombie",
+              "state": "Z"
+            }
+          ],
+          "monotonic": 1857637.461278416,
+          "rss_bytes": 0
+        },
+        "peak_sampled_group_rss_bytes": 0,
+        "prelaunch_rss_bytes": 0,
+        "prelaunch_space": {
+          "allocated_bytes": 8192,
+          "block_bytes": 4096,
+          "entries": 7,
+          "free_bytes": 233067810816,
+          "logical_bytes": 3065
+        },
+        "primary": null,
+        "raw_exit": 0,
+        "signals": [],
+        "status": "completed",
+        "terminal_members": [
+          {
+            "euid": 501,
+            "pgid": 53567,
+            "pid": 53567,
+            "rss_bytes": 0,
+            "ruid": 501,
+            "sid": 53567,
+            "sid_source": "owned setsid plus waitable zombie",
+            "state": "Z"
+          }
+        ],
+        "trigger_sample": null,
+        "utc": "2026-11-21T12:24:18.396379+00:00"
+      },
+      "transcripts": [
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/compiler.jsonl",
+          "sha256": "34c669b1084afbf28b3b05f07128ac138e43cc8fc7f556e1c5ee22d285c299ba"
+        },
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/compiler.stdout",
+          "sha256": "7656124e47978db7276c4783b040238fd3951ab2f3b824834660fcfb5b37eac1"
+        },
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/compiler.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "allowed_exits": [
+        0
+      ],
+      "argv": [
+        "/usr/bin/env",
+        "SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk",
+        "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/R",
+        "CMD",
+        "config",
+        "--all"
+      ],
+      "command": [
+        "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/R",
+        "CMD",
+        "config",
+        "--all"
+      ],
+      "cwd": "/private/tmp/mss-key-geometry-builds-20261121",
+      "effective_environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-key-geometry-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "SDKROOT": "/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk",
+        "TEMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-key-geometry-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "label": "r-config",
+      "outcome": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "primary": null,
+        "raw_exit": 0,
+        "receipt_error": null,
+        "status": "completed"
+      },
+      "paths": {
+        "receipt": "/private/tmp/mss-key-geometry-builds-20261121/r-config.jsonl",
+        "stderr": "/private/tmp/mss-key-geometry-builds-20261121/r-config.stderr",
+        "stdout": "/private/tmp/mss-key-geometry-builds-20261121/r-config.stdout"
+      },
+      "receipt": {
+        "path": "/private/tmp/mss-key-geometry-builds-20261121/r-config.jsonl",
+        "sha256": "d8b82c327c9fc2dbf4b6732d36f8d7676693ed36f83f8fa398a0a56ece92eb86"
+      },
+      "terminal": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "elapsed_seconds": 0.6162217080127448,
+        "first_group": {
+          "completed_monotonic": 1857637.480903958,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 53571,
+              "pid": 53571,
+              "rss_bytes": 32768,
+              "ruid": 501,
+              "sid": 53571,
+              "sid_source": "getsid",
+              "state": "Ss"
+            }
+          ],
+          "monotonic": 1857637.478026041,
+          "rss_bytes": 32768
+        },
+        "group_samples": 2,
+        "label": "r-config",
+        "last_group": {
+          "completed_monotonic": 1857638.091504833,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 53571,
+              "pid": 53571,
+              "rss_bytes": 0,
+              "ruid": 501,
+              "sid": 53571,
+              "sid_source": "owned setsid plus waitable zombie",
+              "state": "Z"
+            }
+          ],
+          "monotonic": 1857638.088105125,
+          "rss_bytes": 0
+        },
+        "last_space": {
+          "allocated_bytes": 20480,
+          "block_bytes": 4096,
+          "entries": 10,
+          "free_bytes": 233067679744,
+          "logical_bytes": 11082
+        },
+        "leader_reaped": true,
+        "max_sample_gap_seconds": 0.6100790838245302,
+        "minimum_free_bytes": 233067679744,
+        "missed_samples": 0,
+        "peak_disk_allocated_bytes": 20480,
+        "peak_disk_logical_bytes": 11082,
+        "peak_group": {
+          "completed_monotonic": 1857637.480903958,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 53571,
+              "pid": 53571,
+              "rss_bytes": 32768,
+              "ruid": 501,
+              "sid": 53571,
+              "sid_source": "getsid",
+              "state": "Ss"
+            }
+          ],
+          "monotonic": 1857637.478026041,
+          "rss_bytes": 32768
+        },
+        "peak_sampled_group_rss_bytes": 32768,
+        "prelaunch_rss_bytes": 0,
+        "prelaunch_space": {
+          "allocated_bytes": 16384,
+          "block_bytes": 4096,
+          "entries": 10,
+          "free_bytes": 233067798528,
+          "logical_bytes": 6603
+        },
+        "primary": null,
+        "raw_exit": 0,
+        "signals": [],
+        "status": "completed",
+        "terminal_members": [
+          {
+            "euid": 501,
+            "pgid": 53571,
+            "pid": 53571,
+            "rss_bytes": 0,
+            "ruid": 501,
+            "sid": 53571,
+            "sid_source": "owned setsid plus waitable zombie",
+            "state": "Z"
+          }
+        ],
+        "trigger_sample": null,
+        "utc": "2026-11-21T12:24:19.012986+00:00"
+      },
+      "transcripts": [
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/r-config.jsonl",
+          "sha256": "d8b82c327c9fc2dbf4b6732d36f8d7676693ed36f83f8fa398a0a56ece92eb86"
+        },
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/r-config.stdout",
+          "sha256": "5f713ee2ce1c5b57698ac0a43e5451863383d6557f151a38691ad6c180fa7527"
+        },
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/r-config.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "allowed_exits": [
+        0
+      ],
+      "argv": [
+        "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+        "--vanilla",
+        "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+        "runtime",
+        "/private/tmp/mss-key-geometry-builds-20261121/runtime.tsv"
+      ],
+      "command": [
+        "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+        "--vanilla",
+        "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+        "runtime",
+        "/private/tmp/mss-key-geometry-builds-20261121/runtime.tsv"
+      ],
+      "cwd": "/private/tmp/mss-key-geometry-builds-20261121",
+      "effective_environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-key-geometry-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-key-geometry-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "label": "runtime",
+      "outcome": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "primary": null,
+        "raw_exit": 0,
+        "receipt_error": null,
+        "status": "completed"
+      },
+      "paths": {
+        "receipt": "/private/tmp/mss-key-geometry-builds-20261121/runtime.jsonl",
+        "stderr": "/private/tmp/mss-key-geometry-builds-20261121/runtime.stderr",
+        "stdout": "/private/tmp/mss-key-geometry-builds-20261121/runtime.stdout"
+      },
+      "receipt": {
+        "path": "/private/tmp/mss-key-geometry-builds-20261121/runtime.jsonl",
+        "sha256": "7d984905a568e49a3d9f8cc203d84bbfef7a10f1e4b09bc0cf909855e5fde6a0"
+      },
+      "terminal": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "elapsed_seconds": 0.3359184581786394,
+        "first_group": {
+          "completed_monotonic": 1857638.100578125,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 53965,
+              "pid": 53965,
+              "rss_bytes": 32768,
+              "ruid": 501,
+              "sid": 53965,
+              "sid_source": "getsid",
+              "state": "Ss"
+            }
+          ],
+          "monotonic": 1857638.097926375,
+          "rss_bytes": 32768
+        },
+        "group_samples": 2,
+        "label": "runtime",
+        "last_group": {
+          "completed_monotonic": 1857638.427849833,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 53965,
+              "pid": 53965,
+              "rss_bytes": 0,
+              "ruid": 501,
+              "sid": 53965,
+              "sid_source": "owned setsid plus waitable zombie",
+              "state": "Z"
+            }
+          ],
+          "monotonic": 1857638.424420458,
+          "rss_bytes": 0
+        },
+        "last_space": {
+          "allocated_bytes": 28672,
+          "block_bytes": 4096,
+          "entries": 14,
+          "free_bytes": 233063952384,
+          "logical_bytes": 15404
+        },
+        "leader_reaped": true,
+        "max_sample_gap_seconds": 0.3264940830413252,
+        "minimum_free_bytes": 233063952384,
+        "missed_samples": 0,
+        "peak_disk_allocated_bytes": 28672,
+        "peak_disk_logical_bytes": 15404,
+        "peak_group": {
+          "completed_monotonic": 1857638.100578125,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 53965,
+              "pid": 53965,
+              "rss_bytes": 32768,
+              "ruid": 501,
+              "sid": 53965,
+              "sid_source": "getsid",
+              "state": "Ss"
+            }
+          ],
+          "monotonic": 1857638.097926375,
+          "rss_bytes": 32768
+        },
+        "peak_sampled_group_rss_bytes": 32768,
+        "prelaunch_rss_bytes": 0,
+        "prelaunch_space": {
+          "allocated_bytes": 24576,
+          "block_bytes": 4096,
+          "entries": 13,
+          "free_bytes": 233067659264,
+          "logical_bytes": 13932
+        },
+        "primary": null,
+        "raw_exit": 0,
+        "signals": [],
+        "status": "completed",
+        "terminal_members": [
+          {
+            "euid": 501,
+            "pgid": 53965,
+            "pid": 53965,
+            "rss_bytes": 0,
+            "ruid": 501,
+            "sid": 53965,
+            "sid_source": "owned setsid plus waitable zombie",
+            "state": "Z"
+          }
+        ],
+        "trigger_sample": null,
+        "utc": "2026-11-21T12:24:19.349367+00:00"
+      },
+      "transcripts": [
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/runtime.jsonl",
+          "sha256": "7d984905a568e49a3d9f8cc203d84bbfef7a10f1e4b09bc0cf909855e5fde6a0"
+        },
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/runtime.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/runtime.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "allowed_exits": [
+        0
+      ],
+      "argv": [
+        "/usr/bin/env",
+        "GIT_CONFIG_NOSYSTEM=1",
+        "GIT_CONFIG_GLOBAL=/dev/null",
+        "GIT_NO_REPLACE_OBJECTS=1",
+        "GIT_NO_LAZY_FETCH=1",
+        "/usr/bin/git",
+        "--no-replace-objects",
+        "-C",
+        "/private/tmp/mss-lazy-variantannotation-20261121",
+        "rev-parse",
+        "--verify",
+        "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b^{tree}"
+      ],
+      "command": [
+        "/usr/bin/git",
+        "--no-replace-objects",
+        "-C",
+        "/private/tmp/mss-lazy-variantannotation-20261121",
+        "rev-parse",
+        "--verify",
+        "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b^{tree}"
+      ],
+      "cwd": "/private/tmp/mss-key-geometry-builds-20261121",
+      "effective_environment": {
+        "BLIS_NUM_THREADS": "1",
+        "GIT_CONFIG_GLOBAL": "/dev/null",
+        "GIT_CONFIG_NOSYSTEM": "1",
+        "GIT_NO_LAZY_FETCH": "1",
+        "GIT_NO_REPLACE_OBJECTS": "1",
+        "HOME": "/private/tmp/mss-key-geometry-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-key-geometry-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "label": "source-tree-baseline",
+      "outcome": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "primary": null,
+        "raw_exit": 0,
+        "receipt_error": null,
+        "status": "completed"
+      },
+      "paths": {
+        "receipt": "/private/tmp/mss-key-geometry-builds-20261121/baseline/source-tree.jsonl",
+        "stderr": "/private/tmp/mss-key-geometry-builds-20261121/baseline/source-tree.stderr",
+        "stdout": "/private/tmp/mss-key-geometry-builds-20261121/baseline/source-tree.stdout"
+      },
+      "receipt": {
+        "path": "/private/tmp/mss-key-geometry-builds-20261121/baseline/source-tree.jsonl",
+        "sha256": "2acfecaea359cb7ae7d7e942ac62919a4018d7cf25144e8a44cd6e4cc1e03164"
+      },
+      "terminal": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "elapsed_seconds": 0.06815199996344745,
+        "first_group": {
+          "completed_monotonic": 1857638.435274208,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 53981,
+              "pid": 53981,
+              "rss_bytes": 1228800,
+              "ruid": 501,
+              "sid": 53981,
+              "sid_source": "getsid",
+              "state": "Rs"
+            }
+          ],
+          "monotonic": 1857638.432820083,
+          "rss_bytes": 1228800
+        },
+        "group_samples": 2,
+        "label": "source-tree-baseline",
+        "last_group": {
+          "completed_monotonic": 1857638.49709275,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 53981,
+              "pid": 53981,
+              "rss_bytes": 0,
+              "ruid": 501,
+              "sid": 53981,
+              "sid_source": "owned setsid plus waitable zombie",
+              "state": "Z"
+            }
+          ],
+          "monotonic": 1857638.493532916,
+          "rss_bytes": 0
+        },
+        "last_space": {
+          "allocated_bytes": 36864,
+          "block_bytes": 4096,
+          "entries": 19,
+          "free_bytes": 233063800832,
+          "logical_bytes": 19184
+        },
+        "leader_reaped": true,
+        "max_sample_gap_seconds": 0.06071283295750618,
+        "minimum_free_bytes": 233063800832,
+        "missed_samples": 0,
+        "peak_disk_allocated_bytes": 36864,
+        "peak_disk_logical_bytes": 19184,
+        "peak_group": {
+          "completed_monotonic": 1857638.435274208,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 53981,
+              "pid": 53981,
+              "rss_bytes": 1228800,
+              "ruid": 501,
+              "sid": 53981,
+              "sid_source": "getsid",
+              "state": "Rs"
+            }
+          ],
+          "monotonic": 1857638.432820083,
+          "rss_bytes": 1228800
+        },
+        "peak_sampled_group_rss_bytes": 1228800,
+        "prelaunch_rss_bytes": 0,
+        "prelaunch_space": {
+          "allocated_bytes": 32768,
+          "block_bytes": 4096,
+          "entries": 19,
+          "free_bytes": 233063944192,
+          "logical_bytes": 18537
+        },
+        "primary": null,
+        "raw_exit": 0,
+        "signals": [],
+        "status": "completed",
+        "terminal_members": [
+          {
+            "euid": 501,
+            "pgid": 53981,
+            "pid": 53981,
+            "rss_bytes": 0,
+            "ruid": 501,
+            "sid": 53981,
+            "sid_source": "owned setsid plus waitable zombie",
+            "state": "Z"
+          }
+        ],
+        "trigger_sample": null,
+        "utc": "2026-11-21T12:24:19.418662+00:00"
+      },
+      "transcripts": [
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/baseline/source-tree.jsonl",
+          "sha256": "2acfecaea359cb7ae7d7e942ac62919a4018d7cf25144e8a44cd6e4cc1e03164"
+        },
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/baseline/source-tree.stdout",
+          "sha256": "e493856cbf0df458e4f2c9a40150b0b20bf1608d15c77cc01f0f3a08a218a5c0"
+        },
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/baseline/source-tree.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "allowed_exits": [
+        0
+      ],
+      "argv": [
+        "/usr/bin/env",
+        "GIT_CONFIG_NOSYSTEM=1",
+        "GIT_CONFIG_GLOBAL=/dev/null",
+        "GIT_NO_REPLACE_OBJECTS=1",
+        "GIT_NO_LAZY_FETCH=1",
+        "/usr/bin/git",
+        "--no-replace-objects",
+        "-C",
+        "/private/tmp/mss-lazy-variantannotation-20261121",
+        "archive",
+        "--format=tar",
+        "--prefix=MungeSumstats/",
+        "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b"
+      ],
+      "command": [
+        "/usr/bin/git",
+        "--no-replace-objects",
+        "-C",
+        "/private/tmp/mss-lazy-variantannotation-20261121",
+        "archive",
+        "--format=tar",
+        "--prefix=MungeSumstats/",
+        "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b"
+      ],
+      "cwd": "/private/tmp/mss-key-geometry-builds-20261121",
+      "effective_environment": {
+        "BLIS_NUM_THREADS": "1",
+        "GIT_CONFIG_GLOBAL": "/dev/null",
+        "GIT_CONFIG_NOSYSTEM": "1",
+        "GIT_NO_LAZY_FETCH": "1",
+        "GIT_NO_REPLACE_OBJECTS": "1",
+        "HOME": "/private/tmp/mss-key-geometry-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-key-geometry-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "label": "git-archive-baseline",
+      "outcome": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "primary": null,
+        "raw_exit": 0,
+        "receipt_error": null,
+        "status": "completed"
+      },
+      "paths": {
+        "receipt": "/private/tmp/mss-key-geometry-builds-20261121/baseline/archive.jsonl",
+        "stderr": "/private/tmp/mss-key-geometry-builds-20261121/baseline/archive.stderr",
+        "stdout": "/private/tmp/mss-key-geometry-builds-20261121/baseline/MungeSumstats.tar"
+      },
+      "receipt": {
+        "path": "/private/tmp/mss-key-geometry-builds-20261121/baseline/archive.jsonl",
+        "sha256": "149812bb5b4590a811a5390b32f3bec98f4e030909213eef5e8605bb93e859fc"
+      },
+      "terminal": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "elapsed_seconds": 0.06447429093532264,
+        "first_group": {
+          "completed_monotonic": 1857638.503926708,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 53984,
+              "pid": 53984,
+              "rss_bytes": 1212416,
+              "ruid": 501,
+              "sid": 53984,
+              "sid_source": "getsid",
+              "state": "Rs"
+            }
+          ],
+          "monotonic": 1857638.501227333,
+          "rss_bytes": 1212416
+        },
+        "group_samples": 2,
+        "label": "git-archive-baseline",
+        "last_group": {
+          "completed_monotonic": 1857638.562155333,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 53984,
+              "pid": 53984,
+              "rss_bytes": 0,
+              "ruid": 501,
+              "sid": 53984,
+              "sid_source": "owned setsid plus waitable zombie",
+              "state": "Z"
+            }
+          ],
+          "monotonic": 1857638.558733916,
+          "rss_bytes": 0
+        },
+        "last_space": {
+          "allocated_bytes": 12922880,
+          "block_bytes": 4096,
+          "entries": 22,
+          "free_bytes": 233050763264,
+          "logical_bytes": 12904688
+        },
+        "leader_reaped": true,
+        "max_sample_gap_seconds": 0.057506582932546735,
+        "minimum_free_bytes": 233050763264,
+        "missed_samples": 0,
+        "peak_disk_allocated_bytes": 12922880,
+        "peak_disk_logical_bytes": 12904688,
+        "peak_group": {
+          "completed_monotonic": 1857638.503926708,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 53984,
+              "pid": 53984,
+              "rss_bytes": 1212416,
+              "ruid": 501,
+              "sid": 53984,
+              "sid_source": "getsid",
+              "state": "Rs"
+            }
+          ],
+          "monotonic": 1857638.501227333,
+          "rss_bytes": 1212416
+        },
+        "peak_sampled_group_rss_bytes": 1212416,
+        "prelaunch_rss_bytes": 0,
+        "prelaunch_space": {
+          "allocated_bytes": 40960,
+          "block_bytes": 4096,
+          "entries": 22,
+          "free_bytes": 233063796736,
+          "logical_bytes": 22162
+        },
+        "primary": null,
+        "raw_exit": 0,
+        "signals": [],
+        "status": "completed",
+        "terminal_members": [
+          {
+            "euid": 501,
+            "pgid": 53984,
+            "pid": 53984,
+            "rss_bytes": 0,
+            "ruid": 501,
+            "sid": 53984,
+            "sid_source": "owned setsid plus waitable zombie",
+            "state": "Z"
+          }
+        ],
+        "trigger_sample": null,
+        "utc": "2026-11-21T12:24:19.483717+00:00"
+      },
+      "transcripts": [
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/baseline/archive.jsonl",
+          "sha256": "149812bb5b4590a811a5390b32f3bec98f4e030909213eef5e8605bb93e859fc"
+        },
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/baseline/MungeSumstats.tar",
+          "sha256": "74430d18ee4e11db03df26a7cae2706868f28c751b81a4d3df84717cba8ad4c6"
+        },
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/baseline/archive.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "allowed_exits": [
+        0
+      ],
+      "argv": [
+        "/usr/bin/env",
+        "SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk",
+        "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/R",
+        "CMD",
+        "INSTALL",
+        "--use-vanilla",
+        "--library=/private/tmp/mss-key-geometry-builds-20261121/baseline/library",
+        "/private/tmp/mss-key-geometry-builds-20261121/baseline/MungeSumstats.tar"
+      ],
+      "command": [
+        "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/R",
+        "CMD",
+        "INSTALL",
+        "--use-vanilla",
+        "--library=/private/tmp/mss-key-geometry-builds-20261121/baseline/library",
+        "/private/tmp/mss-key-geometry-builds-20261121/baseline/MungeSumstats.tar"
+      ],
+      "cwd": "/private/tmp/mss-key-geometry-builds-20261121",
+      "effective_environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-key-geometry-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "SDKROOT": "/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk",
+        "TEMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-key-geometry-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "label": "normal-install-baseline",
+      "outcome": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "primary": null,
+        "raw_exit": 0,
+        "receipt_error": null,
+        "status": "completed"
+      },
+      "paths": {
+        "receipt": "/private/tmp/mss-key-geometry-builds-20261121/baseline/install.jsonl",
+        "stderr": "/private/tmp/mss-key-geometry-builds-20261121/baseline/install.stderr",
+        "stdout": "/private/tmp/mss-key-geometry-builds-20261121/baseline/install.stdout"
+      },
+      "receipt": {
+        "path": "/private/tmp/mss-key-geometry-builds-20261121/baseline/install.jsonl",
+        "sha256": "b4fa53767dfe9c0817e4b703f625edbde8431a448f504cd586df4c76c5d912d9"
+      },
+      "terminal": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "elapsed_seconds": 17.027480375021696,
+        "first_group": {
+          "completed_monotonic": 1857638.590859708,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 53989,
+              "pid": 53989,
+              "rss_bytes": 114688,
+              "ruid": 501,
+              "sid": 53989,
+              "sid_source": "getsid",
+              "state": "Rs"
+            }
+          ],
+          "monotonic": 1857638.587927041,
+          "rss_bytes": 114688
+        },
+        "group_samples": 18,
+        "label": "normal-install-baseline",
+        "last_group": {
+          "completed_monotonic": 1857655.605962583,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 53989,
+              "pid": 53989,
+              "rss_bytes": 0,
+              "ruid": 501,
+              "sid": 53989,
+              "sid_source": "owned setsid plus waitable zombie",
+              "state": "Z"
+            }
+          ],
+          "monotonic": 1857655.60219475,
+          "rss_bytes": 0
+        },
+        "last_space": {
+          "allocated_bytes": 23056384,
+          "block_bytes": 4096,
+          "entries": 872,
+          "free_bytes": 233021521920,
+          "logical_bytes": 21167606
+        },
+        "leader_reaped": true,
+        "max_sample_gap_seconds": 1.0595565838739276,
+        "minimum_free_bytes": 232999723008,
+        "missed_samples": 0,
+        "peak_disk_allocated_bytes": 44736512,
+        "peak_disk_logical_bytes": 39117620,
+        "peak_group": {
+          "completed_monotonic": 1857647.879398916,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 53989,
+              "pid": 53989,
+              "rss_bytes": 2785280,
+              "ruid": 501,
+              "sid": 53989,
+              "sid_source": "getsid",
+              "state": "Ss"
+            },
+            {
+              "euid": 501,
+              "pgid": 53989,
+              "pid": 53994,
+              "rss_bytes": 112689152,
+              "ruid": 501,
+              "sid": 53989,
+              "sid_source": "getsid",
+              "state": "S"
+            },
+            {
+              "euid": 501,
+              "pgid": 53989,
+              "pid": 54083,
+              "rss_bytes": 2670592,
+              "ruid": 501,
+              "sid": 53989,
+              "sid_source": "getsid",
+              "state": "S"
+            },
+            {
+              "euid": 501,
+              "pgid": 53989,
+              "pid": 54084,
+              "rss_bytes": 1102774272,
+              "ruid": 501,
+              "sid": 53989,
+              "sid_source": "getsid",
+              "state": "R"
+            }
+          ],
+          "monotonic": 1857647.875182958,
+          "rss_bytes": 1220919296
+        },
+        "peak_sampled_group_rss_bytes": 1220919296,
+        "prelaunch_rss_bytes": 0,
+        "prelaunch_space": {
+          "allocated_bytes": 12926976,
+          "block_bytes": 4096,
+          "entries": 25,
+          "free_bytes": 233050718208,
+          "logical_bytes": 12907701
+        },
+        "primary": null,
+        "raw_exit": 0,
+        "signals": [],
+        "status": "completed",
+        "terminal_members": [
+          {
+            "euid": 501,
+            "pgid": 53989,
+            "pid": 53989,
+            "rss_bytes": 0,
+            "ruid": 501,
+            "sid": 53989,
+            "sid_source": "owned setsid plus waitable zombie",
+            "state": "Z"
+          }
+        ],
+        "trigger_sample": null,
+        "utc": "2026-11-21T12:24:36.533591+00:00"
+      },
+      "transcripts": [
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/baseline/install.jsonl",
+          "sha256": "b4fa53767dfe9c0817e4b703f625edbde8431a448f504cd586df4c76c5d912d9"
+        },
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/baseline/install.stdout",
+          "sha256": "1d861c964b025461e4a1a8ce900ac871e9a38996d0498135f7f1ac8bd74e367c"
+        },
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/baseline/install.stderr",
+          "sha256": "6f5fa3c82bd1cc34ac6594dbabbc8ce728bcb4687549c2220f125f964bce80d5"
+        }
+      ]
+    },
+    {
+      "allowed_exits": [
+        0
+      ],
+      "argv": [
+        "/usr/bin/env",
+        "GIT_CONFIG_NOSYSTEM=1",
+        "GIT_CONFIG_GLOBAL=/dev/null",
+        "GIT_NO_REPLACE_OBJECTS=1",
+        "GIT_NO_LAZY_FETCH=1",
+        "/usr/bin/git",
+        "--no-replace-objects",
+        "-C",
+        "/private/tmp/mss-lazy-variantannotation-20261121",
+        "rev-parse",
+        "--verify",
+        "8b85aa5ffc45ad7632cfc5319e85dd5eb3089be6^{tree}"
+      ],
+      "command": [
+        "/usr/bin/git",
+        "--no-replace-objects",
+        "-C",
+        "/private/tmp/mss-lazy-variantannotation-20261121",
+        "rev-parse",
+        "--verify",
+        "8b85aa5ffc45ad7632cfc5319e85dd5eb3089be6^{tree}"
+      ],
+      "cwd": "/private/tmp/mss-key-geometry-builds-20261121",
+      "effective_environment": {
+        "BLIS_NUM_THREADS": "1",
+        "GIT_CONFIG_GLOBAL": "/dev/null",
+        "GIT_CONFIG_NOSYSTEM": "1",
+        "GIT_NO_LAZY_FETCH": "1",
+        "GIT_NO_REPLACE_OBJECTS": "1",
+        "HOME": "/private/tmp/mss-key-geometry-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-key-geometry-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "label": "source-tree-candidate",
+      "outcome": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "primary": null,
+        "raw_exit": 0,
+        "receipt_error": null,
+        "status": "completed"
+      },
+      "paths": {
+        "receipt": "/private/tmp/mss-key-geometry-builds-20261121/candidate/source-tree.jsonl",
+        "stderr": "/private/tmp/mss-key-geometry-builds-20261121/candidate/source-tree.stderr",
+        "stdout": "/private/tmp/mss-key-geometry-builds-20261121/candidate/source-tree.stdout"
+      },
+      "receipt": {
+        "path": "/private/tmp/mss-key-geometry-builds-20261121/candidate/source-tree.jsonl",
+        "sha256": "36971047ed0c3f46c7cdf21ae1a51a4fb5e22a92b9b118de5bdef09b2fd9b6d8"
+      },
+      "terminal": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "elapsed_seconds": 0.09721608296968043,
+        "first_group": {
+          "completed_monotonic": 1857655.702742083,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 54353,
+              "pid": 54353,
+              "rss_bytes": 1474560,
+              "ruid": 501,
+              "sid": 54353,
+              "sid_source": "getsid",
+              "state": "Rs"
+            }
+          ],
+          "monotonic": 1857655.699481958,
+          "rss_bytes": 1474560
+        },
+        "group_samples": 2,
+        "label": "source-tree-candidate",
+        "last_group": {
+          "completed_monotonic": 1857655.765758708,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 54353,
+              "pid": 54353,
+              "rss_bytes": 0,
+              "ruid": 501,
+              "sid": 54353,
+              "sid_source": "owned setsid plus waitable zombie",
+              "state": "Z"
+            }
+          ],
+          "monotonic": 1857655.762929333,
+          "rss_bytes": 0
+        },
+        "last_space": {
+          "allocated_bytes": 23076864,
+          "block_bytes": 4096,
+          "entries": 878,
+          "free_bytes": 233021464576,
+          "logical_bytes": 21181623
+        },
+        "leader_reaped": true,
+        "max_sample_gap_seconds": 0.06344737485051155,
+        "minimum_free_bytes": 233021464576,
+        "missed_samples": 0,
+        "peak_disk_allocated_bytes": 23076864,
+        "peak_disk_logical_bytes": 21181623,
+        "peak_group": {
+          "completed_monotonic": 1857655.702742083,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 54353,
+              "pid": 54353,
+              "rss_bytes": 1474560,
+              "ruid": 501,
+              "sid": 54353,
+              "sid_source": "getsid",
+              "state": "Rs"
+            }
+          ],
+          "monotonic": 1857655.699481958,
+          "rss_bytes": 1474560
+        },
+        "peak_sampled_group_rss_bytes": 1474560,
+        "prelaunch_rss_bytes": 0,
+        "prelaunch_space": {
+          "allocated_bytes": 23072768,
+          "block_bytes": 4096,
+          "entries": 878,
+          "free_bytes": 233021476864,
+          "logical_bytes": 21180975
+        },
+        "primary": null,
+        "raw_exit": 0,
+        "signals": [],
+        "status": "completed",
+        "terminal_members": [
+          {
+            "euid": 501,
+            "pgid": 54353,
+            "pid": 54353,
+            "rss_bytes": 0,
+            "ruid": 501,
+            "sid": 54353,
+            "sid_source": "owned setsid plus waitable zombie",
+            "state": "Z"
+          }
+        ],
+        "trigger_sample": null,
+        "utc": "2026-11-21T12:24:36.691559+00:00"
+      },
+      "transcripts": [
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/candidate/source-tree.jsonl",
+          "sha256": "36971047ed0c3f46c7cdf21ae1a51a4fb5e22a92b9b118de5bdef09b2fd9b6d8"
+        },
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/candidate/source-tree.stdout",
+          "sha256": "9965a03eb4b39833579f0969fcdb7db90dd57e15368fefb269024590680c5ce0"
+        },
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/candidate/source-tree.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "allowed_exits": [
+        0
+      ],
+      "argv": [
+        "/usr/bin/env",
+        "GIT_CONFIG_NOSYSTEM=1",
+        "GIT_CONFIG_GLOBAL=/dev/null",
+        "GIT_NO_REPLACE_OBJECTS=1",
+        "GIT_NO_LAZY_FETCH=1",
+        "/usr/bin/git",
+        "--no-replace-objects",
+        "-C",
+        "/private/tmp/mss-lazy-variantannotation-20261121",
+        "archive",
+        "--format=tar",
+        "--prefix=MungeSumstats/",
+        "8b85aa5ffc45ad7632cfc5319e85dd5eb3089be6"
+      ],
+      "command": [
+        "/usr/bin/git",
+        "--no-replace-objects",
+        "-C",
+        "/private/tmp/mss-lazy-variantannotation-20261121",
+        "archive",
+        "--format=tar",
+        "--prefix=MungeSumstats/",
+        "8b85aa5ffc45ad7632cfc5319e85dd5eb3089be6"
+      ],
+      "cwd": "/private/tmp/mss-key-geometry-builds-20261121",
+      "effective_environment": {
+        "BLIS_NUM_THREADS": "1",
+        "GIT_CONFIG_GLOBAL": "/dev/null",
+        "GIT_CONFIG_NOSYSTEM": "1",
+        "GIT_NO_LAZY_FETCH": "1",
+        "GIT_NO_REPLACE_OBJECTS": "1",
+        "HOME": "/private/tmp/mss-key-geometry-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-key-geometry-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "label": "git-archive-candidate",
+      "outcome": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "primary": null,
+        "raw_exit": 0,
+        "receipt_error": null,
+        "status": "completed"
+      },
+      "paths": {
+        "receipt": "/private/tmp/mss-key-geometry-builds-20261121/candidate/archive.jsonl",
+        "stderr": "/private/tmp/mss-key-geometry-builds-20261121/candidate/archive.stderr",
+        "stdout": "/private/tmp/mss-key-geometry-builds-20261121/candidate/MungeSumstats.tar"
+      },
+      "receipt": {
+        "path": "/private/tmp/mss-key-geometry-builds-20261121/candidate/archive.jsonl",
+        "sha256": "f6d0c48749fc59f84714ea590c0980eeb4301ba9d12a2745e725eed2fb32233b"
+      },
+      "terminal": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "elapsed_seconds": 0.09063170896843076,
+        "first_group": {
+          "completed_monotonic": 1857655.793918041,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 54357,
+              "pid": 54357,
+              "rss_bytes": 1277952,
+              "ruid": 501,
+              "sid": 54357,
+              "sid_source": "getsid",
+              "state": "Rs"
+            }
+          ],
+          "monotonic": 1857655.791254166,
+          "rss_bytes": 1277952
+        },
+        "group_samples": 2,
+        "label": "git-archive-candidate",
+        "last_group": {
+          "completed_monotonic": 1857655.857143875,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 54357,
+              "pid": 54357,
+              "rss_bytes": 0,
+              "ruid": 501,
+              "sid": 54357,
+              "sid_source": "owned setsid plus waitable zombie",
+              "state": "Z"
+            }
+          ],
+          "monotonic": 1857655.854056166,
+          "rss_bytes": 0
+        },
+        "last_space": {
+          "allocated_bytes": 35975168,
+          "block_bytes": 4096,
+          "entries": 881,
+          "free_bytes": 233008427008,
+          "logical_bytes": 34077394
+        },
+        "leader_reaped": true,
+        "max_sample_gap_seconds": 0.06280199997127056,
+        "minimum_free_bytes": 233008427008,
+        "missed_samples": 0,
+        "peak_disk_allocated_bytes": 35975168,
+        "peak_disk_logical_bytes": 34077394,
+        "peak_group": {
+          "completed_monotonic": 1857655.793918041,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 54357,
+              "pid": 54357,
+              "rss_bytes": 1277952,
+              "ruid": 501,
+              "sid": 54357,
+              "sid_source": "getsid",
+              "state": "Rs"
+            }
+          ],
+          "monotonic": 1857655.791254166,
+          "rss_bytes": 1277952
+        },
+        "peak_sampled_group_rss_bytes": 1277952,
+        "prelaunch_rss_bytes": 0,
+        "prelaunch_space": {
+          "allocated_bytes": 23080960,
+          "block_bytes": 4096,
+          "entries": 881,
+          "free_bytes": 233021460480,
+          "logical_bytes": 21184627
+        },
+        "primary": null,
+        "raw_exit": 0,
+        "signals": [],
+        "status": "completed",
+        "terminal_members": [
+          {
+            "euid": 501,
+            "pgid": 54357,
+            "pid": 54357,
+            "rss_bytes": 0,
+            "ruid": 501,
+            "sid": 54357,
+            "sid_source": "owned setsid plus waitable zombie",
+            "state": "Z"
+          }
+        ],
+        "trigger_sample": null,
+        "utc": "2026-11-21T12:24:36.782651+00:00"
+      },
+      "transcripts": [
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/candidate/archive.jsonl",
+          "sha256": "f6d0c48749fc59f84714ea590c0980eeb4301ba9d12a2745e725eed2fb32233b"
+        },
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/candidate/MungeSumstats.tar",
+          "sha256": "4c30721a6439428f8a7a0905a0a131304742189799c544496a0eee5e78f968ed"
+        },
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/candidate/archive.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "allowed_exits": [
+        0
+      ],
+      "argv": [
+        "/usr/bin/env",
+        "SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk",
+        "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/R",
+        "CMD",
+        "INSTALL",
+        "--use-vanilla",
+        "--library=/private/tmp/mss-key-geometry-builds-20261121/candidate/library",
+        "/private/tmp/mss-key-geometry-builds-20261121/candidate/MungeSumstats.tar"
+      ],
+      "command": [
+        "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/R",
+        "CMD",
+        "INSTALL",
+        "--use-vanilla",
+        "--library=/private/tmp/mss-key-geometry-builds-20261121/candidate/library",
+        "/private/tmp/mss-key-geometry-builds-20261121/candidate/MungeSumstats.tar"
+      ],
+      "cwd": "/private/tmp/mss-key-geometry-builds-20261121",
+      "effective_environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-key-geometry-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "SDKROOT": "/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk",
+        "TEMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-key-geometry-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-key-geometry-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "label": "normal-install-candidate",
+      "outcome": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "primary": null,
+        "raw_exit": 0,
+        "receipt_error": null,
+        "status": "completed"
+      },
+      "paths": {
+        "receipt": "/private/tmp/mss-key-geometry-builds-20261121/candidate/install.jsonl",
+        "stderr": "/private/tmp/mss-key-geometry-builds-20261121/candidate/install.stderr",
+        "stdout": "/private/tmp/mss-key-geometry-builds-20261121/candidate/install.stdout"
+      },
+      "receipt": {
+        "path": "/private/tmp/mss-key-geometry-builds-20261121/candidate/install.jsonl",
+        "sha256": "32cc935956dedbb657af7852f7993c19ea736e87f5b2195954dafab85d2d3d6a"
+      },
+      "terminal": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "elapsed_seconds": 16.7160838751588,
+        "first_group": {
+          "completed_monotonic": 1857655.904461041,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 54362,
+              "pid": 54362,
+              "rss_bytes": 114688,
+              "ruid": 501,
+              "sid": 54362,
+              "sid_source": "getsid",
+              "state": "Rs"
+            }
+          ],
+          "monotonic": 1857655.901704,
+          "rss_bytes": 114688
+        },
+        "group_samples": 18,
+        "label": "normal-install-candidate",
+        "last_group": {
+          "completed_monotonic": 1857672.587014666,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 54362,
+              "pid": 54362,
+              "rss_bytes": 0,
+              "ruid": 501,
+              "sid": 54362,
+              "sid_source": "owned setsid plus waitable zombie",
+              "state": "Z"
+            }
+          ],
+          "monotonic": 1857672.583178208,
+          "rss_bytes": 0
+        },
+        "last_space": {
+          "allocated_bytes": 46108672,
+          "block_bytes": 4096,
+          "entries": 1731,
+          "free_bytes": 232986005504,
+          "logical_bytes": 42340249
+        },
+        "leader_reaped": true,
+        "max_sample_gap_seconds": 1.0496758338995278,
+        "minimum_free_bytes": 232962457600,
+        "missed_samples": 0,
+        "peak_disk_allocated_bytes": 67801088,
+        "peak_disk_logical_bytes": 60301297,
+        "peak_group": {
+          "completed_monotonic": 1857664.198706958,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 54362,
+              "pid": 54362,
+              "rss_bytes": 2785280,
+              "ruid": 501,
+              "sid": 54362,
+              "sid_source": "getsid",
+              "state": "Ss"
+            },
+            {
+              "euid": 501,
+              "pgid": 54362,
+              "pid": 54366,
+              "rss_bytes": 121307136,
+              "ruid": 501,
+              "sid": 54362,
+              "sid_source": "getsid",
+              "state": "S"
+            },
+            {
+              "euid": 501,
+              "pgid": 54362,
+              "pid": 54482,
+              "rss_bytes": 2670592,
+              "ruid": 501,
+              "sid": 54362,
+              "sid_source": "getsid",
+              "state": "S"
+            },
+            {
+              "euid": 501,
+              "pgid": 54362,
+              "pid": 54484,
+              "rss_bytes": 1097072640,
+              "ruid": 501,
+              "sid": 54362,
+              "sid_source": "getsid",
+              "state": "R"
+            }
+          ],
+          "monotonic": 1857664.195273708,
+          "rss_bytes": 1223835648
+        },
+        "peak_sampled_group_rss_bytes": 1223835648,
+        "prelaunch_rss_bytes": 0,
+        "prelaunch_space": {
+          "allocated_bytes": 35979264,
+          "block_bytes": 4096,
+          "entries": 884,
+          "free_bytes": 233008279552,
+          "logical_bytes": 34080421
+        },
+        "primary": null,
+        "raw_exit": 0,
+        "signals": [],
+        "status": "completed",
+        "terminal_members": [
+          {
+            "euid": 501,
+            "pgid": 54362,
+            "pid": 54362,
+            "rss_bytes": 0,
+            "ruid": 501,
+            "sid": 54362,
+            "sid_source": "owned setsid plus waitable zombie",
+            "state": "Z"
+          }
+        ],
+        "trigger_sample": null,
+        "utc": "2026-11-21T12:24:53.519071+00:00"
+      },
+      "transcripts": [
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/candidate/install.jsonl",
+          "sha256": "32cc935956dedbb657af7852f7993c19ea736e87f5b2195954dafab85d2d3d6a"
+        },
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/candidate/install.stdout",
+          "sha256": "1d861c964b025461e4a1a8ce900ac871e9a38996d0498135f7f1ac8bd74e367c"
+        },
+        {
+          "path": "/private/tmp/mss-key-geometry-builds-20261121/candidate/install.stderr",
+          "sha256": "a1260693af7a174d2119ef962ba79bcb04de156934a082ed7373fb6dd8c7b83d"
+        }
+      ]
+    }
+  ],
+  "producer": {
+    "path": "/private/tmp/mss-fullfile-20261121/runtime/matched-builds.py",
+    "sha256": "0605d74d1434cc918c6901f9847c36ec4aa18d003fe76aaf7a8a1d149be6f54d"
+  },
+  "provenance": {
+    "path": "/private/tmp/mss-key-geometry-builds-20261121/PROVENANCE.json",
+    "sha256": "2700a8c55271c96c4b1cd47709f49b4bc95d26cbdb30bc7531e149a1bac065b7"
+  },
+  "repository": "/private/tmp/mss-lazy-variantannotation-20261121",
+  "reused_producer": {
+    "path": "/private/tmp/mss-fullfile-20261121/runtime/namespace-builds.py",
+    "sha256": "615535da8374c81d3d7f23f0300c313d26d06ebea638e73239492243f851a65f"
+  },
+  "roles": {
+    "baseline": {
+      "path": "/private/tmp/mss-key-geometry-builds-20261121/baseline/build.json",
+      "sha256": "b61d78a9c09b6dc16e3ab4f30abfbf73bcf6c5077d53710f06882728e2d10407"
+    },
+    "candidate": {
+      "path": "/private/tmp/mss-key-geometry-builds-20261121/candidate/build.json",
+      "sha256": "4f4cc66733417e431281dc1892d71f5acc3fe155b2000d2404814f2c5793b74a"
+    }
+  },
+  "runtime_receipt": {
+    "path": "/private/tmp/mss-key-geometry-builds-20261121/runtime.tsv",
+    "sha256": "7a8733e9b60e952379b26bd2d3a5ac235019552dccdcf56d6880bcf0cfa5054a"
+  },
+  "status": "completed",
+  "validated_commits": {
+    "baseline": "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b",
+    "candidate": "8b85aa5ffc45ad7632cfc5319e85dd5eb3089be6"
+  },
+  "verified_runtime_files": [
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+      "sha256": "c34c20d9a73b75e7e55e4ddab73642c0cd85c4299ac17ae81009f9fc43cb2430"
+    },
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+      "sha256": "5323eb12f0d7c1ab0110343bcd79ec20dd63da2ecd0dea854e92f652f067393b"
+    },
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+      "sha256": "1fbe535490fc4ca0acf7c4aed116166c6e6a99640f7d33b290ef459e81ea7613"
+    },
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+      "sha256": "7e4e93e7eb90558fb53f68f2bba58d145be57cd8f9284e038d126dfe84245ed8"
+    },
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+      "sha256": "f131fee2ec7afb9679ba742fe37a1f2c3d2806f7da2a88f817f8a68aad6271ab"
+    }
+  ],
+  "verified_toolchain_files": [
+    {
+      "path": "/Library/Developer/CommandLineTools/usr/bin/clang",
+      "sha256": "fc5e3cbba6ad54059295cad716aacb05ace8235f5f7a6031f1d8c15d24bd6d66"
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/usr/bin/ld",
+      "sha256": "7f7041b1bb30e5e6a815a55edf374065d5c82e1ab93f84d5b6ed5656ded24bcf"
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/usr/bin/make",
+      "sha256": "ba5dd576c636ab1ed626f790be00c0aa71ea73befdaae478a8ac10577134a95c"
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/usr/bin/dsymutil",
+      "sha256": "823ceb77f4a64545084f175b6c2e63d1817f08556e023563e898dc80d302716b"
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk/SDKSettings.json",
+      "sha256": "82165b15ee21419d4cffaba8895797391b908ac9499ba70f561f3e1bd16758d6"
+    },
+    {
+      "path": "/usr/bin/xcrun",
+      "sha256": "687fe96553cdb08386f4ab9771066d71807d53a4460dc87749a590d69253161e"
+    },
+    {
+      "path": "/usr/bin/env",
+      "sha256": "dd48d2912b68c69daf057c1ab13fec6001a072d58bad7d1f91e0687025b2b16a"
+    },
+    {
+      "path": "/usr/bin/cmp",
+      "sha256": "db24187bc1000aac1e2194f83e5c58f776ee9c2d856dec966cdd73e58b3526f2"
+    },
+    {
+      "path": "/bin/sh",
+      "sha256": "f338dc2ba97328cb8aa29c57a348abf3267de71ef42ee1adf293b179542f2962"
+    },
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/SHLIB",
+      "sha256": "90899a421e25914b05315025b5479ac838d279c04697fc4adf55898824ce6e7f"
+    },
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/share/make/shlib.mk",
+      "sha256": "c770cb4ab1600da5180337ca3f61fbf17b91331cd9899ee059625af19f3b005c"
+    },
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/etc/Makeconf",
+      "sha256": "7089036548a5bb140544d24cf2b031b5866af39637425722f080371f8689244a"
+    },
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/R",
+      "sha256": "beabb801d8b74d20fef4c113fd58b3d1a0fc3b18a048d99d1faa3d2dd51bc2cd"
+    }
+  ]
+}

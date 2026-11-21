@@ -82,7 +82,7 @@ vcf2df <- function(vcf,
         yy <- data.frame(
             suppressWarnings(
                 do.call(
-                    rbind,
+                    base::rbind,
                     c(dfannempty,lapply(lapply(anncol,`[`,1),
                                         function(x){strsplit(x,'\\|')[[1]]})
                       )
@@ -115,7 +115,7 @@ vcf2df <- function(vcf,
                 VariantAnnotation::header(vcf)
                 )['ANN',]$Description
         )
-        df <- df[,colnames(df)!="ANN"]
+        df <- df[, colnames(df) != "ANN", with = FALSE]
         df <- cbind(df,dfann)
     }
     ##### Convert geno data ##### 

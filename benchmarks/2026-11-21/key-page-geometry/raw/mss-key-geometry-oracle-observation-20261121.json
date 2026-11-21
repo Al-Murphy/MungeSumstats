@@ -1,0 +1,120 @@
+{
+  "absent_group_session": 67318,
+  "actual_exec_session": 55859,
+  "all_19_fields_correct_rows": 1000000,
+  "guard": {
+    "path": "/private/tmp/mss-key-geometry-oracle-20261121/oracle.jsonl",
+    "sha256": "b6164b919de1c095743d3b48615030d2d3592f8f888d80dcff0cc423f0d7e781"
+  },
+  "input_window": {
+    "path": "/private/tmp/mss-key-geometry-oracle-20261121/input-window.json",
+    "sha256": "9934fbbb591f4fb82eb38b6304bb8d1095881e391a67424adfdde7bc10a91de2"
+  },
+  "inspection_errors": [],
+  "live_members": [],
+  "observed_utc": "2026-11-21T12:45:05.015084+00:00",
+  "oracle": {
+    "path": "/private/tmp/mss-key-geometry-oracle-20261121/snp-oracle-1M.json",
+    "sha256": "cefb1f6d1308ccdbc71f18d0dea872eba2d8b4a6298be32653668e5792415b50"
+  },
+  "outer_tool_terminal": "Last poll output was lost across compaction; no outer terminal chunk/exit claimed. Retained guard terminal and fresh OS closure independently verified.",
+  "source_copies_exact_each": 2,
+  "terminal": {
+    "cleanup_errors": [],
+    "closure": "confirmed",
+    "elapsed_seconds": 11.167416125070304,
+    "first_group": {
+      "completed_monotonic": 1858486.395851041,
+      "members": [
+        {
+          "euid": 501,
+          "pgid": 67318,
+          "pid": 67318,
+          "rss_bytes": 1114112,
+          "ruid": 501,
+          "sid": 67318,
+          "sid_source": "getsid",
+          "state": "Rs"
+        }
+      ],
+      "monotonic": 1858486.386941166,
+      "rss_bytes": 1114112
+    },
+    "group_samples": 12,
+    "label": "key-geometry-snp-oracle-1M",
+    "last_group": {
+      "completed_monotonic": 1858497.55031175,
+      "members": [
+        {
+          "euid": 501,
+          "pgid": 67318,
+          "pid": 67318,
+          "rss_bytes": 0,
+          "ruid": 501,
+          "sid": 67318,
+          "sid_source": "owned setsid plus waitable zombie",
+          "state": "Z"
+        }
+      ],
+      "monotonic": 1858497.54746,
+      "rss_bytes": 0
+    },
+    "last_space": {
+      "allocated_bytes": 16384,
+      "block_bytes": 4096,
+      "entries": 8,
+      "free_bytes": 229536493568,
+      "logical_bytes": 7604
+    },
+    "leader_reaped": true,
+    "max_sample_gap_seconds": 1.0554519589059055,
+    "minimum_free_bytes": 229536493568,
+    "missed_samples": 0,
+    "peak_disk_allocated_bytes": 16384,
+    "peak_disk_logical_bytes": 7604,
+    "peak_group": {
+      "completed_monotonic": 1858496.858433791,
+      "members": [
+        {
+          "euid": 501,
+          "pgid": 67318,
+          "pid": 67318,
+          "rss_bytes": 1575829504,
+          "ruid": 501,
+          "sid": 67318,
+          "sid_source": "getsid",
+          "state": "Rs"
+        }
+      ],
+      "monotonic": 1858496.854805,
+      "rss_bytes": 1575829504
+    },
+    "peak_sampled_group_rss_bytes": 1575829504,
+    "prelaunch_rss_bytes": 0,
+    "prelaunch_space": {
+      "allocated_bytes": 8192,
+      "block_bytes": 4096,
+      "entries": 7,
+      "free_bytes": 229536821248,
+      "logical_bytes": 4473
+    },
+    "primary": null,
+    "raw_exit": 0,
+    "signals": [],
+    "status": "completed",
+    "terminal_members": [
+      {
+        "euid": 501,
+        "pgid": 67318,
+        "pid": 67318,
+        "rss_bytes": 0,
+        "ruid": 501,
+        "sid": 67318,
+        "sid_source": "owned setsid plus waitable zombie",
+        "state": "Z"
+      }
+    ],
+    "trigger_sample": null,
+    "utc": "2026-11-21T12:38:38.481266+00:00"
+  }
+}

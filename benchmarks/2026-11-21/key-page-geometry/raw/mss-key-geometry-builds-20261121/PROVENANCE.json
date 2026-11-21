@@ -1,0 +1,32 @@
+{
+  "baseline": {
+    "path": "/private/tmp/mss-key-geometry-builds-20261121/baseline/build.json",
+    "sha256": "b61d78a9c09b6dc16e3ab4f30abfbf73bcf6c5077d53710f06882728e2d10407"
+  },
+  "candidate": {
+    "path": "/private/tmp/mss-key-geometry-builds-20261121/candidate/build.json",
+    "sha256": "4f4cc66733417e431281dc1892d71f5acc3fe155b2000d2404814f2c5793b74a"
+  },
+  "contention_note": "Independent local build and metadata admission observed 233067880448 free bytes. The build phases ran sequentially under one guard. Benchmark admission, host contention and cache observations, and timings are pending.",
+  "estimated_output_bytes": 3221225472,
+  "minimum_free_bytes": 199715979264,
+  "repository": "/private/tmp/mss-lazy-variantannotation-20261121",
+  "runtime_receipt": {
+    "path": "/private/tmp/mss-key-geometry-builds-20261121/runtime.tsv",
+    "sha256": "7a8733e9b60e952379b26bd2d3a5ac235019552dccdcf56d6880bcf0cfa5054a"
+  },
+  "runtime_transcripts": [
+    {
+      "path": "/private/tmp/mss-key-geometry-builds-20261121/runtime.jsonl",
+      "sha256": "7d984905a568e49a3d9f8cc203d84bbfef7a10f1e4b09bc0cf909855e5fde6a0"
+    },
+    {
+      "path": "/private/tmp/mss-key-geometry-builds-20261121/runtime.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/mss-key-geometry-builds-20261121/runtime.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

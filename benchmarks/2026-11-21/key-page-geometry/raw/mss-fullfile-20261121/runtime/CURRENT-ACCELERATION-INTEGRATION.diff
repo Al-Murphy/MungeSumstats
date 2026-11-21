@@ -1,0 +1,1098 @@
+diff --git a/NAMESPACE b/NAMESPACE
+index 08e6794..951252d 100644
+--- a/NAMESPACE
++++ b/NAMESPACE
+@@ -39,31 +39,20 @@ importFrom(GenomicRanges,mcols)
+ importFrom(GenomicRanges,seqinfo)
+ importFrom(GenomicRanges,seqnames)
+ importFrom(GenomicRanges,sort.GenomicRanges)
+ importFrom(GenomicRanges,start)
+ importFrom(GenomicRanges,tileGenome)
+ importFrom(IRanges,CharacterList)
+ importFrom(R.utils,copyFile)
+ importFrom(R.utils,gunzip)
+ importFrom(R.utils,isGzipped)
+ importFrom(RCurl,getURL)
+-importFrom(VariantAnnotation,ScanVcfParam)
+-importFrom(VariantAnnotation,VcfFile)
+-importFrom(VariantAnnotation,genome)
+-importFrom(VariantAnnotation,indexVcf)
+-importFrom(VariantAnnotation,makeVRangesFromGRanges)
+-importFrom(VariantAnnotation,rbind)
+-importFrom(VariantAnnotation,readVcf)
+-importFrom(VariantAnnotation,scanVcfHeader)
+-importFrom(VariantAnnotation,vcfFields)
+-importFrom(VariantAnnotation,vcfWhich)
+-importFrom(VariantAnnotation,writeVcf)
+ importFrom(data.table,":=")
+ importFrom(data.table,.SD)
+ importFrom(data.table,as.data.table)
+ importFrom(data.table,copy)
+ importFrom(data.table,data.table)
+ importFrom(data.table,fread)
+ importFrom(data.table,fwrite)
+ importFrom(data.table,key)
+ importFrom(data.table,rbindlist)
+ importFrom(data.table,set)
+diff --git a/NEWS.md b/NEWS.md
+index 33a1df8..0788e03 100644
+--- a/NEWS.md
++++ b/NEWS.md
+@@ -1,12 +1,14 @@
+ ## Development: preservation interface
+ 
++* Load VariantAnnotation when a VCF operation first needs it and preserve
++  variant rows when expanding ANN annotations.
+ * Added fixed28MiB reference/FASTA byte-page caching. Matched unique-query and
+   replicated-panel timing/RSS scripts retain external OS measurements.
+ * Added explicit source REF/ALT/strand declarations, including static file-level
+   strand metadata without modifying source bytes. Source-reference conflicts
+   remain unresolved; reference-valid variants absent from the catalog can be
+   sequence-normalized without inventing IDs. Generic opposite-event indels
+   without a resolving known ID remain ambiguous.
+ * Normalizer receipts identify implementation version `mss-preservation-3`
+   separately from compatible reference index version `mss-preservation-2`.
+   Equivalent indel anchors retain all original site contexts before any EAF
+diff --git a/R/check_bp_range.R b/R/check_bp_range.R
+index 919d496..69ab77a 100644
+--- a/R/check_bp_range.R
++++ b/R/check_bp_range.R
+@@ -23,30 +23,30 @@ check_bp_range <- function(sumstats_dt, path, ref_genome,log_folder_ind,
+           genome_info <- 
+             seqinfo(BSgenome.Hsapiens.NCBI.GRCh38::BSgenome.Hsapiens.NCBI.GRCh38)
+         }
+         #mke data.table
+         genome_info <-
+           cbind(data.table::data.table("CHR"=seqnames(genome_info)),
+                 data.table::as.data.table(genome_info))
+         #CHR is only standardised later (check_chr) so also add the other
+         #styles (chr1, x, 23...) to this small lookup, not to the sumstats
+         std_info <- genome_info[CHR %in% c(seq_len(22), "X", "Y", "MT")]
+-        std_info <- rbind(std_info,
+-                          std_info[CHR == "X"][, CHR := "23"],
+-                          std_info[CHR == "Y"][, CHR := "24"],
+-                          std_info[CHR == "MT"][, CHR := "M"])
+-        std_info <- rbind(std_info,
+-                          data.table::copy(std_info)[, CHR := tolower(CHR)])
++        std_info <- base::rbind(std_info,
++                                std_info[CHR == "X"][, CHR := "23"],
++                                std_info[CHR == "Y"][, CHR := "24"],
++                                std_info[CHR == "MT"][, CHR := "M"])
++        std_info <- base::rbind(std_info,
++                                data.table::copy(std_info)[, CHR := tolower(CHR)])
+         std_info <- data.table::rbindlist(lapply(
+           c("", "chr", "CHR", "Chr", "ch"),
+           function(pre) data.table::copy(std_info)[, CHR := paste0(pre, CHR)]))
+-        genome_info <- unique(rbind(genome_info, std_info), by = "CHR")
++        genome_info <- unique(base::rbind(genome_info, std_info), by = "CHR")
+         #convert CHR to char in sumstats (if it is an int)
+         sumstats_dt[,CHR:=as.character(CHR)]
+         #add chr len to sumstats
+         sumstats_dt[genome_info,chr_max:=seqlengths,on="CHR"]
+         #ensure BP numeric
+         if(!is.integer(sumstats_dt$BP)){
+           message("Coercing BP column to numeric.")
+           sumstats_dt[,BP:=as.numeric(BP)]
+         }  
+         #now check if BP value is too large/less than 0
+diff --git a/R/format_sumstats.R b/R/format_sumstats.R
+index b2eb358..21c23aa 100644
+--- a/R/format_sumstats.R
++++ b/R/format_sumstats.R
+@@ -513,21 +513,21 @@ format_sumstats <- function(path,
+           #Add ES mapping
+           es_cols <- data.frame("Uncorrected"=c("ES","EFFECT_SIZE",
+                                                 "EFFECT.SIZE","EFFECT-SIZE",
+                                                 "EFFECT SIZE",
+                                                 "EFFECT_SIZE_ESTIMATE",
+                                                 "EFFECT SIZE ESTIMATE",
+                                                 "EFFECT.SIZE.ESTIMATE",
+                                                 "ES.A1","ES.A2","ES-A1","ES-A2",
+                                                 "ES_A1","ES_A2"),
+                                 "Corrected"=rep("ES",14))
+-          mapping_file <- rbind(mapping_file,es_cols)
++          mapping_file <- base::rbind(mapping_file, es_cols)
+         }
+         
+         #### Check 40:Check for log10 p instead of p ####
+         sumstats_return <-
+           read_log_pval(sumstats_dt = sumstats_return$sumstats_dt)
+  
+         #### Check 2:Check for effect direction ####
+         sumstats_return <-
+           infer_effect_column(
+             sumstats_dt = sumstats_return$sumstats_dt,
+diff --git a/R/get_vcf_sample_ids.R b/R/get_vcf_sample_ids.R
+index ba56f5f..8e4f9cf 100644
+--- a/R/get_vcf_sample_ids.R
++++ b/R/get_vcf_sample_ids.R
+@@ -1,14 +1,13 @@
+ #' Get VCF sample ID(s)
+ #'
+ #' @inheritParams format_sumstats
+-#' @importFrom VariantAnnotation scanVcfHeader
+ #' @return sample_id
+ #' @keywords internal
+ get_vcf_sample_ids <- function(path) { 
+     header <- VariantAnnotation::scanVcfHeader(file = path)
+     sample_id <- tryCatch(expr = {header@samples},
+                           error=function(e){NULL})
+     if (is.null(sample_id)) {
+         header <- readLines(path, 100)
+         sample_id <- header[grepl("^##SAMPLE", header)] # gets ##SAMPLE
+         if (length(sample_id) == 0) {
+diff --git a/R/index_vcf.R b/R/index_vcf.R
+index 455d551..6b4e941 100644
+--- a/R/index_vcf.R
++++ b/R/index_vcf.R
+@@ -8,21 +8,20 @@
+ #' 
+ #' @param path Path to VCF.
+ #' @param verbose Print messages.
+ #' 
+ #' @return Path to tabix-indexed tabular file
+ #'
+ #' @family tabix
+ #' @keywords internal
+ #' @importFrom methods is
+ #' @importFrom R.utils gunzip
+-#' @importFrom VariantAnnotation indexVcf
+ #' @examples 
+ #' eduAttainOkbayPth <- system.file("extdata", "eduAttainOkbay.txt",
+ #'                                  package = "MungeSumstats")
+ #' sumstats_dt <- data.table::fread(eduAttainOkbayPth, nThread = 1)
+ #' sumstats_dt <- 
+ #' MungeSumstats:::standardise_sumstats_column_headers_crossplatform(
+ #'     sumstats_dt = sumstats_dt)$sumstats_dt
+ #' sumstats_dt <- MungeSumstats:::sort_coords(sumstats_dt = sumstats_dt)
+ #' path <- tempfile(fileext = ".tsv")
+ #' MungeSumstats::write_sumstats(sumstats_dt = sumstats_dt, save_path = path)
+diff --git a/R/preservation.R b/R/preservation.R
+index 32327e7..1b51129 100644
+--- a/R/preservation.R
++++ b/R/preservation.R
+@@ -429,21 +429,21 @@ harmonise_sumstats <- function(sumstats, reference,
+             batch$entity_id <- entity_id
+         }
+         batch$normalized_build <- rep(build, size)
+         batch$source_row <- as.double(rows)
+         batch$grch38_chr <- missing_text
+         batch$grch38_pos <- rep(NA_real_, size)
+         batch$grch38_ref <- missing_text
+         batch$grch38_alt <- missing_text
+         batches[[i]] <- batch
+     }
+-    normalized <- if (length(batches) == 1L) batches[[1L]] else do.call(rbind, batches)
++    normalized <- if (length(batches) == 1L) batches[[1L]] else do.call(base::rbind, batches)
+     rownames(normalized) <- NULL
+     if (!is.null(projection)) normalized <- .mss_project(normalized, reference, projection, candidate_limit)
+     provenance <- list(core_version = reference$core_version,
+                        implementation_version = "mss-preservation-7",
+                        reference_version = reference$version, build = build,
+                        reference_path = reference$path,
+                        reference_checksums = reference$checksums,
+                        contig_mapping_implementation = if (length(reference$contig_aliases)) "mss-contigs-1" else "not_applied",
+                        frequency_type = frequency_type, effect_type = effect_type,
+                        columns = columns, reference_verified = verify,
+diff --git a/R/read_header.R b/R/read_header.R
+index e0463fe..483de72 100644
+--- a/R/read_header.R
++++ b/R/read_header.R
+@@ -1,21 +1,20 @@
+ #' Read in file header
+ #'
+ #' @return First \code{n} lines of the VCF header
+ #'
+ #' @inheritParams format_sumstats
+ #' @param n integer. The (maximal) number of lines to read. Negative values
+ #' indicate that one should read up to the end of input on the connection.
+ #' @param skip_vcf_metadata logical, should VCF metadata be ignored 
+ #' @inheritParams format_sumstats
+ #' 
+-#' @importFrom VariantAnnotation scanVcfHeader
+ #' @export
+ #' @examples
+ #' path <- system.file("extdata", "eduAttainOkbay.txt", 
+ #'                     package = "MungeSumstats") 
+ #' header <- read_header(path = path)                    
+ read_header <- function(path,
+                         n = 2L,
+                         skip_vcf_metadata = FALSE,
+                         nThread = 1) {
+     if(is.null(n)) {
+diff --git a/R/read_vcf.R b/R/read_vcf.R
+index a6b6cc4..7dbc19d 100644
+--- a/R/read_vcf.R
++++ b/R/read_vcf.R
+@@ -32,21 +32,20 @@
+ #' @param verbose Print messages.
+ #' @inheritParams check_empty_cols
+ #' @inheritParams format_sumstats
+ #' @inheritParams downloader
+ #' @inheritParams download_vcf
+ #' @inheritParams import_sumstats
+ #' @inheritParams VariantAnnotation::ScanVcfParam
+ #'
+ #' @return The VCF file in data.table format.
+ #' @export
+-#' @importFrom VariantAnnotation writeVcf
+ #' @importFrom data.table as.data.table setnames fwrite
+ #' @source
+ #' \code{
+ #' #### Benchmarking ####
+ #' library(VCFWrenchR)
+ #' library(VariantAnnotation)
+ #' path <- "https://gwas.mrcieu.ac.uk/files/ubm-a-2929/ubm-a-2929.vcf.gz"
+ #' vcf <- VariantAnnotation::readVcf(file = path)
+ #' N <- 1e5
+ #' vcf_sub <- vcf[1:N,]
+diff --git a/R/read_vcf_genome.R b/R/read_vcf_genome.R
+index b9eb14b..5682de3 100644
+--- a/R/read_vcf_genome.R
++++ b/R/read_vcf_genome.R
+@@ -3,21 +3,20 @@
+ #' Get the genome build of a remote or local VCF file.
+ #' @param header Header extracted by \link[VariantAnnotation]{scanVcfHeader}.
+ #' @param validate Validate genome name using 
+ #' \link[GenomeInfoDb]{mapGenomeBuilds}.
+ #' @param default_genome When no genome can be extracted,
+ #'  default to this genome build. 
+ #' @param verbose Print messages. 
+ #' 
+ #' @keywords internal
+ #' @importFrom GenomeInfoDb mapGenomeBuilds
+-#' @importFrom VariantAnnotation genome
+ #' @returns genome 
+ read_vcf_genome <- function(header=NULL,
+                             validate=FALSE,
+                             default_genome="HG19/GRCh37",
+                             verbose=TRUE){
+     
+     msg <- paste("No known genome build matches.",
+                  "Defaulting to:",default_genome)
+     genome <- tryCatch({
+         #### Try 1 ###
+diff --git a/R/read_vcf_parallel.R b/R/read_vcf_parallel.R
+index be46f0e..3b3ffbb 100644
+--- a/R/read_vcf_parallel.R
++++ b/R/read_vcf_parallel.R
+@@ -12,21 +12,20 @@
+ #'  
+ #' @inheritParams read_vcf
+ #' @inheritParams check_empty_cols
+ #' @inheritParams downloader
+ #' @inheritParams download_vcf
+ #' @inheritParams import_sumstats
+ #' @inheritParams GenomicRanges::tileGenome
+ #' @inheritParams BiocParallel::register
+ #' 
+ #' @keywords internal
+-#' @importFrom VariantAnnotation ScanVcfParam VcfFile readVcf rbind
+ #' @importFrom GenomicRanges seqinfo tileGenome 
+ #' @importFrom GenomeInfoDb keepSeqlevels 
+ #' @importFrom data.table rbindlist
+ #' @returns VCF file.
+ #' @source 
+ #' \code{
+ #' path <- "https://gwas.mrcieu.ac.uk/files/ieu-a-298/ieu-a-298.vcf.gz"
+ #' #### Single-threaded ####
+ #' vcf <- MungeSumstats:::read_vcf_parallel(path = path)
+ #' #### Parallel ####
+diff --git a/R/select_vcf_fields.R b/R/select_vcf_fields.R
+index 47e0dd4..c3e3339 100644
+--- a/R/select_vcf_fields.R
++++ b/R/select_vcf_fields.R
+@@ -1,22 +1,20 @@
+ #' Select VCF fields
+ #' 
+ #' Select non-empty columns from each VCF field type.
+ #' @param verbose Print messages.
+ #' @inheritParams read_vcf
+ #' @inheritParams check_empty_cols
+ #' @inheritParams VariantAnnotation::ScanVcfParam
+ #' 
+ #' @returns \code{ScanVcfParam} object.
+ #' @keywords internal
+-#' @importFrom VariantAnnotation scanVcfHeader ScanVcfParam 
+-#' @importFrom VariantAnnotation readVcf vcfFields vcfWhich
+ #' @importFrom GenomicRanges GRanges
+ #' @importFrom methods is
+ select_vcf_fields <- function(path,
+                               sampled_rows=1e4L,
+                               which=NULL,
+                               samples=NULL,
+                               nThread=1,
+                               verbose=TRUE){
+     #### Read header ####
+     ## Read the first n rows to determine which columns are useful.
+diff --git a/R/standardise_sumstats_column_headers_crossplatform.R b/R/standardise_sumstats_column_headers_crossplatform.R
+index 198dc4e..8fc001d 100644
+--- a/R/standardise_sumstats_column_headers_crossplatform.R
++++ b/R/standardise_sumstats_column_headers_crossplatform.R
+@@ -42,28 +42,28 @@ standardise_header <- standardise_sumstats_column_headers_crossplatform <-
+         column_headers <- names(sumstats_dt) 
+         # load synonym mapping - internal data no loading
+         # Go through each and get correct spelling
+         # allow for differing cases column names, data.tables and lower case
+         # entries in user supplied mapping files (caller's object unchanged)
+         mapping_file <- as.data.frame(mapping_file)
+         colnames(mapping_file) <- toupper(colnames(mapping_file))
+         mapping_file$UNCORRECTED <- toupper(mapping_file$UNCORRECTED)
+         #get names for allele mared eff/frq columns
+         eff_frq_allele_matches <- get_eff_frq_allele_combns()
+-        mapping_file <- rbind(mapping_file,
+-                              as.data.frame(eff_frq_allele_matches)[
+-                                  , c("UNCORRECTED", "CORRECTED")])
++        mapping_file <- base::rbind(mapping_file,
++                                    as.data.frame(eff_frq_allele_matches)[
++                                        , c("UNCORRECTED", "CORRECTED")])
+         # minor allele frequencies aren't allele specific so only use them for
+         # FRQ if no allele frequency (e.g. A1FREQ) is found
+         maf_rows <- mapping_file$UNCORRECTED %in% c("MAF", "MINOR_AF")
+-        mapping_file <- rbind(mapping_file[!maf_rows, ],
+-                              mapping_file[maf_rows, ])
++        mapping_file <- base::rbind(mapping_file[!maf_rows, ],
++                                    mapping_file[maf_rows, ])
+         for (headerI in seq_len(nrow(mapping_file))) {
+             un <- mapping_file[headerI, "UNCORRECTED"]
+             cr <- mapping_file[headerI, "CORRECTED"]
+             if (un %in% column_headers & (!cr %in% column_headers)) {
+                 data.table::setnames(sumstats_dt, un, cr)
+             }
+         }
+         # Special case!! A0/A1 -> ref/alt so A1 flips meaning,
+         # A0 is A* in mapping
+         # but usually A1/A2 -> ref/alt so if A* found,
+diff --git a/R/to_VRanges.R b/R/to_VRanges.R
+index fdd32f7..e03400d 100644
+--- a/R/to_VRanges.R
++++ b/R/to_VRanges.R
+@@ -1,18 +1,17 @@
+ #' Convert to \code{VRanges}
+ #'
+ #' @param sumstats_dt data table obj of the summary statistics 
+ #' file for the GWAS.
+ #' @return \code{VRanges} object
+ #' @keywords internal
+ #' @importFrom GenomicRanges makeGRangesFromDataFrame
+-#' @importFrom VariantAnnotation makeVRangesFromGRanges
+ to_vranges <- function(sumstats_dt) {
+     gr <- to_granges(sumstats_dt)
+     message("Converting summary statistics to VRanges.")
+     gr$dummy <- "GWAS"
+     vr <- VariantAnnotation::makeVRangesFromGRanges(gr,
+                                                     ref.field = "A1", 
+                                                     alt.field = "A2",
+                                                     keep.extra.columns = TRUE,
+                                                     sampleNames.field = "dummy"
+     )
+diff --git a/R/vcf2df.R b/R/vcf2df.R
+index dd8e915..c8c1cdf 100644
+--- a/R/vcf2df.R
++++ b/R/vcf2df.R
+@@ -75,21 +75,21 @@ vcf2df <- function(vcf,
+     #### .anncols function ####
+     .anncols = function(anncol,headerstring) {
+         anncols <- strsplit(sub("Functional annotations: '",'',
+                                headerstring),' \\| ')[[1]]
+         dfannempty <- data.frame(matrix(vector(), 0, length(anncols),
+                                        dimnames=list(c(), anncols)),
+                                 stringsAsFactors=FALSE)
+         yy <- data.frame(
+             suppressWarnings(
+                 do.call(
+-                    rbind,
++                    base::rbind,
+                     c(dfannempty,lapply(lapply(anncol,`[`,1),
+                                         function(x){strsplit(x,'\\|')[[1]]})
+                       )
+                     )
+                 ),
+             stringsAsFactors=FALSE)
+         yy <- data.frame(lapply(yy,type.convert))
+         colnames(yy) <- paste("ANN",anncols,sep="_")
+         return(yy)
+     }
+@@ -108,21 +108,21 @@ vcf2df <- function(vcf,
+     )
+     remove(gr)
+     #### Parse ANN column ####
+     if('ANN' %in% colnames(df)) {
+         dfann <- .anncols(
+             anncol = df$ANN,
+             headerstring = VariantAnnotation::info(
+                 VariantAnnotation::header(vcf)
+                 )['ANN',]$Description
+         )
+-        df <- df[,colnames(df)!="ANN"]
++        df <- df[, colnames(df) != "ANN", with = FALSE]
+         df <- cbind(df,dfann)
+     }
+     ##### Convert geno data ##### 
+     ## Works better for VCFHeader
+     if(methods::is(vcf,"VCFHeader")){
+         tmp <- data.table::as.data.table(VariantAnnotation::geno(vcf), 
+                                          keep.rownames = "name")
+         # tmp <- DF_to_dt(DF = VariantAnnotation::geno(x))    
+     } else {
+         ## Works better for VCF
+diff --git a/R/write_sumstats.R b/R/write_sumstats.R
+index 03198e1..8eda178 100644
+--- a/R/write_sumstats.R
++++ b/R/write_sumstats.R
+@@ -13,21 +13,20 @@
+ #'
+ #' @source \href{https://github.com/Bioconductor/VariantAnnotation/issues/35}{
+ #' VariantAnnotation::writeVcf has some unexpected/silent
+ #' file renaming behavior}
+ #'
+ #' @returns If \code{return_path=TRUE}, returns \code{save_path}.
+ #'  Else returns \code{NULL}.
+ #'
+ #' @export
+ #' @importFrom GenomicRanges makeGRangesFromDataFrame
+-#' @importFrom VariantAnnotation makeVRangesFromGRanges
+ #' @examples
+ #' path <- system.file("extdata", "eduAttainOkbay.txt",
+ #'     package = "MungeSumstats"
+ #' )
+ #' eduAttainOkbay <- read_sumstats(path = path)
+ #' write_sumstats(
+ #'     sumstats_dt = eduAttainOkbay,
+ #'     save_path = tempfile(fileext = ".tsv.gz")
+ #' )
+ write_sumstats <- function(sumstats_dt,
+diff --git a/src/preservation_core.h b/src/preservation_core.h
+index ce26471..f59684f 100644
+--- a/src/preservation_core.h
++++ b/src/preservation_core.h
+@@ -492,21 +492,21 @@ class Reference {
+       if(key[0]=='C'&&key!="C:"+out.chr+":"+std::to_string(out.pos)&&key!="C:"+out.chr+":"+std::to_string(out.original_pos))throw std::runtime_error("Typed reference A coordinate key disagrees with its record");
+       if(!missing(out.id))out.identifiers.insert(out.id);
+     } else if(fields.size==5&&values[0]=="S") {
+       if(key[0]!='S')throw std::runtime_error("Typed reference S record has the wrong key type");
+       out.chr=values[1];out.pos=out.original_pos=typed_int(values[2],false);out.ref=out.original_ref=values[3];out.alleles=values[4];
+       if(key!="S:"+out.chr+":"+std::to_string(out.original_pos))throw std::runtime_error("Typed reference S key disagrees with its record");
+     } else throw std::runtime_error("Typed reference record has an unknown tag or field count");
+     out.original_positions.insert(out.original_pos);return out;
+   }
+ public:
+-  Reference(const std::string& dir,const std::string& fasta):keys(dir+"/keys"),offsets(dir+"/offsets"),records(dir+"/records"),fa(fasta,dir+"/fasta.fai") {
++  Reference(const std::string& dir,const std::string& fasta):keys(dir+"/keys",16384,512),offsets(dir+"/offsets"),records(dir+"/records"),fa(fasta,dir+"/fasta.fai") {
+     std::ifstream meta(dir+"/core-version");std::string version;std::getline(meta,version);
+     if(version!="mss-preservation-2"&&version!="mss-preservation-3")throw std::runtime_error("Incomplete or unsupported reference index");
+     if(version=="mss-preservation-3") {
+       std::ifstream exact(dir+"/core-version",std::ios::binary);const std::string marker((std::istreambuf_iterator<char>(exact)),std::istreambuf_iterator<char>());
+       if(marker!="mss-preservation-3\n")throw std::runtime_error("Typed reference marker is malformed");data_format=3;
+     }
+     auto size=offsets.size();if(size%8)throw std::runtime_error("Invalid offsets file");count=size/8;
+     pivot_count=static_cast<std::size_t>(std::min<std::uint64_t>(8191,count));
+     rank_count=static_cast<std::size_t>(std::min<std::uint64_t>(4096,count));
+     if(count){pivots=std::make_unique<Pivot[]>(pivot_count);ranks=std::make_unique<Rank[]>(rank_count);}
+diff --git a/tests/standalone/lookup_parity.cpp b/tests/standalone/lookup_parity.cpp
+index 78cf994..964784b 100644
+--- a/tests/standalone/lookup_parity.cpp
++++ b/tests/standalone/lookup_parity.cpp
+@@ -1,23 +1,25 @@
+ // Build against either header using -I <worktree>/src. Compare parity stdout
+ // byte-for-byte between builds. The pressure mode exits 1 on allocation churn.
+ #ifdef NDEBUG
+ #error "lookup_parity requires assertions enabled"
+ #endif
+ 
+ #include <preservation_core.h>
+ #include <cassert>
++#include <charconv>
+ #include <cstdlib>
+ #include <cstring>
+ #include <iomanip>
+ #include <iostream>
+ #include <new>
++#include <numeric>
+ #include <random>
+ 
+ static std::size_t allocation_calls = 0;
+ static bool counting = false;
+ void* operator new(std::size_t n) {
+   if (counting) ++allocation_calls;
+   if (void* p = std::malloc(n ? n : 1)) return p;
+   throw std::bad_alloc();
+ }
+ void operator delete(void* p) noexcept { std::free(p); }
+@@ -116,20 +118,152 @@ void budgets(Reference& ref) {
+   query(ref, long_prefix + "0", 1, 1);
+ }
+ 
+ std::uint64_t bits(double value) {
+   std::uint64_t raw;
+   static_assert(sizeof(raw) == sizeof(value), "Double must be 64 bits");
+   std::memcpy(&raw, &value, sizeof(raw));
+   return raw;
+ }
+ 
++#ifdef MSS_LOOKUP_COUNTERS
++constexpr std::size_t matched_panel_rows = 437458;
++constexpr std::size_t matched_selected_rows = 32768;
++constexpr unsigned matched_shuffle_seed = 257;
++
++struct MatchedRow {
++  std::size_t ordinal;
++  std::string raw_line;
++  Input input;
++};
++
++bool tsv_field(const std::string& value) {
++  return value.find_first_of("\t\r\n") == std::string::npos && value.find('\0') == std::string::npos;
++}
++
++double matched_number(const std::string& token) {
++  std::size_t consumed = 0;
++  const auto value = std::stod(token, &consumed);
++  if (consumed != token.size() || !std::isfinite(value) ||
++      token.find_first_of(" \t\r\n\f\v") != std::string::npos)
++    throw std::runtime_error("Invalid matched numeric token");
++  return value;
++}
++
++std::int64_t matched_position(const std::string& token) {
++  std::int64_t value = 0;
++  const auto end = token.data() + token.size();
++  const auto parsed = std::from_chars(token.data(), end, value);
++  if (parsed.ec != std::errc{} || parsed.ptr != end || value < 1)
++    throw std::runtime_error("Invalid matched BP token");
++  return static_cast<std::int64_t>(value);
++}
++
++std::size_t matched_ordinal(std::size_t index) {
++  return 1 + std::uint64_t(index) * (matched_panel_rows - 1) / (matched_selected_rows - 1);
++}
++
++void matched(const char* index, const char* fasta, const char* input,
++             const fs::path& output, const std::string& order) {
++  if (order != "input" && order != "shuffled") throw std::runtime_error("Matched order must be input or shuffled");
++  if (!fs::create_directory(output)) throw std::runtime_error("Require a fresh matched output directory");
++
++  const std::string raw_header = "SNP\tCHR\tBP\tA1\tA2\tBETA\tFRQ\tSE\tP";
++  std::ifstream source(input, std::ios::binary);
++  if (!source) throw std::runtime_error("Cannot open matched input");
++  std::string line;
++  if (!std::getline(source, line) || line != raw_header) throw std::runtime_error("Invalid matched header");
++
++  std::vector<MatchedRow> rows;
++  rows.reserve(matched_selected_rows);
++  std::set<std::tuple<std::string, std::string, std::string, std::string>> raw_events;
++  for (std::size_t ordinal = 1; ordinal <= matched_panel_rows; ++ordinal) {
++    if (!std::getline(source, line)) throw std::runtime_error("Truncated matched panel");
++    const auto fields = split(line, '\t');
++    if (fields.size() != 9 || !std::all_of(fields.begin(), fields.end(), tsv_field))
++      throw std::runtime_error("Invalid matched TSV row at ordinal " + std::to_string(ordinal));
++    const auto pos = matched_position(fields[2]);
++    const auto effect = matched_number(fields[5]);
++    const auto eaf = matched_number(fields[6]);
++    matched_number(fields[7]);
++    matched_number(fields[8]);
++    if (ordinal != matched_ordinal(rows.size())) continue;
++
++    if (!raw_events.emplace(fields[1], fields[2], fields[3], fields[4]).second)
++      throw std::runtime_error("Duplicate raw event at ordinal " + std::to_string(ordinal));
++    rows.push_back({ordinal, line, {fields[1], pos, fields[0], fields[3], fields[4], effect, eaf, "EAF"}});
++  }
++  if (rows.size() != matched_selected_rows) throw std::runtime_error("Incomplete matched selection");
++  const auto distinct_raw_count = raw_events.size();
++  raw_events.clear();
++
++  std::vector<std::size_t> sequence(rows.size());
++  std::iota(sequence.begin(), sequence.end(), std::size_t{0});
++  if (order == "shuffled") {
++    std::mt19937 generator(matched_shuffle_seed);
++    std::shuffle(sequence.begin(), sequence.end(), generator);
++  }
++
++  std::ofstream outcomes(output / "outcomes.tsv", std::ios::binary);
++  std::ofstream ordinals(output / "order.tsv", std::ios::binary);
++  if (!outcomes || !ordinals) throw std::runtime_error("Cannot open matched outputs");
++  outcomes << "source_ordinal\t" << raw_header
++           << "\tstatus\tchr\tpos\tref\talt\tid\teffect_bits\teaf_bits\tcandidate_count\tswapped\tcomplemented\n";
++  ordinals << "source_ordinal\n";
++
++  Reference ref(index, fasta);
++  std::set<std::tuple<std::string, std::int64_t, std::string, std::string>> canonical_events;
++  for (const auto selected : sequence) {
++    const auto& row = rows[selected];
++    const auto result = ref.harmonise(row.input, 10000);
++    if (result.status != "match" && result.status != "swap" && result.status != "complement" &&
++        result.status != "swapped_complement")
++      throw std::runtime_error("Unresolved matched event at ordinal " + std::to_string(row.ordinal) + ": " + result.status);
++    if (!canonical_events.emplace(result.chr, result.pos, result.ref, result.alt).second)
++      throw std::runtime_error("Duplicate canonical event at ordinal " + std::to_string(row.ordinal));
++    for (const auto* value : {&result.status, &result.chr, &result.ref, &result.alt, &result.id})
++      if (!tsv_field(*value)) throw std::runtime_error("Invalid matched result TSV field");
++    outcomes << row.ordinal << '\t' << row.raw_line << '\t' << result.status << '\t' << result.chr << '\t'
++             << result.pos << '\t' << result.ref << '\t' << result.alt << '\t' << result.id << '\t'
++             << bits(result.effect) << '\t' << bits(result.eaf) << '\t' << result.candidate_count << '\t'
++             << result.swapped << '\t' << result.complemented << '\n';
++    ordinals << row.ordinal << '\n';
++  }
++  outcomes.close();
++  ordinals.close();
++  if (!outcomes || !ordinals) throw std::runtime_error("Matched output write failed");
++
++  const auto counts = ref.lookup_counters();
++  std::ofstream counters(output / "counters.tsv", std::ios::binary);
++  counters << "metric\tvalue\n"
++           << "selected_count\t" << rows.size() << '\n'
++           << "distinct_raw_count\t" << distinct_raw_count << '\n'
++           << "distinct_canonical_count\t" << canonical_events.size() << '\n'
++           << "rank_hits\t" << counts.rank_hits << '\n'
++           << "pivot_hits\t" << counts.pivot_hits << '\n'
++           << "probe_entries\t" << counts.probe_entries << '\n'
++           << "key_requests\t" << counts.key_requests << '\n'
++           << "offset_requests\t" << counts.offset_requests << '\n'
++           << "key_reads\t" << counts.key_reads << '\n'
++           << "offset_reads\t" << counts.offset_reads << '\n'
++           << "pivot_slots\t" << counts.pivot_slots << '\n'
++           << "rank_slots\t" << counts.rank_slots << '\n'
++           << "rank_bytes\t" << counts.rank_bytes << '\n';
++  counters.close();
++  if (!counters) throw std::runtime_error("Matched counter write failed");
++  std::cout << "matched order " << order << " shuffle_seed " << matched_shuffle_seed
++            << " source_ordinal = 1 + floor(i * (" << matched_panel_rows << " - 1) / ("
++            << matched_selected_rows << " - 1)), i = 0.." << matched_selected_rows - 1 << '\n'
++            << "raw_event (CHR,BP,A1,A2)\ncanonical_event (chr,pos,ref,alt)\n";
++}
++#endif
++
+ void science(const fs::path& root, int format) {
+   const auto fasta = root / "science.fa";
+   const auto sites = root / "science.tsv";
+   write(fasta, ">1\nCAAAAACGTACGT\n>2\nACGT\n>3\nCAAAAAAAAG\n");
+   write(sites, "chr\tpos\tref\talt\tid\taliases\n"
+     "1\t8\tG\tA,T\tr\told;shared\n1\t8\tG\tT\tbridge\t.\n"
+     "1\t10\tA\tC\tbridge\tshared\n2\t1\tA\tG\tr\t.\n"
+     "1\t4\tAA\tA\tdeletion\t.\n3\t5\tAA\tA\trepeat\told-repeat\n"
+     "2\t2\tC\tA,G,T,CA,CAG,<DEL>\tdense\told-dense\n");
+   const auto dir = root / ("science" + std::to_string(format));
+@@ -194,20 +328,97 @@ void corruption(const fs::path& dir, const fs::path& fasta, int format) {
+     write(tail / "keys", "I:r\t0\n");
+     { std::ofstream o(tail / "offsets", std::ios::binary); write64(o, 0); }
+     Reference malformed_tail(tail.string(), fasta.string());
+     const char* error = "Typed reference field is not valid UTF-8/framing";
+     std::cout << "record tail invalid UTF-8 in field 9\n";
+     for (int attempt = 0; attempt < 2; ++attempt)
+       query(malformed_tail, "I:r", 1, 1, error);
+   }
+ }
+ 
++void write_boundary_fixture(const fs::path& dir, const fs::path& fasta,
++                            const std::string& first, const std::string& second) {
++  assert(!first.empty() && first.back() == '\n');
++  assert(!second.empty() && second.back() == '\n' && first < second);
++  if (!fs::create_directory(dir)) throw std::runtime_error("Require a fresh boundary fixture directory");
++  Fasta(fasta.string()).save((dir / "fasta.fai").string());
++  write(dir / "core-version", "mss-preservation-3\n");
++  write(dir / "records", "A\t1\t1\tA\tC\tr\t1\n");
++  write(dir / "keys", first + second);
++  std::ofstream offsets(dir / "offsets", std::ios::binary);
++  write64(offsets, 0);
++  write64(offsets, first.size());
++  offsets.close();
++  if (!offsets) throw std::runtime_error("Boundary fixture offsets write failed");
++}
++
++void boundary_alias(Reference& ref, const std::string& key, const char* label) {
++  std::size_t work = 1;
++  const auto candidates = ref.lookup(key, 1, &work);
++  assert(candidates.size() == 1 && work == 0);
++  const auto& candidate = candidates.front();
++  assert(candidate.chr == "1" && candidate.pos == 1 && candidate.original_pos == 1);
++  assert(candidate.ref == "A" && candidate.alt == "C" && candidate.id == "r");
++  assert(candidate.original_ref.empty() && candidate.alleles.empty());
++  assert(candidate.identifiers == std::set<std::string>{"r"});
++  assert(candidate.original_positions == std::set<std::int64_t>{1});
++  std::cout << label << " key bytes " << key.size() << " found " << candidates.size() << " left " << work << '\n';
++  fields(candidate);
++}
++
++void typed_key_boundaries(const fs::path& root, const fs::path& fasta) {
++  constexpr std::size_t boundary = 16384;
++  const std::string short_key = "I:r";
++  const auto valid_second = short_key + "\t0\n";
++  const auto ascii_key = "I:" + std::string(16379, 'a');
++  const auto ascii_first = ascii_key + "\t0\n";
++  assert(ascii_key.size() == boundary - 3);
++  assert(ascii_first.size() == boundary && ascii_first[boundary - 1] == '\n');
++
++  const auto newline = root / "typed-boundary-newline";
++  write_boundary_fixture(newline, fasta, ascii_first, valid_second);
++  Reference newline_ref(newline.string(), fasta.string());
++  std::cout << "typed boundary newline at 16383\n";
++  boundary_alias(newline_ref, ascii_key, "first");
++  boundary_alias(newline_ref, short_key, "second");
++
++  const auto malformed = root / "typed-boundary-malformed-offset";
++  write_boundary_fixture(malformed, fasta, ascii_first, short_key + "\t01\n");
++  Reference malformed_ref(malformed.string(), fasta.string());
++  std::cout << "typed boundary malformed offset in row at 16384\n";
++  for (const std::size_t initial : {0U, 1U}) {
++    auto work = initial;
++    try {
++      malformed_ref.lookup(short_key, 1, &work);
++      assert(false && "Expected typed malformed offset rejection");
++    } catch (const std::runtime_error& e) {
++      assert(std::strcmp(e.what(), "Typed reference has an invalid unsigned integer") == 0);
++      assert(work == initial);
++      std::cout << "cap 1 initial " << initial << " error " << std::quoted(e.what()) << " left " << work << '\n';
++    }
++  }
++
++  const auto utf8_key = "I:" + std::string(16381, 'a') + u8"雪";
++  const auto utf8_first = utf8_key + "\t0\n";
++  assert(utf8_key.size() == boundary + 2 && utf8_key.compare(boundary - 1, 3, "\xe9\x9b\xaa") == 0);
++  assert(utf8_first.size() == boundary + 5 && utf8_first.back() == '\n');
++
++  const auto utf8 = root / "typed-boundary-utf8";
++  write_boundary_fixture(utf8, fasta, utf8_first, valid_second);
++  Reference utf8_ref(utf8.string(), fasta.string());
++  std::cout << "typed boundary UTF-8 at 16383-16385\n";
++  for (int attempt = 0; attempt < 2; ++attempt) {
++    boundary_alias(utf8_ref, utf8_key, "first");
++    boundary_alias(utf8_ref, short_key, "second");
++  }
++}
++
+ int pressure(Reference& ref) {
+   // A repeated absent key beyond the last rank has no candidate or boundary
+   // record. After the first validated search no row decode/allocation is needed.
+   std::string key = "I:zzzz-a-negative-key-just-beyond-the-last-record";
+   assert(ref.lookup(key).empty());
+   allocation_calls = 0;
+   counting = true;
+   for (int i=0;i<1024;++i) assert(ref.lookup(key).empty());
+   counting = false;
+   std::cout << "warm negative allocations " << allocation_calls << " for 1024 queries\n";
+@@ -241,20 +452,35 @@ int pressure(Reference& ref) {
+            <<" loaded "<<loaded<<" fence hits "<<reused<<" key page requests "
+            <<distinct.key_requests-warm.key_requests<<" reads "<<distinct.key_reads-warm.key_reads
+            <<" offset page requests "<<distinct.offset_requests-warm.offset_requests
+            <<" reads "<<distinct.offset_reads-warm.offset_reads<<" rank bytes "<<distinct.rank_bytes<<'\n';
+ #endif
+   return allocation_calls > 64;
+ }
+ } // namespace
+ 
+ int main(int argc, char** argv) {
++  if (argc > 1 && std::strcmp(argv[1], "matched") == 0) {
++    if (argc != 7) return 2;
++#ifdef MSS_LOOKUP_COUNTERS
++    try {
++      matched(argv[2], argv[3], argv[4], argv[5], argv[6]);
++    } catch (const std::exception& e) {
++      std::cerr << "matched: " << e.what() << '\n';
++      return 1;
++    }
++    return 0;
++#else
++    std::cerr << "matched requires MSS_LOOKUP_COUNTERS\n";
++    return 2;
++#endif
++  }
+   if (argc != 3 || (std::string(argv[1]) != "parity" && std::string(argv[1]) != "pressure")) return 2;
+   const fs::path root = argv[2];
+   if (!fs::create_directory(root)) throw std::runtime_error("require a fresh fixture directory");
+   const auto fasta = root / "tiny.fa";
+   write(fasta, ">1\nACGT\n");
+   int failed = 0;
+   for (int format : {2,3}) {
+     const auto dir = root / ("lookup" + std::to_string(format));
+     lookup_fixture(dir, fasta, format);
+     mss::Reference ref(dir.string(), fasta.string());
+@@ -272,13 +498,14 @@ int main(int argc, char** argv) {
+     mss::BlockFile file(path.string(),3,1);
+     for (int i=0;i<8;++i) {
+       assert(file.strict_line(2)=="bcdefghij"); assert(file.strict_line(12)=="kl");
+       assert(file.bytes(1,5)=="\nbcde"); assert(file.resident_bytes()<=3);
+ #ifdef MSS_LOOKUP_COUNTERS
+       file.visit_line(2,true,[](std::string_view row){assert(row=="bcdefghij");});
+       file.visit_line(12,true,[](std::string_view row){assert(row=="kl");});
+       assert(file.little_endian_offset(2)==UINT64_C(0x6968676665646362));
+ #endif
+     }
++    typed_key_boundaries(root, fasta);
+   }
+   return failed;
+ }
+diff --git a/tests/standalone/test_variantannotation_deferral.R b/tests/standalone/test_variantannotation_deferral.R
+new file mode 100644
+index 0000000..95596d2
+--- /dev/null
++++ b/tests/standalone/test_variantannotation_deferral.R
+@@ -0,0 +1,269 @@
++# Run each mode in a fresh Rscript --vanilla process with explicit libraries.
++# startup checks namespace loading and semantics checks the same outputs on an
++# eager baseline. Give semantics/startup a new receipt path and, optionally,
++# the baseline receipt to compare every recorded field and warning.
++
++same <- function(actual, expected, label) {
++    if (!identical(actual, expected)) {
++        details <- paste(all.equal(expected, actual), collapse = "; ")
++        stop(label, ": ", details, call. = FALSE)
++    }
++}
++
++capture_warnings <- function(expr) {
++    warnings <- character()
++    value <- withCallingHandlers(expr, warning = function(w) {
++        warnings <<- c(warnings, conditionMessage(w))
++        invokeRestart("muffleWarning")
++    })
++    list(value = value, warnings = warnings)
++}
++
++preservation <- function(directory) {
++    fasta <- file.path(directory, "tiny.fa")
++    sites <- file.path(directory, "sites.tsv")
++    writeLines(c(">1", "ACGTACGTACGT"), fasta)
++    writeLines(c(
++        "chr\tpos\tref\talt\tid\taliases",
++        "1\t2\tC\tT\trs2\t.",
++        "1\t5\tA\tG\trs5\t."
++    ), sites)
++    frame <- data.frame(
++        CHR = "1", BP = c(5L, 2L, 5L, 0L),
++        SNP = c("rs5", "rs2", "rs5", "invalid"),
++        A1 = c("A", "T", "A", "A"), A2 = c("G", "C", "G", "G"),
++        BETA = c(0.4, 0.2, -0.25, 1), FRQ = c(0.2, 0.25, 0.4, 0.1),
++        P = c("1e-1000", "0.2", "0.3", "0.1"), keep = letters[1:4]
++    )
++    expected <- data.frame(
++        status = c("match", "swap", "match", "invalid_position"),
++        source_row = c(1, 2, 3, 4),
++        pos = c(5, 2, 5, NA_real_), effect = c(0.4, -0.2, -0.25, NA_real_),
++        eaf = c(0.2, 0.75, 0.4, NA_real_)
++    )
++    lapply(c("mss-preservation-2", "mss-preservation-3"), function(format) {
++        ref <- MungeSumstats::prepare_reference(
++            fasta, sites, file.path(directory, format), build = "GRCh38",
++            version = "deferral-test", reference_format = format
++        )
++        handle <- MungeSumstats::open_reference(ref)
++        results <- lapply(list(frame, data.table::as.data.table(frame)), function(input) {
++            batch <- function(size) {
++                out <- MungeSumstats::harmonise_sumstats(
++                    input, handle, frequency_type = "EAF", batch_size = size
++                )
++                same(out$source, input, "source rows, classes and tokens")
++                same(out$normalized[names(expected)], expected, "resident row order and effects")
++                list(
++                    source_class = class(out$source), normalized = out$normalized,
++                    provenance = out$provenance[c("core_version", "implementation_version",
++                                                  "reference_version", "build", "frequency_type",
++                                                  "effect_type", "columns", "reference_verified")]
++                )
++            }
++            split <- batch(1L)
++            same(split, batch(10L), "resident one-row batches versus a single batch")
++            split
++        })
++        same(results[[2L]]$normalized, results[[1L]]$normalized, "data.table versus data.frame")
++        results
++    })
++}
++
++mapping <- function() {
++    lookup <- data.table::data.table(
++        uncorrected = c("pos0", "chr0", "maf"), corrected = c("BP", "CHR", "FRQ")
++    )
++    original <- data.table::copy(lookup)
++    input <- data.frame(
++        pos0 = c(7L, 2L), chr0 = c("2", "1"), maf = c(0.1, 0.2),
++        A2Freq = c(0.4, 0.5), unchangedCase = c("First", "Second")
++    )
++    expected <- data.frame(
++        BP = c(7L, 2L), CHR = c("2", "1"), maf = c(0.1, 0.2),
++        FRQ = c(0.4, 0.5), unchangedCase = c("First", "Second")
++    )
++    out <- MungeSumstats::standardise_header(
++        data.table::as.data.table(input), mapping_file = lookup,
++        uppercase_unmapped = FALSE, return_list = FALSE
++    )
++    same(class(out), c("data.table", "data.frame"), "mapped input class")
++    same(as.data.frame(out), expected, "mapping precedence, column names, classes and order")
++    same(lookup, original, "caller-owned mapping")
++    as.data.frame(out)
++}
++
++# The packaged ALS fixture covers the standard legacy path. These two rows
++# supply ANN and positions in separate tiles for the split/merge checks.
++local_vcf <- function(directory) {
++    path <- file.path(directory, "annotations.vcf")
++    writeLines(c(
++        "##fileformat=VCFv4.2",
++        "##contig=<ID=1,length=100,assembly=GRCh37>",
++        '##INFO=<ID=ANN,Number=.,Type=String,Description="Functional annotations: \'Consequence | Score | Impact\'">',
++        '##FORMAT=<ID=LP,Number=1,Type=Float,Description="Negative log10 p-value">',
++        paste(c("#CHROM", "POS", "ID", "REF", "ALT", "QUAL", "FILTER", "INFO", "FORMAT", "study"),
++              collapse = "\t"),
++        "1\t2\trs2\tC\tT\t12\tPASS\tANN=missense|11|moderate\tLP\t2",
++        "1\t90\trs90\tA\tG\t14\tPASS\tANN=synonymous|22|low\tLP\t3"
++    ), path)
++    path
++}
++
++vcf_rows <- function(vcf) {
++    same(methods::is(vcf, "CollapsedVCF"), TRUE, "VCF S4 class")
++    ranges <- MatrixGenerics::rowRanges(vcf)
++    ids <- c("rs2", "rs90")
++    same(names(ranges), ids, "VCF variant IDs")
++    same(GenomicRanges::start(ranges), c(2L, 90L), "VCF coordinate order and type")
++    same(VariantAnnotation::samples(VariantAnnotation::header(vcf)), "study", "VCF sample header")
++    same(as.character(VariantAnnotation::ref(vcf)), c("C", "A"), "VCF REF")
++    if (!"ANN" %in% names(VariantAnnotation::info(vcf))) {
++        stop("VCF INFO metadata lost ANN", call. = FALSE)
++    }
++    converted <- MungeSumstats::vcf2df(vcf, add_sample_names = FALSE, verbose = FALSE)
++    same(class(converted), c("data.table", "data.frame"), "VCF conversion class")
++    same(converted$ID, ids, "converted VCF IDs")
++    same(converted$ANN_Consequence, c("missense", "synonymous"), "ANN consequence")
++    same(converted$ANN_Score, c(11L, 22L), "ANN numeric annotation")
++    as.data.frame(converted)
++}
++
++legacy_vcf <- function(directory, path) {
++    # No VariantAnnotation call precedes this MungeSumstats entry point.
++    vcf <- MungeSumstats::read_vcf(
++        path, as_datatable = FALSE, download = FALSE, use_params = FALSE, verbose = FALSE
++    )
++    stopifnot("VariantAnnotation" %in% loadedNamespaces())
++    stopifnot(!"package:VariantAnnotation" %in% search())
++    converted <- vcf_rows(vcf)
++    halves <- list(vcf[1L, ], vcf[2L, ])
++    same(vcf_rows(do.call(VariantAnnotation::rbind, halves)), converted, "S4 split and merge")
++
++    indexed <- MungeSumstats:::index_vcf(path, verbose = FALSE)
++    stopifnot(file.exists(indexed), file.exists(paste0(indexed, ".tbi")))
++    tabular <- MungeSumstats::read_vcf(
++        indexed, download = FALSE, use_params = FALSE, verbose = FALSE
++    )
++    same(tabular$SNP, c("rs2", "rs90"), "legacy tabular variant IDs")
++    same(tabular$BP, c(2L, 90L), "legacy tabular coordinates")
++    same(tabular$P, c(0.01, 0.001), "legacy p-value conversion")
++
++    sumstats <- data.table::data.table(
++        CHR = "1", BP = c(90L, 2L), SNP = c("rs90", "rs2"),
++        A1 = c("A", "C"), A2 = c("G", "T"), P = c(0.001, 0.01),
++        BETA = c(-0.25, 0.5), SE = c(0.125, 0.25)
++    )
++    written <- MungeSumstats::write_sumstats(
++        sumstats, file.path(directory, "written.vcf"), write_vcf = TRUE,
++        ref_genome = "GRCh37", save_format = "opengwas", tabix_index = TRUE, return_path = TRUE
++    )
++    stopifnot(file.exists(written), file.exists(paste0(written, ".tbi")))
++    reread <- MungeSumstats::read_vcf(
++        written, download = FALSE, use_params = FALSE, verbose = FALSE
++    )
++    same(reread$BP, c(2L, 90L), "writer coordinate order")
++    same(reread$ES, c(0.5, -0.25), "writer effect metadata")
++    same(reread$RSID, c("rs2", "rs90"), "writer variant metadata")
++    list(annotated = converted, indexed_read = as.data.frame(tabular), written_read = as.data.frame(reread))
++}
++
++bp_ranges <- function() {
++    lapply(c("GRCh37", "GRCh38"), function(build) {
++        input <- data.table::data.table(
++            CHR = c("chr1", "1", "23", "chrX", "unknown", "1"),
++            BP = c("5", "1000000000", "7", "0", "1000000000", "non-numeric"),
++            SNP = paste0("row", 1:6)
++        )
++        out <- MungeSumstats:::check_bp_range(
++            input, path = "input.tsv", ref_genome = build, log_folder_ind = FALSE,
++            imputation_ind = FALSE, check_save_out = NULL, tabix_index = FALSE,
++            nThread = 1L, log_files = list()
++        )
++        expected <- data.frame(
++            CHR = c("chr1", "23", "unknown"), BP = c(5, 7, 1000000000),
++            SNP = c("row1", "row3", "row5")
++        )
++        same(class(out$sumstats_dt), c("data.table", "data.frame"), "BP result class")
++        actual <- as.data.frame(out$sumstats_dt)
++        same(actual, expected, "BP validation, classes and row order")
++        same(out$log_files, list(), "BP log files")
++        actual
++    })
++}
++
++main <- function(args) {
++    if (length(args) < 3L || length(args) > 5L ||
++        !args[[1L]] %in% c("startup", "semantics", "parallel-vcf", "bp")) {
++        stop("Usage: Rscript --vanilla script.R startup|semantics|parallel-vcf|bp MSS_LIB DEP_LIB [RECEIPT [BASELINE_RECEIPT]]")
++    }
++    mode <- args[[1L]]
++    physical <- function(path) normalizePath(path, winslash = "/", mustWork = TRUE)
++    roots <- physical(c(args[2:3], .Library))
++    .libPaths(roots, include.site = FALSE)
++    same(physical(.libPaths()), roots, "installed library paths")
++    stopifnot(!"VariantAnnotation" %in% loadedNamespaces())
++    stopifnot(!"MungeSumstats" %in% loadedNamespaces())
++    stopifnot(requireNamespace("MungeSumstats", lib.loc = roots[[1L]], quietly = TRUE))
++    same(
++        physical(getNamespaceInfo(asNamespace("MungeSumstats"), "path")),
++        physical(file.path(roots[[1L]], "MungeSumstats")), "MungeSumstats installation"
++    )
++    if (mode == "startup" && "VariantAnnotation" %in% loadedNamespaces()) {
++        stop("VariantAnnotation loaded while loading MungeSumstats", call. = FALSE)
++    }
++    data.table::setDTthreads(1L)
++    directory <- tempfile("mss-namespace-")
++    stopifnot(dir.create(directory))
++    on.exit(unlink(directory, recursive = TRUE))
++    if (mode == "bp") {
++        before <- capture_warnings(bp_ranges())
++        path <- local_vcf(directory)
++        vcf <- capture_warnings(legacy_vcf(directory, path))
++        after <- capture_warnings(bp_ranges())
++        same(after, before, "BP results and warnings after first VCF use")
++        receipt <- list(before = before, vcf = vcf, after = after)
++    } else if (mode == "parallel-vcf") {
++        if (!requireNamespace("GenomicFiles", quietly = TRUE)) {
++            stop("The production parallel VCF check requires GenomicFiles", call. = FALSE)
++        }
++        receipt <- capture_warnings({
++            path <- MungeSumstats:::index_vcf(local_vcf(directory), verbose = FALSE)
++            vcf_rows(MungeSumstats:::read_vcf_parallel(
++                path, as_datatable = FALSE, use_params = FALSE, nThread = 2L, ntile = 2L,
++                verbose = FALSE
++            ))
++        })
++    } else {
++        path <- local_vcf(directory)
++        before <- capture_warnings(list(preservation = preservation(directory), mapping = mapping()))
++        if (mode == "startup" && "VariantAnnotation" %in% loadedNamespaces()) {
++            stop("VariantAnnotation loaded during tabular processing", call. = FALSE)
++        }
++        vcf <- capture_warnings(legacy_vcf(directory, path))
++        after <- capture_warnings(list(preservation = preservation_again(directory), mapping = mapping()))
++        same(after, before, "tabular outputs and warnings after first VCF use")
++        again <- capture_warnings(vcf_rows(MungeSumstats::read_vcf(
++            path, as_datatable = FALSE, download = FALSE, use_params = FALSE, verbose = FALSE
++        )))
++        same(again$value, vcf$value$annotated, "VCF conversion after preservation")
++        receipt <- list(tabular = before, vcf = vcf, repeated_vcf = again)
++    }
++
++    if (length(args) >= 5L) {
++        same(receipt, readRDS(args[[5L]]), "baseline outputs and warnings")
++    }
++    if (length(args) >= 4L) {
++        stopifnot(!file.exists(args[[4L]]))
++        saveRDS(receipt, args[[4L]])
++    }
++    cat(mode, "passed\n")
++}
++
++preservation_again <- function(directory) {
++    next_directory <- file.path(directory, "after-vcf")
++    stopifnot(dir.create(next_directory))
++    preservation(next_directory)
++}
++
++main(commandArgs(trailingOnly = TRUE))

@@ -1,0 +1,145 @@
+{
+  "available_bytes": 246151532544,
+  "baseline_header_sha256": "42cbd86be7e8e85dd67b11713db3f3483997be96f6ace69b54d655d0ca7decf5",
+  "baseline_source_commit": "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b",
+  "cache_payload_bytes_per_handle": 29360128,
+  "disk_bytes": 134217728,
+  "driver": {
+    "path": "/private/tmp/mss-key-geometry-experiment-20261121/source/lookup_parity.cpp",
+    "sha256": "505b0e8c72a517e7db4b48fb49126c0bfcbeeb6254dcd19c8090db57dd20fec9"
+  },
+  "floor_bytes": 199715979264,
+  "guard_sha256": "58e0818aa20801c30194bdce26bd117112b4b4d5d10f74ea556360c0867b56a2",
+  "input_pins_before": {
+    "/private/tmp/gwas-harvest-stage2/assets/mss/matched-1M.tsv": {
+      "bytes": 46106766,
+      "md5": "86fbafb66e89f7dd8ac211952dada625",
+      "sha256": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2"
+    },
+    "/private/tmp/mss-fullfile-20261121/asset-restore-01/GRCh37.ensembl104.chr22.fa": {
+      "bytes": 52159647,
+      "md5": "936544855b253835442a0f253dd4b083",
+      "sha256": "f2e991e0816c2d7a19f9252ba314ea2717ed1ca73563dcd6417d514fb6c85e53"
+    },
+    "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/matched-index/core-version": {
+      "bytes": 19,
+      "md5": "b72bccd1f245def3a23d42a814f3923c",
+      "sha256": "c0ef21703c72cf14f2a71ef4674cd3aeaf4d6ed04174f40bbfa27f13cb3bc107"
+    },
+    "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/matched-index/fasta.fai": {
+      "bytes": 20,
+      "md5": "3b9c342b594b7b5ce42ad8f47f6d97f9",
+      "sha256": "dc27e2b48d065ddb7f37c9334ce0965f662875c7ebdff244f4ad1adcece60957"
+    },
+    "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/matched-index/keys": {
+      "bytes": 30066969,
+      "md5": "1f57d68a18b385924af656142bfacbbd",
+      "sha256": "f0199f6d194d9d8f42785a96450988995187d60052cb36fe25ea5af0ba116c1b"
+    },
+    "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/matched-index/offsets": {
+      "bytes": 10498992,
+      "md5": "39bb9ee045e47fad1c2aa38827905603",
+      "sha256": "f5b3c7a37c535bdb33e48ea4a7afc873ee89ede71368adb00104ed164557c3fc"
+    },
+    "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/matched-index/records": {
+      "bytes": 36006536,
+      "md5": "e2f376ab22a877adcf284e5d0218ea25",
+      "sha256": "eb5d1fc30a6bbba8c5ff40d52ce3582122658c7d80f5e04ae8c668023fcb1f61"
+    }
+  },
+  "issued_utc": "2026-11-21T11:58:00.147918+00:00",
+  "key_payload_bytes_per_role": 8388608,
+  "rss_bytes": 2147483648,
+  "scope": "Native mechanism counters and full Result/floatbit parity only, no API speed claim or product mutation",
+  "toolchain": {
+    "R_platform": "aarch64-apple-darwin20",
+    "R_version": "R version 4.5.3 (2026-03-11)",
+    "build_toolchain_pins": [
+      {
+        "path": "/Library/Developer/CommandLineTools/usr/bin/clang",
+        "sha256": "fc5e3cbba6ad54059295cad716aacb05ace8235f5f7a6031f1d8c15d24bd6d66"
+      },
+      {
+        "path": "/Library/Developer/CommandLineTools/usr/bin/ld",
+        "sha256": "7f7041b1bb30e5e6a815a55edf374065d5c82e1ab93f84d5b6ed5656ded24bcf"
+      },
+      {
+        "path": "/Library/Developer/CommandLineTools/usr/bin/make",
+        "sha256": "ba5dd576c636ab1ed626f790be00c0aa71ea73befdaae478a8ac10577134a95c"
+      },
+      {
+        "path": "/Library/Developer/CommandLineTools/usr/bin/dsymutil",
+        "sha256": "823ceb77f4a64545084f175b6c2e63d1817f08556e023563e898dc80d302716b"
+      },
+      {
+        "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk/SDKSettings.json",
+        "sha256": "82165b15ee21419d4cffaba8895797391b908ac9499ba70f561f3e1bd16758d6"
+      },
+      {
+        "path": "/usr/bin/xcrun",
+        "sha256": "687fe96553cdb08386f4ab9771066d71807d53a4460dc87749a590d69253161e"
+      },
+      {
+        "path": "/usr/bin/env",
+        "sha256": "dd48d2912b68c69daf057c1ab13fec6001a072d58bad7d1f91e0687025b2b16a"
+      },
+      {
+        "path": "/usr/bin/cmp",
+        "sha256": "db24187bc1000aac1e2194f83e5c58f776ee9c2d856dec966cdd73e58b3526f2"
+      },
+      {
+        "path": "/bin/sh",
+        "sha256": "f338dc2ba97328cb8aa29c57a348abf3267de71ef42ee1adf293b179542f2962"
+      },
+      {
+        "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/SHLIB",
+        "sha256": "90899a421e25914b05315025b5479ac838d279c04697fc4adf55898824ce6e7f"
+      },
+      {
+        "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/share/make/shlib.mk",
+        "sha256": "c770cb4ab1600da5180337ca3f61fbf17b91331cd9899ee059625af19f3b005c"
+      },
+      {
+        "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/etc/Makeconf",
+        "sha256": "7089036548a5bb140544d24cf2b031b5866af39637425722f080371f8689244a"
+      },
+      {
+        "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/R",
+        "sha256": "beabb801d8b74d20fef4c113fd58b3d1a0fc3b18a048d99d1faa3d2dd51bc2cd"
+      }
+    ],
+    "compiler": [
+      "Apple clang version 21.0.0 (clang-2100.4.1.1)",
+      "Target: arm64-apple-darwin27.2.0",
+      "Thread model: posix",
+      "InstalledDir: /Library/Developer/CommandLineTools/usr/bin"
+    ],
+    "compiler_flags": {
+      "CC": "clang -arch arm64 -std=gnu2x",
+      "CFLAGS": "-falign-functions=64 -Wall -g -O2",
+      "CPPFLAGS": "-I/opt/R/arm64/include",
+      "CXX17": "clang++ -arch arm64",
+      "CXX17FLAGS": "-falign-functions=64 -Wall -g -O2",
+      "CXX17STD": "-std=gnu++17",
+      "LDFLAGS": "-L/opt/R/arm64/lib",
+      "SHLIB_CXX17LD": "clang++ -arch arm64 -std=gnu++17",
+      "SHLIB_CXX17LDFLAGS": "-dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup"
+    },
+    "compiler_receipt": {
+      "path": "/private/tmp/mss-namespace-builds-20261121/compiler.stdout",
+      "sha256": "7656124e47978db7276c4783b040238fd3951ab2f3b824834660fcfb5b37eac1"
+    },
+    "r_config_receipt": {
+      "path": "/private/tmp/mss-namespace-builds-20261121/r-config.stdout",
+      "sha256": "5f713ee2ce1c5b57698ac0a43e5451863383d6557f151a38691ad6c180fa7527"
+    },
+    "sdk": "/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk"
+  },
+  "trial_header_sha256": "5881233fbad917d4475f4801497c90a720428c41ba5afb8a7d38c234da60f155",
+  "trial_kind": "Uncommitted one-initializer scratch header experiment",
+  "trial_patch": {
+    "path": "/private/tmp/mss-key-geometry-experiment-20261121/source/trial-header.patch",
+    "sha256": "cdfc635afd0c1b7f654301801c12d0f5bbab4393da830b9b0e259ebef81c96cf"
+  },
+  "wall_seconds": 600
+}

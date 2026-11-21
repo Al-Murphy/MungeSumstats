@@ -1,0 +1,29 @@
+{
+  "argv": [
+    "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/bin/python3.15",
+    "-I",
+    "-B",
+    "-S",
+    "/private/tmp/mss-fullfile-20261121/runtime/key-geometry-bench.py",
+    "prepare",
+    "/private/tmp/mss-key-geometry-builds-20261121/PROVENANCE.json",
+    "/private/tmp/mss-key-geometry-preparation-20261121/metadata",
+    "--candidate",
+    "8b85aa5ffc45ad7632cfc5319e85dd5eb3089be6"
+  ],
+  "available_bytes": 237617147904,
+  "baseline_commit": "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b",
+  "build_observation": {
+    "path": "/private/tmp/mss-key-geometry-builds-observation-20261121.json",
+    "sha256": "ee38ae6c506f2a700e3159a0d6ce038d3785a32f634e00dee7de72b03ec39473"
+  },
+  "candidate_commit": "8b85aa5ffc45ad7632cfc5319e85dd5eb3089be6",
+  "disk_bytes": 67108864,
+  "floor_bytes": 199715979264,
+  "guard_sha256": "58e0818aa20801c30194bdce26bd117112b4b4d5d10f74ea556360c0867b56a2",
+  "issued_utc": "2026-11-21T12:27:08.463023+00:00",
+  "rss_bytes": 1073741824,
+  "scope": "Fresh matched Git/archive/normal-install/runtime/dependency verification for key-page API trial, no timed workers",
+  "wall_seconds": 300,
+  "wrapper_sha256": "c2eb2af6b254a981272740eb05b6632b4dc0b55603f62c6cb9a1149a62dee976"
+}

@@ -1,0 +1,132 @@
+{
+  "absent_groups_sessions": [
+    53567,
+    53571,
+    53965,
+    53981,
+    53984,
+    53989,
+    54353,
+    54357,
+    54362
+  ],
+  "actual_exec_session": 45077,
+  "actual_exit_code": 0,
+  "actual_terminal_tool_chunk": "dc0b75",
+  "commits": {
+    "baseline": "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b",
+    "candidate": "8b85aa5ffc45ad7632cfc5319e85dd5eb3089be6"
+  },
+  "inspection_errors": [],
+  "live_members": [],
+  "observed_utc": "2026-11-21T12:27:04.781642+00:00",
+  "operator_result": {
+    "path": "/private/tmp/mss-key-geometry-builds-20261121/operator-result.json",
+    "sha256": "b63a74085c0fc9c4288339c99e65d3c1b9d45ce89b6e6c799ce9796db7f84f2c"
+  },
+  "phases": [
+    {
+      "closure": "confirmed",
+      "group_session": 53567,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-builds-20261121/compiler.jsonl",
+        "sha256": "34c669b1084afbf28b3b05f07128ac138e43cc8fc7f556e1c5ee22d285c299ba"
+      },
+      "label": "compiler",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 53571,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-builds-20261121/r-config.jsonl",
+        "sha256": "d8b82c327c9fc2dbf4b6732d36f8d7676693ed36f83f8fa398a0a56ece92eb86"
+      },
+      "label": "r-config",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 53965,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-builds-20261121/runtime.jsonl",
+        "sha256": "7d984905a568e49a3d9f8cc203d84bbfef7a10f1e4b09bc0cf909855e5fde6a0"
+      },
+      "label": "runtime",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 53981,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-builds-20261121/baseline/source-tree.jsonl",
+        "sha256": "2acfecaea359cb7ae7d7e942ac62919a4018d7cf25144e8a44cd6e4cc1e03164"
+      },
+      "label": "source-tree-baseline",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 53984,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-builds-20261121/baseline/archive.jsonl",
+        "sha256": "149812bb5b4590a811a5390b32f3bec98f4e030909213eef5e8605bb93e859fc"
+      },
+      "label": "git-archive-baseline",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 53989,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-builds-20261121/baseline/install.jsonl",
+        "sha256": "b4fa53767dfe9c0817e4b703f625edbde8431a448f504cd586df4c76c5d912d9"
+      },
+      "label": "normal-install-baseline",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 54353,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-builds-20261121/candidate/source-tree.jsonl",
+        "sha256": "36971047ed0c3f46c7cdf21ae1a51a4fb5e22a92b9b118de5bdef09b2fd9b6d8"
+      },
+      "label": "source-tree-candidate",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 54357,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-builds-20261121/candidate/archive.jsonl",
+        "sha256": "f6d0c48749fc59f84714ea590c0980eeb4301ba9d12a2745e725eed2fb32233b"
+      },
+      "label": "git-archive-candidate",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 54362,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-builds-20261121/candidate/install.jsonl",
+        "sha256": "32cc935956dedbb657af7852f7993c19ea736e87f5b2195954dafab85d2d3d6a"
+      },
+      "label": "normal-install-candidate",
+      "leader_reaped": true,
+      "raw_exit": 0
+    }
+  ],
+  "producer": {
+    "path": "/private/tmp/mss-fullfile-20261121/runtime/matched-builds.py",
+    "sha256": "0605d74d1434cc918c6901f9847c36ec4aa18d003fe76aaf7a8a1d149be6f54d"
+  }
+}

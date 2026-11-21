@@ -1,0 +1,94 @@
+{
+  "absent_groups_sessions": [
+    50376,
+    50406,
+    50433,
+    50437,
+    50440,
+    50443
+  ],
+  "actual_exec_session": 11263,
+  "actual_exit_code": 0,
+  "actual_terminal_tool_chunk": "46abae",
+  "inspection_errors": [],
+  "live_members": [],
+  "nonempty_stderr": [],
+  "observed_utc": "2026-11-21T12:23:13.204096+00:00",
+  "parity_transcript_equal": true,
+  "phases": [
+    {
+      "closure": "confirmed",
+      "group_session": 50376,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-02-boundaries/compile-baseline.jsonl",
+        "sha256": "225ccb17727320bdccfc2979fd2440962b9523c0a841358a27241b5ba173c1d0"
+      },
+      "label": "compile-baseline",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 50406,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-02-boundaries/compile-trial.jsonl",
+        "sha256": "811559b49149aa15ca080a710c6d052201153879a0114530925b9bd01bee5c68"
+      },
+      "label": "compile-trial",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 50433,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-02-boundaries/parity-baseline.jsonl",
+        "sha256": "f1cc7957da4a865ad64d467335d5f69c81ae743c0a2ecb34c3b936001ecd7227"
+      },
+      "label": "parity-baseline",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 50437,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-02-boundaries/parity-trial.jsonl",
+        "sha256": "93c8a1a66d862a2814c758daaea5cc2a5d451e5d0050870c09b093562f3cabb9"
+      },
+      "label": "parity-trial",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 50440,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-02-boundaries/pressure-baseline.jsonl",
+        "sha256": "66c296e0c9edff32f877a17a270bcf45e48e0a0d8c114883d0be28831d02674e"
+      },
+      "label": "pressure-baseline",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 50443,
+      "guard": {
+        "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-02-boundaries/pressure-trial.jsonl",
+        "sha256": "4aa08d2c053b42a9a9229a0dceeb84e69fd664d4c117f5bfc1cef7bc5944758c"
+      },
+      "label": "pressure-trial",
+      "leader_reaped": true,
+      "raw_exit": 0
+    }
+  ],
+  "result": {
+    "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-02-boundaries/result.json",
+    "sha256": "e4fffc3e14de38c90a51ad0b2bed823868d51ad74ad6b53b34b4062d90f8a696"
+  },
+  "transcript": {
+    "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-02-boundaries/parity-baseline.stdout",
+    "sha256": "4401910e98e5bdffde63e4485ebaf83928cb0d678ab07492dbc8c47af3be09ee"
+  }
+}

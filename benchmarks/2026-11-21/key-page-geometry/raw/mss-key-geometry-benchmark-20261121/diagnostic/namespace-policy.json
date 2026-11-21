@@ -1,0 +1,4667 @@
+{
+  "binding": {
+    "path": "/private/tmp/mss-fullfile-20261121/runtime/namespace-bench.py",
+    "sha256": "a61cbab2a7af12e0befd8d4fb6c0e9f81d786160db1ad391c95389717a002e94"
+  },
+  "bootstrap": {
+    "path": "/private/tmp/mss-fullfile-20261121/runtime/warm-current.py",
+    "sha256": "c58b14cda2ad650cefa078e4a73cd2a2a4d5ab8ffc4f7477e5375e0aaa794220"
+  },
+  "frozen_sources": {
+    "/private/tmp/mss-performance-20261119/tools/darwin-matrix-stage185/driver.py": "16e82e1e581dd92e911f8947f2465f4092759124bc157d1a1b0f8133c10761b4",
+    "/private/tmp/mss-performance-20261119/tools/darwin-matrix-stage185/warm.py": "46dac35e0452add60a41a0b5923b2096d0cce14309421bf0ca4585702f4c6382",
+    "/private/tmp/mss-performance-20261119/tools/darwin-matrix-stage185/prime.R": "28d96fb69242596bd5c9adb73013f5de70f8cb6f326f3900ed780c8ba5118661",
+    "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/run.py": "c0c5f2f72a334b2b77721eccca59a00d1e47fb1663f513ddcbe51700a13ec043",
+    "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/verify.py": "cb0f9774aa9523514ce9fc75868e438272606de3eb3564699addca103de1930b",
+    "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/process_metrics.py": "f402957540febe6e0f9e8c56422b7acc5f68bcc32afe4377705347de199a05d7",
+    "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R": "f8477b5b0047b0361d636e4af63b5ed9bf2be87229d7cf9c682331a51147e7df",
+    "/private/tmp/mss-performance-20261119/repo/inst/verification/fai-safety-stage8/whole-file/harness/verify.py": "d4bbe46a9037597203e779b9e0f830a293b15a476421973fc6a0b69b2dc45c95",
+    "/private/tmp/mss-performance-20261119/tools/darwin-full-stage185/guard.py": "58e0818aa20801c30194bdce26bd117112b4b4d5d10f74ea556360c0867b56a2",
+    "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/operations/build.py": "a17b8a9f9c998a0ae27c35df9da31e08f7a6cba56a8b870d6af022350fb3a3f8",
+    "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/bin/python3.15": "6cc907e4a022fefc843bcd93954eaf5a2cbfc77a095640bfadeeed96154190c5"
+  },
+  "matrix_config": {
+    "path": "/private/tmp/mss-fullmatrix-20261121/prep-01/matrix.json",
+    "sha256": "156143e169744ead89eb7a01721ac433da0d0983be68924b417bcc72f00426c7"
+  },
+  "baseline_override": {
+    "frozen": "a86e8c94d753630eff8c6a695ed2f240d1123d0d",
+    "actual": "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b"
+  },
+  "key_geometry_override": {
+    "wrapper": {
+      "path": "/private/tmp/mss-fullfile-20261121/runtime/key-geometry-bench.py",
+      "sha256": "c2eb2af6b254a981272740eb05b6632b4dc0b55603f62c6cb9a1149a62dee976"
+    },
+    "original_baseline": "14ea7af51a19272c7792fbe582a3d42b291b4a1a",
+    "actual_baseline": "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b",
+    "prior_eager_only": [
+      "AnnotationDbi",
+      "DBI",
+      "GenomicFeatures",
+      "KEGGREST",
+      "RSQLite",
+      "VariantAnnotation",
+      "bit",
+      "bit64",
+      "blob",
+      "cachem",
+      "fastmap",
+      "memoise",
+      "png"
+    ],
+    "revised_eager_only": [],
+    "reason": "Both roles defer VariantAnnotation. Key-page geometry requires identical namespace inventories.",
+    "counter_review": {
+      "path": "/private/tmp/mss-fullfile-20261121/runtime/KEY-GEOMETRY-RESULT-REVIEW.md",
+      "sha256": "d478ab3a248afb1f94cca78c913037735aadea29d8e6bd9c4fbbd539c4f425d0"
+    }
+  },
+  "preparation": {
+    "path": "/private/tmp/mss-key-geometry-preparation-20261121/metadata/binding.json",
+    "sha256": "124bad97669b7a831643f9bf3589015cda725189953d996650e097d744cd00a8"
+  },
+  "configuration": {
+    "path": "/private/tmp/mss-key-geometry-preparation-20261121/metadata/diagnostic.json",
+    "sha256": "deaca2c419999a5964e1998a25bae24eadcf1dc18075debe48ef0d04b42fedb1"
+  },
+  "source_commits": {
+    "baseline": "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b",
+    "candidate": "8b85aa5ffc45ad7632cfc5319e85dd5eb3089be6"
+  },
+  "required_baseline_only": [],
+  "cases": {
+    "hard-cases-f2": {
+      "baseline_only": [],
+      "candidate_only": [],
+      "common_comparison_state": {
+        "abind": [
+          "1.4.8",
+          "/private/tmp/mss-parallel-support-20261121/common/abind"
+        ],
+        "base": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/base"
+        ],
+        "Biobase": [
+          "2.70.0",
+          "/private/tmp/mss-parallel-support-20261121/common/Biobase"
+        ],
+        "BiocGenerics": [
+          "0.56.0",
+          "/private/tmp/mss-parallel-support-20261121/common/BiocGenerics"
+        ],
+        "BiocIO": [
+          "1.20.0",
+          "/private/tmp/mss-parallel-support-20261121/common/BiocIO"
+        ],
+        "BiocParallel": [
+          "1.44.0",
+          "/private/tmp/mss-parallel-support-20261121/common/BiocParallel"
+        ],
+        "Biostrings": [
+          "2.78.0",
+          "/private/tmp/mss-parallel-support-20261121/common/Biostrings"
+        ],
+        "bitops": [
+          "1.1.0",
+          "/private/tmp/mss-parallel-support-20261121/common/bitops"
+        ],
+        "BSgenome": [
+          "1.78.0",
+          "/private/tmp/mss-parallel-support-20261121/common/BSgenome"
+        ],
+        "cigarillo": [
+          "1.0.0",
+          "/private/tmp/mss-parallel-support-20261121/common/cigarillo"
+        ],
+        "cli": [
+          "3.6.6",
+          "/private/tmp/mss-parallel-support-20261121/common/cli"
+        ],
+        "codetools": [
+          "0.2.20",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/codetools"
+        ],
+        "compiler": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/compiler"
+        ],
+        "crayon": [
+          "1.5.3",
+          "/private/tmp/mss-parallel-support-20261121/common/crayon"
+        ],
+        "curl": [
+          "8.1.0",
+          "/private/tmp/mss-parallel-support-20261121/common/curl"
+        ],
+        "data.table": [
+          "1.18.6.1",
+          "/private/tmp/mss-parallel-support-20261121/common/data.table"
+        ],
+        "datasets": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/datasets"
+        ],
+        "DelayedArray": [
+          "0.36.1",
+          "/private/tmp/mss-parallel-support-20261121/common/DelayedArray"
+        ],
+        "dplyr": [
+          "1.2.1",
+          "/private/tmp/mss-parallel-support-20261121/common/dplyr"
+        ],
+        "generics": [
+          "0.1.4",
+          "/private/tmp/mss-parallel-support-20261121/common/generics"
+        ],
+        "GenomeInfoDb": [
+          "1.46.2",
+          "/private/tmp/mss-parallel-support-20261121/common/GenomeInfoDb"
+        ],
+        "GenomicAlignments": [
+          "1.46.0",
+          "/private/tmp/mss-parallel-support-20261121/common/GenomicAlignments"
+        ],
+        "GenomicRanges": [
+          "1.62.1",
+          "/private/tmp/mss-parallel-support-20261121/common/GenomicRanges"
+        ],
+        "glue": [
+          "1.8.1",
+          "/private/tmp/mss-parallel-support-20261121/common/glue"
+        ],
+        "graphics": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/graphics"
+        ],
+        "grDevices": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grDevices"
+        ],
+        "grid": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grid"
+        ],
+        "httr": [
+          "1.4.9",
+          "/private/tmp/mss-parallel-support-20261121/common/httr"
+        ],
+        "ieugwasr": [
+          "1.2.1",
+          "/private/tmp/mss-parallel-support-20261121/common/ieugwasr"
+        ],
+        "IRanges": [
+          "2.44.0",
+          "/private/tmp/mss-parallel-support-20261121/common/IRanges"
+        ],
+        "jsonlite": [
+          "2.0.0",
+          "/private/tmp/mss-parallel-support-20261121/common/jsonlite"
+        ],
+        "lattice": [
+          "0.22.9",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/lattice"
+        ],
+        "lifecycle": [
+          "1.0.5",
+          "/private/tmp/mss-parallel-support-20261121/common/lifecycle"
+        ],
+        "magrittr": [
+          "2.0.5",
+          "/private/tmp/mss-parallel-support-20261121/common/magrittr"
+        ],
+        "Matrix": [
+          "1.7.4",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/Matrix"
+        ],
+        "MatrixGenerics": [
+          "1.22.0",
+          "/private/tmp/mss-parallel-support-20261121/common/MatrixGenerics"
+        ],
+        "matrixStats": [
+          "1.5.0",
+          "/private/tmp/mss-parallel-support-20261121/common/matrixStats"
+        ],
+        "methods": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/methods"
+        ],
+        "MungeSumstats": [
+          "1.21.4",
+          "<selected installation>"
+        ],
+        "parallel": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/parallel"
+        ],
+        "pillar": [
+          "1.11.1",
+          "/private/tmp/mss-parallel-support-20261121/common/pillar"
+        ],
+        "pkgconfig": [
+          "2.0.3",
+          "/private/tmp/mss-parallel-support-20261121/common/pkgconfig"
+        ],
+        "R.methodsS3": [
+          "1.8.2",
+          "/private/tmp/mss-parallel-support-20261121/common/R.methodsS3"
+        ],
+        "R.oo": [
+          "1.27.1",
+          "/private/tmp/mss-parallel-support-20261121/common/R.oo"
+        ],
+        "R.utils": [
+          "2.13.0",
+          "/private/tmp/mss-parallel-support-20261121/common/R.utils"
+        ],
+        "R6": [
+          "2.6.1",
+          "/private/tmp/mss-parallel-support-20261121/common/R6"
+        ],
+        "Rcpp": [
+          "1.1.2",
+          "/private/tmp/mss-parallel-support-20261121/common/Rcpp"
+        ],
+        "RCurl": [
+          "1.98.1.20",
+          "/private/tmp/mss-parallel-support-20261121/common/RCurl"
+        ],
+        "restfulr": [
+          "0.0.17",
+          "/private/tmp/mss-parallel-support-20261121/common/restfulr"
+        ],
+        "rjson": [
+          "0.2.23",
+          "/private/tmp/mss-parallel-support-20261121/common/rjson"
+        ],
+        "rlang": [
+          "1.3.0",
+          "/private/tmp/mss-parallel-support-20261121/common/rlang"
+        ],
+        "Rsamtools": [
+          "2.26.0",
+          "/private/tmp/mss-parallel-support-20261121/common/Rsamtools"
+        ],
+        "rtracklayer": [
+          "1.70.1",
+          "/private/tmp/mss-parallel-support-20261121/common/rtracklayer"
+        ],
+        "S4Arrays": [
+          "1.10.1",
+          "/private/tmp/mss-parallel-support-20261121/common/S4Arrays"
+        ],
+        "S4Vectors": [
+          "0.48.1",
+          "/private/tmp/mss-parallel-support-20261121/common/S4Vectors"
+        ],
+        "Seqinfo": [
+          "1.0.0",
+          "/private/tmp/mss-parallel-support-20261121/common/Seqinfo"
+        ],
+        "SparseArray": [
+          "1.10.10",
+          "/private/tmp/mss-parallel-support-20261121/common/SparseArray"
+        ],
+        "stats": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats"
+        ],
+        "stats4": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats4"
+        ],
+        "stringi": [
+          "1.8.9",
+          "/private/tmp/mss-parallel-support-20261121/common/stringi"
+        ],
+        "stringr": [
+          "1.6.0",
+          "/private/tmp/mss-parallel-support-20261121/common/stringr"
+        ],
+        "SummarizedExperiment": [
+          "1.40.0",
+          "/private/tmp/mss-parallel-support-20261121/common/SummarizedExperiment"
+        ],
+        "tibble": [
+          "3.3.1",
+          "/private/tmp/mss-parallel-support-20261121/common/tibble"
+        ],
+        "tidyselect": [
+          "1.2.1",
+          "/private/tmp/mss-parallel-support-20261121/common/tidyselect"
+        ],
+        "tools": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/tools"
+        ],
+        "UCSC.utils": [
+          "1.6.1",
+          "/private/tmp/mss-parallel-support-20261121/common/UCSC.utils"
+        ],
+        "utils": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/utils"
+        ],
+        "vctrs": [
+          "0.7.3",
+          "/private/tmp/mss-parallel-support-20261121/common/vctrs"
+        ],
+        "XML": [
+          "3.99.0.25",
+          "/private/tmp/mss-parallel-support-20261121/common/XML"
+        ],
+        "XVector": [
+          "0.50.0",
+          "/private/tmp/mss-parallel-support-20261121/common/XVector"
+        ],
+        "yaml": [
+          "2.3.12",
+          "/private/tmp/mss-parallel-support-20261121/common/yaml"
+        ]
+      },
+      "actual_role_states": {
+        "baseline": {
+          "abind": [
+            "1.4.8",
+            "/private/tmp/mss-parallel-support-20261121/common/abind"
+          ],
+          "base": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/base"
+          ],
+          "Biobase": [
+            "2.70.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Biobase"
+          ],
+          "BiocGenerics": [
+            "0.56.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocGenerics"
+          ],
+          "BiocIO": [
+            "1.20.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocIO"
+          ],
+          "BiocParallel": [
+            "1.44.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocParallel"
+          ],
+          "Biostrings": [
+            "2.78.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Biostrings"
+          ],
+          "bitops": [
+            "1.1.0",
+            "/private/tmp/mss-parallel-support-20261121/common/bitops"
+          ],
+          "BSgenome": [
+            "1.78.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BSgenome"
+          ],
+          "cigarillo": [
+            "1.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/cigarillo"
+          ],
+          "cli": [
+            "3.6.6",
+            "/private/tmp/mss-parallel-support-20261121/common/cli"
+          ],
+          "codetools": [
+            "0.2.20",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/codetools"
+          ],
+          "compiler": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/compiler"
+          ],
+          "crayon": [
+            "1.5.3",
+            "/private/tmp/mss-parallel-support-20261121/common/crayon"
+          ],
+          "curl": [
+            "8.1.0",
+            "/private/tmp/mss-parallel-support-20261121/common/curl"
+          ],
+          "data.table": [
+            "1.18.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/data.table"
+          ],
+          "datasets": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/datasets"
+          ],
+          "DelayedArray": [
+            "0.36.1",
+            "/private/tmp/mss-parallel-support-20261121/common/DelayedArray"
+          ],
+          "dplyr": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/dplyr"
+          ],
+          "generics": [
+            "0.1.4",
+            "/private/tmp/mss-parallel-support-20261121/common/generics"
+          ],
+          "GenomeInfoDb": [
+            "1.46.2",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomeInfoDb"
+          ],
+          "GenomicAlignments": [
+            "1.46.0",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomicAlignments"
+          ],
+          "GenomicRanges": [
+            "1.62.1",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomicRanges"
+          ],
+          "glue": [
+            "1.8.1",
+            "/private/tmp/mss-parallel-support-20261121/common/glue"
+          ],
+          "graphics": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/graphics"
+          ],
+          "grDevices": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grDevices"
+          ],
+          "grid": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grid"
+          ],
+          "httr": [
+            "1.4.9",
+            "/private/tmp/mss-parallel-support-20261121/common/httr"
+          ],
+          "ieugwasr": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/ieugwasr"
+          ],
+          "IRanges": [
+            "2.44.0",
+            "/private/tmp/mss-parallel-support-20261121/common/IRanges"
+          ],
+          "jsonlite": [
+            "2.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/jsonlite"
+          ],
+          "lattice": [
+            "0.22.9",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/lattice"
+          ],
+          "lifecycle": [
+            "1.0.5",
+            "/private/tmp/mss-parallel-support-20261121/common/lifecycle"
+          ],
+          "magrittr": [
+            "2.0.5",
+            "/private/tmp/mss-parallel-support-20261121/common/magrittr"
+          ],
+          "Matrix": [
+            "1.7.4",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/Matrix"
+          ],
+          "MatrixGenerics": [
+            "1.22.0",
+            "/private/tmp/mss-parallel-support-20261121/common/MatrixGenerics"
+          ],
+          "matrixStats": [
+            "1.5.0",
+            "/private/tmp/mss-parallel-support-20261121/common/matrixStats"
+          ],
+          "methods": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/methods"
+          ],
+          "MungeSumstats": [
+            "1.21.4",
+            "/private/tmp/mss-key-geometry-builds-20261121/baseline/library/MungeSumstats"
+          ],
+          "parallel": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/parallel"
+          ],
+          "pillar": [
+            "1.11.1",
+            "/private/tmp/mss-parallel-support-20261121/common/pillar"
+          ],
+          "pkgconfig": [
+            "2.0.3",
+            "/private/tmp/mss-parallel-support-20261121/common/pkgconfig"
+          ],
+          "R.methodsS3": [
+            "1.8.2",
+            "/private/tmp/mss-parallel-support-20261121/common/R.methodsS3"
+          ],
+          "R.oo": [
+            "1.27.1",
+            "/private/tmp/mss-parallel-support-20261121/common/R.oo"
+          ],
+          "R.utils": [
+            "2.13.0",
+            "/private/tmp/mss-parallel-support-20261121/common/R.utils"
+          ],
+          "R6": [
+            "2.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/R6"
+          ],
+          "Rcpp": [
+            "1.1.2",
+            "/private/tmp/mss-parallel-support-20261121/common/Rcpp"
+          ],
+          "RCurl": [
+            "1.98.1.20",
+            "/private/tmp/mss-parallel-support-20261121/common/RCurl"
+          ],
+          "restfulr": [
+            "0.0.17",
+            "/private/tmp/mss-parallel-support-20261121/common/restfulr"
+          ],
+          "rjson": [
+            "0.2.23",
+            "/private/tmp/mss-parallel-support-20261121/common/rjson"
+          ],
+          "rlang": [
+            "1.3.0",
+            "/private/tmp/mss-parallel-support-20261121/common/rlang"
+          ],
+          "Rsamtools": [
+            "2.26.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Rsamtools"
+          ],
+          "rtracklayer": [
+            "1.70.1",
+            "/private/tmp/mss-parallel-support-20261121/common/rtracklayer"
+          ],
+          "S4Arrays": [
+            "1.10.1",
+            "/private/tmp/mss-parallel-support-20261121/common/S4Arrays"
+          ],
+          "S4Vectors": [
+            "0.48.1",
+            "/private/tmp/mss-parallel-support-20261121/common/S4Vectors"
+          ],
+          "Seqinfo": [
+            "1.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Seqinfo"
+          ],
+          "SparseArray": [
+            "1.10.10",
+            "/private/tmp/mss-parallel-support-20261121/common/SparseArray"
+          ],
+          "stats": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats"
+          ],
+          "stats4": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats4"
+          ],
+          "stringi": [
+            "1.8.9",
+            "/private/tmp/mss-parallel-support-20261121/common/stringi"
+          ],
+          "stringr": [
+            "1.6.0",
+            "/private/tmp/mss-parallel-support-20261121/common/stringr"
+          ],
+          "SummarizedExperiment": [
+            "1.40.0",
+            "/private/tmp/mss-parallel-support-20261121/common/SummarizedExperiment"
+          ],
+          "tibble": [
+            "3.3.1",
+            "/private/tmp/mss-parallel-support-20261121/common/tibble"
+          ],
+          "tidyselect": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/tidyselect"
+          ],
+          "tools": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/tools"
+          ],
+          "UCSC.utils": [
+            "1.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/UCSC.utils"
+          ],
+          "utils": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/utils"
+          ],
+          "vctrs": [
+            "0.7.3",
+            "/private/tmp/mss-parallel-support-20261121/common/vctrs"
+          ],
+          "XML": [
+            "3.99.0.25",
+            "/private/tmp/mss-parallel-support-20261121/common/XML"
+          ],
+          "XVector": [
+            "0.50.0",
+            "/private/tmp/mss-parallel-support-20261121/common/XVector"
+          ],
+          "yaml": [
+            "2.3.12",
+            "/private/tmp/mss-parallel-support-20261121/common/yaml"
+          ]
+        },
+        "candidate": {
+          "abind": [
+            "1.4.8",
+            "/private/tmp/mss-parallel-support-20261121/common/abind"
+          ],
+          "base": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/base"
+          ],
+          "Biobase": [
+            "2.70.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Biobase"
+          ],
+          "BiocGenerics": [
+            "0.56.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocGenerics"
+          ],
+          "BiocIO": [
+            "1.20.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocIO"
+          ],
+          "BiocParallel": [
+            "1.44.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocParallel"
+          ],
+          "Biostrings": [
+            "2.78.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Biostrings"
+          ],
+          "bitops": [
+            "1.1.0",
+            "/private/tmp/mss-parallel-support-20261121/common/bitops"
+          ],
+          "BSgenome": [
+            "1.78.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BSgenome"
+          ],
+          "cigarillo": [
+            "1.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/cigarillo"
+          ],
+          "cli": [
+            "3.6.6",
+            "/private/tmp/mss-parallel-support-20261121/common/cli"
+          ],
+          "codetools": [
+            "0.2.20",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/codetools"
+          ],
+          "compiler": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/compiler"
+          ],
+          "crayon": [
+            "1.5.3",
+            "/private/tmp/mss-parallel-support-20261121/common/crayon"
+          ],
+          "curl": [
+            "8.1.0",
+            "/private/tmp/mss-parallel-support-20261121/common/curl"
+          ],
+          "data.table": [
+            "1.18.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/data.table"
+          ],
+          "datasets": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/datasets"
+          ],
+          "DelayedArray": [
+            "0.36.1",
+            "/private/tmp/mss-parallel-support-20261121/common/DelayedArray"
+          ],
+          "dplyr": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/dplyr"
+          ],
+          "generics": [
+            "0.1.4",
+            "/private/tmp/mss-parallel-support-20261121/common/generics"
+          ],
+          "GenomeInfoDb": [
+            "1.46.2",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomeInfoDb"
+          ],
+          "GenomicAlignments": [
+            "1.46.0",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomicAlignments"
+          ],
+          "GenomicRanges": [
+            "1.62.1",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomicRanges"
+          ],
+          "glue": [
+            "1.8.1",
+            "/private/tmp/mss-parallel-support-20261121/common/glue"
+          ],
+          "graphics": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/graphics"
+          ],
+          "grDevices": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grDevices"
+          ],
+          "grid": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grid"
+          ],
+          "httr": [
+            "1.4.9",
+            "/private/tmp/mss-parallel-support-20261121/common/httr"
+          ],
+          "ieugwasr": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/ieugwasr"
+          ],
+          "IRanges": [
+            "2.44.0",
+            "/private/tmp/mss-parallel-support-20261121/common/IRanges"
+          ],
+          "jsonlite": [
+            "2.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/jsonlite"
+          ],
+          "lattice": [
+            "0.22.9",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/lattice"
+          ],
+          "lifecycle": [
+            "1.0.5",
+            "/private/tmp/mss-parallel-support-20261121/common/lifecycle"
+          ],
+          "magrittr": [
+            "2.0.5",
+            "/private/tmp/mss-parallel-support-20261121/common/magrittr"
+          ],
+          "Matrix": [
+            "1.7.4",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/Matrix"
+          ],
+          "MatrixGenerics": [
+            "1.22.0",
+            "/private/tmp/mss-parallel-support-20261121/common/MatrixGenerics"
+          ],
+          "matrixStats": [
+            "1.5.0",
+            "/private/tmp/mss-parallel-support-20261121/common/matrixStats"
+          ],
+          "methods": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/methods"
+          ],
+          "MungeSumstats": [
+            "1.21.4",
+            "/private/tmp/mss-key-geometry-builds-20261121/candidate/library/MungeSumstats"
+          ],
+          "parallel": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/parallel"
+          ],
+          "pillar": [
+            "1.11.1",
+            "/private/tmp/mss-parallel-support-20261121/common/pillar"
+          ],
+          "pkgconfig": [
+            "2.0.3",
+            "/private/tmp/mss-parallel-support-20261121/common/pkgconfig"
+          ],
+          "R.methodsS3": [
+            "1.8.2",
+            "/private/tmp/mss-parallel-support-20261121/common/R.methodsS3"
+          ],
+          "R.oo": [
+            "1.27.1",
+            "/private/tmp/mss-parallel-support-20261121/common/R.oo"
+          ],
+          "R.utils": [
+            "2.13.0",
+            "/private/tmp/mss-parallel-support-20261121/common/R.utils"
+          ],
+          "R6": [
+            "2.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/R6"
+          ],
+          "Rcpp": [
+            "1.1.2",
+            "/private/tmp/mss-parallel-support-20261121/common/Rcpp"
+          ],
+          "RCurl": [
+            "1.98.1.20",
+            "/private/tmp/mss-parallel-support-20261121/common/RCurl"
+          ],
+          "restfulr": [
+            "0.0.17",
+            "/private/tmp/mss-parallel-support-20261121/common/restfulr"
+          ],
+          "rjson": [
+            "0.2.23",
+            "/private/tmp/mss-parallel-support-20261121/common/rjson"
+          ],
+          "rlang": [
+            "1.3.0",
+            "/private/tmp/mss-parallel-support-20261121/common/rlang"
+          ],
+          "Rsamtools": [
+            "2.26.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Rsamtools"
+          ],
+          "rtracklayer": [
+            "1.70.1",
+            "/private/tmp/mss-parallel-support-20261121/common/rtracklayer"
+          ],
+          "S4Arrays": [
+            "1.10.1",
+            "/private/tmp/mss-parallel-support-20261121/common/S4Arrays"
+          ],
+          "S4Vectors": [
+            "0.48.1",
+            "/private/tmp/mss-parallel-support-20261121/common/S4Vectors"
+          ],
+          "Seqinfo": [
+            "1.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Seqinfo"
+          ],
+          "SparseArray": [
+            "1.10.10",
+            "/private/tmp/mss-parallel-support-20261121/common/SparseArray"
+          ],
+          "stats": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats"
+          ],
+          "stats4": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats4"
+          ],
+          "stringi": [
+            "1.8.9",
+            "/private/tmp/mss-parallel-support-20261121/common/stringi"
+          ],
+          "stringr": [
+            "1.6.0",
+            "/private/tmp/mss-parallel-support-20261121/common/stringr"
+          ],
+          "SummarizedExperiment": [
+            "1.40.0",
+            "/private/tmp/mss-parallel-support-20261121/common/SummarizedExperiment"
+          ],
+          "tibble": [
+            "3.3.1",
+            "/private/tmp/mss-parallel-support-20261121/common/tibble"
+          ],
+          "tidyselect": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/tidyselect"
+          ],
+          "tools": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/tools"
+          ],
+          "UCSC.utils": [
+            "1.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/UCSC.utils"
+          ],
+          "utils": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/utils"
+          ],
+          "vctrs": [
+            "0.7.3",
+            "/private/tmp/mss-parallel-support-20261121/common/vctrs"
+          ],
+          "XML": [
+            "3.99.0.25",
+            "/private/tmp/mss-parallel-support-20261121/common/XML"
+          ],
+          "XVector": [
+            "0.50.0",
+            "/private/tmp/mss-parallel-support-20261121/common/XVector"
+          ],
+          "yaml": [
+            "2.3.12",
+            "/private/tmp/mss-parallel-support-20261121/common/yaml"
+          ]
+        }
+      }
+    },
+    "hard-cases-f3": {
+      "baseline_only": [],
+      "candidate_only": [],
+      "common_comparison_state": {
+        "abind": [
+          "1.4.8",
+          "/private/tmp/mss-parallel-support-20261121/common/abind"
+        ],
+        "base": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/base"
+        ],
+        "Biobase": [
+          "2.70.0",
+          "/private/tmp/mss-parallel-support-20261121/common/Biobase"
+        ],
+        "BiocGenerics": [
+          "0.56.0",
+          "/private/tmp/mss-parallel-support-20261121/common/BiocGenerics"
+        ],
+        "BiocIO": [
+          "1.20.0",
+          "/private/tmp/mss-parallel-support-20261121/common/BiocIO"
+        ],
+        "BiocParallel": [
+          "1.44.0",
+          "/private/tmp/mss-parallel-support-20261121/common/BiocParallel"
+        ],
+        "Biostrings": [
+          "2.78.0",
+          "/private/tmp/mss-parallel-support-20261121/common/Biostrings"
+        ],
+        "bitops": [
+          "1.1.0",
+          "/private/tmp/mss-parallel-support-20261121/common/bitops"
+        ],
+        "BSgenome": [
+          "1.78.0",
+          "/private/tmp/mss-parallel-support-20261121/common/BSgenome"
+        ],
+        "cigarillo": [
+          "1.0.0",
+          "/private/tmp/mss-parallel-support-20261121/common/cigarillo"
+        ],
+        "cli": [
+          "3.6.6",
+          "/private/tmp/mss-parallel-support-20261121/common/cli"
+        ],
+        "codetools": [
+          "0.2.20",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/codetools"
+        ],
+        "compiler": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/compiler"
+        ],
+        "crayon": [
+          "1.5.3",
+          "/private/tmp/mss-parallel-support-20261121/common/crayon"
+        ],
+        "curl": [
+          "8.1.0",
+          "/private/tmp/mss-parallel-support-20261121/common/curl"
+        ],
+        "data.table": [
+          "1.18.6.1",
+          "/private/tmp/mss-parallel-support-20261121/common/data.table"
+        ],
+        "datasets": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/datasets"
+        ],
+        "DelayedArray": [
+          "0.36.1",
+          "/private/tmp/mss-parallel-support-20261121/common/DelayedArray"
+        ],
+        "dplyr": [
+          "1.2.1",
+          "/private/tmp/mss-parallel-support-20261121/common/dplyr"
+        ],
+        "generics": [
+          "0.1.4",
+          "/private/tmp/mss-parallel-support-20261121/common/generics"
+        ],
+        "GenomeInfoDb": [
+          "1.46.2",
+          "/private/tmp/mss-parallel-support-20261121/common/GenomeInfoDb"
+        ],
+        "GenomicAlignments": [
+          "1.46.0",
+          "/private/tmp/mss-parallel-support-20261121/common/GenomicAlignments"
+        ],
+        "GenomicRanges": [
+          "1.62.1",
+          "/private/tmp/mss-parallel-support-20261121/common/GenomicRanges"
+        ],
+        "glue": [
+          "1.8.1",
+          "/private/tmp/mss-parallel-support-20261121/common/glue"
+        ],
+        "graphics": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/graphics"
+        ],
+        "grDevices": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grDevices"
+        ],
+        "grid": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grid"
+        ],
+        "httr": [
+          "1.4.9",
+          "/private/tmp/mss-parallel-support-20261121/common/httr"
+        ],
+        "ieugwasr": [
+          "1.2.1",
+          "/private/tmp/mss-parallel-support-20261121/common/ieugwasr"
+        ],
+        "IRanges": [
+          "2.44.0",
+          "/private/tmp/mss-parallel-support-20261121/common/IRanges"
+        ],
+        "jsonlite": [
+          "2.0.0",
+          "/private/tmp/mss-parallel-support-20261121/common/jsonlite"
+        ],
+        "lattice": [
+          "0.22.9",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/lattice"
+        ],
+        "lifecycle": [
+          "1.0.5",
+          "/private/tmp/mss-parallel-support-20261121/common/lifecycle"
+        ],
+        "magrittr": [
+          "2.0.5",
+          "/private/tmp/mss-parallel-support-20261121/common/magrittr"
+        ],
+        "Matrix": [
+          "1.7.4",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/Matrix"
+        ],
+        "MatrixGenerics": [
+          "1.22.0",
+          "/private/tmp/mss-parallel-support-20261121/common/MatrixGenerics"
+        ],
+        "matrixStats": [
+          "1.5.0",
+          "/private/tmp/mss-parallel-support-20261121/common/matrixStats"
+        ],
+        "methods": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/methods"
+        ],
+        "MungeSumstats": [
+          "1.21.4",
+          "<selected installation>"
+        ],
+        "parallel": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/parallel"
+        ],
+        "pillar": [
+          "1.11.1",
+          "/private/tmp/mss-parallel-support-20261121/common/pillar"
+        ],
+        "pkgconfig": [
+          "2.0.3",
+          "/private/tmp/mss-parallel-support-20261121/common/pkgconfig"
+        ],
+        "R.methodsS3": [
+          "1.8.2",
+          "/private/tmp/mss-parallel-support-20261121/common/R.methodsS3"
+        ],
+        "R.oo": [
+          "1.27.1",
+          "/private/tmp/mss-parallel-support-20261121/common/R.oo"
+        ],
+        "R.utils": [
+          "2.13.0",
+          "/private/tmp/mss-parallel-support-20261121/common/R.utils"
+        ],
+        "R6": [
+          "2.6.1",
+          "/private/tmp/mss-parallel-support-20261121/common/R6"
+        ],
+        "Rcpp": [
+          "1.1.2",
+          "/private/tmp/mss-parallel-support-20261121/common/Rcpp"
+        ],
+        "RCurl": [
+          "1.98.1.20",
+          "/private/tmp/mss-parallel-support-20261121/common/RCurl"
+        ],
+        "restfulr": [
+          "0.0.17",
+          "/private/tmp/mss-parallel-support-20261121/common/restfulr"
+        ],
+        "rjson": [
+          "0.2.23",
+          "/private/tmp/mss-parallel-support-20261121/common/rjson"
+        ],
+        "rlang": [
+          "1.3.0",
+          "/private/tmp/mss-parallel-support-20261121/common/rlang"
+        ],
+        "Rsamtools": [
+          "2.26.0",
+          "/private/tmp/mss-parallel-support-20261121/common/Rsamtools"
+        ],
+        "rtracklayer": [
+          "1.70.1",
+          "/private/tmp/mss-parallel-support-20261121/common/rtracklayer"
+        ],
+        "S4Arrays": [
+          "1.10.1",
+          "/private/tmp/mss-parallel-support-20261121/common/S4Arrays"
+        ],
+        "S4Vectors": [
+          "0.48.1",
+          "/private/tmp/mss-parallel-support-20261121/common/S4Vectors"
+        ],
+        "Seqinfo": [
+          "1.0.0",
+          "/private/tmp/mss-parallel-support-20261121/common/Seqinfo"
+        ],
+        "SparseArray": [
+          "1.10.10",
+          "/private/tmp/mss-parallel-support-20261121/common/SparseArray"
+        ],
+        "stats": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats"
+        ],
+        "stats4": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats4"
+        ],
+        "stringi": [
+          "1.8.9",
+          "/private/tmp/mss-parallel-support-20261121/common/stringi"
+        ],
+        "stringr": [
+          "1.6.0",
+          "/private/tmp/mss-parallel-support-20261121/common/stringr"
+        ],
+        "SummarizedExperiment": [
+          "1.40.0",
+          "/private/tmp/mss-parallel-support-20261121/common/SummarizedExperiment"
+        ],
+        "tibble": [
+          "3.3.1",
+          "/private/tmp/mss-parallel-support-20261121/common/tibble"
+        ],
+        "tidyselect": [
+          "1.2.1",
+          "/private/tmp/mss-parallel-support-20261121/common/tidyselect"
+        ],
+        "tools": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/tools"
+        ],
+        "UCSC.utils": [
+          "1.6.1",
+          "/private/tmp/mss-parallel-support-20261121/common/UCSC.utils"
+        ],
+        "utils": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/utils"
+        ],
+        "vctrs": [
+          "0.7.3",
+          "/private/tmp/mss-parallel-support-20261121/common/vctrs"
+        ],
+        "XML": [
+          "3.99.0.25",
+          "/private/tmp/mss-parallel-support-20261121/common/XML"
+        ],
+        "XVector": [
+          "0.50.0",
+          "/private/tmp/mss-parallel-support-20261121/common/XVector"
+        ],
+        "yaml": [
+          "2.3.12",
+          "/private/tmp/mss-parallel-support-20261121/common/yaml"
+        ]
+      },
+      "actual_role_states": {
+        "baseline": {
+          "abind": [
+            "1.4.8",
+            "/private/tmp/mss-parallel-support-20261121/common/abind"
+          ],
+          "base": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/base"
+          ],
+          "Biobase": [
+            "2.70.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Biobase"
+          ],
+          "BiocGenerics": [
+            "0.56.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocGenerics"
+          ],
+          "BiocIO": [
+            "1.20.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocIO"
+          ],
+          "BiocParallel": [
+            "1.44.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocParallel"
+          ],
+          "Biostrings": [
+            "2.78.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Biostrings"
+          ],
+          "bitops": [
+            "1.1.0",
+            "/private/tmp/mss-parallel-support-20261121/common/bitops"
+          ],
+          "BSgenome": [
+            "1.78.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BSgenome"
+          ],
+          "cigarillo": [
+            "1.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/cigarillo"
+          ],
+          "cli": [
+            "3.6.6",
+            "/private/tmp/mss-parallel-support-20261121/common/cli"
+          ],
+          "codetools": [
+            "0.2.20",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/codetools"
+          ],
+          "compiler": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/compiler"
+          ],
+          "crayon": [
+            "1.5.3",
+            "/private/tmp/mss-parallel-support-20261121/common/crayon"
+          ],
+          "curl": [
+            "8.1.0",
+            "/private/tmp/mss-parallel-support-20261121/common/curl"
+          ],
+          "data.table": [
+            "1.18.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/data.table"
+          ],
+          "datasets": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/datasets"
+          ],
+          "DelayedArray": [
+            "0.36.1",
+            "/private/tmp/mss-parallel-support-20261121/common/DelayedArray"
+          ],
+          "dplyr": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/dplyr"
+          ],
+          "generics": [
+            "0.1.4",
+            "/private/tmp/mss-parallel-support-20261121/common/generics"
+          ],
+          "GenomeInfoDb": [
+            "1.46.2",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomeInfoDb"
+          ],
+          "GenomicAlignments": [
+            "1.46.0",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomicAlignments"
+          ],
+          "GenomicRanges": [
+            "1.62.1",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomicRanges"
+          ],
+          "glue": [
+            "1.8.1",
+            "/private/tmp/mss-parallel-support-20261121/common/glue"
+          ],
+          "graphics": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/graphics"
+          ],
+          "grDevices": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grDevices"
+          ],
+          "grid": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grid"
+          ],
+          "httr": [
+            "1.4.9",
+            "/private/tmp/mss-parallel-support-20261121/common/httr"
+          ],
+          "ieugwasr": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/ieugwasr"
+          ],
+          "IRanges": [
+            "2.44.0",
+            "/private/tmp/mss-parallel-support-20261121/common/IRanges"
+          ],
+          "jsonlite": [
+            "2.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/jsonlite"
+          ],
+          "lattice": [
+            "0.22.9",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/lattice"
+          ],
+          "lifecycle": [
+            "1.0.5",
+            "/private/tmp/mss-parallel-support-20261121/common/lifecycle"
+          ],
+          "magrittr": [
+            "2.0.5",
+            "/private/tmp/mss-parallel-support-20261121/common/magrittr"
+          ],
+          "Matrix": [
+            "1.7.4",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/Matrix"
+          ],
+          "MatrixGenerics": [
+            "1.22.0",
+            "/private/tmp/mss-parallel-support-20261121/common/MatrixGenerics"
+          ],
+          "matrixStats": [
+            "1.5.0",
+            "/private/tmp/mss-parallel-support-20261121/common/matrixStats"
+          ],
+          "methods": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/methods"
+          ],
+          "MungeSumstats": [
+            "1.21.4",
+            "/private/tmp/mss-key-geometry-builds-20261121/baseline/library/MungeSumstats"
+          ],
+          "parallel": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/parallel"
+          ],
+          "pillar": [
+            "1.11.1",
+            "/private/tmp/mss-parallel-support-20261121/common/pillar"
+          ],
+          "pkgconfig": [
+            "2.0.3",
+            "/private/tmp/mss-parallel-support-20261121/common/pkgconfig"
+          ],
+          "R.methodsS3": [
+            "1.8.2",
+            "/private/tmp/mss-parallel-support-20261121/common/R.methodsS3"
+          ],
+          "R.oo": [
+            "1.27.1",
+            "/private/tmp/mss-parallel-support-20261121/common/R.oo"
+          ],
+          "R.utils": [
+            "2.13.0",
+            "/private/tmp/mss-parallel-support-20261121/common/R.utils"
+          ],
+          "R6": [
+            "2.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/R6"
+          ],
+          "Rcpp": [
+            "1.1.2",
+            "/private/tmp/mss-parallel-support-20261121/common/Rcpp"
+          ],
+          "RCurl": [
+            "1.98.1.20",
+            "/private/tmp/mss-parallel-support-20261121/common/RCurl"
+          ],
+          "restfulr": [
+            "0.0.17",
+            "/private/tmp/mss-parallel-support-20261121/common/restfulr"
+          ],
+          "rjson": [
+            "0.2.23",
+            "/private/tmp/mss-parallel-support-20261121/common/rjson"
+          ],
+          "rlang": [
+            "1.3.0",
+            "/private/tmp/mss-parallel-support-20261121/common/rlang"
+          ],
+          "Rsamtools": [
+            "2.26.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Rsamtools"
+          ],
+          "rtracklayer": [
+            "1.70.1",
+            "/private/tmp/mss-parallel-support-20261121/common/rtracklayer"
+          ],
+          "S4Arrays": [
+            "1.10.1",
+            "/private/tmp/mss-parallel-support-20261121/common/S4Arrays"
+          ],
+          "S4Vectors": [
+            "0.48.1",
+            "/private/tmp/mss-parallel-support-20261121/common/S4Vectors"
+          ],
+          "Seqinfo": [
+            "1.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Seqinfo"
+          ],
+          "SparseArray": [
+            "1.10.10",
+            "/private/tmp/mss-parallel-support-20261121/common/SparseArray"
+          ],
+          "stats": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats"
+          ],
+          "stats4": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats4"
+          ],
+          "stringi": [
+            "1.8.9",
+            "/private/tmp/mss-parallel-support-20261121/common/stringi"
+          ],
+          "stringr": [
+            "1.6.0",
+            "/private/tmp/mss-parallel-support-20261121/common/stringr"
+          ],
+          "SummarizedExperiment": [
+            "1.40.0",
+            "/private/tmp/mss-parallel-support-20261121/common/SummarizedExperiment"
+          ],
+          "tibble": [
+            "3.3.1",
+            "/private/tmp/mss-parallel-support-20261121/common/tibble"
+          ],
+          "tidyselect": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/tidyselect"
+          ],
+          "tools": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/tools"
+          ],
+          "UCSC.utils": [
+            "1.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/UCSC.utils"
+          ],
+          "utils": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/utils"
+          ],
+          "vctrs": [
+            "0.7.3",
+            "/private/tmp/mss-parallel-support-20261121/common/vctrs"
+          ],
+          "XML": [
+            "3.99.0.25",
+            "/private/tmp/mss-parallel-support-20261121/common/XML"
+          ],
+          "XVector": [
+            "0.50.0",
+            "/private/tmp/mss-parallel-support-20261121/common/XVector"
+          ],
+          "yaml": [
+            "2.3.12",
+            "/private/tmp/mss-parallel-support-20261121/common/yaml"
+          ]
+        },
+        "candidate": {
+          "abind": [
+            "1.4.8",
+            "/private/tmp/mss-parallel-support-20261121/common/abind"
+          ],
+          "base": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/base"
+          ],
+          "Biobase": [
+            "2.70.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Biobase"
+          ],
+          "BiocGenerics": [
+            "0.56.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocGenerics"
+          ],
+          "BiocIO": [
+            "1.20.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocIO"
+          ],
+          "BiocParallel": [
+            "1.44.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocParallel"
+          ],
+          "Biostrings": [
+            "2.78.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Biostrings"
+          ],
+          "bitops": [
+            "1.1.0",
+            "/private/tmp/mss-parallel-support-20261121/common/bitops"
+          ],
+          "BSgenome": [
+            "1.78.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BSgenome"
+          ],
+          "cigarillo": [
+            "1.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/cigarillo"
+          ],
+          "cli": [
+            "3.6.6",
+            "/private/tmp/mss-parallel-support-20261121/common/cli"
+          ],
+          "codetools": [
+            "0.2.20",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/codetools"
+          ],
+          "compiler": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/compiler"
+          ],
+          "crayon": [
+            "1.5.3",
+            "/private/tmp/mss-parallel-support-20261121/common/crayon"
+          ],
+          "curl": [
+            "8.1.0",
+            "/private/tmp/mss-parallel-support-20261121/common/curl"
+          ],
+          "data.table": [
+            "1.18.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/data.table"
+          ],
+          "datasets": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/datasets"
+          ],
+          "DelayedArray": [
+            "0.36.1",
+            "/private/tmp/mss-parallel-support-20261121/common/DelayedArray"
+          ],
+          "dplyr": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/dplyr"
+          ],
+          "generics": [
+            "0.1.4",
+            "/private/tmp/mss-parallel-support-20261121/common/generics"
+          ],
+          "GenomeInfoDb": [
+            "1.46.2",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomeInfoDb"
+          ],
+          "GenomicAlignments": [
+            "1.46.0",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomicAlignments"
+          ],
+          "GenomicRanges": [
+            "1.62.1",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomicRanges"
+          ],
+          "glue": [
+            "1.8.1",
+            "/private/tmp/mss-parallel-support-20261121/common/glue"
+          ],
+          "graphics": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/graphics"
+          ],
+          "grDevices": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grDevices"
+          ],
+          "grid": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grid"
+          ],
+          "httr": [
+            "1.4.9",
+            "/private/tmp/mss-parallel-support-20261121/common/httr"
+          ],
+          "ieugwasr": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/ieugwasr"
+          ],
+          "IRanges": [
+            "2.44.0",
+            "/private/tmp/mss-parallel-support-20261121/common/IRanges"
+          ],
+          "jsonlite": [
+            "2.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/jsonlite"
+          ],
+          "lattice": [
+            "0.22.9",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/lattice"
+          ],
+          "lifecycle": [
+            "1.0.5",
+            "/private/tmp/mss-parallel-support-20261121/common/lifecycle"
+          ],
+          "magrittr": [
+            "2.0.5",
+            "/private/tmp/mss-parallel-support-20261121/common/magrittr"
+          ],
+          "Matrix": [
+            "1.7.4",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/Matrix"
+          ],
+          "MatrixGenerics": [
+            "1.22.0",
+            "/private/tmp/mss-parallel-support-20261121/common/MatrixGenerics"
+          ],
+          "matrixStats": [
+            "1.5.0",
+            "/private/tmp/mss-parallel-support-20261121/common/matrixStats"
+          ],
+          "methods": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/methods"
+          ],
+          "MungeSumstats": [
+            "1.21.4",
+            "/private/tmp/mss-key-geometry-builds-20261121/candidate/library/MungeSumstats"
+          ],
+          "parallel": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/parallel"
+          ],
+          "pillar": [
+            "1.11.1",
+            "/private/tmp/mss-parallel-support-20261121/common/pillar"
+          ],
+          "pkgconfig": [
+            "2.0.3",
+            "/private/tmp/mss-parallel-support-20261121/common/pkgconfig"
+          ],
+          "R.methodsS3": [
+            "1.8.2",
+            "/private/tmp/mss-parallel-support-20261121/common/R.methodsS3"
+          ],
+          "R.oo": [
+            "1.27.1",
+            "/private/tmp/mss-parallel-support-20261121/common/R.oo"
+          ],
+          "R.utils": [
+            "2.13.0",
+            "/private/tmp/mss-parallel-support-20261121/common/R.utils"
+          ],
+          "R6": [
+            "2.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/R6"
+          ],
+          "Rcpp": [
+            "1.1.2",
+            "/private/tmp/mss-parallel-support-20261121/common/Rcpp"
+          ],
+          "RCurl": [
+            "1.98.1.20",
+            "/private/tmp/mss-parallel-support-20261121/common/RCurl"
+          ],
+          "restfulr": [
+            "0.0.17",
+            "/private/tmp/mss-parallel-support-20261121/common/restfulr"
+          ],
+          "rjson": [
+            "0.2.23",
+            "/private/tmp/mss-parallel-support-20261121/common/rjson"
+          ],
+          "rlang": [
+            "1.3.0",
+            "/private/tmp/mss-parallel-support-20261121/common/rlang"
+          ],
+          "Rsamtools": [
+            "2.26.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Rsamtools"
+          ],
+          "rtracklayer": [
+            "1.70.1",
+            "/private/tmp/mss-parallel-support-20261121/common/rtracklayer"
+          ],
+          "S4Arrays": [
+            "1.10.1",
+            "/private/tmp/mss-parallel-support-20261121/common/S4Arrays"
+          ],
+          "S4Vectors": [
+            "0.48.1",
+            "/private/tmp/mss-parallel-support-20261121/common/S4Vectors"
+          ],
+          "Seqinfo": [
+            "1.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Seqinfo"
+          ],
+          "SparseArray": [
+            "1.10.10",
+            "/private/tmp/mss-parallel-support-20261121/common/SparseArray"
+          ],
+          "stats": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats"
+          ],
+          "stats4": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats4"
+          ],
+          "stringi": [
+            "1.8.9",
+            "/private/tmp/mss-parallel-support-20261121/common/stringi"
+          ],
+          "stringr": [
+            "1.6.0",
+            "/private/tmp/mss-parallel-support-20261121/common/stringr"
+          ],
+          "SummarizedExperiment": [
+            "1.40.0",
+            "/private/tmp/mss-parallel-support-20261121/common/SummarizedExperiment"
+          ],
+          "tibble": [
+            "3.3.1",
+            "/private/tmp/mss-parallel-support-20261121/common/tibble"
+          ],
+          "tidyselect": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/tidyselect"
+          ],
+          "tools": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/tools"
+          ],
+          "UCSC.utils": [
+            "1.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/UCSC.utils"
+          ],
+          "utils": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/utils"
+          ],
+          "vctrs": [
+            "0.7.3",
+            "/private/tmp/mss-parallel-support-20261121/common/vctrs"
+          ],
+          "XML": [
+            "3.99.0.25",
+            "/private/tmp/mss-parallel-support-20261121/common/XML"
+          ],
+          "XVector": [
+            "0.50.0",
+            "/private/tmp/mss-parallel-support-20261121/common/XVector"
+          ],
+          "yaml": [
+            "2.3.12",
+            "/private/tmp/mss-parallel-support-20261121/common/yaml"
+          ]
+        }
+      }
+    },
+    "declared-f2": {
+      "baseline_only": [],
+      "candidate_only": [],
+      "common_comparison_state": {
+        "abind": [
+          "1.4.8",
+          "/private/tmp/mss-parallel-support-20261121/common/abind"
+        ],
+        "base": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/base"
+        ],
+        "Biobase": [
+          "2.70.0",
+          "/private/tmp/mss-parallel-support-20261121/common/Biobase"
+        ],
+        "BiocGenerics": [
+          "0.56.0",
+          "/private/tmp/mss-parallel-support-20261121/common/BiocGenerics"
+        ],
+        "BiocIO": [
+          "1.20.0",
+          "/private/tmp/mss-parallel-support-20261121/common/BiocIO"
+        ],
+        "BiocParallel": [
+          "1.44.0",
+          "/private/tmp/mss-parallel-support-20261121/common/BiocParallel"
+        ],
+        "Biostrings": [
+          "2.78.0",
+          "/private/tmp/mss-parallel-support-20261121/common/Biostrings"
+        ],
+        "bitops": [
+          "1.1.0",
+          "/private/tmp/mss-parallel-support-20261121/common/bitops"
+        ],
+        "BSgenome": [
+          "1.78.0",
+          "/private/tmp/mss-parallel-support-20261121/common/BSgenome"
+        ],
+        "cigarillo": [
+          "1.0.0",
+          "/private/tmp/mss-parallel-support-20261121/common/cigarillo"
+        ],
+        "cli": [
+          "3.6.6",
+          "/private/tmp/mss-parallel-support-20261121/common/cli"
+        ],
+        "codetools": [
+          "0.2.20",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/codetools"
+        ],
+        "compiler": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/compiler"
+        ],
+        "crayon": [
+          "1.5.3",
+          "/private/tmp/mss-parallel-support-20261121/common/crayon"
+        ],
+        "curl": [
+          "8.1.0",
+          "/private/tmp/mss-parallel-support-20261121/common/curl"
+        ],
+        "data.table": [
+          "1.18.6.1",
+          "/private/tmp/mss-parallel-support-20261121/common/data.table"
+        ],
+        "datasets": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/datasets"
+        ],
+        "DelayedArray": [
+          "0.36.1",
+          "/private/tmp/mss-parallel-support-20261121/common/DelayedArray"
+        ],
+        "dplyr": [
+          "1.2.1",
+          "/private/tmp/mss-parallel-support-20261121/common/dplyr"
+        ],
+        "generics": [
+          "0.1.4",
+          "/private/tmp/mss-parallel-support-20261121/common/generics"
+        ],
+        "GenomeInfoDb": [
+          "1.46.2",
+          "/private/tmp/mss-parallel-support-20261121/common/GenomeInfoDb"
+        ],
+        "GenomicAlignments": [
+          "1.46.0",
+          "/private/tmp/mss-parallel-support-20261121/common/GenomicAlignments"
+        ],
+        "GenomicRanges": [
+          "1.62.1",
+          "/private/tmp/mss-parallel-support-20261121/common/GenomicRanges"
+        ],
+        "glue": [
+          "1.8.1",
+          "/private/tmp/mss-parallel-support-20261121/common/glue"
+        ],
+        "graphics": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/graphics"
+        ],
+        "grDevices": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grDevices"
+        ],
+        "grid": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grid"
+        ],
+        "httr": [
+          "1.4.9",
+          "/private/tmp/mss-parallel-support-20261121/common/httr"
+        ],
+        "ieugwasr": [
+          "1.2.1",
+          "/private/tmp/mss-parallel-support-20261121/common/ieugwasr"
+        ],
+        "IRanges": [
+          "2.44.0",
+          "/private/tmp/mss-parallel-support-20261121/common/IRanges"
+        ],
+        "jsonlite": [
+          "2.0.0",
+          "/private/tmp/mss-parallel-support-20261121/common/jsonlite"
+        ],
+        "lattice": [
+          "0.22.9",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/lattice"
+        ],
+        "lifecycle": [
+          "1.0.5",
+          "/private/tmp/mss-parallel-support-20261121/common/lifecycle"
+        ],
+        "magrittr": [
+          "2.0.5",
+          "/private/tmp/mss-parallel-support-20261121/common/magrittr"
+        ],
+        "Matrix": [
+          "1.7.4",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/Matrix"
+        ],
+        "MatrixGenerics": [
+          "1.22.0",
+          "/private/tmp/mss-parallel-support-20261121/common/MatrixGenerics"
+        ],
+        "matrixStats": [
+          "1.5.0",
+          "/private/tmp/mss-parallel-support-20261121/common/matrixStats"
+        ],
+        "methods": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/methods"
+        ],
+        "MungeSumstats": [
+          "1.21.4",
+          "<selected installation>"
+        ],
+        "parallel": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/parallel"
+        ],
+        "pillar": [
+          "1.11.1",
+          "/private/tmp/mss-parallel-support-20261121/common/pillar"
+        ],
+        "pkgconfig": [
+          "2.0.3",
+          "/private/tmp/mss-parallel-support-20261121/common/pkgconfig"
+        ],
+        "R.methodsS3": [
+          "1.8.2",
+          "/private/tmp/mss-parallel-support-20261121/common/R.methodsS3"
+        ],
+        "R.oo": [
+          "1.27.1",
+          "/private/tmp/mss-parallel-support-20261121/common/R.oo"
+        ],
+        "R.utils": [
+          "2.13.0",
+          "/private/tmp/mss-parallel-support-20261121/common/R.utils"
+        ],
+        "R6": [
+          "2.6.1",
+          "/private/tmp/mss-parallel-support-20261121/common/R6"
+        ],
+        "Rcpp": [
+          "1.1.2",
+          "/private/tmp/mss-parallel-support-20261121/common/Rcpp"
+        ],
+        "RCurl": [
+          "1.98.1.20",
+          "/private/tmp/mss-parallel-support-20261121/common/RCurl"
+        ],
+        "restfulr": [
+          "0.0.17",
+          "/private/tmp/mss-parallel-support-20261121/common/restfulr"
+        ],
+        "rjson": [
+          "0.2.23",
+          "/private/tmp/mss-parallel-support-20261121/common/rjson"
+        ],
+        "rlang": [
+          "1.3.0",
+          "/private/tmp/mss-parallel-support-20261121/common/rlang"
+        ],
+        "Rsamtools": [
+          "2.26.0",
+          "/private/tmp/mss-parallel-support-20261121/common/Rsamtools"
+        ],
+        "rtracklayer": [
+          "1.70.1",
+          "/private/tmp/mss-parallel-support-20261121/common/rtracklayer"
+        ],
+        "S4Arrays": [
+          "1.10.1",
+          "/private/tmp/mss-parallel-support-20261121/common/S4Arrays"
+        ],
+        "S4Vectors": [
+          "0.48.1",
+          "/private/tmp/mss-parallel-support-20261121/common/S4Vectors"
+        ],
+        "Seqinfo": [
+          "1.0.0",
+          "/private/tmp/mss-parallel-support-20261121/common/Seqinfo"
+        ],
+        "SparseArray": [
+          "1.10.10",
+          "/private/tmp/mss-parallel-support-20261121/common/SparseArray"
+        ],
+        "stats": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats"
+        ],
+        "stats4": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats4"
+        ],
+        "stringi": [
+          "1.8.9",
+          "/private/tmp/mss-parallel-support-20261121/common/stringi"
+        ],
+        "stringr": [
+          "1.6.0",
+          "/private/tmp/mss-parallel-support-20261121/common/stringr"
+        ],
+        "SummarizedExperiment": [
+          "1.40.0",
+          "/private/tmp/mss-parallel-support-20261121/common/SummarizedExperiment"
+        ],
+        "tibble": [
+          "3.3.1",
+          "/private/tmp/mss-parallel-support-20261121/common/tibble"
+        ],
+        "tidyselect": [
+          "1.2.1",
+          "/private/tmp/mss-parallel-support-20261121/common/tidyselect"
+        ],
+        "tools": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/tools"
+        ],
+        "UCSC.utils": [
+          "1.6.1",
+          "/private/tmp/mss-parallel-support-20261121/common/UCSC.utils"
+        ],
+        "utils": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/utils"
+        ],
+        "vctrs": [
+          "0.7.3",
+          "/private/tmp/mss-parallel-support-20261121/common/vctrs"
+        ],
+        "XML": [
+          "3.99.0.25",
+          "/private/tmp/mss-parallel-support-20261121/common/XML"
+        ],
+        "XVector": [
+          "0.50.0",
+          "/private/tmp/mss-parallel-support-20261121/common/XVector"
+        ],
+        "yaml": [
+          "2.3.12",
+          "/private/tmp/mss-parallel-support-20261121/common/yaml"
+        ]
+      },
+      "actual_role_states": {
+        "baseline": {
+          "abind": [
+            "1.4.8",
+            "/private/tmp/mss-parallel-support-20261121/common/abind"
+          ],
+          "base": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/base"
+          ],
+          "Biobase": [
+            "2.70.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Biobase"
+          ],
+          "BiocGenerics": [
+            "0.56.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocGenerics"
+          ],
+          "BiocIO": [
+            "1.20.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocIO"
+          ],
+          "BiocParallel": [
+            "1.44.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocParallel"
+          ],
+          "Biostrings": [
+            "2.78.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Biostrings"
+          ],
+          "bitops": [
+            "1.1.0",
+            "/private/tmp/mss-parallel-support-20261121/common/bitops"
+          ],
+          "BSgenome": [
+            "1.78.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BSgenome"
+          ],
+          "cigarillo": [
+            "1.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/cigarillo"
+          ],
+          "cli": [
+            "3.6.6",
+            "/private/tmp/mss-parallel-support-20261121/common/cli"
+          ],
+          "codetools": [
+            "0.2.20",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/codetools"
+          ],
+          "compiler": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/compiler"
+          ],
+          "crayon": [
+            "1.5.3",
+            "/private/tmp/mss-parallel-support-20261121/common/crayon"
+          ],
+          "curl": [
+            "8.1.0",
+            "/private/tmp/mss-parallel-support-20261121/common/curl"
+          ],
+          "data.table": [
+            "1.18.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/data.table"
+          ],
+          "datasets": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/datasets"
+          ],
+          "DelayedArray": [
+            "0.36.1",
+            "/private/tmp/mss-parallel-support-20261121/common/DelayedArray"
+          ],
+          "dplyr": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/dplyr"
+          ],
+          "generics": [
+            "0.1.4",
+            "/private/tmp/mss-parallel-support-20261121/common/generics"
+          ],
+          "GenomeInfoDb": [
+            "1.46.2",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomeInfoDb"
+          ],
+          "GenomicAlignments": [
+            "1.46.0",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomicAlignments"
+          ],
+          "GenomicRanges": [
+            "1.62.1",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomicRanges"
+          ],
+          "glue": [
+            "1.8.1",
+            "/private/tmp/mss-parallel-support-20261121/common/glue"
+          ],
+          "graphics": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/graphics"
+          ],
+          "grDevices": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grDevices"
+          ],
+          "grid": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grid"
+          ],
+          "httr": [
+            "1.4.9",
+            "/private/tmp/mss-parallel-support-20261121/common/httr"
+          ],
+          "ieugwasr": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/ieugwasr"
+          ],
+          "IRanges": [
+            "2.44.0",
+            "/private/tmp/mss-parallel-support-20261121/common/IRanges"
+          ],
+          "jsonlite": [
+            "2.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/jsonlite"
+          ],
+          "lattice": [
+            "0.22.9",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/lattice"
+          ],
+          "lifecycle": [
+            "1.0.5",
+            "/private/tmp/mss-parallel-support-20261121/common/lifecycle"
+          ],
+          "magrittr": [
+            "2.0.5",
+            "/private/tmp/mss-parallel-support-20261121/common/magrittr"
+          ],
+          "Matrix": [
+            "1.7.4",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/Matrix"
+          ],
+          "MatrixGenerics": [
+            "1.22.0",
+            "/private/tmp/mss-parallel-support-20261121/common/MatrixGenerics"
+          ],
+          "matrixStats": [
+            "1.5.0",
+            "/private/tmp/mss-parallel-support-20261121/common/matrixStats"
+          ],
+          "methods": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/methods"
+          ],
+          "MungeSumstats": [
+            "1.21.4",
+            "/private/tmp/mss-key-geometry-builds-20261121/baseline/library/MungeSumstats"
+          ],
+          "parallel": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/parallel"
+          ],
+          "pillar": [
+            "1.11.1",
+            "/private/tmp/mss-parallel-support-20261121/common/pillar"
+          ],
+          "pkgconfig": [
+            "2.0.3",
+            "/private/tmp/mss-parallel-support-20261121/common/pkgconfig"
+          ],
+          "R.methodsS3": [
+            "1.8.2",
+            "/private/tmp/mss-parallel-support-20261121/common/R.methodsS3"
+          ],
+          "R.oo": [
+            "1.27.1",
+            "/private/tmp/mss-parallel-support-20261121/common/R.oo"
+          ],
+          "R.utils": [
+            "2.13.0",
+            "/private/tmp/mss-parallel-support-20261121/common/R.utils"
+          ],
+          "R6": [
+            "2.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/R6"
+          ],
+          "Rcpp": [
+            "1.1.2",
+            "/private/tmp/mss-parallel-support-20261121/common/Rcpp"
+          ],
+          "RCurl": [
+            "1.98.1.20",
+            "/private/tmp/mss-parallel-support-20261121/common/RCurl"
+          ],
+          "restfulr": [
+            "0.0.17",
+            "/private/tmp/mss-parallel-support-20261121/common/restfulr"
+          ],
+          "rjson": [
+            "0.2.23",
+            "/private/tmp/mss-parallel-support-20261121/common/rjson"
+          ],
+          "rlang": [
+            "1.3.0",
+            "/private/tmp/mss-parallel-support-20261121/common/rlang"
+          ],
+          "Rsamtools": [
+            "2.26.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Rsamtools"
+          ],
+          "rtracklayer": [
+            "1.70.1",
+            "/private/tmp/mss-parallel-support-20261121/common/rtracklayer"
+          ],
+          "S4Arrays": [
+            "1.10.1",
+            "/private/tmp/mss-parallel-support-20261121/common/S4Arrays"
+          ],
+          "S4Vectors": [
+            "0.48.1",
+            "/private/tmp/mss-parallel-support-20261121/common/S4Vectors"
+          ],
+          "Seqinfo": [
+            "1.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Seqinfo"
+          ],
+          "SparseArray": [
+            "1.10.10",
+            "/private/tmp/mss-parallel-support-20261121/common/SparseArray"
+          ],
+          "stats": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats"
+          ],
+          "stats4": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats4"
+          ],
+          "stringi": [
+            "1.8.9",
+            "/private/tmp/mss-parallel-support-20261121/common/stringi"
+          ],
+          "stringr": [
+            "1.6.0",
+            "/private/tmp/mss-parallel-support-20261121/common/stringr"
+          ],
+          "SummarizedExperiment": [
+            "1.40.0",
+            "/private/tmp/mss-parallel-support-20261121/common/SummarizedExperiment"
+          ],
+          "tibble": [
+            "3.3.1",
+            "/private/tmp/mss-parallel-support-20261121/common/tibble"
+          ],
+          "tidyselect": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/tidyselect"
+          ],
+          "tools": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/tools"
+          ],
+          "UCSC.utils": [
+            "1.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/UCSC.utils"
+          ],
+          "utils": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/utils"
+          ],
+          "vctrs": [
+            "0.7.3",
+            "/private/tmp/mss-parallel-support-20261121/common/vctrs"
+          ],
+          "XML": [
+            "3.99.0.25",
+            "/private/tmp/mss-parallel-support-20261121/common/XML"
+          ],
+          "XVector": [
+            "0.50.0",
+            "/private/tmp/mss-parallel-support-20261121/common/XVector"
+          ],
+          "yaml": [
+            "2.3.12",
+            "/private/tmp/mss-parallel-support-20261121/common/yaml"
+          ]
+        },
+        "candidate": {
+          "abind": [
+            "1.4.8",
+            "/private/tmp/mss-parallel-support-20261121/common/abind"
+          ],
+          "base": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/base"
+          ],
+          "Biobase": [
+            "2.70.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Biobase"
+          ],
+          "BiocGenerics": [
+            "0.56.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocGenerics"
+          ],
+          "BiocIO": [
+            "1.20.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocIO"
+          ],
+          "BiocParallel": [
+            "1.44.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocParallel"
+          ],
+          "Biostrings": [
+            "2.78.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Biostrings"
+          ],
+          "bitops": [
+            "1.1.0",
+            "/private/tmp/mss-parallel-support-20261121/common/bitops"
+          ],
+          "BSgenome": [
+            "1.78.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BSgenome"
+          ],
+          "cigarillo": [
+            "1.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/cigarillo"
+          ],
+          "cli": [
+            "3.6.6",
+            "/private/tmp/mss-parallel-support-20261121/common/cli"
+          ],
+          "codetools": [
+            "0.2.20",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/codetools"
+          ],
+          "compiler": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/compiler"
+          ],
+          "crayon": [
+            "1.5.3",
+            "/private/tmp/mss-parallel-support-20261121/common/crayon"
+          ],
+          "curl": [
+            "8.1.0",
+            "/private/tmp/mss-parallel-support-20261121/common/curl"
+          ],
+          "data.table": [
+            "1.18.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/data.table"
+          ],
+          "datasets": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/datasets"
+          ],
+          "DelayedArray": [
+            "0.36.1",
+            "/private/tmp/mss-parallel-support-20261121/common/DelayedArray"
+          ],
+          "dplyr": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/dplyr"
+          ],
+          "generics": [
+            "0.1.4",
+            "/private/tmp/mss-parallel-support-20261121/common/generics"
+          ],
+          "GenomeInfoDb": [
+            "1.46.2",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomeInfoDb"
+          ],
+          "GenomicAlignments": [
+            "1.46.0",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomicAlignments"
+          ],
+          "GenomicRanges": [
+            "1.62.1",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomicRanges"
+          ],
+          "glue": [
+            "1.8.1",
+            "/private/tmp/mss-parallel-support-20261121/common/glue"
+          ],
+          "graphics": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/graphics"
+          ],
+          "grDevices": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grDevices"
+          ],
+          "grid": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grid"
+          ],
+          "httr": [
+            "1.4.9",
+            "/private/tmp/mss-parallel-support-20261121/common/httr"
+          ],
+          "ieugwasr": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/ieugwasr"
+          ],
+          "IRanges": [
+            "2.44.0",
+            "/private/tmp/mss-parallel-support-20261121/common/IRanges"
+          ],
+          "jsonlite": [
+            "2.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/jsonlite"
+          ],
+          "lattice": [
+            "0.22.9",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/lattice"
+          ],
+          "lifecycle": [
+            "1.0.5",
+            "/private/tmp/mss-parallel-support-20261121/common/lifecycle"
+          ],
+          "magrittr": [
+            "2.0.5",
+            "/private/tmp/mss-parallel-support-20261121/common/magrittr"
+          ],
+          "Matrix": [
+            "1.7.4",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/Matrix"
+          ],
+          "MatrixGenerics": [
+            "1.22.0",
+            "/private/tmp/mss-parallel-support-20261121/common/MatrixGenerics"
+          ],
+          "matrixStats": [
+            "1.5.0",
+            "/private/tmp/mss-parallel-support-20261121/common/matrixStats"
+          ],
+          "methods": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/methods"
+          ],
+          "MungeSumstats": [
+            "1.21.4",
+            "/private/tmp/mss-key-geometry-builds-20261121/candidate/library/MungeSumstats"
+          ],
+          "parallel": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/parallel"
+          ],
+          "pillar": [
+            "1.11.1",
+            "/private/tmp/mss-parallel-support-20261121/common/pillar"
+          ],
+          "pkgconfig": [
+            "2.0.3",
+            "/private/tmp/mss-parallel-support-20261121/common/pkgconfig"
+          ],
+          "R.methodsS3": [
+            "1.8.2",
+            "/private/tmp/mss-parallel-support-20261121/common/R.methodsS3"
+          ],
+          "R.oo": [
+            "1.27.1",
+            "/private/tmp/mss-parallel-support-20261121/common/R.oo"
+          ],
+          "R.utils": [
+            "2.13.0",
+            "/private/tmp/mss-parallel-support-20261121/common/R.utils"
+          ],
+          "R6": [
+            "2.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/R6"
+          ],
+          "Rcpp": [
+            "1.1.2",
+            "/private/tmp/mss-parallel-support-20261121/common/Rcpp"
+          ],
+          "RCurl": [
+            "1.98.1.20",
+            "/private/tmp/mss-parallel-support-20261121/common/RCurl"
+          ],
+          "restfulr": [
+            "0.0.17",
+            "/private/tmp/mss-parallel-support-20261121/common/restfulr"
+          ],
+          "rjson": [
+            "0.2.23",
+            "/private/tmp/mss-parallel-support-20261121/common/rjson"
+          ],
+          "rlang": [
+            "1.3.0",
+            "/private/tmp/mss-parallel-support-20261121/common/rlang"
+          ],
+          "Rsamtools": [
+            "2.26.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Rsamtools"
+          ],
+          "rtracklayer": [
+            "1.70.1",
+            "/private/tmp/mss-parallel-support-20261121/common/rtracklayer"
+          ],
+          "S4Arrays": [
+            "1.10.1",
+            "/private/tmp/mss-parallel-support-20261121/common/S4Arrays"
+          ],
+          "S4Vectors": [
+            "0.48.1",
+            "/private/tmp/mss-parallel-support-20261121/common/S4Vectors"
+          ],
+          "Seqinfo": [
+            "1.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Seqinfo"
+          ],
+          "SparseArray": [
+            "1.10.10",
+            "/private/tmp/mss-parallel-support-20261121/common/SparseArray"
+          ],
+          "stats": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats"
+          ],
+          "stats4": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats4"
+          ],
+          "stringi": [
+            "1.8.9",
+            "/private/tmp/mss-parallel-support-20261121/common/stringi"
+          ],
+          "stringr": [
+            "1.6.0",
+            "/private/tmp/mss-parallel-support-20261121/common/stringr"
+          ],
+          "SummarizedExperiment": [
+            "1.40.0",
+            "/private/tmp/mss-parallel-support-20261121/common/SummarizedExperiment"
+          ],
+          "tibble": [
+            "3.3.1",
+            "/private/tmp/mss-parallel-support-20261121/common/tibble"
+          ],
+          "tidyselect": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/tidyselect"
+          ],
+          "tools": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/tools"
+          ],
+          "UCSC.utils": [
+            "1.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/UCSC.utils"
+          ],
+          "utils": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/utils"
+          ],
+          "vctrs": [
+            "0.7.3",
+            "/private/tmp/mss-parallel-support-20261121/common/vctrs"
+          ],
+          "XML": [
+            "3.99.0.25",
+            "/private/tmp/mss-parallel-support-20261121/common/XML"
+          ],
+          "XVector": [
+            "0.50.0",
+            "/private/tmp/mss-parallel-support-20261121/common/XVector"
+          ],
+          "yaml": [
+            "2.3.12",
+            "/private/tmp/mss-parallel-support-20261121/common/yaml"
+          ]
+        }
+      }
+    },
+    "declared-f3": {
+      "baseline_only": [],
+      "candidate_only": [],
+      "common_comparison_state": {
+        "abind": [
+          "1.4.8",
+          "/private/tmp/mss-parallel-support-20261121/common/abind"
+        ],
+        "base": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/base"
+        ],
+        "Biobase": [
+          "2.70.0",
+          "/private/tmp/mss-parallel-support-20261121/common/Biobase"
+        ],
+        "BiocGenerics": [
+          "0.56.0",
+          "/private/tmp/mss-parallel-support-20261121/common/BiocGenerics"
+        ],
+        "BiocIO": [
+          "1.20.0",
+          "/private/tmp/mss-parallel-support-20261121/common/BiocIO"
+        ],
+        "BiocParallel": [
+          "1.44.0",
+          "/private/tmp/mss-parallel-support-20261121/common/BiocParallel"
+        ],
+        "Biostrings": [
+          "2.78.0",
+          "/private/tmp/mss-parallel-support-20261121/common/Biostrings"
+        ],
+        "bitops": [
+          "1.1.0",
+          "/private/tmp/mss-parallel-support-20261121/common/bitops"
+        ],
+        "BSgenome": [
+          "1.78.0",
+          "/private/tmp/mss-parallel-support-20261121/common/BSgenome"
+        ],
+        "cigarillo": [
+          "1.0.0",
+          "/private/tmp/mss-parallel-support-20261121/common/cigarillo"
+        ],
+        "cli": [
+          "3.6.6",
+          "/private/tmp/mss-parallel-support-20261121/common/cli"
+        ],
+        "codetools": [
+          "0.2.20",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/codetools"
+        ],
+        "compiler": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/compiler"
+        ],
+        "crayon": [
+          "1.5.3",
+          "/private/tmp/mss-parallel-support-20261121/common/crayon"
+        ],
+        "curl": [
+          "8.1.0",
+          "/private/tmp/mss-parallel-support-20261121/common/curl"
+        ],
+        "data.table": [
+          "1.18.6.1",
+          "/private/tmp/mss-parallel-support-20261121/common/data.table"
+        ],
+        "datasets": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/datasets"
+        ],
+        "DelayedArray": [
+          "0.36.1",
+          "/private/tmp/mss-parallel-support-20261121/common/DelayedArray"
+        ],
+        "dplyr": [
+          "1.2.1",
+          "/private/tmp/mss-parallel-support-20261121/common/dplyr"
+        ],
+        "generics": [
+          "0.1.4",
+          "/private/tmp/mss-parallel-support-20261121/common/generics"
+        ],
+        "GenomeInfoDb": [
+          "1.46.2",
+          "/private/tmp/mss-parallel-support-20261121/common/GenomeInfoDb"
+        ],
+        "GenomicAlignments": [
+          "1.46.0",
+          "/private/tmp/mss-parallel-support-20261121/common/GenomicAlignments"
+        ],
+        "GenomicRanges": [
+          "1.62.1",
+          "/private/tmp/mss-parallel-support-20261121/common/GenomicRanges"
+        ],
+        "glue": [
+          "1.8.1",
+          "/private/tmp/mss-parallel-support-20261121/common/glue"
+        ],
+        "graphics": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/graphics"
+        ],
+        "grDevices": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grDevices"
+        ],
+        "grid": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grid"
+        ],
+        "httr": [
+          "1.4.9",
+          "/private/tmp/mss-parallel-support-20261121/common/httr"
+        ],
+        "ieugwasr": [
+          "1.2.1",
+          "/private/tmp/mss-parallel-support-20261121/common/ieugwasr"
+        ],
+        "IRanges": [
+          "2.44.0",
+          "/private/tmp/mss-parallel-support-20261121/common/IRanges"
+        ],
+        "jsonlite": [
+          "2.0.0",
+          "/private/tmp/mss-parallel-support-20261121/common/jsonlite"
+        ],
+        "lattice": [
+          "0.22.9",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/lattice"
+        ],
+        "lifecycle": [
+          "1.0.5",
+          "/private/tmp/mss-parallel-support-20261121/common/lifecycle"
+        ],
+        "magrittr": [
+          "2.0.5",
+          "/private/tmp/mss-parallel-support-20261121/common/magrittr"
+        ],
+        "Matrix": [
+          "1.7.4",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/Matrix"
+        ],
+        "MatrixGenerics": [
+          "1.22.0",
+          "/private/tmp/mss-parallel-support-20261121/common/MatrixGenerics"
+        ],
+        "matrixStats": [
+          "1.5.0",
+          "/private/tmp/mss-parallel-support-20261121/common/matrixStats"
+        ],
+        "methods": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/methods"
+        ],
+        "MungeSumstats": [
+          "1.21.4",
+          "<selected installation>"
+        ],
+        "parallel": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/parallel"
+        ],
+        "pillar": [
+          "1.11.1",
+          "/private/tmp/mss-parallel-support-20261121/common/pillar"
+        ],
+        "pkgconfig": [
+          "2.0.3",
+          "/private/tmp/mss-parallel-support-20261121/common/pkgconfig"
+        ],
+        "R.methodsS3": [
+          "1.8.2",
+          "/private/tmp/mss-parallel-support-20261121/common/R.methodsS3"
+        ],
+        "R.oo": [
+          "1.27.1",
+          "/private/tmp/mss-parallel-support-20261121/common/R.oo"
+        ],
+        "R.utils": [
+          "2.13.0",
+          "/private/tmp/mss-parallel-support-20261121/common/R.utils"
+        ],
+        "R6": [
+          "2.6.1",
+          "/private/tmp/mss-parallel-support-20261121/common/R6"
+        ],
+        "Rcpp": [
+          "1.1.2",
+          "/private/tmp/mss-parallel-support-20261121/common/Rcpp"
+        ],
+        "RCurl": [
+          "1.98.1.20",
+          "/private/tmp/mss-parallel-support-20261121/common/RCurl"
+        ],
+        "restfulr": [
+          "0.0.17",
+          "/private/tmp/mss-parallel-support-20261121/common/restfulr"
+        ],
+        "rjson": [
+          "0.2.23",
+          "/private/tmp/mss-parallel-support-20261121/common/rjson"
+        ],
+        "rlang": [
+          "1.3.0",
+          "/private/tmp/mss-parallel-support-20261121/common/rlang"
+        ],
+        "Rsamtools": [
+          "2.26.0",
+          "/private/tmp/mss-parallel-support-20261121/common/Rsamtools"
+        ],
+        "rtracklayer": [
+          "1.70.1",
+          "/private/tmp/mss-parallel-support-20261121/common/rtracklayer"
+        ],
+        "S4Arrays": [
+          "1.10.1",
+          "/private/tmp/mss-parallel-support-20261121/common/S4Arrays"
+        ],
+        "S4Vectors": [
+          "0.48.1",
+          "/private/tmp/mss-parallel-support-20261121/common/S4Vectors"
+        ],
+        "Seqinfo": [
+          "1.0.0",
+          "/private/tmp/mss-parallel-support-20261121/common/Seqinfo"
+        ],
+        "SparseArray": [
+          "1.10.10",
+          "/private/tmp/mss-parallel-support-20261121/common/SparseArray"
+        ],
+        "stats": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats"
+        ],
+        "stats4": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats4"
+        ],
+        "stringi": [
+          "1.8.9",
+          "/private/tmp/mss-parallel-support-20261121/common/stringi"
+        ],
+        "stringr": [
+          "1.6.0",
+          "/private/tmp/mss-parallel-support-20261121/common/stringr"
+        ],
+        "SummarizedExperiment": [
+          "1.40.0",
+          "/private/tmp/mss-parallel-support-20261121/common/SummarizedExperiment"
+        ],
+        "tibble": [
+          "3.3.1",
+          "/private/tmp/mss-parallel-support-20261121/common/tibble"
+        ],
+        "tidyselect": [
+          "1.2.1",
+          "/private/tmp/mss-parallel-support-20261121/common/tidyselect"
+        ],
+        "tools": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/tools"
+        ],
+        "UCSC.utils": [
+          "1.6.1",
+          "/private/tmp/mss-parallel-support-20261121/common/UCSC.utils"
+        ],
+        "utils": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/utils"
+        ],
+        "vctrs": [
+          "0.7.3",
+          "/private/tmp/mss-parallel-support-20261121/common/vctrs"
+        ],
+        "XML": [
+          "3.99.0.25",
+          "/private/tmp/mss-parallel-support-20261121/common/XML"
+        ],
+        "XVector": [
+          "0.50.0",
+          "/private/tmp/mss-parallel-support-20261121/common/XVector"
+        ],
+        "yaml": [
+          "2.3.12",
+          "/private/tmp/mss-parallel-support-20261121/common/yaml"
+        ]
+      },
+      "actual_role_states": {
+        "baseline": {
+          "abind": [
+            "1.4.8",
+            "/private/tmp/mss-parallel-support-20261121/common/abind"
+          ],
+          "base": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/base"
+          ],
+          "Biobase": [
+            "2.70.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Biobase"
+          ],
+          "BiocGenerics": [
+            "0.56.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocGenerics"
+          ],
+          "BiocIO": [
+            "1.20.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocIO"
+          ],
+          "BiocParallel": [
+            "1.44.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocParallel"
+          ],
+          "Biostrings": [
+            "2.78.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Biostrings"
+          ],
+          "bitops": [
+            "1.1.0",
+            "/private/tmp/mss-parallel-support-20261121/common/bitops"
+          ],
+          "BSgenome": [
+            "1.78.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BSgenome"
+          ],
+          "cigarillo": [
+            "1.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/cigarillo"
+          ],
+          "cli": [
+            "3.6.6",
+            "/private/tmp/mss-parallel-support-20261121/common/cli"
+          ],
+          "codetools": [
+            "0.2.20",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/codetools"
+          ],
+          "compiler": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/compiler"
+          ],
+          "crayon": [
+            "1.5.3",
+            "/private/tmp/mss-parallel-support-20261121/common/crayon"
+          ],
+          "curl": [
+            "8.1.0",
+            "/private/tmp/mss-parallel-support-20261121/common/curl"
+          ],
+          "data.table": [
+            "1.18.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/data.table"
+          ],
+          "datasets": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/datasets"
+          ],
+          "DelayedArray": [
+            "0.36.1",
+            "/private/tmp/mss-parallel-support-20261121/common/DelayedArray"
+          ],
+          "dplyr": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/dplyr"
+          ],
+          "generics": [
+            "0.1.4",
+            "/private/tmp/mss-parallel-support-20261121/common/generics"
+          ],
+          "GenomeInfoDb": [
+            "1.46.2",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomeInfoDb"
+          ],
+          "GenomicAlignments": [
+            "1.46.0",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomicAlignments"
+          ],
+          "GenomicRanges": [
+            "1.62.1",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomicRanges"
+          ],
+          "glue": [
+            "1.8.1",
+            "/private/tmp/mss-parallel-support-20261121/common/glue"
+          ],
+          "graphics": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/graphics"
+          ],
+          "grDevices": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grDevices"
+          ],
+          "grid": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grid"
+          ],
+          "httr": [
+            "1.4.9",
+            "/private/tmp/mss-parallel-support-20261121/common/httr"
+          ],
+          "ieugwasr": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/ieugwasr"
+          ],
+          "IRanges": [
+            "2.44.0",
+            "/private/tmp/mss-parallel-support-20261121/common/IRanges"
+          ],
+          "jsonlite": [
+            "2.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/jsonlite"
+          ],
+          "lattice": [
+            "0.22.9",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/lattice"
+          ],
+          "lifecycle": [
+            "1.0.5",
+            "/private/tmp/mss-parallel-support-20261121/common/lifecycle"
+          ],
+          "magrittr": [
+            "2.0.5",
+            "/private/tmp/mss-parallel-support-20261121/common/magrittr"
+          ],
+          "Matrix": [
+            "1.7.4",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/Matrix"
+          ],
+          "MatrixGenerics": [
+            "1.22.0",
+            "/private/tmp/mss-parallel-support-20261121/common/MatrixGenerics"
+          ],
+          "matrixStats": [
+            "1.5.0",
+            "/private/tmp/mss-parallel-support-20261121/common/matrixStats"
+          ],
+          "methods": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/methods"
+          ],
+          "MungeSumstats": [
+            "1.21.4",
+            "/private/tmp/mss-key-geometry-builds-20261121/baseline/library/MungeSumstats"
+          ],
+          "parallel": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/parallel"
+          ],
+          "pillar": [
+            "1.11.1",
+            "/private/tmp/mss-parallel-support-20261121/common/pillar"
+          ],
+          "pkgconfig": [
+            "2.0.3",
+            "/private/tmp/mss-parallel-support-20261121/common/pkgconfig"
+          ],
+          "R.methodsS3": [
+            "1.8.2",
+            "/private/tmp/mss-parallel-support-20261121/common/R.methodsS3"
+          ],
+          "R.oo": [
+            "1.27.1",
+            "/private/tmp/mss-parallel-support-20261121/common/R.oo"
+          ],
+          "R.utils": [
+            "2.13.0",
+            "/private/tmp/mss-parallel-support-20261121/common/R.utils"
+          ],
+          "R6": [
+            "2.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/R6"
+          ],
+          "Rcpp": [
+            "1.1.2",
+            "/private/tmp/mss-parallel-support-20261121/common/Rcpp"
+          ],
+          "RCurl": [
+            "1.98.1.20",
+            "/private/tmp/mss-parallel-support-20261121/common/RCurl"
+          ],
+          "restfulr": [
+            "0.0.17",
+            "/private/tmp/mss-parallel-support-20261121/common/restfulr"
+          ],
+          "rjson": [
+            "0.2.23",
+            "/private/tmp/mss-parallel-support-20261121/common/rjson"
+          ],
+          "rlang": [
+            "1.3.0",
+            "/private/tmp/mss-parallel-support-20261121/common/rlang"
+          ],
+          "Rsamtools": [
+            "2.26.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Rsamtools"
+          ],
+          "rtracklayer": [
+            "1.70.1",
+            "/private/tmp/mss-parallel-support-20261121/common/rtracklayer"
+          ],
+          "S4Arrays": [
+            "1.10.1",
+            "/private/tmp/mss-parallel-support-20261121/common/S4Arrays"
+          ],
+          "S4Vectors": [
+            "0.48.1",
+            "/private/tmp/mss-parallel-support-20261121/common/S4Vectors"
+          ],
+          "Seqinfo": [
+            "1.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Seqinfo"
+          ],
+          "SparseArray": [
+            "1.10.10",
+            "/private/tmp/mss-parallel-support-20261121/common/SparseArray"
+          ],
+          "stats": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats"
+          ],
+          "stats4": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats4"
+          ],
+          "stringi": [
+            "1.8.9",
+            "/private/tmp/mss-parallel-support-20261121/common/stringi"
+          ],
+          "stringr": [
+            "1.6.0",
+            "/private/tmp/mss-parallel-support-20261121/common/stringr"
+          ],
+          "SummarizedExperiment": [
+            "1.40.0",
+            "/private/tmp/mss-parallel-support-20261121/common/SummarizedExperiment"
+          ],
+          "tibble": [
+            "3.3.1",
+            "/private/tmp/mss-parallel-support-20261121/common/tibble"
+          ],
+          "tidyselect": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/tidyselect"
+          ],
+          "tools": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/tools"
+          ],
+          "UCSC.utils": [
+            "1.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/UCSC.utils"
+          ],
+          "utils": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/utils"
+          ],
+          "vctrs": [
+            "0.7.3",
+            "/private/tmp/mss-parallel-support-20261121/common/vctrs"
+          ],
+          "XML": [
+            "3.99.0.25",
+            "/private/tmp/mss-parallel-support-20261121/common/XML"
+          ],
+          "XVector": [
+            "0.50.0",
+            "/private/tmp/mss-parallel-support-20261121/common/XVector"
+          ],
+          "yaml": [
+            "2.3.12",
+            "/private/tmp/mss-parallel-support-20261121/common/yaml"
+          ]
+        },
+        "candidate": {
+          "abind": [
+            "1.4.8",
+            "/private/tmp/mss-parallel-support-20261121/common/abind"
+          ],
+          "base": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/base"
+          ],
+          "Biobase": [
+            "2.70.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Biobase"
+          ],
+          "BiocGenerics": [
+            "0.56.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocGenerics"
+          ],
+          "BiocIO": [
+            "1.20.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocIO"
+          ],
+          "BiocParallel": [
+            "1.44.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocParallel"
+          ],
+          "Biostrings": [
+            "2.78.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Biostrings"
+          ],
+          "bitops": [
+            "1.1.0",
+            "/private/tmp/mss-parallel-support-20261121/common/bitops"
+          ],
+          "BSgenome": [
+            "1.78.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BSgenome"
+          ],
+          "cigarillo": [
+            "1.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/cigarillo"
+          ],
+          "cli": [
+            "3.6.6",
+            "/private/tmp/mss-parallel-support-20261121/common/cli"
+          ],
+          "codetools": [
+            "0.2.20",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/codetools"
+          ],
+          "compiler": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/compiler"
+          ],
+          "crayon": [
+            "1.5.3",
+            "/private/tmp/mss-parallel-support-20261121/common/crayon"
+          ],
+          "curl": [
+            "8.1.0",
+            "/private/tmp/mss-parallel-support-20261121/common/curl"
+          ],
+          "data.table": [
+            "1.18.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/data.table"
+          ],
+          "datasets": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/datasets"
+          ],
+          "DelayedArray": [
+            "0.36.1",
+            "/private/tmp/mss-parallel-support-20261121/common/DelayedArray"
+          ],
+          "dplyr": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/dplyr"
+          ],
+          "generics": [
+            "0.1.4",
+            "/private/tmp/mss-parallel-support-20261121/common/generics"
+          ],
+          "GenomeInfoDb": [
+            "1.46.2",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomeInfoDb"
+          ],
+          "GenomicAlignments": [
+            "1.46.0",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomicAlignments"
+          ],
+          "GenomicRanges": [
+            "1.62.1",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomicRanges"
+          ],
+          "glue": [
+            "1.8.1",
+            "/private/tmp/mss-parallel-support-20261121/common/glue"
+          ],
+          "graphics": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/graphics"
+          ],
+          "grDevices": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grDevices"
+          ],
+          "grid": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grid"
+          ],
+          "httr": [
+            "1.4.9",
+            "/private/tmp/mss-parallel-support-20261121/common/httr"
+          ],
+          "ieugwasr": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/ieugwasr"
+          ],
+          "IRanges": [
+            "2.44.0",
+            "/private/tmp/mss-parallel-support-20261121/common/IRanges"
+          ],
+          "jsonlite": [
+            "2.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/jsonlite"
+          ],
+          "lattice": [
+            "0.22.9",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/lattice"
+          ],
+          "lifecycle": [
+            "1.0.5",
+            "/private/tmp/mss-parallel-support-20261121/common/lifecycle"
+          ],
+          "magrittr": [
+            "2.0.5",
+            "/private/tmp/mss-parallel-support-20261121/common/magrittr"
+          ],
+          "Matrix": [
+            "1.7.4",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/Matrix"
+          ],
+          "MatrixGenerics": [
+            "1.22.0",
+            "/private/tmp/mss-parallel-support-20261121/common/MatrixGenerics"
+          ],
+          "matrixStats": [
+            "1.5.0",
+            "/private/tmp/mss-parallel-support-20261121/common/matrixStats"
+          ],
+          "methods": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/methods"
+          ],
+          "MungeSumstats": [
+            "1.21.4",
+            "/private/tmp/mss-key-geometry-builds-20261121/candidate/library/MungeSumstats"
+          ],
+          "parallel": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/parallel"
+          ],
+          "pillar": [
+            "1.11.1",
+            "/private/tmp/mss-parallel-support-20261121/common/pillar"
+          ],
+          "pkgconfig": [
+            "2.0.3",
+            "/private/tmp/mss-parallel-support-20261121/common/pkgconfig"
+          ],
+          "R.methodsS3": [
+            "1.8.2",
+            "/private/tmp/mss-parallel-support-20261121/common/R.methodsS3"
+          ],
+          "R.oo": [
+            "1.27.1",
+            "/private/tmp/mss-parallel-support-20261121/common/R.oo"
+          ],
+          "R.utils": [
+            "2.13.0",
+            "/private/tmp/mss-parallel-support-20261121/common/R.utils"
+          ],
+          "R6": [
+            "2.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/R6"
+          ],
+          "Rcpp": [
+            "1.1.2",
+            "/private/tmp/mss-parallel-support-20261121/common/Rcpp"
+          ],
+          "RCurl": [
+            "1.98.1.20",
+            "/private/tmp/mss-parallel-support-20261121/common/RCurl"
+          ],
+          "restfulr": [
+            "0.0.17",
+            "/private/tmp/mss-parallel-support-20261121/common/restfulr"
+          ],
+          "rjson": [
+            "0.2.23",
+            "/private/tmp/mss-parallel-support-20261121/common/rjson"
+          ],
+          "rlang": [
+            "1.3.0",
+            "/private/tmp/mss-parallel-support-20261121/common/rlang"
+          ],
+          "Rsamtools": [
+            "2.26.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Rsamtools"
+          ],
+          "rtracklayer": [
+            "1.70.1",
+            "/private/tmp/mss-parallel-support-20261121/common/rtracklayer"
+          ],
+          "S4Arrays": [
+            "1.10.1",
+            "/private/tmp/mss-parallel-support-20261121/common/S4Arrays"
+          ],
+          "S4Vectors": [
+            "0.48.1",
+            "/private/tmp/mss-parallel-support-20261121/common/S4Vectors"
+          ],
+          "Seqinfo": [
+            "1.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Seqinfo"
+          ],
+          "SparseArray": [
+            "1.10.10",
+            "/private/tmp/mss-parallel-support-20261121/common/SparseArray"
+          ],
+          "stats": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats"
+          ],
+          "stats4": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats4"
+          ],
+          "stringi": [
+            "1.8.9",
+            "/private/tmp/mss-parallel-support-20261121/common/stringi"
+          ],
+          "stringr": [
+            "1.6.0",
+            "/private/tmp/mss-parallel-support-20261121/common/stringr"
+          ],
+          "SummarizedExperiment": [
+            "1.40.0",
+            "/private/tmp/mss-parallel-support-20261121/common/SummarizedExperiment"
+          ],
+          "tibble": [
+            "3.3.1",
+            "/private/tmp/mss-parallel-support-20261121/common/tibble"
+          ],
+          "tidyselect": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/tidyselect"
+          ],
+          "tools": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/tools"
+          ],
+          "UCSC.utils": [
+            "1.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/UCSC.utils"
+          ],
+          "utils": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/utils"
+          ],
+          "vctrs": [
+            "0.7.3",
+            "/private/tmp/mss-parallel-support-20261121/common/vctrs"
+          ],
+          "XML": [
+            "3.99.0.25",
+            "/private/tmp/mss-parallel-support-20261121/common/XML"
+          ],
+          "XVector": [
+            "0.50.0",
+            "/private/tmp/mss-parallel-support-20261121/common/XVector"
+          ],
+          "yaml": [
+            "2.3.12",
+            "/private/tmp/mss-parallel-support-20261121/common/yaml"
+          ]
+        }
+      }
+    },
+    "matched-1M": {
+      "baseline_only": [],
+      "candidate_only": [],
+      "common_comparison_state": {
+        "abind": [
+          "1.4.8",
+          "/private/tmp/mss-parallel-support-20261121/common/abind"
+        ],
+        "base": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/base"
+        ],
+        "Biobase": [
+          "2.70.0",
+          "/private/tmp/mss-parallel-support-20261121/common/Biobase"
+        ],
+        "BiocGenerics": [
+          "0.56.0",
+          "/private/tmp/mss-parallel-support-20261121/common/BiocGenerics"
+        ],
+        "BiocIO": [
+          "1.20.0",
+          "/private/tmp/mss-parallel-support-20261121/common/BiocIO"
+        ],
+        "BiocParallel": [
+          "1.44.0",
+          "/private/tmp/mss-parallel-support-20261121/common/BiocParallel"
+        ],
+        "Biostrings": [
+          "2.78.0",
+          "/private/tmp/mss-parallel-support-20261121/common/Biostrings"
+        ],
+        "bitops": [
+          "1.1.0",
+          "/private/tmp/mss-parallel-support-20261121/common/bitops"
+        ],
+        "BSgenome": [
+          "1.78.0",
+          "/private/tmp/mss-parallel-support-20261121/common/BSgenome"
+        ],
+        "cigarillo": [
+          "1.0.0",
+          "/private/tmp/mss-parallel-support-20261121/common/cigarillo"
+        ],
+        "cli": [
+          "3.6.6",
+          "/private/tmp/mss-parallel-support-20261121/common/cli"
+        ],
+        "codetools": [
+          "0.2.20",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/codetools"
+        ],
+        "compiler": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/compiler"
+        ],
+        "crayon": [
+          "1.5.3",
+          "/private/tmp/mss-parallel-support-20261121/common/crayon"
+        ],
+        "curl": [
+          "8.1.0",
+          "/private/tmp/mss-parallel-support-20261121/common/curl"
+        ],
+        "data.table": [
+          "1.18.6.1",
+          "/private/tmp/mss-parallel-support-20261121/common/data.table"
+        ],
+        "datasets": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/datasets"
+        ],
+        "DelayedArray": [
+          "0.36.1",
+          "/private/tmp/mss-parallel-support-20261121/common/DelayedArray"
+        ],
+        "dplyr": [
+          "1.2.1",
+          "/private/tmp/mss-parallel-support-20261121/common/dplyr"
+        ],
+        "generics": [
+          "0.1.4",
+          "/private/tmp/mss-parallel-support-20261121/common/generics"
+        ],
+        "GenomeInfoDb": [
+          "1.46.2",
+          "/private/tmp/mss-parallel-support-20261121/common/GenomeInfoDb"
+        ],
+        "GenomicAlignments": [
+          "1.46.0",
+          "/private/tmp/mss-parallel-support-20261121/common/GenomicAlignments"
+        ],
+        "GenomicRanges": [
+          "1.62.1",
+          "/private/tmp/mss-parallel-support-20261121/common/GenomicRanges"
+        ],
+        "glue": [
+          "1.8.1",
+          "/private/tmp/mss-parallel-support-20261121/common/glue"
+        ],
+        "graphics": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/graphics"
+        ],
+        "grDevices": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grDevices"
+        ],
+        "grid": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grid"
+        ],
+        "httr": [
+          "1.4.9",
+          "/private/tmp/mss-parallel-support-20261121/common/httr"
+        ],
+        "ieugwasr": [
+          "1.2.1",
+          "/private/tmp/mss-parallel-support-20261121/common/ieugwasr"
+        ],
+        "IRanges": [
+          "2.44.0",
+          "/private/tmp/mss-parallel-support-20261121/common/IRanges"
+        ],
+        "jsonlite": [
+          "2.0.0",
+          "/private/tmp/mss-parallel-support-20261121/common/jsonlite"
+        ],
+        "lattice": [
+          "0.22.9",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/lattice"
+        ],
+        "lifecycle": [
+          "1.0.5",
+          "/private/tmp/mss-parallel-support-20261121/common/lifecycle"
+        ],
+        "magrittr": [
+          "2.0.5",
+          "/private/tmp/mss-parallel-support-20261121/common/magrittr"
+        ],
+        "Matrix": [
+          "1.7.4",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/Matrix"
+        ],
+        "MatrixGenerics": [
+          "1.22.0",
+          "/private/tmp/mss-parallel-support-20261121/common/MatrixGenerics"
+        ],
+        "matrixStats": [
+          "1.5.0",
+          "/private/tmp/mss-parallel-support-20261121/common/matrixStats"
+        ],
+        "methods": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/methods"
+        ],
+        "MungeSumstats": [
+          "1.21.4",
+          "<selected installation>"
+        ],
+        "parallel": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/parallel"
+        ],
+        "pillar": [
+          "1.11.1",
+          "/private/tmp/mss-parallel-support-20261121/common/pillar"
+        ],
+        "pkgconfig": [
+          "2.0.3",
+          "/private/tmp/mss-parallel-support-20261121/common/pkgconfig"
+        ],
+        "R.methodsS3": [
+          "1.8.2",
+          "/private/tmp/mss-parallel-support-20261121/common/R.methodsS3"
+        ],
+        "R.oo": [
+          "1.27.1",
+          "/private/tmp/mss-parallel-support-20261121/common/R.oo"
+        ],
+        "R.utils": [
+          "2.13.0",
+          "/private/tmp/mss-parallel-support-20261121/common/R.utils"
+        ],
+        "R6": [
+          "2.6.1",
+          "/private/tmp/mss-parallel-support-20261121/common/R6"
+        ],
+        "Rcpp": [
+          "1.1.2",
+          "/private/tmp/mss-parallel-support-20261121/common/Rcpp"
+        ],
+        "RCurl": [
+          "1.98.1.20",
+          "/private/tmp/mss-parallel-support-20261121/common/RCurl"
+        ],
+        "restfulr": [
+          "0.0.17",
+          "/private/tmp/mss-parallel-support-20261121/common/restfulr"
+        ],
+        "rjson": [
+          "0.2.23",
+          "/private/tmp/mss-parallel-support-20261121/common/rjson"
+        ],
+        "rlang": [
+          "1.3.0",
+          "/private/tmp/mss-parallel-support-20261121/common/rlang"
+        ],
+        "Rsamtools": [
+          "2.26.0",
+          "/private/tmp/mss-parallel-support-20261121/common/Rsamtools"
+        ],
+        "rtracklayer": [
+          "1.70.1",
+          "/private/tmp/mss-parallel-support-20261121/common/rtracklayer"
+        ],
+        "S4Arrays": [
+          "1.10.1",
+          "/private/tmp/mss-parallel-support-20261121/common/S4Arrays"
+        ],
+        "S4Vectors": [
+          "0.48.1",
+          "/private/tmp/mss-parallel-support-20261121/common/S4Vectors"
+        ],
+        "Seqinfo": [
+          "1.0.0",
+          "/private/tmp/mss-parallel-support-20261121/common/Seqinfo"
+        ],
+        "SparseArray": [
+          "1.10.10",
+          "/private/tmp/mss-parallel-support-20261121/common/SparseArray"
+        ],
+        "stats": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats"
+        ],
+        "stats4": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats4"
+        ],
+        "stringi": [
+          "1.8.9",
+          "/private/tmp/mss-parallel-support-20261121/common/stringi"
+        ],
+        "stringr": [
+          "1.6.0",
+          "/private/tmp/mss-parallel-support-20261121/common/stringr"
+        ],
+        "SummarizedExperiment": [
+          "1.40.0",
+          "/private/tmp/mss-parallel-support-20261121/common/SummarizedExperiment"
+        ],
+        "tibble": [
+          "3.3.1",
+          "/private/tmp/mss-parallel-support-20261121/common/tibble"
+        ],
+        "tidyselect": [
+          "1.2.1",
+          "/private/tmp/mss-parallel-support-20261121/common/tidyselect"
+        ],
+        "tools": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/tools"
+        ],
+        "UCSC.utils": [
+          "1.6.1",
+          "/private/tmp/mss-parallel-support-20261121/common/UCSC.utils"
+        ],
+        "utils": [
+          "4.5.3",
+          "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/utils"
+        ],
+        "vctrs": [
+          "0.7.3",
+          "/private/tmp/mss-parallel-support-20261121/common/vctrs"
+        ],
+        "XML": [
+          "3.99.0.25",
+          "/private/tmp/mss-parallel-support-20261121/common/XML"
+        ],
+        "XVector": [
+          "0.50.0",
+          "/private/tmp/mss-parallel-support-20261121/common/XVector"
+        ],
+        "yaml": [
+          "2.3.12",
+          "/private/tmp/mss-parallel-support-20261121/common/yaml"
+        ]
+      },
+      "actual_role_states": {
+        "baseline": {
+          "abind": [
+            "1.4.8",
+            "/private/tmp/mss-parallel-support-20261121/common/abind"
+          ],
+          "base": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/base"
+          ],
+          "Biobase": [
+            "2.70.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Biobase"
+          ],
+          "BiocGenerics": [
+            "0.56.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocGenerics"
+          ],
+          "BiocIO": [
+            "1.20.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocIO"
+          ],
+          "BiocParallel": [
+            "1.44.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocParallel"
+          ],
+          "Biostrings": [
+            "2.78.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Biostrings"
+          ],
+          "bitops": [
+            "1.1.0",
+            "/private/tmp/mss-parallel-support-20261121/common/bitops"
+          ],
+          "BSgenome": [
+            "1.78.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BSgenome"
+          ],
+          "cigarillo": [
+            "1.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/cigarillo"
+          ],
+          "cli": [
+            "3.6.6",
+            "/private/tmp/mss-parallel-support-20261121/common/cli"
+          ],
+          "codetools": [
+            "0.2.20",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/codetools"
+          ],
+          "compiler": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/compiler"
+          ],
+          "crayon": [
+            "1.5.3",
+            "/private/tmp/mss-parallel-support-20261121/common/crayon"
+          ],
+          "curl": [
+            "8.1.0",
+            "/private/tmp/mss-parallel-support-20261121/common/curl"
+          ],
+          "data.table": [
+            "1.18.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/data.table"
+          ],
+          "datasets": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/datasets"
+          ],
+          "DelayedArray": [
+            "0.36.1",
+            "/private/tmp/mss-parallel-support-20261121/common/DelayedArray"
+          ],
+          "dplyr": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/dplyr"
+          ],
+          "generics": [
+            "0.1.4",
+            "/private/tmp/mss-parallel-support-20261121/common/generics"
+          ],
+          "GenomeInfoDb": [
+            "1.46.2",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomeInfoDb"
+          ],
+          "GenomicAlignments": [
+            "1.46.0",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomicAlignments"
+          ],
+          "GenomicRanges": [
+            "1.62.1",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomicRanges"
+          ],
+          "glue": [
+            "1.8.1",
+            "/private/tmp/mss-parallel-support-20261121/common/glue"
+          ],
+          "graphics": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/graphics"
+          ],
+          "grDevices": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grDevices"
+          ],
+          "grid": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grid"
+          ],
+          "httr": [
+            "1.4.9",
+            "/private/tmp/mss-parallel-support-20261121/common/httr"
+          ],
+          "ieugwasr": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/ieugwasr"
+          ],
+          "IRanges": [
+            "2.44.0",
+            "/private/tmp/mss-parallel-support-20261121/common/IRanges"
+          ],
+          "jsonlite": [
+            "2.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/jsonlite"
+          ],
+          "lattice": [
+            "0.22.9",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/lattice"
+          ],
+          "lifecycle": [
+            "1.0.5",
+            "/private/tmp/mss-parallel-support-20261121/common/lifecycle"
+          ],
+          "magrittr": [
+            "2.0.5",
+            "/private/tmp/mss-parallel-support-20261121/common/magrittr"
+          ],
+          "Matrix": [
+            "1.7.4",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/Matrix"
+          ],
+          "MatrixGenerics": [
+            "1.22.0",
+            "/private/tmp/mss-parallel-support-20261121/common/MatrixGenerics"
+          ],
+          "matrixStats": [
+            "1.5.0",
+            "/private/tmp/mss-parallel-support-20261121/common/matrixStats"
+          ],
+          "methods": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/methods"
+          ],
+          "MungeSumstats": [
+            "1.21.4",
+            "/private/tmp/mss-key-geometry-builds-20261121/baseline/library/MungeSumstats"
+          ],
+          "parallel": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/parallel"
+          ],
+          "pillar": [
+            "1.11.1",
+            "/private/tmp/mss-parallel-support-20261121/common/pillar"
+          ],
+          "pkgconfig": [
+            "2.0.3",
+            "/private/tmp/mss-parallel-support-20261121/common/pkgconfig"
+          ],
+          "R.methodsS3": [
+            "1.8.2",
+            "/private/tmp/mss-parallel-support-20261121/common/R.methodsS3"
+          ],
+          "R.oo": [
+            "1.27.1",
+            "/private/tmp/mss-parallel-support-20261121/common/R.oo"
+          ],
+          "R.utils": [
+            "2.13.0",
+            "/private/tmp/mss-parallel-support-20261121/common/R.utils"
+          ],
+          "R6": [
+            "2.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/R6"
+          ],
+          "Rcpp": [
+            "1.1.2",
+            "/private/tmp/mss-parallel-support-20261121/common/Rcpp"
+          ],
+          "RCurl": [
+            "1.98.1.20",
+            "/private/tmp/mss-parallel-support-20261121/common/RCurl"
+          ],
+          "restfulr": [
+            "0.0.17",
+            "/private/tmp/mss-parallel-support-20261121/common/restfulr"
+          ],
+          "rjson": [
+            "0.2.23",
+            "/private/tmp/mss-parallel-support-20261121/common/rjson"
+          ],
+          "rlang": [
+            "1.3.0",
+            "/private/tmp/mss-parallel-support-20261121/common/rlang"
+          ],
+          "Rsamtools": [
+            "2.26.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Rsamtools"
+          ],
+          "rtracklayer": [
+            "1.70.1",
+            "/private/tmp/mss-parallel-support-20261121/common/rtracklayer"
+          ],
+          "S4Arrays": [
+            "1.10.1",
+            "/private/tmp/mss-parallel-support-20261121/common/S4Arrays"
+          ],
+          "S4Vectors": [
+            "0.48.1",
+            "/private/tmp/mss-parallel-support-20261121/common/S4Vectors"
+          ],
+          "Seqinfo": [
+            "1.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Seqinfo"
+          ],
+          "SparseArray": [
+            "1.10.10",
+            "/private/tmp/mss-parallel-support-20261121/common/SparseArray"
+          ],
+          "stats": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats"
+          ],
+          "stats4": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats4"
+          ],
+          "stringi": [
+            "1.8.9",
+            "/private/tmp/mss-parallel-support-20261121/common/stringi"
+          ],
+          "stringr": [
+            "1.6.0",
+            "/private/tmp/mss-parallel-support-20261121/common/stringr"
+          ],
+          "SummarizedExperiment": [
+            "1.40.0",
+            "/private/tmp/mss-parallel-support-20261121/common/SummarizedExperiment"
+          ],
+          "tibble": [
+            "3.3.1",
+            "/private/tmp/mss-parallel-support-20261121/common/tibble"
+          ],
+          "tidyselect": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/tidyselect"
+          ],
+          "tools": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/tools"
+          ],
+          "UCSC.utils": [
+            "1.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/UCSC.utils"
+          ],
+          "utils": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/utils"
+          ],
+          "vctrs": [
+            "0.7.3",
+            "/private/tmp/mss-parallel-support-20261121/common/vctrs"
+          ],
+          "XML": [
+            "3.99.0.25",
+            "/private/tmp/mss-parallel-support-20261121/common/XML"
+          ],
+          "XVector": [
+            "0.50.0",
+            "/private/tmp/mss-parallel-support-20261121/common/XVector"
+          ],
+          "yaml": [
+            "2.3.12",
+            "/private/tmp/mss-parallel-support-20261121/common/yaml"
+          ]
+        },
+        "candidate": {
+          "abind": [
+            "1.4.8",
+            "/private/tmp/mss-parallel-support-20261121/common/abind"
+          ],
+          "base": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/base"
+          ],
+          "Biobase": [
+            "2.70.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Biobase"
+          ],
+          "BiocGenerics": [
+            "0.56.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocGenerics"
+          ],
+          "BiocIO": [
+            "1.20.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocIO"
+          ],
+          "BiocParallel": [
+            "1.44.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BiocParallel"
+          ],
+          "Biostrings": [
+            "2.78.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Biostrings"
+          ],
+          "bitops": [
+            "1.1.0",
+            "/private/tmp/mss-parallel-support-20261121/common/bitops"
+          ],
+          "BSgenome": [
+            "1.78.0",
+            "/private/tmp/mss-parallel-support-20261121/common/BSgenome"
+          ],
+          "cigarillo": [
+            "1.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/cigarillo"
+          ],
+          "cli": [
+            "3.6.6",
+            "/private/tmp/mss-parallel-support-20261121/common/cli"
+          ],
+          "codetools": [
+            "0.2.20",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/codetools"
+          ],
+          "compiler": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/compiler"
+          ],
+          "crayon": [
+            "1.5.3",
+            "/private/tmp/mss-parallel-support-20261121/common/crayon"
+          ],
+          "curl": [
+            "8.1.0",
+            "/private/tmp/mss-parallel-support-20261121/common/curl"
+          ],
+          "data.table": [
+            "1.18.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/data.table"
+          ],
+          "datasets": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/datasets"
+          ],
+          "DelayedArray": [
+            "0.36.1",
+            "/private/tmp/mss-parallel-support-20261121/common/DelayedArray"
+          ],
+          "dplyr": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/dplyr"
+          ],
+          "generics": [
+            "0.1.4",
+            "/private/tmp/mss-parallel-support-20261121/common/generics"
+          ],
+          "GenomeInfoDb": [
+            "1.46.2",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomeInfoDb"
+          ],
+          "GenomicAlignments": [
+            "1.46.0",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomicAlignments"
+          ],
+          "GenomicRanges": [
+            "1.62.1",
+            "/private/tmp/mss-parallel-support-20261121/common/GenomicRanges"
+          ],
+          "glue": [
+            "1.8.1",
+            "/private/tmp/mss-parallel-support-20261121/common/glue"
+          ],
+          "graphics": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/graphics"
+          ],
+          "grDevices": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grDevices"
+          ],
+          "grid": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/grid"
+          ],
+          "httr": [
+            "1.4.9",
+            "/private/tmp/mss-parallel-support-20261121/common/httr"
+          ],
+          "ieugwasr": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/ieugwasr"
+          ],
+          "IRanges": [
+            "2.44.0",
+            "/private/tmp/mss-parallel-support-20261121/common/IRanges"
+          ],
+          "jsonlite": [
+            "2.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/jsonlite"
+          ],
+          "lattice": [
+            "0.22.9",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/lattice"
+          ],
+          "lifecycle": [
+            "1.0.5",
+            "/private/tmp/mss-parallel-support-20261121/common/lifecycle"
+          ],
+          "magrittr": [
+            "2.0.5",
+            "/private/tmp/mss-parallel-support-20261121/common/magrittr"
+          ],
+          "Matrix": [
+            "1.7.4",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/Matrix"
+          ],
+          "MatrixGenerics": [
+            "1.22.0",
+            "/private/tmp/mss-parallel-support-20261121/common/MatrixGenerics"
+          ],
+          "matrixStats": [
+            "1.5.0",
+            "/private/tmp/mss-parallel-support-20261121/common/matrixStats"
+          ],
+          "methods": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/methods"
+          ],
+          "MungeSumstats": [
+            "1.21.4",
+            "/private/tmp/mss-key-geometry-builds-20261121/candidate/library/MungeSumstats"
+          ],
+          "parallel": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/parallel"
+          ],
+          "pillar": [
+            "1.11.1",
+            "/private/tmp/mss-parallel-support-20261121/common/pillar"
+          ],
+          "pkgconfig": [
+            "2.0.3",
+            "/private/tmp/mss-parallel-support-20261121/common/pkgconfig"
+          ],
+          "R.methodsS3": [
+            "1.8.2",
+            "/private/tmp/mss-parallel-support-20261121/common/R.methodsS3"
+          ],
+          "R.oo": [
+            "1.27.1",
+            "/private/tmp/mss-parallel-support-20261121/common/R.oo"
+          ],
+          "R.utils": [
+            "2.13.0",
+            "/private/tmp/mss-parallel-support-20261121/common/R.utils"
+          ],
+          "R6": [
+            "2.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/R6"
+          ],
+          "Rcpp": [
+            "1.1.2",
+            "/private/tmp/mss-parallel-support-20261121/common/Rcpp"
+          ],
+          "RCurl": [
+            "1.98.1.20",
+            "/private/tmp/mss-parallel-support-20261121/common/RCurl"
+          ],
+          "restfulr": [
+            "0.0.17",
+            "/private/tmp/mss-parallel-support-20261121/common/restfulr"
+          ],
+          "rjson": [
+            "0.2.23",
+            "/private/tmp/mss-parallel-support-20261121/common/rjson"
+          ],
+          "rlang": [
+            "1.3.0",
+            "/private/tmp/mss-parallel-support-20261121/common/rlang"
+          ],
+          "Rsamtools": [
+            "2.26.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Rsamtools"
+          ],
+          "rtracklayer": [
+            "1.70.1",
+            "/private/tmp/mss-parallel-support-20261121/common/rtracklayer"
+          ],
+          "S4Arrays": [
+            "1.10.1",
+            "/private/tmp/mss-parallel-support-20261121/common/S4Arrays"
+          ],
+          "S4Vectors": [
+            "0.48.1",
+            "/private/tmp/mss-parallel-support-20261121/common/S4Vectors"
+          ],
+          "Seqinfo": [
+            "1.0.0",
+            "/private/tmp/mss-parallel-support-20261121/common/Seqinfo"
+          ],
+          "SparseArray": [
+            "1.10.10",
+            "/private/tmp/mss-parallel-support-20261121/common/SparseArray"
+          ],
+          "stats": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats"
+          ],
+          "stats4": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/stats4"
+          ],
+          "stringi": [
+            "1.8.9",
+            "/private/tmp/mss-parallel-support-20261121/common/stringi"
+          ],
+          "stringr": [
+            "1.6.0",
+            "/private/tmp/mss-parallel-support-20261121/common/stringr"
+          ],
+          "SummarizedExperiment": [
+            "1.40.0",
+            "/private/tmp/mss-parallel-support-20261121/common/SummarizedExperiment"
+          ],
+          "tibble": [
+            "3.3.1",
+            "/private/tmp/mss-parallel-support-20261121/common/tibble"
+          ],
+          "tidyselect": [
+            "1.2.1",
+            "/private/tmp/mss-parallel-support-20261121/common/tidyselect"
+          ],
+          "tools": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/tools"
+          ],
+          "UCSC.utils": [
+            "1.6.1",
+            "/private/tmp/mss-parallel-support-20261121/common/UCSC.utils"
+          ],
+          "utils": [
+            "4.5.3",
+            "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/utils"
+          ],
+          "vctrs": [
+            "0.7.3",
+            "/private/tmp/mss-parallel-support-20261121/common/vctrs"
+          ],
+          "XML": [
+            "3.99.0.25",
+            "/private/tmp/mss-parallel-support-20261121/common/XML"
+          ],
+          "XVector": [
+            "0.50.0",
+            "/private/tmp/mss-parallel-support-20261121/common/XVector"
+          ],
+          "yaml": [
+            "2.3.12",
+            "/private/tmp/mss-parallel-support-20261121/common/yaml"
+          ]
+        }
+      }
+    }
+  },
+  "workers": [
+    {
+      "case": "hard-cases-f2",
+      "role": "baseline",
+      "worker": "pair-01-baseline",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/hard-cases-f2/pair-01-baseline/namespaces.tsv",
+        "sha256": "9df8126ddd68f081cdf21ba717749624c795f7fa35ea13c3053bd84739706df8"
+      }
+    },
+    {
+      "case": "hard-cases-f2",
+      "role": "candidate",
+      "worker": "pair-01-candidate",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/hard-cases-f2/pair-01-candidate/namespaces.tsv",
+        "sha256": "5ccd78aa3d910dd5f0c7e3900b3bfd4a0631cac2f48cbb0503e536ea6d8be69c"
+      }
+    },
+    {
+      "case": "hard-cases-f2",
+      "role": "candidate",
+      "worker": "pair-02-candidate",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/hard-cases-f2/pair-02-candidate/namespaces.tsv",
+        "sha256": "5ccd78aa3d910dd5f0c7e3900b3bfd4a0631cac2f48cbb0503e536ea6d8be69c"
+      }
+    },
+    {
+      "case": "hard-cases-f2",
+      "role": "baseline",
+      "worker": "pair-02-baseline",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/hard-cases-f2/pair-02-baseline/namespaces.tsv",
+        "sha256": "9df8126ddd68f081cdf21ba717749624c795f7fa35ea13c3053bd84739706df8"
+      }
+    },
+    {
+      "case": "hard-cases-f2",
+      "role": "baseline",
+      "worker": "pair-03-baseline",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/hard-cases-f2/pair-03-baseline/namespaces.tsv",
+        "sha256": "9df8126ddd68f081cdf21ba717749624c795f7fa35ea13c3053bd84739706df8"
+      }
+    },
+    {
+      "case": "hard-cases-f2",
+      "role": "candidate",
+      "worker": "pair-03-candidate",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/hard-cases-f2/pair-03-candidate/namespaces.tsv",
+        "sha256": "5ccd78aa3d910dd5f0c7e3900b3bfd4a0631cac2f48cbb0503e536ea6d8be69c"
+      }
+    },
+    {
+      "case": "hard-cases-f3",
+      "role": "baseline",
+      "worker": "pair-01-baseline",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/hard-cases-f3/pair-01-baseline/namespaces.tsv",
+        "sha256": "9df8126ddd68f081cdf21ba717749624c795f7fa35ea13c3053bd84739706df8"
+      }
+    },
+    {
+      "case": "hard-cases-f3",
+      "role": "candidate",
+      "worker": "pair-01-candidate",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/hard-cases-f3/pair-01-candidate/namespaces.tsv",
+        "sha256": "5ccd78aa3d910dd5f0c7e3900b3bfd4a0631cac2f48cbb0503e536ea6d8be69c"
+      }
+    },
+    {
+      "case": "hard-cases-f3",
+      "role": "candidate",
+      "worker": "pair-02-candidate",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/hard-cases-f3/pair-02-candidate/namespaces.tsv",
+        "sha256": "5ccd78aa3d910dd5f0c7e3900b3bfd4a0631cac2f48cbb0503e536ea6d8be69c"
+      }
+    },
+    {
+      "case": "hard-cases-f3",
+      "role": "baseline",
+      "worker": "pair-02-baseline",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/hard-cases-f3/pair-02-baseline/namespaces.tsv",
+        "sha256": "9df8126ddd68f081cdf21ba717749624c795f7fa35ea13c3053bd84739706df8"
+      }
+    },
+    {
+      "case": "hard-cases-f3",
+      "role": "baseline",
+      "worker": "pair-03-baseline",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/hard-cases-f3/pair-03-baseline/namespaces.tsv",
+        "sha256": "9df8126ddd68f081cdf21ba717749624c795f7fa35ea13c3053bd84739706df8"
+      }
+    },
+    {
+      "case": "hard-cases-f3",
+      "role": "candidate",
+      "worker": "pair-03-candidate",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/hard-cases-f3/pair-03-candidate/namespaces.tsv",
+        "sha256": "5ccd78aa3d910dd5f0c7e3900b3bfd4a0631cac2f48cbb0503e536ea6d8be69c"
+      }
+    },
+    {
+      "case": "declared-f2",
+      "role": "baseline",
+      "worker": "pair-01-baseline",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/declared-f2/pair-01-baseline/namespaces.tsv",
+        "sha256": "9df8126ddd68f081cdf21ba717749624c795f7fa35ea13c3053bd84739706df8"
+      }
+    },
+    {
+      "case": "declared-f2",
+      "role": "candidate",
+      "worker": "pair-01-candidate",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/declared-f2/pair-01-candidate/namespaces.tsv",
+        "sha256": "5ccd78aa3d910dd5f0c7e3900b3bfd4a0631cac2f48cbb0503e536ea6d8be69c"
+      }
+    },
+    {
+      "case": "declared-f2",
+      "role": "candidate",
+      "worker": "pair-02-candidate",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/declared-f2/pair-02-candidate/namespaces.tsv",
+        "sha256": "5ccd78aa3d910dd5f0c7e3900b3bfd4a0631cac2f48cbb0503e536ea6d8be69c"
+      }
+    },
+    {
+      "case": "declared-f2",
+      "role": "baseline",
+      "worker": "pair-02-baseline",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/declared-f2/pair-02-baseline/namespaces.tsv",
+        "sha256": "9df8126ddd68f081cdf21ba717749624c795f7fa35ea13c3053bd84739706df8"
+      }
+    },
+    {
+      "case": "declared-f2",
+      "role": "baseline",
+      "worker": "pair-03-baseline",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/declared-f2/pair-03-baseline/namespaces.tsv",
+        "sha256": "9df8126ddd68f081cdf21ba717749624c795f7fa35ea13c3053bd84739706df8"
+      }
+    },
+    {
+      "case": "declared-f2",
+      "role": "candidate",
+      "worker": "pair-03-candidate",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/declared-f2/pair-03-candidate/namespaces.tsv",
+        "sha256": "5ccd78aa3d910dd5f0c7e3900b3bfd4a0631cac2f48cbb0503e536ea6d8be69c"
+      }
+    },
+    {
+      "case": "declared-f3",
+      "role": "baseline",
+      "worker": "pair-01-baseline",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/declared-f3/pair-01-baseline/namespaces.tsv",
+        "sha256": "9df8126ddd68f081cdf21ba717749624c795f7fa35ea13c3053bd84739706df8"
+      }
+    },
+    {
+      "case": "declared-f3",
+      "role": "candidate",
+      "worker": "pair-01-candidate",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/declared-f3/pair-01-candidate/namespaces.tsv",
+        "sha256": "5ccd78aa3d910dd5f0c7e3900b3bfd4a0631cac2f48cbb0503e536ea6d8be69c"
+      }
+    },
+    {
+      "case": "declared-f3",
+      "role": "candidate",
+      "worker": "pair-02-candidate",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/declared-f3/pair-02-candidate/namespaces.tsv",
+        "sha256": "5ccd78aa3d910dd5f0c7e3900b3bfd4a0631cac2f48cbb0503e536ea6d8be69c"
+      }
+    },
+    {
+      "case": "declared-f3",
+      "role": "baseline",
+      "worker": "pair-02-baseline",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/declared-f3/pair-02-baseline/namespaces.tsv",
+        "sha256": "9df8126ddd68f081cdf21ba717749624c795f7fa35ea13c3053bd84739706df8"
+      }
+    },
+    {
+      "case": "declared-f3",
+      "role": "baseline",
+      "worker": "pair-03-baseline",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/declared-f3/pair-03-baseline/namespaces.tsv",
+        "sha256": "9df8126ddd68f081cdf21ba717749624c795f7fa35ea13c3053bd84739706df8"
+      }
+    },
+    {
+      "case": "declared-f3",
+      "role": "candidate",
+      "worker": "pair-03-candidate",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/declared-f3/pair-03-candidate/namespaces.tsv",
+        "sha256": "5ccd78aa3d910dd5f0c7e3900b3bfd4a0631cac2f48cbb0503e536ea6d8be69c"
+      }
+    },
+    {
+      "case": "matched-1M",
+      "role": "baseline",
+      "worker": "pair-01-baseline",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/matched-1M/pair-01-baseline/namespaces.tsv",
+        "sha256": "9df8126ddd68f081cdf21ba717749624c795f7fa35ea13c3053bd84739706df8"
+      }
+    },
+    {
+      "case": "matched-1M",
+      "role": "candidate",
+      "worker": "pair-01-candidate",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/matched-1M/pair-01-candidate/namespaces.tsv",
+        "sha256": "5ccd78aa3d910dd5f0c7e3900b3bfd4a0631cac2f48cbb0503e536ea6d8be69c"
+      }
+    },
+    {
+      "case": "matched-1M",
+      "role": "candidate",
+      "worker": "pair-02-candidate",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/matched-1M/pair-02-candidate/namespaces.tsv",
+        "sha256": "5ccd78aa3d910dd5f0c7e3900b3bfd4a0631cac2f48cbb0503e536ea6d8be69c"
+      }
+    },
+    {
+      "case": "matched-1M",
+      "role": "baseline",
+      "worker": "pair-02-baseline",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/matched-1M/pair-02-baseline/namespaces.tsv",
+        "sha256": "9df8126ddd68f081cdf21ba717749624c795f7fa35ea13c3053bd84739706df8"
+      }
+    },
+    {
+      "case": "matched-1M",
+      "role": "baseline",
+      "worker": "pair-03-baseline",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/matched-1M/pair-03-baseline/namespaces.tsv",
+        "sha256": "9df8126ddd68f081cdf21ba717749624c795f7fa35ea13c3053bd84739706df8"
+      }
+    },
+    {
+      "case": "matched-1M",
+      "role": "candidate",
+      "worker": "pair-03-candidate",
+      "raw_inventory": {
+        "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/matched-1M/pair-03-candidate/namespaces.tsv",
+        "sha256": "5ccd78aa3d910dd5f0c7e3900b3bfd4a0631cac2f48cbb0503e536ea6d8be69c"
+      }
+    }
+  ]
+}

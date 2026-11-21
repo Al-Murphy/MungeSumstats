@@ -1,0 +1,58 @@
+{
+  "available_bytes": 252084183040,
+  "baseline_settings": {
+    "path": "/private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/matched-1M/pair-01-candidate/settings.tsv",
+    "sha256": "765f0655b148051ac42a2175602877341f32c479dd69058d51ad11c89c91fd41"
+  },
+  "benchmark_observation": {
+    "path": "/private/tmp/mss-namespace-benchmark-v2-observation-20261121.json",
+    "sha256": "3a3359c916164758a3b9586c7f03cc40cc6e2634120fa5421cbdd7e82da2359f"
+  },
+  "commands": {
+    "alloc": [
+      "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+      "--vanilla",
+      "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+      "run",
+      "/private/tmp/mss-current-profile-20261121/alloc/settings.tsv"
+    ],
+    "cpu": [
+      "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+      "--vanilla",
+      "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+      "run",
+      "/private/tmp/mss-current-profile-20261121/cpu/settings.tsv"
+    ]
+  },
+  "disk_bytes": 2147483648,
+  "floor_bytes": 199715979264,
+  "guard_sha256": "58e0818aa20801c30194bdce26bd117112b4b4d5d10f74ea556360c0867b56a2",
+  "issued_utc": "2026-11-21T11:28:42.633233+00:00",
+  "oracle_observation": {
+    "path": "/private/tmp/mss-namespace-oracle-observation-20261121.json",
+    "sha256": "565acb8b46d8be55be6c43bdc4c6ae6820f63b5ea27b7fc1a7e91405f31f760b"
+  },
+  "profile_changes_only": {
+    "alloc": {
+      "output": "/private/tmp/mss-current-profile-20261121/alloc",
+      "profile": "alloc",
+      "settings": {
+        "path": "/private/tmp/mss-current-profile-20261121/alloc/settings.tsv",
+        "sha256": "5022bfff0dc40918bf20d6c2ff2b897a0d8ba6571ec3b14ecca6c9862dfacf6e"
+      }
+    },
+    "cpu": {
+      "output": "/private/tmp/mss-current-profile-20261121/cpu",
+      "profile": "cpu",
+      "settings": {
+        "path": "/private/tmp/mss-current-profile-20261121/cpu/settings.tsv",
+        "sha256": "be754dac5dd2b635b738e89268330e9caca5b1d45ed11fdb2d0cd41afa4dfa4c"
+      }
+    }
+  },
+  "rss_bytes": 4294967296,
+  "scope": "Two serial instrumented1M workers for currenthotspotdiagnosis, not performance ratios; bounded owned-PID native stack sample may be added during CPU processing",
+  "source_commit": "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b",
+  "wall_seconds": 300,
+  "worker_sha256": "f8477b5b0047b0361d636e4af63b5ed9bf2be87229d7cf9c682331a51147e7df"
+}

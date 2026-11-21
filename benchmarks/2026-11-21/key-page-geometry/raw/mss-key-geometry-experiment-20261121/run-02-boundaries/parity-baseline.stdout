@@ -1,0 +1,298 @@
+format 2
+cap 1 initial 1 found 1
+ "1" "A" "C" "r" "A" "C" 1 1 ids "r" positions 1
+left 0
+cap 1 initial 1 found 0
+left 1
+cap 1 initial 1 found 1
+ "1" "A" "C" "r" "A" "C" 1 1 ids "r" positions 1
+left 0
+cap 1 initial 1 found 0
+left 1
+cap 1 initial 1 found 1
+ "1" "A" "C" "r" "A" "C" 1 1 ids "r" positions 1
+left 0
+cap 1 initial 1 found 0
+left 1
+cap 400 initial 0 error "Reference context closure limit exceeded; no arbitrary context selected"
+left 0
+cap 400 initial 399 error "Reference context closure limit exceeded; no arbitrary context selected"
+left 0
+cap 400 initial 400 found 1
+ "1" "A" "C" "r" "A" "C" 1 1 ids "r" positions 1
+left 0
+cap 399 initial 0 error "Reference context closure limit exceeded; no arbitrary context selected"
+left 0
+cap 399 initial 399 error "Reference candidate limit exceeded; no arbitrary candidate selected"
+left 0
+cap 399 initial 400 error "Reference candidate limit exceeded; no arbitrary candidate selected"
+left 1
+cap 401 initial 0 error "Reference context closure limit exceeded; no arbitrary context selected"
+left 0
+cap 401 initial 399 error "Reference context closure limit exceeded; no arbitrary context selected"
+left 0
+cap 401 initial 400 found 1
+ "1" "A" "C" "r" "A" "C" 1 1 ids "r" positions 1
+left 0
+cap 400 initial 400 found 1
+ "1" "A" "C" "r" "A" "C" 1 1 ids "r" positions 1
+left 0
+cap 1 initial 1 found 1
+ "1" "A" "C" "r" "A" "C" 1 1 ids "r" positions 1
+left 0
+result "match" "1" "G" "T" "r" 8 4593671619917905920 4596373779694328218 2 0 0
+result "swap" "1" "G" "T" "r" 8 0 9221120237041090560 2 1 0
+result "alt_alt_contrast" "" "" "" "" 0 9221120237041090560 9221120237041090560 2 0 0
+result "complement" "1" "G" "T" "r" 8 4604930618986332160 9221120237041090560 2 0 1
+result "ambiguous" "" "" "" "" 0 9221120237041090560 9221120237041090560 3 0 0
+result "match" "1" "A" "C" "bridge" 10 13835058055282163712 4599075939470750515 1 0 0
+result "match" "1" "CA" "C" "deletion" 1 4607182418800017408 4599075939470750515 1 0 0
+result "match" "3" "CA" "C" "repeat" 1 4602678819172646912 4606281698874543309 1 0 0
+result "source_coordinates_missing" "" "" "" "" 0 9221120237041090560 9221120237041090560 1 0 0
+result "ambiguous" "" "" "" "" 0 9221120237041090560 9221120237041090560 5 0 0
+result "swap" "1" "G" "T" "" 8 0 9221120237041090560 1 1 0
+result "source_reference_mismatch" "" "" "" "" 0 9221120237041090560 9221120237041090560 0 0 0
+result "source_strand_unknown" "" "" "" "" 0 9221120237041090560 9221120237041090560 0 0 0
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+result "match" "1" "CA" "C" "deletion" 1 4607182418800017408 4599075939470750515 1 0 0
+result "match" "3" "CA" "C" "repeat" 1 4602678819172646912 4606281698874543309 1 0 0
+result "source_coordinates_missing" "" "" "" "" 0 9221120237041090560 9221120237041090560 1 0 0
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+result "source_reference_mismatch" "" "" "" "" 0 9221120237041090560 9221120237041090560 0 0 0
+result "source_strand_unknown" "" "" "" "" 0 9221120237041090560 9221120237041090560 0 0 0
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+result "match" "1" "CA" "C" "deletion" 1 4607182418800017408 4599075939470750515 1 0 0
+result "match" "3" "CA" "C" "repeat" 1 4602678819172646912 4606281698874543309 1 0 0
+result "source_coordinates_missing" "" "" "" "" 0 9221120237041090560 9221120237041090560 1 0 0
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+result "source_reference_mismatch" "" "" "" "" 0 9221120237041090560 9221120237041090560 0 0 0
+result "source_strand_unknown" "" "" "" "" 0 9221120237041090560 9221120237041090560 0 0 0
+result "match" "1" "G" "T" "r" 8 4593671619917905920 4596373779694328218 2 0 0
+result "swap" "1" "G" "T" "r" 8 0 9221120237041090560 2 1 0
+result "alt_alt_contrast" "" "" "" "" 0 9221120237041090560 9221120237041090560 2 0 0
+result "complement" "1" "G" "T" "r" 8 4604930618986332160 9221120237041090560 2 0 1
+result "ambiguous" "" "" "" "" 0 9221120237041090560 9221120237041090560 3 0 0
+result "match" "1" "A" "C" "bridge" 10 13835058055282163712 4599075939470750515 1 0 0
+result "match" "1" "CA" "C" "deletion" 1 4607182418800017408 4599075939470750515 1 0 0
+result "match" "3" "CA" "C" "repeat" 1 4602678819172646912 4606281698874543309 1 0 0
+result "source_coordinates_missing" "" "" "" "" 0 9221120237041090560 9221120237041090560 1 0 0
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+result "swap" "1" "G" "T" "" 8 0 9221120237041090560 1 1 0
+result "source_reference_mismatch" "" "" "" "" 0 9221120237041090560 9221120237041090560 0 0 0
+result "source_strand_unknown" "" "" "" "" 0 9221120237041090560 9221120237041090560 0 0 0
+result "match" "1" "G" "T" "r" 8 4593671619917905920 4596373779694328218 2 0 0
+result "swap" "1" "G" "T" "r" 8 0 9221120237041090560 2 1 0
+result "alt_alt_contrast" "" "" "" "" 0 9221120237041090560 9221120237041090560 2 0 0
+result "complement" "1" "G" "T" "r" 8 4604930618986332160 9221120237041090560 2 0 1
+result "ambiguous" "" "" "" "" 0 9221120237041090560 9221120237041090560 3 0 0
+result "match" "1" "A" "C" "bridge" 10 13835058055282163712 4599075939470750515 1 0 0
+result "match" "1" "CA" "C" "deletion" 1 4607182418800017408 4599075939470750515 1 0 0
+result "match" "3" "CA" "C" "repeat" 1 4602678819172646912 4606281698874543309 1 0 0
+result "source_coordinates_missing" "" "" "" "" 0 9221120237041090560 9221120237041090560 1 0 0
+result "ambiguous" "" "" "" "" 0 9221120237041090560 9221120237041090560 5 0 0
+result "swap" "1" "G" "T" "" 8 0 9221120237041090560 1 1 0
+result "source_reference_mismatch" "" "" "" "" 0 9221120237041090560 9221120237041090560 0 0 0
+result "source_strand_unknown" "" "" "" "" 0 9221120237041090560 9221120237041090560 0 0 0
+cap 1 initial 0 error "Reference context closure limit exceeded; no arbitrary context selected"
+left 0
+cap 1 initial 1 error "Reference candidate limit exceeded; no arbitrary candidate selected"
+left 0
+cap 1 initial 2 error "Reference candidate limit exceeded; no arbitrary candidate selected"
+left 1
+cap 2 initial 0 error "Reference context closure limit exceeded; no arbitrary context selected"
+left 0
+cap 2 initial 1 error "Reference context closure limit exceeded; no arbitrary context selected"
+left 0
+cap 2 initial 2 error "Corrupt reference record"
+left 0
+cap 1 initial 0 error "Reference context closure limit exceeded; no arbitrary context selected"
+left 0
+cap 1 initial 1 error "Reference candidate limit exceeded; no arbitrary candidate selected"
+left 0
+cap 1 initial 2 error "Reference candidate limit exceeded; no arbitrary candidate selected"
+left 1
+cap 1 initial 1 found 1
+ "1" "A" "C" "r" "A" "C" 1 1 ids "r" positions 1
+left 0
+format 3
+cap 1 initial 1 found 1
+ "1" "A" "C" "r" "" "" 1 1 ids "r" positions 1
+left 0
+cap 1 initial 1 found 0
+left 1
+cap 1 initial 1 found 1
+ "1" "A" "C" "r" "" "" 1 1 ids "r" positions 1
+left 0
+cap 1 initial 1 found 0
+left 1
+cap 1 initial 1 found 1
+ "1" "A" "C" "r" "" "" 1 1 ids "r" positions 1
+left 0
+cap 1 initial 1 found 0
+left 1
+cap 400 initial 0 error "Reference context closure limit exceeded; no arbitrary context selected"
+left 0
+cap 400 initial 399 error "Reference context closure limit exceeded; no arbitrary context selected"
+left 0
+cap 400 initial 400 found 1
+ "1" "A" "C" "r" "" "" 1 1 ids "r" positions 1
+left 0
+cap 399 initial 0 error "Reference context closure limit exceeded; no arbitrary context selected"
+left 0
+cap 399 initial 399 error "Reference candidate limit exceeded; no arbitrary candidate selected"
+left 0
+cap 399 initial 400 error "Reference candidate limit exceeded; no arbitrary candidate selected"
+left 1
+cap 401 initial 0 error "Reference context closure limit exceeded; no arbitrary context selected"
+left 0
+cap 401 initial 399 error "Reference context closure limit exceeded; no arbitrary context selected"
+left 0
+cap 401 initial 400 found 1
+ "1" "A" "C" "r" "" "" 1 1 ids "r" positions 1
+left 0
+cap 400 initial 400 found 1
+ "1" "A" "C" "r" "" "" 1 1 ids "r" positions 1
+left 0
+cap 1 initial 1 found 1
+ "1" "A" "C" "r" "" "" 1 1 ids "r" positions 1
+left 0
+result "match" "1" "G" "T" "r" 8 4593671619917905920 4596373779694328218 2 0 0
+result "swap" "1" "G" "T" "r" 8 0 9221120237041090560 2 1 0
+result "alt_alt_contrast" "" "" "" "" 0 9221120237041090560 9221120237041090560 2 0 0
+result "complement" "1" "G" "T" "r" 8 4604930618986332160 9221120237041090560 2 0 1
+result "ambiguous" "" "" "" "" 0 9221120237041090560 9221120237041090560 3 0 0
+result "match" "1" "A" "C" "bridge" 10 13835058055282163712 4599075939470750515 1 0 0
+result "match" "1" "CA" "C" "deletion" 1 4607182418800017408 4599075939470750515 1 0 0
+result "match" "3" "CA" "C" "repeat" 1 4602678819172646912 4606281698874543309 1 0 0
+result "source_coordinates_missing" "" "" "" "" 0 9221120237041090560 9221120237041090560 1 0 0
+result "ambiguous" "" "" "" "" 0 9221120237041090560 9221120237041090560 5 0 0
+result "swap" "1" "G" "T" "" 8 0 9221120237041090560 1 1 0
+result "source_reference_mismatch" "" "" "" "" 0 9221120237041090560 9221120237041090560 0 0 0
+result "source_strand_unknown" "" "" "" "" 0 9221120237041090560 9221120237041090560 0 0 0
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+result "match" "1" "CA" "C" "deletion" 1 4607182418800017408 4599075939470750515 1 0 0
+result "match" "3" "CA" "C" "repeat" 1 4602678819172646912 4606281698874543309 1 0 0
+result "source_coordinates_missing" "" "" "" "" 0 9221120237041090560 9221120237041090560 1 0 0
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+result "source_reference_mismatch" "" "" "" "" 0 9221120237041090560 9221120237041090560 0 0 0
+result "source_strand_unknown" "" "" "" "" 0 9221120237041090560 9221120237041090560 0 0 0
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+result "match" "1" "CA" "C" "deletion" 1 4607182418800017408 4599075939470750515 1 0 0
+result "match" "3" "CA" "C" "repeat" 1 4602678819172646912 4606281698874543309 1 0 0
+result "source_coordinates_missing" "" "" "" "" 0 9221120237041090560 9221120237041090560 1 0 0
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+result "source_reference_mismatch" "" "" "" "" 0 9221120237041090560 9221120237041090560 0 0 0
+result "source_strand_unknown" "" "" "" "" 0 9221120237041090560 9221120237041090560 0 0 0
+result "match" "1" "G" "T" "r" 8 4593671619917905920 4596373779694328218 2 0 0
+result "swap" "1" "G" "T" "r" 8 0 9221120237041090560 2 1 0
+result "alt_alt_contrast" "" "" "" "" 0 9221120237041090560 9221120237041090560 2 0 0
+result "complement" "1" "G" "T" "r" 8 4604930618986332160 9221120237041090560 2 0 1
+result "ambiguous" "" "" "" "" 0 9221120237041090560 9221120237041090560 3 0 0
+result "match" "1" "A" "C" "bridge" 10 13835058055282163712 4599075939470750515 1 0 0
+result "match" "1" "CA" "C" "deletion" 1 4607182418800017408 4599075939470750515 1 0 0
+result "match" "3" "CA" "C" "repeat" 1 4602678819172646912 4606281698874543309 1 0 0
+result "source_coordinates_missing" "" "" "" "" 0 9221120237041090560 9221120237041090560 1 0 0
+science error "Reference candidate limit exceeded; no arbitrary candidate selected"
+result "swap" "1" "G" "T" "" 8 0 9221120237041090560 1 1 0
+result "source_reference_mismatch" "" "" "" "" 0 9221120237041090560 9221120237041090560 0 0 0
+result "source_strand_unknown" "" "" "" "" 0 9221120237041090560 9221120237041090560 0 0 0
+result "match" "1" "G" "T" "r" 8 4593671619917905920 4596373779694328218 2 0 0
+result "swap" "1" "G" "T" "r" 8 0 9221120237041090560 2 1 0
+result "alt_alt_contrast" "" "" "" "" 0 9221120237041090560 9221120237041090560 2 0 0
+result "complement" "1" "G" "T" "r" 8 4604930618986332160 9221120237041090560 2 0 1
+result "ambiguous" "" "" "" "" 0 9221120237041090560 9221120237041090560 3 0 0
+result "match" "1" "A" "C" "bridge" 10 13835058055282163712 4599075939470750515 1 0 0
+result "match" "1" "CA" "C" "deletion" 1 4607182418800017408 4599075939470750515 1 0 0
+result "match" "3" "CA" "C" "repeat" 1 4602678819172646912 4606281698874543309 1 0 0
+result "source_coordinates_missing" "" "" "" "" 0 9221120237041090560 9221120237041090560 1 0 0
+result "ambiguous" "" "" "" "" 0 9221120237041090560 9221120237041090560 5 0 0
+result "swap" "1" "G" "T" "" 8 0 9221120237041090560 1 1 0
+result "source_reference_mismatch" "" "" "" "" 0 9221120237041090560 9221120237041090560 0 0 0
+result "source_strand_unknown" "" "" "" "" 0 9221120237041090560 9221120237041090560 0 0 0
+cap 1 initial 0 error "Reference context closure limit exceeded; no arbitrary context selected"
+left 0
+cap 1 initial 1 error "Reference candidate limit exceeded; no arbitrary candidate selected"
+left 0
+cap 1 initial 2 error "Reference candidate limit exceeded; no arbitrary candidate selected"
+left 1
+cap 2 initial 0 error "Reference context closure limit exceeded; no arbitrary context selected"
+left 0
+cap 2 initial 1 error "Reference context closure limit exceeded; no arbitrary context selected"
+left 0
+cap 2 initial 2 error "Typed reference record has an unknown tag or field count"
+left 0
+cap 1 initial 0 error "Reference context closure limit exceeded; no arbitrary context selected"
+left 0
+cap 1 initial 1 error "Reference candidate limit exceeded; no arbitrary candidate selected"
+left 0
+cap 1 initial 2 error "Reference candidate limit exceeded; no arbitrary candidate selected"
+left 1
+cap 1 initial 1 found 1
+ "1" "A" "C" "r" "" "" 1 1 ids "r" positions 1
+left 0
+cap 1 initial 1 error "Typed reference has an invalid unsigned integer"
+left 1
+cap 1 initial 1 error "Typed reference has an invalid unsigned integer"
+left 1
+cap 1 initial 1 error "Typed reference record offset is out of range"
+left 1
+cap 1 initial 1 error "Typed reference record offset is out of range"
+left 1
+cap 1 initial 1 error "Typed reference offset is not a record boundary"
+left 0
+cap 1 initial 1 error "Typed reference offset is not a record boundary"
+left 0
+cap 1 initial 1 error "Typed reference record is truncated"
+left 1
+cap 1 initial 1 error "Typed reference record is truncated"
+left 1
+cap 1 initial 1 error "Typed reference key row must have two fields"
+left 1
+cap 1 initial 1 error "Typed reference key row must have two fields"
+left 1
+record tail invalid UTF-8 in field 9
+cap 1 initial 1 error "Typed reference field is not valid UTF-8/framing"
+left 0
+cap 1 initial 1 error "Typed reference field is not valid UTF-8/framing"
+left 0
+typed boundary newline at 16383
+first key bytes 16381 found 1 left 0
+ "1" "A" "C" "r" "" "" 1 1 ids "r" positions 1
+second key bytes 3 found 1 left 0
+ "1" "A" "C" "r" "" "" 1 1 ids "r" positions 1
+typed boundary malformed offset in row at 16384
+cap 1 initial 0 error "Typed reference has an invalid unsigned integer" left 0
+cap 1 initial 1 error "Typed reference has an invalid unsigned integer" left 1
+typed boundary UTF-8 at 16383-16385
+first key bytes 16386 found 1 left 0
+ "1" "A" "C" "r" "" "" 1 1 ids "r" positions 1
+second key bytes 3 found 1 left 0
+ "1" "A" "C" "r" "" "" 1 1 ids "r" positions 1
+first key bytes 16386 found 1 left 0
+ "1" "A" "C" "r" "" "" 1 1 ids "r" positions 1
+second key bytes 3 found 1 left 0
+ "1" "A" "C" "r" "" "" 1 1 ids "r" positions 1

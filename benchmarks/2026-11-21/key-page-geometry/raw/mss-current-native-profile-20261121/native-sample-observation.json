@@ -1,0 +1,31 @@
+{
+  "finished_utc": "2026-11-21T11:33:47.527039+00:00",
+  "group": 13034,
+  "processing_marker": "Rprof.out appeared while the owned R child was live",
+  "r_command": [
+    "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+    "--vanilla",
+    "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+    "run",
+    "/private/tmp/mss-current-native-profile-20261121/run/settings.tsv"
+  ],
+  "r_exit": 0,
+  "r_pid": 13036,
+  "sample": {
+    "bytes": 642854,
+    "path": "/private/tmp/mss-current-native-profile-20261121/run/native-sample.txt",
+    "sha256": "58ce1badb3585540419e9331914e381f25c3adb16a8bdfe712dd80ce3be47c5f"
+  },
+  "sampler_argv": [
+    "/usr/bin/sample",
+    "13036",
+    "5",
+    "1",
+    "-mayDie",
+    "-file",
+    "/private/tmp/mss-current-native-profile-20261121/run/native-sample.txt"
+  ],
+  "sampler_exit": 0,
+  "session": 13034,
+  "started_utc": "2026-11-21T11:33:39.382192+00:00"
+}

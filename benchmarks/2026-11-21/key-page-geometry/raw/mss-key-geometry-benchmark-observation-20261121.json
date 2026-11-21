@@ -1,0 +1,342 @@
+{
+  "absent_group_session": 60279,
+  "actual_exec_session": 36700,
+  "actual_exit_code": 0,
+  "actual_terminal_tool_chunk": "6e229e",
+  "guard": {
+    "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic.jsonl",
+    "sha256": "6bf4f0d9fdab348db83ecf3a24161c2faf9208c7f69eb2d73a22dfcdb0444152"
+  },
+  "independent_1m_oracle": "pending",
+  "inspection_errors": [],
+  "live_members": [],
+  "namespace_policy": {
+    "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/namespace-policy.json",
+    "sha256": "9c529f66d2af23747d7f0fc90ba5f289f67379678f75f7da5491351cf2724036"
+  },
+  "observed_utc": "2026-11-21T12:34:04.687791+00:00",
+  "summary": {
+    "path": "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/summary.json",
+    "sha256": "a9ac9daa4b2f2aaaa664a9dab3a6b27d922252b41dd317bdd674d12396890c6f"
+  },
+  "terminal": {
+    "cleanup_errors": [],
+    "closure": "confirmed",
+    "elapsed_seconds": 175.53708166698925,
+    "first_group": {
+      "completed_monotonic": 1857976.114631291,
+      "members": [
+        {
+          "euid": 501,
+          "pgid": 60279,
+          "pid": 60279,
+          "rss_bytes": 3768320,
+          "ruid": 501,
+          "sid": 60279,
+          "sid_source": "getsid",
+          "state": "Rs"
+        }
+      ],
+      "monotonic": 1857976.104827208,
+      "rss_bytes": 3768320
+    },
+    "group_samples": 171,
+    "label": "key-geometry-diagnostic",
+    "last_group": {
+      "completed_monotonic": 1858151.634557958,
+      "members": [
+        {
+          "euid": 501,
+          "pgid": 60279,
+          "pid": 60279,
+          "rss_bytes": 0,
+          "ruid": 501,
+          "sid": 60279,
+          "sid_source": "owned setsid plus waitable zombie",
+          "state": "Z"
+        }
+      ],
+      "monotonic": 1858151.631362416,
+      "rss_bytes": 0
+    },
+    "last_space": {
+      "allocated_bytes": 1471074304,
+      "block_bytes": 4096,
+      "entries": 648,
+      "free_bytes": 234288906240,
+      "logical_bytes": 1403823794
+    },
+    "leader_reaped": true,
+    "max_sample_gap_seconds": 1.0597663749940693,
+    "minimum_free_bytes": 234288795648,
+    "missed_samples": 0,
+    "peak_disk_allocated_bytes": 1471074304,
+    "peak_disk_logical_bytes": 1403823794,
+    "peak_group": {
+      "completed_monotonic": 1858121.9297235,
+      "members": [
+        {
+          "euid": 501,
+          "pgid": 60279,
+          "pid": 60279,
+          "rss_bytes": 40943616,
+          "ruid": 501,
+          "sid": 60279,
+          "sid_source": "getsid",
+          "state": "Ss"
+        },
+        {
+          "euid": 501,
+          "pgid": 60279,
+          "pid": 62087,
+          "rss_bytes": 1286848512,
+          "ruid": 501,
+          "sid": 60279,
+          "sid_source": "getsid",
+          "state": "R"
+        }
+      ],
+      "monotonic": 1858121.926248875,
+      "rss_bytes": 1327792128
+    },
+    "peak_sampled_group_rss_bytes": 1327792128,
+    "prelaunch_rss_bytes": 0,
+    "prelaunch_space": {
+      "allocated_bytes": 8192,
+      "block_bytes": 4096,
+      "entries": 7,
+      "free_bytes": 236338614272,
+      "logical_bytes": 3668
+    },
+    "primary": null,
+    "raw_exit": 0,
+    "signals": [],
+    "status": "completed",
+    "terminal_members": [
+      {
+        "euid": 501,
+        "pgid": 60279,
+        "pid": 60279,
+        "rss_bytes": 0,
+        "ruid": 501,
+        "sid": 60279,
+        "sid_source": "owned setsid plus waitable zombie",
+        "state": "Z"
+      }
+    ],
+    "trigger_sample": null,
+    "utc": "2026-11-21T12:32:52.565126+00:00"
+  },
+  "workers": [
+    {
+      "case": "hard-cases-f2",
+      "exit_code": 0,
+      "pid": 60347,
+      "role": "baseline",
+      "worker": "pair-01-baseline"
+    },
+    {
+      "case": "hard-cases-f2",
+      "exit_code": 0,
+      "pid": 60431,
+      "role": "candidate",
+      "worker": "pair-01-candidate"
+    },
+    {
+      "case": "hard-cases-f2",
+      "exit_code": 0,
+      "pid": 60475,
+      "role": "candidate",
+      "worker": "pair-02-candidate"
+    },
+    {
+      "case": "hard-cases-f2",
+      "exit_code": 0,
+      "pid": 60520,
+      "role": "baseline",
+      "worker": "pair-02-baseline"
+    },
+    {
+      "case": "hard-cases-f2",
+      "exit_code": 0,
+      "pid": 60580,
+      "role": "baseline",
+      "worker": "pair-03-baseline"
+    },
+    {
+      "case": "hard-cases-f2",
+      "exit_code": 0,
+      "pid": 60649,
+      "role": "candidate",
+      "worker": "pair-03-candidate"
+    },
+    {
+      "case": "hard-cases-f3",
+      "exit_code": 0,
+      "pid": 60695,
+      "role": "baseline",
+      "worker": "pair-01-baseline"
+    },
+    {
+      "case": "hard-cases-f3",
+      "exit_code": 0,
+      "pid": 60751,
+      "role": "candidate",
+      "worker": "pair-01-candidate"
+    },
+    {
+      "case": "hard-cases-f3",
+      "exit_code": 0,
+      "pid": 60828,
+      "role": "candidate",
+      "worker": "pair-02-candidate"
+    },
+    {
+      "case": "hard-cases-f3",
+      "exit_code": 0,
+      "pid": 60917,
+      "role": "baseline",
+      "worker": "pair-02-baseline"
+    },
+    {
+      "case": "hard-cases-f3",
+      "exit_code": 0,
+      "pid": 60931,
+      "role": "baseline",
+      "worker": "pair-03-baseline"
+    },
+    {
+      "case": "hard-cases-f3",
+      "exit_code": 0,
+      "pid": 60950,
+      "role": "candidate",
+      "worker": "pair-03-candidate"
+    },
+    {
+      "case": "declared-f2",
+      "exit_code": 0,
+      "pid": 60974,
+      "role": "baseline",
+      "worker": "pair-01-baseline"
+    },
+    {
+      "case": "declared-f2",
+      "exit_code": 0,
+      "pid": 61021,
+      "role": "candidate",
+      "worker": "pair-01-candidate"
+    },
+    {
+      "case": "declared-f2",
+      "exit_code": 0,
+      "pid": 61039,
+      "role": "candidate",
+      "worker": "pair-02-candidate"
+    },
+    {
+      "case": "declared-f2",
+      "exit_code": 0,
+      "pid": 61062,
+      "role": "baseline",
+      "worker": "pair-02-baseline"
+    },
+    {
+      "case": "declared-f2",
+      "exit_code": 0,
+      "pid": 61133,
+      "role": "baseline",
+      "worker": "pair-03-baseline"
+    },
+    {
+      "case": "declared-f2",
+      "exit_code": 0,
+      "pid": 61160,
+      "role": "candidate",
+      "worker": "pair-03-candidate"
+    },
+    {
+      "case": "declared-f3",
+      "exit_code": 0,
+      "pid": 61352,
+      "role": "baseline",
+      "worker": "pair-01-baseline"
+    },
+    {
+      "case": "declared-f3",
+      "exit_code": 0,
+      "pid": 61394,
+      "role": "candidate",
+      "worker": "pair-01-candidate"
+    },
+    {
+      "case": "declared-f3",
+      "exit_code": 0,
+      "pid": 61471,
+      "role": "candidate",
+      "worker": "pair-02-candidate"
+    },
+    {
+      "case": "declared-f3",
+      "exit_code": 0,
+      "pid": 61511,
+      "role": "baseline",
+      "worker": "pair-02-baseline"
+    },
+    {
+      "case": "declared-f3",
+      "exit_code": 0,
+      "pid": 61527,
+      "role": "baseline",
+      "worker": "pair-03-baseline"
+    },
+    {
+      "case": "declared-f3",
+      "exit_code": 0,
+      "pid": 61637,
+      "role": "candidate",
+      "worker": "pair-03-candidate"
+    },
+    {
+      "case": "matched-1M",
+      "exit_code": 0,
+      "pid": 61691,
+      "role": "baseline",
+      "worker": "pair-01-baseline"
+    },
+    {
+      "case": "matched-1M",
+      "exit_code": 0,
+      "pid": 61868,
+      "role": "candidate",
+      "worker": "pair-01-candidate"
+    },
+    {
+      "case": "matched-1M",
+      "exit_code": 0,
+      "pid": 61931,
+      "role": "candidate",
+      "worker": "pair-02-candidate"
+    },
+    {
+      "case": "matched-1M",
+      "exit_code": 0,
+      "pid": 62087,
+      "role": "baseline",
+      "worker": "pair-02-baseline"
+    },
+    {
+      "case": "matched-1M",
+      "exit_code": 0,
+      "pid": 62168,
+      "role": "baseline",
+      "worker": "pair-03-baseline"
+    },
+    {
+      "case": "matched-1M",
+      "exit_code": 0,
+      "pid": 62373,
+      "role": "candidate",
+      "worker": "pair-03-candidate"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "actual_settings": {
+    "path": "/private/tmp/mss-current-native-profile-20261121/run/settings.tsv",
+    "sha256": "209a912f685f50de43e3efa02b5489d2f1ac698df5639d51eec22af5f0371de9"
+  },
+  "argv": [
+    "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/bin/python3.15",
+    "-I",
+    "-B",
+    "-S",
+    "-c",
+    "import hashlib,json,os,subprocess,sys,time\nfrom pathlib import Path\nfrom datetime import datetime,timezone\nroot=Path(sys.argv[1]);command=json.loads(sys.argv[2]);marker=root/\"run/Rprof.out\"\nassert not marker.exists()\nchild=subprocess.Popen(command,stdin=subprocess.DEVNULL)\ndeadline=time.monotonic()+20\nwhile child.poll() is None and not marker.exists() and time.monotonic()<deadline: time.sleep(.01)\nassert child.poll() is None and marker.exists(), \"No live CPU processing window observed\"\nassert os.getpgid(child.pid)==os.getpgrp() and os.getsid(child.pid)==os.getsid(0)\nargv=[\"/usr/bin/sample\",str(child.pid),\"5\",\"1\",\"-mayDie\",\"-file\",str(root/\"run/native-sample.txt\")]\nstarted=datetime.now(timezone.utc).isoformat()\nsample=subprocess.run(argv,stdin=subprocess.DEVNULL,timeout=15,check=False)\nexit_code=child.wait(timeout=120)\np=root/\"run/native-sample.txt\"\nrecord={\"started_utc\":started,\"finished_utc\":datetime.now(timezone.utc).isoformat(),\"r_command\":command,\"r_pid\":child.pid,\"group\":os.getpgrp(),\"session\":os.getsid(0),\"sampler_argv\":argv,\"sampler_exit\":sample.returncode,\"r_exit\":exit_code,\"processing_marker\":\"Rprof.out appeared while the owned R child was live\",\"sample\":{\"path\":str(p),\"bytes\":p.stat().st_size,\"sha256\":hashlib.sha256(p.read_bytes()).hexdigest()} if p.exists() else None}\nwith (root/\"native-sample-observation.json\").open(\"x\") as stream:json.dump(record,stream,indent=2,sort_keys=True);stream.write(\"\\n\")\nsys.exit(exit_code or sample.returncode)\n",
+    "/private/tmp/mss-current-native-profile-20261121",
+    "[\"/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript\", \"--vanilla\", \"/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R\", \"run\", \"/private/tmp/mss-current-native-profile-20261121/run/settings.tsv\"]"
+  ],
+  "available_bytes": 251592773632,
+  "disk_bytes": 1073741824,
+  "floor_bytes": 199715979264,
+  "guard_sha256": "58e0818aa20801c30194bdce26bd117112b4b4d5d10f74ea556360c0867b56a2",
+  "issued_utc": "2026-11-21T11:33:36.123351+00:00",
+  "original_settings": {
+    "path": "/private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/matched-1M/pair-01-candidate/settings.tsv",
+    "sha256": "765f0655b148051ac42a2175602877341f32c479dd69058d51ad11c89c91fd41"
+  },
+  "rss_bytes": 4294967296,
+  "scope": "Repeat ONLY short native processing diagnostic after manual sampler missed window; owned R and sample share qualified guard group/session, no new monitor, no performance ratio",
+  "source_commit": "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b",
+  "wall_seconds": 180,
+  "worker_sha256": "f8477b5b0047b0361d636e4af63b5ed9bf2be87229d7cf9c682331a51147e7df",
+  "workload_sha256": "dd763e02079a780a13860884cac2717af3b95bc52db23e6bde384966e3cbbd95"
+}

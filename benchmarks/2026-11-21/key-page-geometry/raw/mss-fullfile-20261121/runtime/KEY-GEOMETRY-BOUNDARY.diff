@@ -1,0 +1,94 @@
+--- a/lookup_parity.cpp
++++ b/lookup_parity.cpp
+@@ -332,6 +332,83 @@
+     std::cout << "record tail invalid UTF-8 in field 9\n";
+     for (int attempt = 0; attempt < 2; ++attempt)
+       query(malformed_tail, "I:r", 1, 1, error);
++  }
++}
++
++void write_boundary_fixture(const fs::path& dir, const fs::path& fasta,
++                            const std::string& first, const std::string& second) {
++  assert(!first.empty() && first.back() == '\n');
++  assert(!second.empty() && second.back() == '\n' && first < second);
++  if (!fs::create_directory(dir)) throw std::runtime_error("Require a fresh boundary fixture directory");
++  Fasta(fasta.string()).save((dir / "fasta.fai").string());
++  write(dir / "core-version", "mss-preservation-3\n");
++  write(dir / "records", "A\t1\t1\tA\tC\tr\t1\n");
++  write(dir / "keys", first + second);
++  std::ofstream offsets(dir / "offsets", std::ios::binary);
++  write64(offsets, 0);
++  write64(offsets, first.size());
++  offsets.close();
++  if (!offsets) throw std::runtime_error("Boundary fixture offsets write failed");
++}
++
++void boundary_alias(Reference& ref, const std::string& key, const char* label) {
++  std::size_t work = 1;
++  const auto candidates = ref.lookup(key, 1, &work);
++  assert(candidates.size() == 1 && work == 0);
++  const auto& candidate = candidates.front();
++  assert(candidate.chr == "1" && candidate.pos == 1 && candidate.original_pos == 1);
++  assert(candidate.ref == "A" && candidate.alt == "C" && candidate.id == "r");
++  assert(candidate.original_ref.empty() && candidate.alleles.empty());
++  assert(candidate.identifiers == std::set<std::string>{"r"});
++  assert(candidate.original_positions == std::set<std::int64_t>{1});
++  std::cout << label << " key bytes " << key.size() << " found " << candidates.size() << " left " << work << '\n';
++  fields(candidate);
++}
++
++void typed_key_boundaries(const fs::path& root, const fs::path& fasta) {
++  constexpr std::size_t boundary = 16384;
++  const std::string short_key = "I:r";
++  const auto valid_second = short_key + "\t0\n";
++  const auto ascii_key = "I:" + std::string(16379, 'a');
++  const auto ascii_first = ascii_key + "\t0\n";
++  assert(ascii_key.size() == boundary - 3);
++  assert(ascii_first.size() == boundary && ascii_first[boundary - 1] == '\n');
++
++  const auto newline = root / "typed-boundary-newline";
++  write_boundary_fixture(newline, fasta, ascii_first, valid_second);
++  Reference newline_ref(newline.string(), fasta.string());
++  std::cout << "typed boundary newline at 16383\n";
++  boundary_alias(newline_ref, ascii_key, "first");
++  boundary_alias(newline_ref, short_key, "second");
++
++  const auto malformed = root / "typed-boundary-malformed-offset";
++  write_boundary_fixture(malformed, fasta, ascii_first, short_key + "\t01\n");
++  Reference malformed_ref(malformed.string(), fasta.string());
++  std::cout << "typed boundary malformed offset in row at 16384\n";
++  for (const std::size_t initial : {0U, 1U}) {
++    auto work = initial;
++    try {
++      malformed_ref.lookup(short_key, 1, &work);
++      assert(false && "Expected typed malformed offset rejection");
++    } catch (const std::runtime_error& e) {
++      assert(std::strcmp(e.what(), "Typed reference has an invalid unsigned integer") == 0);
++      assert(work == initial);
++      std::cout << "cap 1 initial " << initial << " error " << std::quoted(e.what()) << " left " << work << '\n';
++    }
++  }
++
++  const auto utf8_key = "I:" + std::string(16381, 'a') + u8"雪";
++  const auto utf8_first = utf8_key + "\t0\n";
++  assert(utf8_key.size() == boundary + 2 && utf8_key.compare(boundary - 1, 3, "\xe9\x9b\xaa") == 0);
++  assert(utf8_first.size() == boundary + 5 && utf8_first.back() == '\n');
++
++  const auto utf8 = root / "typed-boundary-utf8";
++  write_boundary_fixture(utf8, fasta, utf8_first, valid_second);
++  Reference utf8_ref(utf8.string(), fasta.string());
++  std::cout << "typed boundary UTF-8 at 16383-16385\n";
++  for (int attempt = 0; attempt < 2; ++attempt) {
++    boundary_alias(utf8_ref, utf8_key, "first");
++    boundary_alias(utf8_ref, short_key, "second");
+   }
+ }
+ 
+@@ -428,6 +505,7 @@
+       assert(file.little_endian_offset(2)==UINT64_C(0x6968676665646362));
+ #endif
+     }
++    typed_key_boundaries(root, fasta);
+   }
+   return failed;
+ }

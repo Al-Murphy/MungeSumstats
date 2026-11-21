@@ -15,7 +15,6 @@
 #' @keywords internal
 #' @importFrom methods is
 #' @importFrom R.utils gunzip
-#' @importFrom VariantAnnotation indexVcf
 #' @examples 
 #' eduAttainOkbayPth <- system.file("extdata", "eduAttainOkbay.txt",
 #'                                  package = "MungeSumstats")

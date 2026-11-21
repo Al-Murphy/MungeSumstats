@@ -1,0 +1,8 @@
+chr	pos	ref	alt	id	aliases
+1	8	G	A,T	r	old;shared
+1	8	G	T	bridge	.
+1	10	A	C	bridge	shared
+2	1	A	G	r	.
+1	4	AA	A	deletion	.
+3	5	AA	A	repeat	old-repeat
+2	2	C	A,G,T,CA,CAG,<DEL>	dense	old-dense

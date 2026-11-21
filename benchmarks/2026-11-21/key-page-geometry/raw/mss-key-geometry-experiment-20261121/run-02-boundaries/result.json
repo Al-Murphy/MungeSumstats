@@ -1,0 +1,68 @@
+{
+  "all_three_boundary_markers": true,
+  "headers": {
+    "baseline": {
+      "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-01/baseline/src/preservation_core.h",
+      "sha256": "42cbd86be7e8e85dd67b11713db3f3483997be96f6ace69b54d655d0ca7decf5"
+    },
+    "trial": {
+      "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-01/trial/src/preservation_core.h",
+      "sha256": "5881233fbad917d4475f4801497c90a720428c41ba5afb8a7d38c234da60f155"
+    }
+  },
+  "outcomes": {
+    "compile-baseline": {
+      "cleanup_errors": [],
+      "closure": "confirmed",
+      "primary": null,
+      "raw_exit": 0,
+      "receipt_error": null,
+      "status": "completed"
+    },
+    "compile-trial": {
+      "cleanup_errors": [],
+      "closure": "confirmed",
+      "primary": null,
+      "raw_exit": 0,
+      "receipt_error": null,
+      "status": "completed"
+    },
+    "parity-baseline": {
+      "cleanup_errors": [],
+      "closure": "confirmed",
+      "primary": null,
+      "raw_exit": 0,
+      "receipt_error": null,
+      "status": "completed"
+    },
+    "parity-trial": {
+      "cleanup_errors": [],
+      "closure": "confirmed",
+      "primary": null,
+      "raw_exit": 0,
+      "receipt_error": null,
+      "status": "completed"
+    },
+    "pressure-baseline": {
+      "cleanup_errors": [],
+      "closure": "confirmed",
+      "primary": null,
+      "raw_exit": 0,
+      "receipt_error": null,
+      "status": "completed"
+    },
+    "pressure-trial": {
+      "cleanup_errors": [],
+      "closure": "confirmed",
+      "primary": null,
+      "raw_exit": 0,
+      "receipt_error": null,
+      "status": "completed"
+    }
+  },
+  "parity_transcript_equal": true,
+  "source": {
+    "path": "/private/tmp/mss-key-geometry-experiment-20261121/source/lookup_parity-boundaries.cpp",
+    "sha256": "b11f9d1897aacc32fc3899f546f27c6958a908a7df648f6bc1a5c24d37cf7888"
+  }
+}

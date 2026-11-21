@@ -1,0 +1,29 @@
+{
+  "available_bytes": 238998663168,
+  "disk_bytes": 67108864,
+  "floor_bytes": 199715979264,
+  "guard_sha256": "58e0818aa20801c30194bdce26bd117112b4b4d5d10f74ea556360c0867b56a2",
+  "headers": {
+    "baseline": {
+      "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-01/baseline/src/preservation_core.h",
+      "sha256": "42cbd86be7e8e85dd67b11713db3f3483997be96f6ace69b54d655d0ca7decf5"
+    },
+    "trial": {
+      "path": "/private/tmp/mss-key-geometry-experiment-20261121/run-01/trial/src/preservation_core.h",
+      "sha256": "5881233fbad917d4475f4801497c90a720428c41ba5afb8a7d38c234da60f155"
+    }
+  },
+  "issued_utc": "2026-11-21T12:20:20.384325+00:00",
+  "rss_bytes": 2147483648,
+  "scope": "Existingformat2/3parity/pressure plus three16KiBtypedboundarycharacterizations, no API speed measurement or product mutation",
+  "source": {
+    "path": "/private/tmp/mss-key-geometry-experiment-20261121/source/lookup_parity-boundaries.cpp",
+    "sha256": "b11f9d1897aacc32fc3899f546f27c6958a908a7df648f6bc1a5c24d37cf7888"
+  },
+  "source_commit": "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b",
+  "source_review": {
+    "path": "/private/tmp/mss-fullfile-20261121/runtime/KEY-GEOMETRY-BOUNDARY-REVIEW.md",
+    "sha256": "521677fbd9c046dad7126b9cac930debb6cb209bd0bed3837fe7956b9b4c109b"
+  },
+  "wall_seconds": 300
+}

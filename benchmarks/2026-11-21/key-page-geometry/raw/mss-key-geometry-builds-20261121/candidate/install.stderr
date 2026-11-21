@@ -1,0 +1,23 @@
+Warning in untar2(tarfile, files, list, exdir, restore_times) :
+  skipping pax global extended headers
+* installing *source* package ‘MungeSumstats’ ...
+** this is package ‘MungeSumstats’ version ‘1.21.4’
+** using staged installation
+** libs
+using C++ compiler: ‘Apple clang version 21.0.0 (clang-2100.4.1.1)’
+using C++17
+using SDK: ‘MacOSX27.2.sdk’
+installing to /private/tmp/mss-key-geometry-builds-20261121/candidate/library/00LOCK-MungeSumstats/00new/MungeSumstats/libs
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (MungeSumstats)

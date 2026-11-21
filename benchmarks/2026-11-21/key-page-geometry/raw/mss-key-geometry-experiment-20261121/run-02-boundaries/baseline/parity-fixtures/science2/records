@@ -1,0 +1,19 @@
+1	8	G		r	8	G	A,T
+1	8	G	A	r	8	G	A,T
+1	8	G	T	r	8	G	A,T
+1	8	G		bridge	8	G	T
+1	8	G	T	bridge	8	G	T
+1	10	A		bridge	10	A	C
+1	10	A	C	bridge	10	A	C
+2	1	A		r	1	A	G
+2	1	A	G	r	1	A	G
+1	4	AA		deletion	4	AA	A
+1	1	CA	C	deletion	4	AA	A
+3	5	AA		repeat	5	AA	A
+3	1	CA	C	repeat	5	AA	A
+2	2	C		dense	2	C	A,G,T,CA,CAG,<DEL>
+2	2	C	A	dense	2	C	A,G,T,CA,CAG,<DEL>
+2	2	C	G	dense	2	C	A,G,T,CA,CAG,<DEL>
+2	2	C	T	dense	2	C	A,G,T,CA,CAG,<DEL>
+2	2	C	CA	dense	2	C	A,G,T,CA,CAG,<DEL>
+2	2	C	CAG	dense	2	C	A,G,T,CA,CAG,<DEL>

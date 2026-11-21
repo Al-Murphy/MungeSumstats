@@ -10,7 +10,6 @@
 #' 
 #' @keywords internal
 #' @importFrom GenomeInfoDb mapGenomeBuilds
-#' @importFrom VariantAnnotation genome
 #' @returns genome 
 read_vcf_genome <- function(header=NULL,
                             validate=FALSE,

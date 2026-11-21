@@ -1,0 +1,21 @@
+{
+  "user_seconds": 3.582629,
+  "system_seconds": 0.148428,
+  "peak_rss_bytes": 950059008,
+  "rss_source": "wait4 ru_maxrss",
+  "rss_complete": true,
+  "pid": 61471,
+  "exit_code": 0,
+  "command": [
+    "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+    "--vanilla",
+    "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+    "run",
+    "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/declared-f3/pair-02-candidate/settings.tsv"
+  ],
+  "wall_seconds": 3.7485066670924425,
+  "started_utc": "2026-11-21T12:31:22.461217+00:00",
+  "finished_utc": "2026-11-21T12:31:26.209924+00:00",
+  "role": "candidate",
+  "case": "declared-f3"
+}

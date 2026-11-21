@@ -1,0 +1,314 @@
+{
+  "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/declared-f2/pair-01-baseline": {
+    "audit.tsv": {
+      "bytes": 141,
+      "sha256": "94d6840801b3e9cebbb99264566fe70f61984404cb66e03d353543dd49fc9674",
+      "md5": "a23a994fd486830dfb445b98e6f698e3"
+    },
+    "checksums.tsv": {
+      "bytes": 436,
+      "sha256": "c1cbac80faf1b4da615b395b2a8655764fbecae8a297ba85dbd8baf0997169fd",
+      "md5": "43333cde0ce0ed7a27e8fa6c834e36c4"
+    },
+    "columns.tsv": {
+      "bytes": 204,
+      "sha256": "5188371f996e97f8454bf1c247b3bee907d57e572043b33e3a14db08cdca1ff0",
+      "md5": "6680d97e714c16a2916963ffe0a46e1d"
+    },
+    "manifest.rds": {
+      "bytes": 1294,
+      "sha256": "8bd90fe5b8a1abd5ea843343623bf86b05e89199b1bf746a6215a80a82e93bc6",
+      "md5": "5c8293d80042ff0ee7dd565fa73a1790"
+    },
+    "metadata.tsv": {
+      "bytes": 772,
+      "sha256": "45358147ed00997e4eaf8c45b2cbeffc554d81820565a1e250101b5a7915346c",
+      "md5": "b70454e859b38f25cacac32ccc7237ed"
+    },
+    "normalized.tsv": {
+      "bytes": 1242,
+      "sha256": "6afce092cf2373bc89b406edc4ce5cc63b12260f64ff922a73dc85de0ec8381d",
+      "md5": "1fec4ef503910cb69574d3d2961f6710"
+    },
+    "reference_checksums.tsv": {
+      "bytes": 439,
+      "sha256": "f58e3785492db0efb5c891e2ef97b45382c1d2e344ae81ecabbd6f08c2a2abc0",
+      "md5": "96704051115c8436d061f69d329b3cf4"
+    },
+    "reference_contigs.tsv": {
+      "bytes": 38,
+      "sha256": "e3e43922ff786bb9ea64ca39ba38dcaeaf3d6890e43e83825bb0a94d5925e45e",
+      "md5": "124f58f70b361faffce6574aae308cf4"
+    },
+    "source-artifact": {
+      "bytes": 673,
+      "sha256": "f5313bbb67348759a9d30276b5a7fd88dea16b7ffaa9db330a8064648bf78c62",
+      "md5": "69e2ff9358e18cc9e4eb29fa862c28a3"
+    },
+    "source.tsv": {
+      "bytes": 673,
+      "sha256": "f5313bbb67348759a9d30276b5a7fd88dea16b7ffaa9db330a8064648bf78c62",
+      "md5": "69e2ff9358e18cc9e4eb29fa862c28a3"
+    }
+  },
+  "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/declared-f2/pair-01-candidate": {
+    "audit.tsv": {
+      "bytes": 141,
+      "sha256": "94d6840801b3e9cebbb99264566fe70f61984404cb66e03d353543dd49fc9674",
+      "md5": "a23a994fd486830dfb445b98e6f698e3"
+    },
+    "checksums.tsv": {
+      "bytes": 436,
+      "sha256": "c1cbac80faf1b4da615b395b2a8655764fbecae8a297ba85dbd8baf0997169fd",
+      "md5": "43333cde0ce0ed7a27e8fa6c834e36c4"
+    },
+    "columns.tsv": {
+      "bytes": 204,
+      "sha256": "5188371f996e97f8454bf1c247b3bee907d57e572043b33e3a14db08cdca1ff0",
+      "md5": "6680d97e714c16a2916963ffe0a46e1d"
+    },
+    "manifest.rds": {
+      "bytes": 1294,
+      "sha256": "df82f7da26d9fe3598530ec57c88ed78174d3915f5983d0e2a00392e54ce3747",
+      "md5": "071c4ea507297f7c211f3854e960de10"
+    },
+    "metadata.tsv": {
+      "bytes": 772,
+      "sha256": "45358147ed00997e4eaf8c45b2cbeffc554d81820565a1e250101b5a7915346c",
+      "md5": "b70454e859b38f25cacac32ccc7237ed"
+    },
+    "normalized.tsv": {
+      "bytes": 1242,
+      "sha256": "6afce092cf2373bc89b406edc4ce5cc63b12260f64ff922a73dc85de0ec8381d",
+      "md5": "1fec4ef503910cb69574d3d2961f6710"
+    },
+    "reference_checksums.tsv": {
+      "bytes": 439,
+      "sha256": "f58e3785492db0efb5c891e2ef97b45382c1d2e344ae81ecabbd6f08c2a2abc0",
+      "md5": "96704051115c8436d061f69d329b3cf4"
+    },
+    "reference_contigs.tsv": {
+      "bytes": 38,
+      "sha256": "e3e43922ff786bb9ea64ca39ba38dcaeaf3d6890e43e83825bb0a94d5925e45e",
+      "md5": "124f58f70b361faffce6574aae308cf4"
+    },
+    "source-artifact": {
+      "bytes": 673,
+      "sha256": "f5313bbb67348759a9d30276b5a7fd88dea16b7ffaa9db330a8064648bf78c62",
+      "md5": "69e2ff9358e18cc9e4eb29fa862c28a3"
+    },
+    "source.tsv": {
+      "bytes": 673,
+      "sha256": "f5313bbb67348759a9d30276b5a7fd88dea16b7ffaa9db330a8064648bf78c62",
+      "md5": "69e2ff9358e18cc9e4eb29fa862c28a3"
+    }
+  },
+  "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/declared-f2/pair-02-candidate": {
+    "audit.tsv": {
+      "bytes": 141,
+      "sha256": "94d6840801b3e9cebbb99264566fe70f61984404cb66e03d353543dd49fc9674",
+      "md5": "a23a994fd486830dfb445b98e6f698e3"
+    },
+    "checksums.tsv": {
+      "bytes": 436,
+      "sha256": "c1cbac80faf1b4da615b395b2a8655764fbecae8a297ba85dbd8baf0997169fd",
+      "md5": "43333cde0ce0ed7a27e8fa6c834e36c4"
+    },
+    "columns.tsv": {
+      "bytes": 204,
+      "sha256": "5188371f996e97f8454bf1c247b3bee907d57e572043b33e3a14db08cdca1ff0",
+      "md5": "6680d97e714c16a2916963ffe0a46e1d"
+    },
+    "manifest.rds": {
+      "bytes": 1294,
+      "sha256": "1322f47eeeb72ac984f4ce6837505ee8e4e102f964ac2366f5bda390f6e153a0",
+      "md5": "afd47c662c03cb3e9ed9cb7a18c4e1a7"
+    },
+    "metadata.tsv": {
+      "bytes": 772,
+      "sha256": "45358147ed00997e4eaf8c45b2cbeffc554d81820565a1e250101b5a7915346c",
+      "md5": "b70454e859b38f25cacac32ccc7237ed"
+    },
+    "normalized.tsv": {
+      "bytes": 1242,
+      "sha256": "6afce092cf2373bc89b406edc4ce5cc63b12260f64ff922a73dc85de0ec8381d",
+      "md5": "1fec4ef503910cb69574d3d2961f6710"
+    },
+    "reference_checksums.tsv": {
+      "bytes": 439,
+      "sha256": "f58e3785492db0efb5c891e2ef97b45382c1d2e344ae81ecabbd6f08c2a2abc0",
+      "md5": "96704051115c8436d061f69d329b3cf4"
+    },
+    "reference_contigs.tsv": {
+      "bytes": 38,
+      "sha256": "e3e43922ff786bb9ea64ca39ba38dcaeaf3d6890e43e83825bb0a94d5925e45e",
+      "md5": "124f58f70b361faffce6574aae308cf4"
+    },
+    "source-artifact": {
+      "bytes": 673,
+      "sha256": "f5313bbb67348759a9d30276b5a7fd88dea16b7ffaa9db330a8064648bf78c62",
+      "md5": "69e2ff9358e18cc9e4eb29fa862c28a3"
+    },
+    "source.tsv": {
+      "bytes": 673,
+      "sha256": "f5313bbb67348759a9d30276b5a7fd88dea16b7ffaa9db330a8064648bf78c62",
+      "md5": "69e2ff9358e18cc9e4eb29fa862c28a3"
+    }
+  },
+  "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/declared-f2/pair-02-baseline": {
+    "audit.tsv": {
+      "bytes": 141,
+      "sha256": "94d6840801b3e9cebbb99264566fe70f61984404cb66e03d353543dd49fc9674",
+      "md5": "a23a994fd486830dfb445b98e6f698e3"
+    },
+    "checksums.tsv": {
+      "bytes": 436,
+      "sha256": "c1cbac80faf1b4da615b395b2a8655764fbecae8a297ba85dbd8baf0997169fd",
+      "md5": "43333cde0ce0ed7a27e8fa6c834e36c4"
+    },
+    "columns.tsv": {
+      "bytes": 204,
+      "sha256": "5188371f996e97f8454bf1c247b3bee907d57e572043b33e3a14db08cdca1ff0",
+      "md5": "6680d97e714c16a2916963ffe0a46e1d"
+    },
+    "manifest.rds": {
+      "bytes": 1294,
+      "sha256": "eab8fc02a5b76bde85d630560e6484a8a1622c5e88173f8f84cfdbbae6c11719",
+      "md5": "4d645fd4c87acb4e77da7ff498052551"
+    },
+    "metadata.tsv": {
+      "bytes": 772,
+      "sha256": "45358147ed00997e4eaf8c45b2cbeffc554d81820565a1e250101b5a7915346c",
+      "md5": "b70454e859b38f25cacac32ccc7237ed"
+    },
+    "normalized.tsv": {
+      "bytes": 1242,
+      "sha256": "6afce092cf2373bc89b406edc4ce5cc63b12260f64ff922a73dc85de0ec8381d",
+      "md5": "1fec4ef503910cb69574d3d2961f6710"
+    },
+    "reference_checksums.tsv": {
+      "bytes": 439,
+      "sha256": "f58e3785492db0efb5c891e2ef97b45382c1d2e344ae81ecabbd6f08c2a2abc0",
+      "md5": "96704051115c8436d061f69d329b3cf4"
+    },
+    "reference_contigs.tsv": {
+      "bytes": 38,
+      "sha256": "e3e43922ff786bb9ea64ca39ba38dcaeaf3d6890e43e83825bb0a94d5925e45e",
+      "md5": "124f58f70b361faffce6574aae308cf4"
+    },
+    "source-artifact": {
+      "bytes": 673,
+      "sha256": "f5313bbb67348759a9d30276b5a7fd88dea16b7ffaa9db330a8064648bf78c62",
+      "md5": "69e2ff9358e18cc9e4eb29fa862c28a3"
+    },
+    "source.tsv": {
+      "bytes": 673,
+      "sha256": "f5313bbb67348759a9d30276b5a7fd88dea16b7ffaa9db330a8064648bf78c62",
+      "md5": "69e2ff9358e18cc9e4eb29fa862c28a3"
+    }
+  },
+  "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/declared-f2/pair-03-baseline": {
+    "audit.tsv": {
+      "bytes": 141,
+      "sha256": "94d6840801b3e9cebbb99264566fe70f61984404cb66e03d353543dd49fc9674",
+      "md5": "a23a994fd486830dfb445b98e6f698e3"
+    },
+    "checksums.tsv": {
+      "bytes": 436,
+      "sha256": "c1cbac80faf1b4da615b395b2a8655764fbecae8a297ba85dbd8baf0997169fd",
+      "md5": "43333cde0ce0ed7a27e8fa6c834e36c4"
+    },
+    "columns.tsv": {
+      "bytes": 204,
+      "sha256": "5188371f996e97f8454bf1c247b3bee907d57e572043b33e3a14db08cdca1ff0",
+      "md5": "6680d97e714c16a2916963ffe0a46e1d"
+    },
+    "manifest.rds": {
+      "bytes": 1294,
+      "sha256": "706a8e686e58a7e15b6dbcc27eb417e9f74b1179257ad312412bc4414df55bd8",
+      "md5": "ab8e850072a5c2db804221c3c14564d9"
+    },
+    "metadata.tsv": {
+      "bytes": 772,
+      "sha256": "45358147ed00997e4eaf8c45b2cbeffc554d81820565a1e250101b5a7915346c",
+      "md5": "b70454e859b38f25cacac32ccc7237ed"
+    },
+    "normalized.tsv": {
+      "bytes": 1242,
+      "sha256": "6afce092cf2373bc89b406edc4ce5cc63b12260f64ff922a73dc85de0ec8381d",
+      "md5": "1fec4ef503910cb69574d3d2961f6710"
+    },
+    "reference_checksums.tsv": {
+      "bytes": 439,
+      "sha256": "f58e3785492db0efb5c891e2ef97b45382c1d2e344ae81ecabbd6f08c2a2abc0",
+      "md5": "96704051115c8436d061f69d329b3cf4"
+    },
+    "reference_contigs.tsv": {
+      "bytes": 38,
+      "sha256": "e3e43922ff786bb9ea64ca39ba38dcaeaf3d6890e43e83825bb0a94d5925e45e",
+      "md5": "124f58f70b361faffce6574aae308cf4"
+    },
+    "source-artifact": {
+      "bytes": 673,
+      "sha256": "f5313bbb67348759a9d30276b5a7fd88dea16b7ffaa9db330a8064648bf78c62",
+      "md5": "69e2ff9358e18cc9e4eb29fa862c28a3"
+    },
+    "source.tsv": {
+      "bytes": 673,
+      "sha256": "f5313bbb67348759a9d30276b5a7fd88dea16b7ffaa9db330a8064648bf78c62",
+      "md5": "69e2ff9358e18cc9e4eb29fa862c28a3"
+    }
+  },
+  "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/declared-f2/pair-03-candidate": {
+    "audit.tsv": {
+      "bytes": 141,
+      "sha256": "94d6840801b3e9cebbb99264566fe70f61984404cb66e03d353543dd49fc9674",
+      "md5": "a23a994fd486830dfb445b98e6f698e3"
+    },
+    "checksums.tsv": {
+      "bytes": 436,
+      "sha256": "c1cbac80faf1b4da615b395b2a8655764fbecae8a297ba85dbd8baf0997169fd",
+      "md5": "43333cde0ce0ed7a27e8fa6c834e36c4"
+    },
+    "columns.tsv": {
+      "bytes": 204,
+      "sha256": "5188371f996e97f8454bf1c247b3bee907d57e572043b33e3a14db08cdca1ff0",
+      "md5": "6680d97e714c16a2916963ffe0a46e1d"
+    },
+    "manifest.rds": {
+      "bytes": 1294,
+      "sha256": "c3bd23dcb235402c359fa9d7ad8096e9a2380d0e3fbb0a0bdeb3ab3e6a29fb9c",
+      "md5": "fd6a2e2e3d634b87929c8a7d52869e00"
+    },
+    "metadata.tsv": {
+      "bytes": 772,
+      "sha256": "45358147ed00997e4eaf8c45b2cbeffc554d81820565a1e250101b5a7915346c",
+      "md5": "b70454e859b38f25cacac32ccc7237ed"
+    },
+    "normalized.tsv": {
+      "bytes": 1242,
+      "sha256": "6afce092cf2373bc89b406edc4ce5cc63b12260f64ff922a73dc85de0ec8381d",
+      "md5": "1fec4ef503910cb69574d3d2961f6710"
+    },
+    "reference_checksums.tsv": {
+      "bytes": 439,
+      "sha256": "f58e3785492db0efb5c891e2ef97b45382c1d2e344ae81ecabbd6f08c2a2abc0",
+      "md5": "96704051115c8436d061f69d329b3cf4"
+    },
+    "reference_contigs.tsv": {
+      "bytes": 38,
+      "sha256": "e3e43922ff786bb9ea64ca39ba38dcaeaf3d6890e43e83825bb0a94d5925e45e",
+      "md5": "124f58f70b361faffce6574aae308cf4"
+    },
+    "source-artifact": {
+      "bytes": 673,
+      "sha256": "f5313bbb67348759a9d30276b5a7fd88dea16b7ffaa9db330a8064648bf78c62",
+      "md5": "69e2ff9358e18cc9e4eb29fa862c28a3"
+    },
+    "source.tsv": {
+      "bytes": 673,
+      "sha256": "f5313bbb67348759a9d30276b5a7fd88dea16b7ffaa9db330a8064648bf78c62",
+      "md5": "69e2ff9358e18cc9e4eb29fa862c28a3"
+    }
+  }
+}

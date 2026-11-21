@@ -1,0 +1,23 @@
+{
+  "user_seconds": 0.06483,
+  "system_seconds": 0.021618,
+  "peak_rss_bytes": 78102528,
+  "rss_source": "wait4 ru_maxrss",
+  "rss_complete": true,
+  "pid": 62796,
+  "exit_code": 0,
+  "command": [
+    "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+    "--vanilla",
+    "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+    "manifests",
+    "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/hard-cases-f2/stable-manifests.txt",
+    "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/hard-cases-f2/pair-01-baseline/edition/manifest.rds",
+    "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/hard-cases-f2/pair-01-candidate/edition/manifest.rds",
+    "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/hard-cases-f2/pair-02-candidate/edition/manifest.rds",
+    "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/hard-cases-f2/pair-02-baseline/edition/manifest.rds",
+    "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/hard-cases-f2/pair-03-baseline/edition/manifest.rds",
+    "/private/tmp/mss-key-geometry-benchmark-20261121/diagnostic/hard-cases-f2/pair-03-candidate/edition/manifest.rds"
+  ],
+  "wall_seconds": 0.10053991689346731
+}

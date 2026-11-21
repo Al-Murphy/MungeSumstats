@@ -39,7 +39,6 @@
 #'
 #' @return The VCF file in data.table format.
 #' @export
-#' @importFrom VariantAnnotation writeVcf
 #' @importFrom data.table as.data.table setnames fwrite
 #' @source
 #' \code{

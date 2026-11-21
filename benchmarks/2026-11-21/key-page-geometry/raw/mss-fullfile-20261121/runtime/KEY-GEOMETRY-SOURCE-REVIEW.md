@@ -1,0 +1,28 @@
+# Key page geometry independent source review
+
+**Spec compliance passes. Code quality passes with one minor finding. Critical 0, Important 0, Minor 1.** The reviewed source is ready for the guarded native counter experiment.
+
+## Reviewed inputs
+
+| Artifact | Verified SHA-256 |
+|---|---|
+| Source report | `92e3c097f18e5c339213ae47440aca0ae8f4df06e54d2123a083af02cf1513de` |
+| Full source review diff | `27853e5bee84e0bbee8a1464ac801ceb5344a8edcb76e195f767ffc03c9ff097` |
+| Scratch matched driver | `505b0e8c72a517e7db4b48fb49126c0bfcbeeb6254dcd19c8090db57dd20fec9` |
+| One-line trial patch | `cdfc635afd0c1b7f654301801c12d0f5bbab4393da830b9b0e259ebef81c96cf` |
+
+## Spec compliance
+
+- The `matched` branch consumes `INDEX FASTA INPUT OUTPUT ORDER` with `argc == 7`, requires `MSS_LOOKUP_COUNTERS`, and retains the translation-unit assertion guard. Both orders require a fresh output directory. The legacy parity and pressure entry paths and fixture bodies are unchanged in the diff. [Driver assertion guard](/private/tmp/mss-key-geometry-experiment-20261121/source/lookup_parity.cpp:3) · [Matched dispatch](/private/tmp/mss-key-geometry-experiment-20261121/source/lookup_parity.cpp:384) · [Source diff](KEY-GEOMETRY-SOURCE.diff)
+- The exact header and the nine literal-tab fields are validated on the initial 437,458 rows. BP is parsed as a complete positive integer, and BETA, FRQ, SE and P as complete finite doubles. The widened unsigned multiplication computes the prescribed floor formula and preserves 1-based endpoints. The raw line is retained for each of the 32,768 selected rows. The raw key `(CHR,BP,A1,A2)` and canonical key `(chr,pos,ref,alt)` verify distinct loci and alleles on the fixed panel. The raw record separately retains `SNP` and all statistical tokens. [Selection and validation](/private/tmp/mss-key-geometry-experiment-20261121/source/lookup_parity.cpp:143) · [Canonical uniqueness](/private/tmp/mss-key-geometry-experiment-20261121/source/lookup_parity.cpp:215)
+- `Input` receives CHR, BP, SNP, A1 as the other allele, A2 as the effect allele, BETA and FRQ with `EAF`. The ordinary constructor leaves `source_contract` false. Each invocation constructs a fresh `Reference` and harmonises each selected row once at cap 10,000. The status gate accepts the four successful ordinary orientations. The input sequence preserves ascending selection order, and the shuffled sequence permutes the same indices with `std::mt19937(257)` under the shared toolchain. [Input mapping](/private/tmp/mss-key-geometry-experiment-20261121/source/lookup_parity.cpp:191) · [Native input contract](/private/tmp/mss-lazy-variantannotation-20261121/src/preservation_core.h:359) · [Order and resolution](/private/tmp/mss-key-geometry-experiment-20261121/source/lookup_parity.cpp:199)
+- `outcomes.tsv` contains source ordinals, all nine original tokens and all 11 native fields, with exact double bits and explicit TSV framing. `order.tsv` records the query order. All three output streams are checked after close. `counters.tsv` emits the three selection counts and precisely the ten native members. The page read counts support nominal requested-byte derivation at each width. The source handoff distinguishes short-page bytes, physical I/O, elapsed time and RSS from that calculation. [Outcome and counter writers](/private/tmp/mss-key-geometry-experiment-20261121/source/lookup_parity.cpp:206) · [Counter definition](/private/tmp/mss-lazy-variantannotation-20261121/src/preservation_core.h:515) · [Source report](KEY-GEOMETRY-SOURCE-REPORT.md)
+- The patch replaces only `Reference`'s key-cache initializer with `keys(dir+"/keys",16384,512)`. The `BlockFile` constructor takes byte width then page capacity. The baseline and trial both budget 8 MiB of key page payload per handle, and offsets, records and FASTA keep the combined page payload at 28 MiB. Container overhead may vary. The patch has no serialization, lookup algorithm or public API changes. [Trial patch](/private/tmp/mss-key-geometry-experiment-20261121/source/trial-header.patch:7) · [BlockFile constructor](/private/tmp/mss-lazy-variantannotation-20261121/src/preservation_core.h:69) · [FASTA constructor](/private/tmp/mss-lazy-variantannotation-20261121/src/preservation_core.h:194)
+
+## Quality finding
+
+- **Minor. Numeric parse failures lack the source ordinal and column.** A conversion exception from `std::stod` can reach the CLI as `matched: stod`, and explicit numeric rejection also omits the row position. TSV framing and duplicate/resolution failures already identify the row. Adding row and column context would make a future malformed fixture easier to diagnose. This does not affect the selection or validity checks and need not block the pinned experiment. [Numeric parsers](/private/tmp/mss-key-geometry-experiment-20261121/source/lookup_parity.cpp:143) · [Parse call sites](/private/tmp/mss-key-geometry-experiment-20261121/source/lookup_parity.cpp:184) · [CLI failure handling](/private/tmp/mss-key-geometry-experiment-20261121/source/lookup_parity.cpp:387)
+
+## Native checks pending
+
+This review verified source artifact pins and inspected the diff and relevant native contracts. The guarded run still needs to authenticate the real fixtures, compile both roles with identical flags, compare legacy format-2/3 parity and pressure, and run each matched order with fresh handles. It must confirm exact outcomes and order, all selected events resolved and distinct, and interpret the actual counters at the two page widths. Public-API and 19-field parity, unprofiled timing and RSS, page-boundary qualification and native Windows coverage remain promotion gates. No compiler, R, native driver or fixture-payload check was run in this review.
