@@ -99,14 +99,17 @@ check_allele_flip <- function(sumstats_dt, path,
         sumstats_dt[A1 == ref_gen_allele, match_type := TRUE]
         sumstats_dt[A2 == ref_gen_allele, match_type := FALSE]
         # drop cases that don't match either
-        if (allele_flip_drop &&
-            nrow(sumstats_dt[A1 != ref_gen_allele &
-                A2 != ref_gen_allele, ]) > 0) {
+        if (allele_flip_drop && {
+            mismatch_rows <- sumstats_dt[
+                A1 != ref_gen_allele & A2 != ref_gen_allele, which = TRUE
+            ]
+            mismatch_count <- length(mismatch_rows)
+            mismatch_count > 0L
+        }) {
             print_msg0 <-
                 paste0(
                     "There are ",
-                    formatC(nrow(sumstats_dt[A1 != ref_gen_allele &
-                        A2 != ref_gen_allele, ]), big.mark = ","),
+                    formatC(mismatch_count, big.mark = ","),
                     " SNPs where neither A1 nor A2 match the reference genome.",
                     " These will be removed."
                 )
@@ -119,8 +122,7 @@ check_allele_flip <- function(sumstats_dt, path,
                     log_files = log_files
                 )
                 write_sumstats(
-                    sumstats_dt = sumstats_dt[(A1 != ref_gen_allele &
-                        A2 != ref_gen_allele), ],
+                    sumstats_dt = sumstats_dt[mismatch_rows, ],
                     save_path =
                         paste0(
                             check_save_out$log_folder,
@@ -147,12 +149,13 @@ check_allele_flip <- function(sumstats_dt, path,
                 match_type := TRUE
             ]
         }
-        # continue if flipping necessary
-        if (nrow(sumstats_dt[match_type == FALSE, ]) > 0) {
+        # Locate flips on the table that remains after the optional drop.
+        flip_rows <- sumstats_dt[match_type == FALSE, which = TRUE]
+        flip_count <- length(flip_rows)
+        if (flip_count > 0L) {
             print_msg <- paste0(
                 "There are ", 
-                formatC(nrow(sumstats_dt[match_type == FALSE, ]),
-                        big.mark = ","),
+                formatC(flip_count, big.mark = ","),
                 " SNPs where A1 doesn't match the reference genome.",
                 "\nThese will be flipped with their effect columns."
             )
@@ -189,20 +192,17 @@ check_allele_flip <- function(sumstats_dt, path,
                 "these values will not be exact down to the missing ",
                 "frequencies of the other\nalternative allele(s)."
             )
-            if (nrow(sumstats_dt[match_type == FALSE, ]) > 0 &&
-                "FRQ" %in% effect_columns &&
+            if ("FRQ" %in% effect_columns &&
                 !bi_allelic_filter && !flip_frq_as_biallelic) {
                 stop(stp_msg)
             }
             #if set flip_frq_as_biallelic = TRUE, let them know
-            if (nrow(sumstats_dt[match_type == FALSE, ]) > 0 &&
-                "FRQ" %in% effect_columns &&
+            if ("FRQ" %in% effect_columns &&
                 !bi_allelic_filter && flip_frq_as_biallelic) {
               print_msg <- paste0(
                 "Note: You have set flip_frq_as_biallelic to TRUE meaning of ",
                 "the ",
-                formatC(nrow(sumstats_dt[match_type == FALSE, ]),
-                        big.mark = ","),
+                formatC(flip_count, big.mark = ","),
                 " SNPs to be flipped, ",
                 "any non-bi-allelic SNPs\nwill have their frequencies flipped ",
                 "as (1-FRQ) essentially ignoring the frequencies of any other ",

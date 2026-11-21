@@ -1,0 +1,21 @@
+Full-width missing-j GWAS row subsets with logging and drop disabled: 4 (expected zero): Mean relative difference: 1
+Error: Full-width missing-j GWAS row subsets with logging and drop disabled: 4 (expected zero)
+Execution halted
+        0.53 real         0.28 user         0.03 sys
+           112410624  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               10327  page reclaims
+                  21  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   1  signals received
+                  19  voluntary context switches
+                 181  involuntary context switches
+            11183123  instructions retired
+             5573226  cycles elapsed
+             1310960  peak memory footprint
