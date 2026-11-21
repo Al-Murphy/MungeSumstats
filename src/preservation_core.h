@@ -556,6 +556,7 @@ public:
   }
   Result harmonise(const Input& input,std::size_t cap=10000) {
     if(input.source_contract)return harmonise_declared(input,cap);
+    SourceNormalizations source(input);
     Result result;std::vector<Candidate> coordinate,ids,candidates;
     std::set<std::string> loaded_coordinates;
     std::set<std::string> indel_events;
@@ -568,6 +569,7 @@ public:
         auto a=orientation>=2?complement(other):other;auto b=orientation>=2?complement(effect):effect;
         if(orientation%2)std::swap(a,b);
         auto n=normalize(fa,input.chr,input.pos,a,b);if(n.status=="ok"){positions.insert(std::to_string(n.pos));if(other.size()!=effect.size())indel_events.insert(n.chr+":"+std::to_string(n.pos)+":"+n.ref+":"+n.alt);}
+        source.retain(orientation,n);
       }
       for(auto& pos:positions) {
         const auto key="C:"+input.chr+":"+pos;loaded_coordinates.insert(key);
@@ -599,8 +601,12 @@ public:
       auto chr=missing(input.chr)?c.chr:input.chr;
       std::set<std::int64_t> anchors=input.pos>0?std::set<std::int64_t>{input.pos}:c.original_positions;
       if(input.pos<=0)anchors.insert(c.pos);
-      for(auto pos:anchors){auto n=normalize(fa,chr,pos,a,b);
-        if(n.status=="ok"&&n.chr==c.chr&&n.pos==c.pos&&n.ref==c.ref&&n.alt==c.alt){auto key=c.key()+":"+(swap?"1":"0")+":"+(comp?"1":"0");if(hitkeys.insert(key).second)hits.push_back({c,swap,comp,pos});}}
+      for(auto pos:anchors) {
+        const bool matches=source.compare(fa,chr,pos,orientation,a,b,[&](const NormalizationView& n) {
+          return n.status=="ok"&&n.chr==c.chr&&n.pos==c.pos&&n.ref==c.ref&&n.alt==c.alt;
+        });
+        if(matches){auto key=c.key()+":"+(swap?"1":"0")+":"+(comp?"1":"0");if(hitkeys.insert(key).second)hits.push_back({c,swap,comp,pos});}
+      }
 
     }
     if(hits.size()>1){result.status="ambiguous";return result;}
@@ -611,7 +617,7 @@ public:
     if(hits.size()==1){resolved_anchors.insert(hits[0].anchor);resolved_anchors.insert(hits[0].candidate.pos);}
     const auto selected=hits.empty()?std::string():hits[0].candidate.key()+":"+(hits[0].swap?"1":"0")+":"+(hits[0].comp?"1":"0");
     bool competing_ref_alt=false,context_required=false;
-    const bool alt_alt=alt_alt_context(input,coordinate,other,effect,cap,resolved_anchors,
+    const bool alt_alt=alt_alt_context(input,coordinate,other,effect,source,cap,resolved_anchors,
                                       &ids,&loaded_coordinates,selected,&competing_ref_alt,&context_required);
     if(hits.empty()) {
       if(alt_alt){result.status="alt_alt_contrast";return result;}
@@ -629,6 +635,61 @@ public:
     return result;
   }
 private:
+  struct NormalizationView {
+    std::string_view status;
+    const std::string& chr;
+    std::int64_t pos;
+    std::string_view ref,alt;
+  };
+  // Only this row's coordinate loop writes slots. All three loops derive
+  // orientation i from the same immutable other/effect alleles in the same order.
+  class SourceNormalizations {
+    struct Slot {
+      std::int64_t pos;
+      std::uint16_t status,ref,alt,end;
+    };
+    const Input& source;
+    char bytes[256];
+    Slot slots[4];
+    std::size_t used=0;
+    unsigned present=0;
+
+    std::uint16_t append(std::string_view s) {
+      const auto start=static_cast<std::uint16_t>(used);
+      std::copy(s.begin(),s.end(),bytes+used);
+      used+=s.size();
+      return start;
+    }
+    std::string_view slice(std::uint16_t begin,std::uint16_t end) const {
+      return {bytes+begin,static_cast<std::size_t>(end-begin)};
+    }
+  public:
+    explicit SourceNormalizations(const Input& row):source(row) {}
+    void retain(int orientation,const Normalized& n) {
+      auto room=sizeof(bytes)-used;
+      for(std::string_view s:{std::string_view(n.status),std::string_view(n.ref),std::string_view(n.alt)}) {
+        if(s.size()>room)return;
+        room-=s.size();
+      }
+      const auto status=append(n.status);
+      const auto ref=append(n.ref);
+      const auto alt=append(n.alt);
+      slots[orientation]={n.pos,status,ref,alt,static_cast<std::uint16_t>(used)};
+      present|=1U<<orientation;
+    }
+    template<class Compare>
+    bool compare(Fasta& fa,const std::string& chr,std::int64_t pos,int orientation,
+                 const std::string& ref,const std::string& alt,const Compare& compare_value) const {
+      if((present&(1U<<orientation))&&pos==source.pos&&chr==source.chr) {
+        const auto& s=slots[orientation];
+        return compare_value(NormalizationView{slice(s.status,s.ref),source.chr,s.pos,
+                             slice(s.ref,s.alt),slice(s.alt,s.end)});
+      }
+      const auto n=normalize(fa,chr,pos,ref,alt);
+      return compare_value(NormalizationView{n.status,n.chr,n.pos,n.ref,n.alt});
+    }
+  };
+  static_assert(sizeof(SourceNormalizations)<=576,"Row normalization storage exceeds its bound");
   struct ProofEvent {std::string chr,ref,alt;std::int64_t pos;};
   struct ContextClosure {
     std::set<std::pair<std::string,std::int64_t>> locations;
@@ -688,7 +749,7 @@ private:
   }
   bool alt_alt_context(const Input& input,const std::vector<Candidate>& candidates,
                        const std::string& other,const std::string& effect,
-                       std::size_t cap,const std::set<std::int64_t>& resolved_anchors,
+                       const SourceNormalizations& source,std::size_t cap,const std::set<std::int64_t>& resolved_anchors,
                        const std::vector<Candidate>* ids=nullptr,
                        const std::set<std::string>* loaded_coordinates=nullptr,
                        const std::string& selected=std::string(),bool* competing_ref_alt=nullptr,
@@ -704,10 +765,13 @@ private:
         consume_context_work(&closure.remaining_work);
         const bool swap=orientation%2,comp=orientation>=2;
         auto a=comp?complement(other):other,b=comp?complement(effect):effect;if(swap)std::swap(a,b);
-        const auto normalized=normalize(fa,anchor.first,anchor.second,a,b);
-        if(normalized.status!="ok")continue;
-        const auto key=normalized.chr+":"+std::to_string(normalized.pos)+":"+normalized.ref+":"+normalized.alt;
-        if(closure.events.count(key)&&key+":"+(swap?"1":"0")+":"+(comp?"1":"0")!=selected) {
+        const bool competes=source.compare(fa,anchor.first,anchor.second,orientation,a,b,[&](const NormalizationView& n) {
+          if(n.status!="ok")return false;
+          auto key=n.chr+":"+std::to_string(n.pos)+":";
+          key.append(n.ref).append(":").append(n.alt);
+          return closure.events.count(key)&&key+":"+(swap?"1":"0")+":"+(comp?"1":"0")!=selected;
+        });
+        if(competes) {
           *competing_ref_alt=true;return false;
         }
       }
