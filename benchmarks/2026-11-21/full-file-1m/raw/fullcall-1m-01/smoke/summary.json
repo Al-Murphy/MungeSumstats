@@ -1,0 +1,1088 @@
+{
+  "scope": "Complete installed public harmonise_file calls",
+  "suite": "diagnostic",
+  "profile": "none",
+  "target_status": "not_applicable",
+  "processing_speed_and_rss_target_met": null,
+  "fresh_processes": true,
+  "verification_seconds": 0.6110935001634061,
+  "started_utc": "2026-11-21T07:16:55.368802+00:00",
+  "finished_utc": "2026-11-21T07:17:34.722962+00:00",
+  "cases": {
+    "hard-cases-f2": {
+      "medians": {
+        "baseline": {
+          "package_setup": {
+            "elapsed": 4.217,
+            "user.self": 3.803,
+            "sys.self": 0.152,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "reference_open": {
+            "elapsed": 0.00100000000000033,
+            "user.self": 0.00100000000000033,
+            "sys.self": 0.0,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "processing": {
+            "elapsed": 0.00899999999999945,
+            "user.self": 0.00600000000000023,
+            "sys.self": 0.002,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "process_wall_median_seconds": 5.172339708078653,
+          "process_user_median_seconds": 4.496523,
+          "process_system_median_seconds": 0.201461,
+          "median_peak_rss_bytes": 1041514496,
+          "max_peak_rss_bytes": 1041514496,
+          "rss_complete": true
+        },
+        "candidate": {
+          "package_setup": {
+            "elapsed": 4.002,
+            "user.self": 3.828,
+            "sys.self": 0.144,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "reference_open": {
+            "elapsed": 0.00200000000000067,
+            "user.self": 0.0,
+            "sys.self": 0.001,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "processing": {
+            "elapsed": 0.00600000000000023,
+            "user.self": 0.00499999999999989,
+            "sys.self": 0.002,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "process_wall_median_seconds": 4.769151916960254,
+          "process_user_median_seconds": 4.528343,
+          "process_system_median_seconds": 0.18778799999999998,
+          "median_peak_rss_bytes": 1039728640,
+          "max_peak_rss_bytes": 1039728640,
+          "rss_complete": true
+        }
+      },
+      "ratio_of_median_processing_seconds": 1.4999999999998508,
+      "baseline_over_candidate_by_pair": [
+        1.4999999999998508
+      ],
+      "median_peak_rss_nonregression": true,
+      "target": false,
+      "rows": 32,
+      "cardinality": {
+        "input_sha256": "19eb0e6ae84c144a1aa05173a099e8d4b756c6bfb761ef2bcf0de2031336b4bd",
+        "input_rows": 32,
+        "distinct_keys": 27,
+        "key_definition": "Exact decoded source tuple (CHR, BP, SNP, A1, A2, TYPE); retain allele order, raw missing tokens, contig and ID aliases as supplied; absent fields are null.",
+        "method": "Exact streaming set census over the generated input"
+      },
+      "observations": [
+        {
+          "directory": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/smoke/hard-cases-f2/pair-01-baseline",
+          "pair": 1,
+          "process": {
+            "user_seconds": 4.496523,
+            "system_seconds": 0.201461,
+            "peak_rss_bytes": 1041514496,
+            "rss_source": "wait4 ru_maxrss",
+            "rss_complete": true,
+            "pid": 63614,
+            "exit_code": 0,
+            "command": [
+              "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+              "--vanilla",
+              "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+              "run",
+              "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/smoke/hard-cases-f2/pair-01-baseline/settings.tsv"
+            ],
+            "wall_seconds": 5.172339708078653,
+            "started_utc": "2026-11-21T07:16:55.509812+00:00",
+            "finished_utc": "2026-11-21T07:17:00.682387+00:00",
+            "role": "baseline",
+            "case": "hard-cases-f2"
+          },
+          "metrics": {
+            "R_version": "R version 4.5.3 (2026-03-11)",
+            "R_platform": "aarch64-apple-darwin20",
+            "R_home": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources",
+            "R_bin": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin",
+            "R_engine": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+            "R_shared": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+            "R_shared_resolution": "R home library directory",
+            "BLAS": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "BLAS_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "LAPACK": "3.12.1",
+            "LAPACK_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+            "locale": "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8",
+            "threads": "1",
+            "package_setup.user.self": "3.803",
+            "package_setup.sys.self": "0.152",
+            "package_setup.elapsed": "4.217",
+            "package_setup.user.child": "0",
+            "package_setup.sys.child": "0",
+            "reference_open.user.self": "0.00100000000000033",
+            "reference_open.sys.self": "0",
+            "reference_open.elapsed": "0.00100000000000033",
+            "reference_open.user.child": "0",
+            "reference_open.sys.child": "0",
+            "processing.user.self": "0.00600000000000023",
+            "processing.sys.self": "0.002",
+            "processing.elapsed": "0.00899999999999945",
+            "processing.user.child": "0",
+            "processing.sys.child": "0",
+            "source_rows": "32",
+            "normalized_rows": "32",
+            "implementation": "mss-preservation-7",
+            "dll": "/private/tmp/mss-fullfile-20261121/builds-01/baseline/library/MungeSumstats/libs/MungeSumstats.so",
+            "dll_md5": "57d013ac6d9248ea2cdb8443e8916faa"
+          }
+        },
+        {
+          "directory": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/smoke/hard-cases-f2/pair-01-candidate",
+          "pair": 1,
+          "process": {
+            "user_seconds": 4.528343,
+            "system_seconds": 0.18778799999999998,
+            "peak_rss_bytes": 1039728640,
+            "rss_source": "wait4 ru_maxrss",
+            "rss_complete": true,
+            "pid": 63634,
+            "exit_code": 0,
+            "command": [
+              "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+              "--vanilla",
+              "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+              "run",
+              "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/smoke/hard-cases-f2/pair-01-candidate/settings.tsv"
+            ],
+            "wall_seconds": 4.769151916960254,
+            "started_utc": "2026-11-21T07:17:00.684459+00:00",
+            "finished_utc": "2026-11-21T07:17:05.453842+00:00",
+            "role": "candidate",
+            "case": "hard-cases-f2"
+          },
+          "metrics": {
+            "R_version": "R version 4.5.3 (2026-03-11)",
+            "R_platform": "aarch64-apple-darwin20",
+            "R_home": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources",
+            "R_bin": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin",
+            "R_engine": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+            "R_shared": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+            "R_shared_resolution": "R home library directory",
+            "BLAS": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "BLAS_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "LAPACK": "3.12.1",
+            "LAPACK_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+            "locale": "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8",
+            "threads": "1",
+            "package_setup.user.self": "3.828",
+            "package_setup.sys.self": "0.144",
+            "package_setup.elapsed": "4.002",
+            "package_setup.user.child": "0",
+            "package_setup.sys.child": "0",
+            "reference_open.user.self": "0",
+            "reference_open.sys.self": "0.001",
+            "reference_open.elapsed": "0.00200000000000067",
+            "reference_open.user.child": "0",
+            "reference_open.sys.child": "0",
+            "processing.user.self": "0.00499999999999989",
+            "processing.sys.self": "0.002",
+            "processing.elapsed": "0.00600000000000023",
+            "processing.user.child": "0",
+            "processing.sys.child": "0",
+            "source_rows": "32",
+            "normalized_rows": "32",
+            "implementation": "mss-preservation-7",
+            "dll": "/private/tmp/mss-fullfile-20261121/builds-01/candidate/library/MungeSumstats/libs/MungeSumstats.so",
+            "dll_md5": "07c780192431c65ea5ff629b59e3846c"
+          }
+        }
+      ],
+      "verification": {
+        "normalized_rows_checked": 32,
+        "status_counts": {
+          "match": 11,
+          "swap": 2,
+          "complement": 2,
+          "swapped_complement": 2,
+          "alt_alt_contrast": 1,
+          "ambiguous": 4,
+          "source_coordinates_missing": 1,
+          "coordinate_id_conflict": 1,
+          "unmapped": 1,
+          "invalid_position": 1,
+          "unsupported_allele": 1,
+          "specialist_preserved": 5
+        },
+        "oracle_fields": [
+          "source_row",
+          "status",
+          "chr",
+          "pos",
+          "ref",
+          "alt",
+          "id",
+          "effect",
+          "eaf",
+          "swapped",
+          "complemented",
+          "candidate_count",
+          "entity_type",
+          "entity_id",
+          "normalized_build",
+          "grch38_chr",
+          "grch38_pos",
+          "grch38_ref",
+          "grch38_alt"
+        ],
+        "oracle_rows_checked": 32,
+        "stable_byte_equality": true,
+        "edition_count": 2,
+        "normalized_columns": [
+          "status",
+          "chr",
+          "pos",
+          "ref",
+          "alt",
+          "id",
+          "effect",
+          "eaf",
+          "swapped",
+          "complemented",
+          "candidate_count",
+          "entity_type",
+          "entity_id",
+          "normalized_build",
+          "source_row",
+          "grch38_chr",
+          "grch38_pos",
+          "grch38_ref",
+          "grch38_alt"
+        ],
+        "source_artifact": {
+          "bytes": 439,
+          "sha256": "19eb0e6ae84c144a1aa05173a099e8d4b756c6bfb761ef2bcf0de2031336b4bd",
+          "md5": "1b08864cadb08931be535ad7a1846e9e"
+        },
+        "decoded_source": {
+          "bytes": 2071,
+          "sha256": "57c0a73187a0b8ada8d53a51fd0e1d390996ff60e9110e8531e3fd674a581da0",
+          "md5": "9caaa02001fdf8037245ce18b51411de"
+        },
+        "stable_rds_manifest_equality": true
+      }
+    },
+    "hard-cases-f3": {
+      "medians": {
+        "baseline": {
+          "package_setup": {
+            "elapsed": 3.973,
+            "user.self": 3.833,
+            "sys.self": 0.136,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "reference_open": {
+            "elapsed": 0.00100000000000033,
+            "user.self": 0.00099999999999989,
+            "sys.self": 0.001,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "processing": {
+            "elapsed": 0.00999999999999979,
+            "user.self": 0.00700000000000056,
+            "sys.self": 0.002,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "process_wall_median_seconds": 4.759457875043154,
+          "process_user_median_seconds": 4.550875,
+          "process_system_median_seconds": 0.18962199999999999,
+          "median_peak_rss_bytes": 1037991936,
+          "max_peak_rss_bytes": 1037991936,
+          "rss_complete": true
+        },
+        "candidate": {
+          "package_setup": {
+            "elapsed": 3.966,
+            "user.self": 3.831,
+            "sys.self": 0.13,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "reference_open": {
+            "elapsed": 0.000999999999999446,
+            "user.self": 0.00100000000000033,
+            "sys.self": 0.0,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "processing": {
+            "elapsed": 0.00599999999999934,
+            "user.self": 0.00499999999999989,
+            "sys.self": 0.002,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "process_wall_median_seconds": 4.729193791048601,
+          "process_user_median_seconds": 4.531253,
+          "process_system_median_seconds": 0.178897,
+          "median_peak_rss_bytes": 1019658240,
+          "max_peak_rss_bytes": 1019658240,
+          "rss_complete": true
+        }
+      },
+      "ratio_of_median_processing_seconds": 1.666666666666815,
+      "baseline_over_candidate_by_pair": [
+        1.666666666666815
+      ],
+      "median_peak_rss_nonregression": true,
+      "target": false,
+      "rows": 32,
+      "cardinality": {
+        "input_sha256": "19eb0e6ae84c144a1aa05173a099e8d4b756c6bfb761ef2bcf0de2031336b4bd",
+        "input_rows": 32,
+        "distinct_keys": 27,
+        "key_definition": "Exact decoded source tuple (CHR, BP, SNP, A1, A2, TYPE); retain allele order, raw missing tokens, contig and ID aliases as supplied; absent fields are null.",
+        "method": "Exact streaming set census over the generated input"
+      },
+      "observations": [
+        {
+          "directory": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/smoke/hard-cases-f3/pair-01-baseline",
+          "pair": 1,
+          "process": {
+            "user_seconds": 4.550875,
+            "system_seconds": 0.18962199999999999,
+            "peak_rss_bytes": 1037991936,
+            "rss_source": "wait4 ru_maxrss",
+            "rss_complete": true,
+            "pid": 63658,
+            "exit_code": 0,
+            "command": [
+              "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+              "--vanilla",
+              "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+              "run",
+              "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/smoke/hard-cases-f3/pair-01-baseline/settings.tsv"
+            ],
+            "wall_seconds": 4.759457875043154,
+            "started_utc": "2026-11-21T07:17:05.455738+00:00",
+            "finished_utc": "2026-11-21T07:17:10.215400+00:00",
+            "role": "baseline",
+            "case": "hard-cases-f3"
+          },
+          "metrics": {
+            "R_version": "R version 4.5.3 (2026-03-11)",
+            "R_platform": "aarch64-apple-darwin20",
+            "R_home": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources",
+            "R_bin": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin",
+            "R_engine": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+            "R_shared": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+            "R_shared_resolution": "R home library directory",
+            "BLAS": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "BLAS_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "LAPACK": "3.12.1",
+            "LAPACK_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+            "locale": "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8",
+            "threads": "1",
+            "package_setup.user.self": "3.833",
+            "package_setup.sys.self": "0.136",
+            "package_setup.elapsed": "3.973",
+            "package_setup.user.child": "0",
+            "package_setup.sys.child": "0",
+            "reference_open.user.self": "0.00099999999999989",
+            "reference_open.sys.self": "0.001",
+            "reference_open.elapsed": "0.00100000000000033",
+            "reference_open.user.child": "0",
+            "reference_open.sys.child": "0",
+            "processing.user.self": "0.00700000000000056",
+            "processing.sys.self": "0.002",
+            "processing.elapsed": "0.00999999999999979",
+            "processing.user.child": "0",
+            "processing.sys.child": "0",
+            "source_rows": "32",
+            "normalized_rows": "32",
+            "implementation": "mss-preservation-7",
+            "dll": "/private/tmp/mss-fullfile-20261121/builds-01/baseline/library/MungeSumstats/libs/MungeSumstats.so",
+            "dll_md5": "57d013ac6d9248ea2cdb8443e8916faa"
+          }
+        },
+        {
+          "directory": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/smoke/hard-cases-f3/pair-01-candidate",
+          "pair": 1,
+          "process": {
+            "user_seconds": 4.531253,
+            "system_seconds": 0.178897,
+            "peak_rss_bytes": 1019658240,
+            "rss_source": "wait4 ru_maxrss",
+            "rss_complete": true,
+            "pid": 63714,
+            "exit_code": 0,
+            "command": [
+              "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+              "--vanilla",
+              "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+              "run",
+              "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/smoke/hard-cases-f3/pair-01-candidate/settings.tsv"
+            ],
+            "wall_seconds": 4.729193791048601,
+            "started_utc": "2026-11-21T07:17:10.217497+00:00",
+            "finished_utc": "2026-11-21T07:17:14.946945+00:00",
+            "role": "candidate",
+            "case": "hard-cases-f3"
+          },
+          "metrics": {
+            "R_version": "R version 4.5.3 (2026-03-11)",
+            "R_platform": "aarch64-apple-darwin20",
+            "R_home": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources",
+            "R_bin": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin",
+            "R_engine": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+            "R_shared": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+            "R_shared_resolution": "R home library directory",
+            "BLAS": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "BLAS_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "LAPACK": "3.12.1",
+            "LAPACK_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+            "locale": "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8",
+            "threads": "1",
+            "package_setup.user.self": "3.831",
+            "package_setup.sys.self": "0.13",
+            "package_setup.elapsed": "3.966",
+            "package_setup.user.child": "0",
+            "package_setup.sys.child": "0",
+            "reference_open.user.self": "0.00100000000000033",
+            "reference_open.sys.self": "0",
+            "reference_open.elapsed": "0.000999999999999446",
+            "reference_open.user.child": "0",
+            "reference_open.sys.child": "0",
+            "processing.user.self": "0.00499999999999989",
+            "processing.sys.self": "0.002",
+            "processing.elapsed": "0.00599999999999934",
+            "processing.user.child": "0",
+            "processing.sys.child": "0",
+            "source_rows": "32",
+            "normalized_rows": "32",
+            "implementation": "mss-preservation-7",
+            "dll": "/private/tmp/mss-fullfile-20261121/builds-01/candidate/library/MungeSumstats/libs/MungeSumstats.so",
+            "dll_md5": "07c780192431c65ea5ff629b59e3846c"
+          }
+        }
+      ],
+      "verification": {
+        "normalized_rows_checked": 32,
+        "status_counts": {
+          "match": 11,
+          "swap": 2,
+          "complement": 2,
+          "swapped_complement": 2,
+          "alt_alt_contrast": 1,
+          "ambiguous": 4,
+          "source_coordinates_missing": 1,
+          "coordinate_id_conflict": 1,
+          "unmapped": 1,
+          "invalid_position": 1,
+          "unsupported_allele": 1,
+          "specialist_preserved": 5
+        },
+        "oracle_fields": [
+          "source_row",
+          "status",
+          "chr",
+          "pos",
+          "ref",
+          "alt",
+          "id",
+          "effect",
+          "eaf",
+          "swapped",
+          "complemented",
+          "candidate_count",
+          "entity_type",
+          "entity_id",
+          "normalized_build",
+          "grch38_chr",
+          "grch38_pos",
+          "grch38_ref",
+          "grch38_alt"
+        ],
+        "oracle_rows_checked": 32,
+        "stable_byte_equality": true,
+        "edition_count": 2,
+        "normalized_columns": [
+          "status",
+          "chr",
+          "pos",
+          "ref",
+          "alt",
+          "id",
+          "effect",
+          "eaf",
+          "swapped",
+          "complemented",
+          "candidate_count",
+          "entity_type",
+          "entity_id",
+          "normalized_build",
+          "source_row",
+          "grch38_chr",
+          "grch38_pos",
+          "grch38_ref",
+          "grch38_alt"
+        ],
+        "source_artifact": {
+          "bytes": 439,
+          "sha256": "19eb0e6ae84c144a1aa05173a099e8d4b756c6bfb761ef2bcf0de2031336b4bd",
+          "md5": "1b08864cadb08931be535ad7a1846e9e"
+        },
+        "decoded_source": {
+          "bytes": 2071,
+          "sha256": "57c0a73187a0b8ada8d53a51fd0e1d390996ff60e9110e8531e3fd674a581da0",
+          "md5": "9caaa02001fdf8037245ce18b51411de"
+        },
+        "stable_rds_manifest_equality": true
+      }
+    },
+    "declared-f2": {
+      "medians": {
+        "baseline": {
+          "package_setup": {
+            "elapsed": 4.009,
+            "user.self": 3.871,
+            "sys.self": 0.134,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "reference_open": {
+            "elapsed": 0.00100000000000033,
+            "user.self": 0.00099999999999989,
+            "sys.self": 0.0,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "processing": {
+            "elapsed": 0.00699999999999967,
+            "user.self": 0.00600000000000023,
+            "sys.self": 0.002,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "process_wall_median_seconds": 4.770764208165929,
+          "process_user_median_seconds": 4.567916,
+          "process_system_median_seconds": 0.178527,
+          "median_peak_rss_bytes": 1022951424,
+          "max_peak_rss_bytes": 1022951424,
+          "rss_complete": true
+        },
+        "candidate": {
+          "package_setup": {
+            "elapsed": 3.997,
+            "user.self": 3.856,
+            "sys.self": 0.138,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "reference_open": {
+            "elapsed": 0.00100000000000033,
+            "user.self": 0.00099999999999989,
+            "sys.self": 0.0,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "processing": {
+            "elapsed": 0.00600000000000023,
+            "user.self": 0.00400000000000045,
+            "sys.self": 0.002,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "process_wall_median_seconds": 4.763571250019595,
+          "process_user_median_seconds": 4.557638,
+          "process_system_median_seconds": 0.177663,
+          "median_peak_rss_bytes": 1029242880,
+          "max_peak_rss_bytes": 1029242880,
+          "rss_complete": true
+        }
+      },
+      "ratio_of_median_processing_seconds": 1.1666666666665668,
+      "baseline_over_candidate_by_pair": [
+        1.1666666666665668
+      ],
+      "median_peak_rss_nonregression": false,
+      "target": false,
+      "rows": 9,
+      "cardinality": {
+        "input_sha256": "f5313bbb67348759a9d30276b5a7fd88dea16b7ffaa9db330a8064648bf78c62",
+        "input_rows": 9,
+        "distinct_keys": 9,
+        "key_definition": "Exact decoded source tuple (CHR, BP, SNP, A1, A2, TYPE, REF, ALT, STRAND); retain allele order, raw missing tokens, contig and ID aliases as supplied; absent fields are null.",
+        "method": "Exact streaming set census over the generated input"
+      },
+      "observations": [
+        {
+          "directory": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/smoke/declared-f2/pair-01-baseline",
+          "pair": 1,
+          "process": {
+            "user_seconds": 4.567916,
+            "system_seconds": 0.178527,
+            "peak_rss_bytes": 1022951424,
+            "rss_source": "wait4 ru_maxrss",
+            "rss_complete": true,
+            "pid": 63748,
+            "exit_code": 0,
+            "command": [
+              "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+              "--vanilla",
+              "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+              "run",
+              "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/smoke/declared-f2/pair-01-baseline/settings.tsv"
+            ],
+            "wall_seconds": 4.770764208165929,
+            "started_utc": "2026-11-21T07:17:14.949154+00:00",
+            "finished_utc": "2026-11-21T07:17:19.720138+00:00",
+            "role": "baseline",
+            "case": "declared-f2"
+          },
+          "metrics": {
+            "R_version": "R version 4.5.3 (2026-03-11)",
+            "R_platform": "aarch64-apple-darwin20",
+            "R_home": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources",
+            "R_bin": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin",
+            "R_engine": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+            "R_shared": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+            "R_shared_resolution": "R home library directory",
+            "BLAS": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "BLAS_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "LAPACK": "3.12.1",
+            "LAPACK_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+            "locale": "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8",
+            "threads": "1",
+            "package_setup.user.self": "3.871",
+            "package_setup.sys.self": "0.134",
+            "package_setup.elapsed": "4.009",
+            "package_setup.user.child": "0",
+            "package_setup.sys.child": "0",
+            "reference_open.user.self": "0.00099999999999989",
+            "reference_open.sys.self": "0",
+            "reference_open.elapsed": "0.00100000000000033",
+            "reference_open.user.child": "0",
+            "reference_open.sys.child": "0",
+            "processing.user.self": "0.00600000000000023",
+            "processing.sys.self": "0.002",
+            "processing.elapsed": "0.00699999999999967",
+            "processing.user.child": "0",
+            "processing.sys.child": "0",
+            "source_rows": "9",
+            "normalized_rows": "9",
+            "implementation": "mss-preservation-7",
+            "dll": "/private/tmp/mss-fullfile-20261121/builds-01/baseline/library/MungeSumstats/libs/MungeSumstats.so",
+            "dll_md5": "57d013ac6d9248ea2cdb8443e8916faa"
+          }
+        },
+        {
+          "directory": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/smoke/declared-f2/pair-01-candidate",
+          "pair": 1,
+          "process": {
+            "user_seconds": 4.557638,
+            "system_seconds": 0.177663,
+            "peak_rss_bytes": 1029242880,
+            "rss_source": "wait4 ru_maxrss",
+            "rss_complete": true,
+            "pid": 63775,
+            "exit_code": 0,
+            "command": [
+              "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+              "--vanilla",
+              "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+              "run",
+              "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/smoke/declared-f2/pair-01-candidate/settings.tsv"
+            ],
+            "wall_seconds": 4.763571250019595,
+            "started_utc": "2026-11-21T07:17:19.722119+00:00",
+            "finished_utc": "2026-11-21T07:17:24.485907+00:00",
+            "role": "candidate",
+            "case": "declared-f2"
+          },
+          "metrics": {
+            "R_version": "R version 4.5.3 (2026-03-11)",
+            "R_platform": "aarch64-apple-darwin20",
+            "R_home": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources",
+            "R_bin": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin",
+            "R_engine": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+            "R_shared": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+            "R_shared_resolution": "R home library directory",
+            "BLAS": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "BLAS_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "LAPACK": "3.12.1",
+            "LAPACK_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+            "locale": "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8",
+            "threads": "1",
+            "package_setup.user.self": "3.856",
+            "package_setup.sys.self": "0.138",
+            "package_setup.elapsed": "3.997",
+            "package_setup.user.child": "0",
+            "package_setup.sys.child": "0",
+            "reference_open.user.self": "0.00099999999999989",
+            "reference_open.sys.self": "0",
+            "reference_open.elapsed": "0.00100000000000033",
+            "reference_open.user.child": "0",
+            "reference_open.sys.child": "0",
+            "processing.user.self": "0.00400000000000045",
+            "processing.sys.self": "0.002",
+            "processing.elapsed": "0.00600000000000023",
+            "processing.user.child": "0",
+            "processing.sys.child": "0",
+            "source_rows": "9",
+            "normalized_rows": "9",
+            "implementation": "mss-preservation-7",
+            "dll": "/private/tmp/mss-fullfile-20261121/builds-01/candidate/library/MungeSumstats/libs/MungeSumstats.so",
+            "dll_md5": "07c780192431c65ea5ff629b59e3846c"
+          }
+        }
+      ],
+      "verification": {
+        "normalized_rows_checked": 9,
+        "status_counts": {
+          "swap": 2,
+          "match": 2,
+          "complement": 1,
+          "swapped_complement": 1,
+          "source_strand_unknown": 1,
+          "sequence_only": 1,
+          "source_id_conflict": 1
+        },
+        "oracle_fields": [
+          "source_row",
+          "status",
+          "chr",
+          "pos",
+          "ref",
+          "alt",
+          "id",
+          "effect",
+          "eaf",
+          "swapped",
+          "complemented",
+          "candidate_count",
+          "entity_type",
+          "entity_id",
+          "normalized_build",
+          "grch38_chr",
+          "grch38_pos",
+          "grch38_ref",
+          "grch38_alt"
+        ],
+        "oracle_rows_checked": 9,
+        "stable_byte_equality": true,
+        "edition_count": 2,
+        "normalized_columns": [
+          "status",
+          "chr",
+          "pos",
+          "ref",
+          "alt",
+          "id",
+          "effect",
+          "eaf",
+          "swapped",
+          "complemented",
+          "candidate_count",
+          "entity_type",
+          "entity_id",
+          "normalized_build",
+          "source_row",
+          "grch38_chr",
+          "grch38_pos",
+          "grch38_ref",
+          "grch38_alt"
+        ],
+        "source_artifact": {
+          "bytes": 673,
+          "sha256": "f5313bbb67348759a9d30276b5a7fd88dea16b7ffaa9db330a8064648bf78c62",
+          "md5": "69e2ff9358e18cc9e4eb29fa862c28a3"
+        },
+        "decoded_source": {
+          "bytes": 673,
+          "sha256": "f5313bbb67348759a9d30276b5a7fd88dea16b7ffaa9db330a8064648bf78c62",
+          "md5": "69e2ff9358e18cc9e4eb29fa862c28a3"
+        },
+        "stable_rds_manifest_equality": true
+      }
+    },
+    "declared-f3": {
+      "medians": {
+        "baseline": {
+          "package_setup": {
+            "elapsed": 4.072,
+            "user.self": 3.922,
+            "sys.self": 0.142,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "reference_open": {
+            "elapsed": 0.00200000000000067,
+            "user.self": 0.00099999999999989,
+            "sys.self": 0.0,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "processing": {
+            "elapsed": 0.00899999999999945,
+            "user.self": 0.00699999999999967,
+            "sys.self": 0.002,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "process_wall_median_seconds": 4.848466624971479,
+          "process_user_median_seconds": 4.633665,
+          "process_system_median_seconds": 0.18513,
+          "median_peak_rss_bytes": 1022869504,
+          "max_peak_rss_bytes": 1022869504,
+          "rss_complete": true
+        },
+        "candidate": {
+          "package_setup": {
+            "elapsed": 3.981,
+            "user.self": 3.841,
+            "sys.self": 0.136,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "reference_open": {
+            "elapsed": 0.00200000000000067,
+            "user.self": 0.00099999999999989,
+            "sys.self": 0.001,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "processing": {
+            "elapsed": 0.00699999999999967,
+            "user.self": 0.00400000000000045,
+            "sys.self": 0.002,
+            "user.child": 0.0,
+            "sys.child": 0.0
+          },
+          "process_wall_median_seconds": 4.770406834082678,
+          "process_user_median_seconds": 4.557738,
+          "process_system_median_seconds": 0.182585,
+          "median_peak_rss_bytes": 1041891328,
+          "max_peak_rss_bytes": 1041891328,
+          "rss_complete": true
+        }
+      },
+      "ratio_of_median_processing_seconds": 1.2857142857142678,
+      "baseline_over_candidate_by_pair": [
+        1.2857142857142678
+      ],
+      "median_peak_rss_nonregression": false,
+      "target": false,
+      "rows": 9,
+      "cardinality": {
+        "input_sha256": "f5313bbb67348759a9d30276b5a7fd88dea16b7ffaa9db330a8064648bf78c62",
+        "input_rows": 9,
+        "distinct_keys": 9,
+        "key_definition": "Exact decoded source tuple (CHR, BP, SNP, A1, A2, TYPE, REF, ALT, STRAND); retain allele order, raw missing tokens, contig and ID aliases as supplied; absent fields are null.",
+        "method": "Exact streaming set census over the generated input"
+      },
+      "observations": [
+        {
+          "directory": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/smoke/declared-f3/pair-01-baseline",
+          "pair": 1,
+          "process": {
+            "user_seconds": 4.633665,
+            "system_seconds": 0.18513,
+            "peak_rss_bytes": 1022869504,
+            "rss_source": "wait4 ru_maxrss",
+            "rss_complete": true,
+            "pid": 63797,
+            "exit_code": 0,
+            "command": [
+              "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+              "--vanilla",
+              "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+              "run",
+              "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/smoke/declared-f3/pair-01-baseline/settings.tsv"
+            ],
+            "wall_seconds": 4.848466624971479,
+            "started_utc": "2026-11-21T07:17:24.488270+00:00",
+            "finished_utc": "2026-11-21T07:17:29.337001+00:00",
+            "role": "baseline",
+            "case": "declared-f3"
+          },
+          "metrics": {
+            "R_version": "R version 4.5.3 (2026-03-11)",
+            "R_platform": "aarch64-apple-darwin20",
+            "R_home": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources",
+            "R_bin": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin",
+            "R_engine": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+            "R_shared": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+            "R_shared_resolution": "R home library directory",
+            "BLAS": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "BLAS_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "LAPACK": "3.12.1",
+            "LAPACK_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+            "locale": "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8",
+            "threads": "1",
+            "package_setup.user.self": "3.922",
+            "package_setup.sys.self": "0.142",
+            "package_setup.elapsed": "4.072",
+            "package_setup.user.child": "0",
+            "package_setup.sys.child": "0",
+            "reference_open.user.self": "0.00099999999999989",
+            "reference_open.sys.self": "0",
+            "reference_open.elapsed": "0.00200000000000067",
+            "reference_open.user.child": "0",
+            "reference_open.sys.child": "0",
+            "processing.user.self": "0.00699999999999967",
+            "processing.sys.self": "0.002",
+            "processing.elapsed": "0.00899999999999945",
+            "processing.user.child": "0",
+            "processing.sys.child": "0",
+            "source_rows": "9",
+            "normalized_rows": "9",
+            "implementation": "mss-preservation-7",
+            "dll": "/private/tmp/mss-fullfile-20261121/builds-01/baseline/library/MungeSumstats/libs/MungeSumstats.so",
+            "dll_md5": "57d013ac6d9248ea2cdb8443e8916faa"
+          }
+        },
+        {
+          "directory": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/smoke/declared-f3/pair-01-candidate",
+          "pair": 1,
+          "process": {
+            "user_seconds": 4.557738,
+            "system_seconds": 0.182585,
+            "peak_rss_bytes": 1041891328,
+            "rss_source": "wait4 ru_maxrss",
+            "rss_complete": true,
+            "pid": 63831,
+            "exit_code": 0,
+            "command": [
+              "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+              "--vanilla",
+              "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+              "run",
+              "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/smoke/declared-f3/pair-01-candidate/settings.tsv"
+            ],
+            "wall_seconds": 4.770406834082678,
+            "started_utc": "2026-11-21T07:17:29.339324+00:00",
+            "finished_utc": "2026-11-21T07:17:34.109965+00:00",
+            "role": "candidate",
+            "case": "declared-f3"
+          },
+          "metrics": {
+            "R_version": "R version 4.5.3 (2026-03-11)",
+            "R_platform": "aarch64-apple-darwin20",
+            "R_home": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources",
+            "R_bin": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin",
+            "R_engine": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+            "R_shared": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+            "R_shared_resolution": "R home library directory",
+            "BLAS": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "BLAS_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+            "LAPACK": "3.12.1",
+            "LAPACK_library": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+            "locale": "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8",
+            "threads": "1",
+            "package_setup.user.self": "3.841",
+            "package_setup.sys.self": "0.136",
+            "package_setup.elapsed": "3.981",
+            "package_setup.user.child": "0",
+            "package_setup.sys.child": "0",
+            "reference_open.user.self": "0.00099999999999989",
+            "reference_open.sys.self": "0.001",
+            "reference_open.elapsed": "0.00200000000000067",
+            "reference_open.user.child": "0",
+            "reference_open.sys.child": "0",
+            "processing.user.self": "0.00400000000000045",
+            "processing.sys.self": "0.002",
+            "processing.elapsed": "0.00699999999999967",
+            "processing.user.child": "0",
+            "processing.sys.child": "0",
+            "source_rows": "9",
+            "normalized_rows": "9",
+            "implementation": "mss-preservation-7",
+            "dll": "/private/tmp/mss-fullfile-20261121/builds-01/candidate/library/MungeSumstats/libs/MungeSumstats.so",
+            "dll_md5": "07c780192431c65ea5ff629b59e3846c"
+          }
+        }
+      ],
+      "verification": {
+        "normalized_rows_checked": 9,
+        "status_counts": {
+          "swap": 2,
+          "match": 2,
+          "complement": 1,
+          "swapped_complement": 1,
+          "source_strand_unknown": 1,
+          "sequence_only": 1,
+          "source_id_conflict": 1
+        },
+        "oracle_fields": [
+          "source_row",
+          "status",
+          "chr",
+          "pos",
+          "ref",
+          "alt",
+          "id",
+          "effect",
+          "eaf",
+          "swapped",
+          "complemented",
+          "candidate_count",
+          "entity_type",
+          "entity_id",
+          "normalized_build",
+          "grch38_chr",
+          "grch38_pos",
+          "grch38_ref",
+          "grch38_alt"
+        ],
+        "oracle_rows_checked": 9,
+        "stable_byte_equality": true,
+        "edition_count": 2,
+        "normalized_columns": [
+          "status",
+          "chr",
+          "pos",
+          "ref",
+          "alt",
+          "id",
+          "effect",
+          "eaf",
+          "swapped",
+          "complemented",
+          "candidate_count",
+          "entity_type",
+          "entity_id",
+          "normalized_build",
+          "source_row",
+          "grch38_chr",
+          "grch38_pos",
+          "grch38_ref",
+          "grch38_alt"
+        ],
+        "source_artifact": {
+          "bytes": 673,
+          "sha256": "f5313bbb67348759a9d30276b5a7fd88dea16b7ffaa9db330a8064648bf78c62",
+          "md5": "69e2ff9358e18cc9e4eb29fa862c28a3"
+        },
+        "decoded_source": {
+          "bytes": 673,
+          "sha256": "f5313bbb67348759a9d30276b5a7fd88dea16b7ffaa9db330a8064648bf78c62",
+          "md5": "69e2ff9358e18cc9e4eb29fa862c28a3"
+        },
+        "stable_rds_manifest_equality": true
+      }
+    }
+  },
+  "target_rule": "Ratio of processing medians >= 2 and no increase in median OS peak RSS."
+}

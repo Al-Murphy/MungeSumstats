@@ -1,0 +1,15 @@
+list(schema_version = 1L, core_version = "mss-preservation-2", 
+    build = "GRCh37", version = "Ensembl104-chr22-bounded-prefix-unique-nonpal-SNPs", 
+    fasta = "/private/tmp/mss-fullfile-20261121/asset-restore-01/GRCh37.ensembl104.chr22.fa", 
+    checksum_algorithm = "MD5", checksums = c(fasta = "936544855b253835442a0f253dd4b083", 
+    fasta.fai = "3b9c342b594b7b5ce42ad8f47f6d97f9", keys = "1f57d68a18b385924af656142bfacbbd", 
+    offsets = "39bb9ee045e47fad1c2aa38827905603", records = "e2f376ab22a877adcf284e5d0218ea25", 
+    rejected.tsv = "45f36dbd4ae0c11dc6733aca3d43456d", source.tsv = "ddd22bb347a722ef37ff8a2bb3320a19", 
+    `core-version` = "b72bccd1f245def3a23d42a814f3923c"), sizes = c(fasta = 52159647, 
+    fasta.fai = 20, keys = 30066969, offsets = 10498992, records = 36006536, 
+    rejected.tsv = 11, source.tsv = 12972528, `core-version` = 19
+    ), files = c("fasta.fai", "keys", "offsets", "records", "rejected.tsv", 
+    "source.tsv", "core-version"), created_utc = "2026-11-21 07:13:30 UTC", 
+    input_variants = "/private/tmp/gwas-harvest-stage2/assets/reference/matched-index/source.tsv", 
+    projection = "not_attempted")
+Full reference MD5 verification and native open passed.

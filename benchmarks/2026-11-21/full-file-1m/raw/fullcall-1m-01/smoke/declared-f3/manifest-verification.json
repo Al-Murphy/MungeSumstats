@@ -1,0 +1,19 @@
+{
+  "user_seconds": 0.075531,
+  "system_seconds": 0.025457,
+  "peak_rss_bytes": 83640320,
+  "rss_source": "wait4 ru_maxrss",
+  "rss_complete": true,
+  "pid": 63892,
+  "exit_code": 0,
+  "command": [
+    "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+    "--vanilla",
+    "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+    "manifests",
+    "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/smoke/declared-f3/stable-manifests.txt",
+    "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/smoke/declared-f3/pair-01-baseline/edition/manifest.rds",
+    "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/smoke/declared-f3/pair-01-candidate/edition/manifest.rds"
+  ],
+  "wall_seconds": 0.11745233298279345
+}

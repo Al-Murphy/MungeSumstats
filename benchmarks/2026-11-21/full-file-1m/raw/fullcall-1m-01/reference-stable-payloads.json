@@ -1,0 +1,54 @@
+{
+  "manifest_semantic_validation_pending": true,
+  "members": [
+    {
+      "bytes": 20,
+      "md5": "3b9c342b594b7b5ce42ad8f47f6d97f9",
+      "name": "fasta.fai",
+      "sha256": "dc27e2b48d065ddb7f37c9334ce0965f662875c7ebdff244f4ad1adcece60957"
+    },
+    {
+      "bytes": 30066969,
+      "md5": "1f57d68a18b385924af656142bfacbbd",
+      "name": "keys",
+      "sha256": "f0199f6d194d9d8f42785a96450988995187d60052cb36fe25ea5af0ba116c1b"
+    },
+    {
+      "bytes": 10498992,
+      "md5": "39bb9ee045e47fad1c2aa38827905603",
+      "name": "offsets",
+      "sha256": "f5b3c7a37c535bdb33e48ea4a7afc873ee89ede71368adb00104ed164557c3fc"
+    },
+    {
+      "bytes": 36006536,
+      "md5": "e2f376ab22a877adcf284e5d0218ea25",
+      "name": "records",
+      "sha256": "eb5d1fc30a6bbba8c5ff40d52ce3582122658c7d80f5e04ae8c668023fcb1f61"
+    },
+    {
+      "bytes": 11,
+      "md5": "45f36dbd4ae0c11dc6733aca3d43456d",
+      "name": "rejected.tsv",
+      "sha256": "a0fd889e80558d09eefe3f9e5fb6adfe28c86f51820069cfedad00d981432baa"
+    },
+    {
+      "bytes": 12972528,
+      "md5": "ddd22bb347a722ef37ff8a2bb3320a19",
+      "name": "source.tsv",
+      "sha256": "d6fae3acdc98e4d06f2e5eb01492360aeb874fe5b9f8763914cc39d9c40db9d1"
+    },
+    {
+      "bytes": 19,
+      "md5": "b72bccd1f245def3a23d42a814f3923c",
+      "name": "core-version",
+      "sha256": "c0ef21703c72cf14f2a71ef4674cd3aeaf4d6ed04174f40bbfa27f13cb3bc107"
+    }
+  ],
+  "new_manifest": {
+    "bytes": 712,
+    "path": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/matched-index/manifest.rds",
+    "sha256": "d15ad358b438fef485ddf0980043556a43f3e4d6b72faca35f3429ce4919ab93"
+  },
+  "producer_receipt": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/prepare-reference-v2.jsonl",
+  "stable_payloads_match_historical": true
+}

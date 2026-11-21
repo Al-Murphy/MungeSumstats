@@ -1,0 +1,41 @@
+Warning in untar2(tarfile, files, list, exdir, restore_times) :
+  skipping pax global extended headers
+* installing *source* package ‘MungeSumstats’ ...
+** this is package ‘MungeSumstats’ version ‘1.21.4’
+** using staged installation
+** libs
+using C++ compiler: ‘Apple clang version 21.0.0 (clang-2100.4.1.1)’
+using C++17
+using SDK: ‘MacOSX27.2.sdk’
+installing to /private/tmp/mss-fullfile-20261121/builds-01/candidate/library/00LOCK-MungeSumstats/00new/MungeSumstats/libs
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (MungeSumstats)
+       18.05 real        16.62 user         1.23 sys
+          1443758080  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              313511  page reclaims
+                 945  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   6  signals received
+                 143  voluntary context switches
+                3009  involuntary context switches
+            79944942  instructions retired
+            32906600  cycles elapsed
+             1851800  peak memory footprint

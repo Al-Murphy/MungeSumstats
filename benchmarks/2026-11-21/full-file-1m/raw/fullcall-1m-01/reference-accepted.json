@@ -1,0 +1,38 @@
+{
+  "accepted_by": "root operator",
+  "full_verification": "both installed public open_reference calls verified complete reference MD5 and native handles",
+  "historical_manifest_sha256": "07ec7576ce3f0d9dfa66ed8544972d445bac28d2ea9f1eecd5cd5603550bc1f2",
+  "manifest_change": "actual producer UTC and restored FASTA path; seven indexed payloads byte-identical",
+  "manifest_fields_checked": [
+    "schema_version",
+    "core_version",
+    "build",
+    "version",
+    "fasta",
+    "input_variants",
+    "files",
+    "sizes",
+    "checksums",
+    "empty contig aliases"
+  ],
+  "new_manifest": {
+    "bytes": 712,
+    "path": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/matched-index/manifest.rds",
+    "sha256": "d15ad358b438fef485ddf0980043556a43f3e4d6b72faca35f3429ce4919ab93"
+  },
+  "observed_utc": "2026-11-21T07:17:17.749371+00:00",
+  "opens": {
+    "baseline": {
+      "receipt": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/open-reference-baseline.jsonl",
+      "receipt_sha256": "82dcff705a52dd13ff13d54efd86ae3e1d32931decbe44dbc71566930414c838",
+      "stdout_sha256": "78a328ec29655a91933e2cc8d269c705a3d4039c9ff3b00b3d3b65e17c6f07fc"
+    },
+    "candidate": {
+      "receipt": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/open-reference-candidate.jsonl",
+      "receipt_sha256": "fbe98db62e90c7cf16101e012484c35618774d7749e986157dfb390b3566c4bc",
+      "stdout_sha256": "78a328ec29655a91933e2cc8d269c705a3d4039c9ff3b00b3d3b65e17c6f07fc"
+    }
+  },
+  "scope": "synthetic chr22 matched benchmark reference, format 2; no production whole-genome qualification",
+  "stable_seven_members_match_historical": true
+}

@@ -1,0 +1,68 @@
+{
+  "normalized_rows_checked": 9,
+  "status_counts": {
+    "swap": 2,
+    "match": 2,
+    "complement": 1,
+    "swapped_complement": 1,
+    "source_strand_unknown": 1,
+    "sequence_only": 1,
+    "source_id_conflict": 1
+  },
+  "oracle_fields": [
+    "source_row",
+    "status",
+    "chr",
+    "pos",
+    "ref",
+    "alt",
+    "id",
+    "effect",
+    "eaf",
+    "swapped",
+    "complemented",
+    "candidate_count",
+    "entity_type",
+    "entity_id",
+    "normalized_build",
+    "grch38_chr",
+    "grch38_pos",
+    "grch38_ref",
+    "grch38_alt"
+  ],
+  "oracle_rows_checked": 9,
+  "stable_byte_equality": true,
+  "edition_count": 2,
+  "normalized_columns": [
+    "status",
+    "chr",
+    "pos",
+    "ref",
+    "alt",
+    "id",
+    "effect",
+    "eaf",
+    "swapped",
+    "complemented",
+    "candidate_count",
+    "entity_type",
+    "entity_id",
+    "normalized_build",
+    "source_row",
+    "grch38_chr",
+    "grch38_pos",
+    "grch38_ref",
+    "grch38_alt"
+  ],
+  "source_artifact": {
+    "bytes": 673,
+    "sha256": "f5313bbb67348759a9d30276b5a7fd88dea16b7ffaa9db330a8064648bf78c62",
+    "md5": "69e2ff9358e18cc9e4eb29fa862c28a3"
+  },
+  "decoded_source": {
+    "bytes": 673,
+    "sha256": "f5313bbb67348759a9d30276b5a7fd88dea16b7ffaa9db330a8064648bf78c62",
+    "md5": "69e2ff9358e18cc9e4eb29fa862c28a3"
+  },
+  "stable_rds_manifest_equality": true
+}

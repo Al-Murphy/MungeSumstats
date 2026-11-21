@@ -1,0 +1,60 @@
+{
+  "r_engine": {
+    "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+    "sha256": "5323eb12f0d7c1ab0110343bcd79ec20dd63da2ecd0dea854e92f652f067393b"
+  },
+  "r_executable": {
+    "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+    "sha256": "c34c20d9a73b75e7e55e4ddab73642c0cd85c4299ac17ae81009f9fc43cb2430"
+  },
+  "runtime_files": [
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+      "role": "r_shared",
+      "sha256": "1fbe535490fc4ca0acf7c4aed116166c6e6a99640f7d33b290ef459e81ea7613"
+    },
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+      "role": "blas",
+      "sha256": "7e4e93e7eb90558fb53f68f2bba58d145be57cd8f9284e038d126dfe84245ed8"
+    },
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+      "role": "lapack",
+      "sha256": "f131fee2ec7afb9679ba742fe37a1f2c3d2806f7da2a88f817f8a68aad6271ab"
+    }
+  ],
+  "dependency_libraries": [
+    "/private/tmp/mss-fullfile-20261121/restored-01/common"
+  ],
+  "baseline": {
+    "commit": "a86e8c94d753630eff8c6a695ed2f240d1123d0d",
+    "library": "/private/tmp/mss-fullfile-20261121/builds-01/baseline/library",
+    "dll": {
+      "path": "/private/tmp/mss-fullfile-20261121/builds-01/baseline/library/MungeSumstats/libs/MungeSumstats.so",
+      "sha256": "4dc9b277a41f39cf136ea79db4873f1a3fbd495413ec7106efc2f6dfb16c31a7"
+    },
+    "package_tree_sha256": "40a3f8fead4de582968a108b34c134f88c8333cd794813980f2863190bdbfaa6",
+    "build_receipt": {
+      "path": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/baseline-build.json",
+      "sha256": "1ee933956406ea8b36e4b6119fcc6ceed025b06e951c4f7bbd60561c4c2711f7"
+    }
+  },
+  "candidate": {
+    "commit": "bfa192c83bb1fe15043c781d3b330f0f71bafb70",
+    "library": "/private/tmp/mss-fullfile-20261121/builds-01/candidate/library",
+    "dll": {
+      "path": "/private/tmp/mss-fullfile-20261121/builds-01/candidate/library/MungeSumstats/libs/MungeSumstats.so",
+      "sha256": "e68cbaeaeac0dcdf63e267d5afdf617617bbdab1ec39b9af5d17adc7bd8b3c9f"
+    },
+    "package_tree_sha256": "20f1b68b0bb3fcc2f5eeebc1a437bfe273948c09670e99172e31f9cf822daeeb",
+    "build_receipt": {
+      "path": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/candidate-build.json",
+      "sha256": "9dea60efba73e39717ae67bad4a2cb41935144df94bee6dfedab7a5b94b63bba"
+    }
+  },
+  "dependency_inventory": {
+    "path": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/dependency-inventory.json",
+    "sha256": "293025cbce6ea392e6b6ecbda1787b90b904abd5a2f30958a9301505fcf46a31"
+  }
+}

@@ -1,0 +1,237 @@
+{
+  "artifacts": {
+    "admission.txt": {
+      "bytes": 194,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/admission.txt",
+      "sha256": "5b65a9d2cadb124fb5007e6b5f98ef62d5ff5440f8a1e94e9c5fec920973ec24"
+    },
+    "entry-pins.txt": {
+      "bytes": 335,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/entry-pins.txt",
+      "sha256": "5cc993bca5383ebeff2dd76a956b8c18afa21819e04effef49ca42e655f74f85"
+    },
+    "owned-process-closure.json": {
+      "bytes": 3246,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/owned-process-closure.json",
+      "sha256": "267a967f802d999848aca2c2d42e3c3c9882fa14de34f42e1e41d96bb7b8aab7"
+    },
+    "pins-after.txt": {
+      "bytes": 335,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/pins-after.txt",
+      "sha256": "5cc993bca5383ebeff2dd76a956b8c18afa21819e04effef49ca42e655f74f85"
+    },
+    "pins-before.txt": {
+      "bytes": 335,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/pins-before.txt",
+      "sha256": "5cc993bca5383ebeff2dd76a956b8c18afa21819e04effef49ca42e655f74f85"
+    },
+    "source-freeze.sha256": {
+      "bytes": 417,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/source-freeze.sha256",
+      "sha256": "a5caa7d63ec2a77c9fdabc679e141f883b397fd6997eed7278d7becdae3955d4"
+    },
+    "source-recheck.txt": {
+      "bytes": 169,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/source-recheck.txt",
+      "sha256": "3a82e7c1e6413b2b00d1ad61cbb9cf62b944b7dc48abd878a1a7a7e8781f0aeb"
+    },
+    "status": {
+      "bytes": 2,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/status",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "suite-wrapper.stdout": {
+      "bytes": 0,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/suite-wrapper.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "suite.stderr": {
+      "bytes": 8843,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/suite.stderr",
+      "sha256": "8394e4390cd262b7478c756556ee7b6bc3d71f4256c4b529c7bdb2923207876f"
+    },
+    "suite.stdout": {
+      "bytes": 482,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/suite.stdout",
+      "sha256": "a492aeb39cac4089572b09b676cfcbd33f08f9ab0a5a9dc91149d5c62d757d6b"
+    },
+    "workflow-status.json": {
+      "bytes": 845,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/workflow-status.json",
+      "sha256": "db7a41c50b82d2b569db7434abf1ab56d67e8955cfc5757e4aa75886e89b3867"
+    }
+  },
+  "case_pins": {
+    "test_a_fast_exits_and_signal_preserve_raw_wait4_status/allowed-two.jsonl": {
+      "bytes": 3159,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/cases/test_a_fast_exits_and_signal_preserve_raw_wait4_status/allowed-two.jsonl",
+      "sha256": "9972c5989909e2194f4fbfae79edad6fd02960f938854f4391fd10227efd57d2"
+    },
+    "test_a_fast_exits_and_signal_preserve_raw_wait4_status/fast.jsonl": {
+      "bytes": 3109,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/cases/test_a_fast_exits_and_signal_preserve_raw_wait4_status/fast.jsonl",
+      "sha256": "0de2b948f592b4fda98746c3044b1811365443652e46657913224f473416111d"
+    },
+    "test_a_fast_exits_and_signal_preserve_raw_wait4_status/nonzero.jsonl": {
+      "bytes": 3499,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/cases/test_a_fast_exits_and_signal_preserve_raw_wait4_status/nonzero.jsonl",
+      "sha256": "c826b4cae56799b77ae71cbc9e4befd6de22dcea4019007a4edc4c900a036273"
+    },
+    "test_a_fast_exits_and_signal_preserve_raw_wait4_status/signal.jsonl": {
+      "bytes": 3539,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/cases/test_a_fast_exits_and_signal_preserve_raw_wait4_status/signal.jsonl",
+      "sha256": "a9161f3e4be332700095e82fd206dd01c7fe913a575d76e6f03e3118510e63a8"
+    },
+    "test_foreground_descendant_is_sampled_and_can_exit_cleanly/foreground.jsonl": {
+      "bytes": 3460,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/cases/test_foreground_descendant_is_sampled_and_can_exit_cleanly/foreground.jsonl",
+      "sha256": "f8f79aafea298a68f15f7d1c29cf8fb2d0d5652419e08eefe2b817de28a4fcf0"
+    },
+    "test_leftover_descendant_escalates_kill_and_decoy_is_left_alive/decoy.confirmation.json": {
+      "bytes": 113,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/cases/test_leftover_descendant_escalates_kill_and_decoy_is_left_alive/decoy.confirmation.json",
+      "sha256": "9f910a7df0e471f402b7c6a0016707994eb94936664f684aa39e8293882cef12"
+    },
+    "test_leftover_descendant_escalates_kill_and_decoy_is_left_alive/decoy.stdout": {
+      "bytes": 32,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/cases/test_leftover_descendant_escalates_kill_and_decoy_is_left_alive/decoy.stdout",
+      "sha256": "46d74597ce2c49b6a27987435e75a52933211d515f9c5ac0a69ecd9feca295a9"
+    },
+    "test_leftover_descendant_escalates_kill_and_decoy_is_left_alive/leftover.jsonl": {
+      "bytes": 5327,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/cases/test_leftover_descendant_escalates_kill_and_decoy_is_left_alive/leftover.jsonl",
+      "sha256": "f88299f5151a721303ca553ac3babd7d6ad86181396d07485e84e7978f5a04e0"
+    },
+    "test_leftover_descendant_escalates_kill_and_decoy_is_left_alive/leftover.stdout": {
+      "bytes": 32,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/cases/test_leftover_descendant_escalates_kill_and_decoy_is_left_alive/leftover.stdout",
+      "sha256": "a0c7b0414aef824468e0c99d2b460c2942ea9ad8eb2ce4f80821bd7ab99afc59"
+    },
+    "test_parent_reaps_descendant_before_fresh_native_query/descendant-transition.jsonl": {
+      "bytes": 3990,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/cases/test_parent_reaps_descendant_before_fresh_native_query/descendant-transition.jsonl",
+      "sha256": "2f8e02f324fc02e5789af5530a6a88bb82bb8b3da142ee3d6a6658b416b3922f"
+    },
+    "test_parent_reaps_descendant_before_fresh_native_query/descendant.ready": {
+      "bytes": 5,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/cases/test_parent_reaps_descendant_before_fresh_native_query/descendant.ready",
+      "sha256": "882c9fb20ce121de338bd45fb3397b67bf5c8262a7c9d0b9decbb766f64b934a"
+    },
+    "test_parent_reaps_descendant_before_fresh_native_query/parent-wait.json": {
+      "bytes": 11,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/cases/test_parent_reaps_descendant_before_fresh_native_query/parent-wait.json",
+      "sha256": "d06c24afc9f03ce1a4024e8d59d27a456fafece28025eed69f19e363bcaa71e7"
+    },
+    "test_rss_guard_triggers_and_keeps_sample_separate/rss.jsonl": {
+      "bytes": 3846,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/cases/test_rss_guard_triggers_and_keeps_sample_separate/rss.jsonl",
+      "sha256": "df1b598428629100bd763b0a37f40c25907ff30406622ea6be93e46739525d23"
+    },
+    "test_shutdown_during_phase_uses_cleanup_and_marks_next_pending/SIGHUP.jsonl": {
+      "bytes": 3746,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/cases/test_shutdown_during_phase_uses_cleanup_and_marks_next_pending/SIGHUP.jsonl",
+      "sha256": "6d7495401b06be27a0ec72e9eed47e2478bb00663b30825208f2d8e54667db97"
+    },
+    "test_shutdown_during_phase_uses_cleanup_and_marks_next_pending/SIGINT.jsonl": {
+      "bytes": 3736,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/cases/test_shutdown_during_phase_uses_cleanup_and_marks_next_pending/SIGINT.jsonl",
+      "sha256": "caa9a7e64df86fbc48d4630350d2b7392ed3105376b3d9b0e9bf9cd5e2e6ffaa"
+    },
+    "test_shutdown_during_phase_uses_cleanup_and_marks_next_pending/SIGTERM.jsonl": {
+      "bytes": 3747,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/cases/test_shutdown_during_phase_uses_cleanup_and_marks_next_pending/SIGTERM.jsonl",
+      "sha256": "02f36067825a3687ec87d70ccf30c3c3bc634abdac155ed4a59d7b40da79c4ae"
+    },
+    "test_term_aware_child_closes_before_escalation/term-aware.jsonl": {
+      "bytes": 3858,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/cases/test_term_aware_child_closes_before_escalation/term-aware.jsonl",
+      "sha256": "e95a824357288d47793e794c62d6f4a02ac5f18b8453f12d49681ea39b4d49a8"
+    },
+    "test_transition_requires_fresh_native_zombie_and_exact_reap/transition.jsonl": {
+      "bytes": 3168,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/cases/test_transition_requires_fresh_native_zombie_and_exact_reap/transition.jsonl",
+      "sha256": "7d251fa5e5b0406b7ece946197c342bdd94fb04f31e82e45b429db7ef4797ec4"
+    },
+    "test_uncertain_closure_uses_only_direct_child_and_blocks_pending/lost.jsonl": {
+      "bytes": 2610,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/cases/test_uncertain_closure_uses_only_direct_child_and_blocks_pending/lost.jsonl",
+      "sha256": "65e648f66eae9f2665db95517002e1db0390c9af5f8ca2d7e57b15dbbcdb95c2"
+    },
+    "test_wait4_metrics_separately_report_bytes_and_exact_signal/inner-page-touch.json": {
+      "bytes": 374,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/cases/test_wait4_metrics_separately_report_bytes_and_exact_signal/inner-page-touch.json",
+      "sha256": "f34c00bdc181d4e677382e9d4af3aae2a31e47b1fb9f4dc2cfe6aa26e29f4e4e"
+    },
+    "test_wait4_metrics_separately_report_bytes_and_exact_signal/inner-signal.json": {
+      "bytes": 325,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/green/cases/test_wait4_metrics_separately_report_bytes_and_exact_signal/inner-signal.json",
+      "sha256": "4a6cba5639cb80a9958952371d852b13622ecbbe85bba142826a358cea1f7184"
+    }
+  },
+  "command": [
+    "/bin/zsh",
+    "/private/tmp/mss-fullfile-20261121/native58-measured/run-native.sh"
+  ],
+  "elapsed_seconds": 6.04,
+  "free_kib": 297106084,
+  "observed_supervisor_exit": 0,
+  "peak_rss_bytes": 43941888,
+  "schema": "mss-darwin-native-stage185-root-observation-v1",
+  "source_pins": {
+    "full-native-suite.py": {
+      "bytes": 1176,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/full-native-suite.py",
+      "sha256": "acb6c3b7c418a05995200eeca2dabbfcbbf9b1b27fa26b8554ed2ad0c01de906"
+    },
+    "guard.py": {
+      "bytes": 59374,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/guard.py",
+      "sha256": "58e0818aa20801c30194bdce26bd117112b4b4d5d10f74ea556360c0867b56a2"
+    },
+    "native-body.sh": {
+      "bytes": 397,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/native-body.sh",
+      "sha256": "bab5961696f9046a16313be3cfbd83c8bf011738bb62182be4d3bd3f60864bd5"
+    },
+    "native-pins.sha256": {
+      "bytes": 1079,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/native-pins.sha256",
+      "sha256": "90dbd6c02ea3280f678686daf22c6258ab13ef13623787d95c6dcaa0d0f01a87"
+    },
+    "native-verify.py": {
+      "bytes": 14528,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/native-verify.py",
+      "sha256": "e0d9e37f4537c7a91b72004a7e14c299124af615af0f8ff3bbcdff7d87d5aac1"
+    },
+    "pure_suite.py": {
+      "bytes": 16374,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/pure_suite.py",
+      "sha256": "baae077349e2f8261c87fd9fa702f6c0768766a624feb51222df207af6db3266"
+    },
+    "run-native.sh": {
+      "bytes": 137,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/run-native.sh",
+      "sha256": "8b710fd6795e1016784fa72a7e25b9f23fdb132afddd002022bbb6cfef42d6a6"
+    },
+    "run-tests.sh": {
+      "bytes": 965,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/run-tests.sh",
+      "sha256": "948d6f26def0768c13c2b8d45f2bdce0aba342ce695b4a80b9b83cf250625fe8"
+    },
+    "test_guard.py": {
+      "bytes": 64705,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/test_guard.py",
+      "sha256": "b21338afcf4f7140db58d28594ff4da47d559056ea013bcf696af8e723b6ba8c"
+    },
+    "test_review_fix2.py": {
+      "bytes": 8250,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/test_review_fix2.py",
+      "sha256": "13988ab007f6d9273371887523258c5853e2c63d7469a9636ab4d6bea2ddeee8"
+    },
+    "test_wait_status.py": {
+      "bytes": 25753,
+      "path": "/private/tmp/mss-fullfile-20261121/native58-measured/test_wait_status.py",
+      "sha256": "16ae8e8621fa302e9413f61d4195a934ad3d08794f9190e80f153a5e527d9893"
+    }
+  }
+}

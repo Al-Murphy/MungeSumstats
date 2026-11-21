@@ -1,0 +1,154 @@
+{
+  "phases": [
+    {
+      "label": "fast",
+      "pid": 48971,
+      "closure": "confirmed",
+      "raw_exit": 0,
+      "sampled_rss": 4734976
+    },
+    {
+      "label": "nonzero",
+      "pid": 48974,
+      "closure": "confirmed",
+      "raw_exit": 7,
+      "sampled_rss": 2605056
+    },
+    {
+      "label": "allowed-two",
+      "pid": 48977,
+      "closure": "confirmed",
+      "raw_exit": 2,
+      "sampled_rss": 3276800
+    },
+    {
+      "label": "signal",
+      "pid": 48980,
+      "closure": "confirmed",
+      "raw_exit": -15,
+      "sampled_rss": 2473984
+    },
+    {
+      "label": "foreground",
+      "pid": 48983,
+      "closure": "confirmed",
+      "raw_exit": 0,
+      "sampled_rss": 29622272
+    },
+    {
+      "label": "leftover",
+      "pid": 48999,
+      "closure": "confirmed",
+      "raw_exit": 0,
+      "sampled_rss": 15761408
+    },
+    {
+      "label": "rss",
+      "pid": 49025,
+      "closure": "confirmed",
+      "raw_exit": -15,
+      "sampled_rss": 4538368
+    },
+    {
+      "label": "SIGINT",
+      "pid": 49030,
+      "closure": "confirmed",
+      "raw_exit": -15,
+      "sampled_rss": 1671168
+    },
+    {
+      "label": "SIGTERM",
+      "pid": 49034,
+      "closure": "confirmed",
+      "raw_exit": -15,
+      "sampled_rss": 2981888
+    },
+    {
+      "label": "SIGHUP",
+      "pid": 49038,
+      "closure": "confirmed",
+      "raw_exit": -15,
+      "sampled_rss": 2342912
+    },
+    {
+      "label": "term-aware",
+      "pid": 49042,
+      "closure": "confirmed",
+      "raw_exit": 17,
+      "sampled_rss": 3784704
+    },
+    {
+      "label": "lost",
+      "pid": 49088,
+      "closure": "unresolved",
+      "raw_exit": -15,
+      "sampled_rss": 0
+    },
+    {
+      "label": "transition",
+      "pid": 49093,
+      "closure": "confirmed",
+      "raw_exit": 23,
+      "sampled_rss": 4227072
+    },
+    {
+      "label": "descendant-transition",
+      "pid": 48903,
+      "closure": "confirmed",
+      "raw_exit": 31,
+      "sampled_rss": 31621120
+    }
+  ],
+  "decoy": {
+    "identity": [
+      48998,
+      48998,
+      48998,
+      501,
+      501
+    ],
+    "alive_after_guard": true,
+    "observed_monotonic": 1837160.749482416
+  },
+  "child_wait": [
+    48905,
+    19
+  ],
+  "ps": [
+    "/bin/ps",
+    "-x",
+    "-p",
+    "48903,48905,48971,48974,48977,48980,48983,48985,48998,48999,49001,49025,49030,49034,49038,49042,49088,49089,49090,49093",
+    "-g",
+    "48903,48971,48974,48977,48980,48983,48998,48999,49025,49030,49034,49038,49042,49088,49093",
+    "-o",
+    "pid=,pgid=,ruid=,uid=,state=,rss="
+  ],
+  "status": 1,
+  "stdout": "",
+  "stderr": "",
+  "kernel_wait": {
+    "result": {
+      "command": [
+        "/bin/ps",
+        "-x",
+        "-p",
+        "48903,48905,48971,48974,48977,48980,48983,48985,48998,48999,49001,49025,49030,49034,49038,49042,49088,49089,49090,49093",
+        "-g",
+        "48903,48971,48974,48977,48980,48983,48998,48999,49025,49030,49034,49038,49042,49088,49093",
+        "-o",
+        "pid=,pgid=,ruid=,uid=,state=,rss="
+      ],
+      "pid": 49099,
+      "waitid_code": 1,
+      "waitid_status": 1,
+      "wait4_status": 256,
+      "exit_code": 1
+    }
+  },
+  "known_absent": true,
+  "complete": true,
+  "incomplete": [],
+  "logical": 147770,
+  "allocated": 348160
+}

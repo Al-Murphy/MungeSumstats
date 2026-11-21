@@ -1,0 +1,11 @@
+{
+  "input_sha256": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2",
+  "input_rows": 1000000,
+  "distinct_keys": 437458,
+  "key_definition": "Unique catalog (chromosome, position, REF, ALT, current ID); orient both input allele orders to the verified panel event",
+  "method": "Compared every raw input record with the independently reconstructed alternating panel from historically pinned source.tsv",
+  "reference_source": {
+    "path": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/matched-index/source.tsv",
+    "sha256": "d6fae3acdc98e4d06f2e5eb01492360aeb874fe5b9f8763914cc39d9c40db9d1"
+  }
+}

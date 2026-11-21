@@ -1,0 +1,5 @@
+Three alternating baseline/candidate pairs of complete public harmonise_file calls on 1,000,000 synthetic chr22 rows. One thread, serial fresh R processes and fresh verified handles. No other heavy workloads are launched by this task during timing. This shared desktop and OS page cache are uncontrolled. Continuing disk floor 186 GiB; planned new retained output at most 3 GiB.
+Observed UTC: 2026-11-21T07:19:58Z
+ 2:19  7 users, load averages: 11.56 9.22 6.81
+Filesystem   1024-blocks       Used Available Capacity  iused      ifree %iused  Mounted on
+/dev/disk3s5  1948404040 1588000000 290400000    85% 22335655 2905743240    1%   /System/Volumes/Data

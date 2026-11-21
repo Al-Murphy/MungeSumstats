@@ -1,0 +1,127 @@
+{
+  "schema": 1,
+  "contention_note": "Three alternating baseline/candidate pairs of complete public harmonise_file calls on 1,000,000 synthetic chr22 rows. One thread, serial fresh R processes and fresh verified handles. No other heavy workloads are launched by this task during timing. This shared desktop and OS page cache are uncontrolled. Continuing disk floor 186 GiB; planned new retained output at most 3 GiB.\nObserved UTC: 2026-11-21T07:19:58Z\n 2:19  7 users, load averages: 11.56 9.22 6.81\nFilesystem   1024-blocks       Used Available Capacity  iused      ifree %iused  Mounted on\n/dev/disk3s5  1948404040 1588000000 290400000    85% 22335655 2905743240    1%   /System/Volumes/Data",
+  "r_executable": {
+    "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+    "sha256": "c34c20d9a73b75e7e55e4ddab73642c0cd85c4299ac17ae81009f9fc43cb2430"
+  },
+  "r_engine": {
+    "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+    "sha256": "5323eb12f0d7c1ab0110343bcd79ec20dd63da2ecd0dea854e92f652f067393b"
+  },
+  "runtime_files": [
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+      "role": "r_shared",
+      "sha256": "1fbe535490fc4ca0acf7c4aed116166c6e6a99640f7d33b290ef459e81ea7613"
+    },
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+      "role": "blas",
+      "sha256": "7e4e93e7eb90558fb53f68f2bba58d145be57cd8f9284e038d126dfe84245ed8"
+    },
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+      "role": "lapack",
+      "sha256": "f131fee2ec7afb9679ba742fe37a1f2c3d2806f7da2a88f817f8a68aad6271ab"
+    }
+  ],
+  "dependency_libraries": [
+    "/private/tmp/mss-fullfile-20261121/restored-01/common"
+  ],
+  "minimum_free_bytes": 199715979264,
+  "estimated_output_bytes": 2147483648,
+  "edition_encoding": "utf-8",
+  "baseline": {
+    "commit": "a86e8c94d753630eff8c6a695ed2f240d1123d0d",
+    "library": "/private/tmp/mss-fullfile-20261121/builds-01/baseline/library",
+    "dll": {
+      "path": "/private/tmp/mss-fullfile-20261121/builds-01/baseline/library/MungeSumstats/libs/MungeSumstats.so",
+      "sha256": "4dc9b277a41f39cf136ea79db4873f1a3fbd495413ec7106efc2f6dfb16c31a7"
+    },
+    "package_tree_sha256": "40a3f8fead4de582968a108b34c134f88c8333cd794813980f2863190bdbfaa6",
+    "build_receipt": {
+      "path": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/baseline-build.json",
+      "sha256": "1ee933956406ea8b36e4b6119fcc6ceed025b06e951c4f7bbd60561c4c2711f7"
+    }
+  },
+  "candidate": {
+    "commit": "bfa192c83bb1fe15043c781d3b330f0f71bafb70",
+    "library": "/private/tmp/mss-fullfile-20261121/builds-01/candidate/library",
+    "dll": {
+      "path": "/private/tmp/mss-fullfile-20261121/builds-01/candidate/library/MungeSumstats/libs/MungeSumstats.so",
+      "sha256": "e68cbaeaeac0dcdf63e267d5afdf617617bbdab1ec39b9af5d17adc7bd8b3c9f"
+    },
+    "package_tree_sha256": "20f1b68b0bb3fcc2f5eeebc1a437bfe273948c09670e99172e31f9cf822daeeb",
+    "build_receipt": {
+      "path": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/candidate-build.json",
+      "sha256": "9dea60efba73e39717ae67bad4a2cb41935144df94bee6dfedab7a5b94b63bba"
+    }
+  },
+  "references": {
+    "matched_2": {
+      "directory": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/matched-index",
+      "format": 2,
+      "fasta": {
+        "path": "/private/tmp/mss-fullfile-20261121/asset-restore-01/GRCh37.ensembl104.chr22.fa",
+        "sha256": "f2e991e0816c2d7a19f9252ba314ea2717ed1ca73563dcd6417d514fb6c85e53"
+      },
+      "bind_fasta": true,
+      "files": {
+        "core-version": "c0ef21703c72cf14f2a71ef4674cd3aeaf4d6ed04174f40bbfa27f13cb3bc107",
+        "fasta.fai": "dc27e2b48d065ddb7f37c9334ce0965f662875c7ebdff244f4ad1adcece60957",
+        "keys": "f0199f6d194d9d8f42785a96450988995187d60052cb36fe25ea5af0ba116c1b",
+        "offsets": "f5b3c7a37c535bdb33e48ea4a7afc873ee89ede71368adb00104ed164557c3fc",
+        "records": "eb5d1fc30a6bbba8c5ff40d52ce3582122658c7d80f5e04ae8c668023fcb1f61",
+        "rejected.tsv": "a0fd889e80558d09eefe3f9e5fb6adfe28c86f51820069cfedad00d981432baa",
+        "source.tsv": "d6fae3acdc98e4d06f2e5eb01492360aeb874fe5b9f8763914cc39d9c40db9d1",
+        "manifest.rds": "d15ad358b438fef485ddf0980043556a43f3e4d6b72faca35f3429ce4919ab93"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "matched-1M",
+      "rows": 1000000,
+      "pairs": 3,
+      "target": false,
+      "reference": "matched_2",
+      "input": {
+        "path": "/private/tmp/gwas-harvest-stage2/assets/mss/matched-1M.tsv",
+        "sha256": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2"
+      },
+      "cardinality_receipt": {
+        "path": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/matched-1M.keys.json",
+        "sha256": "4eab2210f1c47bb632473a8ddbfddc96065721e1eee8cbbcc74485d834cb3b85"
+      },
+      "settings": {
+        "batch_size": 100000,
+        "batch_bytes": 8388608,
+        "max_record_bytes": 67108864,
+        "candidate_limit": 10000,
+        "frequency_type": "EAF",
+        "effect_type": "beta",
+        "delimiter": "tab",
+        "verify_acquisition_receipt": false
+      }
+    }
+  ],
+  "dependency_inventory": {
+    "path": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/dependency-inventory.json",
+    "sha256": "293025cbce6ea392e6b6ecbda1787b90b904abd5a2f30958a9301505fcf46a31"
+  },
+  "reference_provenance": {
+    "installations": {
+      "path": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/installations.json",
+      "sha256": "8b5b4d9a104f34da2053e21c99f6e235021088ac695741704f815284ba27578b"
+    },
+    "accepted_reference": {
+      "path": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/reference-accepted.json",
+      "sha256": "dce55f634f56040ab5072955351ce05b0191ffdcad16b9cda0a9487ebdbc36aa"
+    },
+    "stable_payloads": {
+      "path": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/reference-stable-payloads.json",
+      "sha256": "c8f99a012793f1777712f42ae7f175badc61ebd5822a86c995abdedbb48d8c19"
+    }
+  }
+}
