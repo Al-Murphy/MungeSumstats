@@ -20,7 +20,6 @@
 #'
 #' @export
 #' @importFrom GenomicRanges makeGRangesFromDataFrame
-#' @importFrom VariantAnnotation makeVRangesFromGRanges
 #' @examples
 #' path <- system.file("extdata", "eduAttainOkbay.txt",
 #'     package = "MungeSumstats"

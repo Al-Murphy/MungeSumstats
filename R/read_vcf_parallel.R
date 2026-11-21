@@ -19,7 +19,6 @@
 #' @inheritParams BiocParallel::register
 #' 
 #' @keywords internal
-#' @importFrom VariantAnnotation ScanVcfParam VcfFile readVcf rbind
 #' @importFrom GenomicRanges seqinfo tileGenome 
 #' @importFrom GenomeInfoDb keepSeqlevels 
 #' @importFrom data.table rbindlist

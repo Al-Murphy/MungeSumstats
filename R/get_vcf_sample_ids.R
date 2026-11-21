@@ -1,7 +1,6 @@
 #' Get VCF sample ID(s)
 #'
 #' @inheritParams format_sumstats
-#' @importFrom VariantAnnotation scanVcfHeader
 #' @return sample_id
 #' @keywords internal
 get_vcf_sample_ids <- function(path) { 

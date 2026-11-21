@@ -520,7 +520,7 @@ format_sumstats <- function(path,
                                                 "ES.A1","ES.A2","ES-A1","ES-A2",
                                                 "ES_A1","ES_A2"),
                                 "Corrected"=rep("ES",14))
-          mapping_file <- rbind(mapping_file,es_cols)
+          mapping_file <- base::rbind(mapping_file, es_cols)
         }
         
         #### Check 40:Check for log10 p instead of p ####

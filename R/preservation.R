@@ -436,7 +436,7 @@ harmonise_sumstats <- function(sumstats, reference,
         batch$grch38_alt <- missing_text
         batches[[i]] <- batch
     }
-    normalized <- if (length(batches) == 1L) batches[[1L]] else do.call(rbind, batches)
+    normalized <- if (length(batches) == 1L) batches[[1L]] else do.call(base::rbind, batches)
     rownames(normalized) <- NULL
     if (!is.null(projection)) normalized <- .mss_project(normalized, reference, projection, candidate_limit)
     provenance <- list(core_version = reference$core_version,

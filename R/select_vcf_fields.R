@@ -8,8 +8,6 @@
 #' 
 #' @returns \code{ScanVcfParam} object.
 #' @keywords internal
-#' @importFrom VariantAnnotation scanVcfHeader ScanVcfParam 
-#' @importFrom VariantAnnotation readVcf vcfFields vcfWhich
 #' @importFrom GenomicRanges GRanges
 #' @importFrom methods is
 select_vcf_fields <- function(path,

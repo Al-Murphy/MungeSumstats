@@ -1,5 +1,7 @@
 ## Development: preservation interface
 
+* Load VariantAnnotation when a VCF operation first needs it and preserve
+  variant rows when expanding ANN annotations.
 * Added fixed28MiB reference/FASTA byte-page caching. Matched unique-query and
   replicated-panel timing/RSS scripts retain external OS measurements.
 * Added explicit source REF/ALT/strand declarations, including static file-level

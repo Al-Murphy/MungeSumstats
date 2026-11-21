@@ -82,7 +82,7 @@ vcf2df <- function(vcf,
         yy <- data.frame(
             suppressWarnings(
                 do.call(
-                    rbind,
+                    base::rbind,
                     c(dfannempty,lapply(lapply(anncol,`[`,1),
                                         function(x){strsplit(x,'\\|')[[1]]})
                       )

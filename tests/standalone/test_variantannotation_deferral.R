@@ -185,9 +185,10 @@ bp_ranges <- function() {
             SNP = c("row1", "row3", "row5")
         )
         same(class(out$sumstats_dt), c("data.table", "data.frame"), "BP result class")
-        same(as.data.frame(out$sumstats_dt), expected, "BP validation, classes and row order")
+        actual <- as.data.frame(out$sumstats_dt)
+        same(actual, expected, "BP validation, classes and row order")
         same(out$log_files, list(), "BP log files")
-        expected
+        actual
     })
 }
 
@@ -216,7 +217,12 @@ main <- function(args) {
     stopifnot(dir.create(directory))
     on.exit(unlink(directory, recursive = TRUE))
     if (mode == "bp") {
-        receipt <- capture_warnings(bp_ranges())
+        before <- capture_warnings(bp_ranges())
+        path <- local_vcf(directory)
+        vcf <- capture_warnings(legacy_vcf(directory, path))
+        after <- capture_warnings(bp_ranges())
+        same(after, before, "BP results and warnings after first VCF use")
+        receipt <- list(before = before, vcf = vcf, after = after)
     } else if (mode == "parallel-vcf") {
         if (!requireNamespace("GenomicFiles", quietly = TRUE)) {
             stop("The production parallel VCF check requires GenomicFiles", call. = FALSE)
