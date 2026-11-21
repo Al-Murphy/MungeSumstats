@@ -1,0 +1,16 @@
+{
+  "issued_utc": "2026-11-21T09:45:29.428451+00:00",
+  "available_bytes": 247843127296,
+  "probe_sha256": "761012549d5f3ed81be411752caeb86934078f175b6b4aee547a64ef05ac78b9",
+  "libraries": {
+    "eager": "/private/tmp/mss-namespace-annfix-build-20261121/library",
+    "deferred": "/private/tmp/mss-namespace-deferred-build-20261121/library"
+  },
+  "common": "/private/tmp/mss-parallel-support-20261121/common",
+  "common_inventory_sha256": "181de043a869c040e467039cd533d936efe3a69734d7c9c27c6a2a80d4e84472",
+  "wall_seconds": 600,
+  "rss_bytes": 4294967296,
+  "disk_bytes": 67108864,
+  "floor_bytes": 199715979264,
+  "scope": "Freshinstalledsemanticandproductionparallelcomparisononly;notperformancetimings"
+}

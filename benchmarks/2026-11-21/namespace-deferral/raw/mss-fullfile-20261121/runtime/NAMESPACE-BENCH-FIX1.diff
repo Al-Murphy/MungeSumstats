@@ -1,0 +1,152 @@
+--- a/namespace-bench.py
++++ b/namespace-bench.py
+@@ -22,6 +22,7 @@
+               "sha256": "181de043a869c040e467039cd533d936efe3a69734d7c9c27c6a2a80d4e84472"}
+ RHOME = Path("/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources")
+ FRAMEWORK = RHOME / "library"
++PINNED_SDK = Path("/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk")
+ ROLES = ("baseline", "candidate")
+ CASE_NAMES = ("hard-cases", "declared", "matched-1M")
+ CASE_IDS = ("hard-cases-f2", "hard-cases-f3", "declared-f2", "declared-f3", "matched-1M")
+@@ -164,6 +165,27 @@
+     return {**original,
+             "references": {name: original["references"][name] for name in ("matched_2", "scientific_2", "scientific_3")},
+             "cases": [{**cases[name], "pairs": 3, "target": False} for name in CASE_NAMES]}
++
++
++def toolchain_pins(toolchain, historical_pins):
++    pins = {pin["path"]: pin for pin in toolchain["build_toolchain_pins"]}
++    historical = {pin["path"]: pin for pin in historical_pins}
++    settings_path = str(PINNED_SDK / "SDKSettings.json")
++    settings_pin = historical.pop(settings_path, None)
++    require(toolchain["sdk"] == str(PINNED_SDK) and settings_pin is not None
++            and pins.get(settings_path) == settings_pin
++            and all(pins.get(path) == pin for path, pin in historical.items()),
++            "Expected the pinned compiler, SDK and R Makeconf")
++    return pins.values()
++
++
++def verify_compiler_capture(toolchain, compiler, r_config):
++    flags = {part[0].strip(): part[2].strip() for line in r_config if (part := line.partition("="))[1]}
++    required = {"CC", "CFLAGS", "CPPFLAGS", "CXX17", "CXX17FLAGS", "LDFLAGS"}
++    declared = toolchain["compiler_flags"]
++    require(compiler == toolchain["compiler"] and required <= declared.keys() <= flags.keys()
++            and all(isinstance(value, str) and flags[key] == value for key, value in declared.items()),
++            "Compiler version or effective R flags disagree with actual captures")
+ 
+ 
+ def inputs(warm, provenance_pin, candidate):
+@@ -190,20 +212,14 @@
+             and environments["baseline"] == environments["candidate"]
+             and {"R_LIBS", "R_LIBS_SITE", "R_LIBS_USER", "R_MAKEVARS_USER", "MAKEFLAGS"} <= environments["baseline"],
+             "Role archives, guard environments, commands or toolchain are not comparable")
+-    pins = {pin["path"]: pin for pin in toolchain["build_toolchain_pins"]}
+-    require(all(pins.get(pin["path"]) == pin for pin in previous["build_toolchain_pins"])
+-            and str(Path(toolchain["sdk"]) / "SDKSettings.json") in pins
+-            and not (RHOME / "etc/Makevars.site").exists(), "Expected the pinned compiler, SDK and R Makeconf")
+-    for pin in [*pins.values(), config["r_executable"], config["r_engine"],
++    pins = toolchain_pins(toolchain, previous["build_toolchain_pins"])
++    require(not (RHOME / "etc/Makevars.site").exists(), "Unexpected R site Makevars")
++    for pin in [*pins, config["r_executable"], config["r_engine"],
+                 *({key: p[key] for key in ("path", "sha256")} for p in config["runtime_files"])]:
+         checked_file(warm, pin)
+     compiler = warm.d.check_control(toolchain["compiler_receipt"]).decode().strip().splitlines()
+     r_config = warm.d.check_control(toolchain["r_config_receipt"]).decode().splitlines()
+-    flags = {part[0].strip(): part[2].strip() for line in r_config if (part := line.partition("="))[1]}
+-    required = {"CC", "CFLAGS", "CPPFLAGS", "CXX17", "CXX17FLAGS", "LDFLAGS"}
+-    require(compiler == toolchain["compiler"] and required <= toolchain["compiler_flags"].keys()
+-            and {key: flags.get(key) for key in toolchain["compiler_flags"]} == toolchain["compiler_flags"],
+-            "Compiler version or effective R flags disagree with actual captures")
++    verify_compiler_capture(toolchain, compiler, r_config)
+     runtime_path = root["runtime_receipt"]["path"]
+     runtime = warm.d.check_control(root["runtime_receipt"]).decode()
+     guarded_phase(warm, root["runtime_transcripts"], warm.r.r_command(config["r_executable"]["path"], warm.WORKER,
+--- a/namespace-bench-source-controls.py
++++ b/namespace-bench-source-controls.py
+@@ -1,4 +1,4 @@
+-"""In-memory controls for the binding's namespace policy and diagnostic roster."""
++"""Source-only controls for the namespace policy, roster and toolchain metadata."""
+ import copy
+ import json
+ import runpy
+@@ -91,3 +91,47 @@
+                                       for name in ("matched_2", "scientific_2", "scientific_3")}
+ assert 2 * sum(case["pairs"] * len(case.get("reference_formats", [None])) for case in diagnostic["cases"]) == 30
+ print("PASS authenticated physical frozen modules and preserved five-case, thirty-worker roster")
++
++toolchain_pins = module["toolchain_pins"]
++verify_compiler_capture = module["verify_compiler_capture"]
++historical_pins = json.loads(warm.d.check_control(matrix["dependency_inventory"]))["build_toolchain_pins"]
++sdk = "/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk"
++toolchain = {"sdk": sdk, "build_toolchain_pins": historical_pins}
++assert list(toolchain_pins(toolchain, historical_pins)) == historical_pins
++alternate_sdk = "/Library/Developer/CommandLineTools/SDKs/MacOSX99.0.sdk"
++alternate_pin = {"path": f"{alternate_sdk}/SDKSettings.json", "sha256": "a" * 64}
++wrong_sdk = {"sdk": alternate_sdk, "build_toolchain_pins": [*historical_pins, alternate_pin]}
++wrong_digest = {**toolchain, "build_toolchain_pins": [
++    {**pin, "sha256": "a" * 64} if pin["path"] == f"{sdk}/SDKSettings.json" else pin for pin in historical_pins
++]}
++
++compiler = ["Apple clang version 21.0.0"]
++flags = {"CC": "clang", "CFLAGS": "-O2", "CPPFLAGS": "", "CXX17": "clang++", "CXX17FLAGS": "-O2", "LDFLAGS": ""}
++captured = [f"{key} = {value}" for key, value in flags.items()]
++declaration = {"compiler": compiler, "compiler_flags": flags}
++verify_compiler_capture(declaration, compiler, captured)
++missing_capture = [line for line in captured if not line.startswith("LDFLAGS ")]
++missing_declaration = {key: value for key, value in flags.items() if key != "LDFLAGS"}
++
++accepted_errors = []
++for description, check, args in [
++    ("alternate selected SDK with both pins", toolchain_pins, (wrong_sdk, historical_pins)),
++    ("changed historical SDK digest", toolchain_pins, (wrong_digest, historical_pins)),
++    ("missing required captured flag and null declaration", verify_compiler_capture,
++     ({**declaration, "compiler_flags": {**flags, "LDFLAGS": None}}, compiler, missing_capture)),
++    ("missing additional captured flag and null declaration", verify_compiler_capture,
++     ({**declaration, "compiler_flags": {**flags, "LTO": None}}, compiler, captured)),
++    ("null declaration for captured empty flag", verify_compiler_capture,
++     ({**declaration, "compiler_flags": {**flags, "LDFLAGS": None}}, compiler, captured)),
++    ("missing declared required flag", verify_compiler_capture,
++     ({**declaration, "compiler_flags": missing_declaration}, compiler, captured)),
++    ("different captured flag value", verify_compiler_capture,
++     ({**declaration, "compiler_flags": {**flags, "CFLAGS": "-O3"}}, compiler, captured)),
++]:
++    try:
++        check(*args)
++    except ValueError:
++        continue
++    accepted_errors.append(description)
++assert not accepted_errors, f"Accepted invalid toolchain metadata: {', '.join(accepted_errors)}"
++print("PASS selected historical SDK and digest, missing/null/mismatched flags, and captured empty flag values")
+--- a/NAMESPACE-BENCH-REPORT.md
++++ b/NAMESPACE-BENCH-REPORT.md
+@@ -65,3 +65,30 @@
+ ```
+ 
+ The source controls passed the exact 13-name case, missing and extra names, path/version and repetition drift, physical frozen imports, and the five-case roster. Both files parsed, diagnostic CLI help exited zero, and the all-zero candidate exited one without creating metadata. This handoff covers source and in-memory controls. Actual committed-role provenance consumption and benchmark behavior still need review and root execution.
++
++## Review round 1
++
++The selected SDK path must equal the historical physical MacOSX27.2 SDK, and its `SDKSettings.json` pin must equal the historical path and digest. The captured R configuration must contain all six required flag names and every additional declared name. Declared values must be strings equal to the captured values. Captured empty strings are valid.
++
++| Current source | SHA-256 |
++| --- | --- |
++| [Binding](namespace-bench.py) | `a61cbab2a7af12e0befd8d4fb6c0e9f81d786160db1ad391c95389717a002e94` |
++| [Source controls](namespace-bench-source-controls.py) | `eb6e7aabffeb76bf2415a2d9b8841626e5d7bd08a3a67d25e7599f588c8107d3` |
++| [Prior binding snapshot](namespace-bench.review0.py) | `88b9f264c26c4e0d6c4f84a09ebf9384132c328c36358b66548bdbe6fb0cd998` |
++
++```sh
++"$PY" -I -B -S "$RUNTIME/namespace-bench-source-controls.py"
++"$PY" -I -B -S -c 'import ast, sys; from pathlib import Path; [ast.parse(Path(p).read_bytes(), filename=p) for p in sys.argv[1:]]; print("PASS both Python sources parse")' "$BINDING" "$RUNTIME/namespace-bench-source-controls.py"
++git apply --check "$RUNTIME/NAMESPACE-BENCH-FIX1.diff" # run from a copy of the three review-0 files
++```
++
++The source controls reproduced three invalid acceptances using the original conditions isolated from file I/O. The alternate SDK passed when both SDK pins were listed, and absent required and optional flag names passed when declared as null. After the fix, the controls and AST command both exited zero.
++
++```text
++PASS exact 13-namespace delta and rejection of missing, extra, path, version, and repeat drift
++PASS authenticated physical frozen modules and preserved five-case, thirty-worker roster
++PASS selected historical SDK and digest, missing/null/mismatched flags, and captured empty flag values
++PASS both Python sources parse
++```
++
++The [review round 1 diff](NAMESPACE-BENCH-FIX1.diff) applies cleanly to the review-0 source set. The checks used source files and small metadata controls. Actual builds and timings remain pending in this handoff.

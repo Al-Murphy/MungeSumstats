@@ -1,0 +1,111 @@
+{
+  "absent_group_session": 8500,
+  "actual_exec_session": 90009,
+  "actual_exit_code": 0,
+  "actual_terminal_tool_chunk": "09155c",
+  "guard": {
+    "path": "/private/tmp/mss-namespace-preparation-20261121/prepare.jsonl",
+    "sha256": "eba3d8d6ff9acfc0d93e5a9be4e40a846e47cf2c98254c3114263d3ccb7a1024"
+  },
+  "inspection_errors": [],
+  "live_members": [],
+  "observed_utc": "2026-11-21T11:08:42.149538+00:00",
+  "terminal": {
+    "cleanup_errors": [],
+    "closure": "confirmed",
+    "elapsed_seconds": 1.8002497090492398,
+    "first_group": {
+      "completed_monotonic": 1853006.629972625,
+      "members": [
+        {
+          "euid": 501,
+          "pgid": 8500,
+          "pid": 8500,
+          "rss_bytes": 3211264,
+          "ruid": 501,
+          "sid": 8500,
+          "sid_source": "getsid",
+          "state": "Rs"
+        }
+      ],
+      "monotonic": 1853006.626783625,
+      "rss_bytes": 3211264
+    },
+    "group_samples": 3,
+    "label": "namespace-prepare",
+    "last_group": {
+      "completed_monotonic": 1853008.423679583,
+      "members": [
+        {
+          "euid": 501,
+          "pgid": 8500,
+          "pid": 8500,
+          "rss_bytes": 0,
+          "ruid": 501,
+          "sid": 8500,
+          "sid_source": "owned setsid plus waitable zombie",
+          "state": "Z"
+        }
+      ],
+      "monotonic": 1853008.420459708,
+      "rss_bytes": 0
+    },
+    "last_space": {
+      "allocated_bytes": 413696,
+      "block_bytes": 4096,
+      "entries": 11,
+      "free_bytes": 253554069504,
+      "logical_bytes": 397254
+    },
+    "leader_reaped": true,
+    "max_sample_gap_seconds": 1.0387814159039408,
+    "minimum_free_bytes": 253554069504,
+    "missed_samples": 0,
+    "peak_disk_allocated_bytes": 413696,
+    "peak_disk_logical_bytes": 397254,
+    "peak_group": {
+      "completed_monotonic": 1853007.668229958,
+      "members": [
+        {
+          "euid": 501,
+          "pgid": 8500,
+          "pid": 8500,
+          "rss_bytes": 35274752,
+          "ruid": 501,
+          "sid": 8500,
+          "sid_source": "getsid",
+          "state": "Us"
+        }
+      ],
+      "monotonic": 1853007.665565041,
+      "rss_bytes": 35274752
+    },
+    "peak_sampled_group_rss_bytes": 35274752,
+    "prelaunch_rss_bytes": 0,
+    "prelaunch_space": {
+      "allocated_bytes": 8192,
+      "block_bytes": 4096,
+      "entries": 7,
+      "free_bytes": 253554499584,
+      "logical_bytes": 2414
+    },
+    "primary": null,
+    "raw_exit": 0,
+    "signals": [],
+    "status": "completed",
+    "terminal_members": [
+      {
+        "euid": 501,
+        "pgid": 8500,
+        "pid": 8500,
+        "rss_bytes": 0,
+        "ruid": 501,
+        "sid": 8500,
+        "sid_source": "owned setsid plus waitable zombie",
+        "state": "Z"
+      }
+    ],
+    "trigger_sample": null,
+    "utc": "2026-11-21T11:07:09.295379+00:00"
+  }
+}

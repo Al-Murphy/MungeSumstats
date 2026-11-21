@@ -1,0 +1,222 @@
+diff --git a/NAMESPACE b/NAMESPACE
+index 08e6794..951252d 100644
+--- a/NAMESPACE
++++ b/NAMESPACE
+@@ -46,17 +46,6 @@ importFrom(R.utils,copyFile)
+ importFrom(R.utils,gunzip)
+ importFrom(R.utils,isGzipped)
+ importFrom(RCurl,getURL)
+-importFrom(VariantAnnotation,ScanVcfParam)
+-importFrom(VariantAnnotation,VcfFile)
+-importFrom(VariantAnnotation,genome)
+-importFrom(VariantAnnotation,indexVcf)
+-importFrom(VariantAnnotation,makeVRangesFromGRanges)
+-importFrom(VariantAnnotation,rbind)
+-importFrom(VariantAnnotation,readVcf)
+-importFrom(VariantAnnotation,scanVcfHeader)
+-importFrom(VariantAnnotation,vcfFields)
+-importFrom(VariantAnnotation,vcfWhich)
+-importFrom(VariantAnnotation,writeVcf)
+ importFrom(data.table,":=")
+ importFrom(data.table,.SD)
+ importFrom(data.table,as.data.table)
+diff --git a/R/check_bp_range.R b/R/check_bp_range.R
+index 919d496..69ab77a 100644
+--- a/R/check_bp_range.R
++++ b/R/check_bp_range.R
+@@ -30,16 +30,16 @@ check_bp_range <- function(sumstats_dt, path, ref_genome,log_folder_ind,
+         #CHR is only standardised later (check_chr) so also add the other
+         #styles (chr1, x, 23...) to this small lookup, not to the sumstats
+         std_info <- genome_info[CHR %in% c(seq_len(22), "X", "Y", "MT")]
+-        std_info <- rbind(std_info,
+-                          std_info[CHR == "X"][, CHR := "23"],
+-                          std_info[CHR == "Y"][, CHR := "24"],
+-                          std_info[CHR == "MT"][, CHR := "M"])
+-        std_info <- rbind(std_info,
+-                          data.table::copy(std_info)[, CHR := tolower(CHR)])
++        std_info <- base::rbind(std_info,
++                                std_info[CHR == "X"][, CHR := "23"],
++                                std_info[CHR == "Y"][, CHR := "24"],
++                                std_info[CHR == "MT"][, CHR := "M"])
++        std_info <- base::rbind(std_info,
++                                data.table::copy(std_info)[, CHR := tolower(CHR)])
+         std_info <- data.table::rbindlist(lapply(
+           c("", "chr", "CHR", "Chr", "ch"),
+           function(pre) data.table::copy(std_info)[, CHR := paste0(pre, CHR)]))
+-        genome_info <- unique(rbind(genome_info, std_info), by = "CHR")
++        genome_info <- unique(base::rbind(genome_info, std_info), by = "CHR")
+         #convert CHR to char in sumstats (if it is an int)
+         sumstats_dt[,CHR:=as.character(CHR)]
+         #add chr len to sumstats
+diff --git a/R/format_sumstats.R b/R/format_sumstats.R
+index b2eb358..21c23aa 100644
+--- a/R/format_sumstats.R
++++ b/R/format_sumstats.R
+@@ -520,7 +520,7 @@ format_sumstats <- function(path,
+                                                 "ES.A1","ES.A2","ES-A1","ES-A2",
+                                                 "ES_A1","ES_A2"),
+                                 "Corrected"=rep("ES",14))
+-          mapping_file <- rbind(mapping_file,es_cols)
++          mapping_file <- base::rbind(mapping_file, es_cols)
+         }
+         
+         #### Check 40:Check for log10 p instead of p ####
+diff --git a/R/get_vcf_sample_ids.R b/R/get_vcf_sample_ids.R
+index ba56f5f..8e4f9cf 100644
+--- a/R/get_vcf_sample_ids.R
++++ b/R/get_vcf_sample_ids.R
+@@ -1,7 +1,6 @@
+ #' Get VCF sample ID(s)
+ #'
+ #' @inheritParams format_sumstats
+-#' @importFrom VariantAnnotation scanVcfHeader
+ #' @return sample_id
+ #' @keywords internal
+ get_vcf_sample_ids <- function(path) { 
+diff --git a/R/index_vcf.R b/R/index_vcf.R
+index 455d551..6b4e941 100644
+--- a/R/index_vcf.R
++++ b/R/index_vcf.R
+@@ -15,7 +15,6 @@
+ #' @keywords internal
+ #' @importFrom methods is
+ #' @importFrom R.utils gunzip
+-#' @importFrom VariantAnnotation indexVcf
+ #' @examples 
+ #' eduAttainOkbayPth <- system.file("extdata", "eduAttainOkbay.txt",
+ #'                                  package = "MungeSumstats")
+diff --git a/R/preservation.R b/R/preservation.R
+index 32327e7..1b51129 100644
+--- a/R/preservation.R
++++ b/R/preservation.R
+@@ -436,7 +436,7 @@ harmonise_sumstats <- function(sumstats, reference,
+         batch$grch38_alt <- missing_text
+         batches[[i]] <- batch
+     }
+-    normalized <- if (length(batches) == 1L) batches[[1L]] else do.call(rbind, batches)
++    normalized <- if (length(batches) == 1L) batches[[1L]] else do.call(base::rbind, batches)
+     rownames(normalized) <- NULL
+     if (!is.null(projection)) normalized <- .mss_project(normalized, reference, projection, candidate_limit)
+     provenance <- list(core_version = reference$core_version,
+diff --git a/R/read_header.R b/R/read_header.R
+index e0463fe..483de72 100644
+--- a/R/read_header.R
++++ b/R/read_header.R
+@@ -8,7 +8,6 @@
+ #' @param skip_vcf_metadata logical, should VCF metadata be ignored 
+ #' @inheritParams format_sumstats
+ #' 
+-#' @importFrom VariantAnnotation scanVcfHeader
+ #' @export
+ #' @examples
+ #' path <- system.file("extdata", "eduAttainOkbay.txt", 
+diff --git a/R/read_vcf.R b/R/read_vcf.R
+index a6b6cc4..7dbc19d 100644
+--- a/R/read_vcf.R
++++ b/R/read_vcf.R
+@@ -39,7 +39,6 @@
+ #'
+ #' @return The VCF file in data.table format.
+ #' @export
+-#' @importFrom VariantAnnotation writeVcf
+ #' @importFrom data.table as.data.table setnames fwrite
+ #' @source
+ #' \code{
+diff --git a/R/read_vcf_genome.R b/R/read_vcf_genome.R
+index b9eb14b..5682de3 100644
+--- a/R/read_vcf_genome.R
++++ b/R/read_vcf_genome.R
+@@ -10,7 +10,6 @@
+ #' 
+ #' @keywords internal
+ #' @importFrom GenomeInfoDb mapGenomeBuilds
+-#' @importFrom VariantAnnotation genome
+ #' @returns genome 
+ read_vcf_genome <- function(header=NULL,
+                             validate=FALSE,
+diff --git a/R/read_vcf_parallel.R b/R/read_vcf_parallel.R
+index be46f0e..3b3ffbb 100644
+--- a/R/read_vcf_parallel.R
++++ b/R/read_vcf_parallel.R
+@@ -19,7 +19,6 @@
+ #' @inheritParams BiocParallel::register
+ #' 
+ #' @keywords internal
+-#' @importFrom VariantAnnotation ScanVcfParam VcfFile readVcf rbind
+ #' @importFrom GenomicRanges seqinfo tileGenome 
+ #' @importFrom GenomeInfoDb keepSeqlevels 
+ #' @importFrom data.table rbindlist
+diff --git a/R/select_vcf_fields.R b/R/select_vcf_fields.R
+index 47e0dd4..c3e3339 100644
+--- a/R/select_vcf_fields.R
++++ b/R/select_vcf_fields.R
+@@ -8,8 +8,6 @@
+ #' 
+ #' @returns \code{ScanVcfParam} object.
+ #' @keywords internal
+-#' @importFrom VariantAnnotation scanVcfHeader ScanVcfParam 
+-#' @importFrom VariantAnnotation readVcf vcfFields vcfWhich
+ #' @importFrom GenomicRanges GRanges
+ #' @importFrom methods is
+ select_vcf_fields <- function(path,
+diff --git a/R/standardise_sumstats_column_headers_crossplatform.R b/R/standardise_sumstats_column_headers_crossplatform.R
+index 198dc4e..8fc001d 100644
+--- a/R/standardise_sumstats_column_headers_crossplatform.R
++++ b/R/standardise_sumstats_column_headers_crossplatform.R
+@@ -49,14 +49,14 @@ standardise_header <- standardise_sumstats_column_headers_crossplatform <-
+         mapping_file$UNCORRECTED <- toupper(mapping_file$UNCORRECTED)
+         #get names for allele mared eff/frq columns
+         eff_frq_allele_matches <- get_eff_frq_allele_combns()
+-        mapping_file <- rbind(mapping_file,
+-                              as.data.frame(eff_frq_allele_matches)[
+-                                  , c("UNCORRECTED", "CORRECTED")])
++        mapping_file <- base::rbind(mapping_file,
++                                    as.data.frame(eff_frq_allele_matches)[
++                                        , c("UNCORRECTED", "CORRECTED")])
+         # minor allele frequencies aren't allele specific so only use them for
+         # FRQ if no allele frequency (e.g. A1FREQ) is found
+         maf_rows <- mapping_file$UNCORRECTED %in% c("MAF", "MINOR_AF")
+-        mapping_file <- rbind(mapping_file[!maf_rows, ],
+-                              mapping_file[maf_rows, ])
++        mapping_file <- base::rbind(mapping_file[!maf_rows, ],
++                                    mapping_file[maf_rows, ])
+         for (headerI in seq_len(nrow(mapping_file))) {
+             un <- mapping_file[headerI, "UNCORRECTED"]
+             cr <- mapping_file[headerI, "CORRECTED"]
+diff --git a/R/to_VRanges.R b/R/to_VRanges.R
+index fdd32f7..e03400d 100644
+--- a/R/to_VRanges.R
++++ b/R/to_VRanges.R
+@@ -5,7 +5,6 @@
+ #' @return \code{VRanges} object
+ #' @keywords internal
+ #' @importFrom GenomicRanges makeGRangesFromDataFrame
+-#' @importFrom VariantAnnotation makeVRangesFromGRanges
+ to_vranges <- function(sumstats_dt) {
+     gr <- to_granges(sumstats_dt)
+     message("Converting summary statistics to VRanges.")
+diff --git a/R/vcf2df.R b/R/vcf2df.R
+index 6aed8e2..c8c1cdf 100644
+--- a/R/vcf2df.R
++++ b/R/vcf2df.R
+@@ -82,7 +82,7 @@ vcf2df <- function(vcf,
+         yy <- data.frame(
+             suppressWarnings(
+                 do.call(
+-                    rbind,
++                    base::rbind,
+                     c(dfannempty,lapply(lapply(anncol,`[`,1),
+                                         function(x){strsplit(x,'\\|')[[1]]})
+                       )
+diff --git a/R/write_sumstats.R b/R/write_sumstats.R
+index 03198e1..8eda178 100644
+--- a/R/write_sumstats.R
++++ b/R/write_sumstats.R
+@@ -20,7 +20,6 @@
+ #'
+ #' @export
+ #' @importFrom GenomicRanges makeGRangesFromDataFrame
+-#' @importFrom VariantAnnotation makeVRangesFromGRanges
+ #' @examples
+ #' path <- system.file("extdata", "eduAttainOkbay.txt",
+ #'     package = "MungeSumstats"

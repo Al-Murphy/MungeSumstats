@@ -1,0 +1,253 @@
+diff --git a/namespace-builds.py b/namespace-builds.py
+--- a/namespace-builds.py
++++ b/namespace-builds.py
+@@ -63,17 +63,27 @@
+     return binding, binding.load_frozen()
+ 
+ 
+-def write_json(path, value, guard=None):
++def write_json(path, value, guard, *, check_stop=True):
+     data = (json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + "\n").encode()
+     require(len(data) <= CONTROL_LIMIT, f"Oversized operator control: {path}")
+-    if guard is None:
+-        stream = path.open("xb")
+-    else:
+-        guard._check_space(guard._space(walk=True), evidence_bytes=len(data), metadata_blocks=1, new_entries=1)
+-        stream = os.fdopen(guard._new_file(path), "wb")
+-    with stream:
+-        stream.write(data)
+-    return {"path": str(path), "sha256": hashlib.sha256(data).hexdigest()}
++    pin = {"path": str(path), "sha256": hashlib.sha256(data).hexdigest()}
++    guard._check_space(guard._space(walk=True), evidence_bytes=len(data), metadata_blocks=1, new_entries=1)
++    if check_stop:
++        guard._stop_check()
++    with guard._directory(path.parent) as parent, os.fdopen(guard._new_file(path), "wb") as stream:
++        opened = os.fstat(stream.fileno())
++        try:
++            stream.write(data)
++            stream.close()
++            if check_stop:
++                guard._stop_check()
++        except BaseException:
++            current = os.stat(path.name, dir_fd=parent, follow_symlinks=False)
++            require((current.st_dev, current.st_ino) == (opened.st_dev, opened.st_ino),
++                    f"Operator control changed before cleanup: {path}")
++            os.unlink(path.name, dir_fd=parent)
++            raise
++    return pin
+ 
+ 
+ def environment(root, common):
+@@ -246,31 +256,31 @@
+     info = root.lstat()
+     require(stat.S_IMODE(info.st_mode) == 0o700 and info.st_uid == os.geteuid(), "Expected a private owner output root")
+     source = {"path": str(SOURCE), "sha256": hashlib.sha256(source_bytes(SOURCE)).hexdigest()}
+-    volume = os.statvfs(root)
+-    available = volume.f_bavail * volume.f_frsize
+-    admitted = volume.f_frsize > 0 and available >= FLOOR + CAP
+-    admission = write_json(root / "admission.json", {
+-        "scope": "matched normal installs and runtime metadata only", "admitted": admitted,
+-        "issued_utc": started.isoformat(), "observed_utc": datetime.now(timezone.utc).isoformat(),
+-        "root": {"path": str(root), "dev": info.st_dev, "ino": info.st_ino}, "supervisor_pid": os.getpid(),
+-        "producer": source, "binding": {"path": str(BINDING), "sha256": BINDING_SHA}, "guard_sha256": GUARD_SHA,
+-        "available_bytes": available, "minimum_free_bytes": FLOOR, "owned_output_cap_bytes": CAP,
+-        "sampled_group_rss_limit_bytes": RSS, "wall_seconds": WALL,
+-    })
+-    result = {"status": "failed", "producer": source, "admission": admission, "repository": str(REPO),
+-              "commits": COMMITS, "phases": [], "roles": {}}
+-    guard = None
+-    try:
+-        require(admitted, f"Available bytes {available} must fund the continuing floor and build output cap")
+-        binding, warm = load_binding()
+-        require(warm.SOURCES[warm.GUARD] == GUARD_SHA and binding.BASELINE == COMMITS["baseline"],
+-                "Unexpected authenticated guard or baseline")
+-        guard_pin = warm.pin(warm.GUARD, GUARD_SHA)
+-        result["guard"] = guard_pin
+-        native = warm.d.module(guard_pin, "namespace_build_guard")
+-        guard = native.Guard(native.GuardConfig(root, started, WALL, RSS, CAP, FLOOR))
+-        with guard.shutdown_signals():
+-            guard._stop_check()
++    binding, warm = load_binding()
++    require(warm.SOURCES[warm.GUARD] == GUARD_SHA and binding.BASELINE == COMMITS["baseline"],
++            "Unexpected authenticated guard or baseline")
++    guard_pin = warm.pin(warm.GUARD, GUARD_SHA)
++    native = warm.d.module(guard_pin, "namespace_build_guard")
++    guard = native.Guard(native.GuardConfig(root, started, WALL, RSS, CAP, FLOOR))
++    require(guard._root_id == (info.st_dev, info.st_ino), "Output root changed since creation")
++    with guard.shutdown_signals():
++        available = guard._space(walk=False)["free_bytes"]
++        admitted = available >= FLOOR + CAP
++        if not admitted:
++            print(f"Available bytes {available} cannot fund the continuing floor and build output cap", file=sys.stderr)
++        admission = write_json(root / "admission.json", {
++            "scope": "matched normal installs and runtime metadata only", "admitted": admitted,
++            "issued_utc": started.isoformat(), "observed_utc": datetime.now(timezone.utc).isoformat(),
++            "root": {"path": str(root), "dev": info.st_dev, "ino": info.st_ino}, "supervisor_pid": os.getpid(),
++            "producer": source, "binding": {"path": str(BINDING), "sha256": BINDING_SHA}, "guard_sha256": GUARD_SHA,
++            "available_bytes": available, "minimum_free_bytes": FLOOR, "owned_output_cap_bytes": CAP,
++            "sampled_group_rss_limit_bytes": RSS, "wall_seconds": WALL,
++        }, guard)
++        if not admitted:
++            return 1
++        result = {"status": "failed", "producer": source, "admission": admission, "repository": str(REPO),
++                  "guard": guard_pin, "commits": COMMITS, "phases": [], "roles": {}}
++        try:
+             physical(REPO)
+             common = physical(binding.COMMON)
+             require(not os.path.lexists(common / "MungeSumstats"), "Common library contains a selected package")
+@@ -290,14 +300,17 @@
+                                     "Build phases ran sequentially under the shared guard. "
+                                     "Benchmark host admission, contention and cache observations, and timings are pending."),
+             }, guard)
+-    except (OSError, ValueError, RuntimeError, KeyError, TypeError, csv.Error, KeyboardInterrupt) as error:
+-        result["error"] = f"{type(error).__name__}: {error}"
+-        print(result["error"], file=sys.stderr)
+-    else:
+-        result["status"] = "completed"
+-    result["finished_utc"] = datetime.now(timezone.utc).isoformat()
+-    write_json(root / "operator-result.json", result, guard if result["status"] == "completed" else None)
+-    return 0 if result["status"] == "completed" else 1
++            completed = {**result, "status": "completed", "finished_utc": datetime.now(timezone.utc).isoformat()}
++            write_json(root / "operator-result.json", completed, guard)
++            return 0
++        except (OSError, ValueError, RuntimeError, KeyError, TypeError, csv.Error, KeyboardInterrupt) as error:
++            result.update(error=f"{type(error).__name__}: {error}", finished_utc=datetime.now(timezone.utc).isoformat())
++            print(result["error"], file=sys.stderr)
++            try:
++                write_json(root / "operator-result.json", result, guard, check_stop=False)
++            except (OSError, ValueError, RuntimeError) as receipt_error:
++                print(f"Could not retain operator result: {receipt_error}", file=sys.stderr)
++            return 1
+ 
+ 
+ def main():
+diff --git a/namespace-builds-source-controls.py b/namespace-builds-source-controls.py
+--- a/namespace-builds-source-controls.py
++++ b/namespace-builds-source-controls.py
+@@ -1,6 +1,10 @@
+ """Exercise only producer metadata parsing and the frozen environment allowlist."""
+ import ast
++from datetime import datetime, timezone
+ from pathlib import Path
++import runpy
++import signal
++import tempfile
+ 
+ root = Path(__file__).parent
+ source = root / "namespace-builds.py"
+@@ -49,3 +53,58 @@
+ assert set(producer["GIT_SETTINGS"]) == {"GIT_CONFIG_NOSYSTEM", "GIT_CONFIG_GLOBAL", "GIT_NO_REPLACE_OBJECTS",
+                                         "GIT_NO_LAZY_FETCH"}
+ print("PASS required and empty compiler flags, strict runtime TSV, and native guard environment compatibility")
++
++native = runpy.run_path(str(guard))
++write_json = producer["write_json"]
++floor, cap = producer["FLOOR"], producer["CAP"]
++with tempfile.TemporaryDirectory(dir=root) as directory:
++    output = Path(directory)
++    config = native["GuardConfig"](output, datetime.now(timezone.utc), 60, producer["RSS"], cap, floor)
++    native_guard = native["Guard"](config)
++    sample = {"free_bytes": floor + cap, "block_bytes": 4096, "allocated_bytes": 0, "logical_bytes": 0}
++    native_guard._space = lambda *, walk: sample
++    result = output / "operator-result.json"
++    admission = output / "admission.json"
++
++    def refused(path, value, reason, **kwargs):
++        try:
++            write_json(path, value, native_guard, **kwargs)
++        except native["GuardError"] as error:
++            assert error.reason == reason, error
++        else:
++            raise AssertionError(f"Publication succeeded despite {reason}")
++        assert not path.exists()
++
++    sample["allocated_bytes"] = cap + 1
++    refused(result, {"status": "failed"}, "disk", check_stop=False)
++    sample.update(allocated_bytes=0, free_bytes=floor - 1)
++    refused(result, {"status": "failed"}, "filesystem_floor", check_stop=False)
++    sample["free_bytes"] = floor
++    refused(admission, {"admitted": False}, "evidence_reserve")
++    refused(result, {"status": "failed"}, "evidence_reserve", check_stop=False)
++    sample["free_bytes"] = floor + 1024**2
++    write_json(admission, {"admitted": False}, native_guard)
++    assert admission.is_file()
++
++    def expire_after_walk(*, walk):
++        assert walk
++        native_guard.deadline = 0
++        return sample
++
++    native_guard._space = expire_after_walk
++    refused(output / "PROVENANCE.json", {}, "wall")
++    refused(result, {"status": "completed"}, "wall")
++    native_guard.deadline = float("inf")
++    native_guard._space = lambda *, walk: sample
++    stop_check = native_guard._stop_check
++
++    def stop_during_publication():
++        if result.is_file():
++            native_guard._signal_handler(signal.SIGTERM, None)
++        stop_check()
++
++    native_guard._stop_check = stop_during_publication
++    refused(result, {"status": "completed"}, "shutdown")
++    write_json(result, {"status": "failed"}, native_guard, check_stop=False)
++    assert '"status": "failed"' in result.read_text()
++print("PASS guarded failure and rejection funding, deadline after walk, and stop during publication")
+diff --git a/NAMESPACE-BUILDS-REPORT.md b/NAMESPACE-BUILDS-REPORT.md
+--- a/NAMESPACE-BUILDS-REPORT.md
++++ b/NAMESPACE-BUILDS-REPORT.md
+@@ -15,7 +15,7 @@
+ 
+ The two installs use the same clean build environment with private HOME and temporary paths, the physical 96-package common library, disabled user startup and Makevars, one make job and the guard's supported thread controls. The approved `en_US.UTF-8` locale applies to both installs and to the runtime capture. It matches the frozen worker's expected runtime TSV and the binding's exact SDK log marker. Both installs run the same SDK-prefixed `R CMD INSTALL --use-vanilla` invocation with separate libraries and archives, without an outer timing wrapper. The producer checks staged load markers and three parsed native commands, then records DLL and frozen package-tree digests. It requires distinct source trees and identical native commands before publishing `PROVENANCE.json`. [Build requirements](NAMESPACE-BUILDS-BRIEF.md)
+ 
+-The provenance pins each role's `build.json` and the fresh runtime TSV, with the runtime's guard JSONL, stdout and stderr in that order. Both role receipts use the same transcript order. Provenance declares the 186 GiB continuing floor and the 3 GiB estimate requested by the consumer. Benchmark admission, host contention and cache observations, and timings require their separate measurement phase. The private `operator-result.json` records only attempted phases, and a failure terminates the sequence with its actual guard evidence. The final failure control is bounded to 1 MiB and can be written after a guard stop, including a stop for exhausted output or free space. Native guard limits describe the sampled workloads and their funded transcripts.
++The provenance pins each role's `build.json` and the fresh runtime TSV, with the runtime's guard JSONL, stdout and stderr in that order. Both role receipts use the same transcript order. Provenance declares the 186 GiB continuing floor and the 3 GiB estimate requested by the consumer. Benchmark admission, host contention and cache observations, and timings require their separate measurement phase. The private `operator-result.json` records only attempted phases. A failure terminates the sequence and preserves native guard evidence. The producer uses the same guard funding and root checks for its own JSON controls. It reports a write refusal to stderr if the guard cannot fund the failure result.
+ 
+ ## Operator command
+ 
+@@ -25,9 +25,9 @@
+ "$PY" -I -B -S "$RUNTIME/namespace-builds.py" "$OUTPUT"
+ ```
+ 
+-After successful independent observation, `$OUTPUT/PROVENANCE.json` is the input to the separately reviewed binding's preparation command. [Preparation and measurement commands](NAMESPACE-BENCH-REPORT.md)
++After a zero exit, a completed operator result and independent observation, `$OUTPUT/PROVENANCE.json` is the input to the separately reviewed binding's preparation command. [Preparation and measurement commands](NAMESPACE-BENCH-REPORT.md)
+ 
+-## Source checks
++## Initial source checks
+ 
+ | Source | SHA-256 |
+ | --- | --- |
+@@ -35,3 +35,32 @@
+ | [Metadata controls](namespace-builds-source-controls.py) | `56dbbb35d66cb4481f583a17120e59207c60426833ac8f15b64c95c1167b12c0` |
+ 
+ The physical Python parsed both Python files and printed CLI help with exit zero. In-memory controls passed for explicit empty compiler flags, missing required flags, malformed and duplicate runtime keys, runtime locale mismatches and guard environment compatibility. Passing the existing runtime directory as output exited one at exclusive root creation. Source verification used metadata only.
++
++## Review round 1
++
++Every operator JSON write now applies the frozen guard's current floor, owned budget, evidence reservation and directory checks. A rejected admission with available space for its record retains `admission.json` with `admitted=false` and exits one. A rejection at the continuing floor reports the funding refusal to stderr. After a failed phase, a funded failure result retains the attempted phase records. On refusal, stderr reports the reason and prior evidence remains in place. [Review](NAMESPACE-BUILDS-REVIEW.md)
++
++Provenance and final completion remain inside the guard's shared deadline and signal scope. The writer rechecks the guard after the directory walk and after closing the new control. A stop during the write removes the control it just created after confirming its inode and exits nonzero through the failure path. A stop after a valid provenance receipt can leave that receipt alongside a failed or absent operator result. The zero exit and completed operator result remain the handoff criteria.
++
++| Current source | SHA-256 |
++| --- | --- |
++| [Producer](namespace-builds.py) | `615535da8374c81d3d7f23f0300c313d26d06ebea638e73239492243f851a65f` |
++| [Metadata controls](namespace-builds-source-controls.py) | `b757ed4a868217c3476a4b8c824671cb2e35116d7942e63f9d2193ef6e606b99` |
++| [Review snapshot](namespace-builds.review0.py) | `41da5092b5aafc65c7d95cbd684e53f4606e131b5f0a818293548080d502f4df` |
++
++```sh
++"$PY" -I -B -S "$RUNTIME/namespace-builds-source-controls.py"
++"$PY" -I -B -S -c 'import ast, sys; from pathlib import Path; [ast.parse(Path(p).read_bytes(), filename=p) for p in sys.argv[1:]]; print("PASS both producer Python sources parse")' "$RUNTIME/namespace-builds.py" "$RUNTIME/namespace-builds-source-controls.py"
++"$PY" -I -B -S "$RUNTIME/namespace-builds.py" --help
++"$PY" -I -B -S "$RUNTIME/namespace-builds.py" "$RUNTIME"
++git -C "$RUNTIME" apply --reverse --check NAMESPACE-BUILDS-FIX1.diff
++```
++
++```text
++PASS required and empty compiler flags, strict runtime TSV, and native guard environment compatibility
++PASS guarded failure and rejection funding, deadline after walk, and stop during publication
++PASS both producer Python sources parse
++[Errno 17] File exists: '/private/tmp/mss-fullfile-20261121/runtime'
++```
++
++The existing-root probe exited one. The metadata, syntax, help and reverse diff checks exited zero. The funding controls used the native guard's funding arithmetic and small temporary controls in the runtime directory. They exercised the owned cap, the free floor, funded and unfunded initial rejection records, deadline expiry during a walk and shutdown during publication. No guard child phase or native build ran.

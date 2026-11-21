@@ -1,0 +1,10 @@
+source_row	status	chr	pos	ref	alt	id	effect	eaf	swapped	complemented	candidate_count	entity_type	entity_id	normalized_build	grch38_chr	grch38_pos	grch38_ref	grch38_alt
+1	swap	I	1	CA	C	del	0.125	0.25	TRUE	FALSE	1	small_variant	del	SYNTHETIC	NA	NA	NA	NA
+2	match	I	1	CA	C	del	0.125	0.25	FALSE	FALSE	1	small_variant	del	SYNTHETIC	NA	NA	NA	NA
+3	match	Q	1	A	G	quad	0.125	0.25	FALSE	FALSE	1	small_variant	quad	SYNTHETIC	NA	NA	NA	NA
+4	swap	Q	1	A	G	quad	0.125	NA	TRUE	FALSE	1	small_variant	quad	SYNTHETIC	NA	NA	NA	NA
+5	complement	Q	1	A	G	quad	0.125	0.25	FALSE	TRUE	1	small_variant	quad	SYNTHETIC	NA	NA	NA	NA
+6	swapped_complement	Q	1	A	G	quad	0.125	NA	TRUE	TRUE	1	small_variant	quad	SYNTHETIC	NA	NA	NA	NA
+7	source_strand_unknown	NA	NA	NA	NA	NA	NA	NA	NA	NA	0	small_variant	quad	SYNTHETIC	NA	NA	NA	NA
+8	sequence_only	S	1	A	G	NA	0.125	0.25	FALSE	FALSE	0	small_variant	unknown	SYNTHETIC	NA	NA	NA	NA
+9	source_id_conflict	NA	NA	NA	NA	NA	NA	NA	NA	NA	0	small_variant	r雪	SYNTHETIC	NA	NA	NA	NA

@@ -1,0 +1,121 @@
+{
+  "absent_group_session": 11937,
+  "actual_exec_session": 32856,
+  "actual_exit_code": 0,
+  "actual_terminal_tool_chunk": "59da1a",
+  "all_19_fields_correct_rows": 1000000,
+  "guard": {
+    "path": "/private/tmp/mss-namespace-oracle-20261121/oracle.jsonl",
+    "sha256": "d3434e008c89497034913d1ef4491e391bdb799e5e5e0687546952e3ce348a9c"
+  },
+  "input_window": {
+    "path": "/private/tmp/mss-namespace-oracle-20261121/input-window.json",
+    "sha256": "083368f0f7aa5c7b00dc4c560c5bcbfd6b8d88bf4278d412f0b500015ab1b267"
+  },
+  "inspection_errors": [],
+  "live_members": [],
+  "observed_utc": "2026-11-21T11:26:53.809996+00:00",
+  "oracle": {
+    "path": "/private/tmp/mss-namespace-oracle-20261121/snp-oracle-1M.json",
+    "sha256": "cefb1f6d1308ccdbc71f18d0dea872eba2d8b4a6298be32653668e5792415b50"
+  },
+  "source_copies_exact_each": 2,
+  "terminal": {
+    "cleanup_errors": [],
+    "closure": "confirmed",
+    "elapsed_seconds": 9.915580291999504,
+    "first_group": {
+      "completed_monotonic": 1854118.933633375,
+      "members": [
+        {
+          "euid": 501,
+          "pgid": 11937,
+          "pid": 11937,
+          "rss_bytes": 4702208,
+          "ruid": 501,
+          "sid": 11937,
+          "sid_source": "getsid",
+          "state": "Rs"
+        }
+      ],
+      "monotonic": 1854118.927850916,
+      "rss_bytes": 4702208
+    },
+    "group_samples": 11,
+    "label": "namespace-snp-oracle-1M",
+    "last_group": {
+      "completed_monotonic": 1854128.840293875,
+      "members": [
+        {
+          "euid": 501,
+          "pgid": 11937,
+          "pid": 11937,
+          "rss_bytes": 0,
+          "ruid": 501,
+          "sid": 11937,
+          "sid_source": "owned setsid plus waitable zombie",
+          "state": "Z"
+        }
+      ],
+      "monotonic": 1854128.837536791,
+      "rss_bytes": 0
+    },
+    "last_space": {
+      "allocated_bytes": 16384,
+      "block_bytes": 4096,
+      "entries": 8,
+      "free_bytes": 252072472576,
+      "logical_bytes": 7608
+    },
+    "leader_reaped": true,
+    "max_sample_gap_seconds": 1.059319415828213,
+    "minimum_free_bytes": 252069060608,
+    "missed_samples": 0,
+    "peak_disk_allocated_bytes": 16384,
+    "peak_disk_logical_bytes": 7608,
+    "peak_group": {
+      "completed_monotonic": 1854128.311095833,
+      "members": [
+        {
+          "euid": 501,
+          "pgid": 11937,
+          "pid": 11937,
+          "rss_bytes": 1576009728,
+          "ruid": 501,
+          "sid": 11937,
+          "sid_source": "getsid",
+          "state": "Rs"
+        }
+      ],
+      "monotonic": 1854128.308024416,
+      "rss_bytes": 1576009728
+    },
+    "peak_sampled_group_rss_bytes": 1576009728,
+    "prelaunch_rss_bytes": 0,
+    "prelaunch_space": {
+      "allocated_bytes": 8192,
+      "block_bytes": 4096,
+      "entries": 7,
+      "free_bytes": 252070232064,
+      "logical_bytes": 4479
+    },
+    "primary": null,
+    "raw_exit": 0,
+    "signals": [],
+    "status": "completed",
+    "terminal_members": [
+      {
+        "euid": 501,
+        "pgid": 11937,
+        "pid": 11937,
+        "rss_bytes": 0,
+        "ruid": 501,
+        "sid": 11937,
+        "sid_source": "owned setsid plus waitable zombie",
+        "state": "Z"
+      }
+    ],
+    "trigger_sample": null,
+    "utc": "2026-11-21T11:25:49.726351+00:00"
+  }
+}

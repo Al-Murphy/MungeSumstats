@@ -1,0 +1,93 @@
+CC = clang -arch arm64 -std=gnu2x
+CFLAGS = -falign-functions=64 -Wall -g -O2
+CPICFLAGS = -fPIC
+CPPFLAGS = -I/opt/R/arm64/include
+CC17 = clang -arch arm64 -std=gnu17
+C17FLAGS = -falign-functions=64 -Wall -g -O2
+CC23 = clang -arch arm64 -std=gnu2x
+C23FLAGS = -falign-functions=64 -Wall -g -O2
+CC90 = clang -arch arm64 -std=gnu90
+C90FLAGS = -falign-functions=64 -Wall -g -O2
+CC99 = clang -arch arm64 -std=gnu99
+C99FLAGS = -falign-functions=64 -Wall -g -O2
+CXX = clang++ -arch arm64 -std=gnu++17
+CXXFLAGS = -falign-functions=64 -Wall -g -O2
+CXXPICFLAGS = -fPIC
+CXX11 = clang++ -arch arm64
+CXX11STD = -std=gnu++11
+CXX11FLAGS = -falign-functions=64 -Wall -g -O2
+CXX11PICFLAGS = -fPIC
+CXX14 = clang++ -arch arm64
+CXX14STD = -std=gnu++14
+CXX14FLAGS = -falign-functions=64 -Wall -g -O2
+CXX14PICFLAGS = -fPIC
+CXX17 = clang++ -arch arm64
+CXX17STD = -std=gnu++17
+CXX17FLAGS = -falign-functions=64 -Wall -g -O2
+CXX17PICFLAGS = -fPIC
+CXX20 = clang++ -arch arm64
+CXX20STD = -std=gnu++20
+CXX20FLAGS = -falign-functions=64 -Wall -g -O2
+CXX20PICFLAGS = -fPIC
+CXX23 = clang++ -arch arm64
+CXX23STD = -std=gnu++23
+CXX23FLAGS = -falign-functions=64 -Wall -g -O2
+CXX23PICFLAGS = -fPIC
+CXX26 = clang++ -arch arm64
+CXX26STD = -std=gnu++26
+CXX26FLAGS = -falign-functions=64 -Wall -g -O2
+CXX26PICFLAGS = -fPIC
+DYLIB_EXT = .dylib
+DYLIB_LD = clang -arch arm64 -std=gnu2x
+DYLIB_LDFLAGS = -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup
+FC = /opt/gfortran/bin/gfortran -arch arm64
+FFLAGS = -Wall -g -O2
+FPICFLAGS = -fPIC
+FLIBS = -L/opt/gfortran/lib/gcc/aarch64-apple-darwin20.0/14.2.0 -L/opt/gfortran/lib -lemutls_w -lheapt_w -lgfortran -lquadmath
+FCFLAGS = -Wall -g -O2
+SAFE_FFLAGS = -Wall -g -O2
+OBJC = clang -arch arm64
+OBJCFLAGS = -falign-functions=64 -Wall -g -O2 -fobjc-exceptions
+JAVA = /usr/bin/java
+JAVAC = /usr/bin/javac
+JAVAH = /usr/bin/javah
+JAR = /usr/bin/jar
+JAVA_HOME = /Library/Java/JavaVirtualMachines/jdk-11.0.18+10/Contents/Home
+JAVA_LIBS = -L/Library/Java/JavaVirtualMachines/jdk-11.0.18+10/Contents/Home/lib/server -ljvm
+JAVA_CPPFLAGS = -I/Library/Java/JavaVirtualMachines/jdk-11.0.18+10/Contents/Home/include -I/Library/Java/JavaVirtualMachines/jdk-11.0.18+10/Contents/Home/include/darwin
+LDFLAGS = -L/opt/R/arm64/lib
+SHLIB_CFLAGS =
+SHLIB_CXXFLAGS =
+SHLIB_CXXLD = clang++ -arch arm64 -std=gnu++17
+SHLIB_CXXLDFLAGS = -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup
+SHLIB_CXX11LD = clang++ -arch arm64 -std=gnu++11
+SHLIB_CXX11LDFLAGS = -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup
+SHLIB_CXX14LD = clang++ -arch arm64 -std=gnu++14
+SHLIB_CXX14LDFLAGS = -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup
+SHLIB_CXX17LD = clang++ -arch arm64 -std=gnu++17
+SHLIB_CXX17LDFLAGS = -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup
+SHLIB_CXX20LD = clang++ -arch arm64 -std=gnu++20
+SHLIB_CXX20LDFLAGS = -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup
+SHLIB_CXX23LD = clang++ -arch arm64 -std=gnu++23
+SHLIB_CXX23LDFLAGS = -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup
+SHLIB_CXX26LD = clang++ -arch arm64 -std=gnu++26
+SHLIB_CXX26LDFLAGS = -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup
+SHLIB_EXT = .so
+SHLIB_FFLAGS =
+SHLIB_LD = clang -arch arm64 -std=gnu2x
+SHLIB_LDFLAGS = -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup
+TCLTK_CPPFLAGS = -I/opt/R/arm64/include -I/opt/R/arm64/include -I/usr/X11R6/include
+TCLTK_LIBS = -L/opt/R/arm64/lib -ltcl8.6 -L/opt/R/arm64/lib -ltk8.6 -L/usr/X11R6/lib -lX11 -Wl,-weak-lXss -lXext
+BLAS_LIBS = -L/Library/Frameworks/R.framework/Resources/lib -lRblas
+LAPACK_LIBS = -L/Library/Frameworks/R.framework/Resources/lib -lRlapack
+MAKE = make
+LIBnn = lib
+AR = ar
+NM = /usr/bin/nm -B
+RANLIB = ranlib
+LTO =
+LTO_FC =
+LTO_LD =
+
+## The following variables are defunct
+CPP CXXCPP

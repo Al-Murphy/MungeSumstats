@@ -1,0 +1,32 @@
+{
+  "baseline": {
+    "path": "/private/tmp/mss-namespace-builds-20261121/baseline/build.json",
+    "sha256": "b4b7e216720750e7bf51a0fb41d05636806ca116a8d9ae4bbf8495f1ac457170"
+  },
+  "candidate": {
+    "path": "/private/tmp/mss-namespace-builds-20261121/candidate/build.json",
+    "sha256": "e13492e1af5e6984084ccf20558c4c7a2598a57308291ddb12ecf8ed80554341"
+  },
+  "contention_note": "Independent build/metadata admission observed 253621862400 free bytes. Build phases ran sequentially under the shared guard. Benchmark host admission, contention and cache observations, and timings are pending.",
+  "estimated_output_bytes": 3221225472,
+  "minimum_free_bytes": 199715979264,
+  "repository": "/private/tmp/mss-lazy-variantannotation-20261121",
+  "runtime_receipt": {
+    "path": "/private/tmp/mss-namespace-builds-20261121/runtime.tsv",
+    "sha256": "7a8733e9b60e952379b26bd2d3a5ac235019552dccdcf56d6880bcf0cfa5054a"
+  },
+  "runtime_transcripts": [
+    {
+      "path": "/private/tmp/mss-namespace-builds-20261121/runtime.jsonl",
+      "sha256": "57b0a832aed893a5cc820dd0ef178eafa92ee71474b7b791a8a3c03a9647b788"
+    },
+    {
+      "path": "/private/tmp/mss-namespace-builds-20261121/runtime.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/mss-namespace-builds-20261121/runtime.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

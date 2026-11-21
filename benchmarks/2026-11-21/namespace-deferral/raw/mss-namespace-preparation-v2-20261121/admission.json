@@ -1,0 +1,28 @@
+{
+  "issued_utc": "2026-11-21T11:19:50.869514+00:00",
+  "available_bytes": 253553332224,
+  "argv": [
+    "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/bin/python3.15",
+    "-I",
+    "-B",
+    "-S",
+    "/private/tmp/mss-fullfile-20261121/runtime/namespace-bench-v2.py",
+    "prepare",
+    "/private/tmp/mss-namespace-builds-20261121/PROVENANCE.json",
+    "/private/tmp/mss-namespace-preparation-v2-20261121/metadata",
+    "--candidate",
+    "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b"
+  ],
+  "guard_sha256": "58e0818aa20801c30194bdce26bd117112b4b4d5d10f74ea556360c0867b56a2",
+  "binding_sha256": "a61cbab2a7af12e0befd8d4fb6c0e9f81d786160db1ad391c95389717a002e94",
+  "v2_sha256": "c5071a4503b583c51874127425aafb52aa2d0014f7e7fd3be33adadc2e9885b3",
+  "audit": {
+    "path": "/private/tmp/mss-fullfile-20261121/runtime/OTEL-NAMESPACE-DELTA.md",
+    "sha256": "1baeba297218e4d7fca22cda8706019e9093b20f9530ba9f62997e393d603e79"
+  },
+  "wall_seconds": 300,
+  "rss_bytes": 1073741824,
+  "disk_bytes": 67108864,
+  "floor_bytes": 199715979264,
+  "scope": "Fresh sealed14-namespace metadata using unchanged independently observed committed builds; no timed R workers"
+}

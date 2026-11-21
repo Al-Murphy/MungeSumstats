@@ -1,0 +1,7 @@
+{
+  "input_sha256": "f5313bbb67348759a9d30276b5a7fd88dea16b7ffaa9db330a8064648bf78c62",
+  "input_rows": 9,
+  "distinct_keys": 9,
+  "key_definition": "Exact decoded source tuple (CHR, BP, SNP, A1, A2, TYPE, REF, ALT, STRAND); retain allele order, raw missing tokens, contig and ID aliases as supplied; absent fields are null.",
+  "method": "Exact streaming set census over the generated input"
+}

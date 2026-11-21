@@ -1,0 +1,61 @@
+{
+  "equal": true,
+  "inputs_after": {
+    "/private/tmp/gwas-harvest-stage2/assets/mss/matched-1M.tsv": {
+      "bytes": 46106766,
+      "md5": "86fbafb66e89f7dd8ac211952dada625",
+      "sha256": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2"
+    },
+    "/private/tmp/mss-fullfile-20261121/asset-restore-01/GRCh37.ensembl104.chr22.fa": {
+      "bytes": 52159647,
+      "md5": "936544855b253835442a0f253dd4b083",
+      "sha256": "f2e991e0816c2d7a19f9252ba314ea2717ed1ca73563dcd6417d514fb6c85e53"
+    },
+    "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/matched-index/fasta.fai": {
+      "bytes": 20,
+      "md5": "3b9c342b594b7b5ce42ad8f47f6d97f9",
+      "sha256": "dc27e2b48d065ddb7f37c9334ce0965f662875c7ebdff244f4ad1adcece60957"
+    },
+    "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/matched-index/source.tsv": {
+      "bytes": 12972528,
+      "md5": "ddd22bb347a722ef37ff8a2bb3320a19",
+      "sha256": "d6fae3acdc98e4d06f2e5eb01492360aeb874fe5b9f8763914cc39d9c40db9d1"
+    },
+    "/private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/matched-1M/pair-01-candidate/edition/normalized.tsv": {
+      "bytes": 141352740,
+      "md5": "2c48ea2a6e10e2626c736ae2beb87cdd",
+      "sha256": "e127d0cc8e6bf449841a452aba5110adb37caf18895bf34767065ac660f4c6dc"
+    }
+  },
+  "inputs_before": {
+    "/private/tmp/gwas-harvest-stage2/assets/mss/matched-1M.tsv": {
+      "bytes": 46106766,
+      "md5": "86fbafb66e89f7dd8ac211952dada625",
+      "sha256": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2"
+    },
+    "/private/tmp/mss-fullfile-20261121/asset-restore-01/GRCh37.ensembl104.chr22.fa": {
+      "bytes": 52159647,
+      "md5": "936544855b253835442a0f253dd4b083",
+      "sha256": "f2e991e0816c2d7a19f9252ba314ea2717ed1ca73563dcd6417d514fb6c85e53"
+    },
+    "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/matched-index/fasta.fai": {
+      "bytes": 20,
+      "md5": "3b9c342b594b7b5ce42ad8f47f6d97f9",
+      "sha256": "dc27e2b48d065ddb7f37c9334ce0965f662875c7ebdff244f4ad1adcece60957"
+    },
+    "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/matched-index/source.tsv": {
+      "bytes": 12972528,
+      "md5": "ddd22bb347a722ef37ff8a2bb3320a19",
+      "sha256": "d6fae3acdc98e4d06f2e5eb01492360aeb874fe5b9f8763914cc39d9c40db9d1"
+    },
+    "/private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/matched-1M/pair-01-candidate/edition/normalized.tsv": {
+      "bytes": 141352740,
+      "md5": "2c48ea2a6e10e2626c736ae2beb87cdd",
+      "sha256": "e127d0cc8e6bf449841a452aba5110adb37caf18895bf34767065ac660f4c6dc"
+    }
+  },
+  "oracle": {
+    "path": "/private/tmp/mss-namespace-oracle-20261121/snp-oracle-1M.json",
+    "sha256": "cefb1f6d1308ccdbc71f18d0dea872eba2d8b4a6298be32653668e5792415b50"
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "absent_group_sessions": [
+    7863,
+    7866,
+    8254,
+    8265,
+    8268,
+    8271,
+    8366,
+    8369,
+    8372
+  ],
+  "actual_exec_session": 47563,
+  "actual_exit_code": 0,
+  "actual_terminal_tool_chunk": "282278",
+  "inspection_errors": [],
+  "live_members": [],
+  "observed_utc": "2026-11-21T11:06:41.358118+00:00",
+  "operator_result": {
+    "path": "/private/tmp/mss-namespace-builds-20261121/operator-result.json",
+    "sha256": "0ab419c656fee0f624d7938b7276299f6ea313898690a13e3c590e479634a66f"
+  },
+  "phases": [
+    {
+      "closure": "confirmed",
+      "group_session": 7863,
+      "guard": {
+        "path": "/private/tmp/mss-namespace-builds-20261121/compiler.jsonl",
+        "sha256": "24b88b99881c2cc0b00d39a40f1ecd12d999f6b51bcf90eb4c582e29c9ce18ad"
+      },
+      "label": "compiler",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 7866,
+      "guard": {
+        "path": "/private/tmp/mss-namespace-builds-20261121/r-config.jsonl",
+        "sha256": "7acb699a0fbe6ca32ce64289fb9b4c6863f9ac6aa6b01524b159f9dbbae56718"
+      },
+      "label": "r-config",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 8254,
+      "guard": {
+        "path": "/private/tmp/mss-namespace-builds-20261121/runtime.jsonl",
+        "sha256": "57b0a832aed893a5cc820dd0ef178eafa92ee71474b7b791a8a3c03a9647b788"
+      },
+      "label": "runtime",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 8265,
+      "guard": {
+        "path": "/private/tmp/mss-namespace-builds-20261121/baseline/source-tree.jsonl",
+        "sha256": "9058167d2a9d3c00e7e3acd0cd36396a484fbeb335c3c04e86c04d4a7e668ed4"
+      },
+      "label": "source-tree-baseline",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 8268,
+      "guard": {
+        "path": "/private/tmp/mss-namespace-builds-20261121/baseline/archive.jsonl",
+        "sha256": "bf9e305c5036c693e5de55eefad82986cff4d2864384d4b8cf7653746e112e6f"
+      },
+      "label": "git-archive-baseline",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 8271,
+      "guard": {
+        "path": "/private/tmp/mss-namespace-builds-20261121/baseline/install.jsonl",
+        "sha256": "cad46c384d232f60f549aaf6b7bb35b9fdffeb08bc24edddcb1a0fa6291e941f"
+      },
+      "label": "normal-install-baseline",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 8366,
+      "guard": {
+        "path": "/private/tmp/mss-namespace-builds-20261121/candidate/source-tree.jsonl",
+        "sha256": "35952f1e6a095803c1a82995768b3a9beee6efd389d7bd9cc74360119315b880"
+      },
+      "label": "source-tree-candidate",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 8369,
+      "guard": {
+        "path": "/private/tmp/mss-namespace-builds-20261121/candidate/archive.jsonl",
+        "sha256": "b11779949ac1ad058e2372384caf34f57dcd7ddea29c0f5464188aae7ca7cda6"
+      },
+      "label": "git-archive-candidate",
+      "leader_reaped": true,
+      "raw_exit": 0
+    },
+    {
+      "closure": "confirmed",
+      "group_session": 8372,
+      "guard": {
+        "path": "/private/tmp/mss-namespace-builds-20261121/candidate/install.jsonl",
+        "sha256": "f19d18b1bf5a8a4b88252e2000aa8abb8fbaa6e5e2532dd4851ce1db982ec097"
+      },
+      "label": "normal-install-candidate",
+      "leader_reaped": true,
+      "raw_exit": 0
+    }
+  ],
+  "producer": {
+    "path": "/private/tmp/mss-fullfile-20261121/runtime/namespace-builds.py",
+    "sha256": "615535da8374c81d3d7f23f0300c313d26d06ebea638e73239492243f851a65f"
+  }
+}

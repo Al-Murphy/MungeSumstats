@@ -1,0 +1,2082 @@
+{
+  "admission": {
+    "path": "/private/tmp/mss-namespace-builds-20261121/admission.json",
+    "sha256": "b7907d12d90095dda99ad3d6ec26f23c4c21673fbe82b6620112db4208e30702"
+  },
+  "commits": {
+    "baseline": "14ea7af51a19272c7792fbe582a3d42b291b4a1a",
+    "candidate": "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b"
+  },
+  "finished_utc": "2026-11-21T11:06:00.989688+00:00",
+  "guard": {
+    "path": "/private/tmp/mss-performance-20261119/tools/darwin-full-stage185/guard.py",
+    "sha256": "58e0818aa20801c30194bdce26bd117112b4b4d5d10f74ea556360c0867b56a2"
+  },
+  "historical_dependency_inventory": {
+    "path": "/private/tmp/mss-fullfile-20261121/fullcall-1m-01/dependency-inventory.json",
+    "sha256": "293025cbce6ea392e6b6ecbda1787b90b904abd5a2f30958a9301505fcf46a31"
+  },
+  "matrix_configuration": {
+    "path": "/private/tmp/mss-fullmatrix-20261121/prep-01/matrix.json",
+    "sha256": "156143e169744ead89eb7a01721ac433da0d0983be68924b417bcc72f00426c7"
+  },
+  "phases": [
+    {
+      "allowed_exits": [
+        0
+      ],
+      "argv": [
+        "/Library/Developer/CommandLineTools/usr/bin/clang",
+        "--version"
+      ],
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/clang",
+        "--version"
+      ],
+      "cwd": "/private/tmp/mss-namespace-builds-20261121",
+      "effective_environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-namespace-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-namespace-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "label": "compiler",
+      "outcome": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "primary": null,
+        "raw_exit": 0,
+        "receipt_error": null,
+        "status": "completed"
+      },
+      "paths": {
+        "receipt": "/private/tmp/mss-namespace-builds-20261121/compiler.jsonl",
+        "stderr": "/private/tmp/mss-namespace-builds-20261121/compiler.stderr",
+        "stdout": "/private/tmp/mss-namespace-builds-20261121/compiler.stdout"
+      },
+      "receipt": {
+        "path": "/private/tmp/mss-namespace-builds-20261121/compiler.jsonl",
+        "sha256": "24b88b99881c2cc0b00d39a40f1ecd12d999f6b51bcf90eb4c582e29c9ce18ad"
+      },
+      "terminal": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "elapsed_seconds": 0.07276766700670123,
+        "first_group": {
+          "completed_monotonic": 1852908.722272041,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 7863,
+              "pid": 7863,
+              "rss_bytes": 32768,
+              "ruid": 501,
+              "sid": 7863,
+              "sid_source": "getsid",
+              "state": "Ss"
+            }
+          ],
+          "monotonic": 1852908.717710333,
+          "rss_bytes": 32768
+        },
+        "group_samples": 2,
+        "label": "compiler",
+        "last_group": {
+          "completed_monotonic": 1852908.78564325,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 7863,
+              "pid": 7863,
+              "rss_bytes": 0,
+              "ruid": 501,
+              "sid": 7863,
+              "sid_source": "owned setsid plus waitable zombie",
+              "state": "Z"
+            }
+          ],
+          "monotonic": 1852908.782410375,
+          "rss_bytes": 0
+        },
+        "last_space": {
+          "allocated_bytes": 12288,
+          "block_bytes": 4096,
+          "entries": 7,
+          "free_bytes": 253621747712,
+          "logical_bytes": 2906
+        },
+        "leader_reaped": true,
+        "max_sample_gap_seconds": 0.06470004213042557,
+        "minimum_free_bytes": 253621747712,
+        "missed_samples": 0,
+        "peak_disk_allocated_bytes": 12288,
+        "peak_disk_logical_bytes": 2906,
+        "peak_group": {
+          "completed_monotonic": 1852908.722272041,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 7863,
+              "pid": 7863,
+              "rss_bytes": 32768,
+              "ruid": 501,
+              "sid": 7863,
+              "sid_source": "getsid",
+              "state": "Ss"
+            }
+          ],
+          "monotonic": 1852908.717710333,
+          "rss_bytes": 32768
+        },
+        "peak_sampled_group_rss_bytes": 32768,
+        "prelaunch_rss_bytes": 0,
+        "prelaunch_space": {
+          "allocated_bytes": 8192,
+          "block_bytes": 4096,
+          "entries": 7,
+          "free_bytes": 253621751808,
+          "logical_bytes": 2158
+        },
+        "primary": null,
+        "raw_exit": 0,
+        "signals": [],
+        "status": "completed",
+        "terminal_members": [
+          {
+            "euid": 501,
+            "pgid": 7863,
+            "pid": 7863,
+            "rss_bytes": 0,
+            "ruid": 501,
+            "sid": 7863,
+            "sid_source": "owned setsid plus waitable zombie",
+            "state": "Z"
+          }
+        ],
+        "trigger_sample": null,
+        "utc": "2026-11-21T11:05:29.656048+00:00"
+      },
+      "transcripts": [
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/compiler.jsonl",
+          "sha256": "24b88b99881c2cc0b00d39a40f1ecd12d999f6b51bcf90eb4c582e29c9ce18ad"
+        },
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/compiler.stdout",
+          "sha256": "7656124e47978db7276c4783b040238fd3951ab2f3b824834660fcfb5b37eac1"
+        },
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/compiler.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "allowed_exits": [
+        0
+      ],
+      "argv": [
+        "/usr/bin/env",
+        "SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk",
+        "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/R",
+        "CMD",
+        "config",
+        "--all"
+      ],
+      "command": [
+        "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/R",
+        "CMD",
+        "config",
+        "--all"
+      ],
+      "cwd": "/private/tmp/mss-namespace-builds-20261121",
+      "effective_environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-namespace-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "SDKROOT": "/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk",
+        "TEMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-namespace-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "label": "r-config",
+      "outcome": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "primary": null,
+        "raw_exit": 0,
+        "receipt_error": null,
+        "status": "completed"
+      },
+      "paths": {
+        "receipt": "/private/tmp/mss-namespace-builds-20261121/r-config.jsonl",
+        "stderr": "/private/tmp/mss-namespace-builds-20261121/r-config.stderr",
+        "stdout": "/private/tmp/mss-namespace-builds-20261121/r-config.stdout"
+      },
+      "receipt": {
+        "path": "/private/tmp/mss-namespace-builds-20261121/r-config.jsonl",
+        "sha256": "7acb699a0fbe6ca32ce64289fb9b4c6863f9ac6aa6b01524b159f9dbbae56718"
+      },
+      "terminal": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "elapsed_seconds": 0.47492599999532104,
+        "first_group": {
+          "completed_monotonic": 1852908.790799458,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 7866,
+              "pid": 7866,
+              "rss_bytes": 32768,
+              "ruid": 501,
+              "sid": 7866,
+              "sid_source": "getsid",
+              "state": "Ss"
+            }
+          ],
+          "monotonic": 1852908.788337833,
+          "rss_bytes": 32768
+        },
+        "group_samples": 2,
+        "label": "r-config",
+        "last_group": {
+          "completed_monotonic": 1852909.260869666,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 7866,
+              "pid": 7866,
+              "rss_bytes": 0,
+              "ruid": 501,
+              "sid": 7866,
+              "sid_source": "owned setsid plus waitable zombie",
+              "state": "Z"
+            }
+          ],
+          "monotonic": 1852909.258378583,
+          "rss_bytes": 0
+        },
+        "last_space": {
+          "allocated_bytes": 20480,
+          "block_bytes": 4096,
+          "entries": 10,
+          "free_bytes": 253621735424,
+          "logical_bytes": 10128
+        },
+        "leader_reaped": true,
+        "max_sample_gap_seconds": 0.4700407499913126,
+        "minimum_free_bytes": 253621735424,
+        "missed_samples": 0,
+        "peak_disk_allocated_bytes": 20480,
+        "peak_disk_logical_bytes": 10128,
+        "peak_group": {
+          "completed_monotonic": 1852908.790799458,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 7866,
+              "pid": 7866,
+              "rss_bytes": 32768,
+              "ruid": 501,
+              "sid": 7866,
+              "sid_source": "getsid",
+              "state": "Ss"
+            }
+          ],
+          "monotonic": 1852908.788337833,
+          "rss_bytes": 32768
+        },
+        "peak_sampled_group_rss_bytes": 32768,
+        "prelaunch_rss_bytes": 0,
+        "prelaunch_space": {
+          "allocated_bytes": 16384,
+          "block_bytes": 4096,
+          "entries": 10,
+          "free_bytes": 253621743616,
+          "logical_bytes": 5652
+        },
+        "primary": null,
+        "raw_exit": 0,
+        "signals": [],
+        "status": "completed",
+        "terminal_members": [
+          {
+            "euid": 501,
+            "pgid": 7866,
+            "pid": 7866,
+            "rss_bytes": 0,
+            "ruid": 501,
+            "sid": 7866,
+            "sid_source": "owned setsid plus waitable zombie",
+            "state": "Z"
+          }
+        ],
+        "trigger_sample": null,
+        "utc": "2026-11-21T11:05:30.131292+00:00"
+      },
+      "transcripts": [
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/r-config.jsonl",
+          "sha256": "7acb699a0fbe6ca32ce64289fb9b4c6863f9ac6aa6b01524b159f9dbbae56718"
+        },
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/r-config.stdout",
+          "sha256": "5f713ee2ce1c5b57698ac0a43e5451863383d6557f151a38691ad6c180fa7527"
+        },
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/r-config.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "allowed_exits": [
+        0
+      ],
+      "argv": [
+        "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+        "--vanilla",
+        "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+        "runtime",
+        "/private/tmp/mss-namespace-builds-20261121/runtime.tsv"
+      ],
+      "command": [
+        "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+        "--vanilla",
+        "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+        "runtime",
+        "/private/tmp/mss-namespace-builds-20261121/runtime.tsv"
+      ],
+      "cwd": "/private/tmp/mss-namespace-builds-20261121",
+      "effective_environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-namespace-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-namespace-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "label": "runtime",
+      "outcome": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "primary": null,
+        "raw_exit": 0,
+        "receipt_error": null,
+        "status": "completed"
+      },
+      "paths": {
+        "receipt": "/private/tmp/mss-namespace-builds-20261121/runtime.jsonl",
+        "stderr": "/private/tmp/mss-namespace-builds-20261121/runtime.stderr",
+        "stdout": "/private/tmp/mss-namespace-builds-20261121/runtime.stdout"
+      },
+      "receipt": {
+        "path": "/private/tmp/mss-namespace-builds-20261121/runtime.jsonl",
+        "sha256": "57b0a832aed893a5cc820dd0ef178eafa92ee71474b7b791a8a3c03a9647b788"
+      },
+      "terminal": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "elapsed_seconds": 0.3033997907768935,
+        "first_group": {
+          "completed_monotonic": 1852909.268644125,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 8254,
+              "pid": 8254,
+              "rss_bytes": 32768,
+              "ruid": 501,
+              "sid": 8254,
+              "sid_source": "getsid",
+              "state": "Ss"
+            }
+          ],
+          "monotonic": 1852909.266597625,
+          "rss_bytes": 32768
+        },
+        "group_samples": 2,
+        "label": "runtime",
+        "last_group": {
+          "completed_monotonic": 1852909.564557,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 8254,
+              "pid": 8254,
+              "rss_bytes": 0,
+              "ruid": 501,
+              "sid": 8254,
+              "sid_source": "owned setsid plus waitable zombie",
+              "state": "Z"
+            }
+          ],
+          "monotonic": 1852909.561493583,
+          "rss_bytes": 0
+        },
+        "last_space": {
+          "allocated_bytes": 28672,
+          "block_bytes": 4096,
+          "entries": 14,
+          "free_bytes": 253621719040,
+          "logical_bytes": 14420
+        },
+        "leader_reaped": true,
+        "max_sample_gap_seconds": 0.29489595792256296,
+        "minimum_free_bytes": 253621719040,
+        "missed_samples": 0,
+        "peak_disk_allocated_bytes": 28672,
+        "peak_disk_logical_bytes": 14420,
+        "peak_group": {
+          "completed_monotonic": 1852909.268644125,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 8254,
+              "pid": 8254,
+              "rss_bytes": 32768,
+              "ruid": 501,
+              "sid": 8254,
+              "sid_source": "getsid",
+              "state": "Ss"
+            }
+          ],
+          "monotonic": 1852909.266597625,
+          "rss_bytes": 32768
+        },
+        "peak_sampled_group_rss_bytes": 32768,
+        "prelaunch_rss_bytes": 0,
+        "prelaunch_space": {
+          "allocated_bytes": 24576,
+          "block_bytes": 4096,
+          "entries": 13,
+          "free_bytes": 253621731328,
+          "logical_bytes": 12951
+        },
+        "primary": null,
+        "raw_exit": 0,
+        "signals": [],
+        "status": "completed",
+        "terminal_members": [
+          {
+            "euid": 501,
+            "pgid": 8254,
+            "pid": 8254,
+            "rss_bytes": 0,
+            "ruid": 501,
+            "sid": 8254,
+            "sid_source": "owned setsid plus waitable zombie",
+            "state": "Z"
+          }
+        ],
+        "trigger_sample": null,
+        "utc": "2026-11-21T11:05:30.435015+00:00"
+      },
+      "transcripts": [
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/runtime.jsonl",
+          "sha256": "57b0a832aed893a5cc820dd0ef178eafa92ee71474b7b791a8a3c03a9647b788"
+        },
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/runtime.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/runtime.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "allowed_exits": [
+        0
+      ],
+      "argv": [
+        "/usr/bin/env",
+        "GIT_CONFIG_NOSYSTEM=1",
+        "GIT_CONFIG_GLOBAL=/dev/null",
+        "GIT_NO_REPLACE_OBJECTS=1",
+        "GIT_NO_LAZY_FETCH=1",
+        "/usr/bin/git",
+        "--no-replace-objects",
+        "-C",
+        "/private/tmp/mss-lazy-variantannotation-20261121",
+        "rev-parse",
+        "--verify",
+        "14ea7af51a19272c7792fbe582a3d42b291b4a1a^{tree}"
+      ],
+      "command": [
+        "/usr/bin/git",
+        "--no-replace-objects",
+        "-C",
+        "/private/tmp/mss-lazy-variantannotation-20261121",
+        "rev-parse",
+        "--verify",
+        "14ea7af51a19272c7792fbe582a3d42b291b4a1a^{tree}"
+      ],
+      "cwd": "/private/tmp/mss-namespace-builds-20261121",
+      "effective_environment": {
+        "BLIS_NUM_THREADS": "1",
+        "GIT_CONFIG_GLOBAL": "/dev/null",
+        "GIT_CONFIG_NOSYSTEM": "1",
+        "GIT_NO_LAZY_FETCH": "1",
+        "GIT_NO_REPLACE_OBJECTS": "1",
+        "HOME": "/private/tmp/mss-namespace-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-namespace-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "label": "source-tree-baseline",
+      "outcome": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "primary": null,
+        "raw_exit": 0,
+        "receipt_error": null,
+        "status": "completed"
+      },
+      "paths": {
+        "receipt": "/private/tmp/mss-namespace-builds-20261121/baseline/source-tree.jsonl",
+        "stderr": "/private/tmp/mss-namespace-builds-20261121/baseline/source-tree.stderr",
+        "stdout": "/private/tmp/mss-namespace-builds-20261121/baseline/source-tree.stdout"
+      },
+      "receipt": {
+        "path": "/private/tmp/mss-namespace-builds-20261121/baseline/source-tree.jsonl",
+        "sha256": "9058167d2a9d3c00e7e3acd0cd36396a484fbeb335c3c04e86c04d4a7e668ed4"
+      },
+      "terminal": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "elapsed_seconds": 0.06752520916052163,
+        "first_group": {
+          "completed_monotonic": 1852909.570261166,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 8265,
+              "pid": 8265,
+              "rss_bytes": 1228800,
+              "ruid": 501,
+              "sid": 8265,
+              "sid_source": "getsid",
+              "state": "Rs"
+            }
+          ],
+          "monotonic": 1852909.568139166,
+          "rss_bytes": 1228800
+        },
+        "group_samples": 2,
+        "label": "source-tree-baseline",
+        "last_group": {
+          "completed_monotonic": 1852909.632934458,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 8265,
+              "pid": 8265,
+              "rss_bytes": 0,
+              "ruid": 501,
+              "sid": 8265,
+              "sid_source": "owned setsid plus waitable zombie",
+              "state": "Z"
+            }
+          ],
+          "monotonic": 1852909.630417375,
+          "rss_bytes": 0
+        },
+        "last_space": {
+          "allocated_bytes": 36864,
+          "block_bytes": 4096,
+          "entries": 19,
+          "free_bytes": 253621706752,
+          "logical_bytes": 18169
+        },
+        "leader_reaped": true,
+        "max_sample_gap_seconds": 0.062278208788484335,
+        "minimum_free_bytes": 253621706752,
+        "missed_samples": 0,
+        "peak_disk_allocated_bytes": 36864,
+        "peak_disk_logical_bytes": 18169,
+        "peak_group": {
+          "completed_monotonic": 1852909.570261166,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 8265,
+              "pid": 8265,
+              "rss_bytes": 1228800,
+              "ruid": 501,
+              "sid": 8265,
+              "sid_source": "getsid",
+              "state": "Rs"
+            }
+          ],
+          "monotonic": 1852909.568139166,
+          "rss_bytes": 1228800
+        },
+        "peak_sampled_group_rss_bytes": 1228800,
+        "prelaunch_rss_bytes": 0,
+        "prelaunch_space": {
+          "allocated_bytes": 32768,
+          "block_bytes": 4096,
+          "entries": 19,
+          "free_bytes": 253621710848,
+          "logical_bytes": 17526
+        },
+        "primary": null,
+        "raw_exit": 0,
+        "signals": [],
+        "status": "completed",
+        "terminal_members": [
+          {
+            "euid": 501,
+            "pgid": 8265,
+            "pid": 8265,
+            "rss_bytes": 0,
+            "ruid": 501,
+            "sid": 8265,
+            "sid_source": "owned setsid plus waitable zombie",
+            "state": "Z"
+          }
+        ],
+        "trigger_sample": null,
+        "utc": "2026-11-21T11:05:30.503408+00:00"
+      },
+      "transcripts": [
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/baseline/source-tree.jsonl",
+          "sha256": "9058167d2a9d3c00e7e3acd0cd36396a484fbeb335c3c04e86c04d4a7e668ed4"
+        },
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/baseline/source-tree.stdout",
+          "sha256": "9ecb1463aad7e601e8c4fe21046ea60e46859a000a54932c67cb4f59b35f2488"
+        },
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/baseline/source-tree.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "allowed_exits": [
+        0
+      ],
+      "argv": [
+        "/usr/bin/env",
+        "GIT_CONFIG_NOSYSTEM=1",
+        "GIT_CONFIG_GLOBAL=/dev/null",
+        "GIT_NO_REPLACE_OBJECTS=1",
+        "GIT_NO_LAZY_FETCH=1",
+        "/usr/bin/git",
+        "--no-replace-objects",
+        "-C",
+        "/private/tmp/mss-lazy-variantannotation-20261121",
+        "archive",
+        "--format=tar",
+        "--prefix=MungeSumstats/",
+        "14ea7af51a19272c7792fbe582a3d42b291b4a1a"
+      ],
+      "command": [
+        "/usr/bin/git",
+        "--no-replace-objects",
+        "-C",
+        "/private/tmp/mss-lazy-variantannotation-20261121",
+        "archive",
+        "--format=tar",
+        "--prefix=MungeSumstats/",
+        "14ea7af51a19272c7792fbe582a3d42b291b4a1a"
+      ],
+      "cwd": "/private/tmp/mss-namespace-builds-20261121",
+      "effective_environment": {
+        "BLIS_NUM_THREADS": "1",
+        "GIT_CONFIG_GLOBAL": "/dev/null",
+        "GIT_CONFIG_NOSYSTEM": "1",
+        "GIT_NO_LAZY_FETCH": "1",
+        "GIT_NO_REPLACE_OBJECTS": "1",
+        "HOME": "/private/tmp/mss-namespace-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-namespace-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "label": "git-archive-baseline",
+      "outcome": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "primary": null,
+        "raw_exit": 0,
+        "receipt_error": null,
+        "status": "completed"
+      },
+      "paths": {
+        "receipt": "/private/tmp/mss-namespace-builds-20261121/baseline/archive.jsonl",
+        "stderr": "/private/tmp/mss-namespace-builds-20261121/baseline/archive.stderr",
+        "stdout": "/private/tmp/mss-namespace-builds-20261121/baseline/MungeSumstats.tar"
+      },
+      "receipt": {
+        "path": "/private/tmp/mss-namespace-builds-20261121/baseline/archive.jsonl",
+        "sha256": "bf9e305c5036c693e5de55eefad82986cff4d2864384d4b8cf7653746e112e6f"
+      },
+      "terminal": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "elapsed_seconds": 0.06774087506346405,
+        "first_group": {
+          "completed_monotonic": 1852909.638385875,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 8268,
+              "pid": 8268,
+              "rss_bytes": 1228800,
+              "ruid": 501,
+              "sid": 8268,
+              "sid_source": "getsid",
+              "state": "Rs"
+            }
+          ],
+          "monotonic": 1852909.636408458,
+          "rss_bytes": 1228800
+        },
+        "group_samples": 2,
+        "label": "git-archive-baseline",
+        "last_group": {
+          "completed_monotonic": 1852909.701088375,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 8268,
+              "pid": 8268,
+              "rss_bytes": 0,
+              "ruid": 501,
+              "sid": 8268,
+              "sid_source": "owned setsid plus waitable zombie",
+              "state": "Z"
+            }
+          ],
+          "monotonic": 1852909.698518708,
+          "rss_bytes": 0
+        },
+        "last_space": {
+          "allocated_bytes": 12922880,
+          "block_bytes": 4096,
+          "entries": 22,
+          "free_bytes": 253608820736,
+          "logical_bytes": 12903646
+        },
+        "leader_reaped": true,
+        "max_sample_gap_seconds": 0.06211025011725724,
+        "minimum_free_bytes": 253608820736,
+        "missed_samples": 0,
+        "peak_disk_allocated_bytes": 12922880,
+        "peak_disk_logical_bytes": 12903646,
+        "peak_group": {
+          "completed_monotonic": 1852909.638385875,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 8268,
+              "pid": 8268,
+              "rss_bytes": 1228800,
+              "ruid": 501,
+              "sid": 8268,
+              "sid_source": "getsid",
+              "state": "Rs"
+            }
+          ],
+          "monotonic": 1852909.636408458,
+          "rss_bytes": 1228800
+        },
+        "peak_sampled_group_rss_bytes": 1228800,
+        "prelaunch_rss_bytes": 0,
+        "prelaunch_space": {
+          "allocated_bytes": 40960,
+          "block_bytes": 4096,
+          "entries": 22,
+          "free_bytes": 253621702656,
+          "logical_bytes": 21124
+        },
+        "primary": null,
+        "raw_exit": 0,
+        "signals": [],
+        "status": "completed",
+        "terminal_members": [
+          {
+            "euid": 501,
+            "pgid": 8268,
+            "pid": 8268,
+            "rss_bytes": 0,
+            "ruid": 501,
+            "sid": 8268,
+            "sid_source": "owned setsid plus waitable zombie",
+            "state": "Z"
+          }
+        ],
+        "trigger_sample": null,
+        "utc": "2026-11-21T11:05:30.571557+00:00"
+      },
+      "transcripts": [
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/baseline/archive.jsonl",
+          "sha256": "bf9e305c5036c693e5de55eefad82986cff4d2864384d4b8cf7653746e112e6f"
+        },
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/baseline/MungeSumstats.tar",
+          "sha256": "7db963d0de51a703f953a2ff6896fdafe34b39213c625a94954316b600bf8ee2"
+        },
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/baseline/archive.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "allowed_exits": [
+        0
+      ],
+      "argv": [
+        "/usr/bin/env",
+        "SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk",
+        "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/R",
+        "CMD",
+        "INSTALL",
+        "--use-vanilla",
+        "--library=/private/tmp/mss-namespace-builds-20261121/baseline/library",
+        "/private/tmp/mss-namespace-builds-20261121/baseline/MungeSumstats.tar"
+      ],
+      "command": [
+        "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/R",
+        "CMD",
+        "INSTALL",
+        "--use-vanilla",
+        "--library=/private/tmp/mss-namespace-builds-20261121/baseline/library",
+        "/private/tmp/mss-namespace-builds-20261121/baseline/MungeSumstats.tar"
+      ],
+      "cwd": "/private/tmp/mss-namespace-builds-20261121",
+      "effective_environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-namespace-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "SDKROOT": "/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk",
+        "TEMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-namespace-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "label": "normal-install-baseline",
+      "outcome": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "primary": null,
+        "raw_exit": 0,
+        "receipt_error": null,
+        "status": "completed"
+      },
+      "paths": {
+        "receipt": "/private/tmp/mss-namespace-builds-20261121/baseline/install.jsonl",
+        "stderr": "/private/tmp/mss-namespace-builds-20261121/baseline/install.stderr",
+        "stdout": "/private/tmp/mss-namespace-builds-20261121/baseline/install.stdout"
+      },
+      "receipt": {
+        "path": "/private/tmp/mss-namespace-builds-20261121/baseline/install.jsonl",
+        "sha256": "cad46c384d232f60f549aaf6b7bb35b9fdffeb08bc24edddcb1a0fa6291e941f"
+      },
+      "terminal": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "elapsed_seconds": 16.04106399999,
+        "first_group": {
+          "completed_monotonic": 1852909.72553525,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 8271,
+              "pid": 8271,
+              "rss_bytes": 622592,
+              "ruid": 501,
+              "sid": 8271,
+              "sid_source": "getsid",
+              "state": "Rs"
+            }
+          ],
+          "monotonic": 1852909.723202,
+          "rss_bytes": 622592
+        },
+        "group_samples": 17,
+        "label": "normal-install-baseline",
+        "last_group": {
+          "completed_monotonic": 1852925.756307708,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 8271,
+              "pid": 8271,
+              "rss_bytes": 0,
+              "ruid": 501,
+              "sid": 8271,
+              "sid_source": "owned setsid plus waitable zombie",
+              "state": "Z"
+            }
+          ],
+          "monotonic": 1852925.753108833,
+          "rss_bytes": 0
+        },
+        "last_space": {
+          "allocated_bytes": 23101440,
+          "block_bytes": 4096,
+          "entries": 872,
+          "free_bytes": 253595869184,
+          "logical_bytes": 21165065
+        },
+        "leader_reaped": true,
+        "max_sample_gap_seconds": 1.0564006250351667,
+        "minimum_free_bytes": 253573435392,
+        "missed_samples": 0,
+        "peak_disk_allocated_bytes": 44781568,
+        "peak_disk_logical_bytes": 39115477,
+        "peak_group": {
+          "completed_monotonic": 1852917.945565416,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 8271,
+              "pid": 8271,
+              "rss_bytes": 2785280,
+              "ruid": 501,
+              "sid": 8271,
+              "sid_source": "getsid",
+              "state": "Ss"
+            },
+            {
+              "euid": 501,
+              "pgid": 8271,
+              "pid": 8275,
+              "rss_bytes": 120537088,
+              "ruid": 501,
+              "sid": 8271,
+              "sid_source": "getsid",
+              "state": "S"
+            },
+            {
+              "euid": 501,
+              "pgid": 8271,
+              "pid": 8301,
+              "rss_bytes": 2670592,
+              "ruid": 501,
+              "sid": 8271,
+              "sid_source": "getsid",
+              "state": "S"
+            },
+            {
+              "euid": 501,
+              "pgid": 8271,
+              "pid": 8302,
+              "rss_bytes": 1103626240,
+              "ruid": 501,
+              "sid": 8271,
+              "sid_source": "getsid",
+              "state": "R"
+            }
+          ],
+          "monotonic": 1852917.9417845,
+          "rss_bytes": 1229619200
+        },
+        "peak_sampled_group_rss_bytes": 1229619200,
+        "prelaunch_rss_bytes": 0,
+        "prelaunch_space": {
+          "allocated_bytes": 12926976,
+          "block_bytes": 4096,
+          "entries": 25,
+          "free_bytes": 253608816640,
+          "logical_bytes": 12906627
+        },
+        "primary": null,
+        "raw_exit": 0,
+        "signals": [],
+        "status": "completed",
+        "terminal_members": [
+          {
+            "euid": 501,
+            "pgid": 8271,
+            "pid": 8271,
+            "rss_bytes": 0,
+            "ruid": 501,
+            "sid": 8271,
+            "sid_source": "owned setsid plus waitable zombie",
+            "state": "Z"
+          }
+        ],
+        "trigger_sample": null,
+        "utc": "2026-11-21T11:05:46.631489+00:00"
+      },
+      "transcripts": [
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/baseline/install.jsonl",
+          "sha256": "cad46c384d232f60f549aaf6b7bb35b9fdffeb08bc24edddcb1a0fa6291e941f"
+        },
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/baseline/install.stdout",
+          "sha256": "1d861c964b025461e4a1a8ce900ac871e9a38996d0498135f7f1ac8bd74e367c"
+        },
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/baseline/install.stderr",
+          "sha256": "1227b719bec134cbda1391893cb90ca864cafc748ed9c5a27ac8ed354dbf471d"
+        }
+      ]
+    },
+    {
+      "allowed_exits": [
+        0
+      ],
+      "argv": [
+        "/usr/bin/env",
+        "GIT_CONFIG_NOSYSTEM=1",
+        "GIT_CONFIG_GLOBAL=/dev/null",
+        "GIT_NO_REPLACE_OBJECTS=1",
+        "GIT_NO_LAZY_FETCH=1",
+        "/usr/bin/git",
+        "--no-replace-objects",
+        "-C",
+        "/private/tmp/mss-lazy-variantannotation-20261121",
+        "rev-parse",
+        "--verify",
+        "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b^{tree}"
+      ],
+      "command": [
+        "/usr/bin/git",
+        "--no-replace-objects",
+        "-C",
+        "/private/tmp/mss-lazy-variantannotation-20261121",
+        "rev-parse",
+        "--verify",
+        "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b^{tree}"
+      ],
+      "cwd": "/private/tmp/mss-namespace-builds-20261121",
+      "effective_environment": {
+        "BLIS_NUM_THREADS": "1",
+        "GIT_CONFIG_GLOBAL": "/dev/null",
+        "GIT_CONFIG_NOSYSTEM": "1",
+        "GIT_NO_LAZY_FETCH": "1",
+        "GIT_NO_REPLACE_OBJECTS": "1",
+        "HOME": "/private/tmp/mss-namespace-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-namespace-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "label": "source-tree-candidate",
+      "outcome": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "primary": null,
+        "raw_exit": 0,
+        "receipt_error": null,
+        "status": "completed"
+      },
+      "paths": {
+        "receipt": "/private/tmp/mss-namespace-builds-20261121/candidate/source-tree.jsonl",
+        "stderr": "/private/tmp/mss-namespace-builds-20261121/candidate/source-tree.stderr",
+        "stdout": "/private/tmp/mss-namespace-builds-20261121/candidate/source-tree.stdout"
+      },
+      "receipt": {
+        "path": "/private/tmp/mss-namespace-builds-20261121/candidate/source-tree.jsonl",
+        "sha256": "35952f1e6a095803c1a82995768b3a9beee6efd389d7bd9cc74360119315b880"
+      },
+      "terminal": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "elapsed_seconds": 0.08289604098536074,
+        "first_group": {
+          "completed_monotonic": 1852925.8269015,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 8366,
+              "pid": 8366,
+              "rss_bytes": 1277952,
+              "ruid": 501,
+              "sid": 8366,
+              "sid_source": "getsid",
+              "state": "Rs"
+            }
+          ],
+          "monotonic": 1852925.824549083,
+          "rss_bytes": 1277952
+        },
+        "group_samples": 2,
+        "label": "source-tree-candidate",
+        "last_group": {
+          "completed_monotonic": 1852925.885927958,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 8366,
+              "pid": 8366,
+              "rss_bytes": 0,
+              "ruid": 501,
+              "sid": 8366,
+              "sid_source": "owned setsid plus waitable zombie",
+              "state": "Z"
+            }
+          ],
+          "monotonic": 1852925.882992458,
+          "rss_bytes": 0
+        },
+        "last_space": {
+          "allocated_bytes": 23121920,
+          "block_bytes": 4096,
+          "entries": 878,
+          "free_bytes": 253595848704,
+          "logical_bytes": 21178976
+        },
+        "leader_reaped": true,
+        "max_sample_gap_seconds": 0.05844337516464293,
+        "minimum_free_bytes": 253595848704,
+        "missed_samples": 0,
+        "peak_disk_allocated_bytes": 23121920,
+        "peak_disk_logical_bytes": 21178976,
+        "peak_group": {
+          "completed_monotonic": 1852925.8269015,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 8366,
+              "pid": 8366,
+              "rss_bytes": 1277952,
+              "ruid": 501,
+              "sid": 8366,
+              "sid_source": "getsid",
+              "state": "Rs"
+            }
+          ],
+          "monotonic": 1852925.824549083,
+          "rss_bytes": 1277952
+        },
+        "peak_sampled_group_rss_bytes": 1277952,
+        "prelaunch_rss_bytes": 0,
+        "prelaunch_space": {
+          "allocated_bytes": 23117824,
+          "block_bytes": 4096,
+          "entries": 878,
+          "free_bytes": 253595852800,
+          "logical_bytes": 21178331
+        },
+        "primary": null,
+        "raw_exit": 0,
+        "signals": [],
+        "status": "completed",
+        "terminal_members": [
+          {
+            "euid": 501,
+            "pgid": 8366,
+            "pid": 8366,
+            "rss_bytes": 0,
+            "ruid": 501,
+            "sid": 8366,
+            "sid_source": "owned setsid plus waitable zombie",
+            "state": "Z"
+          }
+        ],
+        "trigger_sample": null,
+        "utc": "2026-11-21T11:05:46.760275+00:00"
+      },
+      "transcripts": [
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/candidate/source-tree.jsonl",
+          "sha256": "35952f1e6a095803c1a82995768b3a9beee6efd389d7bd9cc74360119315b880"
+        },
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/candidate/source-tree.stdout",
+          "sha256": "e493856cbf0df458e4f2c9a40150b0b20bf1608d15c77cc01f0f3a08a218a5c0"
+        },
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/candidate/source-tree.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "allowed_exits": [
+        0
+      ],
+      "argv": [
+        "/usr/bin/env",
+        "GIT_CONFIG_NOSYSTEM=1",
+        "GIT_CONFIG_GLOBAL=/dev/null",
+        "GIT_NO_REPLACE_OBJECTS=1",
+        "GIT_NO_LAZY_FETCH=1",
+        "/usr/bin/git",
+        "--no-replace-objects",
+        "-C",
+        "/private/tmp/mss-lazy-variantannotation-20261121",
+        "archive",
+        "--format=tar",
+        "--prefix=MungeSumstats/",
+        "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b"
+      ],
+      "command": [
+        "/usr/bin/git",
+        "--no-replace-objects",
+        "-C",
+        "/private/tmp/mss-lazy-variantannotation-20261121",
+        "archive",
+        "--format=tar",
+        "--prefix=MungeSumstats/",
+        "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b"
+      ],
+      "cwd": "/private/tmp/mss-namespace-builds-20261121",
+      "effective_environment": {
+        "BLIS_NUM_THREADS": "1",
+        "GIT_CONFIG_GLOBAL": "/dev/null",
+        "GIT_CONFIG_NOSYSTEM": "1",
+        "GIT_NO_LAZY_FETCH": "1",
+        "GIT_NO_REPLACE_OBJECTS": "1",
+        "HOME": "/private/tmp/mss-namespace-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-namespace-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "label": "git-archive-candidate",
+      "outcome": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "primary": null,
+        "raw_exit": 0,
+        "receipt_error": null,
+        "status": "completed"
+      },
+      "paths": {
+        "receipt": "/private/tmp/mss-namespace-builds-20261121/candidate/archive.jsonl",
+        "stderr": "/private/tmp/mss-namespace-builds-20261121/candidate/archive.stderr",
+        "stdout": "/private/tmp/mss-namespace-builds-20261121/candidate/MungeSumstats.tar"
+      },
+      "receipt": {
+        "path": "/private/tmp/mss-namespace-builds-20261121/candidate/archive.jsonl",
+        "sha256": "b11779949ac1ad058e2372384caf34f57dcd7ddea29c0f5464188aae7ca7cda6"
+      },
+      "terminal": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "elapsed_seconds": 0.08356345794163644,
+        "first_group": {
+          "completed_monotonic": 1852925.910154333,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 8369,
+              "pid": 8369,
+              "rss_bytes": 1277952,
+              "ruid": 501,
+              "sid": 8369,
+              "sid_source": "getsid",
+              "state": "Rs"
+            }
+          ],
+          "monotonic": 1852925.907818083,
+          "rss_bytes": 1277952
+        },
+        "group_samples": 2,
+        "label": "git-archive-candidate",
+        "last_group": {
+          "completed_monotonic": 1852925.970051125,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 8369,
+              "pid": 8369,
+              "rss_bytes": 0,
+              "ruid": 501,
+              "sid": 8369,
+              "sid_source": "owned setsid plus waitable zombie",
+              "state": "Z"
+            }
+          ],
+          "monotonic": 1852925.967043125,
+          "rss_bytes": 0
+        },
+        "last_space": {
+          "allocated_bytes": 36007936,
+          "block_bytes": 4096,
+          "entries": 881,
+          "free_bytes": 253582958592,
+          "logical_bytes": 34064475
+        },
+        "leader_reaped": true,
+        "max_sample_gap_seconds": 0.059225042117759585,
+        "minimum_free_bytes": 253582958592,
+        "missed_samples": 0,
+        "peak_disk_allocated_bytes": 36007936,
+        "peak_disk_logical_bytes": 34064475,
+        "peak_group": {
+          "completed_monotonic": 1852925.910154333,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 8369,
+              "pid": 8369,
+              "rss_bytes": 1277952,
+              "ruid": 501,
+              "sid": 8369,
+              "sid_source": "getsid",
+              "state": "Rs"
+            }
+          ],
+          "monotonic": 1852925.907818083,
+          "rss_bytes": 1277952
+        },
+        "peak_sampled_group_rss_bytes": 1277952,
+        "prelaunch_rss_bytes": 0,
+        "prelaunch_space": {
+          "allocated_bytes": 23126016,
+          "block_bytes": 4096,
+          "entries": 881,
+          "free_bytes": 253595844608,
+          "logical_bytes": 21181951
+        },
+        "primary": null,
+        "raw_exit": 0,
+        "signals": [],
+        "status": "completed",
+        "terminal_members": [
+          {
+            "euid": 501,
+            "pgid": 8369,
+            "pid": 8369,
+            "rss_bytes": 0,
+            "ruid": 501,
+            "sid": 8369,
+            "sid_source": "owned setsid plus waitable zombie",
+            "state": "Z"
+          }
+        ],
+        "trigger_sample": null,
+        "utc": "2026-11-21T11:05:46.844384+00:00"
+      },
+      "transcripts": [
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/candidate/archive.jsonl",
+          "sha256": "b11779949ac1ad058e2372384caf34f57dcd7ddea29c0f5464188aae7ca7cda6"
+        },
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/candidate/MungeSumstats.tar",
+          "sha256": "74430d18ee4e11db03df26a7cae2706868f28c751b81a4d3df84717cba8ad4c6"
+        },
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/candidate/archive.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "allowed_exits": [
+        0
+      ],
+      "argv": [
+        "/usr/bin/env",
+        "SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk",
+        "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/R",
+        "CMD",
+        "INSTALL",
+        "--use-vanilla",
+        "--library=/private/tmp/mss-namespace-builds-20261121/candidate/library",
+        "/private/tmp/mss-namespace-builds-20261121/candidate/MungeSumstats.tar"
+      ],
+      "command": [
+        "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/R",
+        "CMD",
+        "INSTALL",
+        "--use-vanilla",
+        "--library=/private/tmp/mss-namespace-builds-20261121/candidate/library",
+        "/private/tmp/mss-namespace-builds-20261121/candidate/MungeSumstats.tar"
+      ],
+      "cwd": "/private/tmp/mss-namespace-builds-20261121",
+      "effective_environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-namespace-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "SDKROOT": "/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk",
+        "TEMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "environment": {
+        "BLIS_NUM_THREADS": "1",
+        "HOME": "/private/tmp/mss-namespace-builds-20261121/home",
+        "LANG": "en_US.UTF-8",
+        "LC_ALL": "en_US.UTF-8",
+        "MAKEFLAGS": "-j1",
+        "MKL_DYNAMIC": "FALSE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_NUM_THREADS": "1",
+        "OMP_THREAD_LIMIT": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "R_DATATABLE_NUM_THREADS": "1",
+        "R_ENVIRON_USER": "/dev/null",
+        "R_LIBS": "/private/tmp/mss-parallel-support-20261121/common",
+        "R_LIBS_SITE": "",
+        "R_LIBS_USER": "",
+        "R_MAKEVARS_USER": "/dev/null",
+        "R_PROFILE_USER": "/dev/null",
+        "TEMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMP": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TMPDIR": "/private/tmp/mss-namespace-builds-20261121/tmp",
+        "TZ": "UTC",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "label": "normal-install-candidate",
+      "outcome": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "primary": null,
+        "raw_exit": 0,
+        "receipt_error": null,
+        "status": "completed"
+      },
+      "paths": {
+        "receipt": "/private/tmp/mss-namespace-builds-20261121/candidate/install.jsonl",
+        "stderr": "/private/tmp/mss-namespace-builds-20261121/candidate/install.stderr",
+        "stdout": "/private/tmp/mss-namespace-builds-20261121/candidate/install.stdout"
+      },
+      "receipt": {
+        "path": "/private/tmp/mss-namespace-builds-20261121/candidate/install.jsonl",
+        "sha256": "f19d18b1bf5a8a4b88252e2000aa8abb8fbaa6e5e2532dd4851ce1db982ec097"
+      },
+      "terminal": {
+        "cleanup_errors": [],
+        "closure": "confirmed",
+        "elapsed_seconds": 14.072015583049506,
+        "first_group": {
+          "completed_monotonic": 1852926.013251541,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 8372,
+              "pid": 8372,
+              "rss_bytes": 655360,
+              "ruid": 501,
+              "sid": 8372,
+              "sid_source": "getsid",
+              "state": "Rs"
+            }
+          ],
+          "monotonic": 1852926.010895166,
+          "rss_bytes": 655360
+        },
+        "group_samples": 15,
+        "label": "normal-install-candidate",
+        "last_group": {
+          "completed_monotonic": 1852940.055223291,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 8372,
+              "pid": 8372,
+              "rss_bytes": 0,
+              "ruid": 501,
+              "sid": 8372,
+              "sid_source": "owned setsid plus waitable zombie",
+              "state": "Z"
+            }
+          ],
+          "monotonic": 1852940.052071291,
+          "rss_bytes": 0
+        },
+        "last_space": {
+          "allocated_bytes": 46137344,
+          "block_bytes": 4096,
+          "entries": 1731,
+          "free_bytes": 253572866048,
+          "logical_bytes": 42325935
+        },
+        "leader_reaped": true,
+        "max_sample_gap_seconds": 1.058459124993533,
+        "minimum_free_bytes": 253549875200,
+        "missed_samples": 0,
+        "peak_disk_allocated_bytes": 67817472,
+        "peak_disk_logical_bytes": 60275651,
+        "peak_group": {
+          "completed_monotonic": 1852933.273797458,
+          "members": [
+            {
+              "euid": 501,
+              "pgid": 8372,
+              "pid": 8372,
+              "rss_bytes": 2785280,
+              "ruid": 501,
+              "sid": 8372,
+              "sid_source": "getsid",
+              "state": "Ss"
+            },
+            {
+              "euid": 501,
+              "pgid": 8372,
+              "pid": 8376,
+              "rss_bytes": 123486208,
+              "ruid": 501,
+              "sid": 8372,
+              "sid_source": "getsid",
+              "state": "S"
+            },
+            {
+              "euid": 501,
+              "pgid": 8372,
+              "pid": 8400,
+              "rss_bytes": 2670592,
+              "ruid": 501,
+              "sid": 8372,
+              "sid_source": "getsid",
+              "state": "S"
+            },
+            {
+              "euid": 501,
+              "pgid": 8372,
+              "pid": 8401,
+              "rss_bytes": 1097826304,
+              "ruid": 501,
+              "sid": 8372,
+              "sid_source": "getsid",
+              "state": "R"
+            }
+          ],
+          "monotonic": 1852933.270884416,
+          "rss_bytes": 1226768384
+        },
+        "peak_sampled_group_rss_bytes": 1226768384,
+        "prelaunch_rss_bytes": 0,
+        "prelaunch_space": {
+          "allocated_bytes": 36012032,
+          "block_bytes": 4096,
+          "entries": 884,
+          "free_bytes": 253582954496,
+          "logical_bytes": 34067472
+        },
+        "primary": null,
+        "raw_exit": 0,
+        "signals": [],
+        "status": "completed",
+        "terminal_members": [
+          {
+            "euid": 501,
+            "pgid": 8372,
+            "pid": 8372,
+            "rss_bytes": 0,
+            "ruid": 501,
+            "sid": 8372,
+            "sid_source": "owned setsid plus waitable zombie",
+            "state": "Z"
+          }
+        ],
+        "trigger_sample": null,
+        "utc": "2026-11-21T11:06:00.935145+00:00"
+      },
+      "transcripts": [
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/candidate/install.jsonl",
+          "sha256": "f19d18b1bf5a8a4b88252e2000aa8abb8fbaa6e5e2532dd4851ce1db982ec097"
+        },
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/candidate/install.stdout",
+          "sha256": "1d861c964b025461e4a1a8ce900ac871e9a38996d0498135f7f1ac8bd74e367c"
+        },
+        {
+          "path": "/private/tmp/mss-namespace-builds-20261121/candidate/install.stderr",
+          "sha256": "fce27e3b1ba65a725212a4435e07a86e3c6b03a07e59f8b8615004f4a0f782c2"
+        }
+      ]
+    }
+  ],
+  "producer": {
+    "path": "/private/tmp/mss-fullfile-20261121/runtime/namespace-builds.py",
+    "sha256": "615535da8374c81d3d7f23f0300c313d26d06ebea638e73239492243f851a65f"
+  },
+  "provenance": {
+    "path": "/private/tmp/mss-namespace-builds-20261121/PROVENANCE.json",
+    "sha256": "5fb9441a4599d40d03a0d17f9a813adc53f791e730748d99f83be0e12b88f561"
+  },
+  "repository": "/private/tmp/mss-lazy-variantannotation-20261121",
+  "roles": {
+    "baseline": {
+      "path": "/private/tmp/mss-namespace-builds-20261121/baseline/build.json",
+      "sha256": "b4b7e216720750e7bf51a0fb41d05636806ca116a8d9ae4bbf8495f1ac457170"
+    },
+    "candidate": {
+      "path": "/private/tmp/mss-namespace-builds-20261121/candidate/build.json",
+      "sha256": "e13492e1af5e6984084ccf20558c4c7a2598a57308291ddb12ecf8ed80554341"
+    }
+  },
+  "runtime_receipt": {
+    "path": "/private/tmp/mss-namespace-builds-20261121/runtime.tsv",
+    "sha256": "7a8733e9b60e952379b26bd2d3a5ac235019552dccdcf56d6880bcf0cfa5054a"
+  },
+  "status": "completed",
+  "verified_runtime_files": [
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+      "sha256": "c34c20d9a73b75e7e55e4ddab73642c0cd85c4299ac17ae81009f9fc43cb2430"
+    },
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/exec/R",
+      "sha256": "5323eb12f0d7c1ab0110343bcd79ec20dd63da2ecd0dea854e92f652f067393b"
+    },
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libR.dylib",
+      "sha256": "1fbe535490fc4ca0acf7c4aed116166c6e6a99640f7d33b290ef459e81ea7613"
+    },
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib",
+      "sha256": "7e4e93e7eb90558fb53f68f2bba58d145be57cd8f9284e038d126dfe84245ed8"
+    },
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib",
+      "sha256": "f131fee2ec7afb9679ba742fe37a1f2c3d2806f7da2a88f817f8a68aad6271ab"
+    }
+  ],
+  "verified_toolchain_files": [
+    {
+      "path": "/Library/Developer/CommandLineTools/usr/bin/clang",
+      "sha256": "fc5e3cbba6ad54059295cad716aacb05ace8235f5f7a6031f1d8c15d24bd6d66"
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/usr/bin/ld",
+      "sha256": "7f7041b1bb30e5e6a815a55edf374065d5c82e1ab93f84d5b6ed5656ded24bcf"
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/usr/bin/make",
+      "sha256": "ba5dd576c636ab1ed626f790be00c0aa71ea73befdaae478a8ac10577134a95c"
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/usr/bin/dsymutil",
+      "sha256": "823ceb77f4a64545084f175b6c2e63d1817f08556e023563e898dc80d302716b"
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk/SDKSettings.json",
+      "sha256": "82165b15ee21419d4cffaba8895797391b908ac9499ba70f561f3e1bd16758d6"
+    },
+    {
+      "path": "/usr/bin/xcrun",
+      "sha256": "687fe96553cdb08386f4ab9771066d71807d53a4460dc87749a590d69253161e"
+    },
+    {
+      "path": "/usr/bin/env",
+      "sha256": "dd48d2912b68c69daf057c1ab13fec6001a072d58bad7d1f91e0687025b2b16a"
+    },
+    {
+      "path": "/usr/bin/cmp",
+      "sha256": "db24187bc1000aac1e2194f83e5c58f776ee9c2d856dec966cdd73e58b3526f2"
+    },
+    {
+      "path": "/bin/sh",
+      "sha256": "f338dc2ba97328cb8aa29c57a348abf3267de71ef42ee1adf293b179542f2962"
+    },
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/SHLIB",
+      "sha256": "90899a421e25914b05315025b5479ac838d279c04697fc4adf55898824ce6e7f"
+    },
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/share/make/shlib.mk",
+      "sha256": "c770cb4ab1600da5180337ca3f61fbf17b91331cd9899ee059625af19f3b005c"
+    },
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/etc/Makeconf",
+      "sha256": "7089036548a5bb140544d24cf2b031b5866af39637425722f080371f8689244a"
+    },
+    {
+      "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/R",
+      "sha256": "beabb801d8b74d20fef4c113fd58b3d1a0fc3b18a048d99d1faa3d2dd51bc2cd"
+    }
+  ]
+}

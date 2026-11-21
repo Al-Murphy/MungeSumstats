@@ -1,0 +1,310 @@
+{
+  "archive": {
+    "path": "/private/tmp/mss-namespace-builds-20261121/baseline/MungeSumstats.tar",
+    "sha256": "7db963d0de51a703f953a2ff6896fdafe34b39213c625a94954316b600bf8ee2"
+  },
+  "compile_and_link_argv": [
+    [
+      "clang++",
+      "-arch",
+      "arm64",
+      "-std=gnu++17",
+      "-I/Library/Frameworks/R.framework/Resources/include",
+      "-DNDEBUG",
+      "-I/private/tmp/mss-parallel-support-20261121/common/Rcpp/include",
+      "-I/opt/R/arm64/include",
+      "-fPIC",
+      "-falign-functions=64",
+      "-Wall",
+      "-g",
+      "-O2",
+      "-c",
+      "RcppExports.cpp",
+      "-o",
+      "RcppExports.o"
+    ],
+    [
+      "clang++",
+      "-arch",
+      "arm64",
+      "-std=gnu++17",
+      "-I/Library/Frameworks/R.framework/Resources/include",
+      "-DNDEBUG",
+      "-I/private/tmp/mss-parallel-support-20261121/common/Rcpp/include",
+      "-I/opt/R/arm64/include",
+      "-fPIC",
+      "-falign-functions=64",
+      "-Wall",
+      "-g",
+      "-O2",
+      "-c",
+      "preservation.cpp",
+      "-o",
+      "preservation.o"
+    ],
+    [
+      "clang++",
+      "-arch",
+      "arm64",
+      "-std=gnu++17",
+      "-dynamiclib",
+      "-Wl,-headerpad_max_install_names",
+      "-undefined",
+      "dynamic_lookup",
+      "-L/Library/Frameworks/R.framework/Resources/lib",
+      "-L/opt/R/arm64/lib",
+      "-o",
+      "MungeSumstats.so",
+      "RcppExports.o",
+      "preservation.o",
+      "-F/Library/Frameworks/R.framework/..",
+      "-framework",
+      "R"
+    ]
+  ],
+  "dll": {
+    "path": "/private/tmp/mss-namespace-builds-20261121/baseline/library/MungeSumstats/libs/MungeSumstats.so",
+    "sha256": "37dbe7aadb33c3126039ec03dc1244c27a8a45d357d673f33281ddcb25756531"
+  },
+  "dll_sha256": "37dbe7aadb33c3126039ec03dc1244c27a8a45d357d673f33281ddcb25756531",
+  "install_argv": [
+    "/usr/bin/env",
+    "SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk",
+    "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/R",
+    "CMD",
+    "INSTALL",
+    "--use-vanilla",
+    "--library=/private/tmp/mss-namespace-builds-20261121/baseline/library",
+    "/private/tmp/mss-namespace-builds-20261121/baseline/MungeSumstats.tar"
+  ],
+  "install_transcripts": [
+    {
+      "path": "/private/tmp/mss-namespace-builds-20261121/baseline/install.jsonl",
+      "sha256": "cad46c384d232f60f549aaf6b7bb35b9fdffeb08bc24edddcb1a0fa6291e941f"
+    },
+    {
+      "path": "/private/tmp/mss-namespace-builds-20261121/baseline/install.stdout",
+      "sha256": "1d861c964b025461e4a1a8ce900ac871e9a38996d0498135f7f1ac8bd74e367c"
+    },
+    {
+      "path": "/private/tmp/mss-namespace-builds-20261121/baseline/install.stderr",
+      "sha256": "1227b719bec134cbda1391893cb90ca864cafc748ed9c5a27ac8ed354dbf471d"
+    }
+  ],
+  "library": "/private/tmp/mss-namespace-builds-20261121/baseline/library",
+  "package_tree_sha256": "f1a973219051bff1ab4ed7212f3d0bb8c5d28c4eeb4e47b40e5f0c5af1b86b5c",
+  "source_commit": "14ea7af51a19272c7792fbe582a3d42b291b4a1a",
+  "source_tree": "90c4beaf26ffa8fa1acdaef126b0568033b7cf5c",
+  "terminal": {
+    "cleanup_errors": [],
+    "closure": "confirmed",
+    "elapsed_seconds": 16.04106399999,
+    "first_group": {
+      "completed_monotonic": 1852909.72553525,
+      "members": [
+        {
+          "euid": 501,
+          "pgid": 8271,
+          "pid": 8271,
+          "rss_bytes": 622592,
+          "ruid": 501,
+          "sid": 8271,
+          "sid_source": "getsid",
+          "state": "Rs"
+        }
+      ],
+      "monotonic": 1852909.723202,
+      "rss_bytes": 622592
+    },
+    "group_samples": 17,
+    "label": "normal-install-baseline",
+    "last_group": {
+      "completed_monotonic": 1852925.756307708,
+      "members": [
+        {
+          "euid": 501,
+          "pgid": 8271,
+          "pid": 8271,
+          "rss_bytes": 0,
+          "ruid": 501,
+          "sid": 8271,
+          "sid_source": "owned setsid plus waitable zombie",
+          "state": "Z"
+        }
+      ],
+      "monotonic": 1852925.753108833,
+      "rss_bytes": 0
+    },
+    "last_space": {
+      "allocated_bytes": 23101440,
+      "block_bytes": 4096,
+      "entries": 872,
+      "free_bytes": 253595869184,
+      "logical_bytes": 21165065
+    },
+    "leader_reaped": true,
+    "max_sample_gap_seconds": 1.0564006250351667,
+    "minimum_free_bytes": 253573435392,
+    "missed_samples": 0,
+    "peak_disk_allocated_bytes": 44781568,
+    "peak_disk_logical_bytes": 39115477,
+    "peak_group": {
+      "completed_monotonic": 1852917.945565416,
+      "members": [
+        {
+          "euid": 501,
+          "pgid": 8271,
+          "pid": 8271,
+          "rss_bytes": 2785280,
+          "ruid": 501,
+          "sid": 8271,
+          "sid_source": "getsid",
+          "state": "Ss"
+        },
+        {
+          "euid": 501,
+          "pgid": 8271,
+          "pid": 8275,
+          "rss_bytes": 120537088,
+          "ruid": 501,
+          "sid": 8271,
+          "sid_source": "getsid",
+          "state": "S"
+        },
+        {
+          "euid": 501,
+          "pgid": 8271,
+          "pid": 8301,
+          "rss_bytes": 2670592,
+          "ruid": 501,
+          "sid": 8271,
+          "sid_source": "getsid",
+          "state": "S"
+        },
+        {
+          "euid": 501,
+          "pgid": 8271,
+          "pid": 8302,
+          "rss_bytes": 1103626240,
+          "ruid": 501,
+          "sid": 8271,
+          "sid_source": "getsid",
+          "state": "R"
+        }
+      ],
+      "monotonic": 1852917.9417845,
+      "rss_bytes": 1229619200
+    },
+    "peak_sampled_group_rss_bytes": 1229619200,
+    "prelaunch_rss_bytes": 0,
+    "prelaunch_space": {
+      "allocated_bytes": 12926976,
+      "block_bytes": 4096,
+      "entries": 25,
+      "free_bytes": 253608816640,
+      "logical_bytes": 12906627
+    },
+    "primary": null,
+    "raw_exit": 0,
+    "signals": [],
+    "status": "completed",
+    "terminal_members": [
+      {
+        "euid": 501,
+        "pgid": 8271,
+        "pid": 8271,
+        "rss_bytes": 0,
+        "ruid": 501,
+        "sid": 8271,
+        "sid_source": "owned setsid plus waitable zombie",
+        "state": "Z"
+      }
+    ],
+    "trigger_sample": null,
+    "utc": "2026-11-21T11:05:46.631489+00:00"
+  },
+  "toolchain": {
+    "R_platform": "aarch64-apple-darwin20",
+    "R_version": "R version 4.5.3 (2026-03-11)",
+    "build_toolchain_pins": [
+      {
+        "path": "/Library/Developer/CommandLineTools/usr/bin/clang",
+        "sha256": "fc5e3cbba6ad54059295cad716aacb05ace8235f5f7a6031f1d8c15d24bd6d66"
+      },
+      {
+        "path": "/Library/Developer/CommandLineTools/usr/bin/ld",
+        "sha256": "7f7041b1bb30e5e6a815a55edf374065d5c82e1ab93f84d5b6ed5656ded24bcf"
+      },
+      {
+        "path": "/Library/Developer/CommandLineTools/usr/bin/make",
+        "sha256": "ba5dd576c636ab1ed626f790be00c0aa71ea73befdaae478a8ac10577134a95c"
+      },
+      {
+        "path": "/Library/Developer/CommandLineTools/usr/bin/dsymutil",
+        "sha256": "823ceb77f4a64545084f175b6c2e63d1817f08556e023563e898dc80d302716b"
+      },
+      {
+        "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk/SDKSettings.json",
+        "sha256": "82165b15ee21419d4cffaba8895797391b908ac9499ba70f561f3e1bd16758d6"
+      },
+      {
+        "path": "/usr/bin/xcrun",
+        "sha256": "687fe96553cdb08386f4ab9771066d71807d53a4460dc87749a590d69253161e"
+      },
+      {
+        "path": "/usr/bin/env",
+        "sha256": "dd48d2912b68c69daf057c1ab13fec6001a072d58bad7d1f91e0687025b2b16a"
+      },
+      {
+        "path": "/usr/bin/cmp",
+        "sha256": "db24187bc1000aac1e2194f83e5c58f776ee9c2d856dec966cdd73e58b3526f2"
+      },
+      {
+        "path": "/bin/sh",
+        "sha256": "f338dc2ba97328cb8aa29c57a348abf3267de71ef42ee1adf293b179542f2962"
+      },
+      {
+        "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/SHLIB",
+        "sha256": "90899a421e25914b05315025b5479ac838d279c04697fc4adf55898824ce6e7f"
+      },
+      {
+        "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/share/make/shlib.mk",
+        "sha256": "c770cb4ab1600da5180337ca3f61fbf17b91331cd9899ee059625af19f3b005c"
+      },
+      {
+        "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/etc/Makeconf",
+        "sha256": "7089036548a5bb140544d24cf2b031b5866af39637425722f080371f8689244a"
+      },
+      {
+        "path": "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/R",
+        "sha256": "beabb801d8b74d20fef4c113fd58b3d1a0fc3b18a048d99d1faa3d2dd51bc2cd"
+      }
+    ],
+    "compiler": [
+      "Apple clang version 21.0.0 (clang-2100.4.1.1)",
+      "Target: arm64-apple-darwin27.2.0",
+      "Thread model: posix",
+      "InstalledDir: /Library/Developer/CommandLineTools/usr/bin"
+    ],
+    "compiler_flags": {
+      "CC": "clang -arch arm64 -std=gnu2x",
+      "CFLAGS": "-falign-functions=64 -Wall -g -O2",
+      "CPPFLAGS": "-I/opt/R/arm64/include",
+      "CXX17": "clang++ -arch arm64",
+      "CXX17FLAGS": "-falign-functions=64 -Wall -g -O2",
+      "CXX17STD": "-std=gnu++17",
+      "LDFLAGS": "-L/opt/R/arm64/lib",
+      "SHLIB_CXX17LD": "clang++ -arch arm64 -std=gnu++17",
+      "SHLIB_CXX17LDFLAGS": "-dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup"
+    },
+    "compiler_receipt": {
+      "path": "/private/tmp/mss-namespace-builds-20261121/compiler.stdout",
+      "sha256": "7656124e47978db7276c4783b040238fd3951ab2f3b824834660fcfb5b37eac1"
+    },
+    "r_config_receipt": {
+      "path": "/private/tmp/mss-namespace-builds-20261121/r-config.stdout",
+      "sha256": "5f713ee2ce1c5b57698ac0a43e5451863383d6557f151a38691ad6c180fa7527"
+    },
+    "sdk": "/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk"
+  }
+}

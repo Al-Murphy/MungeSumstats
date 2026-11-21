@@ -1,0 +1,222 @@
+diff --git a/namespace-bench-v2.py b/namespace-bench-v2.py
+new file mode 100644
+index 0000000..2931982
+--- /dev/null
++++ b/namespace-bench-v2.py
+@@ -0,0 +1,63 @@
++"""Apply the reviewed OpenTelemetry namespace correction to the frozen binding."""
++import hashlib
++import importlib.util
++from pathlib import Path
++import sys
++
++
++RUNTIME = Path("/private/tmp/mss-fullfile-20261121/runtime")
++PYTHON = Path("/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/bin/python3.15")
++ORIGINAL = RUNTIME / "namespace-bench.py"
++ORIGINAL_PIN = {"path": str(ORIGINAL),
++                "sha256": "a61cbab2a7af12e0befd8d4fb6c0e9f81d786160db1ad391c95389717a002e94"}
++AUDIT_PIN = {"path": str(RUNTIME / "OTEL-NAMESPACE-DELTA.md"),
++             "sha256": "1baeba297218e4d7fca22cda8706019e9093b20f9530ba9f62997e393d603e79"}
++PRIOR_EAGER_ONLY = frozenset({"AnnotationDbi", "DBI", "GenomicFeatures", "KEGGREST", "RSQLite",
++                             "VariantAnnotation", "bit", "bit64", "blob", "cachem", "fastmap", "memoise", "png"})
++REVISED_EAGER_ONLY = PRIOR_EAGER_ONLY | {"otel"}
++
++
++def load_original():
++    if not (Path(sys.executable) == PYTHON and sys.flags.isolated and sys.dont_write_bytecode and sys.flags.no_site):
++        raise ValueError("Use the physical pinned Python executable with -I -B -S")
++    if ORIGINAL.resolve(strict=True) != ORIGINAL or not ORIGINAL.is_file():
++        raise ValueError("Expected the original physical namespace binding source")
++    with ORIGINAL.open("rb") as stream:
++        data = stream.read(1024**2 + 1)
++    if len(data) > 1024**2 or hashlib.sha256(data).hexdigest() != ORIGINAL_PIN["sha256"]:
++        raise ValueError("Original namespace binding source digest changed")
++    spec = importlib.util.spec_from_file_location("namespace_bench_original", ORIGINAL)
++    binding = importlib.util.module_from_spec(spec)
++    exec(compile(data, str(ORIGINAL), "exec"), binding.__dict__)
++    return binding
++
++
++def apply_override(binding):
++    binding.require(binding.EAGER_ONLY == PRIOR_EAGER_ONLY, "Expected the reviewed prior 13-name namespace policy")
++    original_identity = binding.source_identity
++
++    def source_identity(warm):
++        identity = original_identity(warm)
++        binding.require(identity["binding"] == ORIGINAL_PIN, "Original namespace binding source digest changed")
++        warm.d.check_control(AUDIT_PIN)
++        return {**identity, "namespace_policy_override": {
++            "wrapper": warm.d.pin_control(binding.physical(__file__)),
++            "audit": AUDIT_PIN,
++            "prior_eager_only": sorted(PRIOR_EAGER_ONLY),
++            "revised_eager_only": sorted(REVISED_EAGER_ONLY),
++            "added": sorted(REVISED_EAGER_ONLY - PRIOR_EAGER_ONLY),
++            "reason": "DBI loads otel in the eager worker. testthat loaded otel in both roles of the earlier probe.",
++        }}
++
++    binding.EAGER_ONLY = REVISED_EAGER_ONLY
++    binding.source_identity = source_identity
++
++
++def main():
++    binding = load_original()
++    apply_override(binding)
++    return binding.main()
++
++
++if __name__ == "__main__":
++    sys.exit(main())
+diff --git a/namespace-bench-v2-source-controls.py b/namespace-bench-v2-source-controls.py
+new file mode 100644
+index 0000000..61290a4
+--- /dev/null
++++ b/namespace-bench-v2-source-controls.py
+@@ -0,0 +1,90 @@
++"""Check the source-only namespace correction against the two retained worker inventories."""
++import json
++from pathlib import Path
++import runpy
++
++wrapper_path = Path(__file__).with_name("namespace-bench-v2.py")
++wrapper = runpy.run_path(str(wrapper_path))
++binding = wrapper["load_original"]()
++warm = binding.load_frozen()
++original_identity = binding.source_identity(warm)
++case = "hard-cases-f2"
++case_dir = Path("/private/tmp/mss-namespace-benchmark-20261121/diagnostic") / case
++builds = Path("/private/tmp/mss-namespace-builds-20261121")
++config = {role: {"library": str(builds / role / "library")} for role in ("baseline", "candidate")}
++states = {}
++for role, digest in (
++    ("baseline", "040814dc3654a620b7096ab118e8e72d2d75a9204a77cc849f96b6b501fff255"),
++    ("candidate", "e6c40018fe19afb387fdb4fe2c0bc2a4f30302208fca91eb56364ac943980c32"),
++):
++    root = case_dir / f"pair-01-{role}"
++    warm.d.check_control(warm.pin(root / "namespaces.tsv", digest))
++    states[role] = warm.r.dependency_state(root, config, role)
++baseline, candidate = (states[role] for role in ("baseline", "candidate"))
++expected_delta = {"AnnotationDbi", "DBI", "GenomicFeatures", "KEGGREST", "RSQLite", "VariantAnnotation",
++                  "bit", "bit64", "blob", "cachem", "fastmap", "memoise", "otel", "png"}
++assert (len(baseline), len(candidate)) == (85, 71)
++assert baseline.keys() - candidate.keys() == expected_delta
++assert candidate.keys() <= baseline.keys()
++assert candidate["MungeSumstats"] == baseline["MungeSumstats"] == ["1.21.4", "<selected installation>"]
++extra = {"testthat": ["3.3.2", "/private/tmp/mss-parallel-support-20261121/common/testthat"]}
++installed = {role: {**baseline, **extra} for role in ("baseline", "candidate")}
++
++
++def rejects(policy, role, state, error):
++    try:
++        policy.observe(case, role, state)
++    except ValueError as exc:
++        assert error in str(exc), str(exc)
++    else:
++        raise AssertionError(f"Accepted {error}")
++
++
++policy = binding.NamespacePolicy(installed)
++policy.observe(case, "baseline", baseline)
++rejects(policy, "candidate", candidate, "additional baseline-only namespaces ['otel']")
++print("PASS original policy rejects actual namespace inventories (85 baseline, 71 candidate)")
++
++wrapper["apply_override"](binding)
++policy = binding.NamespacePolicy(installed)
++assert policy.observe(case, "baseline", baseline) == candidate
++assert policy.observe(case, "candidate", candidate) == candidate
++assert policy.observe(case, "candidate", candidate) == candidate  # candidate-first second pair
++assert policy.observe(case, "baseline", baseline) == candidate
++for name in sorted(expected_delta):
++    missing = {pkg: identity for pkg, identity in baseline.items() if pkg != name}
++    rejects(binding.NamespacePolicy(installed), "baseline", missing, f"baseline missing ['{name}']")
++    rejects(policy, "candidate", {**candidate, name: baseline[name]}, "changed across repetitions")
++policy = binding.NamespacePolicy(installed)
++policy.observe(case, "baseline", baseline)
++rejects(policy, "candidate", {**candidate, **extra}, "candidate-only")
++rejects(policy, "candidate", {**candidate, "otel": baseline["otel"]}, "candidate loaded eager-only")
++rejects(policy, "candidate", {**candidate, "Rcpp": [candidate["Rcpp"][0], "/unexpected/Rcpp"]}, "wrong version or origin")
++rejects(policy, "candidate", {**candidate, "Rcpp": ["0.0", candidate["Rcpp"][1]]}, "wrong version or origin")
++policy.observe(case, "candidate", candidate)
++rejects(policy, "candidate", {pkg: identity for pkg, identity in candidate.items() if pkg != "Rcpp"},
++        "changed across repetitions")
++policy = binding.NamespacePolicy(installed)
++policy.observe(case, "baseline", {**baseline, **extra})
++rejects(policy, "candidate", candidate, "additional baseline-only namespaces ['testthat']")
++print("PASS exact 14-name policy on retained pair and rejection of omissions, extras, path/version and repeat drift")
++
++identity = binding.source_identity(warm)
++override = identity["namespace_policy_override"]
++assert {key: value for key, value in identity.items() if key != "namespace_policy_override"} == original_identity
++assert Path(binding.__file__) == Path(original_identity["binding"]["path"])
++assert original_identity["binding"]["sha256"] == "a61cbab2a7af12e0befd8d4fb6c0e9f81d786160db1ad391c95389717a002e94"
++assert override["wrapper"] == warm.d.pin_control(wrapper_path)
++assert override["audit"] == {"path": str(wrapper_path.with_name("OTEL-NAMESPACE-DELTA.md")),
++                             "sha256": "1baeba297218e4d7fca22cda8706019e9093b20f9530ba9f62997e393d603e79"}
++assert override["prior_eager_only"] == sorted(expected_delta - {"otel"})
++assert override["revised_eager_only"] == sorted(expected_delta)
++assert override["added"] == ["otel"]
++matrix = json.loads(warm.d.check_control(original_identity["matrix_config"]))
++diagnostic = binding.select_config(matrix)
++expanded = [(f'{case["id"]}-f{diagnostic["references"][ref]["format"]}' if ref else case["id"], case["pairs"])
++            for case in diagnostic["cases"] for ref in case.get("reference_formats", [None])]
++assert expanded == [(case, 3) for case in ("hard-cases-f2", "hard-cases-f3", "declared-f2", "declared-f3", "matched-1M")]
++assert 2 * sum(pairs for _, pairs in expanded) == 30
++assert all(case["target"] is False for case in diagnostic["cases"])
++print("PASS original plus wrapper/audit source identity and unchanged five-case, thirty-worker roster")
+diff --git a/NAMESPACE-BENCH-V2-REPORT.md b/NAMESPACE-BENCH-V2-REPORT.md
+new file mode 100644
+index 0000000..faadde2
+--- /dev/null
++++ b/NAMESPACE-BENCH-V2-REPORT.md
+@@ -0,0 +1,51 @@
++# Namespace benchmark correction
++
++The original diagnostic stopped after its first tiny pair. Both workers exited zero, and the outer diagnostic exited one. The retained `hard-cases-f2` TSVs contain 85 baseline namespaces and 71 candidate namespaces. Their exact baseline-only difference is the original 13 names plus `otel` 0.3.0. Both inventories agree on every shared version and all shared dependency paths. The MungeSumstats path identifies the selected installation in each role. The installed DBI load hook reached `otel` in the eager worker. The previous reference probe loaded `testthat`, whose own hook reached `otel` in both roles. Later case inventories remain unobserved. [Root-cause audit and raw evidence pins](OTEL-NAMESPACE-DELTA.md)
++
++The [v2 entrypoint](namespace-bench-v2.py) authenticates the original binding at its physical path before executing its verified bytes. It preserves the original `__file__`, requires the exact reviewed 13-name set, and sets the explicit revised 14-name policy.
++
++```text
++AnnotationDbi DBI GenomicFeatures KEGGREST RSQLite VariantAnnotation
++bit bit64 blob cachem fastmap memoise otel png
++```
++
++The existing source identity is preserved, and `namespace_policy_override` adds the actual wrapper pin, the authenticated audit pin, the prior and revised sets, the single added name and its reason. The original preparation and run identity checks seal and verify this field. The v2 entrypoint delegates both original CLI commands with the same arguments. The original parser, role/path/version checks, exact per-case repeats, first-pair stop, worker roster, timing, accounting and verification retain their implementations. [Original binding](namespace-bench.py) · [Build provenance](NAMESPACE-BUILDS-REPORT.md)
++
++## Operator launch
++
++Reuse the guarded normal installs of baseline `14ea7af51a19272c7792fbe582a3d42b291b4a1a` and candidate `f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b`. Use actual provenance pointing to these builds and fresh benchmark admission. `META` and `RUN_PARENT` are fresh private physical roots. Launch the v2 diagnostic through the existing guard after preparation. All five cases require three new pairs and 30 fresh workers. The retained failed pair stays outside the new estimates. The full C9, 40M, warm and Windows gates remain open.
++
++```sh
++PY=/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/bin/python3.15
++RUNTIME=/private/tmp/mss-fullfile-20261121/runtime
++V2="$RUNTIME/namespace-bench-v2.py"
++"$PY" -I -B -S "$V2" prepare "$PROVENANCE" "$META" --candidate f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b
++"$PY" -I -B -S "$V2" run "$META/diagnostic.json" "$RUN_PARENT/diagnostic" --suite diagnostic --profile none
++```
++
++## Source controls
++
++| Artifact | SHA-256 |
++| --- | --- |
++| [Original binding](namespace-bench.py) | `a61cbab2a7af12e0befd8d4fb6c0e9f81d786160db1ad391c95389717a002e94` |
++| [Audit](OTEL-NAMESPACE-DELTA.md) | `1baeba297218e4d7fca22cda8706019e9093b20f9530ba9f62997e393d603e79` |
++| [V2 wrapper](namespace-bench-v2.py) | `c5071a4503b583c51874127425aafb52aa2d0014f7e7fd3be33adadc2e9885b3` |
++| [Source controls](namespace-bench-v2-source-controls.py) | `2b0b2c1f13ca0bb32f3ec6d265f6626f7665cfceb87a032650edb11cb4c9bdd3` |
++
++```sh
++"$PY" -I -B -S "$RUNTIME/namespace-bench-v2-source-controls.py"
++"$PY" -I -B -S -c 'import ast, sys; from pathlib import Path; [ast.parse(Path(p).read_bytes(), filename=p) for p in sys.argv[1:]]; print("PASS both v2 Python sources parse")' "$V2" "$RUNTIME/namespace-bench-v2-source-controls.py"
++"$PY" -I -B -S "$V2" prepare --help
++"$PY" -I -B -S "$V2" run --help
++```
++
++The original policy rejected the pinned pair exactly for the extra baseline-only `otel` row. Before applying the override, the new control also failed on the baseline comparison view. All four commands above then exited zero with the revised wrapper.
++
++```text
++PASS original policy rejects actual namespace inventories (85 baseline, 71 candidate)
++PASS exact 14-name policy on retained pair and rejection of omissions, extras, path/version and repeat drift
++PASS original plus wrapper/audit source identity and unchanged five-case, thirty-worker roster
++PASS both v2 Python sources parse
++```
++
++The controls check both raw TSV digests against the audit, use the original frozen parser, and use in-memory changes to check omissions of each expected name, extras, path/version drift and repetition drift. Both help commands printed the original argument contract. The [addition diff](NAMESPACE-BENCH-V2.diff) applied cleanly and reproduced all three added files. This is source verification. Fresh v2 preparation and measurement are pending.

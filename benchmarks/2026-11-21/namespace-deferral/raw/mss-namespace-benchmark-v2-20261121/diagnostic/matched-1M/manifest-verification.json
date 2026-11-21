@@ -1,0 +1,23 @@
+{
+  "user_seconds": 0.058719,
+  "system_seconds": 0.020139999999999998,
+  "peak_rss_bytes": 82247680,
+  "rss_source": "wait4 ru_maxrss",
+  "rss_complete": true,
+  "pid": 11448,
+  "exit_code": 0,
+  "command": [
+    "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+    "--vanilla",
+    "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+    "manifests",
+    "/private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/matched-1M/stable-manifests.txt",
+    "/private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/matched-1M/pair-01-baseline/edition/manifest.rds",
+    "/private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/matched-1M/pair-01-candidate/edition/manifest.rds",
+    "/private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/matched-1M/pair-02-candidate/edition/manifest.rds",
+    "/private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/matched-1M/pair-02-baseline/edition/manifest.rds",
+    "/private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/matched-1M/pair-03-baseline/edition/manifest.rds",
+    "/private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/matched-1M/pair-03-candidate/edition/manifest.rds"
+  ],
+  "wall_seconds": 0.09256895794533193
+}

@@ -1,0 +1,24 @@
+Checking for incorrect base-pair positions
+Coercing BP column to numeric.
+3 SNPs have been removed as their BP column is not in the range of 1 to the length of the chromosome
+Checking for incorrect base-pair positions
+Coercing BP column to numeric.
+3 SNPs have been removed as their BP column is not in the range of 1 to the length of the chromosome
+Loading required namespace: GenomicFiles
+Returning as VCF.
+Renaming ID as SNP.
+sumstats has -log10 P-values; these will be converted to unadjusted p-values in the 'P' column.
+No INFO (SI) column detected.
+Sorting coordinates with 'data.table'.
+Converting summary statistics to GenomicRanges.
+Converting summary statistics to VRanges.
+Writing in IEU OpenGWAS VCF format ==>  /private/tmp/mss-namespace-installed-suite-20261121/tmp/RtmpsVxqam/mss-namespace-16f63737590c6/written.vcf
+Renaming ID as SNP.
+sumstats has -log10 P-values; these will be converted to unadjusted p-values in the 'P' column.
+No INFO (SI) column detected.
+Checking for incorrect base-pair positions
+Coercing BP column to numeric.
+3 SNPs have been removed as their BP column is not in the range of 1 to the length of the chromosome
+Checking for incorrect base-pair positions
+Coercing BP column to numeric.
+3 SNPs have been removed as their BP column is not in the range of 1 to the length of the chromosome

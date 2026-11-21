@@ -1,0 +1,71 @@
+BUILD compiler ['/Library/Developer/CommandLineTools/usr/bin/clang', '--version']
+BUILD r-config ['/usr/bin/env', 'SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk', '/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/R', 'CMD', 'config', '--all']
+BUILD runtime ['/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript', '--vanilla', '/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R', 'runtime', '/private/tmp/mss-namespace-builds-20261121/runtime.tsv']
+BUILD source-tree-baseline ['/usr/bin/env', 'GIT_CONFIG_NOSYSTEM=1', 'GIT_CONFIG_GLOBAL=/dev/null', 'GIT_NO_REPLACE_OBJECTS=1', 'GIT_NO_LAZY_FETCH=1', '/usr/bin/git', '--no-replace-objects', '-C', '/private/tmp/mss-lazy-variantannotation-20261121', 'rev-parse', '--verify', '14ea7af51a19272c7792fbe582a3d42b291b4a1a^{tree}']
+BUILD git-archive-baseline ['/usr/bin/env', 'GIT_CONFIG_NOSYSTEM=1', 'GIT_CONFIG_GLOBAL=/dev/null', 'GIT_NO_REPLACE_OBJECTS=1', 'GIT_NO_LAZY_FETCH=1', '/usr/bin/git', '--no-replace-objects', '-C', '/private/tmp/mss-lazy-variantannotation-20261121', 'archive', '--format=tar', '--prefix=MungeSumstats/', '14ea7af51a19272c7792fbe582a3d42b291b4a1a']
+BUILD normal-install-baseline ['/usr/bin/env', 'SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk', '/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/R', 'CMD', 'INSTALL', '--use-vanilla', '--library=/private/tmp/mss-namespace-builds-20261121/baseline/library', '/private/tmp/mss-namespace-builds-20261121/baseline/MungeSumstats.tar']
+BUILD source-tree-candidate ['/usr/bin/env', 'GIT_CONFIG_NOSYSTEM=1', 'GIT_CONFIG_GLOBAL=/dev/null', 'GIT_NO_REPLACE_OBJECTS=1', 'GIT_NO_LAZY_FETCH=1', '/usr/bin/git', '--no-replace-objects', '-C', '/private/tmp/mss-lazy-variantannotation-20261121', 'rev-parse', '--verify', 'f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b^{tree}']
+BUILD git-archive-candidate ['/usr/bin/env', 'GIT_CONFIG_NOSYSTEM=1', 'GIT_CONFIG_GLOBAL=/dev/null', 'GIT_NO_REPLACE_OBJECTS=1', 'GIT_NO_LAZY_FETCH=1', '/usr/bin/git', '--no-replace-objects', '-C', '/private/tmp/mss-lazy-variantannotation-20261121', 'archive', '--format=tar', '--prefix=MungeSumstats/', 'f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b']
+BUILD normal-install-candidate ['/usr/bin/env', 'SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk', '/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/R', 'CMD', 'INSTALL', '--use-vanilla', '--library=/private/tmp/mss-namespace-builds-20261121/candidate/library', '/private/tmp/mss-namespace-builds-20261121/candidate/MungeSumstats.tar']
+CASE hard-cases-f2 32 {'match': 11, 'swap': 2, 'complement': 2, 'swapped_complement': 2, 'alt_alt_contrast': 1, 'ambiguous': 4, 'source_coordinates_missing': 1, 'coordinate_id_conflict': 1, 'unmapped': 1, 'invalid_position': 1, 'unsupported_allele': 1, 'specialist_preserved': 5}
+setup 3.091 2.743 ratio 1.126868392271236 less pct 11.258492397282438 absolute 0.3480000000000003
+wall 3.7073079999536276 3.289779416983947 ratio 1.1269168932160407 less pct 11.262311709059592 absolute 0.41752858296968043
+rss 1016905728 943079424 ratio 1.0782821702194194 less pct 7.259896563391177 absolute 73826304
+processing 0.004 0.00499999999999989 ratio 0.8000000000000176 less pct -24.999999999997247 absolute -0.0009999999999998899
+pairs processing [0.8000000000000176, 1.0, 0.7999999999999456]
+CASE hard-cases-f3 32 {'match': 11, 'swap': 2, 'complement': 2, 'swapped_complement': 2, 'alt_alt_contrast': 1, 'ambiguous': 4, 'source_coordinates_missing': 1, 'coordinate_id_conflict': 1, 'unmapped': 1, 'invalid_position': 1, 'unsupported_allele': 1, 'specialist_preserved': 5}
+setup 3.073 2.756 ratio 1.1150217706821481 less pct 10.315652456882528 absolute 0.31700000000000017
+wall 3.6867289170622826 3.307991749839857 ratio 1.1144915694668103 less pct 10.272986588995447 absolute 0.37873716722242534
+rss 1031061504 961118208 ratio 1.0727728342027207 less pct 6.783620155408309 absolute 69943296
+processing 0.00499999999999989 0.00499999999999989 ratio 1.0 less pct 0.0 absolute 0.0
+pairs processing [1.0, 1.0, 1.0]
+CASE declared-f2 9 {'swap': 2, 'match': 2, 'complement': 1, 'swapped_complement': 1, 'source_strand_unknown': 1, 'sequence_only': 1, 'source_id_conflict': 1}
+setup 3.119 2.798 ratio 1.1147248034310222 less pct 10.29176017954473 absolute 0.3210000000000002
+wall 3.7346499590203166 3.34621216612868 ratio 1.1160828344429308 less pct 10.400915672255739 absolute 0.3884377928916365
+rss 996360192 940949504 ratio 1.058888056972715 less pct 5.561310903918571 absolute 55410688
+processing 0.00500000000000034 0.00499999999999989 ratio 1.00000000000009 less pct 9.00390872971002e-12 absolute 4.501607420159814e-16
+pairs processing [1.1999999999999824, 1.250000000000085, 0.99999999999991]
+CASE declared-f3 9 {'swap': 2, 'match': 2, 'complement': 1, 'swapped_complement': 1, 'source_strand_unknown': 1, 'sequence_only': 1, 'source_id_conflict': 1}
+setup 3.115 2.795 ratio 1.114490161001789 less pct 10.272873194221521 absolute 0.3200000000000003
+wall 3.7364474169444293 3.3401485411450267 ratio 1.1186470813850538 less pct 10.606301429593934 absolute 0.3962988757994026
+rss 1044840448 933920768 ratio 1.118767762534648 less pct 10.615944301574354 absolute 110919680
+processing 0.00499999999999989 0.004 ratio 1.2499999999999725 less pct 19.99999999999824 absolute 0.0009999999999998899
+pairs processing [0.99999999999991, 1.0, 1.2499999999999725]
+CASE matched-1M 1000000 {'match': 562542, 'swap': 437458}
+setup 3.112 2.767 ratio 1.1246837730393928 less pct 11.086118251928024 absolute 0.3450000000000002
+wall 11.054995083948597 10.581757417181507 ratio 1.0447220294427368 less pct 4.2807587264711895 absolute 0.47323766676709056
+rss 1272266752 1234944000 ratio 1.0302222222222222 less pct 2.9335634167385716 absolute 37322752
+processing 7.117 7.018 ratio 1.0141065830721003 less pct 1.391035548686248 absolute 0.0990000000000002
+pairs processing [1.0045597036192648, 1.0156985871271587, 1.0251864359082594]
+INVENTORY 6bf2215319755c30203c5e32edfcfaca6710718cf8b0da99ec84a86af6f69b38
+PIN COUNTS 45 {'/private/tmp/mss-parallel-support-20261121/common': 96, '/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library': 30}
+BASELINE ONLY VERSIONS {'AnnotationDbi': '1.72.0', 'DBI': '1.3.0', 'GenomicFeatures': '1.62.0', 'KEGGREST': '1.50.0', 'RSQLite': '3.53.3', 'VariantAnnotation': '1.56.0', 'bit': '4.6.0', 'bit64': '4.8.6', 'blob': '1.3.0', 'cachem': '1.1.0', 'fastmap': '1.2.0', 'memoise': '2.0.1', 'otel': '0.3.0', 'png': '0.1.9'}
+COMMANDS ['/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/bin/python3.15', '-I', '-B', '-S', '/private/tmp/mss-fullfile-20261121/runtime/namespace-bench-v2.py', 'run', '/private/tmp/mss-namespace-preparation-v2-20261121/metadata/diagnostic.json', '/private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic', '--suite', 'diagnostic', '--profile', 'none'] ['/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/bin/python3.15', '-I', '-B', '-S', '/private/tmp/mss-performance-20261119/repo/inst/verification/fai-safety-stage8/whole-file/harness/verify.py', '--profile', '/private/tmp/mss-fullmatrix-20261121/prep-01/snp-oracle.json', '--stage', '1M', '--edition', 'mss7=/private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/matched-1M/pair-01-candidate/edition', '--receipt', '/private/tmp/mss-namespace-oracle-20261121/snp-oracle-1M.json']
+PIN 0ab419c656fee0f624d7938b7276299f6ea313898690a13e3c590e479634a66f /private/tmp/mss-namespace-builds-20261121/operator-result.json
+PIN b4b7e216720750e7bf51a0fb41d05636806ca116a8d9ae4bbf8495f1ac457170 /private/tmp/mss-namespace-builds-20261121/baseline/build.json
+PIN e13492e1af5e6984084ccf20558c4c7a2598a57308291ddb12ecf8ed80554341 /private/tmp/mss-namespace-builds-20261121/candidate/build.json
+PIN 752f94970a2aa1e2e1237fe73831fbfcd2f4fb732bc264adb3dcd6615d3e09d2 /private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/summary.json
+PIN 48767f00afbd1116eb35796405441514b675795b432ed252c5b23f4156e1c97a /private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/namespace-policy.json
+PIN c35b6c5d39a9f82ae58d6e327894273c8d782e5cd5ae2f0055584b3f2c97181f /private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/pins.json
+PIN 04e1082b5109dc3bfa8db5fc6d1684243cabefdf0d99a2bd8c81e277570c4457 /private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/post-pins.json
+PIN 6bf2215319755c30203c5e32edfcfaca6710718cf8b0da99ec84a86af6f69b38 /private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/namespace-inputs-before.json
+PIN 6bf2215319755c30203c5e32edfcfaca6710718cf8b0da99ec84a86af6f69b38 /private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/namespace-inputs-after.json
+PIN 4c395e9c719d512dfa6426f23599f4cce0e55bc46d295237fff5014291e0487e /private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/hard-cases-f2/artifact-digests.json
+PIN 9a8fcc0b5952891351fd637d40929dd6ecd53e2515b732748c4e26845d9862d0 /private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/hard-cases-f2/verification.json
+PIN d88b9ab6ca1432aeefad3f05017f3f55055ce0072b69e43d69fd00390531649b /private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/hard-cases-f2/manifest-verification.json
+PIN 839eb954c093ca90ebd8a60354fae23a21368234628e947983278d90fd719896 /private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/hard-cases-f3/artifact-digests.json
+PIN 9a8fcc0b5952891351fd637d40929dd6ecd53e2515b732748c4e26845d9862d0 /private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/hard-cases-f3/verification.json
+PIN 94fd2bd29761a5f39c347829a24a397ca50b1228df854e900e142c31fec56a4e /private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/hard-cases-f3/manifest-verification.json
+PIN 162a132bb40328f1a3fa4c9ca0075f765daaaca75410f8332ec27ad03f0781c1 /private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/declared-f2/artifact-digests.json
+PIN aebce60aade1ba625cf7b3e9d7f0c475949324fe0300d7c632fa67a3ff6f8116 /private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/declared-f2/verification.json
+PIN a3b9e8bfe61ba88fa3485db3ab41eac6610cd4c92c271e5243bffb7b0e44deeb /private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/declared-f2/manifest-verification.json
+PIN 5434546a96e0ee84afca87cc1ac7c900839edeed1fee570fbbe8afbc3e660f9a /private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/declared-f3/artifact-digests.json
+PIN aebce60aade1ba625cf7b3e9d7f0c475949324fe0300d7c632fa67a3ff6f8116 /private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/declared-f3/verification.json
+PIN 88c3a2849c9bbaa70cccd14619087f2a2cfc18056eb652fc5921cbaaf8513853 /private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/declared-f3/manifest-verification.json
+PIN 02ee36f352204860b9d6dc4bc45fecea1145babf7939897d828f6b56463dbae4 /private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/matched-1M/artifact-digests.json
+PIN 8a753ccaf7d27d4ddb84dcdac1c064a6e4fb9b5195ce1488128ba8b1e840a9ec /private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/matched-1M/verification.json
+PIN cf764af45614edb34ed0204b01bf231b2a7a4312e90258bc89c5ac00109fff09 /private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/matched-1M/manifest-verification.json
+PIN b844e5e69377782273888ae2049de32cba2b0325b58ac4e5e0230ba0d0ef28a5 /private/tmp/mss-fullfile-20261121/runtime/NAMESPACE-BENCH-V2-REVIEW.md
+PIN 2cc85fc6b38da7cd2f97ff7491fe240c7dfca4a532dd351629e32f09286582d3 /private/tmp/mss-fullfile-20261121/runtime/NAMESPACE-DEFERRAL-RUNTIME-REVIEW.md
+PIN 3dbd0b72aa4b434830c6faf99d5bf22c731c6aa735994d5e4d066cfeb3fb6218 /private/tmp/mss-namespace-benchmark-failure-observation-20261121.json
+PASS retained controls

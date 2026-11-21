@@ -1,0 +1,21 @@
+{
+  "user_seconds": 3.209694,
+  "system_seconds": 0.114271,
+  "peak_rss_bytes": 940949504,
+  "rss_source": "wait4 ru_maxrss",
+  "rss_complete": true,
+  "pid": 10821,
+  "exit_code": 0,
+  "command": [
+    "/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript",
+    "--vanilla",
+    "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R",
+    "run",
+    "/private/tmp/mss-namespace-benchmark-v2-20261121/diagnostic/declared-f2/pair-03-candidate/settings.tsv"
+  ],
+  "wall_seconds": 3.34621216612868,
+  "started_utc": "2026-11-21T11:21:39.198135+00:00",
+  "finished_utc": "2026-11-21T11:21:42.544532+00:00",
+  "role": "candidate",
+  "case": "declared-f2"
+}

@@ -1,0 +1,165 @@
+{
+  "absent_group_session": 8561,
+  "actual_exec_session": 31278,
+  "actual_exit_code": 1,
+  "actual_terminal_tool_chunk": "0d6526",
+  "completed_workers": [
+    {
+      "exit_code": 0,
+      "process": {
+        "path": "/private/tmp/mss-namespace-benchmark-20261121/diagnostic/hard-cases-f2/pair-01-baseline/process.json",
+        "sha256": "5b1f60c5ba67b7194fa0f124fc31c56e62064d9b5dcbe1e5200c2862abfef45e"
+      },
+      "role": "baseline"
+    },
+    {
+      "exit_code": 0,
+      "process": {
+        "path": "/private/tmp/mss-namespace-benchmark-20261121/diagnostic/hard-cases-f2/pair-01-candidate/process.json",
+        "sha256": "b51ca1e4fa95001776d7c68cfafdc3f7e98e348fdf55d11bb604f2363a1ea4d0"
+      },
+      "role": "candidate"
+    }
+  ],
+  "failure": "Exact namespace policy mismatch: observed baseline-only includes otel beyond prior expected13; no performance claim or cohort reuse",
+  "guard": {
+    "path": "/private/tmp/mss-namespace-benchmark-20261121/diagnostic.jsonl",
+    "sha256": "b73b55e07f47fffc129eb13672b0de604a8fb3782bc3d819b1adac98634d3dd1"
+  },
+  "inspection_errors": [],
+  "live_members": [],
+  "observed_utc": "2026-11-21T11:11:02.890406+00:00",
+  "terminal": {
+    "cleanup_errors": [],
+    "closure": "confirmed",
+    "elapsed_seconds": 8.638715791981667,
+    "first_group": {
+      "completed_monotonic": 1853101.283925708,
+      "members": [
+        {
+          "euid": 501,
+          "pgid": 8561,
+          "pid": 8561,
+          "rss_bytes": 4194304,
+          "ruid": 501,
+          "sid": 8561,
+          "sid_source": "getsid",
+          "state": "Rs"
+        }
+      ],
+      "monotonic": 1853101.280592666,
+      "rss_bytes": 4194304
+    },
+    "group_samples": 10,
+    "label": "namespace-diagnostic",
+    "last_group": {
+      "completed_monotonic": 1853109.916200083,
+      "members": [
+        {
+          "euid": 501,
+          "pgid": 8561,
+          "pid": 8561,
+          "rss_bytes": 0,
+          "ruid": 501,
+          "sid": 8561,
+          "sid_source": "owned setsid plus waitable zombie",
+          "state": "Z"
+        }
+      ],
+      "monotonic": 1853109.913246,
+      "rss_bytes": 0
+    },
+    "last_space": {
+      "allocated_bytes": 552960,
+      "block_bytes": 4096,
+      "entries": 51,
+      "free_bytes": 253551820800,
+      "logical_bytes": 449060
+    },
+    "leader_reaped": true,
+    "max_sample_gap_seconds": 1.0592731251381338,
+    "minimum_free_bytes": 253551480832,
+    "missed_samples": 0,
+    "peak_disk_allocated_bytes": 552960,
+    "peak_disk_logical_bytes": 449060,
+    "peak_group": {
+      "completed_monotonic": 1853106.492276458,
+      "members": [
+        {
+          "euid": 501,
+          "pgid": 8561,
+          "pid": 8561,
+          "rss_bytes": 38649856,
+          "ruid": 501,
+          "sid": 8561,
+          "sid_source": "getsid",
+          "state": "Ss"
+        },
+        {
+          "euid": 501,
+          "pgid": 8561,
+          "pid": 8573,
+          "rss_bytes": 994017280,
+          "ruid": 501,
+          "sid": 8561,
+          "sid_source": "getsid",
+          "state": "R"
+        }
+      ],
+      "monotonic": 1853106.488811375,
+      "rss_bytes": 1032667136
+    },
+    "peak_sampled_group_rss_bytes": 1032667136,
+    "prelaunch_rss_bytes": 0,
+    "prelaunch_space": {
+      "allocated_bytes": 8192,
+      "block_bytes": 4096,
+      "entries": 7,
+      "free_bytes": 253552058368,
+      "logical_bytes": 3502
+    },
+    "primary": {
+      "detail": "Phase returned raw exit 1",
+      "reason": "phase_exit"
+    },
+    "raw_exit": 1,
+    "signals": [],
+    "status": "error",
+    "terminal_members": [
+      {
+        "euid": 501,
+        "pgid": 8561,
+        "pid": 8561,
+        "rss_bytes": 0,
+        "ruid": 501,
+        "sid": 8561,
+        "sid_source": "owned setsid plus waitable zombie",
+        "state": "Z"
+      }
+    ],
+    "trigger_sample": {
+      "group": {
+        "completed_monotonic": 1853109.916200083,
+        "members": [
+          {
+            "euid": 501,
+            "pgid": 8561,
+            "pid": 8561,
+            "rss_bytes": 0,
+            "ruid": 501,
+            "sid": 8561,
+            "sid_source": "owned setsid plus waitable zombie",
+            "state": "Z"
+          }
+        ],
+        "monotonic": 1853109.913246,
+        "rss_bytes": 0
+      },
+      "space": {
+        "block_bytes": 4096,
+        "free_bytes": 253551480832
+      }
+    },
+    "utc": "2026-11-21T11:08:50.789469+00:00"
+  }
+}

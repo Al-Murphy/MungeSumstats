@@ -1,0 +1,26 @@
+{
+  "admitted": true,
+  "available_bytes": 253621862400,
+  "binding": {
+    "path": "/private/tmp/mss-fullfile-20261121/runtime/namespace-bench.py",
+    "sha256": "a61cbab2a7af12e0befd8d4fb6c0e9f81d786160db1ad391c95389717a002e94"
+  },
+  "guard_sha256": "58e0818aa20801c30194bdce26bd117112b4b4d5d10f74ea556360c0867b56a2",
+  "issued_utc": "2026-11-21T11:05:29.163417+00:00",
+  "minimum_free_bytes": 199715979264,
+  "observed_utc": "2026-11-21T11:05:29.202583+00:00",
+  "owned_output_cap_bytes": 536870912,
+  "producer": {
+    "path": "/private/tmp/mss-fullfile-20261121/runtime/namespace-builds.py",
+    "sha256": "615535da8374c81d3d7f23f0300c313d26d06ebea638e73239492243f851a65f"
+  },
+  "root": {
+    "dev": 16777234,
+    "ino": 425985614,
+    "path": "/private/tmp/mss-namespace-builds-20261121"
+  },
+  "sampled_group_rss_limit_bytes": 4294967296,
+  "scope": "matched normal installs and runtime metadata only",
+  "supervisor_pid": 7862,
+  "wall_seconds": 900
+}

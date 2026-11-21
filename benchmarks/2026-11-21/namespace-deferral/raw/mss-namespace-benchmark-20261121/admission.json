@@ -1,0 +1,43 @@
+{
+  "argv": [
+    "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/bin/python3.15",
+    "-I",
+    "-B",
+    "-S",
+    "/private/tmp/mss-fullfile-20261121/runtime/namespace-bench.py",
+    "run",
+    "/private/tmp/mss-namespace-preparation-20261121/metadata/diagnostic.json",
+    "/private/tmp/mss-namespace-benchmark-20261121/diagnostic",
+    "--suite",
+    "diagnostic",
+    "--profile",
+    "none"
+  ],
+  "available_bytes": 253552070656,
+  "binding_sha256": "a61cbab2a7af12e0befd8d4fb6c0e9f81d786160db1ad391c95389717a002e94",
+  "build_observation": {
+    "path": "/private/tmp/mss-namespace-builds-observation-20261121.json",
+    "sha256": "c5177c03c405857cddcf7f6a56521ec98309b16ce4651bb606222e4bd2ec66a9"
+  },
+  "competing_processes": [],
+  "configuration": {
+    "path": "/private/tmp/mss-namespace-preparation-20261121/metadata/diagnostic.json",
+    "sha256": "e7f8f62ad46c2d2979f15ad7ad7f3cd48c58e9445945f1984f6f8dbc836c51b8"
+  },
+  "contention": "Serial one-thread workers on shared Darwin arm64 desktop; no competing R/compiler processes at admission; all MSS agents finished heavy work; OS page cache uncontrolled and inputs preread by frozen verifier",
+  "disk_bytes": 3221225472,
+  "floor_bytes": 199715979264,
+  "guard_sha256": "58e0818aa20801c30194bdce26bd117112b4b4d5d10f74ea556360c0867b56a2",
+  "issued_utc": "2026-11-21T11:08:42.150217+00:00",
+  "preparation_binding": {
+    "path": "/private/tmp/mss-namespace-preparation-20261121/metadata/binding.json",
+    "sha256": "8914967577de034a734e0d8e83dbb7b3a9f4046abf547fb86df21aa62440468e"
+  },
+  "preparation_observation": {
+    "path": "/private/tmp/mss-namespace-preparation-observation-20261121.json",
+    "sha256": "225f6d720d492a1584bf6e3e87cf23beedbc3df2194824e54a4f52948fdb2cf9"
+  },
+  "rss_bytes": 8589934592,
+  "scope": "Five-case 15-pair 30-fresh-worker namespace diagnostic; independent of incomplete original full cold/warm matrix",
+  "wall_seconds": 1800
+}

@@ -1,0 +1,21 @@
+Standardising column headers.
+First line of summary statistics file: 
+pos0	chr0	maf	A2Freq	unchangedCase	
+Returning unmapped column names without making them uppercase.
+Loading required namespace: GenomicFiles
+Returning as VCF.
+Renaming ID as SNP.
+sumstats has -log10 P-values; these will be converted to unadjusted p-values in the 'P' column.
+No INFO (SI) column detected.
+Sorting coordinates with 'data.table'.
+Converting summary statistics to GenomicRanges.
+Converting summary statistics to VRanges.
+Writing in IEU OpenGWAS VCF format ==>  /private/tmp/mss-namespace-paired-functional-20261121/tmp/RtmpA2wDHc/mss-namespace-103f5d752cca/written.vcf
+Renaming ID as SNP.
+sumstats has -log10 P-values; these will be converted to unadjusted p-values in the 'P' column.
+No INFO (SI) column detected.
+Standardising column headers.
+First line of summary statistics file: 
+pos0	chr0	maf	A2Freq	unchangedCase	
+Returning unmapped column names without making them uppercase.
+Returning as VCF.

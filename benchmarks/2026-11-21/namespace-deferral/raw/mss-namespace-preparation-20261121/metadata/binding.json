@@ -1,0 +1,44 @@
+{
+  "binding": {
+    "path": "/private/tmp/mss-fullfile-20261121/runtime/namespace-bench.py",
+    "sha256": "a61cbab2a7af12e0befd8d4fb6c0e9f81d786160db1ad391c95389717a002e94"
+  },
+  "bootstrap": {
+    "path": "/private/tmp/mss-fullfile-20261121/runtime/warm-current.py",
+    "sha256": "c58b14cda2ad650cefa078e4a73cd2a2a4d5ab8ffc4f7477e5375e0aaa794220"
+  },
+  "frozen_sources": {
+    "/private/tmp/mss-performance-20261119/tools/darwin-matrix-stage185/driver.py": "16e82e1e581dd92e911f8947f2465f4092759124bc157d1a1b0f8133c10761b4",
+    "/private/tmp/mss-performance-20261119/tools/darwin-matrix-stage185/warm.py": "46dac35e0452add60a41a0b5923b2096d0cce14309421bf0ca4585702f4c6382",
+    "/private/tmp/mss-performance-20261119/tools/darwin-matrix-stage185/prime.R": "28d96fb69242596bd5c9adb73013f5de70f8cb6f326f3900ed780c8ba5118661",
+    "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/run.py": "c0c5f2f72a334b2b77721eccca59a00d1e47fb1663f513ddcbe51700a13ec043",
+    "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/verify.py": "cb0f9774aa9523514ce9fc75868e438272606de3eb3564699addca103de1930b",
+    "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/process_metrics.py": "f402957540febe6e0f9e8c56422b7acc5f68bcc32afe4377705347de199a05d7",
+    "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/worker.R": "f8477b5b0047b0361d636e4af63b5ed9bf2be87229d7cf9c682331a51147e7df",
+    "/private/tmp/mss-performance-20261119/repo/inst/verification/fai-safety-stage8/whole-file/harness/verify.py": "d4bbe46a9037597203e779b9e0f830a293b15a476421973fc6a0b69b2dc45c95",
+    "/private/tmp/mss-performance-20261119/tools/darwin-full-stage185/guard.py": "58e0818aa20801c30194bdce26bd117112b4b4d5d10f74ea556360c0867b56a2",
+    "/private/tmp/mss-performance-20261119/repo/benchmarks/2026-11-19/performance-upgrade/operations/build.py": "a17b8a9f9c998a0ae27c35df9da31e08f7a6cba56a8b870d6af022350fb3a3f8",
+    "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/bin/python3.15": "6cc907e4a022fefc843bcd93954eaf5a2cbfc77a095640bfadeeed96154190c5"
+  },
+  "matrix_config": {
+    "path": "/private/tmp/mss-fullmatrix-20261121/prep-01/matrix.json",
+    "sha256": "156143e169744ead89eb7a01721ac433da0d0983be68924b417bcc72f00426c7"
+  },
+  "baseline_override": {
+    "frozen": "a86e8c94d753630eff8c6a695ed2f240d1123d0d",
+    "actual": "14ea7af51a19272c7792fbe582a3d42b291b4a1a"
+  },
+  "provenance": {
+    "path": "/private/tmp/mss-namespace-builds-20261121/PROVENANCE.json",
+    "sha256": "5fb9441a4599d40d03a0d17f9a813adc53f791e730748d99f83be0e12b88f561"
+  },
+  "candidate": "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b",
+  "configuration": {
+    "path": "/private/tmp/mss-namespace-preparation-20261121/metadata/diagnostic.json",
+    "sha256": "e7f8f62ad46c2d2979f15ad7ad7f3cd48c58e9445945f1984f6f8dbc836c51b8"
+  },
+  "preparation_inventory": {
+    "path": "/private/tmp/mss-namespace-preparation-20261121/metadata/preparation-inventory.json",
+    "sha256": "6bf2215319755c30203c5e32edfcfaca6710718cf8b0da99ec84a86af6f69b38"
+  }
+}

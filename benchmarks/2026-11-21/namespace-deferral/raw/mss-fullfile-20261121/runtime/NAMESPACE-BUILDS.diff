@@ -1,0 +1,417 @@
+diff --git a/namespace-builds.py b/namespace-builds.py
+new file mode 100644
+--- /dev/null
++++ b/namespace-builds.py
+@@ -0,0 +1,314 @@
++"""Produce guarded normal staged Darwin builds and namespace benchmark provenance."""
++import argparse
++import csv
++from dataclasses import asdict
++from datetime import datetime, timezone
++import hashlib
++import importlib.util
++import io
++import json
++import os
++from pathlib import Path
++import shlex
++import stat
++import sys
++import time
++
++
++RUNTIME = Path("/private/tmp/mss-fullfile-20261121/runtime")
++SOURCE = RUNTIME / "namespace-builds.py"
++BINDING = RUNTIME / "namespace-bench.py"
++BINDING_SHA = "a61cbab2a7af12e0befd8d4fb6c0e9f81d786160db1ad391c95389717a002e94"
++GUARD_SHA = "58e0818aa20801c30194bdce26bd117112b4b4d5d10f74ea556360c0867b56a2"
++PYTHON = Path("/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/bin/python3.15")
++REPO = Path("/private/tmp/mss-lazy-variantannotation-20261121")
++COMMITS = {"baseline": "14ea7af51a19272c7792fbe582a3d42b291b4a1a",
++           "candidate": "f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b"}
++CLT = Path("/Library/Developer/CommandLineTools/usr/bin")
++FLOOR, CAP, RSS, WALL = 186 * 1024**3, 512 * 1024**2, 4 * 1024**3, 900
++ESTIMATED_OUTPUT = 3 * 1024**3
++CONTROL_LIMIT = 1024**2
++REQUIRED_FLAGS = ("CC", "CFLAGS", "CPPFLAGS", "CXX17", "CXX17FLAGS", "LDFLAGS")
++OPTIONAL_FLAGS = ("CXX17STD", "SHLIB_CXX17LD", "SHLIB_CXX17LDFLAGS")
++GIT_SETTINGS = {"GIT_CONFIG_NOSYSTEM": "1", "GIT_CONFIG_GLOBAL": "/dev/null",
++                "GIT_NO_REPLACE_OBJECTS": "1", "GIT_NO_LAZY_FETCH": "1"}
++
++
++def require(condition, message):
++    if not condition:
++        raise ValueError(message)
++
++
++def physical(path):
++    require(path.is_absolute() and path.resolve(strict=True) == path, f"Expected a physical path: {path}")
++    return path
++
++
++def source_bytes(path):
++    physical(path)
++    with os.fdopen(os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK | os.O_CLOEXEC), "rb") as stream:
++        info = os.fstat(stream.fileno())
++        require(stat.S_ISREG(info.st_mode) and 0 < info.st_size <= CONTROL_LIMIT, f"Invalid Python source: {path}")
++        data = stream.read(CONTROL_LIMIT + 1)
++    require(len(data) == info.st_size, f"Python source size changed: {path}")
++    return data
++
++
++def load_binding():
++    data = source_bytes(BINDING)
++    require(hashlib.sha256(data).hexdigest() == BINDING_SHA, f"Reviewed binding changed: {BINDING}")
++    spec = importlib.util.spec_from_file_location("namespace_build_binding", BINDING)
++    binding = importlib.util.module_from_spec(spec)
++    exec(compile(data, str(BINDING), "exec"), binding.__dict__)
++    return binding, binding.load_frozen()
++
++
++def write_json(path, value, guard=None):
++    data = (json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + "\n").encode()
++    require(len(data) <= CONTROL_LIMIT, f"Oversized operator control: {path}")
++    if guard is None:
++        stream = path.open("xb")
++    else:
++        guard._check_space(guard._space(walk=True), evidence_bytes=len(data), metadata_blocks=1, new_entries=1)
++        stream = os.fdopen(guard._new_file(path), "wb")
++    with stream:
++        stream.write(data)
++    return {"path": str(path), "sha256": hashlib.sha256(data).hexdigest()}
++
++
++def environment(root, common):
++    return {
++        "PATH": f"{CLT}:/usr/bin:/bin:/usr/sbin:/sbin",
++        "HOME": str(root / "home"),
++        **{key: str(root / "tmp") for key in ("TMPDIR", "TMP", "TEMP")},
++        "LANG": "en_US.UTF-8", "LC_ALL": "en_US.UTF-8", "TZ": "UTC",
++        "R_LIBS": str(common), "R_LIBS_USER": "", "R_LIBS_SITE": "",
++        **dict.fromkeys(("R_ENVIRON_USER", "R_PROFILE_USER", "R_MAKEVARS_USER"), "/dev/null"),
++        "MAKEFLAGS": "-j1", "OMP_DYNAMIC": "FALSE", "MKL_DYNAMIC": "FALSE",
++        **dict.fromkeys(("OMP_NUM_THREADS", "OMP_THREAD_LIMIT", "OPENBLAS_NUM_THREADS",
++                         "MKL_NUM_THREADS", "VECLIB_MAXIMUM_THREADS", "BLIS_NUM_THREADS",
++                         "NUMEXPR_NUM_THREADS", "R_DATATABLE_NUM_THREADS"), "1"),
++    }
++
++
++def parse_runtime(data, expected):
++    rows = iter(csv.reader(io.StringIO(data.decode()), delimiter="\t", strict=True))
++    require(next(rows, None) == ["key", "value"], "Unexpected runtime TSV header")
++    observed = {}
++    for row in rows:
++        require(len(row) == 2 and row[0] not in observed, "Invalid or repeated runtime TSV key")
++        observed[row[0]] = row[1]
++    require(observed == expected, "Fresh runtime differs from the pinned matrix runtime")
++    return observed
++
++
++def compiler_flags(r_config):
++    captured = {}
++    for line in r_config.splitlines():
++        key, separator, value = line.partition("=")
++        if separator:
++            captured[key.strip()] = value.strip()
++    require(all(name in captured for name in REQUIRED_FLAGS), "Incomplete R CMD config --all")
++    return {name: captured[name] for name in (*REQUIRED_FLAGS, *OPTIONAL_FLAGS) if name in captured}
++
++
++class BuildRun:
++    def __init__(self, binding, warm, guard, result):
++        self.binding, self.warm, self.guard, self.result = binding, warm, guard, result
++        self.root = guard.root
++        self.env = environment(self.root, binding.COMMON)
++        self.sdk_env = {"SDKROOT": str(binding.PINNED_SDK)}
++        self.r = str(binding.RHOME / "bin/R")
++
++    def phase(self, label, argv, *, stem=None, archive=None, overrides=None):
++        self.guard._stop_check()
++        stem = self.root / label if stem is None else stem
++        paths = [stem.with_suffix(".jsonl"), archive or stem.with_suffix(".stdout"), stem.with_suffix(".stderr")]
++        effective = {**self.env, **(overrides or {})}
++        dispatched = ["/usr/bin/env", *(f"{k}={v}" for k, v in overrides.items()), *argv] if overrides else argv
++        record = {"label": label, "argv": dispatched, "command": argv, "cwd": str(self.root),
++                  "environment": self.env, "effective_environment": effective, "allowed_exits": [0],
++                  "paths": dict(zip(("receipt", "stdout", "stderr"), map(str, paths)))}
++        self.result["phases"].append(record)
++        outcome = asdict(self.guard.run_phase(label, dispatched, cwd=self.root, env=self.env, allowed_exits=(0,),
++                                              receipt=paths[0], stdout=paths[1], stderr=paths[2]))
++        record["outcome"] = outcome
++        rows = []
++        if paths[0].exists():
++            evidence = self.warm.d.control_bytes(physical(paths[0]))
++            record["receipt"] = {"path": str(paths[0]), "sha256": hashlib.sha256(evidence).hexdigest()}
++            rows = [json.loads(line) for line in evidence.splitlines()]
++            if rows and rows[-1]["status"] not in {"planned", "running"}:
++                record["terminal"] = rows[-1]
++        require(outcome["status"] == "completed" and outcome["receipt_error"] is None,
++                f"{label}: guard outcome {outcome}")
++        planned, running, terminal = rows
++        require(all(row["label"] == label for row in rows)
++                and planned["status"] == "planned" and running["status"] == "running"
++                and planned["argv"] == dispatched and planned["cwd"] == str(self.root)
++                and planned["allowed_exits"] == [0] and all(planned[key] == value for key, value in record["paths"].items())
++                and running["environment_keys"] == sorted(self.env)
++                and running["pid"] == running["expected_pgid"] == running["expected_sid"] > 1
++                and running["uid"] == os.geteuid() and planned["utc"] <= running["utc"] <= terminal["utc"]
++                and outcome["raw_exit"] == self.warm.d.phase_status(terminal, [0]),
++                f"{label}: retained guard records differ from the completed phase")
++        self.guard._stop_check()
++        stdout_pin = self.warm.build.pin(physical(paths[1])) if archive else self.warm.d.pin_control(physical(paths[1]))
++        record["transcripts"] = [record["receipt"], stdout_pin, self.warm.d.pin_control(physical(paths[2]))]
++        return record
++
++    def captures(self):
++        warm, binding = self.warm, self.binding
++        config_pin = warm.pin(warm.CONFIG, warm.ACCEPTED[warm.CONFIG])
++        config = json.loads(warm.d.check_control(config_pin))
++        previous = json.loads(warm.d.check_control(config["dependency_inventory"]))
++        toolchain = {"sdk": str(physical(binding.PINNED_SDK)),
++                     "build_toolchain_pins": previous["build_toolchain_pins"]}
++        toolchain_pins = binding.toolchain_pins(toolchain, previous["build_toolchain_pins"])
++        require(not os.path.lexists(binding.RHOME / "etc/Makevars.site"), "Unexpected R site Makevars")
++        runtime_pins = [{key: pin[key] for key in ("path", "sha256")}
++                        for pin in [config["r_executable"], config["r_engine"], *config["runtime_files"]]]
++        for pin in [*toolchain_pins, *runtime_pins]:
++            self.guard._stop_check()
++            binding.checked_file(warm, pin)
++        self.result.update(matrix_configuration=config_pin, historical_dependency_inventory=config["dependency_inventory"],
++                           verified_toolchain_files=toolchain["build_toolchain_pins"], verified_runtime_files=runtime_pins)
++        compiler = self.phase("compiler", [str(CLT / "clang"), "--version"])["transcripts"][1]
++        r_config = self.phase("r-config", [self.r, "CMD", "config", "--all"],
++                              overrides=self.sdk_env)["transcripts"][1]
++        runtime_path = self.root / "runtime.tsv"
++        command = warm.r.r_command(config["r_executable"]["path"], warm.WORKER, "runtime", str(runtime_path))
++        runtime = self.phase("runtime", command)["transcripts"]
++        runtime_receipt = warm.d.pin_control(physical(runtime_path))
++        observed = parse_runtime(warm.d.check_control(runtime_receipt), previous["runtime_observed"])
++        self.result["runtime_receipt"] = runtime_receipt
++        compiler_lines = warm.d.check_control(compiler).decode().strip().splitlines()
++        require(compiler_lines and compiler_lines[0].startswith("Apple clang version "), "Unexpected compiler version capture")
++        config_lines = warm.d.check_control(r_config).decode()
++        toolchain.update(R_version=observed["R_version"], R_platform=observed["R_platform"],
++                         compiler=compiler_lines, compiler_flags=compiler_flags(config_lines),
++                         compiler_receipt=compiler, r_config_receipt=r_config)
++        binding.verify_compiler_capture(toolchain, compiler_lines, config_lines.splitlines())
++        warm.r.verify_runtime(config, {**observed, "threads": "1"}, toolchain)
++        return toolchain, runtime_receipt, runtime
++
++    def role(self, role, commit, toolchain):
++        warm = self.warm
++        self.guard._stop_check()
++        directory = self.root / role
++        directory.mkdir(mode=0o700)
++        library = directory / "library"
++        library.mkdir(mode=0o700)
++        git = ["/usr/bin/git", "--no-replace-objects", "-C", str(REPO)]
++        revision = self.phase(f"source-tree-{role}", [*git, "rev-parse", "--verify", f"{commit}^{{tree}}"],
++                              stem=directory / "source-tree", overrides=GIT_SETTINGS)
++        tree = warm.d.check_control(revision["transcripts"][1]).decode().strip()
++        require(warm.r.valid_hash(tree, 40), f"{role}: invalid Git tree ID")
++        archive_path = directory / "MungeSumstats.tar"
++        archive_phase = self.phase(f"git-archive-{role}", [*git, "archive", "--format=tar", "--prefix=MungeSumstats/", commit],
++                                   stem=directory / "archive", archive=archive_path, overrides=GIT_SETTINGS)
++        archive = archive_phase["transcripts"][1]
++        install = [self.r, "CMD", "INSTALL", "--use-vanilla", f"--library={library}", str(archive_path)]
++        phase = self.phase(f"normal-install-{role}", install, stem=directory / "install", overrides=self.sdk_env)
++        stdout, stderr = (warm.d.check_control(pin).decode() for pin in phase["transcripts"][1:])
++        commands = [shlex.split(line) for line in stdout.splitlines() if line.startswith("clang++ ")]
++        require(len(commands) == 3 and all(f"-I{self.binding.COMMON}/Rcpp/include" in c and "-c" in c for c in commands[:2])
++                and "-dynamiclib" in commands[2] and "MungeSumstats.so" in commands[2],
++                f"{role}: unexpected compiler or linker commands")
++        markers = ("** using staged installation", toolchain["compiler"][0], "using C++17",
++                   f"using SDK: ‘{self.binding.PINNED_SDK.name}’",
++                   "** testing if installed package can be loaded from temporary location",
++                   "** testing if installed package can be loaded from final location", "* DONE (MungeSumstats)")
++        offsets = [stderr.find(marker) for marker in markers]
++        require(offsets[0] >= 0 and offsets == sorted(set(offsets)), f"{role}: incomplete normal staged install evidence")
++        package = library / "MungeSumstats"
++        require(set(library.iterdir()) == {package}, f"{role}: library must contain only the newly installed package")
++        dll = warm.build.pin(physical(package / "libs/MungeSumstats.so"))
++        tree_sha = warm.build.package_tree(physical(package))["tree_sha256"]
++        self.guard._stop_check()
++        receipt = {"source_commit": commit, "source_tree": tree, "archive": archive, "library": str(physical(library)),
++                   "dll": dll, "dll_sha256": dll["sha256"], "package_tree_sha256": tree_sha,
++                   "install_argv": phase["argv"], "install_transcripts": phase["transcripts"], "terminal": phase["terminal"],
++                   "compile_and_link_argv": commands, "toolchain": toolchain}
++        self.result["roles"][role] = write_json(directory / "build.json", receipt, self.guard)
++        return receipt
++
++
++def run(root):
++    started = datetime.now(timezone.utc)
++    require(sys.platform == "darwin" and physical(Path(sys.executable)) == PYTHON and sys.flags.isolated
++            and sys.flags.dont_write_bytecode and sys.flags.no_site, "Use the pinned Darwin Python with -I -B -S")
++    require(root.is_absolute() and root == physical(root.parent) / root.name
++            and not root.is_relative_to(REPO), "Expected an absolute physical output path outside the source repository")
++    require(physical(Path(__file__)) == SOURCE, f"Use the physical producer source: {SOURCE}")
++    os.umask(0o077)
++    root.mkdir(mode=0o700)
++    info = root.lstat()
++    require(stat.S_IMODE(info.st_mode) == 0o700 and info.st_uid == os.geteuid(), "Expected a private owner output root")
++    source = {"path": str(SOURCE), "sha256": hashlib.sha256(source_bytes(SOURCE)).hexdigest()}
++    volume = os.statvfs(root)
++    available = volume.f_bavail * volume.f_frsize
++    admitted = volume.f_frsize > 0 and available >= FLOOR + CAP
++    admission = write_json(root / "admission.json", {
++        "scope": "matched normal installs and runtime metadata only", "admitted": admitted,
++        "issued_utc": started.isoformat(), "observed_utc": datetime.now(timezone.utc).isoformat(),
++        "root": {"path": str(root), "dev": info.st_dev, "ino": info.st_ino}, "supervisor_pid": os.getpid(),
++        "producer": source, "binding": {"path": str(BINDING), "sha256": BINDING_SHA}, "guard_sha256": GUARD_SHA,
++        "available_bytes": available, "minimum_free_bytes": FLOOR, "owned_output_cap_bytes": CAP,
++        "sampled_group_rss_limit_bytes": RSS, "wall_seconds": WALL,
++    })
++    result = {"status": "failed", "producer": source, "admission": admission, "repository": str(REPO),
++              "commits": COMMITS, "phases": [], "roles": {}}
++    guard = None
++    try:
++        require(admitted, f"Available bytes {available} must fund the continuing floor and build output cap")
++        binding, warm = load_binding()
++        require(warm.SOURCES[warm.GUARD] == GUARD_SHA and binding.BASELINE == COMMITS["baseline"],
++                "Unexpected authenticated guard or baseline")
++        guard_pin = warm.pin(warm.GUARD, GUARD_SHA)
++        result["guard"] = guard_pin
++        native = warm.d.module(guard_pin, "namespace_build_guard")
++        guard = native.Guard(native.GuardConfig(root, started, WALL, RSS, CAP, FLOOR))
++        with guard.shutdown_signals():
++            guard._stop_check()
++            physical(REPO)
++            common = physical(binding.COMMON)
++            require(not os.path.lexists(common / "MungeSumstats"), "Common library contains a selected package")
++            for name in ("home", "tmp"):
++                (root / name).mkdir(mode=0o700)
++            operator = BuildRun(binding, warm, guard, result)
++            toolchain, runtime, transcripts = operator.captures()
++            baseline, candidate = (operator.role(role, commit, toolchain) for role, commit in COMMITS.items())
++            require(baseline["source_tree"] != candidate["source_tree"]
++                    and baseline["compile_and_link_argv"] == candidate["compile_and_link_argv"],
++                    "Expected distinct source trees with identical native commands")
++            guard._stop_check()
++            result["provenance"] = write_json(root / "PROVENANCE.json", {
++                "repository": str(REPO), **result["roles"], "runtime_receipt": runtime, "runtime_transcripts": transcripts,
++                "minimum_free_bytes": FLOOR, "estimated_output_bytes": ESTIMATED_OUTPUT,
++                "contention_note": (f"Independent build/metadata admission observed {available} free bytes. "
++                                    "Build phases ran sequentially under the shared guard. "
++                                    "Benchmark host admission, contention and cache observations, and timings are pending."),
++            }, guard)
++    except (OSError, ValueError, RuntimeError, KeyError, TypeError, csv.Error, KeyboardInterrupt) as error:
++        result["error"] = f"{type(error).__name__}: {error}"
++        print(result["error"], file=sys.stderr)
++    else:
++        result["status"] = "completed"
++    result["finished_utc"] = datetime.now(timezone.utc).isoformat()
++    write_json(root / "operator-result.json", result, guard if result["status"] == "completed" else None)
++    return 0 if result["status"] == "completed" else 1
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("output", type=Path, help="absent physical directory for private build evidence")
++    try:
++        return run(parser.parse_args().output)
++    except (OSError, ValueError, RuntimeError) as error:
++        print(error, file=sys.stderr)
++        return 1
++
++
++if __name__ == "__main__":
++    sys.exit(main())
+diff --git a/namespace-builds-source-controls.py b/namespace-builds-source-controls.py
+new file mode 100644
+--- /dev/null
++++ b/namespace-builds-source-controls.py
+@@ -0,0 +1,51 @@
++"""Exercise only producer metadata parsing and the frozen environment allowlist."""
++import ast
++from pathlib import Path
++
++root = Path(__file__).parent
++source = root / "namespace-builds.py"
++code = compile(ast.parse(source.read_bytes(), filename=str(source)), str(source), "exec")
++producer = {"__file__": str(source), "__name__": "namespace_builds_metadata_controls"}
++exec(code, producer)
++
++
++def reject(function, *args):
++    try:
++        function(*args)
++    except ValueError:
++        return
++    raise AssertionError(f"Accepted invalid metadata in {function.__name__}")
++
++
++flags = producer["compiler_flags"]
++required = producer["REQUIRED_FLAGS"]
++config = dict.fromkeys(required, "-O2")
++config.update(CPPFLAGS="", CXX17="clang++ -arch arm64", CXX17STD="-std=gnu++17")
++capture = "\n".join(f"{name} = {value}" for name, value in config.items())
++assert flags(capture) == config
++for name in required:
++    reject(flags, "\n".join(f"{key} = {value}" for key, value in config.items() if key != name))
++
++parse_runtime = producer["parse_runtime"]
++runtime = b'"key"\t"value"\n"R_version"\t"4.5.3"\n"locale"\t"en_US.UTF-8"\n'
++expected = {"R_version": "4.5.3", "locale": "en_US.UTF-8"}
++assert parse_runtime(runtime, expected) == expected
++reject(parse_runtime, runtime, {**expected, "locale": "C"})
++reject(parse_runtime, runtime + b'"locale"\t"en_US.UTF-8"\n', expected)
++reject(parse_runtime, runtime + b'"wide"\t"row"\t"bad"\n', expected)
++
++guard = Path("/private/tmp/mss-performance-20261119/tools/darwin-full-stage185/guard.py")
++guard_source = ast.parse(guard.read_bytes(), filename=str(guard))
++allowlist = next(node for node in guard_source.body if isinstance(node, ast.Assign)
++                 and isinstance(node.targets[0], ast.Name) and node.targets[0].id == "_ENV_KEYS")
++allowed = set(allowlist.value.args[0].func.value.value.split())
++env = producer["environment"](Path("/private/tmp/fake-producer"), Path("/private/tmp/fake-common"))
++assert {"HOME", "TMPDIR"} <= env.keys() <= allowed
++assert env["LC_ALL"] == env["LANG"] == "en_US.UTF-8"
++assert env["R_LIBS"] == "/private/tmp/fake-common"
++assert env["R_LIBS_USER"] == env["R_LIBS_SITE"] == ""
++assert env["MAKEFLAGS"] == "-j1"
++assert env.keys().isdisjoint(producer["GIT_SETTINGS"])
++assert set(producer["GIT_SETTINGS"]) == {"GIT_CONFIG_NOSYSTEM", "GIT_CONFIG_GLOBAL", "GIT_NO_REPLACE_OBJECTS",
++                                        "GIT_NO_LAZY_FETCH"}
++print("PASS required and empty compiler flags, strict runtime TSV, and native guard environment compatibility")
+diff --git a/NAMESPACE-BUILDS-REPORT.md b/NAMESPACE-BUILDS-REPORT.md
+new file mode 100644
+--- /dev/null
++++ b/NAMESPACE-BUILDS-REPORT.md
+@@ -0,0 +1,37 @@
++# Matched committed namespace builds
++
++The source is ready for independent review and execution. Both role installations and all benchmark observations are still pending.
++
++| Role | Commit |
++| --- | --- |
++| Baseline | `14ea7af51a19272c7792fbe582a3d42b291b4a1a` |
++| Candidate | `f39ab1b7f0a9fd643d70097e5764ba7e1fcf257b` |
++
++The producer takes a single absent absolute output path under a physical parent. It creates its own private root and records fresh filesystem availability in `admission.json`. It admits the independent build when the initial free space funds the 186 GiB continuing floor and the 512 MiB owned output budget. One authenticated native guard shares the 900-second operator window across all phases, samples group RSS against 4 GiB, and checks logical and allocated output against the budget. The operator uses the native guard's exclusive files and records its actual returned outcome alongside each retained terminal. [Producer](namespace-builds.py) · [Guard](/private/tmp/mss-performance-20261119/tools/darwin-full-stage185/guard.py)
++
++The producer authenticates the reviewed binding before executing its bytes and obtains its frozen helpers from `load_frozen()`. It checks the original matrix and dependency inventory pins, freshly verifies their compiler, SDK, R Makeconf and runtime file pins, and captures the pinned clang's `--version` plus effective `R CMD config --all` under the guard. The exact frozen worker captures `runtime.tsv` with no selected package library. The actual runtime must match the original matrix, including R, BLAS, LAPACK and locale. The toolchain object is shared by both receipts and retains the captured compiler lines and required flags, including any explicit empty values. [Binding](namespace-bench.py) · [Provenance consumer contract](NAMESPACE-BENCH-REPORT.md)
++
++Each role runs a guarded local Git tree lookup and archive from `/private/tmp/mss-lazy-variantannotation-20261121`. The guard owns the archive's stdout file `ROLE/MungeSumstats.tar`, directly receiving the bytes from the requested `git archive --format=tar --prefix=MungeSumstats/ COMMIT`. The `/usr/bin/env` wrapper applies the explicit Git safety settings without modifying the authenticated guard. The operator result retains the wrapper dispatch, direct command, effective environment, raw outcome, transcript pins and actual terminal. The benchmark consumer independently checks the embedded archive commit.
++
++The two installs use the same clean build environment with private HOME and temporary paths, the physical 96-package common library, disabled user startup and Makevars, one make job and the guard's supported thread controls. The approved `en_US.UTF-8` locale applies to both installs and to the runtime capture. It matches the frozen worker's expected runtime TSV and the binding's exact SDK log marker. Both installs run the same SDK-prefixed `R CMD INSTALL --use-vanilla` invocation with separate libraries and archives, without an outer timing wrapper. The producer checks staged load markers and three parsed native commands, then records DLL and frozen package-tree digests. It requires distinct source trees and identical native commands before publishing `PROVENANCE.json`. [Build requirements](NAMESPACE-BUILDS-BRIEF.md)
++
++The provenance pins each role's `build.json` and the fresh runtime TSV, with the runtime's guard JSONL, stdout and stderr in that order. Both role receipts use the same transcript order. Provenance declares the 186 GiB continuing floor and the 3 GiB estimate requested by the consumer. Benchmark admission, host contention and cache observations, and timings require their separate measurement phase. The private `operator-result.json` records only attempted phases, and a failure terminates the sequence with its actual guard evidence. The final failure control is bounded to 1 MiB and can be written after a guard stop, including a stop for exhausted output or free space. Native guard limits describe the sampled workloads and their funded transcripts.
++
++## Operator command
++
++```sh
++PY=/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/bin/python3.15
++RUNTIME=/private/tmp/mss-fullfile-20261121/runtime
++"$PY" -I -B -S "$RUNTIME/namespace-builds.py" "$OUTPUT"
++```
++
++After successful independent observation, `$OUTPUT/PROVENANCE.json` is the input to the separately reviewed binding's preparation command. [Preparation and measurement commands](NAMESPACE-BENCH-REPORT.md)
++
++## Source checks
++
++| Source | SHA-256 |
++| --- | --- |
++| [Producer](namespace-builds.py) | `41da5092b5aafc65c7d95cbd684e53f4606e131b5f0a818293548080d502f4df` |
++| [Metadata controls](namespace-builds-source-controls.py) | `56dbbb35d66cb4481f583a17120e59207c60426833ac8f15b64c95c1167b12c0` |
++
++The physical Python parsed both Python files and printed CLI help with exit zero. In-memory controls passed for explicit empty compiler flags, missing required flags, malformed and duplicate runtime keys, runtime locale mismatches and guard environment compatibility. Passing the existing runtime directory as output exited one at exclusive root creation. Source verification used metadata only.

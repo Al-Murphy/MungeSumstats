@@ -1,0 +1,152 @@
+{
+  "schema": "namespace-functional-root-observation-v1",
+  "observed_utc": "2026-11-21T10:39:20.252618+00:00",
+  "phases": {
+    "/private/tmp/mss-namespace-paired-functional-20261121/eager-semantics.jsonl": {
+      "receipt": {
+        "path": "/private/tmp/mss-namespace-paired-functional-20261121/eager-semantics.jsonl",
+        "sha256": "14a49082aef047ca6fe67d14e0b61dc62257ae890c063632483cd3e69fc2c568"
+      },
+      "admission": {
+        "path": "/private/tmp/mss-namespace-paired-functional-20261121/admission.json",
+        "sha256": "87b8a3461f09d151460d7df8f6dddaaf92302dfe25190ea942176a3da95b581f"
+      },
+      "pgid": 66549,
+      "sid": 66549,
+      "observed_raw_exit": 0,
+      "observed_supervisor_exit": 0,
+      "group_absent": true,
+      "session_absent": true
+    },
+    "/private/tmp/mss-namespace-paired-functional-20261121/deferred-startup.jsonl": {
+      "receipt": {
+        "path": "/private/tmp/mss-namespace-paired-functional-20261121/deferred-startup.jsonl",
+        "sha256": "ba0d22613943a357d131e2b5a4e999e2cb72f367e9b9a32fa0effbbf58d8e050"
+      },
+      "admission": {
+        "path": "/private/tmp/mss-namespace-paired-functional-20261121/admission.json",
+        "sha256": "87b8a3461f09d151460d7df8f6dddaaf92302dfe25190ea942176a3da95b581f"
+      },
+      "pgid": 66739,
+      "sid": 66739,
+      "observed_raw_exit": 0,
+      "observed_supervisor_exit": 0,
+      "group_absent": true,
+      "session_absent": true
+    },
+    "/private/tmp/mss-namespace-paired-functional-20261121/eager-parallel.jsonl": {
+      "receipt": {
+        "path": "/private/tmp/mss-namespace-paired-functional-20261121/eager-parallel.jsonl",
+        "sha256": "e6b93b36b24b83cb0da7b9a3214cf1b736754700658d988bf8ee5313328d6430"
+      },
+      "admission": {
+        "path": "/private/tmp/mss-namespace-paired-functional-20261121/admission.json",
+        "sha256": "87b8a3461f09d151460d7df8f6dddaaf92302dfe25190ea942176a3da95b581f"
+      },
+      "pgid": 66861,
+      "sid": 66861,
+      "observed_raw_exit": 0,
+      "observed_supervisor_exit": 0,
+      "group_absent": true,
+      "session_absent": true
+    },
+    "/private/tmp/mss-namespace-paired-functional-20261121/deferred-parallel.jsonl": {
+      "receipt": {
+        "path": "/private/tmp/mss-namespace-paired-functional-20261121/deferred-parallel.jsonl",
+        "sha256": "0dacb5cc7305b0e1acac3e691819ec3704e378cc0f55a177771be2ea166436b3"
+      },
+      "admission": {
+        "path": "/private/tmp/mss-namespace-paired-functional-20261121/admission.json",
+        "sha256": "87b8a3461f09d151460d7df8f6dddaaf92302dfe25190ea942176a3da95b581f"
+      },
+      "pgid": 66962,
+      "sid": 66962,
+      "observed_raw_exit": 0,
+      "observed_supervisor_exit": 0,
+      "group_absent": true,
+      "session_absent": true
+    },
+    "/private/tmp/mss-namespace-installed-suite-20261121/eager-bp.jsonl": {
+      "receipt": {
+        "path": "/private/tmp/mss-namespace-installed-suite-20261121/eager-bp.jsonl",
+        "sha256": "97a1d532721675d9c1a118d1a616b34dbedc58ccdd3465aede8c84bcfe19106f"
+      },
+      "admission": {
+        "path": "/private/tmp/mss-namespace-installed-suite-20261121/admission.json",
+        "sha256": "cbab726393fca23c7a53265bd07383d263798774848d0791b85da0034efe3ed2"
+      },
+      "pgid": 93783,
+      "sid": 93783,
+      "observed_raw_exit": 0,
+      "observed_supervisor_exit": 0,
+      "group_absent": true,
+      "session_absent": true
+    },
+    "/private/tmp/mss-namespace-installed-suite-20261121/deferred-bp.jsonl": {
+      "receipt": {
+        "path": "/private/tmp/mss-namespace-installed-suite-20261121/deferred-bp.jsonl",
+        "sha256": "4aec228892d34b9d5538f8b53c42b63bdbc99eb9d069b8cd3cfcaed69e9b764e"
+      },
+      "admission": {
+        "path": "/private/tmp/mss-namespace-installed-suite-20261121/admission.json",
+        "sha256": "cbab726393fca23c7a53265bd07383d263798774848d0791b85da0034efe3ed2"
+      },
+      "pgid": 94051,
+      "sid": 94051,
+      "observed_raw_exit": 0,
+      "observed_supervisor_exit": 0,
+      "group_absent": true,
+      "session_absent": true
+    },
+    "/private/tmp/mss-namespace-installed-suite-20261121/eager-unfiltered.jsonl": {
+      "receipt": {
+        "path": "/private/tmp/mss-namespace-installed-suite-20261121/eager-unfiltered.jsonl",
+        "sha256": "04fdbb42c78363cfc244226363e450a137f0cdac374e44f021f11f41a546fd42"
+      },
+      "admission": {
+        "path": "/private/tmp/mss-namespace-installed-suite-20261121/admission.json",
+        "sha256": "cbab726393fca23c7a53265bd07383d263798774848d0791b85da0034efe3ed2"
+      },
+      "pgid": 94417,
+      "sid": 94417,
+      "observed_raw_exit": 0,
+      "observed_supervisor_exit": 0,
+      "group_absent": true,
+      "session_absent": true
+    },
+    "/private/tmp/mss-namespace-installed-suite-20261121/deferred-unfiltered.jsonl": {
+      "receipt": {
+        "path": "/private/tmp/mss-namespace-installed-suite-20261121/deferred-unfiltered.jsonl",
+        "sha256": "91c9e317497311468927b73f354b113006edb44d9a9673bb9e4dba63b8275def"
+      },
+      "admission": {
+        "path": "/private/tmp/mss-namespace-installed-suite-20261121/admission.json",
+        "sha256": "cbab726393fca23c7a53265bd07383d263798774848d0791b85da0034efe3ed2"
+      },
+      "pgid": 95330,
+      "sid": 95330,
+      "observed_raw_exit": 0,
+      "observed_supervisor_exit": 0,
+      "group_absent": true,
+      "session_absent": true
+    }
+  },
+  "matches": [],
+  "tool_terminals": {
+    "core_parallel": "a331dd",
+    "bp_unfiltered": "39b389"
+  },
+  "post_suite_integrity": {
+    "path": "/private/tmp/mss-namespace-installed-suite-20261121/post-suite-integrity.json",
+    "sha256": "942fa71e3f9b866df01c7c0c4df6ff241b578214ca8eeb0d8288a3abee622a1a"
+  },
+  "matched_conditions": true,
+  "assertions_per_role": 3077,
+  "active_test_files_per_role": 89,
+  "full_suite_skipped_failed_errors": [
+    0,
+    0,
+    0
+  ],
+  "performance_claim": false
+}

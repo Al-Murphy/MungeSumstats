@@ -1,0 +1,73 @@
+{
+  "normalized_rows_checked": 32,
+  "status_counts": {
+    "match": 11,
+    "swap": 2,
+    "complement": 2,
+    "swapped_complement": 2,
+    "alt_alt_contrast": 1,
+    "ambiguous": 4,
+    "source_coordinates_missing": 1,
+    "coordinate_id_conflict": 1,
+    "unmapped": 1,
+    "invalid_position": 1,
+    "unsupported_allele": 1,
+    "specialist_preserved": 5
+  },
+  "oracle_fields": [
+    "source_row",
+    "status",
+    "chr",
+    "pos",
+    "ref",
+    "alt",
+    "id",
+    "effect",
+    "eaf",
+    "swapped",
+    "complemented",
+    "candidate_count",
+    "entity_type",
+    "entity_id",
+    "normalized_build",
+    "grch38_chr",
+    "grch38_pos",
+    "grch38_ref",
+    "grch38_alt"
+  ],
+  "oracle_rows_checked": 32,
+  "stable_byte_equality": true,
+  "edition_count": 6,
+  "normalized_columns": [
+    "status",
+    "chr",
+    "pos",
+    "ref",
+    "alt",
+    "id",
+    "effect",
+    "eaf",
+    "swapped",
+    "complemented",
+    "candidate_count",
+    "entity_type",
+    "entity_id",
+    "normalized_build",
+    "source_row",
+    "grch38_chr",
+    "grch38_pos",
+    "grch38_ref",
+    "grch38_alt"
+  ],
+  "source_artifact": {
+    "bytes": 439,
+    "sha256": "19eb0e6ae84c144a1aa05173a099e8d4b756c6bfb761ef2bcf0de2031336b4bd",
+    "md5": "1b08864cadb08931be535ad7a1846e9e"
+  },
+  "decoded_source": {
+    "bytes": 2071,
+    "sha256": "57c0a73187a0b8ada8d53a51fd0e1d390996ff60e9110e8531e3fd674a581da0",
+    "md5": "9caaa02001fdf8037245ce18b51411de"
+  },
+  "stable_rds_manifest_equality": true
+}
