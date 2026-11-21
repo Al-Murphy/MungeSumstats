@@ -1,6 +1,6 @@
 Runtime start namespace roster: base, compiler, data.table, grDevices, graphics, methods, stats, tools, utils
 Runtime start: R version 4.5.3 (2026-03-11); R home=/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources; JIT=0; data.table threads=1
-Library roots: /private/tmp/mss-focus-20261120/r-component-alloc-v1/t3/lib | /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library 
+Library roots: /private/tmp/mss-focus-20261120/r-component-alloc-v2/t3/lib | /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library 
 Namespace	base	4.5.3	/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/base
 Namespace	compiler	4.5.3	/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/compiler
 Namespace	data.table	1.18.6.1	/Users/bschilder/Library/R/arm64/4.5/library/data.table
@@ -27,13 +27,13 @@ list(datatable.optimize = Inf, datatable.auto.index = TRUE, datatable.use.index 
     datatable.print.nrows = 100L, datatable.print.rownames = TRUE, 
     datatable.print.topn = 5L, datatable.print.trunc.cols = FALSE, 
     datatable.show.indices = FALSE, datatable.warnredundantby = TRUE)
-narrow/sparse rows=100000 flipped=1000 allocation_events=1004 allocation_bytes=18507920
-wide/dense rows=100000 flipped=75000 allocation_events=630 allocation_bytes=124773744
-narrow/dense rows=100000 flipped=75000 allocation_events=311 allocation_bytes=67097664
-wide/sparse rows=100000 flipped=1000 allocation_events=630 allocation_bytes=16141744
+narrow/sparse rows=100000 flipped=1000 allocation_events=1056 allocation_bytes=20438224
+wide/dense rows=100000 flipped=75000 allocation_events=682 allocation_bytes=129073072
+narrow/dense rows=100000 flipped=75000 allocation_events=363 allocation_bytes=71395968
+wide/sparse rows=100000 flipped=1000 allocation_events=682 allocation_bytes=18073072
 Runtime end namespace roster: base, compiler, data.table, grDevices, graphics, methods, stats, tools, utils
 Runtime end: R version 4.5.3 (2026-03-11); R home=/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources; JIT=0; data.table threads=1
-Library roots: /private/tmp/mss-focus-20261120/r-component-alloc-v1/t3/lib | /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library 
+Library roots: /private/tmp/mss-focus-20261120/r-component-alloc-v2/t3/lib | /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library 
 Namespace	base	4.5.3	/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/base
 Namespace	compiler	4.5.3	/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/compiler
 Namespace	data.table	1.18.6.1	/Users/bschilder/Library/R/arm64/4.5/library/data.table

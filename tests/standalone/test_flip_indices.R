@@ -298,6 +298,13 @@ flip_cases <- function() {
         integer_effect = fixture(flip_input(
             "rs1", "G", "A", BETA = -3L, OR = 4L
         )),
+        integer_tmp = fixture(flip_input(
+            c("rs1", "rs2"), c("G", "A"), c("A", "G"), tmp = 1:2
+        )),
+        factor_flag = fixture(flip_input(
+            c("rs1", "rs2"), c("G", "A"), c("A", "G"),
+            BETA = c(-0.7, 0.4), flipped = factor(c("old", "old"))
+        ), settings = list(imputation_ind = TRUE)),
         z_frq_disabled = fixture(ordinary, settings = list(
             allele_flip_z = FALSE, allele_flip_frq = FALSE, bi_allelic_filter = FALSE
         )),
@@ -383,6 +390,24 @@ literal_checks <- function(cases) {
     }, logical(1L))))
     same(columns("integer_effect")$BETA, 3L, "integer effect: signed BETA")
     same(columns("integer_effect")$OR, 0L, "integer effect: reciprocal assignment")
+
+    tmp_case <- cases$integer_tmp
+    stopifnot(!is.null(tmp_case$result), !"tmp" %in% names(tmp_case$caller_input$columns))
+    same(tmp_case$caller_input$columns$A2, c("G", "G"), "integer tmp: caller swap")
+    stopifnot(any(vapply(tmp_case$conditions, function(condition) {
+        condition$type == "warning" &&
+            grepl("Coercing 'character' RHS to 'integer'", condition$message, fixed = TRUE) &&
+            grepl("named 'tmp'", condition$message, fixed = TRUE)
+    }, logical(1L))))
+
+    flag_case <- cases$factor_flag
+    same(flag_case$result, NULL, "factor flag: no result")
+    condition <- tail(flag_case$conditions, 1L)[[1L]]
+    stopifnot(condition$type == "error",
+              grepl("Cannot assign 'logical' to 'factor'", condition$message, fixed = TRUE))
+    same(flag_case$caller_input$columns$BETA, c(0.7, 0.4), "factor flag: effects precede error")
+    same(flag_case$caller_input$columns$flipped, factor(c("old", "old")),
+         "factor flag: caller retains original levels and values")
 
     same(columns("z_frq_disabled")$Z[2L], -2, "disabled Z: unchanged")
     same(columns("z_frq_disabled")$FRQ[2L], 0.2, "disabled FRQ: unchanged")
@@ -511,7 +536,7 @@ run_flip_regression <- function(args) {
     candidate <- source_flip(candidate_path, args[[3L]])
     same(formals(candidate), formals(old), "public helper formals")
     fixtures <- flip_cases()
-    stopifnot(length(fixtures) <= 24L)
+    stopifnot(length(fixtures) <= 25L)
     outcomes <- list(control = list(), candidate = list())
     for (name in names(fixtures)) {
         fixture <- fixtures[[name]]

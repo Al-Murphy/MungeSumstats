@@ -161,9 +161,9 @@ check_allele_flip <- function(sumstats_dt, path,
             )
             message(print_msg)
             # swap A1 and A2 for those SNPs needing to be flipped
-            sumstats_dt[flip_rows, tmp := A2]
-            sumstats_dt[flip_rows, A2 := A1]
-            sumstats_dt[flip_rows, A1 := tmp]
+            sumstats_dt[match_type == FALSE, tmp := A2]
+            sumstats_dt[match_type == FALSE, A2 := A1]
+            sumstats_dt[match_type == FALSE, A1 := tmp]
             sumstats_dt[, tmp := NULL]
 
             # flip effect column(s) - BETA, OR, Z, log_odds, SIGNED_SUMSTAT, FRQ
@@ -231,7 +231,7 @@ check_allele_flip <- function(sumstats_dt, path,
                 }
             }
             if (imputation_ind) {
-                sumstats_dt[flip_rows, flipped := TRUE]
+                sumstats_dt[match_type == FALSE, flipped := TRUE]
             }
         }
         # remove extra created columns and return
