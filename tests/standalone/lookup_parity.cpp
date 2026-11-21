@@ -6,11 +6,13 @@
 
 #include <preservation_core.h>
 #include <cassert>
+#include <charconv>
 #include <cstdlib>
 #include <cstring>
 #include <iomanip>
 #include <iostream>
 #include <new>
+#include <numeric>
 #include <random>
 
 static std::size_t allocation_calls = 0;
@@ -123,6 +125,138 @@ std::uint64_t bits(double value) {
   return raw;
 }
 
+#ifdef MSS_LOOKUP_COUNTERS
+constexpr std::size_t matched_panel_rows = 437458;
+constexpr std::size_t matched_selected_rows = 32768;
+constexpr unsigned matched_shuffle_seed = 257;
+
+struct MatchedRow {
+  std::size_t ordinal;
+  std::string raw_line;
+  Input input;
+};
+
+bool tsv_field(const std::string& value) {
+  return value.find_first_of("\t\r\n") == std::string::npos && value.find('\0') == std::string::npos;
+}
+
+double matched_number(const std::string& token) {
+  std::size_t consumed = 0;
+  const auto value = std::stod(token, &consumed);
+  if (consumed != token.size() || !std::isfinite(value) ||
+      token.find_first_of(" \t\r\n\f\v") != std::string::npos)
+    throw std::runtime_error("Invalid matched numeric token");
+  return value;
+}
+
+std::int64_t matched_position(const std::string& token) {
+  std::int64_t value = 0;
+  const auto end = token.data() + token.size();
+  const auto parsed = std::from_chars(token.data(), end, value);
+  if (parsed.ec != std::errc{} || parsed.ptr != end || value < 1)
+    throw std::runtime_error("Invalid matched BP token");
+  return static_cast<std::int64_t>(value);
+}
+
+std::size_t matched_ordinal(std::size_t index) {
+  return 1 + std::uint64_t(index) * (matched_panel_rows - 1) / (matched_selected_rows - 1);
+}
+
+void matched(const char* index, const char* fasta, const char* input,
+             const fs::path& output, const std::string& order) {
+  if (order != "input" && order != "shuffled") throw std::runtime_error("Matched order must be input or shuffled");
+  if (!fs::create_directory(output)) throw std::runtime_error("Require a fresh matched output directory");
+
+  const std::string raw_header = "SNP\tCHR\tBP\tA1\tA2\tBETA\tFRQ\tSE\tP";
+  std::ifstream source(input, std::ios::binary);
+  if (!source) throw std::runtime_error("Cannot open matched input");
+  std::string line;
+  if (!std::getline(source, line) || line != raw_header) throw std::runtime_error("Invalid matched header");
+
+  std::vector<MatchedRow> rows;
+  rows.reserve(matched_selected_rows);
+  std::set<std::tuple<std::string, std::string, std::string, std::string>> raw_events;
+  for (std::size_t ordinal = 1; ordinal <= matched_panel_rows; ++ordinal) {
+    if (!std::getline(source, line)) throw std::runtime_error("Truncated matched panel");
+    const auto fields = split(line, '\t');
+    if (fields.size() != 9 || !std::all_of(fields.begin(), fields.end(), tsv_field))
+      throw std::runtime_error("Invalid matched TSV row at ordinal " + std::to_string(ordinal));
+    const auto pos = matched_position(fields[2]);
+    const auto effect = matched_number(fields[5]);
+    const auto eaf = matched_number(fields[6]);
+    matched_number(fields[7]);
+    matched_number(fields[8]);
+    if (ordinal != matched_ordinal(rows.size())) continue;
+
+    if (!raw_events.emplace(fields[1], fields[2], fields[3], fields[4]).second)
+      throw std::runtime_error("Duplicate raw event at ordinal " + std::to_string(ordinal));
+    rows.push_back({ordinal, line, {fields[1], pos, fields[0], fields[3], fields[4], effect, eaf, "EAF"}});
+  }
+  if (rows.size() != matched_selected_rows) throw std::runtime_error("Incomplete matched selection");
+  const auto distinct_raw_count = raw_events.size();
+  raw_events.clear();
+
+  std::vector<std::size_t> sequence(rows.size());
+  std::iota(sequence.begin(), sequence.end(), std::size_t{0});
+  if (order == "shuffled") {
+    std::mt19937 generator(matched_shuffle_seed);
+    std::shuffle(sequence.begin(), sequence.end(), generator);
+  }
+
+  std::ofstream outcomes(output / "outcomes.tsv", std::ios::binary);
+  std::ofstream ordinals(output / "order.tsv", std::ios::binary);
+  if (!outcomes || !ordinals) throw std::runtime_error("Cannot open matched outputs");
+  outcomes << "source_ordinal\t" << raw_header
+           << "\tstatus\tchr\tpos\tref\talt\tid\teffect_bits\teaf_bits\tcandidate_count\tswapped\tcomplemented\n";
+  ordinals << "source_ordinal\n";
+
+  Reference ref(index, fasta);
+  std::set<std::tuple<std::string, std::int64_t, std::string, std::string>> canonical_events;
+  for (const auto selected : sequence) {
+    const auto& row = rows[selected];
+    const auto result = ref.harmonise(row.input, 10000);
+    if (result.status != "match" && result.status != "swap" && result.status != "complement" &&
+        result.status != "swapped_complement")
+      throw std::runtime_error("Unresolved matched event at ordinal " + std::to_string(row.ordinal) + ": " + result.status);
+    if (!canonical_events.emplace(result.chr, result.pos, result.ref, result.alt).second)
+      throw std::runtime_error("Duplicate canonical event at ordinal " + std::to_string(row.ordinal));
+    for (const auto* value : {&result.status, &result.chr, &result.ref, &result.alt, &result.id})
+      if (!tsv_field(*value)) throw std::runtime_error("Invalid matched result TSV field");
+    outcomes << row.ordinal << '\t' << row.raw_line << '\t' << result.status << '\t' << result.chr << '\t'
+             << result.pos << '\t' << result.ref << '\t' << result.alt << '\t' << result.id << '\t'
+             << bits(result.effect) << '\t' << bits(result.eaf) << '\t' << result.candidate_count << '\t'
+             << result.swapped << '\t' << result.complemented << '\n';
+    ordinals << row.ordinal << '\n';
+  }
+  outcomes.close();
+  ordinals.close();
+  if (!outcomes || !ordinals) throw std::runtime_error("Matched output write failed");
+
+  const auto counts = ref.lookup_counters();
+  std::ofstream counters(output / "counters.tsv", std::ios::binary);
+  counters << "metric\tvalue\n"
+           << "selected_count\t" << rows.size() << '\n'
+           << "distinct_raw_count\t" << distinct_raw_count << '\n'
+           << "distinct_canonical_count\t" << canonical_events.size() << '\n'
+           << "rank_hits\t" << counts.rank_hits << '\n'
+           << "pivot_hits\t" << counts.pivot_hits << '\n'
+           << "probe_entries\t" << counts.probe_entries << '\n'
+           << "key_requests\t" << counts.key_requests << '\n'
+           << "offset_requests\t" << counts.offset_requests << '\n'
+           << "key_reads\t" << counts.key_reads << '\n'
+           << "offset_reads\t" << counts.offset_reads << '\n'
+           << "pivot_slots\t" << counts.pivot_slots << '\n'
+           << "rank_slots\t" << counts.rank_slots << '\n'
+           << "rank_bytes\t" << counts.rank_bytes << '\n';
+  counters.close();
+  if (!counters) throw std::runtime_error("Matched counter write failed");
+  std::cout << "matched order " << order << " shuffle_seed " << matched_shuffle_seed
+            << " source_ordinal = 1 + floor(i * (" << matched_panel_rows << " - 1) / ("
+            << matched_selected_rows << " - 1)), i = 0.." << matched_selected_rows - 1 << '\n'
+            << "raw_event (CHR,BP,A1,A2)\ncanonical_event (chr,pos,ref,alt)\n";
+}
+#endif
+
 void science(const fs::path& root, int format) {
   const auto fasta = root / "science.fa";
   const auto sites = root / "science.tsv";
@@ -201,6 +335,83 @@ void corruption(const fs::path& dir, const fs::path& fasta, int format) {
   }
 }
 
+void write_boundary_fixture(const fs::path& dir, const fs::path& fasta,
+                            const std::string& first, const std::string& second) {
+  assert(!first.empty() && first.back() == '\n');
+  assert(!second.empty() && second.back() == '\n' && first < second);
+  if (!fs::create_directory(dir)) throw std::runtime_error("Require a fresh boundary fixture directory");
+  Fasta(fasta.string()).save((dir / "fasta.fai").string());
+  write(dir / "core-version", "mss-preservation-3\n");
+  write(dir / "records", "A\t1\t1\tA\tC\tr\t1\n");
+  write(dir / "keys", first + second);
+  std::ofstream offsets(dir / "offsets", std::ios::binary);
+  write64(offsets, 0);
+  write64(offsets, first.size());
+  offsets.close();
+  if (!offsets) throw std::runtime_error("Boundary fixture offsets write failed");
+}
+
+void boundary_alias(Reference& ref, const std::string& key, const char* label) {
+  std::size_t work = 1;
+  const auto candidates = ref.lookup(key, 1, &work);
+  assert(candidates.size() == 1 && work == 0);
+  const auto& candidate = candidates.front();
+  assert(candidate.chr == "1" && candidate.pos == 1 && candidate.original_pos == 1);
+  assert(candidate.ref == "A" && candidate.alt == "C" && candidate.id == "r");
+  assert(candidate.original_ref.empty() && candidate.alleles.empty());
+  assert(candidate.identifiers == std::set<std::string>{"r"});
+  assert(candidate.original_positions == std::set<std::int64_t>{1});
+  std::cout << label << " key bytes " << key.size() << " found " << candidates.size() << " left " << work << '\n';
+  fields(candidate);
+}
+
+void typed_key_boundaries(const fs::path& root, const fs::path& fasta) {
+  constexpr std::size_t boundary = 16384;
+  const std::string short_key = "I:r";
+  const auto valid_second = short_key + "\t0\n";
+  const auto ascii_key = "I:" + std::string(16379, 'a');
+  const auto ascii_first = ascii_key + "\t0\n";
+  assert(ascii_key.size() == boundary - 3);
+  assert(ascii_first.size() == boundary && ascii_first[boundary - 1] == '\n');
+
+  const auto newline = root / "typed-boundary-newline";
+  write_boundary_fixture(newline, fasta, ascii_first, valid_second);
+  Reference newline_ref(newline.string(), fasta.string());
+  std::cout << "typed boundary newline at 16383\n";
+  boundary_alias(newline_ref, ascii_key, "first");
+  boundary_alias(newline_ref, short_key, "second");
+
+  const auto malformed = root / "typed-boundary-malformed-offset";
+  write_boundary_fixture(malformed, fasta, ascii_first, short_key + "\t01\n");
+  Reference malformed_ref(malformed.string(), fasta.string());
+  std::cout << "typed boundary malformed offset in row at 16384\n";
+  for (const std::size_t initial : {0U, 1U}) {
+    auto work = initial;
+    try {
+      malformed_ref.lookup(short_key, 1, &work);
+      assert(false && "Expected typed malformed offset rejection");
+    } catch (const std::runtime_error& e) {
+      assert(std::strcmp(e.what(), "Typed reference has an invalid unsigned integer") == 0);
+      assert(work == initial);
+      std::cout << "cap 1 initial " << initial << " error " << std::quoted(e.what()) << " left " << work << '\n';
+    }
+  }
+
+  const auto utf8_key = "I:" + std::string(16381, 'a') + u8"雪";
+  const auto utf8_first = utf8_key + "\t0\n";
+  assert(utf8_key.size() == boundary + 2 && utf8_key.compare(boundary - 1, 3, "\xe9\x9b\xaa") == 0);
+  assert(utf8_first.size() == boundary + 5 && utf8_first.back() == '\n');
+
+  const auto utf8 = root / "typed-boundary-utf8";
+  write_boundary_fixture(utf8, fasta, utf8_first, valid_second);
+  Reference utf8_ref(utf8.string(), fasta.string());
+  std::cout << "typed boundary UTF-8 at 16383-16385\n";
+  for (int attempt = 0; attempt < 2; ++attempt) {
+    boundary_alias(utf8_ref, utf8_key, "first");
+    boundary_alias(utf8_ref, short_key, "second");
+  }
+}
+
 int pressure(Reference& ref) {
   // A repeated absent key beyond the last rank has no candidate or boundary
   // record. After the first validated search no row decode/allocation is needed.
@@ -248,6 +459,21 @@ int pressure(Reference& ref) {
 } // namespace
 
 int main(int argc, char** argv) {
+  if (argc > 1 && std::strcmp(argv[1], "matched") == 0) {
+    if (argc != 7) return 2;
+#ifdef MSS_LOOKUP_COUNTERS
+    try {
+      matched(argv[2], argv[3], argv[4], argv[5], argv[6]);
+    } catch (const std::exception& e) {
+      std::cerr << "matched: " << e.what() << '\n';
+      return 1;
+    }
+    return 0;
+#else
+    std::cerr << "matched requires MSS_LOOKUP_COUNTERS\n";
+    return 2;
+#endif
+  }
   if (argc != 3 || (std::string(argv[1]) != "parity" && std::string(argv[1]) != "pressure")) return 2;
   const fs::path root = argv[2];
   if (!fs::create_directory(root)) throw std::runtime_error("require a fresh fixture directory");
@@ -279,6 +505,7 @@ int main(int argc, char** argv) {
       assert(file.little_endian_offset(2)==UINT64_C(0x6968676665646362));
 #endif
     }
+    typed_key_boundaries(root, fasta);
   }
   return failed;
 }
