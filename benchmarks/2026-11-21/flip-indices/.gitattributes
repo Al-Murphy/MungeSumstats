@@ -1,0 +1,4 @@
+# Preserve verbatim worker output, including R's printed trailing spaces.
+*.stdout -text whitespace=-blank-at-eol
+*.stderr -text
+*.status -text

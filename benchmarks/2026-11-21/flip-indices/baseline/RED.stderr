@@ -1,0 +1,20 @@
+Error: Full-width missing-j GWAS row subsets with logging and drop disabled: 4 (expected zero)
+Execution halted
+        0.27 real         0.23 user         0.02 sys
+           115097600  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               10491  page reclaims
+                  21  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   1  signals received
+                   9  voluntary context switches
+                 136  involuntary context switches
+            11225269  instructions retired
+             5504935  cycles elapsed
+             1310960  peak memory footprint
