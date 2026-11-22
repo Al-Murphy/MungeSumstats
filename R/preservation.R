@@ -583,10 +583,13 @@ harmonise_file <- function(input, reference, path,
                                      frequency_type = frequency_type, effect_type = effect_type,
                                      batch_size = batch_size, candidate_limit = candidate_limit,
                                      verify = FALSE, source_strand = source_strand, projection = projection)$normalized
+        batch_state <- fields$state
+        batch_nrow <- fields$nrow
+        retained <- fields <- source_batch <- NULL
         if (total) result$source_row <- result$source_row + total
         mss_write_normalized_cpp(result, normalized_writer, first, native_encoding = native_encoding)
         first <- FALSE
-        if (fields$state == "done") break
+        if (batch_state == "done") break
         batch_counts <- table(result$status)
         for (status in names(batch_counts)) {
             if (!status %in% names(counts)) counts[[status]] <- 0
@@ -596,7 +599,8 @@ harmonise_file <- function(input, reference, path,
             if (!status %in% names(projection_counts)) projection_counts[[status]] <- 0
             projection_counts[[status]] <- projection_counts[[status]] + sum(result$projection_status == status)
         }
-        total <- total + fields$nrow
+        total <- total + batch_nrow
+        result <- NULL
     }
     if (!is.null(acquisition_receipt)) {
         if (!is.list(acquisition_receipt) || !length(acquisition_receipt) ||

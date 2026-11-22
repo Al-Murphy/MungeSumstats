@@ -1,0 +1,2312 @@
+{
+  "candidate": "8bc67611e96c588db79e853271951e2611056756",
+  "baseline": "qualified R-lifetime-only package; 16KiB key pages",
+  "candidate_change": "8KiB key pages at the same 8MiB payload budget",
+  "negative_percent_is_improvement": true,
+  "results": {
+    "1M": {
+      "pairs": [
+        {
+          "pair": 1,
+          "order": "AB",
+          "values": {
+            "operation_seconds": {
+              "baseline": 13.364,
+              "candidate": 13.261,
+              "difference": -0.10300000000000153,
+              "percent": -0.7707273271475721
+            },
+            "operation_plus_closing_gc_seconds": {
+              "baseline": 14.055,
+              "candidate": 13.945,
+              "difference": -0.10999999999999943,
+              "percent": -0.7826396300248981
+            },
+            "closing_gc_seconds": {
+              "baseline": 0.690999999999999,
+              "candidate": 0.683999999999997,
+              "difference": -0.007000000000001894,
+              "percent": -1.0130246020263247
+            },
+            "worker_wall_seconds": {
+              "baseline": 20.993984444,
+              "candidate": 20.896204421,
+              "difference": -0.09778002299999855,
+              "percent": -0.4657525743187054
+            },
+            "worker_cpu_seconds": {
+              "baseline": 19.616429999999998,
+              "candidate": 19.516858,
+              "difference": -0.09957199999999844,
+              "percent": -0.5075949089615106
+            },
+            "peak_rss_bytes": {
+              "baseline": 1052803072,
+              "candidate": 1053147136,
+              "difference": 344064,
+              "percent": 0.032680755703569986
+            },
+            "operation_gc_cpu_seconds": {
+              "baseline": 1.541,
+              "candidate": 1.544,
+              "difference": 0.0030000000000001137,
+              "percent": 0.19467878001298597
+            },
+            "operation_gc_elapsed_seconds": {
+              "baseline": 1.538,
+              "candidate": 1.541,
+              "difference": 0.0029999999999998916,
+              "percent": 0.19505851755525952
+            },
+            "operation_plus_closing_gc_cpu_seconds": {
+              "baseline": 2.23,
+              "candidate": 2.2259999999999995,
+              "difference": -0.004000000000000448,
+              "percent": -0.17937219730943713
+            },
+            "operation_plus_closing_gc_collection_elapsed_seconds": {
+              "baseline": 2.227,
+              "candidate": 2.223,
+              "difference": -0.0040000000000000036,
+              "percent": -0.17961383026493058
+            },
+            "gc_through_pre_receipt_cpu_seconds": {
+              "baseline": 5.007000000000001,
+              "candidate": 5.011,
+              "difference": 0.0039999999999995595,
+              "percent": 0.0798881565807781
+            },
+            "gc_through_pre_receipt_elapsed_seconds": {
+              "baseline": 5.003,
+              "candidate": 5.011,
+              "difference": 0.008000000000000007,
+              "percent": 0.15990405756546086
+            },
+            "gc_setup_delta.user_cpu": {
+              "baseline": 2.164,
+              "candidate": 2.172,
+              "difference": 0.008000000000000007,
+              "percent": 0.369685767097967
+            },
+            "gc_setup_delta.system_cpu": {
+              "baseline": 0.004,
+              "candidate": 0.00399999999999995,
+              "difference": -5.0306980803327406e-17,
+              "percent": -1.2576745200831851e-12
+            },
+            "gc_setup_delta.elapsed": {
+              "baseline": 2.166,
+              "candidate": 2.179,
+              "difference": 0.0129999999999999,
+              "percent": 0.6001846722068283
+            },
+            "gc_setup_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_setup_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.elapsed": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_preparation_delta.user_cpu": {
+              "baseline": 0.608,
+              "candidate": 0.608000000000001,
+              "difference": 9.992007221626409e-16,
+              "percent": 1.6434222403990804e-13
+            },
+            "gc_preparation_delta.system_cpu": {
+              "baseline": 0.001,
+              "candidate": 0.001,
+              "difference": 0.0,
+              "percent": 0.0
+            },
+            "gc_preparation_delta.elapsed": {
+              "baseline": 0.61,
+              "candidate": 0.609,
+              "difference": -0.0010000000000000009,
+              "percent": -0.16393442622950835
+            },
+            "gc_preparation_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_preparation_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_delta.user_cpu": {
+              "baseline": 1.541,
+              "candidate": 1.544,
+              "difference": 0.0030000000000001137,
+              "percent": 0.19467878001298597
+            },
+            "gc_operation_delta.system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_delta.elapsed": {
+              "baseline": 1.538,
+              "candidate": 1.541,
+              "difference": 0.0029999999999998916,
+              "percent": 0.19505851755525952
+            },
+            "gc_operation_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_closing_delta.user_cpu": {
+              "baseline": 0.684999999999999,
+              "candidate": 0.679000000000002,
+              "difference": -0.005999999999997008,
+              "percent": -0.8759124087586885
+            },
+            "gc_closing_delta.system_cpu": {
+              "baseline": 0.004,
+              "candidate": 0.00299999999999989,
+              "difference": -0.0010000000000001102,
+              "percent": -25.000000000002757
+            },
+            "gc_closing_delta.elapsed": {
+              "baseline": 0.689,
+              "candidate": 0.681999999999999,
+              "difference": -0.007000000000000894,
+              "percent": -1.015965166908693
+            },
+            "gc_closing_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_closing_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_plus_closing_delta.user_cpu": {
+              "baseline": 2.226,
+              "candidate": 2.223,
+              "difference": -0.0030000000000001137,
+              "percent": -0.13477088948787572
+            },
+            "gc_operation_plus_closing_delta.system_cpu": {
+              "baseline": 0.004,
+              "candidate": 0.00299999999999989,
+              "difference": -0.0010000000000001102,
+              "percent": -25.000000000002757
+            },
+            "gc_operation_plus_closing_delta.elapsed": {
+              "baseline": 2.227,
+              "candidate": 2.223,
+              "difference": -0.0040000000000000036,
+              "percent": -0.17961383026493058
+            },
+            "gc_operation_plus_closing_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_plus_closing_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_through_receipt_delta.user_cpu": {
+              "baseline": 4.998,
+              "candidate": 5.003,
+              "difference": 0.004999999999999893,
+              "percent": 0.10004001600640042
+            },
+            "gc_through_receipt_delta.system_cpu": {
+              "baseline": 0.00900000000000001,
+              "candidate": 0.00799999999999984,
+              "difference": -0.0010000000000001692,
+              "percent": -11.111111111112978
+            },
+            "gc_through_receipt_delta.elapsed": {
+              "baseline": 5.003,
+              "candidate": 5.011,
+              "difference": 0.008000000000000007,
+              "percent": 0.15990405756546086
+            },
+            "gc_through_receipt_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_through_receipt_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            }
+          }
+        },
+        {
+          "pair": 2,
+          "order": "BA",
+          "values": {
+            "operation_seconds": {
+              "baseline": 13.387,
+              "candidate": 13.331,
+              "difference": -0.05600000000000094,
+              "percent": -0.41831627698514184
+            },
+            "operation_plus_closing_gc_seconds": {
+              "baseline": 14.075,
+              "candidate": 14.014,
+              "difference": -0.06099999999999994,
+              "percent": -0.43339253996447563
+            },
+            "closing_gc_seconds": {
+              "baseline": 0.688000000000002,
+              "candidate": 0.683,
+              "difference": -0.005000000000002003,
+              "percent": -0.7267441860468006
+            },
+            "worker_wall_seconds": {
+              "baseline": 21.38653325,
+              "candidate": 20.942413842,
+              "difference": -0.4441194079999988,
+              "percent": -2.0766311342208716
+            },
+            "worker_cpu_seconds": {
+              "baseline": 19.968671,
+              "candidate": 19.519360000000002,
+              "difference": -0.449310999999998,
+              "percent": -2.2500796372477567
+            },
+            "peak_rss_bytes": {
+              "baseline": 1051410432,
+              "candidate": 1053204480,
+              "difference": 1794048,
+              "percent": 0.17063250899911178
+            },
+            "operation_gc_cpu_seconds": {
+              "baseline": 1.542,
+              "candidate": 1.54,
+              "difference": -0.0020000000000000018,
+              "percent": -0.1297016861219197
+            },
+            "operation_gc_elapsed_seconds": {
+              "baseline": 1.541,
+              "candidate": 1.538,
+              "difference": -0.0029999999999998916,
+              "percent": -0.19467878001297156
+            },
+            "operation_plus_closing_gc_cpu_seconds": {
+              "baseline": 2.228,
+              "candidate": 2.221,
+              "difference": -0.007000000000000117,
+              "percent": -0.31418312387792263
+            },
+            "operation_plus_closing_gc_collection_elapsed_seconds": {
+              "baseline": 2.228,
+              "candidate": 2.219,
+              "difference": -0.009000000000000341,
+              "percent": -0.4039497307001948
+            },
+            "gc_through_pre_receipt_cpu_seconds": {
+              "baseline": 5.172,
+              "candidate": 4.983,
+              "difference": -0.18900000000000006,
+              "percent": -3.654292343387472
+            },
+            "gc_through_pre_receipt_elapsed_seconds": {
+              "baseline": 5.176,
+              "candidate": 4.989,
+              "difference": -0.18700000000000028,
+              "percent": -3.6128284389490006
+            },
+            "gc_setup_delta.user_cpu": {
+              "baseline": 2.306,
+              "candidate": 2.149,
+              "difference": -0.15700000000000003,
+              "percent": -6.808326105810929
+            },
+            "gc_setup_delta.system_cpu": {
+              "baseline": 0.001,
+              "candidate": 0.002,
+              "difference": 0.001,
+              "percent": 100.0
+            },
+            "gc_setup_delta.elapsed": {
+              "baseline": 2.311,
+              "candidate": 2.159,
+              "difference": -0.15200000000000014,
+              "percent": -6.577239290350503
+            },
+            "gc_setup_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_setup_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.elapsed": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_preparation_delta.user_cpu": {
+              "baseline": 0.637,
+              "candidate": 0.611,
+              "difference": -0.026000000000000023,
+              "percent": -4.081632653061228
+            },
+            "gc_preparation_delta.system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_preparation_delta.elapsed": {
+              "baseline": 0.637,
+              "candidate": 0.611000000000001,
+              "difference": -0.025999999999999024,
+              "percent": -4.081632653061071
+            },
+            "gc_preparation_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_preparation_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_delta.user_cpu": {
+              "baseline": 1.542,
+              "candidate": 1.54,
+              "difference": -0.0020000000000000018,
+              "percent": -0.1297016861219197
+            },
+            "gc_operation_delta.system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_delta.elapsed": {
+              "baseline": 1.541,
+              "candidate": 1.538,
+              "difference": -0.0029999999999998916,
+              "percent": -0.19467878001297156
+            },
+            "gc_operation_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_closing_delta.user_cpu": {
+              "baseline": 0.679000000000002,
+              "candidate": 0.675999999999998,
+              "difference": -0.0030000000000039995,
+              "percent": -0.441826215022679
+            },
+            "gc_closing_delta.system_cpu": {
+              "baseline": 0.00700000000000012,
+              "candidate": 0.00499999999999989,
+              "difference": -0.00200000000000023,
+              "percent": -28.571428571431365
+            },
+            "gc_closing_delta.elapsed": {
+              "baseline": 0.687000000000001,
+              "candidate": 0.681000000000001,
+              "difference": -0.006000000000000005,
+              "percent": -0.8733624454148466
+            },
+            "gc_closing_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_closing_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_plus_closing_delta.user_cpu": {
+              "baseline": 2.221,
+              "candidate": 2.216,
+              "difference": -0.004999999999999893,
+              "percent": -0.22512381809995016
+            },
+            "gc_operation_plus_closing_delta.system_cpu": {
+              "baseline": 0.00700000000000012,
+              "candidate": 0.00499999999999989,
+              "difference": -0.00200000000000023,
+              "percent": -28.571428571431365
+            },
+            "gc_operation_plus_closing_delta.elapsed": {
+              "baseline": 2.228,
+              "candidate": 2.219,
+              "difference": -0.009000000000000341,
+              "percent": -0.4039497307001948
+            },
+            "gc_operation_plus_closing_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_plus_closing_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_through_receipt_delta.user_cpu": {
+              "baseline": 5.164,
+              "candidate": 4.976,
+              "difference": -0.18799999999999972,
+              "percent": -3.640588690937253
+            },
+            "gc_through_receipt_delta.system_cpu": {
+              "baseline": 0.00800000000000012,
+              "candidate": 0.0069999999999999,
+              "difference": -0.0010000000000002195,
+              "percent": -12.500000000002556
+            },
+            "gc_through_receipt_delta.elapsed": {
+              "baseline": 5.176,
+              "candidate": 4.989,
+              "difference": -0.18700000000000028,
+              "percent": -3.6128284389490006
+            },
+            "gc_through_receipt_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_through_receipt_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            }
+          }
+        },
+        {
+          "pair": 3,
+          "order": "AB",
+          "values": {
+            "operation_seconds": {
+              "baseline": 13.208,
+              "candidate": 13.103,
+              "difference": -0.10500000000000043,
+              "percent": -0.7949727437916446
+            },
+            "operation_plus_closing_gc_seconds": {
+              "baseline": 13.886,
+              "candidate": 13.775,
+              "difference": -0.11099999999999888,
+              "percent": -0.7993662681837742
+            },
+            "closing_gc_seconds": {
+              "baseline": 0.678000000000001,
+              "candidate": 0.671999999999997,
+              "difference": -0.006000000000004002,
+              "percent": -0.8849557522129783
+            },
+            "worker_wall_seconds": {
+              "baseline": 20.7897322,
+              "candidate": 20.648096181,
+              "difference": -0.1416360189999999,
+              "percent": -0.6812787083423801
+            },
+            "worker_cpu_seconds": {
+              "baseline": 19.426592000000003,
+              "candidate": 19.222521,
+              "difference": -0.20407100000000256,
+              "percent": -1.0504724657829976
+            },
+            "peak_rss_bytes": {
+              "baseline": 1052512256,
+              "candidate": 1053265920,
+              "difference": 753664,
+              "percent": 0.07160619704935768
+            },
+            "operation_gc_cpu_seconds": {
+              "baseline": 1.522,
+              "candidate": 1.502,
+              "difference": -0.020000000000000018,
+              "percent": -1.314060446780553
+            },
+            "operation_gc_elapsed_seconds": {
+              "baseline": 1.522,
+              "candidate": 1.5,
+              "difference": -0.02200000000000002,
+              "percent": -1.4454664914586084
+            },
+            "operation_plus_closing_gc_cpu_seconds": {
+              "baseline": 2.199,
+              "candidate": 2.1729999999999996,
+              "difference": -0.026000000000000245,
+              "percent": -1.1823556161891882
+            },
+            "operation_plus_closing_gc_collection_elapsed_seconds": {
+              "baseline": 2.199,
+              "candidate": 2.171,
+              "difference": -0.028000000000000025,
+              "percent": -1.2733060482037302
+            },
+            "gc_through_pre_receipt_cpu_seconds": {
+              "baseline": 4.986,
+              "candidate": 4.951,
+              "difference": -0.03500000000000014,
+              "percent": -0.7019655034095497
+            },
+            "gc_through_pre_receipt_elapsed_seconds": {
+              "baseline": 4.988,
+              "candidate": 4.957,
+              "difference": -0.031000000000000583,
+              "percent": -0.6214915797915113
+            },
+            "gc_setup_delta.user_cpu": {
+              "baseline": 2.163,
+              "candidate": 2.171,
+              "difference": 0.008000000000000007,
+              "percent": 0.36985668053629256
+            },
+            "gc_setup_delta.system_cpu": {
+              "baseline": 0.00700000000000001,
+              "candidate": 0.0,
+              "difference": -0.00700000000000001,
+              "percent": -100.0
+            },
+            "gc_setup_delta.elapsed": {
+              "baseline": 2.172,
+              "candidate": 2.179,
+              "difference": 0.006999999999999673,
+              "percent": 0.32228360957641217
+            },
+            "gc_setup_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_setup_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.elapsed": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_preparation_delta.user_cpu": {
+              "baseline": 0.617,
+              "candidate": 0.606999999999999,
+              "difference": -0.010000000000001008,
+              "percent": -1.6207455429499202
+            },
+            "gc_preparation_delta.system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_preparation_delta.elapsed": {
+              "baseline": 0.617,
+              "candidate": 0.606999999999999,
+              "difference": -0.010000000000001008,
+              "percent": -1.6207455429499202
+            },
+            "gc_preparation_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_preparation_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_delta.user_cpu": {
+              "baseline": 1.51,
+              "candidate": 1.502,
+              "difference": -0.008000000000000007,
+              "percent": -0.5298013245033117
+            },
+            "gc_operation_delta.system_cpu": {
+              "baseline": 0.012,
+              "candidate": 0.0,
+              "difference": -0.012,
+              "percent": -100.0
+            },
+            "gc_operation_delta.elapsed": {
+              "baseline": 1.522,
+              "candidate": 1.5,
+              "difference": -0.02200000000000002,
+              "percent": -1.4454664914586084
+            },
+            "gc_operation_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_closing_delta.user_cpu": {
+              "baseline": 0.675000000000001,
+              "candidate": 0.669,
+              "difference": -0.0060000000000010045,
+              "percent": -0.8888888888890364
+            },
+            "gc_closing_delta.system_cpu": {
+              "baseline": 0.002,
+              "candidate": 0.002,
+              "difference": 0.0,
+              "percent": 0.0
+            },
+            "gc_closing_delta.elapsed": {
+              "baseline": 0.677,
+              "candidate": 0.670999999999999,
+              "difference": -0.0060000000000010045,
+              "percent": -0.8862629246677998
+            },
+            "gc_closing_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_closing_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_plus_closing_delta.user_cpu": {
+              "baseline": 2.185,
+              "candidate": 2.171,
+              "difference": -0.014000000000000234,
+              "percent": -0.640732265446235
+            },
+            "gc_operation_plus_closing_delta.system_cpu": {
+              "baseline": 0.014,
+              "candidate": 0.002,
+              "difference": -0.012,
+              "percent": -85.71428571428571
+            },
+            "gc_operation_plus_closing_delta.elapsed": {
+              "baseline": 2.199,
+              "candidate": 2.171,
+              "difference": -0.028000000000000025,
+              "percent": -1.2733060482037302
+            },
+            "gc_operation_plus_closing_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_plus_closing_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_through_receipt_delta.user_cpu": {
+              "baseline": 4.965,
+              "candidate": 4.949,
+              "difference": -0.016000000000000014,
+              "percent": -0.32225579053373643
+            },
+            "gc_through_receipt_delta.system_cpu": {
+              "baseline": 0.021,
+              "candidate": 0.002,
+              "difference": -0.019000000000000003,
+              "percent": -90.47619047619048
+            },
+            "gc_through_receipt_delta.elapsed": {
+              "baseline": 4.988,
+              "candidate": 4.957,
+              "difference": -0.031000000000000583,
+              "percent": -0.6214915797915113
+            },
+            "gc_through_receipt_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_through_receipt_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            }
+          }
+        }
+      ],
+      "medians": {
+        "operation_seconds": {
+          "baseline": 13.364,
+          "candidate": 13.261,
+          "paired_difference": -0.10300000000000153,
+          "paired_percent": -0.7707273271475721
+        },
+        "operation_plus_closing_gc_seconds": {
+          "baseline": 14.055,
+          "candidate": 13.945,
+          "paired_difference": -0.10999999999999943,
+          "paired_percent": -0.7826396300248981
+        },
+        "closing_gc_seconds": {
+          "baseline": 0.688000000000002,
+          "candidate": 0.683,
+          "paired_difference": -0.006000000000004002,
+          "paired_percent": -0.8849557522129783
+        },
+        "worker_wall_seconds": {
+          "baseline": 20.993984444,
+          "candidate": 20.896204421,
+          "paired_difference": -0.1416360189999999,
+          "paired_percent": -0.6812787083423801
+        },
+        "worker_cpu_seconds": {
+          "baseline": 19.616429999999998,
+          "candidate": 19.516858,
+          "paired_difference": -0.20407100000000256,
+          "paired_percent": -1.0504724657829976
+        },
+        "peak_rss_bytes": {
+          "baseline": 1052512256,
+          "candidate": 1053204480,
+          "paired_difference": 753664,
+          "paired_percent": 0.07160619704935768
+        },
+        "operation_gc_cpu_seconds": {
+          "baseline": 1.541,
+          "candidate": 1.54,
+          "paired_difference": -0.0020000000000000018,
+          "paired_percent": -0.1297016861219197
+        },
+        "operation_gc_elapsed_seconds": {
+          "baseline": 1.538,
+          "candidate": 1.538,
+          "paired_difference": -0.0029999999999998916,
+          "paired_percent": -0.19467878001297156
+        },
+        "operation_plus_closing_gc_cpu_seconds": {
+          "baseline": 2.228,
+          "candidate": 2.221,
+          "paired_difference": -0.007000000000000117,
+          "paired_percent": -0.31418312387792263
+        },
+        "operation_plus_closing_gc_collection_elapsed_seconds": {
+          "baseline": 2.227,
+          "candidate": 2.219,
+          "paired_difference": -0.009000000000000341,
+          "paired_percent": -0.4039497307001948
+        },
+        "gc_through_pre_receipt_cpu_seconds": {
+          "baseline": 5.007000000000001,
+          "candidate": 4.983,
+          "paired_difference": -0.03500000000000014,
+          "paired_percent": -0.7019655034095497
+        },
+        "gc_through_pre_receipt_elapsed_seconds": {
+          "baseline": 5.003,
+          "candidate": 4.989,
+          "paired_difference": -0.031000000000000583,
+          "paired_percent": -0.6214915797915113
+        },
+        "gc_setup_delta.user_cpu": {
+          "baseline": 2.164,
+          "candidate": 2.171,
+          "paired_difference": 0.008000000000000007,
+          "paired_percent": 0.369685767097967
+        },
+        "gc_setup_delta.system_cpu": {
+          "baseline": 0.004,
+          "candidate": 0.002,
+          "paired_difference": -5.0306980803327406e-17,
+          "paired_percent": -1.2576745200831851e-12
+        },
+        "gc_setup_delta.elapsed": {
+          "baseline": 2.172,
+          "candidate": 2.179,
+          "paired_difference": 0.006999999999999673,
+          "paired_percent": 0.32228360957641217
+        },
+        "gc_setup_delta.child_user_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_setup_delta.child_system_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_reference_delta.user_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_reference_delta.system_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_reference_delta.elapsed": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_reference_delta.child_user_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_reference_delta.child_system_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_preparation_delta.user_cpu": {
+          "baseline": 0.617,
+          "candidate": 0.608000000000001,
+          "paired_difference": -0.010000000000001008,
+          "paired_percent": -1.6207455429499202
+        },
+        "gc_preparation_delta.system_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": 0.0
+        },
+        "gc_preparation_delta.elapsed": {
+          "baseline": 0.617,
+          "candidate": 0.609,
+          "paired_difference": -0.010000000000001008,
+          "paired_percent": -1.6207455429499202
+        },
+        "gc_preparation_delta.child_user_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_preparation_delta.child_system_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_operation_delta.user_cpu": {
+          "baseline": 1.541,
+          "candidate": 1.54,
+          "paired_difference": -0.0020000000000000018,
+          "paired_percent": -0.1297016861219197
+        },
+        "gc_operation_delta.system_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": -100.0
+        },
+        "gc_operation_delta.elapsed": {
+          "baseline": 1.538,
+          "candidate": 1.538,
+          "paired_difference": -0.0029999999999998916,
+          "paired_percent": -0.19467878001297156
+        },
+        "gc_operation_delta.child_user_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_operation_delta.child_system_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_closing_delta.user_cpu": {
+          "baseline": 0.679000000000002,
+          "candidate": 0.675999999999998,
+          "paired_difference": -0.005999999999997008,
+          "paired_percent": -0.8759124087586885
+        },
+        "gc_closing_delta.system_cpu": {
+          "baseline": 0.004,
+          "candidate": 0.00299999999999989,
+          "paired_difference": -0.0010000000000001102,
+          "paired_percent": -25.000000000002757
+        },
+        "gc_closing_delta.elapsed": {
+          "baseline": 0.687000000000001,
+          "candidate": 0.681000000000001,
+          "paired_difference": -0.0060000000000010045,
+          "paired_percent": -0.8862629246677998
+        },
+        "gc_closing_delta.child_user_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_closing_delta.child_system_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_operation_plus_closing_delta.user_cpu": {
+          "baseline": 2.221,
+          "candidate": 2.216,
+          "paired_difference": -0.004999999999999893,
+          "paired_percent": -0.22512381809995016
+        },
+        "gc_operation_plus_closing_delta.system_cpu": {
+          "baseline": 0.00700000000000012,
+          "candidate": 0.00299999999999989,
+          "paired_difference": -0.00200000000000023,
+          "paired_percent": -28.571428571431365
+        },
+        "gc_operation_plus_closing_delta.elapsed": {
+          "baseline": 2.227,
+          "candidate": 2.219,
+          "paired_difference": -0.009000000000000341,
+          "paired_percent": -0.4039497307001948
+        },
+        "gc_operation_plus_closing_delta.child_user_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_operation_plus_closing_delta.child_system_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_through_receipt_delta.user_cpu": {
+          "baseline": 4.998,
+          "candidate": 4.976,
+          "paired_difference": -0.016000000000000014,
+          "paired_percent": -0.32225579053373643
+        },
+        "gc_through_receipt_delta.system_cpu": {
+          "baseline": 0.00900000000000001,
+          "candidate": 0.0069999999999999,
+          "paired_difference": -0.0010000000000002195,
+          "paired_percent": -12.500000000002556
+        },
+        "gc_through_receipt_delta.elapsed": {
+          "baseline": 5.003,
+          "candidate": 4.989,
+          "paired_difference": -0.031000000000000583,
+          "paired_percent": -0.6214915797915113
+        },
+        "gc_through_receipt_delta.child_user_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_through_receipt_delta.child_system_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        }
+      }
+    },
+    "10M": {
+      "pairs": [
+        {
+          "pair": 1,
+          "order": "AB",
+          "values": {
+            "operation_seconds": {
+              "baseline": 131.024,
+              "candidate": 130.822,
+              "difference": -0.20199999999999818,
+              "percent": -0.15417022835510913
+            },
+            "operation_plus_closing_gc_seconds": {
+              "baseline": 131.622,
+              "candidate": 131.417,
+              "difference": -0.2050000000000125,
+              "percent": -0.15574903891447667
+            },
+            "closing_gc_seconds": {
+              "baseline": 0.597999999999985,
+              "candidate": 0.594999999999999,
+              "difference": -0.002999999999986014,
+              "percent": -0.5016722408003493
+            },
+            "worker_wall_seconds": {
+              "baseline": 138.535550295,
+              "candidate": 138.514725541,
+              "difference": -0.020824754000017265,
+              "percent": -0.01503206502278489
+            },
+            "worker_cpu_seconds": {
+              "baseline": 126.382238,
+              "candidate": 125.154257,
+              "difference": -1.2279809999999998,
+              "percent": -0.9716404927091098
+            },
+            "peak_rss_bytes": {
+              "baseline": 1073139712,
+              "candidate": 1073242112,
+              "difference": 102400,
+              "percent": 0.009542093993442673
+            },
+            "operation_gc_cpu_seconds": {
+              "baseline": 14.461000000000002,
+              "candidate": 13.926,
+              "difference": -0.5350000000000019,
+              "percent": -3.699605836387538
+            },
+            "operation_gc_elapsed_seconds": {
+              "baseline": 14.47,
+              "candidate": 13.922,
+              "difference": -0.548,
+              "percent": -3.787145818935729
+            },
+            "operation_plus_closing_gc_cpu_seconds": {
+              "baseline": 15.057,
+              "candidate": 14.52,
+              "difference": -0.5370000000000008,
+              "percent": -3.566447499501898
+            },
+            "operation_plus_closing_gc_collection_elapsed_seconds": {
+              "baseline": 15.066,
+              "candidate": 14.516,
+              "difference": -0.5500000000000007,
+              "percent": -3.6506040090269525
+            },
+            "gc_through_pre_receipt_cpu_seconds": {
+              "baseline": 17.827,
+              "candidate": 17.288,
+              "difference": -0.5390000000000015,
+              "percent": -3.023503674202061
+            },
+            "gc_through_pre_receipt_elapsed_seconds": {
+              "baseline": 17.837,
+              "candidate": 17.281,
+              "difference": -0.5560000000000009,
+              "percent": -3.117116106968666
+            },
+            "gc_setup_delta.user_cpu": {
+              "baseline": 2.154,
+              "candidate": 2.183,
+              "difference": 0.028999999999999915,
+              "percent": 1.3463324048282226
+            },
+            "gc_setup_delta.system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.002,
+              "difference": 0.002,
+              "percent": null
+            },
+            "gc_setup_delta.elapsed": {
+              "baseline": 2.155,
+              "candidate": 2.182,
+              "difference": 0.027000000000000135,
+              "percent": 1.2529002320185678
+            },
+            "gc_setup_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_setup_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.elapsed": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_preparation_delta.user_cpu": {
+              "baseline": 0.616000000000001,
+              "candidate": 0.582999999999999,
+              "difference": -0.03300000000000203,
+              "percent": -5.357142857143177
+            },
+            "gc_preparation_delta.system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_preparation_delta.elapsed": {
+              "baseline": 0.616000000000001,
+              "candidate": 0.583,
+              "difference": -0.03300000000000103,
+              "percent": -5.357142857143016
+            },
+            "gc_preparation_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_preparation_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_delta.user_cpu": {
+              "baseline": 14.444,
+              "candidate": 13.919,
+              "difference": -0.5250000000000004,
+              "percent": -3.634727222376075
+            },
+            "gc_operation_delta.system_cpu": {
+              "baseline": 0.0170000000000021,
+              "candidate": 0.00700000000000012,
+              "difference": -0.01000000000000198,
+              "percent": -58.82352941176909
+            },
+            "gc_operation_delta.elapsed": {
+              "baseline": 14.47,
+              "candidate": 13.922,
+              "difference": -0.548,
+              "percent": -3.787145818935729
+            },
+            "gc_operation_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_closing_delta.user_cpu": {
+              "baseline": 0.596000000000004,
+              "candidate": 0.593999999999994,
+              "difference": -0.002000000000009994,
+              "percent": -0.3355704698003323
+            },
+            "gc_closing_delta.system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_closing_delta.elapsed": {
+              "baseline": 0.596000000000004,
+              "candidate": 0.593999999999994,
+              "difference": -0.002000000000009994,
+              "percent": -0.3355704698003323
+            },
+            "gc_closing_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_closing_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_plus_closing_delta.user_cpu": {
+              "baseline": 15.04,
+              "candidate": 14.513,
+              "difference": -0.5269999999999992,
+              "percent": -3.5039893617021227
+            },
+            "gc_operation_plus_closing_delta.system_cpu": {
+              "baseline": 0.0170000000000021,
+              "candidate": 0.00700000000000012,
+              "difference": -0.01000000000000198,
+              "percent": -58.82352941176909
+            },
+            "gc_operation_plus_closing_delta.elapsed": {
+              "baseline": 15.066,
+              "candidate": 14.516,
+              "difference": -0.5500000000000007,
+              "percent": -3.6506040090269525
+            },
+            "gc_operation_plus_closing_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_plus_closing_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_through_receipt_delta.user_cpu": {
+              "baseline": 17.81,
+              "candidate": 17.279,
+              "difference": -0.5309999999999988,
+              "percent": -2.9814710836608582
+            },
+            "gc_through_receipt_delta.system_cpu": {
+              "baseline": 0.0170000000000021,
+              "candidate": 0.00900000000000012,
+              "difference": -0.00800000000000198,
+              "percent": -47.058823529417595
+            },
+            "gc_through_receipt_delta.elapsed": {
+              "baseline": 17.837,
+              "candidate": 17.281,
+              "difference": -0.5560000000000009,
+              "percent": -3.117116106968666
+            },
+            "gc_through_receipt_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_through_receipt_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            }
+          }
+        },
+        {
+          "pair": 2,
+          "order": "BA",
+          "values": {
+            "operation_seconds": {
+              "baseline": 133.107,
+              "candidate": 129.628,
+              "difference": -3.4790000000000134,
+              "percent": -2.6136867332296676
+            },
+            "operation_plus_closing_gc_seconds": {
+              "baseline": 133.71,
+              "candidate": 130.223,
+              "difference": -3.4869999999999948,
+              "percent": -2.607882731284118
+            },
+            "closing_gc_seconds": {
+              "baseline": 0.603000000000009,
+              "candidate": 0.594999999999999,
+              "difference": -0.008000000000009999,
+              "percent": -1.3266998341641592
+            },
+            "worker_wall_seconds": {
+              "baseline": 140.633073237,
+              "candidate": 136.90660999,
+              "difference": -3.726463246999998,
+              "percent": -2.6497772972080518
+            },
+            "worker_cpu_seconds": {
+              "baseline": 128.78787,
+              "candidate": 124.210376,
+              "difference": -4.5774940000000015,
+              "percent": -3.554289701351534
+            },
+            "peak_rss_bytes": {
+              "baseline": 1075970048,
+              "candidate": 1074593792,
+              "difference": -1376256,
+              "percent": -0.12790839322694603
+            },
+            "operation_gc_cpu_seconds": {
+              "baseline": 14.001999999999999,
+              "candidate": 13.975,
+              "difference": -0.026999999999999247,
+              "percent": -0.1928295957720272
+            },
+            "operation_gc_elapsed_seconds": {
+              "baseline": 14.0040000000001,
+              "candidate": 13.9780000000001,
+              "difference": -0.026000000000001577,
+              "percent": -0.1856612396458254
+            },
+            "operation_plus_closing_gc_cpu_seconds": {
+              "baseline": 14.602999999999998,
+              "candidate": 14.568999999999999,
+              "difference": -0.03399999999999892,
+              "percent": -0.23282887077996936
+            },
+            "operation_plus_closing_gc_collection_elapsed_seconds": {
+              "baseline": 14.6050000000001,
+              "candidate": 14.5720000000001,
+              "difference": -0.032999999999999474,
+              "percent": -0.22595001711742038
+            },
+            "gc_through_pre_receipt_cpu_seconds": {
+              "baseline": 17.301999999999996,
+              "candidate": 17.219,
+              "difference": -0.08299999999999486,
+              "percent": -0.47971332793893695
+            },
+            "gc_through_pre_receipt_elapsed_seconds": {
+              "baseline": 17.3100000000001,
+              "candidate": 17.2180000000001,
+              "difference": -0.0920000000000023,
+              "percent": -0.5314846909301084
+            },
+            "gc_setup_delta.user_cpu": {
+              "baseline": 2.114,
+              "candidate": 2.065,
+              "difference": -0.04899999999999993,
+              "percent": -2.3178807947019835
+            },
+            "gc_setup_delta.system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.004,
+              "difference": 0.004,
+              "percent": null
+            },
+            "gc_setup_delta.elapsed": {
+              "baseline": 2.119,
+              "candidate": 2.065,
+              "difference": -0.05400000000000027,
+              "percent": -2.54837187352526
+            },
+            "gc_setup_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_setup_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.elapsed": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_preparation_delta.user_cpu": {
+              "baseline": 0.585,
+              "candidate": 0.581,
+              "difference": -0.0040000000000000036,
+              "percent": -0.6837606837606844
+            },
+            "gc_preparation_delta.system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_preparation_delta.elapsed": {
+              "baseline": 0.586,
+              "candidate": 0.581,
+              "difference": -0.0050000000000000044,
+              "percent": -0.8532423208191134
+            },
+            "gc_preparation_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_preparation_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_delta.user_cpu": {
+              "baseline": 13.987,
+              "candidate": 13.965,
+              "difference": -0.02200000000000024,
+              "percent": -0.15728891113176693
+            },
+            "gc_operation_delta.system_cpu": {
+              "baseline": 0.0149999999999983,
+              "candidate": 0.00999999999999979,
+              "difference": -0.004999999999998509,
+              "percent": -33.333333333327175
+            },
+            "gc_operation_delta.elapsed": {
+              "baseline": 14.0040000000001,
+              "candidate": 13.9780000000001,
+              "difference": -0.026000000000001577,
+              "percent": -0.1856612396458254
+            },
+            "gc_operation_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_closing_delta.user_cpu": {
+              "baseline": 0.600999999999999,
+              "candidate": 0.593000000000004,
+              "difference": -0.007999999999995011,
+              "percent": -1.3311148086514184
+            },
+            "gc_closing_delta.system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.000999999999999446,
+              "difference": 0.000999999999999446,
+              "percent": null
+            },
+            "gc_closing_delta.elapsed": {
+              "baseline": 0.600999999999999,
+              "candidate": 0.593999999999994,
+              "difference": -0.007000000000005002,
+              "percent": -1.1647254575715498
+            },
+            "gc_closing_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_closing_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_plus_closing_delta.user_cpu": {
+              "baseline": 14.588,
+              "candidate": 14.558,
+              "difference": -0.02999999999999936,
+              "percent": -0.20564847820125695
+            },
+            "gc_operation_plus_closing_delta.system_cpu": {
+              "baseline": 0.0149999999999983,
+              "candidate": 0.0109999999999992,
+              "difference": -0.0039999999999991,
+              "percent": -26.666666666663687
+            },
+            "gc_operation_plus_closing_delta.elapsed": {
+              "baseline": 14.6050000000001,
+              "candidate": 14.5720000000001,
+              "difference": -0.032999999999999474,
+              "percent": -0.22595001711742038
+            },
+            "gc_operation_plus_closing_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_plus_closing_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_through_receipt_delta.user_cpu": {
+              "baseline": 17.287,
+              "candidate": 17.204,
+              "difference": -0.08299999999999841,
+              "percent": -0.4801295771388813
+            },
+            "gc_through_receipt_delta.system_cpu": {
+              "baseline": 0.0149999999999983,
+              "candidate": 0.0149999999999992,
+              "difference": 9.003214840319629e-16,
+              "percent": 6.002143226880433e-12
+            },
+            "gc_through_receipt_delta.elapsed": {
+              "baseline": 17.3100000000001,
+              "candidate": 17.2180000000001,
+              "difference": -0.0920000000000023,
+              "percent": -0.5314846909301084
+            },
+            "gc_through_receipt_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_through_receipt_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            }
+          }
+        },
+        {
+          "pair": 3,
+          "order": "AB",
+          "values": {
+            "operation_seconds": {
+              "baseline": 129.493,
+              "candidate": 132.075,
+              "difference": 2.5819999999999936,
+              "percent": 1.9939301738317854
+            },
+            "operation_plus_closing_gc_seconds": {
+              "baseline": 130.112,
+              "candidate": 132.709,
+              "difference": 2.5970000000000084,
+              "percent": 1.9959727004427021
+            },
+            "closing_gc_seconds": {
+              "baseline": 0.619,
+              "candidate": 0.633999999999986,
+              "difference": 0.014999999999986025,
+              "percent": 2.423263327946046
+            },
+            "worker_wall_seconds": {
+              "baseline": 136.94710967,
+              "candidate": 139.656255473,
+              "difference": 2.709145802999984,
+              "percent": 1.978242410174398
+            },
+            "worker_cpu_seconds": {
+              "baseline": 124.036676,
+              "candidate": 127.86698200000001,
+              "difference": 3.8303060000000073,
+              "percent": 3.0880430881588663
+            },
+            "peak_rss_bytes": {
+              "baseline": 1072705536,
+              "candidate": 1073369088,
+              "difference": 663552,
+              "percent": 0.06185779580054297
+            },
+            "operation_gc_cpu_seconds": {
+              "baseline": 14.075000000000003,
+              "candidate": 14.558999999999902,
+              "difference": 0.48399999999989873,
+              "percent": 3.4387211367665977
+            },
+            "operation_gc_elapsed_seconds": {
+              "baseline": 14.073,
+              "candidate": 14.554,
+              "difference": 0.48099999999999987,
+              "percent": 3.417892418105591
+            },
+            "operation_plus_closing_gc_cpu_seconds": {
+              "baseline": 14.692000000000103,
+              "candidate": 15.190999999999903,
+              "difference": 0.4989999999997998,
+              "percent": 3.3964062074584556
+            },
+            "operation_plus_closing_gc_collection_elapsed_seconds": {
+              "baseline": 14.69,
+              "candidate": 15.186,
+              "difference": 0.49600000000000044,
+              "percent": 3.3764465622872732
+            },
+            "gc_through_pre_receipt_cpu_seconds": {
+              "baseline": 17.377000000000102,
+              "candidate": 17.998999999999903,
+              "difference": 0.6219999999998009,
+              "percent": 3.579444092765134
+            },
+            "gc_through_pre_receipt_elapsed_seconds": {
+              "baseline": 17.375,
+              "candidate": 17.996,
+              "difference": 0.6209999999999987,
+              "percent": 3.574100719424453
+            },
+            "gc_setup_delta.user_cpu": {
+              "baseline": 2.094,
+              "candidate": 2.163,
+              "difference": 0.06899999999999995,
+              "percent": 3.295128939828078
+            },
+            "gc_setup_delta.system_cpu": {
+              "baseline": 0.003,
+              "candidate": 0.027,
+              "difference": 0.024,
+              "percent": 800.0
+            },
+            "gc_setup_delta.elapsed": {
+              "baseline": 2.097,
+              "candidate": 2.192,
+              "difference": 0.0950000000000002,
+              "percent": 4.530281354315698
+            },
+            "gc_setup_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_setup_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.elapsed": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_reference_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_preparation_delta.user_cpu": {
+              "baseline": 0.587000000000001,
+              "candidate": 0.617,
+              "difference": 0.029999999999999027,
+              "percent": 5.11073253833032
+            },
+            "gc_preparation_delta.system_cpu": {
+              "baseline": 0.001,
+              "candidate": 0.001,
+              "difference": 0.0,
+              "percent": 0.0
+            },
+            "gc_preparation_delta.elapsed": {
+              "baseline": 0.588,
+              "candidate": 0.618,
+              "difference": 0.030000000000000027,
+              "percent": 5.102040816326536
+            },
+            "gc_preparation_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_preparation_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_delta.user_cpu": {
+              "baseline": 14.064,
+              "candidate": 14.5389999999999,
+              "difference": 0.47499999999990017,
+              "percent": 3.3774175199082777
+            },
+            "gc_operation_delta.system_cpu": {
+              "baseline": 0.0110000000000019,
+              "candidate": 0.0200000000000007,
+              "difference": 0.0089999999999988,
+              "percent": 81.81818181815677
+            },
+            "gc_operation_delta.elapsed": {
+              "baseline": 14.073,
+              "candidate": 14.554,
+              "difference": 0.48099999999999987,
+              "percent": 3.417892418105591
+            },
+            "gc_operation_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_closing_delta.user_cpu": {
+              "baseline": 0.617000000000004,
+              "candidate": 0.617999999999995,
+              "difference": 0.000999999999991008,
+              "percent": 0.16207455429351728
+            },
+            "gc_closing_delta.system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0140000000000011,
+              "difference": 0.0140000000000011,
+              "percent": null
+            },
+            "gc_closing_delta.elapsed": {
+              "baseline": 0.617000000000019,
+              "candidate": 0.631999999999977,
+              "difference": 0.014999999999958047,
+              "percent": 2.431118314417761
+            },
+            "gc_closing_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_closing_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_plus_closing_delta.user_cpu": {
+              "baseline": 14.6810000000001,
+              "candidate": 15.1569999999999,
+              "difference": 0.47599999999980014,
+              "percent": 3.2422859478223343
+            },
+            "gc_operation_plus_closing_delta.system_cpu": {
+              "baseline": 0.0110000000000019,
+              "candidate": 0.0340000000000018,
+              "difference": 0.0229999999999999,
+              "percent": 209.09090909087206
+            },
+            "gc_operation_plus_closing_delta.elapsed": {
+              "baseline": 14.69,
+              "candidate": 15.186,
+              "difference": 0.49600000000000044,
+              "percent": 3.3764465622872732
+            },
+            "gc_operation_plus_closing_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_operation_plus_closing_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_through_receipt_delta.user_cpu": {
+              "baseline": 17.3620000000001,
+              "candidate": 17.9369999999999,
+              "difference": 0.5749999999998003,
+              "percent": 3.3118304342805955
+            },
+            "gc_through_receipt_delta.system_cpu": {
+              "baseline": 0.0150000000000019,
+              "candidate": 0.0620000000000018,
+              "difference": 0.046999999999999896,
+              "percent": 313.33333333329296
+            },
+            "gc_through_receipt_delta.elapsed": {
+              "baseline": 17.375,
+              "candidate": 17.996,
+              "difference": 0.6209999999999987,
+              "percent": 3.574100719424453
+            },
+            "gc_through_receipt_delta.child_user_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            },
+            "gc_through_receipt_delta.child_system_cpu": {
+              "baseline": 0.0,
+              "candidate": 0.0,
+              "difference": 0.0,
+              "percent": null
+            }
+          }
+        }
+      ],
+      "medians": {
+        "operation_seconds": {
+          "baseline": 131.024,
+          "candidate": 130.822,
+          "paired_difference": -0.20199999999999818,
+          "paired_percent": -0.15417022835510913
+        },
+        "operation_plus_closing_gc_seconds": {
+          "baseline": 131.622,
+          "candidate": 131.417,
+          "paired_difference": -0.2050000000000125,
+          "paired_percent": -0.15574903891447667
+        },
+        "closing_gc_seconds": {
+          "baseline": 0.603000000000009,
+          "candidate": 0.594999999999999,
+          "paired_difference": -0.002999999999986014,
+          "paired_percent": -0.5016722408003493
+        },
+        "worker_wall_seconds": {
+          "baseline": 138.535550295,
+          "candidate": 138.514725541,
+          "paired_difference": -0.020824754000017265,
+          "paired_percent": -0.01503206502278489
+        },
+        "worker_cpu_seconds": {
+          "baseline": 126.382238,
+          "candidate": 125.154257,
+          "paired_difference": -1.2279809999999998,
+          "paired_percent": -0.9716404927091098
+        },
+        "peak_rss_bytes": {
+          "baseline": 1073139712,
+          "candidate": 1073369088,
+          "paired_difference": 102400,
+          "paired_percent": 0.009542093993442673
+        },
+        "operation_gc_cpu_seconds": {
+          "baseline": 14.075000000000003,
+          "candidate": 13.975,
+          "paired_difference": -0.026999999999999247,
+          "paired_percent": -0.1928295957720272
+        },
+        "operation_gc_elapsed_seconds": {
+          "baseline": 14.073,
+          "candidate": 13.9780000000001,
+          "paired_difference": -0.026000000000001577,
+          "paired_percent": -0.1856612396458254
+        },
+        "operation_plus_closing_gc_cpu_seconds": {
+          "baseline": 14.692000000000103,
+          "candidate": 14.568999999999999,
+          "paired_difference": -0.03399999999999892,
+          "paired_percent": -0.23282887077996936
+        },
+        "operation_plus_closing_gc_collection_elapsed_seconds": {
+          "baseline": 14.69,
+          "candidate": 14.5720000000001,
+          "paired_difference": -0.032999999999999474,
+          "paired_percent": -0.22595001711742038
+        },
+        "gc_through_pre_receipt_cpu_seconds": {
+          "baseline": 17.377000000000102,
+          "candidate": 17.288,
+          "paired_difference": -0.08299999999999486,
+          "paired_percent": -0.47971332793893695
+        },
+        "gc_through_pre_receipt_elapsed_seconds": {
+          "baseline": 17.375,
+          "candidate": 17.281,
+          "paired_difference": -0.0920000000000023,
+          "paired_percent": -0.5314846909301084
+        },
+        "gc_setup_delta.user_cpu": {
+          "baseline": 2.114,
+          "candidate": 2.163,
+          "paired_difference": 0.028999999999999915,
+          "paired_percent": 1.3463324048282226
+        },
+        "gc_setup_delta.system_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.004,
+          "paired_difference": 0.004,
+          "paired_percent": 800.0
+        },
+        "gc_setup_delta.elapsed": {
+          "baseline": 2.119,
+          "candidate": 2.182,
+          "paired_difference": 0.027000000000000135,
+          "paired_percent": 1.2529002320185678
+        },
+        "gc_setup_delta.child_user_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_setup_delta.child_system_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_reference_delta.user_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_reference_delta.system_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_reference_delta.elapsed": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_reference_delta.child_user_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_reference_delta.child_system_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_preparation_delta.user_cpu": {
+          "baseline": 0.587000000000001,
+          "candidate": 0.582999999999999,
+          "paired_difference": -0.0040000000000000036,
+          "paired_percent": -0.6837606837606844
+        },
+        "gc_preparation_delta.system_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": 0.0
+        },
+        "gc_preparation_delta.elapsed": {
+          "baseline": 0.588,
+          "candidate": 0.583,
+          "paired_difference": -0.0050000000000000044,
+          "paired_percent": -0.8532423208191134
+        },
+        "gc_preparation_delta.child_user_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_preparation_delta.child_system_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_operation_delta.user_cpu": {
+          "baseline": 14.064,
+          "candidate": 13.965,
+          "paired_difference": -0.02200000000000024,
+          "paired_percent": -0.15728891113176693
+        },
+        "gc_operation_delta.system_cpu": {
+          "baseline": 0.0149999999999983,
+          "candidate": 0.00999999999999979,
+          "paired_difference": -0.004999999999998509,
+          "paired_percent": -33.333333333327175
+        },
+        "gc_operation_delta.elapsed": {
+          "baseline": 14.073,
+          "candidate": 13.9780000000001,
+          "paired_difference": -0.026000000000001577,
+          "paired_percent": -0.1856612396458254
+        },
+        "gc_operation_delta.child_user_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_operation_delta.child_system_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_closing_delta.user_cpu": {
+          "baseline": 0.600999999999999,
+          "candidate": 0.593999999999994,
+          "paired_difference": -0.002000000000009994,
+          "paired_percent": -0.3355704698003323
+        },
+        "gc_closing_delta.system_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.000999999999999446,
+          "paired_difference": 0.000999999999999446,
+          "paired_percent": null
+        },
+        "gc_closing_delta.elapsed": {
+          "baseline": 0.600999999999999,
+          "candidate": 0.593999999999994,
+          "paired_difference": -0.002000000000009994,
+          "paired_percent": -0.3355704698003323
+        },
+        "gc_closing_delta.child_user_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_closing_delta.child_system_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_operation_plus_closing_delta.user_cpu": {
+          "baseline": 14.6810000000001,
+          "candidate": 14.558,
+          "paired_difference": -0.02999999999999936,
+          "paired_percent": -0.20564847820125695
+        },
+        "gc_operation_plus_closing_delta.system_cpu": {
+          "baseline": 0.0149999999999983,
+          "candidate": 0.0109999999999992,
+          "paired_difference": -0.0039999999999991,
+          "paired_percent": -26.666666666663687
+        },
+        "gc_operation_plus_closing_delta.elapsed": {
+          "baseline": 14.69,
+          "candidate": 14.5720000000001,
+          "paired_difference": -0.032999999999999474,
+          "paired_percent": -0.22595001711742038
+        },
+        "gc_operation_plus_closing_delta.child_user_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_operation_plus_closing_delta.child_system_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_through_receipt_delta.user_cpu": {
+          "baseline": 17.3620000000001,
+          "candidate": 17.279,
+          "paired_difference": -0.08299999999999841,
+          "paired_percent": -0.4801295771388813
+        },
+        "gc_through_receipt_delta.system_cpu": {
+          "baseline": 0.0150000000000019,
+          "candidate": 0.0149999999999992,
+          "paired_difference": 9.003214840319629e-16,
+          "paired_percent": 6.002143226880433e-12
+        },
+        "gc_through_receipt_delta.elapsed": {
+          "baseline": 17.375,
+          "candidate": 17.281,
+          "paired_difference": -0.0920000000000023,
+          "paired_percent": -0.5314846909301084
+        },
+        "gc_through_receipt_delta.child_user_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        },
+        "gc_through_receipt_delta.child_system_cpu": {
+          "baseline": 0.0,
+          "candidate": 0.0,
+          "paired_difference": 0.0,
+          "paired_percent": null
+        }
+      }
+    }
+  }
+}

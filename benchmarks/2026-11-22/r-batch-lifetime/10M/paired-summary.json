@@ -1,0 +1,1421 @@
+{
+  "schema": 1,
+  "positive_reduction_means_improvement": true,
+  "source_recipe": {
+    "kind": "qualified_installed_A_B_reuse",
+    "A_tree": "0ac1c449f2973394b4df37d1f318f2325cdb0e09c00ce704eb40ba770cd137ce",
+    "B_tree": "d732c62becffbe538cf7250842bd73ee87c038225c4ee20cbf5cd79a381798e5",
+    "R_overlay": "32f23a6779483741dc92642ccd0c15b859d5d485f25316934ae8a3159885e94a"
+  },
+  "paired_reductions": [
+    {
+      "pair": 1,
+      "order": "AB",
+      "fields": {
+        "operation_elapsed_seconds": {
+          "baseline_A": 136.161,
+          "variant_B": 131.225,
+          "reduction_absolute_A_minus_B": 4.936000000000007,
+          "reduction_percent": 3.625120262042734,
+          "undefined_percent_reason": null
+        },
+        "operation_plus_closing_gc_elapsed_seconds": {
+          "baseline_A": 136.797,
+          "variant_B": 131.833,
+          "reduction_absolute_A_minus_B": 4.963999999999999,
+          "reduction_percent": 3.6287345482722566,
+          "undefined_percent_reason": null
+        },
+        "closing_gc_elapsed_seconds": {
+          "baseline_A": 0.635999999999996,
+          "variant_B": 0.608000000000004,
+          "reduction_absolute_A_minus_B": 0.02799999999999203,
+          "reduction_percent": 4.4025157232692145,
+          "undefined_percent_reason": null
+        },
+        "whole_worker_wall_seconds": {
+          "baseline_A": 143.608681211,
+          "variant_B": 138.62949438,
+          "reduction_absolute_A_minus_B": 4.979186830999993,
+          "reduction_percent": 3.4671906941922406,
+          "undefined_percent_reason": null
+        },
+        "whole_worker_cpu_seconds": {
+          "baseline_A": 132.115853,
+          "variant_B": 125.73394400000001,
+          "reduction_absolute_A_minus_B": 6.381908999999979,
+          "reduction_percent": 4.830539905002906,
+          "undefined_percent_reason": null
+        },
+        "whole_worker_peak_rss_bytes": {
+          "baseline_A": 1072885760.0,
+          "variant_B": 1075777536.0,
+          "reduction_absolute_A_minus_B": -2891776.0,
+          "reduction_percent": -0.26953251760933056,
+          "undefined_percent_reason": null
+        },
+        "operation_gc_cpu_seconds": {
+          "baseline_A": 20.461,
+          "variant_B": 14.39,
+          "reduction_absolute_A_minus_B": 6.070999999999998,
+          "reduction_percent": 29.67108156981574,
+          "undefined_percent_reason": null
+        },
+        "operation_gc_elapsed_seconds": {
+          "baseline_A": 20.4719999999999,
+          "variant_B": 14.386,
+          "reduction_absolute_A_minus_B": 6.085999999999899,
+          "reduction_percent": 29.728409534974254,
+          "undefined_percent_reason": null
+        },
+        "operation_plus_closing_gc_cpu_seconds": {
+          "baseline_A": 21.094,
+          "variant_B": 14.996,
+          "reduction_absolute_A_minus_B": 6.098000000000001,
+          "reduction_percent": 28.908694415473597,
+          "undefined_percent_reason": null
+        },
+        "operation_plus_closing_gc_collection_elapsed_seconds": {
+          "baseline_A": 21.1059999999999,
+          "variant_B": 14.993,
+          "reduction_absolute_A_minus_B": 6.112999999999898,
+          "reduction_percent": 28.9633279636119,
+          "undefined_percent_reason": null
+        },
+        "gc_through_pre_receipt_cpu_seconds": {
+          "baseline_A": 23.815,
+          "variant_B": 17.714000000000002,
+          "reduction_absolute_A_minus_B": 6.100999999999999,
+          "reduction_percent": 25.618307789208476,
+          "undefined_percent_reason": null
+        },
+        "gc_through_pre_receipt_elapsed_seconds": {
+          "baseline_A": 23.8319999999999,
+          "variant_B": 17.716,
+          "reduction_absolute_A_minus_B": 6.1159999999999,
+          "reduction_percent": 25.662974152399823,
+          "undefined_percent_reason": null
+        },
+        "gc_setup_delta__user_cpu_seconds": {
+          "baseline_A": 2.124,
+          "variant_B": 2.118,
+          "reduction_absolute_A_minus_B": 0.006000000000000227,
+          "reduction_percent": 0.28248587570622535,
+          "undefined_percent_reason": null
+        },
+        "gc_setup_delta__system_cpu_seconds": {
+          "baseline_A": 0.004,
+          "variant_B": 0.001,
+          "reduction_absolute_A_minus_B": 0.003,
+          "reduction_percent": 75.0,
+          "undefined_percent_reason": null
+        },
+        "gc_setup_delta__elapsed_seconds": {
+          "baseline_A": 2.133,
+          "variant_B": 2.124,
+          "reduction_absolute_A_minus_B": 0.008999999999999897,
+          "reduction_percent": 0.4219409282700374,
+          "undefined_percent_reason": null
+        },
+        "gc_setup_delta__child_user_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_setup_delta__child_system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_reference_delta__user_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_reference_delta__system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_reference_delta__elapsed_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_reference_delta__child_user_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_reference_delta__child_system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_preparation_delta__user_cpu_seconds": {
+          "baseline_A": 0.593,
+          "variant_B": 0.599,
+          "reduction_absolute_A_minus_B": -0.006000000000000005,
+          "reduction_percent": -1.011804384485667,
+          "undefined_percent_reason": null
+        },
+        "gc_preparation_delta__system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_preparation_delta__elapsed_seconds": {
+          "baseline_A": 0.593,
+          "variant_B": 0.599,
+          "reduction_absolute_A_minus_B": -0.006000000000000005,
+          "reduction_percent": -1.011804384485667,
+          "undefined_percent_reason": null
+        },
+        "gc_preparation_delta__child_user_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_preparation_delta__child_system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_operation_delta__user_cpu_seconds": {
+          "baseline_A": 20.444,
+          "variant_B": 14.369,
+          "reduction_absolute_A_minus_B": 6.074999999999999,
+          "reduction_percent": 29.715319898258652,
+          "undefined_percent_reason": null
+        },
+        "gc_operation_delta__system_cpu_seconds": {
+          "baseline_A": 0.0170000000000008,
+          "variant_B": 0.0210000000000004,
+          "reduction_absolute_A_minus_B": -0.003999999999999601,
+          "reduction_percent": -23.52941176470243,
+          "undefined_percent_reason": null
+        },
+        "gc_operation_delta__elapsed_seconds": {
+          "baseline_A": 20.4719999999999,
+          "variant_B": 14.386,
+          "reduction_absolute_A_minus_B": 6.085999999999899,
+          "reduction_percent": 29.728409534974254,
+          "undefined_percent_reason": null
+        },
+        "gc_operation_delta__child_user_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_operation_delta__child_system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_closing_delta__user_cpu_seconds": {
+          "baseline_A": 0.632000000000005,
+          "variant_B": 0.605999999999995,
+          "reduction_absolute_A_minus_B": 0.026000000000010015,
+          "reduction_percent": 4.113924050634464,
+          "undefined_percent_reason": null
+        },
+        "gc_closing_delta__system_cpu_seconds": {
+          "baseline_A": 0.00100000000000122,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.00100000000000122,
+          "reduction_percent": 100.0,
+          "undefined_percent_reason": null
+        },
+        "gc_closing_delta__elapsed_seconds": {
+          "baseline_A": 0.634000000000015,
+          "variant_B": 0.606999999999999,
+          "reduction_absolute_A_minus_B": 0.02700000000001601,
+          "reduction_percent": 4.258675078866778,
+          "undefined_percent_reason": null
+        },
+        "gc_closing_delta__child_user_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_closing_delta__child_system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_operation_plus_closing_delta__user_cpu_seconds": {
+          "baseline_A": 21.076,
+          "variant_B": 14.975,
+          "reduction_absolute_A_minus_B": 6.101000000000001,
+          "reduction_percent": 28.94761814386032,
+          "undefined_percent_reason": null
+        },
+        "gc_operation_plus_closing_delta__system_cpu_seconds": {
+          "baseline_A": 0.018000000000002,
+          "variant_B": 0.0210000000000004,
+          "reduction_absolute_A_minus_B": -0.0029999999999983998,
+          "reduction_percent": -16.666666666655924,
+          "undefined_percent_reason": null
+        },
+        "gc_operation_plus_closing_delta__elapsed_seconds": {
+          "baseline_A": 21.1059999999999,
+          "variant_B": 14.993,
+          "reduction_absolute_A_minus_B": 6.112999999999898,
+          "reduction_percent": 28.9633279636119,
+          "undefined_percent_reason": null
+        },
+        "gc_operation_plus_closing_delta__child_user_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_operation_plus_closing_delta__child_system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_through_receipt_delta__user_cpu_seconds": {
+          "baseline_A": 23.793,
+          "variant_B": 17.692,
+          "reduction_absolute_A_minus_B": 6.100999999999999,
+          "reduction_percent": 25.641995544908163,
+          "undefined_percent_reason": null
+        },
+        "gc_through_receipt_delta__system_cpu_seconds": {
+          "baseline_A": 0.022000000000002,
+          "variant_B": 0.0220000000000004,
+          "reduction_absolute_A_minus_B": 1.5994150448506161e-15,
+          "reduction_percent": 7.270068385683958e-12,
+          "undefined_percent_reason": null
+        },
+        "gc_through_receipt_delta__elapsed_seconds": {
+          "baseline_A": 23.8319999999999,
+          "variant_B": 17.716,
+          "reduction_absolute_A_minus_B": 6.1159999999999,
+          "reduction_percent": 25.662974152399823,
+          "undefined_percent_reason": null
+        },
+        "gc_through_receipt_delta__child_user_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_through_receipt_delta__child_system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        }
+      }
+    },
+    {
+      "pair": 2,
+      "order": "BA",
+      "fields": {
+        "operation_elapsed_seconds": {
+          "baseline_A": 135.456,
+          "variant_B": 130.444,
+          "reduction_absolute_A_minus_B": 5.0120000000000005,
+          "reduction_percent": 3.700094495629578,
+          "undefined_percent_reason": null
+        },
+        "operation_plus_closing_gc_elapsed_seconds": {
+          "baseline_A": 136.096,
+          "variant_B": 131.056,
+          "reduction_absolute_A_minus_B": 5.039999999999992,
+          "reduction_percent": 3.7032682812132554,
+          "undefined_percent_reason": null
+        },
+        "closing_gc_elapsed_seconds": {
+          "baseline_A": 0.639999999999986,
+          "variant_B": 0.611999999999995,
+          "reduction_absolute_A_minus_B": 0.027999999999991032,
+          "reduction_percent": 4.374999999998694,
+          "undefined_percent_reason": null
+        },
+        "whole_worker_wall_seconds": {
+          "baseline_A": 143.073735008,
+          "variant_B": 137.921633749,
+          "reduction_absolute_A_minus_B": 5.1521012590000055,
+          "reduction_percent": 3.6010112259332048,
+          "undefined_percent_reason": null
+        },
+        "whole_worker_cpu_seconds": {
+          "baseline_A": 131.482578,
+          "variant_B": 125.334225,
+          "reduction_absolute_A_minus_B": 6.148352999999986,
+          "reduction_percent": 4.67617314287828,
+          "undefined_percent_reason": null
+        },
+        "whole_worker_peak_rss_bytes": {
+          "baseline_A": 1072877568.0,
+          "variant_B": 1080115200.0,
+          "reduction_absolute_A_minus_B": -7237632.0,
+          "reduction_percent": -0.6745999931280137,
+          "undefined_percent_reason": null
+        },
+        "operation_gc_cpu_seconds": {
+          "baseline_A": 20.439,
+          "variant_B": 14.389999999999997,
+          "reduction_absolute_A_minus_B": 6.049000000000003,
+          "reduction_percent": 29.595381378736743,
+          "undefined_percent_reason": null
+        },
+        "operation_gc_elapsed_seconds": {
+          "baseline_A": 20.439,
+          "variant_B": 14.386,
+          "reduction_absolute_A_minus_B": 6.053000000000001,
+          "reduction_percent": 29.61495180781839,
+          "undefined_percent_reason": null
+        },
+        "operation_plus_closing_gc_cpu_seconds": {
+          "baseline_A": 21.076999999999998,
+          "variant_B": 15.000999999999998,
+          "reduction_absolute_A_minus_B": 6.0760000000000005,
+          "reduction_percent": 28.82763201594155,
+          "undefined_percent_reason": null
+        },
+        "operation_plus_closing_gc_collection_elapsed_seconds": {
+          "baseline_A": 21.078,
+          "variant_B": 14.997,
+          "reduction_absolute_A_minus_B": 6.0809999999999995,
+          "reduction_percent": 28.84998576715058,
+          "undefined_percent_reason": null
+        },
+        "gc_through_pre_receipt_cpu_seconds": {
+          "baseline_A": 23.832,
+          "variant_B": 17.72,
+          "reduction_absolute_A_minus_B": 6.112000000000002,
+          "reduction_percent": 25.646189996643173,
+          "undefined_percent_reason": null
+        },
+        "gc_through_pre_receipt_elapsed_seconds": {
+          "baseline_A": 23.835,
+          "variant_B": 17.718,
+          "reduction_absolute_A_minus_B": 6.117000000000001,
+          "reduction_percent": 25.66393958464443,
+          "undefined_percent_reason": null
+        },
+        "gc_setup_delta__user_cpu_seconds": {
+          "baseline_A": 2.145,
+          "variant_B": 2.116,
+          "reduction_absolute_A_minus_B": 0.028999999999999915,
+          "reduction_percent": 1.351981351981348,
+          "undefined_percent_reason": null
+        },
+        "gc_setup_delta__system_cpu_seconds": {
+          "baseline_A": 0.00700000000000001,
+          "variant_B": 0.001,
+          "reduction_absolute_A_minus_B": 0.00600000000000001,
+          "reduction_percent": 85.71428571428574,
+          "undefined_percent_reason": null
+        },
+        "gc_setup_delta__elapsed_seconds": {
+          "baseline_A": 2.155,
+          "variant_B": 2.119,
+          "reduction_absolute_A_minus_B": 0.03599999999999959,
+          "reduction_percent": 1.6705336426913964,
+          "undefined_percent_reason": null
+        },
+        "gc_setup_delta__child_user_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_setup_delta__child_system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_reference_delta__user_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_reference_delta__system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_reference_delta__elapsed_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_reference_delta__child_user_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_reference_delta__child_system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_preparation_delta__user_cpu_seconds": {
+          "baseline_A": 0.603,
+          "variant_B": 0.602,
+          "reduction_absolute_A_minus_B": 0.0010000000000000009,
+          "reduction_percent": 0.16583747927031525,
+          "undefined_percent_reason": null
+        },
+        "gc_preparation_delta__system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_preparation_delta__elapsed_seconds": {
+          "baseline_A": 0.601999999999999,
+          "variant_B": 0.602,
+          "reduction_absolute_A_minus_B": -9.992007221626409e-16,
+          "reduction_percent": -1.6598018640575458e-13,
+          "undefined_percent_reason": null
+        },
+        "gc_preparation_delta__child_user_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_preparation_delta__child_system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_operation_delta__user_cpu_seconds": {
+          "baseline_A": 20.429,
+          "variant_B": 14.383,
+          "reduction_absolute_A_minus_B": 6.045999999999999,
+          "reduction_percent": 29.59518331783249,
+          "undefined_percent_reason": null
+        },
+        "gc_operation_delta__system_cpu_seconds": {
+          "baseline_A": 0.00999999999999979,
+          "variant_B": 0.00699999999999878,
+          "reduction_absolute_A_minus_B": 0.0030000000000010105,
+          "reduction_percent": 30.000000000010736,
+          "undefined_percent_reason": null
+        },
+        "gc_operation_delta__elapsed_seconds": {
+          "baseline_A": 20.439,
+          "variant_B": 14.386,
+          "reduction_absolute_A_minus_B": 6.053000000000001,
+          "reduction_percent": 29.61495180781839,
+          "undefined_percent_reason": null
+        },
+        "gc_operation_delta__child_user_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_operation_delta__child_system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_closing_delta__user_cpu_seconds": {
+          "baseline_A": 0.637,
+          "variant_B": 0.611000000000004,
+          "reduction_absolute_A_minus_B": 0.025999999999996026,
+          "reduction_percent": 4.0816326530606,
+          "undefined_percent_reason": null
+        },
+        "gc_closing_delta__system_cpu_seconds": {
+          "baseline_A": 0.000999999999999446,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.000999999999999446,
+          "reduction_percent": 100.0,
+          "undefined_percent_reason": null
+        },
+        "gc_closing_delta__elapsed_seconds": {
+          "baseline_A": 0.638999999999982,
+          "variant_B": 0.611000000000018,
+          "reduction_absolute_A_minus_B": 0.027999999999964054,
+          "reduction_percent": 4.38184663536226,
+          "undefined_percent_reason": null
+        },
+        "gc_closing_delta__child_user_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_closing_delta__child_system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_operation_plus_closing_delta__user_cpu_seconds": {
+          "baseline_A": 21.066,
+          "variant_B": 14.994,
+          "reduction_absolute_A_minus_B": 6.071999999999999,
+          "reduction_percent": 28.823696952435203,
+          "undefined_percent_reason": null
+        },
+        "gc_operation_plus_closing_delta__system_cpu_seconds": {
+          "baseline_A": 0.0109999999999992,
+          "variant_B": 0.00699999999999878,
+          "reduction_absolute_A_minus_B": 0.00400000000000042,
+          "reduction_percent": 36.363636363642826,
+          "undefined_percent_reason": null
+        },
+        "gc_operation_plus_closing_delta__elapsed_seconds": {
+          "baseline_A": 21.078,
+          "variant_B": 14.997,
+          "reduction_absolute_A_minus_B": 6.0809999999999995,
+          "reduction_percent": 28.84998576715058,
+          "undefined_percent_reason": null
+        },
+        "gc_operation_plus_closing_delta__child_user_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_operation_plus_closing_delta__child_system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_through_receipt_delta__user_cpu_seconds": {
+          "baseline_A": 23.814,
+          "variant_B": 17.712,
+          "reduction_absolute_A_minus_B": 6.102,
+          "reduction_percent": 25.62358276643991,
+          "undefined_percent_reason": null
+        },
+        "gc_through_receipt_delta__system_cpu_seconds": {
+          "baseline_A": 0.0179999999999992,
+          "variant_B": 0.00799999999999879,
+          "reduction_absolute_A_minus_B": 0.010000000000000411,
+          "reduction_percent": 55.555555555560304,
+          "undefined_percent_reason": null
+        },
+        "gc_through_receipt_delta__elapsed_seconds": {
+          "baseline_A": 23.835,
+          "variant_B": 17.718,
+          "reduction_absolute_A_minus_B": 6.117000000000001,
+          "reduction_percent": 25.66393958464443,
+          "undefined_percent_reason": null
+        },
+        "gc_through_receipt_delta__child_user_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_through_receipt_delta__child_system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        }
+      }
+    },
+    {
+      "pair": 3,
+      "order": "AB",
+      "fields": {
+        "operation_elapsed_seconds": {
+          "baseline_A": 135.003,
+          "variant_B": 130.216,
+          "reduction_absolute_A_minus_B": 4.786999999999978,
+          "reduction_percent": 3.545847129323036,
+          "undefined_percent_reason": null
+        },
+        "operation_plus_closing_gc_elapsed_seconds": {
+          "baseline_A": 135.639,
+          "variant_B": 130.827,
+          "reduction_absolute_A_minus_B": 4.812000000000012,
+          "reduction_percent": 3.547652223917908,
+          "undefined_percent_reason": null
+        },
+        "closing_gc_elapsed_seconds": {
+          "baseline_A": 0.635999999999996,
+          "variant_B": 0.611000000000018,
+          "reduction_absolute_A_minus_B": 0.02499999999997804,
+          "reduction_percent": 3.930817610059465,
+          "undefined_percent_reason": null
+        },
+        "whole_worker_wall_seconds": {
+          "baseline_A": 142.479365499,
+          "variant_B": 137.61644432,
+          "reduction_absolute_A_minus_B": 4.862921179000011,
+          "reduction_percent": 3.413070490571592,
+          "undefined_percent_reason": null
+        },
+        "whole_worker_cpu_seconds": {
+          "baseline_A": 131.141898,
+          "variant_B": 125.347216,
+          "reduction_absolute_A_minus_B": 5.794681999999995,
+          "reduction_percent": 4.418635148928526,
+          "undefined_percent_reason": null
+        },
+        "whole_worker_peak_rss_bytes": {
+          "baseline_A": 1072070656.0,
+          "variant_B": 1076379648.0,
+          "reduction_absolute_A_minus_B": -4308992.0,
+          "reduction_percent": -0.40193171745575695,
+          "undefined_percent_reason": null
+        },
+        "operation_gc_cpu_seconds": {
+          "baseline_A": 20.401,
+          "variant_B": 14.3609999999999,
+          "reduction_absolute_A_minus_B": 6.0400000000001,
+          "reduction_percent": 29.606391843537573,
+          "undefined_percent_reason": null
+        },
+        "operation_gc_elapsed_seconds": {
+          "baseline_A": 20.4040000000001,
+          "variant_B": 14.3639999999999,
+          "reduction_absolute_A_minus_B": 6.0400000000002,
+          "reduction_percent": 29.602038815919283,
+          "undefined_percent_reason": null
+        },
+        "operation_plus_closing_gc_cpu_seconds": {
+          "baseline_A": 21.036,
+          "variant_B": 14.9699999999999,
+          "reduction_absolute_A_minus_B": 6.066000000000102,
+          "reduction_percent": 28.83628066172324,
+          "undefined_percent_reason": null
+        },
+        "operation_plus_closing_gc_collection_elapsed_seconds": {
+          "baseline_A": 21.0380000000001,
+          "variant_B": 14.974,
+          "reduction_absolute_A_minus_B": 6.0640000000000995,
+          "reduction_percent": 28.824032702728733,
+          "undefined_percent_reason": null
+        },
+        "gc_through_pre_receipt_cpu_seconds": {
+          "baseline_A": 23.757,
+          "variant_B": 17.6869999999999,
+          "reduction_absolute_A_minus_B": 6.0700000000001,
+          "reduction_percent": 25.550364103212104,
+          "undefined_percent_reason": null
+        },
+        "gc_through_pre_receipt_elapsed_seconds": {
+          "baseline_A": 23.7610000000001,
+          "variant_B": 17.691,
+          "reduction_absolute_A_minus_B": 6.0700000000001,
+          "reduction_percent": 25.546062876141892,
+          "undefined_percent_reason": null
+        },
+        "gc_setup_delta__user_cpu_seconds": {
+          "baseline_A": 2.119,
+          "variant_B": 2.116,
+          "reduction_absolute_A_minus_B": 0.0030000000000001137,
+          "reduction_percent": 0.14157621519585245,
+          "undefined_percent_reason": null
+        },
+        "gc_setup_delta__system_cpu_seconds": {
+          "baseline_A": 0.003,
+          "variant_B": 0.002,
+          "reduction_absolute_A_minus_B": 0.001,
+          "reduction_percent": 33.333333333333336,
+          "undefined_percent_reason": null
+        },
+        "gc_setup_delta__elapsed_seconds": {
+          "baseline_A": 2.123,
+          "variant_B": 2.118,
+          "reduction_absolute_A_minus_B": 0.0050000000000003375,
+          "reduction_percent": 0.2355157795572462,
+          "undefined_percent_reason": null
+        },
+        "gc_setup_delta__child_user_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_setup_delta__child_system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_reference_delta__user_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_reference_delta__system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_reference_delta__elapsed_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_reference_delta__child_user_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_reference_delta__child_system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_preparation_delta__user_cpu_seconds": {
+          "baseline_A": 0.599,
+          "variant_B": 0.599,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": 0.0,
+          "undefined_percent_reason": null
+        },
+        "gc_preparation_delta__system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_preparation_delta__elapsed_seconds": {
+          "baseline_A": 0.6,
+          "variant_B": 0.599,
+          "reduction_absolute_A_minus_B": 0.0010000000000000009,
+          "reduction_percent": 0.16666666666666682,
+          "undefined_percent_reason": null
+        },
+        "gc_preparation_delta__child_user_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_preparation_delta__child_system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_operation_delta__user_cpu_seconds": {
+          "baseline_A": 20.395,
+          "variant_B": 14.3539999999999,
+          "reduction_absolute_A_minus_B": 6.0410000000001,
+          "reduction_percent": 29.620004903163032,
+          "undefined_percent_reason": null
+        },
+        "gc_operation_delta__system_cpu_seconds": {
+          "baseline_A": 0.0059999999999989,
+          "variant_B": 0.00700000000000056,
+          "reduction_absolute_A_minus_B": -0.0010000000000016593,
+          "reduction_percent": -16.666666666697378,
+          "undefined_percent_reason": null
+        },
+        "gc_operation_delta__elapsed_seconds": {
+          "baseline_A": 20.4040000000001,
+          "variant_B": 14.3639999999999,
+          "reduction_absolute_A_minus_B": 6.0400000000002,
+          "reduction_percent": 29.602038815919283,
+          "undefined_percent_reason": null
+        },
+        "gc_operation_delta__child_user_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_operation_delta__child_system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_closing_delta__user_cpu_seconds": {
+          "baseline_A": 0.635000000000005,
+          "variant_B": 0.608999999999995,
+          "reduction_absolute_A_minus_B": 0.026000000000010015,
+          "reduction_percent": 4.094488188977923,
+          "undefined_percent_reason": null
+        },
+        "gc_closing_delta__system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_closing_delta__elapsed_seconds": {
+          "baseline_A": 0.633999999999986,
+          "variant_B": 0.610000000000014,
+          "reduction_absolute_A_minus_B": 0.023999999999972044,
+          "reduction_percent": 3.7854889589862104,
+          "undefined_percent_reason": null
+        },
+        "gc_closing_delta__child_user_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_closing_delta__child_system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_operation_plus_closing_delta__user_cpu_seconds": {
+          "baseline_A": 21.03,
+          "variant_B": 14.9629999999999,
+          "reduction_absolute_A_minus_B": 6.067000000000101,
+          "reduction_percent": 28.849262957679986,
+          "undefined_percent_reason": null
+        },
+        "gc_operation_plus_closing_delta__system_cpu_seconds": {
+          "baseline_A": 0.0059999999999989,
+          "variant_B": 0.00700000000000056,
+          "reduction_absolute_A_minus_B": -0.0010000000000016593,
+          "reduction_percent": -16.666666666697378,
+          "undefined_percent_reason": null
+        },
+        "gc_operation_plus_closing_delta__elapsed_seconds": {
+          "baseline_A": 21.0380000000001,
+          "variant_B": 14.974,
+          "reduction_absolute_A_minus_B": 6.0640000000000995,
+          "reduction_percent": 28.824032702728733,
+          "undefined_percent_reason": null
+        },
+        "gc_operation_plus_closing_delta__child_user_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_operation_plus_closing_delta__child_system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_through_receipt_delta__user_cpu_seconds": {
+          "baseline_A": 23.748,
+          "variant_B": 17.6779999999999,
+          "reduction_absolute_A_minus_B": 6.0700000000001,
+          "reduction_percent": 25.56004716186668,
+          "undefined_percent_reason": null
+        },
+        "gc_through_receipt_delta__system_cpu_seconds": {
+          "baseline_A": 0.0089999999999989,
+          "variant_B": 0.00900000000000056,
+          "reduction_absolute_A_minus_B": -1.6601303665098044e-15,
+          "reduction_percent": -1.8445892961222305e-11,
+          "undefined_percent_reason": null
+        },
+        "gc_through_receipt_delta__elapsed_seconds": {
+          "baseline_A": 23.7610000000001,
+          "variant_B": 17.691,
+          "reduction_absolute_A_minus_B": 6.0700000000001,
+          "reduction_percent": 25.546062876141892,
+          "undefined_percent_reason": null
+        },
+        "gc_through_receipt_delta__child_user_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        },
+        "gc_through_receipt_delta__child_system_cpu_seconds": {
+          "baseline_A": 0.0,
+          "variant_B": 0.0,
+          "reduction_absolute_A_minus_B": 0.0,
+          "reduction_percent": null,
+          "undefined_percent_reason": "zero_baseline"
+        }
+      }
+    }
+  ],
+  "medians": {
+    "operation_elapsed_seconds": {
+      "median_baseline_A": 135.456,
+      "median_variant_B": 130.444,
+      "median_paired_reduction_absolute": 4.936000000000007,
+      "median_paired_reduction_percent": 3.625120262042734,
+      "defined_percent_pairs": 3
+    },
+    "operation_plus_closing_gc_elapsed_seconds": {
+      "median_baseline_A": 136.096,
+      "median_variant_B": 131.056,
+      "median_paired_reduction_absolute": 4.963999999999999,
+      "median_paired_reduction_percent": 3.6287345482722566,
+      "defined_percent_pairs": 3
+    },
+    "closing_gc_elapsed_seconds": {
+      "median_baseline_A": 0.635999999999996,
+      "median_variant_B": 0.611000000000018,
+      "median_paired_reduction_absolute": 0.027999999999991032,
+      "median_paired_reduction_percent": 4.374999999998694,
+      "defined_percent_pairs": 3
+    },
+    "whole_worker_wall_seconds": {
+      "median_baseline_A": 143.073735008,
+      "median_variant_B": 137.921633749,
+      "median_paired_reduction_absolute": 4.979186830999993,
+      "median_paired_reduction_percent": 3.4671906941922406,
+      "defined_percent_pairs": 3
+    },
+    "whole_worker_cpu_seconds": {
+      "median_baseline_A": 131.482578,
+      "median_variant_B": 125.347216,
+      "median_paired_reduction_absolute": 6.148352999999986,
+      "median_paired_reduction_percent": 4.67617314287828,
+      "defined_percent_pairs": 3
+    },
+    "whole_worker_peak_rss_bytes": {
+      "median_baseline_A": 1072877568.0,
+      "median_variant_B": 1076379648.0,
+      "median_paired_reduction_absolute": -4308992.0,
+      "median_paired_reduction_percent": -0.40193171745575695,
+      "defined_percent_pairs": 3
+    },
+    "operation_gc_cpu_seconds": {
+      "median_baseline_A": 20.439,
+      "median_variant_B": 14.389999999999997,
+      "median_paired_reduction_absolute": 6.049000000000003,
+      "median_paired_reduction_percent": 29.606391843537573,
+      "defined_percent_pairs": 3
+    },
+    "operation_gc_elapsed_seconds": {
+      "median_baseline_A": 20.439,
+      "median_variant_B": 14.386,
+      "median_paired_reduction_absolute": 6.053000000000001,
+      "median_paired_reduction_percent": 29.61495180781839,
+      "defined_percent_pairs": 3
+    },
+    "operation_plus_closing_gc_cpu_seconds": {
+      "median_baseline_A": 21.076999999999998,
+      "median_variant_B": 14.996,
+      "median_paired_reduction_absolute": 6.0760000000000005,
+      "median_paired_reduction_percent": 28.83628066172324,
+      "defined_percent_pairs": 3
+    },
+    "operation_plus_closing_gc_collection_elapsed_seconds": {
+      "median_baseline_A": 21.078,
+      "median_variant_B": 14.993,
+      "median_paired_reduction_absolute": 6.0809999999999995,
+      "median_paired_reduction_percent": 28.84998576715058,
+      "defined_percent_pairs": 3
+    },
+    "gc_through_pre_receipt_cpu_seconds": {
+      "median_baseline_A": 23.815,
+      "median_variant_B": 17.714000000000002,
+      "median_paired_reduction_absolute": 6.100999999999999,
+      "median_paired_reduction_percent": 25.618307789208476,
+      "defined_percent_pairs": 3
+    },
+    "gc_through_pre_receipt_elapsed_seconds": {
+      "median_baseline_A": 23.8319999999999,
+      "median_variant_B": 17.716,
+      "median_paired_reduction_absolute": 6.1159999999999,
+      "median_paired_reduction_percent": 25.662974152399823,
+      "defined_percent_pairs": 3
+    },
+    "gc_setup_delta__user_cpu_seconds": {
+      "median_baseline_A": 2.124,
+      "median_variant_B": 2.116,
+      "median_paired_reduction_absolute": 0.006000000000000227,
+      "median_paired_reduction_percent": 0.28248587570622535,
+      "defined_percent_pairs": 3
+    },
+    "gc_setup_delta__system_cpu_seconds": {
+      "median_baseline_A": 0.004,
+      "median_variant_B": 0.001,
+      "median_paired_reduction_absolute": 0.003,
+      "median_paired_reduction_percent": 75.0,
+      "defined_percent_pairs": 3
+    },
+    "gc_setup_delta__elapsed_seconds": {
+      "median_baseline_A": 2.133,
+      "median_variant_B": 2.119,
+      "median_paired_reduction_absolute": 0.008999999999999897,
+      "median_paired_reduction_percent": 0.4219409282700374,
+      "defined_percent_pairs": 3
+    },
+    "gc_setup_delta__child_user_cpu_seconds": {
+      "median_baseline_A": 0.0,
+      "median_variant_B": 0.0,
+      "median_paired_reduction_absolute": 0.0,
+      "median_paired_reduction_percent": null,
+      "defined_percent_pairs": 0
+    },
+    "gc_setup_delta__child_system_cpu_seconds": {
+      "median_baseline_A": 0.0,
+      "median_variant_B": 0.0,
+      "median_paired_reduction_absolute": 0.0,
+      "median_paired_reduction_percent": null,
+      "defined_percent_pairs": 0
+    },
+    "gc_reference_delta__user_cpu_seconds": {
+      "median_baseline_A": 0.0,
+      "median_variant_B": 0.0,
+      "median_paired_reduction_absolute": 0.0,
+      "median_paired_reduction_percent": null,
+      "defined_percent_pairs": 0
+    },
+    "gc_reference_delta__system_cpu_seconds": {
+      "median_baseline_A": 0.0,
+      "median_variant_B": 0.0,
+      "median_paired_reduction_absolute": 0.0,
+      "median_paired_reduction_percent": null,
+      "defined_percent_pairs": 0
+    },
+    "gc_reference_delta__elapsed_seconds": {
+      "median_baseline_A": 0.0,
+      "median_variant_B": 0.0,
+      "median_paired_reduction_absolute": 0.0,
+      "median_paired_reduction_percent": null,
+      "defined_percent_pairs": 0
+    },
+    "gc_reference_delta__child_user_cpu_seconds": {
+      "median_baseline_A": 0.0,
+      "median_variant_B": 0.0,
+      "median_paired_reduction_absolute": 0.0,
+      "median_paired_reduction_percent": null,
+      "defined_percent_pairs": 0
+    },
+    "gc_reference_delta__child_system_cpu_seconds": {
+      "median_baseline_A": 0.0,
+      "median_variant_B": 0.0,
+      "median_paired_reduction_absolute": 0.0,
+      "median_paired_reduction_percent": null,
+      "defined_percent_pairs": 0
+    },
+    "gc_preparation_delta__user_cpu_seconds": {
+      "median_baseline_A": 0.599,
+      "median_variant_B": 0.599,
+      "median_paired_reduction_absolute": 0.0,
+      "median_paired_reduction_percent": 0.0,
+      "defined_percent_pairs": 3
+    },
+    "gc_preparation_delta__system_cpu_seconds": {
+      "median_baseline_A": 0.0,
+      "median_variant_B": 0.0,
+      "median_paired_reduction_absolute": 0.0,
+      "median_paired_reduction_percent": null,
+      "defined_percent_pairs": 0
+    },
+    "gc_preparation_delta__elapsed_seconds": {
+      "median_baseline_A": 0.6,
+      "median_variant_B": 0.599,
+      "median_paired_reduction_absolute": -9.992007221626409e-16,
+      "median_paired_reduction_percent": -1.6598018640575458e-13,
+      "defined_percent_pairs": 3
+    },
+    "gc_preparation_delta__child_user_cpu_seconds": {
+      "median_baseline_A": 0.0,
+      "median_variant_B": 0.0,
+      "median_paired_reduction_absolute": 0.0,
+      "median_paired_reduction_percent": null,
+      "defined_percent_pairs": 0
+    },
+    "gc_preparation_delta__child_system_cpu_seconds": {
+      "median_baseline_A": 0.0,
+      "median_variant_B": 0.0,
+      "median_paired_reduction_absolute": 0.0,
+      "median_paired_reduction_percent": null,
+      "defined_percent_pairs": 0
+    },
+    "gc_operation_delta__user_cpu_seconds": {
+      "median_baseline_A": 20.429,
+      "median_variant_B": 14.369,
+      "median_paired_reduction_absolute": 6.045999999999999,
+      "median_paired_reduction_percent": 29.620004903163032,
+      "defined_percent_pairs": 3
+    },
+    "gc_operation_delta__system_cpu_seconds": {
+      "median_baseline_A": 0.00999999999999979,
+      "median_variant_B": 0.00700000000000056,
+      "median_paired_reduction_absolute": -0.0010000000000016593,
+      "median_paired_reduction_percent": -16.666666666697378,
+      "defined_percent_pairs": 3
+    },
+    "gc_operation_delta__elapsed_seconds": {
+      "median_baseline_A": 20.439,
+      "median_variant_B": 14.386,
+      "median_paired_reduction_absolute": 6.053000000000001,
+      "median_paired_reduction_percent": 29.61495180781839,
+      "defined_percent_pairs": 3
+    },
+    "gc_operation_delta__child_user_cpu_seconds": {
+      "median_baseline_A": 0.0,
+      "median_variant_B": 0.0,
+      "median_paired_reduction_absolute": 0.0,
+      "median_paired_reduction_percent": null,
+      "defined_percent_pairs": 0
+    },
+    "gc_operation_delta__child_system_cpu_seconds": {
+      "median_baseline_A": 0.0,
+      "median_variant_B": 0.0,
+      "median_paired_reduction_absolute": 0.0,
+      "median_paired_reduction_percent": null,
+      "defined_percent_pairs": 0
+    },
+    "gc_closing_delta__user_cpu_seconds": {
+      "median_baseline_A": 0.635000000000005,
+      "median_variant_B": 0.608999999999995,
+      "median_paired_reduction_absolute": 0.026000000000010015,
+      "median_paired_reduction_percent": 4.094488188977923,
+      "defined_percent_pairs": 3
+    },
+    "gc_closing_delta__system_cpu_seconds": {
+      "median_baseline_A": 0.000999999999999446,
+      "median_variant_B": 0.0,
+      "median_paired_reduction_absolute": 0.000999999999999446,
+      "median_paired_reduction_percent": 100.0,
+      "defined_percent_pairs": 2
+    },
+    "gc_closing_delta__elapsed_seconds": {
+      "median_baseline_A": 0.634000000000015,
+      "median_variant_B": 0.610000000000014,
+      "median_paired_reduction_absolute": 0.02700000000001601,
+      "median_paired_reduction_percent": 4.258675078866778,
+      "defined_percent_pairs": 3
+    },
+    "gc_closing_delta__child_user_cpu_seconds": {
+      "median_baseline_A": 0.0,
+      "median_variant_B": 0.0,
+      "median_paired_reduction_absolute": 0.0,
+      "median_paired_reduction_percent": null,
+      "defined_percent_pairs": 0
+    },
+    "gc_closing_delta__child_system_cpu_seconds": {
+      "median_baseline_A": 0.0,
+      "median_variant_B": 0.0,
+      "median_paired_reduction_absolute": 0.0,
+      "median_paired_reduction_percent": null,
+      "defined_percent_pairs": 0
+    },
+    "gc_operation_plus_closing_delta__user_cpu_seconds": {
+      "median_baseline_A": 21.066,
+      "median_variant_B": 14.975,
+      "median_paired_reduction_absolute": 6.071999999999999,
+      "median_paired_reduction_percent": 28.849262957679986,
+      "defined_percent_pairs": 3
+    },
+    "gc_operation_plus_closing_delta__system_cpu_seconds": {
+      "median_baseline_A": 0.0109999999999992,
+      "median_variant_B": 0.00700000000000056,
+      "median_paired_reduction_absolute": -0.0010000000000016593,
+      "median_paired_reduction_percent": -16.666666666655924,
+      "defined_percent_pairs": 3
+    },
+    "gc_operation_plus_closing_delta__elapsed_seconds": {
+      "median_baseline_A": 21.078,
+      "median_variant_B": 14.993,
+      "median_paired_reduction_absolute": 6.0809999999999995,
+      "median_paired_reduction_percent": 28.84998576715058,
+      "defined_percent_pairs": 3
+    },
+    "gc_operation_plus_closing_delta__child_user_cpu_seconds": {
+      "median_baseline_A": 0.0,
+      "median_variant_B": 0.0,
+      "median_paired_reduction_absolute": 0.0,
+      "median_paired_reduction_percent": null,
+      "defined_percent_pairs": 0
+    },
+    "gc_operation_plus_closing_delta__child_system_cpu_seconds": {
+      "median_baseline_A": 0.0,
+      "median_variant_B": 0.0,
+      "median_paired_reduction_absolute": 0.0,
+      "median_paired_reduction_percent": null,
+      "defined_percent_pairs": 0
+    },
+    "gc_through_receipt_delta__user_cpu_seconds": {
+      "median_baseline_A": 23.793,
+      "median_variant_B": 17.692,
+      "median_paired_reduction_absolute": 6.100999999999999,
+      "median_paired_reduction_percent": 25.62358276643991,
+      "defined_percent_pairs": 3
+    },
+    "gc_through_receipt_delta__system_cpu_seconds": {
+      "median_baseline_A": 0.0179999999999992,
+      "median_variant_B": 0.00900000000000056,
+      "median_paired_reduction_absolute": 1.5994150448506161e-15,
+      "median_paired_reduction_percent": 7.270068385683958e-12,
+      "defined_percent_pairs": 3
+    },
+    "gc_through_receipt_delta__elapsed_seconds": {
+      "median_baseline_A": 23.8319999999999,
+      "median_variant_B": 17.716,
+      "median_paired_reduction_absolute": 6.1159999999999,
+      "median_paired_reduction_percent": 25.662974152399823,
+      "defined_percent_pairs": 3
+    },
+    "gc_through_receipt_delta__child_user_cpu_seconds": {
+      "median_baseline_A": 0.0,
+      "median_variant_B": 0.0,
+      "median_paired_reduction_absolute": 0.0,
+      "median_paired_reduction_percent": null,
+      "defined_percent_pairs": 0
+    },
+    "gc_through_receipt_delta__child_system_cpu_seconds": {
+      "median_baseline_A": 0.0,
+      "median_variant_B": 0.0,
+      "median_paired_reduction_absolute": 0.0,
+      "median_paired_reduction_percent": null,
+      "defined_percent_pairs": 0
+    }
+  },
+  "guard": {
+    "all1M_prior_phase_pins_preserved": true,
+    "all789_protected_files_identity_sha_unchanged": true,
+    "completed_utc": "2026-11-22T02:30:32.924740+00:00",
+    "deletion_performed": false,
+    "elapsed_seconds": 1071.4305464699864,
+    "final_storage": {
+      "peak_root_growth_bytes": 303104,
+      "peak_setup_growth_bytes": 14112986624,
+      "peak_workspace_growth_bytes": 14112683520,
+      "root_filesystem_free_bytes": 24933535744,
+      "root_filesystem_total_bytes": 42949672960,
+      "root_free_bytes": 21983862784,
+      "workspace_charge_bytes": 72847673344,
+      "workspace_conservative_free_bytes": 271729113265,
+      "workspace_physical_free_bytes": 305848086429696,
+      "workspace_physical_total_bytes": 898491987329024,
+      "workspace_quota_accounted_bytes": 128270886735,
+      "workspace_quota_free_bytes": 271729113265
+    },
+    "fresh10M_workers": 6,
+    "full_suite_assertions": 3077,
+    "full_suite_cases": 269,
+    "full_suite_zero_skip_fail_error": true,
+    "independent_oracle19_fields_rows": 10000000,
+    "installed_trees_pinned": true,
+    "namespace_rosters_equal": true,
+    "no_reinstall_or_resuite": true,
+    "no_signaled_or_unknown_cleanup": true,
+    "old18_unretired_identities_unchanged": true,
+    "original_failed_phase_exit_code": 1,
+    "output_charge_bytes": 14112681984,
+    "paired_order": [
+      "AB",
+      "BA",
+      "AB"
+    ],
+    "peak_owned_rss_bytes": 1539538944,
+    "root_growth_budget_bytes": 1000000000,
+    "source4_and_FIX1source19_unchanged": true,
+    "source_list_sha256": "3d044b145aa753d46baebd86ff47b95e6d45f6dde9c27c33f63415d4237782d8",
+    "stable_RDS_fields_match": true,
+    "stable_file_comparisons": 56,
+    "stage_charge_bytes": 1071616,
+    "status": "fixed10M_trial_guard_complete",
+    "workspace_growth_budget_bytes": 20000000000
+  },
+  "GC_time_component_order": [
+    "user_cpu",
+    "system_cpu",
+    "elapsed",
+    "child_user_cpu",
+    "child_system_cpu"
+  ],
+  "GC_event_counts": null,
+  "GC_event_counts_limitation": "Not instrumented; gc.time() reports time, not event counts. No event counts inferred.",
+  "GC_elapsed_resolution_limitation": "Public GC timer resolution can underestimate elapsed time.",
+  "GC_through_pre_receipt_scope": "Starts before package load, ends before small final receipt serialization. Whole-worker wait4 includes that serialization.",
+  "inference_scope": "Three fresh 10M replicated chr22 SNP-panel pairs only; no whole-genome/indel/multiallelic performance extrapolation.",
+  "original_producer_phase_exit_code": 1,
+  "original_producer_phase_elapsed_seconds": 729.3990452920552,
+  "10M_trial_terminal_phase": {
+    "absolute_term_seconds": 1800,
+    "completed_utc": "2026-11-22T02:30:32.968276+00:00",
+    "elapsed_seconds": 1072.0698714160826,
+    "exit_code": 0,
+    "started_utc": "2026-11-22T02:12:40.883680+00:00",
+    "wrapper_sha256": "c911b15823d2b1f92014df4aca7e6cc3e25051a9c4834c15a8b68663ecbdeba7"
+  },
+  "input_receipts": {
+    "/private/tmp/mss-file-batch-lifetime-10M-operator-20261122/returned/output/trial-receipt.json": "5664888d333d10a97a90b90753cd349c2686a21ac1402028c3ec18572f441cb0",
+    "/private/tmp/mss-file-batch-lifetime-10M-operator-20261122/returned/control/trial-proof.json": "7c07a089dbfde885eee22eafd5a2f8b5a556733c05462d63f4b616ab5fac921d"
+  }
+}

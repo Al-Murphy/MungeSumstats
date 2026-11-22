@@ -1,0 +1,33 @@
+{
+  "status": "independent_local_review_passed",
+  "root_analysis_sha256": "1d0b4b3b6d571a795bbc1eac5f874e3e2b96b0367cf40a629001c13c73d57ff3",
+  "root_analyzer_sha256": "880be89787919be20e36233f14b471b1e740087793471a91b1a3b2ef1e43cc2b",
+  "review_source_sha256": "bb7cdd3b72ece8638f7c8bfdf46a54f6e9b90c5b20920fd71be1bbb3f3e438f7",
+  "operator24_and_payload17_pins_unchanged": true,
+  "returned88_pins_verified": true,
+  "metrics_per_scale": 47,
+  "paired_field_comparisons": 282,
+  "raw269_cases3077_assertions2_warnings": true,
+  "stable112_gold_receipt_comparisons": true,
+  "independent_cloud_oracle_receipts_rows": [
+    1000000,
+    10000000
+  ],
+  "stable_RDS_and_namespaces": true,
+  "primary_median_paired_percent_C_minus_B": {
+    "1M": {
+      "operation_plus_closing_gc_seconds": -0.7826396300248981,
+      "worker_cpu_seconds": -1.0504724657829976,
+      "worker_wall_seconds": -0.6812787083423801,
+      "peak_rss_bytes": 0.07160619704935768
+    },
+    "10M": {
+      "operation_plus_closing_gc_seconds": -0.15574903891447667,
+      "worker_cpu_seconds": -0.9716404927091098,
+      "worker_wall_seconds": -0.01503206502278489,
+      "peak_rss_bytes": 0.009542093993442673
+    }
+  },
+  "decision_review": "Keep16KiB pages; adopt independently qualified R-only cleanup. Tiny/mixed incremental8KiB result supports this bounded decision; no claim that8KiB is universally slower.",
+  "runtime_or_scientific_rerun": false
+}

@@ -1,0 +1,3 @@
+"file"	"test"	"type"	"message"
+"test-a0_a1.R"	"Test that if a0/a1 passed, formatted correctly"	"expectation_warning"	"replacing previous import 'utils::findMatches' by 'S4Vectors::findMatches' when loading 'SNPlocs.Hsapiens.dbSNP144.GRCh37'"
+"test-rs_plus.R"	"Handle extra info in rs id column"	"expectation_warning"	"NAs introduced by coercion"

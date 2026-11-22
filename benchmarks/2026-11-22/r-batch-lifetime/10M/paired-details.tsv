@@ -1,0 +1,142 @@
+pair	order	metric	baseline_A	variant_B	reduction_A_minus_B	reduction_percent
+1	AB	operation_elapsed_seconds	136.161	131.225	4.936000000000007	3.625120262042734
+1	AB	operation_plus_closing_gc_elapsed_seconds	136.797	131.833	4.963999999999999	3.6287345482722566
+1	AB	closing_gc_elapsed_seconds	0.635999999999996	0.608000000000004	0.02799999999999203	4.4025157232692145
+1	AB	whole_worker_wall_seconds	143.608681211	138.62949438	4.979186830999993	3.4671906941922406
+1	AB	whole_worker_cpu_seconds	132.115853	125.73394400000001	6.381908999999979	4.830539905002906
+1	AB	whole_worker_peak_rss_bytes	1072885760.0	1075777536.0	-2891776.0	-0.26953251760933056
+1	AB	operation_gc_cpu_seconds	20.461	14.39	6.070999999999998	29.67108156981574
+1	AB	operation_gc_elapsed_seconds	20.4719999999999	14.386	6.085999999999899	29.728409534974254
+1	AB	operation_plus_closing_gc_cpu_seconds	21.094	14.996	6.098000000000001	28.908694415473597
+1	AB	operation_plus_closing_gc_collection_elapsed_seconds	21.1059999999999	14.993	6.112999999999898	28.9633279636119
+1	AB	gc_through_pre_receipt_cpu_seconds	23.815	17.714000000000002	6.100999999999999	25.618307789208476
+1	AB	gc_through_pre_receipt_elapsed_seconds	23.8319999999999	17.716	6.1159999999999	25.662974152399823
+1	AB	gc_setup_delta__user_cpu_seconds	2.124	2.118	0.006000000000000227	0.28248587570622535
+1	AB	gc_setup_delta__system_cpu_seconds	0.004	0.001	0.003	75.0
+1	AB	gc_setup_delta__elapsed_seconds	2.133	2.124	0.008999999999999897	0.4219409282700374
+1	AB	gc_setup_delta__child_user_cpu_seconds	0.0	0.0	0.0	
+1	AB	gc_setup_delta__child_system_cpu_seconds	0.0	0.0	0.0	
+1	AB	gc_reference_delta__user_cpu_seconds	0.0	0.0	0.0	
+1	AB	gc_reference_delta__system_cpu_seconds	0.0	0.0	0.0	
+1	AB	gc_reference_delta__elapsed_seconds	0.0	0.0	0.0	
+1	AB	gc_reference_delta__child_user_cpu_seconds	0.0	0.0	0.0	
+1	AB	gc_reference_delta__child_system_cpu_seconds	0.0	0.0	0.0	
+1	AB	gc_preparation_delta__user_cpu_seconds	0.593	0.599	-0.006000000000000005	-1.011804384485667
+1	AB	gc_preparation_delta__system_cpu_seconds	0.0	0.0	0.0	
+1	AB	gc_preparation_delta__elapsed_seconds	0.593	0.599	-0.006000000000000005	-1.011804384485667
+1	AB	gc_preparation_delta__child_user_cpu_seconds	0.0	0.0	0.0	
+1	AB	gc_preparation_delta__child_system_cpu_seconds	0.0	0.0	0.0	
+1	AB	gc_operation_delta__user_cpu_seconds	20.444	14.369	6.074999999999999	29.715319898258652
+1	AB	gc_operation_delta__system_cpu_seconds	0.0170000000000008	0.0210000000000004	-0.003999999999999601	-23.52941176470243
+1	AB	gc_operation_delta__elapsed_seconds	20.4719999999999	14.386	6.085999999999899	29.728409534974254
+1	AB	gc_operation_delta__child_user_cpu_seconds	0.0	0.0	0.0	
+1	AB	gc_operation_delta__child_system_cpu_seconds	0.0	0.0	0.0	
+1	AB	gc_closing_delta__user_cpu_seconds	0.632000000000005	0.605999999999995	0.026000000000010015	4.113924050634464
+1	AB	gc_closing_delta__system_cpu_seconds	0.00100000000000122	0.0	0.00100000000000122	100.0
+1	AB	gc_closing_delta__elapsed_seconds	0.634000000000015	0.606999999999999	0.02700000000001601	4.258675078866778
+1	AB	gc_closing_delta__child_user_cpu_seconds	0.0	0.0	0.0	
+1	AB	gc_closing_delta__child_system_cpu_seconds	0.0	0.0	0.0	
+1	AB	gc_operation_plus_closing_delta__user_cpu_seconds	21.076	14.975	6.101000000000001	28.94761814386032
+1	AB	gc_operation_plus_closing_delta__system_cpu_seconds	0.018000000000002	0.0210000000000004	-0.0029999999999983998	-16.666666666655924
+1	AB	gc_operation_plus_closing_delta__elapsed_seconds	21.1059999999999	14.993	6.112999999999898	28.9633279636119
+1	AB	gc_operation_plus_closing_delta__child_user_cpu_seconds	0.0	0.0	0.0	
+1	AB	gc_operation_plus_closing_delta__child_system_cpu_seconds	0.0	0.0	0.0	
+1	AB	gc_through_receipt_delta__user_cpu_seconds	23.793	17.692	6.100999999999999	25.641995544908163
+1	AB	gc_through_receipt_delta__system_cpu_seconds	0.022000000000002	0.0220000000000004	1.5994150448506161e-15	7.270068385683958e-12
+1	AB	gc_through_receipt_delta__elapsed_seconds	23.8319999999999	17.716	6.1159999999999	25.662974152399823
+1	AB	gc_through_receipt_delta__child_user_cpu_seconds	0.0	0.0	0.0	
+1	AB	gc_through_receipt_delta__child_system_cpu_seconds	0.0	0.0	0.0	
+2	BA	operation_elapsed_seconds	135.456	130.444	5.0120000000000005	3.700094495629578
+2	BA	operation_plus_closing_gc_elapsed_seconds	136.096	131.056	5.039999999999992	3.7032682812132554
+2	BA	closing_gc_elapsed_seconds	0.639999999999986	0.611999999999995	0.027999999999991032	4.374999999998694
+2	BA	whole_worker_wall_seconds	143.073735008	137.921633749	5.1521012590000055	3.6010112259332048
+2	BA	whole_worker_cpu_seconds	131.482578	125.334225	6.148352999999986	4.67617314287828
+2	BA	whole_worker_peak_rss_bytes	1072877568.0	1080115200.0	-7237632.0	-0.6745999931280137
+2	BA	operation_gc_cpu_seconds	20.439	14.389999999999997	6.049000000000003	29.595381378736743
+2	BA	operation_gc_elapsed_seconds	20.439	14.386	6.053000000000001	29.61495180781839
+2	BA	operation_plus_closing_gc_cpu_seconds	21.076999999999998	15.000999999999998	6.0760000000000005	28.82763201594155
+2	BA	operation_plus_closing_gc_collection_elapsed_seconds	21.078	14.997	6.0809999999999995	28.84998576715058
+2	BA	gc_through_pre_receipt_cpu_seconds	23.832	17.72	6.112000000000002	25.646189996643173
+2	BA	gc_through_pre_receipt_elapsed_seconds	23.835	17.718	6.117000000000001	25.66393958464443
+2	BA	gc_setup_delta__user_cpu_seconds	2.145	2.116	0.028999999999999915	1.351981351981348
+2	BA	gc_setup_delta__system_cpu_seconds	0.00700000000000001	0.001	0.00600000000000001	85.71428571428574
+2	BA	gc_setup_delta__elapsed_seconds	2.155	2.119	0.03599999999999959	1.6705336426913964
+2	BA	gc_setup_delta__child_user_cpu_seconds	0.0	0.0	0.0	
+2	BA	gc_setup_delta__child_system_cpu_seconds	0.0	0.0	0.0	
+2	BA	gc_reference_delta__user_cpu_seconds	0.0	0.0	0.0	
+2	BA	gc_reference_delta__system_cpu_seconds	0.0	0.0	0.0	
+2	BA	gc_reference_delta__elapsed_seconds	0.0	0.0	0.0	
+2	BA	gc_reference_delta__child_user_cpu_seconds	0.0	0.0	0.0	
+2	BA	gc_reference_delta__child_system_cpu_seconds	0.0	0.0	0.0	
+2	BA	gc_preparation_delta__user_cpu_seconds	0.603	0.602	0.0010000000000000009	0.16583747927031525
+2	BA	gc_preparation_delta__system_cpu_seconds	0.0	0.0	0.0	
+2	BA	gc_preparation_delta__elapsed_seconds	0.601999999999999	0.602	-9.992007221626409e-16	-1.6598018640575458e-13
+2	BA	gc_preparation_delta__child_user_cpu_seconds	0.0	0.0	0.0	
+2	BA	gc_preparation_delta__child_system_cpu_seconds	0.0	0.0	0.0	
+2	BA	gc_operation_delta__user_cpu_seconds	20.429	14.383	6.045999999999999	29.59518331783249
+2	BA	gc_operation_delta__system_cpu_seconds	0.00999999999999979	0.00699999999999878	0.0030000000000010105	30.000000000010736
+2	BA	gc_operation_delta__elapsed_seconds	20.439	14.386	6.053000000000001	29.61495180781839
+2	BA	gc_operation_delta__child_user_cpu_seconds	0.0	0.0	0.0	
+2	BA	gc_operation_delta__child_system_cpu_seconds	0.0	0.0	0.0	
+2	BA	gc_closing_delta__user_cpu_seconds	0.637	0.611000000000004	0.025999999999996026	4.0816326530606
+2	BA	gc_closing_delta__system_cpu_seconds	0.000999999999999446	0.0	0.000999999999999446	100.0
+2	BA	gc_closing_delta__elapsed_seconds	0.638999999999982	0.611000000000018	0.027999999999964054	4.38184663536226
+2	BA	gc_closing_delta__child_user_cpu_seconds	0.0	0.0	0.0	
+2	BA	gc_closing_delta__child_system_cpu_seconds	0.0	0.0	0.0	
+2	BA	gc_operation_plus_closing_delta__user_cpu_seconds	21.066	14.994	6.071999999999999	28.823696952435203
+2	BA	gc_operation_plus_closing_delta__system_cpu_seconds	0.0109999999999992	0.00699999999999878	0.00400000000000042	36.363636363642826
+2	BA	gc_operation_plus_closing_delta__elapsed_seconds	21.078	14.997	6.0809999999999995	28.84998576715058
+2	BA	gc_operation_plus_closing_delta__child_user_cpu_seconds	0.0	0.0	0.0	
+2	BA	gc_operation_plus_closing_delta__child_system_cpu_seconds	0.0	0.0	0.0	
+2	BA	gc_through_receipt_delta__user_cpu_seconds	23.814	17.712	6.102	25.62358276643991
+2	BA	gc_through_receipt_delta__system_cpu_seconds	0.0179999999999992	0.00799999999999879	0.010000000000000411	55.555555555560304
+2	BA	gc_through_receipt_delta__elapsed_seconds	23.835	17.718	6.117000000000001	25.66393958464443
+2	BA	gc_through_receipt_delta__child_user_cpu_seconds	0.0	0.0	0.0	
+2	BA	gc_through_receipt_delta__child_system_cpu_seconds	0.0	0.0	0.0	
+3	AB	operation_elapsed_seconds	135.003	130.216	4.786999999999978	3.545847129323036
+3	AB	operation_plus_closing_gc_elapsed_seconds	135.639	130.827	4.812000000000012	3.547652223917908
+3	AB	closing_gc_elapsed_seconds	0.635999999999996	0.611000000000018	0.02499999999997804	3.930817610059465
+3	AB	whole_worker_wall_seconds	142.479365499	137.61644432	4.862921179000011	3.413070490571592
+3	AB	whole_worker_cpu_seconds	131.141898	125.347216	5.794681999999995	4.418635148928526
+3	AB	whole_worker_peak_rss_bytes	1072070656.0	1076379648.0	-4308992.0	-0.40193171745575695
+3	AB	operation_gc_cpu_seconds	20.401	14.3609999999999	6.0400000000001	29.606391843537573
+3	AB	operation_gc_elapsed_seconds	20.4040000000001	14.3639999999999	6.0400000000002	29.602038815919283
+3	AB	operation_plus_closing_gc_cpu_seconds	21.036	14.9699999999999	6.066000000000102	28.83628066172324
+3	AB	operation_plus_closing_gc_collection_elapsed_seconds	21.0380000000001	14.974	6.0640000000000995	28.824032702728733
+3	AB	gc_through_pre_receipt_cpu_seconds	23.757	17.6869999999999	6.0700000000001	25.550364103212104
+3	AB	gc_through_pre_receipt_elapsed_seconds	23.7610000000001	17.691	6.0700000000001	25.546062876141892
+3	AB	gc_setup_delta__user_cpu_seconds	2.119	2.116	0.0030000000000001137	0.14157621519585245
+3	AB	gc_setup_delta__system_cpu_seconds	0.003	0.002	0.001	33.333333333333336
+3	AB	gc_setup_delta__elapsed_seconds	2.123	2.118	0.0050000000000003375	0.2355157795572462
+3	AB	gc_setup_delta__child_user_cpu_seconds	0.0	0.0	0.0	
+3	AB	gc_setup_delta__child_system_cpu_seconds	0.0	0.0	0.0	
+3	AB	gc_reference_delta__user_cpu_seconds	0.0	0.0	0.0	
+3	AB	gc_reference_delta__system_cpu_seconds	0.0	0.0	0.0	
+3	AB	gc_reference_delta__elapsed_seconds	0.0	0.0	0.0	
+3	AB	gc_reference_delta__child_user_cpu_seconds	0.0	0.0	0.0	
+3	AB	gc_reference_delta__child_system_cpu_seconds	0.0	0.0	0.0	
+3	AB	gc_preparation_delta__user_cpu_seconds	0.599	0.599	0.0	0.0
+3	AB	gc_preparation_delta__system_cpu_seconds	0.0	0.0	0.0	
+3	AB	gc_preparation_delta__elapsed_seconds	0.6	0.599	0.0010000000000000009	0.16666666666666682
+3	AB	gc_preparation_delta__child_user_cpu_seconds	0.0	0.0	0.0	
+3	AB	gc_preparation_delta__child_system_cpu_seconds	0.0	0.0	0.0	
+3	AB	gc_operation_delta__user_cpu_seconds	20.395	14.3539999999999	6.0410000000001	29.620004903163032
+3	AB	gc_operation_delta__system_cpu_seconds	0.0059999999999989	0.00700000000000056	-0.0010000000000016593	-16.666666666697378
+3	AB	gc_operation_delta__elapsed_seconds	20.4040000000001	14.3639999999999	6.0400000000002	29.602038815919283
+3	AB	gc_operation_delta__child_user_cpu_seconds	0.0	0.0	0.0	
+3	AB	gc_operation_delta__child_system_cpu_seconds	0.0	0.0	0.0	
+3	AB	gc_closing_delta__user_cpu_seconds	0.635000000000005	0.608999999999995	0.026000000000010015	4.094488188977923
+3	AB	gc_closing_delta__system_cpu_seconds	0.0	0.0	0.0	
+3	AB	gc_closing_delta__elapsed_seconds	0.633999999999986	0.610000000000014	0.023999999999972044	3.7854889589862104
+3	AB	gc_closing_delta__child_user_cpu_seconds	0.0	0.0	0.0	
+3	AB	gc_closing_delta__child_system_cpu_seconds	0.0	0.0	0.0	
+3	AB	gc_operation_plus_closing_delta__user_cpu_seconds	21.03	14.9629999999999	6.067000000000101	28.849262957679986
+3	AB	gc_operation_plus_closing_delta__system_cpu_seconds	0.0059999999999989	0.00700000000000056	-0.0010000000000016593	-16.666666666697378
+3	AB	gc_operation_plus_closing_delta__elapsed_seconds	21.0380000000001	14.974	6.0640000000000995	28.824032702728733
+3	AB	gc_operation_plus_closing_delta__child_user_cpu_seconds	0.0	0.0	0.0	
+3	AB	gc_operation_plus_closing_delta__child_system_cpu_seconds	0.0	0.0	0.0	
+3	AB	gc_through_receipt_delta__user_cpu_seconds	23.748	17.6779999999999	6.0700000000001	25.56004716186668
+3	AB	gc_through_receipt_delta__system_cpu_seconds	0.0089999999999989	0.00900000000000056	-1.6601303665098044e-15	-1.8445892961222305e-11
+3	AB	gc_through_receipt_delta__elapsed_seconds	23.7610000000001	17.691	6.0700000000001	25.546062876141892
+3	AB	gc_through_receipt_delta__child_user_cpu_seconds	0.0	0.0	0.0	
+3	AB	gc_through_receipt_delta__child_system_cpu_seconds	0.0	0.0	0.0	

@@ -1,0 +1,15 @@
+{
+  "pid": 103534,
+  "command": [
+    "/opt/R/4.5.3/bin/Rscript",
+    "--vanilla",
+    "/workspace/mss-combined-installed-source-20261122/worker.R",
+    "/workspace/mss-combined-installed-source-20261122/worker-functions.R",
+    "/workspace/mss-combined-installed-results-20261122/runs/10M/pair-02-A/settings.tsv"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 140.633073237,
+  "user_seconds": 115.247704,
+  "system_seconds": 13.540166,
+  "peak_rss_bytes": 1075970048
+}

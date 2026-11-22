@@ -1,0 +1,639 @@
+{
+  "local_files": {
+    "/private/tmp/mss-combined-installed-source-20261122/README.md": {
+      "bytes": 5357,
+      "sha256": "f17a6ab36085114eccb99d90513686828392f677c93c7766151d98e14e953134"
+    },
+    "/private/tmp/mss-combined-installed-source-20261122/SOURCE.sha256": {
+      "bytes": 1302,
+      "sha256": "77c918632a63d1b19fff708ca8dcf025d1becb0c0fe914430b81bd98158177de"
+    },
+    "/private/tmp/mss-combined-installed-source-20261122/candidate.tar": {
+      "bytes": 12892160,
+      "sha256": "da9ca1e47dbae6bdd4984d1f597a3e8a8b09a4f04887f28613f917d4e4a81363"
+    },
+    "/private/tmp/mss-combined-installed-source-20261122/combined.py": {
+      "bytes": 18192,
+      "sha256": "6c4174f5d30a5b61b63c3a65f3b3df0c40c2cfde8b68941ef0e93678506e6105"
+    },
+    "/private/tmp/mss-combined-installed-source-20261122/frozen-run.py": {
+      "bytes": 29126,
+      "sha256": "d49b74f82f12d088fcdff72448b39fcaa32cd5aafb4738b7ea3e7b0f7caa304f"
+    },
+    "/private/tmp/mss-combined-installed-source-20261122/manifests.R": {
+      "bytes": 912,
+      "sha256": "fb3e1cc23932abf82e32b73d2de859cd5e820955c9528d3f0bda01f22ef4862b"
+    },
+    "/private/tmp/mss-combined-installed-source-20261122/meter.py": {
+      "bytes": 786,
+      "sha256": "94276f2514a02666dcfd0e4e7aec08be55bc21b8183e4b1e69fa5370185258c8"
+    },
+    "/private/tmp/mss-combined-installed-source-20261122/recipe.json": {
+      "bytes": 1623,
+      "sha256": "b19564b5c010a8d8b0437515e32dba71cd47258edcc0a2786be9c0564d16caa5"
+    },
+    "/private/tmp/mss-combined-installed-source-20261122/retained-pins.json": {
+      "bytes": 12215,
+      "sha256": "cfbd8f87563389e1ea3ae207c67f0d06c4a7bcf16285f81d875ff301195119ee"
+    },
+    "/private/tmp/mss-combined-installed-source-20261122/reused/helpers.py": {
+      "bytes": 6835,
+      "sha256": "05fa1154b5f05f88644caf3187593e5fb79785d5b9a35cc240955d8216e6049f"
+    },
+    "/private/tmp/mss-combined-installed-source-20261122/reused/linux-suite-stage.json": {
+      "bytes": 20469,
+      "sha256": "6e53fd75cd337eb939d0cdc0e4c9844a99eb345be0439dd093922c4742195fa0"
+    },
+    "/private/tmp/mss-combined-installed-source-20261122/reused/qualify.R": {
+      "bytes": 2856,
+      "sha256": "087e55847f6a5333781f7526625ea5e59776cfd81f18f83a3c7492d55cd712b9"
+    },
+    "/private/tmp/mss-combined-installed-source-20261122/reused/snp_oracle.py": {
+      "bytes": 11349,
+      "sha256": "d4bbe46a9037597203e779b9e0f830a293b15a476421973fc6a0b69b2dc45c95"
+    },
+    "/private/tmp/mss-combined-installed-source-20261122/reused/verify.py": {
+      "bytes": 12112,
+      "sha256": "cb0f9774aa9523514ce9fc75868e438272606de3eb3564699addca103de1930b"
+    },
+    "/private/tmp/mss-combined-installed-source-20261122/run-linux.sh": {
+      "bytes": 311,
+      "sha256": "c02f3c40fbee8e0cde8afcb47c8663dc6f0a3da72fba84ca197ecbe44c67dfc6"
+    },
+    "/private/tmp/mss-combined-installed-source-20261122/worker-functions.R": {
+      "bytes": 2809,
+      "sha256": "fd599f17e5dd6551233253506a6f5e1d5a8f09870f62b46c42245e3cc1528b73"
+    },
+    "/private/tmp/mss-combined-installed-source-20261122/worker.R": {
+      "bytes": 6778,
+      "sha256": "d6e597890311f6c86616a2aa9cb74cdf604660d6c4fb0a090e6a6c1000a9d8f1"
+    },
+    "/private/tmp/mss-combined-integration-20261122/candidate.json": {
+      "bytes": 864,
+      "sha256": "2a1c767a24ee54b5466149ffc5b0d1e69e35bb5b3b0312c2b245491f60fba4d9"
+    },
+    "/private/tmp/mss-combined-operator-20261122/ADAPTATION.diff": {
+      "bytes": 91652,
+      "sha256": "2abba4a285afc6511e88f3bd19bdc1ffe9ed086b32a55763c74154288b70e38b"
+    },
+    "/private/tmp/mss-combined-operator-20261122/CONTROL-RESULTS.json": {
+      "bytes": 1427,
+      "sha256": "b5c5f6c4087975f6fe014a026e621fe72b869a75e7941fc22960eae10ca626ea"
+    },
+    "/private/tmp/mss-combined-operator-20261122/FINAL-VERIFICATION.json": {
+      "bytes": 992,
+      "sha256": "0ddd1380049ff7e4c21dac5308a86024c5ee95e0c96390e2634e6cb0eff235d5"
+    },
+    "/private/tmp/mss-combined-operator-20261122/PAYLOAD-PINS.json": {
+      "bytes": 2174,
+      "sha256": "dcbf188c1618426790489eee4907039f1abf1ba28111e40a166983f5d173476c"
+    },
+    "/private/tmp/mss-combined-operator-20261122/PROVENANCE.json": {
+      "bytes": 2956,
+      "sha256": "345d970628e5df95302d4d2cefc765720ce815bafaa0324ee080010b343b56ea"
+    },
+    "/private/tmp/mss-combined-operator-20261122/REPORT.md": {
+      "bytes": 11755,
+      "sha256": "0d827c7123a531f4b3b449c335fd69712a5da96b6117f8dfdf69539e252cf3e7"
+    },
+    "/private/tmp/mss-combined-operator-20261122/SOURCE-PINS.json": {
+      "bytes": 3129,
+      "sha256": "305da7b16c2b195555f63a4cfce707f2bae58fd9c96e7d47a0f61827cd9b5da0"
+    },
+    "/private/tmp/mss-combined-operator-20261122/VERIFICATION.json": {
+      "bytes": 970,
+      "sha256": "a7bcd4aca583f6ac35c17fabf02e5d7f1b61c7a86119d4220902b7d6cd14f7b9"
+    },
+    "/private/tmp/mss-combined-operator-20261122/apple-controls.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/private/tmp/mss-combined-operator-20261122/apple-controls.stdout": {
+      "bytes": 1427,
+      "sha256": "668cebe8cebf55d6e8bcc30d4539df81f9296225ddd82e2da4e5d8740bad6ac4"
+    },
+    "/private/tmp/mss-combined-operator-20261122/apple-final-controls.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/private/tmp/mss-combined-operator-20261122/apple-final-controls.stdout": {
+      "bytes": 1427,
+      "sha256": "8576cacefcd241a864bc8a1fd2deee002abfe86d60d8665d4e0138ddc5d4842a"
+    },
+    "/private/tmp/mss-combined-operator-20261122/brew-controls.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/private/tmp/mss-combined-operator-20261122/brew-controls.stdout": {
+      "bytes": 1427,
+      "sha256": "8ae6037573783645b653543434651901bef33f8ee3c734801dd69800b4a0f0bb"
+    },
+    "/private/tmp/mss-combined-operator-20261122/brew-final-controls.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/private/tmp/mss-combined-operator-20261122/brew-final-controls.stdout": {
+      "bytes": 1427,
+      "sha256": "b5c5f6c4087975f6fe014a026e621fe72b869a75e7941fc22960eae10ca626ea"
+    },
+    "/private/tmp/mss-combined-operator-20261122/check_controls.py": {
+      "bytes": 9397,
+      "sha256": "86f715c110e6ea5998393ff97546650765718cc81e33ef8b9f04ee94437949f7"
+    },
+    "/private/tmp/mss-combined-operator-20261122/cleanup-result.json": {
+      "bytes": 1162,
+      "sha256": "d341230e97e6b7c1abf4324e7de532be37f5d2b32d7bd681e20a87670261c5fd"
+    },
+    "/private/tmp/mss-combined-operator-20261122/controller-copy-proof.json": {
+      "bytes": 13603,
+      "sha256": "d4f14c698ad0655b2f1f016b5ae3d9e7fb165f2d0dd8cd9b7401f03a3bdd22c2"
+    },
+    "/private/tmp/mss-combined-operator-20261122/copy-terminal.json": {
+      "bytes": 6625,
+      "sha256": "b363f910a6bcfa296a6208923e349a81bb2336c0a620e5d363e734b23d794e7d"
+    },
+    "/private/tmp/mss-combined-operator-20261122/copy_metadata.py": {
+      "bytes": 4720,
+      "sha256": "183786a5174e65c70d60e31ee54b91397e48c664194f96a809296aef00592d21"
+    },
+    "/private/tmp/mss-combined-operator-20261122/fresh.py": {
+      "bytes": 22003,
+      "sha256": "1c445343966a9568acc38eec85515e4a6c97df441573aabc822bb8ff09a24353"
+    },
+    "/private/tmp/mss-combined-operator-20261122/guard_combined.py": {
+      "bytes": 23449,
+      "sha256": "9e0b331f2f95bf800b4b9ecf59273dc4c29e8371ed428a0b4c63864816fdc0a4"
+    },
+    "/private/tmp/mss-combined-operator-20261122/readback.py": {
+      "bytes": 1508,
+      "sha256": "0d51bb28cf721ec5e424cc5d415394c62115f9e87357c8aa28026e02e6251ced"
+    },
+    "/private/tmp/mss-combined-operator-20261122/return_metadata.py": {
+      "bytes": 3262,
+      "sha256": "1096754d04855bb4e403ac05ea7b94f3b924e187d77e51bde5dfb297973a96c5"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/control/combined-inputs.json": {
+      "bytes": 36378,
+      "sha256": "6f3dd7fde4824880b6adfe3dbc5696070897f4194523817423c7e403ab968fc6"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/control/combined-proof.json": {
+      "bytes": 2233,
+      "sha256": "69b58946bacd0e4160bfde0964368b486c99216209fa19f9306b5ad905d01a07"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/control/combined.guard.jsonl": {
+      "bytes": 44633,
+      "sha256": "8cbf148c72609d437a24c287c45a08cf2e1a5cb21d7b37b42feb335cd4dc6a23"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/control/combined.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/control/combined.stdout": {
+      "bytes": 2677,
+      "sha256": "c5a833983ceaa501ac8e2f84284e354db526827a4efac3dd16643c8535916501"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/build/binding.json": {
+      "bytes": 2315,
+      "sha256": "54d089f211611a041d4aa40b91aa57dd8185348437d5cbdb7c1deca74af7b586"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/build/installed-files.json": {
+      "bytes": 171054,
+      "sha256": "fc4edf47389fc21d443232dd3c5a189f5c44c796f7361c8340c6c0e05ba71696"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/build/source-files.json": {
+      "bytes": 194707,
+      "sha256": "3c0cb9fb039b5a512dd109ff604b6dd6f010e22d8f6e08449881813be44f4f8c"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/comparison-receipt.json": {
+      "bytes": 127885,
+      "sha256": "86f1f63121ac552ccbfaae62b5b01317592c5178332e047f33b3fced898d094f"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/functional/receipt/conditions.tsv": {
+      "bytes": 346,
+      "sha256": "a60b401da7ba163aaea637a590821a7a0fe8cfa872fafb1a5dfdb9c991b2e70b"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/functional/receipt/qualification.tsv": {
+      "bytes": 114,
+      "sha256": "f8ddac4062576dee32ac00813a72f02f98ae9335f32c9f057e3dd74e4fa29d1f"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/functional/receipt/tests.tsv": {
+      "bytes": 28921,
+      "sha256": "f1f878ae3c82dd9a43a538269bb76204ede85f6c70b04e76f4cdecdc8a24c333"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/functional/suite-stage.json": {
+      "bytes": 23977,
+      "sha256": "d4fddf8e9ff61eb35ac77350661f0772ec38aa8f2dbe533f629265ec79debf47"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/functional/verified.json": {
+      "bytes": 40444,
+      "sha256": "547c68fd2e11c1c646efcc37da0763253feefef2d2961e92b4e2d30c33f5f29c"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/10M/pair-01-A/metrics.tsv": {
+      "bytes": 4171,
+      "sha256": "6e88b885879414f8341b49611072965a24806645a1a2b4f1047886fe5556e19d"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/10M/pair-01-A/namespaces.tsv": {
+      "bytes": 3407,
+      "sha256": "bd663dc3fca368f88b2652ba76988baad1782a4588f22e8ffadfec53115c19f8"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/10M/pair-01-A/process.json": {
+      "bytes": 472,
+      "sha256": "865bae944ebc65e38f31c2c5805cf03456f752dadc54d585a6b2cfc056472bf1"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/10M/pair-01-A/settings.tsv": {
+      "bytes": 958,
+      "sha256": "a3e3a40658c78c87219815f1e7dd51b45c5bcfb36f9cf084f606c67890310601"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/10M/pair-01-B/metrics.tsv": {
+      "bytes": 4167,
+      "sha256": "f9571514fa58e4f26d1dfd91e8e6eaa51a21d9c7e9c388e227121eedc00dff32"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/10M/pair-01-B/namespaces.tsv": {
+      "bytes": 3395,
+      "sha256": "5b1ce21a09ed1794c7fa583dcc5ea62bd68547151a19539593a04977cfb8da8e"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/10M/pair-01-B/process.json": {
+      "bytes": 463,
+      "sha256": "7fc85986eb775e4921264efa1b97eea9e67ade2017487726ddc1a4a72c4ff6fd"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/10M/pair-01-B/settings.tsv": {
+      "bytes": 922,
+      "sha256": "750567a757b04a6954816f76389473cbe0b99fee11ac4323995e1c3934badda8"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/10M/pair-02-A/metrics.tsv": {
+      "bytes": 4214,
+      "sha256": "424801ca18ebdd36d17551d8cffc4e4a6aaf19509977ed9317cfd4317fc19882"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/10M/pair-02-A/namespaces.tsv": {
+      "bytes": 3407,
+      "sha256": "bd663dc3fca368f88b2652ba76988baad1782a4588f22e8ffadfec53115c19f8"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/10M/pair-02-A/process.json": {
+      "bytes": 464,
+      "sha256": "67966cf386a303324de6314533de030137039e37f2212fc692548972d73a2b25"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/10M/pair-02-A/settings.tsv": {
+      "bytes": 958,
+      "sha256": "8b255e0f8fd06a0be42dd6de852dac0dd574f62f6858328e19965c88ccebfb86"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/10M/pair-02-B/metrics.tsv": {
+      "bytes": 4229,
+      "sha256": "b0e62176f834185661bb379f5b7c8e268c18182237f04d0a26bef6cf91b5de84"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/10M/pair-02-B/namespaces.tsv": {
+      "bytes": 3395,
+      "sha256": "5b1ce21a09ed1794c7fa583dcc5ea62bd68547151a19539593a04977cfb8da8e"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/10M/pair-02-B/process.json": {
+      "bytes": 461,
+      "sha256": "ee2b16a7e4797d9e7e5963682bf2e9af068eef9ecc82f9d626fb30dd7bc796c5"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/10M/pair-02-B/settings.tsv": {
+      "bytes": 922,
+      "sha256": "79a1e8b66a5fa4a2dd6b774063d3397c9821399b6809ed979da7dc7b08a80a4a"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/10M/pair-03-A/metrics.tsv": {
+      "bytes": 4217,
+      "sha256": "d4411cf022ee4346bd180344c77b1a4b953df4bbb0e214bdb4e58877e99b41a5"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/10M/pair-03-A/namespaces.tsv": {
+      "bytes": 3407,
+      "sha256": "bd663dc3fca368f88b2652ba76988baad1782a4588f22e8ffadfec53115c19f8"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/10M/pair-03-A/process.json": {
+      "bytes": 462,
+      "sha256": "9d0a41fc2c74a2030b9cad221fa4488562faa82239ffeca30d58f63e7e231075"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/10M/pair-03-A/settings.tsv": {
+      "bytes": 958,
+      "sha256": "7124db1b0cf16147d90f60ed258bacd7301f9655f276e16f48b3b01cce9dc8c3"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/10M/pair-03-B/metrics.tsv": {
+      "bytes": 4215,
+      "sha256": "7a5ebe9025599d85812af1804c0f470fab33be3ca8982a5b6c9f65ea15422082"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/10M/pair-03-B/namespaces.tsv": {
+      "bytes": 3395,
+      "sha256": "5b1ce21a09ed1794c7fa583dcc5ea62bd68547151a19539593a04977cfb8da8e"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/10M/pair-03-B/process.json": {
+      "bytes": 463,
+      "sha256": "8d7dbf34e2d308b3f21173fd79994978cfe23ff39bc7a01c873304f3eefca5a0"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/10M/pair-03-B/settings.tsv": {
+      "bytes": 922,
+      "sha256": "2449f80e222c15ed27b42dc188c192bac31c8365b34b61af810bccaf889d4b43"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/1M/pair-01-A/metrics.tsv": {
+      "bytes": 4109,
+      "sha256": "1496d7dc9b1ec51383c75bf525ebffc6ac615aa49d289f5318649c4091c8405c"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/1M/pair-01-A/namespaces.tsv": {
+      "bytes": 3407,
+      "sha256": "bd663dc3fca368f88b2652ba76988baad1782a4588f22e8ffadfec53115c19f8"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/1M/pair-01-A/process.json": {
+      "bytes": 457,
+      "sha256": "66807fd3062e3931654e9975e1d0dfd7b9f8ef309b80a6988cfed126e881767c"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/1M/pair-01-A/settings.tsv": {
+      "bytes": 955,
+      "sha256": "9247ea942d52b99e3711981bd7f68c2c23f523c1886b984cbe427e255f9b6f34"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/1M/pair-01-B/metrics.tsv": {
+      "bytes": 4219,
+      "sha256": "52cf2be46902242e590e9ab375f2c96248e297ef2fd80954ec03291f85df08df"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/1M/pair-01-B/namespaces.tsv": {
+      "bytes": 3395,
+      "sha256": "5b1ce21a09ed1794c7fa583dcc5ea62bd68547151a19539593a04977cfb8da8e"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/1M/pair-01-B/process.json": {
+      "bytes": 460,
+      "sha256": "bc451b1a8a37b9df3f53651bbbeb0f0b084621fc9efe6728f657b072db5b053d"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/1M/pair-01-B/settings.tsv": {
+      "bytes": 919,
+      "sha256": "8643299a3c4775927498612d009a9885f31a45793cf1b9e5186d4438e1405ff0"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/1M/pair-02-A/metrics.tsv": {
+      "bytes": 4145,
+      "sha256": "91e5d06fe63dcbe1c893ebd43d534a6d798c625f16c93d7b9110952e0432e452"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/1M/pair-02-A/namespaces.tsv": {
+      "bytes": 3407,
+      "sha256": "bd663dc3fca368f88b2652ba76988baad1782a4588f22e8ffadfec53115c19f8"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/1M/pair-02-A/process.json": {
+      "bytes": 459,
+      "sha256": "626dd379506662dc5b314e1d6ec8aab66409087292aaadf983538cb93391beef"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/1M/pair-02-A/settings.tsv": {
+      "bytes": 955,
+      "sha256": "c3fbcfb069cf8e9acb799f714ce1f7a4cccdf892c8e1ba2fcde652321ede409b"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/1M/pair-02-B/metrics.tsv": {
+      "bytes": 4117,
+      "sha256": "1f382cdb4ec4693968d2429797960dc376f2be5e8f3236607fe1aa04a14699b3"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/1M/pair-02-B/namespaces.tsv": {
+      "bytes": 3395,
+      "sha256": "5b1ce21a09ed1794c7fa583dcc5ea62bd68547151a19539593a04977cfb8da8e"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/1M/pair-02-B/process.json": {
+      "bytes": 470,
+      "sha256": "6a751b86fe40a6c358781f8749417aea89bc1f7373971bcb13fa3e3c8dcb7548"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/1M/pair-02-B/settings.tsv": {
+      "bytes": 919,
+      "sha256": "3f8a9710970951363cdeb3e99dcb3c6778972f2bfa4cf04eb19176b2ac6bbe40"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/1M/pair-03-A/metrics.tsv": {
+      "bytes": 4120,
+      "sha256": "266eddad7d74eb01160331a6de5e04adc574d2454df57e3211641944e4615414"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/1M/pair-03-A/namespaces.tsv": {
+      "bytes": 3407,
+      "sha256": "bd663dc3fca368f88b2652ba76988baad1782a4588f22e8ffadfec53115c19f8"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/1M/pair-03-A/process.json": {
+      "bytes": 458,
+      "sha256": "2c6249c498cb22d03e19d6b10c3e2fdadfe8fa4fa10debf93b7841792d42db9b"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/1M/pair-03-A/settings.tsv": {
+      "bytes": 955,
+      "sha256": "96e77d52f76b0e2480ab036d100538a5ef45070831057c450851675cc4c5c3d3"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/1M/pair-03-B/metrics.tsv": {
+      "bytes": 4030,
+      "sha256": "7bdb9018646ca709ec2509ca3ee0e62a1fdb8f9050323360e56e1c83938be7af"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/1M/pair-03-B/namespaces.tsv": {
+      "bytes": 3395,
+      "sha256": "5b1ce21a09ed1794c7fa583dcc5ea62bd68547151a19539593a04977cfb8da8e"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/1M/pair-03-B/process.json": {
+      "bytes": 470,
+      "sha256": "4d436e20c740cea66dfdaf47a8d1cb8150a5a8095324ac777bb799c0b4fb3ce5"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/runs/1M/pair-03-B/settings.tsv": {
+      "bytes": 919,
+      "sha256": "124e764b8f52139f151eeac3b5926526eec90f36a67838ea406197921d1d4455"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/verification/10M/artifact-digests.json": {
+      "bytes": 12191,
+      "sha256": "2a1a22338e88002f0a5a1de0b9751cc0f6ff931a8c76b6e0ae675ea6b856b804"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/verification/10M/scale-receipt.json": {
+      "bytes": 37767,
+      "sha256": "81b835f161661191a89893ac3f604cd82e3358284992d56c0426f8a4f0287d05"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/verification/10M/stable-editions.json": {
+      "bytes": 907,
+      "sha256": "c17952ab517c3abd94f4e15940d711d0b04ea67785c65717574a67dfb7cd6278"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/verification/10M/stable-manifests.txt": {
+      "bytes": 5,
+      "sha256": "9f56e761d79bfdb34304a012586cb04d16b435ef6130091a97702e559260a2f2"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/verification/10M/whole-SNP-oracle.json": {
+      "bytes": 1372,
+      "sha256": "188200363b74e67a7b5edbf26708ad6e8eb96084c2f38b223ca6ad5436177785"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/verification/1M/artifact-digests.json": {
+      "bytes": 12171,
+      "sha256": "f3d17a124279661ee76c204c1647d0e57ffc06471ba756838a19ed86b33aac73"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/verification/1M/scale-receipt.json": {
+      "bytes": 37283,
+      "sha256": "7f1b8592c23552b69c29bf8046671c8d7fe72586bbbb5ffbb1688bfa3da3cb4d"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/verification/1M/stable-editions.json": {
+      "bytes": 902,
+      "sha256": "a266808ff4ede0ef0dde6246faf182da45c6067256d90ba20ceb6d089d5c2e27"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/verification/1M/stable-manifests.txt": {
+      "bytes": 5,
+      "sha256": "9f56e761d79bfdb34304a012586cb04d16b435ef6130091a97702e559260a2f2"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/output/verification/1M/whole-SNP-oracle.json": {
+      "bytes": 1361,
+      "sha256": "cefb1f6d1308ccdbc71f18d0dea872eba2d8b4a6298be32653668e5792415b50"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/tails/build/install.log": {
+      "bytes": 1288,
+      "sha256": "43b1b658604b4371424766dc6af4c7ab1a324665304412cd060eec7aed5fbed0"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/tails/functional/qualification.log": {
+      "bytes": 16384,
+      "sha256": "168bf9b1c8aeb1e8eed494b8a5f79a78f05376361d9ee4dc05ba35ac3f8c9c24"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/tails/runs/10M/pair-01-A/worker.log": {
+      "bytes": 14,
+      "sha256": "2bdf880ad20d275eaa107d56522b570433a5d1aa2fefa98dc6c1eb75bc23784d"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/tails/runs/10M/pair-01-B/worker.log": {
+      "bytes": 14,
+      "sha256": "2bdf880ad20d275eaa107d56522b570433a5d1aa2fefa98dc6c1eb75bc23784d"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/tails/runs/10M/pair-02-A/worker.log": {
+      "bytes": 14,
+      "sha256": "2bdf880ad20d275eaa107d56522b570433a5d1aa2fefa98dc6c1eb75bc23784d"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/tails/runs/10M/pair-02-B/worker.log": {
+      "bytes": 14,
+      "sha256": "2bdf880ad20d275eaa107d56522b570433a5d1aa2fefa98dc6c1eb75bc23784d"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/tails/runs/10M/pair-03-A/worker.log": {
+      "bytes": 14,
+      "sha256": "2bdf880ad20d275eaa107d56522b570433a5d1aa2fefa98dc6c1eb75bc23784d"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/tails/runs/10M/pair-03-B/worker.log": {
+      "bytes": 14,
+      "sha256": "2bdf880ad20d275eaa107d56522b570433a5d1aa2fefa98dc6c1eb75bc23784d"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/tails/runs/1M/pair-01-A/worker.log": {
+      "bytes": 14,
+      "sha256": "2bdf880ad20d275eaa107d56522b570433a5d1aa2fefa98dc6c1eb75bc23784d"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/tails/runs/1M/pair-01-B/worker.log": {
+      "bytes": 14,
+      "sha256": "2bdf880ad20d275eaa107d56522b570433a5d1aa2fefa98dc6c1eb75bc23784d"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/tails/runs/1M/pair-02-A/worker.log": {
+      "bytes": 14,
+      "sha256": "2bdf880ad20d275eaa107d56522b570433a5d1aa2fefa98dc6c1eb75bc23784d"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/tails/runs/1M/pair-02-B/worker.log": {
+      "bytes": 14,
+      "sha256": "2bdf880ad20d275eaa107d56522b570433a5d1aa2fefa98dc6c1eb75bc23784d"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/tails/runs/1M/pair-03-A/worker.log": {
+      "bytes": 14,
+      "sha256": "2bdf880ad20d275eaa107d56522b570433a5d1aa2fefa98dc6c1eb75bc23784d"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/tails/runs/1M/pair-03-B/worker.log": {
+      "bytes": 14,
+      "sha256": "2bdf880ad20d275eaa107d56522b570433a5d1aa2fefa98dc6c1eb75bc23784d"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/tails/verification/10M/manifest-verification.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/private/tmp/mss-combined-operator-20261122/returned/tails/verification/1M/manifest-verification.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/private/tmp/mss-combined-operator-20261122/run.py": {
+      "bytes": 8364,
+      "sha256": "c0e53750fbe00b0cd4c3aec3371522fcaa4cc2872231ddc43bb4b89d000471d5"
+    },
+    "/private/tmp/mss-combined-operator-20261122/stage.py": {
+      "bytes": 1552,
+      "sha256": "4ededaab27ecdd2d9461f9d4c96391b58c630af38c544a2ba73cfbe06ed811fe"
+    },
+    "/private/tmp/mss-combined-operator-20261122/terminal.json": {
+      "bytes": 30644,
+      "sha256": "059a4a0b06aee5f72b0c0590507a0b6f8c6fde3d2e9111652fad455d26a05897"
+    },
+    "/private/tmp/mss-combined-results-20261122/RESULTS.md": {
+      "bytes": 6400,
+      "sha256": "a1e22c85f2173a35e91eb83b7e8089f6e97c1c5c822df1aaf883bfd9f37f1a02"
+    },
+    "/private/tmp/mss-combined-results-20261122/REVIEW.json": {
+      "bytes": 1431,
+      "sha256": "b369f5e958e7e8cf28f241803b6b197f5e0a83de0d8ab49f30afb1d85ece4704"
+    },
+    "/private/tmp/mss-combined-results-20261122/analysis.json": {
+      "bytes": 81447,
+      "sha256": "1d0b4b3b6d571a795bbc1eac5f874e3e2b96b0367cf40a629001c13c73d57ff3"
+    },
+    "/private/tmp/mss-combined-results-20261122/analyze.py": {
+      "bytes": 8275,
+      "sha256": "880be89787919be20e36233f14b471b1e740087793471a91b1a3b2ef1e43cc2b"
+    },
+    "/private/tmp/mss-combined-results-20261122/review-analysis.py": {
+      "bytes": 6880,
+      "sha256": "bb7cdd3b72ece8638f7c8bfdf46a54f6e9b90c5b20920fd71be1bbb3f3e438f7"
+    },
+    "/private/tmp/mss-combined-retention-20261122/completed.json": {
+      "bytes": 403,
+      "sha256": "81cbcf27bc9201e014f6ddead5b744cdcb0804b4b43aa15b1637a479c9f58385"
+    },
+    "/private/tmp/mss-file-batch-lifetime-10M-operator-20261122/returned/output/runs/pair-01-B/namespaces.tsv": {
+      "bytes": 3407,
+      "sha256": "bd663dc3fca368f88b2652ba76988baad1782a4588f22e8ffadfec53115c19f8"
+    },
+    "/private/tmp/mss-file-batch-lifetime-10M-results-20261122/RESULTS.md": {
+      "bytes": 5484,
+      "sha256": "b20e6ce978abf12a83a386f05d90c57688b9b52247fcb5b4fff548d857f90a04"
+    },
+    "/private/tmp/mss-file-batch-lifetime-operator-20261122/returned/output/functional/verified.json": {
+      "bytes": 40444,
+      "sha256": "547c68fd2e11c1c646efcc37da0763253feefef2d2961e92b4e2d30c33f5f29c"
+    },
+    "/private/tmp/mss-file-batch-lifetime-operator-20261122/returned/output/runs/pair-01-B/namespaces.tsv": {
+      "bytes": 3407,
+      "sha256": "bd663dc3fca368f88b2652ba76988baad1782a4588f22e8ffadfec53115c19f8"
+    },
+    "/private/tmp/mss-key-page-8k-operator-20261122/ACTUAL-REPORT.md": {
+      "bytes": 3874,
+      "sha256": "0f099f471be39a27034152ab3c350bd35d3d0e0fee6eaa49f4a143b0ad7cf3bd"
+    }
+  },
+  "remote53_protected_sha256": {
+    "/workspace/mss-task4/inputs/mss/matched-1M.tsv": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2",
+    "/workspace/mss-task4/inputs/reference/GRCh37.ensembl104.chr22.fa": "f2e991e0816c2d7a19f9252ba314ea2717ed1ca73563dcd6417d514fb6c85e53",
+    "/workspace/mss-task4/inputs/reference/matched-index/core-version": "c0ef21703c72cf14f2a71ef4674cd3aeaf4d6ed04174f40bbfa27f13cb3bc107",
+    "/workspace/mss-task4/inputs/reference/matched-index/fasta.fai": "dc27e2b48d065ddb7f37c9334ce0965f662875c7ebdff244f4ad1adcece60957",
+    "/workspace/mss-task4/inputs/reference/matched-index/keys": "f0199f6d194d9d8f42785a96450988995187d60052cb36fe25ea5af0ba116c1b",
+    "/workspace/mss-task4/inputs/reference/matched-index/manifest.rds": "d15ad358b438fef485ddf0980043556a43f3e4d6b72faca35f3429ce4919ab93",
+    "/workspace/mss-task4/inputs/reference/matched-index/offsets": "f5b3c7a37c535bdb33e48ea4a7afc873ee89ede71368adb00104ed164557c3fc",
+    "/workspace/mss-task4/inputs/reference/matched-index/records": "eb5d1fc30a6bbba8c5ff40d52ce3582122658c7d80f5e04ae8c668023fcb1f61",
+    "/workspace/mss-task4/inputs/reference/matched-index/rejected.tsv": "a0fd889e80558d09eefe3f9e5fb6adfe28c86f51820069cfedad00d981432baa",
+    "/workspace/mss-task4/inputs/reference/matched-index/source.tsv": "d6fae3acdc98e4d06f2e5eb01492360aeb874fe5b9f8763914cc39d9c40db9d1",
+    "/workspace/mss-task4/results/assets/diagnostic.json": "1f0b3a2d9710574997e225d1b1923e1606f149ed0a4eeeb5f2cb2703ade71c11",
+    "/workspace/mss-task4/results/assets/snp-oracle.json": "d7c7925c0d59fb6335ddd4b2f76322d18376deb3b52f68c9b05b58a8ccdffdb1",
+    "/workspace/mss-task4/results/build/candidate/build.json": "0b6e7ce842659f9888855d4ea968750b1c9cb799e439e67d5a01c23910fc782b",
+    "/workspace/mss-task4/inputs/mss/matched-10M.tsv": "cecd6f1053fb9c02066be3aa78f0f4976cb8ab32e882357e016ec1ea259788e0",
+    "/workspace/mss-task4/RETAINED.json": "930b6299ac1bd515f3ac0c891eb69a2ba24cff3877d120f695dfc27279cf9700",
+    "/workspace/mss-file-batch-lifetime-experiment-results-20261121/runs/pair-01-B/settings.tsv": "fc50a0ba6da4214179fa6c1e13e2b73163068ee4e91a5478608d8d533ce410c8",
+    "/workspace/mss-file-batch-lifetime-experiment-results-20261121/runs/pair-01-B/namespaces.tsv": "bd663dc3fca368f88b2652ba76988baad1782a4588f22e8ffadfec53115c19f8",
+    "/workspace/mss-file-batch-lifetime-experiment-results-20261121/runs/pair-01-B/process.json": "89d496c80fa7b2f601002fa4f5b45aaec0c89e61c9ca0d2a6f4cb7f751d8e595",
+    "/workspace/mss-file-batch-lifetime-10M-results-20261122/runs/pair-01-B/settings.tsv": "189d3518393c0a66f87b93db820f51aa95df7dffa752e070aadf260098a9a586",
+    "/workspace/mss-file-batch-lifetime-10M-results-20261122/runs/pair-01-B/namespaces.tsv": "bd663dc3fca368f88b2652ba76988baad1782a4588f22e8ffadfec53115c19f8",
+    "/workspace/mss-file-batch-lifetime-10M-results-20261122/runs/pair-01-B/process.json": "9d3e283de2984b7bb45e5304fd0f1635367483d49630034f86a76f89d788c6be",
+    "/workspace/mss-file-batch-lifetime-experiment-results-20261121/build/binding.json": "a6fc013c72f2f83897a9d414aea896bb64e3dbf97497cdc081e62c8418d93ffd",
+    "/workspace/mss-file-batch-lifetime-experiment-results-20261121/functional/verified.json": "547c68fd2e11c1c646efcc37da0763253feefef2d2961e92b4e2d30c33f5f29c",
+    "/workspace/mss-file-batch-lifetime-completion-results-20261122/completion-receipt.json": "6465969d3abbf11643d731c3a1668c121852bd4b66ab4680e7393ba104772c51",
+    "/workspace/mss-file-batch-lifetime-completion-results-20261122/artifact-digests.json": "f82c7279bb29ac1fbc7a6fbccf10e5feb2ffc9f9c12d04a80bda4b9f6b07ff8c",
+    "/workspace/mss-file-batch-lifetime-completion-results-20261122/whole-SNP-oracle.json": "cefb1f6d1308ccdbc71f18d0dea872eba2d8b4a6298be32653668e5792415b50",
+    "/workspace/mss-file-batch-lifetime-completion-results-20261122/stable-manifests.txt": "9f56e761d79bfdb34304a012586cb04d16b435ef6130091a97702e559260a2f2",
+    "/workspace/mss-file-batch-lifetime-10M-results-20261122/trial-receipt.json": "5664888d333d10a97a90b90753cd349c2686a21ac1402028c3ec18572f441cb0",
+    "/workspace/mss-file-batch-lifetime-10M-results-20261122/artifact-digests.json": "007668f9584743fdc83476bd3a4c8bd7ce7509d5b3d0f506096ea34cf74d69b9",
+    "/workspace/mss-file-batch-lifetime-10M-results-20261122/whole-SNP-oracle.json": "188200363b74e67a7b5edbf26708ad6e8eb96084c2f38b223ca6ad5436177785",
+    "/workspace/mss-file-batch-lifetime-10M-results-20261122/stable-manifests.txt": "9f56e761d79bfdb34304a012586cb04d16b435ef6130091a97702e559260a2f2",
+    "/opt/mss-file-batch-lifetime-10M-guard-20261122/trial.guard.jsonl": "22ad6ea48878a3e9020ab093d1dd85950b75436dd1c50a2779355c13350f7d60",
+    "/opt/mss-file-batch-lifetime-10M-guard-20261122/trial-proof.json": "7c07a089dbfde885eee22eafd5a2f8b5a556733c05462d63f4b616ab5fac921d",
+    "/opt/mss-file-batch-lifetime-10M-guard-20261122/trial-inputs.json": "6a2d92900de4db6085fd3a7ab2e91bdd7d5adefa6ed51719558339df7b272c68",
+    "/workspace/mss-file-batch-lifetime-experiment-results-20261121/build/source/R/preservation.R": "32f23a6779483741dc92642ccd0c15b859d5d485f25316934ae8a3159885e94a",
+    "/workspace/mss-file-batch-lifetime-experiment-results-20261121/runs/pair-01-B/edition/audit.tsv": "9d3d82f645c6b1e2fea65569f0b3c79872203a9713de3f6a0307e1711bdb97ea",
+    "/workspace/mss-file-batch-lifetime-experiment-results-20261121/runs/pair-01-B/edition/checksums.tsv": "46fd50a287cd8c15a44db28a3edae0eb590e17d55fec4e4ac55adb4d16cf390e",
+    "/workspace/mss-file-batch-lifetime-experiment-results-20261121/runs/pair-01-B/edition/columns.tsv": "50399949e7f2255c480408848751b751e8d8fe2ea6931dedcdd60f44a273a74a",
+    "/workspace/mss-file-batch-lifetime-experiment-results-20261121/runs/pair-01-B/edition/manifest.rds": "d9333877c5279c05f04a2181e629dc104f75ca73cfe48637683d9bdccdcc5aed",
+    "/workspace/mss-file-batch-lifetime-experiment-results-20261121/runs/pair-01-B/edition/metadata.tsv": "169d7e0abdab6bfbbbe8f0c927092e09a2cc9efb1793fd05a374b89933d8baa3",
+    "/workspace/mss-file-batch-lifetime-experiment-results-20261121/runs/pair-01-B/edition/normalized.tsv": "e127d0cc8e6bf449841a452aba5110adb37caf18895bf34767065ac660f4c6dc",
+    "/workspace/mss-file-batch-lifetime-experiment-results-20261121/runs/pair-01-B/edition/reference_checksums.tsv": "9dfe68d07c6d76bd17623e190e576ab2e1793760f209d2998a8324ea0f9b7045",
+    "/workspace/mss-file-batch-lifetime-experiment-results-20261121/runs/pair-01-B/edition/source-artifact": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2",
+    "/workspace/mss-file-batch-lifetime-experiment-results-20261121/runs/pair-01-B/edition/source.tsv": "d110828a8b17bf88309db042e7073faa267a0b63a3550d14a87f7761074c91f2",
+    "/workspace/mss-file-batch-lifetime-10M-results-20261122/runs/pair-01-B/edition/audit.tsv": "38a56a917b3bf0af2d446250907218b2265ca8d3a8f35f865e5408d5b06a4c57",
+    "/workspace/mss-file-batch-lifetime-10M-results-20261122/runs/pair-01-B/edition/checksums.tsv": "e07c9e41e1b7a2cf720f85a265511f30ae4627ca06f5f31989a3307fa8a25068",
+    "/workspace/mss-file-batch-lifetime-10M-results-20261122/runs/pair-01-B/edition/columns.tsv": "50399949e7f2255c480408848751b751e8d8fe2ea6931dedcdd60f44a273a74a",
+    "/workspace/mss-file-batch-lifetime-10M-results-20261122/runs/pair-01-B/edition/manifest.rds": "838775fff74ec88f561758bd81533ee6e4cd9f1773bb16e9d692554a23e5b09e",
+    "/workspace/mss-file-batch-lifetime-10M-results-20261122/runs/pair-01-B/edition/metadata.tsv": "e24b5a7a9d7952819009797558611523937404bcb09c6df27066a059c761ff0c",
+    "/workspace/mss-file-batch-lifetime-10M-results-20261122/runs/pair-01-B/edition/normalized.tsv": "cc165d872ea931fc233df388fb7a0f152e0fd48b775745100ecc046d6f841bc9",
+    "/workspace/mss-file-batch-lifetime-10M-results-20261122/runs/pair-01-B/edition/reference_checksums.tsv": "9dfe68d07c6d76bd17623e190e576ab2e1793760f209d2998a8324ea0f9b7045",
+    "/workspace/mss-file-batch-lifetime-10M-results-20261122/runs/pair-01-B/edition/source-artifact": "cecd6f1053fb9c02066be3aa78f0f4976cb8ab32e882357e016ec1ea259788e0",
+    "/workspace/mss-file-batch-lifetime-10M-results-20261122/runs/pair-01-B/edition/source.tsv": "cecd6f1053fb9c02066be3aa78f0f4976cb8ab32e882357e016ec1ea259788e0"
+  }
+}
