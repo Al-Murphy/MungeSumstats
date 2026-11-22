@@ -1,0 +1,37 @@
+{
+  "baseline_header_sha256": "5881233fbad917d4475f4801497c90a720428c41ba5afb8a7d38c234da60f155",
+  "candidate_header_sha256": "9f71fa92eaa8e6b8d249ba58d7863630a7f6958e491ea413a48d521151932225",
+  "prefetch_arena_budget_bytes": 33554432,
+  "max_gather_keys": 200000,
+  "max_selected_key_bytes": 224,
+  "gather_estimate_scope": "vector capacity*sizeof(string)+sum(string.capacity()+1); estimate only, excludes allocator overhead and may double count SSO",
+  "timed_candidate_scope": "gather+estimate+prefetch sort/search+ordinary row loop+clear+gather destruction",
+  "original_combined_proof_sha256": "69b58946bacd0e4160bfde0964368b486c99216209fa19f9306b5ad905d01a07",
+  "unmeasured_intervening_root_reservation_bytes": 1073741824,
+  "reservation_semantics": "one conservative MAX allowance for sequential intervening native phases; not observed root highwater, not summed per compile",
+  "intervening_receipts": {
+    "RED": {
+      "local_path": "/private/tmp/mss-batch-rank-red-20261122/red-receipt.json",
+      "bytes": 378,
+      "sha256": "59ab4fabfa3a4c8897520f980ad190fdbeca6eb66f92bf23ce3c160b5c41d4fb"
+    },
+    "first_GREEN_failure": {
+      "local_path": "/private/tmp/mss-batch-rank-green-20261122/green-receipt.json",
+      "bytes": 595,
+      "sha256": "13d32df80960fec21bfd3b6b6499f0676ba323853a969d5f4495f0b3013eb1e8"
+    },
+    "allocation_diagnostic": {
+      "local_path": "/private/tmp/mss-batch-rank-wide-run-20261122/green-receipt.json",
+      "bytes": 960,
+      "sha256": "4257ff1dd4a14e603c5096029198d37e23a74ea62b79c0f83bffe703e6bf92f3"
+    },
+    "GREEN2": {
+      "local_path": "/private/tmp/mss-batch-rank-green2-20261122/green-receipt.json",
+      "bytes": 331,
+      "sha256": "231eb7709cfdf02107f9b03e4d86235b32a7b73be52069b50bab532fec3ec98a"
+    }
+  },
+  "execution_end_utc": "2026-11-22T07:30:00Z",
+  "original_compute_utc": "2026-11-22T07:37:49.716Z",
+  "original_provider_utc": "2026-11-22T09:37:49.716Z"
+}

@@ -1,0 +1,14 @@
+{
+  "RESULTS.md": {
+    "bytes": 3401,
+    "sha256": "ed7106fdf38541a804d8e8508d4f8bc5054a51b6ffd91376381e597428f0b631"
+  },
+  "analysis.json": {
+    "bytes": 7816,
+    "sha256": "bf379eafebd8a687e017aa73bbac070202a0956d3b7ed61377f51dd92a989d16"
+  },
+  "analyze.py": {
+    "bytes": 5609,
+    "sha256": "f25422461debc3e5764ee37080ebcd518126962b3b630b1a812031a77c2f6321"
+  }
+}

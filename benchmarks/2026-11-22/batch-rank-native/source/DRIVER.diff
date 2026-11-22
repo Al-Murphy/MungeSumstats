@@ -1,0 +1,70 @@
+--- original/driver.cpp
++++ batch-rank/driver.cpp
+@@ -40,6 +40,10 @@
+     std::size_t rows = 0, batches = 0, last_batch = 0;
+     std::uint64_t order_hash = UINT64_C(14695981039346656037);
+     std::chrono::nanoseconds elapsed{};
++#ifdef MSS_BATCH_RANK_BENCH
++    std::size_t prefetch_attempts=0, prefetch_admitted=0, prefetch_peak=0;
++    std::size_t gather_peak_estimate=0, gather_max_keys=0, gather_max_key_bytes=0;
++#endif
+ };
+ 
+ // Fisher–Yates with a fixed seed and explicit bounded draw for library-independent order.
+@@ -72,8 +76,38 @@
+ 
+     std::vector<mss::Result> results(count);
+     const auto start = std::chrono::steady_clock::now();
++#ifdef MSS_BATCH_RANK_BENCH
++    {
++        // Borrowed caller keys are separate from the core's incremental arena.
++        std::vector<std::string> keys;
++        keys.reserve(2 * count);
++        auto add = [&](std::string key) {
++            if (key.size() <= 224) {
++                run.gather_max_key_bytes = std::max(run.gather_max_key_bytes, key.size());
++                keys.push_back(std::move(key));
++            }
++        };
++        for (const auto& input : inputs) {
++            if (!mss::missing(input.chr) && input.pos > 0)
++                add("C:" + input.chr + ":" + std::to_string(input.pos));
++            if (!mss::missing(input.id)) add("I:" + input.id);
++        }
++        std::size_t estimate = keys.capacity() * sizeof(std::string);
++        for (const auto& key : keys) estimate += key.capacity() + 1;
++        run.gather_peak_estimate = std::max(run.gather_peak_estimate, estimate);
++        run.gather_max_keys = std::max(run.gather_max_keys, keys.size());
++        ++run.prefetch_attempts;
++        if (reference.prefetch_rank_keys(keys, 32U * 1024 * 1024)) ++run.prefetch_admitted;
++        run.prefetch_peak = std::max(run.prefetch_peak, reference.prefetch_peak_bytes());
++#endif
+     for (std::size_t step = 0; step < count; ++step)
+         results[step] = reference.harmonise(inputs[order[step]]);
++#ifdef MSS_BATCH_RANK_BENCH
++        reference.clear_prefetched_ranks();
++        if (reference.prefetch_owned_bytes() || reference.prefetched_rank_count())
++            throw std::runtime_error("Batch rank directory was not cleared");
++    } // Includes key-vector/string destruction in the candidate clock.
++#endif
+     const auto end = std::chrono::steady_clock::now();
+     run.elapsed += std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+ 
+@@ -157,7 +191,16 @@
+         std::cerr << "{\"mode\":\"" << mode << "\",\"order\":\"" << order << "\",\"seed\":" << shuffle_seed
+                   << ",\"capacity\":" << capacity << ",\"rows\":" << run.rows << ",\"batches\":" << run.batches
+                   << ",\"last_batch\":" << run.last_batch << ",\"order_hash\":" << run.order_hash
+-                  << ",\"harmonise_ns\":" << run.elapsed.count() << "}\n";
++                  << ",\"harmonise_ns\":" << run.elapsed.count()
++#ifdef MSS_BATCH_RANK_BENCH
++                  << ",\"batch_rank\":{\"attempts\":" << run.prefetch_attempts
++                  << ",\"admitted\":" << run.prefetch_admitted
++                  << ",\"arena_peak_bytes\":" << run.prefetch_peak
++                  << ",\"gather_estimate_bytes\":" << run.gather_peak_estimate
++                  << ",\"gather_max_keys\":" << run.gather_max_keys
++                  << ",\"gather_max_key_bytes\":" << run.gather_max_key_bytes << "}"
++#endif
++                  << "}\n";
+         return std::cerr ? 0 : 1;
+     } catch (const std::exception& error) {
+         std::cerr << error.what() << '\n';

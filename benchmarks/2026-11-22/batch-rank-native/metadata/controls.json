@@ -1,0 +1,32 @@
+{
+  "passed": [
+    "fixture-format2-matched-baseline",
+    "short-format2-matched-baseline",
+    "empty-format2-matched-baseline",
+    "fixture-format3-matched-baseline",
+    "short-format3-matched-baseline",
+    "empty-format3-matched-baseline",
+    "fixture-format2-shuffled-baseline",
+    "short-format2-shuffled-baseline",
+    "empty-format2-shuffled-baseline",
+    "fixture-format3-shuffled-baseline",
+    "short-format3-shuffled-baseline",
+    "empty-format3-shuffled-baseline",
+    "fixture-format2-matched-candidate",
+    "short-format2-matched-candidate",
+    "empty-format2-matched-candidate",
+    "fixture-format3-matched-candidate",
+    "short-format3-matched-candidate",
+    "empty-format3-matched-candidate",
+    "fixture-format2-shuffled-candidate",
+    "short-format2-shuffled-candidate",
+    "empty-format2-shuffled-candidate",
+    "fixture-format3-shuffled-candidate",
+    "short-format3-shuffled-candidate",
+    "empty-format3-shuffled-candidate"
+  ],
+  "lookup_parity": [
+    "baseline",
+    "candidate"
+  ]
+}

@@ -1,0 +1,1 @@
+{"mode":"panel","order":"matched","seed":257,"capacity":100000,"rows":1000000,"batches":10,"last_batch":100000,"order_hash":8137637191047640805,"harmonise_ns":7658220547,"batch_rank":{"attempts":10,"admitted":10,"arena_peak_bytes":5945737,"gather_estimate_bytes":9600000,"gather_max_keys":200000,"gather_max_key_bytes":14}}

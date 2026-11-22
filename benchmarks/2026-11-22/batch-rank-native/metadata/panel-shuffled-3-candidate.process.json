@@ -1,0 +1,15 @@
+{
+  "pid": 105694,
+  "command": [
+    "/workspace/mss-batch-rank-benchmark-results-20261122/candidate",
+    "panel",
+    "/workspace/mss-task4/inputs/reference/matched-index",
+    "/workspace/mss-task4/inputs/reference/GRCh37.ensembl104.chr22.fa",
+    "shuffled"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 13.880100146,
+  "user_seconds": 10.396594,
+  "system_seconds": 2.046336,
+  "peak_rss_bytes": 101277696
+}

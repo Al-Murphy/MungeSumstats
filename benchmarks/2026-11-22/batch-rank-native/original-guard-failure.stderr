@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "<string>", line 80, in <module>
+  File "<string>", line 30, in verify_results
+  File "<string>", line 15, in need
+RuntimeError: all_existing_controls_and12_paired_receipts

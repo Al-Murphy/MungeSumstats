@@ -1,0 +1,40 @@
+{
+  "controls_exact": true,
+  "direct_paired_equality": false,
+  "expected_wait4_command_binding_preserved": "/workspace/mss-batch-rank-benchmark-results-20261122/<role>",
+  "explicit_local_source_binding": "/private/tmp/mss-key-page-8k-experiment-20261122",
+  "json_roundtrip_paired_exact": true,
+  "original_summarizer_sha256": "4d523fe578cedce68a20da28226c3090368ef9358d5773cd49f9b8c97313bb7f",
+  "type_mismatches": [
+    {
+      "expected_type": "tuple",
+      "path": "/matched/pairs/0/execution_order",
+      "receipt_type": "list"
+    },
+    {
+      "expected_type": "tuple",
+      "path": "/matched/pairs/1/execution_order",
+      "receipt_type": "list"
+    },
+    {
+      "expected_type": "tuple",
+      "path": "/matched/pairs/2/execution_order",
+      "receipt_type": "list"
+    },
+    {
+      "expected_type": "tuple",
+      "path": "/shuffled/pairs/0/execution_order",
+      "receipt_type": "list"
+    },
+    {
+      "expected_type": "tuple",
+      "path": "/shuffled/pairs/1/execution_order",
+      "receipt_type": "list"
+    },
+    {
+      "expected_type": "tuple",
+      "path": "/shuffled/pairs/2/execution_order",
+      "receipt_type": "list"
+    }
+  ]
+}
