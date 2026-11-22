@@ -6,6 +6,7 @@ import csv
 from datetime import datetime, timezone
 from decimal import InvalidOperation
 import hashlib
+import math
 import os
 from pathlib import Path
 import platform
@@ -367,8 +368,18 @@ def verify_manifests(config, work, runs):
 
 def summarize_case(case, observations, *, suite):
     def phase_values(entries, name):
-        return {phase: statistics.median(float(item["metrics"][f"{name}.{phase}"]) for item in entries)
-                for phase in ("elapsed", "user.self", "sys.self", "user.child", "sys.child")}
+        result = {}
+        for phase in ("elapsed", "user.self", "sys.self", "user.child", "sys.child"):
+            raw = [item["metrics"][f"{name}.{phase}"] for item in entries]
+            # R's proc.time() reports unavailable child CPU as NA on Windows.
+            if phase in ("user.child", "sys.child") and all(value == "NA" for value in raw):
+                result[phase] = None
+                continue
+            values = [float(value) for value in raw]
+            if not all(math.isfinite(value) for value in values):
+                raise ValueError(f"Nonfinite benchmark metric: {name}.{phase}")
+            result[phase] = statistics.median(values)
+        return result
 
     paired = [{role: next(item for item in observations
                          if item["pair"] == pair and item["process"]["role"] == role)
