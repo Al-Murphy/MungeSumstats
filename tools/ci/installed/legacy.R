@@ -205,6 +205,9 @@ main <- function() {
             for (method in c("GenomicRanges", "data.table")) {
                 unsorted <- data.table::copy(full); data.table::setorderv(unsorted, "BETA")
                 restored <- MungeSumstats:::sort_coords(data.table::copy(unsorted), sort_method = method)
+                # GRanges places coordinates before metadata. Align named
+                # columns only; row order, membership and values stay exact.
+                data.table::setcolorder(restored, names(full))
                 check(paste0("sort-", method), equal(restored, full) && !identical(unsorted$SNP, full$SNP))
             }
             ranges <- GenomicRanges::GRanges(seqnames = as.character(full$CHR[c(1L, nrow(full))]),
