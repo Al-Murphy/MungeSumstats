@@ -26,6 +26,16 @@ sys.path.insert(0, str(BENCH))
 from process_metrics import child_environment
 from verify import digest, read_json, write_json
 
+def windows_child_environment(scratch):
+    """Preserve the admitted OS architecture across worker and R boundaries."""
+    environment = child_environment(scratch)
+    architecture = os.environ.get("PROCESSOR_ARCHITECTURE")
+    if architecture != "AMD64":
+        raise RuntimeError("Admitted native AMD64 Windows OS environment required")
+    environment["PROCESSOR_ARCHITECTURE"] = architecture
+    return environment
+
+
 RESERVE = 8_000_000_000
 ARTIFACT_LIMIT = 512_000_000
 JOB_MEMORY = 7 * 1024**3
@@ -514,7 +524,7 @@ class Execution:
         self.logs = evidence/"logs"
         self.logs.mkdir()
         self.clock = clock
-        self.environment = child_environment(root/"tmp")
+        self.environment = windows_child_environment(root/"tmp")
         (root/"tmp").mkdir()
         empty = evidence/"empty-startup"
         empty.write_bytes(b"")
@@ -638,7 +648,7 @@ def job_control_fixture(root, clock):
     write_json(directory/"controller.json",dict(pid=os.getpid(),parent=os.getppid(),
                started_monotonic=started,natural_exit_monotonic=started+16,attempt=clock.attempt))
     subprocess.Popen([sys.executable,"-I","-S","-B","-c",JOB_CONTROL_WRITER,str(directory),json.dumps(clock.attempt)],
-                     stdin=subprocess.DEVNULL,env=child_environment(root),close_fds=True)
+                     stdin=subprocess.DEVNULL,env=windows_child_environment(root),close_fds=True)
     while time.monotonic()<started+16:
         clock.remaining("compute")
         time.sleep(.05)
@@ -721,7 +731,7 @@ def owned_phase(root, clock, mode, start_file, entry):
             if mode=="qualify":admit_job_commitment(root,job,"before-worker",clock)
             process=subprocess.Popen([sys.executable,"-I","-S","-B",str(entry),str(root),
                 "--job-start",str(start_file),"--internal-worker",mode],stdin=subprocess.DEVNULL,
-                stdout=out,stderr=err,env=child_environment(root),close_fds=True)
+                stdout=out,stderr=err,env=windows_child_environment(root),close_fds=True)
         job.assign(process.pid)
         assigned=True
         if job.active_count()!=1:
