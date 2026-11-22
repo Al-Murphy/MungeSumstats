@@ -1,0 +1,23 @@
+{
+  "driver_execution_status": "unexecuted_source_preparation",
+  "fixtures": {
+    "fixtures/ALSvcf.vcf": {
+      "bytes": 47124,
+      "md5": "bc64e98453f70c633d34d36280e95bab",
+      "sha256": "82292fbf8816dfc2c1dcf6147e6418ae25eac84f02d5d6da5ae7bc336e0bd79c"
+    },
+    "fixtures/ALSvcf.vcf.gz": {
+      "bytes": 5563,
+      "md5": "11a2d3f449e4762f86d37fce2154a161",
+      "sha256": "de11c274b913b2685935e56a9cf2b7121b75c6d6b4b85a8587a71acf5ecdd92e"
+    },
+    "fixtures/eduAttainOkbay.txt": {
+      "bytes": 5194,
+      "md5": "c896d71ab42e118874d49f378c8bed23",
+      "sha256": "251ad0c554333154248f4955a62c10f0e6efe9990dabca4a42dfbeba0a13915b"
+    }
+  },
+  "historical_guard_manifest_sha256": "1a1477d959b0690dd1609fb5a5b52fc406bf35d3a3e657f053612096c7d2fa4f",
+  "schema": "mss-legacy-fixtures-v1",
+  "stronger_indel_assertions": "prospective_until_genuine_Linux_output_passes"
+}

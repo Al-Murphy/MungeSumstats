@@ -1,0 +1,73 @@
+name: Installed package evidence
+
+on:
+  workflow_run:
+    workflows: ['Installed package qualification']
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: 'Completed producer run ID'
+        required: true
+        type: string
+      attempt:
+        description: 'Exact completed producer attempt'
+        required: true
+        default: '1'
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  receive:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 40
+    defaults:
+      run:
+        shell: bash
+    env:
+      MSS_TARGET_RUN_ID: '${{ github.event.workflow_run.id || inputs.run_id }}'
+      MSS_TARGET_ATTEMPT: '${{ github.event.workflow_run.run_attempt || inputs.attempt }}'
+    steps:
+      - name: Preserve exact Git bytes
+        run: git config --global core.autocrlf false
+      - name: Checkout trusted receiver revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: '${{ github.workflow_sha }}'
+          persist-credentials: false
+      - name: Set up pinned Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+      - name: Retain independent terminal service and exact ZIPs
+        id: fetch
+        env:
+          GITHUB_TOKEN: '${{ github.token }}'
+        run: >-
+          python -I -S -B tools/ci/installed/service.py terminal
+          --repository "$GITHUB_REPOSITORY" --run-id "$MSS_TARGET_RUN_ID"
+          --attempt "$MSS_TARGET_ATTEMPT" --out "$RUNNER_TEMP/mss-terminal"
+      - name: Verify complete installed-package evidence
+        env:
+          GITHUB_TOKEN: '${{ github.token }}'
+        run: >-
+          python -I -S -B tools/ci/installed/receiver.py
+          --service "$RUNNER_TEMP/mss-terminal" --out "$RUNNER_TEMP/mss-received"
+      - name: Retain terminal evidence and decision
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: mss-installed-received-${{ env.MSS_TARGET_RUN_ID }}-${{ env.MSS_TARGET_ATTEMPT }}-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/mss-terminal
+            ${{ runner.temp }}/mss-received
+          if-no-files-found: error
+          include-hidden-files: true
+          archive: true
+          compression-level: 1
+          retention-days: 14
+          overwrite: false

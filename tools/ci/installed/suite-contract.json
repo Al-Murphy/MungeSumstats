@@ -1,0 +1,2009 @@
+{
+  "case_counts": [
+    [
+      "test-a0_a1.R",
+      "Test that if a0/a1 passed, formatted correctly",
+      1,
+      1
+    ],
+    [
+      "test-allele_flip.R",
+      "Test that allele columns and effect columns flipped correctly",
+      1,
+      1
+    ],
+    [
+      "test-alt-alt-orientation.R",
+      "a bounded site-context lookup cannot silently select a unique hit on overflow",
+      1,
+      1
+    ],
+    [
+      "test-alt-alt-orientation.R",
+      "biallelic and noncompeting triallelic directions retain resolved effects",
+      18,
+      1
+    ],
+    [
+      "test-alt-alt-orientation.R",
+      "incoherent or invalid ALT contexts cannot obscure a unique canonical hit",
+      27,
+      1
+    ],
+    [
+      "test-alt-alt-orientation.R",
+      "indel and multi-base ALT pairs can compete with a single canonical event",
+      10,
+      1
+    ],
+    [
+      "test-alt-alt-orientation.R",
+      "quad-allelic source contrasts remain ambiguous across all orientations",
+      10,
+      1
+    ],
+    [
+      "test-alt-alt-orientation.R",
+      "split biallelic source records retain coherent orientation ambiguity regardless of order",
+      35,
+      1
+    ],
+    [
+      "test-alt-alt-orientation.R",
+      "streaming preserves original bytes and every ambiguous source row",
+      25,
+      1
+    ],
+    [
+      "test-alt-alt-orientation.R",
+      "trusted source REF ALT and strand still resolve a quad-allelic event",
+      11,
+      1
+    ],
+    [
+      "test-alt-alt-reanchoring.R",
+      "common reference padding preserves unknown-strand contrast ambiguity",
+      80,
+      1
+    ],
+    [
+      "test-alt-alt-reanchoring.R",
+      "jointly padded pure ALT contrasts retain their explicit uncertainty status",
+      32,
+      1
+    ],
+    [
+      "test-alt-alt-reanchoring.R",
+      "padded indel and MNV contexts retain all four orientation ambiguities",
+      60,
+      1
+    ],
+    [
+      "test-alt-alt-reanchoring.R",
+      "repeat-equivalent source anchors compare both ALT events in one REF span",
+      5,
+      1
+    ],
+    [
+      "test-alt-alt-reanchoring.R",
+      "shared alternate backgrounds remain part of the association contrast",
+      16,
+      1
+    ],
+    [
+      "test-bi_alllelic.R",
+      "non-biallelic SNPs are removed",
+      1,
+      1
+    ],
+    [
+      "test-check_drop_indels.R",
+      "check_range_p_val works",
+      1,
+      1
+    ],
+    [
+      "test-check_impute_se_beta.R",
+      "Check that imputation columns added correctly",
+      7,
+      1
+    ],
+    [
+      "test-check_info_score.R",
+      "check_info_score works",
+      8,
+      1
+    ],
+    [
+      "test-check_range_pval.R",
+      "check_range_p_val works",
+      4,
+      1
+    ],
+    [
+      "test-check_small_p_val.R",
+      "check_small_p_val works",
+      2,
+      1
+    ],
+    [
+      "test-check_tabular.R",
+      "Check that a file is in tabular format",
+      1,
+      1
+    ],
+    [
+      "test-check_vcf.R",
+      "Checking whether a file is works",
+      1,
+      1
+    ],
+    [
+      "test-check_zscore.R",
+      "Check that Z-scores get computed correctly",
+      2,
+      1
+    ],
+    [
+      "test-chromosome-mapping-performance.R",
+      "best chromosome map depends on the frequency of competing styles",
+      8,
+      1
+    ],
+    [
+      "test-chromosome-mapping-performance.R",
+      "chromosome mapping preserves legacy warnings and errors",
+      6,
+      1
+    ],
+    [
+      "test-chromosome-mapping-performance.R",
+      "chromosome mapping preserves unmapped contigs and zero-map matrices",
+      12,
+      1
+    ],
+    [
+      "test-chromosome-mapping-performance.R",
+      "chromosome style mapping preserves values, row order and names",
+      29,
+      1
+    ],
+    [
+      "test-combined_CHR_BP_A2_A1.R",
+      "Can correctly separate CHR:BP:A2:A1",
+      1,
+      1
+    ],
+    [
+      "test-combined_CHR_BP_A2_A1_2.R",
+      "Can correctly separate CHR:BP:A2:A1, two columns",
+      1,
+      1
+    ],
+    [
+      "test-combined_allele_columns.R",
+      "Can correctly separate two A1/A2 columns",
+      1,
+      1
+    ],
+    [
+      "test-combined_chr_bp.R",
+      "Can correctly separate CHR:BP",
+      1,
+      1
+    ],
+    [
+      "test-combined_chr_bp_2.R",
+      "Can correctly separate two CHR:BP columns",
+      1,
+      1
+    ],
+    [
+      "test-comma_delim.R",
+      "Can handle comma delimited files",
+      1,
+      1
+    ],
+    [
+      "test-complex-contrast-boundary.R",
+      "a shared alternate background remains coherent after a repeat shift",
+      5,
+      1
+    ],
+    [
+      "test-complex-contrast-boundary.R",
+      "jointly padded pure SNP contexts have one exact source anchor",
+      40,
+      1
+    ],
+    [
+      "test-complex-contrast-boundary.R",
+      "length and base-pair exclusions retain ordinary supported contrasts",
+      3,
+      1
+    ],
+    [
+      "test-complex-contrast-boundary.R",
+      "single-base contrasts defer when an inserted alternate background cannot be excluded",
+      5,
+      1
+    ],
+    [
+      "test-complex-contrast-boundary.R",
+      "unknown alternate sequence defers generic effects and preserves explicit source contracts",
+      23,
+      1
+    ],
+    [
+      "test-compute_nsize.R",
+      "compute_nsize works",
+      8,
+      1
+    ],
+    [
+      "test-contig-aliases.R",
+      "contig mappings cannot shadow canonical names or invent destinations",
+      12,
+      1
+    ],
+    [
+      "test-contig-aliases.R",
+      "explicit contig aliases preserve source labels and resolve reference labels",
+      13,
+      1
+    ],
+    [
+      "test-correct_format.R",
+      "Input has correct format",
+      2,
+      1
+    ],
+    [
+      "test-dup_col.R",
+      "Handle dup cols",
+      3,
+      1
+    ],
+    [
+      "test-dup_rows.R",
+      "Handle duplicate rows based on rs ID",
+      2,
+      1
+    ],
+    [
+      "test-effect_columns_nonzero.R",
+      "Filter effect columns so !=0",
+      1,
+      1
+    ],
+    [
+      "test-equivalent-indel-context.R",
+      "equivalent indel anchors retain trusted EAF checks and defer uncertain generic context",
+      7,
+      1
+    ],
+    [
+      "test-fai-safety.R",
+      "re-pinned malformed FAI rows are refused by the native gate in both formats",
+      144,
+      1
+    ],
+    [
+      "test-fai-safety.R",
+      "valid indexed LF CRLF and unterminated FASTAs retain all public scientific fields",
+      156,
+      1
+    ],
+    [
+      "test-frq_filter.R",
+      "Filter SNPs based on FRQ",
+      2,
+      1
+    ],
+    [
+      "test-generic-coordinate-contract.R",
+      "closed-universe REF ALT hypotheses reject without promoting proof-only mappings",
+      157,
+      1
+    ],
+    [
+      "test-generic-coordinate-contract.R",
+      "closure keeps chromosome and paired REF context boundaries and trusted contracts",
+      10,
+      1
+    ],
+    [
+      "test-generic-coordinate-contract.R",
+      "complex generic ID inference requires source position even for one canonical event",
+      29,
+      1
+    ],
+    [
+      "test-generic-coordinate-contract.R",
+      "current ID cycles terminate and fanout obeys explicit global closure caps",
+      6,
+      1
+    ],
+    [
+      "test-generic-coordinate-contract.R",
+      "known source positions preserve distinct identities and opposite valid effect signs",
+      11,
+      1
+    ],
+    [
+      "test-generic-coordinate-contract.R",
+      "missing-position complex rows remain byte-preserved in streamed editions",
+      8,
+      1
+    ],
+    [
+      "test-generic-coordinate-contract.R",
+      "newly required ID context lookups retain raw candidate cap failures",
+      1,
+      1
+    ],
+    [
+      "test-generic-coordinate-contract.R",
+      "paired ID contexts survive coordinate candidate intersection and reference order",
+      56,
+      1
+    ],
+    [
+      "test-generic-coordinate-contract.R",
+      "partial historical aliases and exact-event coordinate bridges close current IDs",
+      9,
+      1
+    ],
+    [
+      "test-generic-coordinate-contract.R",
+      "single-base ID inference and unsupported complex marker behavior remain explicit",
+      11,
+      1
+    ],
+    [
+      "test-headers_correct.R",
+      "Input has correct headers",
+      1,
+      1
+    ],
+    [
+      "test-indels.R",
+      "non-biallelic SNPs are removed",
+      2,
+      1
+    ],
+    [
+      "test-index_tabular.R",
+      "index_tabular works",
+      1,
+      1
+    ],
+    [
+      "test-info_filter.R",
+      "Filter SNPs where INFO<0.9",
+      1,
+      1
+    ],
+    [
+      "test-input_R_obj.R",
+      "Can pass in R objects of summary statistics",
+      1,
+      1
+    ],
+    [
+      "test-issues_alleles.R",
+      "#111/#124: bi_allelic_filter drops >2 allele SNPs, FALSE keeps",
+      5,
+      1
+    ],
+    [
+      "test-issues_alleles.R",
+      "#137: allele flip contract and non-biallelic FRQ guard",
+      14,
+      1
+    ],
+    [
+      "test-issues_chr.R",
+      "#103/#116/#130: check_chr standardises X, Y and MT names",
+      5,
+      1
+    ],
+    [
+      "test-issues_chr.R",
+      "#116/#117: sort_coords keeps MT and sorts CHR naturally",
+      3,
+      1
+    ],
+    [
+      "test-issues_chr.R",
+      "#144/#150: NA CHR and NA BP rows survive check_bp_range",
+      2,
+      1
+    ],
+    [
+      "test-issues_chr.R",
+      "#144: check_bp_range also checks 23/24/x/y/M/mt CHR names",
+      2,
+      1
+    ],
+    [
+      "test-issues_chr.R",
+      "#144: check_bp_range drops BP outside 1..chromosome length",
+      4,
+      1
+    ],
+    [
+      "test-issues_chr.R",
+      "#161: character BP and P columns are compared numerically",
+      4,
+      1
+    ],
+    [
+      "test-issues_chr.R",
+      "#31/#37/#157/#158: check_chr prefixes, contigs and lowercase",
+      4,
+      1
+    ],
+    [
+      "test-issues_chr.R",
+      "#8: sort_coords orders CHR naturally, sex chromosomes last",
+      8,
+      1
+    ],
+    [
+      "test-issues_dups.R",
+      "#139: indels sharing an RSID are deduped on alleles, not RSID",
+      8,
+      1
+    ],
+    [
+      "test-issues_dups.R",
+      "#77/#81/#89: BP dedupe skips indels and respects the switches",
+      6,
+      1
+    ],
+    [
+      "test-issues_dups.R",
+      "#77/#81: RSID dedupe only with bi_allelic_filter and check_dups",
+      5,
+      1
+    ],
+    [
+      "test-issues_effect_direction.R",
+      "#168: check 2 infers the effect allele from column names",
+      14,
+      1
+    ],
+    [
+      "test-issues_effect_direction.R",
+      "#186: EA/OA allele headers are not treated as ambiguous",
+      2,
+      1
+    ],
+    [
+      "test-issues_effect_direction.R",
+      "#188/#208: check 3 makes the reference allele the non-effect A1",
+      9,
+      1
+    ],
+    [
+      "test-issues_effect_direction.R",
+      "#193: ALLELE0 headers are ambiguous; A1FREQ marks ALLELE1 effect",
+      6,
+      1
+    ],
+    [
+      "test-issues_effect_direction.R",
+      "#193: eff_on_minor_alleles infers from the reference only",
+      4,
+      1
+    ],
+    [
+      "test-issues_effect_direction.R",
+      "#208: mixed-case allele headers are swapped by check 2",
+      9,
+      1
+    ],
+    [
+      "test-issues_effect_direction.R",
+      "#208: raw METAL headers (Freq1) mark Allele1 as the effect",
+      3,
+      1
+    ],
+    [
+      "test-issues_flip.R",
+      "#139: check_bi_allelic keeps off-reference SNPs (none filtered)",
+      1,
+      1
+    ],
+    [
+      "test-issues_flip.R",
+      "#139: check_bi_allelic keeps off-reference SNPs (some filtered)",
+      2,
+      1
+    ],
+    [
+      "test-issues_flip.R",
+      "#140: SNPs absent from the reference are kept unflipped",
+      4,
+      1
+    ],
+    [
+      "test-issues_flip.R",
+      "#140: allele_flip_drop drops SNPs matching neither allele",
+      12,
+      1
+    ],
+    [
+      "test-issues_flip.R",
+      "#140: allele_flip_drop keeps SNPs absent from the reference",
+      2,
+      1
+    ],
+    [
+      "test-issues_flip.R",
+      "#145: lower-case alleles are uppercased, then match reference",
+      9,
+      1
+    ],
+    [
+      "test-issues_flip.R",
+      "#165: FRQ guard names its remedies and only fires on a flip",
+      7,
+      1
+    ],
+    [
+      "test-issues_flip.R",
+      "#44/#46/#88: flips invert OR, take 1-FRQ, negate signed stats",
+      12,
+      1
+    ],
+    [
+      "test-issues_headers.R",
+      "#12/#148: sumstatsColHeaders ships once, unique and upper-case",
+      10,
+      1
+    ],
+    [
+      "test-issues_headers.R",
+      "#142: REGENIE header (GENPOS, ALLELE0/1, A1FREQ) maps fully",
+      4,
+      1
+    ],
+    [
+      "test-issues_headers.R",
+      "#142: in a full REGENIE header A1FREQ, not MAF, becomes FRQ",
+      2,
+      1
+    ],
+    [
+      "test-issues_headers.R",
+      "#168: allele-specific effect/FRQ names map only via the combinations",
+      3,
+      1
+    ],
+    [
+      "test-issues_headers.R",
+      "#174/#175: exported standardise_header normalises a custom mapping_file",
+      2,
+      1
+    ],
+    [
+      "test-issues_headers.R",
+      "#174/#175: format_sumstats normalises a custom mapping_file",
+      4,
+      1
+    ],
+    [
+      "test-issues_headers.R",
+      "#186: EA/OA map to A2/A1 so A1 is not imputed",
+      3,
+      1
+    ],
+    [
+      "test-issues_headers.R",
+      "#192: risk / non-risk allele headers map to A2 / A1",
+      21,
+      1
+    ],
+    [
+      "test-issues_headers.R",
+      "#45/#142: a user-supplied mapping_file is applied",
+      4,
+      1
+    ],
+    [
+      "test-issues_headers.R",
+      "#45/#48: A0/ALLELE0 becomes A1 and its partner A1/ALLELE1 becomes A2",
+      5,
+      1
+    ],
+    [
+      "test-issues_headers.R",
+      "#58/#91/#94/#96/#97/#99/#105/#138/#142/#148/#168/#186: single headers map to the agreed name",
+      1,
+      1
+    ],
+    [
+      "test-issues_headers.R",
+      "#95/#105/#138: the first synonym in map order wins and names stay unique",
+      8,
+      1
+    ],
+    [
+      "test-issues_headers.R",
+      "#99/#195: published header sets map to the exact expected names",
+      5,
+      1
+    ],
+    [
+      "test-issues_ieu_mock.R",
+      "#204: each dbSNP tarball gets its own extraction",
+      4,
+      1
+    ],
+    [
+      "test-issues_ieu_mock.R",
+      "#209/#210: download_vcf fetches the index from its own URL",
+      9,
+      1
+    ],
+    [
+      "test-issues_ieu_mock.R",
+      "#52/#109: find_sumstats computes N per row",
+      6,
+      1
+    ],
+    [
+      "test-issues_ieu_mock.R",
+      "#66/#74: import_sumstats reuses an existing formatted file",
+      4,
+      1
+    ],
+    [
+      "test-issues_liftover.R",
+      "#104: a chrX SNP lifts to the right CHR and position",
+      6,
+      1
+    ],
+    [
+      "test-issues_liftover.R",
+      "#107/#118/#136: no conversion requested -> unchanged and silent",
+      5,
+      1
+    ],
+    [
+      "test-issues_liftover.R",
+      "#128/#133: Ensembl is the default chain source; no UCSC shipped",
+      6,
+      1
+    ],
+    [
+      "test-issues_liftover.R",
+      "#183/#184/#197: local_chain .gz is kept, reusable; extra cols",
+      11,
+      1
+    ],
+    [
+      "test-issues_liftover.R",
+      "#211: CHR 23 is lifted as X and rmv_chr removes rows",
+      7,
+      1
+    ],
+    [
+      "test-issues_liftover.R",
+      "#84/#128: get_chain_file uses an existing chain, no download",
+      6,
+      1
+    ],
+    [
+      "test-issues_liftover.R",
+      "#84: get_chain_file finds a cached chain in any save_dir",
+      2,
+      1
+    ],
+    [
+      "test-issues_liftover.R",
+      "get_chain_file uses the bundled chain when a download fails",
+      6,
+      1
+    ],
+    [
+      "test-issues_logs.R",
+      "#207: a caller's message sink is restored after format_sumstats",
+      1,
+      1
+    ],
+    [
+      "test-issues_logs.R",
+      "#4/#32: report_summary wording round-trips through parse_report",
+      4,
+      1
+    ],
+    [
+      "test-issues_logs.R",
+      "#61/#131/#207/#80: message logs are named from save_path and sinks are restored",
+      15,
+      1
+    ],
+    [
+      "test-issues_logs.R",
+      "#68: parse_logs finds current '<id>_log_msg.txt' and old log names",
+      8,
+      1
+    ],
+    [
+      "test-issues_logs.R",
+      "#80: rerunning with force_new=TRUE does not append to old logs",
+      1,
+      1
+    ],
+    [
+      "test-issues_n_frq.R",
+      "#180/#181/#182/#197: default drop_na_cols ignores extra columns",
+      5,
+      1
+    ],
+    [
+      "test-issues_n_frq.R",
+      "#26: character N is converted with or without imputation_ind",
+      5,
+      1
+    ],
+    [
+      "test-issues_n_frq.R",
+      "#29: N_dropNA=TRUE drops NA N and NA N doesn't disable N_std",
+      4,
+      1
+    ],
+    [
+      "test-issues_n_frq.R",
+      "#3/#151: check_ldsc_format forces the parameters LDSC needs",
+      13,
+      1
+    ],
+    [
+      "test-issues_n_frq.R",
+      "#3: LDSC output accepts several compute_n methods",
+      1,
+      1
+    ],
+    [
+      "test-issues_n_frq.R",
+      "#43: compute_nsize formulas, Neff_<method> names, IMPUTATION_n",
+      11,
+      1
+    ],
+    [
+      "test-issues_n_frq.R",
+      "#5/#100: an all-NA or absent INFO column drops no rows",
+      5,
+      1
+    ],
+    [
+      "test-issues_n_frq.R",
+      "#58/#189: check_frq_maf renames or warns, never converts FRQ",
+      6,
+      1
+    ],
+    [
+      "test-issues_pvals_z.R",
+      "#129/#135: impute_beta prefers log(OR) > LOG_ODDS > Z*SE, opt-in",
+      10,
+      1
+    ],
+    [
+      "test-issues_pvals_z.R",
+      "#149: multi-trait P columns error unless ignore_multi_trait=TRUE",
+      5,
+      1
+    ],
+    [
+      "test-issues_pvals_z.R",
+      "#212/#213: P=0 gives a finite Z (P set to 1e-300) and is flagged",
+      14,
+      1
+    ],
+    [
+      "test-issues_pvals_z.R",
+      "#218: -log10 P beyond the double range gives P=0 with a message",
+      9,
+      1
+    ],
+    [
+      "test-issues_pvals_z.R",
+      "#218: text P below the double range is counted and set to 0",
+      7,
+      1
+    ],
+    [
+      "test-issues_pvals_z.R",
+      "#76: out-of-range p-values are set to 1/0 only when converting",
+      5,
+      1
+    ],
+    [
+      "test-issues_read.R",
+      "#100: a VCF INFO 'AF=' field stays AF and is not read as INFO",
+      3,
+      1
+    ],
+    [
+      "test-issues_read.R",
+      "#110/#119: partly-NA columns are not flagged as empty",
+      4,
+      1
+    ],
+    [
+      "test-issues_read.R",
+      "#155/#156: 'vcf' elsewhere in a tabular path does not route to read_vcf",
+      6,
+      1
+    ],
+    [
+      "test-issues_read.R",
+      "#21: a VCF without ##SAMPLE lines is read (nThread=1)",
+      3,
+      1
+    ],
+    [
+      "test-issues_read.R",
+      "#51: a ##SAMPLE ID that differs from the data column is ignored",
+      3,
+      1
+    ],
+    [
+      "test-issues_read.R",
+      "#53: read_sumstats accepts an R object",
+      7,
+      1
+    ],
+    [
+      "test-issues_read.R",
+      "#91/#154: a PGC '.vcf.tsv' text file is read as tabular",
+      2,
+      1
+    ],
+    [
+      "test-issues_read.R",
+      "#91/#154: a PGC text file renamed to .tsv is read as tabular",
+      3,
+      1
+    ],
+    [
+      "test-issues_ref_genome.R",
+      "#139: check_no_rs_snp reports how many indels it skips",
+      3,
+      1
+    ],
+    [
+      "test-issues_ref_genome.R",
+      "#150: NA CHR/BP rows are imputed from the SNP ID",
+      9,
+      1
+    ],
+    [
+      "test-issues_ref_genome.R",
+      "#150: check_no_chr_bp accepts a pre-loaded rsids table",
+      2,
+      1
+    ],
+    [
+      "test-issues_ref_genome.R",
+      "#164: many indels sharing one ID don't explode the not-join",
+      4,
+      1
+    ],
+    [
+      "test-issues_ref_genome.R",
+      "#164: off-reference SNVs are still corrected when indels exist",
+      7,
+      1
+    ],
+    [
+      "test-issues_ref_genome.R",
+      "#166: off-reference SNP with imputation_ind=TRUE, indels T/F",
+      10,
+      1
+    ],
+    [
+      "test-issues_ref_genome.R",
+      "#177: removed-row logs with NA CHR/BP aren't tabix-sorted",
+      5,
+      1
+    ],
+    [
+      "test-issues_save_path.R",
+      "#10: user-specified nested and relative save_paths are honoured",
+      6,
+      1
+    ],
+    [
+      "test-issues_save_path.R",
+      "#24: a global `sumstats_return` does not replace the cached data",
+      2,
+      1
+    ],
+    [
+      "test-issues_save_path.R",
+      "#24: a previously formatted save_path short-circuits format_sumstats",
+      5,
+      1
+    ],
+    [
+      "test-issues_save_path.R",
+      "#33: '~' in save_path is expanded to the home directory",
+      3,
+      1
+    ],
+    [
+      "test-issues_save_path.R",
+      "#33: saving to tempdir() prints NOTEs; other folders do not",
+      3,
+      1
+    ],
+    [
+      "test-issues_save_path.R",
+      "#34: only the file suffix is rewritten, not directory names",
+      2,
+      1
+    ],
+    [
+      "test-issues_save_path.R",
+      "#34: the save_path suffix follows write_vcf",
+      14,
+      1
+    ],
+    [
+      "test-issues_save_path.R",
+      "#49: output format is matched on the end of save_path",
+      9,
+      1
+    ],
+    [
+      "test-issues_save_path.R",
+      "#62: a save_path folder that cannot be created fails early",
+      1,
+      1
+    ],
+    [
+      "test-issues_save_path.R",
+      "#7: tabix_index=TRUE rewrites a .gz save_path to .bgz",
+      3,
+      1
+    ],
+    [
+      "test-issues_snp_ids.R",
+      "#120: mix of rs IDs and CHR:BP:A1:A2 IDs doesn't crash",
+      2,
+      1
+    ],
+    [
+      "test-issues_snp_ids.R",
+      "#123: all CHR:BP SNP IDs are moved to ID, not looked up",
+      4,
+      1
+    ],
+    [
+      "test-issues_snp_ids.R",
+      "#138: combined CHR:BP:A?:A? column is split in the right order",
+      11,
+      1
+    ],
+    [
+      "test-issues_snp_ids.R",
+      "#159/#162: imputation_ind=TRUE with chr:bp and malformed IDs",
+      13,
+      1
+    ],
+    [
+      "test-issues_snp_ids.R",
+      "#176: NA SNP IDs with imputation_ind=TRUE get unique join keys",
+      6,
+      1
+    ],
+    [
+      "test-issues_snp_ids.R",
+      "#48: CHR:BP column with a 3-field CHR:BP:ID row keeps CHR, BP",
+      4,
+      1
+    ],
+    [
+      "test-issues_snp_ids.R",
+      "#48: multi-rs IDs split on ',', '; ' and '_' separators",
+      5,
+      1
+    ],
+    [
+      "test-issues_snp_ids.R",
+      "#48: remove_multi_rs_snp=TRUE message counts all separators",
+      1,
+      1
+    ],
+    [
+      "test-issues_snp_ids.R",
+      "#57: VARIANT CHR:BP:A1:A2 column gives integer BP for joins",
+      8,
+      1
+    ],
+    [
+      "test-issues_validate.R",
+      "#125: several numeric compute_n values give a clear error",
+      2,
+      1
+    ],
+    [
+      "test-issues_validate.R",
+      "#204: dbSNP_tarball validation and load_snp_loc_data errors",
+      5,
+      1
+    ],
+    [
+      "test-issues_validate.R",
+      "#37/#158: rmv_chrPrefix is deprecated; chr_style is validated",
+      6,
+      1
+    ],
+    [
+      "test-issues_validate.R",
+      "#3: ldsc_format is deprecated in favour of save_format",
+      2,
+      1
+    ],
+    [
+      "test-issues_validate.R",
+      "#49/#114: ref_genome=NULL validates; install check uses dbSNP",
+      4,
+      1
+    ],
+    [
+      "test-issues_validate.R",
+      "#98/#200: dbSNP=155 validates; unknown or invalid versions error",
+      3,
+      1
+    ],
+    [
+      "test-issues_validate.R",
+      "#99: a remote https path passes validation",
+      2,
+      1
+    ],
+    [
+      "test-issues_write.R",
+      "#102: save_format='openGWAS' writes GWAS-VCF fields",
+      11,
+      1
+    ],
+    [
+      "test-issues_write.R",
+      "#117/#121/#122: tabix output has integer BP, natural CHR order, no leftovers",
+      8,
+      1
+    ],
+    [
+      "test-issues_write.R",
+      "#126: NA is written as 'NA' in tsv and as an empty field in csv",
+      3,
+      1
+    ],
+    [
+      "test-issues_write.R",
+      "#19: convert_sumstats returns VRanges (ref=A1, alt=A2), GRanges or the data.table",
+      9,
+      1
+    ],
+    [
+      "test-issues_write.R",
+      "#216: .vcf.gz output is BGZF and readable by htslib",
+      4,
+      1
+    ],
+    [
+      "test-issues_write.R",
+      "#216: write_vcf returns an existing path for each VCF suffix and tabix_index",
+      13,
+      1
+    ],
+    [
+      "test-issues_write.R",
+      "#34: write_sumstats only strips the compression suffix of the file name",
+      4,
+      1
+    ],
+    [
+      "test-list_sumstats.R",
+      "list_sumstats and parse_logs work",
+      5,
+      1
+    ],
+    [
+      "test-log10_p.R",
+      "log10 p-value",
+      2,
+      1
+    ],
+    [
+      "test-missing_data.R",
+      "Handle missing data",
+      4,
+      1
+    ],
+    [
+      "test-multi_rs_snp_one_row.R",
+      "Handle more than 1 rs IDs in one row",
+      3,
+      1
+    ],
+    [
+      "test-multi_traits.R",
+      "Multi-trait GWAS handled correctly",
+      1,
+      1
+    ],
+    [
+      "test-n_not_integer.R",
+      "Handle n when it isn't an integer",
+      1,
+      1
+    ],
+    [
+      "test-n_num.R",
+      "Handle n when its 5 std dev > mean",
+      3,
+      1
+    ],
+    [
+      "test-no_chr.R",
+      "Imputation of CHR correctly",
+      1,
+      1
+    ],
+    [
+      "test-no_chr_bp.R",
+      "Imputation of CHR and BP correctly",
+      5,
+      1
+    ],
+    [
+      "test-no_rs_id.R",
+      "Handle rs ID in row",
+      1,
+      1
+    ],
+    [
+      "test-no_rs_snp.R",
+      "Check SNP ID formatting",
+      3,
+      1
+    ],
+    [
+      "test-no_snp.R",
+      "Imputation of SNP correctly",
+      1,
+      1
+    ],
+    [
+      "test-on_x_y_mt_chr.R",
+      "SNPs on X,Y,MT chromosome are removed",
+      1,
+      1
+    ],
+    [
+      "test-paired-site-contexts.R",
+      "an ALT pair at a different original position cannot classify the input site",
+      2,
+      1
+    ],
+    [
+      "test-paired-site-contexts.R",
+      "an ALT pair in one original REF span remains a genuine ALT-ALT diagnostic",
+      4,
+      1
+    ],
+    [
+      "test-paired-site-contexts.R",
+      "an ID-only lookup cannot borrow an ALT pair from a different known chromosome",
+      2,
+      1
+    ],
+    [
+      "test-paired-site-contexts.R",
+      "an unsupported original REF is context rather than validated ALT-ALT evidence",
+      2,
+      1
+    ],
+    [
+      "test-paired-site-contexts.R",
+      "biallelic direction and frequency remain resolved across all four orientations",
+      4,
+      1
+    ],
+    [
+      "test-paired-site-contexts.R",
+      "different REF spans at one position cannot pool ALT strings",
+      2,
+      1
+    ],
+    [
+      "test-paired-site-contexts.R",
+      "separate original sites cannot invent an ALT-ALT diagnostic through record order",
+      18,
+      1
+    ],
+    [
+      "test-paired-site-contexts.R",
+      "symbolic context preserves real ALT pairs and defers unresolved allele context",
+      4,
+      1
+    ],
+    [
+      "test-preservation-fasta-layout.R",
+      "a single unterminated FASTA sequence line has no delimiter stride",
+      2,
+      1
+    ],
+    [
+      "test-preservation-fasta-layout.R",
+      "reference FASTA indexes retain exact binary line offsets",
+      144,
+      1
+    ],
+    [
+      "test-preservation-stream-performance.R",
+      "bounded writer matches exact baseline bytes across block boundaries",
+      13,
+      1
+    ],
+    [
+      "test-preservation-stream-performance.R",
+      "collectors reject mixed use and invalid source records even in discarded columns",
+      17,
+      1
+    ],
+    [
+      "test-preservation-stream-performance.R",
+      "column batches match row decoding and row/byte membership at every split",
+      373,
+      1
+    ],
+    [
+      "test-preservation-stream-performance.R",
+      "deferred character elements stay live across native block flushes",
+      1,
+      1
+    ],
+    [
+      "test-preservation-stream-performance.R",
+      "file and resident batches retain source contracts, classes and edition bytes",
+      29,
+      1
+    ],
+    [
+      "test-preservation-stream-performance.R",
+      "file errors respect raw block and deferred-row boundaries",
+      6,
+      1
+    ],
+    [
+      "test-preservation-stream-performance.R",
+      "file publication no longer materializes legacy row lists",
+      2,
+      1
+    ],
+    [
+      "test-preservation-stream-performance.R",
+      "unknown converting connections and marked strings use the compatible formatter",
+      4,
+      1
+    ],
+    [
+      "test-preservation.R",
+      "a verified native reference handle can be reused across calls",
+      3,
+      1
+    ],
+    [
+      "test-preservation.R",
+      "batching, empty input and repeated harmonisation preserve alignment",
+      6,
+      1
+    ],
+    [
+      "test-preservation.R",
+      "duplicate and unsupported reference rows retain third-allele context",
+      5,
+      1
+    ],
+    [
+      "test-preservation.R",
+      "effects, alleles and frequencies are conservative and per-allele",
+      9,
+      1
+    ],
+    [
+      "test-preservation.R",
+      "file streaming matches resident batches and preserves associations",
+      15,
+      1
+    ],
+    [
+      "test-preservation.R",
+      "frequency declarations and effect scale are explicit",
+      5,
+      1
+    ],
+    [
+      "test-preservation.R",
+      "immutable reference preparation records identity and rejects conflicts",
+      1,
+      1
+    ],
+    [
+      "test-preservation.R",
+      "malformed or truncated input cannot publish an edition",
+      5,
+      1
+    ],
+    [
+      "test-preservation.R",
+      "reference has immutable identity and source validation",
+      4,
+      1
+    ],
+    [
+      "test-preservation.R",
+      "reference payload mutation fails verification",
+      1,
+      1
+    ],
+    [
+      "test-preservation.R",
+      "reference publication rejects input mutation during indexing",
+      2,
+      1
+    ],
+    [
+      "test-preservation.R",
+      "source rows and raw numeric tokens survive all outcomes",
+      5,
+      1
+    ],
+    [
+      "test-preservation.R",
+      "split ALT contrasts remain distinct and generic opposite indel events stay ambiguous",
+      3,
+      1
+    ],
+    [
+      "test-projection.R",
+      "chain IDs may repeat on distinct source contigs in bundled Ensembl chains",
+      1,
+      1
+    ],
+    [
+      "test-projection.R",
+      "chain gaps, reference conflicts and malformed build assets stay explicit",
+      5,
+      1
+    ],
+    [
+      "test-projection.R",
+      "explicit aliases cannot collapse distinct chains into a false unique indel mapping",
+      2,
+      1
+    ],
+    [
+      "test-projection.R",
+      "negative indel spans left align and target third alleles suppress complemented EAF",
+      9,
+      1
+    ],
+    [
+      "test-projection.R",
+      "projection preserves native identity, signed effects and nullable outcomes",
+      14,
+      1
+    ],
+    [
+      "test-projection.R",
+      "reverse reanchored REF-effect indels retain EAF only with canonical two-allele site evidence",
+      81,
+      1
+    ],
+    [
+      "test-quoted-stream.R",
+      "quoted CSV preserves bytes and decoded token spelling across bounded chunks",
+      17,
+      1
+    ],
+    [
+      "test-quoted-stream.R",
+      "quoted decoder preserves UTF-8 and all field boundaries at arbitrary byte splits",
+      11,
+      1
+    ],
+    [
+      "test-quoted-stream.R",
+      "specialist rows bypass small-variant candidate resolution",
+      3,
+      1
+    ],
+    [
+      "test-quoted-stream.R",
+      "typed statistical entities retain identity without small-variant effects",
+      6,
+      1
+    ],
+    [
+      "test-read_header.R",
+      "read_header works",
+      1,
+      1
+    ],
+    [
+      "test-read_sumstats.R",
+      "Test that different kinds of files can be read in.",
+      1,
+      1
+    ],
+    [
+      "test-read_vcf.R",
+      "Test that VCFs can be properly read in.",
+      1,
+      1
+    ],
+    [
+      "test-reference-format3.R",
+      "all source target projection format combinations identify both formats honestly",
+      13,
+      1
+    ],
+    [
+      "test-reference-format3.R",
+      "reference format2 remains the default and explicit format3 is opt-in",
+      10,
+      1
+    ],
+    [
+      "test-reference-format3.R",
+      "typed and legacy references have identical public scientific rows",
+      6,
+      1
+    ],
+    [
+      "test-reference-format3.R",
+      "typed file editions preserve original bytes and identify the data format",
+      10,
+      1
+    ],
+    [
+      "test-reference-format3.R",
+      "typed native records reject corruption without relying on manifest checksums",
+      13,
+      1
+    ],
+    [
+      "test-reference-format3.R",
+      "typed records factor contexts while retaining every raw occurrence and alias key",
+      9,
+      1
+    ],
+    [
+      "test-reference-format3.R",
+      "typed source framing and signed unsupported contexts are explicit",
+      4,
+      1
+    ],
+    [
+      "test-reference-relocation.R",
+      "default open retains its existing scientific and receipt behavior",
+      10,
+      1
+    ],
+    [
+      "test-reference-relocation.R",
+      "explicit FASTA binds transferred immutable references without the original path",
+      40,
+      1
+    ],
+    [
+      "test-reference-relocation.R",
+      "explicit FASTA never bypasses byte identity or path validation",
+      22,
+      1
+    ],
+    [
+      "test-reference-relocation.R",
+      "explicit rebinding rereads the manifest and owns a fresh physical FASTA handle",
+      30,
+      1
+    ],
+    [
+      "test-reference-relocation.R",
+      "projection receipts retain both explicit physical bindings and unchanged scientific identities",
+      30,
+      1
+    ],
+    [
+      "test-reference-relocation.R",
+      "reference-version refusals remain consistent with and without relocation",
+      6,
+      1
+    ],
+    [
+      "test-reference-relocation.R",
+      "relocation verifies every unchanged index artifact including FAI and source",
+      24,
+      1
+    ],
+    [
+      "test-reference-relocation.R",
+      "streamed editions record physical FASTA binding without changing scientific fields",
+      30,
+      1
+    ],
+    [
+      "test-rs_plus.R",
+      "Handle extra info in rs id column",
+      1,
+      1
+    ],
+    [
+      "test-signed_cols.R",
+      "will fail without a signed column",
+      1,
+      1
+    ],
+    [
+      "test-small_p_val.R",
+      "Handle small p-values",
+      1,
+      1
+    ],
+    [
+      "test-source-reference-contract.R",
+      "declared source REF ALT strand prevents opposite indel event mapping",
+      37,
+      1
+    ],
+    [
+      "test-space_delim.R",
+      "Can handle space delimited files",
+      1,
+      1
+    ],
+    [
+      "test-standard_error_positive.R",
+      "Filter SNPs SE<=0",
+      1,
+      1
+    ],
+    [
+      "test-standardise_sumstats_column_headers_crossplatform.R",
+      "standardise_sumstats_column_headers_crossplatform works",
+      8,
+      1
+    ],
+    [
+      "test-strand_ambig.R",
+      "strand-ambiguous SNPs are removed",
+      1,
+      1
+    ],
+    [
+      "test-user_mapping_file.R",
+      "Test that user inputted mapping file is appropriate",
+      2,
+      1
+    ],
+    [
+      "test-validate_parameters.R",
+      "validate parameters",
+      11,
+      1
+    ],
+    [
+      "test-vital_cols.R",
+      "will fail without a vital column",
+      1,
+      1
+    ],
+    [
+      "test-write_sumstats.R",
+      "write_sumstats works",
+      28,
+      1
+    ]
+  ],
+  "comment_only_scripts": [
+    "test-get_genome_builds.R"
+  ],
+  "expected_suite_warnings": 0,
+  "expected_test_warnings": 2,
+  "known_platform_fallbacks": [
+    "test-allele_flip.R",
+    "test-indels.R",
+    "test-multi_rs_snp_one_row.R",
+    "test-index_tabular.R",
+    "test-read_header.R"
+  ],
+  "legacy_direct_parity_required": true,
+  "per_case_derivation": "The93 exact current proposed scripts/helpers retain the269 case titles. Qualified12 postimages keep body assertions; isolated fixture/home changes preserve all original parent expectations and add no test_that case. This count ledger is prospective and requires a new current-checkout execution. No historical pass is inherited.",
+  "schema": "mss-installed-suite-v1",
+  "source_base_commit": "767ec806342d45e9c05cd092b7b8f643eac510ae",
+  "source_files": {
+    "helper-alt-alt-orientation.R": {
+      "bytes": 1469,
+      "sha256": "dcb9b5987ad303421682e013a01ae2de853c640ea50510077514779c911838c9"
+    },
+    "helper-portable-fixtures.R": {
+      "bytes": 6835,
+      "sha256": "9005bfd15b3b9c3cf84cc2e08ef560c7bc3156921a0d90322f359f0722875a8c"
+    },
+    "helper-reference-format3.R": {
+      "bytes": 1251,
+      "sha256": "e2c62b449f82e42443ca12b736aae1e7abbd932f84d46dbaa77e8b3a1d93c995"
+    },
+    "test-a0_a1.R": {
+      "bytes": 1858,
+      "sha256": "fbd99dfb8f7f055195899fecaa19deaabde5c1208540894178f5c2de69c4b489"
+    },
+    "test-allele_flip.R": {
+      "bytes": 2247,
+      "sha256": "20d4d754a47d6908515e84313488215fc069e223be0a37ce2fd242d79c2aa117"
+    },
+    "test-alt-alt-orientation.R": {
+      "bytes": 9994,
+      "sha256": "e1cc830691bb565cbed9da8ce24247d3ccb4f73198e88fc447b0b210d8123d24"
+    },
+    "test-alt-alt-reanchoring.R": {
+      "bytes": 4670,
+      "sha256": "88efca7433d747faabebe54a9cf54e9161d544da610545d4b9845a68510b24d0"
+    },
+    "test-bi_alllelic.R": {
+      "bytes": 2058,
+      "sha256": "35b642f67dd3b0359b0ecb6015ef6039beac1ea464fabfa363703375995d045a"
+    },
+    "test-check_drop_indels.R": {
+      "bytes": 1135,
+      "sha256": "f5304f93abedbc595519cac0757d5f6dfb1dd2e881dbb26463da421a62b23b6d"
+    },
+    "test-check_impute_se_beta.R": {
+      "bytes": 12159,
+      "sha256": "e0968191ca968c8b8ddd6f91ba5d109809931571cdf64b2ac47c8d1acaa96043"
+    },
+    "test-check_info_score.R": {
+      "bytes": 2992,
+      "sha256": "2a790db93b79cf9c28bd1b1d83bc0e0f5ae14850af7889ce923e870728e01c1b"
+    },
+    "test-check_range_pval.R": {
+      "bytes": 902,
+      "sha256": "066158d78563b3535d0f229ed9637e738f5a3251a09c5baf18eafeea240109d1"
+    },
+    "test-check_small_p_val.R": {
+      "bytes": 637,
+      "sha256": "fa2351be20e5c9fb7201259281da144c829e73d8707b0543e4b8183de41ca428"
+    },
+    "test-check_tabular.R": {
+      "bytes": 1295,
+      "sha256": "8240b8b5102ea2339eccc41c86577d169d1ed1a4942b186bcd9c121e5817866b"
+    },
+    "test-check_vcf.R": {
+      "bytes": 680,
+      "sha256": "11abef192b557695c11b4531497db14296cadc4c160105a390ef37e040f71b80"
+    },
+    "test-check_zscore.R": {
+      "bytes": 1567,
+      "sha256": "6dec7fe6bcf664cb7ed4e9b6603c329ee52a977d6bf61ab778c0022cb0b5603d"
+    },
+    "test-chromosome-mapping-performance.R": {
+      "bytes": 3826,
+      "sha256": "c71ac7f2364906b57fe503b8ca7d86010d229657716db49d26a43b8a3da5bdca"
+    },
+    "test-combined_CHR_BP_A2_A1.R": {
+      "bytes": 2131,
+      "sha256": "ea53dcecc84dad54d61b5ef6ca9ecac4b81022c3d72993b462947a2ccffefc30"
+    },
+    "test-combined_CHR_BP_A2_A1_2.R": {
+      "bytes": 2200,
+      "sha256": "a0491ead455af84de4878d448cafd5eafc7bee81598598b018b31500451c7ee2"
+    },
+    "test-combined_allele_columns.R": {
+      "bytes": 2140,
+      "sha256": "02a11808881a9719ba24537829d475c06eb7501aaad37f53896e9e6981dab3f0"
+    },
+    "test-combined_chr_bp.R": {
+      "bytes": 1960,
+      "sha256": "3a45990d9144778eef521cdddd5151ba81c38116265d3369e5d091c8daf23dfc"
+    },
+    "test-combined_chr_bp_2.R": {
+      "bytes": 2037,
+      "sha256": "200890eb53aa87669ef48b67bf5ea5bced3515048fa46e29903fc486cae31476"
+    },
+    "test-comma_delim.R": {
+      "bytes": 1773,
+      "sha256": "4989ffcb59db97da16ca53a043841c1a997d8885507c83e876d8a6d44216447c"
+    },
+    "test-complex-contrast-boundary.R": {
+      "bytes": 5069,
+      "sha256": "8a4d4c6971785f60fa6cae93f9c0308baa2b117a9801525fde39e3fdb8c6c14f"
+    },
+    "test-compute_nsize.R": {
+      "bytes": 2953,
+      "sha256": "697312993470e2b9a47156e81a5a5f6fe595b59ba7586fcf13dad578ede9b604"
+    },
+    "test-contig-aliases.R": {
+      "bytes": 3195,
+      "sha256": "de37c88783489e82cdd87d862c8e76918df72abbd2a987536b763b3aebc14667"
+    },
+    "test-correct_format.R": {
+      "bytes": 1522,
+      "sha256": "1771669bf6d3be7d82c25b436d092b9b625472975d4e8c75371f38b340e0cb5a"
+    },
+    "test-dup_col.R": {
+      "bytes": 2633,
+      "sha256": "cc47ef40fb514dc98814d3100c05bd1ab0d7605629ef6344c909dd499892cc22"
+    },
+    "test-dup_rows.R": {
+      "bytes": 2884,
+      "sha256": "b47b2cdb8a87057dc277067e46386ac7696257c99c9c0f8b328c2d087002bc0e"
+    },
+    "test-effect_columns_nonzero.R": {
+      "bytes": 1510,
+      "sha256": "9ace3a88af28f92188e2262cdeca12369c731eee6ab416d219ca506207bcae5c"
+    },
+    "test-equivalent-indel-context.R": {
+      "bytes": 1612,
+      "sha256": "6fef003a32e0c0636dbac8b40534a7718f60396b5b863f8dd6adf7a218328507"
+    },
+    "test-fai-safety.R": {
+      "bytes": 5811,
+      "sha256": "8188ca8c72aeb11e198570e1a3ea5acc70012d38e4fdfb8c06f31939e8dd834d"
+    },
+    "test-frq_filter.R": {
+      "bytes": 2363,
+      "sha256": "d0d5c30694af3321ba0485c4300cf289b8214285ec0bc9bd816c575f2ed7cd3f"
+    },
+    "test-generic-coordinate-contract.R": {
+      "bytes": 12488,
+      "sha256": "8b61630c7a60858397fbd09c6ea77f169fd63c6ad0024af8ef7fcf5fdab0f167"
+    },
+    "test-get_genome_builds.R": {
+      "bytes": 942,
+      "sha256": "77b49a490de847f6fd8519e87c8a50fe21947d02273c571e2301becaaff7a97b"
+    },
+    "test-headers_correct.R": {
+      "bytes": 1449,
+      "sha256": "9069f5bfeb7905dcdedef10858f8c72f024f1b15ef0847f5f4ee68dbdd5fbd15"
+    },
+    "test-indels.R": {
+      "bytes": 2457,
+      "sha256": "9e95229308d689ed6a1baa02d04bebd706ed4d89180b713b7638a786e69bc6e9"
+    },
+    "test-index_tabular.R": {
+      "bytes": 2522,
+      "sha256": "e724554817c675f92c1a9c6c38e44226e9b9ba17e503ea7fbee3350c45c6b821"
+    },
+    "test-info_filter.R": {
+      "bytes": 1603,
+      "sha256": "3330df7b1ff52e3103c0dd3956c7b66808909c58243d6167fd4568806c0db68a"
+    },
+    "test-input_R_obj.R": {
+      "bytes": 1610,
+      "sha256": "2c5ce343ef255aab963871a810ce3fd0444c4e1d2dcf7c3323d08efbc0ba5fc6"
+    },
+    "test-issues_alleles.R": {
+      "bytes": 3880,
+      "sha256": "45ee3cb3b5cbc566580bd8adf124a8ed497134265ec6a541823cd2c1a4cec7a9"
+    },
+    "test-issues_chr.R": {
+      "bytes": 6568,
+      "sha256": "e2760884c36d65d9f5e5c571f6389c907b249e4c31a0a60286b8fe2c0851bd41"
+    },
+    "test-issues_dups.R": {
+      "bytes": 4262,
+      "sha256": "9ad38ed5db8cd87deae16d19b27995a8a1afc026212da4fa8914513acc3e9b7d"
+    },
+    "test-issues_effect_direction.R": {
+      "bytes": 9996,
+      "sha256": "e12dd47f2151ad8178cd8021e7e6a45feef09f67424369cf4e360589027693b1"
+    },
+    "test-issues_flip.R": {
+      "bytes": 8437,
+      "sha256": "ae439497b0e9c8218fed97f7057e2316fa461f2f2df2d8541d6ad5866ff07094"
+    },
+    "test-issues_headers.R": {
+      "bytes": 15592,
+      "sha256": "45076fc65820e4143e45099427305805b91538a362b1c496e0f71d4d2a0a0c76"
+    },
+    "test-issues_ieu_mock.R": {
+      "bytes": 6320,
+      "sha256": "c3853b04dab65367efec7aaed0f4c6fa0ec720b71e706fcea260cd23effd677d"
+    },
+    "test-issues_liftover.R": {
+      "bytes": 10939,
+      "sha256": "3c5e40f3bcb75faf5dabcd1e9a6b61aa81eb1d7a29b752c63f8e552c375775d2"
+    },
+    "test-issues_logs.R": {
+      "bytes": 7115,
+      "sha256": "b4276abb3634eb652ca160e54635a7326459beb04e978ecafdb5a91d097dd333"
+    },
+    "test-issues_n_frq.R": {
+      "bytes": 9032,
+      "sha256": "54038396e349827bb17f81d18f9c43cc5233f155de7e11334df0addceb73a08c"
+    },
+    "test-issues_pvals_z.R": {
+      "bytes": 7640,
+      "sha256": "37a5ccd9db3d55aa57b795d4ae06c0b75ba4fa8f95506be5b06294b9e6c5b081"
+    },
+    "test-issues_read.R": {
+      "bytes": 4910,
+      "sha256": "df262d2a15a17d2b3c87e2a7372bd87c017c7183e7489d1ae8853ded98a77f7b"
+    },
+    "test-issues_ref_genome.R": {
+      "bytes": 9229,
+      "sha256": "a470579b405448a1602db249b21ee7cd502e9e10dafb2a862540abf68c88b08a"
+    },
+    "test-issues_save_path.R": {
+      "bytes": 6588,
+      "sha256": "74b771500598155092fc49f6abe0a04611c1c2b1900ff7da698eabf0f3624d26"
+    },
+    "test-issues_snp_ids.R": {
+      "bytes": 10245,
+      "sha256": "ec6645068750b5d951b77725eb5d13d373669e8e776258740c3e04c21e0fffa7"
+    },
+    "test-issues_validate.R": {
+      "bytes": 5964,
+      "sha256": "38e3061ba66502da0bc8b85bcd13829eaa095d238405759da7d38ca15818cb53"
+    },
+    "test-issues_write.R": {
+      "bytes": 8783,
+      "sha256": "b8244aeec645b9763cef0d2a095cd9ac98fe6404fc03b6110732be5e1395d9a1"
+    },
+    "test-list_sumstats.R": {
+      "bytes": 1589,
+      "sha256": "ca45527777b71e12812790b7913420ce2095f60e36186b9562710da69473a224"
+    },
+    "test-log10_p.R": {
+      "bytes": 3044,
+      "sha256": "2ef05660fbed9bf167176e001751a036c104b6b69e1f18e517a4f3f275f48b2c"
+    },
+    "test-missing_data.R": {
+      "bytes": 4136,
+      "sha256": "3b153d5548d72e967f192e49b1260a788d98e1fbe699812190ddd7c26d76e286"
+    },
+    "test-multi_rs_snp_one_row.R": {
+      "bytes": 4977,
+      "sha256": "59fce3c7e8113621b1996780f7386dd6ea55ffec90ebead883cf50efd525d486"
+    },
+    "test-multi_traits.R": {
+      "bytes": 2670,
+      "sha256": "5bd2e64cc79912ee24f06db99d1a7a0116aca69ab51cee5e545b8e385a1bbb03"
+    },
+    "test-n_not_integer.R": {
+      "bytes": 1430,
+      "sha256": "4d6f8c01f1e164294a8443f92752bd1bac6eedeab0b95ba83d6bf5f8d6d2dd4a"
+    },
+    "test-n_num.R": {
+      "bytes": 2914,
+      "sha256": "cc8ff50119dbc8ed46ec30eca540edcef8f5db8cf21ffdc0f3a6531f13467027"
+    },
+    "test-no_chr.R": {
+      "bytes": 1971,
+      "sha256": "4f3d9c3362c7548ae1455bdf011f709e9350da41bcefd8961edb9475b03317f8"
+    },
+    "test-no_chr_bp.R": {
+      "bytes": 2375,
+      "sha256": "e754044b8eca39aadd4f8388f9e66766ffb7652aed9b063c449fe1ee1f0af136"
+    },
+    "test-no_rs_id.R": {
+      "bytes": 1751,
+      "sha256": "2ee8b8e82ae00b873598975cb6e62c0063882c6ff80958f805048ad7504a101e"
+    },
+    "test-no_rs_snp.R": {
+      "bytes": 4307,
+      "sha256": "61c31f4fed59585a5b1690b067dd654b98d15c181c5cb46c385d620daf4cb8ea"
+    },
+    "test-no_snp.R": {
+      "bytes": 1864,
+      "sha256": "b9290d998ffccdfefe0b53243455e2ae303c80cf766949d0e41fb2715ee51d8e"
+    },
+    "test-on_x_y_mt_chr.R": {
+      "bytes": 2325,
+      "sha256": "6723197ccfbb723e4dfcaa285c634416d6fff60940a6fb953adab0aa80c3899e"
+    },
+    "test-paired-site-contexts.R": {
+      "bytes": 6003,
+      "sha256": "6bafde3b3fb9bcbc3579d48dc1e601ffeea4aa21963f951b5aeefd9545aaf4e9"
+    },
+    "test-preservation-fasta-layout.R": {
+      "bytes": 4816,
+      "sha256": "8302f29dc4bd9b6931f6b3ccf343f4730fdca5aba60f11598644ff2a1cf33dde"
+    },
+    "test-preservation-stream-performance.R": {
+      "bytes": 17628,
+      "sha256": "d2b87c484754f1ca7dd5448deba65b61b4d5c79b3217b29c647df32faae58455"
+    },
+    "test-preservation.R": {
+      "bytes": 9732,
+      "sha256": "367fc82831398200655400a55d71538db84047c9e61c937dbd56abef05c6e3fc"
+    },
+    "test-projection.R": {
+      "bytes": 10801,
+      "sha256": "c8badea2e2f91b3b2123bb5c76bbce1552edc4daaf0b43c155621171d7ac9dab"
+    },
+    "test-quoted-stream.R": {
+      "bytes": 4560,
+      "sha256": "c9b45403040a927db9eff248f076330f46da50dfebbc26df2bb79d4a11489193"
+    },
+    "test-read_header.R": {
+      "bytes": 1570,
+      "sha256": "46c8c7d8721a9ea6e98814426808b02a24ced2266b5d0bffd4f01ac01f215ae0"
+    },
+    "test-read_sumstats.R": {
+      "bytes": 2533,
+      "sha256": "63099e447ec81f5fda853b5eaf9e35fa7263ec5377f641c29ca4fa9e155eb7b6"
+    },
+    "test-read_vcf.R": {
+      "bytes": 1522,
+      "sha256": "326769390ab5ff4b021904d5322b2c7cb7653d141b7856ec0d62356bf223f2e4"
+    },
+    "test-reference-format3.R": {
+      "bytes": 9069,
+      "sha256": "20205c11fdb5069bfd97c70f3433fa213a0d96d7bbd738761a39cdaf2705b436"
+    },
+    "test-reference-relocation.R": {
+      "bytes": 15060,
+      "sha256": "84fd05ae6cd8d88b2f8d63435ce40c00484ab58786f4ca07f9ed99c35a2eab90"
+    },
+    "test-rs_plus.R": {
+      "bytes": 2247,
+      "sha256": "8fd81fa739f0f31514a07719812540768920024d1baf8c0a7630347f9b13df1c"
+    },
+    "test-signed_cols.R": {
+      "bytes": 1414,
+      "sha256": "433d1a8a27d640d8a89f80ab2ed357896e494cc65360abc71204eb6d917d0611"
+    },
+    "test-small_p_val.R": {
+      "bytes": 1897,
+      "sha256": "04c4bf0399af7eaad81ed60c08c508befdc5152aee022465d9a32a267bc7a43a"
+    },
+    "test-source-reference-contract.R": {
+      "bytes": 4905,
+      "sha256": "94f7569eb35c317ac89eb206236909462f35b04a683c37a14a2c9272d99ac40b"
+    },
+    "test-space_delim.R": {
+      "bytes": 1812,
+      "sha256": "e64d79f9afef239361dcdd776b15fdfc1b7c001352ca31023959470df2980780"
+    },
+    "test-standard_error_positive.R": {
+      "bytes": 1522,
+      "sha256": "ec2930b984459920080aa25e008b9974566023cd77d5145192beb9df7525f2d5"
+    },
+    "test-standardise_sumstats_column_headers_crossplatform.R": {
+      "bytes": 1464,
+      "sha256": "69b6a7b6ad934f78541715d73c1f3882c0eb2b135c4c10da186fb3f43317677e"
+    },
+    "test-strand_ambig.R": {
+      "bytes": 2164,
+      "sha256": "4655c5a4a0d56cbe58082a78c859a0777b80ad977006c160c18c85dac0ed1de9"
+    },
+    "test-user_mapping_file.R": {
+      "bytes": 2282,
+      "sha256": "7256b44566caf50fada8cf0455306e4cbceceed644a97d2d80ec6ac528b63c20"
+    },
+    "test-validate_parameters.R": {
+      "bytes": 7734,
+      "sha256": "f84b870d092b24b77022e926f7f6babbfb506347b6a437c379a9c71cb4553ab4"
+    },
+    "test-vital_cols.R": {
+      "bytes": 1493,
+      "sha256": "d232e2fbce58fb7236ff230e1fa8c4ea7af975c211273ee6dc4d4edba0046411"
+    },
+    "test-write_sumstats.R": {
+      "bytes": 3747,
+      "sha256": "7e79ae1da418646a8ff408dd991aeb76fcbc4fef804840a0fc756cac8a97dd88"
+    }
+  },
+  "status": "prospective_source_case_contract_not_current_execution_evidence"
+}

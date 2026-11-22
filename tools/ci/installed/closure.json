@@ -1,0 +1,3295 @@
+{
+  "Bioconductor": "3.22",
+  "R": "4.5.3",
+  "Rtools": "45",
+  "code_package_count": 148,
+  "installation_order": {
+    "linux": [
+      "abind",
+      "base64enc",
+      "BH",
+      "BiocBaseUtils",
+      "BiocManager",
+      "bit",
+      "bitops",
+      "brio",
+      "cli",
+      "clipr",
+      "cpp11",
+      "crayon",
+      "curl",
+      "data.table",
+      "DBI",
+      "digest",
+      "evaluate",
+      "farver",
+      "fastmap",
+      "formatR",
+      "fs",
+      "futile.options",
+      "generics",
+      "gitcreds",
+      "glue",
+      "ini",
+      "jsonlite",
+      "labeling",
+      "magrittr",
+      "matrixStats",
+      "mime",
+      "otel",
+      "pak",
+      "pkgconfig",
+      "png",
+      "praise",
+      "ps",
+      "R.methodsS3",
+      "R6",
+      "rappdirs",
+      "RColorBrewer",
+      "Rcpp",
+      "Rhtslib",
+      "rjson",
+      "rlang",
+      "rprojroot",
+      "rstudioapi",
+      "S7",
+      "snow",
+      "stringi",
+      "sys",
+      "utf8",
+      "viridisLite",
+      "whisker",
+      "withr",
+      "xfun",
+      "XML",
+      "yaml",
+      "askpass",
+      "BiocGenerics",
+      "bit64",
+      "cachem",
+      "desc",
+      "diffobj",
+      "highr",
+      "htmltools",
+      "isoband",
+      "lambda.r",
+      "lifecycle",
+      "litedown",
+      "MatrixGenerics",
+      "plyr",
+      "processx",
+      "R.oo",
+      "RCurl",
+      "rex",
+      "tinytex",
+      "yulab.utils",
+      "zip",
+      "Biobase",
+      "callr",
+      "fontawesome",
+      "futile.logger",
+      "gtable",
+      "jquerylib",
+      "knitr",
+      "markdown",
+      "memoise",
+      "openssl",
+      "R.utils",
+      "rvcheck",
+      "S4Vectors",
+      "sass",
+      "scales",
+      "vctrs",
+      "waldo",
+      "BiocIO",
+      "BiocParallel",
+      "blob",
+      "bslib",
+      "credentials",
+      "ggplot2",
+      "gridExtra",
+      "httr",
+      "httr2",
+      "IRanges",
+      "pillar",
+      "pkgbuild",
+      "purrr",
+      "restfulr",
+      "stringr",
+      "tidyselect",
+      "covr",
+      "dlstats",
+      "gert",
+      "gh",
+      "pkgload",
+      "rmarkdown",
+      "RSQLite",
+      "S4Arrays",
+      "Seqinfo",
+      "tibble",
+      "UCSC.utils",
+      "UpSetR",
+      "XVector",
+      "Biostrings",
+      "bookdown",
+      "dplyr",
+      "GenomeInfoDb",
+      "GenomicRanges",
+      "SparseArray",
+      "testthat",
+      "usethis",
+      "badger",
+      "BiocStyle",
+      "cigarillo",
+      "DelayedArray",
+      "ieugwasr",
+      "KEGGREST",
+      "Rsamtools",
+      "AnnotationDbi",
+      "SummarizedExperiment",
+      "GenomicAlignments",
+      "rtracklayer",
+      "BSgenome",
+      "GenomicFeatures",
+      "BSgenome.Hsapiens.1000genomes.hs37d5",
+      "BSgenome.Hsapiens.NCBI.GRCh38",
+      "SNPlocs.Hsapiens.dbSNP144.GRCh37",
+      "SNPlocs.Hsapiens.dbSNP144.GRCh38",
+      "SNPlocs.Hsapiens.dbSNP155.GRCh37",
+      "SNPlocs.Hsapiens.dbSNP155.GRCh38",
+      "VariantAnnotation",
+      "GenomicFiles"
+    ],
+    "windows": [
+      "abind",
+      "base64enc",
+      "BH",
+      "BiocBaseUtils",
+      "BiocManager",
+      "bit",
+      "bitops",
+      "brio",
+      "cli",
+      "clipr",
+      "cpp11",
+      "crayon",
+      "curl",
+      "data.table",
+      "DBI",
+      "digest",
+      "evaluate",
+      "farver",
+      "fastmap",
+      "formatR",
+      "fs",
+      "futile.options",
+      "generics",
+      "gitcreds",
+      "glue",
+      "ini",
+      "jsonlite",
+      "labeling",
+      "magrittr",
+      "matrixStats",
+      "mime",
+      "otel",
+      "pak",
+      "pkgconfig",
+      "png",
+      "praise",
+      "ps",
+      "R.methodsS3",
+      "R6",
+      "rappdirs",
+      "RColorBrewer",
+      "Rcpp",
+      "Rhtslib",
+      "rjson",
+      "rlang",
+      "rprojroot",
+      "rstudioapi",
+      "S7",
+      "snow",
+      "stringi",
+      "sys",
+      "utf8",
+      "viridisLite",
+      "whisker",
+      "withr",
+      "xfun",
+      "XML",
+      "yaml",
+      "askpass",
+      "BiocGenerics",
+      "bit64",
+      "cachem",
+      "desc",
+      "diffobj",
+      "highr",
+      "htmltools",
+      "isoband",
+      "lambda.r",
+      "lifecycle",
+      "litedown",
+      "MatrixGenerics",
+      "plyr",
+      "processx",
+      "R.oo",
+      "RCurl",
+      "rex",
+      "tinytex",
+      "yulab.utils",
+      "zip",
+      "Biobase",
+      "callr",
+      "fontawesome",
+      "futile.logger",
+      "gtable",
+      "jquerylib",
+      "knitr",
+      "markdown",
+      "memoise",
+      "openssl",
+      "R.utils",
+      "rvcheck",
+      "S4Vectors",
+      "sass",
+      "scales",
+      "vctrs",
+      "waldo",
+      "BiocIO",
+      "BiocParallel",
+      "blob",
+      "bslib",
+      "credentials",
+      "ggplot2",
+      "gridExtra",
+      "httr",
+      "httr2",
+      "IRanges",
+      "pillar",
+      "pkgbuild",
+      "purrr",
+      "restfulr",
+      "stringr",
+      "tidyselect",
+      "covr",
+      "dlstats",
+      "gert",
+      "gh",
+      "pkgload",
+      "rmarkdown",
+      "RSQLite",
+      "S4Arrays",
+      "Seqinfo",
+      "tibble",
+      "UCSC.utils",
+      "UpSetR",
+      "XVector",
+      "Biostrings",
+      "bookdown",
+      "dplyr",
+      "GenomeInfoDb",
+      "GenomicRanges",
+      "SparseArray",
+      "testthat",
+      "usethis",
+      "badger",
+      "BiocStyle",
+      "cigarillo",
+      "DelayedArray",
+      "ieugwasr",
+      "KEGGREST",
+      "Rsamtools",
+      "AnnotationDbi",
+      "SummarizedExperiment",
+      "GenomicAlignments",
+      "rtracklayer",
+      "BSgenome",
+      "GenomicFeatures",
+      "BSgenome.Hsapiens.1000genomes.hs37d5",
+      "BSgenome.Hsapiens.NCBI.GRCh38",
+      "SNPlocs.Hsapiens.dbSNP144.GRCh37",
+      "SNPlocs.Hsapiens.dbSNP144.GRCh38",
+      "SNPlocs.Hsapiens.dbSNP155.GRCh37",
+      "SNPlocs.Hsapiens.dbSNP155.GRCh38",
+      "VariantAnnotation",
+      "GenomicFiles"
+    ]
+  },
+  "lanes": {
+    "linux-gold": {
+      "code_packages": 148,
+      "installed_packages": 150,
+      "reference_packages": [
+        "BSgenome.Hsapiens.1000genomes.hs37d5",
+        "SNPlocs.Hsapiens.dbSNP144.GRCh37"
+      ]
+    },
+    "windows": {
+      "code_packages": 148,
+      "installed_packages": 154,
+      "reference_packages": [
+        "BSgenome.Hsapiens.1000genomes.hs37d5",
+        "BSgenome.Hsapiens.NCBI.GRCh38",
+        "SNPlocs.Hsapiens.dbSNP144.GRCh37",
+        "SNPlocs.Hsapiens.dbSNP144.GRCh38",
+        "SNPlocs.Hsapiens.dbSNP155.GRCh37",
+        "SNPlocs.Hsapiens.dbSNP155.GRCh38"
+      ]
+    }
+  },
+  "legacy_used_references": [
+    "BSgenome.Hsapiens.1000genomes.hs37d5",
+    "SNPlocs.Hsapiens.dbSNP144.GRCh37"
+  ],
+  "packages": {
+    "AnnotationDbi": {
+      "artifacts": {
+        "linux": {
+          "archive": "AnnotationDbi_1.72.0.tar.gz",
+          "bytes": "4380728",
+          "sha256": "6774d57293bb7a45b81fa60433ba360f5197a5427384597f400218d0519ff96f",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/AnnotationDbi_1.72.0.tar.gz"
+        },
+        "windows": {
+          "archive": "AnnotationDbi_1.72.0.tar.gz",
+          "bytes": "4380728",
+          "sha256": "6774d57293bb7a45b81fa60433ba360f5197a5427384597f400218d0519ff96f",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/AnnotationDbi_1.72.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.72.0"
+    },
+    "BH": {
+      "artifacts": {
+        "linux": {
+          "archive": "BH_1.90.0-1.tar.gz",
+          "bytes": "14307014",
+          "sha256": "2e1fafb05938e81073561ae4892dc543ef15807e375e0ea8fa75e3ab79f0281b",
+          "source": "https://cran.r-project.org/src/contrib/BH_1.90.0-1.tar.gz"
+        },
+        "windows": {
+          "archive": "BH_1.90.0-1.tar.gz",
+          "bytes": "14307014",
+          "sha256": "2e1fafb05938e81073561ae4892dc543ef15807e375e0ea8fa75e3ab79f0281b",
+          "source": "https://cloud.r-project.org/src/contrib/BH_1.90.0-1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.90.0-1"
+    },
+    "BSgenome": {
+      "artifacts": {
+        "linux": {
+          "archive": "BSgenome_1.78.0.tar.gz",
+          "bytes": "5903877",
+          "sha256": "f1c9f78221cac03ef2570f14242151ec7307e214580b9baf2c0abc634db34416",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/BSgenome_1.78.0.tar.gz"
+        },
+        "windows": {
+          "archive": "BSgenome_1.78.0.tar.gz",
+          "bytes": "5903877",
+          "sha256": "f1c9f78221cac03ef2570f14242151ec7307e214580b9baf2c0abc634db34416",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/BSgenome_1.78.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.78.0"
+    },
+    "BSgenome.Hsapiens.1000genomes.hs37d5": {
+      "artifacts": {
+        "linux": {
+          "archive": "BSgenome.Hsapiens.1000genomes.hs37d5_0.99.1.tar.gz",
+          "bytes": "687514862",
+          "sha256": "591fb6b984d10c56d6c6efdabcd694414c1a89f7e2c27405f77ceb8a5d79e0b1",
+          "source": "https://bioconductor.org/packages/3.22/data/annotation/src/contrib/BSgenome.Hsapiens.1000genomes.hs37d5_0.99.1.tar.gz"
+        },
+        "windows": {
+          "archive": "BSgenome.Hsapiens.1000genomes.hs37d5_0.99.1.tar.gz",
+          "bytes": "687514862",
+          "sha256": "591fb6b984d10c56d6c6efdabcd694414c1a89f7e2c27405f77ceb8a5d79e0b1",
+          "source": "https://bioconductor.org/packages/3.22/data/annotation/src/contrib/BSgenome.Hsapiens.1000genomes.hs37d5_0.99.1.tar.gz"
+        }
+      },
+      "kind": "reference",
+      "version": "0.99.1"
+    },
+    "BSgenome.Hsapiens.NCBI.GRCh38": {
+      "artifacts": {
+        "linux": {
+          "archive": "BSgenome.Hsapiens.NCBI.GRCh38_1.3.1000.tar.gz",
+          "bytes": "845207156",
+          "sha256": "812538bdacfd0eb90714916203dec85b22de2a5f7aaf0d0431d0a15370c3e578",
+          "source": "https://bioconductor.org/packages/3.22/data/annotation/src/contrib/BSgenome.Hsapiens.NCBI.GRCh38_1.3.1000.tar.gz"
+        },
+        "windows": {
+          "archive": "BSgenome.Hsapiens.NCBI.GRCh38_1.3.1000.tar.gz",
+          "bytes": "845207156",
+          "sha256": "812538bdacfd0eb90714916203dec85b22de2a5f7aaf0d0431d0a15370c3e578",
+          "source": "https://bioconductor.org/packages/3.22/data/annotation/src/contrib/BSgenome.Hsapiens.NCBI.GRCh38_1.3.1000.tar.gz"
+        }
+      },
+      "kind": "reference",
+      "version": "1.3.1000"
+    },
+    "Biobase": {
+      "artifacts": {
+        "linux": {
+          "archive": "Biobase_2.70.0.tar.gz",
+          "bytes": "1978690",
+          "sha256": "530a7435640e86c34db16bcc4c8a38b5046ac79512a86e7b97f66a9d57813cbc",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/Biobase_2.70.0.tar.gz"
+        },
+        "windows": {
+          "archive": "Biobase_2.70.0.tar.gz",
+          "bytes": "1978690",
+          "sha256": "530a7435640e86c34db16bcc4c8a38b5046ac79512a86e7b97f66a9d57813cbc",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/Biobase_2.70.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "2.70.0"
+    },
+    "BiocBaseUtils": {
+      "artifacts": {
+        "linux": {
+          "archive": "BiocBaseUtils_1.12.0.tar.gz",
+          "bytes": "232556",
+          "sha256": "884cc8922f56ccc9f244451589b83299ee50027259c92dc1ac12c0da7b210a1a",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/BiocBaseUtils_1.12.0.tar.gz"
+        },
+        "windows": {
+          "archive": "BiocBaseUtils_1.12.0.tar.gz",
+          "bytes": "232556",
+          "sha256": "884cc8922f56ccc9f244451589b83299ee50027259c92dc1ac12c0da7b210a1a",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/BiocBaseUtils_1.12.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.12.0"
+    },
+    "BiocGenerics": {
+      "artifacts": {
+        "linux": {
+          "archive": "BiocGenerics_0.56.0.tar.gz",
+          "bytes": "61534",
+          "sha256": "17795ff63ca767a48df95d2f4c774400c6098102dce9ffcb5db2596a6d9b68e0",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/BiocGenerics_0.56.0.tar.gz"
+        },
+        "windows": {
+          "archive": "BiocGenerics_0.56.0.tar.gz",
+          "bytes": "61534",
+          "sha256": "17795ff63ca767a48df95d2f4c774400c6098102dce9ffcb5db2596a6d9b68e0",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/BiocGenerics_0.56.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.56.0"
+    },
+    "BiocIO": {
+      "artifacts": {
+        "linux": {
+          "archive": "BiocIO_1.20.0.tar.gz",
+          "bytes": "232371",
+          "sha256": "8177843b09d17fa2ecb155d01af8229531e92799cd169726c28c3aa47143cd8b",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/BiocIO_1.20.0.tar.gz"
+        },
+        "windows": {
+          "archive": "BiocIO_1.20.0.tar.gz",
+          "bytes": "232371",
+          "sha256": "8177843b09d17fa2ecb155d01af8229531e92799cd169726c28c3aa47143cd8b",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/BiocIO_1.20.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.20.0"
+    },
+    "BiocManager": {
+      "artifacts": {
+        "linux": {
+          "archive": "BiocManager_1.30.27.tar.gz",
+          "bytes": "752490",
+          "sha256": "acbfdcf09602c8279085556ca54531c2ada0ac3c1775d54ce2c3b9a3dc03fbb5",
+          "source": "https://cran.r-project.org/src/contrib/BiocManager_1.30.27.tar.gz"
+        },
+        "windows": {
+          "archive": "BiocManager_1.30.27.tar.gz",
+          "bytes": "752490",
+          "sha256": "acbfdcf09602c8279085556ca54531c2ada0ac3c1775d54ce2c3b9a3dc03fbb5",
+          "source": "https://cloud.r-project.org/src/contrib/BiocManager_1.30.27.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.30.27"
+    },
+    "BiocParallel": {
+      "artifacts": {
+        "linux": {
+          "archive": "BiocParallel_1.44.0.tar.gz",
+          "bytes": "1108179",
+          "sha256": "3b2069e6b5aeb9c2e0586c110527dc2557240f4a447b67b8061931ee0b9a23c2",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/BiocParallel_1.44.0.tar.gz"
+        },
+        "windows": {
+          "archive": "BiocParallel_1.44.0.tar.gz",
+          "bytes": "1108179",
+          "sha256": "3b2069e6b5aeb9c2e0586c110527dc2557240f4a447b67b8061931ee0b9a23c2",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/BiocParallel_1.44.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.44.0"
+    },
+    "BiocStyle": {
+      "artifacts": {
+        "linux": {
+          "archive": "BiocStyle_2.38.0.tar.gz",
+          "bytes": "908653",
+          "sha256": "a884cf0727e6e921c774ac883e247946c5b4f22e6f0f759ec69a8636dc9b2720",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/BiocStyle_2.38.0.tar.gz"
+        },
+        "windows": {
+          "archive": "BiocStyle_2.38.0.tar.gz",
+          "bytes": "908653",
+          "sha256": "a884cf0727e6e921c774ac883e247946c5b4f22e6f0f759ec69a8636dc9b2720",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/BiocStyle_2.38.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "2.38.0"
+    },
+    "Biostrings": {
+      "artifacts": {
+        "linux": {
+          "archive": "Biostrings_2.78.0.tar.gz",
+          "bytes": "12823602",
+          "sha256": "b3ab668e0202a1be3ca04e5e09bf85c51ea6a23a6a4231df7c35eac1233fd685",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/Biostrings_2.78.0.tar.gz"
+        },
+        "windows": {
+          "archive": "Biostrings_2.78.0.tar.gz",
+          "bytes": "12823602",
+          "sha256": "b3ab668e0202a1be3ca04e5e09bf85c51ea6a23a6a4231df7c35eac1233fd685",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/Biostrings_2.78.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "2.78.0"
+    },
+    "DBI": {
+      "artifacts": {
+        "linux": {
+          "archive": "DBI_1.3.0.tar.gz",
+          "bytes": "744704",
+          "sha256": "13def8e90cbe41205a0dfcf585a6a7ea79ce10d45969789e82613c7ce3d5fb18",
+          "source": "https://cran.r-project.org/src/contrib/DBI_1.3.0.tar.gz"
+        },
+        "windows": {
+          "archive": "DBI_1.3.0.tar.gz",
+          "bytes": "744704",
+          "sha256": "13def8e90cbe41205a0dfcf585a6a7ea79ce10d45969789e82613c7ce3d5fb18",
+          "source": "https://cloud.r-project.org/src/contrib/DBI_1.3.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.3.0"
+    },
+    "DelayedArray": {
+      "artifacts": {
+        "linux": {
+          "archive": "DelayedArray_0.36.1.tar.gz",
+          "bytes": "815062",
+          "sha256": "3ac71b2914c233c9fb57f5f1c94f59d8e40dd339ba1777d6740015c01d6519ee",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/DelayedArray_0.36.1.tar.gz"
+        },
+        "windows": {
+          "archive": "DelayedArray_0.36.1.tar.gz",
+          "bytes": "815062",
+          "sha256": "3ac71b2914c233c9fb57f5f1c94f59d8e40dd339ba1777d6740015c01d6519ee",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/DelayedArray_0.36.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.36.1"
+    },
+    "GenomeInfoDb": {
+      "artifacts": {
+        "linux": {
+          "archive": "GenomeInfoDb_1.46.2.tar.gz",
+          "bytes": "3648336",
+          "sha256": "1619aaebc6b1716e19fef2ef9dad1a1b10311e8d56c0918204db0ee5e3647caa",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/GenomeInfoDb_1.46.2.tar.gz"
+        },
+        "windows": {
+          "archive": "GenomeInfoDb_1.46.2.tar.gz",
+          "bytes": "3648336",
+          "sha256": "1619aaebc6b1716e19fef2ef9dad1a1b10311e8d56c0918204db0ee5e3647caa",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/GenomeInfoDb_1.46.2.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.46.2"
+    },
+    "GenomicAlignments": {
+      "artifacts": {
+        "linux": {
+          "archive": "GenomicAlignments_1.46.0.tar.gz",
+          "bytes": "2260096",
+          "sha256": "f27fa39ad9fd5c8db15335ff21b3cfa18b2d2f06e5ad8e7174c894351d2f46a3",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/GenomicAlignments_1.46.0.tar.gz"
+        },
+        "windows": {
+          "archive": "GenomicAlignments_1.46.0.tar.gz",
+          "bytes": "2260096",
+          "sha256": "f27fa39ad9fd5c8db15335ff21b3cfa18b2d2f06e5ad8e7174c894351d2f46a3",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/GenomicAlignments_1.46.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.46.0"
+    },
+    "GenomicFeatures": {
+      "artifacts": {
+        "linux": {
+          "archive": "GenomicFeatures_1.62.0.tar.gz",
+          "bytes": "574452",
+          "sha256": "f7a51eacb533952f6672d2baba1899f54e7ff2017fe4ffc68fc56eedea855f67",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/GenomicFeatures_1.62.0.tar.gz"
+        },
+        "windows": {
+          "archive": "GenomicFeatures_1.62.0.tar.gz",
+          "bytes": "574452",
+          "sha256": "f7a51eacb533952f6672d2baba1899f54e7ff2017fe4ffc68fc56eedea855f67",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/GenomicFeatures_1.62.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.62.0"
+    },
+    "GenomicFiles": {
+      "artifacts": {
+        "linux": {
+          "archive": "GenomicFiles_1.46.0.tar.gz",
+          "bytes": "730918",
+          "sha256": "47b53ceddc4d547855cb248c27c489ecd81d8f9fa4359249c214881812818857",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/GenomicFiles_1.46.0.tar.gz"
+        },
+        "windows": {
+          "archive": "GenomicFiles_1.46.0.tar.gz",
+          "bytes": "730918",
+          "sha256": "47b53ceddc4d547855cb248c27c489ecd81d8f9fa4359249c214881812818857",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/GenomicFiles_1.46.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.46.0"
+    },
+    "GenomicRanges": {
+      "artifacts": {
+        "linux": {
+          "archive": "GenomicRanges_1.62.1.tar.gz",
+          "bytes": "1375832",
+          "sha256": "60fc1b77dc280e7384be30d62e1125a18be111a9a1c1581f5dc5c4311a7bc5d5",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/GenomicRanges_1.62.1.tar.gz"
+        },
+        "windows": {
+          "archive": "GenomicRanges_1.62.1.tar.gz",
+          "bytes": "1375832",
+          "sha256": "60fc1b77dc280e7384be30d62e1125a18be111a9a1c1581f5dc5c4311a7bc5d5",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/GenomicRanges_1.62.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.62.1"
+    },
+    "IRanges": {
+      "artifacts": {
+        "linux": {
+          "archive": "IRanges_2.44.0.tar.gz",
+          "bytes": "496065",
+          "sha256": "244e55ca485805ae2fcae8621dec7bb35e9fcd0da707271eb5ef984b88605042",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/IRanges_2.44.0.tar.gz"
+        },
+        "windows": {
+          "archive": "IRanges_2.44.0.tar.gz",
+          "bytes": "496065",
+          "sha256": "244e55ca485805ae2fcae8621dec7bb35e9fcd0da707271eb5ef984b88605042",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/IRanges_2.44.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "2.44.0"
+    },
+    "KEGGREST": {
+      "artifacts": {
+        "linux": {
+          "archive": "KEGGREST_1.50.0.tar.gz",
+          "bytes": "239728",
+          "sha256": "85d5c1838cb4d02b04e3ab958a2097c3fd23f586d34e867d297c644555555c25",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/KEGGREST_1.50.0.tar.gz"
+        },
+        "windows": {
+          "archive": "KEGGREST_1.50.0.tar.gz",
+          "bytes": "239728",
+          "sha256": "85d5c1838cb4d02b04e3ab958a2097c3fd23f586d34e867d297c644555555c25",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/KEGGREST_1.50.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.50.0"
+    },
+    "MatrixGenerics": {
+      "artifacts": {
+        "linux": {
+          "archive": "MatrixGenerics_1.22.0.tar.gz",
+          "bytes": "34596",
+          "sha256": "b53dcb3c9ac7e1e6e0a297f90c1603ab2a39e052718bd70d76aeed6f6110557a",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/MatrixGenerics_1.22.0.tar.gz"
+        },
+        "windows": {
+          "archive": "MatrixGenerics_1.22.0.tar.gz",
+          "bytes": "34596",
+          "sha256": "b53dcb3c9ac7e1e6e0a297f90c1603ab2a39e052718bd70d76aeed6f6110557a",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/MatrixGenerics_1.22.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.22.0"
+    },
+    "R.methodsS3": {
+      "artifacts": {
+        "linux": {
+          "archive": "R.methodsS3_1.8.2.tar.gz",
+          "bytes": "24131",
+          "sha256": "822d5e61dad4c91e8883be2b38d7b89f87492046d0fe345704eb5d2658927c2e",
+          "source": "https://cran.r-project.org/src/contrib/R.methodsS3_1.8.2.tar.gz"
+        },
+        "windows": {
+          "archive": "R.methodsS3_1.8.2.tar.gz",
+          "bytes": "24131",
+          "sha256": "822d5e61dad4c91e8883be2b38d7b89f87492046d0fe345704eb5d2658927c2e",
+          "source": "https://cloud.r-project.org/src/contrib/R.methodsS3_1.8.2.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.8.2"
+    },
+    "R.oo": {
+      "artifacts": {
+        "linux": {
+          "archive": "R.oo_1.27.1.tar.gz",
+          "bytes": "384264",
+          "sha256": "5faf599cc1f027d8b80e1270aa6a43e29dccd6fee8287953f13e7ab3d94270f5",
+          "source": "https://cran.r-project.org/src/contrib/R.oo_1.27.1.tar.gz"
+        },
+        "windows": {
+          "archive": "R.oo_1.27.1.tar.gz",
+          "bytes": "384264",
+          "sha256": "5faf599cc1f027d8b80e1270aa6a43e29dccd6fee8287953f13e7ab3d94270f5",
+          "source": "https://cloud.r-project.org/src/contrib/R.oo_1.27.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.27.1"
+    },
+    "R.utils": {
+      "artifacts": {
+        "linux": {
+          "archive": "R.utils_2.13.0.tar.gz",
+          "bytes": "367225",
+          "sha256": "ab2043c34e129928ff85a037ce7a3f7791f245f49a55ee9a95bd7df0813bcf25",
+          "source": "https://cran.r-project.org/src/contrib/R.utils_2.13.0.tar.gz"
+        },
+        "windows": {
+          "archive": "R.utils_2.13.0.tar.gz",
+          "bytes": "367225",
+          "sha256": "ab2043c34e129928ff85a037ce7a3f7791f245f49a55ee9a95bd7df0813bcf25",
+          "source": "https://cloud.r-project.org/src/contrib/R.utils_2.13.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "2.13.0"
+    },
+    "R6": {
+      "artifacts": {
+        "linux": {
+          "archive": "R6_2.6.1.tar.gz",
+          "bytes": "64507",
+          "sha256": "59c6eba8b1b912eb7e104f65053235604be853425ee67c152ac4e86a1f2073b4",
+          "source": "https://cran.r-project.org/src/contrib/R6_2.6.1.tar.gz"
+        },
+        "windows": {
+          "archive": "R6_2.6.1.tar.gz",
+          "bytes": "64507",
+          "sha256": "59c6eba8b1b912eb7e104f65053235604be853425ee67c152ac4e86a1f2073b4",
+          "source": "https://cloud.r-project.org/src/contrib/R6_2.6.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "2.6.1"
+    },
+    "RColorBrewer": {
+      "artifacts": {
+        "linux": {
+          "archive": "RColorBrewer_1.1-3.tar.gz",
+          "bytes": "11638",
+          "sha256": "4f42f5423c45688b39f492c7892d93f37b4541831c8ffb140364d2bd89031ac0",
+          "source": "https://cran.r-project.org/src/contrib/RColorBrewer_1.1-3.tar.gz"
+        },
+        "windows": {
+          "archive": "RColorBrewer_1.1-3.tar.gz",
+          "bytes": "11638",
+          "sha256": "4f42f5423c45688b39f492c7892d93f37b4541831c8ffb140364d2bd89031ac0",
+          "source": "https://cloud.r-project.org/src/contrib/RColorBrewer_1.1-3.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.1-3"
+    },
+    "RCurl": {
+      "artifacts": {
+        "linux": {
+          "archive": "RCurl_1.98-1.20.tar.gz",
+          "bytes": "718541",
+          "sha256": "91ec442673597261115354e791f14b59fc8dc339010ae775e03c185970a48c1b",
+          "source": "https://cran.r-project.org/src/contrib/RCurl_1.98-1.20.tar.gz"
+        },
+        "windows": {
+          "archive": "RCurl_1.98-1.20.tar.gz",
+          "bytes": "718541",
+          "sha256": "91ec442673597261115354e791f14b59fc8dc339010ae775e03c185970a48c1b",
+          "source": "https://cloud.r-project.org/src/contrib/RCurl_1.98-1.20.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.98-1.20"
+    },
+    "RSQLite": {
+      "artifacts": {
+        "linux": {
+          "archive": "RSQLite_3.53.3.tar.gz",
+          "bytes": "4413180",
+          "sha256": "82946aac5e2869da5fdaf57d0e4afeee3d4deac21d9eaeffb5f743273a93736c",
+          "source": "https://cran.r-project.org/src/contrib/RSQLite_3.53.3.tar.gz"
+        },
+        "windows": {
+          "archive": "RSQLite_3.53.3.tar.gz",
+          "bytes": "4413180",
+          "sha256": "82946aac5e2869da5fdaf57d0e4afeee3d4deac21d9eaeffb5f743273a93736c",
+          "source": "https://cloud.r-project.org/src/contrib/RSQLite_3.53.3.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "3.53.3"
+    },
+    "Rcpp": {
+      "artifacts": {
+        "linux": {
+          "archive": "Rcpp_1.1.2.tar.gz",
+          "bytes": "1892159",
+          "sha256": "2746cf2fb188e5f0a84dbf5c8f68915b54564ed33e5754572f174e7b32e7f4f3",
+          "source": "https://cran.r-project.org/src/contrib/Rcpp_1.1.2.tar.gz"
+        },
+        "windows": {
+          "archive": "Rcpp_1.1.2.tar.gz",
+          "bytes": "1892159",
+          "sha256": "2746cf2fb188e5f0a84dbf5c8f68915b54564ed33e5754572f174e7b32e7f4f3",
+          "source": "https://cloud.r-project.org/src/contrib/Rcpp_1.1.2.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.1.2"
+    },
+    "Rhtslib": {
+      "artifacts": {
+        "linux": {
+          "archive": "Rhtslib_3.6.0.tar.gz",
+          "bytes": "5175121",
+          "sha256": "8b5fc0dfba39efb7371b5b0f930445047c7e06238d07c2293a50317612da6692",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/Rhtslib_3.6.0.tar.gz"
+        },
+        "windows": {
+          "archive": "Rhtslib_3.6.0.tar.gz",
+          "bytes": "5175121",
+          "sha256": "8b5fc0dfba39efb7371b5b0f930445047c7e06238d07c2293a50317612da6692",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/Rhtslib_3.6.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "3.6.0"
+    },
+    "Rsamtools": {
+      "artifacts": {
+        "linux": {
+          "archive": "Rsamtools_2.26.0.tar.gz",
+          "bytes": "1916602",
+          "sha256": "9cda0a97ef33e0343d8c5ad6228fa043c441f20f92510ef494422a3b7b496be9",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/Rsamtools_2.26.0.tar.gz"
+        },
+        "windows": {
+          "archive": "Rsamtools_2.26.0.tar.gz",
+          "bytes": "1916602",
+          "sha256": "9cda0a97ef33e0343d8c5ad6228fa043c441f20f92510ef494422a3b7b496be9",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/Rsamtools_2.26.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "2.26.0"
+    },
+    "S4Arrays": {
+      "artifacts": {
+        "linux": {
+          "archive": "S4Arrays_1.10.1.tar.gz",
+          "bytes": "297028",
+          "sha256": "a3ceed75583236f2cb207f30f614d25b512e43ba008107dbda8425cfb4e47167",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/S4Arrays_1.10.1.tar.gz"
+        },
+        "windows": {
+          "archive": "S4Arrays_1.10.1.tar.gz",
+          "bytes": "297028",
+          "sha256": "a3ceed75583236f2cb207f30f614d25b512e43ba008107dbda8425cfb4e47167",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/S4Arrays_1.10.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.10.1"
+    },
+    "S4Vectors": {
+      "artifacts": {
+        "linux": {
+          "archive": "S4Vectors_0.48.1.tar.gz",
+          "bytes": "843974",
+          "sha256": "cfe78db85b5dc98034031807d6699fb96eed7a228b0ccfa474e1ede642acddc9",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/S4Vectors_0.48.1.tar.gz"
+        },
+        "windows": {
+          "archive": "S4Vectors_0.48.1.tar.gz",
+          "bytes": "843974",
+          "sha256": "cfe78db85b5dc98034031807d6699fb96eed7a228b0ccfa474e1ede642acddc9",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/S4Vectors_0.48.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.48.1"
+    },
+    "S7": {
+      "artifacts": {
+        "linux": {
+          "archive": "S7_1.0.0.tar.gz",
+          "bytes": "350340",
+          "sha256": "ae5d0133421024da72e59a2c406fd63430cf0d74a0f833c40752b325f9875f8f",
+          "source": "https://cran.r-project.org/src/contrib/S7_1.0.0.tar.gz"
+        },
+        "windows": {
+          "archive": "S7_1.0.0.tar.gz",
+          "bytes": "350340",
+          "sha256": "ae5d0133421024da72e59a2c406fd63430cf0d74a0f833c40752b325f9875f8f",
+          "source": "https://cloud.r-project.org/src/contrib/S7_1.0.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.0.0"
+    },
+    "SNPlocs.Hsapiens.dbSNP144.GRCh37": {
+      "artifacts": {
+        "linux": {
+          "archive": "SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz",
+          "bytes": "913353230",
+          "sha256": "3f8e047e5b27a95ae5bc7acbfb4de6aec6c6a65a9edda3eb915b863807e913fd",
+          "source": "https://bioconductor.org/packages/3.22/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz"
+        },
+        "windows": {
+          "archive": "SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz",
+          "bytes": "913353230",
+          "sha256": "3f8e047e5b27a95ae5bc7acbfb4de6aec6c6a65a9edda3eb915b863807e913fd",
+          "source": "https://bioconductor.org/packages/3.22/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz"
+        }
+      },
+      "kind": "reference",
+      "version": "0.99.20"
+    },
+    "SNPlocs.Hsapiens.dbSNP144.GRCh38": {
+      "artifacts": {
+        "linux": {
+          "archive": "SNPlocs.Hsapiens.dbSNP144.GRCh38_0.99.20.tar.gz",
+          "bytes": "898581361",
+          "sha256": "b6c6ae8d3a866501146e325d40dc1695b26b522c6f9d063218fc6466bbd5b57b",
+          "source": "https://bioconductor.org/packages/3.22/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh38_0.99.20.tar.gz"
+        },
+        "windows": {
+          "archive": "SNPlocs.Hsapiens.dbSNP144.GRCh38_0.99.20.tar.gz",
+          "bytes": "898581361",
+          "sha256": "b6c6ae8d3a866501146e325d40dc1695b26b522c6f9d063218fc6466bbd5b57b",
+          "source": "https://bioconductor.org/packages/3.22/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh38_0.99.20.tar.gz"
+        }
+      },
+      "kind": "reference",
+      "version": "0.99.20"
+    },
+    "SNPlocs.Hsapiens.dbSNP155.GRCh37": {
+      "artifacts": {
+        "linux": {
+          "archive": "SNPlocs.Hsapiens.dbSNP155.GRCh37_0.99.24.tar.gz",
+          "bytes": "6048515545",
+          "sha256": "ff556ce69e3eecc43850a91d1f479d20c65e6c4811b0c3e9a67df96221caa22a",
+          "source": "https://bioconductor.org/packages/3.22/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP155.GRCh37_0.99.24.tar.gz"
+        },
+        "windows": {
+          "archive": "SNPlocs.Hsapiens.dbSNP155.GRCh37_0.99.24.tar.gz",
+          "bytes": "6048515545",
+          "sha256": "ff556ce69e3eecc43850a91d1f479d20c65e6c4811b0c3e9a67df96221caa22a",
+          "source": "https://bioconductor.org/packages/3.22/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP155.GRCh37_0.99.24.tar.gz"
+        }
+      },
+      "kind": "reference",
+      "version": "0.99.24"
+    },
+    "SNPlocs.Hsapiens.dbSNP155.GRCh38": {
+      "artifacts": {
+        "linux": {
+          "archive": "SNPlocs.Hsapiens.dbSNP155.GRCh38_0.99.24.tar.gz",
+          "bytes": "6166220332",
+          "sha256": "bad0c9765f1ab213d6e0047c5e5b779670c03f8dd3fb9bb497cffa303de3fefb",
+          "source": "https://bioconductor.org/packages/3.22/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP155.GRCh38_0.99.24.tar.gz"
+        },
+        "windows": {
+          "archive": "SNPlocs.Hsapiens.dbSNP155.GRCh38_0.99.24.tar.gz",
+          "bytes": "6166220332",
+          "sha256": "bad0c9765f1ab213d6e0047c5e5b779670c03f8dd3fb9bb497cffa303de3fefb",
+          "source": "https://bioconductor.org/packages/3.22/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP155.GRCh38_0.99.24.tar.gz"
+        }
+      },
+      "kind": "reference",
+      "version": "0.99.24"
+    },
+    "Seqinfo": {
+      "artifacts": {
+        "linux": {
+          "archive": "Seqinfo_1.0.0.tar.gz",
+          "bytes": "254658",
+          "sha256": "d72c95a5593ef0c5e343baa7d935583540abdc30c6f4d4c9178ecc8d89234d82",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/Seqinfo_1.0.0.tar.gz"
+        },
+        "windows": {
+          "archive": "Seqinfo_1.0.0.tar.gz",
+          "bytes": "254658",
+          "sha256": "d72c95a5593ef0c5e343baa7d935583540abdc30c6f4d4c9178ecc8d89234d82",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/Seqinfo_1.0.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.0.0"
+    },
+    "SparseArray": {
+      "artifacts": {
+        "linux": {
+          "archive": "SparseArray_1.10.10.tar.gz",
+          "bytes": "479284",
+          "sha256": "7c516c3e2f9dab11c10c6e75caf2254463c5792b711035ca3cf8475e946b81a5",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/SparseArray_1.10.10.tar.gz"
+        },
+        "windows": {
+          "archive": "SparseArray_1.10.10.tar.gz",
+          "bytes": "479284",
+          "sha256": "7c516c3e2f9dab11c10c6e75caf2254463c5792b711035ca3cf8475e946b81a5",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/SparseArray_1.10.10.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.10.10"
+    },
+    "SummarizedExperiment": {
+      "artifacts": {
+        "linux": {
+          "archive": "SummarizedExperiment_1.40.0.tar.gz",
+          "bytes": "690867",
+          "sha256": "6976456849cb849d27da2de62e93c8c154a663a9cd65c587687ad10f5b76b4f6",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/SummarizedExperiment_1.40.0.tar.gz"
+        },
+        "windows": {
+          "archive": "SummarizedExperiment_1.40.0.tar.gz",
+          "bytes": "690867",
+          "sha256": "6976456849cb849d27da2de62e93c8c154a663a9cd65c587687ad10f5b76b4f6",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/SummarizedExperiment_1.40.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.40.0"
+    },
+    "UCSC.utils": {
+      "artifacts": {
+        "linux": {
+          "archive": "UCSC.utils_1.6.1.tar.gz",
+          "bytes": "237320",
+          "sha256": "e56cd0072ca73bceb0130afe2ad128be07edca3d6e441726e9b35feaf9194392",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/UCSC.utils_1.6.1.tar.gz"
+        },
+        "windows": {
+          "archive": "UCSC.utils_1.6.1.tar.gz",
+          "bytes": "237320",
+          "sha256": "e56cd0072ca73bceb0130afe2ad128be07edca3d6e441726e9b35feaf9194392",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/UCSC.utils_1.6.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.6.1"
+    },
+    "UpSetR": {
+      "artifacts": {
+        "linux": {
+          "archive": "UpSetR_1.4.1.tar.gz",
+          "bytes": "4096256",
+          "sha256": "91c1fdfbb5dccaf29e57f159d752a846f73d01a40e05f542f64f4841d48e549e",
+          "source": "https://cran.r-project.org/src/contrib/UpSetR_1.4.1.tar.gz"
+        },
+        "windows": {
+          "archive": "UpSetR_1.4.1.tar.gz",
+          "bytes": "4096256",
+          "sha256": "91c1fdfbb5dccaf29e57f159d752a846f73d01a40e05f542f64f4841d48e549e",
+          "source": "https://cloud.r-project.org/src/contrib/UpSetR_1.4.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.4.1"
+    },
+    "VariantAnnotation": {
+      "artifacts": {
+        "linux": {
+          "archive": "VariantAnnotation_1.56.0.tar.gz",
+          "bytes": "2147120",
+          "sha256": "c8ba3edc1ee7f8dcf09df03c3bfaeb17cd42cead8b61ede9f3eddb1510571a01",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/VariantAnnotation_1.56.0.tar.gz"
+        },
+        "windows": {
+          "archive": "VariantAnnotation_1.56.0.tar.gz",
+          "bytes": "2147120",
+          "sha256": "c8ba3edc1ee7f8dcf09df03c3bfaeb17cd42cead8b61ede9f3eddb1510571a01",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/VariantAnnotation_1.56.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.56.0"
+    },
+    "XML": {
+      "artifacts": {
+        "linux": {
+          "archive": "XML_3.99-0.25.tar.gz",
+          "bytes": "959237",
+          "sha256": "c0fc887921d0468214c184edeea2991f31a3cbf10a5fb4458dea4046a54b3861",
+          "source": "https://cran.r-project.org/src/contrib/XML_3.99-0.25.tar.gz"
+        },
+        "windows": {
+          "archive": "XML_3.99-0.25.tar.gz",
+          "bytes": "959237",
+          "sha256": "c0fc887921d0468214c184edeea2991f31a3cbf10a5fb4458dea4046a54b3861",
+          "source": "https://cloud.r-project.org/src/contrib/XML_3.99-0.25.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "3.99-0.25"
+    },
+    "XVector": {
+      "artifacts": {
+        "linux": {
+          "archive": "XVector_0.50.0.tar.gz",
+          "bytes": "71419",
+          "sha256": "c963d04bd4c5c0387c401158408e02a08f1e9051124cae4154045c903c8be390",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/XVector_0.50.0.tar.gz"
+        },
+        "windows": {
+          "archive": "XVector_0.50.0.tar.gz",
+          "bytes": "71419",
+          "sha256": "c963d04bd4c5c0387c401158408e02a08f1e9051124cae4154045c903c8be390",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/XVector_0.50.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.50.0"
+    },
+    "abind": {
+      "artifacts": {
+        "linux": {
+          "archive": "abind_1.4-8.tar.gz",
+          "bytes": "21974",
+          "sha256": "264a051b523ceae1795a0879e7768949ea55c586ac8db0adf1f5ebeddd2623e1",
+          "source": "https://cran.r-project.org/src/contrib/abind_1.4-8.tar.gz"
+        },
+        "windows": {
+          "archive": "abind_1.4-8.tar.gz",
+          "bytes": "21974",
+          "sha256": "264a051b523ceae1795a0879e7768949ea55c586ac8db0adf1f5ebeddd2623e1",
+          "source": "https://cloud.r-project.org/src/contrib/abind_1.4-8.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.4-8"
+    },
+    "askpass": {
+      "artifacts": {
+        "linux": {
+          "archive": "askpass_1.2.1.tar.gz",
+          "bytes": "6058",
+          "sha256": "6c2106a74c44a748f2cea795d9686e27a0058a90debcfd8558b62b06aec0c7dd",
+          "source": "https://cran.r-project.org/src/contrib/askpass_1.2.1.tar.gz"
+        },
+        "windows": {
+          "archive": "askpass_1.2.1.tar.gz",
+          "bytes": "6058",
+          "sha256": "6c2106a74c44a748f2cea795d9686e27a0058a90debcfd8558b62b06aec0c7dd",
+          "source": "https://cloud.r-project.org/src/contrib/askpass_1.2.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.2.1"
+    },
+    "badger": {
+      "artifacts": {
+        "linux": {
+          "archive": "badger_0.2.5.tar.gz",
+          "bytes": "13183",
+          "sha256": "24d35c81f8780da5106b9aa083abf4cb982a3458247345daa646a08a0f18a19f",
+          "source": "https://cran.r-project.org/src/contrib/badger_0.2.5.tar.gz"
+        },
+        "windows": {
+          "archive": "badger_0.2.5.tar.gz",
+          "bytes": "13183",
+          "sha256": "24d35c81f8780da5106b9aa083abf4cb982a3458247345daa646a08a0f18a19f",
+          "source": "https://cloud.r-project.org/src/contrib/badger_0.2.5.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.2.5"
+    },
+    "base64enc": {
+      "artifacts": {
+        "linux": {
+          "archive": "base64enc_0.1-6.tar.gz",
+          "bytes": "9418",
+          "sha256": "3c7e9d22f7409fa2989008fa6e980c3dd8e2693eb20676acf2470ae7addb0816",
+          "source": "https://cran.r-project.org/src/contrib/base64enc_0.1-6.tar.gz"
+        },
+        "windows": {
+          "archive": "base64enc_0.1-6.tar.gz",
+          "bytes": "9418",
+          "sha256": "3c7e9d22f7409fa2989008fa6e980c3dd8e2693eb20676acf2470ae7addb0816",
+          "source": "https://cloud.r-project.org/src/contrib/base64enc_0.1-6.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.1-6"
+    },
+    "bit": {
+      "artifacts": {
+        "linux": {
+          "archive": "bit_4.6.0.tar.gz",
+          "bytes": "304585",
+          "sha256": "48fe21c5d04c7b724d695eeb60074395c0c631a7fb234e2075de92471445de08",
+          "source": "https://cran.r-project.org/src/contrib/bit_4.6.0.tar.gz"
+        },
+        "windows": {
+          "archive": "bit_4.6.0.tar.gz",
+          "bytes": "304585",
+          "sha256": "48fe21c5d04c7b724d695eeb60074395c0c631a7fb234e2075de92471445de08",
+          "source": "https://cloud.r-project.org/src/contrib/bit_4.6.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "4.6.0"
+    },
+    "bit64": {
+      "artifacts": {
+        "linux": {
+          "archive": "bit64_4.8.6.tar.gz",
+          "bytes": "179374",
+          "sha256": "a5fcec17ba772a561a7375ca8fd966bdd5f20dd4e89b4dae07d7da933d554b45",
+          "source": "https://cran.r-project.org/src/contrib/bit64_4.8.6.tar.gz"
+        },
+        "windows": {
+          "archive": "bit64_4.8.6.tar.gz",
+          "bytes": "179374",
+          "sha256": "a5fcec17ba772a561a7375ca8fd966bdd5f20dd4e89b4dae07d7da933d554b45",
+          "source": "https://cloud.r-project.org/src/contrib/bit64_4.8.6.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "4.8.6"
+    },
+    "bitops": {
+      "artifacts": {
+        "linux": {
+          "archive": "bitops_1.1-0.tar.gz",
+          "bytes": "11019",
+          "sha256": "73f063f15c6334d769202a178f7dd5499bdd10044a4ffbef571be57cbcc68b22",
+          "source": "https://cran.r-project.org/src/contrib/bitops_1.1-0.tar.gz"
+        },
+        "windows": {
+          "archive": "bitops_1.1-0.tar.gz",
+          "bytes": "11019",
+          "sha256": "73f063f15c6334d769202a178f7dd5499bdd10044a4ffbef571be57cbcc68b22",
+          "source": "https://cloud.r-project.org/src/contrib/bitops_1.1-0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.1-0"
+    },
+    "blob": {
+      "artifacts": {
+        "linux": {
+          "archive": "blob_1.3.0.tar.gz",
+          "bytes": "11157",
+          "sha256": "d4d2aeb8d17683bbfc256a7541e282af9663a752988a21a6ba72a4ab268c7331",
+          "source": "https://cran.r-project.org/src/contrib/blob_1.3.0.tar.gz"
+        },
+        "windows": {
+          "archive": "blob_1.3.0.tar.gz",
+          "bytes": "11157",
+          "sha256": "d4d2aeb8d17683bbfc256a7541e282af9663a752988a21a6ba72a4ab268c7331",
+          "source": "https://cloud.r-project.org/src/contrib/blob_1.3.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.3.0"
+    },
+    "bookdown": {
+      "artifacts": {
+        "linux": {
+          "archive": "bookdown_0.48.tar.gz",
+          "bytes": "864545",
+          "sha256": "ef77ad0f3d9116f8fccc08a358d538943e37ac55e60994e7bd18387cd05eba7c",
+          "source": "https://cran.r-project.org/src/contrib/bookdown_0.48.tar.gz"
+        },
+        "windows": {
+          "archive": "bookdown_0.48.tar.gz",
+          "bytes": "864545",
+          "sha256": "ef77ad0f3d9116f8fccc08a358d538943e37ac55e60994e7bd18387cd05eba7c",
+          "source": "https://cloud.r-project.org/src/contrib/bookdown_0.48.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.48"
+    },
+    "brio": {
+      "artifacts": {
+        "linux": {
+          "archive": "brio_1.1.5.tar.gz",
+          "bytes": "13172",
+          "sha256": "a9f22335ea39039de25bb27bccd5ff1ffb2b743579b31d150b6b91c9ea81d0b8",
+          "source": "https://cran.r-project.org/src/contrib/brio_1.1.5.tar.gz"
+        },
+        "windows": {
+          "archive": "brio_1.1.5.tar.gz",
+          "bytes": "13172",
+          "sha256": "a9f22335ea39039de25bb27bccd5ff1ffb2b743579b31d150b6b91c9ea81d0b8",
+          "source": "https://cloud.r-project.org/src/contrib/brio_1.1.5.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.1.5"
+    },
+    "bslib": {
+      "artifacts": {
+        "linux": {
+          "archive": "bslib_0.12.0.tar.gz",
+          "bytes": "5847376",
+          "sha256": "26fc11793dc1fdccd6d8d2fc1d638c29c47aa0c2e5cbadc6a35af3819f5446d1",
+          "source": "https://cran.r-project.org/src/contrib/bslib_0.12.0.tar.gz"
+        },
+        "windows": {
+          "archive": "bslib_0.12.0.tar.gz",
+          "bytes": "5847376",
+          "sha256": "26fc11793dc1fdccd6d8d2fc1d638c29c47aa0c2e5cbadc6a35af3819f5446d1",
+          "source": "https://cloud.r-project.org/src/contrib/bslib_0.12.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.12.0"
+    },
+    "cachem": {
+      "artifacts": {
+        "linux": {
+          "archive": "cachem_1.1.0.tar.gz",
+          "bytes": "27192",
+          "sha256": "550839fc2ae5d865db475ba2c1714144f07fa0c052c72135b0e4a70287492e21",
+          "source": "https://cran.r-project.org/src/contrib/cachem_1.1.0.tar.gz"
+        },
+        "windows": {
+          "archive": "cachem_1.1.0.tar.gz",
+          "bytes": "27192",
+          "sha256": "550839fc2ae5d865db475ba2c1714144f07fa0c052c72135b0e4a70287492e21",
+          "source": "https://cloud.r-project.org/src/contrib/cachem_1.1.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.1.0"
+    },
+    "callr": {
+      "artifacts": {
+        "linux": {
+          "archive": "callr_3.8.0.tar.gz",
+          "bytes": "113258",
+          "sha256": "a16b50e41ddbbf2bac236572e3e68c4ef9c76b88faf5cf840c79524c49000b06",
+          "source": "https://cran.r-project.org/src/contrib/callr_3.8.0.tar.gz"
+        },
+        "windows": {
+          "archive": "callr_3.8.0.tar.gz",
+          "bytes": "113258",
+          "sha256": "a16b50e41ddbbf2bac236572e3e68c4ef9c76b88faf5cf840c79524c49000b06",
+          "source": "https://cloud.r-project.org/src/contrib/callr_3.8.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "3.8.0"
+    },
+    "cigarillo": {
+      "artifacts": {
+        "linux": {
+          "archive": "cigarillo_1.0.0.tar.gz",
+          "bytes": "258574",
+          "sha256": "a9daf079d3f8b6baf13c457e35662ac779c1db552bc48ecb5e70c5e6878d5e1d",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/cigarillo_1.0.0.tar.gz"
+        },
+        "windows": {
+          "archive": "cigarillo_1.0.0.tar.gz",
+          "bytes": "258574",
+          "sha256": "a9daf079d3f8b6baf13c457e35662ac779c1db552bc48ecb5e70c5e6878d5e1d",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/cigarillo_1.0.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.0.0"
+    },
+    "cli": {
+      "artifacts": {
+        "linux": {
+          "archive": "cli_3.6.6.tar.gz",
+          "bytes": "644134",
+          "sha256": "b2b58d6dd82f5798b335e39c00591686a01fd3e94399ef898e146173e36f18f9",
+          "source": "https://cran.r-project.org/src/contrib/cli_3.6.6.tar.gz"
+        },
+        "windows": {
+          "archive": "cli_3.6.6.tar.gz",
+          "bytes": "644134",
+          "sha256": "b2b58d6dd82f5798b335e39c00591686a01fd3e94399ef898e146173e36f18f9",
+          "source": "https://cloud.r-project.org/src/contrib/cli_3.6.6.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "3.6.6"
+    },
+    "clipr": {
+      "artifacts": {
+        "linux": {
+          "archive": "clipr_0.8.1.tar.gz",
+          "bytes": "20835",
+          "sha256": "06e87a9c387da33f4ce8de91d037c090b924689b5ff487d3c0c7506bd4c3f1b6",
+          "source": "https://cran.r-project.org/src/contrib/clipr_0.8.1.tar.gz"
+        },
+        "windows": {
+          "archive": "clipr_0.8.1.tar.gz",
+          "bytes": "20835",
+          "sha256": "06e87a9c387da33f4ce8de91d037c090b924689b5ff487d3c0c7506bd4c3f1b6",
+          "source": "https://cloud.r-project.org/src/contrib/clipr_0.8.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.8.1"
+    },
+    "covr": {
+      "artifacts": {
+        "linux": {
+          "archive": "covr_4.0.0.tar.gz",
+          "bytes": "517953",
+          "sha256": "28fc3043496db08766b394c05f0fe8a8daa5f64457131019c1274eab17357ee7",
+          "source": "https://cran.r-project.org/src/contrib/covr_4.0.0.tar.gz"
+        },
+        "windows": {
+          "archive": "covr_4.0.0.tar.gz",
+          "bytes": "517953",
+          "sha256": "28fc3043496db08766b394c05f0fe8a8daa5f64457131019c1274eab17357ee7",
+          "source": "https://cloud.r-project.org/src/contrib/covr_4.0.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "4.0.0"
+    },
+    "cpp11": {
+      "artifacts": {
+        "linux": {
+          "archive": "cpp11_0.5.5.tar.gz",
+          "bytes": "304823",
+          "sha256": "72486beb0605c1229bf3d422cd536224af8dc09bd389a3116f62f4c7705c62f4",
+          "source": "https://cran.r-project.org/src/contrib/cpp11_0.5.5.tar.gz"
+        },
+        "windows": {
+          "archive": "cpp11_0.5.5.tar.gz",
+          "bytes": "304823",
+          "sha256": "72486beb0605c1229bf3d422cd536224af8dc09bd389a3116f62f4c7705c62f4",
+          "source": "https://cloud.r-project.org/src/contrib/cpp11_0.5.5.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.5.5"
+    },
+    "crayon": {
+      "artifacts": {
+        "linux": {
+          "archive": "crayon_1.5.3.tar.gz",
+          "bytes": "40396",
+          "sha256": "3e74a0685541efb5ea763b92cfd5c859df71c46b0605967a0b5dbb7326e9da69",
+          "source": "https://cran.r-project.org/src/contrib/crayon_1.5.3.tar.gz"
+        },
+        "windows": {
+          "archive": "crayon_1.5.3.tar.gz",
+          "bytes": "40396",
+          "sha256": "3e74a0685541efb5ea763b92cfd5c859df71c46b0605967a0b5dbb7326e9da69",
+          "source": "https://cloud.r-project.org/src/contrib/crayon_1.5.3.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.5.3"
+    },
+    "credentials": {
+      "artifacts": {
+        "linux": {
+          "archive": "credentials_2.0.3.tar.gz",
+          "bytes": "283143",
+          "sha256": "140043804b4cfcb5e174af3a188ce4cd1e17f7f6aeb777bbd4da21f6c73e013c",
+          "source": "https://cran.r-project.org/src/contrib/credentials_2.0.3.tar.gz"
+        },
+        "windows": {
+          "archive": "credentials_2.0.3.tar.gz",
+          "bytes": "283143",
+          "sha256": "140043804b4cfcb5e174af3a188ce4cd1e17f7f6aeb777bbd4da21f6c73e013c",
+          "source": "https://cloud.r-project.org/src/contrib/credentials_2.0.3.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "2.0.3"
+    },
+    "curl": {
+      "artifacts": {
+        "linux": {
+          "archive": "curl_8.1.0.tar.gz",
+          "bytes": "730855",
+          "sha256": "ab3907ac4f063d614c778b8540d7e2e7b108dc6ab82c42e471cff2a1ca21205b",
+          "source": "https://cran.r-project.org/src/contrib/curl_8.1.0.tar.gz"
+        },
+        "windows": {
+          "archive": "curl_8.1.0.tar.gz",
+          "bytes": "730855",
+          "sha256": "ab3907ac4f063d614c778b8540d7e2e7b108dc6ab82c42e471cff2a1ca21205b",
+          "source": "https://cloud.r-project.org/src/contrib/curl_8.1.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "8.1.0"
+    },
+    "data.table": {
+      "artifacts": {
+        "linux": {
+          "archive": "data.table_1.18.6.1.tar.gz",
+          "bytes": "6028881",
+          "sha256": "f2846f45fbbdfe886f05fa7489314a56ae0f3352ae5bc1070b0cdd4f44ffa1f5",
+          "source": "https://cran.r-project.org/src/contrib/data.table_1.18.6.1.tar.gz"
+        },
+        "windows": {
+          "archive": "data.table_1.18.6.1.tar.gz",
+          "bytes": "6028881",
+          "sha256": "f2846f45fbbdfe886f05fa7489314a56ae0f3352ae5bc1070b0cdd4f44ffa1f5",
+          "source": "https://cloud.r-project.org/src/contrib/data.table_1.18.6.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.18.6.1"
+    },
+    "desc": {
+      "artifacts": {
+        "linux": {
+          "archive": "desc_1.4.3.tar.gz",
+          "bytes": "80066",
+          "sha256": "54468da73dd78fc9e7c565c41cfe3331802c2134b2e61a9ad197215317092f26",
+          "source": "https://cran.r-project.org/src/contrib/desc_1.4.3.tar.gz"
+        },
+        "windows": {
+          "archive": "desc_1.4.3.tar.gz",
+          "bytes": "80066",
+          "sha256": "54468da73dd78fc9e7c565c41cfe3331802c2134b2e61a9ad197215317092f26",
+          "source": "https://cloud.r-project.org/src/contrib/desc_1.4.3.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.4.3"
+    },
+    "diffobj": {
+      "artifacts": {
+        "linux": {
+          "archive": "diffobj_0.3.10.tar.gz",
+          "bytes": "481260",
+          "sha256": "216927655cc63b44c4822b39838d3855a86a47a06e21c3136510fccac907ba81",
+          "source": "https://cran.r-project.org/src/contrib/diffobj_0.3.10.tar.gz"
+        },
+        "windows": {
+          "archive": "diffobj_0.3.10.tar.gz",
+          "bytes": "481260",
+          "sha256": "216927655cc63b44c4822b39838d3855a86a47a06e21c3136510fccac907ba81",
+          "source": "https://cloud.r-project.org/src/contrib/diffobj_0.3.10.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.3.10"
+    },
+    "digest": {
+      "artifacts": {
+        "linux": {
+          "archive": "digest_0.6.39.tar.gz",
+          "bytes": "236629",
+          "sha256": "8bf048b49b2d17077138fae758bda56bbd53278d9437f2fdeaedf979c90a13c9",
+          "source": "https://cran.r-project.org/src/contrib/digest_0.6.39.tar.gz"
+        },
+        "windows": {
+          "archive": "digest_0.6.39.tar.gz",
+          "bytes": "236629",
+          "sha256": "8bf048b49b2d17077138fae758bda56bbd53278d9437f2fdeaedf979c90a13c9",
+          "source": "https://cloud.r-project.org/src/contrib/digest_0.6.39.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.6.39"
+    },
+    "dlstats": {
+      "artifacts": {
+        "linux": {
+          "archive": "dlstats_0.1.8.tar.gz",
+          "bytes": "579482",
+          "sha256": "589b10f98dd83ec56a35c7988622157a5cd2935006b264504a338f1eabfffc27",
+          "source": "https://cran.r-project.org/src/contrib/dlstats_0.1.8.tar.gz"
+        },
+        "windows": {
+          "archive": "dlstats_0.1.8.tar.gz",
+          "bytes": "579482",
+          "sha256": "589b10f98dd83ec56a35c7988622157a5cd2935006b264504a338f1eabfffc27",
+          "source": "https://cloud.r-project.org/src/contrib/dlstats_0.1.8.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.1.8"
+    },
+    "dplyr": {
+      "artifacts": {
+        "linux": {
+          "archive": "dplyr_1.2.1.tar.gz",
+          "bytes": "923509",
+          "sha256": "18d66fe2f24cda8b619c177326d39dd015229ab99695fa67d3fa31e4569390e0",
+          "source": "https://cran.r-project.org/src/contrib/dplyr_1.2.1.tar.gz"
+        },
+        "windows": {
+          "archive": "dplyr_1.2.1.tar.gz",
+          "bytes": "923509",
+          "sha256": "18d66fe2f24cda8b619c177326d39dd015229ab99695fa67d3fa31e4569390e0",
+          "source": "https://cloud.r-project.org/src/contrib/dplyr_1.2.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.2.1"
+    },
+    "evaluate": {
+      "artifacts": {
+        "linux": {
+          "archive": "evaluate_1.0.5.tar.gz",
+          "bytes": "39322",
+          "sha256": "47aac79f889a828a5f8b4756cb972d7c2966bb984cbae17a4bd2389a73270794",
+          "source": "https://cran.r-project.org/src/contrib/evaluate_1.0.5.tar.gz"
+        },
+        "windows": {
+          "archive": "evaluate_1.0.5.tar.gz",
+          "bytes": "39322",
+          "sha256": "47aac79f889a828a5f8b4756cb972d7c2966bb984cbae17a4bd2389a73270794",
+          "source": "https://cloud.r-project.org/src/contrib/evaluate_1.0.5.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.0.5"
+    },
+    "farver": {
+      "artifacts": {
+        "linux": {
+          "archive": "farver_2.1.2.tar.gz",
+          "bytes": "1275981",
+          "sha256": "528823b95daab4566137711f1c842027a952bea1b2ae6ff098e2ca512b17fe25",
+          "source": "https://cran.r-project.org/src/contrib/farver_2.1.2.tar.gz"
+        },
+        "windows": {
+          "archive": "farver_2.1.2.tar.gz",
+          "bytes": "1275981",
+          "sha256": "528823b95daab4566137711f1c842027a952bea1b2ae6ff098e2ca512b17fe25",
+          "source": "https://cloud.r-project.org/src/contrib/farver_2.1.2.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "2.1.2"
+    },
+    "fastmap": {
+      "artifacts": {
+        "linux": {
+          "archive": "fastmap_1.2.0.tar.gz",
+          "bytes": "46710",
+          "sha256": "b1da04a2915d1d057f3c2525e295ef15016a64e6667eac83a14641bbd83b9246",
+          "source": "https://cran.r-project.org/src/contrib/fastmap_1.2.0.tar.gz"
+        },
+        "windows": {
+          "archive": "fastmap_1.2.0.tar.gz",
+          "bytes": "46710",
+          "sha256": "b1da04a2915d1d057f3c2525e295ef15016a64e6667eac83a14641bbd83b9246",
+          "source": "https://cloud.r-project.org/src/contrib/fastmap_1.2.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.2.0"
+    },
+    "fontawesome": {
+      "artifacts": {
+        "linux": {
+          "archive": "fontawesome_0.5.3.tar.gz",
+          "bytes": "1320479",
+          "sha256": "1b1909d0fad5ec4c658f5c628a195b9bd93d544afa957e68e897224cfb81fb4f",
+          "source": "https://cran.r-project.org/src/contrib/fontawesome_0.5.3.tar.gz"
+        },
+        "windows": {
+          "archive": "fontawesome_0.5.3.tar.gz",
+          "bytes": "1320479",
+          "sha256": "1b1909d0fad5ec4c658f5c628a195b9bd93d544afa957e68e897224cfb81fb4f",
+          "source": "https://cloud.r-project.org/src/contrib/fontawesome_0.5.3.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.5.3"
+    },
+    "formatR": {
+      "artifacts": {
+        "linux": {
+          "archive": "formatR_1.14.tar.gz",
+          "bytes": "96077",
+          "sha256": "4ebaab2c3f8527871655246b62abd060bc75dae1cec7f962ca4752b8080f474c",
+          "source": "https://cran.r-project.org/src/contrib/formatR_1.14.tar.gz"
+        },
+        "windows": {
+          "archive": "formatR_1.14.tar.gz",
+          "bytes": "96077",
+          "sha256": "4ebaab2c3f8527871655246b62abd060bc75dae1cec7f962ca4752b8080f474c",
+          "source": "https://cloud.r-project.org/src/contrib/formatR_1.14.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.14"
+    },
+    "fs": {
+      "artifacts": {
+        "linux": {
+          "archive": "fs_2.1.0.tar.gz",
+          "bytes": "1471347",
+          "sha256": "7088af1117d65c4ceb144b532e323f197fc8243b1d704bf6edf40774789829cd",
+          "source": "https://cran.r-project.org/src/contrib/fs_2.1.0.tar.gz"
+        },
+        "windows": {
+          "archive": "fs_2.1.0.tar.gz",
+          "bytes": "1471347",
+          "sha256": "7088af1117d65c4ceb144b532e323f197fc8243b1d704bf6edf40774789829cd",
+          "source": "https://cloud.r-project.org/src/contrib/fs_2.1.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "2.1.0"
+    },
+    "futile.logger": {
+      "artifacts": {
+        "linux": {
+          "archive": "futile.logger_1.4.9.tar.gz",
+          "bytes": "24311",
+          "sha256": "496bedbe2e52d06db22a4d659b8e7dd9ad0f1d1f95ead459ec02d05d0ac2b3d6",
+          "source": "https://cran.r-project.org/src/contrib/futile.logger_1.4.9.tar.gz"
+        },
+        "windows": {
+          "archive": "futile.logger_1.4.9.tar.gz",
+          "bytes": "24311",
+          "sha256": "496bedbe2e52d06db22a4d659b8e7dd9ad0f1d1f95ead459ec02d05d0ac2b3d6",
+          "source": "https://cloud.r-project.org/src/contrib/futile.logger_1.4.9.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.4.9"
+    },
+    "futile.options": {
+      "artifacts": {
+        "linux": {
+          "archive": "futile.options_1.0.1.tar.gz",
+          "bytes": "3919",
+          "sha256": "7a9cc974e09598077b242a1069f7fbf4fa7f85ffe25067f6c4c32314ef532570",
+          "source": "https://cran.r-project.org/src/contrib/futile.options_1.0.1.tar.gz"
+        },
+        "windows": {
+          "archive": "futile.options_1.0.1.tar.gz",
+          "bytes": "3919",
+          "sha256": "7a9cc974e09598077b242a1069f7fbf4fa7f85ffe25067f6c4c32314ef532570",
+          "source": "https://cloud.r-project.org/src/contrib/futile.options_1.0.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.0.1"
+    },
+    "generics": {
+      "artifacts": {
+        "linux": {
+          "archive": "generics_0.1.4.tar.gz",
+          "bytes": "47224",
+          "sha256": "bbe95a097792d38fc3b7e677738af1b95b66ea5e5017e33b8beac6a6088d0801",
+          "source": "https://cran.r-project.org/src/contrib/generics_0.1.4.tar.gz"
+        },
+        "windows": {
+          "archive": "generics_0.1.4.tar.gz",
+          "bytes": "47224",
+          "sha256": "bbe95a097792d38fc3b7e677738af1b95b66ea5e5017e33b8beac6a6088d0801",
+          "source": "https://cloud.r-project.org/src/contrib/generics_0.1.4.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.1.4"
+    },
+    "gert": {
+      "artifacts": {
+        "linux": {
+          "archive": "gert_2.5.0.tar.gz",
+          "bytes": "141726",
+          "sha256": "b818f3fcfe5c2676b6587eeacbf69268376d6342cbb8a6ab2ff6ef6969732caf",
+          "source": "https://cran.r-project.org/src/contrib/gert_2.5.0.tar.gz"
+        },
+        "windows": {
+          "archive": "gert_2.5.0.tar.gz",
+          "bytes": "141726",
+          "sha256": "b818f3fcfe5c2676b6587eeacbf69268376d6342cbb8a6ab2ff6ef6969732caf",
+          "source": "https://cloud.r-project.org/src/contrib/gert_2.5.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "2.5.0"
+    },
+    "ggplot2": {
+      "artifacts": {
+        "linux": {
+          "archive": "ggplot2_4.0.4.tar.gz",
+          "bytes": "6357378",
+          "sha256": "d3d25e95e2b0c5f777d6cef41ace54ffd7c26ebe707f278bde7c916c76d328c9",
+          "source": "https://cran.r-project.org/src/contrib/ggplot2_4.0.4.tar.gz"
+        },
+        "windows": {
+          "archive": "ggplot2_4.0.4.tar.gz",
+          "bytes": "6357378",
+          "sha256": "d3d25e95e2b0c5f777d6cef41ace54ffd7c26ebe707f278bde7c916c76d328c9",
+          "source": "https://cloud.r-project.org/src/contrib/ggplot2_4.0.4.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "4.0.4"
+    },
+    "gh": {
+      "artifacts": {
+        "linux": {
+          "archive": "gh_1.6.1.tar.gz",
+          "bytes": "63839",
+          "sha256": "b5ad2aae31fad5cdf40ca679a4f0e560a63fe60ef2d4bd63f8ab39a669bd2fa3",
+          "source": "https://cran.r-project.org/src/contrib/gh_1.6.1.tar.gz"
+        },
+        "windows": {
+          "archive": "gh_1.6.1.tar.gz",
+          "bytes": "63839",
+          "sha256": "b5ad2aae31fad5cdf40ca679a4f0e560a63fe60ef2d4bd63f8ab39a669bd2fa3",
+          "source": "https://cloud.r-project.org/src/contrib/gh_1.6.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.6.1"
+    },
+    "gitcreds": {
+      "artifacts": {
+        "linux": {
+          "archive": "gitcreds_0.1.2.tar.gz",
+          "bytes": "62569",
+          "sha256": "41c6abcca5635062b123ffb5af2794770eca5ebd97b05c5a64b24fa1c803c75d",
+          "source": "https://cran.r-project.org/src/contrib/gitcreds_0.1.2.tar.gz"
+        },
+        "windows": {
+          "archive": "gitcreds_0.1.2.tar.gz",
+          "bytes": "62569",
+          "sha256": "41c6abcca5635062b123ffb5af2794770eca5ebd97b05c5a64b24fa1c803c75d",
+          "source": "https://cloud.r-project.org/src/contrib/gitcreds_0.1.2.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.1.2"
+    },
+    "glue": {
+      "artifacts": {
+        "linux": {
+          "archive": "glue_1.8.1.tar.gz",
+          "bytes": "129786",
+          "sha256": "1c55905d3efc3d5c199ceb0bd12218e97f0d4c64df6038ff41ecef415478a122",
+          "source": "https://cran.r-project.org/src/contrib/glue_1.8.1.tar.gz"
+        },
+        "windows": {
+          "archive": "glue_1.8.1.tar.gz",
+          "bytes": "129786",
+          "sha256": "1c55905d3efc3d5c199ceb0bd12218e97f0d4c64df6038ff41ecef415478a122",
+          "source": "https://cloud.r-project.org/src/contrib/glue_1.8.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.8.1"
+    },
+    "gridExtra": {
+      "artifacts": {
+        "linux": {
+          "archive": "gridExtra_2.3.1.tar.gz",
+          "bytes": "480742",
+          "sha256": "de42e501ac2c6a70bd0ffc18d7703e9b0e6b878c610df09756183c3e52445c82",
+          "source": "https://cran.r-project.org/src/contrib/gridExtra_2.3.1.tar.gz"
+        },
+        "windows": {
+          "archive": "gridExtra_2.3.1.tar.gz",
+          "bytes": "480742",
+          "sha256": "de42e501ac2c6a70bd0ffc18d7703e9b0e6b878c610df09756183c3e52445c82",
+          "source": "https://cloud.r-project.org/src/contrib/gridExtra_2.3.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "2.3.1"
+    },
+    "gtable": {
+      "artifacts": {
+        "linux": {
+          "archive": "gtable_0.3.6.tar.gz",
+          "bytes": "148148",
+          "sha256": "d305a5fa11278b649d2d8edc5288bf28009be888a42be58ff8714018e49de0ef",
+          "source": "https://cran.r-project.org/src/contrib/gtable_0.3.6.tar.gz"
+        },
+        "windows": {
+          "archive": "gtable_0.3.6.tar.gz",
+          "bytes": "148148",
+          "sha256": "d305a5fa11278b649d2d8edc5288bf28009be888a42be58ff8714018e49de0ef",
+          "source": "https://cloud.r-project.org/src/contrib/gtable_0.3.6.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.3.6"
+    },
+    "highr": {
+      "artifacts": {
+        "linux": {
+          "archive": "highr_0.12.tar.gz",
+          "bytes": "13622",
+          "sha256": "e8e1d6460022a9948799602d6b95dc78fbfa318ff6f0627e95c20b7190fc612b",
+          "source": "https://cran.r-project.org/src/contrib/highr_0.12.tar.gz"
+        },
+        "windows": {
+          "archive": "highr_0.12.tar.gz",
+          "bytes": "13622",
+          "sha256": "e8e1d6460022a9948799602d6b95dc78fbfa318ff6f0627e95c20b7190fc612b",
+          "source": "https://cloud.r-project.org/src/contrib/highr_0.12.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.12"
+    },
+    "htmltools": {
+      "artifacts": {
+        "linux": {
+          "archive": "htmltools_0.5.9.tar.gz",
+          "bytes": "135206",
+          "sha256": "19308618da485818f69dcfeeadd2ddc81d43a736a74519df7b3fd98e13128afd",
+          "source": "https://cran.r-project.org/src/contrib/htmltools_0.5.9.tar.gz"
+        },
+        "windows": {
+          "archive": "htmltools_0.5.9.tar.gz",
+          "bytes": "135206",
+          "sha256": "19308618da485818f69dcfeeadd2ddc81d43a736a74519df7b3fd98e13128afd",
+          "source": "https://cloud.r-project.org/src/contrib/htmltools_0.5.9.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.5.9"
+    },
+    "httr": {
+      "artifacts": {
+        "linux": {
+          "archive": "httr_1.4.9.tar.gz",
+          "bytes": "113805",
+          "sha256": "4adf8cea7a24012ec883da1723eaade26c69455e0a3200bdc12f2f9f8515982c",
+          "source": "https://cran.r-project.org/src/contrib/httr_1.4.9.tar.gz"
+        },
+        "windows": {
+          "archive": "httr_1.4.9.tar.gz",
+          "bytes": "113805",
+          "sha256": "4adf8cea7a24012ec883da1723eaade26c69455e0a3200bdc12f2f9f8515982c",
+          "source": "https://cloud.r-project.org/src/contrib/httr_1.4.9.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.4.9"
+    },
+    "httr2": {
+      "artifacts": {
+        "linux": {
+          "archive": "httr2_1.3.0.tar.gz",
+          "bytes": "301901",
+          "sha256": "031990311482479da4bb910369606c73bb2b2456b8b8c1ab877ad8fbb0703c75",
+          "source": "https://cran.r-project.org/src/contrib/httr2_1.3.0.tar.gz"
+        },
+        "windows": {
+          "archive": "httr2_1.3.0.tar.gz",
+          "bytes": "301901",
+          "sha256": "031990311482479da4bb910369606c73bb2b2456b8b8c1ab877ad8fbb0703c75",
+          "source": "https://cloud.r-project.org/src/contrib/httr2_1.3.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.3.0"
+    },
+    "ieugwasr": {
+      "artifacts": {
+        "linux": {
+          "archive": "ieugwasr_1.2.1.tar.gz",
+          "bytes": "51811",
+          "sha256": "e0f64cd14df9363b4a0fd7155ac32bc4c6e93034045d6f419ed26b94dbba52c5",
+          "source": "https://cran.r-project.org/src/contrib/ieugwasr_1.2.1.tar.gz"
+        },
+        "windows": {
+          "archive": "ieugwasr_1.2.1.tar.gz",
+          "bytes": "51811",
+          "sha256": "e0f64cd14df9363b4a0fd7155ac32bc4c6e93034045d6f419ed26b94dbba52c5",
+          "source": "https://cloud.r-project.org/src/contrib/ieugwasr_1.2.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.2.1"
+    },
+    "ini": {
+      "artifacts": {
+        "linux": {
+          "archive": "ini_0.3.1.tar.gz",
+          "bytes": "3488",
+          "sha256": "7b191a54019c8c52d6c2211c14878c95564154ec4865f57007953742868cd813",
+          "source": "https://cran.r-project.org/src/contrib/ini_0.3.1.tar.gz"
+        },
+        "windows": {
+          "archive": "ini_0.3.1.tar.gz",
+          "bytes": "3488",
+          "sha256": "7b191a54019c8c52d6c2211c14878c95564154ec4865f57007953742868cd813",
+          "source": "https://cloud.r-project.org/src/contrib/ini_0.3.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.3.1"
+    },
+    "isoband": {
+      "artifacts": {
+        "linux": {
+          "archive": "isoband_0.3.0.tar.gz",
+          "bytes": "1593511",
+          "sha256": "fe8d3d58ca75bbee32f389152ac0058818f3f76f09c9867949531de7abc424ac",
+          "source": "https://cran.r-project.org/src/contrib/isoband_0.3.0.tar.gz"
+        },
+        "windows": {
+          "archive": "isoband_0.3.0.tar.gz",
+          "bytes": "1593511",
+          "sha256": "fe8d3d58ca75bbee32f389152ac0058818f3f76f09c9867949531de7abc424ac",
+          "source": "https://cloud.r-project.org/src/contrib/isoband_0.3.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.3.0"
+    },
+    "jquerylib": {
+      "artifacts": {
+        "linux": {
+          "archive": "jquerylib_0.1.4.tar.gz",
+          "bytes": "520207",
+          "sha256": "f0bcc11dcde3a6ff180277e45c24642d3da3c8690900e38f44495efbc9064411",
+          "source": "https://cran.r-project.org/src/contrib/jquerylib_0.1.4.tar.gz"
+        },
+        "windows": {
+          "archive": "jquerylib_0.1.4.tar.gz",
+          "bytes": "520207",
+          "sha256": "f0bcc11dcde3a6ff180277e45c24642d3da3c8690900e38f44495efbc9064411",
+          "source": "https://cloud.r-project.org/src/contrib/jquerylib_0.1.4.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.1.4"
+    },
+    "jsonlite": {
+      "artifacts": {
+        "linux": {
+          "archive": "jsonlite_2.0.0.tar.gz",
+          "bytes": "1055849",
+          "sha256": "75eb910c82b350ec33f094779da0f87bff154c232e4ae39c9896a9b89f3ac82d",
+          "source": "https://cran.r-project.org/src/contrib/jsonlite_2.0.0.tar.gz"
+        },
+        "windows": {
+          "archive": "jsonlite_2.0.0.tar.gz",
+          "bytes": "1055849",
+          "sha256": "75eb910c82b350ec33f094779da0f87bff154c232e4ae39c9896a9b89f3ac82d",
+          "source": "https://cloud.r-project.org/src/contrib/jsonlite_2.0.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "2.0.0"
+    },
+    "knitr": {
+      "artifacts": {
+        "linux": {
+          "archive": "knitr_1.52.tar.gz",
+          "bytes": "490015",
+          "sha256": "bdd66a02dfba08a4c644b38a6ae08f6ba915c16d6b6ab6a188ec193c35905ff2",
+          "source": "https://cran.r-project.org/src/contrib/knitr_1.52.tar.gz"
+        },
+        "windows": {
+          "archive": "knitr_1.52.tar.gz",
+          "bytes": "490015",
+          "sha256": "bdd66a02dfba08a4c644b38a6ae08f6ba915c16d6b6ab6a188ec193c35905ff2",
+          "source": "https://cloud.r-project.org/src/contrib/knitr_1.52.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.52"
+    },
+    "labeling": {
+      "artifacts": {
+        "linux": {
+          "archive": "labeling_0.4.3.tar.gz",
+          "bytes": "10167",
+          "sha256": "c62f4fc2cc74377d7055903c5f1913b7295f7587456fe468592738a483e264f2",
+          "source": "https://cran.r-project.org/src/contrib/labeling_0.4.3.tar.gz"
+        },
+        "windows": {
+          "archive": "labeling_0.4.3.tar.gz",
+          "bytes": "10167",
+          "sha256": "c62f4fc2cc74377d7055903c5f1913b7295f7587456fe468592738a483e264f2",
+          "source": "https://cloud.r-project.org/src/contrib/labeling_0.4.3.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.4.3"
+    },
+    "lambda.r": {
+      "artifacts": {
+        "linux": {
+          "archive": "lambda.r_1.2.6.tar.gz",
+          "bytes": "25603",
+          "sha256": "0ad5ca078d86597a5527f781f10a669dc925f6b63e759cc43e0bccee77e69059",
+          "source": "https://cran.r-project.org/src/contrib/lambda.r_1.2.6.tar.gz"
+        },
+        "windows": {
+          "archive": "lambda.r_1.2.6.tar.gz",
+          "bytes": "25603",
+          "sha256": "0ad5ca078d86597a5527f781f10a669dc925f6b63e759cc43e0bccee77e69059",
+          "source": "https://cloud.r-project.org/src/contrib/lambda.r_1.2.6.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.2.6"
+    },
+    "lifecycle": {
+      "artifacts": {
+        "linux": {
+          "archive": "lifecycle_1.0.5.tar.gz",
+          "bytes": "107137",
+          "sha256": "61841e3e6edba056a88355a3f1d6698ab8d5d9cb3c05f2af0ec5a44ab516f8ee",
+          "source": "https://cran.r-project.org/src/contrib/lifecycle_1.0.5.tar.gz"
+        },
+        "windows": {
+          "archive": "lifecycle_1.0.5.tar.gz",
+          "bytes": "107137",
+          "sha256": "61841e3e6edba056a88355a3f1d6698ab8d5d9cb3c05f2af0ec5a44ab516f8ee",
+          "source": "https://cloud.r-project.org/src/contrib/lifecycle_1.0.5.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.0.5"
+    },
+    "litedown": {
+      "artifacts": {
+        "linux": {
+          "archive": "litedown_1.0.tar.gz",
+          "bytes": "302411",
+          "sha256": "9261b3fe6a92adc04aa4c2fa99e240a8981ee4a077ce29deaf00717c7daa32f0",
+          "source": "https://cran.r-project.org/src/contrib/litedown_1.0.tar.gz"
+        },
+        "windows": {
+          "archive": "litedown_1.0.tar.gz",
+          "bytes": "302411",
+          "sha256": "9261b3fe6a92adc04aa4c2fa99e240a8981ee4a077ce29deaf00717c7daa32f0",
+          "source": "https://cloud.r-project.org/src/contrib/litedown_1.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.0"
+    },
+    "magrittr": {
+      "artifacts": {
+        "linux": {
+          "archive": "magrittr_2.0.5.tar.gz",
+          "bytes": "281813",
+          "sha256": "3f5b5b1d4e6d12807a95c50b6c88cb1d8af2c5eb5213f08bfe58f278eca2ed23",
+          "source": "https://cran.r-project.org/src/contrib/magrittr_2.0.5.tar.gz"
+        },
+        "windows": {
+          "archive": "magrittr_2.0.5.tar.gz",
+          "bytes": "281813",
+          "sha256": "3f5b5b1d4e6d12807a95c50b6c88cb1d8af2c5eb5213f08bfe58f278eca2ed23",
+          "source": "https://cloud.r-project.org/src/contrib/magrittr_2.0.5.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "2.0.5"
+    },
+    "markdown": {
+      "artifacts": {
+        "linux": {
+          "archive": "markdown_2.1.tar.gz",
+          "bytes": "21362",
+          "sha256": "dbac75f985c945a70981ad1bfb4640bd4b765af83365643dbf7774357026a6cb",
+          "source": "https://cran.r-project.org/src/contrib/markdown_2.1.tar.gz"
+        },
+        "windows": {
+          "archive": "markdown_2.1.tar.gz",
+          "bytes": "21362",
+          "sha256": "dbac75f985c945a70981ad1bfb4640bd4b765af83365643dbf7774357026a6cb",
+          "source": "https://cloud.r-project.org/src/contrib/markdown_2.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "2.1"
+    },
+    "matrixStats": {
+      "artifacts": {
+        "linux": {
+          "archive": "matrixStats_1.5.0.tar.gz",
+          "bytes": "212156",
+          "sha256": "12996c5f3e6fc202a43e1087f16a71b7fa93d7e908f512542c7ee89cf95dcc15",
+          "source": "https://cran.r-project.org/src/contrib/matrixStats_1.5.0.tar.gz"
+        },
+        "windows": {
+          "archive": "matrixStats_1.5.0.tar.gz",
+          "bytes": "212156",
+          "sha256": "12996c5f3e6fc202a43e1087f16a71b7fa93d7e908f512542c7ee89cf95dcc15",
+          "source": "https://cloud.r-project.org/src/contrib/matrixStats_1.5.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.5.0"
+    },
+    "memoise": {
+      "artifacts": {
+        "linux": {
+          "archive": "memoise_2.0.1.tar.gz",
+          "bytes": "17852",
+          "sha256": "f85034ee98c8ca07fb3cd826142c1cd1e1e5747075a94c75a45783bbc4fe2deb",
+          "source": "https://cran.r-project.org/src/contrib/memoise_2.0.1.tar.gz"
+        },
+        "windows": {
+          "archive": "memoise_2.0.1.tar.gz",
+          "bytes": "17852",
+          "sha256": "f85034ee98c8ca07fb3cd826142c1cd1e1e5747075a94c75a45783bbc4fe2deb",
+          "source": "https://cloud.r-project.org/src/contrib/memoise_2.0.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "2.0.1"
+    },
+    "mime": {
+      "artifacts": {
+        "linux": {
+          "archive": "mime_0.13.tar.gz",
+          "bytes": "21950",
+          "sha256": "7132834cf3c3388eff12bad376d69fbcf8275acc37d36c290e59174fe3c7f3eb",
+          "source": "https://cran.r-project.org/src/contrib/mime_0.13.tar.gz"
+        },
+        "windows": {
+          "archive": "mime_0.13.tar.gz",
+          "bytes": "21950",
+          "sha256": "7132834cf3c3388eff12bad376d69fbcf8275acc37d36c290e59174fe3c7f3eb",
+          "source": "https://cloud.r-project.org/src/contrib/mime_0.13.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.13"
+    },
+    "openssl": {
+      "artifacts": {
+        "linux": {
+          "archive": "openssl_2.6.0.tar.gz",
+          "bytes": "1056862",
+          "sha256": "5c94c361bca1aece2ba88518042617fd501dc8e5e3da72503a3cef3251cee1a8",
+          "source": "https://cran.r-project.org/src/contrib/openssl_2.6.0.tar.gz"
+        },
+        "windows": {
+          "archive": "openssl_2.6.0.tar.gz",
+          "bytes": "1056862",
+          "sha256": "5c94c361bca1aece2ba88518042617fd501dc8e5e3da72503a3cef3251cee1a8",
+          "source": "https://cloud.r-project.org/src/contrib/openssl_2.6.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "2.6.0"
+    },
+    "otel": {
+      "artifacts": {
+        "linux": {
+          "archive": "otel_0.3.0.tar.gz",
+          "bytes": "81535",
+          "sha256": "3fcfca6f950dadeb9448bcf17ba51d21a0f891130d5196e469085e6cc78c9a31",
+          "source": "https://cran.r-project.org/src/contrib/otel_0.3.0.tar.gz"
+        },
+        "windows": {
+          "archive": "otel_0.3.0.tar.gz",
+          "bytes": "81535",
+          "sha256": "3fcfca6f950dadeb9448bcf17ba51d21a0f891130d5196e469085e6cc78c9a31",
+          "source": "https://cloud.r-project.org/src/contrib/otel_0.3.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.3.0"
+    },
+    "pak": {
+      "artifacts": {
+        "linux": {
+          "archive": "pak_0.11.2.tar.gz",
+          "bytes": "3950813",
+          "sha256": "7474043d33073a459ad5e7da1c0c066920a26707c5dc7d4c6c103a209d0a87a5",
+          "source": "https://cran.r-project.org/src/contrib/pak_0.11.2.tar.gz"
+        },
+        "windows": {
+          "archive": "pak_0.11.2.tar.gz",
+          "bytes": "3950813",
+          "sha256": "7474043d33073a459ad5e7da1c0c066920a26707c5dc7d4c6c103a209d0a87a5",
+          "source": "https://cloud.r-project.org/src/contrib/pak_0.11.2.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.11.2"
+    },
+    "pillar": {
+      "artifacts": {
+        "linux": {
+          "archive": "pillar_1.11.1.tar.gz",
+          "bytes": "409508",
+          "sha256": "056ce154238c9b5b8d5dcbcb52e1bc51d33870ce08c8a9ca9496478bd59f4653",
+          "source": "https://cran.r-project.org/src/contrib/pillar_1.11.1.tar.gz"
+        },
+        "windows": {
+          "archive": "pillar_1.11.1.tar.gz",
+          "bytes": "409508",
+          "sha256": "056ce154238c9b5b8d5dcbcb52e1bc51d33870ce08c8a9ca9496478bd59f4653",
+          "source": "https://cloud.r-project.org/src/contrib/pillar_1.11.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.11.1"
+    },
+    "pkgbuild": {
+      "artifacts": {
+        "linux": {
+          "archive": "pkgbuild_1.4.8.tar.gz",
+          "bytes": "51302",
+          "sha256": "2e4259202ce90fc452f31ff36cfe14ff21a38e9fd71c3015e25018b9079924cb",
+          "source": "https://cran.r-project.org/src/contrib/pkgbuild_1.4.8.tar.gz"
+        },
+        "windows": {
+          "archive": "pkgbuild_1.4.8.tar.gz",
+          "bytes": "51302",
+          "sha256": "2e4259202ce90fc452f31ff36cfe14ff21a38e9fd71c3015e25018b9079924cb",
+          "source": "https://cloud.r-project.org/src/contrib/pkgbuild_1.4.8.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.4.8"
+    },
+    "pkgconfig": {
+      "artifacts": {
+        "linux": {
+          "archive": "pkgconfig_2.0.3.tar.gz",
+          "bytes": "6080",
+          "sha256": "330fef440ffeb842a7dcfffc8303743f1feae83e8d6131078b5a44ff11bc3850",
+          "source": "https://cran.r-project.org/src/contrib/pkgconfig_2.0.3.tar.gz"
+        },
+        "windows": {
+          "archive": "pkgconfig_2.0.3.tar.gz",
+          "bytes": "6080",
+          "sha256": "330fef440ffeb842a7dcfffc8303743f1feae83e8d6131078b5a44ff11bc3850",
+          "source": "https://cloud.r-project.org/src/contrib/pkgconfig_2.0.3.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "2.0.3"
+    },
+    "pkgload": {
+      "artifacts": {
+        "linux": {
+          "archive": "pkgload_1.5.3.tar.gz",
+          "bytes": "89069",
+          "sha256": "5e539f91ca36b8ed80933101baf2a57462b9342c68556f5d4dcb86c01639df28",
+          "source": "https://cran.r-project.org/src/contrib/pkgload_1.5.3.tar.gz"
+        },
+        "windows": {
+          "archive": "pkgload_1.5.3.tar.gz",
+          "bytes": "89069",
+          "sha256": "5e539f91ca36b8ed80933101baf2a57462b9342c68556f5d4dcb86c01639df28",
+          "source": "https://cloud.r-project.org/src/contrib/pkgload_1.5.3.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.5.3"
+    },
+    "plyr": {
+      "artifacts": {
+        "linux": {
+          "archive": "plyr_1.8.9.tar.gz",
+          "bytes": "401488",
+          "sha256": "15b5e7f711d53bf41b8687923983b8ef424563aa2f74c5195feb5b1df1aee103",
+          "source": "https://cran.r-project.org/src/contrib/plyr_1.8.9.tar.gz"
+        },
+        "windows": {
+          "archive": "plyr_1.8.9.tar.gz",
+          "bytes": "401488",
+          "sha256": "15b5e7f711d53bf41b8687923983b8ef424563aa2f74c5195feb5b1df1aee103",
+          "source": "https://cloud.r-project.org/src/contrib/plyr_1.8.9.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.8.9"
+    },
+    "png": {
+      "artifacts": {
+        "linux": {
+          "archive": "png_0.1-9.tar.gz",
+          "bytes": "24939",
+          "sha256": "0b8502363c6f5c73cf284dee4fd1416f5adf4115b6ae9a1e09531c143b978589",
+          "source": "https://cran.r-project.org/src/contrib/png_0.1-9.tar.gz"
+        },
+        "windows": {
+          "archive": "png_0.1-9.tar.gz",
+          "bytes": "24939",
+          "sha256": "0b8502363c6f5c73cf284dee4fd1416f5adf4115b6ae9a1e09531c143b978589",
+          "source": "https://cloud.r-project.org/src/contrib/png_0.1-9.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.1-9"
+    },
+    "praise": {
+      "artifacts": {
+        "linux": {
+          "archive": "praise_1.0.0.tar.gz",
+          "bytes": "6100",
+          "sha256": "5c035e74fd05dfa59b03afe0d5f4c53fbf34144e175e90c53d09c6baedf5debd",
+          "source": "https://cran.r-project.org/src/contrib/praise_1.0.0.tar.gz"
+        },
+        "windows": {
+          "archive": "praise_1.0.0.tar.gz",
+          "bytes": "6100",
+          "sha256": "5c035e74fd05dfa59b03afe0d5f4c53fbf34144e175e90c53d09c6baedf5debd",
+          "source": "https://cloud.r-project.org/src/contrib/praise_1.0.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.0.0"
+    },
+    "processx": {
+      "artifacts": {
+        "linux": {
+          "archive": "processx_3.10.0.tar.gz",
+          "bytes": "204148",
+          "sha256": "3c032ceb1233ef7359d30590800b6a8313386ce5753fde29643e595f5a4331d0",
+          "source": "https://cran.r-project.org/src/contrib/processx_3.10.0.tar.gz"
+        },
+        "windows": {
+          "archive": "processx_3.10.0.tar.gz",
+          "bytes": "204148",
+          "sha256": "3c032ceb1233ef7359d30590800b6a8313386ce5753fde29643e595f5a4331d0",
+          "source": "https://cloud.r-project.org/src/contrib/processx_3.10.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "3.10.0"
+    },
+    "ps": {
+      "artifacts": {
+        "linux": {
+          "archive": "ps_1.9.3.tar.gz",
+          "bytes": "172432",
+          "sha256": "7b227f0627709a2073daf960ac612a0b87d03e18f7dd5c1938048ed440ef2e68",
+          "source": "https://cran.r-project.org/src/contrib/ps_1.9.3.tar.gz"
+        },
+        "windows": {
+          "archive": "ps_1.9.3.tar.gz",
+          "bytes": "172432",
+          "sha256": "7b227f0627709a2073daf960ac612a0b87d03e18f7dd5c1938048ed440ef2e68",
+          "source": "https://cloud.r-project.org/src/contrib/ps_1.9.3.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.9.3"
+    },
+    "purrr": {
+      "artifacts": {
+        "linux": {
+          "archive": "purrr_1.2.2.tar.gz",
+          "bytes": "278508",
+          "sha256": "ac3bc0fc0e789510042522e6c4294336c71447be8f6921b5ef78b9a9fb86617d",
+          "source": "https://cran.r-project.org/src/contrib/purrr_1.2.2.tar.gz"
+        },
+        "windows": {
+          "archive": "purrr_1.2.2.tar.gz",
+          "bytes": "278508",
+          "sha256": "ac3bc0fc0e789510042522e6c4294336c71447be8f6921b5ef78b9a9fb86617d",
+          "source": "https://cloud.r-project.org/src/contrib/purrr_1.2.2.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.2.2"
+    },
+    "rappdirs": {
+      "artifacts": {
+        "linux": {
+          "archive": "rappdirs_0.3.4.tar.gz",
+          "bytes": "11763",
+          "sha256": "2320ebc9ef3b1a32a1e63f94a6ce2c1c34d66782221a6531e786804f681abc66",
+          "source": "https://cran.r-project.org/src/contrib/rappdirs_0.3.4.tar.gz"
+        },
+        "windows": {
+          "archive": "rappdirs_0.3.4.tar.gz",
+          "bytes": "11763",
+          "sha256": "2320ebc9ef3b1a32a1e63f94a6ce2c1c34d66782221a6531e786804f681abc66",
+          "source": "https://cloud.r-project.org/src/contrib/rappdirs_0.3.4.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.3.4"
+    },
+    "restfulr": {
+      "artifacts": {
+        "linux": {
+          "archive": "restfulr_0.0.17.tar.gz",
+          "bytes": "15182",
+          "sha256": "e50b9c4a9886f3756a9610f89f24d4de97262e7c5769dc3e4824ce888c304057",
+          "source": "https://cran.r-project.org/src/contrib/restfulr_0.0.17.tar.gz"
+        },
+        "windows": {
+          "archive": "restfulr_0.0.17.tar.gz",
+          "bytes": "15182",
+          "sha256": "e50b9c4a9886f3756a9610f89f24d4de97262e7c5769dc3e4824ce888c304057",
+          "source": "https://cloud.r-project.org/src/contrib/restfulr_0.0.17.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.0.17"
+    },
+    "rex": {
+      "artifacts": {
+        "linux": {
+          "archive": "rex_1.2.2.tar.gz",
+          "bytes": "91288",
+          "sha256": "5c6a6f9bc45507038ae528e71a7f6cd69a77c24c2fed86383a34fd5c86c2ee48",
+          "source": "https://cran.r-project.org/src/contrib/rex_1.2.2.tar.gz"
+        },
+        "windows": {
+          "archive": "rex_1.2.2.tar.gz",
+          "bytes": "91288",
+          "sha256": "5c6a6f9bc45507038ae528e71a7f6cd69a77c24c2fed86383a34fd5c86c2ee48",
+          "source": "https://cloud.r-project.org/src/contrib/rex_1.2.2.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.2.2"
+    },
+    "rjson": {
+      "artifacts": {
+        "linux": {
+          "archive": "rjson_0.2.23.tar.gz",
+          "bytes": "79159",
+          "sha256": "55034575c854ed657e6701da278c0fdea251479624d06a963b2e58461a5f0f48",
+          "source": "https://cran.r-project.org/src/contrib/rjson_0.2.23.tar.gz"
+        },
+        "windows": {
+          "archive": "rjson_0.2.23.tar.gz",
+          "bytes": "79159",
+          "sha256": "55034575c854ed657e6701da278c0fdea251479624d06a963b2e58461a5f0f48",
+          "source": "https://cloud.r-project.org/src/contrib/rjson_0.2.23.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.2.23"
+    },
+    "rlang": {
+      "artifacts": {
+        "linux": {
+          "archive": "rlang_1.3.0.tar.gz",
+          "bytes": "784080",
+          "sha256": "80aa537d49e72265f443a15e8936128af583caa5e572086518b503cbf064279c",
+          "source": "https://cran.r-project.org/src/contrib/rlang_1.3.0.tar.gz"
+        },
+        "windows": {
+          "archive": "rlang_1.3.0.tar.gz",
+          "bytes": "784080",
+          "sha256": "80aa537d49e72265f443a15e8936128af583caa5e572086518b503cbf064279c",
+          "source": "https://cloud.r-project.org/src/contrib/rlang_1.3.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.3.0"
+    },
+    "rmarkdown": {
+      "artifacts": {
+        "linux": {
+          "archive": "rmarkdown_2.32.tar.gz",
+          "bytes": "2193865",
+          "sha256": "f7fab8ae670d18a4b91409d11e4275b565c4081d77c4522443d01f94a8c2acee",
+          "source": "https://cran.r-project.org/src/contrib/rmarkdown_2.32.tar.gz"
+        },
+        "windows": {
+          "archive": "rmarkdown_2.32.tar.gz",
+          "bytes": "2193865",
+          "sha256": "f7fab8ae670d18a4b91409d11e4275b565c4081d77c4522443d01f94a8c2acee",
+          "source": "https://cloud.r-project.org/src/contrib/rmarkdown_2.32.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "2.32"
+    },
+    "rprojroot": {
+      "artifacts": {
+        "linux": {
+          "archive": "rprojroot_2.1.1.tar.gz",
+          "bytes": "59899",
+          "sha256": "473989bbef45fd9cd68f68dc317b14c9f42de5cea4b55fd6ba9011f25e0517e9",
+          "source": "https://cran.r-project.org/src/contrib/rprojroot_2.1.1.tar.gz"
+        },
+        "windows": {
+          "archive": "rprojroot_2.1.1.tar.gz",
+          "bytes": "59899",
+          "sha256": "473989bbef45fd9cd68f68dc317b14c9f42de5cea4b55fd6ba9011f25e0517e9",
+          "source": "https://cloud.r-project.org/src/contrib/rprojroot_2.1.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "2.1.1"
+    },
+    "rstudioapi": {
+      "artifacts": {
+        "linux": {
+          "archive": "rstudioapi_0.19.0.tar.gz",
+          "bytes": "130807",
+          "sha256": "f1e3bb445a90aadc07b043493022d120493eba7ff30c0b3055442d8b77d8069a",
+          "source": "https://cran.r-project.org/src/contrib/rstudioapi_0.19.0.tar.gz"
+        },
+        "windows": {
+          "archive": "rstudioapi_0.19.0.tar.gz",
+          "bytes": "130807",
+          "sha256": "f1e3bb445a90aadc07b043493022d120493eba7ff30c0b3055442d8b77d8069a",
+          "source": "https://cloud.r-project.org/src/contrib/rstudioapi_0.19.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.19.0"
+    },
+    "rtracklayer": {
+      "artifacts": {
+        "linux": {
+          "archive": "rtracklayer_1.70.1.tar.gz",
+          "bytes": "4086857",
+          "sha256": "08b485a50cdb47e935a2bd742cb99fa82b4f56467e16bbf8ce5249a22feb833c",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/rtracklayer_1.70.1.tar.gz"
+        },
+        "windows": {
+          "archive": "rtracklayer_1.70.1.tar.gz",
+          "bytes": "4086857",
+          "sha256": "08b485a50cdb47e935a2bd742cb99fa82b4f56467e16bbf8ce5249a22feb833c",
+          "source": "https://bioconductor.org/packages/3.22/bioc/src/contrib/rtracklayer_1.70.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.70.1"
+    },
+    "rvcheck": {
+      "artifacts": {
+        "linux": {
+          "archive": "rvcheck_0.2.1.tar.gz",
+          "bytes": "5658",
+          "sha256": "2ad9efd2af8d103e88bff0a01692f0e32515805f269152f2694eadbfe9947026",
+          "source": "https://cran.r-project.org/src/contrib/rvcheck_0.2.1.tar.gz"
+        },
+        "windows": {
+          "archive": "rvcheck_0.2.1.tar.gz",
+          "bytes": "5658",
+          "sha256": "2ad9efd2af8d103e88bff0a01692f0e32515805f269152f2694eadbfe9947026",
+          "source": "https://cloud.r-project.org/src/contrib/rvcheck_0.2.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.2.1"
+    },
+    "sass": {
+      "artifacts": {
+        "linux": {
+          "archive": "sass_0.5.0.tar.gz",
+          "bytes": "2952912",
+          "sha256": "fd6b9d97190e2bf6f6f6b8d3c63f7c922c7563cb99e728749ed8f00e09099da7",
+          "source": "https://cran.r-project.org/src/contrib/sass_0.5.0.tar.gz"
+        },
+        "windows": {
+          "archive": "sass_0.5.0.tar.gz",
+          "bytes": "2952912",
+          "sha256": "fd6b9d97190e2bf6f6f6b8d3c63f7c922c7563cb99e728749ed8f00e09099da7",
+          "source": "https://cloud.r-project.org/src/contrib/sass_0.5.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.5.0"
+    },
+    "scales": {
+      "artifacts": {
+        "linux": {
+          "archive": "scales_1.4.0.tar.gz",
+          "bytes": "328671",
+          "sha256": "d55ef5f08c92652d7a95cfa27584024723ab17873f1b2577dd488cb7c883ceee",
+          "source": "https://cran.r-project.org/src/contrib/scales_1.4.0.tar.gz"
+        },
+        "windows": {
+          "archive": "scales_1.4.0.tar.gz",
+          "bytes": "328671",
+          "sha256": "d55ef5f08c92652d7a95cfa27584024723ab17873f1b2577dd488cb7c883ceee",
+          "source": "https://cloud.r-project.org/src/contrib/scales_1.4.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.4.0"
+    },
+    "snow": {
+      "artifacts": {
+        "linux": {
+          "archive": "snow_0.4-4.tar.gz",
+          "bytes": "20464",
+          "sha256": "84587f46f222a96f3e2fde10ad6ec6ddbd878f4e917cd926d632f61a87db13c9",
+          "source": "https://cran.r-project.org/src/contrib/snow_0.4-4.tar.gz"
+        },
+        "windows": {
+          "archive": "snow_0.4-4.tar.gz",
+          "bytes": "20464",
+          "sha256": "84587f46f222a96f3e2fde10ad6ec6ddbd878f4e917cd926d632f61a87db13c9",
+          "source": "https://cloud.r-project.org/src/contrib/snow_0.4-4.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.4-4"
+    },
+    "stringi": {
+      "artifacts": {
+        "linux": {
+          "archive": "stringi_1.8.9.tar.gz",
+          "bytes": "11907881",
+          "sha256": "427fcebd281d7ea850becce75e0807576dd394a723a814b2d487419b93275a33",
+          "source": "https://cran.r-project.org/src/contrib/stringi_1.8.9.tar.gz"
+        },
+        "windows": {
+          "archive": "stringi_1.8.9.tar.gz",
+          "bytes": "11907881",
+          "sha256": "427fcebd281d7ea850becce75e0807576dd394a723a814b2d487419b93275a33",
+          "source": "https://cloud.r-project.org/src/contrib/stringi_1.8.9.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.8.9"
+    },
+    "stringr": {
+      "artifacts": {
+        "linux": {
+          "archive": "stringr_1.6.0.tar.gz",
+          "bytes": "195833",
+          "sha256": "24f2fc5df980a7eb888659e22b9744d2316c558624015c7a7cd8c3ce3e370064",
+          "source": "https://cran.r-project.org/src/contrib/stringr_1.6.0.tar.gz"
+        },
+        "windows": {
+          "archive": "stringr_1.6.0.tar.gz",
+          "bytes": "195833",
+          "sha256": "24f2fc5df980a7eb888659e22b9744d2316c558624015c7a7cd8c3ce3e370064",
+          "source": "https://cloud.r-project.org/src/contrib/stringr_1.6.0.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.6.0"
+    },
+    "sys": {
+      "artifacts": {
+        "linux": {
+          "archive": "sys_3.4.3.tar.gz",
+          "bytes": "19936",
+          "sha256": "051e7332e3074db826efef9059067721864f9d70adc55bbcae3a72e5ae83913a",
+          "source": "https://cran.r-project.org/src/contrib/sys_3.4.3.tar.gz"
+        },
+        "windows": {
+          "archive": "sys_3.4.3.tar.gz",
+          "bytes": "19936",
+          "sha256": "051e7332e3074db826efef9059067721864f9d70adc55bbcae3a72e5ae83913a",
+          "source": "https://cloud.r-project.org/src/contrib/sys_3.4.3.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "3.4.3"
+    },
+    "testthat": {
+      "artifacts": {
+        "linux": {
+          "archive": "testthat_3.3.2.tar.gz",
+          "bytes": "834043",
+          "sha256": "5d2e2fa2c3dcb523afb6898c02be9544c24c1c7e0789149c436fef768a409808",
+          "source": "https://cran.r-project.org/src/contrib/testthat_3.3.2.tar.gz"
+        },
+        "windows": {
+          "archive": "testthat_3.3.2.tar.gz",
+          "bytes": "834043",
+          "sha256": "5d2e2fa2c3dcb523afb6898c02be9544c24c1c7e0789149c436fef768a409808",
+          "source": "https://cloud.r-project.org/src/contrib/testthat_3.3.2.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "3.3.2"
+    },
+    "tibble": {
+      "artifacts": {
+        "linux": {
+          "archive": "tibble_3.3.1.tar.gz",
+          "bytes": "557135",
+          "sha256": "fb309f8a1939021b237c7e85ff7ad6e8ff5acd57a6230d220a452094b492b28f",
+          "source": "https://cran.r-project.org/src/contrib/tibble_3.3.1.tar.gz"
+        },
+        "windows": {
+          "archive": "tibble_3.3.1.tar.gz",
+          "bytes": "557135",
+          "sha256": "fb309f8a1939021b237c7e85ff7ad6e8ff5acd57a6230d220a452094b492b28f",
+          "source": "https://cloud.r-project.org/src/contrib/tibble_3.3.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "3.3.1"
+    },
+    "tidyselect": {
+      "artifacts": {
+        "linux": {
+          "archive": "tidyselect_1.2.1.tar.gz",
+          "bytes": "103591",
+          "sha256": "169e97ba0bbfbcdf4a80534322751f87a04370310c40e27f04aac6525d45903c",
+          "source": "https://cran.r-project.org/src/contrib/tidyselect_1.2.1.tar.gz"
+        },
+        "windows": {
+          "archive": "tidyselect_1.2.1.tar.gz",
+          "bytes": "103591",
+          "sha256": "169e97ba0bbfbcdf4a80534322751f87a04370310c40e27f04aac6525d45903c",
+          "source": "https://cloud.r-project.org/src/contrib/tidyselect_1.2.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.2.1"
+    },
+    "tinytex": {
+      "artifacts": {
+        "linux": {
+          "archive": "tinytex_0.61.tar.gz",
+          "bytes": "38437",
+          "sha256": "78300dc6163911c7de3efbe225c3bf455287c67886ed0e5a04fd347c6eaf2680",
+          "source": "https://cran.r-project.org/src/contrib/tinytex_0.61.tar.gz"
+        },
+        "windows": {
+          "archive": "tinytex_0.61.tar.gz",
+          "bytes": "38437",
+          "sha256": "78300dc6163911c7de3efbe225c3bf455287c67886ed0e5a04fd347c6eaf2680",
+          "source": "https://cloud.r-project.org/src/contrib/tinytex_0.61.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.61"
+    },
+    "usethis": {
+      "artifacts": {
+        "linux": {
+          "archive": "usethis_3.2.2.tar.gz",
+          "bytes": "414329",
+          "sha256": "423d9880847e5873c2978559e0bbe9ea4570aa100cbef3de5911cac35296a67e",
+          "source": "https://cran.r-project.org/src/contrib/usethis_3.2.2.tar.gz"
+        },
+        "windows": {
+          "archive": "usethis_3.2.2.tar.gz",
+          "bytes": "414329",
+          "sha256": "423d9880847e5873c2978559e0bbe9ea4570aa100cbef3de5911cac35296a67e",
+          "source": "https://cloud.r-project.org/src/contrib/usethis_3.2.2.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "3.2.2"
+    },
+    "utf8": {
+      "artifacts": {
+        "linux": {
+          "archive": "utf8_1.2.6.tar.gz",
+          "bytes": "243856",
+          "sha256": "4589f8b72291329e70b7f3a8c20f2feb4e7764eebad2e6976bc9a3eee7686ce9",
+          "source": "https://cran.r-project.org/src/contrib/utf8_1.2.6.tar.gz"
+        },
+        "windows": {
+          "archive": "utf8_1.2.6.tar.gz",
+          "bytes": "243856",
+          "sha256": "4589f8b72291329e70b7f3a8c20f2feb4e7764eebad2e6976bc9a3eee7686ce9",
+          "source": "https://cloud.r-project.org/src/contrib/utf8_1.2.6.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "1.2.6"
+    },
+    "vctrs": {
+      "artifacts": {
+        "linux": {
+          "archive": "vctrs_0.7.3.tar.gz",
+          "bytes": "1083213",
+          "sha256": "b45078413e06ac624dddb7221a3a43908b405c8abec09822cb86638d30b0435b",
+          "source": "https://cran.r-project.org/src/contrib/vctrs_0.7.3.tar.gz"
+        },
+        "windows": {
+          "archive": "vctrs_0.7.3.tar.gz",
+          "bytes": "1083213",
+          "sha256": "b45078413e06ac624dddb7221a3a43908b405c8abec09822cb86638d30b0435b",
+          "source": "https://cloud.r-project.org/src/contrib/vctrs_0.7.3.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.7.3"
+    },
+    "viridisLite": {
+      "artifacts": {
+        "linux": {
+          "archive": "viridisLite_0.4.3.tar.gz",
+          "bytes": "1269031",
+          "sha256": "433be9bde66234dc76301fb4ffbbc9fc74bab5c14f4548d8ef2fc0065e121ef5",
+          "source": "https://cran.r-project.org/src/contrib/viridisLite_0.4.3.tar.gz"
+        },
+        "windows": {
+          "archive": "viridisLite_0.4.3.tar.gz",
+          "bytes": "1269031",
+          "sha256": "433be9bde66234dc76301fb4ffbbc9fc74bab5c14f4548d8ef2fc0065e121ef5",
+          "source": "https://cloud.r-project.org/src/contrib/viridisLite_0.4.3.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.4.3"
+    },
+    "waldo": {
+      "artifacts": {
+        "linux": {
+          "archive": "waldo_0.6.2.tar.gz",
+          "bytes": "45913",
+          "sha256": "b22a746be625eec49736d2a0a18d96c45c14d97e30e42bc81a0740f3194e07fa",
+          "source": "https://cran.r-project.org/src/contrib/waldo_0.6.2.tar.gz"
+        },
+        "windows": {
+          "archive": "waldo_0.6.2.tar.gz",
+          "bytes": "45913",
+          "sha256": "b22a746be625eec49736d2a0a18d96c45c14d97e30e42bc81a0740f3194e07fa",
+          "source": "https://cloud.r-project.org/src/contrib/waldo_0.6.2.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.6.2"
+    },
+    "whisker": {
+      "artifacts": {
+        "linux": {
+          "archive": "whisker_0.4.1.tar.gz",
+          "bytes": "28586",
+          "sha256": "bf5151494508032f68ac41e211bda80da9087c65c7068ffdd12f16669bf1f2bc",
+          "source": "https://cran.r-project.org/src/contrib/whisker_0.4.1.tar.gz"
+        },
+        "windows": {
+          "archive": "whisker_0.4.1.tar.gz",
+          "bytes": "28586",
+          "sha256": "bf5151494508032f68ac41e211bda80da9087c65c7068ffdd12f16669bf1f2bc",
+          "source": "https://cloud.r-project.org/src/contrib/whisker_0.4.1.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.4.1"
+    },
+    "withr": {
+      "artifacts": {
+        "linux": {
+          "archive": "withr_3.0.3.tar.gz",
+          "bytes": "103968",
+          "sha256": "d86c6454164fc85678bfc85e2a6cce42f7461d45fa9a87de71f376e7956c991e",
+          "source": "https://cran.r-project.org/src/contrib/withr_3.0.3.tar.gz"
+        },
+        "windows": {
+          "archive": "withr_3.0.3.tar.gz",
+          "bytes": "103968",
+          "sha256": "d86c6454164fc85678bfc85e2a6cce42f7461d45fa9a87de71f376e7956c991e",
+          "source": "https://cloud.r-project.org/src/contrib/withr_3.0.3.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "3.0.3"
+    },
+    "xfun": {
+      "artifacts": {
+        "linux": {
+          "archive": "xfun_0.62.tar.gz",
+          "bytes": "229690",
+          "sha256": "56102222347f91ef0446dfb203016ff5935d6d6b0bff3b8776673c5e46a94baf",
+          "source": "https://cran.r-project.org/src/contrib/xfun_0.62.tar.gz"
+        },
+        "windows": {
+          "archive": "xfun_0.62.tar.gz",
+          "bytes": "229690",
+          "sha256": "56102222347f91ef0446dfb203016ff5935d6d6b0bff3b8776673c5e46a94baf",
+          "source": "https://cloud.r-project.org/src/contrib/xfun_0.62.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.62"
+    },
+    "yaml": {
+      "artifacts": {
+        "linux": {
+          "archive": "yaml_2.3.12.tar.gz",
+          "bytes": "108975",
+          "sha256": "80ccf3dde851133ef3e333b818a817c296c6ccdacfc4709cd466995289cd556c",
+          "source": "https://cran.r-project.org/src/contrib/yaml_2.3.12.tar.gz"
+        },
+        "windows": {
+          "archive": "yaml_2.3.12.tar.gz",
+          "bytes": "108975",
+          "sha256": "80ccf3dde851133ef3e333b818a817c296c6ccdacfc4709cd466995289cd556c",
+          "source": "https://cloud.r-project.org/src/contrib/yaml_2.3.12.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "2.3.12"
+    },
+    "yulab.utils": {
+      "artifacts": {
+        "linux": {
+          "archive": "yulab.utils_0.2.6.tar.gz",
+          "bytes": "36132",
+          "sha256": "ea5210cc414365f4970796025acb1f4ef5ab459ca399e949696b7f92f9ed0713",
+          "source": "https://cran.r-project.org/src/contrib/yulab.utils_0.2.6.tar.gz"
+        },
+        "windows": {
+          "archive": "yulab.utils_0.2.6.tar.gz",
+          "bytes": "36132",
+          "sha256": "ea5210cc414365f4970796025acb1f4ef5ab459ca399e949696b7f92f9ed0713",
+          "source": "https://cloud.r-project.org/src/contrib/yulab.utils_0.2.6.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "0.2.6"
+    },
+    "zip": {
+      "artifacts": {
+        "linux": {
+          "archive": "zip_3.0.2.tar.gz",
+          "bytes": "446551",
+          "sha256": "5bf37e5ad4cf4cc3d191b4479e7b53336afd9250e5b9f10272e7b4a4b5cc88b7",
+          "source": "https://cran.r-project.org/src/contrib/zip_3.0.2.tar.gz"
+        },
+        "windows": {
+          "archive": "zip_3.0.2.tar.gz",
+          "bytes": "446551",
+          "sha256": "5bf37e5ad4cf4cc3d191b4479e7b53336afd9250e5b9f10272e7b4a4b5cc88b7",
+          "source": "https://cloud.r-project.org/src/contrib/zip_3.0.2.tar.gz"
+        }
+      },
+      "kind": "code",
+      "version": "3.0.2"
+    }
+  },
+  "reference_unpacked_bytes": {
+    "BSgenome.Hsapiens.1000genomes.hs37d5": 784422750,
+    "BSgenome.Hsapiens.NCBI.GRCh38": 845369669,
+    "SNPlocs.Hsapiens.dbSNP144.GRCh37": 914671541,
+    "SNPlocs.Hsapiens.dbSNP144.GRCh38": 899875171,
+    "SNPlocs.Hsapiens.dbSNP155.GRCh37": 6496537345,
+    "SNPlocs.Hsapiens.dbSNP155.GRCh38": 6632076422
+  },
+  "source_locks": {
+    "linux": {
+      "bytes": 27153,
+      "sha256": "fc1105ec377b12fde67840d68b807d6c2904eb11129baf7aaa69f52a151cc313"
+    },
+    "windows": {
+      "bytes": 33515,
+      "sha256": "8e754b98859d57d7af03e895df353f04d62e11da9c88f049a5bad203bacde681"
+    }
+  },
+  "status": "proposed_public_input_projection_not_installed_or_qualified",
+  "unpacked_bytes": {
+    "AnnotationDbi": 8001326,
+    "BH": 129194316,
+    "BSgenome": 6202233,
+    "BSgenome.Hsapiens.1000genomes.hs37d5": 784422750,
+    "BSgenome.Hsapiens.NCBI.GRCh38": 845369669,
+    "Biobase": 3476069,
+    "BiocBaseUtils": 679131,
+    "BiocGenerics": 282529,
+    "BiocIO": 689040,
+    "BiocManager": 1385225,
+    "BiocParallel": 3751601,
+    "BiocStyle": 1863080,
+    "Biostrings": 15287151,
+    "DBI": 1879793,
+    "DelayedArray": 1921717,
+    "GenomeInfoDb": 5579565,
+    "GenomicAlignments": 3414552,
+    "GenomicFeatures": 1626929,
+    "GenomicFiles": 1385540,
+    "GenomicRanges": 2566605,
+    "IRanges": 1488643,
+    "KEGGREST": 712446,
+    "MatrixGenerics": 292306,
+    "R.methodsS3": 88038,
+    "R.oo": 975015,
+    "R.utils": 1461085,
+    "R6": 205270,
+    "RColorBrewer": 53304,
+    "RCurl": 1877614,
+    "RSQLite": 27448886,
+    "Rcpp": 4557522,
+    "Rhtslib": 14637006,
+    "Rsamtools": 3483276,
+    "S4Arrays": 950519,
+    "S4Vectors": 2848652,
+    "S7": 1376365,
+    "SNPlocs.Hsapiens.dbSNP144.GRCh37": 914671541,
+    "SNPlocs.Hsapiens.dbSNP144.GRCh38": 899875171,
+    "SNPlocs.Hsapiens.dbSNP155.GRCh37": 6496537345,
+    "SNPlocs.Hsapiens.dbSNP155.GRCh38": 6632076422,
+    "Seqinfo": 786201,
+    "SparseArray": 2000264,
+    "SummarizedExperiment": 2573001,
+    "UCSC.utils": 708467,
+    "UpSetR": 7951800,
+    "VariantAnnotation": 4015943,
+    "XML": 2568908,
+    "XVector": 349091,
+    "abind": 89046,
+    "askpass": 13120,
+    "badger": 57235,
+    "base64enc": 24668,
+    "bit": 1024883,
+    "bit64": 913470,
+    "bitops": 27298,
+    "blob": 31541,
+    "bookdown": 1876970,
+    "brio": 45572,
+    "bslib": 12763541,
+    "cachem": 103633,
+    "callr": 538603,
+    "cigarillo": 820834,
+    "cli": 3154723,
+    "clipr": 67179,
+    "covr": 1324353,
+    "cpp11": 1177955,
+    "crayon": 128045,
+    "credentials": 380069,
+    "curl": 2386808,
+    "data.table": 17352021,
+    "desc": 299840,
+    "diffobj": 1346883,
+    "digest": 889245,
+    "dlstats": 805408,
+    "dplyr": 3028456,
+    "evaluate": 122338,
+    "farver": 1764621,
+    "fastmap": 206958,
+    "fontawesome": 2059622,
+    "formatR": 219142,
+    "fs": 1737514,
+    "futile.logger": 82189,
+    "futile.options": 10201,
+    "generics": 93936,
+    "gert": 407893,
+    "ggplot2": 16252370,
+    "gh": 219289,
+    "gitcreds": 286502,
+    "glue": 347472,
+    "gridExtra": 764931,
+    "gtable": 272369,
+    "highr": 48613,
+    "htmltools": 415403,
+    "httr": 375011,
+    "httr2": 968316,
+    "ieugwasr": 194125,
+    "ini": 8159,
+    "isoband": 1996900,
+    "jquerylib": 1545821,
+    "jsonlite": 2629289,
+    "knitr": 1233804,
+    "labeling": 33882,
+    "lambda.r": 87236,
+    "lifecycle": 374402,
+    "litedown": 1406939,
+    "magrittr": 478040,
+    "markdown": 59161,
+    "matrixStats": 1185305,
+    "memoise": 57802,
+    "mime": 72294,
+    "openssl": 3131542,
+    "otel": 391483,
+    "pak": 26529503,
+    "pillar": 1626509,
+    "pkgbuild": 172988,
+    "pkgconfig": 21051,
+    "pkgload": 266811,
+    "plyr": 643317,
+    "png": 46428,
+    "praise": 17536,
+    "processx": 845290,
+    "ps": 695272,
+    "purrr": 857406,
+    "rappdirs": 44485,
+    "restfulr": 52323,
+    "rex": 294753,
+    "rjson": 304441,
+    "rlang": 2924265,
+    "rmarkdown": 6914639,
+    "rprojroot": 195819,
+    "rstudioapi": 451115,
+    "rtracklayer": 5476184,
+    "rvcheck": 18226,
+    "sass": 4883807,
+    "scales": 828208,
+    "snow": 65213,
+    "stringi": 28672656,
+    "stringr": 638250,
+    "sys": 57353,
+    "testthat": 2359624,
+    "tibble": 1968082,
+    "tidyselect": 438406,
+    "tinytex": 113918,
+    "usethis": 1311301,
+    "utf8": 1770009,
+    "vctrs": 4481031,
+    "viridisLite": 1382395,
+    "waldo": 185800,
+    "whisker": 154878,
+    "withr": 306811,
+    "xfun": 700007,
+    "yaml": 612265,
+    "yulab.utils": 126504,
+    "zip": 2275255
+  }
+}

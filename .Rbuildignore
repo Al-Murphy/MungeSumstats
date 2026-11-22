@@ -19,3 +19,4 @@ package\.json$
 
 ^\.remember$
 ^benchmarks$
+^tools/ci$

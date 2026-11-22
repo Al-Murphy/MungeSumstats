@@ -1,0 +1,183 @@
+name: Installed package qualification
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'R/**'
+      - 'src/**'
+      - 'tests/**'
+      - 'inst/**'
+      - 'DESCRIPTION'
+      - 'NAMESPACE'
+      - '.Rbuildignore'
+      - 'tools/ci/installed/**'
+      - '.github/workflows/installed-*.yaml'
+  push:
+    paths:
+      - 'R/**'
+      - 'src/**'
+      - 'tests/**'
+      - 'inst/**'
+      - 'DESCRIPTION'
+      - 'NAMESPACE'
+      - '.Rbuildignore'
+      - 'tools/ci/installed/**'
+      - '.github/workflows/installed-*.yaml'
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: installed-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  linux-gold:
+    name: linux-gold
+    runs-on: ubuntu-22.04
+    timeout-minutes: 360
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Preserve exact Git bytes
+        run: git config --global core.autocrlf false
+      - name: Checkout triggering source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: '${{ github.sha }}'
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Set up pinned Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+      - name: Observe actual job start
+        id: observed
+        env:
+          GITHUB_TOKEN: '${{ github.token }}'
+        run: >-
+          python -I -S -B tools/ci/installed/service.py observe
+          --lane linux-gold --out "$RUNNER_TEMP/mss-linux-job-start.json"
+      - name: Set up pinned R
+        uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
+        timeout-minutes: 30
+        with:
+          r-version: '4.5.3'
+          use-public-rspm: false
+          Ncpus: 1
+      - name: Install required system headers
+        timeout-minutes: 20
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y g++ gfortran make pkg-config libcurl4-openssl-dev libssl-dev libxml2-dev libicu-dev libpng-dev zlib1g-dev libbz2-dev liblzma-dev libgit2-dev libssh2-1-dev
+          dpkg-query -W > "$RUNNER_TEMP/mss-linux-system-packages.tsv"
+      - name: Run current installed Linux gold
+        timeout-minutes: 320
+        run: >-
+          python -I -S -B tools/ci/installed/controller.py
+          "$RUNNER_TEMP/mss-installed-linux-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          --checkout "$GITHUB_WORKSPACE" --lane linux-gold
+          --job-start "$RUNNER_TEMP/mss-linux-job-start.json"
+          --system-packages "$RUNNER_TEMP/mss-linux-system-packages.tsv"
+      - name: Prepare bounded source snapshot
+        id: snapshot
+        if: always()
+        continue-on-error: true
+        timeout-minutes: 20
+        run: >-
+          python -I -S -B tools/ci/installed/controller.py
+          "$RUNNER_TEMP/mss-installed-linux-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          --lane linux-gold --job-start "$RUNNER_TEMP/mss-linux-job-start.json"
+          --prepare-upload "$RUNNER_TEMP"
+      - name: Retain original Linux evidence
+        if: always() && steps.snapshot.outputs.directory != ''
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        timeout-minutes: 20
+        with:
+          name: mss-installed-linux-gold-${{ github.run_id }}-${{ github.run_attempt }}
+          path: '${{ steps.snapshot.outputs.directory }}'
+          if-no-files-found: error
+          include-hidden-files: true
+          archive: true
+          compression-level: 1
+          retention-days: 14
+          overwrite: false
+
+  installed-windows:
+    name: installed-windows
+    needs: linux-gold
+    runs-on: windows-2022
+    timeout-minutes: 360
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Preserve exact Git bytes
+        run: git config --global core.autocrlf false
+      - name: Checkout triggering source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: '${{ github.sha }}'
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Set up pinned Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+      - name: Observe actual job start
+        id: observed
+        env:
+          GITHUB_TOKEN: '${{ github.token }}'
+        run: >-
+          python -I -S -B tools/ci/installed/service.py observe
+          --lane windows --out "$env:RUNNER_TEMP/mss-windows-job-start.json"
+      - name: Set up pinned R and Rtools
+        uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
+        timeout-minutes: 30
+        with:
+          r-version: '4.5.3'
+          rtools-version: '45'
+          use-public-rspm: false
+          Ncpus: 1
+      - name: Download same-run Linux results as data
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+        with:
+          name: mss-installed-linux-gold-${{ github.run_id }}-${{ github.run_attempt }}
+          path: '${{ runner.temp }}/mss-linux-gold-data'
+          digest-mismatch: error
+      - name: Run complete current installed package
+        timeout-minutes: 320
+        run: >-
+          python -I -S -B tools/ci/installed/controller.py
+          "C:/mss-installed-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
+          --checkout "$env:GITHUB_WORKSPACE" --lane windows
+          --job-start "$env:RUNNER_TEMP/mss-windows-job-start.json"
+          --linux-gold "$env:RUNNER_TEMP/mss-linux-gold-data"
+      - name: Prepare bounded source snapshot
+        id: snapshot
+        if: always()
+        continue-on-error: true
+        timeout-minutes: 20
+        run: >-
+          python -I -S -B tools/ci/installed/controller.py
+          "C:/mss-installed-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
+          --lane windows --job-start "$env:RUNNER_TEMP/mss-windows-job-start.json"
+          --prepare-upload "$env:RUNNER_TEMP"
+      - name: Retain original Windows evidence
+        if: always() && steps.snapshot.outputs.directory != ''
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        timeout-minutes: 20
+        with:
+          name: mss-installed-windows-${{ github.run_id }}-${{ github.run_attempt }}
+          path: '${{ steps.snapshot.outputs.directory }}'
+          if-no-files-found: error
+          include-hidden-files: true
+          archive: true
+          compression-level: 1
+          retention-days: 14
+          overwrite: false
