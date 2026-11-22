@@ -1,0 +1,23 @@
+{
+  "field_sha256": {
+    "alt": "c788a65df10f4a45df32a45741e71cfbef16dc496080877e6e17c3cea61b6f81",
+    "candidate_count": "0459fc92d58c974a1ef73f41888446e46a5e90bf75b761158136beec10bf02a3",
+    "chr": "4a1c4e68ba17c9a85ef69e7a90917bda23ed6a5f32004af2f8547abcb0360a32",
+    "complemented": "8c8d88267427078992f1e46e4990f40f30276b2e20fbb1cd25ccb7b7512e2e50",
+    "eaf_binary64": "177c832f54e0cb16378a4f9cfd4e82eac7f52f5ef428c29a0b91331f998d5d1d",
+    "effect_binary64": "e65a7a7a697f9a4dbaa32349e4f6d962584a336ec636f635a27dac84d73067c7",
+    "id": "9f5e32ccfd3db52a5861797665361efba11b8e5ba7dbd20a15999ccb2afa1b75",
+    "input_label": "9f5e32ccfd3db52a5861797665361efba11b8e5ba7dbd20a15999ccb2afa1b75",
+    "ordinal": "90433fcbd9e16297e6a7c1dacb1056394743194776e52f78ebf0a44b80b6b14f",
+    "pos": "9e08818791f8f49d67d58e80b256cc3768a113666344dcac8bdabb8d175e5098",
+    "ref": "fff06995e7da7358bf185255055c17fa5c6b249dbd6bb6061b10cdf413c0f42e",
+    "status": "0f8d67670eb771e3047d70d066c687a44831b1d921184b464e00cf502982403a",
+    "swapped": "e0f18ec4dfec248c2144f68bf2d4dbef7183b10db9e8fdc65a4d0dca1dbbe08b"
+  },
+  "ordered_sha256": "4abb49ca7ad93890c05b3d5f61f6c59e0f4c899cbb2c5be46d79110e6553525e",
+  "rows": 1000000,
+  "statuses": {
+    "match": 562542,
+    "swap": 437458
+  }
+}

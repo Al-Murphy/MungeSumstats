@@ -1,0 +1,351 @@
+{
+  "counter_stage_reconciliations": 4,
+  "full13_field_1M_gold_matches": 4,
+  "metadata_files": 17,
+  "proof_sha256": "8c896c5ab8c0d6d1890e3d568cb88f5fd8a313d42ea7c778686666b76c514edc",
+  "results": {
+    "matched": {
+      "baseline": {
+        "batch_rank": null,
+        "counters": {
+          "key_reads": 81875,
+          "key_requests": 29160321,
+          "offset_reads": 303,
+          "offset_requests": 29088995,
+          "pivot_hits": 38991809,
+          "probe_entries": 22214082,
+          "rank_hits": 437458
+        },
+        "instrumented_total_seconds": "7.183197589",
+        "process": {
+          "command": [
+            "/workspace/mss-batch-rank-cost-results-20261122/baseline",
+            "panel",
+            "/workspace/mss-task4/inputs/reference/matched-index",
+            "/workspace/mss-task4/inputs/reference/GRCh37.ensembl104.chr22.fa",
+            "matched"
+          ],
+          "exit_code": 0,
+          "peak_rss_bytes": 101281792,
+          "pid": 105817,
+          "system_seconds": 0.44909,
+          "user_seconds": 8.030495,
+          "wall_seconds": 9.800722273
+        },
+        "stage_counters": {
+          "clear_and_keys_destroy": {
+            "key_reads": 0,
+            "key_requests": 0,
+            "offset_reads": 0,
+            "offset_requests": 0,
+            "pivot_hits": 0,
+            "probe_entries": 0,
+            "rank_hits": 0
+          },
+          "gather": {
+            "key_reads": 0,
+            "key_requests": 0,
+            "offset_reads": 0,
+            "offset_requests": 0,
+            "pivot_hits": 0,
+            "probe_entries": 0,
+            "rank_hits": 0
+          },
+          "ordinary_rows": {
+            "key_reads": 81875,
+            "key_requests": 29160321,
+            "offset_reads": 303,
+            "offset_requests": 29088995,
+            "pivot_hits": 38991809,
+            "probe_entries": 22214082,
+            "rank_hits": 437458
+          },
+          "prefetch": {
+            "key_reads": 0,
+            "key_requests": 0,
+            "offset_reads": 0,
+            "offset_requests": 0,
+            "pivot_hits": 0,
+            "probe_entries": 0,
+            "rank_hits": 0
+          }
+        },
+        "stage_seconds": {
+          "clear_and_keys_destroy": "0",
+          "gather": "0",
+          "ordinary_rows": "7.183196449",
+          "prefetch": "0"
+        },
+        "unassigned_bookkeeping_ns": 1140
+      },
+      "candidate": {
+        "batch_rank": {
+          "admitted": 10,
+          "arena_peak_bytes": 5945737,
+          "attempts": 10,
+          "gather_estimate_bytes": 9600000,
+          "gather_max_key_bytes": 14,
+          "gather_max_keys": 200000
+        },
+        "counters": {
+          "key_reads": 83211,
+          "key_requests": 17820144,
+          "offset_reads": 297,
+          "offset_requests": 17781527,
+          "pivot_hits": 12997380,
+          "probe_entries": 10906614,
+          "rank_hits": 2437458
+        },
+        "instrumented_total_seconds": "7.598737915",
+        "process": {
+          "command": [
+            "/workspace/mss-batch-rank-cost-results-20261122/candidate",
+            "panel",
+            "/workspace/mss-task4/inputs/reference/matched-index",
+            "/workspace/mss-task4/inputs/reference/GRCh37.ensembl104.chr22.fa",
+            "matched"
+          ],
+          "exit_code": 0,
+          "peak_rss_bytes": 101273600,
+          "pid": 105831,
+          "system_seconds": 0.44243,
+          "user_seconds": 8.404171999999999,
+          "wall_seconds": 10.250256698
+        },
+        "stage_counters": {
+          "clear_and_keys_destroy": {
+            "key_reads": 0,
+            "key_requests": 0,
+            "offset_reads": 0,
+            "offset_requests": 0,
+            "pivot_hits": 0,
+            "probe_entries": 0,
+            "rank_hits": 0
+          },
+          "gather": {
+            "key_reads": 0,
+            "key_requests": 0,
+            "offset_reads": 0,
+            "offset_requests": 0,
+            "pivot_hits": 0,
+            "probe_entries": 0,
+            "rank_hits": 0
+          },
+          "ordinary_rows": {
+            "key_reads": 77046,
+            "key_requests": 14313584,
+            "offset_reads": 121,
+            "offset_requests": 14279660,
+            "pivot_hits": 12997263,
+            "probe_entries": 7404747,
+            "rank_hits": 2437458
+          },
+          "prefetch": {
+            "key_reads": 6165,
+            "key_requests": 3506560,
+            "offset_reads": 176,
+            "offset_requests": 3501867,
+            "pivot_hits": 117,
+            "probe_entries": 3501867,
+            "rank_hits": 0
+          }
+        },
+        "stage_seconds": {
+          "clear_and_keys_destroy": "0.002578468",
+          "gather": "0.08925566",
+          "ordinary_rows": "6.722128149",
+          "prefetch": "0.784771925"
+        },
+        "unassigned_bookkeeping_ns": 3713
+      },
+      "derived": {
+        "counter_signed_percent": {
+          "key_reads": "1.631755725190839694656488550",
+          "key_requests": "-38.88906778495339608915827778",
+          "offset_reads": "-1.980198019801980198019801980",
+          "offset_requests": "-38.87197890473699761714009026",
+          "pivot_hits": "-66.66638370125376845172790008",
+          "probe_entries": "-50.90225200393156016980580156",
+          "rank_hits": "457.1867470705759181452848045"
+        },
+        "instrumented_total_delta_seconds": "0.415540326",
+        "ordinary_row_saving_seconds": "0.461068300",
+        "preparation_minus_row_saving_seconds": "0.415537753",
+        "preparation_seconds": "0.876606053"
+      }
+    },
+    "shuffled": {
+      "baseline": {
+        "batch_rank": null,
+        "counters": {
+          "key_reads": 743335,
+          "key_requests": 29160321,
+          "offset_reads": 303,
+          "offset_requests": 29088995,
+          "pivot_hits": 38991809,
+          "probe_entries": 22214082,
+          "rank_hits": 437458
+        },
+        "instrumented_total_seconds": "10.664133818",
+        "process": {
+          "command": [
+            "/workspace/mss-batch-rank-cost-results-20261122/baseline",
+            "panel",
+            "/workspace/mss-task4/inputs/reference/matched-index",
+            "/workspace/mss-task4/inputs/reference/GRCh37.ensembl104.chr22.fa",
+            "shuffled"
+          ],
+          "exit_code": 0,
+          "peak_rss_bytes": 103383040,
+          "pid": 105845,
+          "system_seconds": 2.075939,
+          "user_seconds": 9.809165,
+          "wall_seconds": 13.150907337
+        },
+        "stage_counters": {
+          "clear_and_keys_destroy": {
+            "key_reads": 0,
+            "key_requests": 0,
+            "offset_reads": 0,
+            "offset_requests": 0,
+            "pivot_hits": 0,
+            "probe_entries": 0,
+            "rank_hits": 0
+          },
+          "gather": {
+            "key_reads": 0,
+            "key_requests": 0,
+            "offset_reads": 0,
+            "offset_requests": 0,
+            "pivot_hits": 0,
+            "probe_entries": 0,
+            "rank_hits": 0
+          },
+          "ordinary_rows": {
+            "key_reads": 743335,
+            "key_requests": 29160321,
+            "offset_reads": 303,
+            "offset_requests": 29088995,
+            "pivot_hits": 38991809,
+            "probe_entries": 22214082,
+            "rank_hits": 437458
+          },
+          "prefetch": {
+            "key_reads": 0,
+            "key_requests": 0,
+            "offset_reads": 0,
+            "offset_requests": 0,
+            "pivot_hits": 0,
+            "probe_entries": 0,
+            "rank_hits": 0
+          }
+        },
+        "stage_seconds": {
+          "clear_and_keys_destroy": "0",
+          "gather": "0",
+          "ordinary_rows": "10.664132328",
+          "prefetch": "0"
+        },
+        "unassigned_bookkeeping_ns": 1490
+      },
+      "candidate": {
+        "batch_rank": {
+          "admitted": 10,
+          "arena_peak_bytes": 5945737,
+          "attempts": 10,
+          "gather_estimate_bytes": 9600000,
+          "gather_max_key_bytes": 14,
+          "gather_max_keys": 200000
+        },
+        "counters": {
+          "key_reads": 696013,
+          "key_requests": 17820144,
+          "offset_reads": 297,
+          "offset_requests": 17781527,
+          "pivot_hits": 12997380,
+          "probe_entries": 10906614,
+          "rank_hits": 2437458
+        },
+        "instrumented_total_seconds": "11.121912433",
+        "process": {
+          "command": [
+            "/workspace/mss-batch-rank-cost-results-20261122/candidate",
+            "panel",
+            "/workspace/mss-task4/inputs/reference/matched-index",
+            "/workspace/mss-task4/inputs/reference/GRCh37.ensembl104.chr22.fa",
+            "shuffled"
+          ],
+          "exit_code": 0,
+          "peak_rss_bytes": 101273600,
+          "pid": 105858,
+          "system_seconds": 1.994416,
+          "user_seconds": 10.406826,
+          "wall_seconds": 13.802038567
+        },
+        "stage_counters": {
+          "clear_and_keys_destroy": {
+            "key_reads": 0,
+            "key_requests": 0,
+            "offset_reads": 0,
+            "offset_requests": 0,
+            "pivot_hits": 0,
+            "probe_entries": 0,
+            "rank_hits": 0
+          },
+          "gather": {
+            "key_reads": 0,
+            "key_requests": 0,
+            "offset_reads": 0,
+            "offset_requests": 0,
+            "pivot_hits": 0,
+            "probe_entries": 0,
+            "rank_hits": 0
+          },
+          "ordinary_rows": {
+            "key_reads": 688884,
+            "key_requests": 14313584,
+            "offset_reads": 121,
+            "offset_requests": 14279660,
+            "pivot_hits": 12997263,
+            "probe_entries": 7404747,
+            "rank_hits": 2437458
+          },
+          "prefetch": {
+            "key_reads": 7129,
+            "key_requests": 3506560,
+            "offset_reads": 176,
+            "offset_requests": 3501867,
+            "pivot_hits": 117,
+            "probe_entries": 3501867,
+            "rank_hits": 0
+          }
+        },
+        "stage_seconds": {
+          "clear_and_keys_destroy": "0.002602836",
+          "gather": "0.088726983",
+          "ordinary_rows": "10.250274225",
+          "prefetch": "0.78030247"
+        },
+        "unassigned_bookkeeping_ns": 5919
+      },
+      "derived": {
+        "counter_signed_percent": {
+          "key_reads": "-6.366174066874289519530225269",
+          "key_requests": "-38.88906778495339608915827778",
+          "offset_reads": "-1.980198019801980198019801980",
+          "offset_requests": "-38.87197890473699761714009026",
+          "pivot_hits": "-66.66638370125376845172790008",
+          "probe_entries": "-50.90225200393156016980580156",
+          "rank_hits": "457.1867470705759181452848045"
+        },
+        "instrumented_total_delta_seconds": "0.457778615",
+        "ordinary_row_saving_seconds": "0.413858103",
+        "preparation_minus_row_saving_seconds": "0.457774186",
+        "preparation_seconds": "0.871632289"
+      }
+    }
+  },
+  "scope": "one instrumented fresh worker per role/order; no speedup inference",
+  "source_manifest_sha256": "fd6638f3ddc4bed57a907f4313ed438387e4eba0175291420c512c440c4fc13b",
+  "status": "independently_reconciled17_returned_metadata"
+}

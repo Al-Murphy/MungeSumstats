@@ -1,0 +1,99 @@
+--- a/driver.cpp
++++ b/driver.cpp
+@@ -40,6 +40,8 @@
+     std::size_t rows = 0, batches = 0, last_batch = 0;
+     std::uint64_t order_hash = UINT64_C(14695981039346656037);
+     std::chrono::nanoseconds elapsed{};
++    std::array<std::uint64_t,4> stage_ns{};
++    std::array<std::array<std::uint64_t,7>,4> stage_counts{};
+ #ifdef MSS_BATCH_RANK_BENCH
+     std::size_t prefetch_attempts=0, prefetch_admitted=0, prefetch_peak=0;
+     std::size_t gather_peak_estimate=0, gather_max_keys=0, gather_max_key_bytes=0;
+@@ -54,6 +56,23 @@
+         std::uint64_t draw;
+         do { draw = random() - random.min(); } while (draw >= limit);
+         std::swap(order[bound - 1], order[draw % bound]);
++    }
++}
++
++using DiagnosticCounts=std::array<std::uint64_t,7>;
++static DiagnosticCounts snapshot(const mss::Reference& reference) {
++    const auto c=reference.lookup_counters();
++    return {c.rank_hits,c.pivot_hits,c.probe_entries,c.key_requests,c.offset_requests,c.key_reads,c.offset_reads};
++}
++static void record_stage(Run& run,std::size_t stage,
++                         std::chrono::steady_clock::time_point start,
++                         const DiagnosticCounts& before,const mss::Reference& reference) {
++    const auto end=std::chrono::steady_clock::now();
++    run.stage_ns[stage]+=std::chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
++    const auto after=snapshot(reference);
++    for(std::size_t i=0;i<after.size();++i) {
++        if(after[i]<before[i])throw std::runtime_error("Diagnostic counter regressed");
++        run.stage_counts[stage][i]+=after[i]-before[i];
+     }
+ }
+ 
+@@ -77,8 +96,9 @@
+     std::vector<mss::Result> results(count);
+     const auto start = std::chrono::steady_clock::now();
+ #ifdef MSS_BATCH_RANK_BENCH
++    auto phase_start=start;
++    auto phase_before=snapshot(reference);
+     {
+-        // Borrowed caller keys are separate from the core's incremental arena.
+         std::vector<std::string> keys;
+         keys.reserve(2 * count);
+         auto add = [&](std::string key) {
+@@ -96,17 +116,23 @@
+         for (const auto& key : keys) estimate += key.capacity() + 1;
+         run.gather_peak_estimate = std::max(run.gather_peak_estimate, estimate);
+         run.gather_max_keys = std::max(run.gather_max_keys, keys.size());
++        record_stage(run,0,phase_start,phase_before,reference);
++        phase_start=std::chrono::steady_clock::now();phase_before=snapshot(reference);
+         ++run.prefetch_attempts;
+-        if (reference.prefetch_rank_keys(keys, 32U * 1024 * 1024)) ++run.prefetch_admitted;
+-        run.prefetch_peak = std::max(run.prefetch_peak, reference.prefetch_peak_bytes());
+-#endif
+-    for (std::size_t step = 0; step < count; ++step)
+-        results[step] = reference.harmonise(inputs[order[step]]);
+-#ifdef MSS_BATCH_RANK_BENCH
++        if(reference.prefetch_rank_keys(keys,32U*1024*1024))++run.prefetch_admitted;
++        run.prefetch_peak=std::max(run.prefetch_peak,reference.prefetch_peak_bytes());
++        record_stage(run,1,phase_start,phase_before,reference);
++#endif
++        const auto row_start=std::chrono::steady_clock::now();
++        const auto row_before=snapshot(reference);
++        for(std::size_t step=0;step<count;++step)
++            results[step]=reference.harmonise(inputs[order[step]]);
++        record_stage(run,2,row_start,row_before,reference);
++#ifdef MSS_BATCH_RANK_BENCH
++        phase_start=std::chrono::steady_clock::now();phase_before=snapshot(reference);
+         reference.clear_prefetched_ranks();
+-        if (reference.prefetch_owned_bytes() || reference.prefetched_rank_count())
+-            throw std::runtime_error("Batch rank directory was not cleared");
+-    } // Includes key-vector/string destruction in the candidate clock.
++    }
++    record_stage(run,3,phase_start,phase_before,reference);
+ #endif
+     const auto end = std::chrono::steady_clock::now();
+     run.elapsed += std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+@@ -200,7 +226,18 @@
+                   << ",\"gather_max_keys\":" << run.gather_max_keys
+                   << ",\"gather_max_key_bytes\":" << run.gather_max_key_bytes << "}"
+ #endif
+-                  << "}\n";
++                  << ",\"instrumented_cost_diagnostic\":{\"stages\":[\"gather\",\"prefetch\",\"ordinary_rows\",\"clear_and_keys_destroy\"],\"counter_fields\":[\"rank_hits\",\"pivot_hits\",\"probe_entries\",\"key_requests\",\"offset_requests\",\"key_reads\",\"offset_reads\"],\"stage_ns\":[";
++        for(std::size_t i=0;i<4;++i)std::cerr<<(i?",":"")<<run.stage_ns[i];
++        std::cerr<<"],\"stage_counts\":[";
++        for(std::size_t i=0;i<4;++i) {
++            std::cerr<<(i?",":"")<<"[";
++            for(std::size_t j=0;j<7;++j)std::cerr<<(j?",":"")<<run.stage_counts[i][j];
++            std::cerr<<"]";
++        }
++        std::cerr<<"],\"final_counts\":[";
++        const auto final_counts=snapshot(reference);
++        for(std::size_t i=0;i<7;++i)std::cerr<<(i?",":"")<<final_counts[i];
++        std::cerr<<"]}}\n";
+         return std::cerr ? 0 : 1;
+     } catch (const std::exception& error) {
+         std::cerr << error.what() << '\n';
