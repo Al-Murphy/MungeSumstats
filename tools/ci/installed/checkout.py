@@ -31,19 +31,55 @@ def plain(path, directory=False):
     return info
 
 
-def read_source(path, blob):
+def read_source(path, blob, *, relative_path=None, diagnostics=None):
     before = plain(path)
     require(before.st_size <= 64 * 1024**2, "Oversized tracked source file")
     with path.open("rb") as stream:
         held = os.fstat(stream.fileno())
         raw = stream.read(64 * 1024**2 + 1)
         after = os.fstat(stream.fileno())
-    identity = lambda item: (item.st_dev, item.st_ino, item.st_mode, item.st_nlink,
-                             item.st_size, item.st_mtime_ns, item.st_ctime_ns)
-    require(identity(before) == identity(held) == identity(after) == identity(path.lstat())
-            and len(raw) == before.st_size, "Source changed while frozen")
-    require(hashlib.sha1(b"blob " + str(len(raw)).encode("ascii") + b"\0" + raw).hexdigest() == blob,
-            "Checkout bytes differ from Git blob; disable autocrlf/filter transformations")
+    final = path.lstat()
+    samples = dict(path_before=before, fd_held=held, fd_after=after, path_after=final)
+    common = ("st_dev", "st_ino", "st_mode", "st_nlink", "st_size", "st_mtime_ns")
+    # CPython3.12 Windows lstat ctime is CreationTime, but fstat ctime is
+    # ChangeTime. Compare creation across APIs and each ctime within its domain.
+    timestamp = "st_birthtime_ns" if os.name == "nt" else "st_ctime_ns"
+    available = all(type(getattr(item, timestamp, None)) is int for item in samples.values())
+    identity = lambda item: tuple(getattr(item, field, None) for field in common + (timestamp,))
+    stable = available and identity(before) == identity(held) == identity(after) == identity(final)
+    stable = stable and before.st_ctime_ns == final.st_ctime_ns and held.st_ctime_ns == after.st_ctime_ns
+    complete = len(raw) == before.st_size
+    actual_blob = hashlib.sha1(b"blob " + str(len(raw)).encode("ascii") + b"\0" + raw).hexdigest()
+    blob_matches = actual_blob == blob
+    cross_domain = os.name == "nt" and (before.st_ctime_ns != held.st_ctime_ns or
+                                         final.st_ctime_ns != after.st_ctime_ns)
+    diagnostic = None
+    if not (stable and complete and blob_matches) or cross_domain:
+        fields = common + ("st_ctime_ns", "st_birthtime_ns", "st_file_attributes", "st_reparse_tag")
+        snapshots = {name: {field: getattr(item, field, None) for field in fields}
+                     for name, item in samples.items()}
+        import sys
+        diagnostic = dict(schema="mss-source-identity-observation-v1",
+            status="windows_cross_domain_only" if stable and complete and blob_matches else "rejected_source",
+            tracked_path=(relative_path if relative_path is not None else path.name)[:1024],
+            cross_api_timestamp=timestamp, common_identity_stable=stable, read_complete=complete,
+            path_ctime_stable=before.st_ctime_ns == final.st_ctime_ns,
+            fd_ctime_stable=held.st_ctime_ns == after.st_ctime_ns,
+            snapshots=snapshots, read_bytes=len(raw), expected_git_blob=blob,
+            actual_git_blob=actual_blob, raw_sha256=hashlib.sha256(raw).hexdigest(),
+            python_version=sys.version[:512], python_executable=sys.executable[:1024])
+        encoded = json.dumps(diagnostic, sort_keys=True)
+        require(len(encoded.encode("utf-8")) <= 16384, "Oversized source identity diagnostic")
+        if diagnostics is not None:
+            name = "windows-stat-domains.json" if diagnostic["status"] == "windows_cross_domain_only" else "source-identity-failure.json"
+            try:
+                with (diagnostics / name).open("x", encoding="utf-8") as stream:
+                    stream.write(encoded + "\n")
+            except FileExistsError:
+                pass  # Retain the first bounded observation in this fresh freeze.
+    detail = "" if diagnostic is None else ": " + json.dumps(diagnostic, sort_keys=True)
+    require(stable and complete, "Source changed while frozen" + detail)
+    require(blob_matches, "Checkout bytes differ from Git blob; disable autocrlf/filter transformations" + detail)
     return raw
 
 
@@ -82,7 +118,7 @@ def freeze_checkout(checkout, output):
             if parent == checkout:
                 break
             plain(parent, True)
-        raw = read_source(original, blob)
+        raw = read_source(original, blob, relative_path=name, diagnostics=output)
         total += len(raw)
         require(total <= 512 * 1024**2, "Tracked source byte bound")
         target = source / name
