@@ -73,7 +73,7 @@ jobs:
         timeout-minutes: 20
         run: |
           sudo apt-get update
-          sudo apt-get install --no-install-recommends -y g++ gfortran make pkg-config libcurl4-openssl-dev libssl-dev libxml2-dev libicu-dev libpng-dev zlib1g-dev libbz2-dev liblzma-dev libgit2-dev libssh2-1-dev
+          sudo apt-get install --no-install-recommends -y g++ gfortran make pkg-config libcurl4-openssl-dev libssl-dev libxml2-dev libicu-dev libpng-dev zlib1g-dev libbz2-dev liblzma-dev libgit2-dev libssh2-1-dev libuv1-dev
           dpkg-query -W > "$RUNNER_TEMP/mss-linux-system-packages.tsv"
       - name: Run current installed Linux gold
         timeout-minutes: 320
