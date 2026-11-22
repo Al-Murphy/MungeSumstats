@@ -398,7 +398,9 @@ def ordinary_install(evidence, source, checkout, lane, native, extracted, logs):
 def legacy_contract(receipt, name):
     fixed = {
         "allele-flip": {"historical_full_output_line_equality", "all_decoded_columns_and_values_equal", "nonempty_unique_variant_membership"},
-        "indels": {"known_indel_retained", "two_expected_rows", "indel_alleles_and_anchor_retained", "one_unidentified_indel_removed_and_logged"},
+        "indels": {"known_indel_retained", "two_expected_rows", "indel_alleles_and_anchor_retained",
+                   "indel_effect_and_frequency_preserved", "one_unidentified_indel_removed_and_logged",
+                   "logged_indel_effect_and_frequency_preserved"},
         "multiple-rsids": {"first_identifier_and_conversion_flag", "historical_full_decoded_equality", "five_historical_log_categories", "historical_log_row_counts"},
         "tabix": {"bgzf_and_index_exist", "historical_nine_column_header", "historical_full_read_equality", "sort-GenomicRanges", "sort-data.table"},
         "headers": {"frozen_vcf_528_lines"},

@@ -129,6 +129,10 @@ main <- function() {
                 EAF = c(.0945334, .3787, .0945334), BETA = c(-.00625732297153778, .027, -.00625732297153778),
                 P = c(.4883341, 2.693e-24, .4883341))
             canonical(source, "input", sort = character())
+            # Keep immutable fixture numerics before format_sumstats can mutate
+            # its data.table input. This historical call has ambiguous A1/A2.
+            known_input <- data.table::copy(source[SNP == "rs34589910"])
+            missing_input <- data.table::copy(source[SNP == "4:6364621"])
             result <- format_case(source, "indels", ref_genome = "GRCh37", convert_small_p = TRUE,
                 allele_flip_check = TRUE, snp_ids_are_rs_ids = TRUE, return_data = TRUE,
                 on_ref_genome = TRUE, indels = TRUE, log_folder_ind = TRUE, dbSNP = 144)
@@ -136,11 +140,21 @@ main <- function() {
             check("known_indel_retained", "rs34589910" %in% rows$SNP)
             check("two_expected_rows", nrow(rows) == 2L && setequal(rows$SNP, c("rs34589910", "rs12987662")))
             indel <- rows[SNP == "rs34589910"]
-            check("indel_alleles_and_anchor_retained", nrow(indel) == 1L && indel$CHR == 4 &&
-                indel$BP == 6364621 && indel$A1 == "C" && indel$A2 == "CG")
+            # Frozen Linux evidence confirms the documented global label
+            # inference: input A1 becomes output A2, without changing BETA/EAF.
+            # FRQ preserves this fixture's EAF for the inferred effect allele;
+            # it is not a claim of minor-allele frequency or biological truth.
+            # Indels themselves are excluded from reference-allele checks.
+            check("indel_alleles_and_anchor_retained", nrow(indel) == 1L &&
+                indel$CHR == 4 && indel$BP == 6364621 && indel$A1 == "CG" && indel$A2 == "C")
+            check("indel_effect_and_frequency_preserved", identical(indel$BETA, known_input$BETA) &&
+                identical(indel$FRQ, known_input$EAF))
             missing <- canonical(read_table(result$log_files$snp_missing_rs), "missing-rsid-log", sort = character())
             check("one_unidentified_indel_removed_and_logged", nrow(missing) == 1L &&
-                missing$BP == 6364621 && missing$A1 == "C" && missing$A2 == "CG")
+                missing$SNP == missing_input$SNP && missing$CHR == 4 && missing$BP == 6364621 &&
+                missing$A1 == "CG" && missing$A2 == "C")
+            check("logged_indel_effect_and_frequency_preserved", identical(missing$BETA, missing_input$BETA) &&
+                identical(missing$FRQ, missing_input$EAF))
             observed$rows <- nrow(rows); observed$log_files <- result$log_files
         } else if (operation == "multiple-rsids") {
             changed <- raw_lines
