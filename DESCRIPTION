@@ -69,6 +69,8 @@ Suggests:
     markdown,
     knitr,
     testthat (>= 3.1.7),
+    pkgload,
+    withr,
     UpSetR,
     BiocStyle,
     covr, 

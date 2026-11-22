@@ -13,7 +13,12 @@ check_save_path <- function(save_path,
                             write_vcf = FALSE,
                             verbose = TRUE) {
     #### Add warning to users that temp files aren't actually saved ####
-    if (dirname(save_path) == tempdir()) {
+    # dirname() uses forward slashes on Windows, even for a backslash tempdir().
+    temp_spelling <- function(path) {
+        if (.Platform$OS.type == "windows") chartr("\\", "/", path) else path
+    }
+    tmp <- temp_spelling(tempdir())
+    if (temp_spelling(dirname(save_path)) == tmp) {
         messager(
             "\n\n******::NOTE::******\n",
             "- Formatted results will be saved to `tempdir()` by default.\n",
@@ -33,7 +38,7 @@ check_save_path <- function(save_path,
         stop("log_folder_ind must be either TRUE or FALSE")
     }
     
-    if (log_folder_ind && log_folder == tempdir()) {
+    if (log_folder_ind && temp_spelling(log_folder) == tmp) {
         messager(
             "******::NOTE::******\n",
             "- Log results will be saved to `tempdir()` by default.\n",

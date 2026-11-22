@@ -133,27 +133,28 @@ write_sumstats <- function(sumstats_dt,
           vr <- vr[, all_poss_cols[all_poss_cols %in% names(mcols(vr))]]
 
           messager("Writing in IEU OpenGWAS VCF format ==> ", save_path)
-          vcf_path <- VariantAnnotation::writeVcf(
-            obj = VariantAnnotation::asVCF(vr, info = "RSID"),
-            ### Must supply filename without compression suffix
-            filename = tmp_save_path,
-            index = tabix_index
-          )
+          vcf <- VariantAnnotation::asVCF(vr, info = "RSID")
 
         } else {
           #### Convert to VRanges and save ####
           vr <- to_vranges(sumstats_dt = sumstats_dt)
           messager("Writing in VCF format ==> ", save_path)
-          vcf_path <- VariantAnnotation::writeVcf(
-              obj = vr,
-              ### Must supply filename without compression suffix
-              filename = tmp_save_path,
-              index = tabix_index
-          )
+          vcf <- vr
         }
-        #### Compress ####
-        ## only compress if this was not already handled by writeVcf(index=T)
-        if (isFALSE(tabix_index)) {
+        if (isTRUE(tabix_index)) {
+            # Match writeVcf(index=TRUE)'s VCF sort, then close the writer
+            # before compression. The caller may already own a sibling .vcf.
+            dest <- paste0(tmp_save_path, ".bgz")
+            work <- tempfile("mss-indexed-vcf-")
+            if (!dir.create(work, mode = "0700")) stop("Cannot create VCF staging directory")
+            on.exit(unlink(work, recursive = TRUE, expand = FALSE), add = TRUE)
+            raw_vcf <- file.path(work, "sorted.vcf")
+            if (!methods::is(vcf, "VCF")) vcf <- methods::as(vcf, "VCF")
+            VariantAnnotation::writeVcf(BiocGenerics::sort(vcf), raw_vcf, index = FALSE)
+            save_path <- Rsamtools::bgzip(raw_vcf, dest = dest, overwrite = TRUE)
+            Rsamtools::indexTabix(save_path, format = "vcf")
+        } else {
+            VariantAnnotation::writeVcf(vcf, tmp_save_path, index = tabix_index)
             if (endsWith(save_path,".bgz") || endsWith(save_path,".gz")) {
                 # IMPORTANT: use bgzip, not gzip, for VCF compatibility
                 save_path <- Rsamtools::bgzip(tmp_save_path, dest = save_path,
@@ -162,9 +163,6 @@ write_sumstats <- function(sumstats_dt,
             } else {
                 save_path <- tmp_save_path
             }
-        } else {
-            # writeVcf(index=TRUE) writes (and returns) the .bgz file
-            save_path <- vcf_path
         }
     } else {
         if (isTRUE(tabix_index)) {

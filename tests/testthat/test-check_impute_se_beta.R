@@ -1,14 +1,13 @@
 test_that("Check that imputation columns added correctly", {
     ## The following test uses more than 2GB of memory, which is more
     ## than what 32-bit Windows can handle:
-    is_32bit_windows <- .Platform$OS.type == "windows" #&&
-    #.Platform$r_arch == "i386"
+    is_32bit_windows <- .Platform$OS.type == "windows" &&
+        .Machine$sizeof.pointer == 4L
     if (!is_32bit_windows) {
         #Our VCF file contains a BETA and SE column, let's impute these and 
         #compare the difference
         # write the ALS GWAS, VCF file to a temp file for testing
-        vcf_path <- system.file("extdata", "ALSvcf.vcf", 
-                                package = "MungeSumstats")
+        vcf_path <- mss_test_als_fixture("imputation")
         sumstats_dt <- MungeSumstats:::read_vcf(path = vcf_path)
         #add in known sample size of study
         sumstats_dt[,N:=293723]

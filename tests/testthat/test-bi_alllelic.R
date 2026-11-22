@@ -1,8 +1,8 @@
 test_that("non-biallelic SNPs are removed", {
     ## The following test uses more than 2GB of memory, which is more
     ## than what 32-bit Windows can handle:
-    is_32bit_windows <- .Platform$OS.type == "windows" #&&
-        #.Platform$r_arch == "i386"
+    is_32bit_windows <- .Platform$OS.type == "windows" &&
+        .Machine$sizeof.pointer == 4L
     if (!is_32bit_windows) {
         file <- tempfile()
         # Update ID from line 3 to check it is deleted -

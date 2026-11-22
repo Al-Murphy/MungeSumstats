@@ -5,8 +5,7 @@ test_that("Test that VCFs can be properly read in.", {
         .Platform$OS.type == "windows" && .Platform$r_arch == "i386"
     if (!is_32bit_windows) {
         # write the ALS GWAS, VCF file to a temp file for testing
-        vcf_path <- system.file("extdata", "ALSvcf.vcf", 
-                                package = "MungeSumstats")
+        vcf_path <- mss_test_als_fixture("roundtrip")
         ### Read in original VCF
         sumstats_dt <- read_vcf(path = vcf_path)
         sumstats_dt <- standardise_header(

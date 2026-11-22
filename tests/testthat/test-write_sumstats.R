@@ -1,8 +1,8 @@
 test_that("write_sumstats works", {
     ## The following test uses more than 2GB of memory, which is more
     ## than what 32-bit Windows can handle:
-    is_32bit_windows <- .Platform$OS.type == "windows" ##&&
-    ##.Platform$r_arch == "i386"
+    is_32bit_windows <- .Platform$OS.type == "windows" &&
+        .Machine$sizeof.pointer == 4L
     if (!is_32bit_windows) {
         sumstats_dt <- MungeSumstats::formatted_example() 
         

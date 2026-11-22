@@ -11,12 +11,13 @@ run_check_save_path <- function(save_path, tabix_index = FALSE, ...) {
 }
 
 test_that("#7: tabix_index=TRUE rewrites a .gz save_path to .bgz", {
-    f <- file.path(tempfile(), "ss.tsv.gz")
+    td <- tempfile()
+    f <- file.path(td, "ss.tsv.gz")
     expect_message(
         out <- run_check_save_path(f, tabix_index = TRUE),
         "Switching output to tabix-indexed format"
     )
-    expect_equal(out$save_path, file.path(dirname(f), "ss.tsv.bgz"))
+    expect_equal(out$save_path, file.path(td, "ss.tsv.bgz"))
     expect_equal(out$extension, ".tsv.bgz")
 })
 
@@ -58,15 +59,9 @@ test_that("#33: saving to tempdir() prints NOTEs; other folders do not", {
 })
 
 test_that("#33: '~' in save_path is expanded to the home directory", {
-    home <- tempfile("home")
-    dir.create(home)
-    old_home <- Sys.getenv("HOME")
-    Sys.setenv(HOME = home)
-    on.exit(Sys.setenv(HOME = old_home), add = TRUE)
-    # never create directories in the real HOME
-    skip_if_not(path.expand("~") == home, "'~' is not expanded from HOME")
-    out <- run_check_save_path("~/x_mss_test/a.tsv.gz")
-    Sys.setenv(HOME = old_home)
+    checked <- mss_test_home_expansion()
+    home <- checked$home
+    out <- checked$result
     expect_false(startsWith(out$save_path, "~"))
     expect_equal(out$save_path, file.path(home, "x_mss_test", "a.tsv.gz"))
     expect_true(dir.exists(file.path(home, "x_mss_test")))
